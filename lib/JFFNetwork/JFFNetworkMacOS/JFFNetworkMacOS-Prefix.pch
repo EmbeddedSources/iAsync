@@ -1,0 +1,9 @@
+//
+// Prefix header for all source files of the 'JFFNetworkMacOS' target in the 'JFFNetworkMacOS' project
+//
+
+#ifdef __OBJC__
+   #import <Cocoa/Cocoa.h>
+
+   #include <zlib.h>
+#endif

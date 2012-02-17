@@ -1,0 +1,5 @@
+That's why we suggest using the following repository structure :
+ 1. lib Ð shared code, maintained by our team. Libraries, containing the model and network protocol bindings should also be stored here.
+ 2. frameworks Ð pre-build third-party libraries and those maintained by our team.
+It should contain no *.xcodeproj entries. Instead only deployed libraries must be placed there. All frameworks and universal libraries, developed by our team must be deployed into this directory.
+ 3. test Ð for unit tests of all kinds (Sen Testing Kit, Google toolbox, GHUnit).

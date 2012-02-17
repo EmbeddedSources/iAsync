@@ -1,0 +1,7 @@
+1. remove NSLocalizedString
+2. add unit test
+3. Comment library using this - http://www.gentlebytes.com/home/appledocapp/
+see https://github.com/tomaz/appledoc
+4. Migrate to ARC
+5. Move UI components from Utils to UI lib
+6. use https://github.com/robbiehanson/CocoaLumberjack logs

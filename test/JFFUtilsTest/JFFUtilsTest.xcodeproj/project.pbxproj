@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1B26EC6F14DABFB800A1A875 /* EmptyStringTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC6D14DABFB800A1A875 /* EmptyStringTest.m */; };
+		1B26EC7014DABFB800A1A875 /* JFFStringFormatTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */; };
+		1B29556F143DCE7F00532BD7 /* JFFSimpleBlockHolderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B29556E143DCE7F00532BD7 /* JFFSimpleBlockHolderTest.m */; };
+		1B80C1E01442CE5A007D4309 /* NSObjectRuntimeExtensionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B80C1DF1442CE5A007D4309 /* NSObjectRuntimeExtensionsTest.m */; };
+		1B80C24014430049007D4309 /* NSObjectInstancesCountTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B80C23F14430049007D4309 /* NSObjectInstancesCountTest.m */; };
+		1B9025C4143DDA1200D3B0A0 /* JFFOnDeallocBlockOwnerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9025C3143DDA1200D3B0A0 /* JFFOnDeallocBlockOwnerTest.m */; };
+		1B902622143DF1B300D3B0A0 /* NSObject+OwnershipsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B902621143DF1B300D3B0A0 /* NSObject+OwnershipsTest.m */; };
+		1B902640143EF04500D3B0A0 /* JFFAssignProxyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B90263F143EF04400D3B0A0 /* JFFAssignProxyTest.m */; };
+		1B902643143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B902642143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m */; };
+		1B90269F143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B90269E143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m */; };
+		1BD182411467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD182401467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m */; };
+		532E281914A9E9A300111144 /* ObjcDynamicCastTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 532E281814A9E9A300111144 /* ObjcDynamicCastTest.mm */; };
+		5349A6CC14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5349A6CB14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm */; };
+		534C727B1431D9DE0085B41E /* JUMutableArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */; };
+		534CDFD814A8C8280068F4DF /* ObjCppCastingTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 534CDFD714A8C8280068F4DF /* ObjCppCastingTest.mm */; };
+		534CDFDA14A8CA290068F4DF /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CDFD914A8CA290068F4DF /* libstdc++.dylib */; };
+		534CDFDE14A8CAAC0068F4DF /* JMStringHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */; };
+		534CE02B14A8CE7B0068F4DF /* JMParent.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CE02A14A8CE7B0068F4DF /* JMParent.m */; };
+		534CE02E14A8CE8C0068F4DF /* JMChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CE02D14A8CE8C0068F4DF /* JMChild.m */; };
+		53A0938614ADB79A0011F01B /* libprofile_rt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A0938514ADB79A0011F01B /* libprofile_rt.a */; };
+		53BCF8E614323E7D00E896B3 /* JUArrayAdditionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BCF8E514323E7D00E896B3 /* JUArrayAdditionsTest.m */; };
+		B69483EC1429C88400B8247E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69483EB1429C88400B8247E /* UIKit.framework */; };
+		B69483EE1429C88400B8247E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69483ED1429C88400B8247E /* Foundation.framework */; };
+		B69483F01429C88400B8247E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69483EF1429C88400B8247E /* CoreGraphics.framework */; };
+		B69483F61429C88400B8247E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B69483F41429C88400B8247E /* InfoPlist.strings */; };
+		B69483F81429C88400B8247E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B69483F71429C88400B8247E /* main.m */; };
+		B69484031429D3D300B8247E /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69484021429D3D300B8247E /* GHUnitIOS.framework */; };
+		B69484661429E26100B8247E /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B69484651429E24B00B8247E /* libJFFUtils.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1B61C41B14A2065800542F46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802A5B148BF2930040A93A;
+			remoteInfo = JFFUtilsMacOS;
+		};
+		534CDFD314A8C7E00068F4DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391044314A88C04007315A3;
+			remoteInfo = "JFFUtils-clang";
+		};
+		B69484641429E24B00B8247E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+		B69484671429E29A00B8247E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1B26EC6D14DABFB800A1A875 /* EmptyStringTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyStringTest.m; sourceTree = "<group>"; };
+		1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStringFormatTest.m; sourceTree = "<group>"; };
+		1B29556E143DCE7F00532BD7 /* JFFSimpleBlockHolderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSimpleBlockHolderTest.m; sourceTree = "<group>"; };
+		1B80C1DF1442CE5A007D4309 /* NSObjectRuntimeExtensionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectRuntimeExtensionsTest.m; sourceTree = "<group>"; };
+		1B80C23F14430049007D4309 /* NSObjectInstancesCountTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectInstancesCountTest.m; sourceTree = "<group>"; };
+		1B9025C3143DDA1200D3B0A0 /* JFFOnDeallocBlockOwnerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFOnDeallocBlockOwnerTest.m; sourceTree = "<group>"; };
+		1B902621143DF1B300D3B0A0 /* NSObject+OwnershipsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+OwnershipsTest.m"; sourceTree = "<group>"; };
+		1B90263F143EF04400D3B0A0 /* JFFAssignProxyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAssignProxyTest.m; sourceTree = "<group>"; };
+		1B902642143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMutableAssignArrayTest.m; sourceTree = "<group>"; };
+		1B90269E143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMulticastDelegateTest.m; sourceTree = "<group>"; };
+		1BD182401467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMutableAssignDictionaryTest.m; sourceTree = "<group>"; };
+		532E281814A9E9A300111144 /* ObjcDynamicCastTest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjcDynamicCastTest.mm; sourceTree = "<group>"; };
+		5349A6CB14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ClassHierarchyCheckerTest.mm; sourceTree = "<group>"; };
+		534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUMutableArrayTest.m; sourceTree = "<group>"; };
+		534CDFD714A8C8280068F4DF /* ObjCppCastingTest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjCppCastingTest.mm; sourceTree = "<group>"; };
+		534CDFD914A8CA290068F4DF /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		534CDFDC14A8CAAC0068F4DF /* JMStringHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStringHolder.h; sourceTree = "<group>"; };
+		534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStringHolder.m; sourceTree = "<group>"; };
+		534CE02914A8CE7B0068F4DF /* JMParent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMParent.h; sourceTree = "<group>"; };
+		534CE02A14A8CE7B0068F4DF /* JMParent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMParent.m; sourceTree = "<group>"; };
+		534CE02C14A8CE8C0068F4DF /* JMChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMChild.h; sourceTree = "<group>"; };
+		534CE02D14A8CE8C0068F4DF /* JMChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMChild.m; sourceTree = "<group>"; };
+		53A0938514ADB79A0011F01B /* libprofile_rt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libprofile_rt.a; path = usr/lib/libprofile_rt.a; sourceTree = DEVELOPER_DIR; };
+		53BCF8E514323E7D00E896B3 /* JUArrayAdditionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUArrayAdditionsTest.m; sourceTree = "<group>"; };
+		B69483E71429C88400B8247E /* JFFUtilsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFUtilsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B69483EB1429C88400B8247E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B69483ED1429C88400B8247E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B69483EF1429C88400B8247E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B69483F31429C88400B8247E /* JFFUtilsTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFUtilsTest-Info.plist"; sourceTree = "<group>"; };
+		B69483F51429C88400B8247E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B69483F71429C88400B8247E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B69483F91429C88400B8247E /* JFFUtilsTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFUtilsTest-Prefix.pch"; sourceTree = "<group>"; };
+		B69484021429D3D300B8247E /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../../frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
+		B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B69483E41429C88400B8247E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B69484661429E26100B8247E /* libJFFUtils.a in Frameworks */,
+				B69483EC1429C88400B8247E /* UIKit.framework in Frameworks */,
+				B69483EE1429C88400B8247E /* Foundation.framework in Frameworks */,
+				B69483F01429C88400B8247E /* CoreGraphics.framework in Frameworks */,
+				B69484031429D3D300B8247E /* GHUnitIOS.framework in Frameworks */,
+				53A0938614ADB79A0011F01B /* libprofile_rt.a in Frameworks */,
+				534CDFDA14A8CA290068F4DF /* libstdc++.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		534CDFDB14A8CA910068F4DF /* mock */ = {
+			isa = PBXGroup;
+			children = (
+				534CDFDC14A8CAAC0068F4DF /* JMStringHolder.h */,
+				534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */,
+				534CE02914A8CE7B0068F4DF /* JMParent.h */,
+				534CE02A14A8CE7B0068F4DF /* JMParent.m */,
+				534CE02C14A8CE8C0068F4DF /* JMChild.h */,
+				534CE02D14A8CE8C0068F4DF /* JMChild.m */,
+			);
+			path = mock;
+			sourceTree = "<group>";
+		};
+		B69483DC1429C88400B8247E = {
+			isa = PBXGroup;
+			children = (
+				53A0938514ADB79A0011F01B /* libprofile_rt.a */,
+				534CDFD914A8CA290068F4DF /* libstdc++.dylib */,
+				B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */,
+				B69483F11429C88400B8247E /* JFFUtilsTest */,
+				B69483EA1429C88400B8247E /* Frameworks */,
+				B69483E81429C88400B8247E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B69483E81429C88400B8247E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B69483E71429C88400B8247E /* JFFUtilsTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B69483EA1429C88400B8247E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B69484021429D3D300B8247E /* GHUnitIOS.framework */,
+				B69483EB1429C88400B8247E /* UIKit.framework */,
+				B69483ED1429C88400B8247E /* Foundation.framework */,
+				B69483EF1429C88400B8247E /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B69483F11429C88400B8247E /* JFFUtilsTest */ = {
+			isa = PBXGroup;
+			children = (
+				B69484451429DFAC00B8247E /* Classes */,
+				B69483F21429C88400B8247E /* Supporting Files */,
+			);
+			path = JFFUtilsTest;
+			sourceTree = "<group>";
+		};
+		B69483F21429C88400B8247E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B69483F31429C88400B8247E /* JFFUtilsTest-Info.plist */,
+				B69483F41429C88400B8247E /* InfoPlist.strings */,
+				B69483F71429C88400B8247E /* main.m */,
+				B69483F91429C88400B8247E /* JFFUtilsTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B69484451429DFAC00B8247E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1B26EC6D14DABFB800A1A875 /* EmptyStringTest.m */,
+				1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */,
+				534CDFDB14A8CA910068F4DF /* mock */,
+				534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */,
+				53BCF8E514323E7D00E896B3 /* JUArrayAdditionsTest.m */,
+				1B29556E143DCE7F00532BD7 /* JFFSimpleBlockHolderTest.m */,
+				1B9025C3143DDA1200D3B0A0 /* JFFOnDeallocBlockOwnerTest.m */,
+				1B902621143DF1B300D3B0A0 /* NSObject+OwnershipsTest.m */,
+				1B90263F143EF04400D3B0A0 /* JFFAssignProxyTest.m */,
+				1B90269E143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m */,
+				1B80C1DF1442CE5A007D4309 /* NSObjectRuntimeExtensionsTest.m */,
+				1B80C23F14430049007D4309 /* NSObjectInstancesCountTest.m */,
+				1B902642143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m */,
+				1BD182401467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m */,
+				534CDFD714A8C8280068F4DF /* ObjCppCastingTest.mm */,
+				5349A6CB14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm */,
+				532E281814A9E9A300111144 /* ObjcDynamicCastTest.mm */,
+			);
+			path = Classes;
+			sourceTree = SOURCE_ROOT;
+		};
+		B694845E1429E24B00B8247E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B69484651429E24B00B8247E /* libJFFUtils.a */,
+				1B61C41C14A2065800542F46 /* libJFFUtilsMacOS.a */,
+				534CDFD414A8C7E00068F4DF /* libJFFUtils copy.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B69483E61429C88400B8247E /* JFFUtilsTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B69483FF1429C88400B8247E /* Build configuration list for PBXNativeTarget "JFFUtilsTest" */;
+			buildPhases = (
+				B69483E31429C88400B8247E /* Sources */,
+				B69483E41429C88400B8247E /* Frameworks */,
+				B69483E51429C88400B8247E /* Resources */,
+				B69484951429ECE200B8247E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B69484681429E29A00B8247E /* PBXTargetDependency */,
+			);
+			name = JFFUtilsTest;
+			productName = JFFUtilsTest;
+			productReference = B69483E71429C88400B8247E /* JFFUtilsTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B69483DE1429C88400B8247E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = B69483E11429C88400B8247E /* Build configuration list for PBXProject "JFFUtilsTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B69483DC1429C88400B8247E;
+			productRefGroup = B69483E81429C88400B8247E /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B694845E1429E24B00B8247E /* Products */;
+					ProjectRef = B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				B69483E61429C88400B8247E /* JFFUtilsTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1B61C41C14A2065800542F46 /* libJFFUtilsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtilsMacOS.a;
+			remoteRef = 1B61C41B14A2065800542F46 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		534CDFD414A8C7E00068F4DF /* libJFFUtils copy.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			name = "libJFFUtils copy.a";
+			path = "libJFFUtils-clang.a";
+			remoteRef = 534CDFD314A8C7E00068F4DF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B69484651429E24B00B8247E /* libJFFUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtils.a;
+			remoteRef = B69484641429E24B00B8247E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B69483E51429C88400B8247E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B69483F61429C88400B8247E /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B69484951429ECE200B8247E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#\n#/bin/bash\n#\n## Dump XCode variables\n\n\nXCODE_DUMP_DIR=/tmp/${PRODUCT_NAME}Build\nmkdir -p \"$XCODE_DUMP_DIR\"\nCI_TEST_PRODUCT_DIR_FILE=$XCODE_DUMP_DIR/PRODUCT_DIR.txt\n\ncd \"$BUILT_PRODUCTS_DIR\"\ncd ..\necho $PWD > \"$CI_TEST_PRODUCT_DIR_FILE\"\n\nexit 0";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B69483E31429C88400B8247E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B69483F81429C88400B8247E /* main.m in Sources */,
+				534C727B1431D9DE0085B41E /* JUMutableArrayTest.m in Sources */,
+				53BCF8E614323E7D00E896B3 /* JUArrayAdditionsTest.m in Sources */,
+				1B29556F143DCE7F00532BD7 /* JFFSimpleBlockHolderTest.m in Sources */,
+				1B9025C4143DDA1200D3B0A0 /* JFFOnDeallocBlockOwnerTest.m in Sources */,
+				1B902622143DF1B300D3B0A0 /* NSObject+OwnershipsTest.m in Sources */,
+				1B902640143EF04500D3B0A0 /* JFFAssignProxyTest.m in Sources */,
+				1B902643143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m in Sources */,
+				1B90269F143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m in Sources */,
+				1B80C1E01442CE5A007D4309 /* NSObjectRuntimeExtensionsTest.m in Sources */,
+				1B80C24014430049007D4309 /* NSObjectInstancesCountTest.m in Sources */,
+				1BD182411467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m in Sources */,
+				534CDFD814A8C8280068F4DF /* ObjCppCastingTest.mm in Sources */,
+				534CDFDE14A8CAAC0068F4DF /* JMStringHolder.m in Sources */,
+				534CE02B14A8CE7B0068F4DF /* JMParent.m in Sources */,
+				534CE02E14A8CE8C0068F4DF /* JMChild.m in Sources */,
+				5349A6CC14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm in Sources */,
+				532E281914A9E9A300111144 /* ObjcDynamicCastTest.mm in Sources */,
+				1B26EC6F14DABFB800A1A875 /* EmptyStringTest.m in Sources */,
+				1B26EC7014DABFB800A1A875 /* JFFStringFormatTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B69484681429E29A00B8247E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFUtils;
+			targetProxy = B69484671429E29A00B8247E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B69483F41429C88400B8247E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B69483F51429C88400B8247E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B69483FD1429C88400B8247E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../../lib/;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				New_Setting = "";
+				OTHER_LDFLAGS = "-all_load";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B69483FE1429C88400B8247E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../../lib/;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				New_Setting = "";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-all_load";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B69484001429C88400B8247E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../frameworks\"",
+				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFUtilsTest/JFFUtilsTest-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "JFFUtilsTest/JFFUtilsTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/usr/lib\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B69484011429C88400B8247E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../frameworks\"",
+				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFUtilsTest/JFFUtilsTest-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "JFFUtilsTest/JFFUtilsTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/usr/lib\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B69483E11429C88400B8247E /* Build configuration list for PBXProject "JFFUtilsTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B69483FD1429C88400B8247E /* Debug */,
+				B69483FE1429C88400B8247E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B69483FF1429C88400B8247E /* Build configuration list for PBXNativeTarget "JFFUtilsTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B69484001429C88400B8247E /* Debug */,
+				B69484011429C88400B8247E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B69483DE1429C88400B8247E /* Project object */;
+}
