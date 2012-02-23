@@ -8,6 +8,11 @@
 template < class DESTINATION >
 DESTINATION* objc_kind_of_cast( id nsObject )
 {
+   if ( nil == nsObject )
+   {
+      return nil;
+   }
+   
    Class destination_class_ = [ DESTINATION class ];
    if ( ![ nsObject isKindOfClass: destination_class_ ] )
    {
@@ -22,6 +27,11 @@ DESTINATION* objc_kind_of_cast( id nsObject )
 template < class DESTINATION >
 DESTINATION* objc_member_of_cast( id nsObject )
 {
+   if ( nil == nsObject )
+   {
+      return nil;
+   }
+   
    Class destination_class_ = [ DESTINATION class ];
    if ( ![ nsObject isMemberOfClass: destination_class_ ] )
    {
