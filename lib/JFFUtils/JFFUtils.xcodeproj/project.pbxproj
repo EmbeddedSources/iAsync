@@ -12,11 +12,8 @@
 		1B16830F146AD4C800832839 /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B16830D146AD4C800832839 /* NSString+UUIDCreation.h */; };
 		1B168310146AD4C800832839 /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */; };
 		1B26EC5414DABAB600A1A875 /* JFFMemoryMgmt.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B26EC5114DABAB600A1A875 /* JFFMemoryMgmt.h */; };
-		1B26EC5514DABAB600A1A875 /* JFFMemoryMgmt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC5214DABAB600A1A875 /* JFFMemoryMgmt.m */; };
-		1B26EC5614DABAB600A1A875 /* JFFRuntimeInitializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC5314DABAB600A1A875 /* JFFRuntimeInitializer.m */; };
 		1B26EC5914DABACA00A1A875 /* NSMutableArray+AddNonEmptyObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B26EC5714DABACA00A1A875 /* NSMutableArray+AddNonEmptyObject.h */; };
 		1B26EC5A14DABACA00A1A875 /* NSMutableArray+AddNonEmptyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC5814DABACA00A1A875 /* NSMutableArray+AddNonEmptyObject.m */; };
-		1B26EC5D14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC5C14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m */; };
 		1B26EC6014DABAF000A1A875 /* NSString+StringWithCutPrefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B26EC5E14DABAF000A1A875 /* NSString+StringWithCutPrefix.h */; };
 		1B26EC6114DABAF000A1A875 /* NSString+StringWithCutPrefix.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC5F14DABAF000A1A875 /* NSString+StringWithCutPrefix.m */; };
 		1B2A683F143F54F700BC284F /* NSObject+InstancesCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2A683D143F54F700BC284F /* NSObject+InstancesCount.h */; };
@@ -910,10 +907,7 @@
 				538E1CAF14B32201006BD40A /* NSDecimalNumber+Increment.m in Sources */,
 				53A3BB2814DAB2BF008B71BE /* NSString+Format.m in Sources */,
 				53A3BB4214DAB3CD008B71BE /* NSString+IsEmpty.m in Sources */,
-				1B26EC5514DABAB600A1A875 /* JFFMemoryMgmt.m in Sources */,
-				1B26EC5614DABAB600A1A875 /* JFFRuntimeInitializer.m in Sources */,
 				1B26EC5A14DABACA00A1A875 /* NSMutableArray+AddNonEmptyObject.m in Sources */,
-				1B26EC5D14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m in Sources */,
 				1B26EC6114DABAF000A1A875 /* NSString+StringWithCutPrefix.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
