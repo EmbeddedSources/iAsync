@@ -1,0 +1,11 @@
+
+#ifdef __OBJC__
+   #import <Foundation/Foundation.h>
+
+   #import <JFFUtils/JFFResultContext.h>
+
+   #import <Foundation/Foundation.h>
+   #include <CFNetwork/CFNetwork.h>
+
+   #include <zlib.h>
+#endif

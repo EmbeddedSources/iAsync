@@ -139,6 +139,57 @@
 		65802B61148BFC930040A93A /* JNConnectionsFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEF9314449AF5005D745F /* JNConnectionsFactory.h */; };
 		65802B62148BFC930040A93A /* JNConnectionsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF9414449AF5005D745F /* JNConnectionsFactory.m */; };
 		65802B63148BFCB20040A93A /* JNUrlResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEEDA14448782005D745F /* JNUrlResponse.h */; };
+		7E8F204414F9494300588C7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5AE6DE13F3E6C600EB6143 /* Foundation.framework */; };
+		7E8F204A14F9494300588C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E8F204814F9494300588C7D /* InfoPlist.strings */; };
+		7E8F205014F949A000588C7D /* JNConnectionsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF9414449AF5005D745F /* JNConnectionsFactory.m */; };
+		7E8F205314F949A000588C7D /* JNHttpEncodingsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 53834213141E691900473CF2 /* JNHttpEncodingsFactory.m */; };
+		7E8F205514F949A000588C7D /* JNGzipDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 53834217141E69E300473CF2 /* JNGzipDecoder.m */; };
+		7E8F205714F949A000588C7D /* JNStubDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 53834249141E713900473CF2 /* JNStubDecoder.m */; };
+		7E8F205914F949A000588C7D /* JNZipDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A33F25141F631500469DAA /* JNZipDecoder.m */; };
+		7E8F205C14F949A000588C7D /* JNGzipErrorsLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A33F36141F7E1D00469DAA /* JNGzipErrorsLogger.m */; };
+		7E8F205E14F949A000588C7D /* JNAbstractConnection+Constructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF1E14448DC9005D745F /* JNAbstractConnection+Constructor.m */; };
+		7E8F206014F949A000588C7D /* JFFFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D713CCB13F53D78007268DF /* JFFFileManager.m */; };
+		7E8F206214F949A000588C7D /* NSMutableSet+DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D713CBD13F538D0007268DF /* NSMutableSet+DownloadManager.m */; };
+		7E8F206414F949A000588C7D /* JFFTrafficCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD71E9113F5492C004C90A9 /* JFFTrafficCalculator.m */; };
+		7E8F206714F949A000588C7D /* NSMutableDictionary+DownloadingFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD71E9B13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.m */; };
+		7E8F206914F949A000588C7D /* JFFDownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD71E9813F54AE7004C90A9 /* JFFDownloadItem.m */; };
+		7E8F206C14F949A000588C7D /* NSURL+Cookies.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E074BD144EFBA000CB146F /* NSURL+Cookies.m */; };
+		7E8F206E14F949A000588C7D /* JNUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 53CB3D6014457E0D00D7E447 /* JNUtils.m */; };
+		7E8F207114F949A000588C7D /* JFFURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AE6F813F3E93000EB6143 /* JFFURLResponse.m */; };
+		7E8F207414F949A000588C7D /* JFFURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AE6F113F3E80B00EB6143 /* JFFURLConnection.m */; };
+		7E8F207614F949A000588C7D /* JNAbstractConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF1914448D44005D745F /* JNAbstractConnection.m */; };
+		7E8F207814F949A000588C7D /* JNNsUrlConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF1514448BBA005D745F /* JNNsUrlConnection.m */; };
+		7E8F207A14F949A000588C7D /* JFFNetworkBlocksFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD565FF13F3EC1100A4538D /* JFFNetworkBlocksFunctions.m */; };
+		7E8F207C14F949A000588C7D /* JFFUrlResponseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316F432141E151C00C3D9A9 /* JFFUrlResponseLogger.m */; };
+		7E8F208014F949DD00588C7D /* JNConnectionsFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEF9314449AF5005D745F /* JNConnectionsFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F208214F949DD00588C7D /* JNHttpDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 5383420A141E689E00473CF2 /* JNHttpDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F208314F949DD00588C7D /* JNHttpEncodingsFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 53834212141E691900473CF2 /* JNHttpEncodingsFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F208514F949DD00588C7D /* JNGzipDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 53834216141E69E300473CF2 /* JNGzipDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F208714F949DD00588C7D /* JNStubDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 53834248141E713900473CF2 /* JNStubDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F208914F949DD00588C7D /* JNZipDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A33F24141F631500469DAA /* JNZipDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F208B14F949DD00588C7D /* JNGzipCustomErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A33F33141F7C2B00469DAA /* JNGzipCustomErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F208C14F949DD00588C7D /* JNGzipErrorsLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A33F35141F7E1D00469DAA /* JNGzipErrorsLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F208E14F949DD00588C7D /* JNAbstractConnection+Constructor.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEF1D14448DC9005D745F /* JNAbstractConnection+Constructor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F209014F949DD00588C7D /* JFFFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CCA13F53D78007268DF /* JFFFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F209214F949DD00588C7D /* NSMutableSet+DownloadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CBC13F538D0007268DF /* NSMutableSet+DownloadManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F209414F949DD00588C7D /* JFFTrafficCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD71E9013F5492C004C90A9 /* JFFTrafficCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F209614F949DD00588C7D /* JFFTrafficCalculatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD71E9513F54948004C90A9 /* JFFTrafficCalculatorDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F209714F949DD00588C7D /* NSMutableDictionary+DownloadingFileInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD71E9A13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F209914F949DD00588C7D /* JFFDownloadItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CB513F52FBA007268DF /* JFFDownloadItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F209B14F949DD00588C7D /* JFFDownloadItemDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CB913F52FE2007268DF /* JFFDownloadItemDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F209C14F949DD00588C7D /* NSURL+Cookies.h in Headers */ = {isa = PBXBuildFile; fileRef = 53E074BC144EFBA000CB146F /* NSURL+Cookies.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F209E14F949DD00588C7D /* JNUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 53CB3D5F14457E0D00D7E447 /* JNUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20A014F949DD00588C7D /* JNUrlResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEEDA14448782005D745F /* JNUrlResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20A114F949DD00588C7D /* JFFURLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D5AE6F713F3E93000EB6143 /* JFFURLResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20A314F949DD00588C7D /* JNUrlConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEED0144485A6005D745F /* JNUrlConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20A414F949DD00588C7D /* JFFURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D5AE6F013F3E80B00EB6143 /* JFFURLConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20A614F949DD00588C7D /* JNAbstractConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEF1814448D44005D745F /* JNAbstractConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20A814F949DD00588C7D /* JNNsUrlConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEF1414448BBA005D745F /* JNNsUrlConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20AA14F949DD00588C7D /* JFFNetworkBlocksFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD565FE13F3EC1100A4538D /* JFFNetworkBlocksFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20AC14F949DD00588C7D /* JFFUrlResponseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5316F431141E151C00C3D9A9 /* JFFUrlResponseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20AE14F949DD00588C7D /* JNConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5310B9EF141F489200A3E2B1 /* JNConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20AF14F949DD00588C7D /* JNUrlConnectionCallbacks.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEED414448698005D745F /* JNUrlConnectionCallbacks.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F20B014F949DD00588C7D /* JFFNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D5AE6F413F3E8AF00EB6143 /* JFFNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D5AE6DF13F3E6C600EB6143 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5AE6DE13F3E6C600EB6143 /* Foundation.framework */; };
 		8D5AE6F213F3E80B00EB6143 /* JFFURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D5AE6F013F3E80B00EB6143 /* JFFURLConnection.h */; };
 		8D5AE6F313F3E80B00EB6143 /* JFFURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AE6F113F3E80B00EB6143 /* JFFURLConnection.m */; };
@@ -184,7 +235,7 @@
 		5383421A141E6A3B00473CF2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		53834248141E713900473CF2 /* JNStubDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNStubDecoder.h; sourceTree = "<group>"; };
 		53834249141E713900473CF2 /* JNStubDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNStubDecoder.m; sourceTree = "<group>"; };
-		539103B714A88BCA007315A3 /* libJFFNetwork copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libJFFNetwork copy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		539103B714A88BCA007315A3 /* libJFFNetwork copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFNetwork copy.a"; path = "libJFFNetwork-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53A33F24141F631500469DAA /* JNZipDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNZipDecoder.h; sourceTree = "<group>"; };
 		53A33F25141F631500469DAA /* JNZipDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNZipDecoder.m; sourceTree = "<group>"; };
 		53A33F33141F7C2B00469DAA /* JNGzipCustomErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNGzipCustomErrors.h; sourceTree = "<group>"; };
@@ -200,6 +251,10 @@
 		65802B27148BFC230040A93A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		65802B28148BFC230040A93A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65802B2B148BFC230040A93A /* JFFNetworkMacOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFNetworkMacOS-Prefix.pch"; sourceTree = "<group>"; };
+		7E8F204314F9494300588C7D /* JFFNetworkFW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = JFFNetworkFW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E8F204714F9494300588C7D /* JFFNetworkFW-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFNetworkFW-Info.plist"; sourceTree = "<group>"; };
+		7E8F204914F9494300588C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7E8F204B14F9494300588C7D /* JFFNetworkFW-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFNetworkFW-Prefix.pch"; sourceTree = "<group>"; };
 		8D5AE6DB13F3E6C600EB6143 /* libJFFNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5AE6DE13F3E6C600EB6143 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8D5AE6E213F3E6C700EB6143 /* JFFNetwork-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFNetwork-Prefix.pch"; sourceTree = "<group>"; };
@@ -239,6 +294,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				65802B24148BFC230040A93A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E8F203D14F9494300588C7D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E8F204414F9494300588C7D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,12 +398,31 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7E8F204514F9494300588C7D /* JFFNetworkFW */ = {
+			isa = PBXGroup;
+			children = (
+				7E8F204614F9494300588C7D /* Supporting Files */,
+			);
+			path = JFFNetworkFW;
+			sourceTree = "<group>";
+		};
+		7E8F204614F9494300588C7D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7E8F204714F9494300588C7D /* JFFNetworkFW-Info.plist */,
+				7E8F204814F9494300588C7D /* InfoPlist.strings */,
+				7E8F204B14F9494300588C7D /* JFFNetworkFW-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		8D5AE6D013F3E6C500EB6143 = {
 			isa = PBXGroup;
 			children = (
 				8D5AE6EF13F3E7EE00EB6143 /* Classes */,
 				8D5AE6E113F3E6C700EB6143 /* Supporting Files */,
 				65802B29148BFC230040A93A /* JFFNetworkMacOS */,
+				7E8F204514F9494300588C7D /* JFFNetworkFW */,
 				8D5AE6DD13F3E6C600EB6143 /* Frameworks */,
 				8D5AE6DC13F3E6C600EB6143 /* Products */,
 			);
@@ -352,6 +434,7 @@
 				8D5AE6DB13F3E6C600EB6143 /* libJFFNetwork.a */,
 				65802B22148BFC230040A93A /* libJFFNetworkMacOS.a */,
 				539103B714A88BCA007315A3 /* libJFFNetwork copy.a */,
+				7E8F204314F9494300588C7D /* JFFNetworkFW.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -508,6 +591,42 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E8F203E14F9494300588C7D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E8F208014F949DD00588C7D /* JNConnectionsFactory.h in Headers */,
+				7E8F208214F949DD00588C7D /* JNHttpDecoder.h in Headers */,
+				7E8F208314F949DD00588C7D /* JNHttpEncodingsFactory.h in Headers */,
+				7E8F208514F949DD00588C7D /* JNGzipDecoder.h in Headers */,
+				7E8F208714F949DD00588C7D /* JNStubDecoder.h in Headers */,
+				7E8F208914F949DD00588C7D /* JNZipDecoder.h in Headers */,
+				7E8F208B14F949DD00588C7D /* JNGzipCustomErrors.h in Headers */,
+				7E8F208C14F949DD00588C7D /* JNGzipErrorsLogger.h in Headers */,
+				7E8F208E14F949DD00588C7D /* JNAbstractConnection+Constructor.h in Headers */,
+				7E8F209014F949DD00588C7D /* JFFFileManager.h in Headers */,
+				7E8F209214F949DD00588C7D /* NSMutableSet+DownloadManager.h in Headers */,
+				7E8F209414F949DD00588C7D /* JFFTrafficCalculator.h in Headers */,
+				7E8F209614F949DD00588C7D /* JFFTrafficCalculatorDelegate.h in Headers */,
+				7E8F209714F949DD00588C7D /* NSMutableDictionary+DownloadingFileInfo.h in Headers */,
+				7E8F209914F949DD00588C7D /* JFFDownloadItem.h in Headers */,
+				7E8F209B14F949DD00588C7D /* JFFDownloadItemDelegate.h in Headers */,
+				7E8F209C14F949DD00588C7D /* NSURL+Cookies.h in Headers */,
+				7E8F209E14F949DD00588C7D /* JNUtils.h in Headers */,
+				7E8F20A014F949DD00588C7D /* JNUrlResponse.h in Headers */,
+				7E8F20A114F949DD00588C7D /* JFFURLResponse.h in Headers */,
+				7E8F20A314F949DD00588C7D /* JNUrlConnection.h in Headers */,
+				7E8F20A414F949DD00588C7D /* JFFURLConnection.h in Headers */,
+				7E8F20A614F949DD00588C7D /* JNAbstractConnection.h in Headers */,
+				7E8F20A814F949DD00588C7D /* JNNsUrlConnection.h in Headers */,
+				7E8F20AA14F949DD00588C7D /* JFFNetworkBlocksFunctions.h in Headers */,
+				7E8F20AC14F949DD00588C7D /* JFFUrlResponseLogger.h in Headers */,
+				7E8F20AE14F949DD00588C7D /* JNConstants.h in Headers */,
+				7E8F20AF14F949DD00588C7D /* JNUrlConnectionCallbacks.h in Headers */,
+				7E8F20B014F949DD00588C7D /* JFFNetwork.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D5AE6D913F3E6C600EB6143 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -581,6 +700,27 @@
 			productReference = 65802B22148BFC230040A93A /* libJFFNetworkMacOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		7E8F204214F9494300588C7D /* JFFNetworkFW */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E8F204E14F9494300588C7D /* Build configuration list for PBXNativeTarget "JFFNetworkFW" */;
+			buildPhases = (
+				7E8F203B14F9494300588C7D /* Framework begin */,
+				7E8F203C14F9494300588C7D /* Sources */,
+				7E8F203D14F9494300588C7D /* Frameworks */,
+				7E8F203E14F9494300588C7D /* Headers */,
+				7E8F203F14F9494300588C7D /* Resources */,
+				7E8F204014F9494300588C7D /* Restore directories */,
+				7E8F204114F9494300588C7D /* Framework end */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JFFNetworkFW;
+			productName = JFFNetworkFW;
+			productReference = 7E8F204314F9494300588C7D /* JFFNetworkFW.framework */;
+			productType = "com.apple.product-type.framework.static";
+		};
 		8D5AE6DA13F3E6C600EB6143 /* JFFNetwork */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D5AE6E813F3E6C700EB6143 /* Build configuration list for PBXNativeTarget "JFFNetwork" */;
@@ -621,9 +761,66 @@
 				8D5AE6DA13F3E6C600EB6143 /* JFFNetwork */,
 				65802B21148BFC230040A93A /* JFFNetworkMacOS */,
 				5391037D14A88BCA007315A3 /* JFFNetwork-clang */,
+				7E8F204214F9494300588C7D /* JFFNetworkFW */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7E8F203F14F9494300588C7D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E8F204A14F9494300588C7D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7E8F203B14F9494300588C7D /* Framework begin */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Framework begin";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n\tUFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version  from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\nONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM:-$ONLY_ACTIVE_ARCH}\n\n# Short-circuit if all binaries are up to date\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n   [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n   [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n  ([[ \"${ONLY_ACTIVE_PLATFORM}\" == \"YES\" ]] || \\\n    ([[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n     [[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n     [[ ! \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\n    )\n  )\nthen\n    exit 0\nfi\n\n\n# Clean other platform if needed\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]]\nthen\n\techo \"Platform \\\"$UFW_SDK_PLATFORM\\\" was cleaned recently. Cleaning \\\"$UFW_OTHER_PLATFORM\\\" as well\"\n\techo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\n\txcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\nfi\n\n\n# Make sure we are building from fresh binaries\n\nrm -rf \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\n\nif [[ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]]\nthen\n    rm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n    rm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nfi\n";
+		};
+		7E8F204014F9494300588C7D /* Restore directories */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Restore directories";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "INLINED_PYHON_SCRIPT=\"import sys; import os.path; headerPathFromFind = sys.argv[2]; srcRoot = sys.argv[1]; headerPathFromFindWithoutFilename = os.path.dirname( headerPathFromFind ); relatedPathForDirectory = os.path.relpath( headerPathFromFindWithoutFilename, srcRoot ); print( relatedPathForDirectory );\"\n\nHEADERS_ROOT=$SRCROOT\nFRAMEWORK_HEADERS_DIR=\"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Headers\"\n\n## only header files expected at this point\nPUBLIC_HEADERS=$( ls -1 \"$FRAMEWORK_HEADERS_DIR\" )\n\n\nfor PUBLIC_HEADER in $PUBLIC_HEADERS; do\n\n   FIND_RESULT=$( find \"$HEADERS_ROOT\" -name \"$PUBLIC_HEADER\" )\n   RELATIVE_PATH=$( python -c \"$INLINED_PYHON_SCRIPT\" \"$HEADERS_ROOT\" \"$FIND_RESULT\" )\n\n   mkdir -p \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH\"\n   mv \"$FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER\" \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH/$PUBLIC_HEADER\"\ndone\n";
+		};
+		7E8F204114F9494300588C7D /* Framework end */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Framework end";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\nexport UFW_MASTER_SCRIPT_RUNNING=1\n\n\n# Functions\n\n## List files in the specified directory, storing to the specified array.\n#\n# @param $1 The path to list\n# @param $2 The name of the array to fill\n#\n##\nlist_files ()\n{\n    filelist=$(ls \"$1\")\n    while read line\n    do\n        eval \"$2[\\${#$2[*]}]=\\\"\\$line\\\"\"\n    done <<< \"$filelist\"\n}\n\n\n# Sanity check\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n    echo \"Framework target \\\"${TARGET_NAME}\\\" had no source files to build from. Make sure your source files have the correct target membership\"\n    exit 1\nfi\n\n\n# Gather information\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n    UFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\nONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM:-$ONLY_ACTIVE_ARCH}\n\n# Short-circuit if all binaries are up to date.\n# We already checked the other platform in the prerun script.\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\nif [ \"${ONLY_ACTIVE_PLATFORM}\" == \"YES\" ]\nthen\n    echo \"ONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM}: Skipping other platform build\"\nelse\n    # Make sure the other platform gets built\n    \n    echo \"Build other platform\"\n    \n    echo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n    xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n    \n    \n    # Build the fat static library binary\n    \n    echo \"Create universal static library\"\n    \n    echo \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \n    echo mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n    mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nfi\n\n# Build embedded framework structure\n\necho \"Build Embedded Framework\"\n\necho rm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\necho mkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\necho cp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\ncp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\n\ndeclare -a UFW_FILE_LIST\nlist_files \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" UFW_FILE_LIST\nfor filename in \"${UFW_FILE_LIST[@]}\"\ndo\n    if [[ \"${filename}\" != \"Info.plist\" ]] && [[ ! \"${filename}\" =~ .*\\.lproj$ ]]\n    then\n        echo ln -sf \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n        ln -sf \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n    fi\ndone\n\n\nif [ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]\nthen\n    # Replace other platform's framework with a copy of this one (so that both have the same universal binary)\n    \n    echo \"Copy from $UFW_SDK_PLATFORM to $UFW_OTHER_PLATFORM\"\n    \n    echo rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    echo cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5391037E14A88BCA007315A3 /* Sources */ = {
@@ -680,6 +877,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E8F203C14F9494300588C7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E8F205014F949A000588C7D /* JNConnectionsFactory.m in Sources */,
+				7E8F205314F949A000588C7D /* JNHttpEncodingsFactory.m in Sources */,
+				7E8F205514F949A000588C7D /* JNGzipDecoder.m in Sources */,
+				7E8F205714F949A000588C7D /* JNStubDecoder.m in Sources */,
+				7E8F205914F949A000588C7D /* JNZipDecoder.m in Sources */,
+				7E8F205C14F949A000588C7D /* JNGzipErrorsLogger.m in Sources */,
+				7E8F205E14F949A000588C7D /* JNAbstractConnection+Constructor.m in Sources */,
+				7E8F206014F949A000588C7D /* JFFFileManager.m in Sources */,
+				7E8F206214F949A000588C7D /* NSMutableSet+DownloadManager.m in Sources */,
+				7E8F206414F949A000588C7D /* JFFTrafficCalculator.m in Sources */,
+				7E8F206714F949A000588C7D /* NSMutableDictionary+DownloadingFileInfo.m in Sources */,
+				7E8F206914F949A000588C7D /* JFFDownloadItem.m in Sources */,
+				7E8F206C14F949A000588C7D /* NSURL+Cookies.m in Sources */,
+				7E8F206E14F949A000588C7D /* JNUtils.m in Sources */,
+				7E8F207114F949A000588C7D /* JFFURLResponse.m in Sources */,
+				7E8F207414F949A000588C7D /* JFFURLConnection.m in Sources */,
+				7E8F207614F949A000588C7D /* JNAbstractConnection.m in Sources */,
+				7E8F207814F949A000588C7D /* JNNsUrlConnection.m in Sources */,
+				7E8F207A14F949A000588C7D /* JFFNetworkBlocksFunctions.m in Sources */,
+				7E8F207C14F949A000588C7D /* JFFUrlResponseLogger.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D5AE6D713F3E6C600EB6143 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -708,6 +932,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7E8F204814F9494300588C7D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7E8F204914F9494300588C7D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		539103B514A88BCA007315A3 /* Debug */ = {
@@ -781,6 +1016,44 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		7E8F204C14F9494300588C7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFNetworkFW/JFFNetworkFW-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "JFFNetworkFW/JFFNetworkFW-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		7E8F204D14F9494300588C7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFNetworkFW/JFFNetworkFW-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "JFFNetworkFW/JFFNetworkFW-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
 		};
@@ -874,6 +1147,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		7E8F204E14F9494300588C7D /* Build configuration list for PBXNativeTarget "JFFNetworkFW" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E8F204C14F9494300588C7D /* Debug */,
+				7E8F204D14F9494300588C7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		8D5AE6D513F3E6C500EB6143 /* Build configuration list for PBXProject "JFFNetwork" */ = {
 			isa = XCConfigurationList;

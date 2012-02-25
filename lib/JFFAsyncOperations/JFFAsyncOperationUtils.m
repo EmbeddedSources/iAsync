@@ -8,7 +8,7 @@
 JFFAsyncOperation asyncOperationWithSyncOperation( JFFSyncOperation load_data_block_ )
 {
     load_data_block_ = [ [ load_data_block_ copy ] autorelease ];
-    JFFSyncOperationWithProgress progress_load_data_block_ = ^id( NSError** error_
+    b progress_load_data_block_ = ^id( NSError** error_
                                                                  , JFFAsyncOperationProgressHandler progress_callback_ )
     {
         return load_data_block_( error_ );
