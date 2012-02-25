@@ -213,6 +213,13 @@
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = JFFAsyncOperations;
 		};
+		7E8F201F14F9438000588C7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E57F42414F93738002D139B;
+			remoteInfo = JFFUtilsFW;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -268,6 +275,7 @@
 				7E57F3F614F93344002D139B /* libJFFUtils.a */,
 				7E57F3F814F93344002D139B /* libJFFUtilsMacOS.a */,
 				7E57F3FA14F93344002D139B /* libJFFUtils copy.a */,
+				7E8F202014F9438000588C7D /* JFFUtilsFW.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -397,6 +405,13 @@
 			name = "libJFFUtils copy.a";
 			path = "libJFFUtils-clang.a";
 			remoteRef = 7E57F3F914F93344002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E8F202014F9438000588C7D /* JFFUtilsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFUtilsFW.framework;
+			remoteRef = 7E8F201F14F9438000588C7D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -538,6 +553,7 @@
 				7E57F3BC14F93313002D139B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7E57F40414F933A3002D139B /* Build configuration list for PBXAggregateTarget "iAsync-clang" */ = {
 			isa = XCConfigurationList;
@@ -546,6 +562,7 @@
 				7E57F40614F933A3002D139B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7E57F41014F933D5002D139B /* Build configuration list for PBXAggregateTarget "iAsync-Desktop" */ = {
 			isa = XCConfigurationList;
@@ -554,6 +571,7 @@
 				7E57F41214F933D5002D139B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
