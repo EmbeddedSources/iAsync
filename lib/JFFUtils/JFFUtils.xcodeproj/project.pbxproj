@@ -203,6 +203,91 @@
 		65802AAA148BF4B00040A93A /* NSObject+RuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */; };
 		65802AAB148BF4B20040A93A /* NSObject+Const0.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE75CFE1434B3450076E068 /* NSObject+Const0.m */; };
 		65802AAC148BF4B50040A93A /* NSObject+InstancesCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A683E143F54F700BC284F /* NSObject+InstancesCount.m */; };
+		7E57F42514F93738002D139B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		7E57F42B14F93738002D139B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E57F42914F93738002D139B /* InfoPlist.strings */; };
+		7E57F43114F937E0002D139B /* NSString+ToURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676CD144C474500B14D49 /* NSString+ToURL.m */; };
+		7E57F43314F937E0002D139B /* NSURL+ToURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676D1144C476600B14D49 /* NSURL+ToURL.m */; };
+		7E57F43514F937E0002D139B /* UIWebView+UserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676BA144C3FE900B14D49 /* UIWebView+UserAgent.m */; };
+		7E57F43714F937E0002D139B /* NSThread+AssertMainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676BE144C409F00B14D49 /* NSThread+AssertMainThread.m */; };
+		7E57F43914F937E0002D139B /* NSDecimalNumber+Increment.m in Sources */ = {isa = PBXBuildFile; fileRef = 538E1CAB14B32201006BD40A /* NSDecimalNumber+Increment.m */; };
+		7E57F43B14F937E0002D139B /* NSString+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDD81445D75700733BE5 /* NSString+XQueryComponents.m */; };
+		7E57F43D14F937E0002D139B /* NSURL+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDDC1445D9FD00733BE5 /* NSURL+XQueryComponents.m */; };
+		7E57F43F14F937E0002D139B /* NSDictionary+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE01445DA7E00733BE5 /* NSDictionary+XQueryComponents.m */; };
+		7E57F44214F937E0002D139B /* JFFSimpleBlockHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE0A91390496200DD6890 /* JFFSimpleBlockHolder.m */; };
+		7E57F44414F937E0002D139B /* JFFOnDeallocBlockOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1C21391A25500DD6890 /* JFFOnDeallocBlockOwner.m */; };
+		7E57F44614F937E0002D139B /* NSString+StringWithCutPrefix.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC5F14DABAF000A1A875 /* NSString+StringWithCutPrefix.m */; };
+		7E57F44814F937E0002D139B /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A3BB2414DAB2BF008B71BE /* NSString+Format.m */; };
+		7E57F44A14F937E0002D139B /* NSString+Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE19C1391969A00DD6890 /* NSString+Search.m */; };
+		7E57F44C14F937E0002D139B /* NSString+PropertyName.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648B7D13923EC4001E163C /* NSString+PropertyName.m */; };
+		7E57F44E14F937E0002D139B /* NSString+PathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D713CC613F539A5007268DF /* NSString+PathExtensions.m */; };
+		7E57F45014F937E0002D139B /* NSString+Trimm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6AAD8D1447039B00EA1D96 /* NSString+Trimm.m */; };
+		7E57F45214F937E0002D139B /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */; };
+		7E57F45414F937E0002D139B /* NSString+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A3BB3E14DAB3CD008B71BE /* NSString+IsEmpty.m */; };
+		7E57F45714F937E0002D139B /* NSMutableArray+AddNonEmptyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC5814DABACA00A1A875 /* NSMutableArray+AddNonEmptyObject.m */; };
+		7E57F45914F937E0002D139B /* NSMutableArray+ChangeCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCDF9E414320B3200CEB6E7 /* NSMutableArray+ChangeCount.m */; };
+		7E57F45B14F937E0002D139B /* NSArray+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE0AC1390496200DD6890 /* NSArray+BlocksAdditions.m */; };
+		7E57F45D14F937E0002D139B /* NSArray+RemoveDuplicates.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BCF8DF143239D100E896B3 /* NSArray+RemoveDuplicates.m */; };
+		7E57F45F14F937E0002D139B /* NSArray+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E366C71433760A002AB0B9 /* NSArray+IsEmpty.m */; };
+		7E57F46114F937E0002D139B /* NSArray+NoThrowObjectAtIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE41445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m */; };
+		7E57F46314F937E0002D139B /* NSObject+Ownerships.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE138139107EA00DD6890 /* NSObject+Ownerships.m */; };
+		7E57F46514F937E0002D139B /* NSObject+OnDeallocBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1CC1391A36800DD6890 /* NSObject+OnDeallocBlock.m */; };
+		7E57F46714F937E0002D139B /* NSObject+RuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */; };
+		7E57F46914F937E0002D139B /* NSObject+Const0.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE75CFE1434B3450076E068 /* NSObject+Const0.m */; };
+		7E57F46B14F937E0002D139B /* NSObject+InstancesCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A683E143F54F700BC284F /* NSObject+InstancesCount.m */; };
+		7E57F46D14F937E0002D139B /* NSObject+ExpandArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EE0351487D03A00BA6680 /* NSObject+ExpandArray.m */; };
+		7E57F46F14F937E0002D139B /* JFFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648BE013924326001E163C /* JFFError.m */; };
+		7E57F47114F937E0002D139B /* JFFAssignProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB67B1E13E980B70024EA6C /* JFFAssignProxy.m */; };
+		7E57F47314F937E0002D139B /* JFFSingleThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01FB014447B7600A627B1 /* JFFSingleThreadProxy.m */; };
+		7E57F47514F937E0002D139B /* JFFMutableAssignArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D713C6C13F3F62B007268DF /* JFFMutableAssignArray.m */; };
+		7E57F47714F937E0002D139B /* JFFMutableAssignDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1820C1467D71B0033BEFF /* JFFMutableAssignDictionary.m */; };
+		7E57F47914F937E0002D139B /* JFFMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB67B1913E97FCF0024EA6C /* JFFMulticastDelegate.m */; };
+		7E57F47B14F937E0002D139B /* JFFResultContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01FB51444824100A627B1 /* JFFResultContext.m */; };
+		7E57F47D14F937E0002D139B /* JGCDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7608991444912F0059E977 /* JGCDAdditions.m */; };
+		7E57F47F14F937E0002D139B /* JSignedRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B104D8D1483C8410025FDDA /* JSignedRange.m */; };
+		7E57F48214F937E0002D139B /* JFFCastFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5349A6C514A9CEA7008ECCA6 /* JFFCastFunctions.mm */; };
+		7E57F48314F93840002D139B /* NSString+ToURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676CC144C474500B14D49 /* NSString+ToURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F48514F93840002D139B /* NSURL+ToURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676D0144C476600B14D49 /* NSURL+ToURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F48714F93840002D139B /* UIWebView+UserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676B9144C3FE900B14D49 /* UIWebView+UserAgent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F48914F93840002D139B /* NSThread+AssertMainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676BD144C409E00B14D49 /* NSThread+AssertMainThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F48B14F93840002D139B /* NSDecimalNumber+Increment.h in Headers */ = {isa = PBXBuildFile; fileRef = 538E1CAA14B32201006BD40A /* NSDecimalNumber+Increment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F48D14F93840002D139B /* NSString+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDD71445D75700733BE5 /* NSString+XQueryComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F48F14F93840002D139B /* NSURL+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDDB1445D9FD00733BE5 /* NSURL+XQueryComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F49114F93840002D139B /* NSDictionary+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDDF1445DA7E00733BE5 /* NSDictionary+XQueryComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F49314F93840002D139B /* JFFUtilsBlockDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE0A51390496200DD6890 /* JFFUtilsBlockDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F49414F93840002D139B /* JFFSimpleBlockHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE0A81390496200DD6890 /* JFFSimpleBlockHolder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F49614F93840002D139B /* JFFOnDeallocBlockOwner.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE1C11391A25500DD6890 /* JFFOnDeallocBlockOwner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F49814F93840002D139B /* NSString+StringWithCutPrefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B26EC5E14DABAF000A1A875 /* NSString+StringWithCutPrefix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F49A14F93840002D139B /* NSString+Format.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A3BB2314DAB2BE008B71BE /* NSString+Format.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F49C14F93840002D139B /* NSString+Search.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE19B1391969A00DD6890 /* NSString+Search.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F49E14F93840002D139B /* NSString+PropertyName.h in Headers */ = {isa = PBXBuildFile; fileRef = 65648B7C13923EC4001E163C /* NSString+PropertyName.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4A014F93840002D139B /* NSString+PathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CC513F539A5007268DF /* NSString+PathExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4A214F93840002D139B /* NSString+Trimm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B6AAD8C1447039B00EA1D96 /* NSString+Trimm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4A414F93840002D139B /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B16830D146AD4C800832839 /* NSString+UUIDCreation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4A614F93840002D139B /* NSString+IsEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A3BB3D14DAB3CD008B71BE /* NSString+IsEmpty.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4A814F93840002D139B /* JUArrayHelperBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 53BCF8E214323A4800E896B3 /* JUArrayHelperBlocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4A914F93840002D139B /* NSMutableArray+AddNonEmptyObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B26EC5714DABACA00A1A875 /* NSMutableArray+AddNonEmptyObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4AB14F93840002D139B /* NSMutableArray+ChangeCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BCDF9E314320B3200CEB6E7 /* NSMutableArray+ChangeCount.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4AD14F93840002D139B /* NSArray+BlocksAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE0AB1390496200DD6890 /* NSArray+BlocksAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4AF14F93840002D139B /* NSArray+RemoveDuplicates.h in Headers */ = {isa = PBXBuildFile; fileRef = 53BCF8DE143239D100E896B3 /* NSArray+RemoveDuplicates.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4B114F93840002D139B /* NSArray+IsEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 53E366C61433760A002AB0B9 /* NSArray+IsEmpty.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4B314F93840002D139B /* NSArray+NoThrowObjectAtIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDE31445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4B514F93840002D139B /* NSObject+Ownerships.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE137139107EA00DD6890 /* NSObject+Ownerships.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4B714F93840002D139B /* NSObject+OnDeallocBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE1CB1391A36800DD6890 /* NSObject+OnDeallocBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4B914F93840002D139B /* NSObject+RuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D1DE52913AB8269001FD56F /* NSObject+RuntimeExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4BB14F93840002D139B /* NSObject+Const0.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE75CFD1434B3450076E068 /* NSObject+Const0.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4BD14F93840002D139B /* NSObject+InstancesCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2A683D143F54F700BC284F /* NSObject+InstancesCount.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4BF14F93840002D139B /* NSObject+ExpandArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3EE0341487D03A00BA6680 /* NSObject+ExpandArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4C114F93840002D139B /* JFFError.h in Headers */ = {isa = PBXBuildFile; fileRef = 65648BDF13924326001E163C /* JFFError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4C314F93840002D139B /* JFFAssignProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DB67B1D13E980B70024EA6C /* JFFAssignProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4C514F93840002D139B /* JFFSingleThreadProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD01FAF14447B7600A627B1 /* JFFSingleThreadProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4C714F93840002D139B /* JFFMutableAssignArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713C6B13F3F62B007268DF /* JFFMutableAssignArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4C914F93840002D139B /* JFFMutableAssignDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD1820B1467D71B0033BEFF /* JFFMutableAssignDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4CB14F93840002D139B /* JFFMulticastDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DB67B1813E97FCF0024EA6C /* JFFMulticastDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4CD14F93840002D139B /* JFFResultContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD01FB41444824100A627B1 /* JFFResultContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4CF14F93840002D139B /* JGCDAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B7608981444912F0059E977 /* JGCDAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4D114F93840002D139B /* JSignedRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B104D911483C85A0025FDDA /* JSignedRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4D314F93840002D139B /* JFFUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE27B1391BD7800DD6890 /* JFFUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E57F4D414F93840002D139B /* JFFCastFunctions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 534CDFC014A8C2930068F4DF /* JFFCastFunctions.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D1DE52B13AB8269001FD56F /* NSObject+RuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D1DE52913AB8269001FD56F /* NSObject+RuntimeExtensions.h */; };
 		8D1DE52C13AB8269001FD56F /* NSObject+RuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */; };
 		8D713C6D13F3F62B007268DF /* JFFMutableAssignArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713C6B13F3F62B007268DF /* JFFMutableAssignArray.h */; };
@@ -302,6 +387,10 @@
 		65802A60148BF2930040A93A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		65802A61148BF2930040A93A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65802A64148BF2930040A93A /* JFFUtilsMacOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFUtilsMacOS-Prefix.pch"; sourceTree = "<group>"; };
+		7E57F42414F93738002D139B /* JFFUtilsFW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = JFFUtilsFW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E57F42814F93738002D139B /* JFFUtilsFW-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFUtilsFW-Info.plist"; sourceTree = "<group>"; };
+		7E57F42A14F93738002D139B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7E57F42C14F93738002D139B /* JFFUtilsFW-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFUtilsFW-Prefix.pch"; sourceTree = "<group>"; };
 		8D1DE52913AB8269001FD56F /* NSObject+RuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RuntimeExtensions.h"; sourceTree = "<group>"; };
 		8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RuntimeExtensions.m"; sourceTree = "<group>"; };
 		8D713C6B13F3F62B007268DF /* JFFMutableAssignArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFMutableAssignArray.h; sourceTree = "<group>"; };
@@ -334,6 +423,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E57F41E14F93738002D139B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E57F42514F93738002D139B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2AAC07C0554694100DB518D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -351,6 +448,7 @@
 				D2AAC07E0554694100DB518D /* libJFFUtils.a */,
 				65802A5B148BF2930040A93A /* libJFFUtilsMacOS.a */,
 				5391044314A88C04007315A3 /* libJFFUtils copy.a */,
+				7E57F42414F93738002D139B /* JFFUtilsFW.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -361,6 +459,7 @@
 				651BE0BF1390496700DD6890 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				65802A62148BF2930040A93A /* JFFUtilsMacOS */,
+				7E57F42614F93738002D139B /* JFFUtilsFW */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
@@ -577,6 +676,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7E57F42614F93738002D139B /* JFFUtilsFW */ = {
+			isa = PBXGroup;
+			children = (
+				7E57F42714F93738002D139B /* Supporting Files */,
+			);
+			path = JFFUtilsFW;
+			sourceTree = "<group>";
+		};
+		7E57F42714F93738002D139B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7E57F42814F93738002D139B /* JFFUtilsFW-Info.plist */,
+				7E57F42914F93738002D139B /* InfoPlist.strings */,
+				7E57F42C14F93738002D139B /* JFFUtilsFW-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -638,6 +755,56 @@
 				538E1CAD14B32201006BD40A /* NSDecimalNumber+Increment.h in Headers */,
 				53A3BB2614DAB2BF008B71BE /* NSString+Format.h in Headers */,
 				53A3BB4014DAB3CD008B71BE /* NSString+IsEmpty.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E57F41F14F93738002D139B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E57F48314F93840002D139B /* NSString+ToURL.h in Headers */,
+				7E57F48514F93840002D139B /* NSURL+ToURL.h in Headers */,
+				7E57F48714F93840002D139B /* UIWebView+UserAgent.h in Headers */,
+				7E57F48914F93840002D139B /* NSThread+AssertMainThread.h in Headers */,
+				7E57F48B14F93840002D139B /* NSDecimalNumber+Increment.h in Headers */,
+				7E57F48D14F93840002D139B /* NSString+XQueryComponents.h in Headers */,
+				7E57F48F14F93840002D139B /* NSURL+XQueryComponents.h in Headers */,
+				7E57F49114F93840002D139B /* NSDictionary+XQueryComponents.h in Headers */,
+				7E57F49314F93840002D139B /* JFFUtilsBlockDefinitions.h in Headers */,
+				7E57F49414F93840002D139B /* JFFSimpleBlockHolder.h in Headers */,
+				7E57F49614F93840002D139B /* JFFOnDeallocBlockOwner.h in Headers */,
+				7E57F49814F93840002D139B /* NSString+StringWithCutPrefix.h in Headers */,
+				7E57F49A14F93840002D139B /* NSString+Format.h in Headers */,
+				7E57F49C14F93840002D139B /* NSString+Search.h in Headers */,
+				7E57F49E14F93840002D139B /* NSString+PropertyName.h in Headers */,
+				7E57F4A014F93840002D139B /* NSString+PathExtensions.h in Headers */,
+				7E57F4A214F93840002D139B /* NSString+Trimm.h in Headers */,
+				7E57F4A414F93840002D139B /* NSString+UUIDCreation.h in Headers */,
+				7E57F4A614F93840002D139B /* NSString+IsEmpty.h in Headers */,
+				7E57F4A814F93840002D139B /* JUArrayHelperBlocks.h in Headers */,
+				7E57F4A914F93840002D139B /* NSMutableArray+AddNonEmptyObject.h in Headers */,
+				7E57F4AB14F93840002D139B /* NSMutableArray+ChangeCount.h in Headers */,
+				7E57F4AD14F93840002D139B /* NSArray+BlocksAdditions.h in Headers */,
+				7E57F4AF14F93840002D139B /* NSArray+RemoveDuplicates.h in Headers */,
+				7E57F4B114F93840002D139B /* NSArray+IsEmpty.h in Headers */,
+				7E57F4B314F93840002D139B /* NSArray+NoThrowObjectAtIndex.h in Headers */,
+				7E57F4B514F93840002D139B /* NSObject+Ownerships.h in Headers */,
+				7E57F4B714F93840002D139B /* NSObject+OnDeallocBlock.h in Headers */,
+				7E57F4B914F93840002D139B /* NSObject+RuntimeExtensions.h in Headers */,
+				7E57F4BB14F93840002D139B /* NSObject+Const0.h in Headers */,
+				7E57F4BD14F93840002D139B /* NSObject+InstancesCount.h in Headers */,
+				7E57F4BF14F93840002D139B /* NSObject+ExpandArray.h in Headers */,
+				7E57F4C114F93840002D139B /* JFFError.h in Headers */,
+				7E57F4C314F93840002D139B /* JFFAssignProxy.h in Headers */,
+				7E57F4C514F93840002D139B /* JFFSingleThreadProxy.h in Headers */,
+				7E57F4C714F93840002D139B /* JFFMutableAssignArray.h in Headers */,
+				7E57F4C914F93840002D139B /* JFFMutableAssignDictionary.h in Headers */,
+				7E57F4CB14F93840002D139B /* JFFMulticastDelegate.h in Headers */,
+				7E57F4CD14F93840002D139B /* JFFResultContext.h in Headers */,
+				7E57F4CF14F93840002D139B /* JGCDAdditions.h in Headers */,
+				7E57F4D114F93840002D139B /* JSignedRange.h in Headers */,
+				7E57F4D314F93840002D139B /* JFFUtils.h in Headers */,
+				7E57F4D414F93840002D139B /* JFFCastFunctions.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +897,27 @@
 			productReference = 65802A5B148BF2930040A93A /* libJFFUtilsMacOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		7E57F42314F93738002D139B /* JFFUtilsFW */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E57F42D14F93738002D139B /* Build configuration list for PBXNativeTarget "JFFUtilsFW" */;
+			buildPhases = (
+				7E57F41C14F93738002D139B /* Begin framework */,
+				7E57F41D14F93738002D139B /* Sources */,
+				7E57F41E14F93738002D139B /* Frameworks */,
+				7E57F41F14F93738002D139B /* Headers */,
+				7E57F42014F93738002D139B /* Resources */,
+				7E57F42114F93738002D139B /* Restore directories */,
+				7E57F42214F93738002D139B /* End Framework */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JFFUtilsFW;
+			productName = JFFUtilsFW;
+			productReference = 7E57F42414F93738002D139B /* JFFUtilsFW.framework */;
+			productType = "com.apple.product-type.framework.static";
+		};
 		D2AAC07D0554694100DB518D /* JFFUtils */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "JFFUtils" */;
@@ -764,6 +952,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* JFFUtils */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
@@ -773,9 +962,66 @@
 				D2AAC07D0554694100DB518D /* JFFUtils */,
 				65802A5A148BF2930040A93A /* JFFUtilsMacOS */,
 				539103F214A88C04007315A3 /* JFFUtils-clang */,
+				7E57F42314F93738002D139B /* JFFUtilsFW */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7E57F42014F93738002D139B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E57F42B14F93738002D139B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7E57F41C14F93738002D139B /* Begin framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Begin framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n\tUFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version  from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\nONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM:-$ONLY_ACTIVE_ARCH}\n\n# Short-circuit if all binaries are up to date\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n   [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n   [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n  ([[ \"${ONLY_ACTIVE_PLATFORM}\" == \"YES\" ]] || \\\n    ([[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n     [[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n     [[ ! \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\n    )\n  )\nthen\n    exit 0\nfi\n\n\n# Clean other platform if needed\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]]\nthen\n\techo \"Platform \\\"$UFW_SDK_PLATFORM\\\" was cleaned recently. Cleaning \\\"$UFW_OTHER_PLATFORM\\\" as well\"\n\techo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\n\txcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\nfi\n\n\n# Make sure we are building from fresh binaries\n\nrm -rf \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\n\nif [[ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]]\nthen\n    rm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n    rm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nfi\n";
+		};
+		7E57F42114F93738002D139B /* Restore directories */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Restore directories";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "INLINED_PYHON_SCRIPT=\"import sys; import os.path; headerPathFromFind = sys.argv[2]; srcRoot = sys.argv[1]; headerPathFromFindWithoutFilename = os.path.dirname( headerPathFromFind ); relatedPathForDirectory = os.path.relpath( headerPathFromFindWithoutFilename, srcRoot ); print( relatedPathForDirectory );\"\n\nHEADERS_ROOT=$SRCROOT/$PRODUCT_NAME\nFRAMEWORK_HEADERS_DIR=\"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Headers\"\n\n## only header files expected at this point\nPUBLIC_HEADERS=$( ls -1 \"$FRAMEWORK_HEADERS_DIR\" )\n\n\nfor PUBLIC_HEADER in $PUBLIC_HEADERS; do\n\n   FIND_RESULT=$( find \"$HEADERS_ROOT\" -name \"$PUBLIC_HEADER\" )\n   RELATIVE_PATH=$( python -c \"$INLINED_PYHON_SCRIPT\" \"$HEADERS_ROOT\" \"$FIND_RESULT\" )\n\n   mkdir -p \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH\"\n   mv \"$FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER\" \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH/$PUBLIC_HEADER\"\ndone\n";
+		};
+		7E57F42214F93738002D139B /* End Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "End Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\nexport UFW_MASTER_SCRIPT_RUNNING=1\n\n\n# Functions\n\n## List files in the specified directory, storing to the specified array.\n#\n# @param $1 The path to list\n# @param $2 The name of the array to fill\n#\n##\nlist_files ()\n{\n    filelist=$(ls \"$1\")\n    while read line\n    do\n        eval \"$2[\\${#$2[*]}]=\\\"\\$line\\\"\"\n    done <<< \"$filelist\"\n}\n\n\n# Sanity check\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n    echo \"Framework target \\\"${TARGET_NAME}\\\" had no source files to build from. Make sure your source files have the correct target membership\"\n    exit 1\nfi\n\n\n# Gather information\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n    UFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\nONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM:-$ONLY_ACTIVE_ARCH}\n\n# Short-circuit if all binaries are up to date.\n# We already checked the other platform in the prerun script.\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\nif [ \"${ONLY_ACTIVE_PLATFORM}\" == \"YES\" ]\nthen\n    echo \"ONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM}: Skipping other platform build\"\nelse\n    # Make sure the other platform gets built\n    \n    echo \"Build other platform\"\n    \n    echo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n    xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n    \n    \n    # Build the fat static library binary\n    \n    echo \"Create universal static library\"\n    \n    echo \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \n    echo mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n    mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nfi\n\n# Build embedded framework structure\n\necho \"Build Embedded Framework\"\n\necho rm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\necho mkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\necho cp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\ncp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\n\ndeclare -a UFW_FILE_LIST\nlist_files \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" UFW_FILE_LIST\nfor filename in \"${UFW_FILE_LIST[@]}\"\ndo\n    if [[ \"${filename}\" != \"Info.plist\" ]] && [[ ! \"${filename}\" =~ .*\\.lproj$ ]]\n    then\n        echo ln -sf \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n        ln -sf \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n    fi\ndone\n\n\nif [ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]\nthen\n    # Replace other platform's framework with a copy of this one (so that both have the same universal binary)\n    \n    echo \"Copy from $UFW_SDK_PLATFORM to $UFW_OTHER_PLATFORM\"\n    \n    echo rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    echo cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5391041A14A88C04007315A3 /* Sources */ = {
@@ -865,6 +1111,53 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E57F41D14F93738002D139B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E57F43114F937E0002D139B /* NSString+ToURL.m in Sources */,
+				7E57F43314F937E0002D139B /* NSURL+ToURL.m in Sources */,
+				7E57F43514F937E0002D139B /* UIWebView+UserAgent.m in Sources */,
+				7E57F43714F937E0002D139B /* NSThread+AssertMainThread.m in Sources */,
+				7E57F43914F937E0002D139B /* NSDecimalNumber+Increment.m in Sources */,
+				7E57F43B14F937E0002D139B /* NSString+XQueryComponents.m in Sources */,
+				7E57F43D14F937E0002D139B /* NSURL+XQueryComponents.m in Sources */,
+				7E57F43F14F937E0002D139B /* NSDictionary+XQueryComponents.m in Sources */,
+				7E57F44214F937E0002D139B /* JFFSimpleBlockHolder.m in Sources */,
+				7E57F44414F937E0002D139B /* JFFOnDeallocBlockOwner.m in Sources */,
+				7E57F44614F937E0002D139B /* NSString+StringWithCutPrefix.m in Sources */,
+				7E57F44814F937E0002D139B /* NSString+Format.m in Sources */,
+				7E57F44A14F937E0002D139B /* NSString+Search.m in Sources */,
+				7E57F44C14F937E0002D139B /* NSString+PropertyName.m in Sources */,
+				7E57F44E14F937E0002D139B /* NSString+PathExtensions.m in Sources */,
+				7E57F45014F937E0002D139B /* NSString+Trimm.m in Sources */,
+				7E57F45214F937E0002D139B /* NSString+UUIDCreation.m in Sources */,
+				7E57F45414F937E0002D139B /* NSString+IsEmpty.m in Sources */,
+				7E57F45714F937E0002D139B /* NSMutableArray+AddNonEmptyObject.m in Sources */,
+				7E57F45914F937E0002D139B /* NSMutableArray+ChangeCount.m in Sources */,
+				7E57F45B14F937E0002D139B /* NSArray+BlocksAdditions.m in Sources */,
+				7E57F45D14F937E0002D139B /* NSArray+RemoveDuplicates.m in Sources */,
+				7E57F45F14F937E0002D139B /* NSArray+IsEmpty.m in Sources */,
+				7E57F46114F937E0002D139B /* NSArray+NoThrowObjectAtIndex.m in Sources */,
+				7E57F46314F937E0002D139B /* NSObject+Ownerships.m in Sources */,
+				7E57F46514F937E0002D139B /* NSObject+OnDeallocBlock.m in Sources */,
+				7E57F46714F937E0002D139B /* NSObject+RuntimeExtensions.m in Sources */,
+				7E57F46914F937E0002D139B /* NSObject+Const0.m in Sources */,
+				7E57F46B14F937E0002D139B /* NSObject+InstancesCount.m in Sources */,
+				7E57F46D14F937E0002D139B /* NSObject+ExpandArray.m in Sources */,
+				7E57F46F14F937E0002D139B /* JFFError.m in Sources */,
+				7E57F47114F937E0002D139B /* JFFAssignProxy.m in Sources */,
+				7E57F47314F937E0002D139B /* JFFSingleThreadProxy.m in Sources */,
+				7E57F47514F937E0002D139B /* JFFMutableAssignArray.m in Sources */,
+				7E57F47714F937E0002D139B /* JFFMutableAssignDictionary.m in Sources */,
+				7E57F47914F937E0002D139B /* JFFMulticastDelegate.m in Sources */,
+				7E57F47B14F937E0002D139B /* JFFResultContext.m in Sources */,
+				7E57F47D14F937E0002D139B /* JGCDAdditions.m in Sources */,
+				7E57F47F14F937E0002D139B /* JSignedRange.m in Sources */,
+				7E57F48214F937E0002D139B /* JFFCastFunctions.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2AAC07B0554694100DB518D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -913,6 +1206,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7E57F42914F93738002D139B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7E57F42A14F93738002D139B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB921F08733DC00010E9CD /* Debug */ = {
@@ -1082,6 +1386,57 @@
 			};
 			name = Release;
 		};
+		7E57F42E14F93738002D139B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFUtilsFW/JFFUtilsFW-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "JFFUtilsFW/JFFUtilsFW-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		7E57F42F14F93738002D139B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFUtilsFW/JFFUtilsFW-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "JFFUtilsFW/JFFUtilsFW-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1120,6 +1475,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		7E57F42D14F93738002D139B /* Build configuration list for PBXNativeTarget "JFFUtilsFW" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E57F42E14F93738002D139B /* Debug */,
+				7E57F42F14F93738002D139B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
