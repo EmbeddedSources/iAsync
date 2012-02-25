@@ -138,7 +138,7 @@
 		1B835B31142CBA2200FC004C /* JFFAsyncOperationsPredefinedBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationsPredefinedBlocks.h; sourceTree = "<group>"; };
 		1B835B32142CBA2200FC004C /* JFFAsyncOperationsPredefinedBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationsPredefinedBlocks.m; sourceTree = "<group>"; };
 		1B9026CF143F368B00D3B0A0 /* JFFAsyncOpNoARC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = JFFAsyncOpNoARC.xcodeproj; sourceTree = "<group>"; };
-		5391037B14A88BB5007315A3 /* libJFFAsyncOperations copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFAsyncOperations copy.a"; path = "libJFFAsyncOperations-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5391037B14A88BB5007315A3 /* libJFFAsyncOperations-clang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFAsyncOperations-clang.a"; path = "libJFFAsyncOperations-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		651BE1611391913300DD6890 /* JFFAsyncOperationsBlockDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationsBlockDefinitions.h; sourceTree = "<group>"; };
 		651BE1651391928400DD6890 /* JFFAsyncOperationContinuity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationContinuity.h; sourceTree = "<group>"; };
 		651BE1661391928400DD6890 /* JFFAsyncOperationContinuity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationContinuity.m; sourceTree = "<group>"; };
@@ -220,7 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC07E0554694100DB518D /* libJFFAsyncOperations.a */,
-				5391037B14A88BB5007315A3 /* libJFFAsyncOperations copy.a */,
+				5391037B14A88BB5007315A3 /* libJFFAsyncOperations-clang.a */,
 				7E8F20C914F94BDF00588C7D /* JFFAsyncOperationsFW.framework */,
 			);
 			name = Products;
@@ -491,7 +491,7 @@
 			);
 			name = "JFFAsyncOperations-clang";
 			productName = JFFAsyncOperations;
-			productReference = 5391037B14A88BB5007315A3 /* libJFFAsyncOperations copy.a */;
+			productReference = 5391037B14A88BB5007315A3 /* libJFFAsyncOperations-clang.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		7E8F20C814F94BDF00588C7D /* JFFAsyncOperationsFW */ = {

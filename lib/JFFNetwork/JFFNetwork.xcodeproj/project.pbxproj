@@ -229,7 +229,7 @@
 		5383421A141E6A3B00473CF2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		53834248141E713900473CF2 /* JNStubDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNStubDecoder.h; sourceTree = "<group>"; };
 		53834249141E713900473CF2 /* JNStubDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNStubDecoder.m; sourceTree = "<group>"; };
-		539103B714A88BCA007315A3 /* libJFFNetwork copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFNetwork copy.a"; path = "libJFFNetwork-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		539103B714A88BCA007315A3 /* libJFFNetwork-clang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFNetwork-clang.a"; path = "libJFFNetwork-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53A33F24141F631500469DAA /* JNZipDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNZipDecoder.h; sourceTree = "<group>"; };
 		53A33F25141F631500469DAA /* JNZipDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNZipDecoder.m; sourceTree = "<group>"; };
 		53A33F33141F7C2B00469DAA /* JNGzipCustomErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNGzipCustomErrors.h; sourceTree = "<group>"; };
@@ -427,7 +427,7 @@
 			children = (
 				8D5AE6DB13F3E6C600EB6143 /* libJFFNetwork.a */,
 				65802B22148BFC230040A93A /* libJFFNetworkMacOS.a */,
-				539103B714A88BCA007315A3 /* libJFFNetwork copy.a */,
+				539103B714A88BCA007315A3 /* libJFFNetwork-clang.a */,
 				7E8F204314F9494300588C7D /* JFFNetworkFW.framework */,
 			);
 			name = Products;
@@ -668,7 +668,7 @@
 			);
 			name = "JFFNetwork-clang";
 			productName = JFFNetwork;
-			productReference = 539103B714A88BCA007315A3 /* libJFFNetwork copy.a */;
+			productReference = 539103B714A88BCA007315A3 /* libJFFNetwork-clang.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		65802B21148BFC230040A93A /* JFFNetworkMacOS */ = {

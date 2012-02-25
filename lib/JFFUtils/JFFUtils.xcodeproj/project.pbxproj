@@ -353,7 +353,7 @@
 		534CDFC014A8C2930068F4DF /* JFFCastFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JFFCastFunctions.hpp; sourceTree = "<group>"; };
 		538E1CAA14B32201006BD40A /* NSDecimalNumber+Increment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDecimalNumber+Increment.h"; sourceTree = "<group>"; };
 		538E1CAB14B32201006BD40A /* NSDecimalNumber+Increment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDecimalNumber+Increment.m"; sourceTree = "<group>"; };
-		5391044314A88C04007315A3 /* libJFFUtils copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFUtils copy.a"; path = "libJFFUtils-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5391044314A88C04007315A3 /* libJFFUtils-clang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFUtils-clang.a"; path = "libJFFUtils-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53A3BB2314DAB2BE008B71BE /* NSString+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Format.h"; sourceTree = "<group>"; };
 		53A3BB2414DAB2BF008B71BE /* NSString+Format.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Format.m"; sourceTree = "<group>"; };
 		53A3BB3D14DAB3CD008B71BE /* NSString+IsEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+IsEmpty.h"; sourceTree = "<group>"; };
@@ -447,7 +447,7 @@
 			children = (
 				D2AAC07E0554694100DB518D /* libJFFUtils.a */,
 				65802A5B148BF2930040A93A /* libJFFUtilsMacOS.a */,
-				5391044314A88C04007315A3 /* libJFFUtils copy.a */,
+				5391044314A88C04007315A3 /* libJFFUtils-clang.a */,
 				7E57F42414F93738002D139B /* JFFUtilsFW.framework */,
 			);
 			name = Products;
@@ -877,7 +877,7 @@
 			);
 			name = "JFFUtils-clang";
 			productName = JFFUtils;
-			productReference = 5391044314A88C04007315A3 /* libJFFUtils copy.a */;
+			productReference = 5391044314A88C04007315A3 /* libJFFUtils-clang.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		65802A5A148BF2930040A93A /* JFFUtilsMacOS */ = {

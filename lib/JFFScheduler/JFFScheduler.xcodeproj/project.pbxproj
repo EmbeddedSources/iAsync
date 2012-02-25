@@ -31,7 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		539103C614A88BD6007315A3 /* libJFFScheduler copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFScheduler copy.a"; path = "libJFFScheduler-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		539103C614A88BD6007315A3 /* libJFFScheduler-clang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFScheduler-clang.a"; path = "libJFFScheduler-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		651BE1031390559900DD6890 /* JFFScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFScheduler.h; sourceTree = "<group>"; };
 		651BE1041390559900DD6890 /* JFFScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFScheduler.m; sourceTree = "<group>"; };
 		651BE196139195E500DD6890 /* NSObject+Scheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Scheduler.h"; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 			children = (
 				D2AAC07E0554694100DB518D /* libJFFScheduler.a */,
 				65802B07148BFB850040A93A /* libJFFSchedulerMacOS.a */,
-				539103C614A88BD6007315A3 /* libJFFScheduler copy.a */,
+				539103C614A88BD6007315A3 /* libJFFScheduler-clang.a */,
 				7E8F202A14F9484F00588C7D /* JFFSchedulerFW.framework */,
 			);
 			name = Products;
@@ -240,7 +240,7 @@
 			);
 			name = "JFFScheduler-clang";
 			productName = JFFScheduler;
-			productReference = 539103C614A88BD6007315A3 /* libJFFScheduler copy.a */;
+			productReference = 539103C614A88BD6007315A3 /* libJFFScheduler-clang.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		65802B06148BFB850040A93A /* JFFSchedulerMacOS */ = {
