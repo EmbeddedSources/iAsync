@@ -67,8 +67,6 @@
 		65BA0A4E14A7821200EB2AAB /* JFFAsyncOperationsPredefinedBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B835B32142CBA2200FC004C /* JFFAsyncOperationsPredefinedBlocks.m */; };
 		7E8F20CA14F94BDF00588C7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		7E8F20D014F94BDF00588C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E8F20CE14F94BDF00588C7D /* InfoPlist.strings */; };
-		7E8F20D714F94C3100588C7D /* JFFObjectRelatedPropertyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D61CD2B13F2BC8A0003AC4A /* JFFObjectRelatedPropertyData.m */; };
-		7E8F20D914F94C3100588C7D /* NSObject+PropertyExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D61CD3013F2BCE40003AC4A /* NSObject+PropertyExtractor.m */; };
 		7E8F20DB14F94C3100588C7D /* JFFPropertyPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9827F813F2B9D5009DD73B /* JFFPropertyPath.m */; };
 		7E8F20DD14F94C3100588C7D /* JFFPropertyExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D98280013F2BA10009DD73B /* JFFPropertyExtractor.m */; };
 		7E8F20DF14F94C3100588C7D /* NSObject+AsyncPropertyReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9827FA13F2B9D5009DD73B /* NSObject+AsyncPropertyReader.m */; };
@@ -656,8 +654,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E8F20D714F94C3100588C7D /* JFFObjectRelatedPropertyData.m in Sources */,
-				7E8F20D914F94C3100588C7D /* NSObject+PropertyExtractor.m in Sources */,
 				7E8F20DB14F94C3100588C7D /* JFFPropertyPath.m in Sources */,
 				7E8F20DD14F94C3100588C7D /* JFFPropertyExtractor.m in Sources */,
 				7E8F20DF14F94C3100588C7D /* NSObject+AsyncPropertyReader.m in Sources */,

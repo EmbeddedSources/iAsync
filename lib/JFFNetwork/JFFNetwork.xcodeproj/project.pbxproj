@@ -169,12 +169,6 @@
 		7E8F208914F949DD00588C7D /* JNZipDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A33F24141F631500469DAA /* JNZipDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8F208B14F949DD00588C7D /* JNGzipCustomErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A33F33141F7C2B00469DAA /* JNGzipCustomErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8F208C14F949DD00588C7D /* JNGzipErrorsLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A33F35141F7E1D00469DAA /* JNGzipErrorsLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E8F208E14F949DD00588C7D /* JNAbstractConnection+Constructor.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEF1D14448DC9005D745F /* JNAbstractConnection+Constructor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E8F209014F949DD00588C7D /* JFFFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CCA13F53D78007268DF /* JFFFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E8F209214F949DD00588C7D /* NSMutableSet+DownloadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CBC13F538D0007268DF /* NSMutableSet+DownloadManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E8F209414F949DD00588C7D /* JFFTrafficCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD71E9013F5492C004C90A9 /* JFFTrafficCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E8F209614F949DD00588C7D /* JFFTrafficCalculatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD71E9513F54948004C90A9 /* JFFTrafficCalculatorDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E8F209714F949DD00588C7D /* NSMutableDictionary+DownloadingFileInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD71E9A13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8F209914F949DD00588C7D /* JFFDownloadItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CB513F52FBA007268DF /* JFFDownloadItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8F209B14F949DD00588C7D /* JFFDownloadItemDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CB913F52FE2007268DF /* JFFDownloadItemDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8F209C14F949DD00588C7D /* NSURL+Cookies.h in Headers */ = {isa = PBXBuildFile; fileRef = 53E074BC144EFBA000CB146F /* NSURL+Cookies.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -603,12 +597,6 @@
 				7E8F208914F949DD00588C7D /* JNZipDecoder.h in Headers */,
 				7E8F208B14F949DD00588C7D /* JNGzipCustomErrors.h in Headers */,
 				7E8F208C14F949DD00588C7D /* JNGzipErrorsLogger.h in Headers */,
-				7E8F208E14F949DD00588C7D /* JNAbstractConnection+Constructor.h in Headers */,
-				7E8F209014F949DD00588C7D /* JFFFileManager.h in Headers */,
-				7E8F209214F949DD00588C7D /* NSMutableSet+DownloadManager.h in Headers */,
-				7E8F209414F949DD00588C7D /* JFFTrafficCalculator.h in Headers */,
-				7E8F209614F949DD00588C7D /* JFFTrafficCalculatorDelegate.h in Headers */,
-				7E8F209714F949DD00588C7D /* NSMutableDictionary+DownloadingFileInfo.h in Headers */,
 				7E8F209914F949DD00588C7D /* JFFDownloadItem.h in Headers */,
 				7E8F209B14F949DD00588C7D /* JFFDownloadItemDelegate.h in Headers */,
 				7E8F209C14F949DD00588C7D /* NSURL+Cookies.h in Headers */,
