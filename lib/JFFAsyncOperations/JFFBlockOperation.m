@@ -6,16 +6,17 @@
 
 @property ( nonatomic, copy ) JFFSyncOperation loadDataBlock;
 @property ( nonatomic, copy ) JFFDidFinishAsyncOperationHandler didLoadDataBlock;
-@property ( nonatomic, assign ) dispatch_queue_t currentQueue;
 @property ( assign ) BOOL finishedOrCanceled;
 
 @end
 
 @implementation JFFBlockOperation
+{
+    dispatch_queue_t _currentQueue;
+}
 
 @synthesize loadDataBlock      = _loadDataBlock;
 @synthesize didLoadDataBlock   = _didLoadDataBlock;
-@synthesize currentQueue       = _currentQueue;
 @synthesize finishedOrCanceled = _finishedOrCanceled;
 
 -(void)dealloc
@@ -36,8 +37,8 @@
         self.loadDataBlock    = loadDataBlock_;
         self.didLoadDataBlock = didLoadDataBlock_;
 
-        self.currentQueue = currentQueue_;
-        dispatch_retain( self.currentQueue );
+        _currentQueue = currentQueue_;
+        dispatch_retain( _currentQueue );
     }
 
     return self;
@@ -49,8 +50,8 @@
 
     self.loadDataBlock    = nil;
     self.didLoadDataBlock = nil;
-    dispatch_release( self.currentQueue );
-    self.currentQueue = NULL;
+    dispatch_release( _currentQueue );
+    _currentQueue = NULL;
 }
 
 -(void)didFinishOperationWithResult:( id )result_
@@ -70,7 +71,7 @@
         return;
 
     dispatch_queue_t currentQueue_ = dispatch_get_current_queue();
-    NSAssert( currentQueue_ == self.currentQueue, @"Invalid current queue queue" );
+    NSAssert( currentQueue_ == _currentQueue, @"Invalid current queue queue" );
 
     [ self finalizeOperations ];
 }
@@ -99,7 +100,7 @@
             error_ = [ JFFError errorWithDescription: description_ ];
         }
 
-        dispatch_async( self.currentQueue, ^
+        dispatch_async( _currentQueue, ^
         {
             [ self didFinishOperationWithResult: opResult_ error: error_ ];
         } );
@@ -115,7 +116,7 @@
     dispatch_queue_t currentQueue_ = dispatch_get_current_queue();
     dispatch_queue_t queue_        = dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 
-    NSAssert( currentQueue_ == queue_, @"Invalid run queue" );
+    NSAssert( currentQueue_ != queue_, @"Invalid run queue" );
 
     JFFBlockOperation* result_ = [ [ self alloc ] initWithLoadDataBlock: loadDataBlock_
                                                        didLoadDataBlock: didLoadDataBlock_

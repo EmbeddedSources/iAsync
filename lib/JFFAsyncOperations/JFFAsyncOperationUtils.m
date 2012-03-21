@@ -5,13 +5,13 @@
 #import "JFFCancelAyncOperationBlockHolder.h"
 #import "JFFDidFinishAsyncOperationBlockHolder.h"
 
-JFFAsyncOperation asyncOperationWithSyncOperation( JFFSyncOperation load_data_block_ )
+JFFAsyncOperation asyncOperationWithSyncOperation( JFFSyncOperation loadDataBlock_ )
 {
-    load_data_block_ = [ [ load_data_block_ copy ] autorelease ];
-    b progress_load_data_block_ = ^id( NSError** error_
+    loadDataBlock_ = [ [ loadDataBlock_ copy ] autorelease ];
+    JFFSyncOperationWithProgress progress_load_data_block_ = ^id( NSError** error_
                                                                  , JFFAsyncOperationProgressHandler progress_callback_ )
     {
-        return load_data_block_( error_ );
+        return loadDataBlock_( error_ );
     };
 
     return asyncOperationWithSyncOperationWithProgressBlock( progress_load_data_block_ );

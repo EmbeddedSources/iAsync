@@ -9,4 +9,10 @@
 
 #import <JFFAsyncOperations/NSObject+AutoCancelAsyncOperation.h>
 #import <JFFAsyncOperations/JFFAsyncOperationContinuity.h>
+#import <JFFAsyncOperations/JFFAsyncOperationHelpers.h>
 #import <JFFAsyncOperations/LoadBalancer/JFFAsyncOperationLoadBalancer.h>
+
+#import <JFFAsyncOperations/Extensions/NSArray+AsyncMap.h>
+#import <JFFAsyncOperations/Extensions/NSDictionary+AsyncMap.h>
+
+#import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationBuilder.h>

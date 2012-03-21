@@ -58,7 +58,7 @@ static char property_data_property_key_;
 
     if ( self.propertyDataByPropertyName == nil )
     {
-        self.propertyDataByPropertyName = [ NSMutableDictionary dictionary ];
+        self.propertyDataByPropertyName = [ NSMutableDictionary new ];
     }
 
     if ( property_path_.key )

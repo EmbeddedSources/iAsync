@@ -15,10 +15,17 @@ JFFAsyncOperation sequenceOfAsyncOperationsArray( NSArray* loaders_ );
 
 /////////////////////////////// SEQUENCE WITH BINDING ///////////////////////////////
 
-//calls loaders while success
+//calls binders while success
+JFFAsyncOperationBinder binderAsSequenceOfBinders( JFFAsyncOperationBinder firstBinder_, ... );
+
+JFFAsyncOperationBinder binderAsSequenceOfBindersArray( NSArray* binders_ );
+
+//calls binders while success
+//JTODO remove
 JFFAsyncOperation bindSequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
                                                 , JFFAsyncOperationBinder secondLoaderBinder_, ... );
 
+//JTODO remove
 JFFAsyncOperation bindSequenceOfAsyncOperationsArray( JFFAsyncOperation firstLoader, NSArray* loadersBinders_ );
 
 /////////////////////////////////// TRY SEQUENCE ///////////////////////////////////
@@ -55,30 +62,9 @@ JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsArray( NSArray* loaders_
 
 ///////////////////////// ADD OBSERVERS OF ASYNC OP. RESULT ////////////////////////
 
-//finish_callback_block_ called before loader_'s JFFDidFinishAsyncOperationHandler
-JFFAsyncOperation asyncOperationWithFinishCallbackBlock( JFFAsyncOperation loader_
-                                                        , JFFDidFinishAsyncOperationHandler finishCallbackBlock_ );
-
-//finish_callback_hook_ called instead loader_'s JFFDidFinishAsyncOperationHandler
-JFFAsyncOperation asyncOperationWithFinishHookBlock( JFFAsyncOperation loader_
-                                                    , JFFDidFinishAsyncOperationHook finishCallbackHook_ );
-
-typedef NSError* (^JFFChangedResultBuilder)(NSError* error_);
-JFFAsyncOperation asyncOperationWithChangedResult( JFFAsyncOperation loader_
-                                                  , JFFChangedResultBuilder resultBuilder_ );
-
-typedef NSError* (^JFFChangedErrorBuilder)(NSError* error_);
-JFFAsyncOperation asyncOperationWithChangedError( JFFAsyncOperation loader_
-                                                  , JFFChangedErrorBuilder errorBuilder_ );
-
 //done_callback_hook_ called an cancel or finish loader_'s callbacks
 JFFAsyncOperation asyncOperationWithDoneBlock( JFFAsyncOperation loader_
                                               , JFFSimpleBlock doneCallbackHook_ );
-
-JFFAsyncOperation asyncOperationWithResult( id result_ );
-JFFAsyncOperation asyncOperationWithError( NSError* error_ );
-
-JFFAsyncOperationBinder asyncOperationBinderWithAnalyzer( JFFAnalyzer analyzer_ );
 
 ///////////////////////// AUTO REPEAT CIRCLE ////////////////////////
 

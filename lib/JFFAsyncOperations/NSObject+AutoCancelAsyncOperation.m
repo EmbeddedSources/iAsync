@@ -13,7 +13,7 @@
     NSParameterAssert( nativeAsyncOp_ );
 
     nativeAsyncOp_ = [ nativeAsyncOp_ copy ];
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
+    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
                                     , JFFCancelAsyncOperationHandler cancel_callback_
                                     , JFFDidFinishAsyncOperationHandler done_callback_ )
     {
@@ -36,7 +36,7 @@
 
         JFFCancelAyncOperationBlockHolder* cancel_callback_holder_ = [ JFFCancelAyncOperationBlockHolder new ];
         cancel_callback_holder_.cancelBlock = cancel_callback_;
-        JFFCancelAsyncOperationHandler cancel_callback_wrapper_ = ^void( BOOL cancel_op_ )
+        JFFCancelAsyncOperationHandler cancelCallbackWrapper_ = ^void( BOOL cancel_op_ )
         {
             remove_ondealloc_block_holder_.onceSimpleBlock();
             cancel_callback_holder_.onceCancelBlock( cancel_op_ );
@@ -44,16 +44,16 @@
 
         JFFDidFinishAsyncOperationBlockHolder* done_callback_holder_ = [ JFFDidFinishAsyncOperationBlockHolder new ];
         done_callback_holder_.didFinishBlock = done_callback_;
-        JFFDidFinishAsyncOperationHandler done_callback_wrapper_ = ^void( id result_
-                                                                         , NSError* error_ )
+        JFFDidFinishAsyncOperationHandler doneCallbackWrapper_ = ^void( id result_
+                                                                        , NSError* error_ )
         {
             remove_ondealloc_block_holder_.onceSimpleBlock();
             done_callback_holder_.onceDidFinishBlock( result_, error_ );
         };
 
-        JFFCancelAsyncOperation cancel_ = nativeAsyncOp_( progress_callback_
-                                                         , cancel_callback_wrapper_
-                                                         , done_callback_wrapper_ );
+        JFFCancelAsyncOperation cancel_ = nativeAsyncOp_( progressCallback_
+                                                         , cancelCallbackWrapper_
+                                                         , doneCallbackWrapper_ );
 
         if ( finished_ )
         {
