@@ -4,18 +4,17 @@
 
 -(NSDecimalNumber*)instanceOne
 {
-   return [ [ self class ] one ];
+    return [ [ self class ] one ];
 }
-
 
 -(NSDecimalNumber*)increment
 {
-   return [ self decimalNumberByAdding: [ self instanceOne ] ];
+    return [ self decimalNumberByAdding: [ self instanceOne ] ];
 }
 
 -(NSDecimalNumber*)decrement
 {
-   return [ self decimalNumberBySubtracting: [ self instanceOne ] ];
+    return [ self decimalNumberBySubtracting: [ self instanceOne ] ];
 }
 
 @end

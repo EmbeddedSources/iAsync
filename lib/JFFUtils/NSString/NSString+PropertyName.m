@@ -2,28 +2,31 @@
 
 @implementation NSString (PropertyName)
 
-+(id)propertyGetNameFromPropertyName:( NSString* )property_name_
+-(id)propertyGetNameFromPropertyName
 {
-   NSUInteger string_length_ = [ property_name_ length ];
-   if ( string_length_ <= 4
-       || [ property_name_ characterAtIndex: string_length_ - 1 ] != ':'
-       || ![ property_name_ hasPrefix: @"set" ] )
-      return nil;
+    NSUInteger string_length_ = [ self length ];
+    if ( string_length_ <= 4
+        || [ self characterAtIndex: string_length_ - 1 ] != ':'
+        || ![ self hasPrefix: @"set" ] )
+        return nil;
 
-   NSString* name_part1_ = [ property_name_ substringWithRange: NSMakeRange( 3, 1 ) ];
-   NSString* name_part2_ = [ property_name_ substringWithRange: NSMakeRange( 4, string_length_ - 5 ) ];
+    NSString* namePart1_ = [ self substringWithRange: NSMakeRange( 3, 1 ) ];
+    NSString* namePart2_ = [ self substringWithRange: NSMakeRange( 4, string_length_ - 5 ) ];
 
-   return [ [ name_part1_ lowercaseString ] stringByAppendingString: name_part2_ ];
+    return [ [ namePart1_ lowercaseString ] stringByAppendingString: namePart2_ ];
 }
 
-+(id)propertySetNameFromPropertyName:( NSString* )property_name_
+-(id)propertySetNameForPropertyName
 {
-   NSUInteger string_length_ = [ property_name_ length ];
-   NSString* property_name_part1_ = [ [ property_name_ substringWithRange: NSMakeRange( 0, 1 ) ] capitalizedString ];
-   NSString* property_name_part2_ = [ property_name_ substringWithRange: NSMakeRange( 1, string_length_ - 1 ) ];
-   property_name_ = [ property_name_part1_ stringByAppendingString: property_name_part2_ ];
+    if ( [ self hasSuffix: @":" ] )
+        return nil;
 
-   return [ [ @"set" stringByAppendingString: property_name_ ] stringByAppendingString: @":" ];
+    NSUInteger string_length_ = [ self length ];
+    NSString* property_name_part1_ = [ [ self substringWithRange: NSMakeRange( 0, 1 ) ] capitalizedString ];
+    NSString* property_name_part2_ = [ self substringWithRange: NSMakeRange( 1, string_length_ - 1 ) ];
+    NSString* result_ = [ property_name_part1_ stringByAppendingString: property_name_part2_ ];
+
+    return [ [ @"set" stringByAppendingString: result_ ] stringByAppendingString: @":" ];
 }
 
 @end

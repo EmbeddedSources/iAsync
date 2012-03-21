@@ -1,17 +1,17 @@
 #import "UIWebView+UserAgent.h"
 
-static NSString* user_agent_ = nil;
+static NSString* userAgent_ = nil;
 
 @implementation UIWebView (UserAgent)
 
 +(NSString*)userAgent
 {
-   if ( !user_agent_ )
-   {
-      UIWebView* web_view_ = [ UIWebView new ];
-      user_agent_ = [ web_view_ stringByEvaluatingJavaScriptFromString: @"navigator.userAgent" ];
-   }
-   return user_agent_;
+    if ( !userAgent_ )
+    {
+        UIWebView* webView_ = [ UIWebView new ];
+        userAgent_ = [ webView_ stringByEvaluatingJavaScriptFromString: @"navigator.userAgent" ];
+    }
+    return userAgent_;
 }
 
 @end

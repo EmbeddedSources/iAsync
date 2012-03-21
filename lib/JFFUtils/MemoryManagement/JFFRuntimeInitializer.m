@@ -5,10 +5,10 @@
 
 #include <objc/runtime.h>
 
-@interface ESRuntimeInitializer : NSObject
+@interface JFFRuntimeInitializer : NSObject
 @end
 
-@implementation ESRuntimeInitializer
+@implementation JFFRuntimeInitializer
 
 -(void)deallocRemoveAssociatedObjectsHook
 {
