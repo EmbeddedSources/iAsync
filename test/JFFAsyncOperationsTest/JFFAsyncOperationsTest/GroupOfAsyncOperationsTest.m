@@ -18,373 +18,460 @@
 
 -(void)testNormalFinish
 {
-   @autoreleasepool
-   {
-      JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
-      JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* firstLoader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* secondLoader_ = [ JFFAsyncOperationManager new ];
 
-      JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader
-                                                         , second_loader_.loader
-                                                         , nil );
+        JFFAsyncOperation loader_ = groupOfAsyncOperations( firstLoader_.loader
+                                                           , secondLoader_.loader
+                                                           , nil );
 
-      __block BOOL group_loader_finished_ = NO;
-      loader_( nil, nil, ^( id result_, NSError* error_ )
-      {
-         if ( result_ && !error_ )
-         {
-            group_loader_finished_ = YES;
-         }
-      } );
+        __block BOOL group_loader_finished_ = NO;
+        loader_( nil, nil, ^( id result_, NSError* error_ )
+        {
+            if ( result_ && !error_ )
+            {
+                group_loader_finished_ = YES;
+            }
+        } );
 
-      GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
-      GHAssertFalse( second_loader_.finished, @"Second loader not finished yet" );
-      GHAssertFalse( group_loader_finished_, @"Group loader not finished yet" );
+        GHAssertFalse( firstLoader_.finished, @"First loader not finished yet" );
+        GHAssertFalse( secondLoader_.finished, @"Second loader not finished yet" );
+        GHAssertFalse( group_loader_finished_, @"Group loader not finished yet" );
 
-      second_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+        secondLoader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
 
-      GHAssertTrue( second_loader_.finished, @"Second loader finished already" );
-      GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
-      GHAssertFalse( group_loader_finished_, @"Group loader finished already" );
+        GHAssertTrue( secondLoader_.finished, @"Second loader finished already" );
+        GHAssertFalse( firstLoader_.finished, @"First loader not finished yet" );
+        GHAssertFalse( group_loader_finished_, @"Group loader finished already" );
 
-      first_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+        firstLoader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
 
-      GHAssertTrue( first_loader_.finished, @"First loader finished already" );
-      GHAssertTrue( second_loader_.finished, @"Second loader not finished yet" );
-      GHAssertTrue( group_loader_finished_, @"Group loader finished already" );
+        GHAssertTrue( firstLoader_.finished , @"First loader finished already" );
+        GHAssertTrue( secondLoader_.finished, @"Second loader not finished yet" );
+        GHAssertTrue( group_loader_finished_, @"Group loader finished already" );
 
-      [ second_loader_ release ];
-      [ first_loader_ release ];
-   }
+        [ secondLoader_ release ];
+        [ firstLoader_  release ];
+    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
 -(void)testFinishWithFirstError
 {
-   @autoreleasepool
-   {
-      JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
-      JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+
+        JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
       
-      JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
-      
-      __block BOOL group_loader_failed_ = NO;
-      loader_( nil, nil, ^( id result_, NSError* error_ )
-      {
-         if ( !result_ && error_ )
-         {
-            group_loader_failed_ = YES;
-         }
-      } );
+        __block BOOL group_loader_failed_ = NO;
+        loader_( nil, nil, ^( id result_, NSError* error_ )
+        {
+            if ( !result_ && error_ )
+            {
+                group_loader_failed_ = YES;
+            }
+        } );
 
-      GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
-      GHAssertFalse( second_loader_.finished, @"Second loader not finished yet" );
-      GHAssertFalse( group_loader_failed_, @"Group loader not failed yet" );
+        GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
+        GHAssertFalse( second_loader_.finished, @"Second loader not finished yet" );
+        GHAssertFalse( group_loader_failed_, @"Group loader not failed yet" );
 
-      second_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
+        second_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
 
-      GHAssertTrue( second_loader_.finished, @"Second loader finished already" );
-      GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
-      GHAssertFalse( group_loader_failed_, @"Group loader failed already" );
+        GHAssertTrue( second_loader_.finished, @"Second loader finished already" );
+        GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
+        GHAssertFalse( group_loader_failed_, @"Group loader failed already" );
 
-      first_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+        first_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
 
-      GHAssertTrue( first_loader_.finished, @"First loader finished already" );
-      GHAssertTrue( second_loader_.finished, @"Second loader not finished yet" );
-      GHAssertTrue( group_loader_failed_, @"Group loader failed already" );
+        GHAssertTrue( first_loader_.finished, @"First loader finished already" );
+        GHAssertTrue( second_loader_.finished, @"Second loader not finished yet" );
+        GHAssertTrue( group_loader_failed_, @"Group loader failed already" );
 
-      [ second_loader_ release ];
-      [ first_loader_ release ];
-   }
+        [ second_loader_ release ];
+        [ first_loader_ release ];
+    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
 -(void)testFinishWithSecondError
 {
-   @autoreleasepool
-   {
-      JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
-      JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
 
-      JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
+        JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
 
-      __block BOOL group_loader_failed_ = NO;
-      loader_( nil, nil, ^( id result_, NSError* error_ )
-      {
-         if ( !result_ && error_ )
-         {
-            group_loader_failed_ = YES;
-         }
-      } );
+        __block BOOL group_loader_failed_ = NO;
+        loader_( nil, nil, ^( id result_, NSError* error_ )
+        {
+            if ( !result_ && error_ )
+            {
+                group_loader_failed_ = YES;
+            }
+        } );
 
-      GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
-      GHAssertFalse( second_loader_.finished, @"Second loader not finished yet" );
-      GHAssertFalse( group_loader_failed_, @"Group loader not failed yet" );
+        GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
+        GHAssertFalse( second_loader_.finished, @"Second loader not finished yet" );
+        GHAssertFalse( group_loader_failed_, @"Group loader not failed yet" );
 
-      second_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+        second_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
 
-      GHAssertTrue( second_loader_.finished, @"Second loader finished already" );
-      GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
-      GHAssertFalse( group_loader_failed_, @"Group loader failed already" );
+        GHAssertTrue( second_loader_.finished, @"Second loader finished already" );
+        GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
+        GHAssertFalse( group_loader_failed_, @"Group loader failed already" );
 
-      first_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
+        first_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
 
-      GHAssertTrue( first_loader_.finished, @"First loader finished already" );
-      GHAssertTrue( second_loader_.finished, @"Second loader not finished yet" );
-      GHAssertTrue( group_loader_failed_, @"Group loader failed already" );
+        GHAssertTrue( first_loader_.finished, @"First loader finished already" );
+        GHAssertTrue( second_loader_.finished, @"Second loader not finished yet" );
+        GHAssertTrue( group_loader_failed_, @"Group loader failed already" );
 
-      [ second_loader_ release ];
-      [ first_loader_ release ];
-   }
+        [ second_loader_ release ];
+        [ first_loader_ release ];
+    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
 -(void)testCancelFirstLoader
 {
-   @autoreleasepool
-   {
-      JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
-      JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+
+        JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
+
+        __block BOOL main_canceled_ = NO;
+        __block BOOL once_canceled_ = NO;
+
+        loader_( nil, ^( BOOL unsubscribe_only_if_no_ )
+        {
+            main_canceled_ = unsubscribe_only_if_no_ && !once_canceled_;
+            once_canceled_ = YES;
+        }, nil );
       
-      JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
+        GHAssertFalse( first_loader_.canceled, @"First loader not canceled yet" );
+        GHAssertFalse( second_loader_.canceled, @"Second loader not canceled yet" );
+        GHAssertFalse( main_canceled_, @"Group loader not canceled yet" );
 
-      __block BOOL main_canceled_ = NO;
-      __block BOOL once_canceled_ = NO;
+        first_loader_.loaderCancelBlock.onceCancelBlock( YES );
 
-      loader_( nil, ^( BOOL unsubscribe_only_if_no_ )
-      {
-         main_canceled_ = unsubscribe_only_if_no_ && !once_canceled_;
-         once_canceled_ = YES;
-      }, nil );
-      
-      GHAssertFalse( first_loader_.canceled, @"First loader not canceled yet" );
-      GHAssertFalse( second_loader_.canceled, @"Second loader not canceled yet" );
-      GHAssertFalse( main_canceled_, @"Group loader not canceled yet" );
+        GHAssertTrue( first_loader_.canceled, @"First loader canceled already" );
+        GHAssertTrue( first_loader_.cancelFlag, @"First loader canceled already" );
+        GHAssertTrue( second_loader_.canceled, @"Second loader canceled already" );
+        GHAssertTrue( second_loader_.cancelFlag, @"Second loader canceled already" );
+        GHAssertTrue( main_canceled_, @"Group loader canceled already" );
 
-      first_loader_.loaderCancelBlock.onceCancelBlock( YES );
+        [ second_loader_ release ];
+        [ first_loader_ release ];
+    }
 
-      GHAssertTrue( first_loader_.canceled, @"First loader canceled already" );
-      GHAssertTrue( first_loader_.cancelFlag, @"First loader canceled already" );
-      GHAssertTrue( second_loader_.canceled, @"Second loader canceled already" );
-      GHAssertTrue( second_loader_.cancelFlag, @"Second loader canceled already" );
-      GHAssertTrue( main_canceled_, @"Group loader canceled already" );
-
-      [ second_loader_ release ];
-      [ first_loader_ release ];
-   }
-
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
 -(void)testCancelSecondLoader
 {
-   @autoreleasepool
-   {
-      JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
-      JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* first_loader_  = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
 
-      JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
+        JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
 
-      __block BOOL main_canceled_ = NO;
-      __block BOOL once_canceled_ = NO;
+        __block BOOL main_canceled_ = NO;
+        __block BOOL once_canceled_ = NO;
 
-      loader_( nil, ^( BOOL unsubscribe_only_if_no_ )
-      {
-         main_canceled_ = !unsubscribe_only_if_no_ && !once_canceled_;
-         once_canceled_ = YES;
-      }, nil );
+        loader_( nil, ^( BOOL unsubscribe_only_if_no_ )
+        {
+            main_canceled_ = !unsubscribe_only_if_no_ && !once_canceled_;
+            once_canceled_ = YES;
+        }, nil );
 
-      GHAssertFalse( first_loader_.canceled, @"First loader not canceled yet" );
-      GHAssertFalse( second_loader_.canceled, @"Second loader not canceled yet" );
-      GHAssertFalse( main_canceled_, @"Group loader not canceled yet" );
+        GHAssertFalse( first_loader_.canceled, @"First loader not canceled yet" );
+        GHAssertFalse( second_loader_.canceled, @"Second loader not canceled yet" );
+        GHAssertFalse( main_canceled_, @"Group loader not canceled yet" );
 
-      second_loader_.loaderCancelBlock.onceCancelBlock( NO );
+        second_loader_.loaderCancelBlock.onceCancelBlock( NO );
 
-      GHAssertTrue( first_loader_.canceled, @"First loader canceled already" );
-      GHAssertFalse( first_loader_.cancelFlag, @"First loader canceled already" );
-      GHAssertTrue( second_loader_.canceled, @"Second loader canceled already" );
-      GHAssertFalse( second_loader_.cancelFlag, @"Second loader canceled already" );
-      GHAssertTrue( main_canceled_, @"Group loader canceled already" );
+        GHAssertTrue( first_loader_.canceled, @"First loader canceled already" );
+        GHAssertFalse( first_loader_.cancelFlag, @"First loader canceled already" );
+        GHAssertTrue( second_loader_.canceled, @"Second loader canceled already" );
+        GHAssertFalse( second_loader_.cancelFlag, @"Second loader canceled already" );
+        GHAssertTrue( main_canceled_, @"Group loader canceled already" );
 
-      [ second_loader_ release ];
-      [ first_loader_ release ];
-   }
+        [ second_loader_ release ];
+        [ first_loader_ release ];
+    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
 -(void)testCancelMainLoader
 {
-   @autoreleasepool
-   {
-      JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
-      JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
 
-      JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
+        JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
 
-      __block BOOL main_canceled_ = NO;
-      __block BOOL once_canceled_ = NO;
+        __block BOOL main_canceled_ = NO;
+        __block BOOL once_canceled_ = NO;
 
-      JFFCancelAsyncOperation cancel_ = loader_( nil, ^( BOOL unsubscribe_only_if_no_ )
-      {
-         main_canceled_ = unsubscribe_only_if_no_ && !once_canceled_;
-         once_canceled_ = YES;
-      }, nil );
+        JFFCancelAsyncOperation cancel_ = loader_( nil, ^( BOOL unsubscribe_only_if_no_ )
+        {
+            main_canceled_ = unsubscribe_only_if_no_ && !once_canceled_;
+            once_canceled_ = YES;
+        }, nil );
 
-      GHAssertFalse( first_loader_.canceled, @"First loader not canceled yet" );
-      GHAssertFalse( second_loader_.canceled, @"Second loader not canceled yet" );
-      GHAssertFalse( main_canceled_, @"Group loader not canceled yet" );
+        GHAssertFalse( first_loader_.canceled, @"First loader not canceled yet" );
+        GHAssertFalse( second_loader_.canceled, @"Second loader not canceled yet" );
+        GHAssertFalse( main_canceled_, @"Group loader not canceled yet" );
 
-      cancel_( YES );
+        cancel_( YES );
 
-      GHAssertTrue( first_loader_.canceled, @"First loader canceled already" );
-      GHAssertTrue( first_loader_.cancelFlag, @"First loader canceled already" );
-      GHAssertTrue( second_loader_.canceled, @"Second loader canceled already" );
-      GHAssertTrue( second_loader_.cancelFlag, @"Second loader canceled already" );
-      GHAssertTrue( main_canceled_, @"Group loader canceled already" );
+        GHAssertTrue( first_loader_.canceled, @"First loader canceled already" );
+        GHAssertTrue( first_loader_.cancelFlag, @"First loader canceled already" );
+        GHAssertTrue( second_loader_.canceled, @"Second loader canceled already" );
+        GHAssertTrue( second_loader_.cancelFlag, @"Second loader canceled already" );
+        GHAssertTrue( main_canceled_, @"Group loader canceled already" );
 
-      [ second_loader_ release ];
-      [ first_loader_ release ];
-   }
+        [ second_loader_ release ];
+        [ first_loader_ release ];
+    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
 -(void)testCancelAfterResultFirstLoader
 {
-   @autoreleasepool
-   {
-      JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
-      JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
 
-      JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
+        JFFAsyncOperation loader_ = groupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
 
-      __block BOOL main_canceled_ = NO;
-      __block BOOL once_canceled_ = NO;
+        __block BOOL main_canceled_ = NO;
+        __block BOOL once_canceled_ = NO;
 
-      JFFCancelAsyncOperationHandler cancel_callback_ = ^( BOOL unsubscribe_only_if_no_ )
-      {
-         main_canceled_ = unsubscribe_only_if_no_ && !once_canceled_;
-         once_canceled_ = YES;
-      };
+        JFFCancelAsyncOperationHandler cancel_callback_ = ^( BOOL unsubscribe_only_if_no_ )
+        {
+            main_canceled_ = unsubscribe_only_if_no_ && !once_canceled_;
+            once_canceled_ = YES;
+        };
 
-      __block BOOL group_loader_finished_ = NO;
+        __block BOOL group_loader_finished_ = NO;
 
-      JFFDidFinishAsyncOperationHandler done_callback_ = ^void( id result_, NSError* error_ )
-      {
-         group_loader_finished_ = YES;
-      };
-      JFFCancelAsyncOperation cancel_ = loader_( nil, cancel_callback_, done_callback_ );
+        JFFDidFinishAsyncOperationHandler done_callback_ = ^void( id result_, NSError* error_ )
+        {
+            group_loader_finished_ = YES;
+        };
+        JFFCancelAsyncOperation cancel_ = loader_( nil, cancel_callback_, done_callback_ );
 
-      GHAssertFalse( first_loader_.canceled, @"First loader not canceled yet" );
-      GHAssertFalse( second_loader_.canceled, @"Second loader not canceled yet" );
-      GHAssertFalse( main_canceled_, @"Group loader not canceled yet" );
+        GHAssertFalse( first_loader_.canceled, @"First loader not canceled yet" );
+        GHAssertFalse( second_loader_.canceled, @"Second loader not canceled yet" );
+        GHAssertFalse( main_canceled_, @"Group loader not canceled yet" );
 
-      second_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+        second_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
 
-      GHAssertTrue( second_loader_.finished, @"Second loader finished already" );
-      GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
-      GHAssertFalse( group_loader_finished_, @"Group loader finished already" );
+        GHAssertTrue( second_loader_.finished, @"Second loader finished already" );
+        GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
+        GHAssertFalse( group_loader_finished_, @"Group loader finished already" );
 
-      cancel_( YES );
+        cancel_( YES );
 
-      GHAssertTrue( first_loader_.canceled, @"First loader canceled already" );
-      GHAssertTrue( first_loader_.cancelFlag, @"First loader canceled already" );
-      GHAssertFalse( second_loader_.canceled, @"Second loader canceled already" );
-      GHAssertTrue( main_canceled_, @"Group loader canceled already" );
+        GHAssertTrue( first_loader_.canceled, @"First loader canceled already" );
+        GHAssertTrue( first_loader_.cancelFlag, @"First loader canceled already" );
+        GHAssertFalse( second_loader_.canceled, @"Second loader canceled already" );
+        GHAssertTrue( main_canceled_, @"Group loader canceled already" );
 
-      [ second_loader_ release ];
-      [ first_loader_ release ];
-   }
+        [ second_loader_ release ];
+        [ first_loader_ release ];
+    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
 typedef JFFAsyncOperation (*MergeLoadersPtr)( JFFAsyncOperation, ... );
 
 -(void)testResultOfGroupLoadersWithFunc:( MergeLoadersPtr )func_
 {
-   @autoreleasepool
-   {
-      for ( int i = 0; i < 3; ++i )
-      {
-         for ( int j = 0; j < 2; ++j )
-         {
-            JFFAsyncOperationManager* first_loader_  = [ [ JFFAsyncOperationManager new ] autorelease ];
-            JFFAsyncOperationManager* second_loader_ = [ [ JFFAsyncOperationManager new ] autorelease ];
-            JFFAsyncOperationManager* third_loader_  = [ [ JFFAsyncOperationManager new ] autorelease ];
-
-            JFFAsyncOperation loader_ = func_( first_loader_  .loader
-                                              , second_loader_.loader
-                                              , third_loader_ .loader
-                                              , nil );
-
-            JFFResultContext* resultContext_ = [ [ JFFResultContext new ] autorelease ];
-            JFFDidFinishAsyncOperationHandler done_callback_ = ^void( id result_, NSError* error_ )
+    @autoreleasepool
+    {
+        for ( int i = 0; i < 3; ++i )
+        {
+            for ( int j = 0; j < 2; ++j )
             {
-               resultContext_.result = result_;
-            };
-            loader_( nil, nil, done_callback_ );
+                JFFAsyncOperationManager* first_loader_  = [ [ JFFAsyncOperationManager new ] autorelease ];
+                JFFAsyncOperationManager* second_loader_ = [ [ JFFAsyncOperationManager new ] autorelease ];
+                JFFAsyncOperationManager* third_loader_  = [ [ JFFAsyncOperationManager new ] autorelease ];
 
-            NSArray* results_ = [ NSArray arrayWithObjects: @"0", @"1", @"2", nil ];
-            NSArray* loadersResults_ = [ NSArray arrayWithObjects:
-                                        first_loader_   .loaderFinishBlock.didFinishBlock
-                                        , second_loader_.loaderFinishBlock.didFinishBlock
-                                        , third_loader_ .loaderFinishBlock.didFinishBlock
-                                        , nil ];
+                JFFAsyncOperation loader_ = func_( first_loader_  .loader
+                                                  , second_loader_.loader
+                                                  , third_loader_ .loader
+                                                  , nil );
 
-            NSMutableArray* indexes_ = [ NSMutableArray arrayWithArray: results_ ];
+                JFFResultContext* resultContext_ = [ [ JFFResultContext new ] autorelease ];
+                JFFDidFinishAsyncOperationHandler done_callback_ = ^void( id result_, NSError* error_ )
+                {
+                    resultContext_.result = result_;
+                };
+                loader_( nil, nil, done_callback_ );
 
-            NSUInteger firstIndex_ = [ [ indexes_ objectAtIndex: i ] integerValue ];
-            [ indexes_ removeObject: [ indexes_ objectAtIndex: i ] ];
+                NSArray* results_ = [ NSArray arrayWithObjects: @"0", @"1", @"2", nil ];
+                NSArray* loadersResults_ = [ NSArray arrayWithObjects:
+                                            first_loader_   .loaderFinishBlock.didFinishBlock
+                                            , second_loader_.loaderFinishBlock.didFinishBlock
+                                            , third_loader_ .loaderFinishBlock.didFinishBlock
+                                            , nil ];
 
-            NSUInteger secondIndex_ = [ [ indexes_ objectAtIndex: j ] integerValue ];
-            [ indexes_ removeObject: [ indexes_ objectAtIndex: j ] ];
+                NSMutableArray* indexes_ = [ NSMutableArray arrayWithArray: results_ ];
 
-            NSUInteger thirdIndex_ = [ [ indexes_ objectAtIndex: 0 ] integerValue ];
+                NSUInteger firstIndex_ = [ [ indexes_ objectAtIndex: i ] integerValue ];
+                [ indexes_ removeObject: [ indexes_ objectAtIndex: i ] ];
 
-            JFFDidFinishAsyncOperationHandler loader1_ = [ loadersResults_ objectAtIndex: firstIndex_  ];
-            JFFDidFinishAsyncOperationHandler loader2_ = [ loadersResults_ objectAtIndex: secondIndex_ ];
-            JFFDidFinishAsyncOperationHandler loader3_ = [ loadersResults_ objectAtIndex: thirdIndex_  ];
+                NSUInteger secondIndex_ = [ [ indexes_ objectAtIndex: j ] integerValue ];
+                [ indexes_ removeObject: [ indexes_ objectAtIndex: j ] ];
 
-            loader1_( [ results_ objectAtIndex: firstIndex_  ], nil );
-            loader2_( [ results_ objectAtIndex: secondIndex_ ], nil );
-            loader3_( [ results_ objectAtIndex: thirdIndex_  ], nil );
+                NSUInteger thirdIndex_ = [ [ indexes_ objectAtIndex: 0 ] integerValue ];
 
-            GHAssertTrue( [ resultContext_.result isEqual: results_ ], @"OK" );
-         }
-      }
-   }
+                JFFDidFinishAsyncOperationHandler loader1_ = [ loadersResults_ objectAtIndex: firstIndex_  ];
+                JFFDidFinishAsyncOperationHandler loader2_ = [ loadersResults_ objectAtIndex: secondIndex_ ];
+                JFFDidFinishAsyncOperationHandler loader3_ = [ loadersResults_ objectAtIndex: thirdIndex_  ];
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
+                loader1_( [ results_ objectAtIndex: firstIndex_  ], nil );
+                loader2_( [ results_ objectAtIndex: secondIndex_ ], nil );
+                loader3_( [ results_ objectAtIndex: thirdIndex_  ], nil );
+
+                GHAssertTrue( [ resultContext_.result isEqual: results_ ], @"OK" );
+            }
+        }
+    }
+
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
 -(void)testResultOfGroupLoaders
 {
-   [ self testResultOfGroupLoadersWithFunc: &groupOfAsyncOperations ];
+    [ self testResultOfGroupLoadersWithFunc: &groupOfAsyncOperations ];
 }
 
 -(void)testResultOfFailOnFirstErrorGroupLoaders
 {
-   [ self testResultOfGroupLoadersWithFunc: &failOnFirstErrorGroupOfAsyncOperations ];
+    [ self testResultOfGroupLoadersWithFunc: &failOnFirstErrorGroupOfAsyncOperations ];
+}
+
+-(void)testMemoryManagementOfGroupLoaders
+{
+    __block BOOL result2WasDeallocated_ = NO;
+    __block BOOL result3WasDeallocated_ = NO;
+
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* loader5_ = [ JFFAsyncOperationManager new ];
+        @autoreleasepool
+        {
+            JFFAsyncOperationManager* loader2_ = [ JFFAsyncOperationManager new ];
+            JFFAsyncOperationManager* loader4_ = [ JFFAsyncOperationManager new ];
+
+            @autoreleasepool
+            {
+                JFFAsyncOperationManager* loader1_ = [ JFFAsyncOperationManager new ];
+                JFFAsyncOperationManager* loader3_ = [ JFFAsyncOperationManager new ];
+
+                JFFAsyncOperation gr1Loader_ = groupOfAsyncOperations( loader1_.loader
+                                                                      , loader2_.loader
+                                                                      , nil );
+                JFFAsyncOperation gr2Loader_ = groupOfAsyncOperations( loader3_.loader
+                                                                      , loader4_.loader
+                                                                      , nil );
+
+                JFFAsyncOperation loader_ = groupOfAsyncOperations( gr1Loader_
+                                                                   , gr2Loader_
+                                                                   , loader5_.loader
+                                                                   , nil );
+
+                __block BOOL group_loader_finished_ = NO;
+
+                JFFDidFinishAsyncOperationHandler done_callback_ = ^void( id result_, NSError* error_ )
+                {
+                    GHAssertFalse( result2WasDeallocated_, @"OK" );
+                    GHAssertFalse( result3WasDeallocated_, @"OK" );
+                    group_loader_finished_ = YES;
+                };
+                loader_( nil, nil, done_callback_ );
+
+                GHAssertFalse( group_loader_finished_, @"First loader not canceled yet" );
+
+                loader1_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
+
+                {
+                    NSObject* result3_ = [ NSObject new ];
+                    [ result3_ addOnDeallocBlock: ^
+                    {
+                        result3WasDeallocated_ = YES;
+                    } ];
+                    loader3_.loaderFinishBlock.didFinishBlock( result3_, nil );
+                    [ result3_ release ];
+                }
+
+                [ loader1_ release ];
+                [ loader3_ release ];
+            }
+            //@autoreleasepool
+
+            {
+                NSObject* result2_ = [ NSObject new ];
+                [ result2_ addOnDeallocBlock: ^
+                {
+                    result2WasDeallocated_ = YES;
+                } ];
+                loader2_.loaderFinishBlock.didFinishBlock( result2_, nil );
+                [ result2_ release ];
+            }
+            [ loader2_ release ];
+
+            loader4_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+            [ loader4_ release ];
+        }
+
+        loader5_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+
+        [ loader5_ release ];
+    }
+
+    GHAssertTrue( result2WasDeallocated_, @"OK" );
+    GHAssertTrue( result3WasDeallocated_, @"OK" );
+
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
 @end

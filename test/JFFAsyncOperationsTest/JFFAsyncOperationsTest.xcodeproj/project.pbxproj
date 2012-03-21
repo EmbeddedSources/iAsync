@@ -198,7 +198,6 @@
 		8D29EF7D13BE066900041B6A = {
 			isa = PBXGroup;
 			children = (
-				5357CDF914A9F5130046EA34 /* libstdc++.dylib */,
 				8D29EF9213BE066900041B6A /* JFFAsyncOperationsTest */,
 				1B793B35142C887700B43DC8 /* Dependecies */,
 				8D29EF8B13BE066900041B6A /* Frameworks */,
@@ -217,6 +216,7 @@
 		8D29EF8B13BE066900041B6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5357CDF914A9F5130046EA34 /* libstdc++.dylib */,
 				8D29EFB213BE070F00041B6A /* GHUnitIOS.framework */,
 				8D29EF8C13BE066900041B6A /* UIKit.framework */,
 				8D29EF8E13BE066900041B6A /* Foundation.framework */,

@@ -205,59 +205,34 @@
 
 -(void)testSequenceWithOneLoader
 {
-   @autoreleasepool
-   {
-      JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
 
-      JFFAsyncOperation loader_ = sequenceOfAsyncOperationsArray( [ NSArray arrayWithObject: first_loader_.loader ] );
+        JFFAsyncOperation loader_ = sequenceOfAsyncOperationsArray( [ NSArray arrayWithObject: first_loader_.loader ] );
 
-      __block BOOL sequence_loader_finished_ = NO;
-   
-      loader_( nil, nil, ^( id result_, NSError* error_ )
-      {
-         if ( result_ && !error_ )
-         {
-            sequence_loader_finished_ = YES;
-         }
-      } );
+        __block BOOL sequence_loader_finished_ = NO;
 
-      GHAssertFalse( sequence_loader_finished_, @"sequence not finished" );
+        loader_( nil, nil, ^( id result_, NSError* error_ )
+        {
+            if ( result_ && !error_ )
+            {
+                sequence_loader_finished_ = YES;
+            }
+        } );
 
-      first_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+        GHAssertFalse( sequence_loader_finished_, @"sequence not finished" );
 
-      GHAssertTrue( sequence_loader_finished_, @"sequence finished" );
+        first_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
 
-      [ first_loader_ release ];
-   }
+        GHAssertTrue( sequence_loader_finished_, @"sequence finished" );
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
-}
+        [ first_loader_ release ];
+    }
 
--(void)testEmptySequence
-{
-   @autoreleasepool
-   {
-      JFFAsyncOperation loader_ = sequenceOfAsyncOperationsArray( nil );
-      __block BOOL sequence_loader_finished_ = NO;
-
-      GHAssertFalse( sequence_loader_finished_, @"sequence not finished" );
-
-      loader_( nil, nil, ^( id result_, NSError* error_ )
-      {
-         if ( result_ && !error_ )
-         {
-            sequence_loader_finished_ = YES;
-         }
-      } );
-
-      GHAssertTrue( sequence_loader_finished_, @"sequence finished" );
-   }
-
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
 }
 
 -(void)testCriticalErrorOnFailFirstLoaderWhenSequenceResultCallbackIsNil
