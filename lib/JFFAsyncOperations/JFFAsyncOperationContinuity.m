@@ -4,10 +4,6 @@
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 #import "NSError+ResultOwnerships.h"
 
-#import <JFFScheduler/JFFScheduler.h>
-
-#import <Foundation/Foundation.h>
-
 #include <assert.h>
 
 #import "JFFAsyncOperationHelpers.h"
@@ -17,18 +13,6 @@ typedef JFFAsyncOperationBinder (*MergeTwoBindersPtr)( JFFAsyncOperationBinder, 
 typedef JFFAsyncOperation (*MergeTwoLoadersPtr)( JFFAsyncOperation, JFFAsyncOperation );
 //JTODO remove
 typedef JFFAsyncOperation (*MergeLoaderWithBinderPtr)( JFFAsyncOperation, JFFAsyncOperationBinder );
-
-static JFFAsyncOperation createEmptyLoaderBlock()
-{
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
-        if ( doneCallback_ )
-            doneCallback_( [ NSNull null ], nil );
-        return JFFEmptyCancelAsyncOperationBlock;
-    };
-}
 
 static JFFAsyncOperationBinder MergeBinders( MergeTwoBindersPtr merger_, NSArray* blocks_ )
 {
@@ -48,8 +32,7 @@ static JFFAsyncOperationBinder MergeBinders( MergeTwoBindersPtr merger_, NSArray
 //JTODO remove
 static JFFAsyncOperation MergeLoaderWithBinders( MergeLoaderWithBinderPtr merger_, NSArray* blocks_ )
 {
-    if ( ![ blocks_ lastObject ] )
-        return createEmptyLoaderBlock();
+    assert( [ blocks_ lastObject ] ); //array should not be empty
 
     JFFAsyncOperation firstBlock_ = [ blocks_ objectAtIndex: 0 ];
 
@@ -250,8 +233,7 @@ JFFAsyncOperation bindSequenceOfAsyncOperationsArray( JFFAsyncOperation firstLoa
 static JFFAsyncOperation bindTrySequenceOfAsyncOperationsPair( JFFAsyncOperation firstLoader_
                                                               , JFFAsyncOperationBinder secondLoaderBinder_ )
 {
-    if ( firstLoader_ == nil )
-        return createEmptyLoaderBlock();
+    assert( firstLoader_ ); // firstLoader_ should not be nil
 
     firstLoader_        = [ firstLoader_ copy ];
     secondLoaderBinder_ = [ secondLoaderBinder_ copy ];
@@ -614,16 +596,16 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair( JFFAsyncOpe
                                                         , cancelSafeResultBlock( makeResultHandler_( 0 )
                                                                                 , cancelHolder1_ ) );
 
-        cancelHolder1_.cancelBlock = done_ ? JFFEmptyCancelAsyncOperationBlock : cancel1_;
+        cancelHolder1_.cancelBlock = done_ ? JFFStubCancelAsyncOperationBlock : cancel1_;
 
         JFFCancelAsyncOperation cancel2_ = done_
-            ? JFFEmptyCancelAsyncOperationBlock
+            ? JFFStubCancelAsyncOperationBlock
             : secondLoader_( progressCallback_
                              , makeCancelCallback_( cancelHolder1_ )
                              , cancelSafeResultBlock( makeResultHandler_( 1 )
                                                      , cancelHolder2_ ) );
 
-        cancelHolder2_.cancelBlock = done_ ? JFFEmptyCancelAsyncOperationBlock : cancel2_;
+        cancelHolder2_.cancelBlock = done_ ? JFFStubCancelAsyncOperationBlock : cancel2_;
 
         return ^void( BOOL cancel_ )
         {

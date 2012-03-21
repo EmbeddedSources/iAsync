@@ -21,12 +21,11 @@ JFFAsyncOperationBinder binderAsSequenceOfBinders( JFFAsyncOperationBinder first
 JFFAsyncOperationBinder binderAsSequenceOfBindersArray( NSArray* binders_ );
 
 //calls binders while success
-//JTODO remove
 JFFAsyncOperation bindSequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
                                                 , JFFAsyncOperationBinder secondLoaderBinder_, ... );
 
-//JTODO remove
-JFFAsyncOperation bindSequenceOfAsyncOperationsArray( JFFAsyncOperation firstLoader, NSArray* loadersBinders_ );
+JFFAsyncOperation bindSequenceOfAsyncOperationsArray( JFFAsyncOperation firstLoader
+                                                     , NSArray* loadersBinders_ );
 
 /////////////////////////////////// TRY SEQUENCE ///////////////////////////////////
 
@@ -42,7 +41,8 @@ JFFAsyncOperation trySequenceOfAsyncOperationsArray( NSArray* loaders_ );
 JFFAsyncOperation bindTrySequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
                                                    , JFFAsyncOperationBinder secondLoaderBinder_, ... );
 
-JFFAsyncOperation bindTrySequenceOfAsyncOperationsArray( JFFAsyncOperation firstLoader, NSArray* loadersBinders_ );
+JFFAsyncOperation bindTrySequenceOfAsyncOperationsArray( JFFAsyncOperation firstLoader_
+                                                        , NSArray* loadersBinders_ );
 
 /////////////////////////////////////// GROUP //////////////////////////////////////
 

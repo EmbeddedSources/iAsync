@@ -19,12 +19,11 @@ JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterfa
         progressCallback_ = [ progressCallback_ copy ];
         __block void (^progressHandler_)( id ) = [ ^( id data_ )
         {
-            //use asyncObject_ in if to own it while waiting result
             if ( progressCallback_ )
                 progressCallback_( data_ );
         } copy ];
 
-        void (^completionHandlerWrapper_)( id, NSError* ) = ^( id result_, NSError* error_ )
+        void (^completionHandlerWrapper_)( id, NSError* ) = [ ^( id result_, NSError* error_ )
         {
             progressHandler_ = nil;
             if ( completionHandler_ )
@@ -32,13 +31,13 @@ JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterfa
                 completionHandler_( result_, error_ );
                 completionHandler_ = nil;
             }
-        };
+        } copy ];
 
-        void (^progressHandlerWrapper_)( id ) = ^( id data_ )
+        void (^progressHandlerWrapper_)( id ) = [ ^( id data_ )
         {
             if ( progressHandler_ )
                 progressHandler_( data_ );
-        };
+        } copy ];
 
         [ asyncObject_ asyncOperationWithResultHandler: completionHandlerWrapper_
                                        progressHandler: progressHandlerWrapper_ ];

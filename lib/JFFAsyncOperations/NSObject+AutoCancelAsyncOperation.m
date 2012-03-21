@@ -8,14 +8,14 @@
 @implementation NSObject (WeakAsyncOperation)
 
 -(JFFAsyncOperation)autoUnsibscribeOrCancelAsyncOperation:( JFFAsyncOperation )nativeAsyncOp_
-                                                   cancel:( BOOL )cancel_native_async_op_
+                                                   cancel:( BOOL )cancelNativeAsyncOp_
 {
     NSParameterAssert( nativeAsyncOp_ );
 
     nativeAsyncOp_ = [ nativeAsyncOp_ copy ];
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancel_callback_
-                                    , JFFDidFinishAsyncOperationHandler done_callback_ )
+                                    , JFFCancelAsyncOperationHandler cancelCallback_
+                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
         __block BOOL finished_ = NO;
         __unsafe_unretained id self_ = self;
@@ -35,20 +35,20 @@
         };
 
         JFFCancelAyncOperationBlockHolder* cancel_callback_holder_ = [ JFFCancelAyncOperationBlockHolder new ];
-        cancel_callback_holder_.cancelBlock = cancel_callback_;
+        cancel_callback_holder_.cancelBlock = cancelCallback_;
         JFFCancelAsyncOperationHandler cancelCallbackWrapper_ = ^void( BOOL cancel_op_ )
         {
             remove_ondealloc_block_holder_.onceSimpleBlock();
             cancel_callback_holder_.onceCancelBlock( cancel_op_ );
         };
 
-        JFFDidFinishAsyncOperationBlockHolder* done_callback_holder_ = [ JFFDidFinishAsyncOperationBlockHolder new ];
-        done_callback_holder_.didFinishBlock = done_callback_;
+        JFFDidFinishAsyncOperationBlockHolder* doneCallbackHolder_ = [ JFFDidFinishAsyncOperationBlockHolder new ];
+        doneCallbackHolder_.didFinishBlock = doneCallback_;
         JFFDidFinishAsyncOperationHandler doneCallbackWrapper_ = ^void( id result_
                                                                         , NSError* error_ )
         {
             remove_ondealloc_block_holder_.onceSimpleBlock();
-            done_callback_holder_.onceDidFinishBlock( result_, error_ );
+            doneCallbackHolder_.onceDidFinishBlock( result_, error_ );
         };
 
         JFFCancelAsyncOperation cancel_ = nativeAsyncOp_( progressCallback_
@@ -57,12 +57,12 @@
 
         if ( finished_ )
         {
-            return JFFEmptyCancelAsyncOperationBlock;
+            return JFFStubCancelAsyncOperationBlock;
         }
 
         ondealloc_block_holder_.simpleBlock = ^void( void )
         {
-            cancel_( cancel_native_async_op_ );
+            cancel_( cancelNativeAsyncOp_ );
         };
 
         //JTODO assert retain count

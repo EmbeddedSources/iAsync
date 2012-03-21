@@ -82,7 +82,7 @@
                 self.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
             else
                 self.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
-            return JFFEmptyCancelAsyncOperationBlock;
+            return JFFStubCancelAsyncOperationBlock;
         }
 
         cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];

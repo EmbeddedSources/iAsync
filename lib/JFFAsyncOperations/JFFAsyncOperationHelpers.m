@@ -2,8 +2,43 @@
 
 #import "JFFAsyncOperationContinuity.h"
 #import "JFFAsyncOperationsPredefinedBlocks.h"
+#import "JFFAsyncOperationBuilder.h"
 
 #import <JFFScheduler/JFFScheduler.h>
+
+@interface JFFAsyncOperationScheduler : NSObject < JFFAsyncOperationInterface >
+
+@property ( nonatomic, assign ) NSTimeInterval duration;
+
+@end
+
+@implementation JFFAsyncOperationScheduler
+{
+    JFFScheduler* _scheduler;
+}
+
+@synthesize duration = _duration;
+
+-(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
+                       progressHandler:( void (^)( id ) )progress_
+{
+    _scheduler = [ JFFScheduler new ];
+    [ _scheduler addBlock: ^( JFFCancelScheduledBlock cancel_ )
+    {
+        cancel_();
+        if ( progress_ )
+            progress_( [ NSNull null ] );
+        if ( handler_ )
+            handler_( [ NSNull null ], nil );
+    } duration: self.duration ];
+}
+
+-(void)cancel:( BOOL )canceled_
+{
+    _scheduler = nil;
+}
+
+@end
 
 JFFAsyncOperation asyncOperationWithResult( id result_ )
 {
@@ -13,7 +48,7 @@ JFFAsyncOperation asyncOperationWithResult( id result_ )
     {
         if ( doneCallback_ )
             doneCallback_( result_, nil );
-        return JFFEmptyCancelAsyncOperationBlock;
+        return JFFStubCancelAsyncOperationBlock;
     };
 }
 
@@ -25,7 +60,7 @@ JFFAsyncOperation asyncOperationWithError( NSError* error_ )
     {
         if ( doneCallback_ )
             doneCallback_( nil, error_ );
-        return JFFEmptyCancelAsyncOperationBlock;
+        return JFFStubCancelAsyncOperationBlock;
     };
 }
 
@@ -79,7 +114,7 @@ JFFAsyncOperation asyncOperationWithAnalyzer( id data_, JFFAnalyzer analyzer_ )
         if ( doneCallback_ )
             doneCallback_( localError_ ? nil : localResult_, localError_ );
 
-        return JFFEmptyCancelAsyncOperationBlock;
+        return JFFStubCancelAsyncOperationBlock;
     };
 }
 
@@ -140,41 +175,9 @@ JFFAsyncOperation asyncOperationWithResultOrError( JFFAsyncOperation loader_
 
 JFFAsyncOperation asyncOperationWithDelay( NSTimeInterval delay_ )
 {
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
-        __block JFFScheduler* scheduler_ = [ JFFScheduler new ];
-
-        [ scheduler_ addBlock: ^( JFFCancelScheduledBlock cancel_ )
-        {
-            #pragma GCC diagnostic push
-            #pragma GCC diagnostic ignored "-Warc-retain-cycles"
-            scheduler_ = nil;
-            #pragma GCC diagnostic pop
-
-            if ( progressCallback_ )
-                progressCallback_( [ NSNull null ] );
-
-            if ( doneCallback_ )
-                doneCallback_( [ NSNull null ], nil );
-        } duration: delay_ ];
-
-        __block JFFCancelAsyncOperationHandler cancelCallbackHandler_ = [ cancelCallback_ copy ];
-        return ^( BOOL canceled_ )
-        {
-            if ( !scheduler_ )
-                return;
-
-            scheduler_ = nil;
-
-            if ( cancelCallbackHandler_ )
-            {
-                cancelCallbackHandler_( canceled_ );
-                cancelCallbackHandler_ = nil;
-            }
-        };
-    };
+    JFFAsyncOperationScheduler* asyncObject_ = [ JFFAsyncOperationScheduler new ];
+    asyncObject_.duration = delay_;
+    return buildAsyncOperationWithInterface( asyncObject_ );
 }
 
 JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder firstBinder_
@@ -196,7 +199,7 @@ JFFAnalyzer analyzerAsSequenceOfAnalyzers( JFFAnalyzer firstAnalyzer_, ... )
     }
     va_end( args );
 
-    return ^id(id dataToAnalyze_, NSError** outError_)
+    return ^id( id dataToAnalyze_, NSError** outError_ )
     {
         JFFAsyncOperation loader_ = firstBinder_( dataToAnalyze_ );
         __block id finalResult_ = nil;
