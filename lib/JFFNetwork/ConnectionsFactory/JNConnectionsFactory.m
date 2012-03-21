@@ -5,6 +5,7 @@
 
 @interface JNConnectionsFactory ()
 
+//JTODO move to ARC and remove inner properties
 @property ( nonatomic, retain ) NSURL       * url     ;
 @property ( nonatomic, retain ) NSData      * postData;
 @property ( nonatomic, retain ) NSDictionary* headers ;

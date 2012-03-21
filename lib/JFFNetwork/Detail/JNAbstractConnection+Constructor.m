@@ -1,6 +1,5 @@
 #import "JNAbstractConnection+Constructor.h"
 
-
 @implementation JNAbstractConnection( Constructor )
 
 -(id)privateInit

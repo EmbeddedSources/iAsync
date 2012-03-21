@@ -6,6 +6,7 @@
 
 @interface ESDownloadedBytesPerDate : NSObject
 
+//STODO remove
 @property ( nonatomic, retain ) NSDate* date;
 @property ( nonatomic, assign ) NSUInteger bytesCount;
 
@@ -40,6 +41,7 @@
 
 @interface JFFTrafficCalculator ()
 
+//JTODO move to ARC and remove inner properties
 @property ( nonatomic, retain ) NSMutableArray* downloadingSpeedInfo;
 @property ( nonatomic, retain ) RICancelCalculateSpeed cancelCalculateSpeedBlock;
 @property ( nonatomic, assign ) id< JFFTrafficCalculatorDelegate > delegate;
@@ -145,7 +147,7 @@
 
    [ self stopScheduling ];
 
-   __block JFFTrafficCalculator* self_ = self;
+   __block typeof(self) self_ = self;
    JFFScheduledBlock block_ = ^void( JFFCancelScheduledBlock cancel_ ) { [ self_ calculateDownloadSpeed ]; };
    self.cancelCalculateSpeedBlock = [ [ JFFScheduler sharedScheduler ] addBlock: block_ duration: calculate_speed_interval_ ];
    
