@@ -151,6 +151,34 @@
 			remoteGlobalIDString = 5391044314A88C04007315A3;
 			remoteInfo = "JFFUtils-clang";
 		};
+		65B1F93A151A8B74000A1736 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5310BA84141F51AD00A3E2B1 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F20C914F94BDF00588C7D;
+			remoteInfo = JFFAsyncOperationsFW;
+		};
+		65B1F93F151A8B74000A1736 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5310BA87141F51AD00A3E2B1 /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F204314F9494300588C7D;
+			remoteInfo = JFFNetworkFW;
+		};
+		65B1F944151A8B74000A1736 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5310BA8A141F51AD00A3E2B1 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F202A14F9484F00588C7D;
+			remoteInfo = JFFSchedulerFW;
+		};
+		65B1F949151A8B74000A1736 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5310BA8D141F51AD00A3E2B1 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E57F42414F93738002D139B;
+			remoteInfo = JFFUtilsFW;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -250,7 +278,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				5357CDF714A9F5050046EA34 /* libstdc++.dylib */,
 				5310BA84141F51AD00A3E2B1 /* JFFAsyncOperations.xcodeproj */,
 				5310BA87141F51AD00A3E2B1 /* JFFNetwork.xcodeproj */,
 				5310BA8A141F51AD00A3E2B1 /* JFFScheduler.xcodeproj */,
@@ -286,6 +313,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5357CDF714A9F5050046EA34 /* libstdc++.dylib */,
 				53A33F2A141F65F700469DAA /* CFNetwork.framework */,
 				53A33F28141F64CC00469DAA /* libz.dylib */,
 				5310BA44141F4D7800A3E2B1 /* GHUnitIOS.framework */,
@@ -300,7 +328,8 @@
 			isa = PBXGroup;
 			children = (
 				5310BA92141F51AD00A3E2B1 /* libJFFAsyncOperations.a */,
-				5357CDE314A9F4F80046EA34 /* libJFFAsyncOperations copy.a */,
+				5357CDE314A9F4F80046EA34 /* libJFFAsyncOperations-clang.a */,
+				65B1F93B151A8B74000A1736 /* JFFAsyncOperationsFW.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -310,7 +339,8 @@
 			children = (
 				5310BA95141F51AD00A3E2B1 /* libJFFNetwork.a */,
 				5357CDE714A9F4F80046EA34 /* libJFFNetworkMacOS.a */,
-				5357CDE914A9F4F80046EA34 /* libJFFNetwork copy.a */,
+				5357CDE914A9F4F80046EA34 /* libJFFNetwork-clang.a */,
+				65B1F940151A8B74000A1736 /* JFFNetworkFW.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -320,7 +350,8 @@
 			children = (
 				5310BA98141F51AD00A3E2B1 /* libJFFScheduler.a */,
 				5357CDED14A9F4F80046EA34 /* libJFFSchedulerMacOS.a */,
-				5357CDEF14A9F4F80046EA34 /* libJFFScheduler copy.a */,
+				5357CDEF14A9F4F80046EA34 /* libJFFScheduler-clang.a */,
+				65B1F945151A8B74000A1736 /* JFFSchedulerFW.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -330,7 +361,8 @@
 			children = (
 				5310BA9B141F51AD00A3E2B1 /* libJFFUtils.a */,
 				5357CDF314A9F4F80046EA34 /* libJFFUtilsMacOS.a */,
-				5357CDF514A9F4F80046EA34 /* libJFFUtils copy.a */,
+				5357CDF514A9F4F80046EA34 /* libJFFUtils-clang.a */,
+				65B1F94A151A8B74000A1736 /* JFFUtilsFW.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -465,10 +497,9 @@
 			remoteRef = 5310BA9A141F51AD00A3E2B1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5357CDE314A9F4F80046EA34 /* libJFFAsyncOperations copy.a */ = {
+		5357CDE314A9F4F80046EA34 /* libJFFAsyncOperations-clang.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "libJFFAsyncOperations copy.a";
 			path = "libJFFAsyncOperations-clang.a";
 			remoteRef = 5357CDE214A9F4F80046EA34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -480,10 +511,9 @@
 			remoteRef = 5357CDE614A9F4F80046EA34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5357CDE914A9F4F80046EA34 /* libJFFNetwork copy.a */ = {
+		5357CDE914A9F4F80046EA34 /* libJFFNetwork-clang.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "libJFFNetwork copy.a";
 			path = "libJFFNetwork-clang.a";
 			remoteRef = 5357CDE814A9F4F80046EA34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -495,10 +525,9 @@
 			remoteRef = 5357CDEC14A9F4F80046EA34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5357CDEF14A9F4F80046EA34 /* libJFFScheduler copy.a */ = {
+		5357CDEF14A9F4F80046EA34 /* libJFFScheduler-clang.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "libJFFScheduler copy.a";
 			path = "libJFFScheduler-clang.a";
 			remoteRef = 5357CDEE14A9F4F80046EA34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -510,12 +539,43 @@
 			remoteRef = 5357CDF214A9F4F80046EA34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5357CDF514A9F4F80046EA34 /* libJFFUtils copy.a */ = {
+		5357CDF514A9F4F80046EA34 /* libJFFUtils-clang.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "libJFFUtils copy.a";
 			path = "libJFFUtils-clang.a";
 			remoteRef = 5357CDF414A9F4F80046EA34 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		65B1F93B151A8B74000A1736 /* JFFAsyncOperationsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			name = JFFAsyncOperationsFW.framework;
+			path = JFFAsyncOperationsFW;
+			remoteRef = 65B1F93A151A8B74000A1736 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		65B1F940151A8B74000A1736 /* JFFNetworkFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			name = JFFNetworkFW.framework;
+			path = JFFNetworkFW;
+			remoteRef = 65B1F93F151A8B74000A1736 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		65B1F945151A8B74000A1736 /* JFFSchedulerFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			name = JFFSchedulerFW.framework;
+			path = JFFSchedulerFW;
+			remoteRef = 65B1F944151A8B74000A1736 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		65B1F94A151A8B74000A1736 /* JFFUtilsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			name = JFFUtilsFW.framework;
+			path = JFFUtilsFW;
+			remoteRef = 65B1F949151A8B74000A1736 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

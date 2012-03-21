@@ -6,28 +6,38 @@
 @interface JFFAsyncOperationOperation : NSObject < JFFAsyncOperationInterface >
 
 @property ( nonatomic, copy ) JFFSyncOperationWithProgress loadDataBlock;
+@property ( nonatomic, retain ) JFFBlockOperation* operation;
 
 @end
 
 @implementation JFFAsyncOperationOperation
-{
-    JFFBlockOperation* _operation;
-}
 
+@synthesize operation     = _operation;
 @synthesize loadDataBlock = _loadDataBlock;
+
+-(void)dealloc
+{
+    [ _operation release ];
+    [ _loadDataBlock release ];
+
+    [ super dealloc ];
+}
 
 -(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
                        progressHandler:( void (^)( id ) )progress_
 {
-    _operation = [ JFFBlockOperation performOperationWithLoadDataBlock: self.loadDataBlock
-                                                      didLoadDataBlock: handler_
-                                                         progressBlock: progress_ ];
+    self.operation = [ JFFBlockOperation performOperationWithLoadDataBlock: self.loadDataBlock
+                                                          didLoadDataBlock: handler_
+                                                             progressBlock: progress_ ];
 }
 
 -(void)cancel:( BOOL )canceled_
 {
     if ( canceled_ )
-        [ _operation cancel ];
+    {
+        [ self.operation cancel ];
+        self.operation = nil;
+    }
 }
 
 @end
@@ -49,7 +59,7 @@ JFFAsyncOperation asyncOperationWithSyncOperation( JFFSyncOperation loadDataBloc
 
 JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock( JFFSyncOperationWithProgress progressLoadDataBlock_ )
 {
-    JFFAsyncOperationOperation* asyncObj_ = [ JFFAsyncOperationOperation new ];
+    JFFAsyncOperationOperation* asyncObj_ = [ [ JFFAsyncOperationOperation new ] autorelease ];
     asyncObj_.loadDataBlock = progressLoadDataBlock_;
     return buildAsyncOperationWithInterface( asyncObj_ );
 }
