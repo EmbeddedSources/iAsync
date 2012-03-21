@@ -4,8 +4,9 @@
 
 @interface JFFBlockOperation ()
 
-@property ( nonatomic, copy ) JFFSyncOperation loadDataBlock;
+@property ( nonatomic, copy ) JFFSyncOperationWithProgress loadDataBlock;
 @property ( nonatomic, copy ) JFFDidFinishAsyncOperationHandler didLoadDataBlock;
+@property ( nonatomic, copy ) JFFAsyncOperationProgressHandler progressBlock;
 @property ( assign ) BOOL finishedOrCanceled;
 
 @end
@@ -17,17 +18,20 @@
 
 @synthesize loadDataBlock      = _loadDataBlock;
 @synthesize didLoadDataBlock   = _didLoadDataBlock;
+@synthesize progressBlock      = _progressBlock;
 @synthesize finishedOrCanceled = _finishedOrCanceled;
 
 -(void)dealloc
 {
     NSAssert( !_didLoadDataBlock, @"should be nil" );
-    NSAssert( !_loadDataBlock, @"should be nil" );
-    NSAssert( !_currentQueue, @"should be nil" );
+    NSAssert( !_progressBlock   , @"should be nil" );
+    NSAssert( !_loadDataBlock   , @"should be nil" );
+    NSAssert( !_currentQueue    , @"should be nil" );
 }
 
--(id)initWithLoadDataBlock:( JFFSyncOperation )loadDataBlock_
+-(id)initWithLoadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
           didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_
+             progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_
               currentQueue:( dispatch_queue_t )currentQueue_
 {
     self = [ super init ];
@@ -36,6 +40,7 @@
     {
         self.loadDataBlock    = loadDataBlock_;
         self.didLoadDataBlock = didLoadDataBlock_;
+        self.progressBlock    = progressBlock_;
 
         _currentQueue = currentQueue_;
         dispatch_retain( _currentQueue );
@@ -50,6 +55,7 @@
 
     self.loadDataBlock    = nil;
     self.didLoadDataBlock = nil;
+    self.progressBlock    = nil;
     dispatch_release( _currentQueue );
     _currentQueue = NULL;
 }
@@ -65,6 +71,12 @@
     [ self finalizeOperations ];
 }
 
+-(void)progressWithInfo:( id )info_
+{
+    if ( self.progressBlock )
+        self.progressBlock( info_ );
+}
+
 -(void)cancel
 {
     if ( self.finishedOrCanceled )
@@ -77,7 +89,7 @@
 }
 
 -(void)performBackgroundOperationInQueue:( dispatch_queue_t )queue_
-                           loadDataBlock:( JFFSyncOperation )loadDataBlock_
+                           loadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
 {
     dispatch_async( queue_, ^
     {
@@ -88,7 +100,14 @@
         id opResult_    = nil;
         @try
         {
-            opResult_ = loadDataBlock_( &error_ );
+            JFFAsyncOperationProgressHandler progressCallback_ = ^( id info_ )
+            {
+                dispatch_async( _currentQueue, ^
+                {
+                    [ self progressWithInfo: info_ ];
+                } );
+            };
+            opResult_ = loadDataBlock_( &error_, progressCallback_ );
         }
         @catch ( NSException* ex_ )
         {
@@ -107,8 +126,9 @@
     } );
 }
 
-+(id)performOperationWithLoadDataBlock:( JFFSyncOperation )loadDataBlock_
++(id)performOperationWithLoadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
                       didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_
+                         progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_
 {
     NSParameterAssert( loadDataBlock_ );
     NSParameterAssert( didLoadDataBlock_ );
@@ -120,6 +140,7 @@
 
     JFFBlockOperation* result_ = [ [ self alloc ] initWithLoadDataBlock: loadDataBlock_
                                                        didLoadDataBlock: didLoadDataBlock_
+                                                          progressBlock: progressBlock_
                                                            currentQueue: currentQueue_ ];
 
     [ result_ performBackgroundOperationInQueue: queue_

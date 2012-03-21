@@ -210,7 +210,7 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
 
     asyncOperation_     = [ asyncOperation_     copy ];
     didFinishOperation_ = [ didFinishOperation_ copy ];
-    factory_            = [ factory_ copy ];
+    factory_            = [ factory_            copy ];
 
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
                                     , JFFCancelAsyncOperationHandler cancelCallback_
@@ -254,13 +254,13 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
 -(JFFAsyncOperation)asyncOperationForPropertyWithPath:( JFFPropertyPath* )propertyPath_
                         propertyExtractorFactoryBlock:( JFFPropertyExtractorFactoryBlock )factory_
                                        asyncOperation:( JFFAsyncOperation )asyncOperation_
-                               didFinishLoadDataBlock:( JFFDidFinishAsyncOperationHandler )did_finish_operation_
+                               didFinishLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didFinishOperation_
 {
     NSAssert( propertyPath_.name && propertyPath_.key, @"propertyName argument should not be nil" );
     return [ self privateAsyncOperationForPropertyWithPath: propertyPath_
                              propertyExtractorFactoryBlock: factory_
                                             asyncOperation: asyncOperation_
-                                    didFinishLoadDataBlock: did_finish_operation_ ];
+                                    didFinishLoadDataBlock: didFinishOperation_ ];
 }
 
 -(JFFAsyncOperation)asyncOperationForPropertyWithPath:( JFFPropertyPath* )propertyPath_
@@ -275,7 +275,7 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
 
 -(JFFAsyncOperation)privateAsyncOperationForPropertyWithPath:( JFFPropertyPath* )propertyPath_
                                               asyncOperation:( JFFAsyncOperation )asyncOperation_
-                                      didFinishLoadDataBlock:( JFFDidFinishAsyncOperationHandler )did_finish_operation_
+                                      didFinishLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didFinishOperation_
 {
     JFFPropertyExtractorFactoryBlock factory_ = ^JFFPropertyExtractor*( void )
     {
@@ -285,7 +285,7 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
     return [ self privateAsyncOperationForPropertyWithPath: propertyPath_
                              propertyExtractorFactoryBlock: factory_
                                             asyncOperation: asyncOperation_
-                                    didFinishLoadDataBlock: did_finish_operation_ ];
+                                    didFinishLoadDataBlock: didFinishOperation_ ];
 }
 
 -(JFFAsyncOperation)asyncOperationForPropertyWithName:( NSString* )property_name_

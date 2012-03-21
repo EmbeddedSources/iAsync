@@ -27,6 +27,7 @@
 		1B902735143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B902709143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancer.h */; };
 		1B902736143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B90270A143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancer.m */; };
 		6532667E14C1EB3A004E90B0 /* JFFAsyncOperationsPredefinedBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 6532667D14C1EB3A004E90B0 /* JFFAsyncOperationsPredefinedBlocks.h */; };
+		65359BD2151A7FEF0099D6FE /* JFFAsyncOperationBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 65359BD1151A7FEF0099D6FE /* JFFAsyncOperationBuilder.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		1B902709143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationLoadBalancer.h; sourceTree = "<group>"; };
 		1B90270A143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationLoadBalancer.m; sourceTree = "<group>"; };
 		6532667D14C1EB3A004E90B0 /* JFFAsyncOperationsPredefinedBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationsPredefinedBlocks.h; sourceTree = SOURCE_ROOT; };
+		65359BD1151A7FEF0099D6FE /* JFFAsyncOperationBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFFAsyncOperationBuilder.h; path = AsyncOperartionsBuilder/JFFAsyncOperationBuilder.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 		1B9026C2143F35F800D3B0A0 /* JFFAsyncOpNoARC */ = {
 			isa = PBXGroup;
 			children = (
+				65359BD1151A7FEF0099D6FE /* JFFAsyncOperationBuilder.h */,
 				6532667D14C1EB3A004E90B0 /* JFFAsyncOperationsPredefinedBlocks.h */,
 				1B0857D71451717C001DDE0A /* JFFAsyncOperationProgressBlockHolder.h */,
 				1B0857D81451717C001DDE0A /* JFFCancelAyncOperationBlockHolder.h */,
@@ -160,6 +163,7 @@
 				1B0857DB1451717C001DDE0A /* JFFCancelAyncOperationBlockHolder.h in Headers */,
 				1B0857DC1451717C001DDE0A /* JFFDidFinishAsyncOperationBlockHolder.h in Headers */,
 				6532667E14C1EB3A004E90B0 /* JFFAsyncOperationsPredefinedBlocks.h in Headers */,
+				65359BD2151A7FEF0099D6FE /* JFFAsyncOperationBuilder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
