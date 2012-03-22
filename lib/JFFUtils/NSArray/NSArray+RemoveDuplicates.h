@@ -4,10 +4,10 @@
 @interface NSArray( RemoveDuplicates )
 
 -(NSArray*)arrayByRemovingDuplicates; //uses @selector(isEual:)
--(NSArray*)arrayByRemovingDuplicatesUsingIsEqualBlock:( EqualityCheckerBlock )predicate_;
+-(NSArray*)arrayByRemovingDuplicatesUsingIsEqualBlock:( JFFEqualityCheckerBlock )predicate_;
 
 //Same methods using functional programming notation
 -(NSArray*)unique; //uses @selector(isEual:)
--(NSArray*)uniqueBy:( EqualityCheckerBlock )predicate_;
+-(NSArray*)uniqueBy:( JFFEqualityCheckerBlock )predicate_;
 
 @end

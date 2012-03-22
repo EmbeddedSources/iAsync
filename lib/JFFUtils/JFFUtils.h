@@ -39,6 +39,8 @@
 #import <JFFUtils/Extensions/NSError+setToPointer.h>
 #import <JFFUtils/Extensions/NSDictionary+BlocksAdditions.h>
 
+#import <JFFUtils/Runtime/JFFRuntime.h>
+
 #import <JFFUtils/JGCDAdditions.h>
 #import <JFFUtils/JFFMutableAssignArray.h>
 #import <JFFUtils/JFFMutableAssignDictionary.h>

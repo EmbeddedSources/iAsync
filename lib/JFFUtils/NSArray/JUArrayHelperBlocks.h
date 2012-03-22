@@ -5,13 +5,13 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^ActionBlock)( id object_ );
-typedef id (^MappingBlock)( id object_ );
-typedef id (^ProducerBlock)( NSUInteger index_ );
-typedef NSArray* (^FlattenBlock)( id object_ );
+typedef void (^JFFActionBlock)( id object_ );
+typedef id (^JFFMappingBlock)( id object_ );
+typedef id (^JFFProducerBlock)( NSUInteger index_ );
+typedef NSArray* (^JFFFlattenBlock)( id object_ );
 
-typedef void (^TransformBlock)( id first_object_, id second_object_ );
-typedef BOOL (^EqualityCheckerBlock)( id first_object_, id second_object_ );
+typedef void (^JFFTransformBlock)( id first_object_, id second_object_ );
+typedef BOOL (^JFFEqualityCheckerBlock)( id first_object_, id second_object_ );
 
 #endif //__JU_ARRAY_HELPER_BLOCKS_H__
 

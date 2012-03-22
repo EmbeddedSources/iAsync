@@ -6,7 +6,7 @@
 @class NSError;
 
 typedef void (^JFFSimpleBlock)( void );
-typedef BOOL (^PredicateBlock)( id object_ );//JTODO rename to JPredicateBlock
+typedef BOOL (^JFFPredicateBlock)( id object_ );
 typedef id (^JFFAnalyzer)(id result_, NSError** error_);
 
 #endif //JFF_UTILS_BLOCK_DEFINITIONS

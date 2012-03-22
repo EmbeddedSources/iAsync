@@ -2,7 +2,7 @@
 
 @implementation NSArray (BlocksAdditions)
 
--(void)each:( ActionBlock )block_
+-(void)each:( JFFActionBlock )block_
 {
     [ self enumerateObjectsUsingBlock: ^void( id obj_, NSUInteger idx_, BOOL* stop_ )
     {
@@ -10,7 +10,7 @@
     } ];
 }
 
--(NSArray*)select:( PredicateBlock )predicate_
+-(NSArray*)select:( JFFPredicateBlock )predicate_
 {
     NSIndexSet* indexes_ = [ self indexesOfObjectsPassingTest: ^BOOL( id obj_, NSUInteger idx_, BOOL* stop_ ) 
     {
@@ -19,7 +19,7 @@
     return [ self objectsAtIndexes: indexes_ ];
 }
 
--(NSArray*)map:( MappingBlock )block_
+-(NSArray*)map:( JFFMappingBlock )block_
 {
     NSMutableArray* result_ = [ NSMutableArray arrayWithCapacity: [ self count ] ];
 
@@ -28,7 +28,7 @@
     return [ NSArray arrayWithArray: result_ ];
 }
 
--(NSArray*)flatten:( FlattenBlock )block_
+-(NSArray*)flatten:( JFFFlattenBlock )block_
 {
     NSMutableArray* result_ = [ NSMutableArray array ];
 
@@ -42,7 +42,7 @@
 }
 
 +(id)arrayWithSize:( NSUInteger )size_
-          producer:( ProducerBlock )block_
+          producer:( JFFProducerBlock )block_
 {
     NSMutableArray* result_ = [ NSMutableArray arrayWithCapacity: size_ ];
 
@@ -54,7 +54,7 @@
     return result_;
 }
 
--(NSUInteger)count:( PredicateBlock )predicate_
+-(NSUInteger)count:( JFFPredicateBlock )predicate_
 {
     __block NSUInteger count_ = 0;
 
@@ -63,7 +63,7 @@
     return count_;
 }
 
--(id)firstMatch:( PredicateBlock )predicate_
+-(id)firstMatch:( JFFPredicateBlock )predicate_
 {
     for ( id object_ in self )
     {
@@ -73,7 +73,7 @@
     return nil;
 }
 
--(NSUInteger)firstIndexOfObjectMatch:( PredicateBlock )predicate_
+-(NSUInteger)firstIndexOfObjectMatch:( JFFPredicateBlock )predicate_
 {
     NSUInteger result_ = 0;
     for ( id object_ in self )
@@ -86,7 +86,7 @@
 }
 
 -(void)transformWithArray:( NSArray* )other_
-                withBlock:( TransformBlock )block_
+                withBlock:( JFFTransformBlock )block_
 {
     NSAssert( [ self count ] == [ other_ count ], @"Dimensions must match to perform transform action" );
 
