@@ -3,18 +3,9 @@
 #import <JFFNetwork/JNAbstractConnection.h>
 #import <Foundation/Foundation.h>
 
-//ESURLConnection can not be reused after cancel or finish
+//JFFURLConnection can not be reused after cancel or finish
 //all callbacks cleared after cancel or finish action
 @interface JFFURLConnection : JNAbstractConnection
-{
-@private
-   NSData* _post_data;
-   NSDictionary* _headers;
-
-   BOOL _response_handled;
-   CFReadStreamRef _read_stream;
-   NSURL* _url;
-}
 
 +(id)connectionWithURL:( NSURL* )url_
               postData:( NSData* )data_

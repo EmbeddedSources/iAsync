@@ -16,6 +16,7 @@
 @property ( nonatomic, retain ) NSDictionary* headers;
 
 @property ( nonatomic, assign ) BOOL responseHandled;
+@property ( nonatomic, retain ) __attribute__((NSObject)) CFReadStreamRef readStream;
 @property ( nonatomic, retain ) NSURL* url;
 
 @property ( nonatomic, retain ) JFFURLResponse* urlResponse;
@@ -33,9 +34,9 @@
 
 @end
 
-static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event_, void* self_context_ )
+static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event_, void* selfContext_ )
 {
-    JFFURLConnection* self_ = self_context_;
+    JFFURLConnection* self_ = selfContext_;
     switch( event_ )
     {
         case kCFStreamEventHasBytesAvailable:
@@ -74,23 +75,23 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
 
 @implementation JFFURLConnection
 
-@synthesize postData = _post_data;
+@synthesize postData = _postData;
 @synthesize headers = _headers;
 
 @synthesize url = _url;
-@synthesize responseHandled = _response_handled;
+@synthesize responseHandled = _responseHandled;
 
-@synthesize urlResponse = _url_response;
+@synthesize urlResponse = _urlResponse;
+@synthesize readStream  = _readStream;
 
 -(void)dealloc
 {
    [ self cancel ];
 
-   [ _post_data    release ];
-   [ _headers      release ];
-   [ _url          release ];
-  
-   [ _url_response release ];
+    self.postData    = nil;
+    self.headers     = nil;
+    self.url         = nil;
+    self.urlResponse = nil;
 
    [ super dealloc ];
 }
@@ -123,8 +124,7 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
    NSDictionary* headers_ = [ NSDictionary dictionaryWithObjectsAndKeys: 
                                  content_type_, @"Content-Type"
                                , @"keep-alive", @"Connection"
-                               , nil 
-                            ];
+                              , nil ];
 
    return [ self connectionWithURL: url_
                           postData: data_
@@ -182,11 +182,11 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
     //   CFReadStreamCreateForStreamedHTTPRequest( CFAllocatorRef alloc,
     //                                             CFHTTPMessageRef requestHeaders,
     //                                             CFReadStreamRef	requestBody )
-    _read_stream = CFReadStreamCreateForHTTPRequest( NULL, httpRequest_ );
+    _readStream = CFReadStreamCreateForHTTPRequest( NULL, httpRequest_ );
     CFRelease( httpRequest_ );
 
     //Prefer using keep-alive packages
-    Boolean keep_alive_set_result_ = CFReadStreamSetProperty( _read_stream, kCFStreamPropertyHTTPAttemptPersistentConnection, kCFBooleanTrue );
+    Boolean keep_alive_set_result_ = CFReadStreamSetProperty( self.readStream, kCFStreamPropertyHTTPAttemptPersistentConnection, kCFBooleanTrue );
     if ( FALSE == keep_alive_set_result_ )
     {
         NSLog( @"JFFURLConnection->start : unable to setup keep-alive packages" );
@@ -198,22 +198,21 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
 
     CFOptionFlags registered_events_ = kCFStreamEventHasBytesAvailable
         | kCFStreamEventErrorOccurred | kCFStreamEventEndEncountered;
-    if ( CFReadStreamSetClient( _read_stream, registered_events_, readStreamCallback, &stream_context_ ) )
+    if ( CFReadStreamSetClient( self.readStream, registered_events_, readStreamCallback, &stream_context_ ) )
     {
-        CFReadStreamScheduleWithRunLoop( _read_stream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
+        CFReadStreamScheduleWithRunLoop( self.readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
     }
 
-    CFReadStreamOpen( _read_stream );
+    CFReadStreamOpen( self.readStream );
 }
 
 -(void)closeReadStream
 {
-    if ( _read_stream )
+    if ( _readStream )
     {
-        CFReadStreamUnscheduleFromRunLoop( _read_stream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
-        CFReadStreamClose( _read_stream );
-        CFRelease( _read_stream );
-        _read_stream = NULL;
+        CFReadStreamUnscheduleFromRunLoop( _readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
+        CFReadStreamClose( _readStream );
+        self.readStream = nil;
     }
 }
 
