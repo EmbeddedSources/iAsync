@@ -5,7 +5,6 @@
 
 @implementation NSArray (AsyncMap)
 
-//STODO add add tolerantAsyncMap:
 -(JFFAsyncOperation)asyncMap:( JFFAsyncOperationBinder )block_
 {
     NSArray* asyncOperations_ = [ self map: ^id( id object_ )

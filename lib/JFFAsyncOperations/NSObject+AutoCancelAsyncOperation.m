@@ -20,17 +20,17 @@
         __block BOOL finished_ = NO;
         __unsafe_unretained id self_ = self;
 
-        JFFSimpleBlockHolder* ondealloc_block_holder_ = [ JFFSimpleBlockHolder new ];
+        JFFSimpleBlockHolder* ondeallocBlockHolder_ = [ JFFSimpleBlockHolder new ];
 
         JFFSimpleBlockHolder* remove_ondealloc_block_holder_ = [ JFFSimpleBlockHolder new ];
         remove_ondealloc_block_holder_.simpleBlock = ^void( void )
         {
             finished_ = YES;
 
-            if ( ondealloc_block_holder_.simpleBlock )
+            if ( ondeallocBlockHolder_.simpleBlock )
             {
-                [ self_ removeOnDeallocBlock: ondealloc_block_holder_.simpleBlock ];
-                ondealloc_block_holder_.simpleBlock = nil;
+                [ self_ removeOnDeallocBlock: ondeallocBlockHolder_.simpleBlock ];
+                ondeallocBlockHolder_.simpleBlock = nil;
             }
         };
 
@@ -60,21 +60,21 @@
             return JFFStubCancelAsyncOperationBlock;
         }
 
-        ondealloc_block_holder_.simpleBlock = ^void( void )
+        ondeallocBlockHolder_.simpleBlock = ^void( void )
         {
             cancel_( cancelNativeAsyncOp_ );
         };
 
         //JTODO assert retain count
-        [ self addOnDeallocBlock: ondealloc_block_holder_.simpleBlock ];
+        [ self addOnDeallocBlock: ondeallocBlockHolder_.simpleBlock ];
 
-        JFFCancelAyncOperationBlockHolder* main_cancel_holder_ = [ JFFCancelAyncOperationBlockHolder new ];
-        main_cancel_holder_.cancelBlock = ^void( BOOL canceled_ )
+        JFFCancelAyncOperationBlockHolder* mainCancelHolder_ = [ JFFCancelAyncOperationBlockHolder new ];
+        mainCancelHolder_.cancelBlock = ^void( BOOL canceled_ )
         {
             cancel_( canceled_ );
         };
 
-        return main_cancel_holder_.onceCancelBlock;
+        return mainCancelHolder_.onceCancelBlock;
     };
 }
 

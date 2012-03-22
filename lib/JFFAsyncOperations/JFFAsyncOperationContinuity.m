@@ -679,7 +679,7 @@ JFFAsyncOperation asyncOperationWithDoneBlock( JFFAsyncOperation loader_
 }
 
 JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
-                                       , PredicateBlock predicate_
+                                       , JFFPredicateBlock predicate_
                                        , NSTimeInterval delay_
                                        , NSInteger maxRepeatCount_ )
 {
