@@ -4,7 +4,7 @@
 
 @implementation JFFConectionTest
 
-//JTODO fix test
+//now not used
 -(void)TtestValidDownloadCompletesCorrectly
 {
     [ self prepare ];
@@ -12,44 +12,45 @@
     NSURL* data_url_ = [ NSURL URLWithString: @"http://10.28.9.57:9000/about/" ];
 
     JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithUrl: data_url_
-                                                                         postData: nil
+                                                                         httpBody: nil
                                                                           headers: nil ];
     [ factory_ autorelease ];
    
     id< JNUrlConnection > connection_ = [ factory_ createFastConnection ];
-    NSMutableData* total_data_ = [ NSMutableData data ];
-    NSData* expected_data_ = [ NSData dataWithContentsOfURL: data_url_ ];
+    NSMutableData* totalData_ = [ NSMutableData data ];
+    NSData* expectedData_ = [ NSData dataWithContentsOfURL: data_url_ ];
 
     connection_.didReceiveResponseBlock = ^( id response_ )
     {
         //IDLE
     };
-    connection_.didReceiveDataBlock = ^( NSData* data_chunk_ )
+    connection_.didReceiveDataBlock = ^( NSData* dataChunk_ )
     {
-        [ total_data_ appendData: data_chunk_ ];
+        [ totalData_ appendData: dataChunk_ ];
     };
-   
+
     connection_.didFinishLoadingBlock = ^( NSError* error_ )
     {
         GHAssertNil( error_, @"Unexpected error - %@", error_ );    
-        GHAssertTrue( [ expected_data_ length ] == [ total_data_ length ], @"packet mismatch" );
+        GHAssertTrue( [ expectedData_ length ] == [ totalData_ length ], @"packet mismatch" );
         [ self notify: kGHUnitWaitStatusSuccess 
           forSelector: _cmd ];
     };
   
     [ connection_ start ];
     [ self waitForStatus: kGHUnitWaitStatusSuccess
-                 timeout: 30. ];
+                 timeout: 61. ];
 }
 
--(void)testInValidDownloadCompletesWithError
+//now not used
+-(void)RtestInValidDownloadCompletesWithError
 {
     [ self prepare ];
 
-    NSURL* data_url_ = [ NSURL URLWithString: @"http://kdjsfhjkfhsdfjkdhfjkds.com" ];
+    NSURL* dataUrl_ = [ NSURL URLWithString: @"http://kdjsfhjkfhsdfjkdhfjkds.com" ];
 
-    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithUrl: data_url_
-                                                                         postData: nil
+    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithUrl: dataUrl_
+                                                                         httpBody: nil
                                                                           headers: nil ];
     [ factory_ autorelease ];
 
@@ -59,7 +60,7 @@
     {
         //IDLE
     };
-    connection_.didReceiveDataBlock = ^( NSData* data_chunk_ )
+    connection_.didReceiveDataBlock = ^( NSData* dataChunk_ )
     {
     };
     connection_.didFinishLoadingBlock = ^( NSError* error_ )
@@ -77,7 +78,7 @@
 
     [ connection_ start ];
     [ self waitForStatus: kGHUnitWaitStatusSuccess
-                 timeout: 30. ];
+                 timeout: 61. ];
 }
 
 
