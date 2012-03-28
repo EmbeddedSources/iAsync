@@ -20,10 +20,10 @@
 
 -(NSDictionary*)dictionaryFromQueryComponents
 {
-    NSMutableDictionary* query_components_ = [ NSMutableDictionary new ];
-    for ( NSString* key_value_pair_string_ in [ self componentsSeparatedByString: @"&" ] )
+    NSMutableDictionary* queryComponents_ = [ NSMutableDictionary new ];
+    for ( NSString* keyValuePairString_ in [ self componentsSeparatedByString: @"&" ] )
     {
-        NSArray* keyValuePairArray_ = [ key_value_pair_string_ componentsSeparatedByString: @"=" ];
+        NSArray* keyValuePairArray_ = [ keyValuePairString_ componentsSeparatedByString: @"=" ];
 
         // Verify that there is at least one key, and at least one value.  Ignore extra = signs
         if ( [ keyValuePairArray_ count ] < 2 )
@@ -31,15 +31,15 @@
 
         NSString* key_ = [ [ keyValuePairArray_ objectAtIndex: 0 ] stringByDecodingURLFormat ];
         NSString* value_ = [ [ keyValuePairArray_ objectAtIndex: 1 ] stringByDecodingURLFormat ];
-        NSMutableArray* results_ = [ query_components_ objectForKey: key_ ]; // URL spec says that multiple values are allowed per key
+        NSMutableArray* results_ = [ queryComponents_ objectForKey: key_ ]; // URL spec says that multiple values are allowed per key
         if( !results_ )// First object
         {
             results_ = [ [ NSMutableArray alloc ] initWithCapacity: 1 ];
-            [ query_components_ setObject: results_ forKey: key_ ];
+            [ queryComponents_ setObject: results_ forKey: key_ ];
         }
         [ results_ addObject: value_ ];
     }
-    return [ NSDictionary dictionaryWithDictionary: query_components_ ];
+    return [ [ NSDictionary alloc ] initWithDictionary: queryComponents_ ];
 }
 
 @end

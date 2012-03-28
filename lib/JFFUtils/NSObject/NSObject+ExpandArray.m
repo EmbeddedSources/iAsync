@@ -4,7 +4,7 @@
 
 -(id)expandArray
 {
-   return self;
+    return self;
 }
 
 @end
@@ -13,20 +13,20 @@
 
 -(id)expandArray
 {
-   NSMutableArray* result_ = [ NSMutableArray array ];
-   for ( id object_ in self )
-   {
-      id newValue_ = [ object_ expandArray ];
-      if ( [ newValue_ isKindOfClass: [ NSArray class ] ] )
-      {
-         [ result_ addObjectsFromArray: newValue_ ];
-      }
-      else
-      {
-         [ result_ addObject: newValue_ ];
-      }
-   }
-   return result_;
+    NSMutableArray* result_ = [ NSMutableArray new ];
+    for ( id object_ in self )
+    {
+        id newValue_ = [ object_ expandArray ];
+        if ( [ newValue_ isKindOfClass: [ NSArray class ] ] )
+        {
+            [ result_ addObjectsFromArray: newValue_ ];
+        }
+        else
+        {
+            [ result_ addObject: newValue_ ];
+        }
+    }
+    return result_;
 }
 
 @end

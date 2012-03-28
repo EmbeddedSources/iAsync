@@ -16,17 +16,17 @@
 
 -(NSArray*)unique
 {
-    NSUInteger items_count_ = [ self count ];
+    NSUInteger itemsCount_ = [ self count ];
 
-    NSMutableSet*   processed_objects_ = [ NSMutableSet   setWithCapacity  : items_count_ ];
-    NSMutableArray* result_            = [ NSMutableArray arrayWithCapacity: items_count_ ];
+    NSMutableSet*   processedObjects_ = [ NSMutableSet   setWithCapacity  : itemsCount_ ];
+    NSMutableArray* result_           = [ NSMutableArray arrayWithCapacity: itemsCount_ ];
 
     for ( id item_ in self )
     {
-        if ( ![ processed_objects_ containsObject: item_ ] )
+        if ( ![ processedObjects_ containsObject: item_ ] )
         {
             [ result_            addObject: item_ ];
-            [ processed_objects_ addObject: item_ ];
+            [ processedObjects_ addObject: item_ ];
         }
     }
 

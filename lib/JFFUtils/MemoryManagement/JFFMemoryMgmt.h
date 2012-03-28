@@ -1,8 +1,8 @@
-#ifndef JFFUtils_JFFMemoryMgmt2_h
-#define JFFUtils_JFFMemoryMgmt2_h
+#ifndef JFF_UTILS_JFF_MEMORY_MGMT_HEADER_INCLUDED
+#define JFF_UTILS_JFF_MEMORY_MGMT_HEADER_INCLUDED
 
 #include <objc/objc.h>
 
 id jff_retainAutorelease( id object_ );
 
-#endif
+#endif //JFF_UTILS_JFF_MEMORY_MGMT_HEADER_INCLUDED

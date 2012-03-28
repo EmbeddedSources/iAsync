@@ -5,7 +5,6 @@
 #import <JFFUtils/NSObject/NSObject+RuntimeExtensions.h>
 
 #import <JFFUtils/NSArray/NSMutableArray+ChangeCount.h>
-#import <JFFUtils/NSArray/NSMutableArray+AddNonEmptyObject.h>
 #import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>
 #import <JFFUtils/NSArray/NSArray+RemoveDuplicates.h>
 #import <JFFUtils/NSArray/NSArray+NoThrowObjectAtIndex.h>
@@ -37,7 +36,9 @@
 #import <JFFUtils/Extensions/UIColor+ColorForHex.h>
 #import <JFFUtils/Extensions/NSDate+TimeZone.h>
 #import <JFFUtils/Extensions/NSError+setToPointer.h>
-#import <JFFUtils/Extensions/NSDictionary+BlocksAdditions.h>
+
+#import <JFFUtils/Dictionary/NSDictionary+BlocksAdditions.h>
+#import <JFFUtils/Dictionary/NSDictionary+JFFExtendedDictionary.h>
 
 #import <JFFUtils/Runtime/JFFRuntime.h>
 

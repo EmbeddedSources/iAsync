@@ -12,9 +12,17 @@
 
 -(NSArray*)select:( JFFPredicateBlock )predicate_
 {
-    NSIndexSet* indexes_ = [ self indexesOfObjectsPassingTest: ^BOOL( id obj_, NSUInteger idx_, BOOL* stop_ ) 
+    return [ self selectWithIndex: ^( id obj_, NSUInteger idx_ )
     {
         return predicate_( obj_ );
+    } ];
+}
+
+-(NSArray*)selectWithIndex:( JFFPredicateWithIndexBlock )predicate_;
+{
+    NSIndexSet* indexes_ = [ self indexesOfObjectsPassingTest: ^BOOL( id obj_, NSUInteger idx_, BOOL* stop_ ) 
+    {
+        return predicate_( obj_, idx_ );
     } ];
     return [ self objectsAtIndexes: indexes_ ];
 }
@@ -25,12 +33,12 @@
 
     [ self each: ^void( id object_ ) { [ result_ addObject: block_( object_ ) ]; } ];
 
-    return [ NSArray arrayWithArray: result_ ];
+    return [ [ NSArray alloc ] initWithArray: result_ ];
 }
 
 -(NSArray*)flatten:( JFFFlattenBlock )block_
 {
-    NSMutableArray* result_ = [ NSMutableArray array ];
+    NSMutableArray* result_ = [ NSMutableArray new ];
 
     [ self each: ^void( id object_ ) 
     {
@@ -38,7 +46,7 @@
         [ result_ addObjectsFromArray: object_items_ ]; 
     } ];
 
-    return [ NSArray arrayWithArray: result_ ];
+    return [ [ NSArray alloc ] initWithArray: result_ ];
 }
 
 +(id)arrayWithSize:( NSUInteger )size_
@@ -90,10 +98,10 @@
 {
     NSAssert( [ self count ] == [ other_ count ], @"Dimensions must match to perform transform action" );
 
-    NSUInteger array_size_ = [ self count ];
-    for ( NSUInteger item_index_ = 0; item_index_ < array_size_; ++item_index_ )
+    NSUInteger arraySize_ = [ self count ];
+    for ( NSUInteger itemIndex_ = 0; itemIndex_ < arraySize_; ++itemIndex_ )
     {
-        block_( [ self objectAtIndex: item_index_], [ other_ objectAtIndex: item_index_ ] );
+        block_( [ self objectAtIndex: itemIndex_ ], [ other_ objectAtIndex: itemIndex_ ] );
     }
 }
 

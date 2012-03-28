@@ -21,6 +21,8 @@
 //Creates a new NSArray containing those elements for which the block returns a YES value 
 -(NSArray*)select:( JFFPredicateBlock )predicate_;
 
+-(NSArray*)selectWithIndex:( JFFPredicateWithIndexBlock )predicate_;
+
 //Invokes the block passing in successive elements from self,
 //Creates a new NSArray containing all elements of all arrays returned the block
 -(NSArray*)flatten:( JFFFlattenBlock )block_;
