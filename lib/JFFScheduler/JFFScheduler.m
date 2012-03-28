@@ -3,17 +3,45 @@
 #import <JFFUtils/Extensions/NSThread+AssertMainThread.h>
 #import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
 
+#include <objc/runtime.h>
+
+char jffSchedulerKey_;
+
+@interface NSThread (JFFScheduler)
+
+@property ( nonatomic, strong, readonly ) JFFScheduler* jffScheduler;
+
+@end
+
+@implementation NSThread (JFFScheduler)
+
+-(JFFScheduler*)jffScheduler
+{
+    id result_ = objc_getAssociatedObject( self, &jffSchedulerKey_ );
+    if ( !result_ )
+    {
+        result_ = [ JFFScheduler new ];
+        objc_setAssociatedObject( self
+                                 , &jffSchedulerKey_
+                                 , result_
+                                 , OBJC_ASSOCIATION_RETAIN_NONATOMIC );
+    }
+    return result_;
+}
+
+@end
+
 @interface JFFScheduler ()
 
-//STODO move to ARC and remove inner properties
-@property ( nonatomic, retain ) NSMutableArray* cancelBlocks;
-@property ( nonatomic, unsafe_unretained ) dispatch_queue_t queue;
+@property ( nonatomic, assign ) dispatch_queue_t queue;
 
 @end
 
 @implementation JFFScheduler
+{
+    __strong NSMutableArray* _cancelBlocks;
+}
 
-@synthesize cancelBlocks;
 @synthesize queue;
 
 -(void)dealloc
@@ -21,9 +49,6 @@
     [ self cancelAllScheduledOperations ];
 
     dispatch_release( queue );
-    [ cancelBlocks release ];
-
-    [ super dealloc ];
 }
 
 -(id)init
@@ -34,21 +59,16 @@
     {
         queue = dispatch_get_current_queue();
         dispatch_retain( queue );
-        self.cancelBlocks = [ NSMutableArray array ];
+        _cancelBlocks = [ NSMutableArray new ];
     }
 
     return self;
 }
 
-+(id)sharedScheduler
++(id)sharedByThreadScheduler
 {
-    [ NSThread assertMainThread ];
-    static id instance_ = nil;
-    if ( !instance_ )
-    {
-        instance_ = [ self new ];
-    }
-    return instance_;
+    NSThread* thread_ = [ NSThread currentThread ];
+    return thread_.jffScheduler;
 }
 
 -(JFFCancelScheduledBlock)addBlock:( JFFScheduledBlock )actionBlock_
@@ -56,7 +76,7 @@
 {
     NSParameterAssert( actionBlock_ );
     if ( !actionBlock_ )
-        return [ [ ^(){ /* do nothing */ } copy ] autorelease ];
+        return ^(){ /* do nothing */ };
 
     __block dispatch_source_t timer_ = dispatch_source_create( DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue );
 
@@ -66,10 +86,10 @@
                               , delta_
                               , 0 );
 
-    __block JFFScheduler* self_ = self;
+    __unsafe_unretained JFFScheduler* self_ = self;
 
-    JFFSimpleBlockHolder* cancelTimerBlockHolder_ = [ [ JFFSimpleBlockHolder new ] autorelease ];
-    __block JFFSimpleBlockHolder* weak_cancel_timer_block_holder_ = cancelTimerBlockHolder_;
+    JFFSimpleBlockHolder* cancelTimerBlockHolder_ = [ JFFSimpleBlockHolder new ];
+    __unsafe_unretained JFFSimpleBlockHolder* weakCancelTimerBlockHolder_ = cancelTimerBlockHolder_;
     cancelTimerBlockHolder_.simpleBlock = ^void( void )
     {
         if ( !timer_ )
@@ -79,16 +99,16 @@
         dispatch_release( timer_ );
         timer_ = NULL;
 
-        [ self_.cancelBlocks removeObject: weak_cancel_timer_block_holder_.simpleBlock ];
+        [ self_->_cancelBlocks removeObject: weakCancelTimerBlockHolder_.simpleBlock ];
     };
 
-    [ self.cancelBlocks addObject: cancelTimerBlockHolder_.simpleBlock ];
+    [ _cancelBlocks addObject: cancelTimerBlockHolder_.simpleBlock ];
 
-    actionBlock_ = [ [ actionBlock_ copy ] autorelease ];
-    dispatch_block_t eventHandlerBlock_ = [ [ ^void( void )
+    actionBlock_ = [ actionBlock_ copy ];
+    dispatch_block_t eventHandlerBlock_ = [ ^void( void )
     {
         actionBlock_( cancelTimerBlockHolder_.onceSimpleBlock );
-    } copy ] autorelease ];
+    } copy ];
 
     dispatch_source_set_event_handler( timer_, eventHandlerBlock_ );
 
@@ -99,11 +119,10 @@
 
 -(void)cancelAllScheduledOperations
 {
-    NSMutableSet* cancelBlocks_ = [ self.cancelBlocks copy ];
-    self.cancelBlocks = nil;
+    NSMutableSet* cancelBlocks_ = [ _cancelBlocks copy ];
+    _cancelBlocks = nil;
     for ( JFFCancelScheduledBlock cancel_ in cancelBlocks_ )
         cancel_();
-    [ cancelBlocks_ release ];
 }
 
 @end
