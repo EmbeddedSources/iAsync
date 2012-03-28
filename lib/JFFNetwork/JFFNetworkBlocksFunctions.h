@@ -6,29 +6,30 @@
 
 @class NSURL, NSData, NSString;
 
-JFFAsyncOperation genericChunkedURLResponseLoader(
-   NSURL* url_
-   , NSData* post_data_
-   , NSDictionary* headers_
-   , BOOL use_live_connection_ 
-   , ShouldAcceptCertificateForHost certificate_callback_);
+@interface JFFURLConnectionParams : NSObject
 
-JFFAsyncOperation genericDataURLResponseLoader( 
-   NSURL* url_
-   , NSData* post_data_
-   , NSDictionary* headers_ 
-   , BOOL use_live_connection_
-   , ShouldAcceptCertificateForHost certificate_callback_);
+@property ( nonatomic, strong ) NSURL* url;
+@property ( nonatomic, strong ) NSData* httpBody;
+@property ( nonatomic, strong ) NSString* httpMethod;
+@property ( nonatomic, strong ) NSDictionary* headers;
+@property ( nonatomic, assign ) BOOL useLiveConnection; 
+@property ( nonatomic, copy   ) JFFShouldAcceptCertificateForHost certificateCallback;
+
+@end
+
+JFFAsyncOperation genericChunkedURLResponseLoader( JFFURLConnectionParams* params_ );
+
+JFFAsyncOperation genericDataURLResponseLoader( JFFURLConnectionParams* params_ );
 
 // Backward compatibility versions
 JFFAsyncOperation chunkedURLResponseLoader( 
    NSURL* url_
-   , NSData* post_data_
+   , NSData* postData_
    , NSDictionary* headers_ );
 
 JFFAsyncOperation dataURLResponseLoader( 
    NSURL* url_
-   , NSData* post_data_
+   , NSData* postData_
    , NSDictionary* headers_ );
 
 JFFAsyncOperation liveChunkedURLResponseLoader( 

@@ -12,7 +12,8 @@
 @interface JFFURLConnection ()
 
 //JTODO move to ARC and remove inner properties
-@property ( nonatomic, retain ) NSData* postData;
+@property ( nonatomic, retain ) NSData* httpBody;
+@property ( nonatomic, retain ) NSString* httpMethod;
 @property ( nonatomic, retain ) NSDictionary* headers;
 
 @property ( nonatomic, assign ) BOOL responseHandled;
@@ -44,11 +45,11 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
             [ self_ handleResponseForReadStream: stream_ ];
 
             UInt8 buffer_[ kJNMaxBufferSize ];
-            CFIndex bytes_read_ = CFReadStreamRead( stream_, buffer_, kJNMaxBufferSize );
-            if ( bytes_read_ > 0 )
+            CFIndex bytesRead_ = CFReadStreamRead( stream_, buffer_, kJNMaxBufferSize );
+            if ( bytesRead_ > 0 )
             {
                 [ self_ handleData: buffer_
-                            length: bytes_read_ ];
+                            length: bytesRead_ ];
             }
             break;
         }
@@ -75,8 +76,9 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
 
 @implementation JFFURLConnection
 
-@synthesize postData = _postData;
-@synthesize headers = _headers;
+@synthesize httpBody   = _postData;
+@synthesize httpMethod = _httpMethod;
+@synthesize headers    = _headers;
 
 @synthesize url = _url;
 @synthesize responseHandled = _responseHandled;
@@ -86,58 +88,65 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
 
 -(void)dealloc
 {
-   [ self cancel ];
+    [ self cancel ];
 
-    self.postData    = nil;
+    self.httpBody    = nil;
+    self.httpMethod  = nil;
     self.headers     = nil;
     self.url         = nil;
     self.urlResponse = nil;
 
-   [ super dealloc ];
+    [ super dealloc ];
 }
 
 -(id)initWithURL:( NSURL* )url_
-        postData:( NSData* )data_
+        httpBody:( NSData* )data_
+      httpMethod:( NSString* )httpMethod_
          headers:( NSDictionary* )headers_
 {
-   self = [ super privateInit ];
+    self = [ super privateInit ];
 
-   if ( self )
-   {
-      self.url = url_;
-      self.postData = data_;
-      self.headers = headers_;
-   }
+    if ( self )
+    {
+        self.url        = url_;
+        self.httpBody   = data_;
+        self.httpMethod = httpMethod_;
+        self.headers    = headers_;
+    }
 
-   return self;
+    return self;
 }
 
 -(void)start
 {
-   [ self startConnectionWithPostData: self.postData headers: self.headers ];
+    [ self startConnectionWithPostData: self.httpBody headers: self.headers ];
 }
 
 +(id)connectionWithURL:( NSURL* )url_
-              postData:( NSData* )data_
+              httpBody:( NSData* )data_
+            httpMethod:( NSString* )httpMethod_
            contentType:( NSString* )content_type_
 {
-   NSDictionary* headers_ = [ NSDictionary dictionaryWithObjectsAndKeys: 
-                                 content_type_, @"Content-Type"
-                               , @"keep-alive", @"Connection"
+    NSDictionary* headers_ = [ NSDictionary dictionaryWithObjectsAndKeys: 
+                              content_type_, @"Content-Type"
+                              , @"keep-alive", @"Connection"
                               , nil ];
 
-   return [ self connectionWithURL: url_
-                          postData: data_
-                           headers: headers_ ];
+    return [ self connectionWithURL: url_
+                           httpBody: data_
+                         httpMethod: httpMethod_
+                            headers: headers_ ];
 }
 
 +(id)connectionWithURL:( NSURL* )url_
-              postData:( NSData* )data_
+              httpBody:( NSData* )data_
+            httpMethod:( NSString* )httpMethod_
                headers:( NSDictionary* )headers_
 {
-   return [ [ [ self alloc ] initWithURL: url_
-                                postData: data_
-                                 headers: headers_ ] autorelease ];
+    return [ [ [ self alloc ] initWithURL: url_
+                                 httpBody: data_
+                               httpMethod: httpMethod_
+                                  headers: headers_ ] autorelease ];
 }
 
 -(void)applyCookiesForHTTPRequest:( CFHTTPMessageRef )httpRequest_
@@ -159,7 +168,12 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
 -(void)startConnectionWithPostData:( NSData* )data_
                            headers:( NSDictionary* )headers_
 {
-    CFStringRef method_ = (CFStringRef) ( data_ ? @"POST" : @"GET" );
+    CFStringRef method_ = (CFStringRef) (self.httpMethod ?: @"GET");
+    if ( !self.httpMethod && data_ )
+    {
+        method_ = (CFStringRef) @"POST";
+    }
+
     CFHTTPMessageRef httpRequest_ = CFHTTPMessageCreateRequest( NULL
                                                                , method_
                                                                , (CFURLRef)self.url
@@ -186,19 +200,19 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
     CFRelease( httpRequest_ );
 
     //Prefer using keep-alive packages
-    Boolean keep_alive_set_result_ = CFReadStreamSetProperty( self.readStream, kCFStreamPropertyHTTPAttemptPersistentConnection, kCFBooleanTrue );
-    if ( FALSE == keep_alive_set_result_ )
+    Boolean keepAliveSetResult_ = CFReadStreamSetProperty( self.readStream, kCFStreamPropertyHTTPAttemptPersistentConnection, kCFBooleanTrue );
+    if ( FALSE == keepAliveSetResult_ )
     {
         NSLog( @"JFFURLConnection->start : unable to setup keep-alive packages" );
     }
 
     typedef void* (*retain)( void* info_ );
     typedef void (*release)( void* info_ );
-    CFStreamClientContext stream_context_ = { 0, self, (retain)CFRetain, (release)CFRelease, NULL };
+    CFStreamClientContext streamContext_ = { 0, self, (retain)CFRetain, (release)CFRelease, NULL };
 
     CFOptionFlags registered_events_ = kCFStreamEventHasBytesAvailable
         | kCFStreamEventErrorOccurred | kCFStreamEventEndEncountered;
-    if ( CFReadStreamSetClient( self.readStream, registered_events_, readStreamCallback, &stream_context_ ) )
+    if ( CFReadStreamSetClient( self.readStream, registered_events_, readStreamCallback, &streamContext_ ) )
     {
         CFReadStreamScheduleWithRunLoop( self.readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
     }

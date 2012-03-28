@@ -324,7 +324,8 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
         NSDictionary* headers_ = [ NSDictionary dictionaryWithObject: range_ forKey: @"Range" ];
 
         JFFURLConnection* connection_ = [ JFFURLConnection connectionWithURL: self.url
-                                                                    postData: nil
+                                                                    httpBody: nil
+                                                                  httpMethod: nil
                                                                      headers: headers_ ];
 
         progress_callback_ = [ [ progress_callback_ copy ] autorelease ];

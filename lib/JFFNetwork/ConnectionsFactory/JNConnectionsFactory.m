@@ -6,25 +6,28 @@
 @interface JNConnectionsFactory ()
 
 //JTODO move to ARC and remove inner properties
-@property ( nonatomic, retain ) NSURL       * url     ;
-@property ( nonatomic, retain ) NSData      * postData;
-@property ( nonatomic, retain ) NSDictionary* headers ;
+@property ( nonatomic, retain ) NSURL       * url       ;
+@property ( nonatomic, retain ) NSData      * httpBody  ;
+@property ( nonatomic, retain ) NSString    * httpMethod;
+@property ( nonatomic, retain ) NSDictionary* headers   ;
 
 @end
 
 @implementation JNConnectionsFactory
 
-@synthesize url      = _url      ;
-@synthesize postData = _post_data;
-@synthesize headers  = _headers  ;
+@synthesize url        = _url     ;
+@synthesize httpBody   = _httpBody;
+@synthesize httpMethod = _httpMethod;
+@synthesize headers    = _headers ;
 
 -(void)dealloc
 {
-   [ _url       release ];
-   [ _post_data release ];
-   [ _headers   release ];
-   
-   [ super dealloc ];
+    [ _url        release ];
+    [ _httpBody   release ];
+    [ _httpMethod release ];
+    [ _headers    release ];
+
+    [ super dealloc ];
 }
 
 #pragma mark -
@@ -37,7 +40,8 @@
 }
 
 -(id)initWithUrl:( NSURL* ) url_
-        postData:( NSData* )post_data_
+        httpBody:( NSData* )httpBody_
+      httpMethod:( NSString* )httpMethod_
          headers:( NSDictionary* )headers_
 {
     if ( nil == url_ )
@@ -54,10 +58,11 @@
         return nil;
     }
 
-    self.url      = url_      ;
-    self.postData = post_data_;
-    self.headers  = headers_  ;
-   
+    self.url        = url_     ;
+    self.httpBody   = httpBody_;
+    self.httpMethod = httpMethod_;
+    self.headers    = headers_ ;
+
     return self;
 }
 
@@ -65,9 +70,10 @@
 #pragma mark Factory
 -(id< JNUrlConnection >)createFastConnection
 {
-   return [ JFFURLConnection connectionWithURL: self.url     
-                                      postData: self.postData
-                                       headers: self.headers ];
+    return [ JFFURLConnection connectionWithURL: self.url     
+                                       httpBody: self.httpBody
+                                     httpMethod: self.httpMethod
+                                        headers: self.headers ];
 }
 
 -(id< JNUrlConnection >)createStandardConnection
@@ -77,11 +83,15 @@
                                                              cachePolicy: NSURLRequestReloadIgnoringLocalCacheData 
                                                          timeoutInterval: timeout_ ];
 
-    NSString* http_method_ = self.postData ? @"POST" : @"GET";
+    NSString* httpMethod_ = self.httpMethod ?: @"GET";
+    if ( !self.httpMethod && self.httpBody )
+    {
+        httpMethod_ = @"POST";
+    }
 
-    [ request_ setHTTPBody           : self.postData ];
+    [ request_ setHTTPBody           : self.httpBody ];
     [ request_ setAllHTTPHeaderFields: self.headers  ];
-    [ request_ setHTTPMethod         : http_method_  ];
+    [ request_ setHTTPMethod         : httpMethod_   ];
 
     JNNsUrlConnection* result_ = [ [ JNNsUrlConnection alloc ] initWithRequest: request_ ];
     return [ result_ autorelease ];

@@ -3,10 +3,10 @@
 
 @interface JNAbstractConnection : NSObject < JNUrlConnection >
 
-@property ( nonatomic, copy ) ESDidReceiveResponseHandler didReceiveResponseBlock;
-@property ( nonatomic, copy ) ESDidReceiveDataHandler     didReceiveDataBlock    ;
-@property ( nonatomic, copy ) ESDidFinishLoadingHandler   didFinishLoadingBlock  ;
-@property ( nonatomic, copy ) ShouldAcceptCertificateForHost shouldAcceptCertificateBlock;
+@property ( nonatomic, copy ) JFFDidReceiveResponseHandler didReceiveResponseBlock;
+@property ( nonatomic, copy ) JFFDidReceiveDataHandler     didReceiveDataBlock    ;
+@property ( nonatomic, copy ) JFFDidFinishLoadingHandler   didFinishLoadingBlock  ;
+@property ( nonatomic, copy ) JFFShouldAcceptCertificateForHost shouldAcceptCertificateBlock;
 
 -(void)clearCallbacks;
 

@@ -5,38 +5,46 @@
 
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationBuilder.h>
 
+@implementation JFFURLConnectionParams
+
+@synthesize url                 = _url;
+@synthesize httpBody            = _httpBody;
+@synthesize httpMethod          = _httpMethod;
+@synthesize headers             = _headers;
+@synthesize useLiveConnection   = _useLiveConnection; 
+@synthesize certificateCallback = _certificateCallback;
+
+-(void)dealloc
+{
+    [ _url                 release ];
+    [ _httpBody            release ];
+    [ _httpMethod          release ];
+    [ _headers             release ];
+    [ _certificateCallback release ];
+
+    [ super dealloc ];
+}
+
+@end
+
 @interface JFFAsyncOperationNetwork : NSObject < JFFAsyncOperationInterface >
 
-@property ( nonatomic, retain ) NSURL* url;
-@property ( nonatomic, retain ) NSData* postData;
-@property ( nonatomic, retain ) NSDictionary* headers;
-@property ( nonatomic, assign ) BOOL useLiveConnection;
+@property ( nonatomic, retain ) JFFURLConnectionParams* params;
 @property ( nonatomic, retain ) id< JNUrlConnection > connection;
-@property ( nonatomic, copy   ) ShouldAcceptCertificateForHost certificateCallback;
-
 @property ( nonatomic, retain ) id resultContext;
 
 @end
 
 @implementation JFFAsyncOperationNetwork
 
-@synthesize url                 = _url;
-@synthesize postData            = _postData;
-@synthesize headers             = _headers;
-@synthesize useLiveConnection   = _useLiveConnection;
-@synthesize connection          = _connection;
-@synthesize certificateCallback = _certificateCallback;
-
+@synthesize params        = _params;
+@synthesize connection    = _connection;
 @synthesize resultContext = _resultContext;
 
 -(void)dealloc
 {
-    [ _url                 release ];
-    [ _postData            release ];
-    [ _headers             release ];
-    [ _connection          release ];
-    [ _certificateCallback release ];
-
+    [ _params        release ];
+    [ _connection    release ];
     [ _resultContext release ];
 
     [ super dealloc ];
@@ -46,18 +54,20 @@
                        progressHandler:( void (^)( id ) )progress_
 {
     {
-        JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithUrl: self.url
-                                                                             postData: self.postData
-                                                                              headers: self.headers ];
+        JNConnectionsFactory* factory_ =
+        [ [ JNConnectionsFactory alloc ] initWithUrl: self.params.url
+                                            httpBody: self.params.httpBody
+                                          httpMethod: self.params.httpMethod
+                                             headers: self.params.headers ];
 
-        self.connection = self.useLiveConnection
+        self.connection = self.params.useLiveConnection
             ? [ factory_ createFastConnection     ]
             : [ factory_ createStandardConnection ];
 
         [ factory_ release ];
     }
 
-    self.connection.shouldAcceptCertificateBlock = self.certificateCallback;
+    self.connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
 
     [ self.connection start ];
 
@@ -94,44 +104,28 @@
 
 @end
 
-JFFAsyncOperation genericChunkedURLResponseLoader( 
-     NSURL* url_
-   , NSData* postData_
-   , NSDictionary* headers_ 
-   , BOOL useLiveConnection_
-   , ShouldAcceptCertificateForHost certificateCallback_ )
+JFFAsyncOperation genericChunkedURLResponseLoader( JFFURLConnectionParams* params_ )
 {
     JFFAsyncOperationNetwork* asyncObj_ = [ [ JFFAsyncOperationNetwork new ] autorelease ];
-    asyncObj_.url               = url_;
-    asyncObj_.postData          = postData_;
-    asyncObj_.headers           = headers_;
-    asyncObj_.useLiveConnection = useLiveConnection_;
-
+    asyncObj_.params = params_;
     return buildAsyncOperationWithInterface( asyncObj_ );
 }
 
-JFFAsyncOperation genericDataURLResponseLoader( 
-     NSURL* url_
-   , NSData* post_data_
-   , NSDictionary* headers_
-   , BOOL use_live_connection_
-   , ShouldAcceptCertificateForHost certificate_callback_)
+JFFAsyncOperation genericDataURLResponseLoader( JFFURLConnectionParams* params_ )
 {
     return [ [ ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
                                         , JFFCancelAsyncOperationHandler cancelCallback_
                                         , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
-        //JTODO progressCallback_ do not used
-        JFFAsyncOperation loader_ = genericChunkedURLResponseLoader( url_
-                                                                    , post_data_
-                                                                    , headers_
-                                                                    , use_live_connection_
-                                                                    , certificate_callback_ );
+        JFFAsyncOperation loader_ = genericChunkedURLResponseLoader( params_ );
 
-        NSMutableData* response_data_ = [ NSMutableData data ];
+        NSMutableData* responseData_ = [ NSMutableData data ];
+        progressCallback_ = [ [ progressCallback_ copy ] autorelease ];
         JFFAsyncOperationProgressHandler dataProgressCallback_ = ^void( id progressInfo_ )
         {
-            [ response_data_ appendData: progressInfo_ ];
+            if ( progressCallback_ )
+                progressCallback_( progressInfo_ );
+            [ responseData_ appendData: progressInfo_ ];
         };
 
         if ( doneCallback_ )
@@ -139,7 +133,7 @@ JFFAsyncOperation genericDataURLResponseLoader(
             doneCallback_ = [ [ doneCallback_ copy ] autorelease ];
             doneCallback_ = ^void( id result_, NSError* error_ )
             {
-                doneCallback_( result_ ? response_data_ : nil, error_ );
+                doneCallback_( result_ ? responseData_ : nil, error_ );
             };
         }
 
@@ -152,32 +146,50 @@ JFFAsyncOperation genericDataURLResponseLoader(
 
 JFFAsyncOperation chunkedURLResponseLoader( 
    NSURL* url_
-   , NSData* post_data_
+   , NSData* postData_
    , NSDictionary* headers_ )
 {
-    return genericChunkedURLResponseLoader( url_,post_data_, headers_, NO, nil );
+    JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+    params_.url      = url_;
+    params_.httpBody = postData_;
+    params_.headers  = headers_;
+    return genericChunkedURLResponseLoader( params_ );
 }
 
 JFFAsyncOperation dataURLResponseLoader( 
    NSURL* url_
-   , NSData* post_data_
+   , NSData* postData_
    , NSDictionary* headers_ )
 {
-    return genericDataURLResponseLoader( url_,post_data_, headers_, NO, nil );
+    JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+    params_.url      = url_;
+    params_.httpBody = postData_;
+    params_.headers  = headers_;
+    return genericDataURLResponseLoader( params_ );
 }
 
 JFFAsyncOperation liveChunkedURLResponseLoader( 
    NSURL* url_
-   , NSData* post_data_
+   , NSData* postData_
    , NSDictionary* headers_ )
 {
-    return genericChunkedURLResponseLoader( url_,post_data_, headers_, YES, nil );
+    JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+    params_.url      = url_;
+    params_.httpBody = postData_;
+    params_.headers  = headers_;
+    params_.useLiveConnection = YES;
+    return genericChunkedURLResponseLoader( params_ );
 }
 
 JFFAsyncOperation liveDataURLResponseLoader(
    NSURL* url_
-   , NSData* post_data_
+   , NSData* postData_
    , NSDictionary* headers_ )
 {
-    return genericDataURLResponseLoader( url_,post_data_, headers_, YES, nil );
+    JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+    params_.url      = url_;
+    params_.httpBody = postData_;
+    params_.headers  = headers_;
+    params_.useLiveConnection = YES;
+    return genericDataURLResponseLoader( params_ );
 }

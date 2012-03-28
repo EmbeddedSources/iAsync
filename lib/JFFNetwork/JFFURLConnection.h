@@ -8,11 +8,13 @@
 @interface JFFURLConnection : JNAbstractConnection
 
 +(id)connectionWithURL:( NSURL* )url_
-              postData:( NSData* )data_
+              httpBody:( NSData* )data_
+            httpMethod:( NSString* )httpMethod_
            contentType:( NSString* )content_type_;
 
 +(id)connectionWithURL:( NSURL* )url_
-              postData:( NSData* )data_
+              httpBody:( NSData* )data_
+            httpMethod:( NSString* )httpMethod_
                headers:( NSDictionary* )headers_;
 
 -(void)start;
