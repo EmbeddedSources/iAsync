@@ -26,6 +26,8 @@ typedef id (^JFFChangedResultBuilder)(id result_);
 JFFAsyncOperation asyncOperationWithChangedResult( JFFAsyncOperation loader_
                                                   , JFFChangedResultBuilder resultBuilder_ );
 
+JFFAsyncOperation asyncOperationResultAsProgress( JFFAsyncOperation loader_ );
+
 typedef NSError* (^JFFChangedErrorBuilder)(NSError* error_);
 JFFAsyncOperation asyncOperationWithChangedError( JFFAsyncOperation loader_
                                                  , JFFChangedErrorBuilder errorBuilder_ );

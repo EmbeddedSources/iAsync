@@ -2,7 +2,6 @@
 
 #import <Foundation/Foundation.h>
 
-//JTODO remove
 @interface JFFBlockOperation : NSObject
 
 +(id)performOperationWithLoadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_

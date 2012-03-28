@@ -65,6 +65,44 @@
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
-///JTODO test when first fails
+-(void)testFailFirstLoader
+{
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* firstLoader_  = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* secondLoader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperation secondLoaderBlock_ = secondLoader_.loader;
+
+        __block NSError* finalError_ = nil;
+        __block BOOL binderCalled_ = NO;
+
+        JFFAsyncOperationBinder secondLoaderBinder_ = ^JFFAsyncOperation( id firstResult_ )
+        {
+            binderCalled_ = YES;
+            return secondLoaderBlock_;
+        };
+        JFFAsyncOperation asyncOp_ = bindSequenceOfAsyncOperations( firstLoader_.loader
+                                                                   , secondLoaderBinder_
+                                                                   , nil );
+
+        asyncOp_( nil, nil, ^( id result_, NSError* error_ )
+        {
+            finalError_ = error_;
+        } );
+
+        NSError* failError_ = [ JFFError errorWithDescription: @"error1" ];
+        firstLoader_.loaderFinishBlock.didFinishBlock( nil, failError_ );
+
+        GHAssertFalse( binderCalled_, @"OK" );
+        GHAssertTrue( failError_ == finalError_, @"OK" );
+
+        [ firstLoader_  release ];
+        [ secondLoader_ release ];
+    }
+
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
+}
 
 @end

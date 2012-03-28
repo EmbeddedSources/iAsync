@@ -21,7 +21,7 @@
     SEL _propertySetSelector;
 }
 
-@synthesize propertyPath = _property_path;
+@synthesize propertyPath = _propertyPath;
 @synthesize object = _object;
 
 @dynamic delegates
@@ -74,7 +74,7 @@
 
     if ( !dict_ )
     {
-        dict_ = [ NSMutableDictionary dictionary ];
+        dict_ = [ NSMutableDictionary new ];
         objc_msgSend( self.object, self.propertySetSelector, dict_ );
     }
 

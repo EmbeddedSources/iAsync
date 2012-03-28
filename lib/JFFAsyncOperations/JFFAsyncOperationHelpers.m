@@ -143,6 +143,27 @@ JFFAsyncOperation asyncOperationWithChangedResult( JFFAsyncOperation loader_
     return bindSequenceOfAsyncOperations( loader_, secondLoaderBinder_, nil );
 }
 
+JFFAsyncOperation asyncOperationResultAsProgress( JFFAsyncOperation loader_ )
+{
+    loader_ = [ loader_ copy ];
+    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+                                    , JFFCancelAsyncOperationHandler cancelCallback_
+                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    {
+        progressCallback_ = [ progressCallback_ copy ];
+        doneCallback_     = [ doneCallback_     copy ];
+        JFFDidFinishAsyncOperationHandler doneCallbackWrapper_ = ^( id result_, NSError* error_ )
+        {
+            if ( result_ && progressCallback_ )
+                progressCallback_( result_ );
+
+            if ( doneCallback_ )
+                doneCallback_( result_, error_ );
+        };
+        return loader_( nil, cancelCallback_, doneCallbackWrapper_ );
+    };
+}
+
 JFFAsyncOperation asyncOperationWithChangedError( JFFAsyncOperation loader_
                                                  , JFFChangedErrorBuilder errorBuilder_ )
 {

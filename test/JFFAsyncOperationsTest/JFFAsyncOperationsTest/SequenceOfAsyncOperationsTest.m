@@ -211,28 +211,90 @@
 
         JFFAsyncOperation loader_ = sequenceOfAsyncOperationsArray( [ NSArray arrayWithObject: first_loader_.loader ] );
 
-        __block BOOL sequence_loader_finished_ = NO;
+        __block BOOL sequenceLoaderFinished_ = NO;
 
         loader_( nil, nil, ^( id result_, NSError* error_ )
         {
             if ( result_ && !error_ )
             {
-                sequence_loader_finished_ = YES;
+                sequenceLoaderFinished_ = YES;
             }
         } );
 
-        GHAssertFalse( sequence_loader_finished_, @"sequence not finished" );
+        GHAssertFalse( sequenceLoaderFinished_, @"sequence not finished" );
 
         first_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
 
-        GHAssertTrue( sequence_loader_finished_, @"sequence finished" );
+        GHAssertTrue( sequenceLoaderFinished_, @"sequence finished" );
 
         [ first_loader_ release ];
+
+        GHAssertTrue( 0 != [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+        GHAssertTrue( 0 != [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+        GHAssertTrue( 0 != [ JFFAsyncOperationManager              instancesCount ], @"OK" );
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
-    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
+}
+
+-(void)testSequenceWithTwoLoader
+{
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager* firstLoader_  = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* secondLoader_ = [ JFFAsyncOperationManager new ];
+
+        NSArray* loaders_ = [ NSArray arrayWithObjects: firstLoader_.loader
+                             , secondLoader_.loader
+                             , nil ];
+
+        __block id sequenceResult_   = nil;
+        id seconBlockResult_ = [ [ NSObject new ] autorelease ];
+
+        JFFAsyncOperation loader_ = sequenceOfAsyncOperationsArray( loaders_ );
+
+        __block BOOL sequenceLoaderFinished_ = NO;
+        
+        loader_( nil, nil, ^( id result_, NSError* error_ )
+        {
+            if ( result_ && !error_ )
+            {
+                sequenceResult_ = result_;
+                sequenceLoaderFinished_ = YES;
+            }
+        } );
+
+        GHAssertFalse( sequenceLoaderFinished_, @"sequence not finished" );
+        GHAssertFalse( firstLoader_.finished  , @"firstLoader not finished" );
+        GHAssertFalse( secondLoader_.finished , @"firstLoader not finished" );
+
+        firstLoader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+
+        GHAssertFalse( sequenceLoaderFinished_, @"sequence not finished" );
+        GHAssertTrue( firstLoader_.finished   , @"firstLoader not finished" );
+        GHAssertFalse( secondLoader_.finished , @"secondLoader not finished" );
+
+        secondLoader_.loaderFinishBlock.didFinishBlock( seconBlockResult_, nil );
+
+        GHAssertTrue( sequenceLoaderFinished_, @"sequence finished" );
+        GHAssertTrue( firstLoader_.finished  , @"firstLoader finished" );
+        GHAssertTrue( secondLoader_.finished , @"secondLoader finished" );
+
+        [ firstLoader_  release ];
+        [ secondLoader_ release ];
+
+        GHAssertTrue( seconBlockResult_ == sequenceResult_, @"secondLoader finished" );
+
+        GHAssertTrue( 0 != [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+        GHAssertTrue( 0 != [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+        GHAssertTrue( 0 != [ JFFAsyncOperationManager              instancesCount ], @"OK" );
+    }
+    
+    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
 -(void)testCriticalErrorOnFailFirstLoaderWhenSequenceResultCallbackIsNil

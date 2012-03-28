@@ -9,7 +9,6 @@
 #import "JFFAsyncOperationHelpers.h"
 
 typedef JFFAsyncOperationBinder (*MergeTwoBindersPtr)( JFFAsyncOperationBinder, JFFAsyncOperationBinder );
-//JTODO remove
 typedef JFFAsyncOperation (*MergeTwoLoadersPtr)( JFFAsyncOperation, JFFAsyncOperation );
 //JTODO remove
 typedef JFFAsyncOperation (*MergeLoaderWithBinderPtr)( JFFAsyncOperation, JFFAsyncOperationBinder );
@@ -134,7 +133,7 @@ static JFFAsyncOperation mergeAsyncOperationsArrayWithMerger( NSArray* loaders_,
 
     NSArray* binders_ = [ loaders_ count ] > 1
         ? [ loaders_ subarrayWithRange: NSMakeRange( 1, [ loaders_ count ] - 1 ) ]
-        : [ NSArray array ];
+        : [ NSArray new ];
     binders_ = [ binders_ map: ^id(id object_)
     {
         object_ = [ object_ copy ];
@@ -149,9 +148,9 @@ static JFFAsyncOperation mergeAsyncOperationsArrayWithMerger( NSArray* loaders_,
     return MergeLoaderWithBinders( merger_, loaderWithBinders_ );
 }
 
-//JTODO test it
 JFFAsyncOperation sequenceOfAsyncOperationsArray( NSArray* loaders_ )
 {
+    assert( loaders_.lastObject ); //should not be empty
     loaders_ = [ loaders_ map: ^id( id object_ )
     {
         JFFAsyncOperation loader_ = object_;
@@ -299,7 +298,6 @@ JFFAsyncOperation trySequenceOfAsyncOperationsArray( NSArray* loaders_ )
     return mergeAsyncOperationsArrayWithMerger( loaders_, bindTrySequenceOfAsyncOperationsPair );
 }
 
-//JTODO test it
 JFFAsyncOperation bindTrySequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
                                                    , JFFAsyncOperationBinder secondLoaderBinder_, ... )
 {
@@ -318,7 +316,6 @@ JFFAsyncOperation bindTrySequenceOfAsyncOperations( JFFAsyncOperation firstLoade
     return firstBlock_;
 }
 
-//JTODO test it
 JFFAsyncOperation bindTrySequenceOfAsyncOperationsArray( JFFAsyncOperation firstLoader_, NSArray* loadersBinders_ )
 {
     loadersBinders_ = [ loadersBinders_ map: ^id( id object_ )
@@ -472,7 +469,7 @@ static JFFAsyncOperation resultToArrayForLoader( JFFAsyncOperation loader_ )
 static JFFAsyncOperation MergeGroupLoaders( MergeTwoLoadersPtr merger_, NSArray* blocks_ )
 {
     if ( ![ blocks_ lastObject ] )
-        return asyncOperationWithResult( [ NSArray array ] );
+        return asyncOperationWithResult( [ NSArray new ] );
 
     JFFAsyncOperation firstBlock_ = [ blocks_ objectAtIndex: 0 ];
     JFFAsyncOperation arrayFirstBlock_ = resultToArrayForLoader( firstBlock_ );
@@ -538,10 +535,16 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair( JFFAsyncOpe
                                     , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
         __block BOOL loaded_ = NO;
-        __block BOOL done_ = NO;
 
         JFFCancelAyncOperationBlockHolder* cancelHolder1_ = [ JFFCancelAyncOperationBlockHolder new ];
         JFFCancelAyncOperationBlockHolder* cancelHolder2_ = [ JFFCancelAyncOperationBlockHolder new ];
+
+        cancelCallback_ = [ cancelCallback_ copy ];
+        __block JFFCancelAsyncOperationHandler cancelCallbackHolder_ = [ ^( BOOL canceled_ )
+        {
+            if ( cancelCallback_ )
+                cancelCallback_( canceled_ );
+        } copy ];// "cancelCallbackHolder_" used as flag for done
 
         NSMutableArray* complexResult_ = [ NSMutableArray arrayWithObjects:
                                           [ NSNull null ]
@@ -556,16 +559,17 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair( JFFAsyncOpe
             {
                 if ( result_ )
                     [ complexResult_ replaceObjectAtIndex: index_ withObject: result_ ];
-                BOOL firstError_ = error_ && !done_;
+                BOOL firstError_ = error_ && cancelCallbackHolder_;
                 if ( loaded_ || firstError_ )
                 {
+                    cancelCallbackHolder_ = nil;
+
                     if ( firstError_ )
                     {
                         cancelHolder1_.onceCancelBlock( YES );
                         cancelHolder2_.onceCancelBlock( YES );
                     }
 
-                    done_ = YES;
                     notifyGroupResult( doneCallback_, complexResult_, error_ );
                     return;
                 }
@@ -573,20 +577,19 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair( JFFAsyncOpe
             };
         };
 
-        __block BOOL blockCanceled_ = NO;
-
-        cancelCallback_ = [ cancelCallback_ copy ];
         JFFCancelAsyncOperationHandler (^makeCancelCallback_)( JFFCancelAyncOperationBlockHolder* ) =
         ^( JFFCancelAyncOperationBlockHolder* cancelHolder_ )
         {
             return ^void( BOOL canceled_ )
             {
-                if ( !blockCanceled_ )
+                if ( cancelCallbackHolder_ )
                 {
-                    blockCanceled_ = YES;
                     cancelHolder_.onceCancelBlock( canceled_ );
-                    if ( cancelCallback_ )
-                        cancelCallback_( canceled_ );
+                    if ( cancelCallbackHolder_ )
+                    {
+                        cancelCallbackHolder_( canceled_ );
+                        cancelCallbackHolder_ = nil;
+                    }
                 }
             };
         };
@@ -596,26 +599,28 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair( JFFAsyncOpe
                                                         , cancelSafeResultBlock( makeResultHandler_( 0 )
                                                                                 , cancelHolder1_ ) );
 
-        cancelHolder1_.cancelBlock = done_ ? JFFStubCancelAsyncOperationBlock : cancel1_;
+        cancelHolder1_.cancelBlock = !cancelCallbackHolder_ ? JFFStubCancelAsyncOperationBlock : cancel1_;
 
-        JFFCancelAsyncOperation cancel2_ = done_
+        JFFCancelAsyncOperation cancel2_ = cancelCallbackHolder_ == nil
             ? JFFStubCancelAsyncOperationBlock
             : secondLoader_( progressCallback_
                              , makeCancelCallback_( cancelHolder1_ )
                              , cancelSafeResultBlock( makeResultHandler_( 1 )
                                                      , cancelHolder2_ ) );
 
-        cancelHolder2_.cancelBlock = done_ ? JFFStubCancelAsyncOperationBlock : cancel2_;
+        cancelHolder2_.cancelBlock = !cancelCallbackHolder_ ? JFFStubCancelAsyncOperationBlock : cancel2_;
 
         return ^void( BOOL cancel_ )
         {
-            if ( !blockCanceled_ )
+            if ( cancelCallbackHolder_ )
             {
-                blockCanceled_ = YES;
+                JFFCancelAsyncOperationHandler tmpCancelCallback_ = [ cancelCallbackHolder_ copy ];
+                cancelCallbackHolder_ = nil;
+
                 cancelHolder1_.onceCancelBlock( cancel_ );
                 cancelHolder2_.onceCancelBlock( cancel_ );
-                if ( cancelCallback_ )
-                    cancelCallback_( cancel_ );
+
+                tmpCancelCallback_( cancel_ );
             }
         };
     };

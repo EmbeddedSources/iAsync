@@ -158,12 +158,12 @@ static JFFDidFinishAsyncOperationHandler doneCallbackBlock( JFFPropertyExtractor
     };
 }
 
-static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* property_extractor_
+static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* propertyExtractor_
                                                    , JFFCallbacksBlocksHolder* callbacks_ )
 {
-    JFFAsyncOperationProgressHandler progress_callback_ = ^void( id progress_info_ )
+    JFFAsyncOperationProgressHandler progressCallback_ = ^void( id progress_info_ )
     {
-        [ property_extractor_.delegates each: ^void( id obj_ )
+        [ propertyExtractor_.delegates each: ^void( id obj_ )
         {
             JFFCallbacksBlocksHolder* obj_callback_ = obj_;
             if ( obj_callback_.onProgressBlock )
@@ -171,27 +171,27 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
         } ];
     };
 
-    JFFDidFinishAsyncOperationHandler done_callback_ = doneCallbackBlock( property_extractor_ );
+    JFFDidFinishAsyncOperationHandler doneCallback_ = doneCallbackBlock( propertyExtractor_ );
 
-    JFFCancelAsyncOperationHandler cancel_callback_ = ^void( BOOL canceled_ )
+    JFFCancelAsyncOperationHandler cancelCallback_ = ^void( BOOL canceled_ )
     {
         JFFCancelAsyncOperationHandler cancel_callback_ = callbacks_.onCancelBlock;
-        clearDataForPropertyExtractor( property_extractor_ );
+        clearDataForPropertyExtractor( propertyExtractor_ );
 
         if ( cancel_callback_ )
             cancel_callback_( canceled_ );
     };
 
-    property_extractor_.cancelBlock = property_extractor_.asyncLoader( progress_callback_
-                                                                      , cancel_callback_
-                                                                      , done_callback_ );
+    propertyExtractor_.cancelBlock = propertyExtractor_.asyncLoader( progressCallback_
+                                                                    , cancelCallback_
+                                                                    , doneCallback_ );
 
-    if ( nil == property_extractor_.cancelBlock )
+    if ( nil == propertyExtractor_.cancelBlock )
     {
         return JFFStubCancelAsyncOperationBlock;
     }
 
-    return cancelBlock( property_extractor_, callbacks_ );
+    return cancelBlock( propertyExtractor_, callbacks_ );
 }
 
 @implementation NSObject (AsyncPropertyReader)

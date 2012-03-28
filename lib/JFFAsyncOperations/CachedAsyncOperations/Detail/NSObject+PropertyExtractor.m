@@ -66,7 +66,7 @@ static char property_data_property_key_;
         NSMutableDictionary* sub_dict_ = [ self.propertyDataByPropertyName objectForKey: property_path_.name ];
         if ( sub_dict_ == nil )
         {
-            sub_dict_ = [ NSMutableDictionary dictionary ];
+            sub_dict_ = [ NSMutableDictionary new ];
             [ self.propertyDataByPropertyName setObject: sub_dict_ forKey: property_path_.name ];
         }
 

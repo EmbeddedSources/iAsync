@@ -66,18 +66,18 @@ int main(int argc, char *argv[])
     
     For malloc debugging see: http://developer.apple.com/mac/library/documentation/Performance/Conceptual/ManagingMemory/Articles/MallocDebug.html
     */
-   
+
    setenv( "GHUNIT_AUTORUN" , "YES", 1 );
    setenv( "WRITE_JUNIT_XML", "YES", 1 );
    setenv( "GHUNIT_AUTOEXIT" , "YES", 1 );
    NSSetUncaughtExceptionHandler(&exceptionHandler);
-   
+
    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-   
+
    [ JFFSimpleBlockHolder enableInstancesCounting ];
    // Register any special test case classes
    //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  
-   
+
    int retVal = 0;
    // If GHUNIT_CLI is set we are using the command line interface and run the tests
    // Otherwise load the GUI app

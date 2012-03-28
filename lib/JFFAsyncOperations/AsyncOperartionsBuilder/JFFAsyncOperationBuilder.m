@@ -1,6 +1,5 @@
 #import "JFFAsyncOperationBuilder.h"
 
-//JTODO test it
 JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterface > asyncObject_ )
 {
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
