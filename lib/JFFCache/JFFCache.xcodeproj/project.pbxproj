@@ -1,0 +1,306 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1BDA4D5E1450044700DCEDDE /* NSObject+CompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D4D1450044700DCEDDE /* NSObject+CompositeKey.h */; };
+		1BDA4D5F1450044700DCEDDE /* NSObject+CompositeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D4E1450044700DCEDDE /* NSObject+CompositeKey.m */; };
+		1BDA4D601450044700DCEDDE /* NSString+CompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D4F1450044700DCEDDE /* NSString+CompositeKey.h */; };
+		1BDA4D611450044700DCEDDE /* NSString+CompositeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D501450044700DCEDDE /* NSString+CompositeKey.m */; };
+		1BDA4D621450044700DCEDDE /* JFFBaseDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D511450044700DCEDDE /* JFFBaseDB.h */; };
+		1BDA4D631450044700DCEDDE /* JFFBaseDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D521450044700DCEDDE /* JFFBaseDB.m */; };
+		1BDA4D641450044700DCEDDE /* JFFCacheDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D531450044700DCEDDE /* JFFCacheDB.h */; };
+		1BDA4D651450044700DCEDDE /* JFFCaches.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D541450044700DCEDDE /* JFFCaches.h */; };
+		1BDA4D661450044700DCEDDE /* JFFCaches.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D551450044700DCEDDE /* JFFCaches.m */; };
+		1BDA4D671450044700DCEDDE /* JFFDBCompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D561450044700DCEDDE /* JFFDBCompositeKey.h */; };
+		1BDA4D681450044700DCEDDE /* JFFDBCompositeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D571450044700DCEDDE /* JFFDBCompositeKey.m */; };
+		1BDA4D691450044700DCEDDE /* JFFDBInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D581450044700DCEDDE /* JFFDBInfo.h */; };
+		1BDA4D6A1450044700DCEDDE /* JFFDBInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D591450044700DCEDDE /* JFFDBInfo.m */; };
+		1BDA4D6B1450044700DCEDDE /* JFFDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D5A1450044700DCEDDE /* JFFDBManager.h */; };
+		1BDA4D6C1450044700DCEDDE /* JFFDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D5B1450044700DCEDDE /* JFFDBManager.m */; };
+		1BDA4D6D1450044700DCEDDE /* JFFThumbnailStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D5C1450044700DCEDDE /* JFFThumbnailStorage.h */; };
+		1BDA4D6E1450044700DCEDDE /* JFFThumbnailStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D5D1450044700DCEDDE /* JFFThumbnailStorage.m */; };
+		6516847B144F4ECD0014670E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6516847A144F4ECD0014670E /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1BDA4D4D1450044700DCEDDE /* NSObject+CompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CompositeKey.h"; sourceTree = "<group>"; };
+		1BDA4D4E1450044700DCEDDE /* NSObject+CompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CompositeKey.m"; sourceTree = "<group>"; };
+		1BDA4D4F1450044700DCEDDE /* NSString+CompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CompositeKey.h"; sourceTree = "<group>"; };
+		1BDA4D501450044700DCEDDE /* NSString+CompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CompositeKey.m"; sourceTree = "<group>"; };
+		1BDA4D511450044700DCEDDE /* JFFBaseDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFBaseDB.h; sourceTree = SOURCE_ROOT; };
+		1BDA4D521450044700DCEDDE /* JFFBaseDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFBaseDB.m; sourceTree = SOURCE_ROOT; };
+		1BDA4D531450044700DCEDDE /* JFFCacheDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheDB.h; sourceTree = SOURCE_ROOT; };
+		1BDA4D541450044700DCEDDE /* JFFCaches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCaches.h; sourceTree = SOURCE_ROOT; };
+		1BDA4D551450044700DCEDDE /* JFFCaches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCaches.m; sourceTree = SOURCE_ROOT; };
+		1BDA4D561450044700DCEDDE /* JFFDBCompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDBCompositeKey.h; sourceTree = SOURCE_ROOT; };
+		1BDA4D571450044700DCEDDE /* JFFDBCompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDBCompositeKey.m; sourceTree = SOURCE_ROOT; };
+		1BDA4D581450044700DCEDDE /* JFFDBInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDBInfo.h; sourceTree = SOURCE_ROOT; };
+		1BDA4D591450044700DCEDDE /* JFFDBInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDBInfo.m; sourceTree = SOURCE_ROOT; };
+		1BDA4D5A1450044700DCEDDE /* JFFDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDBManager.h; sourceTree = SOURCE_ROOT; };
+		1BDA4D5B1450044700DCEDDE /* JFFDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDBManager.m; sourceTree = SOURCE_ROOT; };
+		1BDA4D5C1450044700DCEDDE /* JFFThumbnailStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFThumbnailStorage.h; sourceTree = SOURCE_ROOT; };
+		1BDA4D5D1450044700DCEDDE /* JFFThumbnailStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFThumbnailStorage.m; sourceTree = SOURCE_ROOT; };
+		65168477144F4ECD0014670E /* libJFFCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFCache.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6516847A144F4ECD0014670E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6516847E144F4ECD0014670E /* JFFCache-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFCache-Prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		65168474144F4ECD0014670E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6516847B144F4ECD0014670E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1BDA4D4C1450044700DCEDDE /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				1BDA4D4D1450044700DCEDDE /* NSObject+CompositeKey.h */,
+				1BDA4D4E1450044700DCEDDE /* NSObject+CompositeKey.m */,
+				1BDA4D4F1450044700DCEDDE /* NSString+CompositeKey.h */,
+				1BDA4D501450044700DCEDDE /* NSString+CompositeKey.m */,
+			);
+			path = Details;
+			sourceTree = SOURCE_ROOT;
+		};
+		6516846C144F4ECD0014670E = {
+			isa = PBXGroup;
+			children = (
+				6516847C144F4ECD0014670E /* JFFCache */,
+				65168479144F4ECD0014670E /* Frameworks */,
+				65168478144F4ECD0014670E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		65168478144F4ECD0014670E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				65168477144F4ECD0014670E /* libJFFCache.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		65168479144F4ECD0014670E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6516847A144F4ECD0014670E /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6516847C144F4ECD0014670E /* JFFCache */ = {
+			isa = PBXGroup;
+			children = (
+				1BDA4D4C1450044700DCEDDE /* Details */,
+				1BDA4D511450044700DCEDDE /* JFFBaseDB.h */,
+				1BDA4D521450044700DCEDDE /* JFFBaseDB.m */,
+				1BDA4D531450044700DCEDDE /* JFFCacheDB.h */,
+				1BDA4D541450044700DCEDDE /* JFFCaches.h */,
+				1BDA4D551450044700DCEDDE /* JFFCaches.m */,
+				1BDA4D561450044700DCEDDE /* JFFDBCompositeKey.h */,
+				1BDA4D571450044700DCEDDE /* JFFDBCompositeKey.m */,
+				1BDA4D581450044700DCEDDE /* JFFDBInfo.h */,
+				1BDA4D591450044700DCEDDE /* JFFDBInfo.m */,
+				1BDA4D5A1450044700DCEDDE /* JFFDBManager.h */,
+				1BDA4D5B1450044700DCEDDE /* JFFDBManager.m */,
+				1BDA4D5C1450044700DCEDDE /* JFFThumbnailStorage.h */,
+				1BDA4D5D1450044700DCEDDE /* JFFThumbnailStorage.m */,
+				6516847D144F4ECD0014670E /* Supporting Files */,
+			);
+			path = JFFCache;
+			sourceTree = "<group>";
+		};
+		6516847D144F4ECD0014670E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6516847E144F4ECD0014670E /* JFFCache-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		65168475144F4ECD0014670E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BDA4D5E1450044700DCEDDE /* NSObject+CompositeKey.h in Headers */,
+				1BDA4D601450044700DCEDDE /* NSString+CompositeKey.h in Headers */,
+				1BDA4D621450044700DCEDDE /* JFFBaseDB.h in Headers */,
+				1BDA4D641450044700DCEDDE /* JFFCacheDB.h in Headers */,
+				1BDA4D651450044700DCEDDE /* JFFCaches.h in Headers */,
+				1BDA4D671450044700DCEDDE /* JFFDBCompositeKey.h in Headers */,
+				1BDA4D691450044700DCEDDE /* JFFDBInfo.h in Headers */,
+				1BDA4D6B1450044700DCEDDE /* JFFDBManager.h in Headers */,
+				1BDA4D6D1450044700DCEDDE /* JFFThumbnailStorage.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		65168476144F4ECD0014670E /* JFFCache */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65168484144F4ECD0014670E /* Build configuration list for PBXNativeTarget "JFFCache" */;
+			buildPhases = (
+				65168473144F4ECD0014670E /* Sources */,
+				65168474144F4ECD0014670E /* Frameworks */,
+				65168475144F4ECD0014670E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JFFCache;
+			productName = JFFCache;
+			productReference = 65168477144F4ECD0014670E /* libJFFCache.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6516846E144F4ECD0014670E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 65168471144F4ECD0014670E /* Build configuration list for PBXProject "JFFCache" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6516846C144F4ECD0014670E;
+			productRefGroup = 65168478144F4ECD0014670E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				65168476144F4ECD0014670E /* JFFCache */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		65168473144F4ECD0014670E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BDA4D5F1450044700DCEDDE /* NSObject+CompositeKey.m in Sources */,
+				1BDA4D611450044700DCEDDE /* NSString+CompositeKey.m in Sources */,
+				1BDA4D631450044700DCEDDE /* JFFBaseDB.m in Sources */,
+				1BDA4D661450044700DCEDDE /* JFFCaches.m in Sources */,
+				1BDA4D681450044700DCEDDE /* JFFDBCompositeKey.m in Sources */,
+				1BDA4D6A1450044700DCEDDE /* JFFDBInfo.m in Sources */,
+				1BDA4D6C1450044700DCEDDE /* JFFDBManager.m in Sources */,
+				1BDA4D6E1450044700DCEDDE /* JFFThumbnailStorage.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		65168482144F4ECD0014670E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		65168483144F4ECD0014670E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		65168485144F4ECD0014670E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/JFFCache.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFCache/JFFCache-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		65168486144F4ECD0014670E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/JFFCache.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFCache/JFFCache-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		65168471144F4ECD0014670E /* Build configuration list for PBXProject "JFFCache" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65168482144F4ECD0014670E /* Debug */,
+				65168483144F4ECD0014670E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65168484144F4ECD0014670E /* Build configuration list for PBXNativeTarget "JFFCache" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65168485144F4ECD0014670E /* Debug */,
+				65168486144F4ECD0014670E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6516846E144F4ECD0014670E /* Project object */;
+}
