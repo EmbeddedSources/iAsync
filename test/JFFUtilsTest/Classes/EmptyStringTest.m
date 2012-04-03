@@ -2,7 +2,6 @@
 
 @end
 
-
 @implementation EmptyStringTest
 
 -(void)testNilStringIsEmpty

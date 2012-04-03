@@ -6,8 +6,9 @@
 
 -(void)dealloc
 {
-   [ _content release ];
-   [ super dealloc ];
+    [ _content release ];
+
+    [ super dealloc ];
 }
 
 @end

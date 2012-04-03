@@ -12,10 +12,10 @@
 
 -(void)testClassCheckerRecognizesHierarchy
 {  
-   {
-      GHAssertTrue( class_srcIsSuperclassOfDest   ( [ JMParent class], [ JMChild class ] ), @"Valid hierarchy not recognized" );
-      GHAssertTrue( class_isClassesInSameHierarchy( [ JMParent class], [ JMChild class ] ), @"Valid hierarchy not recognized" );
-   }
+    {
+        GHAssertTrue( class_srcIsSuperclassOfDest   ( [ JMParent class], [ JMChild class ] ), @"Valid hierarchy not recognized" );
+        GHAssertTrue( class_isClassesInSameHierarchy( [ JMParent class], [ JMChild class ] ), @"Valid hierarchy not recognized" );
+    }
    
    {
       GHAssertFalse( class_srcIsSuperclassOfDest   ( [ JMChild class], [ JMParent class ] ), @"Valid hierarchy not recognized" );

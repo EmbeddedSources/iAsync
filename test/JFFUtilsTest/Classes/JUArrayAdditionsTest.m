@@ -78,69 +78,68 @@
 
 -(void)testBlockVersionWorksCorrectly
 {
-   NSArray* items_    = nil;
-   NSArray* received_ = nil;
-   NSArray* expected_ = nil;
-   
-   EqualityCheckerBlock predicate_ = ^( id left_, id right_ )
-   {
-      NSComparisonResult result1_ = [ left_  caseInsensitiveCompare: right_ ];
-      NSComparisonResult result2_ = [ right_ caseInsensitiveCompare: left_  ];
-      
-      BOOL result_equal_ = ( result1_      == result2_ );
-      BOOL result_same_  = ( NSOrderedSame == result2_ );
-      
-      return (BOOL)( result_same_ && result_equal_ );
-   };
-   
-   {
-      items_ = [ NSArray arrayWithObjects: 
-                  @"abra"
-                , @"shwabra"
-                , @"kadabra"
-                , @"abRa"
-                , @"habra"
-                , @"KAdabRA"
-                , @"ABra"
-                , nil ];
-      
-      
-      
-      received_ = [ items_ uniqueBy: predicate_ ];
-      expected_ = [ NSArray arrayWithObjects: 
-                   @"abra"
-                   , @"shwabra"
-                   , @"kadabra"
-                   , @"habra"
-                   , nil ];
-      
-      GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
-   }
-   
-   {
-      items_ = [ NSArray arrayWithObjects: 
-                  @"one"
-                , @"Two"
-                , @"THREE"
-                , @"two"
-                , @"One"
-                , @"four"
-                , @"five"
-                , @"ONE"
-                , nil ];
+    NSArray* items_    = nil;
+    NSArray* received_ = nil;
+    NSArray* expected_ = nil;
+
+    JFFEqualityCheckerBlock predicate_ = ^( id left_, id right_ )
+    {
+        NSComparisonResult result1_ = [ left_  caseInsensitiveCompare: right_ ];
+        NSComparisonResult result2_ = [ right_ caseInsensitiveCompare: left_  ];
+
+        BOOL result_equal_ = ( result1_      == result2_ );
+        BOOL result_same_  = ( NSOrderedSame == result2_ );
+
+        return (BOOL)( result_same_ && result_equal_ );
+    };
+
+    {
+        items_ = [ NSArray arrayWithObjects: 
+                    @"abra"
+                  , @"shwabra"
+                  , @"kadabra"
+                  , @"abRa"
+                  , @"habra"
+                  , @"KAdabRA"
+                  , @"ABra"
+                  , nil ];
       
       
-      received_ = [ items_ uniqueBy: predicate_ ];
-      expected_ = [ NSArray arrayWithObjects: 
-                     @"one"
-                   , @"Two"
-                   , @"THREE"
-                   , @"four"
-                   , @"five"
-                   , nil ];      
       
-      GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
-   }   
+        received_ = [ items_ uniqueBy: predicate_ ];
+        expected_ = [ NSArray arrayWithObjects: 
+                     @"abra"
+                     , @"shwabra"
+                     , @"kadabra"
+                     , @"habra"
+                     , nil ];
+
+        GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+    }
+
+    {
+        items_ = [ NSArray arrayWithObjects: 
+                    @"one"
+                  , @"Two"
+                  , @"THREE"
+                  , @"two"
+                  , @"One"
+                  , @"four"
+                  , @"five"
+                  , @"ONE"
+                  , nil ];
+
+        received_ = [ items_ uniqueBy: predicate_ ];
+        expected_ = [ NSArray arrayWithObjects: 
+                        @"one"
+                     , @"Two"
+                     , @"THREE"
+                     , @"four"
+                     , @"five"
+                     , nil ];      
+
+        GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+    }   
 }
 
 
