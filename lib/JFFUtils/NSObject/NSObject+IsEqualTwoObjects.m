@@ -2,7 +2,6 @@
 
 @implementation NSObject (IsEqualTwoObjects)
 
-//JTODO test
 +(BOOL)object:( NSObject* )object1_
     isEqualTo:( NSObject* )object2_
 {

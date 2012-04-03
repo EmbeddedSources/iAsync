@@ -6,7 +6,6 @@
 
 #import <sqlite3.h>
 
-//JTODO what about varchar(512)???
 static NSString* const createRecords_ =
 @"CREATE TABLE IF NOT EXISTS records ( "
 @"record_id TEXT primary key"
