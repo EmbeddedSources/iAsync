@@ -4,7 +4,7 @@
 #import "NSArray+BlocksAdditions.h"
 #import "NSArray+NoThrowObjectAtIndex.h"
 
-static NSString* const query_component_format_ = @"%@=%@";
+static NSString* const queryComponentFormat_ = @"%@=%@";
 static NSString* const queryComponentSeparator_ = @"&";
 
 @interface NSObject (XQueryComponents)
@@ -18,7 +18,7 @@ static NSString* const queryComponentSeparator_ = @"&";
 -(NSString*)stringFromQueryComponentAndKey:( NSString* )key_
 {
     NSString* value_ = [ [ self description ] stringByEncodingURLFormat ];
-    return [ NSString stringWithFormat: query_component_format_, key_, value_ ];
+    return [ NSString stringWithFormat: queryComponentFormat_, key_, value_ ];
 }
 
 -(NSArray*)arrayOfQueryComponentsForKey:( NSString* )key_
@@ -47,9 +47,9 @@ static NSString* const queryComponentSeparator_ = @"&";
 {
     NSArray* result_ = [ [ self allKeys ] flatten: ^NSArray*( id key_ )
     {
-        key_ = [ key_ stringByEncodingURLFormat ];
         NSObject* values_ = [ self objectForKey: key_ ];
-        return [ values_ arrayOfQueryComponentsForKey: key_ ];
+        NSString* encodedKey_ = [ key_ stringByEncodingURLFormat ];
+        return [ values_ arrayOfQueryComponentsForKey: encodedKey_ ];
     } ];
     return [ result_ componentsJoinedByString: queryComponentSeparator_ ];
 }
