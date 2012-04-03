@@ -3,6 +3,7 @@
 #import <JFFUtils/NSObject/NSObject+ExpandArray.h>
 #import <JFFUtils/NSObject/NSObject+OnDeallocBlock.h>
 #import <JFFUtils/NSObject/NSObject+RuntimeExtensions.h>
+#import <JFFUtils/NSObject/NSObject+IsEqualTwoObjects.h>
 
 #import <JFFUtils/NSArray/NSMutableArray+ChangeCount.h>
 #import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>

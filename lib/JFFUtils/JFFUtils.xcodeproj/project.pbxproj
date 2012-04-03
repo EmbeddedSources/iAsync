@@ -57,6 +57,8 @@
 		1BA676D3144C476600B14D49 /* NSURL+ToURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676D1144C476600B14D49 /* NSURL+ToURL.m */; };
 		1BADF1C014EBEA3000A80A7F /* NSDate+TimeZone.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BADF1BE14EBEA3000A80A7F /* NSDate+TimeZone.h */; };
 		1BADF1C114EBEA3000A80A7F /* NSDate+TimeZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BADF1BF14EBEA3000A80A7F /* NSDate+TimeZone.m */; };
+		1BBD97E015249C4200A34E64 /* NSObject+IsEqualTwoObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BBD97DE15249C4200A34E64 /* NSObject+IsEqualTwoObjects.h */; };
+		1BBD97E115249C4200A34E64 /* NSObject+IsEqualTwoObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBD97DF15249C4200A34E64 /* NSObject+IsEqualTwoObjects.m */; };
 		1BCDF9E514320B3200CEB6E7 /* NSMutableArray+ChangeCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BCDF9E314320B3200CEB6E7 /* NSMutableArray+ChangeCount.h */; };
 		1BCDF9E614320B3200CEB6E7 /* NSMutableArray+ChangeCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCDF9E414320B3200CEB6E7 /* NSMutableArray+ChangeCount.m */; };
 		1BD01FB114447B7600A627B1 /* JFFSingleThreadProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD01FAF14447B7600A627B1 /* JFFSingleThreadProxy.h */; };
