@@ -13,7 +13,6 @@
 			buildPhases = (
 			);
 			dependencies = (
-				6515B9EF152B8D2000518996 /* PBXTargetDependency */,
 				7E57F40214F93398002D139B /* PBXTargetDependency */,
 				7E57F40014F93393002D139B /* PBXTargetDependency */,
 				7E57F3FE14F9338E002D139B /* PBXTargetDependency */,
@@ -66,20 +65,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXContainerItemProxy section */
-		6515B9EC152B8D0500518996 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6515B9E5152B8D0500518996 /* JFFCache.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 65168477144F4ECD0014670E;
-			remoteInfo = JFFCache;
-		};
-		6515B9EE152B8D2000518996 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6515B9E5152B8D0500518996 /* JFFCache.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 65168476144F4ECD0014670E;
-			remoteInfo = JFFCache;
-		};
 		7E57F3C914F93328002D139B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */;
@@ -293,7 +278,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6515B9E5152B8D0500518996 /* JFFCache.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFCache.xcodeproj; path = ../lib/JFFCache/JFFCache.xcodeproj; sourceTree = "<group>"; };
 		7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../lib/JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
 		7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFNetwork.xcodeproj; path = ../lib/JFFNetwork/JFFNetwork.xcodeproj; sourceTree = "<group>"; };
 		7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../lib/JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
@@ -301,18 +285,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		6515B9E6152B8D0500518996 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6515B9ED152B8D0500518996 /* libJFFCache.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7E57F3B014F932EB002D139B = {
 			isa = PBXGroup;
 			children = (
-				6515B9E5152B8D0500518996 /* JFFCache.xcodeproj */,
 				7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */,
 				7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */,
 				7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */,
@@ -324,7 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				7E57F3CA14F93328002D139B /* libJFFAsyncOperations.a */,
-				7E57F3CC14F93328002D139B /* libJFFAsyncOperations-clang.a */,
+				7E57F3CC14F93328002D139B /* libJFFAsyncOperations copy.a */,
 				7E8F213F14F9549500588C7D /* JFFAsyncOperationsFW.framework */,
 			);
 			name = Products;
@@ -335,7 +310,7 @@
 			children = (
 				7E57F3D814F93333002D139B /* libJFFNetwork.a */,
 				7E57F3DA14F93333002D139B /* libJFFNetworkMacOS.a */,
-				7E57F3DC14F93333002D139B /* libJFFNetwork-clang.a */,
+				7E57F3DC14F93333002D139B /* libJFFNetwork copy.a */,
 				7E8F20B414F94AA900588C7D /* JFFNetworkFW.framework */,
 			);
 			name = Products;
@@ -346,7 +321,7 @@
 			children = (
 				7E57F3E714F9333B002D139B /* libJFFScheduler.a */,
 				7E57F3E914F9333B002D139B /* libJFFSchedulerMacOS.a */,
-				7E57F3EB14F9333B002D139B /* libJFFScheduler-clang.a */,
+				7E57F3EB14F9333B002D139B /* libJFFScheduler copy.a */,
 				7E8F20B714F94AA900588C7D /* JFFSchedulerFW.framework */,
 			);
 			name = Products;
@@ -357,7 +332,7 @@
 			children = (
 				7E57F3F614F93344002D139B /* libJFFUtils.a */,
 				7E57F3F814F93344002D139B /* libJFFUtilsMacOS.a */,
-				7E57F3FA14F93344002D139B /* libJFFUtils-clang.a */,
+				7E57F3FA14F93344002D139B /* libJFFUtils copy.a */,
 				7E8F202014F9438000588C7D /* JFFUtilsFW.framework */,
 			);
 			name = Products;
@@ -387,10 +362,6 @@
 					ProjectRef = 7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */;
 				},
 				{
-					ProductGroup = 6515B9E6152B8D0500518996 /* Products */;
-					ProjectRef = 6515B9E5152B8D0500518996 /* JFFCache.xcodeproj */;
-				},
-				{
 					ProductGroup = 7E57F3CF14F93333002D139B /* Products */;
 					ProjectRef = 7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */;
 				},
@@ -414,13 +385,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6515B9ED152B8D0500518996 /* libJFFCache.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libJFFCache.a;
-			remoteRef = 6515B9EC152B8D0500518996 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		7E57F3CA14F93328002D139B /* libJFFAsyncOperations.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -428,7 +392,7 @@
 			remoteRef = 7E57F3C914F93328002D139B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7E57F3CC14F93328002D139B /* libJFFAsyncOperations-clang.a */ = {
+		7E57F3CC14F93328002D139B /* libJFFAsyncOperations copy.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libJFFAsyncOperations-clang.a";
@@ -449,7 +413,7 @@
 			remoteRef = 7E57F3D914F93333002D139B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7E57F3DC14F93333002D139B /* libJFFNetwork-clang.a */ = {
+		7E57F3DC14F93333002D139B /* libJFFNetwork copy.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libJFFNetwork-clang.a";
@@ -470,7 +434,7 @@
 			remoteRef = 7E57F3E814F9333B002D139B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7E57F3EB14F9333B002D139B /* libJFFScheduler-clang.a */ = {
+		7E57F3EB14F9333B002D139B /* libJFFScheduler copy.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libJFFScheduler-clang.a";
@@ -491,7 +455,7 @@
 			remoteRef = 7E57F3F714F93344002D139B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7E57F3FA14F93344002D139B /* libJFFUtils-clang.a */ = {
+		7E57F3FA14F93344002D139B /* libJFFUtils copy.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libJFFUtils-clang.a";
@@ -501,43 +465,34 @@
 		7E8F202014F9438000588C7D /* JFFUtilsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFUtilsFW.framework;
-			path = JFFUtilsFW;
+			path = JFFUtilsFW.framework;
 			remoteRef = 7E8F201F14F9438000588C7D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		7E8F20B414F94AA900588C7D /* JFFNetworkFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFNetworkFW.framework;
-			path = JFFNetworkFW;
+			path = JFFNetworkFW.framework;
 			remoteRef = 7E8F20B314F94AA900588C7D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		7E8F20B714F94AA900588C7D /* JFFSchedulerFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFSchedulerFW.framework;
-			path = JFFSchedulerFW;
+			path = JFFSchedulerFW.framework;
 			remoteRef = 7E8F20B614F94AA900588C7D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		7E8F213F14F9549500588C7D /* JFFAsyncOperationsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFAsyncOperationsFW.framework;
-			path = JFFAsyncOperationsFW;
+			path = JFFAsyncOperationsFW.framework;
 			remoteRef = 7E8F213E14F9549500588C7D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXTargetDependency section */
-		6515B9EF152B8D2000518996 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = JFFCache;
-			targetProxy = 6515B9EE152B8D2000518996 /* PBXContainerItemProxy */;
-		};
 		7E57F3FC14F9338A002D139B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JFFNetwork;
