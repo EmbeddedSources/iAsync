@@ -11,11 +11,12 @@
 -(NSString*)stringByEncodingURLFormat
 {
     static NSString* unsafe_ = @" <>#%'\";?:@&=+$/,{}|\\^~[]`-_*!()";
-    return (__bridge_transfer NSString*)CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault
-                                                                                , (__bridge CFStringRef)self
-                                                                                , NULL
-                                                                                , (__bridge CFStringRef)unsafe_
-                                                                                , kCFStringEncodingUTF8 );
+    CFStringRef resultRef_ = CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault
+                                                                     , (__bridge CFStringRef)self
+                                                                     , NULL
+                                                                     , (__bridge CFStringRef)unsafe_
+                                                                     , kCFStringEncodingUTF8 );
+    return (__bridge_transfer NSString*)resultRef_;
 }
 
 -(NSDictionary*)dictionaryFromQueryComponents
