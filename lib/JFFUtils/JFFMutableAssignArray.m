@@ -44,7 +44,7 @@
 
 @implementation JFFMutableAssignArray
 
-@synthesize mutableArray = _mutable_array;
+@synthesize mutableArray = _mutableArray;
 @dynamic array;
 
 -(void)dealloc
@@ -54,16 +54,16 @@
 
 -(NSMutableArray*)mutableArray
 {
-    if ( !_mutable_array )
+    if ( !_mutableArray )
     {
-        _mutable_array = [ NSMutableArray new ];
+        _mutableArray = [ NSMutableArray new ];
     }
-    return _mutable_array;
+    return _mutableArray;
 }
 
 -(NSArray*)array
 {
-    return [ _mutable_array map: ^id( JFFAutoRemoveAssignProxy* proxy_ )
+    return [ _mutableArray map: ^id( JFFAutoRemoveAssignProxy* proxy_ )
     {
         return proxy_.target;
     } ];
@@ -78,7 +78,7 @@
 
 -(BOOL)containsObject:( id )object_
 {
-    return [ _mutable_array firstMatch: ^BOOL( id element_ )
+    return [ _mutableArray firstMatch: ^BOOL( id element_ )
     {
         JFFAutoRemoveAssignProxy* proxy_ = element_;
         return proxy_.target == object_;
@@ -87,7 +87,7 @@
 
 -(void)removeObject:( id )object_
 {
-    NSUInteger index_ = [ _mutable_array firstIndexOfObjectMatch: ^BOOL( id element_ )
+    NSUInteger index_ = [ _mutableArray firstIndexOfObjectMatch: ^BOOL( id element_ )
     {
         JFFAutoRemoveAssignProxy* proxy_ = element_;
         return proxy_.target == object_;
@@ -95,24 +95,24 @@
 
     if ( index_ != NSNotFound )
     {
-        JFFAutoRemoveAssignProxy* proxy_ = [ _mutable_array objectAtIndex: index_ ];
+        JFFAutoRemoveAssignProxy* proxy_ = [ _mutableArray objectAtIndex: index_ ];
         [  proxy_ onRemoveFromMutableAssignArray: self ];
-        [ _mutable_array removeObjectAtIndex: index_ ];
+        [ _mutableArray removeObjectAtIndex: index_ ];
     }
 }
 
 -(void)removeAllObjects
 {
-    for( JFFAutoRemoveAssignProxy* proxy_ in _mutable_array )
+    for( JFFAutoRemoveAssignProxy* proxy_ in _mutableArray )
     {
         [  proxy_ onRemoveFromMutableAssignArray: self ];
     }
-    [ _mutable_array removeAllObjects ];
+    [ _mutableArray removeAllObjects ];
 }
 
 -(NSUInteger)count
 {
-    return [ _mutable_array count ];
+    return [ _mutableArray count ];
 }
 
 +(id)arrayWithObject:( id )anObject_

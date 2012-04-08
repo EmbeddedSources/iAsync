@@ -20,13 +20,13 @@
     return [ self dateByAdjustingFromTimeZone: [ NSTimeZone localTimeZone ] toTimeZone: to_ ];
 }
 
-+(NSNumber*)timeIntervalSince1970WithTimeZone:( NSTimeZone* )time_zone_
++(NSNumber*)timeIntervalSince1970WithTimeZone:( NSTimeZone* )timeZone_
 {
-    NSDate* date_with_timezone_ = [ [ NSDate date ] dateByAdjustingFromLocalTimeZoneToTimeZone: time_zone_ ];
+    NSDate* dateWithTimeZone_ = [ [ NSDate new ] dateByAdjustingFromLocalTimeZoneToTimeZone: timeZone_ ];
 
-    unsigned long long time_interval_since_1970_ = [ date_with_timezone_ timeIntervalSince1970 ] * 1000;
+    unsigned long long timeIntervalSince_1970_ = [ dateWithTimeZone_ timeIntervalSince1970 ] * 1000;
 
-    return [ NSNumber numberWithUnsignedLongLong: time_interval_since_1970_ ];
+    return [ NSNumber numberWithUnsignedLongLong: timeIntervalSince_1970_ ];
 }
 
 @end

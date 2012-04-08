@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-typedef NSDictionary* (^JFFDictMappingBlock)( id key_, id object_ );
+typedef id (^JFFDictMappingBlock)( id key_, id object_ );
 typedef BOOL (^JFFDictPredicateBlock)( id key_, id object_ );
 
 @interface NSDictionary (BlocksAdditions)

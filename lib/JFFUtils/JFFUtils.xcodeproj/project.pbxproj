@@ -57,6 +57,8 @@
 		1BA676D3144C476600B14D49 /* NSURL+ToURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676D1144C476600B14D49 /* NSURL+ToURL.m */; };
 		1BADF1C014EBEA3000A80A7F /* NSDate+TimeZone.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BADF1BE14EBEA3000A80A7F /* NSDate+TimeZone.h */; };
 		1BADF1C114EBEA3000A80A7F /* NSDate+TimeZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BADF1BF14EBEA3000A80A7F /* NSDate+TimeZone.m */; };
+		1BBD97E015249C4200A34E64 /* NSObject+IsEqualTwoObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BBD97DE15249C4200A34E64 /* NSObject+IsEqualTwoObjects.h */; };
+		1BBD97E115249C4200A34E64 /* NSObject+IsEqualTwoObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBD97DF15249C4200A34E64 /* NSObject+IsEqualTwoObjects.m */; };
 		1BCDF9E514320B3200CEB6E7 /* NSMutableArray+ChangeCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BCDF9E314320B3200CEB6E7 /* NSMutableArray+ChangeCount.h */; };
 		1BCDF9E614320B3200CEB6E7 /* NSMutableArray+ChangeCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCDF9E414320B3200CEB6E7 /* NSMutableArray+ChangeCount.m */; };
 		1BD01FB114447B7600A627B1 /* JFFSingleThreadProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD01FAF14447B7600A627B1 /* JFFSingleThreadProxy.h */; };
@@ -162,8 +164,6 @@
 		53BCF8E314323A4800E896B3 /* JUArrayHelperBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 53BCF8E214323A4800E896B3 /* JUArrayHelperBlocks.h */; };
 		53E366C81433760A002AB0B9 /* NSArray+IsEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 53E366C61433760A002AB0B9 /* NSArray+IsEmpty.h */; };
 		53E366C91433760A002AB0B9 /* NSArray+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E366C71433760A002AB0B9 /* NSArray+IsEmpty.m */; };
-		6515B967152B735400518996 /* NSObject+IsEqualTwoObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 6515B965152B735400518996 /* NSObject+IsEqualTwoObjects.h */; };
-		6515B968152B735400518996 /* NSObject+IsEqualTwoObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6515B966152B735400518996 /* NSObject+IsEqualTwoObjects.m */; };
 		651BE0B41390496200DD6890 /* JFFUtilsBlockDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE0A51390496200DD6890 /* JFFUtilsBlockDefinitions.h */; };
 		651BE0B71390496200DD6890 /* JFFSimpleBlockHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE0A81390496200DD6890 /* JFFSimpleBlockHolder.h */; };
 		651BE0B81390496200DD6890 /* JFFSimpleBlockHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE0A91390496200DD6890 /* JFFSimpleBlockHolder.m */; };
@@ -361,6 +361,8 @@
 		1BA676D1144C476600B14D49 /* NSURL+ToURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+ToURL.m"; sourceTree = "<group>"; };
 		1BADF1BE14EBEA3000A80A7F /* NSDate+TimeZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeZone.h"; sourceTree = "<group>"; };
 		1BADF1BF14EBEA3000A80A7F /* NSDate+TimeZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeZone.m"; sourceTree = "<group>"; };
+		1BBD97DE15249C4200A34E64 /* NSObject+IsEqualTwoObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+IsEqualTwoObjects.h"; sourceTree = "<group>"; };
+		1BBD97DF15249C4200A34E64 /* NSObject+IsEqualTwoObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+IsEqualTwoObjects.m"; sourceTree = "<group>"; };
 		1BCDF9E314320B3200CEB6E7 /* NSMutableArray+ChangeCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+ChangeCount.h"; sourceTree = "<group>"; };
 		1BCDF9E414320B3200CEB6E7 /* NSMutableArray+ChangeCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+ChangeCount.m"; sourceTree = "<group>"; };
 		1BD01FAF14447B7600A627B1 /* JFFSingleThreadProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSingleThreadProxy.h; sourceTree = "<group>"; };
@@ -387,8 +389,6 @@
 		53BCF8E214323A4800E896B3 /* JUArrayHelperBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUArrayHelperBlocks.h; sourceTree = "<group>"; };
 		53E366C61433760A002AB0B9 /* NSArray+IsEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+IsEmpty.h"; sourceTree = "<group>"; };
 		53E366C71433760A002AB0B9 /* NSArray+IsEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+IsEmpty.m"; sourceTree = "<group>"; };
-		6515B965152B735400518996 /* NSObject+IsEqualTwoObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+IsEqualTwoObjects.h"; sourceTree = "<group>"; };
-		6515B966152B735400518996 /* NSObject+IsEqualTwoObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+IsEqualTwoObjects.m"; sourceTree = "<group>"; };
 		651BE0A51390496200DD6890 /* JFFUtilsBlockDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFUtilsBlockDefinitions.h; sourceTree = "<group>"; };
 		651BE0A81390496200DD6890 /* JFFSimpleBlockHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSimpleBlockHolder.h; sourceTree = "<group>"; };
 		651BE0A91390496200DD6890 /* JFFSimpleBlockHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSimpleBlockHolder.m; sourceTree = "<group>"; };
@@ -624,8 +624,6 @@
 		651BE0AD1390496200DD6890 /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
-				6515B965152B735400518996 /* NSObject+IsEqualTwoObjects.h */,
-				6515B966152B735400518996 /* NSObject+IsEqualTwoObjects.m */,
 				651BE137139107EA00DD6890 /* NSObject+Ownerships.h */,
 				651BE138139107EA00DD6890 /* NSObject+Ownerships.m */,
 				651BE1CB1391A36800DD6890 /* NSObject+OnDeallocBlock.h */,
@@ -638,6 +636,8 @@
 				1B2A683E143F54F700BC284F /* NSObject+InstancesCount.m */,
 				1B3EE0341487D03A00BA6680 /* NSObject+ExpandArray.h */,
 				1B3EE0351487D03A00BA6680 /* NSObject+ExpandArray.m */,
+				1BBD97DE15249C4200A34E64 /* NSObject+IsEqualTwoObjects.h */,
+				1BBD97DF15249C4200A34E64 /* NSObject+IsEqualTwoObjects.m */,
 			);
 			path = NSObject;
 			sourceTree = "<group>";
@@ -916,7 +916,7 @@
 				1BA30C2C151A384100329EA6 /* JFFRuntime.h in Headers */,
 				1B054D4F1521C6F4008E4B9E /* NSDictionary+BlocksAdditions.h in Headers */,
 				1B054D531521C739008E4B9E /* NSDictionary+JFFExtendedDictionary.h in Headers */,
-				6515B967152B735400518996 /* NSObject+IsEqualTwoObjects.h in Headers */,
+				1BBD97E015249C4200A34E64 /* NSObject+IsEqualTwoObjects.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1267,7 +1267,7 @@
 				1BA30C2D151A384100329EA6 /* JFFRuntime.m in Sources */,
 				1B054D501521C6F4008E4B9E /* NSDictionary+BlocksAdditions.m in Sources */,
 				1B054D541521C739008E4B9E /* NSDictionary+JFFExtendedDictionary.m in Sources */,
-				6515B968152B735400518996 /* NSObject+IsEqualTwoObjects.m in Sources */,
+				1BBD97E115249C4200A34E64 /* NSObject+IsEqualTwoObjects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
