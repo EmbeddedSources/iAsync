@@ -8,6 +8,8 @@
 #import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>
 #import <JFFScheduler/JFFScheduler.h>
 
+static JFFCaches* sharedCachesInstance_ = nil;
+
 @interface JFFInternalCacheDB : JFFBaseDB
 {
     NSString* _config_property_name;
@@ -21,37 +23,41 @@
 
 @synthesize configPropertyName;
 
--(id)initWithCacheDBWithName:( NSString* )config_property_name_
+-(id)initWithCacheDBWithName:( NSString* )dbPropertyName_
+                      dbInfo:( JFFDBInfo* )dbInfo_
 {
-    NSString* db_name_ = [ [ [ JFFDBInfo sharedDBInfo ] dbInfo ] fileNameForDBWithName: config_property_name_ ];
+    NSString* db_name_ = [ dbInfo_.dbInfo fileNameForDBWithName: dbPropertyName_ ];
 
-    self = [ super initWithDBName: db_name_ cacheName: config_property_name_ ];
+    self = [ super initWithDBName: db_name_ cacheName: dbPropertyName_ ];
 
     if ( self )
     {
-        self.configPropertyName = config_property_name_;
+        self.configPropertyName = dbPropertyName_;
 
-        NSDictionary* db_info_ = [ [ JFFDBInfo sharedDBInfo ] dbInfo ];
-        NSTimeInterval remove_rarely_access_data_delay_ = [ db_info_ autoRemoveByLastAccessDateForDBWithName: self.configPropertyName ];
-        if ( remove_rarely_access_data_delay_ != 0 )
+        NSDictionary* dbInfoDict_ = [ dbInfo_ dbInfo ];
+        NSTimeInterval removeRarelyAccessDataDelay_ = [ dbInfoDict_ autoRemoveByLastAccessDateForDBWithName: self.configPropertyName ];
+        if ( removeRarelyAccessDataDelay_ != 0 )
         {
             __weak JFFInternalCacheDB* self_ = self;
             JFFScheduledBlock block_ = ^void( JFFCancelScheduledBlock cancel_ )
             {
-                NSDate* from_date_ = [ [ NSDate date ] addTimeInterval: -remove_rarely_access_data_delay_ ];
-                [ self_ removeRecordsToAccessDate: from_date_ ];
+                NSDate* fromDate_ = [ [ NSDate new ] dateByAddingTimeInterval: -removeRarelyAccessDataDelay_ ];
+                [ self_ removeRecordsToAccessDate: fromDate_ ];
             };
             block_( nil );
-            [ self addOnDeallocBlock: [ [ JFFScheduler sharedByThreadScheduler ] addBlock: block_ duration: 3600. ] ];
+            JFFScheduler* scheduler_ = [ JFFScheduler sharedByThreadScheduler ];
+            [ self addOnDeallocBlock: [ scheduler_ addBlock: block_ duration: 3600. ] ];
         }
     }
 
     return self;
 }
 
-+(id)internalCacheDBWithName:( NSString* )db_property_name_
++(id)internalCacheDBWithName:( NSString* )dbPropertyName_
+                      dbInfo:( JFFDBInfo* )dbInfo_
 {
-    return [ [ self alloc ] initWithCacheDBWithName: db_property_name_ ];
+    return [ [ self alloc ] initWithCacheDBWithName: dbPropertyName_
+                                             dbInfo: dbInfo_ ];
 }
 
 -(void)migrateDB
@@ -86,48 +92,62 @@
     NSMutableDictionary* _mutableCacheDbByName;
 }
 
--(id< JFFCacheDB >)registerAndCreateCacheDBWithName:( NSString* )db_property_name_
+-(id< JFFCacheDB >)registerAndCreateCacheDBWithName:( NSString* )dbPropertyName_
+                                             dbInfo:( JFFDBInfo* )dbInfo_
 {
-    id< JFFCacheDB > result_ = [ self.mutableCacheDbByName objectForKey: db_property_name_ ];
+    id< JFFCacheDB > result_ = [ self.mutableCacheDbByName objectForKey: dbPropertyName_ ];
 
     if ( !result_ )
     {
-        result_ = [ JFFInternalCacheDB internalCacheDBWithName: db_property_name_ ];
-
-        [ self.mutableCacheDbByName setObject: result_ forKey: db_property_name_ ];
+        result_ = [ JFFInternalCacheDB internalCacheDBWithName: dbPropertyName_
+                                                        dbInfo: dbInfo_ ];
+        [ self.mutableCacheDbByName setObject: result_ forKey: dbPropertyName_ ];
     }
 
     return result_;
 }
 
--(id)init
+-(void)setupCachesWithDBInfo:( JFFDBInfo* )dbInfo_
+{
+    [ [ dbInfo_.dbInfo allKeys ] each: ^void( id dbName_ )
+    {
+        [ self registerAndCreateCacheDBWithName: dbName_
+                                         dbInfo: dbInfo_ ];
+    } ];
+}
+
+-(id)initWithDBInfoDictionary:( NSDictionary* )cachesInfo_
+{
+    JFFDBInfo* dbInfo_ = [ [ JFFDBInfo alloc ] initWithInfoDictionary: cachesInfo_ ];
+    return [ self initWithDBInfo: dbInfo_ ];  
+}
+
+-(id)initWithDBInfo:( JFFDBInfo* )dbInfo_
 {
     self = [ super init ];
 
     if ( self )
     {
-        NSDictionary* db_info_ = [ [ JFFDBInfo sharedDBInfo ] dbInfo ];
-
-        [ [ db_info_ allKeys ] each: ^void( id db_name_ )
-        {
-            [ self registerAndCreateCacheDBWithName: db_name_ ];
-        } ];
+        [ self setupCachesWithDBInfo: dbInfo_ ];
     }
 
     return self;
 }
 
-
 +(JFFCaches*)sharedCaches
 {
-    static id instance_ = nil;
-
-    if ( !instance_ )
+    if ( !sharedCachesInstance_ )
     {
-        instance_ = [ self new ];
+        JFFDBInfo* dbInfo_ = [ JFFDBInfo sharedDBInfo ];
+        sharedCachesInstance_ = [ [ self alloc ] initWithDBInfo: dbInfo_ ];
     }
 
-    return instance_;
+    return sharedCachesInstance_;
+}
+
++(void)setSharedCaches:( JFFCaches* )caches_
+{
+    sharedCachesInstance_ = caches_;
 }
 
 -(NSMutableDictionary*)mutableCacheDbByName

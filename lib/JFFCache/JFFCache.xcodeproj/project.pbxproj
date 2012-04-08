@@ -28,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B1C0B88152D8EB700ECF555 /* JFFCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFCache.h; sourceTree = SOURCE_ROOT; };
 		1BDA4D4D1450044700DCEDDE /* NSObject+CompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CompositeKey.h"; sourceTree = "<group>"; };
 		1BDA4D4E1450044700DCEDDE /* NSObject+CompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CompositeKey.m"; sourceTree = "<group>"; };
 		1BDA4D4F1450044700DCEDDE /* NSString+CompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CompositeKey.h"; sourceTree = "<group>"; };
@@ -115,6 +116,7 @@
 				1BDA4D5B1450044700DCEDDE /* JFFDBManager.m */,
 				1BDA4D5C1450044700DCEDDE /* JFFThumbnailStorage.h */,
 				1BDA4D5D1450044700DCEDDE /* JFFThumbnailStorage.m */,
+				1B1C0B88152D8EB700ECF555 /* JFFCache.h */,
 				6516847D144F4ECD0014670E /* Supporting Files */,
 			);
 			path = JFFCache;

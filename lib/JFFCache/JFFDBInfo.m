@@ -1,6 +1,6 @@
 #import "JFFDBInfo.h"
 
-static JFFDBInfo* shared_info_ = nil;
+static JFFDBInfo* sharedInfo_ = nil;
 
 static NSString* const time_to_live_in_hours_ = @"timeToLiveInHours";
 
@@ -23,9 +23,21 @@ static NSString* const time_to_live_in_hours_ = @"timeToLiveInHours";
     return self;
 }
 
+-(id)initWithInfoDictionary:( NSDictionary* )infoDictionry_
+{
+    self = [ super init ];
+
+    if ( self )
+    {
+        currentDbInfo = infoDictionry_;
+    }
+
+    return self;
+}
+
 -(NSDictionary*)createDBInfo
 {
-    return [ NSDictionary dictionaryWithContentsOfFile: dbInfoPath ];
+    return currentDbInfo ? : [ NSDictionary dictionaryWithContentsOfFile: dbInfoPath ];
 }
 
 -(NSDictionary*)dbInfo
@@ -39,20 +51,19 @@ static NSString* const time_to_live_in_hours_ = @"timeToLiveInHours";
 
 +(JFFDBInfo*)sharedDBInfo
 {
-    if ( !shared_info_ )
+    if ( !sharedInfo_ )
     {
         NSString* default_path_ = [ [ NSBundle mainBundle ] pathForResource: @"DBInfo" ofType: @"plist" ];
-        shared_info_ = [ [ self alloc ] initWithInfoPath: default_path_ ];
+        sharedInfo_ = [ [ self alloc ] initWithInfoPath: default_path_ ];
     }
 
-    return shared_info_;
+    return sharedInfo_;
 }
 
 +(void)setSharedDBInfo:( JFFDBInfo* )db_info_
 {
-   shared_info_ = db_info_;
+    sharedInfo_ = db_info_;
 }
-
 
 +(NSString*)currentDBInfoFilePath
 {

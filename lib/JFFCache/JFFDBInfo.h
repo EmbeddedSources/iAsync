@@ -16,9 +16,10 @@
 @property ( nonatomic, strong, readonly ) NSDictionary* dbInfo;
 @property ( nonatomic, strong ) NSDictionary* currentDbInfo;
 
--(id)initWithInfoPath:( NSString* )info_path_;
+-(id)initWithInfoPath:( NSString* )infoPath_;
+-(id)initWithInfoDictionary:( NSDictionary* )infoDictionry_;
 
-+(void)setSharedDBInfo:( JFFDBInfo* )db_info_;
++(void)setSharedDBInfo:( JFFDBInfo* )dbInfo_;
 +(JFFDBInfo*)sharedDBInfo;
 
 @end

@@ -9,7 +9,7 @@
 static NSString* const createRecords_ =
 @"CREATE TABLE IF NOT EXISTS records ( "
 @"record_id TEXT primary key"
-@", record_data blob"
+@", file_link varchar(100)"
 @", update_time real"
 @", access_time real );";
 
@@ -31,23 +31,24 @@ static NSString* const createRecords_ =
 
 @implementation JFFSQLiteDB
 
--(id)initWithDBName:( NSString* )db_name_
+-(id)initWithDBName:( NSString* )dbName_
 {
     self = [ super init ];
 
     if ( self )
     {
-        NSString* const db_path_ = [ NSString cachesPathByAppendingPathComponent: db_name_ ];
-        if ( sqlite3_open( [ db_path_ UTF8String ], &_db ) != SQLITE_OK )
+        NSString* const dbPath_ = [ NSString cachesPathByAppendingPathComponent: dbName_ ];
+        if ( sqlite3_open( [ dbPath_ UTF8String ], &_db ) != SQLITE_OK )
         {
-            NSLog( @"Can't open %@ db", db_path_ );
+            NSLog( @"Can't open %@ db", dbPath_ );
             return nil;
         }
 
-        const char *cache_size_pragma_ = "PRAGMA cache_size = 100";
-        if ( sqlite3_exec( _db, cache_size_pragma_, 0, 0, 0 ) != SQLITE_OK )
+        const char *cacheSizePragma_ = "PRAGMA cache_size = 1000";
+        if ( sqlite3_exec( _db, cacheSizePragma_, 0, 0, 0 ) != SQLITE_OK )
         {
-            NSAssert1( 0, @"Error: failed to execute pragma statement with message '%s'.", sqlite3_errmsg( _db ) );
+            NSAssert1( 0, @"Error: failed to execute pragma statement with message '%s'."
+                      , sqlite3_errmsg( _db ) );
         }
     }
 
@@ -120,7 +121,7 @@ static NSString* const createRecords_ =
 
 -(NSTimeInterval)currentTime
 {
-    return [ [ NSDate date ] timeIntervalSince1970 ];
+    return [ [ NSDate new ] timeIntervalSince1970 ];
 }
 
 -(BOOL)execQuery:( NSString* )sql_
@@ -146,18 +147,22 @@ static NSString* const createRecords_ =
                        , record_id_ ] ];
 }
 
--(BOOL)hasRecord:( NSString* )record_id_
+-(NSString*)fileLinkForRecordId:( NSString* )recordId_
 {
-    NSString* query_ = [ NSString stringWithFormat: @"SELECT record_id FROM records WHERE record_id='%@';", record_id_ ];
+    NSString* query_ = [ NSString stringWithFormat: @"SELECT file_link FROM records WHERE record_id='%@';"
+                        , recordId_ ];
 
     sqlite3_stmt* statement_ = 0;
 
-    BOOL result_ = NO;
+    NSString* result_ = nil;
 
     if ( [ self.db prepareQuery: query_ statement: &statement_ ] )
     {
-        result_ = ( sqlite3_step( statement_ ) == SQLITE_ROW );
-
+        if ( sqlite3_step( statement_ ) == SQLITE_ROW )
+        {
+            const unsigned char * str_ = sqlite3_column_text( statement_, 0 );
+             result_ = [ [ NSString alloc ] initWithUTF8String: (const char *)str_ ];
+        }
         sqlite3_finalize( statement_ );
     }
 
@@ -167,11 +172,51 @@ static NSString* const createRecords_ =
 -(void)removeRecordsForKey:( id )key_ 
 {
     NSString* recordId_ = [ key_ toCompositeKey ];
-    NSString* remove_query_ = [ NSString stringWithFormat: @"DELETE FROM records WHERE record_id LIKE '%@';"
+
+    NSString* fileLink_ = [ self fileLinkForRecordId: recordId_ ];
+    if ( !fileLink_ )
+        return;
+
+    [ self removeRecordsForRecordId: recordId_ 
+                           fileLink: fileLink_ ];
+}
+
+-(void)removeRecordsForRecordId:( id )recordId_ 
+                       fileLink:( NSString* )fileLink_
+{
+    fileLink_ = [ NSString cachesPathByAppendingPathComponent: fileLink_ ];
+    [ [ NSFileManager defaultManager ] removeItemAtPath: fileLink_ error: nil ];
+    
+    NSString* removeQuery_ = [ NSString stringWithFormat: @"DELETE FROM records WHERE record_id LIKE '%@';"
+                              , recordId_ ];
+    
+    sqlite3_stmt* statement_ = 0;
+    if ( [ self prepareQuery: removeQuery_ statement: &statement_ ] )
+    {
+        if( sqlite3_step( statement_ ) != SQLITE_DONE )
+        {
+            NSLog( @"%@", [ self errorMessage ] );
+        }
+
+        sqlite3_finalize( statement_ );
+    }
+}
+
+-(void)updateData:( NSData* )data_
+        forRecord:( NSString* )recordId_
+         fileLink:( NSString* )fileLink_
+{
+    fileLink_ = [ NSString cachesPathByAppendingPathComponent: fileLink_ ];
+    NSURL* url_ = [ NSURL fileURLWithPath: fileLink_ ];
+    [ data_ writeToURL: url_ atomically: NO ];
+
+    NSString* updateQuery_ = [ NSString stringWithFormat: @"UPDATE records SET update_time='%f', access_time='%f' WHERE record_id='%@';"
+                               , [ self currentTime ]
+                               , [ self currentTime ]
                                , recordId_ ];
 
     sqlite3_stmt* statement_ = 0;
-    if ( [ self prepareQuery: remove_query_ statement: &statement_ ] )
+    if ( [ self prepareQuery: updateQuery_ statement: &statement_ ] )
     {
         if( sqlite3_step( statement_ ) != SQLITE_DONE )
         {
@@ -182,64 +227,79 @@ static NSString* const createRecords_ =
     }
 }
 
--(void)updateData:( NSData* )data_ forRecord:( NSString* )record_id_
+-(void)addData:( NSData* )data_ forRecord:( NSString* )recordId_
 {
-    NSString* update_query_ = [ NSString stringWithFormat: @"UPDATE records SET record_data=?, update_time='%f', access_time='%f' WHERE record_id='%@';"
-                               , [ self currentTime ]
-                               , [ self currentTime ]
-                               , record_id_ ];
+    NSString* fileLink_ = [ NSString createUuid ];
+
+    NSString* addQuery_ = [ NSString stringWithFormat: @"INSERT INTO records (record_id, file_link, update_time, access_time) VALUES ('%@', '%@', '%f', '%f');"
+                           , recordId_
+                           , fileLink_
+                           , [ self currentTime ]
+                           , [ self currentTime ] ];
 
     sqlite3_stmt* statement_ = 0;
-    if ( [ self prepareQuery: update_query_ statement: &statement_ ] )
+    if ( [ self prepareQuery: addQuery_ statement: &statement_ ] )
     {
-        sqlite3_bind_blob( statement_, 1, [ data_ bytes ], [ data_ length ], 0 );
-
-        if( sqlite3_step( statement_ ) != SQLITE_DONE )
+        if ( sqlite3_step( statement_ ) == SQLITE_DONE )
+        {
+            fileLink_ = [ NSString cachesPathByAppendingPathComponent: fileLink_ ];
+            NSURL* url_ = [ NSURL fileURLWithPath: fileLink_ ];
+            [ data_ writeToURL: url_ atomically: NO ];
+        }
+        else
         {
             NSLog( @"%@", [ self errorMessage ] );
         }
 
         sqlite3_finalize( statement_ );
     }
-}
-
--(void)addData:( NSData* )data_ forRecord:( NSString* )record_id_
-{
-    NSString* add_query_ = [ NSString stringWithFormat: @"INSERT INTO records (record_id, record_data, update_time, access_time) VALUES ('%@', ?, '%f', '%f');"
-                            , record_id_
-                            , [ self currentTime ]
-                            , [ self currentTime ] ];
-
-    sqlite3_stmt* statement_ = 0;
-    if ( [ self prepareQuery: add_query_ statement: &statement_ ] )
+    else
     {
-        sqlite3_bind_blob( statement_, 1, [ data_ bytes ], [ data_ length ], 0 );
-
-        if( sqlite3_step( statement_ ) != SQLITE_DONE )
-        {
-            NSLog( @"%@", [ self errorMessage ] );
-        }
-
-        sqlite3_finalize( statement_ );
+        NSLog( @"%@", [ self errorMessage ] );
     }
 }
 
+//JTODO test !!!!
 -(void)removeRecordsToDate:( NSDate* )date_
              dateFieldName:( NSString* )field_name_
 {
-    NSString* remove_query_ = [ NSString stringWithFormat: @"DELETE FROM records WHERE %@ < '%f';"
-                               , field_name_
-                               , [ date_ timeIntervalSince1970 ] ];
+    ///First remove all files
+    NSString* query_ = [ NSString stringWithFormat: @"SELECT file_link FROM records WHERE %@ < '%f';"
+                        , field_name_
+                        , [ date_ timeIntervalSince1970 ] ];
 
     sqlite3_stmt* statement_ = 0;
-    if ( [ self prepareQuery: remove_query_ statement: &statement_ ] )
-    {
-        if( sqlite3_step( statement_ ) != SQLITE_DONE )
-        {
-            NSLog( @"%@", [ self errorMessage ] );
-        }
 
+    if ( [ self.db prepareQuery: query_ statement: &statement_ ] )
+    {
+        while ( sqlite3_step( statement_ ) == SQLITE_ROW )
+        {
+            const unsigned char * str_ = sqlite3_column_text( statement_, 0 );
+            NSString* fileLink_ = [ [ NSString alloc ] initWithUTF8String: (const char *)str_ ];
+
+            fileLink_ = [ NSString cachesPathByAppendingPathComponent: fileLink_ ];
+            [ [ NSFileManager defaultManager ] removeItemAtPath: fileLink_ error: nil ];
+        }
         sqlite3_finalize( statement_ );
+    }
+
+    //////////
+
+    {
+        NSString* remove_query_ = [ NSString stringWithFormat: @"DELETE FROM records WHERE %@ < '%f';"
+                                   , field_name_
+                                   , [ date_ timeIntervalSince1970 ] ];
+
+        sqlite3_stmt* statement_ = 0;
+        if ( [ self prepareQuery: remove_query_ statement: &statement_ ] )
+        {
+            if( sqlite3_step( statement_ ) != SQLITE_DONE )
+            {
+                NSLog( @"%@", [ self errorMessage ] );
+            }
+
+            sqlite3_finalize( statement_ );
+        }
     }
 }
 
@@ -260,69 +320,103 @@ static NSString* const createRecords_ =
 
 -(NSData*)dataForKey:( id )key_ lastUpdateTime:( NSDate** )date_
 {
-    NSString* record_id_ = [ key_ toCompositeKey ];
+    NSString* recordId_ = [ key_ toCompositeKey ];
 
-    static const NSUInteger data_index_ = 0;
-    static const NSUInteger date_index_ = 1;
+    static const NSUInteger linkIndex_ = 0;
+    static const NSUInteger dateIndex_ = 1;
 
-    NSString* query_ = [ NSString stringWithFormat: @"SELECT record_data, update_time FROM records WHERE record_id='%@';", record_id_ ];
+    NSString* query_ = [ NSString stringWithFormat: @"SELECT file_link, update_time FROM records WHERE record_id='%@';", recordId_ ];
 
-    NSData* record_data_ = nil;
+    NSData* recordData_ = nil;
 
     sqlite3_stmt* statement_ = 0;
     if ( [ self.db prepareQuery: query_ statement: &statement_ ] )
     {
         if ( sqlite3_step( statement_ ) == SQLITE_ROW )
         {
-            NSUInteger data_length_ = sqlite3_column_bytes( statement_, data_index_ );
-            record_data_ = [ NSData dataWithBytes: sqlite3_column_blob( statement_, data_index_ ) 
-                                           length: data_length_ ];
+            const unsigned char * str_ = sqlite3_column_text( statement_, linkIndex_ );
+            NSString* fileLink_ = [ [ NSString alloc ] initWithUTF8String: (const char *)str_ ];
+            fileLink_ = [ NSString cachesPathByAppendingPathComponent: fileLink_ ];
+            recordData_ = [ NSData dataWithContentsOfFile: fileLink_ ];
 
-            if ( date_ )
+            if ( date_ && recordData_ )
             {
-                NSTimeInterval dateInetrval_ = sqlite3_column_double( statement_, date_index_ );
+                NSTimeInterval dateInetrval_ = sqlite3_column_double( statement_, dateIndex_ );
                 *date_ = [ NSDate dateWithTimeIntervalSince1970: dateInetrval_ ];
             }
         }
         sqlite3_finalize( statement_ );
     }
 
-    if ( record_data_ )
+    if ( recordData_ )
     {
-        [ self updateAccessTime: record_id_ ];
+        [ self updateAccessTime: recordId_ ];
     }
 
-    return record_data_;
+    return recordData_;
 }
 
+//JTODO test
 -(void)removeAllRecords
 {
-    static NSString* const remove_query_ = @"DELETE * FROM records;";
+    ///First remove all files
+    NSString* query_ = @"SELECT file_link FROM records;";
 
     sqlite3_stmt* statement_ = 0;
-    if ( [ self prepareQuery: remove_query_ statement: &statement_ ] )
-    {
-        if( sqlite3_step( statement_ ) != SQLITE_DONE )
-        {
-            NSLog( @"%@", [ self errorMessage ] );
-        }
 
+    if ( [ self.db prepareQuery: query_ statement: &statement_ ] )
+    {
+        while ( sqlite3_step( statement_ ) == SQLITE_ROW )
+        {
+            const unsigned char * str_ = sqlite3_column_text( statement_, 0 );
+            NSString* fileLink_ = [ [ NSString alloc ] initWithUTF8String: (const char *)str_ ];
+            
+            fileLink_ = [ NSString cachesPathByAppendingPathComponent: fileLink_ ];
+            [ [ NSFileManager defaultManager ] removeItemAtPath: fileLink_ error: nil ];
+        }
         sqlite3_finalize( statement_ );
+    }
+
+    ////////
+    {
+        static NSString* const remove_query_ = @"DELETE * FROM records;";
+
+        sqlite3_stmt* statement_ = 0;
+        if ( [ self prepareQuery: remove_query_ statement: &statement_ ] )
+        {
+            if( sqlite3_step( statement_ ) != SQLITE_DONE )
+            {
+                NSLog( @"%@", [ self errorMessage ] );
+            }
+
+            sqlite3_finalize( statement_ );
+        }
     }
 }
 
 -(void)setData:( NSData* )data_
         forKey:( id )key_
 {
-    NSString* record_id_ = [ key_ toCompositeKey ];
+    NSString* recordId_ = [ key_ toCompositeKey ];
 
-    if ( [ self hasRecord: record_id_ ] )
+    NSString* fileLink_ = [ self fileLinkForRecordId: recordId_ ];
+
+    if ( !data_ && [ fileLink_ length ] != 0 )
     {
-        [ self updateData: data_ forRecord: record_id_ ];
+        [ self removeRecordsForRecordId: recordId_ 
+                               fileLink: fileLink_ ];
+        return;
+    }
+
+    if ( [ fileLink_ length ] != 0 )
+    {
+        [ self updateData: data_
+                forRecord: recordId_
+                 fileLink: fileLink_ ];
     }
     else
     {
-        [ self addData: data_ forRecord: record_id_ ];
+        [ self addData: data_ forRecord: recordId_ ];
     }
 }
 
