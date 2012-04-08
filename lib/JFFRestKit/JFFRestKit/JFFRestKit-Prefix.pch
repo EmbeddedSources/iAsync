@@ -1,0 +1,6 @@
+#ifdef __OBJC__
+    #import <JFFAsyncOperations/JFFAsyncOperations.h>
+    #import <JFFUtils/JFFUtils.h>
+
+    #import <Foundation/Foundation.h>
+#endif
