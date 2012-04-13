@@ -1,6 +1,6 @@
 
-#import <JFFCache/JFFCacheDB.h>
-#import <JFFCache/JFFCaches.h>
+#import <JFFCache/JFFCache.h>
+#import <JFFUtils/JFFUtils.h>
 
 @interface JFFCachesTest : GHTestCase
 @end
