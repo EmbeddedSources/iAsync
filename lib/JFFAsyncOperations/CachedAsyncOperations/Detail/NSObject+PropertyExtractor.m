@@ -14,45 +14,45 @@ static char property_data_property_key_;
 
 @implementation NSObject (PropertyExtractor)
 
--(JFFObjectRelatedPropertyData*)propertyDataForPropertPath:( JFFPropertyPath* )property_path_
+-(JFFObjectRelatedPropertyData*)propertyDataForPropertPath:( JFFPropertyPath* )propertyPath_
 {
-   id data_ = [ self.propertyDataByPropertyName objectForKey: property_path_.name ];
-   if ( property_path_.key == nil )
-   {
-      return data_;
-   }
-   return [ data_ objectForKey: property_path_.key ];
+    id data_ = [ self.propertyDataByPropertyName objectForKey: propertyPath_.name ];
+    if ( propertyPath_.key == nil )
+    {
+        return data_;
+    }
+    return [ data_ objectForKey: propertyPath_.key ];
 }
 
--(void)removePropertyForPropertPath:( JFFPropertyPath* )property_path_
+-(void)removePropertyForPropertPath:( JFFPropertyPath* )propertyPath_
 {
-   if ( property_path_.key )
-   {
-      NSMutableDictionary* sub_dict_ = [ self.propertyDataByPropertyName objectForKey: property_path_.name ];
-      [ sub_dict_ removeObjectForKey: property_path_.key ];
-      if ( [ sub_dict_ count ] == 0 )
-      {
-         [ self.propertyDataByPropertyName removeObjectForKey: property_path_.name ];
-      }
-   }
-   else
-   {
-      [ self.propertyDataByPropertyName removeObjectForKey: property_path_.name ];
-   }
+    if ( propertyPath_.key )
+    {
+        NSMutableDictionary* subDict_ = [ self.propertyDataByPropertyName objectForKey: propertyPath_.name ];
+        [ subDict_ removeObjectForKey: propertyPath_.key ];
+        if ( [ subDict_ count ] == 0 )
+        {
+            [ self.propertyDataByPropertyName removeObjectForKey: propertyPath_.name ];
+        }
+    }
+    else
+    {
+        [ self.propertyDataByPropertyName removeObjectForKey: propertyPath_.name ];
+    }
 
-   //clear property
-   if ( [ self.propertyDataByPropertyName count ] == 0 )
-   {
-      self.propertyDataByPropertyName = nil;
-   }
+    //clear property
+    if ( [ self.propertyDataByPropertyName count ] == 0 )
+    {
+        self.propertyDataByPropertyName = nil;
+    }
 }
 
 -(void)setPropertyData:( JFFObjectRelatedPropertyData* )property_
-        forPropertPath:( JFFPropertyPath* )property_path_
+        forPropertPath:( JFFPropertyPath* )propertyPath_
 {
     if ( !property_ )
     {
-        [ self removePropertyForPropertPath: property_path_ ];
+        [ self removePropertyForPropertPath: propertyPath_ ];
         return;
     }
 
@@ -61,20 +61,20 @@ static char property_data_property_key_;
         self.propertyDataByPropertyName = [ NSMutableDictionary new ];
     }
 
-    if ( property_path_.key )
+    if ( propertyPath_.key )
     {
-        NSMutableDictionary* sub_dict_ = [ self.propertyDataByPropertyName objectForKey: property_path_.name ];
+        NSMutableDictionary* sub_dict_ = [ self.propertyDataByPropertyName objectForKey: propertyPath_.name ];
         if ( sub_dict_ == nil )
         {
             sub_dict_ = [ NSMutableDictionary new ];
-            [ self.propertyDataByPropertyName setObject: sub_dict_ forKey: property_path_.name ];
+            [ self.propertyDataByPropertyName setObject: sub_dict_ forKey: propertyPath_.name ];
         }
 
-        [ sub_dict_ setObject: property_ forKey: property_path_.key ];
+        [ sub_dict_ setObject: property_ forKey: propertyPath_.key ];
         return;
     }
 
-    [ self.propertyDataByPropertyName setObject: property_ forKey: property_path_.name ];
+    [ self.propertyDataByPropertyName setObject: property_ forKey: propertyPath_.name ];
 }
 
 -(NSMutableDictionary*)propertyDataByPropertyName

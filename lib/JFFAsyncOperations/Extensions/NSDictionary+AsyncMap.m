@@ -7,13 +7,12 @@
 
 -(JFFAsyncOperation)asyncMap:( JFFAsyncDictMappingBlock )block_
 {
-    NSMutableArray* asyncOperations_ = [ NSMutableArray arrayWithCapacity: [ self count ] ];
+    NSMutableArray* asyncOperations_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
 
-    NSMutableDictionary* finalResult_ = [ NSMutableDictionary dictionaryWithCapacity: [ self count ] ];
+    NSMutableDictionary* finalResult_ = [ [ NSMutableDictionary alloc ] initWithCapacity: [ self count ] ];
 
-    for ( id key_ in self )
+    [ self enumerateKeysAndObjectsUsingBlock: ^( id key_, id object_, BOOL* stop_ )
     {
-        id object_ = [ self objectForKey: key_ ];
         JFFAsyncOperation loader_ = block_( key_, object_ );
 
         JFFDidFinishAsyncOperationHook finishCallbackHook_ = ^( id result_
@@ -28,12 +27,12 @@
         loader_ = asyncOperationWithFinishHookBlock( loader_, finishCallbackHook_ );
 
         [ asyncOperations_ addObject: loader_ ];
-    }
+    } ];
 
     JFFAsyncOperation loader_ = failOnFirstErrorGroupOfAsyncOperationsArray( asyncOperations_ );
     JFFChangedResultBuilder resultBuilder_ = ^id( id localResult_ )
     {
-        return [ NSDictionary dictionaryWithDictionary: finalResult_ ];
+        return [ [ NSDictionary alloc ] initWithDictionary: finalResult_ ];
     };
     loader_ = asyncOperationWithChangedResult( loader_, resultBuilder_ );
 

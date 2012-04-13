@@ -10,8 +10,6 @@
 @property ( nonatomic, retain ) NSString* activeContextName;
 @property ( nonatomic, retain, readonly ) NSMutableDictionary* contextLoadersByName;
 
-@property ( nonatomic, retain, readonly ) NSArray* allContextNames;
-
 +(id)sharedBalancer;
 
 -(JFFContextLoaders*)activeContextLoaders;
