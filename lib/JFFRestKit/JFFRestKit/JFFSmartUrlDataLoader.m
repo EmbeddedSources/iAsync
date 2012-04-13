@@ -2,6 +2,19 @@
 
 #import "JFFRestKitError.h"
 
+#include <assert.h>
+
+@implementation JFFSmartUrlDataLoaderFields
+
+@synthesize urlBuilder
+, dataLoaderForURL
+, analyzerForData
+, cache
+, cacheKeyForURL
+, cacheDataLifeTime;
+
+@end
+
 @interface JFFResponseDataWithUpdateData : NSObject
 
 @property ( nonatomic, strong ) NSData* data;
@@ -16,13 +29,19 @@
 
 @end
 
-JFFAsyncOperation jSmartDataLoaderWithCache( NSURL*(^urlBuilder_)(void)
-                                            , JFFAsyncOperationBinder dataLoaderForURL_
-                                            , JFFAsyncBinderForURL analyzerForData_
-                                            , id< JFFRestKitCache > cache_
-                                            , id(^keyForURL_)(NSURL*)
-                                            , NSTimeInterval lifeTime_ )
+JFFAsyncOperation jSmartDataLoaderWithCache( JFFSmartUrlDataLoaderFields* args_ )
 {
+    JFFURLBuilderBinder urlBuilder_           = args_.urlBuilder;
+    JFFAsyncOperationBinder dataLoaderForURL_ = args_.dataLoaderForURL;
+    JFFAsyncBinderForURL analyzerForData_     = args_.analyzerForData;
+    id< JFFRestKitCache > cache_              = args_.cache;
+    JFFCacheKeyForURLBuilder cacheKeyForURL_  = args_.cacheKeyForURL;
+    NSTimeInterval cacheDataLifeTime_         = args_.cacheDataLifeTime;
+
+    assert( urlBuilder_       );//should not be nil
+    assert( analyzerForData_  );//should not be nil
+    assert( dataLoaderForURL_ );//should not be nil
+
     NSURL* url_ = urlBuilder_();
 
     if ( !url_ )
@@ -33,24 +52,23 @@ JFFAsyncOperation jSmartDataLoaderWithCache( NSURL*(^urlBuilder_)(void)
     id key_ = nil;
     if ( cache_ )
     {
-        key_ = keyForURL_
-            ? keyForURL_( url_ )
+        key_ = cacheKeyForURL_
+            ? cacheKeyForURL_( url_ )
             : [ url_ description ];
     }
 
     JFFAsyncOperation urlLoader_ = asyncOperationWithResult( url_ );
 
-    dataLoaderForURL_ = [ dataLoaderForURL_ copy ];
     JFFAsyncOperationBinder cachedDataLoaderForURL_ =
     ^JFFAsyncOperation( NSURL* url_ )
     {
         NSDate* lastUpdateDate_ = nil;
         NSData* cachedData_ = [ cache_ dataForKey: key_
-                                   lastUpdateDate:  &lastUpdateDate_ ];
+                                   lastUpdateDate: &lastUpdateDate_ ];
 
         if ( cachedData_ )
         {
-            NSDate* newDate_ = [ lastUpdateDate_ dateByAddingTimeInterval: lifeTime_ ];
+            NSDate* newDate_ = [ lastUpdateDate_ dateByAddingTimeInterval: cacheDataLifeTime_ ];
             if ( [ newDate_ compare: [ NSDate new ] ] == NSOrderedDescending )
             {
                 JFFResponseDataWithUpdateData* result_ = [ JFFResponseDataWithUpdateData new ];
@@ -120,10 +138,10 @@ JFFAsyncOperation jSmartDataLoader( NSURL*(^urlBuilder_)(void)
                                    , JFFAsyncOperationBinder dataLoaderForURL_
                                    , JFFAsyncBinderForURL analyzerForData_ )
 {
-    return jSmartDataLoaderWithCache( urlBuilder_
-                                     , dataLoaderForURL_
-                                     , analyzerForData_
-                                     , nil
-                                     , nil
-                                     , 0. );
+    JFFSmartUrlDataLoaderFields* args_ = [ JFFSmartUrlDataLoaderFields new ];
+    args_.urlBuilder       = urlBuilder_;
+    args_.dataLoaderForURL = dataLoaderForURL_;
+    args_.analyzerForData  = analyzerForData_;
+
+    return jSmartDataLoaderWithCache( args_ );
 }
