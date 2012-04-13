@@ -6,13 +6,13 @@
 
 +(NSString*)storePathForDownloadFilesInfo
 {
-   return [ NSString documentsPathByAppendingPathComponent: @"JFFDownloadFilesInfo.data" ];
+    return [ NSString documentsPathByAppendingPathComponent: @"JFFDownloadFilesInfo.data" ];
 }
 
 +(NSMutableDictionary*)dictionaryWithDownloadFilesInfo
 {
-   NSMutableDictionary* result_ = [ NSMutableDictionary dictionaryWithContentsOfFile: [ self storePathForDownloadFilesInfo ] ];
-   return result_ ? result_ : [ NSMutableDictionary dictionary ];
+    NSMutableDictionary* result_ = [ NSMutableDictionary dictionaryWithContentsOfFile: [ self storePathForDownloadFilesInfo ] ];
+    return result_ ?: [ NSMutableDictionary dictionary ];
 }
 
 -(void)writeToFileDownloadFilesInfo
@@ -22,25 +22,25 @@
 
 +(unsigned long long)fileLengthForDestinationURL:( NSURL* )url_
 {
-   NSMutableDictionary* dict_ = [ self dictionaryWithDownloadFilesInfo ];
+    NSMutableDictionary* dict_ = [ self dictionaryWithDownloadFilesInfo ];
 
-   NSNumber* file_length_ = [ dict_ objectForKey: [ url_ absoluteString ] ];
-   if ( file_length_ )
-   {
-      return [ file_length_ unsignedLongLongValue ];
-   }
-   return NSURLResponseUnknownLength;
+    NSNumber* fileLength_ = [ dict_ objectForKey: [ url_ absoluteString ] ];
+    if ( fileLength_ )
+    {
+        return [ fileLength_ unsignedLongLongValue ];
+    }
+    return NSURLResponseUnknownLength;
 }
 
 +(void)setFileLength:( unsigned long long )file_length_
    forDestinationURL:( NSURL* )url_
 {
-   NSMutableDictionary* dict_ = [ self dictionaryWithDownloadFilesInfo ];
+    NSMutableDictionary* dict_ = [ self dictionaryWithDownloadFilesInfo ];
 
-   NSNumber* file_length_number_ = [ NSNumber numberWithUnsignedLongLong: file_length_ ];
-   [ dict_ setObject: file_length_number_ forKey: [ url_ absoluteString ] ];
+    NSNumber* fileLengthNumber_ = [ NSNumber numberWithUnsignedLongLong: file_length_ ];
+    [ dict_ setObject: fileLengthNumber_ forKey: [ url_ absoluteString ] ];
 
-   [ dict_ writeToFileDownloadFilesInfo ];
+    [ dict_ writeToFileDownloadFilesInfo ];
 }
 
 @end

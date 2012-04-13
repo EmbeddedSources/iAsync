@@ -1,25 +1,33 @@
 #import "JNNsUrlConnection.h"
 #import "JNAbstractConnection+Constructor.h"
 
+#import "JFFURLConnectionParams.h"
+#import "JFFLocalCookiesStorage.h"
+
+#import "NSMutableURLRequest+CreateRequestWithURLParams.h"
+
 @interface JNNsUrlConnection ()
 
 //JTODO move to ARC and remove inner properties
 @property ( nonatomic, retain ) NSURLConnection* nativeConnection;
+@property ( nonatomic, retain ) JFFURLConnectionParams* params;
 
 @end
 
 @implementation JNNsUrlConnection
 
 @synthesize nativeConnection = _nativeConnection;
+@synthesize params           = _params;
 
 -(void)dealloc
 {
     [ _nativeConnection release ];
+    [ _params release ];
 
     [ super dealloc ];
 }
 
--(id)initWithRequest:( NSURLRequest* )request_
+-(id)initWithURLConnectionParams:( JFFURLConnectionParams* )params_
 {
 #ifndef __clang_analyzer__
     self = [ super privateInit ];
@@ -29,6 +37,25 @@
     }
 
     {
+        self.params = params_;
+
+        NSMutableURLRequest* request_ =
+        [ [ NSMutableURLRequest newMutableURLRequestWithParams: params_ ] autorelease ];
+
+        if ( params_.cookiesStorage )
+        {
+            request_.HTTPShouldHandleCookies = NO;
+            NSArray* cookies_ = [ params_.cookiesStorage cookiesForURL: params_.url ];
+            NSDictionary* cookiesheaders_ =
+            [ NSHTTPCookie requestHeaderFieldsWithCookies: cookies_ ];
+            [ cookiesheaders_ enumerateKeysAndObjectsUsingBlock: ^( id cookieName_
+                                                                   , id cookieValue_
+                                                                   , BOOL* stop_ )
+            {
+                [ request_ addValue: cookieValue_ forHTTPHeaderField: cookieName_ ];
+            } ];
+        }
+
         //!c self is retained by native_connection_
         //JTODO : break the cycle
         NSURLConnection* nativeConnection_ = [ [ NSURLConnection alloc ] initWithRequest: request_
@@ -49,59 +76,65 @@
 #pragma mark JNUrlConnection
 -(void)start
 {
-   [ self.nativeConnection start ];
+    [ self.nativeConnection start ];
 }
 
 -(void)cancel
 {
-   [ self clearCallbacks ];
-   [ self.nativeConnection cancel ];
+    [ self clearCallbacks ];
+    [ self.nativeConnection cancel ];
 }
-
 
 #pragma mark -
 #pragma mark NSUrlConnectionDelegate
 -(BOOL)assertConnectionMismatch:( NSURLConnection* )connection_
 {
-   BOOL is_connection_mismatch_ = ( connection_ != self.nativeConnection );
-   if ( is_connection_mismatch_ )
-   {
-      //!c TODO : handle this properly
-      NSLog( @"JNNsUrlConnection : connection mismatch" );
-      NSAssert( NO, @"JNNsUrlConnection : connection mismatch" );
-      return NO;
-   }
-   
-   return YES;
-}
+    BOOL isConnectionMismatch_ = ( connection_ != self.nativeConnection );
+    if ( isConnectionMismatch_ )
+    {
+        //!c TODO : handle this properly
+        NSLog( @"JNNsUrlConnection : connection mismatch" );
+        NSAssert( NO, @"JNNsUrlConnection : connection mismatch" );
+        return NO;
+    }
 
+    return YES;
+}
 
 -(void)connection:( NSURLConnection* )connection_
 didReceiveResponse:( NSHTTPURLResponse* )response_
 {
-   if ( ![ self assertConnectionMismatch: connection_ ] )
-   {
-      return;
-   }
-   
-   if ( nil != self.didReceiveResponseBlock )
-   {
-      self.didReceiveResponseBlock( response_ );
-   }
+    if ( ![ self assertConnectionMismatch: connection_ ] )
+    {
+        return;
+    }
+
+    if ( self.params.cookiesStorage )
+    {
+        NSArray* cookies_ =
+        [ NSHTTPCookie cookiesWithResponseHeaderFields: [ response_ allHeaderFields ]
+                                                forURL: self.params.url ];
+        [ self.params.cookiesStorage setCookies: cookies_ ];
+    }
+
+    if ( nil != self.didReceiveResponseBlock )
+    {
+        self.didReceiveResponseBlock( response_ );
+    }
 }
 
 -(void)connection:( NSURLConnection* )connection_
    didReceiveData:( NSData* )chunk_
 {
-   if ( ![ self assertConnectionMismatch: connection_ ] )
-   {
-      return;
-   }
-   
-   if ( nil != self.didReceiveDataBlock )
-   {
-      self.didReceiveDataBlock( chunk_ );
-   }
+    if ( ![ self assertConnectionMismatch: connection_ ] )
+    {
+        return;
+    }
+
+    if ( nil != self.didReceiveDataBlock )
+    {
+        self.didReceiveDataBlock( chunk_ );
+    }
 }
 
 -(void)connectionDidFinishLoading:( NSURLConnection* )connection_
@@ -110,7 +143,7 @@ didReceiveResponse:( NSHTTPURLResponse* )response_
     {
         return;
     }
-   
+
     if ( nil != self.didFinishLoadingBlock )
     {
         self.didFinishLoadingBlock( nil );
@@ -142,22 +175,23 @@ canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protection_space_
 }
 
 //http://stackoverflow.com/questions/933331/how-to-use-nsurlconnection-to-connect-with-ssl-for-an-untrusted-cert
--(void)connection:(NSURLConnection *)connection_
+-(void)connection:( NSURLConnection* )connection_
 didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge_ 
 {
-    BOOL is_trust_check_ = [ challenge_.protectionSpace.authenticationMethod isEqualToString:   NSURLAuthenticationMethodServerTrust ];
+    NSString* authenticationMethod_ = challenge_.protectionSpace.authenticationMethod;
+    BOOL isTrustCheck_ = [ authenticationMethod_ isEqualToString: NSURLAuthenticationMethodServerTrust ];
 
-    if ( is_trust_check_ )
+    if ( isTrustCheck_ )
     {
-        BOOL is_trusted_host_ = NO;
+        BOOL isTrustedHost_ = NO;
         if ( nil != self.shouldAcceptCertificateBlock )
         {
-            is_trusted_host_ = self.shouldAcceptCertificateBlock( challenge_.protectionSpace.host );
+            isTrustedHost_ = self.shouldAcceptCertificateBlock( challenge_.protectionSpace.host );
         }
 
-        if ( is_trusted_host_ )
+        if ( isTrustedHost_ )
         {
-            NSURLCredential* cred_ = [ NSURLCredential credentialForTrust:challenge_.protectionSpace.serverTrust ];
+            NSURLCredential* cred_ = [ NSURLCredential credentialForTrust: challenge_.protectionSpace.serverTrust ];
 
             [ challenge_.sender useCredential: cred_
                    forAuthenticationChallenge: challenge_ ];
