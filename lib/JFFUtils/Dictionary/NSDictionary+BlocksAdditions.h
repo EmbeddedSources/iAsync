@@ -1,7 +1,6 @@
-#import <Foundation/Foundation.h>
+#import <JFFUtils/Dictionary/JUDictionaryHelperBlocks.h>
 
-typedef id (^JFFDictMappingBlock)( id key_, id object_ );
-typedef BOOL (^JFFDictPredicateBlock)( id key_, id object_ );
+#import <Foundation/Foundation.h>
 
 @interface NSDictionary (BlocksAdditions)
 
@@ -9,5 +8,8 @@ typedef BOOL (^JFFDictPredicateBlock)( id key_, id object_ );
 -(NSDictionary*)mapKey:( JFFDictMappingBlock )block_;
 
 -(NSUInteger)count:( JFFDictPredicateBlock )predicate_;
+
+//Calls block once for each element in self, passing that element and key as a parameter.
+-(void)each:( JFFDictActionBlock )block_;
 
 @end

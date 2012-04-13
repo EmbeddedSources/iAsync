@@ -79,12 +79,12 @@ static bool AmIBeingDebugged(void)
 {
     @synchronized( self )
     {
-        NSString* class_name_ = NSStringFromClass( class_ );
-        NSNumber* number_ = [ self.instancesNumberByClassName objectForKey: class_name_ ];
+        NSString* className_ = NSStringFromClass( class_ );
+        NSNumber* number_ = [ self.instancesNumberByClassName objectForKey: className_ ];
         NSUInteger instances_count_  = [ number_ unsignedIntValue ];
         NSNumber* instancesCountNum_ = [ NSNumber numberWithUnsignedInteger: ++instances_count_ ];
         [ self.instancesNumberByClassName setObject: instancesCountNum_
-                                             forKey: class_name_ ];
+                                             forKey: className_ ];
     }
 }
 
@@ -94,8 +94,8 @@ static bool AmIBeingDebugged(void)
     {
         NSString* class_name_ = NSStringFromClass( class_ );
         NSNumber* number_ = [ self.instancesNumberByClassName objectForKey: class_name_ ];
-        NSUInteger instances_count_  = [ number_ unsignedIntValue ];
-        NSNumber* instancesCountNum_ = [ NSNumber numberWithUnsignedInteger: --instances_count_ ];
+        NSUInteger instancesCount_  = [ number_ unsignedIntValue ];
+        NSNumber* instancesCountNum_ = [ NSNumber numberWithUnsignedInteger: --instancesCount_ ];
         [ self.instancesNumberByClassName setObject: instancesCountNum_
                                              forKey: class_name_ ];
     }
@@ -155,7 +155,8 @@ static bool AmIBeingDebugged(void)
         NSNumber* number_ = [ self.instancesNumberByClassName objectForKey: class_name_ ];
         if ( !number_ )
         {
-            [ self.instancesNumberByClassName setObject: [ NSNumber numberWithInteger: 0 ] forKey: class_name_ ];
+            NSNumber* firstIndex_ = [ NSNumber numberWithInteger: 0 ];
+            [ self.instancesNumberByClassName setObject: firstIndex_ forKey: class_name_ ];
 
             {
                 BOOL method_added_ = [ [ self class ] addClassMethodIfNeedWithSelector: @selector( alloCWithZoneToAdding: )

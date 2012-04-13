@@ -2,15 +2,15 @@
 
 @implementation NSDictionary (JFFExtendedDictionary)
 
+//JTODO test
 -(NSDictionary*)dictionaryByAddingObjectsFromDictionary:( NSDictionary* )dictionary_
 {
     NSMutableDictionary* result_ = [ [ NSMutableDictionary alloc ] initWithDictionary: self ];
 
-    for ( id key_ in dictionary_ )
+    [ dictionary_ enumerateKeysAndObjectsUsingBlock: ^(id key_, id object_, BOOL *stop)
     {
-        id object_ = [ dictionary_ objectForKey: key_ ];
         [ result_ setObject: object_ forKey: key_ ];
-    }
+    } ];
 
     return [ [ NSDictionary alloc ] initWithDictionary: result_ ];
 }

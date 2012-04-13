@@ -45,6 +45,7 @@ static NSString* const queryComponentSeparator_ = @"&";
 
 -(NSString*)stringFromQueryComponents
 {
+    //JTODO use dict map
     NSArray* result_ = [ [ self allKeys ] flatten: ^NSArray*( id key_ )
     {
         NSObject* values_ = [ self objectForKey: key_ ];

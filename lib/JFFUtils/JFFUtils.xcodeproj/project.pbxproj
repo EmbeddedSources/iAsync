@@ -363,6 +363,7 @@
 		1BADF1BF14EBEA3000A80A7F /* NSDate+TimeZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeZone.m"; sourceTree = "<group>"; };
 		1BBD97DE15249C4200A34E64 /* NSObject+IsEqualTwoObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+IsEqualTwoObjects.h"; sourceTree = "<group>"; };
 		1BBD97DF15249C4200A34E64 /* NSObject+IsEqualTwoObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+IsEqualTwoObjects.m"; sourceTree = "<group>"; };
+		1BC8A7CD1536CCC900CF1859 /* JUDictionaryHelperBlocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUDictionaryHelperBlocks.h; sourceTree = "<group>"; };
 		1BCDF9E314320B3200CEB6E7 /* NSMutableArray+ChangeCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+ChangeCount.h"; sourceTree = "<group>"; };
 		1BCDF9E414320B3200CEB6E7 /* NSMutableArray+ChangeCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+ChangeCount.m"; sourceTree = "<group>"; };
 		1BD01FAF14447B7600A627B1 /* JFFSingleThreadProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSingleThreadProxy.h; sourceTree = "<group>"; };
@@ -505,6 +506,7 @@
 		1B054D4B1521C6DA008E4B9E /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
+				1BC8A7CD1536CCC900CF1859 /* JUDictionaryHelperBlocks.h */,
 				1B054D4D1521C6F4008E4B9E /* NSDictionary+BlocksAdditions.h */,
 				1B054D4E1521C6F4008E4B9E /* NSDictionary+BlocksAdditions.m */,
 				1B054D511521C739008E4B9E /* NSDictionary+JFFExtendedDictionary.h */,

@@ -42,8 +42,8 @@
 
     [ self each: ^void( id object_ ) 
     {
-        NSArray* object_items_ = block_( object_ );
-        [ result_ addObjectsFromArray: object_items_ ]; 
+        NSArray* objectItems_ = block_( object_ );
+        [ result_ addObjectsFromArray: objectItems_ ]; 
     } ];
 
     return [ [ NSArray alloc ] initWithArray: result_ ];

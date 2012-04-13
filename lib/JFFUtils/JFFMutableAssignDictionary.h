@@ -1,10 +1,11 @@
+#import <JFFUtils/Dictionary/JUDictionaryHelperBlocks.h>
+
 #import <Foundation/Foundation.h>
 
 @interface JFFMutableAssignDictionary : NSObject
 
-//JTODO remove
-//should return native object, not assign wrapper
-@property ( nonatomic, copy, readonly ) NSDictionary* dictionary;
+-(void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block_;
+-(NSDictionary*)map:( JFFDictMappingBlock )block_;
 
 -(NSUInteger)count;
 -(id)objectForKey:( id )key_;

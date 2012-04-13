@@ -80,6 +80,29 @@
     return proxy_.target;
 }
 
+-(void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block_
+{
+    [ mutableDictionary enumerateKeysAndObjectsUsingBlock: ^( id key_
+                                                             , JFFAutoRemoveFromDictAssignProxy* proxy_
+                                                             , BOOL* stop_ )
+    {
+        block_( key_, proxy_.target, stop_ );
+    } ];
+}
+
+//JTODO test
+-(NSDictionary*)map:( JFFDictMappingBlock )block_
+{
+    NSMutableDictionary* result_ = [ [ NSMutableDictionary alloc ] initWithCapacity: [ self count ] ];
+    [ self enumerateKeysAndObjectsUsingBlock: ^( id key_, id object_, BOOL* stop_ )
+    {
+        id newObject_ = block_( key_, object_ );
+        if ( newObject_ )
+            [ result_ setObject: newObject_ forKey: key_ ];
+    } ];
+    return [ [ NSDictionary alloc ] initWithDictionary: result_ ];
+}
+
 -(void)removeObjectForKey:( id )key_
 {
     JFFAutoRemoveFromDictAssignProxy* proxy_ = [ mutableDictionary objectForKey: key_ ];
@@ -116,21 +139,6 @@
     { 
         return proxy_.target;
     } ];
-}
-
--(NSDictionary*)dictionary
-{
-    if ( mutableDictionary )
-    {
-        NSMutableDictionary* result_ = [ [ NSMutableDictionary alloc ] initWithCapacity: [ mutableDictionary count ] ];
-        for ( id key_ in mutableDictionary )
-        {
-            JFFAutoRemoveFromDictAssignProxy* proxy_ = [ mutableDictionary objectForKey: key_ ];
-            [ result_ setObject: proxy_.target forKey: key_ ];
-        }
-        return result_;
-    }
-    return nil;
 }
 
 @end
