@@ -5,6 +5,7 @@
 #import "NSMutableSet+DownloadManager.h"
 #import "JFFDownloadItemDelegate.h"
 #import "JFFURLResponse.h"
+#import "JFFURLConnectionParams.h"
 
 #import "JFFTrafficCalculator.h"
 #import "JFFTrafficCalculatorDelegate.h"
@@ -323,10 +324,10 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
         NSString* range_ = [ NSString stringWithFormat: @"bytes=%qu-", self.downloadedFileLength ];
         NSDictionary* headers_ = [ NSDictionary dictionaryWithObject: range_ forKey: @"Range" ];
 
-        JFFURLConnection* connection_ = [ JFFURLConnection connectionWithURL: self.url
-                                                                    httpBody: nil
-                                                                  httpMethod: nil
-                                                                     headers: headers_ ];
+        JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+        params_.url     = self.url;
+        params_.headers = headers_;
+        JFFURLConnection* connection_ = [ [ [ JFFURLConnection alloc ] initWithURLConnectionParams: params_ ] autorelease ];
 
         progress_callback_ = [ [ progress_callback_ copy ] autorelease ];
         connection_.didReceiveDataBlock = ^( NSData* data_ )

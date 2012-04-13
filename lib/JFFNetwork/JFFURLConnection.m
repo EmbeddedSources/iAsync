@@ -7,18 +7,19 @@
 #import "JNHttpEncodingsFactory.h"
 #import "JNConstants.h"
 
+#import "JFFURLConnectionParams.h"
+#import "JFFLocalCookiesStorage.h"
+
 #import <JFFUtils/JFFError.h>
 
 @interface JFFURLConnection ()
 
+@property ( nonatomic, retain ) JFFURLConnectionParams* params;
+
 //JTODO move to ARC and remove inner properties
-@property ( nonatomic, retain ) NSData* httpBody;
-@property ( nonatomic, retain ) NSString* httpMethod;
-@property ( nonatomic, retain ) NSDictionary* headers;
 
 @property ( nonatomic, assign ) BOOL responseHandled;
 @property ( nonatomic, retain ) __attribute__((NSObject)) CFReadStreamRef readStream;
-@property ( nonatomic, retain ) NSURL* url;
 
 @property ( nonatomic, retain ) JFFURLResponse* urlResponse;
 
@@ -35,7 +36,9 @@
 
 @end
 
-static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event_, void* selfContext_ )
+static void readStreamCallback( CFReadStreamRef stream_
+                               , CFStreamEventType event_
+                               , void* selfContext_ )
 {
     JFFURLConnection* self_ = selfContext_;
     switch( event_ )
@@ -76,42 +79,30 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
 
 @implementation JFFURLConnection
 
-@synthesize httpBody   = _postData;
-@synthesize httpMethod = _httpMethod;
-@synthesize headers    = _headers;
-
-@synthesize url = _url;
 @synthesize responseHandled = _responseHandled;
 
 @synthesize urlResponse = _urlResponse;
 @synthesize readStream  = _readStream;
 
+@synthesize params = _params;
+
 -(void)dealloc
 {
     [ self cancel ];
 
-    self.httpBody    = nil;
-    self.httpMethod  = nil;
-    self.headers     = nil;
-    self.url         = nil;
     self.urlResponse = nil;
+    self.params      = nil;
 
     [ super dealloc ];
 }
 
--(id)initWithURL:( NSURL* )url_
-        httpBody:( NSData* )data_
-      httpMethod:( NSString* )httpMethod_
-         headers:( NSDictionary* )headers_
+-(id)initWithURLConnectionParams:( JFFURLConnectionParams* )params_
 {
     self = [ super privateInit ];
 
     if ( self )
     {
-        self.url        = url_;
-        self.httpBody   = data_;
-        self.httpMethod = httpMethod_;
-        self.headers    = headers_;
+        self.params = params_;
     }
 
     return self;
@@ -119,64 +110,46 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
 
 -(void)start
 {
-    [ self startConnectionWithPostData: self.httpBody headers: self.headers ];
-}
-
-+(id)connectionWithURL:( NSURL* )url_
-              httpBody:( NSData* )data_
-            httpMethod:( NSString* )httpMethod_
-           contentType:( NSString* )content_type_
-{
-    NSDictionary* headers_ = [ NSDictionary dictionaryWithObjectsAndKeys: 
-                              content_type_, @"Content-Type"
-                              , @"keep-alive", @"Connection"
-                              , nil ];
-
-    return [ self connectionWithURL: url_
-                           httpBody: data_
-                         httpMethod: httpMethod_
-                            headers: headers_ ];
-}
-
-+(id)connectionWithURL:( NSURL* )url_
-              httpBody:( NSData* )data_
-            httpMethod:( NSString* )httpMethod_
-               headers:( NSDictionary* )headers_
-{
-    return [ [ [ self alloc ] initWithURL: url_
-                                 httpBody: data_
-                               httpMethod: httpMethod_
-                                  headers: headers_ ] autorelease ];
+    [ self startConnectionWithPostData: self.params.httpBody
+                               headers: self.params.headers ];
 }
 
 -(void)applyCookiesForHTTPRequest:( CFHTTPMessageRef )httpRequest_
 {
-    NSArray* availableCookies_ = [ [ NSHTTPCookieStorage sharedHTTPCookieStorage ] cookiesForURL: self.url ];
+    //JTODO refactor 1
+    NSArray* availableCookies_ = nil;
+    if ( self.params.cookiesStorage )
+    {
+        availableCookies_ = [ self.params.cookiesStorage cookiesForURL: self.params.url ];
+    }
+    else
+    {
+        availableCookies_ = [ [ NSHTTPCookieStorage sharedHTTPCookieStorage ] cookiesForURL: self.params.url ];
+    }
 
     NSDictionary* headers_ = [ NSHTTPCookie requestHeaderFieldsWithCookies: availableCookies_ ];
 
-    for ( NSString* key_ in headers_ )
+    [ headers_ enumerateKeysAndObjectsUsingBlock: ^( id key_, id value_, BOOL *stop )
     {
-        NSString* value_ = [ headers_ objectForKey: key_ ];
         CFHTTPMessageSetHeaderFieldValue ( httpRequest_, (CFStringRef)key_, (CFStringRef)value_ );
-    }
+    } ];
 }
 
-//JTODO add timeout
+//JTODO add timeout and test
 //JTODO test invalid url
 //JTODO test no internet connection
 -(void)startConnectionWithPostData:( NSData* )data_
                            headers:( NSDictionary* )headers_
 {
-    CFStringRef method_ = (CFStringRef) (self.httpMethod ?: @"GET");
-    if ( !self.httpMethod && data_ )
+    CFStringRef method_ = (CFStringRef) (self.params.httpMethod ?: @"GET");
+    if ( !self.params.httpMethod && data_ )
     {
         method_ = (CFStringRef) @"POST";
     }
 
     CFHTTPMessageRef httpRequest_ = CFHTTPMessageCreateRequest( NULL
                                                                , method_
-                                                               , (CFURLRef)self.url
+                                                               , (CFURLRef)self.params.url
                                                                , kCFHTTPVersion1_1 );
 
     [ self applyCookiesForHTTPRequest: httpRequest_ ];
@@ -186,12 +159,12 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
         CFHTTPMessageSetBody ( httpRequest_, (CFDataRef)data_ );
     }
 
-    for ( NSString* header_ in headers_ )
+    [ headers_ enumerateKeysAndObjectsUsingBlock: ^( id header_, id headerValue_, BOOL *stop )
     {
         CFHTTPMessageSetHeaderFieldValue( httpRequest_
                                          ,(CFStringRef)header_
-                                         ,(CFStringRef)[ headers_ objectForKey: header_ ] );
-    }
+                                         ,(CFStringRef)headerValue_ );
+    } ];
 
     //   CFReadStreamCreateForStreamedHTTPRequest( CFAllocatorRef alloc,
     //                                             CFHTTPMessageRef requestHeaders,
@@ -224,7 +197,9 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
 {
     if ( _readStream )
     {
-        CFReadStreamUnscheduleFromRunLoop( _readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
+        CFReadStreamUnscheduleFromRunLoop( _readStream
+                                          , CFRunLoopGetCurrent()
+                                          , kCFRunLoopCommonModes );
         CFReadStreamClose( _readStream );
         self.readStream = nil;
     }
@@ -249,24 +224,25 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
         return;
     }
 
-    NSString* content_encoding_ = [ self.urlResponse.allHeaderFields objectForKey: @"Content-Encoding" ];
-    id< JNHttpDecoder > decoder_ = [ JNHttpEncodingsFactory decoderForHeaderString: content_encoding_ ];
+    NSString* contentEncoding_ = [ self.urlResponse.allHeaderFields
+                                  objectForKey: @"Content-Encoding" ];
+    id< JNHttpDecoder > decoder_ = [ JNHttpEncodingsFactory decoderForHeaderString: contentEncoding_ ];
 
-    NSError* decoder_error_ = nil;
+    NSError* decoderError_ = nil;
 
-    NSData* raw_ns_data_ = [ NSData dataWithBytes: buffer_ 
-                                           length: length_ ];
+    NSData* rawNsData_ = [ NSData dataWithBytes: buffer_ 
+                                         length: length_ ];
 
-    NSData* decoded_data_ = [ decoder_ decodeData: raw_ns_data_ 
-                                            error: &decoder_error_ ];
+    NSData* decodedData_ = [ decoder_ decodeData: rawNsData_ 
+                                           error: &decoderError_ ];
 
-    if ( nil == decoded_data_ )
+    if ( nil == decodedData_ )
     {
-        [ self handleFinish: decoder_error_ ];
+        [ self handleFinish: decoderError_ ];
     }
     else 
     {
-        self.didReceiveDataBlock( decoded_data_ );
+        self.didReceiveDataBlock( decodedData_ );
     }
 }
 
@@ -283,10 +259,19 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
 
 -(void)acceptCookiesForHeaders:( NSDictionary* )headers_
 {
-    NSArray* cookies_ = [ NSHTTPCookie cookiesWithResponseHeaderFields: headers_ forURL: self.url ];
-    for ( NSHTTPCookie* cookie_ in cookies_ )
+    NSArray* cookies_ = [ NSHTTPCookie cookiesWithResponseHeaderFields: headers_
+                                                                forURL: self.params.url ];
+    //JTODO refactor 1
+    if ( self.params.cookiesStorage )
     {
-        [ [ NSHTTPCookieStorage sharedHTTPCookieStorage ] setCookie: cookie_ ];
+        [ self.params.cookiesStorage setCookies: cookies_ ];
+    }
+    else
+    {
+        for ( NSHTTPCookie* cookie_ in cookies_ )
+        {
+            [ [ NSHTTPCookieStorage sharedHTTPCookieStorage ] setCookie: cookie_ ];
+        }
     }
 }
 
@@ -307,10 +292,10 @@ static void readStreamCallback( CFReadStreamRef stream_, CFStreamEventType event
 
         if ( self.didReceiveResponseBlock )
         {
-            CFIndex error_code_ = CFHTTPMessageGetResponseStatusCode( response_ );
+            CFIndex statusCode_ = CFHTTPMessageGetResponseStatusCode( response_ );
 
             JFFURLResponse* urlResponse_ = [ JFFURLResponse new ];
-            urlResponse_.statusCode = error_code_;
+            urlResponse_.statusCode = statusCode_;
 
             urlResponse_.allHeaderFields = (NSDictionary*)allHeaders_;
 

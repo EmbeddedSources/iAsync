@@ -19,6 +19,8 @@
 #import <JFFNetwork/JNNsUrlConnection.h>
 #import <JFFNetwork/JNUrlConnection.h>
 #import <JFFNetwork/JNUrlResponse.h>
+#import <JFFNetwork/JFFLocalCookiesStorage.h>
+#import <JFFNetwork/JFFURLConnectionParams.h>
 
 #import <JFFNetwork/JNUrlConnectionCallbacks.h>
 #import <JFFNetwork/Utils/JNUtils.h>
