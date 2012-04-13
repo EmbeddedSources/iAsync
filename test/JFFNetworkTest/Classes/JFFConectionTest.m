@@ -4,17 +4,16 @@
 
 @implementation JFFConectionTest
 
-//now not used
--(void)TtestValidDownloadCompletesCorrectly
+//JTODO add file - http://10.28.9.57:9000/about/
+-(void)RtestValidDownloadCompletesCorrectly
 {
     [ self prepare ];
 
     NSURL* data_url_ = [ NSURL URLWithString: @"http://10.28.9.57:9000/about/" ];
 
-    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithUrl: data_url_
-                                                                         httpBody: nil
-                                                                          headers: nil ];
-    [ factory_ autorelease ];
+    JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+    params_.url = data_url_;
+    JNConnectionsFactory* factory_ = [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
    
     id< JNUrlConnection > connection_ = [ factory_ createFastConnection ];
     NSMutableData* totalData_ = [ NSMutableData data ];
@@ -42,17 +41,16 @@
                  timeout: 61. ];
 }
 
-//now not used
+//now http://kdjsfhjkfhsdfjkdhfjkds.com redirected
 -(void)RtestInValidDownloadCompletesWithError
 {
     [ self prepare ];
 
     NSURL* dataUrl_ = [ NSURL URLWithString: @"http://kdjsfhjkfhsdfjkdhfjkds.com" ];
 
-    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithUrl: dataUrl_
-                                                                         httpBody: nil
-                                                                          headers: nil ];
-    [ factory_ autorelease ];
+    JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+    params_.url = dataUrl_;
+    JNConnectionsFactory* factory_ = [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
 
     id< JNUrlConnection > connection_ = [ factory_ createFastConnection ];
 

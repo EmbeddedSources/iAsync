@@ -20,43 +20,41 @@
 
 -(void)testStubDecoderReturnsTheSameVariable
 {
-   NSError*       error_         = nil;
-   JNStubDecoder* decoder_       = nil;
-   NSData*        received_data_ = nil;
-   NSData*        gzip_data_     = nil;
-   
-   {
-      decoder_ = [ [ JNStubDecoder new ] autorelease ];
-      received_data_ = [ decoder_ decodeData: nil
-                                       error: &error_ ];
-      
-      GHAssertNil( received_data_, @"Nil output expected"    );
-      GHAssertNil( error_        , @"No errors are expected" );
-   }
-   
-   
-   {
-      gzip_data_  = [ JNTestBundleManager loadZipFileNamed : @"1" ];
-      
-      decoder_ = [ [ JNStubDecoder new ] autorelease ];
-      received_data_ = [ decoder_ decodeData: gzip_data_
-                                       error: &error_ ];
-      
-      GHAssertTrue( received_data_ == gzip_data_, @"Same output expected"   );
-      GHAssertNil ( error_                      , @"No errors are expected" );
-   }
-   
-   
-   {
-      gzip_data_  = [ JNTestBundleManager loadZipFileNamed : @"1.1" ];
-      
-      decoder_ = [ [ JNStubDecoder new ] autorelease ];
-      received_data_ = [ decoder_ decodeData: gzip_data_
-                                       error: &error_ ];
-      
-      GHAssertTrue( received_data_ == gzip_data_, @"Same output expected"   );
-      GHAssertNil ( error_                      , @"No errors are expected" );
-   }   
+    NSError*       error_         = nil;
+    JNStubDecoder* decoder_       = nil;
+    NSData*        received_data_ = nil;
+    NSData*        gzip_data_     = nil;
+
+    {
+        decoder_ = [ [ JNStubDecoder new ] autorelease ];
+        received_data_ = [ decoder_ decodeData: nil
+                                         error: &error_ ];
+
+        GHAssertNil( received_data_, @"Nil output expected"    );
+        GHAssertNil( error_        , @"No errors are expected" );
+    }
+
+    {
+        gzip_data_  = [ JNTestBundleManager loadZipFileNamed : @"1" ];
+
+        decoder_ = [ [ JNStubDecoder new ] autorelease ];
+        received_data_ = [ decoder_ decodeData: gzip_data_
+                                         error: &error_ ];
+
+        GHAssertTrue( received_data_ == gzip_data_, @"Same output expected"   );
+        GHAssertNil ( error_                      , @"No errors are expected" );
+    }
+
+    {
+        gzip_data_  = [ JNTestBundleManager loadZipFileNamed : @"1.1" ];
+
+        decoder_ = [ [ JNStubDecoder new ] autorelease ];
+        received_data_ = [ decoder_ decodeData: gzip_data_
+                                         error: &error_ ];
+
+        GHAssertTrue( received_data_ == gzip_data_, @"Same output expected"   );
+        GHAssertNil ( error_                      , @"No errors are expected" );
+    }
 }
 
 

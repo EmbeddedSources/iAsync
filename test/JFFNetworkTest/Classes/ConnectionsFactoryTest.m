@@ -17,9 +17,12 @@
 
     GHAssertThrows
     (
-     [ [ [ JNConnectionsFactory alloc ] initWithUrl: nil
-                                           httpBody: stub_data_
-                                            headers: headers_ ] autorelease ]
+     {
+         JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+         params_.httpBody = stub_data_;
+         params_.headers = headers_;
+         [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+     }
      , @"NSAssert expected"
     );
 }
@@ -36,17 +39,23 @@
 
     GHAssertNoThrow
     (
-     [ [ [ JNConnectionsFactory alloc ] initWithUrl: google_url_
-                                           httpBody: nil
-                                            headers: headers_] autorelease ]
+     {
+         JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+         params_.url = google_url_;
+         params_.headers = headers_;
+         [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+     }
     , @"NSAssert expected"
     );
    
     GHAssertNoThrow
     (
-     [ [ [ JNConnectionsFactory alloc ] initWithUrl: google_url_
-                                           httpBody: stub_data_
-                                            headers: nil ] autorelease ]
+     {
+         JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+         params_.url = google_url_;
+         params_.httpBody = stub_data_;
+         [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+     }
      , @"NSAssert expected"
      );
 }
@@ -71,9 +80,12 @@
 
     NSDictionary* headers_ = [ NSDictionary dictionary ];
 
-    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithUrl: google_url_
-                                                                         httpBody: stub_data_
-                                                                          headers: headers_ ];
+    JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+    params_.url = google_url_;
+    params_.httpBody = stub_data_;
+    params_.headers = headers_;
+    JNConnectionsFactory* factory_ = [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+
     [ factory_ autorelease ];
     id< JNUrlConnection > connection_ = nil;
 
