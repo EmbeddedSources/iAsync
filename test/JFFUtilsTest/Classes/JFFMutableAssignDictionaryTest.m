@@ -7,117 +7,146 @@
 
 -(void)testMutableAssignDictionaryAssignIssue
 {
-   NSObject* target_ = [ NSObject new ];
+    NSObject* target_ = [ NSObject new ];
 
-   __block BOOL target_deallocated_ = NO;
-   [ target_ addOnDeallocBlock: ^void( void )
-   {
-      target_deallocated_ = YES;
-   } ];
+    __block BOOL targetDeallocated_ = NO;
+    [ target_ addOnDeallocBlock: ^void( void )
+    {
+        targetDeallocated_ = YES;
+    } ];
 
-   JFFMutableAssignDictionary* dict_ = [ JFFMutableAssignDictionary new ];
-   [ dict_ setObject: target_ forKey: @"1" ];
+    JFFMutableAssignDictionary* dict_ = [ JFFMutableAssignDictionary new ];
+    [ dict_ setObject: target_ forKey: @"1" ];
 
-   GHAssertTrue( 1 == [ dict_ count ], @"Contains 1 object" );
+    GHAssertTrue( 1 == [ dict_ count ], @"Contains 1 object" );
 
-   [ target_ release ];
+    [ target_ release ];
 
-   GHAssertTrue( target_deallocated_, @"Target should be dealloced" );
-   GHAssertTrue( 0 == [ dict_ count ], @"Empty array" );
+    GHAssertTrue( targetDeallocated_, @"Target should be dealloced" );
+    GHAssertTrue( 0 == [ dict_ count ], @"Empty array" );
 
-   [ dict_ release ];
+    [ dict_ release ];
 }
 
 -(void)testMutableAssignDictionaryFirstRelease
 {
-   JFFMutableAssignDictionary* dict_ = [ JFFMutableAssignDictionary new ];
+    JFFMutableAssignDictionary* dict_ = [ JFFMutableAssignDictionary new ];
 
-   __block BOOL dict_deallocated_ = NO;
-   [ dict_ addOnDeallocBlock: ^void( void )
-   {
-      dict_deallocated_ = YES;
-   } ];
+    __block BOOL dict_deallocated_ = NO;
+    [ dict_ addOnDeallocBlock: ^void( void )
+    {
+        dict_deallocated_ = YES;
+    } ];
 
-   NSObject* target_ = [ NSObject new ];
-   [ dict_ setObject: target_ forKey: @"1" ];
+    NSObject* target_ = [ NSObject new ];
+    [ dict_ setObject: target_ forKey: @"1" ];
 
-   [ dict_ release ];
+    [ dict_ release ];
 
-   GHAssertTrue( dict_deallocated_, @"Target should be dealloced" );
+    GHAssertTrue( dict_deallocated_, @"Target should be dealloced" );
 
-   [ target_ release ];
+    [ target_ release ];
 }
 
 -(void)testObjectForKey
 {
-   JFFMutableAssignDictionary* dict_ = [ JFFMutableAssignDictionary new ];
+    @autoreleasepool
+    {
+        JFFMutableAssignDictionary* dict_ = [ JFFMutableAssignDictionary new ];
 
-   __block BOOL target_deallocated_ = NO;
-   @autoreleasepool
-   {
-      NSObject* object_ = [ NSObject new ];
+        __block BOOL target_deallocated_ = NO;
+        @autoreleasepool
+        {
+            NSObject* object1_ = [ NSObject new ];
+            NSObject* object2_ = [ NSObject new ];
 
-      [ object_ addOnDeallocBlock: ^void( void )
-      {
-         target_deallocated_ = YES;
-      } ];
+            [ object1_ addOnDeallocBlock: ^void( void )
+            {
+                target_deallocated_ = YES;
+            } ];
 
-      [ dict_ setObject: object_ forKey: @"1" ];
+            [ dict_ setObject: object1_ forKey: @"1" ];
+            [ dict_ setObject: object2_ forKey: @"2" ];
 
-      GHAssertTrue( [ dict_ objectForKey: @"1" ] == object_, @"Dict contains object_" );
-      GHAssertTrue( [ dict_ objectForKey: @"2" ] == nil, @"Dict no contains object for key \"2\"" );
+            GHAssertTrue( [ dict_ objectForKey: @"1" ] == object1_, @"Dict contains object_" );
+            GHAssertTrue( [ dict_ objectForKey: @"2" ] == object2_, @"Dict contains object_" );
+            GHAssertTrue( [ dict_ objectForKey: @"3" ] == nil, @"Dict no contains object for key \"2\"" );
 
-      [ object_ release ];
-   }
+            __block NSUInteger count_ = 0;
 
-   GHAssertTrue( target_deallocated_, @"Target should be dealloced" );
+            [ dict_ enumerateKeysAndObjectsUsingBlock: ^( id key, id obj, BOOL *stop )
+            {
+                if ( [ key isEqualToString: @"1" ] )
+                {
+                    GHAssertTrue( obj == object1_, @"OK" );
+                    ++count_;
+                }
+                else if ( [ key isEqualToString: @"2" ] )
+                {
+                    GHAssertTrue( obj == object2_, @"OK" );
+                    ++count_;
+                }
+                else
+                {
+                    GHFail( @"should not be reached" );
+                }
+            } ];
 
-   GHAssertTrue( 0 == [ dict_ count ], @"Empty dict" );
+            GHAssertTrue( count_ == 2, @"Dict no contains object for key \"2\"" );
 
-   [ dict_ release ];
+            [ object1_ release ];
+            [ object2_ release ];
+        }
+
+        GHAssertTrue( target_deallocated_, @"Target should be dealloced" );
+
+        GHAssertTrue( 0 == [ dict_ count ], @"Empty dict" );
+
+        [ dict_ release ];
+    }
 }
 
 -(void)testReplaceObjectInDict
 {
-   JFFMutableAssignDictionary* dict_ = [ JFFMutableAssignDictionary new ];
+    JFFMutableAssignDictionary* dict_ = [ JFFMutableAssignDictionary new ];
 
-   @autoreleasepool
-   {
-      __block BOOL replaced_object_dealloced_ = NO;
-      NSObject* object_ = nil;
+    @autoreleasepool
+    {
+        __block BOOL replacedObjectDealloced_ = NO;
+        NSObject* object_ = nil;
 
-      @autoreleasepool
-      {
-         NSObject* replaced_object_ = [ NSObject new ];
-         [ replaced_object_ addOnDeallocBlock: ^void()
-         {
-            replaced_object_dealloced_ = YES;
-         } ];
+        @autoreleasepool
+        {
+            NSObject* replacedObject_ = [ NSObject new ];
+            [ replacedObject_ addOnDeallocBlock: ^void()
+            {
+                replacedObjectDealloced_ = YES;
+            } ];
 
-         object_ = [ NSObject new ];
+            object_ = [ NSObject new ];
 
-         [ dict_ setObject: replaced_object_ forKey: @"1" ];
+            [ dict_ setObject: replacedObject_ forKey: @"1" ];
 
-         GHAssertTrue( [ dict_ objectForKey: @"1" ] == replaced_object_, @"Dict contains object_" );
-         GHAssertTrue( [ dict_ objectForKey: @"2" ] == nil, @"Dict no contains object for key \"2\"" );
+            GHAssertTrue( [ dict_ objectForKey: @"1" ] == replacedObject_, @"Dict contains object_" );
+            GHAssertTrue( [ dict_ objectForKey: @"2" ] == nil, @"Dict no contains object for key \"2\"" );
 
-         [ dict_ setObject: object_ forKey: @"1" ];
-         GHAssertTrue( [ dict_ objectForKey: @"1" ] == object_, @"Dict contains object_" );
+            [ dict_ setObject: object_ forKey: @"1" ];
+            GHAssertTrue( [ dict_ objectForKey: @"1" ] == object_, @"Dict contains object_" );
 
-         [ replaced_object_ release ];
-      }
+            [ replacedObject_ release ];
+        }
 
-      GHAssertTrue( replaced_object_dealloced_, @"OK" );
+        GHAssertTrue( replacedObjectDealloced_, @"OK" );
 
-      NSObject* current_object_ = [ dict_ objectForKey: @"1" ];
-      GHAssertTrue( current_object_ == object_, @"OK" );
+        NSObject* current_object_ = [ dict_ objectForKey: @"1" ];
+        GHAssertTrue( current_object_ == object_, @"OK" );
 
-      [ object_ release ];
-   }
+        [ object_ release ];
+    }
 
-   GHAssertTrue( 0 == [ dict_ count ], @"Empty dict" );
+    GHAssertTrue( 0 == [ dict_ count ], @"Empty dict" );
 
-   [ dict_ release ];
+    [ dict_ release ];
 }
 
 @end

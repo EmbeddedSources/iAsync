@@ -1,16 +1,17 @@
+
 @interface EmptyStringTest : GHTestCase
 
 @end
 
 @implementation EmptyStringTest
 
--(void)testNilStringIsEmpty
+-(void)RtestNilStringIsEmpty
 {
     NSString* str_ = nil;
     GHAssertFalse( [ str_ hasSymbols ], @"Nil String[%@] should have no symbols", str_ );
 }
 
--(void)testEmptyStringIsEmpty
+-(void)RtestEmptyStringIsEmpty
 {
     {
         NSString* str_ = @"";
@@ -30,7 +31,7 @@
     }
 }
 
--(void)testStringWithCharactersIsNotEmpty
+-(void)RtestStringWithCharactersIsNotEmpty
 {
     NSString* str_ = @"abrakadabre";
     GHAssertTrue( [ str_ hasSymbols ], @"The String[%@] should have some symbols", str_ );
