@@ -171,22 +171,19 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
             return asyncOperationWithResult( str_ );
         };
     };
-    
-    JFFAsyncOperation loader_ = jSmartDataLoaderWithCache( urlBuilder_
-                                                          , dataLoaderForURL_
-                                                          , analyzerForData_
-                                                          , cache_
-                                                          , nil
-                                                          , 5.5 );
 
-    JFFAsyncOperationBinder badDataLoaderForURL_ = badTestDataLoader();
+    JFFSmartUrlDataLoaderFields* args_ = [ JFFSmartUrlDataLoaderFields new ];
+    args_.urlBuilder        = urlBuilder_;
+    args_.dataLoaderForURL  = dataLoaderForURL_;
+    args_.analyzerForData   = analyzerForData_;
+    args_.cache             = cache_;
+    args_.cacheDataLifeTime = 5.5;
 
-    JFFAsyncOperation loaderWromCache_ = jSmartDataLoaderWithCache( urlBuilder_
-                                                                   , badDataLoaderForURL_
-                                                                   , analyzerForData_
-                                                                   , cache_
-                                                                   , nil
-                                                                   , 5.5 );
+    JFFAsyncOperation loader_ = jSmartDataLoaderWithCache( args_ );
+
+    args_.dataLoaderForURL = badTestDataLoader();
+
+    JFFAsyncOperation loaderWromCache_ = jSmartDataLoaderWithCache( args_ );
     __block NSString* storedDataString_ = nil;
     __block NSString* cachedDataString_ = nil;
 
@@ -232,21 +229,19 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
         };
     };
 
-    JFFAsyncOperation loader_ = jSmartDataLoaderWithCache( urlBuilder_
-                                                          , dataLoaderForURL_
-                                                          , analyzerForData_
-                                                          , cache_
-                                                          , nil
-                                                          , 5.5 );
+    JFFSmartUrlDataLoaderFields* args_ = [ JFFSmartUrlDataLoaderFields new ];
+    args_.urlBuilder        = urlBuilder_;
+    args_.dataLoaderForURL  = dataLoaderForURL_;
+    args_.analyzerForData   = analyzerForData_;
+    args_.cache             = cache_;
+    args_.cacheDataLifeTime = 5.5;
 
-    JFFAsyncOperationBinder badDataLoaderForURL_ = badTestDataLoader();
+    JFFAsyncOperation loader_ = jSmartDataLoaderWithCache( args_ );
 
-    JFFAsyncOperation loaderWromCache_ = jSmartDataLoaderWithCache( urlBuilder_
-                                                                   , badDataLoaderForURL_
-                                                                   , analyzerForData_
-                                                                   , cache_
-                                                                   , nil
-                                                                   , -5.5 );
+    args_.dataLoaderForURL  = badTestDataLoader();
+    args_.cacheDataLifeTime = -5.5;
+
+    JFFAsyncOperation loaderWromCache_ = jSmartDataLoaderWithCache( args_ );
 
     __block NSString* storedDataString_ = nil;
     __block NSString* cachedDataString_ = nil;
@@ -296,22 +291,20 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
         };
     };
 
-    JFFAsyncOperation loader_ = jSmartDataLoaderWithCache( urlBuilder_
-                                                          , dataLoaderForURL_
-                                                          , analyzerForData_
-                                                          , cache_
-                                                          , nil
-                                                          , 5.5 );
+    JFFSmartUrlDataLoaderFields* args_ = [ JFFSmartUrlDataLoaderFields new ];
+    args_.urlBuilder        = urlBuilder_;
+    args_.dataLoaderForURL  = dataLoaderForURL_;
+    args_.analyzerForData   = analyzerForData_;
+    args_.cache             = cache_;
+    args_.cacheDataLifeTime = 5.5;
+
+    JFFAsyncOperation loader_ = jSmartDataLoaderWithCache( args_ );
 
     BOOL wasCalledAgain_ = NO;
-    JFFAsyncOperationBinder differentDataLoaderForURL_ = differntTestDataLoader( &wasCalledAgain_ );
 
-    JFFAsyncOperation differntLoader_ = jSmartDataLoaderWithCache( urlBuilder_
-                                                                  , differentDataLoaderForURL_
-                                                                  , analyzerForData_
-                                                                  , cache_
-                                                                  , nil
-                                                                  , 5.5 );
+    args_.dataLoaderForURL  = differntTestDataLoader( &wasCalledAgain_ );
+
+    JFFAsyncOperation differntLoader_ = jSmartDataLoaderWithCache( args_ );
 
     __block NSString* storedDataString_ = nil;
     __block NSString* cachedDataString_ = nil;
