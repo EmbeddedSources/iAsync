@@ -39,8 +39,7 @@
     {
         self.params = params_;
 
-        NSMutableURLRequest* request_ =
-        [ [ NSMutableURLRequest newMutableURLRequestWithParams: params_ ] autorelease ];
+        NSMutableURLRequest* request_ = [ NSMutableURLRequest mutableURLRequestWithParams: params_ ];
 
         if ( params_.cookiesStorage )
         {

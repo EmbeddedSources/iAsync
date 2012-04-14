@@ -5,7 +5,7 @@
 
 @implementation NSMutableURLRequest (CreateRequestWithURLParams)
 
-+(id)newMutableURLRequestWithParams:( JFFURLConnectionParams* )params_
++(id)mutableURLRequestWithParams:( JFFURLConnectionParams* )params_
 {
     static const NSTimeInterval timeout_ = 60.;
     NSMutableURLRequest* request_ = [ self requestWithURL: params_.url
