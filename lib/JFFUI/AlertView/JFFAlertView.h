@@ -1,8 +1,6 @@
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 
-#import <UIKit/UIKit.h>
-
-@interface JFFAlertView : UIAlertView
+@interface JFFAlertView : NSObject
 
 @property ( nonatomic, assign ) BOOL dismissBeforeEnterBackground;
 @property ( nonatomic, copy ) JFFSimpleBlock didPresentHandler;
@@ -16,7 +14,8 @@
 //pass NSString(button title) or JFFAlertButton
 -(void)addAlertButton:( id )alert_button_;
 
--(void)addAlertButtonWithTitle:( NSString* )title_ action:( JFFSimpleBlock )action_;
+-(void)addAlertButtonWithTitle:( NSString* )title_
+                        action:( JFFSimpleBlock )action_;
 
 -(void)forceDismiss;
 +(void)dismissAllAlertViews;

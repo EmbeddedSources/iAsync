@@ -8,7 +8,7 @@ static NSInteger first_alert_index_ = 1;
 
 @interface JFFAlertView () < UIAlertViewDelegate >
 
-+(void)activeAlertsAddAlert:( UIAlertView* )alertView_;
++(void)activeAlertsAddAlert:( JFFAlertView* )alertView_;
 -(void)forceShow;
 
 @end
@@ -17,6 +17,7 @@ static NSInteger first_alert_index_ = 1;
 {
     BOOL _exclusive;
     __strong NSMutableArray* _alertButtons;
+    __strong UIAlertView*    _alertView   ;
 }
 
 @synthesize dismissBeforeEnterBackground = _dismissBeforeEnterBackground;
@@ -24,10 +25,10 @@ static NSInteger first_alert_index_ = 1;
 
 -(void)dealloc
 {
-    [ [ NSNotificationCenter defaultCenter ] removeObserver: self ];
+    [ self stopMonitoringBackgroundEvents ];
 }
 
-+(void)activeAlertsAddAlert:( UIAlertView* )alertView_
++(void)activeAlertsAddAlert:( JFFAlertView* )alertView_
 {
     if ( !active_alerts_ )
     {
@@ -37,7 +38,7 @@ static NSInteger first_alert_index_ = 1;
     [ active_alerts_ addObject: alertView_ ];
 }
 
-+(BOOL)activeAlertsRemoveAlert:( UIAlertView* )alertView_
++(BOOL)activeAlertsRemoveAlert:( JFFAlertView* )alertView_
 {
     if ( !active_alerts_ )
         return NO;
@@ -56,15 +57,15 @@ static NSInteger first_alert_index_ = 1;
 
 -(void)dismissWithClickedButtonIndex:( NSInteger )buttonIndex_ animated:( BOOL )animated_
 {
-    [ super dismissWithClickedButtonIndex: buttonIndex_ animated: NO ];
+    [ self->_alertView dismissWithClickedButtonIndex: buttonIndex_ animated: NO ];
 
-    [ self alertView: self didDismissWithButtonIndex: buttonIndex_ ];
+    [ self alertView: self->_alertView didDismissWithButtonIndex: buttonIndex_ ];
 }
 
 -(void)forceDismiss
 {
-    [ self dismissWithClickedButtonIndex: [ self cancelButtonIndex ] animated: NO ];
-    [ self dismissWithClickedButtonIndex: [ self cancelButtonIndex ] animated: NO ];
+    [ self dismissWithClickedButtonIndex: [ self->_alertView cancelButtonIndex ] animated: NO ];
+    [ self dismissWithClickedButtonIndex: [ self->_alertView cancelButtonIndex ] animated: NO ];
 }
 
 +(void)dismissAllAlertViews
@@ -134,32 +135,41 @@ static NSInteger first_alert_index_ = 1;
  cancelButtonTitle:( NSString* )cancel_button_title_
 otherButtonTitlesArray:( NSArray* )other_button_titles_
 {
-    self = [ super initWithTitle: title_
-                         message: message_ 
-                        delegate: self
-               cancelButtonTitle: cancel_button_title_
-               otherButtonTitles: nil, nil ];
-
-    if ( self )
+    self = [ super init ];
+    if ( nil == self )
     {
-        for ( NSString* button_title_ in other_button_titles_ )
-        {
-            [ super addButtonWithTitle: button_title_ ];
-        }
-
-        [ [ NSNotificationCenter defaultCenter] addObserver: self
-                                                   selector: @selector( applicationDidEnterBackground: )
-                                                       name: UIApplicationDidEnterBackgroundNotification 
-                                                     object: nil ];
+        return nil;
     }
+    
+    self->_alertView = [ [ UIAlertView alloc ] initWithTitle: title_
+                                                     message: message_ 
+                                                    delegate: self
+                                           cancelButtonTitle: cancel_button_title_
+                                           otherButtonTitles: nil, nil ];
 
+    if ( nil == self->_alertView )
+    {
+        return nil;
+    }
+    
+    [ self addButtonsToAlertView: other_button_titles_ ];
+    [ self startMonitoringBackgroundEvents ];
+    
     return self;
+}
+
+-(void)addButtonsToAlertView:( NSArray* )other_button_titles_
+{
+    for ( NSString* button_title_ in other_button_titles_ )
+    {
+        [ self->_alertView addButtonWithTitle: button_title_ ];
+    }
 }
 
 -(NSInteger)addAlertButtonWithIndex:( id )alert_button_id_
 {
     JFFAlertButton* alert_button_ = [ alert_button_id_ toAlertButton ];
-    NSInteger index_ = [ super addButtonWithTitle: alert_button_.title ];
+    NSInteger index_ = [ self->_alertView addButtonWithTitle: alert_button_.title ];
     [ _alertButtons insertObject: alert_button_ atIndex: index_ ];
     return index_;
 }
@@ -250,7 +260,7 @@ otherButtonTitlesArray:( NSArray* )other_button_titles_
 
 -(void)forceShow
 {
-    [ super show ];
+    [ self->_alertView show ];
 }
 
 #pragma mark UIAlertViewDelegate
@@ -278,5 +288,22 @@ otherButtonTitlesArray:( NSArray* )other_button_titles_
     if ( removed_ )
         [ [ active_alerts_ objectAtIndex: 0 ] forceShow ];
 }
+
+#pragma mark -
+#pragma mark Notifications
+-(void)startMonitoringBackgroundEvents
+{
+    [ [ NSNotificationCenter defaultCenter] addObserver: self
+                                               selector: @selector( applicationDidEnterBackground: )
+                                                   name: UIApplicationDidEnterBackgroundNotification 
+                                                 object: nil ];    
+}
+
+-(void)stopMonitoringBackgroundEvents
+{
+    // dodikk - no need to unsubscribe a single event
+    [ [ NSNotificationCenter defaultCenter ] removeObserver: self ];    
+}
+
 
 @end
