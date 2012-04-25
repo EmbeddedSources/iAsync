@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B32850E153FFDD000BE99CC /* JFFDataLoadersTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B32850C153FFDD000BE99CC /* JFFDataLoadersTools.h */; };
+		1B32850F153FFDD000BE99CC /* JFFDataLoadersTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B32850D153FFDD000BE99CC /* JFFDataLoadersTools.m */; };
 		1B7ABA85152D973A005DD4CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B7ABA84152D973A005DD4CA /* Foundation.framework */; };
 		65A0BD6A15301D890007A3B5 /* JFFSmartUrlDataLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 65A0BD6815301D890007A3B5 /* JFFSmartUrlDataLoader.h */; };
 		65A0BD6B15301D890007A3B5 /* JFFSmartUrlDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A0BD6915301D890007A3B5 /* JFFSmartUrlDataLoader.m */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B32850C153FFDD000BE99CC /* JFFDataLoadersTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDataLoadersTools.h; sourceTree = "<group>"; };
+		1B32850D153FFDD000BE99CC /* JFFDataLoadersTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDataLoadersTools.m; sourceTree = "<group>"; };
 		1B7ABA81152D973A005DD4CA /* libJFFRestKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFRestKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B7ABA84152D973A005DD4CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1B7ABA88152D973A005DD4CA /* JFFRestKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFRestKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -71,6 +75,8 @@
 				65E307BB1531E9B200E0B781 /* JFFRestKitError.m */,
 				65A0BD6815301D890007A3B5 /* JFFSmartUrlDataLoader.h */,
 				65A0BD6915301D890007A3B5 /* JFFSmartUrlDataLoader.m */,
+				1B32850C153FFDD000BE99CC /* JFFDataLoadersTools.h */,
+				1B32850D153FFDD000BE99CC /* JFFDataLoadersTools.m */,
 				1B7ABA89152D973A005DD4CA /* JFFRestKit.h */,
 				1B7ABA87152D973A005DD4CA /* Supporting Files */,
 			);
@@ -94,6 +100,7 @@
 			files = (
 				65A0BD6A15301D890007A3B5 /* JFFSmartUrlDataLoader.h in Headers */,
 				65E307BC1531E9B200E0B781 /* JFFRestKitError.h in Headers */,
+				1B32850E153FFDD000BE99CC /* JFFDataLoadersTools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +156,7 @@
 			files = (
 				65A0BD6B15301D890007A3B5 /* JFFSmartUrlDataLoader.m in Sources */,
 				65E307BD1531E9B200E0B781 /* JFFRestKitError.m in Sources */,
+				1B32850F153FFDD000BE99CC /* JFFDataLoadersTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

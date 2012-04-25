@@ -39,8 +39,20 @@ JFFAsyncOperation jSmartDataLoaderWithCache( JFFSmartUrlDataLoaderFields* args_ 
     NSTimeInterval cacheDataLifeTime_         = args_.cacheDataLifeTime;
 
     assert( urlBuilder_       );//should not be nil
-    assert( analyzerForData_  );//should not be nil
     assert( dataLoaderForURL_ );//should not be nil
+
+    if ( !analyzerForData_ )
+    {
+        //JTODO test case when ( !analyzerForData_ )
+        analyzerForData_ = ^JFFAsyncOperationBinder( NSURL* url_ )
+        {
+            JFFAnalyzer analyzer_ = ^id( NSData* data_, NSError** outError_ )
+            {
+                return data_;
+            };
+            return asyncOperationBinderWithAnalyzer( analyzer_ );
+        };
+    }
 
     NSURL* url_ = urlBuilder_();
 
@@ -97,7 +109,7 @@ JFFAsyncOperation jSmartDataLoaderWithCache( JFFSmartUrlDataLoaderFields* args_ 
             {
                 JFFResponseDataWithUpdateData* newResult_ = [ JFFResponseDataWithUpdateData new ];
                 newResult_.updateDate = lastUpdateDate_;
-                newResult_.data = cachedData_;
+                newResult_.data       = cachedData_;
                 doneCallback_( newResult_, nil );
                 return;
             }
