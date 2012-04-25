@@ -1,5 +1,6 @@
 
 #import <JFFTestTools/GHAsyncTestCase+MainThreadTests.h>
+#import <JFFUI/JFFUI.h>
 
 @interface JFFActionSheetTest : GHAsyncTestCase
 @end
@@ -8,7 +9,7 @@
 
 -(void)testEmptyActionSheetAndHide
 {
-    __block __weak JFFActionSheet* weakActionSheet_;
+    __block __weak JFFActionSheet* weakActionSheet_ = nil;
 
     void (^showActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
     {
@@ -45,7 +46,7 @@
 
 -(void)testActionWithTitle
 {
-    __block __weak JFFActionSheet* weakActionSheet_;
+    __block __weak JFFActionSheet* weakActionSheet_ = nil;
 
     void (^showActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
     {
