@@ -8,8 +8,7 @@
     NSParameterAssert( error_ );
     *error_ = nil;
 
-    //!! dodikk : Just in case
-    return [ [ encoded_data_ retain ] autorelease ];
+    return encoded_data_;
 }
 
 @end

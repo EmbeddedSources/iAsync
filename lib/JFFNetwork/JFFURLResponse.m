@@ -9,13 +9,6 @@
 
 @dynamic expectedContentLength;
 
--(void)dealloc
-{
-    [ _allHeaderFields release ];
-
-    [ super dealloc ];
-}
-
 -(long long)expectedContentLength
 {
     return [ [ _allHeaderFields objectForKey: @"Content-Length" ] longLongValue ];

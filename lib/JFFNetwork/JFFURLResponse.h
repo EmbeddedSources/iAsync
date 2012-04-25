@@ -4,7 +4,7 @@
 @interface JFFURLResponse : NSObject< JNUrlResponse >
 
 @property ( nonatomic, assign ) NSInteger statusCode;
-@property ( nonatomic, retain ) NSDictionary* allHeaderFields;
+@property ( nonatomic, strong ) NSDictionary* allHeaderFields;
 
 @property ( nonatomic, assign, readonly ) long long expectedContentLength;
 

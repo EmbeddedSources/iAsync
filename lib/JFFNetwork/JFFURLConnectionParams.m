@@ -10,16 +10,4 @@
 @synthesize certificateCallback = _certificateCallback;
 @synthesize cookiesStorage      = _cookiesStorage;
 
--(void)dealloc
-{
-    [ _url                 release ];
-    [ _httpBody            release ];
-    [ _httpMethod          release ];
-    [ _headers             release ];
-    [ _certificateCallback release ];
-    [ _cookiesStorage      release ];
-
-    [ super dealloc ];
-}
-
 @end

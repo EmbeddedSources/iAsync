@@ -10,6 +10,8 @@
 #import <JFFNetwork/DownloadManager/JFFDownloadItem.h>
 #import <JFFNetwork/DownloadManager/JFFDownloadItemDelegate.h>
 
+#import <JFFNetwork/CookiesStorage/JFFLocalCookiesStorage.h>
+
 #import <JFFNetwork/JFFNetworkBlocksFunctions.h>
 
 #import <JFFNetwork/JFFURLConnection.h>
@@ -19,11 +21,14 @@
 #import <JFFNetwork/JNNsUrlConnection.h>
 #import <JFFNetwork/JNUrlConnection.h>
 #import <JFFNetwork/JNUrlResponse.h>
-#import <JFFNetwork/JFFLocalCookiesStorage.h>
 #import <JFFNetwork/JFFURLConnectionParams.h>
 
 #import <JFFNetwork/JNUrlConnectionCallbacks.h>
-#import <JFFNetwork/Utils/JNUtils.h>
 #import <JFFNetwork/JNConstants.h>
 
+#import <JFFNetwork/XQueryComponents/NSString+XQueryComponents.h>
+#import <JFFNetwork/XQueryComponents/NSURL+XQueryComponents.h>
+#import <JFFNetwork/XQueryComponents/NSDictionary+XQueryComponents.h>
+
 #import <JFFNetwork/Extensions/NSURL+Cookies.h>
+#import <JFFNetwork/Extensions/NSDictionary+JHTTPHeaders.h>

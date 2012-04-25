@@ -12,12 +12,12 @@
 +(NSMutableDictionary*)dictionaryWithDownloadFilesInfo
 {
     NSMutableDictionary* result_ = [ NSMutableDictionary dictionaryWithContentsOfFile: [ self storePathForDownloadFilesInfo ] ];
-    return result_ ?: [ NSMutableDictionary dictionary ];
+    return result_ ?: [ NSMutableDictionary new ];
 }
 
 -(void)writeToFileDownloadFilesInfo
 {
-   [ self writeToFile: [ [ self class ] storePathForDownloadFilesInfo ] atomically: NO ];
+    [ self writeToFile: [ [ self class ] storePathForDownloadFilesInfo ] atomically: NO ];
 }
 
 +(unsigned long long)fileLengthForDestinationURL:( NSURL* )url_

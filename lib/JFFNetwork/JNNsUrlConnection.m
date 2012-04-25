@@ -1,43 +1,25 @@
 #import "JNNsUrlConnection.h"
-#import "JNAbstractConnection+Constructor.h"
 
 #import "JFFURLConnectionParams.h"
 #import "JFFLocalCookiesStorage.h"
 
 #import "NSMutableURLRequest+CreateRequestWithURLParams.h"
 
-@interface JNNsUrlConnection ()
-
-//JTODO move to ARC and remove inner properties
-@property ( nonatomic, retain ) NSURLConnection* nativeConnection;
-@property ( nonatomic, retain ) JFFURLConnectionParams* params;
-
-@end
-
 @implementation JNNsUrlConnection
-
-@synthesize nativeConnection = _nativeConnection;
-@synthesize params           = _params;
-
--(void)dealloc
 {
-    [ _nativeConnection release ];
-    [ _params release ];
-
-    [ super dealloc ];
+    NSURLConnection* _nativeConnection;
+    JFFURLConnectionParams* _params;
 }
 
 -(id)initWithURLConnectionParams:( JFFURLConnectionParams* )params_
 {
-#ifndef __clang_analyzer__
-    self = [ super privateInit ];
-    if ( nil == self )
-    {
-        return nil;
-    }
+    NSParameterAssert( params_ );
 
+    self = [ super init ];
+
+    if ( self )
     {
-        self.params = params_;
+        _params = params_;
 
         NSMutableURLRequest* request_ = [ NSMutableURLRequest mutableURLRequestWithParams: params_ ];
 
@@ -55,40 +37,34 @@
             } ];
         }
 
-        //!c self is retained by native_connection_
-        //JTODO : break the cycle
         NSURLConnection* nativeConnection_ = [ [ NSURLConnection alloc ] initWithRequest: request_
                                                                                 delegate: self
                                                                         startImmediately: NO ];
 
-        self.nativeConnection = nativeConnection_;
-        [ nativeConnection_ release ];
+        _nativeConnection = nativeConnection_;
     }
 
     return self;
-#else
-    return nil;
-#endif
 }
 
 #pragma mark -
 #pragma mark JNUrlConnection
 -(void)start
 {
-    [ self.nativeConnection start ];
+    [ _nativeConnection start ];
 }
 
 -(void)cancel
 {
     [ self clearCallbacks ];
-    [ self.nativeConnection cancel ];
+    [ _nativeConnection cancel ];
 }
 
 #pragma mark -
 #pragma mark NSUrlConnectionDelegate
 -(BOOL)assertConnectionMismatch:( NSURLConnection* )connection_
 {
-    BOOL isConnectionMismatch_ = ( connection_ != self.nativeConnection );
+    BOOL isConnectionMismatch_ = ( connection_ != _nativeConnection );
     if ( isConnectionMismatch_ )
     {
         //!c TODO : handle this properly
@@ -108,12 +84,17 @@ didReceiveResponse:( NSHTTPURLResponse* )response_
         return;
     }
 
-    if ( self.params.cookiesStorage )
+    if ( _params.cookiesStorage )
     {
         NSArray* cookies_ =
         [ NSHTTPCookie cookiesWithResponseHeaderFields: [ response_ allHeaderFields ]
-                                                forURL: self.params.url ];
-        [ self.params.cookiesStorage setCookies: cookies_ ];
+                                                forURL: _params.url ];
+        NSLog( @"response_ allHeaderFields: %@", [ response_ allHeaderFields ] );
+        NSLog( @"_params.url: %@", _params.url );
+        for ( NSHTTPCookie* cookie_ in cookies_ )
+        {
+            [ _params.cookiesStorage setCookie: cookie_ ];
+        }
     }
 
     if ( nil != self.didReceiveResponseBlock )
@@ -146,8 +127,8 @@ didReceiveResponse:( NSHTTPURLResponse* )response_
     if ( nil != self.didFinishLoadingBlock )
     {
         self.didFinishLoadingBlock( nil );
-        [ self cancel ];
     }
+    [ self cancel ];
 }
 
 -(void)connection:( NSURLConnection* )connection_

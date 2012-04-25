@@ -8,8 +8,8 @@ extern long long JFFUnknownFileLength;
 
 @interface JFFDownloadItem : NSObject
 
-@property ( nonatomic, retain, readonly ) NSURL* url;
-@property ( nonatomic, retain, readonly ) NSString* localFilePath;
+@property ( nonatomic, strong, readonly ) NSURL* url;
+@property ( nonatomic, strong, readonly ) NSString* localFilePath;
 
 @property ( nonatomic, assign, readonly ) unsigned long long fileLength;
 @property ( nonatomic, assign, readonly ) unsigned long long downloadedFileLength;
@@ -20,11 +20,11 @@ extern long long JFFUnknownFileLength;
 
 //can return existing download item
 +(id)downloadItemWithURL:( NSURL* )url_
-           localFilePath:( NSString* )local_file_path_
+           localFilePath:( NSString* )localFilePath_
                    error:( NSError** )error_;
 
 +(BOOL)removeDownloadForURL:( NSURL* )url_
-              localFilePath:( NSString* )local_file_path_
+              localFilePath:( NSString* )localFilePath_
                       error:( NSError** )error_;
 
 -(void)start;

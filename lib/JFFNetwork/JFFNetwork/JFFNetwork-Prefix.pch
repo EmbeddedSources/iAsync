@@ -1,8 +1,8 @@
 #ifdef __OBJC__
-   #import <JFFUtils/JFFResultContext.h>
+    #import <JFFUtils/JFFUtils.h>
 
-   #import <Foundation/Foundation.h>
-   #include <CFNetwork/CFNetwork.h>
+    #import <Foundation/Foundation.h>
+    #include <CFNetwork/CFNetwork.h>
 
-   #include <zlib.h>
+    #include <zlib.h>
 #endif

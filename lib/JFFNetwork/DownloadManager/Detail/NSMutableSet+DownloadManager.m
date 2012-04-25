@@ -2,62 +2,63 @@
 
 #import "JFFFileManager.h"
 
-#import <JFFUtils/NSString/NSString+PathExtensions.h>
-
 @implementation NSMutableSet (DownloadManager)
 
 +(NSString*)storePathForDownloadedFiles
 {
-   return [ NSString documentsPathByAppendingPathComponent: @"JFFDownloadedFiles.data" ];
+    return [ NSString documentsPathByAppendingPathComponent: @"JFFDownloadedFiles.data" ];
 }
 
 +(id)setWithDownloadedFiles
 {
-   return [ self setWithArray: [ NSArray arrayWithContentsOfFile: [ self storePathForDownloadedFiles ] ] ];
+    NSString* storePathForDownloadedFiles_ = [ self storePathForDownloadedFiles ];
+    NSArray* downloadedItems_ = [ [ NSArray alloc ] initWithContentsOfFile: storePathForDownloadedFiles_ ];
+    return [ [ self alloc ] initWithArray: downloadedItems_ ];
 }
 
 -(void)writeToFileDownloadedFiles
 {
-   [ [ self allObjects ] writeToFile: [ [ self class ] storePathForDownloadedFiles ] atomically: YES ];
+    NSString* storePathForDownloadedFiles_ = [ [ self class ] storePathForDownloadedFiles ];
+    [ [ self allObjects ] writeToFile: storePathForDownloadedFiles_ atomically: YES ];
 }
 
--(void)addDownloadedFileWithPath:( NSString* )file_path_
+-(void)addDownloadedFileWithPath:( NSString* )filePath_
 {
-   [ self addObject: file_path_ ];
-   [ self writeToFileDownloadedFiles ];
+    [ self addObject: filePath_ ];
+    [ self writeToFileDownloadedFiles ];
 }
 
--(void)removeDownloadedFileWithPath:( NSString* )file_path_
+-(void)removeDownloadedFileWithPath:( NSString* )filePath_
 {
-   [ JFFFileManager removeFileForPath: file_path_ ];
-   [ self removeObject: file_path_ ];
-   [ self writeToFileDownloadedFiles ];
+    [ JFFFileManager removeFileForPath: filePath_ ];
+    [ self removeObject: filePath_ ];
+    [ self writeToFileDownloadedFiles ];
 }
 
--(BOOL)containsDownloadedFileWithPath:( NSString* )file_path_
+-(BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
 {
-   BOOL result_ = [ self containsObject: file_path_ ];
-   if ( result_ && ![ [ NSFileManager defaultManager ] fileExistsAtPath: file_path_ ] )
-   {
-      [ self removeDownloadedFileWithPath: file_path_ ];
-      return NO;
-   }
-   return result_;
+    BOOL result_ = [ self containsObject: filePath_ ];
+    if ( result_ && ![ [ NSFileManager defaultManager ] fileExistsAtPath: filePath_ ] )
+    {
+        [ self removeDownloadedFileWithPath: filePath_ ];
+        return NO;
+    }
+    return result_;
 }
 
-+(void)addDownloadedFileWithPath:( NSString* )file_path_
++(void)addDownloadedFileWithPath:( NSString* )filePath_
 {
-   [ [ self setWithDownloadedFiles ] addDownloadedFileWithPath: file_path_ ];
+    [ [ self setWithDownloadedFiles ] addDownloadedFileWithPath: filePath_ ];
 }
 
-+(BOOL)containsDownloadedFileWithPath:( NSString* )file_path_
++(BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
 {
-   return [ [ self setWithDownloadedFiles ] containsDownloadedFileWithPath: file_path_ ];
+    return [ [ self setWithDownloadedFiles ] containsDownloadedFileWithPath: filePath_ ];
 }
 
-+(void)removeDownloadedFileWithPath:( NSString* )file_path_
++(void)removeDownloadedFileWithPath:( NSString* )filePath_
 {
-   [ [ self setWithDownloadedFiles ] removeDownloadedFileWithPath: file_path_ ];
+    [ [ self setWithDownloadedFiles ] removeDownloadedFileWithPath: filePath_ ];
 }
 
 @end

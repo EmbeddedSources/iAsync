@@ -11,51 +11,38 @@
 #import "JFFTrafficCalculatorDelegate.h"
 #import "NSMutableDictionary+DownloadingFileInfo.h"
 
-#import <JFFLibrary/JFFCompatibility.h>
-#import <JFFUtils/JFFMutableAssignArray.h>
-#import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>
-#import <JFFUtils/JFFMulticastDelegate.h>
-#import <JFFUtils/JFFError.h>
-
 #import <JFFAsyncOperations/CachedAsyncOperations/NSObject+AsyncPropertyReader.h>
-#import <JFFAsyncOperations/JFFAsyncOperationContinuity.h>
 #import <JFFAsyncOperations/JFFAsyncOperationHelpers.h>
-#import <JFFAsyncOperations/Helpers/JFFCancelAyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
 
-static JFFMutableAssignArray* download_items_ = nil;
+static JFFMutableAssignArray* downloadItems_ = nil;
 
 long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 @interface JFFDownloadItem () < JFFTrafficCalculatorDelegate >
 
-@property ( nonatomic, retain ) NSURL* url;
-@property ( nonatomic, retain ) NSString* localFilePath;
-
-//JTODO MOVE to ARC and remove inner properties
-@property ( nonatomic, retain ) JFFTrafficCalculator* trafficCalculator;
-@property ( nonatomic, assign ) FILE* file;
-@property ( nonatomic, assign ) float previousProgress;
+@property ( nonatomic, strong ) NSURL* url;
+@property ( nonatomic, strong ) NSString* localFilePath;
 @property ( nonatomic, assign ) float downlodingSpeed;
 @property ( nonatomic, assign ) unsigned long long fileLength;
 @property ( nonatomic, assign ) unsigned long long downloadedFileLength;
-
-@property ( nonatomic, retain ) NSNull* downloadedFlag;
-@property ( nonatomic, copy ) JFFCancelAsyncOperation stopBlock;
-@property ( nonatomic, retain ) JFFMulticastDelegate< JFFDownloadItemDelegate >* multicastDelegate;
+@property ( nonatomic, strong ) NSNull* downloadedFlag;
+@property ( nonatomic, copy   ) JFFCancelAsyncOperation stopBlock;
 
 @end
 
 @implementation JFFDownloadItem
+{
+    JFFTrafficCalculator* _trafficCalculator;
+    FILE* _file;
+    float _previousProgress;
+    JFFMulticastDelegate< JFFDownloadItemDelegate >* _multicastDelegate;
+}
 
 @synthesize url = _url;
 @synthesize localFilePath = _local_file_path;
 @synthesize stopBlock = _stop_block;
-@synthesize trafficCalculator = _traffic_calculator;
-@synthesize file = _file;
-@synthesize previousProgress = _previous_progress;
 @synthesize downlodingSpeed = _downloding_speed;
-@synthesize multicastDelegate = _multicast_delegate;
-
 @synthesize downloadedFileLength = _downloaded_file_length;
 @synthesize fileLength = _file_length;
 
@@ -66,14 +53,6 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 -(void)dealloc
 {
    [ self closeFile ];
-
-   [ _url release ];
-   [ _local_file_path release ];
-   [ _stop_block release ];
-   [ _traffic_calculator release ];
-   [ _multicast_delegate release ];
-
-   [ super dealloc ];
 }
 
 -(unsigned long long)fileSizeForURL:( NSURL* )url_
@@ -92,7 +71,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
       self.url = url_;
       self.localFilePath = local_file_path_;
       self.downloadedFileLength = [ self fileSizeForURL: url_ ];
-      self.multicastDelegate = (JFFMulticastDelegate< JFFDownloadItemDelegate >*)[ [ JFFMulticastDelegate new ] autorelease ];
+      _multicastDelegate = (JFFMulticastDelegate< JFFDownloadItemDelegate >*)[ JFFMulticastDelegate new ];
 
       if ( self.downloaded )
       {
@@ -109,19 +88,19 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 -(JFFTrafficCalculator*)trafficCalculator
 {
-   if ( !_traffic_calculator )
+   if ( !_trafficCalculator )
    {
-      _traffic_calculator = [ [ JFFTrafficCalculator alloc ] initWithDelegate: self ];
+      _trafficCalculator = [ [ JFFTrafficCalculator alloc ] initWithDelegate: self ];
    }
-   return _traffic_calculator;
+   return _trafficCalculator;
 }
 
 -(void)closeFile
 {
-   if ( self.file )
+   if ( _file )
    {
-      fclose( self.file );
-      self.file = 0;
+      fclose( _file );
+      _file = 0;
    }
 }
 
@@ -146,7 +125,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
                                 url:( NSURL* )url_
                               error:( NSError** )outError_
 {
-    BOOL result_ = [ download_items_.array firstMatch: ^BOOL( id object_ )
+    BOOL result_ = [ downloadItems_ firstMatch: ^BOOL( id object_ )
     {
         JFFDownloadItem* item_ = object_;
         return ![ item_.url isEqual: url_ ]
@@ -169,7 +148,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     if ( ![ self checkNotAlreadyUsedLocalPath: local_file_path_ url: url_ error: error_ ] )
         return nil;
 
-    id result_ = [ download_items_.array firstMatch: ^BOOL( id object_ )
+    id result_ = [ downloadItems_ firstMatch: ^BOOL( id object_ )
     {
         JFFDownloadItem* item_ = object_;
         return [ item_.url isEqual: url_ ]
@@ -178,12 +157,12 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
     if ( !result_ )
     {
-        result_ = [ [ [ self alloc ] initWithURL: url_ localFilePath: local_file_path_ ] autorelease ];
-        if ( !download_items_ )
+        result_ = [ [ self alloc ] initWithURL: url_ localFilePath: local_file_path_ ];
+        if ( !downloadItems_ )
         {
-            download_items_ = [ JFFMutableAssignArray new ];
+            downloadItems_ = [ JFFMutableAssignArray new ];
         }
-        [ download_items_ addObject: result_ ];
+        [ downloadItems_ addObject: result_ ];
     }
 
     return result_;
@@ -212,7 +191,6 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
         JFFCancelAsyncOperation stop_block_ = [ self.stopBlock copy ];
         self.stopBlock = nil;
         stop_block_( YES );
-        [ stop_block_ release ];
     }
 }
 
@@ -225,26 +203,25 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 +(BOOL)removeDownloadForURL:( NSURL* )url_
               localFilePath:( NSString* )local_file_path_
                       error:( NSError** )error_
-{ //http://cocoawithlove.com/2010/07/tips-tricks-for-conditional-ios3-ios32.html
-    AUTORELEASE_POOL_BEGIN
+{
+    @autoreleasepool
     {
         JFFDownloadItem* item_ = [ self downloadItemWithURL: url_ localFilePath: local_file_path_ error: error_ ];
         [ item_ removeDownload ];
         return item_ != nil;
     }
-    AUTORELEASE_POOL_END
    
     return NO;
 }
 
 -(void)addDelegate:( id< JFFDownloadItemDelegate > )delegate_
 {
-    [ self.multicastDelegate addDelegate: delegate_ ];
+    [ _multicastDelegate addDelegate: delegate_ ];
 }
 
 -(void)removeDelegate:( id< JFFDownloadItemDelegate > )delegate_
 {
-    [ self.multicastDelegate removeDelegate: delegate_ ];
+    [ _multicastDelegate removeDelegate: delegate_ ];
 }
 
 #pragma mark JFFURLConnection callbacks
@@ -253,15 +230,16 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 {
     self.stopBlock = nil;
     [ self closeFile ];
-    [ self.trafficCalculator stop ];
+    [ _trafficCalculator stop ];
+    _trafficCalculator = nil;
 }
 
 -(void)notifyFinishWithError:( NSError* )error_
 {
     if ( error_ )
-        [ self.multicastDelegate didFailLoadingOfDownloadItem: self error: error_ ];
+        [ _multicastDelegate didFailLoadingOfDownloadItem: self error: error_ ];
     else
-        [ self.multicastDelegate didFinishLoadingOfDownloadItem: self ];
+        [ _multicastDelegate didFinishLoadingOfDownloadItem: self ];
 }
 
 -(void)didFinishLoadedWithError:( NSError* )error_
@@ -278,7 +256,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     NSParameterAssert( canceled_ );
     [ self finalizeLoading ];
 
-    [ self.multicastDelegate didCancelLoadingOfDownloadItem: self ];
+    [ _multicastDelegate didCancelLoadingOfDownloadItem: self ];
 
     if ( cancel_callback_ )
         cancel_callback_( canceled_ );
@@ -287,23 +265,23 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 -(void)didReceiveData:( NSData* )data_
       progressHandler:( JFFAsyncOperationProgressHandler )progress_callback_
 {
-    if ( !_traffic_calculator )
+    if ( !_trafficCalculator )
         [ self.trafficCalculator startLoading ];
 
-    if ( !self.file )
-        self.file = [ JFFFileManager createFileForPath: self.localFilePath ];
+    if ( !_file )
+        _file = [ JFFFileManager createFileForPath: self.localFilePath ];
 
-    fwrite( [ data_ bytes ], 1, [ data_ length ], self.file );
-    fflush( self.file );
+    fwrite( [ data_ bytes ], 1, [ data_ length ], _file );
+    fflush( _file );
 
     [ self.trafficCalculator bytesReceived: data_.length ];
 
     self.downloadedFileLength += data_.length;
 
-    if ( ( self.progress - self.previousProgress ) > 0.005f )
+    if ( ( self.progress - _previousProgress ) > 0.005f )
     {
-        self.previousProgress = self.progress;
-        [ self.multicastDelegate didProgressChangeForDownloadItem: self ];
+        _previousProgress = self.progress;
+        [ _multicastDelegate didProgressChangeForDownloadItem: self ];
     }
 
     if ( progress_callback_ )
@@ -324,19 +302,19 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
         NSString* range_ = [ NSString stringWithFormat: @"bytes=%qu-", self.downloadedFileLength ];
         NSDictionary* headers_ = [ NSDictionary dictionaryWithObject: range_ forKey: @"Range" ];
 
-        JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+        JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
         params_.url     = self.url;
         params_.headers = headers_;
-        JFFURLConnection* connection_ = [ [ [ JFFURLConnection alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+        JFFURLConnection* connection_ = [ [ JFFURLConnection alloc ] initWithURLConnectionParams: params_ ];
 
-        progress_callback_ = [ [ progress_callback_ copy ] autorelease ];
+        progress_callback_ = [ progress_callback_ copy ];
         connection_.didReceiveDataBlock = ^( NSData* data_ )
         {
             [ self didReceiveData: data_ 
                   progressHandler: progress_callback_ ];
         };
 
-        done_callback_ = [ [ done_callback_ copy ] autorelease ];
+        done_callback_ = [ done_callback_ copy ];
         connection_.didFinishLoadingBlock = ^( NSError* error_ )
         {
             [ self didFinishLoadedWithError: error_ ];
@@ -350,24 +328,24 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
             [ self didReceiveResponse: response_ ];
         };
 
-        JFFCancelAyncOperationBlockHolder* cancelCallbackBlockHolder_ = [ [ JFFCancelAyncOperationBlockHolder new ] autorelease ];
-        cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
-        cancel_callback_ = ^( BOOL canceled_ )
+        JFFCancelAsyncOperationBlockHolder* cancelCallbackBlockHolder_ = [ JFFCancelAsyncOperationBlockHolder new ];
+        cancel_callback_ = [ cancel_callback_ copy ];
+        JFFCancelAsyncOperationHandler cancelCallbackWrapper_ = ^( BOOL canceled_ )
         {
             [ self didCancelWithFlag: canceled_ cancelCallback: cancel_callback_ ];
         };
-        cancelCallbackBlockHolder_.cancelBlock = cancel_callback_;
+        cancelCallbackBlockHolder_.cancelBlock = cancelCallbackWrapper_;
 
         [ connection_ start ];
 
-        [ self.multicastDelegate didProgressChangeForDownloadItem: self ];
+        [ _multicastDelegate didProgressChangeForDownloadItem: self ];
 
         self.stopBlock = ^void( BOOL canceled_ )
         {
             if ( canceled_ )
                 [ connection_ cancel ];
             else
-                NSAssert( NO, @"pass canceled_ as YES only" );
+                assert( NO );// pass canceled_ as YES only
 
             cancelCallbackBlockHolder_.onceCancelBlock( canceled_ );
         };
@@ -391,7 +369,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
   didChangeDownloadSpeed:( float )speed_
 {
     self.downlodingSpeed = speed_;
-    [ self.multicastDelegate didProgressChangeForDownloadItem: self ];
+    [ _multicastDelegate didProgressChangeForDownloadItem: self ];
 }
 
 @end
