@@ -20,14 +20,6 @@
 		1B1B280814D825A700FA5388 /* NSString+IsEmailValid.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1B280614D825A600FA5388 /* NSString+IsEmailValid.h */; };
 		1B1B280914D825A700FA5388 /* NSString+IsEmailValid.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B280714D825A600FA5388 /* NSString+IsEmailValid.m */; };
 		1B26EC5D14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC5C14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1B2A683F143F54F700BC284F /* NSObject+InstancesCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2A683D143F54F700BC284F /* NSObject+InstancesCount.h */; };
-		1B2A6840143F54F700BC284F /* NSObject+InstancesCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A683E143F54F700BC284F /* NSObject+InstancesCount.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1B3CDDD91445D75700733BE5 /* NSString+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDD71445D75700733BE5 /* NSString+XQueryComponents.h */; };
-		1B3CDDDA1445D75700733BE5 /* NSString+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDD81445D75700733BE5 /* NSString+XQueryComponents.m */; };
-		1B3CDDDD1445D9FD00733BE5 /* NSURL+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDDB1445D9FD00733BE5 /* NSURL+XQueryComponents.h */; };
-		1B3CDDDE1445D9FD00733BE5 /* NSURL+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDDC1445D9FD00733BE5 /* NSURL+XQueryComponents.m */; };
-		1B3CDDE11445DA7E00733BE5 /* NSDictionary+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDDF1445DA7E00733BE5 /* NSDictionary+XQueryComponents.h */; };
-		1B3CDDE21445DA7E00733BE5 /* NSDictionary+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE01445DA7E00733BE5 /* NSDictionary+XQueryComponents.m */; };
 		1B3CDDE51445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDE31445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h */; };
 		1B3CDDE61445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE41445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m */; };
 		1B3EE0361487D03A00BA6680 /* NSObject+ExpandArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3EE0341487D03A00BA6680 /* NSObject+ExpandArray.h */; };
@@ -67,6 +59,8 @@
 		1BD01FB71444824100A627B1 /* JFFResultContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01FB51444824100A627B1 /* JFFResultContext.m */; };
 		1BD1820D1467D71B0033BEFF /* JFFMutableAssignDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD1820B1467D71B0033BEFF /* JFFMutableAssignDictionary.h */; };
 		1BD1820E1467D71B0033BEFF /* JFFMutableAssignDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1820C1467D71B0033BEFF /* JFFMutableAssignDictionary.m */; };
+		1BE053071547E61A00270B58 /* NSSet+BlocksAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE053051547E61A00270B58 /* NSSet+BlocksAdditions.h */; };
+		1BE053081547E61A00270B58 /* NSSet+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053061547E61A00270B58 /* NSSet+BlocksAdditions.m */; };
 		1BE2ABEE14E524D0003097D3 /* UIColor+ColorForHex.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE2ABEC14E524D0003097D3 /* UIColor+ColorForHex.h */; };
 		1BE2ABEF14E524D0003097D3 /* UIColor+ColorForHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2ABED14E524D0003097D3 /* UIColor+ColorForHex.m */; };
 		1BE2ABF114E524DF003097D3 /* UIColor+ColorForHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2ABED14E524D0003097D3 /* UIColor+ColorForHex.m */; };
@@ -105,13 +99,9 @@
 		5391040614A88C04007315A3 /* JUArrayHelperBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 53BCF8E214323A4800E896B3 /* JUArrayHelperBlocks.h */; };
 		5391040714A88C04007315A3 /* NSArray+IsEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 53E366C61433760A002AB0B9 /* NSArray+IsEmpty.h */; };
 		5391040814A88C04007315A3 /* NSObject+Const0.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE75CFD1434B3450076E068 /* NSObject+Const0.h */; };
-		5391040914A88C04007315A3 /* NSObject+InstancesCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2A683D143F54F700BC284F /* NSObject+InstancesCount.h */; };
 		5391040A14A88C04007315A3 /* JFFSingleThreadProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD01FAF14447B7600A627B1 /* JFFSingleThreadProxy.h */; };
 		5391040B14A88C04007315A3 /* JFFResultContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD01FB41444824100A627B1 /* JFFResultContext.h */; };
 		5391040C14A88C04007315A3 /* JGCDAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B7608981444912F0059E977 /* JGCDAdditions.h */; };
-		5391040D14A88C04007315A3 /* NSString+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDD71445D75700733BE5 /* NSString+XQueryComponents.h */; };
-		5391040E14A88C04007315A3 /* NSURL+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDDB1445D9FD00733BE5 /* NSURL+XQueryComponents.h */; };
-		5391040F14A88C04007315A3 /* NSDictionary+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDDF1445DA7E00733BE5 /* NSDictionary+XQueryComponents.h */; };
 		5391041014A88C04007315A3 /* NSArray+NoThrowObjectAtIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDE31445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h */; };
 		5391041114A88C04007315A3 /* NSString+Trimm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B6AAD8C1447039B00EA1D96 /* NSString+Trimm.h */; };
 		5391041214A88C04007315A3 /* UIWebView+UserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676B9144C3FE900B14D49 /* UIWebView+UserAgent.h */; };
@@ -139,13 +129,9 @@
 		5391042A14A88C04007315A3 /* NSArray+RemoveDuplicates.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BCF8DF143239D100E896B3 /* NSArray+RemoveDuplicates.m */; };
 		5391042B14A88C04007315A3 /* NSArray+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E366C71433760A002AB0B9 /* NSArray+IsEmpty.m */; };
 		5391042C14A88C04007315A3 /* NSObject+Const0.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE75CFE1434B3450076E068 /* NSObject+Const0.m */; };
-		5391042D14A88C04007315A3 /* NSObject+InstancesCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A683E143F54F700BC284F /* NSObject+InstancesCount.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5391042E14A88C04007315A3 /* JFFSingleThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01FB014447B7600A627B1 /* JFFSingleThreadProxy.m */; };
 		5391042F14A88C04007315A3 /* JFFResultContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01FB51444824100A627B1 /* JFFResultContext.m */; };
 		5391043014A88C04007315A3 /* JGCDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7608991444912F0059E977 /* JGCDAdditions.m */; };
-		5391043114A88C04007315A3 /* NSString+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDD81445D75700733BE5 /* NSString+XQueryComponents.m */; };
-		5391043214A88C04007315A3 /* NSURL+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDDC1445D9FD00733BE5 /* NSURL+XQueryComponents.m */; };
-		5391043314A88C04007315A3 /* NSDictionary+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE01445DA7E00733BE5 /* NSDictionary+XQueryComponents.m */; };
 		5391043414A88C04007315A3 /* NSArray+NoThrowObjectAtIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE41445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m */; };
 		5391043514A88C04007315A3 /* NSString+Trimm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6AAD8D1447039B00EA1D96 /* NSString+Trimm.m */; };
 		5391043614A88C04007315A3 /* UIWebView+UserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676BA144C3FE900B14D49 /* UIWebView+UserAgent.m */; };
@@ -195,9 +181,6 @@
 		65802A95148BF4610040A93A /* NSString+ToURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676CD144C474500B14D49 /* NSString+ToURL.m */; };
 		65802A97148BF4640040A93A /* NSURL+ToURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676D1144C476600B14D49 /* NSURL+ToURL.m */; };
 		65802A98148BF4700040A93A /* NSThread+AssertMainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676BE144C409F00B14D49 /* NSThread+AssertMainThread.m */; };
-		65802A99148BF4750040A93A /* NSString+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDD81445D75700733BE5 /* NSString+XQueryComponents.m */; };
-		65802A9A148BF4780040A93A /* NSURL+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDDC1445D9FD00733BE5 /* NSURL+XQueryComponents.m */; };
-		65802A9B148BF47A0040A93A /* NSDictionary+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE01445DA7E00733BE5 /* NSDictionary+XQueryComponents.m */; };
 		65802A9C148BF4800040A93A /* JFFSimpleBlockHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE0A91390496200DD6890 /* JFFSimpleBlockHolder.m */; };
 		65802A9D148BF4820040A93A /* JFFOnDeallocBlockOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1C21391A25500DD6890 /* JFFOnDeallocBlockOwner.m */; };
 		65802A9E148BF4870040A93A /* NSString+Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE19C1391969A00DD6890 /* NSString+Search.m */; };
@@ -214,7 +197,6 @@
 		65802AA9148BF4AE0040A93A /* NSObject+OnDeallocBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1CC1391A36800DD6890 /* NSObject+OnDeallocBlock.m */; };
 		65802AAA148BF4B00040A93A /* NSObject+RuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */; };
 		65802AAB148BF4B20040A93A /* NSObject+Const0.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE75CFE1434B3450076E068 /* NSObject+Const0.m */; };
-		65802AAC148BF4B50040A93A /* NSObject+InstancesCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A683E143F54F700BC284F /* NSObject+InstancesCount.m */; };
 		7E57F42514F93738002D139B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		7E57F42B14F93738002D139B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E57F42914F93738002D139B /* InfoPlist.strings */; };
 		7E57F43114F937E0002D139B /* NSString+ToURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676CD144C474500B14D49 /* NSString+ToURL.m */; };
@@ -222,9 +204,6 @@
 		7E57F43514F937E0002D139B /* UIWebView+UserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676BA144C3FE900B14D49 /* UIWebView+UserAgent.m */; };
 		7E57F43714F937E0002D139B /* NSThread+AssertMainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676BE144C409F00B14D49 /* NSThread+AssertMainThread.m */; };
 		7E57F43914F937E0002D139B /* NSDecimalNumber+Increment.m in Sources */ = {isa = PBXBuildFile; fileRef = 538E1CAB14B32201006BD40A /* NSDecimalNumber+Increment.m */; };
-		7E57F43B14F937E0002D139B /* NSString+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDD81445D75700733BE5 /* NSString+XQueryComponents.m */; };
-		7E57F43D14F937E0002D139B /* NSURL+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDDC1445D9FD00733BE5 /* NSURL+XQueryComponents.m */; };
-		7E57F43F14F937E0002D139B /* NSDictionary+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE01445DA7E00733BE5 /* NSDictionary+XQueryComponents.m */; };
 		7E57F44214F937E0002D139B /* JFFSimpleBlockHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE0A91390496200DD6890 /* JFFSimpleBlockHolder.m */; };
 		7E57F44414F937E0002D139B /* JFFOnDeallocBlockOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1C21391A25500DD6890 /* JFFOnDeallocBlockOwner.m */; };
 		7E57F44814F937E0002D139B /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A3BB2414DAB2BF008B71BE /* NSString+Format.m */; };
@@ -243,7 +222,6 @@
 		7E57F46514F937E0002D139B /* NSObject+OnDeallocBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1CC1391A36800DD6890 /* NSObject+OnDeallocBlock.m */; };
 		7E57F46714F937E0002D139B /* NSObject+RuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */; };
 		7E57F46914F937E0002D139B /* NSObject+Const0.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE75CFE1434B3450076E068 /* NSObject+Const0.m */; };
-		7E57F46B14F937E0002D139B /* NSObject+InstancesCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A683E143F54F700BC284F /* NSObject+InstancesCount.m */; };
 		7E57F46D14F937E0002D139B /* NSObject+ExpandArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EE0351487D03A00BA6680 /* NSObject+ExpandArray.m */; };
 		7E57F46F14F937E0002D139B /* JFFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648BE013924326001E163C /* JFFError.m */; };
 		7E57F47114F937E0002D139B /* JFFAssignProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB67B1E13E980B70024EA6C /* JFFAssignProxy.m */; };
@@ -260,9 +238,6 @@
 		7E57F48714F93840002D139B /* UIWebView+UserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676B9144C3FE900B14D49 /* UIWebView+UserAgent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F48914F93840002D139B /* NSThread+AssertMainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676BD144C409E00B14D49 /* NSThread+AssertMainThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F48B14F93840002D139B /* NSDecimalNumber+Increment.h in Headers */ = {isa = PBXBuildFile; fileRef = 538E1CAA14B32201006BD40A /* NSDecimalNumber+Increment.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E57F48D14F93840002D139B /* NSString+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDD71445D75700733BE5 /* NSString+XQueryComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E57F48F14F93840002D139B /* NSURL+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDDB1445D9FD00733BE5 /* NSURL+XQueryComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E57F49114F93840002D139B /* NSDictionary+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDDF1445DA7E00733BE5 /* NSDictionary+XQueryComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F49314F93840002D139B /* JFFUtilsBlockDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE0A51390496200DD6890 /* JFFUtilsBlockDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F49414F93840002D139B /* JFFSimpleBlockHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE0A81390496200DD6890 /* JFFSimpleBlockHolder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F49614F93840002D139B /* JFFOnDeallocBlockOwner.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE1C11391A25500DD6890 /* JFFOnDeallocBlockOwner.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -283,7 +258,6 @@
 		7E57F4B714F93840002D139B /* NSObject+OnDeallocBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE1CB1391A36800DD6890 /* NSObject+OnDeallocBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4B914F93840002D139B /* NSObject+RuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D1DE52913AB8269001FD56F /* NSObject+RuntimeExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4BB14F93840002D139B /* NSObject+Const0.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE75CFD1434B3450076E068 /* NSObject+Const0.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E57F4BD14F93840002D139B /* NSObject+InstancesCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2A683D143F54F700BC284F /* NSObject+InstancesCount.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4BF14F93840002D139B /* NSObject+ExpandArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3EE0341487D03A00BA6680 /* NSObject+ExpandArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4C114F93840002D139B /* JFFError.h in Headers */ = {isa = PBXBuildFile; fileRef = 65648BDF13924326001E163C /* JFFError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4C314F93840002D139B /* JFFAssignProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DB67B1D13E980B70024EA6C /* JFFAssignProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -324,14 +298,6 @@
 		1B1B280614D825A600FA5388 /* NSString+IsEmailValid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+IsEmailValid.h"; sourceTree = "<group>"; };
 		1B1B280714D825A600FA5388 /* NSString+IsEmailValid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+IsEmailValid.m"; sourceTree = "<group>"; };
 		1B26EC5C14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationCenterNewFeaturesRuntime.m; sourceTree = "<group>"; };
-		1B2A683D143F54F700BC284F /* NSObject+InstancesCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+InstancesCount.h"; sourceTree = "<group>"; };
-		1B2A683E143F54F700BC284F /* NSObject+InstancesCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+InstancesCount.m"; sourceTree = "<group>"; };
-		1B3CDDD71445D75700733BE5 /* NSString+XQueryComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XQueryComponents.h"; sourceTree = "<group>"; };
-		1B3CDDD81445D75700733BE5 /* NSString+XQueryComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XQueryComponents.m"; sourceTree = "<group>"; };
-		1B3CDDDB1445D9FD00733BE5 /* NSURL+XQueryComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+XQueryComponents.h"; sourceTree = "<group>"; };
-		1B3CDDDC1445D9FD00733BE5 /* NSURL+XQueryComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+XQueryComponents.m"; sourceTree = "<group>"; };
-		1B3CDDDF1445DA7E00733BE5 /* NSDictionary+XQueryComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+XQueryComponents.h"; sourceTree = "<group>"; };
-		1B3CDDE01445DA7E00733BE5 /* NSDictionary+XQueryComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+XQueryComponents.m"; sourceTree = "<group>"; };
 		1B3CDDE31445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+NoThrowObjectAtIndex.h"; sourceTree = "<group>"; };
 		1B3CDDE41445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+NoThrowObjectAtIndex.m"; sourceTree = "<group>"; };
 		1B3EE0341487D03A00BA6680 /* NSObject+ExpandArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ExpandArray.h"; sourceTree = "<group>"; };
@@ -372,6 +338,8 @@
 		1BD01FB51444824100A627B1 /* JFFResultContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFResultContext.m; sourceTree = "<group>"; };
 		1BD1820B1467D71B0033BEFF /* JFFMutableAssignDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFMutableAssignDictionary.h; sourceTree = "<group>"; };
 		1BD1820C1467D71B0033BEFF /* JFFMutableAssignDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMutableAssignDictionary.m; sourceTree = "<group>"; };
+		1BE053051547E61A00270B58 /* NSSet+BlocksAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+BlocksAdditions.h"; sourceTree = "<group>"; };
+		1BE053061547E61A00270B58 /* NSSet+BlocksAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+BlocksAdditions.m"; sourceTree = "<group>"; };
 		1BE2ABEC14E524D0003097D3 /* UIColor+ColorForHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorForHex.h"; sourceTree = "<group>"; };
 		1BE2ABED14E524D0003097D3 /* UIColor+ColorForHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorForHex.m"; sourceTree = "<group>"; };
 		1BE75CFD1434B3450076E068 /* NSObject+Const0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Const0.h"; sourceTree = "<group>"; };
@@ -523,19 +491,6 @@
 			path = NSNotificationCenter;
 			sourceTree = "<group>";
 		};
-		1B3CDDD51445D73A00733BE5 /* XQueryComponents */ = {
-			isa = PBXGroup;
-			children = (
-				1B3CDDD71445D75700733BE5 /* NSString+XQueryComponents.h */,
-				1B3CDDD81445D75700733BE5 /* NSString+XQueryComponents.m */,
-				1B3CDDDB1445D9FD00733BE5 /* NSURL+XQueryComponents.h */,
-				1B3CDDDC1445D9FD00733BE5 /* NSURL+XQueryComponents.m */,
-				1B3CDDDF1445DA7E00733BE5 /* NSDictionary+XQueryComponents.h */,
-				1B3CDDE01445DA7E00733BE5 /* NSDictionary+XQueryComponents.m */,
-			);
-			path = XQueryComponents;
-			sourceTree = "<group>";
-		};
 		1B909B7B14EA918800B19283 /* MemoryManagement */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,6 +525,8 @@
 				1BADF1BF14EBEA3000A80A7F /* NSDate+TimeZone.m */,
 				1B10109514ED598300B9E6F4 /* NSError+setToPointer.h */,
 				1B10109614ED598300B9E6F4 /* NSError+setToPointer.m */,
+				1BE053051547E61A00270B58 /* NSSet+BlocksAdditions.h */,
+				1BE053061547E61A00270B58 /* NSSet+BlocksAdditions.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -634,8 +591,6 @@
 				8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */,
 				1BE75CFD1434B3450076E068 /* NSObject+Const0.h */,
 				1BE75CFE1434B3450076E068 /* NSObject+Const0.m */,
-				1B2A683D143F54F700BC284F /* NSObject+InstancesCount.h */,
-				1B2A683E143F54F700BC284F /* NSObject+InstancesCount.m */,
 				1B3EE0341487D03A00BA6680 /* NSObject+ExpandArray.h */,
 				1B3EE0351487D03A00BA6680 /* NSObject+ExpandArray.m */,
 				1BBD97DE15249C4200A34E64 /* NSObject+IsEqualTwoObjects.h */,
@@ -653,7 +608,6 @@
 				1B26EC5B14DABADA00A1A875 /* NSNotificationCenter */,
 				1BA676CB144C473500B14D49 /* ToURL */,
 				1BA676B7144C3FB600B14D49 /* Extensions */,
-				1B3CDDD51445D73A00733BE5 /* XQueryComponents */,
 				651BE0A41390496200DD6890 /* Blocks */,
 				651BE19A1391969300DD6890 /* NSString */,
 				651BE0AA1390496200DD6890 /* NSArray */,
@@ -782,13 +736,9 @@
 				5391040614A88C04007315A3 /* JUArrayHelperBlocks.h in Headers */,
 				5391040714A88C04007315A3 /* NSArray+IsEmpty.h in Headers */,
 				5391040814A88C04007315A3 /* NSObject+Const0.h in Headers */,
-				5391040914A88C04007315A3 /* NSObject+InstancesCount.h in Headers */,
 				5391040A14A88C04007315A3 /* JFFSingleThreadProxy.h in Headers */,
 				5391040B14A88C04007315A3 /* JFFResultContext.h in Headers */,
 				5391040C14A88C04007315A3 /* JGCDAdditions.h in Headers */,
-				5391040D14A88C04007315A3 /* NSString+XQueryComponents.h in Headers */,
-				5391040E14A88C04007315A3 /* NSURL+XQueryComponents.h in Headers */,
-				5391040F14A88C04007315A3 /* NSDictionary+XQueryComponents.h in Headers */,
 				5391041014A88C04007315A3 /* NSArray+NoThrowObjectAtIndex.h in Headers */,
 				5391041114A88C04007315A3 /* NSString+Trimm.h in Headers */,
 				5391041214A88C04007315A3 /* UIWebView+UserAgent.h in Headers */,
@@ -823,9 +773,6 @@
 				7E57F48714F93840002D139B /* UIWebView+UserAgent.h in Headers */,
 				7E57F48914F93840002D139B /* NSThread+AssertMainThread.h in Headers */,
 				7E57F48B14F93840002D139B /* NSDecimalNumber+Increment.h in Headers */,
-				7E57F48D14F93840002D139B /* NSString+XQueryComponents.h in Headers */,
-				7E57F48F14F93840002D139B /* NSURL+XQueryComponents.h in Headers */,
-				7E57F49114F93840002D139B /* NSDictionary+XQueryComponents.h in Headers */,
 				7E57F49314F93840002D139B /* JFFUtilsBlockDefinitions.h in Headers */,
 				7E57F49414F93840002D139B /* JFFSimpleBlockHolder.h in Headers */,
 				7E57F49614F93840002D139B /* JFFOnDeallocBlockOwner.h in Headers */,
@@ -846,7 +793,6 @@
 				7E57F4B714F93840002D139B /* NSObject+OnDeallocBlock.h in Headers */,
 				7E57F4B914F93840002D139B /* NSObject+RuntimeExtensions.h in Headers */,
 				7E57F4BB14F93840002D139B /* NSObject+Const0.h in Headers */,
-				7E57F4BD14F93840002D139B /* NSObject+InstancesCount.h in Headers */,
 				7E57F4BF14F93840002D139B /* NSObject+ExpandArray.h in Headers */,
 				7E57F4C114F93840002D139B /* JFFError.h in Headers */,
 				7E57F4C314F93840002D139B /* JFFAssignProxy.h in Headers */,
@@ -887,13 +833,9 @@
 				53BCF8E314323A4800E896B3 /* JUArrayHelperBlocks.h in Headers */,
 				53E366C81433760A002AB0B9 /* NSArray+IsEmpty.h in Headers */,
 				1BE75CFF1434B3450076E068 /* NSObject+Const0.h in Headers */,
-				1B2A683F143F54F700BC284F /* NSObject+InstancesCount.h in Headers */,
 				1BD01FB114447B7600A627B1 /* JFFSingleThreadProxy.h in Headers */,
 				1BD01FB61444824100A627B1 /* JFFResultContext.h in Headers */,
 				1B76089A1444912F0059E977 /* JGCDAdditions.h in Headers */,
-				1B3CDDD91445D75700733BE5 /* NSString+XQueryComponents.h in Headers */,
-				1B3CDDDD1445D9FD00733BE5 /* NSURL+XQueryComponents.h in Headers */,
-				1B3CDDE11445DA7E00733BE5 /* NSDictionary+XQueryComponents.h in Headers */,
 				1B3CDDE51445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h in Headers */,
 				1B6AAD8E1447039B00EA1D96 /* NSString+Trimm.h in Headers */,
 				1BA676BB144C3FE900B14D49 /* UIWebView+UserAgent.h in Headers */,
@@ -919,6 +861,7 @@
 				1B054D4F1521C6F4008E4B9E /* NSDictionary+BlocksAdditions.h in Headers */,
 				1B054D531521C739008E4B9E /* NSDictionary+JFFExtendedDictionary.h in Headers */,
 				1BBD97E015249C4200A34E64 /* NSObject+IsEqualTwoObjects.h in Headers */,
+				1BE053071547E61A00270B58 /* NSSet+BlocksAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,13 +1050,9 @@
 				5391042A14A88C04007315A3 /* NSArray+RemoveDuplicates.m in Sources */,
 				5391042B14A88C04007315A3 /* NSArray+IsEmpty.m in Sources */,
 				5391042C14A88C04007315A3 /* NSObject+Const0.m in Sources */,
-				5391042D14A88C04007315A3 /* NSObject+InstancesCount.m in Sources */,
 				5391042E14A88C04007315A3 /* JFFSingleThreadProxy.m in Sources */,
 				5391042F14A88C04007315A3 /* JFFResultContext.m in Sources */,
 				5391043014A88C04007315A3 /* JGCDAdditions.m in Sources */,
-				5391043114A88C04007315A3 /* NSString+XQueryComponents.m in Sources */,
-				5391043214A88C04007315A3 /* NSURL+XQueryComponents.m in Sources */,
-				5391043314A88C04007315A3 /* NSDictionary+XQueryComponents.m in Sources */,
 				5391043414A88C04007315A3 /* NSArray+NoThrowObjectAtIndex.m in Sources */,
 				5391043514A88C04007315A3 /* NSString+Trimm.m in Sources */,
 				5391043614A88C04007315A3 /* UIWebView+UserAgent.m in Sources */,
@@ -1145,9 +1084,6 @@
 				65802A95148BF4610040A93A /* NSString+ToURL.m in Sources */,
 				65802A97148BF4640040A93A /* NSURL+ToURL.m in Sources */,
 				65802A98148BF4700040A93A /* NSThread+AssertMainThread.m in Sources */,
-				65802A99148BF4750040A93A /* NSString+XQueryComponents.m in Sources */,
-				65802A9A148BF4780040A93A /* NSURL+XQueryComponents.m in Sources */,
-				65802A9B148BF47A0040A93A /* NSDictionary+XQueryComponents.m in Sources */,
 				65802A9C148BF4800040A93A /* JFFSimpleBlockHolder.m in Sources */,
 				65802A9D148BF4820040A93A /* JFFOnDeallocBlockOwner.m in Sources */,
 				65802A9E148BF4870040A93A /* NSString+Search.m in Sources */,
@@ -1164,7 +1100,6 @@
 				65802AA9148BF4AE0040A93A /* NSObject+OnDeallocBlock.m in Sources */,
 				65802AAA148BF4B00040A93A /* NSObject+RuntimeExtensions.m in Sources */,
 				65802AAB148BF4B20040A93A /* NSObject+Const0.m in Sources */,
-				65802AAC148BF4B50040A93A /* NSObject+InstancesCount.m in Sources */,
 				5349A6C714A9CEA7008ECCA6 /* JFFCastFunctions.mm in Sources */,
 				538E1CB014B32201006BD40A /* NSDecimalNumber+Increment.m in Sources */,
 			);
@@ -1179,9 +1114,6 @@
 				7E57F43514F937E0002D139B /* UIWebView+UserAgent.m in Sources */,
 				7E57F43714F937E0002D139B /* NSThread+AssertMainThread.m in Sources */,
 				7E57F43914F937E0002D139B /* NSDecimalNumber+Increment.m in Sources */,
-				7E57F43B14F937E0002D139B /* NSString+XQueryComponents.m in Sources */,
-				7E57F43D14F937E0002D139B /* NSURL+XQueryComponents.m in Sources */,
-				7E57F43F14F937E0002D139B /* NSDictionary+XQueryComponents.m in Sources */,
 				7E57F44214F937E0002D139B /* JFFSimpleBlockHolder.m in Sources */,
 				7E57F44414F937E0002D139B /* JFFOnDeallocBlockOwner.m in Sources */,
 				7E57F44814F937E0002D139B /* NSString+Format.m in Sources */,
@@ -1200,7 +1132,6 @@
 				7E57F46514F937E0002D139B /* NSObject+OnDeallocBlock.m in Sources */,
 				7E57F46714F937E0002D139B /* NSObject+RuntimeExtensions.m in Sources */,
 				7E57F46914F937E0002D139B /* NSObject+Const0.m in Sources */,
-				7E57F46B14F937E0002D139B /* NSObject+InstancesCount.m in Sources */,
 				7E57F46D14F937E0002D139B /* NSObject+ExpandArray.m in Sources */,
 				7E57F46F14F937E0002D139B /* JFFError.m in Sources */,
 				7E57F47114F937E0002D139B /* JFFAssignProxy.m in Sources */,
@@ -1236,13 +1167,9 @@
 				53BCF8E1143239D100E896B3 /* NSArray+RemoveDuplicates.m in Sources */,
 				53E366C91433760A002AB0B9 /* NSArray+IsEmpty.m in Sources */,
 				1BE75D001434B3450076E068 /* NSObject+Const0.m in Sources */,
-				1B2A6840143F54F700BC284F /* NSObject+InstancesCount.m in Sources */,
 				1BD01FB214447B7600A627B1 /* JFFSingleThreadProxy.m in Sources */,
 				1BD01FB71444824100A627B1 /* JFFResultContext.m in Sources */,
 				1B76089B1444912F0059E977 /* JGCDAdditions.m in Sources */,
-				1B3CDDDA1445D75700733BE5 /* NSString+XQueryComponents.m in Sources */,
-				1B3CDDDE1445D9FD00733BE5 /* NSURL+XQueryComponents.m in Sources */,
-				1B3CDDE21445DA7E00733BE5 /* NSDictionary+XQueryComponents.m in Sources */,
 				1B3CDDE61445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m in Sources */,
 				1B6AAD8F1447039B00EA1D96 /* NSString+Trimm.m in Sources */,
 				1BA676BC144C3FE900B14D49 /* UIWebView+UserAgent.m in Sources */,
@@ -1270,6 +1197,7 @@
 				1B054D501521C6F4008E4B9E /* NSDictionary+BlocksAdditions.m in Sources */,
 				1B054D541521C739008E4B9E /* NSDictionary+JFFExtendedDictionary.m in Sources */,
 				1BBD97E115249C4200A34E64 /* NSObject+IsEqualTwoObjects.m in Sources */,
+				1BE053081547E61A00270B58 /* NSSet+BlocksAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

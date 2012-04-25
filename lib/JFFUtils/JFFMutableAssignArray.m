@@ -122,4 +122,24 @@
     return result_;
 }
 
+-(id)firstMatch:( JFFPredicateBlock )predicate_
+{
+    for ( JFFAutoRemoveAssignProxy* proxy_ in _mutableArray )
+    {
+        if ( predicate_( proxy_.target ) )
+            return proxy_.target;
+    }
+    return nil;
+}
+
+-(void)enumerateObjectsUsingBlock:( void (^)( id, NSUInteger, BOOL* ) )block_
+{
+    [ _mutableArray enumerateObjectsUsingBlock: ^void( JFFAutoRemoveAssignProxy* proxy_
+                                                      , NSUInteger midx_
+                                                      , BOOL* mstop_ )
+    {
+        block_( proxy_.target, midx_, mstop_ );
+    } ];
+}
+
 @end

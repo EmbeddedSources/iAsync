@@ -38,23 +38,31 @@
 {
     SEL selector_ = [ invocation_ selector ];
 
-    for ( id delegate_ in _delegates.array )
+    [ _delegates enumerateObjectsUsingBlock: ^void( id delegate_
+                                                   , NSUInteger idx_
+                                                   , BOOL* stop_ )
     {
         if ( [ delegate_ respondsToSelector: selector_ ] )
         {
             [ invocation_ invokeWithTarget: delegate_ ];
         }
-    }
+    } ];
 }
 
 -(NSMethodSignature*)methodSignatureForSelector:( SEL )selector_
 {
-    for( id delegate_ in _delegates.array )
+    __block NSMethodSignature* result_ = nil;
+    [ _delegates enumerateObjectsUsingBlock: ^void( id delegate_
+                                                   , NSUInteger idx_
+                                                   , BOOL* stop_ )
     {
-        NSMethodSignature* result_ = [ delegate_ methodSignatureForSelector: selector_ ];
+        result_ = [ delegate_ methodSignatureForSelector: selector_ ];
         if( result_ )
-            return result_;
-    }
+            *stop_ = YES;
+    } ];
+
+    if ( result_ )
+        return result_;
 
     return [ [ self class ] instanceMethodSignatureForSelector: @selector( doNothing ) ];
 }

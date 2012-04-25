@@ -24,10 +24,6 @@
 #import <JFFUtils/ToURL/NSString+ToURL.h>
 #import <JFFUtils/ToURL/NSURL+ToURL.h>
 
-#import <JFFUtils/XQueryComponents/NSString+XQueryComponents.h>
-#import <JFFUtils/XQueryComponents/NSURL+XQueryComponents.h>
-#import <JFFUtils/XQueryComponents/NSDictionary+XQueryComponents.h>
-
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 #import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
 
@@ -37,6 +33,7 @@
 #import <JFFUtils/Extensions/UIColor+ColorForHex.h>
 #import <JFFUtils/Extensions/NSDate+TimeZone.h>
 #import <JFFUtils/Extensions/NSError+setToPointer.h>
+#import <JFFUtils/Extensions/NSSet+BlocksAdditions.h>
 
 #import <JFFUtils/Dictionary/NSDictionary+BlocksAdditions.h>
 #import <JFFUtils/Dictionary/NSDictionary+JFFExtendedDictionary.h>

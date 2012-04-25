@@ -1,7 +1,10 @@
+#import <JFFUtils/NSArray/JUArrayHelperBlocks.h>
+
 #import <Foundation/Foundation.h>
 
 @interface JFFMutableAssignArray : NSObject
 
+//JTODO remove array property
 @property ( nonatomic, copy, readonly ) NSArray* array;
 
 +(id)arrayWithObject:( id )anObject_;
@@ -13,5 +16,8 @@
 -(void)removeAllObjects;
 
 -(NSUInteger)count;
+
+-(id)firstMatch:( JFFPredicateBlock )predicate_;
+-(void)enumerateObjectsUsingBlock:( void (^)( id obj, NSUInteger idx, BOOL* stop ) )block_;
 
 @end

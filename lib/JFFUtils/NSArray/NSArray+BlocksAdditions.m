@@ -29,7 +29,7 @@
 
 -(NSArray*)map:( JFFMappingBlock )block_
 {
-    NSMutableArray* result_ = [ NSMutableArray arrayWithCapacity: [ self count ] ];
+    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
 
     [ self each: ^void( id object_ ) { [ result_ addObject: block_( object_ ) ]; } ];
 
@@ -52,7 +52,7 @@
 +(id)arrayWithSize:( NSUInteger )size_
           producer:( JFFProducerBlock )block_
 {
-    NSMutableArray* result_ = [ NSMutableArray arrayWithCapacity: size_ ];
+    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: size_ ];
 
     for ( NSUInteger index_ = 0; index_ < size_; ++index_ )
     {

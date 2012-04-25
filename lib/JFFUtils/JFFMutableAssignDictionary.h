@@ -15,7 +15,4 @@
 
 -(void)removeAllObjects;
 
--(NSArray*)allKeys;
--(NSArray*)allValues;
-
 @end

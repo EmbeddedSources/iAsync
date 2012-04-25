@@ -20,10 +20,10 @@
 -(void)onAddToMutableAssignDictionary:( JFFMutableAssignDictionary* )dict_
                                   key:( id )key_
 {
-    __unsafe_unretained JFFMutableAssignDictionary* assign_dict_ = dict_;
+    __unsafe_unretained JFFMutableAssignDictionary* assignDict_ = dict_;
     self.onDeallocBlock = ^void( void )
     {
-        [ assign_dict_ removeObjectForKey: key_ ];
+        [ assignDict_ removeObjectForKey: key_ ];
     };
     [ self.target addOnDeallocBlock: self.onDeallocBlock ];
 }
@@ -53,10 +53,12 @@
 
 -(void)removeAllObjects
 {
-    for( JFFAutoRemoveFromDictAssignProxy* proxy_ in [ mutableDictionary allValues ] )
+    [ mutableDictionary enumerateKeysAndObjectsUsingBlock: ^( id key
+                                                             , JFFAutoRemoveFromDictAssignProxy* proxy_
+                                                             , BOOL* stop )
     {
         [  proxy_ onRemoveFromMutableAssignDictionary: self ];
-    }
+    } ];
     [ mutableDictionary removeAllObjects ];
 }
 
@@ -126,19 +128,6 @@
 -(NSString*)description
 {
     return [ mutableDictionary description ];
-}
-
--(NSArray*)allKeys
-{
-    return [ mutableDictionary allKeys ];
-}
-
--(NSArray*)allValues
-{
-    return [ [ mutableDictionary allValues ] map: ^id( JFFAutoRemoveFromDictAssignProxy* proxy_ )
-    { 
-        return proxy_.target;
-    } ];
 }
 
 @end
