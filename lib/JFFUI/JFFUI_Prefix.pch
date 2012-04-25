@@ -1,0 +1,12 @@
+//
+// Prefix header for all source files of the 'CocoaTouchStaticLibrary' target in the 'CocoaTouchStaticLibrary' project.
+//
+
+#ifdef __OBJC__
+   #import <JFFUtils/JFFUtils.h>
+   #import <Foundation/Foundation.h>
+   #import <UIKit/UIKit.h>
+
+   #include <objc/runtime.h>
+   #include <objc/message.h>
+#endif
