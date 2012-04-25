@@ -10,10 +10,10 @@
     //!c TODO : provide a better mock
 
     //Our build server
-    NSURL* data_url_ = [ NSURL URLWithString: @"http://10.28.9.57:9000/about/" ];
-    NSData* expected_data_ = [ NSData dataWithContentsOfURL: data_url_ ];
+    NSURL* dataUrl_ = [ NSURL URLWithString: @"http://10.28.9.57:9000/about/" ];
+    NSData* expected_data_ = [ [ NSData alloc ] initWithContentsOfURL: dataUrl_ ];
 
-    JFFAsyncOperation loader_ = dataURLResponseLoader( data_url_, nil, nil );
+    JFFAsyncOperation loader_ = dataURLResponseLoader( dataUrl_, nil, nil );
 
     loader_( nil, nil, ^void( id result_, NSError* error_ ) 
     {
