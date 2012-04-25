@@ -1,0 +1,9 @@
+//
+// Prefix header for all source files of the 'JFFTestTools' target in the 'JFFTestTools' project
+//
+
+#ifdef __OBJC__
+    #import <GHUnitIOS/GHUnit.h>
+
+    #import <Foundation/Foundation.h>
+#endif

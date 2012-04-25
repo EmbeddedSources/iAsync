@@ -1,0 +1,256 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1BE0542F154826DA00270B58 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE0542E154826DA00270B58 /* Foundation.framework */; };
+		1BE054431548273000270B58 /* GHAsyncTestCase+MainThreadTests.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE054411548273000270B58 /* GHAsyncTestCase+MainThreadTests.h */; };
+		1BE054441548273000270B58 /* GHAsyncTestCase+MainThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE054421548273000270B58 /* GHAsyncTestCase+MainThreadTests.m */; };
+		1BE054B0154828F000270B58 /* NSObject+InstancesCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE054AE154828EF00270B58 /* NSObject+InstancesCount.h */; };
+		1BE054B1154828F000270B58 /* NSObject+InstancesCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE054AF154828EF00270B58 /* NSObject+InstancesCount.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1BE0542B154826DA00270B58 /* libJFFTestTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFTestTools.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BE0542E154826DA00270B58 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1BE05432154826DA00270B58 /* JFFTestTools-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFTestTools-Prefix.pch"; sourceTree = "<group>"; };
+		1BE054411548273000270B58 /* GHAsyncTestCase+MainThreadTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GHAsyncTestCase+MainThreadTests.h"; sourceTree = "<group>"; };
+		1BE054421548273000270B58 /* GHAsyncTestCase+MainThreadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GHAsyncTestCase+MainThreadTests.m"; sourceTree = "<group>"; };
+		1BE054AE154828EF00270B58 /* NSObject+InstancesCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+InstancesCount.h"; sourceTree = "<group>"; };
+		1BE054AF154828EF00270B58 /* NSObject+InstancesCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+InstancesCount.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1BE05428154826DA00270B58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE0542F154826DA00270B58 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1BE05420154826DA00270B58 = {
+			isa = PBXGroup;
+			children = (
+				1BE05430154826DA00270B58 /* JFFTestTools */,
+				1BE0542D154826DA00270B58 /* Frameworks */,
+				1BE0542C154826DA00270B58 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1BE0542C154826DA00270B58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1BE0542B154826DA00270B58 /* libJFFTestTools.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1BE0542D154826DA00270B58 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1BE0542E154826DA00270B58 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1BE05430154826DA00270B58 /* JFFTestTools */ = {
+			isa = PBXGroup;
+			children = (
+				1BE054AE154828EF00270B58 /* NSObject+InstancesCount.h */,
+				1BE054AF154828EF00270B58 /* NSObject+InstancesCount.m */,
+				1BE054411548273000270B58 /* GHAsyncTestCase+MainThreadTests.h */,
+				1BE054421548273000270B58 /* GHAsyncTestCase+MainThreadTests.m */,
+				1BE05431154826DA00270B58 /* Supporting Files */,
+			);
+			path = JFFTestTools;
+			sourceTree = "<group>";
+		};
+		1BE05431154826DA00270B58 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1BE05432154826DA00270B58 /* JFFTestTools-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1BE05429154826DA00270B58 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE054431548273000270B58 /* GHAsyncTestCase+MainThreadTests.h in Headers */,
+				1BE054B0154828F000270B58 /* NSObject+InstancesCount.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1BE0542A154826DA00270B58 /* JFFTestTools */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BE05438154826DA00270B58 /* Build configuration list for PBXNativeTarget "JFFTestTools" */;
+			buildPhases = (
+				1BE05427154826DA00270B58 /* Sources */,
+				1BE05428154826DA00270B58 /* Frameworks */,
+				1BE05429154826DA00270B58 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JFFTestTools;
+			productName = JFFTestTools;
+			productReference = 1BE0542B154826DA00270B58 /* libJFFTestTools.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1BE05422154826DA00270B58 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 1BE05425154826DA00270B58 /* Build configuration list for PBXProject "JFFTestTools" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1BE05420154826DA00270B58;
+			productRefGroup = 1BE0542C154826DA00270B58 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1BE0542A154826DA00270B58 /* JFFTestTools */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1BE05427154826DA00270B58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE054441548273000270B58 /* GHAsyncTestCase+MainThreadTests.m in Sources */,
+				1BE054B1154828F000270B58 /* NSObject+InstancesCount.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1BE05436154826DA00270B58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1BE05437154826DA00270B58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1BE05439154826DA00270B58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/JFFTestTools.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFTestTools/JFFTestTools-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1BE0543A154826DA00270B58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/JFFTestTools.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFTestTools/JFFTestTools-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1BE05425154826DA00270B58 /* Build configuration list for PBXProject "JFFTestTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE05436154826DA00270B58 /* Debug */,
+				1BE05437154826DA00270B58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BE05438154826DA00270B58 /* Build configuration list for PBXNativeTarget "JFFTestTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE05439154826DA00270B58 /* Debug */,
+				1BE0543A154826DA00270B58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1BE05422154826DA00270B58 /* Project object */;
+}
