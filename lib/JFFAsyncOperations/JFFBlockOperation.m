@@ -126,15 +126,19 @@
     } );
 }
 
-+(id)performOperationWithLoadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
-                      didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_
-                         progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_
++(id)performOperationWithQueueName:( NSString* )queueName_
+                     loadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
+                  didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_
+                     progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_
 {
     NSParameterAssert( loadDataBlock_ );
     NSParameterAssert( didLoadDataBlock_ );
 
     dispatch_queue_t currentQueue_ = dispatch_get_current_queue();
-    dispatch_queue_t queue_        = dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+    dispatch_queue_t queue_        = [ queueName_ length ] != 0
+        ? dispatch_queue_create( [ queueName_ cStringUsingEncoding: NSUTF8StringEncoding ], DISPATCH_QUEUE_CONCURRENT )
+        : dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 );
 
     NSAssert( currentQueue_ != queue_, @"Invalid run queue" );
 

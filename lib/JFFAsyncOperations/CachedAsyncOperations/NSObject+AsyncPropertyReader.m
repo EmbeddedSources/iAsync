@@ -40,13 +40,18 @@
 
 -(BOOL)hasAsyncPropertyDelegates
 {
-    for ( NSObject* value_ in [ self allValues ] )
+    __block BOOL result_ = NO;
+
+    [ self enumerateKeysAndObjectsUsingBlock: ^void( id key, id value_, BOOL* stop )
     {
         if ( [ value_ hasAsyncPropertyDelegates ] )
-            return YES;
-    }
+        {
+            *stop = YES;
+            result_ = YES;
+        }
+    } ];
 
-    return NO;
+    return result_;
 }
 
 @end
@@ -115,19 +120,19 @@ static JFFCancelAsyncOperation cancelBlock( JFFPropertyExtractor* property_extra
     };
 }
 
-static JFFDidFinishAsyncOperationHandler doneCallbackBlock( JFFPropertyExtractor* property_extractor_ )
+static JFFDidFinishAsyncOperationHandler doneCallbackBlock( JFFPropertyExtractor* propertyExtractor_ )
 {
     return ^void( id result_, NSError* error_ )
     {
         if ( !result_ && !error_ )
         {
             NSLog( @"Assert propertyPath object: %@ propertyPath: %@"
-                  , property_extractor_.object
-                  , property_extractor_.propertyPath );
+                  , propertyExtractor_.object
+                  , propertyExtractor_.propertyPath );
             assert( 0 );//@"should be result or error"
         }
 
-        NSArray* copy_delegates_ = [ property_extractor_.delegates map: ^id( id obj_ )
+        NSArray* copy_delegates_ = [ propertyExtractor_.delegates map: ^id( id obj_ )
         {
             JFFCallbacksBlocksHolder* callback_ = obj_;
             return [ [ JFFCallbacksBlocksHolder alloc ] initWithOnProgressBlock: callback_.onProgressBlock
@@ -135,17 +140,17 @@ static JFFDidFinishAsyncOperationHandler doneCallbackBlock( JFFPropertyExtractor
                                                                didLoadDataBlock: callback_.didLoadDataBlock ];
         } ];
 
-        JFFDidFinishAsyncOperationHandler finish_block_ = [ property_extractor_.didFinishBlock copy ];
+        JFFDidFinishAsyncOperationHandler finish_block_ = [ propertyExtractor_.didFinishBlock copy ];
 
-        property_extractor_.property = result_;
+        propertyExtractor_.property = result_;
 
         if ( finish_block_ )
         {
             finish_block_( result_, error_ );
-            result_ = property_extractor_.property;
+            result_ = propertyExtractor_.property;
         }
 
-        clearDataForPropertyExtractor( property_extractor_ );
+        clearDataForPropertyExtractor( propertyExtractor_ );
 
         [ copy_delegates_ each: ^void( id obj_ )
         {
@@ -210,7 +215,7 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
 
     asyncOperation_     = [ asyncOperation_     copy ];
     didFinishOperation_ = [ didFinishOperation_ copy ];
-    factory_            = [ factory_            copy ];
+    factory_            = [ factory_ copy ];
 
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
                                     , JFFCancelAsyncOperationHandler cancelCallback_

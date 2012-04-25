@@ -2,9 +2,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^JFFAsyncOperationInterfaceHandler)( id, NSError* );
+
 @protocol JFFAsyncOperationInterface < NSObject >
 
--(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
+-(void)asyncOperationWithResultHandler:( JFFAsyncOperationInterfaceHandler )handler_
                        progressHandler:( void (^)( id ) )progress_;
 
 -(void)cancel:( BOOL )canceled_;

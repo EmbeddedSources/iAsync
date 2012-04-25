@@ -4,9 +4,10 @@
 
 @interface JFFBlockOperation : NSObject
 
-+(id)performOperationWithLoadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
-                      didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_
-                         progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_;
++(id)performOperationWithQueueName:( NSString* )queueName_
+                     loadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
+                  didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_
+                     progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_;
 
 -(void)cancel;
 

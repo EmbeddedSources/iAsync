@@ -38,6 +38,8 @@ JFFAsyncOperation asyncOperationWithResultOrError( JFFAsyncOperation loader_
 
 JFFAsyncOperation asyncOperationWithDelay( NSTimeInterval delay_ );
 
+JFFAsyncOperation ignorePregressLoader( JFFAsyncOperation loader_ );
+
 ///////////////////////////////////// SEQUENCE /////////////////////////////////////
 
 JFFAnalyzer analyzerAsSequenceOfAnalyzers( JFFAnalyzer firstAnalyzer_, ... );

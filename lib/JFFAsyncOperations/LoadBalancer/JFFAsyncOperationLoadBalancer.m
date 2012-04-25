@@ -4,7 +4,7 @@
 #import "JFFPedingLoaderData.h"
 #import "JFFAsyncOperationLoadBalancerContexts.h"
 #import "JFFAsyncOperationProgressBlockHolder.h"
-#import "JFFCancelAyncOperationBlockHolder.h"
+#import "JFFCancelAsyncOperationBlockHolder.h"
 #import "JFFDidFinishAsyncOperationBlockHolder.h"
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 
@@ -206,7 +206,7 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
         __block BOOL done_ = NO;
 
         //cancel holder for unsubscribe
-        JFFCancelAyncOperationBlockHolder* cancel_callback_block_holder_ = [ [ JFFCancelAyncOperationBlockHolder new ] autorelease ];
+        JFFCancelAsyncOperationBlockHolder* cancel_callback_block_holder_ = [ [ JFFCancelAsyncOperationBlockHolder new ] autorelease ];
         cancel_callback_block_holder_.cancelBlock = native_cancel_callback_;
         JFFCancelAsyncOperation wrapped_cancel_callback_ = ^void( BOOL canceled_ )
         {

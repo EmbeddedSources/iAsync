@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B0857D61451711D001DDE0A /* JFFCallbacksBlocksHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0857D51451711D001DDE0A /* JFFCallbacksBlocksHolder.h */; };
 		1B0857DA1451717C001DDE0A /* JFFAsyncOperationProgressBlockHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0857D71451717C001DDE0A /* JFFAsyncOperationProgressBlockHolder.h */; };
-		1B0857DB1451717C001DDE0A /* JFFCancelAyncOperationBlockHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0857D81451717C001DDE0A /* JFFCancelAyncOperationBlockHolder.h */; };
+		1B0857DB1451717C001DDE0A /* JFFCancelAsyncOperationBlockHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0857D81451717C001DDE0A /* JFFCancelAsyncOperationBlockHolder.h */; };
 		1B0857DC1451717C001DDE0A /* JFFDidFinishAsyncOperationBlockHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0857D91451717C001DDE0A /* JFFDidFinishAsyncOperationBlockHolder.h */; };
 		1B9026C1143F35F800D3B0A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9026C0143F35F800D3B0A0 /* Foundation.framework */; };
 		1B9026DA143F36A100D3B0A0 /* JFFAsyncOperations_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 1B9026D9143F36A100D3B0A0 /* JFFAsyncOperations_Prefix.pch */; };
@@ -33,7 +33,7 @@
 /* Begin PBXFileReference section */
 		1B0857D51451711D001DDE0A /* JFFCallbacksBlocksHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFFCallbacksBlocksHolder.h; path = Detail/JFFCallbacksBlocksHolder.h; sourceTree = SOURCE_ROOT; };
 		1B0857D71451717C001DDE0A /* JFFAsyncOperationProgressBlockHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFFAsyncOperationProgressBlockHolder.h; path = Helpers/JFFAsyncOperationProgressBlockHolder.h; sourceTree = SOURCE_ROOT; };
-		1B0857D81451717C001DDE0A /* JFFCancelAyncOperationBlockHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFFCancelAyncOperationBlockHolder.h; path = Helpers/JFFCancelAyncOperationBlockHolder.h; sourceTree = SOURCE_ROOT; };
+		1B0857D81451717C001DDE0A /* JFFCancelAsyncOperationBlockHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFFCancelAsyncOperationBlockHolder.h; path = Helpers/JFFCancelAsyncOperationBlockHolder.h; sourceTree = SOURCE_ROOT; };
 		1B0857D91451717C001DDE0A /* JFFDidFinishAsyncOperationBlockHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFFDidFinishAsyncOperationBlockHolder.h; path = Helpers/JFFDidFinishAsyncOperationBlockHolder.h; sourceTree = SOURCE_ROOT; };
 		1B9026BD143F35F800D3B0A0 /* libJFFAsyncOpNoARC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFAsyncOpNoARC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B9026C0143F35F800D3B0A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -98,7 +98,7 @@
 				65359BD1151A7FEF0099D6FE /* JFFAsyncOperationBuilder.h */,
 				6532667D14C1EB3A004E90B0 /* JFFAsyncOperationsPredefinedBlocks.h */,
 				1B0857D71451717C001DDE0A /* JFFAsyncOperationProgressBlockHolder.h */,
-				1B0857D81451717C001DDE0A /* JFFCancelAyncOperationBlockHolder.h */,
+				1B0857D81451717C001DDE0A /* JFFCancelAsyncOperationBlockHolder.h */,
 				1B0857D91451717C001DDE0A /* JFFDidFinishAsyncOperationBlockHolder.h */,
 				1B0857D51451711D001DDE0A /* JFFCallbacksBlocksHolder.h */,
 				1B9026FF143F36B700D3B0A0 /* LoadBalancer */,
@@ -160,7 +160,7 @@
 				1B902735143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancer.h in Headers */,
 				1B0857D61451711D001DDE0A /* JFFCallbacksBlocksHolder.h in Headers */,
 				1B0857DA1451717C001DDE0A /* JFFAsyncOperationProgressBlockHolder.h in Headers */,
-				1B0857DB1451717C001DDE0A /* JFFCancelAyncOperationBlockHolder.h in Headers */,
+				1B0857DB1451717C001DDE0A /* JFFCancelAsyncOperationBlockHolder.h in Headers */,
 				1B0857DC1451717C001DDE0A /* JFFDidFinishAsyncOperationBlockHolder.h in Headers */,
 				6532667E14C1EB3A004E90B0 /* JFFAsyncOperationsPredefinedBlocks.h in Headers */,
 				65359BD2151A7FEF0099D6FE /* JFFAsyncOperationBuilder.h in Headers */,

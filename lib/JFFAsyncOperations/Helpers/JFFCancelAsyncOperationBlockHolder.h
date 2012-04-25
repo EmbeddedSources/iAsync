@@ -2,7 +2,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JFFCancelAyncOperationBlockHolder : NSObject
+//JTODO remove this class
+@interface JFFCancelAsyncOperationBlockHolder : NSObject
 
 @property ( nonatomic, copy ) JFFCancelAsyncOperation cancelBlock;
 @property ( nonatomic, copy, readonly ) JFFCancelAsyncOperation onceCancelBlock;

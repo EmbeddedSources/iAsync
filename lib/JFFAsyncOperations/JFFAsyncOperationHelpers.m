@@ -204,7 +204,7 @@ JFFAsyncOperation asyncOperationWithDelay( NSTimeInterval delay_ )
 JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder firstBinder_
                                                   , JFFAsyncOperationBinder secondBinder_ );
 
-//JTODO test it
+//!!! not tested yet
 JFFAnalyzer analyzerAsSequenceOfAnalyzers( JFFAnalyzer firstAnalyzer_, ... )
 {
     JFFAsyncOperationBinder firstBinder_ = asyncOperationBinderWithAnalyzer( firstAnalyzer_ );
@@ -220,7 +220,7 @@ JFFAnalyzer analyzerAsSequenceOfAnalyzers( JFFAnalyzer firstAnalyzer_, ... )
     }
     va_end( args );
 
-    return ^id( id dataToAnalyze_, NSError** outError_ )
+    return ^id(id dataToAnalyze_, NSError** outError_)
     {
         JFFAsyncOperation loader_ = firstBinder_( dataToAnalyze_ );
         __block id finalResult_ = nil;
@@ -230,5 +230,16 @@ JFFAnalyzer analyzerAsSequenceOfAnalyzers( JFFAnalyzer firstAnalyzer_, ... )
             finalResult_ = loaderResult_; 
         } );
         return finalResult_;
+    };
+}
+
+JFFAsyncOperation ignorePregressLoader( JFFAsyncOperation loader_ )
+{
+    loader_ = [ loader_ copy ];
+    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+                                    , JFFCancelAsyncOperationHandler cancelCallback_
+                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    {
+        return loader_( nil, cancelCallback_, doneCallback_ );
     };
 }
