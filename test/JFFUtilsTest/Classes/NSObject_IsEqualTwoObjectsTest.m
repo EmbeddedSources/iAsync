@@ -1,5 +1,5 @@
-@interface NSObject_IsEqualTwoObjectsTest : GHTestCase
 
+@interface NSObject_IsEqualTwoObjectsTest : GHTestCase
 @end
 
 @implementation NSObject_IsEqualTwoObjectsTest

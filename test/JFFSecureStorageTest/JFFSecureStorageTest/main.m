@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
      
      For malloc debugging see: http://developer.apple.com/mac/library/documentation/Performance/Conceptual/ManagingMemory/Articles/MallocDebug.html
      */
-
+    
     setenv( "GHUNIT_AUTORUN" , "YES", 1 );
     setenv( "WRITE_JUNIT_XML", "YES", 1 );
     setenv( "GHUNIT_AUTOEXIT" , "YES", 1 );
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
         if (getenv("GHUNIT_CLI"))
         {
             retVal = [GHTestRunner run];
-        } 
+        }
         else 
         {
             retVal = UIApplicationMain(argc, argv, nil, @"GHUnitIPhoneAppDelegate");
