@@ -1,12 +1,12 @@
 #import "JFFAsyncOperationManager.h"
 
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
-#import <JFFAsyncOperations/Helpers/JFFCancelAyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
 
 @interface JFFAsyncOperationManager ()
 
 @property ( nonatomic, retain ) JFFDidFinishAsyncOperationBlockHolder* loaderFinishBlock;
-@property ( nonatomic, retain ) JFFCancelAyncOperationBlockHolder* loaderCancelBlock;
+@property ( nonatomic, retain ) JFFCancelAsyncOperationBlockHolder* loaderCancelBlock;
 
 @property ( nonatomic, assign ) NSUInteger loadingCount;
 @property ( nonatomic, assign ) BOOL finished;
@@ -41,7 +41,7 @@
     if ( self )
     {
         loaderFinishBlock = [ JFFDidFinishAsyncOperationBlockHolder new ];
-        loaderCancelBlock = [ JFFCancelAyncOperationBlockHolder     new ];
+        loaderCancelBlock = [ JFFCancelAsyncOperationBlockHolder    new ];
     }
 
     return self;
