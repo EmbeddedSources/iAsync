@@ -1,5 +1,4 @@
 
-#import <JFFAsyncOperations/Helpers/JFFCancelAyncOperationBlockHolder.h>
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 #import <JFFAsyncOperations/JFFBlockOperation.h>
 

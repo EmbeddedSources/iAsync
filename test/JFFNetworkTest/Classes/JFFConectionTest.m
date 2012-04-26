@@ -11,9 +11,9 @@
 
     NSURL* data_url_ = [ NSURL URLWithString: @"http://10.28.9.57:9000/about/" ];
 
-    JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+    JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
     params_.url = data_url_;
-    JNConnectionsFactory* factory_ = [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
    
     id< JNUrlConnection > connection_ = [ factory_ createFastConnection ];
     NSMutableData* totalData_ = [ NSMutableData data ];
@@ -48,9 +48,9 @@
 
     NSURL* dataUrl_ = [ NSURL URLWithString: @"http://kdjsfhjkfhsdfjkdhfjkds.com" ];
 
-    JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+    JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
     params_.url = dataUrl_;
-    JNConnectionsFactory* factory_ = [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
 
     id< JNUrlConnection > connection_ = [ factory_ createFastConnection ];
 

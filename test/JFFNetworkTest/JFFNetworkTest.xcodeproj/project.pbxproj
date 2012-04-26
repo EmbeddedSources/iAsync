@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B166C9C1546ED9200475B6A /* NSStringRFC_2965Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B166C9B1546ED9200475B6A /* NSStringRFC_2965Test.m */; };
+		1BE053111547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053101547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.m */; };
+		1BE053131547F33D00270B58 /* JFFLocalCookiesStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0530C1547EA0400270B58 /* JFFLocalCookiesStorageTest.m */; };
+		1BE053141547F35E00270B58 /* NSHTTPCookieMatchesURLTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053031547DFDE00270B58 /* NSHTTPCookieMatchesURLTest.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -36,6 +40,8 @@
 		53A33F3E141F809F00469DAA /* EncodingsFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A33F3D141F809E00469DAA /* EncodingsFactoryTest.m */; };
 		53A33F41141F80B400469DAA /* GzipErrorsLoggerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A33F40141F80B400469DAA /* GzipErrorsLoggerTest.m */; };
 		53A33F4A141F9AA000469DAA /* 1-Incomplete.zip in Resources */ = {isa = PBXBuildFile; fileRef = 53A33F49141F9A9F00469DAA /* 1-Incomplete.zip */; };
+		65C1D70B1539BE950092F5E6 /* JFFURLConnectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C1D70A1539BE950092F5E6 /* JFFURLConnectionTest.m */; };
+		65F47AC51539A33500D8C865 /* StringFromQueryComponentsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F47AC41539A33500D8C865 /* StringFromQueryComponentsTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +188,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B166C9B1546ED9200475B6A /* NSStringRFC_2965Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringRFC_2965Test.m; sourceTree = "<group>"; };
+		1BE053031547DFDE00270B58 /* NSHTTPCookieMatchesURLTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHTTPCookieMatchesURLTest.m; sourceTree = "<group>"; };
+		1BE0530C1547EA0400270B58 /* JFFLocalCookiesStorageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFLocalCookiesStorageTest.m; sourceTree = "<group>"; };
+		1BE0530F1547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSHTTPCookie+HTTPCookieWithHeader.h"; sourceTree = "<group>"; };
+		1BE053101547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSHTTPCookie+HTTPCookieWithHeader.m"; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* JFFNetworkTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFNetworkTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -215,6 +226,8 @@
 		53A33F3D141F809E00469DAA /* EncodingsFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncodingsFactoryTest.m; sourceTree = "<group>"; };
 		53A33F40141F80B400469DAA /* GzipErrorsLoggerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipErrorsLoggerTest.m; sourceTree = "<group>"; };
 		53A33F49141F9A9F00469DAA /* 1-Incomplete.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "1-Incomplete.zip"; sourceTree = "<group>"; };
+		65C1D70A1539BE950092F5E6 /* JFFURLConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFURLConnectionTest.m; sourceTree = "<group>"; };
+		65F47AC41539A33500D8C865 /* StringFromQueryComponentsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringFromQueryComponentsTest.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* JFFNetworkTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JFFNetworkTest-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,6 +263,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1BE0530E1547EA1E00270B58 /* Details */,
 				53A33F21141F600300469DAA /* JNTestBundleManager.h */,
 				53A33F22141F600300469DAA /* JNTestBundleManager.m */,
 				539A55A51445BC3800FC2770 /* ConnectionsFactoryTest.m */,
@@ -260,8 +274,13 @@
 				531ABC5E144C96AC007269BB /* JNLiveLoaderTest.m */,
 				531ABC61144C9893007269BB /* JnNsLoaderTest.m */,
 				532284321445C65C00F0E723 /* NSConnectionTest.m */,
+				65C1D70A1539BE950092F5E6 /* JFFURLConnectionTest.m */,
 				53A33F3A141F806A00469DAA /* StubDecoderTest.m */,
 				53A33F31141F6AC400469DAA /* ZipDecoderTest.m */,
+				65F47AC41539A33500D8C865 /* StringFromQueryComponentsTest.m */,
+				1B166C9B1546ED9200475B6A /* NSStringRFC_2965Test.m */,
+				1BE053031547DFDE00270B58 /* NSHTTPCookieMatchesURLTest.m */,
+				1BE0530C1547EA0400270B58 /* JFFLocalCookiesStorageTest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -273,6 +292,15 @@
 				5310BB46141F574300A3E2B1 /* JFFNetworkTestData.bundle */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1BE0530E1547EA1E00270B58 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				1BE0530F1547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.h */,
+				1BE053101547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.m */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
@@ -638,6 +666,12 @@
 				532284361445CDE000F0E723 /* JFFConectionTest.m in Sources */,
 				531ABC5F144C96AC007269BB /* JNLiveLoaderTest.m in Sources */,
 				531ABC62144C9893007269BB /* JnNsLoaderTest.m in Sources */,
+				65F47AC51539A33500D8C865 /* StringFromQueryComponentsTest.m in Sources */,
+				65C1D70B1539BE950092F5E6 /* JFFURLConnectionTest.m in Sources */,
+				1B166C9C1546ED9200475B6A /* NSStringRFC_2965Test.m in Sources */,
+				1BE053111547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.m in Sources */,
+				1BE053131547F33D00270B58 /* JFFLocalCookiesStorageTest.m in Sources */,
+				1BE053141547F35E00270B58 /* NSHTTPCookieMatchesURLTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +717,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -692,8 +727,9 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFNetworkTest_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "JFFNetworkTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFNetworkTest;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -703,6 +739,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -710,8 +747,9 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFNetworkTest_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "JFFNetworkTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFNetworkTest;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

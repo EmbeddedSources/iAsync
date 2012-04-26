@@ -19,7 +19,6 @@
 		1BE054DE154829FB00270B58 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE054DB154829F000270B58 /* libJFFTestTools.a */; };
 		1BE054E115482A5400270B58 /* JFFActionSheetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE054E015482A5400270B58 /* JFFActionSheetTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		538C141114A9F33B0097645A /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 538C141014A9F33B0097645A /* libstdc++.dylib */; };
-		7E29158515484A4D002A5325 /* JAlertTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E29158415484A4D002A5325 /* JAlertTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,7 +110,6 @@
 		1BE054D3154829F000270B58 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		1BE054E015482A5400270B58 /* JFFActionSheetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFActionSheetTest.m; sourceTree = "<group>"; };
 		538C141014A9F33B0097645A /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
-		7E29158415484A4D002A5325 /* JAlertTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAlertTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,7 +184,6 @@
 		1B295549143DCA0300532BD7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7E29158415484A4D002A5325 /* JAlertTest.m */,
 				1B29554B143DCA1300532BD7 /* JULoadMoreCellscalculatorTest.m */,
 				1BE054E015482A5400270B58 /* JFFActionSheetTest.m */,
 			);
@@ -312,7 +309,8 @@
 		1BE054D01548298A00270B58 /* JFFUtilsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			path = JFFUtilsFW.framework;
+			name = JFFUtilsFW.framework;
+			path = JFFUtilsFW;
 			remoteRef = 1BE054CF1548298A00270B58 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -384,7 +382,6 @@
 				1B29552B143DC94B00532BD7 /* main.m in Sources */,
 				1B29554C143DCA1300532BD7 /* JULoadMoreCellscalculatorTest.m in Sources */,
 				1BE054E115482A5400270B58 /* JFFActionSheetTest.m in Sources */,
-				7E29158515484A4D002A5325 /* JAlertTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

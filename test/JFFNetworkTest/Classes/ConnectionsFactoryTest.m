@@ -14,14 +14,14 @@
 
     NSDictionary* headers_ = [ NSDictionary dictionary ];
 
-
     GHAssertThrows
     (
      {
-         JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+         JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
          params_.httpBody = stub_data_;
          params_.headers = headers_;
-         [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+         id res_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
+         NSLog( @"res: %@", res_ );
      }
      , @"NSAssert expected"
     );
@@ -40,10 +40,11 @@
     GHAssertNoThrow
     (
      {
-         JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+         JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
          params_.url = google_url_;
          params_.headers = headers_;
-         [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+         id res_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
+         NSLog( @"res: %@", res_ );
      }
     , @"NSAssert expected"
     );
@@ -51,10 +52,11 @@
     GHAssertNoThrow
     (
      {
-         JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+         JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
          params_.url = google_url_;
          params_.httpBody = stub_data_;
-         [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+         id res_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
+         NSLog( @"res: %@", res_ );
      }
      , @"NSAssert expected"
      );
@@ -64,7 +66,10 @@
 {
    GHAssertThrows
    (
-    [ [ [ JNConnectionsFactory alloc ] init ] autorelease ]
+    {
+        id res_ = [ [ JNConnectionsFactory alloc ] init ];
+        NSLog( @"res: %@", res_ );
+    }
     , @"NSAssert expected" 
    );
 }
@@ -80,13 +85,12 @@
 
     NSDictionary* headers_ = [ NSDictionary dictionary ];
 
-    JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
+    JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
     params_.url = google_url_;
     params_.httpBody = stub_data_;
     params_.headers = headers_;
-    JNConnectionsFactory* factory_ = [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
+    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
 
-    [ factory_ autorelease ];
     id< JNUrlConnection > connection_ = nil;
 
     connection_ = [ factory_ createFastConnection ];
@@ -94,11 +98,6 @@
 
     connection_ = [ factory_ createStandardConnection ];
     GHAssertTrue( [ connection_ isMemberOfClass: [ JNNsUrlConnection class ] ], @"Standard connection class mismatch" );
-}
-
--(void)testCannotCreateAbstactConnection
-{
-    GHAssertThrows( [ [ JNAbstractConnection alloc ] init ] , @"NSAssert expected" );
 }
 
 @end

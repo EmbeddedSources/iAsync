@@ -18,6 +18,7 @@
 		1B902643143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B902642143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m */; };
 		1B90269F143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B90269E143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m */; };
 		1BD182411467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD182401467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m */; };
+		1BE053271547F6D400270B58 /* performTimeCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053261547F6D400270B58 /* performTimeCalculator.m */; };
 		532E281914A9E9A300111144 /* ObjcDynamicCastTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 532E281814A9E9A300111144 /* ObjcDynamicCastTest.mm */; };
 		5349A6CC14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5349A6CB14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm */; };
 		534C727B1431D9DE0085B41E /* JUMutableArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */; };
@@ -87,6 +88,8 @@
 		1B902642143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMutableAssignArrayTest.m; sourceTree = "<group>"; };
 		1B90269E143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMulticastDelegateTest.m; sourceTree = "<group>"; };
 		1BD182401467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMutableAssignDictionaryTest.m; sourceTree = "<group>"; };
+		1BE053251547F6D400270B58 /* performTimeCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = performTimeCalculator.h; sourceTree = "<group>"; };
+		1BE053261547F6D400270B58 /* performTimeCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = performTimeCalculator.m; sourceTree = "<group>"; };
 		532E281814A9E9A300111144 /* ObjcDynamicCastTest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjcDynamicCastTest.mm; sourceTree = "<group>"; };
 		5349A6CB14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ClassHierarchyCheckerTest.mm; sourceTree = "<group>"; };
 		534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUMutableArrayTest.m; sourceTree = "<group>"; };
@@ -129,6 +132,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BE053241547F6B800270B58 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				1BE053251547F6D400270B58 /* performTimeCalculator.h */,
+				1BE053261547F6D400270B58 /* performTimeCalculator.m */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
 		534CDFDB14A8CA910068F4DF /* mock */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +207,7 @@
 		B69484451429DFAC00B8247E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1BE053241547F6B800270B58 /* Details */,
 				534CDFDB14A8CA910068F4DF /* mock */,
 				1B26EC6D14DABFB800A1A875 /* EmptyStringTest.m */,
 				1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */,
@@ -367,6 +380,7 @@
 				1B26EC6F14DABFB800A1A875 /* EmptyStringTest.m in Sources */,
 				1B26EC7014DABFB800A1A875 /* JFFStringFormatTest.m in Sources */,
 				6515B96C152B737F00518996 /* NSObject_IsEqualTwoObjectsTest.m in Sources */,
+				1BE053271547F6D400270B58 /* performTimeCalculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

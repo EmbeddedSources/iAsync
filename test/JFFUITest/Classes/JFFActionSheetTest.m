@@ -1,6 +1,5 @@
 
 #import <JFFTestTools/GHAsyncTestCase+MainThreadTests.h>
-#import <JFFUI/JFFUI.h>
 
 @interface JFFActionSheetTest : GHAsyncTestCase
 @end
@@ -9,10 +8,9 @@
 
 -(void)testEmptyActionSheetAndHide
 {
-    __block __weak JFFActionSheet* weakActionSheet_ = nil;
+    __block __weak JFFActionSheet* weakActionSheet_;
 
-    
-    TestAsyncRequestBlock showActionSheetBlock_ = ^void( JFFSimpleBlock finishTest_ )
+    void (^showActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
     {
         JFFActionSheet* actionSheet_ = [ JFFActionSheet actionSheetWithTitle: @"Test Empty"
                                                            cancelButtonTitle: nil
@@ -47,9 +45,9 @@
 
 -(void)testActionWithTitle
 {
-    __block __weak JFFActionSheet* weakActionSheet_ = nil;
+    __block __weak JFFActionSheet* weakActionSheet_;
 
-    TestAsyncRequestBlock showActionSheetBlock_ = ^void( JFFSimpleBlock finishTest_ )
+    void (^showActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
     {
         JFFActionSheet* actionSheet_ = [ JFFActionSheet actionSheetWithTitle: @"Test With Cancel"
                                                            cancelButtonTitle: @"Cancel"

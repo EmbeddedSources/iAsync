@@ -1,6 +1,6 @@
 #import "JFFAsyncOperationManager.h"
 
-#import <JFFAsyncOperations/Helpers/JFFCancelAyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
 @interface SequenceOfAsyncOperationsTest : GHTestCase
@@ -10,7 +10,7 @@
 
 -(void)setUp
 {
-   [ JFFCancelAyncOperationBlockHolder     enableInstancesCounting ];
+   [ JFFCancelAsyncOperationBlockHolder    enableInstancesCounting ];
    [ JFFDidFinishAsyncOperationBlockHolder enableInstancesCounting ];
 
    [ JFFAsyncOperationManager enableInstancesCounting ];
@@ -66,7 +66,7 @@
       [ first_loader_ release ];
    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
+   GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"All object of this class should be deallocated" );
    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
 }
@@ -97,7 +97,7 @@
         [ first_loader_ release ];
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -132,7 +132,7 @@
         [ first_loader_ release ];
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -163,7 +163,7 @@
       [ first_loader_ release ];
    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
+   GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"All object of this class should be deallocated" );
    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
 }
@@ -198,7 +198,7 @@
       [ first_loader_ release ];
    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
+   GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"All object of this class should be deallocated" );
    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
 }
@@ -229,12 +229,12 @@
 
         [ first_loader_ release ];
 
-        GHAssertTrue( 0 != [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+        GHAssertTrue( 0 != [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
         GHAssertTrue( 0 != [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
         GHAssertTrue( 0 != [ JFFAsyncOperationManager              instancesCount ], @"OK" );
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -287,12 +287,12 @@
 
         GHAssertTrue( seconBlockResult_ == sequenceResult_, @"secondLoader finished" );
 
-        GHAssertTrue( 0 != [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+        GHAssertTrue( 0 != [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
         GHAssertTrue( 0 != [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
         GHAssertTrue( 0 != [ JFFAsyncOperationManager              instancesCount ], @"OK" );
     }
     
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -314,7 +314,7 @@
         [ first_loader_ release ];
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"All object of this class should be deallocated" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
 }
