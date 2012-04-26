@@ -2,7 +2,7 @@
 
 @implementation GHAsyncTestCase (MainThreadTests)
 
--(void)performAsyncRequestOnMainThreadWithBlock:( void (^)(JFFSimpleBlock) )block_
+-(void)performAsyncRequestOnMainThreadWithBlock:( TestAsyncRequestBlock )block_
                                        selector:( SEL )selector_
 {
     block_ = [ block_ copy ];
