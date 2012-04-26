@@ -2,6 +2,8 @@
 #import <GHUnitIOS/GHUnit.h>
 #import <Foundation/Foundation.h>
 
+typedef void (^TestAsyncRequestBlock)(JFFSimpleBlock);
+
 @interface GHAsyncTestCase (MainThreadTests)
 
 -(void)performAsyncRequestOnMainThreadWithBlock:( void (^)(JFFSimpleBlock) )block_

@@ -11,7 +11,8 @@
 {
     __block __weak JFFActionSheet* weakActionSheet_ = nil;
 
-    void (^showActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
+    
+    TestAsyncRequestBlock showActionSheetBlock_ = ^void( JFFSimpleBlock finishTest_ )
     {
         JFFActionSheet* actionSheet_ = [ JFFActionSheet actionSheetWithTitle: @"Test Empty"
                                                            cancelButtonTitle: nil
@@ -48,7 +49,7 @@
 {
     __block __weak JFFActionSheet* weakActionSheet_ = nil;
 
-    void (^showActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
+    TestAsyncRequestBlock showActionSheetBlock_ = ^void( JFFSimpleBlock finishTest_ )
     {
         JFFActionSheet* actionSheet_ = [ JFFActionSheet actionSheetWithTitle: @"Test With Cancel"
                                                            cancelButtonTitle: @"Cancel"
