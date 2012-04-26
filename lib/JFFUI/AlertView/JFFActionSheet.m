@@ -61,6 +61,7 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
         if ( cancelButtonTitle_ )
         {
             [ _actionSheet addButtonWithTitle: cancelButtonTitle_ ];
+            _actionSheet.cancelButtonIndex = _actionSheet.numberOfButtons - 1;
         }
 
         [ [ NSNotificationCenter defaultCenter ] addObserver: self
