@@ -27,13 +27,10 @@
 
 -(NSArray*)cookiesForURL:( NSURL* )url_
 {
-//STODO uncomment !!!!
-//    NSArray* result_ = [ _allCookies selectArray: ^BOOL( NSHTTPCookie* cookie_ )
-//    {
-//        return [ cookie_ matchesURL: url_ ];
-//    } ];
-
-    return [ _allCookies allObjects ];
+    return [ _allCookies selectArray: ^BOOL( NSHTTPCookie* cookie_ )
+    {
+        return [ cookie_ matchesURL: url_ ];
+    } ];
 }
 
 @end
