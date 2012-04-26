@@ -7,10 +7,10 @@
 
 -(void)dealloc
 {
-   [ _native_loader release ];
-   [ _wrapped_cancel release ];
+    [ _native_loader release ];
+    [ _wrapped_cancel release ];
 
-   [ super dealloc ];
+    [ super dealloc ];
 }
 
 @end

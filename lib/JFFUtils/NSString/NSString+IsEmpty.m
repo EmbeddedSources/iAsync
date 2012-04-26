@@ -4,7 +4,7 @@
 
 -(BOOL)hasSymbols
 {
-   return ![ self isEqualToString: @"" ];
+    return ![ self isEqualToString: @"" ];
 }
 
 @end

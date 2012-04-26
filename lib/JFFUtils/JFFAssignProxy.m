@@ -6,17 +6,17 @@
 
 -(id)initWithTarget:( id )target_
 {
-   _target = target_;
+    _target = target_;
 
-   return self;
+    return self;
 }
 
 -(void)forwardInvocation:( NSInvocation* )invocation_
 {
-   SEL selector_ = [ invocation_ selector ];
+    SEL selector_ = [ invocation_ selector ];
 
-   if ( [ self.target respondsToSelector: selector_ ] )
-      [ invocation_ invokeWithTarget: self.target ];
+    if ( [ self.target respondsToSelector: selector_ ] )
+        [ invocation_ invokeWithTarget: self.target ];
 }
 
 -(NSMethodSignature*)methodSignatureForSelector:( SEL )selector_

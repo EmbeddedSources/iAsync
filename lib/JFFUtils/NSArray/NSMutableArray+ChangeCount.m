@@ -5,7 +5,7 @@
 -(void)shrinkToSize:( NSUInteger )new_size_
 {
     NSUInteger count_ = [ self count ];
-   
+
     if ( count_ <= new_size_ )
     {
         //The size already fits

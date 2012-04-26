@@ -16,71 +16,71 @@ typedef BOOL (^JFFPredicate)();
                          hasMethod:( JFFPredicate )has_method_
                       methodGetter:( JFFMethodGetter )method_getter_
 {
-   if ( has_method_() )
-      return NO;
+    if ( has_method_() )
+        return NO;
 
-   Method prototype_method_ = method_getter_();
-   const char* type_encoding_ = method_getTypeEncoding( prototype_method_ );
-   BOOL result_ = class_addMethod( class_
-                                  , new_selector_
-                                  , method_getImplementation( prototype_method_ )
-                                  , type_encoding_ );
-   NSAssert( result_, @"method should be added" );
-   return result_;
+    Method prototype_method_ = method_getter_();
+    const char* type_encoding_ = method_getTypeEncoding( prototype_method_ );
+    BOOL result_ = class_addMethod( class_
+                                   , new_selector_
+                                   , method_getImplementation( prototype_method_ )
+                                   , type_encoding_ );
+    NSAssert( result_, @"method should be added" );
+    return result_;
 }
 
 +(BOOL)addInstanceMethodIfNeedWithSelector:( SEL )selector_
                                    toClass:( Class )class_
 {
-   return [ self addInstanceMethodIfNeedWithSelector: selector_
-                                             toClass: class_
-                                   newMethodSelector: selector_ ];
+    return [ self addInstanceMethodIfNeedWithSelector: selector_
+                                              toClass: class_
+                                    newMethodSelector: selector_ ];
 }
 
 +(BOOL)addInstanceMethodIfNeedWithSelector:( SEL )selector_
                                    toClass:( Class )class_
                          newMethodSelector:( SEL )new_selector_
 {
-   JFFPredicate respond_to_selector_ = ^BOOL()
-   {
-      return [ class_ hasInstanceMethodWithSelector: new_selector_ ];
-   };
-   JFFMethodGetter method_getter_ = ^Method()
-   {
-      return class_getInstanceMethod( self, selector_ );
-   };
-   return [ self addMethodIfNeedWithSelector: selector_
-                                     toClass: class_
-                           newMethodSelector: new_selector_
-                                   hasMethod: respond_to_selector_
-                                methodGetter: method_getter_ ];
+    JFFPredicate respond_to_selector_ = ^BOOL()
+    {
+        return [ class_ hasInstanceMethodWithSelector: new_selector_ ];
+    };
+    JFFMethodGetter method_getter_ = ^Method()
+    {
+        return class_getInstanceMethod( self, selector_ );
+    };
+    return [ self addMethodIfNeedWithSelector: selector_
+                                      toClass: class_
+                            newMethodSelector: new_selector_
+                                    hasMethod: respond_to_selector_
+                                 methodGetter: method_getter_ ];
 }
 
 +(BOOL)addClassMethodIfNeedWithSelector:( SEL )selector_
                                 toClass:( Class )class_
 {
-   return [ self addClassMethodIfNeedWithSelector: selector_
-                                          toClass: class_
-                                newMethodSelector: selector_ ];
+    return [ self addClassMethodIfNeedWithSelector: selector_
+                                           toClass: class_
+                                 newMethodSelector: selector_ ];
 }
 
 +(BOOL)addClassMethodIfNeedWithSelector:( SEL )selector_
                                 toClass:( Class )class_
                       newMethodSelector:( SEL )new_selector_
 {
-   JFFPredicate respond_to_selector_ = ^BOOL()
-   {
-      return [ class_ hasClassMethodWithSelector: new_selector_ ];
-   };
-   JFFMethodGetter method_getter_ = ^Method()
-   {
-      return class_getClassMethod( self, selector_ );
-   };
-   return [ self addMethodIfNeedWithSelector: selector_
-                                     toClass: object_getClass( class_ )
-                           newMethodSelector: new_selector_
-                                   hasMethod: respond_to_selector_
-                                methodGetter: method_getter_ ];
+    JFFPredicate respond_to_selector_ = ^BOOL()
+    {
+        return [ class_ hasClassMethodWithSelector: new_selector_ ];
+    };
+    JFFMethodGetter method_getter_ = ^Method()
+    {
+        return class_getClassMethod( self, selector_ );
+    };
+    return [ self addMethodIfNeedWithSelector: selector_
+                                      toClass: object_getClass( class_ )
+                            newMethodSelector: new_selector_
+                                    hasMethod: respond_to_selector_
+                                 methodGetter: method_getter_ ];
 }
 
 //JTODO check if class contains hooked method

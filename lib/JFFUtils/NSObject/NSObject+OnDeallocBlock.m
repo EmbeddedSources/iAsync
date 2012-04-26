@@ -13,7 +13,7 @@
 
 -(BOOL)removeOnDeallocBlockBlock:( void(^)( void ) )block_ fromArray:( NSMutableArray* )array_
 {
-    return NO;
+   return NO;
 }
 
 @end
@@ -22,13 +22,13 @@
 
 -(BOOL)removeOnDeallocBlockBlock:( void(^)( void ) )block_ fromArray:( NSMutableArray* )array_
 {
-    if ( self.block == block_ )
-    {
-        self.block = nil;
-        [ array_ removeObject: self ];
-        return YES;
-    }
-    return NO;
+   if ( self.block == block_ )
+   {
+      self.block = nil;
+      [ array_ removeObject: self ];
+      return YES;
+   }
+   return NO;
 }
 
 @end
@@ -37,18 +37,18 @@
 
 -(void)addOnDeallocBlock:( void(^)( void ) )block_
 {
-    JFFOnDeallocBlockOwner* owner_ = [ [ JFFOnDeallocBlockOwner alloc ] initWithBlock: block_ ];
-    [ self.ownerships addObject: owner_ ];
+   JFFOnDeallocBlockOwner* owner_ = [ [ JFFOnDeallocBlockOwner alloc ] initWithBlock: block_ ];
+   [ self.ownerships addObject: owner_ ];
 }
 
 -(void)removeOnDeallocBlock:( void(^)( void ) )block_
 {
-    NSArray* ownerships_ = [ [ NSArray alloc ] initWithArray: self.ownerships ];
-    for ( id object_ in ownerships_ )
-    {
-        if ( [ object_ removeOnDeallocBlockBlock: block_ fromArray: self.ownerships ] )
-            break;
-    }
+   NSArray* ownerships_ = [ [ NSArray alloc ] initWithArray: self.ownerships ];
+   for ( id object_ in ownerships_ )
+   {
+      if ( [ object_ removeOnDeallocBlockBlock: block_ fromArray: self.ownerships ] )
+         break;
+   }
 }
 
 @end

@@ -4,7 +4,7 @@
 
 -(NSURL*)toURL
 {
-   return [ NSURL URLWithString: self ];
+    return [ NSURL URLWithString: self ];
 }
 
 @end

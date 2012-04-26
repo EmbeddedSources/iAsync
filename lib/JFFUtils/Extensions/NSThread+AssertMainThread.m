@@ -4,7 +4,7 @@
 
 +(void)assertMainThread
 {
-   NSAssert( [ NSThread isMainThread ], @"should be called only from main thread only" );
+    NSAssert( [ NSThread isMainThread ], @"should be called only from main thread only" );
 }
 
 @end

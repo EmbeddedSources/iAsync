@@ -117,7 +117,7 @@
     id previous_object_ = [ self objectForKey: key_ ];
     if ( previous_object_ )
     {
-       [ self removeObjectForKey: key_ ];
+        [ self removeObjectForKey: key_ ];
     }
 
     JFFAutoRemoveFromDictAssignProxy* proxy_ = [ [ JFFAutoRemoveFromDictAssignProxy alloc ] initWithTarget: object_ ];

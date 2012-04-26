@@ -25,10 +25,10 @@
 
 +(id)objectThatAlwaysReturnsZeroForAnyMethod
 {
-   static dispatch_once_t once_;
-   static id instance_;
-   dispatch_once( &once_, ^{ instance_ = [ JFFConst0 new ]; } );
-   return instance_;
+    static dispatch_once_t once_;
+    static id instance_;
+    dispatch_once( &once_, ^{ instance_ = [ JFFConst0 new ]; } );
+    return instance_;
 }
 
 @end

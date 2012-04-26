@@ -9,12 +9,12 @@
 
 -(void)dealloc
 {
-   [ _native_loader release ];
-   [ _progress_callback release ];
-   [ _cancel_callback release ];
-   [ _done_callback release ];
+    [ _native_loader release ];
+    [ _progress_callback release ];
+    [ _cancel_callback release ];
+    [ _done_callback release ];
 
-   [ super dealloc ];
+    [ super dealloc ];
 }
 
 @end
