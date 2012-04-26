@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1BE99A04154599490028F395 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE99A03154599490028F395 /* UIKit.framework */; };
+		1BE99A06154599490028F395 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE99A05154599490028F395 /* Foundation.framework */; };
+		1BE99A08154599490028F395 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE99A07154599490028F395 /* CoreGraphics.framework */; };
+		1BE99A0E154599490028F395 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BE99A0C154599490028F395 /* InfoPlist.strings */; };
+		1BE99A10154599490028F395 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE99A0F154599490028F395 /* main.m */; };
+		1BE99A2D154599CD0028F395 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE99A2C154599CD0028F395 /* GHUnitIOS.framework */; };
+		1BE99A3015459AB40028F395 /* JFFSecureStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE99A2F15459AB40028F395 /* JFFSecureStorageTest.m */; };
+		1BE99A4015459BCC0028F395 /* libJFFSecureStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE99A3B15459BC20028F395 /* libJFFSecureStorage.a */; };
+		1BE99A4215459BDB0028F395 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE99A4115459BDB0028F395 /* Security.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1BE99A3A15459BC20028F395 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BE99A3215459BC20028F395 /* JFFSecureStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B9781B51540235B001F00EE;
+			remoteInfo = JFFSecureStorage;
+		};
+		1BE99A3C15459BC20028F395 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BE99A3215459BC20028F395 /* JFFSecureStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B9781C51540235C001F00EE;
+			remoteInfo = JFFSecureStorageTests;
+		};
+		1BE99A3E15459BC80028F395 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BE99A3215459BC20028F395 /* JFFSecureStorage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B9781B41540235B001F00EE;
+			remoteInfo = JFFSecureStorage;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1BE999FF154599490028F395 /* JFFSecureStorageTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFSecureStorageTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BE99A03154599490028F395 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1BE99A05154599490028F395 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1BE99A07154599490028F395 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1BE99A0B154599490028F395 /* JFFSecureStorageTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFSecureStorageTest-Info.plist"; sourceTree = "<group>"; };
+		1BE99A0D154599490028F395 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1BE99A0F154599490028F395 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1BE99A11154599490028F395 /* JFFSecureStorageTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFSecureStorageTest-Prefix.pch"; sourceTree = "<group>"; };
+		1BE99A2C154599CD0028F395 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../../frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
+		1BE99A2F15459AB40028F395 /* JFFSecureStorageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSecureStorageTest.m; sourceTree = "<group>"; };
+		1BE99A3215459BC20028F395 /* JFFSecureStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFSecureStorage.xcodeproj; path = ../../lib/JFFSecureStorage/JFFSecureStorage.xcodeproj; sourceTree = "<group>"; };
+		1BE99A4115459BDB0028F395 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1BE999FC154599490028F395 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE99A4215459BDB0028F395 /* Security.framework in Frameworks */,
+				1BE99A4015459BCC0028F395 /* libJFFSecureStorage.a in Frameworks */,
+				1BE99A04154599490028F395 /* UIKit.framework in Frameworks */,
+				1BE99A06154599490028F395 /* Foundation.framework in Frameworks */,
+				1BE99A08154599490028F395 /* CoreGraphics.framework in Frameworks */,
+				1BE99A2D154599CD0028F395 /* GHUnitIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1BE999F4154599490028F395 = {
+			isa = PBXGroup;
+			children = (
+				1BE99A3115459BAF0028F395 /* Dependencies */,
+				1BE99A09154599490028F395 /* JFFSecureStorageTest */,
+				1BE99A02154599490028F395 /* Frameworks */,
+				1BE99A00154599490028F395 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1BE99A00154599490028F395 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1BE999FF154599490028F395 /* JFFSecureStorageTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1BE99A02154599490028F395 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1BE99A4115459BDB0028F395 /* Security.framework */,
+				1BE99A2C154599CD0028F395 /* GHUnitIOS.framework */,
+				1BE99A03154599490028F395 /* UIKit.framework */,
+				1BE99A05154599490028F395 /* Foundation.framework */,
+				1BE99A07154599490028F395 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1BE99A09154599490028F395 /* JFFSecureStorageTest */ = {
+			isa = PBXGroup;
+			children = (
+				1BE99A2F15459AB40028F395 /* JFFSecureStorageTest.m */,
+				1BE99A0A154599490028F395 /* Supporting Files */,
+			);
+			path = JFFSecureStorageTest;
+			sourceTree = "<group>";
+		};
+		1BE99A0A154599490028F395 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1BE99A0B154599490028F395 /* JFFSecureStorageTest-Info.plist */,
+				1BE99A0C154599490028F395 /* InfoPlist.strings */,
+				1BE99A0F154599490028F395 /* main.m */,
+				1BE99A11154599490028F395 /* JFFSecureStorageTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1BE99A3115459BAF0028F395 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				1BE99A3215459BC20028F395 /* JFFSecureStorage.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		1BE99A3315459BC20028F395 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1BE99A3B15459BC20028F395 /* libJFFSecureStorage.a */,
+				1BE99A3D15459BC20028F395 /* JFFSecureStorageTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1BE999FE154599490028F395 /* JFFSecureStorageTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BE99A1D154599490028F395 /* Build configuration list for PBXNativeTarget "JFFSecureStorageTest" */;
+			buildPhases = (
+				1BE999FB154599490028F395 /* Sources */,
+				1BE999FC154599490028F395 /* Frameworks */,
+				1BE999FD154599490028F395 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1BE99A3F15459BC80028F395 /* PBXTargetDependency */,
+			);
+			name = JFFSecureStorageTest;
+			productName = JFFSecureStorageTest;
+			productReference = 1BE999FF154599490028F395 /* JFFSecureStorageTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1BE999F6154599490028F395 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = JFF;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 1BE999F9154599490028F395 /* Build configuration list for PBXProject "JFFSecureStorageTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1BE999F4154599490028F395;
+			productRefGroup = 1BE99A00154599490028F395 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1BE99A3315459BC20028F395 /* Products */;
+					ProjectRef = 1BE99A3215459BC20028F395 /* JFFSecureStorage.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1BE999FE154599490028F395 /* JFFSecureStorageTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1BE99A3B15459BC20028F395 /* libJFFSecureStorage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFSecureStorage.a;
+			remoteRef = 1BE99A3A15459BC20028F395 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1BE99A3D15459BC20028F395 /* JFFSecureStorageTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFSecureStorageTests.octest;
+			remoteRef = 1BE99A3C15459BC20028F395 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1BE999FD154599490028F395 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE99A0E154599490028F395 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1BE999FB154599490028F395 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE99A10154599490028F395 /* main.m in Sources */,
+				1BE99A3015459AB40028F395 /* JFFSecureStorageTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1BE99A3F15459BC80028F395 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFSecureStorage;
+			targetProxy = 1BE99A3E15459BC80028F395 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1BE99A0C154599490028F395 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1BE99A0D154599490028F395 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1BE99A1B154599490028F395 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../../lib/JFFSecureStorage;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1BE99A1C154599490028F395 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../../lib/JFFSecureStorage;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1BE99A1E154599490028F395 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFSecureStorageTest/JFFSecureStorageTest-Prefix.pch";
+				INFOPLIST_FILE = "JFFSecureStorageTest/JFFSecureStorageTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1BE99A1F154599490028F395 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFSecureStorageTest/JFFSecureStorageTest-Prefix.pch";
+				INFOPLIST_FILE = "JFFSecureStorageTest/JFFSecureStorageTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1BE999F9154599490028F395 /* Build configuration list for PBXProject "JFFSecureStorageTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE99A1B154599490028F395 /* Debug */,
+				1BE99A1C154599490028F395 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BE99A1D154599490028F395 /* Build configuration list for PBXNativeTarget "JFFSecureStorageTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE99A1E154599490028F395 /* Debug */,
+				1BE99A1F154599490028F395 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1BE999F6154599490028F395 /* Project object */;
+}
