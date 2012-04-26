@@ -23,20 +23,6 @@
 
         NSMutableURLRequest* request_ = [ NSMutableURLRequest mutableURLRequestWithParams: params_ ];
 
-        if ( params_.cookiesStorage )
-        {
-            request_.HTTPShouldHandleCookies = NO;
-            NSArray* cookies_ = [ params_.cookiesStorage cookiesForURL: params_.url ];
-            NSDictionary* cookiesheaders_ =
-            [ NSHTTPCookie requestHeaderFieldsWithCookies: cookies_ ];
-            [ cookiesheaders_ enumerateKeysAndObjectsUsingBlock: ^( id cookieName_
-                                                                   , id cookieValue_
-                                                                   , BOOL* stop_ )
-            {
-                [ request_ addValue: cookieValue_ forHTTPHeaderField: cookieName_ ];
-            } ];
-        }
-
         NSURLConnection* nativeConnection_ = [ [ NSURLConnection alloc ] initWithRequest: request_
                                                                                 delegate: self
                                                                         startImmediately: NO ];
@@ -82,19 +68,6 @@ didReceiveResponse:( NSHTTPURLResponse* )response_
     if ( ![ self assertConnectionMismatch: connection_ ] )
     {
         return;
-    }
-
-    if ( _params.cookiesStorage )
-    {
-        NSArray* cookies_ =
-        [ NSHTTPCookie cookiesWithResponseHeaderFields: [ response_ allHeaderFields ]
-                                                forURL: _params.url ];
-        NSLog( @"response_ allHeaderFields: %@", [ response_ allHeaderFields ] );
-        NSLog( @"_params.url: %@", _params.url );
-        for ( NSHTTPCookie* cookie_ in cookies_ )
-        {
-            [ _params.cookiesStorage setCookie: cookie_ ];
-        }
     }
 
     if ( nil != self.didReceiveResponseBlock )
