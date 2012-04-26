@@ -4,6 +4,8 @@
 
 @property ( nonatomic, assign ) BOOL dismissBeforeEnterBackground;
 @property ( nonatomic, copy ) JFFSimpleBlock didPresentHandler;
+@property ( nonatomic, assign, readonly ) BOOL isOnScreen;
+
 
 //cancelButtonTitle, otherButtonTitles - pass NSString(button title) or JFFAlertButton
 +(id)alertWithTitle:( NSString* )title_
@@ -17,7 +19,7 @@
 -(void)addAlertButtonWithTitle:( NSString* )title_
                         action:( JFFSimpleBlock )action_;
 
--(void)forceDismiss;
+
 +(void)dismissAllAlertViews;
 
 +(void)showAlertWithTitle:( NSString* )title_
@@ -29,5 +31,8 @@
 
 //If call several times, only first alert will be showed
 -(void)exclusiveShow;
+-(void)show;
+-(void)forceDismiss;
+
 
 @end

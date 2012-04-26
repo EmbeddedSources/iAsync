@@ -22,14 +22,20 @@ static NSInteger first_alert_index_ = 1;
 
 @synthesize dismissBeforeEnterBackground = _dismissBeforeEnterBackground;
 @synthesize didPresentHandler = _didPresentHandler;
+@dynamic isOnScreen;
 
 -(void)dealloc
 {
+    [ NSThread assertMainThread ];
+
+    self->_alertView.delegate = nil;
     [ self stopMonitoringBackgroundEvents ];
 }
 
 +(void)activeAlertsAddAlert:( JFFAlertView* )alertView_
 {
+    NSLog( @"activeAlertsAddAlert" );
+    
     if ( !active_alerts_ )
     {
         active_alerts_ = [ [ NSMutableArray alloc ] initWithCapacity: 1 ];
@@ -40,6 +46,8 @@ static NSInteger first_alert_index_ = 1;
 
 +(BOOL)activeAlertsRemoveAlert:( JFFAlertView* )alertView_
 {
+    NSLog( @"activeAlertsRemoveAlert" );
+    
     if ( !active_alerts_ )
         return NO;
 
@@ -64,8 +72,10 @@ static NSInteger first_alert_index_ = 1;
 
 -(void)forceDismiss
 {
+    NSLog( @"forceDismiss" );
+    
     [ self dismissWithClickedButtonIndex: [ self->_alertView cancelButtonIndex ] animated: NO ];
-    [ self dismissWithClickedButtonIndex: [ self->_alertView cancelButtonIndex ] animated: NO ];
+//    [ self dismissWithClickedButtonIndex: [ self->_alertView cancelButtonIndex ] animated: NO ];
 }
 
 +(void)dismissAllAlertViews
@@ -154,6 +164,8 @@ otherButtonTitlesArray:( NSArray* )other_button_titles_
     
     [ self addButtonsToAlertView: other_button_titles_ ];
     [ self startMonitoringBackgroundEvents ];
+    
+    NSLog( @"JFFAlertView created - 0x%X", (NSUInteger)self );
     
     return self;
 }
@@ -263,6 +275,7 @@ otherButtonTitlesArray:( NSArray* )other_button_titles_
     [ self->_alertView show ];
 }
 
+
 #pragma mark UIAlertViewDelegate
 
 -(void)alertView:( UIAlertView* )alertView_ clickedButtonAtIndex:( NSInteger )buttonIndex_
@@ -287,6 +300,11 @@ otherButtonTitlesArray:( NSArray* )other_button_titles_
 
     if ( removed_ )
         [ [ active_alerts_ objectAtIndex: 0 ] forceShow ];
+}
+
+-(BOOL)isOnScreen
+{
+    return self->_alertView.visible;
 }
 
 #pragma mark -
