@@ -7,3 +7,6 @@ svnignore.*
 *.pbxuser
 xcuserdata
 *.xcworkspace
+
+#temporary hard code
+./lib-third-party
