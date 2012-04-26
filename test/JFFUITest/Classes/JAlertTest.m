@@ -222,4 +222,92 @@
     }    
 }
 
+-(void)testAlertsQueueReverseOrder
+{
+    __block __weak JFFAlertView* weakFirstAlert_  = nil;
+    __block __weak JFFAlertView* weakSecondAlert_ = nil;
+    __block BOOL alertVisible_ = NO;
+    
+    
+    {
+        TestAsyncRequestBlock showAlertBlock_ = ^void( JFFSimpleBlock finishTest_ )
+        {
+            JFFAlertView* alert_ = [ JFFAlertView alertWithTitle: @"Title"
+                                                         message: @"Press OK"
+                                               cancelButtonTitle: @"OK"
+                                               otherButtonTitles: nil ];
+            
+            weakFirstAlert_ = alert_;
+            [ weakFirstAlert_ show ];
+            
+            
+            alert_ = [ JFFAlertView alertWithTitle: @"Title"
+                                           message: @"Press YES"
+                                 cancelButtonTitle: @"YES"
+                                 otherButtonTitles: nil ];
+            weakSecondAlert_ = alert_;
+            [ weakSecondAlert_ show ];
+            
+            
+            finishTest_();
+        };
+        
+        [ self performAsyncRequestOnMainThreadWithBlock: showAlertBlock_
+                                               selector: _cmd ];
+        
+        GHAssertNotNil( weakFirstAlert_, @"First alert view must exist until dismissed"   );
+        GHAssertNotNil( weakSecondAlert_, @"Second alert view must exist until dismissed" );
+        
+        
+        
+        dispatch_sync( dispatch_get_main_queue(), ^
+                      {
+                          alertVisible_ = weakFirstAlert_.isOnScreen;
+                      } );
+        GHAssertTrue( alertVisible_, @"First alert view must be visible until dismissed" );
+        
+        dispatch_sync( dispatch_get_main_queue(), ^
+                      {
+                          alertVisible_ = weakSecondAlert_.isOnScreen;
+                      } );
+        GHAssertFalse( alertVisible_, @"Second alert view must NOT be visible until first one gets dismissed" );
+    }
+    
+    
+    {
+        TestAsyncRequestBlock hideAlertBlock_ = ^void( JFFSimpleBlock finishTest_ )
+        {
+            [ weakSecondAlert_ forceDismiss ];
+            finishTest_();
+        };
+        
+        [ self performAsyncRequestOnMainThreadWithBlock: hideAlertBlock_
+                                               selector: _cmd ];
+
+        GHAssertNil( weakSecondAlert_, @"Second alert should have been deallocated" );
+        GHAssertNotNil( weakFirstAlert_ , @"First alert must still live" );
+        
+
+        dispatch_sync( dispatch_get_main_queue(), ^
+        {
+          alertVisible_ = weakFirstAlert_.isOnScreen;
+        } );
+        GHAssertTrue( alertVisible_, @"First Alert must be still visible" );
+    }
+    
+    
+    {
+        TestAsyncRequestBlock hideAlertBlock_ = ^void( JFFSimpleBlock finishTest_ )
+        {
+            [ weakFirstAlert_ forceDismiss ];
+            finishTest_();
+        };
+        
+        [ self performAsyncRequestOnMainThreadWithBlock: hideAlertBlock_
+                                               selector: _cmd ];
+        
+        GHAssertNil( weakFirstAlert_, @"RIP First alert. Finally..." );
+    }    
+}
+
 @end
