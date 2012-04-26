@@ -1,6 +1,5 @@
 #import "JFFAsyncOperationManager.h"
 
-#import <JFFAsyncOperations/Helpers/JFFCancelAyncOperationBlockHolder.h>
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
 #import <JFFScheduler/JFFScheduler.h>

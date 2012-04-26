@@ -1,5 +1,5 @@
 #import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
-#import <JFFAsyncOperations/Helpers/JFFCancelAyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
 #import <JFFAsyncOperations/Helpers/JFFAsyncOperationProgressBlockHolder.h>
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
@@ -10,103 +10,103 @@
 
 -(void)setUp
 {
-   [ JFFSimpleBlockHolder                  enableInstancesCounting ];
-   [ JFFCancelAyncOperationBlockHolder     enableInstancesCounting ];
-   [ JFFAsyncOperationProgressBlockHolder  enableInstancesCounting ];
-   [ JFFDidFinishAsyncOperationBlockHolder enableInstancesCounting ];
+    [ JFFSimpleBlockHolder                  enableInstancesCounting ];
+    [ JFFCancelAsyncOperationBlockHolder    enableInstancesCounting ];
+    [ JFFAsyncOperationProgressBlockHolder  enableInstancesCounting ];
+    [ JFFDidFinishAsyncOperationBlockHolder enableInstancesCounting ];
 }
 
 -(void)testCancelActionAfterUnsubscribeOnDealloc
 {
-   @autoreleasepool
-   {
-      NSObject* obj_ = [ NSObject new ];
+    @autoreleasepool
+    {
+        NSObject* obj_ = [ NSObject new ];
 
-      __block BOOL cancel_callback_called_ = NO;
+        __block BOOL cancel_callback_called_ = NO;
 
-      JFFCancelAsyncOperation cancel_ = nil;
+        JFFCancelAsyncOperation cancel_ = nil;
 
-      @autoreleasepool
-      {
-         JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
-                                                                 , JFFCancelAsyncOperationHandler cancel_callback_
-                                                                 , JFFDidFinishAsyncOperationHandler done_callback_ )
-         {
-            cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
-            return [ [ ^void( BOOL cancel_ )
+        @autoreleasepool
+        {
+            JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
+                                                                    , JFFCancelAsyncOperationHandler cancel_callback_
+                                                                    , JFFDidFinishAsyncOperationHandler done_callback_ )
             {
-               if ( cancel_callback_ )
-                  cancel_callback_( cancel_ );
-            } copy ] autorelease ];
-         };
+                cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
+                return [ [ ^void( BOOL cancel_ )
+                {
+                    if ( cancel_callback_ )
+                        cancel_callback_( cancel_ );
+                } copy ] autorelease ];
+            };
 
-         operation_ = [ obj_ autoUnsubsribeOnDeallocAsyncOperation: operation_ ];
+            operation_ = [ obj_ autoUnsubsribeOnDeallocAsyncOperation: operation_ ];
 
-         cancel_ = operation_( nil, ^( BOOL canceled_ )
-         {
-            cancel_callback_called_ = YES;
-         }, nil );
-         [ cancel_ retain ];
-      }
+            cancel_ = operation_( nil, ^( BOOL canceled_ )
+            {
+                cancel_callback_called_ = YES;
+            }, nil );
+            [ cancel_ retain ];
+        }
 
-      [ obj_ release ];
+        [ obj_ release ];
 
-      GHAssertTrue( cancel_callback_called_, @"Cancel callback should be called" );
-      cancel_callback_called_ = NO;
+        GHAssertTrue( cancel_callback_called_, @"Cancel callback should be called" );
+        cancel_callback_called_ = NO;
 
-      cancel_( YES );
-      [ cancel_ release ];
+        cancel_( YES );
+        [ cancel_ release ];
 
-      GHAssertFalse( cancel_callback_called_, @"Cancel callback should not be called after dealloc" );
-   }
+        GHAssertFalse( cancel_callback_called_, @"Cancel callback should not be called after dealloc" );
+    }
 
-   GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationProgressBlockHolder  instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationProgressBlockHolder  instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
 }
 
 -(void)testOnceCancelBlockCallingOnDealloc
 {
-   @autoreleasepool
-   {
-      NSObject* obj_ = [ NSObject new ];
+    @autoreleasepool
+    {
+        NSObject* obj_ = [ NSObject new ];
 
-      __block NSUInteger cancel_callback_call_count_ = 0;
+        __block NSUInteger cancel_callback_call_count_ = 0;
 
-      @autoreleasepool
-      {
-         NSAutoreleasePool* pool_ = [ NSAutoreleasePool new ];
+        @autoreleasepool
+        {
+            NSAutoreleasePool* pool_ = [ NSAutoreleasePool new ];
 
-         JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
-                                                                 , JFFCancelAsyncOperationHandler cancel_callback_
-                                                                 , JFFDidFinishAsyncOperationHandler done_callback_ )
-         {
-            cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
-            return [ [ ^void( BOOL cancel_ )
+            JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
+                                                                    , JFFCancelAsyncOperationHandler cancel_callback_
+                                                                    , JFFDidFinishAsyncOperationHandler done_callback_ )
             {
-               ++cancel_callback_call_count_;
-               if ( cancel_callback_ )
-                  cancel_callback_( cancel_ );
-            } copy ] autorelease ];
-         };
+                cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
+                return [ [ ^void( BOOL cancel_ )
+                {
+                    ++cancel_callback_call_count_;
+                    if ( cancel_callback_ )
+                        cancel_callback_( cancel_ );
+                } copy ] autorelease ];
+            };
 
-         operation_ = [ obj_ autoUnsubsribeOnDeallocAsyncOperation: operation_ ];
+            operation_ = [ obj_ autoUnsubsribeOnDeallocAsyncOperation: operation_ ];
 
-         operation_( nil, nil, nil );
+            operation_( nil, nil, nil );
 
-         [ pool_ release ];
-      }
+            [ pool_ release ];
+        }
 
-      [ obj_ release ];
+        [ obj_ release ];
 
-      GHAssertTrue( 1 == cancel_callback_call_count_, @"Cancel callback should not be called after dealloc" );
-   }
+        GHAssertTrue( 1 == cancel_callback_call_count_, @"Cancel callback should not be called after dealloc" );
+    }
 
-   GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFAsyncOperationProgressBlockHolder  instancesCount ], @"All object of this class should be deallocated" );
-   GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationProgressBlockHolder  instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
 }
 
 -(void)testCancelCallbackCallingOnCancelBlock
@@ -148,7 +148,7 @@
     }
 
     GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"All object of this class should be deallocated" );
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"All object of this class should be deallocated" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"All object of this class should be deallocated" );
     GHAssertTrue( 0 == [ JFFAsyncOperationProgressBlockHolder  instancesCount ], @"All object of this class should be deallocated" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
 }
@@ -221,7 +221,7 @@
     }
 
     GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationProgressBlockHolder  instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
 }
@@ -291,7 +291,7 @@
     }
 
     GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationProgressBlockHolder  instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
 }

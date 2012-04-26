@@ -1,6 +1,6 @@
 #import "JFFAsyncOperationManager.h"
 
-#import <JFFAsyncOperations/Helpers/JFFCancelAyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
 @interface TestClassWithProperties : NSObject
@@ -41,7 +41,7 @@
 
 -(void)setUp
 {
-    [ JFFCancelAyncOperationBlockHolder     enableInstancesCounting ];
+    [ JFFCancelAsyncOperationBlockHolder    enableInstancesCounting ];
     [ JFFDidFinishAsyncOperationBlockHolder enableInstancesCounting ];
 
     [ JFFAsyncOperationManager enableInstancesCounting ];
@@ -95,7 +95,7 @@
         [ nativeLoader_ release ];
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -147,7 +147,7 @@
         GHAssertTrue( cancelFlag_, @"OK" );
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -199,7 +199,7 @@
       GHAssertFalse( cancelFlag_, @"OK" );
    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+   GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -251,7 +251,7 @@
       GHAssertTrue( cancelFlag_, @"OK" );
    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+   GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -320,7 +320,7 @@
       GHAssertTrue( [ dataOwner_.dict objectForKey: @"1" ] == result_, @"OK" );
    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+   GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -362,7 +362,7 @@
             [ dataOwner_ addOnDeallocBlock: ^()
             {
                deallocated_ = YES;
-            }];
+            } ];
 
             [ dataOwner_ release ];
 
@@ -374,7 +374,7 @@
       GHAssertTrue( deallocated_, @"OK" );
    }
    
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+   GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }

@@ -1,6 +1,6 @@
 #import "JFFAsyncOperationManager.h"
 
-#import <JFFAsyncOperations/Helpers/JFFCancelAyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
 @interface FailOnFirstErrorGroupOfAsyncOperationsTest : GHTestCase
@@ -10,7 +10,7 @@
 
 -(void)setUp
 {
-   [ JFFCancelAyncOperationBlockHolder     enableInstancesCounting ];
+   [ JFFCancelAsyncOperationBlockHolder    enableInstancesCounting ];
    [ JFFDidFinishAsyncOperationBlockHolder enableInstancesCounting ];
 
    [ JFFAsyncOperationManager enableInstancesCounting ];
@@ -31,10 +31,10 @@
       __block BOOL group_loader_finished_ = NO;
       loader_( nil, nil, ^( id result_, NSError* error_ )
       {
-         if ( result_ && !error_ )
-         {
-            group_loader_finished_ = YES;
-         }
+          if ( result_ && !error_ )
+          {
+              group_loader_finished_ = YES;
+          }
       } );
 
       GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
@@ -57,7 +57,7 @@
       [ first_loader_ release ];
    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+   GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -104,7 +104,7 @@
         [ firstLoader_ release ];
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -151,7 +151,7 @@
         [ firstLoader_ release ];
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -188,7 +188,7 @@
         GHAssertTrue( secondLoader_.cancelFlag, @"Second loader canceled already" );
         GHAssertTrue( mainCanceled_, @"Group loader canceled already" );
 
-        GHAssertTrue( 0 != [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+        GHAssertTrue( 0 != [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
         GHAssertTrue( 0 != [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
         GHAssertTrue( 0 != [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 
@@ -196,7 +196,7 @@
         [ firstLoader_ release ];
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -208,7 +208,9 @@
       JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
       JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
 
-      JFFAsyncOperation loader_ = failOnFirstErrorGroupOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
+      JFFAsyncOperation loader_ = failOnFirstErrorGroupOfAsyncOperations( first_loader_.loader
+                                                                         , second_loader_.loader
+                                                                         , nil );
 
       __block BOOL main_canceled_ = NO;
       __block BOOL once_canceled_ = NO;
@@ -235,7 +237,7 @@
       [ first_loader_ release ];
    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+   GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -274,7 +276,7 @@
       [ first_loader_ release ];
    }
 
-   GHAssertTrue( 0 == [ JFFCancelAyncOperationBlockHolder     instancesCount ], @"OK" );
+   GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }

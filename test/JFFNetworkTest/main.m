@@ -38,23 +38,23 @@ int main(int argc, char *argv[])
    setenv( "GHUNIT_AUTOEXIT" , "YES", 1 );
    NSSetUncaughtExceptionHandler(&exceptionHandler);
    
-   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-   
-   // Register any special test case classes
-   //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  
-   
-   int retVal = 0;
-   // If GHUNIT_CLI is set we are using the command line interface and run the tests
-   // Otherwise load the GUI app
-   if (getenv("GHUNIT_CLI"))
+   @autoreleasepool
    {
-      retVal = [GHTestRunner run];
-   } 
-   else 
-   {
-      retVal = UIApplicationMain(argc, argv, nil, @"GHUnitIPhoneAppDelegate");
+      // Register any special test case classes
+      //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  
+   
+      int retVal = 0;
+      // If GHUNIT_CLI is set we are using the command line interface and run the tests
+      // Otherwise load the GUI app
+      if (getenv("GHUNIT_CLI"))
+      {
+         retVal = [GHTestRunner run];
+      } 
+      else 
+      {
+         retVal = UIApplicationMain(argc, argv, nil, @"GHUnitIPhoneAppDelegate");
+      }
+      
+      return retVal;
    }
-   
-   [pool release];
-   return retVal;
 }

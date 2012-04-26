@@ -1,17 +1,17 @@
-#import <JFFAsyncOperations/Helpers/JFFCancelAyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
 
-@interface JFFCancelAyncOperationBlockHolderTest : GHTestCase
+@interface JFFCancelAsyncOperationBlockHolderTest : GHTestCase
 @end
 
-@implementation JFFCancelAyncOperationBlockHolderTest
+@implementation JFFCancelAsyncOperationBlockHolderTest
 
--(void)testJFFCancelAyncOperationBlockHolder
+-(void)testJFFCancelAsyncOperationBlockHolder
 {
    __block BOOL holder_deallocated_ = NO;
 
    @autoreleasepool
    {
-      JFFCancelAyncOperationBlockHolder* holder_ = [ JFFCancelAyncOperationBlockHolder new ];
+      JFFCancelAsyncOperationBlockHolder* holder_ = [ JFFCancelAsyncOperationBlockHolder new ];
       [ holder_ addOnDeallocBlock: ^void( void )
       {
          holder_deallocated_ = YES;
