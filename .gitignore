@@ -9,4 +9,4 @@ xcuserdata
 *.xcworkspace
 
 #temporary hard code
-./lib-third-party
+lib-third-party
