@@ -17,6 +17,11 @@
 //Creates a new NSArray containing the values returned by the block.
 -(NSArray*)map:( JFFMappingBlock )block_;
 
+//Invokes block once for each element of self.
+//Creates a new NSArray containing the values returned by the block.
+//or return nil if error happens
+-(NSArray*)map:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_;
+
 //Invokes the block passing in successive elements from self,
 //Creates a new NSArray containing those elements for which the block returns a YES value 
 -(NSArray*)select:( JFFPredicateBlock )predicate_;

@@ -31,7 +31,30 @@
 {
     NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
 
-    [ self each: ^void( id object_ ) { [ result_ addObject: block_( object_ ) ]; } ];
+    for ( id object_ in self )
+    {
+        [ result_ addObject: block_( object_ ) ];
+    }
+
+    return [ [ NSArray alloc ] initWithArray: result_ ];
+}
+
+-(NSArray*)map:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_
+{
+    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
+
+    for ( id object_ in self )
+    {
+        id newObject_ = block_( object_, outError_ );
+        if ( newObject_ )
+        {
+            [ result_ addObject: newObject_ ];
+        }
+        else
+        {
+            return nil;
+        }
+    }
 
     return [ [ NSArray alloc ] initWithArray: result_ ];
 }
