@@ -51,7 +51,8 @@
 {
     if ( !_propertySetSelector )
     {
-        _propertySetSelector = NSSelectorFromString( [ self.propertyPath.name propertySetNameForPropertyName ] );
+        NSString* setPropertyName_ = [ self.propertyPath.name propertySetNameForPropertyName ];
+        _propertySetSelector = NSSelectorFromString( setPropertyName_ );
     }
     return _propertySetSelector;
 }
