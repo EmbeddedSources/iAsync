@@ -253,46 +253,52 @@ static void readStreamCallback( CFReadStreamRef stream_
         return;
     }
 
-    CFHTTPMessageRef response_ = (CFHTTPMessageRef)CFReadStreamCopyProperty( stream_, kCFStreamPropertyHTTPResponseHeader );
-    if ( response_ )
+    NSDictionary* allHeadersDict_;
+    CFIndex statusCode_;
+
     {
+        CFHTTPMessageRef response_ = (CFHTTPMessageRef)CFReadStreamCopyProperty( stream_, kCFStreamPropertyHTTPResponseHeader );
+
+        if ( !response_ )
+            return;
+
         CFDictionaryRef allHeaders_ = CFHTTPMessageCopyAllHeaderFields( response_ );
-        NSDictionary* allHeadersDict_ = (__bridge NSDictionary*)allHeaders_;
-
-        [ self acceptCookiesForHeaders: allHeadersDict_ ];
-
-        CFIndex statusCode_ = CFHTTPMessageGetResponseStatusCode( response_ );
-
-        //JTODO test redirects (cyclic for example)
-        if ( 302 == statusCode_ )
-        {
-            NSString* location_ = [ allHeadersDict_ objectForKey: @"Location" ];
-            _params.url = [ [ NSURL alloc ] initWithScheme: _params.url.scheme
-                                                      host: _params.url.host
-                                                      path: location_ ];
-
-            [ self start ];
-        }
-        else
-        {
-            _responseHandled = YES;
-
-            if ( self.didReceiveResponseBlock )
-            {
-                JFFURLResponse* urlResponse_ = [ JFFURLResponse new ];
-
-                urlResponse_.statusCode = statusCode_;
-                urlResponse_.allHeaderFields = allHeadersDict_;
-
-                self.didReceiveResponseBlock( urlResponse_ );
-                self.didReceiveResponseBlock = nil;
-
-                _urlResponse = urlResponse_;
-            }
-        }
-
+        allHeadersDict_ = (__bridge NSDictionary*)allHeaders_;
         CFRelease( allHeaders_ );
+        statusCode_ = CFHTTPMessageGetResponseStatusCode( response_ );
+
         CFRelease( response_ );
+    }
+
+    [ self acceptCookiesForHeaders: allHeadersDict_ ];
+
+    //JTODO test redirects (cyclic for example)
+    if ( 302 == statusCode_ )
+    {
+        NSString* location_ = [ allHeadersDict_ objectForKey: @"Location" ];
+        _params.url = [ [ NSURL alloc ] initWithScheme: _params.url.scheme
+                                                  host: _params.url.host
+                                                  path: location_ ];
+
+        [ self start ];
+    }
+    else
+    {
+        _responseHandled = YES;
+
+        if ( self.didReceiveResponseBlock )
+        {
+            JFFURLResponse* urlResponse_ = [ JFFURLResponse new ];
+
+            urlResponse_.statusCode      = statusCode_;
+            urlResponse_.allHeaderFields = allHeadersDict_;
+            urlResponse_.url             = _params.url;
+
+            self.didReceiveResponseBlock( urlResponse_ );
+            self.didReceiveResponseBlock = nil;
+
+            _urlResponse = urlResponse_;
+        }
     }
 }
 
