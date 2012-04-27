@@ -5,6 +5,7 @@
 
 @property ( nonatomic, assign ) NSInteger statusCode;
 @property ( nonatomic, strong ) NSDictionary* allHeaderFields;
+@property ( nonatomic, strong ) NSURL* url;
 
 @property ( nonatomic, assign, readonly ) long long expectedContentLength;
 
