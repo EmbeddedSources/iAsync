@@ -8,6 +8,7 @@
 typedef void (^JFFActionBlock)( id object_ );
 typedef id (^JFFMappingBlock)( id object_ );
 typedef id (^JFFMappingWithErrorBlock)( id object_, NSError** outError_ );
+typedef void (^JFFMappingDictBlock)( id object_, id* key_, id* value_ );
 typedef id (^JFFProducerBlock)( NSUInteger index_ );
 typedef NSArray* (^JFFFlattenBlock)( id object_ );
 
