@@ -2,7 +2,7 @@
 
 #import <Foundation/Foundation.h>
 
-//JTODO remove
+//TODO remove
 @interface JFFAsyncOperationProgressBlockHolder : NSObject
 
 @property ( nonatomic, copy ) JFFAsyncOperationProgressHandler progressBlock;

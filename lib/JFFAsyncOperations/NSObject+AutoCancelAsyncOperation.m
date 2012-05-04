@@ -2,7 +2,6 @@
 
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 
-#import "JFFCancelAsyncOperationBlockHolder.h"
 #import "JFFDidFinishAsyncOperationBlockHolder.h"
 
 @implementation NSObject (WeakAsyncOperation)
@@ -22,8 +21,8 @@
 
         JFFSimpleBlockHolder* ondeallocBlockHolder_ = [ JFFSimpleBlockHolder new ];
 
-        JFFSimpleBlockHolder* remove_ondealloc_block_holder_ = [ JFFSimpleBlockHolder new ];
-        remove_ondealloc_block_holder_.simpleBlock = ^void( void )
+        JFFSimpleBlockHolder* removeOndeallocBlockJolder_ = [ JFFSimpleBlockHolder new ];
+        removeOndeallocBlockJolder_.simpleBlock = ^void( void )
         {
             finished_ = YES;
 
@@ -34,20 +33,23 @@
             }
         };
 
-        JFFCancelAsyncOperationBlockHolder* cancel_callback_holder_ = [ JFFCancelAsyncOperationBlockHolder new ];
-        cancel_callback_holder_.cancelBlock = cancelCallback_;
-        JFFCancelAsyncOperationHandler cancelCallbackWrapper_ = ^void( BOOL cancel_op_ )
+        __block JFFCancelAsyncOperation cancelCallbackHolder_;
+        cancelCallbackHolder_ = [ cancelCallback_ copy ];
+        JFFCancelAsyncOperationHandler cancelCallbackWrapper_ = ^void( BOOL cancelOp_ )
         {
-            remove_ondealloc_block_holder_.onceSimpleBlock();
-            cancel_callback_holder_.onceCancelBlock( cancel_op_ );
+            removeOndeallocBlockJolder_.onceSimpleBlock();
+            if ( cancelCallbackHolder_ )
+            {
+                cancelCallbackHolder_( cancelOp_ );
+                cancelCallbackHolder_ = nil;
+            }
         };
 
         JFFDidFinishAsyncOperationBlockHolder* doneCallbackHolder_ = [ JFFDidFinishAsyncOperationBlockHolder new ];
         doneCallbackHolder_.didFinishBlock = doneCallback_;
-        JFFDidFinishAsyncOperationHandler doneCallbackWrapper_ = ^void( id result_
-                                                                       , NSError* error_ )
+        JFFDidFinishAsyncOperationHandler doneCallbackWrapper_ = ^void( id result_, NSError* error_ )
         {
-            remove_ondealloc_block_holder_.onceSimpleBlock();
+            removeOndeallocBlockJolder_.onceSimpleBlock();
             doneCallbackHolder_.onceDidFinishBlock( result_, error_ );
         };
 
@@ -68,13 +70,18 @@
         //try assert retain count
         [ self addOnDeallocBlock: ondeallocBlockHolder_.simpleBlock ];
 
-        JFFCancelAsyncOperationBlockHolder* mainCancelHolder_ = [ JFFCancelAsyncOperationBlockHolder new ];
-        mainCancelHolder_.cancelBlock = ^void( BOOL canceled_ )
+        __block JFFCancelAsyncOperation cancelBlockHolder_ = [ ^void( BOOL canceled_ )
         {
             cancel_( canceled_ );
-        };
+        } copy ];
 
-        return mainCancelHolder_.onceCancelBlock;
+        return ^( BOOL canceled_ )
+        {
+            if ( !cancelBlockHolder_ )
+                return;
+            cancelBlockHolder_( canceled_ );
+            cancelBlockHolder_ = nil;
+        };
     };
 }
 

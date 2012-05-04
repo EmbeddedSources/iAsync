@@ -28,24 +28,24 @@ static BOOL findAndTryToPerformNextNativeLoader( void );
 
 void setBalancerActiveContextName( NSString* context_name_ )
 {
-   if ( [ sharedBalancer().activeContextName isEqualToString: context_name_ ] )
-      return;
+    if ( [ sharedBalancer().activeContextName isEqualToString: context_name_ ] )
+        return;
 
-   NSLog( @"!!!SET ACTIVE CONTEXT NAME: %@", context_name_ );
-   sharedBalancer().activeContextName = context_name_;
-   setBalancerCurrentContextName( context_name_ );
+    NSLog( @"!!!SET ACTIVE CONTEXT NAME: %@", context_name_ );
+    sharedBalancer().activeContextName = context_name_;
+    setBalancerCurrentContextName( context_name_ );
 
-   while ( findAndTryToPerformNextNativeLoader() );
+    while ( findAndTryToPerformNextNativeLoader() );
 }
 
 static void peformBlockWithinContext( JFFSimpleBlock block_, JFFContextLoaders* context_loaders_ )
 {
-   NSString* current_context_name_ = sharedBalancer().currentContextName;
-   sharedBalancer().currentContextName = context_loaders_.name;
+    NSString* current_context_name_ = sharedBalancer().currentContextName;
+    sharedBalancer().currentContextName = context_loaders_.name;
 
-   block_();
+    block_();
 
-   sharedBalancer().currentContextName = current_context_name_;
+    sharedBalancer().currentContextName = current_context_name_;
 }
 
 static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation native_loader_
@@ -54,25 +54,25 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
 static void performInBalancerPedingLoaderData( JFFPedingLoaderData* pending_loader_data_
                                               , JFFContextLoaders* context_loaders_ )
 {
-   JFFAsyncOperation balanced_loader_ = wrappedAsyncOperationWithContext( pending_loader_data_.nativeLoader, context_loaders_ );
+    JFFAsyncOperation balanced_loader_ = wrappedAsyncOperationWithContext( pending_loader_data_.nativeLoader, context_loaders_ );
 
-   balanced_loader_( pending_loader_data_.progressCallback
-                    , pending_loader_data_.cancelCallback
-                    , pending_loader_data_.doneCallback );
+    balanced_loader_( pending_loader_data_.progressCallback
+                     , pending_loader_data_.cancelCallback
+                     , pending_loader_data_.doneCallback );
 }
 
 static BOOL performLoaderFromContextIfPossible( JFFContextLoaders* context_loaders_ )
 {
-   BOOL have_pending_loaders_ = ( context_loaders_.pendingLoadersNumber > 0 );
-   if ( have_pending_loaders_
-       && canPeformAsyncOperationForContext( context_loaders_ ) )
-   {
-      JFFPedingLoaderData* pending_loader_data_ = [ context_loaders_ popPendingLoaderData ];
-      performInBalancerPedingLoaderData( pending_loader_data_, context_loaders_ );
-      //JTODO remove empty context_loaders_ (without tasks)
-      return YES;
-   }
-   return NO;
+    BOOL have_pending_loaders_ = ( context_loaders_.pendingLoadersNumber > 0 );
+    if ( have_pending_loaders_
+        && canPeformAsyncOperationForContext( context_loaders_ ) )
+    {
+        JFFPedingLoaderData* pending_loader_data_ = [ context_loaders_ popPendingLoaderData ];
+        performInBalancerPedingLoaderData( pending_loader_data_, context_loaders_ );
+        //TODO remove empty context_loaders_ (without tasks)
+        return YES;
+    }
+    return NO;
 }
 
 static BOOL findAndTryToPerformNextNativeLoader( void )
@@ -231,7 +231,7 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
                                                      , nativeLoader_
                                                      , context_loaders_ );
 
-        //JTODO check native loader no within balancer !!!
+        //TODO check native loader no within balancer !!!
         JFFCancelAsyncOperation cancel_block_ = nativeLoader_( wrapped_progress_callback_
                                                               , wrapped_cancel_callback_
                                                               , wrapped_done_callback_ );
@@ -268,7 +268,7 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
 
 static BOOL canPeformAsyncOperationForContext( JFFContextLoaders* contextLoaders_ )
 {
-    //JTODO check condition yet
+    //TODO check condition yet
     BOOL isActiveContext_ = [ sharedBalancer().activeContextName isEqualToString: contextLoaders_.name ];
     return ( ( isActiveContext_ && contextLoaders_.activeLoadersNumber < max_operation_count_ )
             || 0 == global_active_number_ )

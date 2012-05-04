@@ -1,8 +1,6 @@
 #import <JFFAsyncOperations/JFFAsyncOperationUtils.h>
 #import <JFFAsyncOperations/JFFAsyncOperationsPredefinedBlocks.h>
 
-#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
-
 #import <JFFAsyncOperations/CachedAsyncOperations/JFFPropertyPath.h>
 #import <JFFAsyncOperations/CachedAsyncOperations/JFFPropertyExtractor.h>
 #import <JFFAsyncOperations/CachedAsyncOperations/NSObject+AsyncPropertyReader.h>

@@ -47,7 +47,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder first
                                         , JFFCancelAsyncOperationHandler cancelCallback_
                                         , JFFDidFinishAsyncOperationHandler doneCallback_ )
         {
-            JFFCancelAsyncOperationBlockHolder* cancelBlockHolder_ = [ JFFCancelAsyncOperationBlockHolder new ];
+            __block JFFCancelAsyncOperation cancelBlockHolder_;
 
             doneCallback_ = [ doneCallback_ copy ];
             JFFCancelAsyncOperation firstCancel_ = firstLoader_( progressCallback_
@@ -63,38 +63,44 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder first
                 {
                     JFFAsyncOperation secondLoader_ = secondBinder_( result_ );
                     assert( secondLoader_ );//result loader should not be nil
-                    cancelBlockHolder_.cancelBlock = secondLoader_( progressCallback_
-                                                                   , cancelCallback_
-                                                                   , doneCallback_ );
+                    cancelBlockHolder_ = secondLoader_( progressCallback_
+                                                       , cancelCallback_
+                                                       , doneCallback_ );
                 }
             } );
-            if ( !cancelBlockHolder_.cancelBlock )
-                cancelBlockHolder_.cancelBlock = firstCancel_;
+            if ( !cancelBlockHolder_ )
+                cancelBlockHolder_ = firstCancel_;
 
-            return cancelBlockHolder_.onceCancelBlock;
+            return ^( BOOL canceled_ )
+            {
+                if ( !cancelBlockHolder_ )
+                    return;
+                cancelBlockHolder_( canceled_ );
+                cancelBlockHolder_ = nil;
+            };
         };
     };
 }
 
-JFFAsyncOperation sequenceOfAsyncOperations( JFFAsyncOperation first_loader_
-                                            , JFFAsyncOperation second_loader_
+JFFAsyncOperation sequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
+                                            , JFFAsyncOperation secondLoader_
                                             , ... )
 {
     JFFAsyncOperationBinder firstBlock_ = ^JFFAsyncOperation( id result_ )
     {
-        return first_loader_;
+        return firstLoader_;
     };
 
     va_list args;
-    va_start( args, second_loader_ );
-    for ( JFFAsyncOperation second_block_ = second_loader_;
-         second_block_ != nil;
-         second_block_ = va_arg( args, JFFAsyncOperation ) )
+    va_start( args, secondLoader_ );
+    for ( JFFAsyncOperation secondBlock_ = secondLoader_;
+         secondBlock_ != nil;
+         secondBlock_ = va_arg( args, JFFAsyncOperation ) )
     {
-        second_block_ = [ second_block_ copy ];
+        secondBlock_ = [ secondBlock_ copy ];
         JFFAsyncOperationBinder secondBlockBinder_ = ^JFFAsyncOperation( id result_ )
         {
-            return second_block_;
+            return secondBlock_;
         };
         firstBlock_ = bindSequenceOfBindersPair( firstBlock_, secondBlockBinder_ );
     }
@@ -203,7 +209,7 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair( JFFAsyncOperationBi
                                         , JFFCancelAsyncOperationHandler cancelCallback_
                                         , JFFDidFinishAsyncOperationHandler doneCallback_ )
         {
-            JFFCancelAsyncOperationBlockHolder* blockHolder_ = [ JFFCancelAsyncOperationBlockHolder new ];
+            __block JFFCancelAsyncOperation cancelBlockHolder_;
 
             doneCallback_ = [ doneCallback_ copy ];
 
@@ -214,7 +220,7 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair( JFFAsyncOperationBi
                 if ( error_ )
                 {
                     JFFAsyncOperation secondLoader_ = secondBinder_( error_ );
-                    blockHolder_.cancelBlock = secondLoader_( progressCallback_, cancelCallback_, doneCallback_ );
+                    cancelBlockHolder_ = secondLoader_( progressCallback_, cancelCallback_, doneCallback_ );
                 }
                 else
                 {
@@ -222,10 +228,16 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair( JFFAsyncOperationBi
                         doneCallback_( result_, nil );
                 }
             } );
-            if ( !blockHolder_.cancelBlock )
-                blockHolder_.cancelBlock = firstCancel_;
+            if ( !cancelBlockHolder_ )
+                cancelBlockHolder_ = firstCancel_;
 
-            return blockHolder_.onceCancelBlock;
+            return ^( BOOL canceled_ )
+            {
+                if ( !cancelBlockHolder_ )
+                    return;
+                cancelBlockHolder_( canceled_ );
+                cancelBlockHolder_ = nil;
+            };
         };
     };
 }
@@ -677,15 +689,15 @@ JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
     nativeLoader_ = [ nativeLoader_ copy ];
     predicate_    = [ predicate_    copy ];
 
-    return ^( JFFAsyncOperationProgressHandler progressCallback_
-             , JFFCancelAsyncOperationHandler cancelCallback_
-             , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+                                    , JFFCancelAsyncOperationHandler cancelCallback_
+                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
         progressCallback_ = [ progressCallback_ copy ];
         cancelCallback_   = [ cancelCallback_   copy ];
         doneCallback_     = [ doneCallback_     copy ];
 
-        JFFCancelAsyncOperationBlockHolder* holder_ = [ JFFCancelAsyncOperationBlockHolder new ];
+        __block JFFCancelAsyncOperation cancelBlockHolder_;
 
         __block JFFDidFinishAsyncOperationHook finishHookHolder_ = nil;
 
@@ -714,7 +726,7 @@ JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
                                                                               , finishHookHolder_ );
                 loader_ = asyncOperationAfterDelay( delay_, loader_ );
 
-                holder_.cancelBlock = loader_( progressCallback_, cancelCallback_, doneCallback_ );
+                cancelBlockHolder_ = loader_( progressCallback_, cancelCallback_, doneCallback_ );
             }
         };
 
@@ -723,12 +735,16 @@ JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
         JFFAsyncOperation loader_ = asyncOperationWithFinishHookBlock( nativeLoader_
                                                                       , finishHookHolder_ );
 
-        holder_.cancelBlock = loader_( progressCallback_, cancelCallback_, doneCallback_ );
+        cancelBlockHolder_ = loader_( progressCallback_, cancelCallback_, doneCallback_ );
 
         return ^( BOOL canceled_ )
         {
             finishHookHolder_ = nil;
-            holder_.onceCancelBlock( canceled_ );
+
+            if ( !cancelBlockHolder_ )
+                return;
+            cancelBlockHolder_( canceled_ );
+            cancelBlockHolder_ = nil;
         };
     };
 }
