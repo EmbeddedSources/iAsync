@@ -38,7 +38,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder first
     secondBinder_ = [ secondBinder_ copy ];
 
     if ( !secondBinder_ )
-        return secondBinder_;
+        return firstBinder_;
 
     return ^JFFAsyncOperation( id bindResult_ )
     {
