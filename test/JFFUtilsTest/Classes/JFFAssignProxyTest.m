@@ -8,7 +8,7 @@
 
 -(NSUInteger)justReturnFiveNumber
 {
-   return 5;
+    return 5;
 }
 
 @end
@@ -20,36 +20,29 @@
 
 -(void)testAssignProxyDealloc
 {
-   JFFAssignProxy* proxy_ = nil;
-   __block BOOL target_deallocated_ = NO;
+    JFFAssignProxy* proxy_ = nil;
+    __block BOOL target_deallocated_ = NO;
 
-   @autoreleasepool
-   {
-      ProxyTargetTest* target_ = [ ProxyTargetTest new ];
-      [ target_ addOnDeallocBlock: ^void( void )
-      {
-         target_deallocated_ = YES;
-      } ];
+    @autoreleasepool
+    {
+        ProxyTargetTest* target_ = [ ProxyTargetTest new ];
+        [ target_ addOnDeallocBlock: ^void( void )
+        {
+            target_deallocated_ = YES;
+        } ];
 
-      proxy_ = [ [ JFFAssignProxy alloc ] initWithTarget: target_ ];
+        proxy_ = [ [ JFFAssignProxy alloc ] initWithTarget: target_ ];
+    }
 
-      [ target_ release ];
-   }
-
-   GHAssertTrue( target_deallocated_, @"Target should be dealloced" );
-
-   [ proxy_ release ];
+    GHAssertTrue( target_deallocated_, @"Target should be dealloced" );
 }
 
 -(void)testAssignProxyMethodCalls
 {
-   ProxyTargetTest* target_ = [ ProxyTargetTest new ];
+    ProxyTargetTest* target_ = [ ProxyTargetTest new ];
 
-   id proxy_ = [ [ JFFAssignProxy alloc ] initWithTarget: target_ ];
-   GHAssertTrue( 5 == [ proxy_ justReturnFiveNumber ], @"Target should be dealloced" );
-   [ proxy_ release ];
-
-   [ target_ release ];
+    id proxy_ = [ [ JFFAssignProxy alloc ] initWithTarget: target_ ];
+    GHAssertTrue( 5 == [ proxy_ justReturnFiveNumber ], @"Target should be dealloced" );
 }
 
 @end

@@ -7,7 +7,7 @@
 
 #ifdef __OBJC__
     #import <JFFUtils/JFFUtils.h>
-    #import <JFFUtils/NSObject/NSObject+InstancesCount.h>
+    #import <JFFTestTools/JFFTestTools.h>
     #import <JFFUtils/NSString/NSString+Format.h>
 
     #import <GHUnitIOS/GHUnit.h>

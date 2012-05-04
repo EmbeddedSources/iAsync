@@ -54,7 +54,7 @@
 
     {
         JMStringHolder* result_ = nil;
-        JMStringHolder* christmasCheer_ = [ [ JMStringHolder new ] autorelease ];
+        JMStringHolder* christmasCheer_ = [ JMStringHolder new ];
         christmasCheer_.content = @"Merry Christmas";
 
         result_ = objc_member_of_cast<JMStringHolder>( christmasCheer_ );
@@ -65,7 +65,7 @@
 
 -(void)testKindOfCastToSuperTypeReturnsSameObject
 {
-    JMStringHolder* christmasCheer_ = [ [ JMStringHolder new ] autorelease ];
+    JMStringHolder* christmasCheer_ = [ JMStringHolder new ];
     christmasCheer_.content = @"Merry Christmas";
 
     id result_ = nil;

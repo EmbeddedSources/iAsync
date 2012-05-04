@@ -19,7 +19,7 @@
 
 -(NSUInteger)justReturnFiveNumber
 {
-   return self.initialState++;
+    return self.initialState++;
 }
 
 @end
@@ -50,51 +50,42 @@
         [ multicast_ addDelegate: delegate_ ];
 
         GHAssertTrue( init_state_ == [ multicast_ justReturnFiveNumber ], @"Contains 1 object" );
-
-        [ delegate_ release ];
     }
 
     GHAssertTrue( delegate_deallocated_, @"Target should be dealloced" );
     GHAssertTrue( 0 == [ multicast_ justReturnFiveNumber ], @"Empty array" );
-
-    [ multicast_ release ];
 }
 
 -(void)testMulticastDelegateFirstRelease
 {
-   JFFMulticastDelegate< TestMulticastDelegateInterface >* multicast_ =
-      (JFFMulticastDelegate< TestMulticastDelegateInterface >*)[ JFFMulticastDelegate new ];
+    __block BOOL multicast_deallocated_ = NO;
+    {
+        JFFMulticastDelegate< TestMulticastDelegateInterface >* multicast_ =
+        (JFFMulticastDelegate< TestMulticastDelegateInterface >*)[ JFFMulticastDelegate new ];
 
-   __block BOOL multicast_deallocated_ = NO;
-   [ multicast_ addOnDeallocBlock: ^void( void )
-   {
-      multicast_deallocated_ = YES;
-   } ];
+        [ multicast_ addOnDeallocBlock: ^void( void )
+        {
+            multicast_deallocated_ = YES;
+        } ];
 
-   NSObject* delegate_ = [ NSObject new ];
-   [ multicast_ addDelegate: delegate_ ];
+        NSObject* delegate_ = [ NSObject new ];
+        [ multicast_ addDelegate: delegate_ ];
+    }
 
-   [ multicast_ release ];
-
-   GHAssertTrue( multicast_deallocated_, @"Target should be dealloced" );
-
-   [ delegate_ release ];
+    GHAssertTrue( multicast_deallocated_, @"Target should be dealloced" );
 }
 
 -(void)testAddDelegateTwice
 {
-   JFFMulticastDelegate< TestMulticastDelegateInterface >* multicast_ =
+    JFFMulticastDelegate< TestMulticastDelegateInterface >* multicast_ =
       (JFFMulticastDelegate< TestMulticastDelegateInterface >*)[ JFFMulticastDelegate new ];
 
-   TestClassForMulticast* delegate_ = [ TestClassForMulticast new ];
-   delegate_.initialState = 5;
+    TestClassForMulticast* delegate_ = [ TestClassForMulticast new ];
+    delegate_.initialState = 5;
 
-   [ multicast_ addDelegate: delegate_ ];
+    [ multicast_ addDelegate: delegate_ ];
 
-   GHAssertTrue( 5 == [ multicast_ justReturnFiveNumber ], @"Contains 1 object" );
-
-   [ delegate_ release ];
-   [ multicast_ release ];
+    GHAssertTrue( 5 == [ multicast_ justReturnFiveNumber ], @"Contains 1 object" );
 }
 
 @end

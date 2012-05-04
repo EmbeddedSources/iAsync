@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B12CB3B144D5C5900DFE2B1 /* JFFAsyncOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B12CB3A144D5C5900DFE2B1 /* JFFAsyncOperationManager.m */; };
+		1B2D8C49154BFE7300360296 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2D8C46154BFE6400360296 /* libJFFTestTools.a */; };
 		1B7A10A414C036D900F37C95 /* AsyncOperationBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7A10A314C036D900F37C95 /* AsyncOperationBinder.m */; };
 		1B835A25142C8BC400FC004C /* libJFFAsyncOperations.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B835A20142C8BB300FC004C /* libJFFAsyncOperations.a */; };
 		1B835A26142C8BC400FC004C /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B835A16142C8BAB00FC004C /* libJFFUtils.a */; };
@@ -32,6 +33,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1B2D8C45154BFE6400360296 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B2D8C3E154BFE6400360296 /* JFFTestTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1BE0542B154826DA00270B58;
+			remoteInfo = JFFTestTools;
+		};
+		1B2D8C47154BFE6D00360296 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B2D8C3E154BFE6400360296 /* JFFTestTools.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BE0542A154826DA00270B58;
+			remoteInfo = JFFTestTools;
+		};
 		1B835A15142C8BAB00FC004C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1B835A0E142C8BAB00FC004C /* JFFUtils.xcodeproj */;
@@ -138,6 +153,7 @@
 		1B12CB3A144D5C5900DFE2B1 /* JFFAsyncOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationManager.m; sourceTree = "<group>"; };
 		1B2A67C8143F474300BC284F /* JFFDidFinishAsyncOperationBlockHolderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDidFinishAsyncOperationBlockHolderTest.m; sourceTree = "<group>"; };
 		1B2A680C143F514C00BC284F /* JFFCancelAyncOperationBlockHolderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCancelAyncOperationBlockHolderTest.m; sourceTree = "<group>"; };
+		1B2D8C3E154BFE6400360296 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		1B793B32142C851C00B43DC8 /* WeakAsyncOperationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakAsyncOperationTest.m; sourceTree = "<group>"; };
 		1B7A10A314C036D900F37C95 /* AsyncOperationBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncOperationBinder.m; sourceTree = "<group>"; };
 		1B835A0E142C8BAB00FC004C /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
@@ -167,6 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B2D8C49154BFE7300360296 /* libJFFTestTools.a in Frameworks */,
 				1B835B5D142CD17D00FC004C /* libJFFScheduler.a in Frameworks */,
 				1B835A25142C8BC400FC004C /* libJFFAsyncOperations.a in Frameworks */,
 				1B835A26142C8BC400FC004C /* libJFFUtils.a in Frameworks */,
@@ -181,9 +198,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B2D8C3F154BFE6400360296 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1B2D8C46154BFE6400360296 /* libJFFTestTools.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		1B793B35142C887700B43DC8 /* Dependecies */ = {
 			isa = PBXGroup;
 			children = (
+				1B2D8C3E154BFE6400360296 /* JFFTestTools.xcodeproj */,
 				1B835A18142C8BB300FC004C /* JFFAsyncOperations.xcodeproj */,
 				1B835B52142CD17300FC004C /* JFFScheduler.xcodeproj */,
 				1B835A0E142C8BAB00FC004C /* JFFUtils.xcodeproj */,
@@ -301,6 +327,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1B2D8C48154BFE6D00360296 /* PBXTargetDependency */,
 				1B835B5C142CD17A00FC004C /* PBXTargetDependency */,
 				1B835A22142C8BBF00FC004C /* PBXTargetDependency */,
 				1B835A24142C8BBF00FC004C /* PBXTargetDependency */,
@@ -338,6 +365,10 @@
 					ProjectRef = 1B835B52142CD17300FC004C /* JFFScheduler.xcodeproj */;
 				},
 				{
+					ProductGroup = 1B2D8C3F154BFE6400360296 /* Products */;
+					ProjectRef = 1B2D8C3E154BFE6400360296 /* JFFTestTools.xcodeproj */;
+				},
+				{
 					ProductGroup = 1B835A0F142C8BAB00FC004C /* Products */;
 					ProjectRef = 1B835A0E142C8BAB00FC004C /* JFFUtils.xcodeproj */;
 				},
@@ -350,6 +381,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		1B2D8C46154BFE6400360296 /* libJFFTestTools.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFTestTools.a;
+			remoteRef = 1B2D8C45154BFE6400360296 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		1B835A16142C8BAB00FC004C /* libJFFUtils.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -485,6 +523,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1B2D8C48154BFE6D00360296 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFTestTools;
+			targetProxy = 1B2D8C47154BFE6D00360296 /* PBXContainerItemProxy */;
+		};
 		1B835A22142C8BBF00FC004C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JFFUtils;
@@ -536,7 +579,10 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../lib;
+				HEADER_SEARCH_PATHS = (
+					../../lib,
+					../../lib/JFFTestTools,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -563,7 +609,10 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../lib;
+				HEADER_SEARCH_PATHS = (
+					../../lib,
+					../../lib/JFFTestTools,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (

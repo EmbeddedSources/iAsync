@@ -5,74 +5,72 @@
 
 -(void)testIsEqualVersionWorksCorrectly
 {
-   NSArray* items_    = nil;
-   NSArray* received_ = nil;
-   NSArray* expected_ = nil;
+    NSArray* items_    = nil;
+    NSArray* received_ = nil;
+    NSArray* expected_ = nil;
 
+    {
+        items_ = [ NSArray arrayWithObjects: 
+                    @"abra"
+                  , @"shwabra"
+                  , @"kadabra"
+                  , @"abra"
+                  , @"habra"
+                  , @"kadabra"
+                  , @"ABra"
+                  , nil ];
 
-   {
-      items_ = [ NSArray arrayWithObjects: 
-                  @"abra"
-                , @"shwabra"
-                , @"kadabra"
-                , @"abra"
-                , @"habra"
-                , @"kadabra"
-                , @"ABra"
-                , nil ];
+        received_ = [ items_ unique ];
+        expected_ = [ NSArray arrayWithObjects: 
+                        @"abra"
+                     , @"shwabra"
+                     , @"kadabra"
+                     , @"habra"
+                     , @"ABra"
+                     , nil ];
 
+        GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+    }
 
-      received_ = [ items_ unique ];
-      expected_ = [ NSArray arrayWithObjects: 
-                     @"abra"
-                   , @"shwabra"
-                   , @"kadabra"
-                   , @"habra"
-                   , @"ABra"
-                   , nil ];
+    {
+        items_ = [ NSArray arrayWithObjects: 
+                    @"one"
+                  , @"two"
+                  , @"three"
+                  , @"two"
+                  , @"one"
+                  , @"four"
+                  , @"five"
+                  , @"one"
+                  , nil ];
 
-      GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
-   }
+        received_ = [ items_ unique ];
+        expected_ = [ NSArray arrayWithObjects: 
+                        @"one"
+                     , @"two"
+                     , @"three"
+                     , @"four"
+                     , @"five"
+                     , nil ];      
 
-   {
-      items_ = [ NSArray arrayWithObjects: 
-                  @"one"
-                , @"two"
-                , @"three"
-                , @"two"
-                , @"one"
-                , @"four"
-                , @"five"
-                , @"one"
-                , nil ];
-
-      received_ = [ items_ unique ];
-      expected_ = [ NSArray arrayWithObjects: 
-                     @"one"
-                   , @"two"
-                   , @"three"
-                   , @"four"
-                   , @"five"
-                   , nil ];      
-
-      GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
-   }   
+        GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+    }
 }
 
 -(void)testIsEqualVersionWorksWithEmptyArray
 {
-   NSArray* items_    = nil;
-   NSArray* received_ = nil;
-   NSArray* expected_ = nil;
+    NSArray* items_    = nil;
+    NSArray* received_ = nil;
+    NSArray* expected_ = nil;
 
-   {
-      items_ = [ NSArray array ];
+    {
+        items_ = [ NSArray array ];
 
-      received_ = [ items_ unique ];
-      expected_ = items_;
+        received_ = [ items_ unique ];
+        expected_ = items_;
 
-      GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
-   }
+        GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+    }
 }
 
 
@@ -96,50 +94,49 @@
     {
         items_ = [ NSArray arrayWithObjects: 
                   @"abra"
-                , @"shwabra"
-                , @"kadabra"
-                , @"abRa"
-                , @"habra"
-                , @"KAdabRA"
-                , @"ABra"
-                , nil ];
-      
-      
-      
-      received_ = [ items_ uniqueBy: predicate_ ];
-      expected_ = [ NSArray arrayWithObjects: 
-                   @"abra"
-                   , @"shwabra"
-                   , @"kadabra"
-                   , @"habra"
-                   , nil ];
-      
-      GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
-   }
+                  , @"shwabra"
+                  , @"kadabra"
+                  , @"abRa"
+                  , @"habra"
+                  , @"KAdabRA"
+                  , @"ABra"
+                  , nil ];
+
+
+        received_ = [ items_ uniqueBy: predicate_ ];
+        expected_ = [ NSArray arrayWithObjects: 
+                     @"abra"
+                     , @"shwabra"
+                     , @"kadabra"
+                     , @"habra"
+                     , nil ];
+
+        GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+    }
    
-   {
-      items_ = [ NSArray arrayWithObjects: 
-                  @"one"
-                , @"Two"
-                , @"THREE"
-                , @"two"
-                , @"One"
-                , @"four"
-                , @"five"
-                , @"ONE"
-                , nil ];
-      
-      received_ = [ items_ uniqueBy: predicate_ ];
-      expected_ = [ NSArray arrayWithObjects: 
-                     @"one"
-                   , @"Two"
-                   , @"THREE"
-                   , @"four"
-                   , @"five"
-                   , nil ];      
-      
-      GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
-   }   
+    {
+        items_ = [ NSArray arrayWithObjects: 
+                    @"one"
+                  , @"Two"
+                  , @"THREE"
+                  , @"two"
+                  , @"One"
+                  , @"four"
+                  , @"five"
+                  , @"ONE"
+                  , nil ];
+
+        received_ = [ items_ uniqueBy: predicate_ ];
+        expected_ = [ NSArray arrayWithObjects: 
+                        @"one"
+                     , @"Two"
+                     , @"THREE"
+                     , @"four"
+                     , @"five"
+                     , nil ];      
+
+        GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+    }
 }
 
 

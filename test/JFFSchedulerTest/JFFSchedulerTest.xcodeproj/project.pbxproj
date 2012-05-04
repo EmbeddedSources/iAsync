@@ -475,6 +475,7 @@
 				1B41AD18151CCF7100566B1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

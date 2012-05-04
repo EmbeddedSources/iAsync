@@ -7,63 +7,57 @@
 
 -(void)testMutableAssignArrayAssignIssue
 {
-   NSObject* target_ = [ NSObject new ];
+    JFFMutableAssignArray* array_ = nil;
 
-   __block BOOL target_deallocated_ = NO;
-   [ target_ addOnDeallocBlock: ^void( void )
-   {
-      target_deallocated_ = YES;
-   } ];
+    {
+        __weak NSObject* weakTarget_;
 
-   JFFMutableAssignArray* array_ = [ JFFMutableAssignArray new ];
-   [ array_ addObject: target_ ];
+        {
+            NSObject* target_ = [ NSObject new ];
 
-   GHAssertTrue( 1 == [ array_ count ], @"Contains 1 object" );
+            weakTarget_ = target_;
 
-   [ target_ release ];
+            JFFMutableAssignArray* array_ = [ JFFMutableAssignArray new ];
+            [ array_ addObject: target_ ];
 
-   GHAssertTrue( target_deallocated_, @"Target should be dealloced" );
-   GHAssertTrue( 0 == [ array_ count ], @"Empty array" );
+            GHAssertTrue( 1 == [ array_ count ], @"Contains 1 object" );
+        }
 
-   [ array_ release ];
+        GHAssertNil( weakTarget_, @"Target should be dealloced" );
+    }
+    GHAssertTrue( 0 == [ array_ count ], @"Empty array" );
 }
 
 -(void)testMutableAssignArrayFirstRelease
 {
-   JFFMutableAssignArray* array_ = [ JFFMutableAssignArray new ];
+    __weak JFFMutableAssignArray* weakArray_;
+    {
+        JFFMutableAssignArray* array_ = [ JFFMutableAssignArray new ];
 
-   __block BOOL array_deallocated_ = NO;
-   [ array_ addOnDeallocBlock: ^void( void )
-   {
-      array_deallocated_ = YES;
-   } ];
+        weakArray_ = array_;
 
-   NSObject* target_ = [ NSObject new ];
-   [ array_ addObject: target_ ];
+        NSObject* target_ = [ NSObject new ];
+        [ array_ addObject: target_ ];
+    }
 
-   [ array_ release ];
-
-   GHAssertTrue( array_deallocated_, @"Target should be dealloced" );
-
-   [ target_ release ];
+    GHAssertNil( weakArray_, @"Target should be dealloced" );
 }
 
 -(void)testContainsObject
 {
-   JFFMutableAssignArray* array_ = [ JFFMutableAssignArray new ];
+    JFFMutableAssignArray* array_;
+    {
+        array_ = [ JFFMutableAssignArray new ];
 
-   NSObject* object1_ = [ NSObject new ];
-   NSObject* object2_ = [ [ NSObject new ] autorelease ];
-   [ array_ addObject: object1_ ];
+        NSObject* object1_ = [ NSObject new ];
+        NSObject* object2_ = [ NSObject new ];
+        [ array_ addObject: object1_ ];
 
-   GHAssertTrue( [ array_ containsObject: object1_ ], @"Array contains object1_" );
-   GHAssertFalse( [ array_ containsObject: object2_ ], @"Array no contains object2_" );
+        GHAssertTrue( [ array_ containsObject: object1_ ], @"Array contains object1_" );
+        GHAssertFalse( [ array_ containsObject: object2_ ], @"Array no contains object2_" );
+    }
 
-   [ object1_ release ];
-
-   GHAssertTrue( 0 == [ array_ count ], @"Empty array" );
-
-   [ array_ release ];
+    GHAssertTrue( 0 == [ array_ count ], @"Empty array" );
 }
 
 @end

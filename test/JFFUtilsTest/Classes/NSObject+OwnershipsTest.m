@@ -7,26 +7,23 @@
 
 -(void)testObjectOwnershipsExtension
 {
-   __block BOOL owned_deallocated_ = NO;
+    __block BOOL owned_deallocated_ = NO;
+    {
+        NSObject* owner_ = [ NSObject new ];
+        {
+            NSObject* owned_ = [ NSObject new ];
 
-   NSObject* owner_ = [ NSObject new ];
+            [ owned_ addOnDeallocBlock: ^void( void )
+            {
+                owned_deallocated_ = YES;
+            } ];
 
-   NSObject* owned_ = [ NSObject new ];
+            [ owner_.ownerships addObject: owned_ ];
+        }
 
-   [ owned_ addOnDeallocBlock: ^void( void )
-   {
-      owned_deallocated_ = YES;
-   } ];
-
-   [ owner_.ownerships addObject: owned_ ];
-
-   [ owned_ release ];
-
-   GHAssertFalse( owned_deallocated_, @"Owned should not be dealloced" );
-
-   [ owner_ release ];
-
-   GHAssertTrue( owned_deallocated_, @"Owned should be dealloced" );
+        GHAssertFalse( owned_deallocated_, @"Owned should not be dealloced" );
+    }
+    GHAssertTrue( owned_deallocated_, @"Owned should be dealloced" );
 }
 
 @end

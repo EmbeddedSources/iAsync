@@ -17,29 +17,28 @@
 
         @autoreleasepool
         {
-            NSObject* block_context_ = [ NSObject new ];
-            [ block_context_ addOnDeallocBlock: ^void( void )
+            NSObject* blockContext_ = [ NSObject new ];
+            [ blockContext_ addOnDeallocBlock: ^void( void )
             {
                 blockContextDeallocated_ = YES;
             } ];
 
             holder_.simpleBlock = ^void( void )
             {
-                if ( [ block_context_ class ] && [ holder_ class ] )
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Warc-retain-cycles"
+                if ( [ blockContext_ class ] && [ holder_ class ] )
                     ++performBlockCount_;
+                #pragma clang diagnostic pop
             };
 
             holder_.onceSimpleBlock();
             holder_.onceSimpleBlock();
-
-            [ block_context_ release ];
         }
 
         GHAssertTrue( blockContextDeallocated_, @"Block context should be dealloced" );
         GHAssertTrue( 1 == performBlockCount_, @"Block was called once" );
         GHAssertTrue( nil == holder_.simpleBlock, @"Block is nil after call" );
-
-        [ holder_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFSimpleBlockHolder instancesCount ], @"Block holder should be dealloced" );

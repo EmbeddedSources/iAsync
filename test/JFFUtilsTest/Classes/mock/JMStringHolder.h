@@ -2,6 +2,6 @@
 
 @interface JMStringHolder : NSObject
 
-@property ( nonatomic, retain ) NSString* content;
+@property ( nonatomic, strong ) NSString* content;
 
 @end

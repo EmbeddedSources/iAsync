@@ -21,7 +21,7 @@
 
 -(void)testDynamicCastReturnsNilForChildren
 {
-    JMParent* parent_ = [ [ JMParent new ] autorelease ];  
+    JMParent* parent_ = [ JMParent new ];  
     id result_ = nil;
 
     {
@@ -32,7 +32,7 @@
 
 -(void)testDynamicCastToSameTypeReturnsSameObject
 {
-    JMParent* parent_ = [ [ JMParent new ] autorelease ];  
+    JMParent* parent_ = [ JMParent new ];  
     id result_ = nil;
 
     {
@@ -44,7 +44,7 @@
 
 -(void)testDynamicCastReturnsSameObjectForValidHierarchy
 {
-    JMChild * child_   = [ [ JMChild  new ] autorelease ];
+    JMChild * child_   = [ JMChild  new ];
     JMParent* p_child_ = (JMParent*)child_;
 
     NSObject* o_child_ = (NSObject*)child_;
