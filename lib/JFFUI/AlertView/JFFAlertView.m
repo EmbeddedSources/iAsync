@@ -34,8 +34,7 @@ static NSInteger first_alert_index_ = 1;
 
 +(void)activeAlertsAddAlert:( JFFAlertView* )alertView_
 {
-    NSLog( @"activeAlertsAddAlert" );
-    
+    //JTODO refactor
     if ( !active_alerts_ )
     {
         active_alerts_ = [ [ NSMutableArray alloc ] initWithCapacity: 1 ];
@@ -46,12 +45,11 @@ static NSInteger first_alert_index_ = 1;
 
 +(BOOL)activeAlertsRemoveAlert:( JFFAlertView* )alertView_
 {
-    NSLog( @"activeAlertsRemoveAlert" );
-    
     if ( !active_alerts_ )
         return NO;
 
     NSUInteger result_ = [ active_alerts_ indexOfObject: alertView_ ];
+    //JTODO refactor
     if ( result_ != NSNotFound )
         [ active_alerts_ removeObjectAtIndex: result_ ];
 
@@ -72,8 +70,6 @@ static NSInteger first_alert_index_ = 1;
 
 -(void)forceDismiss
 {
-    NSLog( @"forceDismiss" );
-    
     [ self dismissWithClickedButtonIndex: [ self->_alertView cancelButtonIndex ] animated: NO ];
 //    [ self dismissWithClickedButtonIndex: [ self->_alertView cancelButtonIndex ] animated: NO ];
 }
@@ -164,8 +160,6 @@ otherButtonTitlesArray:( NSArray* )other_button_titles_
     
     [ self addButtonsToAlertView: other_button_titles_ ];
     [ self startMonitoringBackgroundEvents ];
-    
-    NSLog( @"JFFAlertView created - 0x%X", (NSUInteger)self );
     
     return self;
 }
