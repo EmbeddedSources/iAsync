@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B160AD7154BE3F200702B1D /* performTimeCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B160AD5154BE3F200702B1D /* performTimeCalculator.h */; };
+		1B160AD8154BE3F200702B1D /* performTimeCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B160AD6154BE3F200702B1D /* performTimeCalculator.m */; };
+		1B2D8B52154BF28100360296 /* JFFTestTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2D8B51154BF28100360296 /* JFFTestTools.h */; };
 		1BE0542F154826DA00270B58 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE0542E154826DA00270B58 /* Foundation.framework */; };
 		1BE054431548273000270B58 /* GHAsyncTestCase+MainThreadTests.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE054411548273000270B58 /* GHAsyncTestCase+MainThreadTests.h */; };
 		1BE054441548273000270B58 /* GHAsyncTestCase+MainThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE054421548273000270B58 /* GHAsyncTestCase+MainThreadTests.m */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B160AD5154BE3F200702B1D /* performTimeCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = performTimeCalculator.h; sourceTree = "<group>"; };
+		1B160AD6154BE3F200702B1D /* performTimeCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = performTimeCalculator.m; sourceTree = "<group>"; };
+		1B2D8B51154BF28100360296 /* JFFTestTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTestTools.h; sourceTree = "<group>"; };
 		1BE0542B154826DA00270B58 /* libJFFTestTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFTestTools.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE0542E154826DA00270B58 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1BE05432154826DA00270B58 /* JFFTestTools-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFTestTools-Prefix.pch"; sourceTree = "<group>"; };
@@ -68,6 +74,9 @@
 				1BE054AF154828EF00270B58 /* NSObject+InstancesCount.m */,
 				1BE054411548273000270B58 /* GHAsyncTestCase+MainThreadTests.h */,
 				1BE054421548273000270B58 /* GHAsyncTestCase+MainThreadTests.m */,
+				1B160AD5154BE3F200702B1D /* performTimeCalculator.h */,
+				1B160AD6154BE3F200702B1D /* performTimeCalculator.m */,
+				1B2D8B51154BF28100360296 /* JFFTestTools.h */,
 				1BE05431154826DA00270B58 /* Supporting Files */,
 			);
 			path = JFFTestTools;
@@ -90,6 +99,8 @@
 			files = (
 				1BE054431548273000270B58 /* GHAsyncTestCase+MainThreadTests.h in Headers */,
 				1BE054B0154828F000270B58 /* NSObject+InstancesCount.h in Headers */,
+				1B160AD7154BE3F200702B1D /* performTimeCalculator.h in Headers */,
+				1B2D8B52154BF28100360296 /* JFFTestTools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +156,7 @@
 			files = (
 				1BE054441548273000270B58 /* GHAsyncTestCase+MainThreadTests.m in Sources */,
 				1BE054B1154828F000270B58 /* NSObject+InstancesCount.m in Sources */,
+				1B160AD8154BE3F200702B1D /* performTimeCalculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

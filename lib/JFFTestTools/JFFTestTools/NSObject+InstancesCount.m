@@ -46,7 +46,6 @@ static bool AmIBeingDebugged(void)
 
 @interface JFFNSObjectInstancesCounter : NSObject
 
-//JTODO try use ivar instead of property
 @property ( nonatomic, retain ) NSMutableDictionary* instancesNumberByClassName;
 
 @end
@@ -165,7 +164,7 @@ static bool AmIBeingDebugged(void)
 
                 if ( !method_added_ )
                 {
-                    //JTODO create name allocWithZoneHook dynamicaly and allocWithZonePrototype use block instead
+                    //TODO create name allocWithZoneHook dynamicaly and allocWithZonePrototype use block instead
                     [ [ self class ] hookClassMethodForClass: class_
                                                 withSelector: @selector( allocWithZone: )
                                      prototypeMethodSelector: @selector( alloCWithZonePrototype: )

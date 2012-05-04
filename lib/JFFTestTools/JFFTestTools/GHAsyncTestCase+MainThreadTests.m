@@ -1,6 +1,10 @@
 #import "GHAsyncTestCase+MainThreadTests.h"
 
-@implementation GHAsyncTestCase (MainThreadTests)
+#import <JFFUtils/NSObject/NSObject+RuntimeExtensions.h>
+
+#import <objc/message.h>
+
+@implementation NSObject (MainThreadTests)
 
 -(void)performAsyncRequestOnMainThreadWithBlock:( TestAsyncRequestBlock )block_
                                        selector:( SEL )selector_
@@ -12,19 +16,34 @@
         {
             void (^didFinishCallback_)(void) = ^void()
             {
-                [ self notify: kGHUnitWaitStatusSuccess forSelector: selector_ ];
+                objc_msgSend( self
+                             , @selector( notify:forSelector: )
+                             , kGHUnitWaitStatusSuccess
+                             , selector_ );
             };
 
             block_( [ didFinishCallback_ copy ] );
         }
     };
 
-    [ self prepare ];
+    objc_msgSend( self, @selector( prepare ), nil );
 
     dispatch_async( dispatch_get_main_queue(), autoreleaseBlock_ );
 
-    [ self waitForStatus: kGHUnitWaitStatusSuccess
-                 timeout: 30000. ];
+    objc_msgSend( self
+                 , @selector( waitForStatus:timeout: )
+                 , kGHUnitWaitStatusSuccess
+                 , 30000. );
+}
+
++(void)load
+{
+    Class class_ = NSClassFromString( @"GHAsyncTestCase" );
+    if ( class_ )
+    {
+        [ self addInstanceMethodIfNeedWithSelector: @selector( performAsyncRequestOnMainThreadWithBlock:selector: )
+                                           toClass: class_ ];
+    }
 }
 
 @end
