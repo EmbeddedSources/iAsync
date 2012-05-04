@@ -2,7 +2,6 @@
 
 @implementation NSString (Search)
 
-//JTODO test
 -(NSUInteger)numberOfCharacterFromString:( NSString* )string_
 {
     NSCharacterSet* set_ = [ NSCharacterSet characterSetWithCharactersInString: string_ ];

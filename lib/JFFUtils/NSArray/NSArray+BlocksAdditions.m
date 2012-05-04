@@ -59,6 +59,24 @@
     return [ [ NSArray alloc ] initWithArray: result_ ];
 }
 
+-(NSDictionary*)mapDict:( JFFMappingDictBlock )block_
+{
+    NSMutableArray* keys_   = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
+    NSMutableArray* values_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
+
+    for ( id object_ in self )
+    {
+        id key_;
+        id value_;
+        block_( object_, &key_, &value_ );
+        [ keys_   addObject: key_   ];
+        [ values_ addObject: value_ ];
+    }
+
+    return [ [ NSDictionary alloc ] initWithObjects: values_
+                                            forKeys: keys_ ];
+}
+
 -(NSArray*)flatten:( JFFFlattenBlock )block_
 {
     NSMutableArray* result_ = [ NSMutableArray new ];

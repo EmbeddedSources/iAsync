@@ -22,6 +22,10 @@
 //or return nil if error happens
 -(NSArray*)map:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_;
 
+//Invokes block once for each element of self.
+//Creates a new NSDictionary containing the values and keys returned by the block.
+-(NSDictionary*)mapDict:( JFFMappingDictBlock )block_;
+
 //Invokes the block passing in successive elements from self,
 //Creates a new NSArray containing those elements for which the block returns a YES value 
 -(NSArray*)select:( JFFPredicateBlock )predicate_;
