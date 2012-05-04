@@ -4,6 +4,25 @@
 
 #include <assert.h>
 
+@implementation NSObject (JFFSmartDataLoaderLogResponse)
+
+-(void)logResponse
+{
+    NSLog( @"jsResponse: %@", self );
+}
+
+@end
+
+@implementation NSData (JFFSmartDataLoaderLogResponse)
+
+-(void)logResponse
+{
+    NSString* str_ = [ [ NSString alloc ] initWithData: self encoding: NSUTF8StringEncoding ];
+    NSLog( @"jsResponse: %@ length: %d", str_, self.length );
+}
+
+@end
+
 @implementation JFFSmartUrlDataLoaderFields
 
 @synthesize urlBuilder
@@ -96,6 +115,8 @@ JFFAsyncOperation jSmartDataLoaderWithCache( JFFSmartUrlDataLoaderFields* args_ 
         {
             if ( !doneCallback_ )
                 return;
+
+            //logs [ srvResponse_ logResponse ];
 
             if ( srvResponse_ )
             {

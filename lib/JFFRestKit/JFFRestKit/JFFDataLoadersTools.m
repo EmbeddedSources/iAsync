@@ -1,8 +1,8 @@
 #import "JFFDataLoadersTools.h"
 
-JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedFDataLoader_ )
+JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedDataLoader_ )
 {
-    chunkedFDataLoader_ = [ chunkedFDataLoader_ copy ];
+    chunkedDataLoader_ = [ chunkedDataLoader_ copy ];
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
                                     , JFFCancelAsyncOperationHandler cancelCallback_
                                     , JFFDidFinishAsyncOperationHandler doneCallback_ )
@@ -68,8 +68,8 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
                 doneCallback_( result_, error_ );
         };
 
-        return chunkedFDataLoader_( progressWrapperCallback_
-                                   , cancelWrapperCallback_
-                                   , doneWrapperCallback_ );
+        return chunkedDataLoader_( progressWrapperCallback_
+                                  , cancelWrapperCallback_
+                                  , doneWrapperCallback_ );
     };
 }

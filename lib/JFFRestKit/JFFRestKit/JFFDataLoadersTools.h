@@ -2,4 +2,4 @@
 
 #import <Foundation/Foundation.h>
 
-JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedFDataLoader_ );
+JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedDataLoader_ );
