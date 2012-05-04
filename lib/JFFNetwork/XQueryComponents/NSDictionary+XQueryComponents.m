@@ -33,7 +33,7 @@ static NSString* const queryComponentSeparator_ = @"&";
 {
     return [ self map: ^id( id value_ )
     {
-        return [ value_ stringFromQueryComponentAndKey: key_ ];;
+        return [ value_ stringFromQueryComponentAndKey: key_ ];
     } ];
 }
 

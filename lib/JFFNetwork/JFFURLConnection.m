@@ -262,9 +262,7 @@ static void readStreamCallback( CFReadStreamRef stream_
         if ( !response_ )
             return;
 
-        CFDictionaryRef allHeaders_ = CFHTTPMessageCopyAllHeaderFields( response_ );
-        allHeadersDict_ = (__bridge NSDictionary*)allHeaders_;
-        CFRelease( allHeaders_ );
+        allHeadersDict_ = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields( response_ );
         statusCode_ = CFHTTPMessageGetResponseStatusCode( response_ );
 
         CFRelease( response_ );
