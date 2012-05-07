@@ -25,7 +25,7 @@
     {
         if ( ![ processedObjects_ containsObject: item_ ] )
         {
-            [ result_            addObject: item_ ];
+            [ result_           addObject: item_ ];
             [ processedObjects_ addObject: item_ ];
         }
     }

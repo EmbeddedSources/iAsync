@@ -4,7 +4,7 @@
 
 @interface JFFCaches : NSObject
 
-@property ( nonatomic, strong, readonly ) NSDictionary* cacheDbByName;
+@property ( nonatomic, readonly ) NSDictionary* cacheDbByName;
 
 +(JFFCaches*)sharedCaches;
 +(void)setSharedCaches:( JFFCaches* )caches_;

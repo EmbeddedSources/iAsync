@@ -93,8 +93,8 @@ static NSString* const createRecords_ =
 
 @interface JFFBaseDB ()
 
-@property ( nonatomic, strong ) JFFSQLiteDB* db;
-@property ( nonatomic, strong ) NSString* name;
+@property ( nonatomic ) JFFSQLiteDB* db;
+@property ( nonatomic ) NSString* name;
 
 @end
 

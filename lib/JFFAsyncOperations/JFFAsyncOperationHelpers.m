@@ -8,7 +8,7 @@
 
 @interface JFFAsyncOperationScheduler : NSObject < JFFAsyncOperationInterface >
 
-@property ( nonatomic, assign ) NSTimeInterval duration;
+@property ( nonatomic ) NSTimeInterval duration;
 
 @end
 

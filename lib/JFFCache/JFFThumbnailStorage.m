@@ -9,7 +9,7 @@ static id storage_instance_ = nil;
 
 @interface JFFThumbnailStorage ()
 
-@property ( nonatomic, strong ) NSMutableDictionary* imagesByUrl;
+@property ( nonatomic ) NSMutableDictionary* imagesByUrl;
 
 @end
 

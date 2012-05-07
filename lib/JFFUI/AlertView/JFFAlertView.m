@@ -16,8 +16,8 @@ static NSInteger first_alert_index_ = 1;
 @implementation JFFAlertView
 {
     BOOL _exclusive;
-    __strong NSMutableArray* _alertButtons;
-    __strong UIAlertView*    _alertView   ;
+    NSMutableArray* _alertButtons;
+    UIAlertView*    _alertView   ;
 }
 
 @synthesize dismissBeforeEnterBackground = _dismissBeforeEnterBackground;

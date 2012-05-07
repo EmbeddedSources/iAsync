@@ -15,7 +15,7 @@ static JFFCaches* sharedCachesInstance_ = nil;
     NSString* _configPropertyName;
 }
 
-@property ( nonatomic, strong ) NSString* configPropertyName;
+@property ( nonatomic ) NSString* configPropertyName;
 
 @end
 
@@ -91,7 +91,7 @@ static JFFCaches* sharedCachesInstance_ = nil;
 
 @interface JFFCaches ()
 
-@property ( nonatomic, strong, readonly ) NSMutableDictionary* mutableCacheDbByName;
+@property ( nonatomic, readonly ) NSMutableDictionary* mutableCacheDbByName;
 
 @end
 

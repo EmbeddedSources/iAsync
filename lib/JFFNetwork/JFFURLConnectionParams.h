@@ -10,7 +10,7 @@
 @property ( nonatomic, strong ) NSData* httpBody;
 @property ( nonatomic, strong ) NSString* httpMethod;
 @property ( nonatomic, strong ) NSDictionary* headers;
-@property ( nonatomic, assign ) BOOL useLiveConnection; 
+@property ( nonatomic ) BOOL useLiveConnection; 
 @property ( nonatomic, strong ) JFFLocalCookiesStorage* cookiesStorage;
 @property ( nonatomic, copy   ) JFFShouldAcceptCertificateForHost certificateCallback;
 

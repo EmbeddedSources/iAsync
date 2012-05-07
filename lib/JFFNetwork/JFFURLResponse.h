@@ -3,10 +3,10 @@
 
 @interface JFFURLResponse : NSObject< JNUrlResponse >
 
-@property ( nonatomic, assign ) NSInteger statusCode;
+@property ( nonatomic ) NSInteger statusCode;
 @property ( nonatomic, strong ) NSDictionary* allHeaderFields;
 @property ( nonatomic, strong ) NSURL* url;
 
-@property ( nonatomic, assign, readonly ) long long expectedContentLength;
+@property ( nonatomic, readonly ) long long expectedContentLength;
 
 @end

@@ -21,12 +21,12 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 @interface JFFDownloadItem () < JFFTrafficCalculatorDelegate >
 
-@property ( nonatomic, strong ) NSURL* url;
-@property ( nonatomic, strong ) NSString* localFilePath;
-@property ( nonatomic, assign ) float downlodingSpeed;
-@property ( nonatomic, assign ) unsigned long long fileLength;
-@property ( nonatomic, assign ) unsigned long long downloadedFileLength;
-@property ( nonatomic, strong ) NSNull* downloadedFlag;
+@property ( nonatomic ) NSURL* url;
+@property ( nonatomic ) NSString* localFilePath;
+@property ( nonatomic ) float downlodingSpeed;
+@property ( nonatomic ) unsigned long long fileLength;
+@property ( nonatomic ) unsigned long long downloadedFileLength;
+@property ( nonatomic ) NSNull* downloadedFlag;
 @property ( nonatomic, copy   ) JFFCancelAsyncOperation stopBlock;
 
 @end

@@ -4,7 +4,7 @@
 
 @interface JFFDBCompositeKey ()
 
-@property ( nonatomic, strong ) NSMutableArray* keys;
+@property ( nonatomic ) NSMutableArray* keys;
 
 @end
 
@@ -16,7 +16,7 @@
 {
     JFFDBCompositeKey* copy_ = [ [ [ self class ] allocWithZone: zone_ ] init ];
 
-    copy_.keys = [ self.keys copyWithZone: zone_ ];
+    copy_->keys = [ self.keys copyWithZone: zone_ ];
 
     return copy_;
 }

@@ -7,7 +7,7 @@
 @property ( nonatomic, copy ) JFFSyncOperationWithProgress loadDataBlock;
 @property ( nonatomic, copy ) JFFDidFinishAsyncOperationHandler didLoadDataBlock;
 @property ( nonatomic, copy ) JFFAsyncOperationProgressHandler progressBlock;
-@property ( assign ) BOOL finishedOrCanceled;
+@property BOOL finishedOrCanceled;
 
 @end
 

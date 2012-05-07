@@ -2,9 +2,9 @@
 
 @interface JFFAlertView : NSObject
 
-@property ( nonatomic, assign ) BOOL dismissBeforeEnterBackground;
+@property ( nonatomic ) BOOL dismissBeforeEnterBackground;
 @property ( nonatomic, copy ) JFFSimpleBlock didPresentHandler;
-@property ( nonatomic, assign, readonly ) BOOL isOnScreen;
+@property ( nonatomic, readonly ) BOOL isOnScreen;
 
 
 //cancelButtonTitle, otherButtonTitles - pass NSString(button title) or JFFAlertButton

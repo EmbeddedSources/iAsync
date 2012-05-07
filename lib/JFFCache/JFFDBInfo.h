@@ -13,8 +13,8 @@
 
 @interface JFFDBInfo : NSObject
 
-@property ( nonatomic, strong, readonly ) NSDictionary* dbInfo;
-@property ( nonatomic, strong ) NSDictionary* currentDbInfo;
+@property ( nonatomic, readonly ) NSDictionary* dbInfo;
+@property ( nonatomic ) NSDictionary* currentDbInfo;
 
 -(id)initWithInfoPath:( NSString* )infoPath_;
 -(id)initWithInfoDictionary:( NSDictionary* )infoDictionry_;

@@ -4,7 +4,7 @@
 
 @interface JFFObjectRelatedPropertyData : NSObject
 
-@property ( nonatomic, strong ) NSMutableArray* delegates;
+@property ( nonatomic ) NSMutableArray* delegates;
 @property ( nonatomic, copy ) JFFAsyncOperation asyncLoader;
 @property ( nonatomic, copy ) JFFDidFinishAsyncOperationHandler didFinishBlock;
 @property ( nonatomic, copy ) JFFCancelAsyncOperation cancelBlock;

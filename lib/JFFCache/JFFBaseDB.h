@@ -4,8 +4,8 @@
 
 @interface JFFBaseDB : NSObject
 
-@property ( nonatomic, strong, readonly ) JFFSQLiteDB* db;
-@property ( nonatomic, strong, readonly ) NSString* name;
+@property ( nonatomic, readonly ) JFFSQLiteDB* db;
+@property ( nonatomic, readonly ) NSString* name;
 
 -(id)initWithDBName:( NSString* )dbName_
           cacheName:( NSString* )cacheName_;

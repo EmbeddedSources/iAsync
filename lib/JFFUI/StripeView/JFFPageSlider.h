@@ -6,14 +6,14 @@
 
 @interface JFFPageSlider : UIView
 
-@property ( nonatomic, strong, readonly ) UIScrollView* scrollView;
+@property ( nonatomic, readonly ) UIScrollView* scrollView;
 
-@property ( nonatomic, assign, readonly ) NSInteger activeIndex;
-@property ( nonatomic, assign, readonly ) NSInteger firstIndex;
-@property ( nonatomic, assign, readonly ) NSInteger lastIndex;
-@property ( nonatomic, strong, readonly ) NSMutableDictionary* viewByIndex;
+@property ( nonatomic, readonly ) NSInteger activeIndex;
+@property ( nonatomic, readonly ) NSInteger firstIndex;
+@property ( nonatomic, readonly ) NSInteger lastIndex;
+@property ( nonatomic, readonly ) NSMutableDictionary* viewByIndex;
 
-@property ( nonatomic, unsafe_unretained ) IBOutlet id< JFFPageSliderDelegate > delegate;
+@property ( nonatomic, weak ) IBOutlet id< JFFPageSliderDelegate > delegate;
 
 -(id)initWithFrame:( CGRect )frame_
           delegate:( id< JFFPageSliderDelegate > )delegate_;
