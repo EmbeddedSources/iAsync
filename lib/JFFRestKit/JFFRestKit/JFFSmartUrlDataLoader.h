@@ -14,9 +14,9 @@ typedef id (^JFFCacheKeyForURLBuilder)( NSURL* );
 @property ( nonatomic, copy   ) JFFURLBuilderBinder urlBuilder;
 @property ( nonatomic, copy   ) JFFAsyncOperationBinder dataLoaderForURL;
 @property ( nonatomic, copy   ) JFFAsyncBinderForURL analyzerForData;
-@property ( nonatomic, strong ) id< JFFRestKitCache > cache;
 @property ( nonatomic, copy   ) JFFCacheKeyForURLBuilder cacheKeyForURL;
-@property ( nonatomic, assign ) NSTimeInterval cacheDataLifeTime;
+@property ( nonatomic ) id< JFFRestKitCache > cache;
+@property ( nonatomic ) NSTimeInterval cacheDataLifeTime;
 
 @end
 

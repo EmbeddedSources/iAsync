@@ -4,7 +4,7 @@
 
 @implementation JFFMulticastDelegate
 {
-    __strong JFFMutableAssignArray* _delegates;
+    JFFMutableAssignArray* _delegates;
 }
 
 -(JFFMutableAssignArray*)delegates

@@ -36,8 +36,8 @@
 
 @interface JFFResponseDataWithUpdateData : NSObject
 
-@property ( nonatomic, strong ) NSData* data;
-@property ( nonatomic, strong ) NSDate* updateDate;
+@property ( nonatomic ) NSData* data;
+@property ( nonatomic ) NSDate* updateDate;
 
 @end
 

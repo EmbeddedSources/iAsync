@@ -9,7 +9,7 @@ char jffSchedulerKey_;
 
 @interface NSThread (JFFScheduler)
 
-@property ( nonatomic, strong, readonly ) JFFScheduler* jffScheduler;
+@property ( nonatomic, readonly ) JFFScheduler* jffScheduler;
 
 @end
 
@@ -33,13 +33,13 @@ char jffSchedulerKey_;
 
 @interface JFFScheduler ()
 
-@property ( nonatomic, assign ) dispatch_queue_t queue;
+@property ( nonatomic ) dispatch_queue_t queue;
 
 @end
 
 @implementation JFFScheduler
 {
-    __strong NSMutableArray* _cancelBlocks;
+    NSMutableArray* _cancelBlocks;
 }
 
 @synthesize queue;

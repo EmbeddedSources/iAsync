@@ -6,7 +6,7 @@ static NSString* const time_to_live_in_hours_ = @"timeToLiveInHours";
 
 @interface JFFDBInfo ()
 
-@property ( nonatomic, strong ) NSString* dbInfoPath;
+@property ( nonatomic ) NSString* dbInfoPath;
 
 @end
 

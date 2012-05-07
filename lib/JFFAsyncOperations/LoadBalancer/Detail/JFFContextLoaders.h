@@ -10,7 +10,7 @@
 
 @interface JFFContextLoaders ( ActiveLoaders )
 
-@property ( nonatomic, assign, readonly ) NSUInteger activeLoadersNumber;
+@property ( nonatomic, readonly ) NSUInteger activeLoadersNumber;
 
 -(void)addActiveNativeLoader:( JFFAsyncOperation )native_loader_
                wrappedCancel:( JFFCancelAsyncOperation )cancel_;
@@ -25,7 +25,7 @@
 
 @interface JFFContextLoaders ( PendingLoaders )
 
-@property ( nonatomic, assign, readonly ) NSUInteger pendingLoadersNumber;
+@property ( nonatomic, readonly ) NSUInteger pendingLoadersNumber;
 
 -(JFFPedingLoaderData*)popPendingLoaderData;
 

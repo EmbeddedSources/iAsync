@@ -16,4 +16,3 @@ typedef void (^JFFTransformBlock)( id first_object_, id second_object_ );
 typedef BOOL (^JFFEqualityCheckerBlock)( id first_object_, id second_object_ );
 
 #endif //__JU_ARRAY_HELPER_BLOCKS_H__
-

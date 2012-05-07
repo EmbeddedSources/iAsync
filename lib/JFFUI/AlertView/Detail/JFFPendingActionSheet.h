@@ -4,8 +4,8 @@
 
 @interface JFFPendingActionSheet : NSObject
 
-@property ( nonatomic, strong ) JFFActionSheet* actionSheet;
-@property ( nonatomic, strong ) UIView* view;
+@property ( nonatomic ) JFFActionSheet* actionSheet;
+@property ( nonatomic ) UIView* view;
 
 -(id)initWithActionSheet:( JFFActionSheet* )actionSheet_
                     view:( UIView* )view_;

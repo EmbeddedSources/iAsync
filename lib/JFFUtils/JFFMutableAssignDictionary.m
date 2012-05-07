@@ -20,10 +20,10 @@
 -(void)onAddToMutableAssignDictionary:( JFFMutableAssignDictionary* )dict_
                                   key:( id )key_
 {
-    __unsafe_unretained JFFMutableAssignDictionary* assignDict_ = dict_;
+    __unsafe_unretained JFFMutableAssignDictionary* unretainedDict_ = dict_;
     self.onDeallocBlock = ^void( void )
     {
-        [ assignDict_ removeObjectForKey: key_ ];
+        [ unretainedDict_ removeObjectForKey: key_ ];
     };
     [ self.target addOnDeallocBlock: self.onDeallocBlock ];
 }
@@ -38,7 +38,7 @@
 
 @interface JFFMutableAssignDictionary ()
 
-@property ( nonatomic, strong ) NSMutableDictionary* mutableDictionary;
+@property ( nonatomic ) NSMutableDictionary* mutableDictionary;
 
 @end
 

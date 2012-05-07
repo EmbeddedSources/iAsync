@@ -19,11 +19,11 @@
 
 -(void)onAddToMutableAssignArray:( JFFMutableAssignArray* )array_
 {
-    __unsafe_unretained JFFMutableAssignArray* assign_array_ = array_;
+    __unsafe_unretained JFFMutableAssignArray* unretainedArray_ = array_;
     __unsafe_unretained JFFAutoRemoveAssignProxy* self_ = self;
     self.onDeallocBlock = ^void( void )
     {
-        [ assign_array_ removeObject: self_.target ];
+        [ unretainedArray_ removeObject: self_.target ];
     };
     [ self.target addOnDeallocBlock: self.onDeallocBlock ];
 }
@@ -38,7 +38,7 @@
 
 @interface JFFMutableAssignArray ()
 
-@property ( nonatomic, strong ) NSMutableArray* mutableArray;
+@property ( nonatomic ) NSMutableArray* mutableArray;
 
 @end
 

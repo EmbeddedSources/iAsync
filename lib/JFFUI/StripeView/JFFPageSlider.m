@@ -7,10 +7,10 @@
 
 @interface JFFPageSlider () < UIScrollViewDelegate >
 
-@property ( nonatomic, strong ) UIScrollView* scrollView;
-@property ( nonatomic, assign ) NSInteger activeIndex;
-@property ( nonatomic, assign ) NSInteger firstIndex;
-@property ( nonatomic, strong ) NSMutableDictionary* viewByIndex;
+@property ( nonatomic ) UIScrollView* scrollView;
+@property ( nonatomic ) NSInteger activeIndex;
+@property ( nonatomic ) NSInteger firstIndex;
+@property ( nonatomic ) NSMutableDictionary* viewByIndex;
 
 @end
 

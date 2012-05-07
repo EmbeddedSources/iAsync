@@ -7,8 +7,8 @@
 
 @interface JFFAsyncOperationNetwork : NSObject < JFFAsyncOperationInterface >
 
-@property ( nonatomic, strong ) JFFURLConnectionParams* params;
-@property ( nonatomic, strong ) id< JNUrlConnection > connection;
-@property ( nonatomic, strong ) id resultContext;
+@property ( nonatomic ) JFFURLConnectionParams* params;
+@property ( nonatomic ) id< JNUrlConnection > connection;
+@property ( nonatomic ) id resultContext;
 
 @end

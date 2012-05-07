@@ -4,9 +4,9 @@
 
 @interface JFFActionSheet : NSObject
 
-@property ( nonatomic, assign ) BOOL dismissBeforeEnterBackground;
-@property ( nonatomic, assign ) NSInteger cancelButtonIndex;
-@property ( nonatomic, assign, readonly ) NSInteger numberOfButtons;
+@property ( nonatomic ) BOOL dismissBeforeEnterBackground;
+@property ( nonatomic ) NSInteger cancelButtonIndex;
+@property ( nonatomic, readonly ) NSInteger numberOfButtons;
 
 //cancelButtonTitle, otherButtonTitles - pass NSString(button title) or JFFAlertButton
 +(id)actionSheetWithTitle:( NSString* )title_

@@ -6,8 +6,8 @@
 
 @interface JFFDownloadedBytesPerDate : NSObject
 
-@property ( nonatomic, strong ) NSDate* date;
-@property ( nonatomic, assign ) NSUInteger bytesCount;
+@property ( nonatomic ) NSDate* date;
+@property ( nonatomic ) NSUInteger bytesCount;
 
 @end
 
@@ -22,8 +22,8 @@
 
     if ( self )
     {
-        self.date       = [ NSDate new ];
-        self.bytesCount = bytesCount_;
+        _date       = [ NSDate new ];
+        _bytesCount = bytesCount_;
     }
 
     return self;

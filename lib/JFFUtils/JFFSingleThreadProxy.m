@@ -16,7 +16,7 @@
 
 @implementation JFFSingleThreadProxy
 {
-    __strong JFFProxyObjectContainer* _container;
+    JFFProxyObjectContainer* _container;
     dispatch_queue_t _dispatchQueue;
 }
 

@@ -2,8 +2,8 @@
 
 @interface JFFPropertyPath : NSObject
 
-@property ( nonatomic, strong, readonly ) NSString* name;
-@property ( nonatomic, strong, readonly ) id< NSCopying, NSObject > key;
+@property ( nonatomic, readonly ) NSString* name;
+@property ( nonatomic, readonly ) id< NSCopying, NSObject > key;
 
 -(id)initWithName:( NSString* )name_
               key:( id< NSCopying, NSObject > )key_;
