@@ -1,0 +1,354 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D34DAC513C2F80500B1A2B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D34DAC413C2F80500B1A2B5 /* Foundation.framework */; };
+		8D7319F213C2F83400B68CE7 /* CXMLDocument_CreationExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319D613C2F83400B68CE7 /* CXMLDocument_CreationExtensions.h */; };
+		8D7319F313C2F83400B68CE7 /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319D713C2F83400B68CE7 /* CXMLDocument_CreationExtensions.m */; };
+		8D7319F413C2F83400B68CE7 /* CXMLNode_CreationExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319D813C2F83400B68CE7 /* CXMLNode_CreationExtensions.h */; };
+		8D7319F513C2F83400B68CE7 /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319D913C2F83400B68CE7 /* CXMLNode_CreationExtensions.m */; };
+		8D7319F613C2F83400B68CE7 /* CXHTMLDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319DA13C2F83400B68CE7 /* CXHTMLDocument.h */; };
+		8D7319F713C2F83400B68CE7 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319DB13C2F83400B68CE7 /* CXHTMLDocument.m */; };
+		8D7319F813C2F83400B68CE7 /* CXMLDocument_PrivateExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319DC13C2F83400B68CE7 /* CXMLDocument_PrivateExtensions.h */; };
+		8D7319F913C2F83400B68CE7 /* CXMLDocument_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319DD13C2F83400B68CE7 /* CXMLDocument_PrivateExtensions.m */; };
+		8D7319FA13C2F83400B68CE7 /* CXMLDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319DE13C2F83400B68CE7 /* CXMLDocument.h */; };
+		8D7319FB13C2F83400B68CE7 /* CXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319DF13C2F83400B68CE7 /* CXMLDocument.m */; };
+		8D7319FC13C2F83400B68CE7 /* CXMLElement_CreationExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319E013C2F83400B68CE7 /* CXMLElement_CreationExtensions.h */; };
+		8D7319FD13C2F83400B68CE7 /* CXMLElement_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319E113C2F83400B68CE7 /* CXMLElement_CreationExtensions.m */; };
+		8D7319FE13C2F83400B68CE7 /* CXMLElement_ElementTreeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319E213C2F83400B68CE7 /* CXMLElement_ElementTreeExtensions.h */; };
+		8D7319FF13C2F83400B68CE7 /* CXMLElement_ElementTreeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319E313C2F83400B68CE7 /* CXMLElement_ElementTreeExtensions.m */; };
+		8D731A0013C2F83400B68CE7 /* CXMLElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319E413C2F83400B68CE7 /* CXMLElement.h */; };
+		8D731A0113C2F83400B68CE7 /* CXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319E513C2F83400B68CE7 /* CXMLElement.m */; };
+		8D731A0213C2F83400B68CE7 /* CXMLNamespaceNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319E613C2F83400B68CE7 /* CXMLNamespaceNode.h */; };
+		8D731A0313C2F83400B68CE7 /* CXMLNamespaceNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319E713C2F83400B68CE7 /* CXMLNamespaceNode.m */; };
+		8D731A0413C2F83400B68CE7 /* CXMLNode_PrivateExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319E813C2F83400B68CE7 /* CXMLNode_PrivateExtensions.h */; };
+		8D731A0513C2F83400B68CE7 /* CXMLNode_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319E913C2F83400B68CE7 /* CXMLNode_PrivateExtensions.m */; };
+		8D731A0613C2F83400B68CE7 /* CXMLNode_XPathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319EA13C2F83400B68CE7 /* CXMLNode_XPathExtensions.h */; };
+		8D731A0713C2F83400B68CE7 /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319EB13C2F83400B68CE7 /* CXMLNode_XPathExtensions.m */; };
+		8D731A0813C2F83400B68CE7 /* CXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319EC13C2F83400B68CE7 /* CXMLNode.h */; };
+		8D731A0913C2F83400B68CE7 /* CXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319ED13C2F83400B68CE7 /* CXMLNode.m */; };
+		8D731A0A13C2F83400B68CE7 /* CTidy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319EF13C2F83400B68CE7 /* CTidy.h */; };
+		8D731A0B13C2F83400B68CE7 /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7319F013C2F83400B68CE7 /* CTidy.m */; };
+		8D731A0C13C2F83400B68CE7 /* TouchXML.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7319F113C2F83400B68CE7 /* TouchXML.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8D34DAC113C2F80500B1A2B5 /* libTouchXMLLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTouchXMLLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D34DAC413C2F80500B1A2B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8D7319D613C2F83400B68CE7 /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
+		8D7319D713C2F83400B68CE7 /* CXMLDocument_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument_CreationExtensions.m; sourceTree = "<group>"; };
+		8D7319D813C2F83400B68CE7 /* CXMLNode_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNode_CreationExtensions.h; sourceTree = "<group>"; };
+		8D7319D913C2F83400B68CE7 /* CXMLNode_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLNode_CreationExtensions.m; sourceTree = "<group>"; };
+		8D7319DA13C2F83400B68CE7 /* CXHTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXHTMLDocument.h; path = Source/CXHTMLDocument.h; sourceTree = SOURCE_ROOT; };
+		8D7319DB13C2F83400B68CE7 /* CXHTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CXHTMLDocument.m; path = Source/CXHTMLDocument.m; sourceTree = SOURCE_ROOT; };
+		8D7319DC13C2F83400B68CE7 /* CXMLDocument_PrivateExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXMLDocument_PrivateExtensions.h; path = Source/CXMLDocument_PrivateExtensions.h; sourceTree = SOURCE_ROOT; };
+		8D7319DD13C2F83400B68CE7 /* CXMLDocument_PrivateExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CXMLDocument_PrivateExtensions.m; path = Source/CXMLDocument_PrivateExtensions.m; sourceTree = SOURCE_ROOT; };
+		8D7319DE13C2F83400B68CE7 /* CXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXMLDocument.h; path = Source/CXMLDocument.h; sourceTree = SOURCE_ROOT; };
+		8D7319DF13C2F83400B68CE7 /* CXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CXMLDocument.m; path = Source/CXMLDocument.m; sourceTree = SOURCE_ROOT; };
+		8D7319E013C2F83400B68CE7 /* CXMLElement_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXMLElement_CreationExtensions.h; path = Source/CXMLElement_CreationExtensions.h; sourceTree = SOURCE_ROOT; };
+		8D7319E113C2F83400B68CE7 /* CXMLElement_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CXMLElement_CreationExtensions.m; path = Source/CXMLElement_CreationExtensions.m; sourceTree = SOURCE_ROOT; };
+		8D7319E213C2F83400B68CE7 /* CXMLElement_ElementTreeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXMLElement_ElementTreeExtensions.h; path = Source/CXMLElement_ElementTreeExtensions.h; sourceTree = SOURCE_ROOT; };
+		8D7319E313C2F83400B68CE7 /* CXMLElement_ElementTreeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CXMLElement_ElementTreeExtensions.m; path = Source/CXMLElement_ElementTreeExtensions.m; sourceTree = SOURCE_ROOT; };
+		8D7319E413C2F83400B68CE7 /* CXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXMLElement.h; path = Source/CXMLElement.h; sourceTree = SOURCE_ROOT; };
+		8D7319E513C2F83400B68CE7 /* CXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CXMLElement.m; path = Source/CXMLElement.m; sourceTree = SOURCE_ROOT; };
+		8D7319E613C2F83400B68CE7 /* CXMLNamespaceNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXMLNamespaceNode.h; path = Source/CXMLNamespaceNode.h; sourceTree = SOURCE_ROOT; };
+		8D7319E713C2F83400B68CE7 /* CXMLNamespaceNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CXMLNamespaceNode.m; path = Source/CXMLNamespaceNode.m; sourceTree = SOURCE_ROOT; };
+		8D7319E813C2F83400B68CE7 /* CXMLNode_PrivateExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXMLNode_PrivateExtensions.h; path = Source/CXMLNode_PrivateExtensions.h; sourceTree = SOURCE_ROOT; };
+		8D7319E913C2F83400B68CE7 /* CXMLNode_PrivateExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CXMLNode_PrivateExtensions.m; path = Source/CXMLNode_PrivateExtensions.m; sourceTree = SOURCE_ROOT; };
+		8D7319EA13C2F83400B68CE7 /* CXMLNode_XPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXMLNode_XPathExtensions.h; path = Source/CXMLNode_XPathExtensions.h; sourceTree = SOURCE_ROOT; };
+		8D7319EB13C2F83400B68CE7 /* CXMLNode_XPathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CXMLNode_XPathExtensions.m; path = Source/CXMLNode_XPathExtensions.m; sourceTree = SOURCE_ROOT; };
+		8D7319EC13C2F83400B68CE7 /* CXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXMLNode.h; path = Source/CXMLNode.h; sourceTree = SOURCE_ROOT; };
+		8D7319ED13C2F83400B68CE7 /* CXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CXMLNode.m; path = Source/CXMLNode.m; sourceTree = SOURCE_ROOT; };
+		8D7319EF13C2F83400B68CE7 /* CTidy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTidy.h; sourceTree = "<group>"; };
+		8D7319F013C2F83400B68CE7 /* CTidy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTidy.m; sourceTree = "<group>"; };
+		8D7319F113C2F83400B68CE7 /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchXML.h; path = Source/TouchXML.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D34DABE13C2F80500B1A2B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D34DAC513C2F80500B1A2B5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8D34DAB613C2F80500B1A2B5 = {
+			isa = PBXGroup;
+			children = (
+				8D34DAC613C2F80500B1A2B5 /* TouchXMLLib */,
+				8D34DAC313C2F80500B1A2B5 /* Frameworks */,
+				8D34DAC213C2F80500B1A2B5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8D34DAC213C2F80500B1A2B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D34DAC113C2F80500B1A2B5 /* libTouchXMLLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8D34DAC313C2F80500B1A2B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D34DAC413C2F80500B1A2B5 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8D34DAC613C2F80500B1A2B5 /* TouchXMLLib */ = {
+			isa = PBXGroup;
+			children = (
+				8D7319D513C2F83400B68CE7 /* Creation */,
+				8D7319DA13C2F83400B68CE7 /* CXHTMLDocument.h */,
+				8D7319DB13C2F83400B68CE7 /* CXHTMLDocument.m */,
+				8D7319DC13C2F83400B68CE7 /* CXMLDocument_PrivateExtensions.h */,
+				8D7319DD13C2F83400B68CE7 /* CXMLDocument_PrivateExtensions.m */,
+				8D7319DE13C2F83400B68CE7 /* CXMLDocument.h */,
+				8D7319DF13C2F83400B68CE7 /* CXMLDocument.m */,
+				8D7319E013C2F83400B68CE7 /* CXMLElement_CreationExtensions.h */,
+				8D7319E113C2F83400B68CE7 /* CXMLElement_CreationExtensions.m */,
+				8D7319E213C2F83400B68CE7 /* CXMLElement_ElementTreeExtensions.h */,
+				8D7319E313C2F83400B68CE7 /* CXMLElement_ElementTreeExtensions.m */,
+				8D7319E413C2F83400B68CE7 /* CXMLElement.h */,
+				8D7319E513C2F83400B68CE7 /* CXMLElement.m */,
+				8D7319E613C2F83400B68CE7 /* CXMLNamespaceNode.h */,
+				8D7319E713C2F83400B68CE7 /* CXMLNamespaceNode.m */,
+				8D7319E813C2F83400B68CE7 /* CXMLNode_PrivateExtensions.h */,
+				8D7319E913C2F83400B68CE7 /* CXMLNode_PrivateExtensions.m */,
+				8D7319EA13C2F83400B68CE7 /* CXMLNode_XPathExtensions.h */,
+				8D7319EB13C2F83400B68CE7 /* CXMLNode_XPathExtensions.m */,
+				8D7319EC13C2F83400B68CE7 /* CXMLNode.h */,
+				8D7319ED13C2F83400B68CE7 /* CXMLNode.m */,
+				8D7319EE13C2F83400B68CE7 /* Tidy */,
+				8D7319F113C2F83400B68CE7 /* TouchXML.h */,
+			);
+			path = TouchXMLLib;
+			sourceTree = "<group>";
+		};
+		8D7319D513C2F83400B68CE7 /* Creation */ = {
+			isa = PBXGroup;
+			children = (
+				8D7319D613C2F83400B68CE7 /* CXMLDocument_CreationExtensions.h */,
+				8D7319D713C2F83400B68CE7 /* CXMLDocument_CreationExtensions.m */,
+				8D7319D813C2F83400B68CE7 /* CXMLNode_CreationExtensions.h */,
+				8D7319D913C2F83400B68CE7 /* CXMLNode_CreationExtensions.m */,
+			);
+			name = Creation;
+			path = Source/Creation;
+			sourceTree = SOURCE_ROOT;
+		};
+		8D7319EE13C2F83400B68CE7 /* Tidy */ = {
+			isa = PBXGroup;
+			children = (
+				8D7319EF13C2F83400B68CE7 /* CTidy.h */,
+				8D7319F013C2F83400B68CE7 /* CTidy.m */,
+			);
+			name = Tidy;
+			path = Source/Tidy;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D34DABF13C2F80500B1A2B5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D7319F213C2F83400B68CE7 /* CXMLDocument_CreationExtensions.h in Headers */,
+				8D7319F413C2F83400B68CE7 /* CXMLNode_CreationExtensions.h in Headers */,
+				8D7319F613C2F83400B68CE7 /* CXHTMLDocument.h in Headers */,
+				8D7319F813C2F83400B68CE7 /* CXMLDocument_PrivateExtensions.h in Headers */,
+				8D7319FA13C2F83400B68CE7 /* CXMLDocument.h in Headers */,
+				8D7319FC13C2F83400B68CE7 /* CXMLElement_CreationExtensions.h in Headers */,
+				8D7319FE13C2F83400B68CE7 /* CXMLElement_ElementTreeExtensions.h in Headers */,
+				8D731A0013C2F83400B68CE7 /* CXMLElement.h in Headers */,
+				8D731A0213C2F83400B68CE7 /* CXMLNamespaceNode.h in Headers */,
+				8D731A0413C2F83400B68CE7 /* CXMLNode_PrivateExtensions.h in Headers */,
+				8D731A0613C2F83400B68CE7 /* CXMLNode_XPathExtensions.h in Headers */,
+				8D731A0813C2F83400B68CE7 /* CXMLNode.h in Headers */,
+				8D731A0A13C2F83400B68CE7 /* CTidy.h in Headers */,
+				8D731A0C13C2F83400B68CE7 /* TouchXML.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D34DAC013C2F80500B1A2B5 /* TouchXMLLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D34DACB13C2F80500B1A2B5 /* Build configuration list for PBXNativeTarget "TouchXMLLib" */;
+			buildPhases = (
+				8D34DABD13C2F80500B1A2B5 /* Sources */,
+				8D34DABE13C2F80500B1A2B5 /* Frameworks */,
+				8D34DABF13C2F80500B1A2B5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TouchXMLLib;
+			productName = TouchXMLLib;
+			productReference = 8D34DAC113C2F80500B1A2B5 /* libTouchXMLLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8D34DAB813C2F80500B1A2B5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 8D34DABB13C2F80500B1A2B5 /* Build configuration list for PBXProject "TouchXMLLib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8D34DAB613C2F80500B1A2B5;
+			productRefGroup = 8D34DAC213C2F80500B1A2B5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D34DAC013C2F80500B1A2B5 /* TouchXMLLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D34DABD13C2F80500B1A2B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D7319F313C2F83400B68CE7 /* CXMLDocument_CreationExtensions.m in Sources */,
+				8D7319F513C2F83400B68CE7 /* CXMLNode_CreationExtensions.m in Sources */,
+				8D7319F713C2F83400B68CE7 /* CXHTMLDocument.m in Sources */,
+				8D7319F913C2F83400B68CE7 /* CXMLDocument_PrivateExtensions.m in Sources */,
+				8D7319FB13C2F83400B68CE7 /* CXMLDocument.m in Sources */,
+				8D7319FD13C2F83400B68CE7 /* CXMLElement_CreationExtensions.m in Sources */,
+				8D7319FF13C2F83400B68CE7 /* CXMLElement_ElementTreeExtensions.m in Sources */,
+				8D731A0113C2F83400B68CE7 /* CXMLElement.m in Sources */,
+				8D731A0313C2F83400B68CE7 /* CXMLNamespaceNode.m in Sources */,
+				8D731A0513C2F83400B68CE7 /* CXMLNode_PrivateExtensions.m in Sources */,
+				8D731A0713C2F83400B68CE7 /* CXMLNode_XPathExtensions.m in Sources */,
+				8D731A0913C2F83400B68CE7 /* CXMLNode.m in Sources */,
+				8D731A0B13C2F83400B68CE7 /* CTidy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8D34DAC913C2F80500B1A2B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8D34DACA13C2F80500B1A2B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8D34DACC13C2F80500B1A2B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = NO;
+				DSTROOT = /tmp/TouchXMLLib.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8D34DACD13C2F80500B1A2B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = NO;
+				DSTROOT = /tmp/TouchXMLLib.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8D34DABB13C2F80500B1A2B5 /* Build configuration list for PBXProject "TouchXMLLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D34DAC913C2F80500B1A2B5 /* Debug */,
+				8D34DACA13C2F80500B1A2B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D34DACB13C2F80500B1A2B5 /* Build configuration list for PBXNativeTarget "TouchXMLLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D34DACC13C2F80500B1A2B5 /* Debug */,
+				8D34DACD13C2F80500B1A2B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8D34DAB813C2F80500B1A2B5 /* Project object */;
+}
