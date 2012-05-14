@@ -195,6 +195,8 @@ static NSString* identifier_ = @"Login&Password";
     [ keychainItemData_ setObject: login_    forKey: (__bridge id)kSecAttrAccount ];
     [ keychainItemData_ setObject: password_ forKey: (__bridge id)kSecValueData   ];
     [ keychainItemData_ setObject: url_      forKey: (__bridge id)kSecAttrService ];
+    [ keychainItemData_ setObject: (__bridge id)kSecAttrAccessibleWhenUnlocked 
+                           forKey: (__bridge id)kSecAttrAccessible ];
 
     NSMutableDictionary* updateItem_ = nil;
 
@@ -281,7 +283,7 @@ static NSString* identifier_ = @"Login&Password";
 
 @implementation JFFSecureStorage
 
-@synthesize secureStorage = _secure_storage;
+@synthesize secureStorage = _secureStorage;
 
 -(id)init
 {
@@ -290,9 +292,9 @@ static NSString* identifier_ = @"Login&Password";
     if ( self )
     {
 #if TARGET_IPHONE_SIMULATOR
-        _secure_storage = [ JFFSimulatorSecureStorage new ];
+        self->_secureStorage = [ JFFSimulatorSecureStorage new ];
 #else
-        _secure_storage = [ JFFDeviceSecureStorage new ];
+        self->_secureStorage = [ JFFDeviceSecureStorage new ];
 #endif
     }
 
