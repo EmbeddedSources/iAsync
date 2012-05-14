@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0BFD0C1561477700853028 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0BFD0B1561477700853028 /* libxml2.dylib */; };
+		1B0BFD181561479700853028 /* libTouchXMLLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0BFD151561478C00853028 /* libTouchXMLLib.a */; };
+		1B0BFD1B15614F1500853028 /* jRestKitXMLToolsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0BFD1A15614F1500853028 /* jRestKitXMLToolsTest.m */; };
 		65E308201531EE1B00E0B781 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3081F1531EE1B00E0B781 /* UIKit.framework */; };
 		65E308221531EE1B00E0B781 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308211531EE1B00E0B781 /* Foundation.framework */; };
 		65E308241531EE1B00E0B781 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308231531EE1B00E0B781 /* CoreGraphics.framework */; };
@@ -24,6 +27,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1B0BFD141561478C00853028 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B0BFD0D1561478C00853028 /* TouchXMLLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D34DAC113C2F80500B1A2B5;
+			remoteInfo = TouchXMLLib;
+		};
+		1B0BFD161561479300853028 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B0BFD0D1561478C00853028 /* TouchXMLLib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D34DAC013C2F80500B1A2B5;
+			remoteInfo = TouchXMLLib;
+		};
 		65E308461531EEC500E0B781 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65E3083F1531EEC500E0B781 /* JFFUtils.xcodeproj */;
@@ -153,6 +170,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B0BFD0B1561477700853028 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		1B0BFD0D1561478C00853028 /* TouchXMLLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TouchXMLLib.xcodeproj; path = "../../lib-third-party/TouchXML/TouchXMLLib.xcodeproj"; sourceTree = "<group>"; };
+		1B0BFD1A15614F1500853028 /* jRestKitXMLToolsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jRestKitXMLToolsTest.m; sourceTree = "<group>"; };
 		65E3081B1531EE1B00E0B781 /* JFFRestKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFRestKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E3081F1531EE1B00E0B781 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		65E308211531EE1B00E0B781 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -177,6 +197,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B0BFD181561479700853028 /* libTouchXMLLib.a in Frameworks */,
+				1B0BFD0C1561477700853028 /* libxml2.dylib in Frameworks */,
 				65E308CD1531F1FA00E0B781 /* libJFFScheduler.a in Frameworks */,
 				65E308B81531F1CD00E0B781 /* libsqlite3.dylib in Frameworks */,
 				65E308B61531F1C000E0B781 /* CFNetwork.framework in Frameworks */,
@@ -194,6 +216,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B0BFD0E1561478C00853028 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1B0BFD151561478C00853028 /* libTouchXMLLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		65E308101531EE1B00E0B781 = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +245,7 @@
 		65E3081E1531EE1B00E0B781 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B0BFD0B1561477700853028 /* libxml2.dylib */,
 				65E308B71531F1CD00E0B781 /* libsqlite3.dylib */,
 				65E308B51531F1C000E0B781 /* CFNetwork.framework */,
 				65E3083C1531EE9200E0B781 /* GHUnitIOS.framework */,
@@ -230,6 +261,7 @@
 			children = (
 				65E308261531EE1B00E0B781 /* Supporting Files */,
 				65E308671531EF0000E0B781 /* SmartDataLoaderTest.m */,
+				1B0BFD1A15614F1500853028 /* jRestKitXMLToolsTest.m */,
 			);
 			path = JFFRestKitTest;
 			sourceTree = "<group>";
@@ -248,6 +280,7 @@
 		65E3083E1531EEB000E0B781 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				1B0BFD0D1561478C00853028 /* TouchXMLLib.xcodeproj */,
 				65E308B91531F1E800E0B781 /* JFFScheduler.xcodeproj */,
 				65E3085A1531EEE000E0B781 /* JFFAsyncOperations.xcodeproj */,
 				65E308541531EED900E0B781 /* JFFCache.xcodeproj */,
@@ -319,6 +352,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1B0BFD171561479300853028 /* PBXTargetDependency */,
 				65E308CC1531F1F500E0B781 /* PBXTargetDependency */,
 				65E3088C1531EF5300E0B781 /* PBXTargetDependency */,
 				65E3088E1531EF5300E0B781 /* PBXTargetDependency */,
@@ -369,6 +403,10 @@
 					ProductGroup = 65E308401531EEC500E0B781 /* Products */;
 					ProjectRef = 65E3083F1531EEC500E0B781 /* JFFUtils.xcodeproj */;
 				},
+				{
+					ProductGroup = 1B0BFD0E1561478C00853028 /* Products */;
+					ProjectRef = 1B0BFD0D1561478C00853028 /* TouchXMLLib.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -378,6 +416,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		1B0BFD151561478C00853028 /* libTouchXMLLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTouchXMLLib.a;
+			remoteRef = 1B0BFD141561478C00853028 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		65E308471531EEC500E0B781 /* libJFFUtils.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -492,12 +537,18 @@
 			files = (
 				65E3082C1531EE1B00E0B781 /* main.m in Sources */,
 				65E308681531EF0100E0B781 /* SmartDataLoaderTest.m in Sources */,
+				1B0BFD1B15614F1500853028 /* jRestKitXMLToolsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1B0BFD171561479300853028 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TouchXMLLib;
+			targetProxy = 1B0BFD161561479300853028 /* PBXContainerItemProxy */;
+		};
 		65E3088C1531EF5300E0B781 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JFFRestKit;
