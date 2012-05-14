@@ -195,6 +195,8 @@ static NSString* identifier_ = @"Login&Password";
     [ keychainItemData_ setObject: login_    forKey: (__bridge id)kSecAttrAccount ];
     [ keychainItemData_ setObject: password_ forKey: (__bridge id)kSecValueData   ];
     [ keychainItemData_ setObject: url_      forKey: (__bridge id)kSecAttrService ];
+    [ keychainItemData_ setObject: (__bridge id)kSecAttrAccessibleWhenUnlocked 
+                           forKey: (__bridge id)kSecAttrAccessible ];
 
     NSMutableDictionary* updateItem_ = nil;
 
