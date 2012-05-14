@@ -281,7 +281,7 @@ static NSString* identifier_ = @"Login&Password";
 
 @implementation JFFSecureStorage
 
-@synthesize secureStorage = _secure_storage;
+@synthesize secureStorage = _secureStorage;
 
 -(id)init
 {
@@ -290,9 +290,9 @@ static NSString* identifier_ = @"Login&Password";
     if ( self )
     {
 #if TARGET_IPHONE_SIMULATOR
-        _secure_storage = [ JFFSimulatorSecureStorage new ];
+        self->_secureStorage = [ JFFSimulatorSecureStorage new ];
 #else
-        _secure_storage = [ JFFDeviceSecureStorage new ];
+        self->_secureStorage = [ JFFDeviceSecureStorage new ];
 #endif
     }
 
