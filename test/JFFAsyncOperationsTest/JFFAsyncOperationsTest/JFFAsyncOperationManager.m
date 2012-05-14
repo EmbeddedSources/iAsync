@@ -57,12 +57,12 @@
 -(JFFAsyncOperation)loader
 {
     return [ [ ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
-                                        , JFFCancelAsyncOperationHandler cancel_callback_
-                                        , JFFDidFinishAsyncOperationHandler done_callback_ )
+                                        , JFFCancelAsyncOperationHandler cancelCallback_
+                                        , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
         self.loadingCount += 1;
 
-        done_callback_ = [ done_callback_ copy ];
+        doneCallback_ = [ doneCallback_ copy ];
 
         __block JFFAsyncOperationManager* self_ = self;
 
@@ -71,10 +71,10 @@
             //TODO use self instead of self_
             self_.loaderCancelBlock.cancelBlock = nil;
             self_.finished = YES;
-            if ( done_callback_ )
-                done_callback_( result_, error_ );
+            if ( doneCallback_ )
+                doneCallback_( result_, error_ );
         };
-        [ done_callback_ release ];
+        [ doneCallback_ release ];
 
         if ( self.finishAtLoading || self.failAtLoading )
         {
@@ -85,14 +85,14 @@
             return JFFStubCancelAsyncOperationBlock;
         }
 
-        cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
+        cancelCallback_ = [ [ cancelCallback_ copy ] autorelease ];
         self.loaderCancelBlock.cancelBlock = ^( BOOL canceled_ )
         {
             self.loaderFinishBlock.didFinishBlock = nil;
-            self.canceled = YES;
+            self.canceled   = YES;
             self.cancelFlag = canceled_;
-            if ( cancel_callback_ )
-                cancel_callback_( canceled_ );
+            if ( cancelCallback_ )
+                cancelCallback_( canceled_ );
         };
         return self.loaderCancelBlock.onceCancelBlock;
     } copy ] autorelease ];
