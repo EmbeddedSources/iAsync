@@ -23,10 +23,12 @@
 
 -(void)dealloc
 {
-    NSAssert( !_didLoadDataBlock, @"should be nil" );
-    NSAssert( !_progressBlock   , @"should be nil" );
-    NSAssert( !_loadDataBlock   , @"should be nil" );
-    NSAssert( !_currentQueue    , @"should be nil" );
+    NSAssert( !self->_didLoadDataBlock, @"should be nil" );
+    NSAssert( !self->_progressBlock   , @"should be nil" );
+    NSAssert( !self->_loadDataBlock   , @"should be nil" );
+
+    dispatch_release( self->_currentQueue );
+    self->_currentQueue = NULL;
 }
 
 -(id)initWithLoadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
@@ -42,8 +44,8 @@
         self.didLoadDataBlock = didLoadDataBlock_;
         self.progressBlock    = progressBlock_;
 
-        _currentQueue = currentQueue_;
-        dispatch_retain( _currentQueue );
+        self->_currentQueue = currentQueue_;
+        dispatch_retain( self->_currentQueue );
     }
 
     return self;
@@ -56,8 +58,6 @@
     self.loadDataBlock    = nil;
     self.didLoadDataBlock = nil;
     self.progressBlock    = nil;
-    dispatch_release( _currentQueue );
-    _currentQueue = NULL;
 }
 
 -(void)didFinishOperationWithResult:( id )result_
@@ -102,7 +102,7 @@
         {
             JFFAsyncOperationProgressHandler progressCallback_ = ^( id info_ )
             {
-                dispatch_async( _currentQueue, ^
+                dispatch_async( self->_currentQueue, ^
                 {
                     [ self progressWithInfo: info_ ];
                 } );
@@ -119,7 +119,7 @@
             error_ = [ JFFError errorWithDescription: description_ ];
         }
 
-        dispatch_async( _currentQueue, ^
+        dispatch_async( self->_currentQueue, ^
         {
             [ self didFinishOperationWithResult: opResult_ error: error_ ];
         } );
