@@ -100,7 +100,7 @@
         [ result_ addObject: block_( index_ ) ];
     }
 
-    return result_;
+    return [ [ NSArray alloc ] initWithArray: result_ ];
 }
 
 -(NSUInteger)count:( JFFPredicateBlock )predicate_
