@@ -8,3 +8,6 @@
 
 @implementation JFFRestKitParseEmptyXMLError
 @end
+
+@implementation JFFRestKitParseInvalidXMLError
+@end
