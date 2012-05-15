@@ -1,6 +1,7 @@
 ._*
 .svn
 build
+.idea
 svnignore.*
 *.svnignore
 *.DS_Store
