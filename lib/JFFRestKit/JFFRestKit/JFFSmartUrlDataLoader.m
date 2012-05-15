@@ -50,12 +50,12 @@
 
 JFFAsyncOperation jSmartDataLoaderWithCache( JFFSmartUrlDataLoaderFields* args_ )
 {
-    JFFURLBuilderBinder urlBuilder_           = args_.urlBuilder;
-    JFFAsyncOperationBinder dataLoaderForURL_ = args_.dataLoaderForURL;
-    JFFAsyncBinderForURL analyzerForData_     = args_.analyzerForData;
-    id< JFFRestKitCache > cache_              = args_.cache;
-    JFFCacheKeyForURLBuilder cacheKeyForURL_  = args_.cacheKeyForURL;
-    NSTimeInterval cacheDataLifeTime_         = args_.cacheDataLifeTime;
+    JFFURLBuilderBinder      urlBuilder_        = args_.urlBuilder;
+    JFFAsyncOperationBinder  dataLoaderForURL_  = args_.dataLoaderForURL;
+    JFFAsyncBinderForURL     analyzerForData_   = args_.analyzerForData;
+    id< JFFRestKitCache >    cache_             = args_.cache;
+    JFFCacheKeyForURLBuilder cacheKeyForURL_    = args_.cacheKeyForURL;
+    NSTimeInterval           cacheDataLifeTime_ = args_.cacheDataLifeTime;
 
     assert( urlBuilder_       );//should not be nil
     assert( dataLoaderForURL_ );//should not be nil
