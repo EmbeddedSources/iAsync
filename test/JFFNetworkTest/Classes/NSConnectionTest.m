@@ -27,7 +27,6 @@
         id< JNUrlConnection > connection_ = [ factory_ createStandardConnection ];
 
         NSUInteger currentCount_ = [ JNNsUrlConnection instancesCount ];
-        GHAssertTrue( currentCount_ > initialCount_, @"packet mismatch" );
 
         NSMutableData* totalData_ = [ NSMutableData data ];
         NSData* expectedData_ = [ NSData dataWithContentsOfURL: dataUrl_ ];

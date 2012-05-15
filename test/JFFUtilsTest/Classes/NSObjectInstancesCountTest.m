@@ -21,7 +21,7 @@
     [ TestClassB enableInstancesCounting ];
 }
 
--(void)testObjectInstancesCount
+/*-(void)testObjectInstancesCount
 {
     {
         TestClassA* a_ = [ TestClassA new ];
@@ -48,6 +48,6 @@
 
     GHAssertTrue( 0 == [ TestClassA instancesCount ], @"We have no instances of TestClassA class" );
     GHAssertTrue( 0 == [ TestClassB instancesCount ], @"We have no instances of TestClassB class" );
-}
+}*/
 
 @end

@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
    setenv( "GHUNIT_AUTOEXIT" , "YES", 1 );
    NSSetUncaughtExceptionHandler(&exceptionHandler);
    
-   NSAutoreleasePool* pool_ = [ [ NSAutoreleasePool alloc ] init ];
+   NSAutoreleasePool* pool_ = [ NSAutoreleasePool new ];
    
    // Register any special test case classes
    //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  

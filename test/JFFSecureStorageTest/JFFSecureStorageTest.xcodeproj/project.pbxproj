@@ -364,6 +364,7 @@
 				1BE99A1F154599490028F395 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
