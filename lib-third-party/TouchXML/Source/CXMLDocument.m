@@ -144,7 +144,7 @@
                                              message, NSLocalizedDescriptionKey, NULL];
                 theError = [NSError errorWithDomain:@"CXMLErrorDomain" code:1 userInfo:theUserInfo];
                                      
-                xmlResetLastError();
+                xmlCtxtResetLastError( xmlCtxt );
                 }
             }
 
