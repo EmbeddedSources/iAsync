@@ -3,51 +3,7 @@
 #import "JFFBlockOperation.h"
 #import "JFFAsyncOperationBuilder.h"
 
-@interface JFFAsyncOperationOperation : NSObject < JFFAsyncOperationInterface >
-
-@property ( nonatomic, copy   ) JFFSyncOperationWithProgress loadDataBlock;
-@property ( nonatomic, retain ) JFFBlockOperation* operation;
-@property ( nonatomic, retain ) NSString* queueName;
-@property ( nonatomic, assign ) BOOL concurrent;
-
-@end
-
-@implementation JFFAsyncOperationOperation
-
-@synthesize operation     = _operation;
-@synthesize loadDataBlock = _loadDataBlock;
-@synthesize queueName     = _queueName;
-@synthesize concurrent    = _concurrent;
-
--(void)dealloc
-{
-    [ _operation     release ];
-    [ _loadDataBlock release ];
-    [ _queueName     release ];
-
-    [ super dealloc ];
-}
-
--(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
-                       progressHandler:( void (^)( id ) )progress_
-{
-    self.operation = [ JFFBlockOperation performOperationWithQueueName: self.queueName
-                                                         loadDataBlock: self.loadDataBlock
-                                                      didLoadDataBlock: handler_
-                                                         progressBlock: progress_
-                                                            concurrent: self.concurrent ];
-}
-
--(void)cancel:( BOOL )canceled_
-{
-    if ( canceled_ )
-    {
-        [ self.operation cancel ];
-        self.operation = nil;
-    }
-}
-
-@end
+#import "JFFAsyncOperationOperation.h"
 
 static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAmdQueue( JFFSyncOperationWithProgress progressLoadDataBlock_
                                                                                   , NSString* queueName_
