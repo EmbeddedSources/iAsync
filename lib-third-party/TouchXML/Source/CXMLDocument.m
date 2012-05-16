@@ -203,8 +203,11 @@
     xmlFreeDoc((xmlDocPtr)_node);
     _node = NULL;
     //
-    xmlFreeParserCtxt( xmlCtxt );
-    xmlCtxt = NULL;
+    if ( xmlCtxt )
+    {
+        xmlFreeParserCtxt( xmlCtxt );
+        xmlCtxt = NULL;
+    }
     //
     [super dealloc];
     }
