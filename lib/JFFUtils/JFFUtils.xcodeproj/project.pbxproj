@@ -19,6 +19,9 @@
 		1B168310146AD4C800832839 /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */; };
 		1B1B280814D825A700FA5388 /* NSString+IsEmailValid.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1B280614D825A600FA5388 /* NSString+IsEmailValid.h */; };
 		1B1B280914D825A700FA5388 /* NSString+IsEmailValid.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B280714D825A600FA5388 /* NSString+IsEmailValid.m */; };
+		1B266C9D15627F7D0054E183 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B266C9C15627F7D0054E183 /* libc++.dylib */; };
+		1B266CA2156282380054E183 /* JFFSharedDispatchersStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B266CA0156282380054E183 /* JFFSharedDispatchersStorage.h */; };
+		1B266CA3156282380054E183 /* JFFSharedDispatchersStorage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1B266CA1156282380054E183 /* JFFSharedDispatchersStorage.mm */; };
 		1B26EC5D14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC5C14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B3CDDE51445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDE31445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h */; };
 		1B3CDDE61445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE41445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m */; };
@@ -297,6 +300,9 @@
 		1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUIDCreation.m"; sourceTree = "<group>"; };
 		1B1B280614D825A600FA5388 /* NSString+IsEmailValid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+IsEmailValid.h"; sourceTree = "<group>"; };
 		1B1B280714D825A600FA5388 /* NSString+IsEmailValid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+IsEmailValid.m"; sourceTree = "<group>"; };
+		1B266C9C15627F7D0054E183 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		1B266CA0156282380054E183 /* JFFSharedDispatchersStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSharedDispatchersStorage.h; sourceTree = "<group>"; };
+		1B266CA1156282380054E183 /* JFFSharedDispatchersStorage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFSharedDispatchersStorage.mm; sourceTree = "<group>"; };
 		1B26EC5C14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationCenterNewFeaturesRuntime.m; sourceTree = "<group>"; };
 		1B3CDDE31445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+NoThrowObjectAtIndex.h"; sourceTree = "<group>"; };
 		1B3CDDE41445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+NoThrowObjectAtIndex.m"; sourceTree = "<group>"; };
@@ -430,6 +436,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B266C9D15627F7D0054E183 /* libc++.dylib in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +471,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B266C9C15627F7D0054E183 /* libc++.dylib */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 				65802A5C148BF2930040A93A /* Cocoa.framework */,
 				65802A5E148BF2930040A93A /* Other Frameworks */,
@@ -481,6 +489,15 @@
 				1B054D521521C739008E4B9E /* NSDictionary+JFFExtendedDictionary.m */,
 			);
 			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		1B266C9F1562822D0054E183 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				1B266CA0156282380054E183 /* JFFSharedDispatchersStorage.h */,
+				1B266CA1156282380054E183 /* JFFSharedDispatchersStorage.mm */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 		1B26EC5B14DABADA00A1A875 /* NSNotificationCenter */ = {
@@ -602,6 +619,7 @@
 		651BE0BF1390496700DD6890 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1B266C9F1562822D0054E183 /* Details */,
 				1B054D4B1521C6DA008E4B9E /* Dictionary */,
 				1BA30C28151A383200329EA6 /* Runtime */,
 				1B909B7B14EA918800B19283 /* MemoryManagement */,
@@ -862,6 +880,7 @@
 				1B054D531521C739008E4B9E /* NSDictionary+JFFExtendedDictionary.h in Headers */,
 				1BBD97E015249C4200A34E64 /* NSObject+IsEqualTwoObjects.h in Headers */,
 				1BE053071547E61A00270B58 /* NSSet+BlocksAdditions.h in Headers */,
+				1B266CA2156282380054E183 /* JFFSharedDispatchersStorage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1198,6 +1217,7 @@
 				1B054D541521C739008E4B9E /* NSDictionary+JFFExtendedDictionary.m in Sources */,
 				1BBD97E115249C4200A34E64 /* NSObject+IsEqualTwoObjects.m in Sources */,
 				1BE053081547E61A00270B58 /* NSSet+BlocksAdditions.m in Sources */,
+				1B266CA3156282380054E183 /* JFFSharedDispatchersStorage.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1220,9 +1240,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/JFFUtils.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1231,7 +1254,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = ../;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFUtils;
 				SDKROOT = iphoneos;
 			};
@@ -1242,14 +1265,17 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/JFFUtils.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFUtils_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFUtils;
 				SDKROOT = iphoneos;
 			};
