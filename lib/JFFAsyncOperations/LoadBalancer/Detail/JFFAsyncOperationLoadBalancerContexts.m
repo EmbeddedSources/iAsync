@@ -4,15 +4,15 @@
 
 @implementation JFFAsyncOperationLoadBalancerContexts
 
-@synthesize currentContextName = _current_context_name;
-@synthesize activeContextName = _active_context_name;
-@synthesize contextLoadersByName = _context_loaders_by_name;
+@synthesize currentContextName = _currentContextName;
+@synthesize activeContextName = _activeContextName;
+@synthesize contextLoadersByName = _contextLoadersByName;
 
 -(void)dealloc
 {
-    [ _current_context_name release ];
-    [ _active_context_name release ];
-    [ _context_loaders_by_name release ];
+    [ _currentContextName release ];
+    [ _activeContextName release ];
+    [ _contextLoadersByName release ];
 
     [ super dealloc ];
 }
@@ -32,29 +32,29 @@
 
 -(NSString*)currentContextName
 {
-    if ( !_current_context_name )
+    if ( !_currentContextName )
     {
-        _current_context_name = [ self.activeContextName retain ];
+        _currentContextName = [ self.activeContextName retain ];
     }
-    return _current_context_name;
+    return _currentContextName;
 }
 
 -(NSString*)activeContextName
 {
-    if ( !_active_context_name )
+    if ( !_activeContextName )
     {
-        _active_context_name = [ @"default" retain ];
+        _activeContextName = [ @"default" retain ];
     }
-    return _active_context_name;
+    return _activeContextName;
 }
 
 -(NSMutableDictionary*)contextLoadersByName
 {
-    if ( !_context_loaders_by_name )
+    if ( !_contextLoadersByName )
     {
-        _context_loaders_by_name = [ NSMutableDictionary new ];
+        _contextLoadersByName = [ NSMutableDictionary new ];
     }
-    return _context_loaders_by_name;
+    return _contextLoadersByName;
 }
 
 -(JFFContextLoaders*)contextLoadersForName:( NSString* )name_
