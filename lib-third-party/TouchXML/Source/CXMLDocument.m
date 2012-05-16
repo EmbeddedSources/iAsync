@@ -105,7 +105,7 @@
     if ((self = [super init]) != NULL)
         {
         NSError *theError = NULL;
-        
+
         xmlCtxt = xmlNewParserCtxt();
 
         #if TOUCHXMLUSETIDY
@@ -129,7 +129,7 @@
                 const char *enc = CFStringGetCStringPtr(cfencstr, 0);
                 theDoc = xmlCtxtReadMemory( xmlCtxt, [inData bytes], [inData length], NULL, enc, XML_PARSE_RECOVER | XML_PARSE_NOWARNING);
                 }
-            
+
             if (theDoc != NULL && xmlDocGetRootElement(theDoc) != NULL)
                 {
                 _node = (xmlNodePtr)theDoc;
@@ -143,7 +143,7 @@
                 NSDictionary *theUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                                              message, NSLocalizedDescriptionKey, NULL];
                 theError = [NSError errorWithDomain:@"CXMLErrorDomain" code:1 userInfo:theUserInfo];
-                                     
+
                 xmlCtxtResetLastError( xmlCtxt );
                 }
             }

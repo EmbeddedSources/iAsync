@@ -132,7 +132,7 @@
                      progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_
                         concurrent:( BOOL )concurrent_
 {
-    NSParameterAssert( loadDataBlock_ );
+    NSParameterAssert( loadDataBlock_    );
     NSParameterAssert( didLoadDataBlock_ );
 
     dispatch_queue_t currentQueue_ = dispatch_get_current_queue();
