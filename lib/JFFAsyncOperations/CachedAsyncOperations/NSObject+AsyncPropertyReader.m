@@ -180,11 +180,11 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
 
     JFFCancelAsyncOperationHandler cancelCallback_ = ^void( BOOL canceled_ )
     {
-        JFFCancelAsyncOperationHandler cancel_callback_ = callbacks_.onCancelBlock;
+        JFFCancelAsyncOperationHandler cancelCallback_ = callbacks_.onCancelBlock;
         clearDataForPropertyExtractor( propertyExtractor_ );
 
-        if ( cancel_callback_ )
-            cancel_callback_( canceled_ );
+        if ( cancelCallback_ )
+            cancelCallback_( canceled_ );
     };
 
     propertyExtractor_.cancelBlock = propertyExtractor_.asyncLoader( progressCallback_

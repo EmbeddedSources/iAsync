@@ -19,7 +19,7 @@ CXMLDocument* xmlDocumentWithData( NSData* data_, NSError** outError_ )
                                                             options: 0
                                                               error: &parseError_ ];
 
-    xmlErrorPtr xmlError_;
+    xmlErrorPtr xmlError_ = nil;
     if ( document_ )
         xmlError_ = xmlCtxtGetLastError( document_->xmlCtxt );
 

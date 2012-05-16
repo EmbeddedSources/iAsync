@@ -10,6 +10,9 @@
 		1B0857D3145169B3001DDE0A /* JFFCallbacksBlocksHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648BAE1392407F001E163C /* JFFCallbacksBlocksHolder.m */; };
 		1B0D88C31519F81F00EC4A92 /* JFFAsyncOperationBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0D88C11519F81F00EC4A92 /* JFFAsyncOperationBuilder.h */; };
 		1B0D88C41519F81F00EC4A92 /* JFFAsyncOperationBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0D88C21519F81F00EC4A92 /* JFFAsyncOperationBuilder.m */; };
+		1B0E83A51563953300825E3C /* JFFAsyncOperationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648C391392490F001E163C /* JFFAsyncOperationUtils.m */; };
+		1B0E83A91563954B00825E3C /* JFFAsyncOperationOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0E83A71563954B00825E3C /* JFFAsyncOperationOperation.h */; };
+		1B0E83AA1563954B00825E3C /* JFFAsyncOperationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E83A81563954B00825E3C /* JFFAsyncOperationOperation.m */; };
 		1B0FB887150604860056F14E /* JFFAsyncOperationHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0FB885150604850056F14E /* JFFAsyncOperationHelpers.h */; };
 		1B0FB888150604860056F14E /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0FB886150604850056F14E /* JFFAsyncOperationHelpers.m */; };
 		1B2A678D143F3D0E00BC284F /* NSObject+AutoCancelAsyncOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 655ADDDF13B68E45005A6D3F /* NSObject+AutoCancelAsyncOperation.m */; };
@@ -147,6 +150,8 @@
 /* Begin PBXFileReference section */
 		1B0D88C11519F81F00EC4A92 /* JFFAsyncOperationBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationBuilder.h; sourceTree = "<group>"; };
 		1B0D88C21519F81F00EC4A92 /* JFFAsyncOperationBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationBuilder.m; sourceTree = "<group>"; };
+		1B0E83A71563954B00825E3C /* JFFAsyncOperationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationOperation.h; sourceTree = "<group>"; };
+		1B0E83A81563954B00825E3C /* JFFAsyncOperationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationOperation.m; sourceTree = "<group>"; };
 		1B0FB885150604850056F14E /* JFFAsyncOperationHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationHelpers.h; sourceTree = "<group>"; };
 		1B0FB886150604850056F14E /* JFFAsyncOperationHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationHelpers.m; sourceTree = "<group>"; };
 		1B3474531502469800973C6B /* NSArray+AsyncMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+AsyncMap.h"; sourceTree = "<group>"; };
@@ -383,6 +388,8 @@
 				65648BAE1392407F001E163C /* JFFCallbacksBlocksHolder.m */,
 				1B9528FA1500E67900C9B979 /* NSError+ResultOwnerships.h */,
 				1B9528FB1500E67900C9B979 /* NSError+ResultOwnerships.m */,
+				1B0E83A71563954B00825E3C /* JFFAsyncOperationOperation.h */,
+				1B0E83A81563954B00825E3C /* JFFAsyncOperationOperation.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -521,6 +528,7 @@
 				1B34746115024EAA00973C6B /* NSDictionary+AsyncMap.h in Headers */,
 				1B0FB887150604860056F14E /* JFFAsyncOperationHelpers.h in Headers */,
 				1B0D88C31519F81F00EC4A92 /* JFFAsyncOperationBuilder.h in Headers */,
+				1B0E83A91563954B00825E3C /* JFFAsyncOperationOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,6 +749,8 @@
 				1B34746215024EAA00973C6B /* NSDictionary+AsyncMap.m in Sources */,
 				1B0FB888150604860056F14E /* JFFAsyncOperationHelpers.m in Sources */,
 				1B0D88C41519F81F00EC4A92 /* JFFAsyncOperationBuilder.m in Sources */,
+				1B0E83A51563953300825E3C /* JFFAsyncOperationUtils.m in Sources */,
+				1B0E83AA1563954B00825E3C /* JFFAsyncOperationOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
