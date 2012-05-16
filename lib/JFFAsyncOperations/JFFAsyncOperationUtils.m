@@ -8,6 +8,7 @@
 @property ( nonatomic, copy   ) JFFSyncOperationWithProgress loadDataBlock;
 @property ( nonatomic, retain ) JFFBlockOperation* operation;
 @property ( nonatomic, retain ) NSString* queueName;
+@property ( nonatomic, assign ) BOOL concurrent;
 
 @end
 
@@ -16,6 +17,7 @@
 @synthesize operation     = _operation;
 @synthesize loadDataBlock = _loadDataBlock;
 @synthesize queueName     = _queueName;
+@synthesize concurrent    = _concurrent;
 
 -(void)dealloc
 {
@@ -32,7 +34,8 @@
     self.operation = [ JFFBlockOperation performOperationWithQueueName: self.queueName
                                                          loadDataBlock: self.loadDataBlock
                                                       didLoadDataBlock: handler_
-                                                         progressBlock: progress_ ];
+                                                         progressBlock: progress_
+                                                            concurrent: self.concurrent ];
 }
 
 -(void)cancel:( BOOL )canceled_
@@ -47,7 +50,8 @@
 @end
 
 static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAmdQueue( JFFSyncOperationWithProgress progressLoadDataBlock_
-                                                                                  , NSString* queueName_ )
+                                                                                  , NSString* queueName_
+                                                                                  , BOOL concurent_ )
 {
     JFFAsyncOperationOperation* asyncObj_ = [ [ JFFAsyncOperationOperation new ] autorelease ];
     asyncObj_.loadDataBlock = progressLoadDataBlock_;
@@ -55,13 +59,15 @@ static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAmdQueu
     return buildAsyncOperationWithInterface( asyncObj_ );
 }
 
-JFFAsyncOperation asyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, NSString* queueName_ )
+static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_
+                                                                        , NSString* queueName_
+                                                                        , BOOL concurrent_ )
 {
     loadDataBlock_ = [ [ loadDataBlock_ copy ] autorelease ];
     JFFSyncOperationWithProgress progressLoadDataBlock_ = ^id( NSError** error_
                                                               , JFFAsyncOperationProgressHandler progressCallback_ )
     {
-        //JTODO test
+        //JTODO test this if
         id result_ = loadDataBlock_( error_ );
         if ( result_ && progressCallback_ )
             progressCallback_( result_ );
@@ -69,7 +75,22 @@ JFFAsyncOperation asyncOperationWithSyncOperationAndQueue( JFFSyncOperation load
     };
 
     return asyncOperationWithSyncOperationWithProgressBlockAmdQueue( progressLoadDataBlock_
-                                                                    , queueName_ );
+                                                                    , queueName_
+                                                                    , concurrent_ );
+}
+
+JFFAsyncOperation asyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, NSString* queueName_ )
+{
+    return privateAsyncOperationWithSyncOperationAndQueue( loadDataBlock_
+                                                          , queueName_
+                                                          , YES );
+}
+
+JFFAsyncOperation serialAsyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, NSString* queueName_ )
+{
+    return privateAsyncOperationWithSyncOperationAndQueue( loadDataBlock_
+                                                          , queueName_
+                                                          , NO );
 }
 
 JFFAsyncOperation asyncOperationWithSyncOperation( JFFSyncOperation loadDataBlock_ )
@@ -80,5 +101,6 @@ JFFAsyncOperation asyncOperationWithSyncOperation( JFFSyncOperation loadDataBloc
 JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock( JFFSyncOperationWithProgress progressLoadDataBlock_ )
 {
     return asyncOperationWithSyncOperationWithProgressBlockAmdQueue( progressLoadDataBlock_
-                                                                    , nil );
+                                                                    , nil
+                                                                    , YES );
 }
