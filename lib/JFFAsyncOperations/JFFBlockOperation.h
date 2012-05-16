@@ -7,7 +7,12 @@
 +(id)performOperationWithQueueName:( NSString* )queueName_
                      loadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
                   didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_
-                     progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_;
+                     progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_
+                        concurrent:( BOOL )concurrent_;
+
++(id)performOperationWithQueueName:( NSString* )queueName_
+                     loadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
+                  didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_;
 
 -(void)cancel;
 
