@@ -10,6 +10,7 @@
 		1B0BFD0C1561477700853028 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0BFD0B1561477700853028 /* libxml2.dylib */; };
 		1B0BFD181561479700853028 /* libTouchXMLLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0BFD151561478C00853028 /* libTouchXMLLib.a */; };
 		1B0BFD1B15614F1500853028 /* jRestKitXMLToolsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0BFD1A15614F1500853028 /* jRestKitXMLToolsTest.m */; };
+		1B0E896C1563FA9C00825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E896B1563FA9C00825E3C /* libc++.dylib */; };
 		65E308201531EE1B00E0B781 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3081F1531EE1B00E0B781 /* UIKit.framework */; };
 		65E308221531EE1B00E0B781 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308211531EE1B00E0B781 /* Foundation.framework */; };
 		65E308241531EE1B00E0B781 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308231531EE1B00E0B781 /* CoreGraphics.framework */; };
@@ -173,6 +174,7 @@
 		1B0BFD0B1561477700853028 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		1B0BFD0D1561478C00853028 /* TouchXMLLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TouchXMLLib.xcodeproj; path = "../../lib-third-party/TouchXML/TouchXMLLib.xcodeproj"; sourceTree = "<group>"; };
 		1B0BFD1A15614F1500853028 /* jRestKitXMLToolsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jRestKitXMLToolsTest.m; sourceTree = "<group>"; };
+		1B0E896B1563FA9C00825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		65E3081B1531EE1B00E0B781 /* JFFRestKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFRestKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E3081F1531EE1B00E0B781 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		65E308211531EE1B00E0B781 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -197,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B0E896C1563FA9C00825E3C /* libc++.dylib in Frameworks */,
 				1B0BFD181561479700853028 /* libTouchXMLLib.a in Frameworks */,
 				1B0BFD0C1561477700853028 /* libxml2.dylib in Frameworks */,
 				65E308CD1531F1FA00E0B781 /* libJFFScheduler.a in Frameworks */,
@@ -245,6 +248,7 @@
 		65E3081E1531EE1B00E0B781 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B0E896B1563FA9C00825E3C /* libc++.dylib */,
 				1B0BFD0B1561477700853028 /* libxml2.dylib */,
 				65E308B71531F1CD00E0B781 /* libsqlite3.dylib */,
 				65E308B51531F1C000E0B781 /* CFNetwork.framework */,

@@ -4,7 +4,7 @@
 #include <string>
 
 static std::map< std::string, dispatch_queue_t > dispatchByLabel_;
-static NSString* lockObject_ = @"0524a0b0-4bc8-47da-a1f5-6073ba5b59d9";
+static NSString* const lockObject_ = @"0524a0b0-4bc8-47da-a1f5-6073ba5b59d9";
 
 void safe_dispatch_sync( dispatch_queue_t queue_, dispatch_block_t block_ )
 {

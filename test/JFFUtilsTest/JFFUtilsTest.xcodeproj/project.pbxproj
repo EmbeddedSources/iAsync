@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0E89211563FA5200825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E89201563FA5200825E3C /* libc++.dylib */; };
 		1B2D8B6C154BF37C00360296 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2D8B69154BF36C00360296 /* libJFFTestTools.a */; };
 		1B2D8B7D154BFA1F00360296 /* JUArrayAdditionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BCF8E514323E7D00E896B3 /* JUArrayAdditionsTest.m */; };
 		1B2D8B7E154BFA2300360296 /* JUMutableArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */; };
@@ -26,7 +27,6 @@
 		1B2D8B8C154BFA3200360296 /* ObjcDynamicCastTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 532E281814A9E9A300111144 /* ObjcDynamicCastTest.mm */; };
 		1B2D8B8D154BFA3200360296 /* NSObject_IsEqualTwoObjectsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6515B96B152B737F00518996 /* NSObject_IsEqualTwoObjectsTest.m */; };
 		1BC7424F154C0384002F3909 /* NumberOfCharacterFromStringTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC7424E154C0384002F3909 /* NumberOfCharacterFromStringTest.m */; };
-		534CDFDA14A8CA290068F4DF /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CDFD914A8CA290068F4DF /* libstdc++.dylib */; };
 		534CDFDE14A8CAAC0068F4DF /* JMStringHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */; };
 		534CE02B14A8CE7B0068F4DF /* JMParent.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CE02A14A8CE7B0068F4DF /* JMParent.m */; };
 		534CE02E14A8CE8C0068F4DF /* JMChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CE02D14A8CE8C0068F4DF /* JMChild.m */; };
@@ -92,6 +92,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B0E89201563FA5200825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		1B26EC6D14DABFB800A1A875 /* EmptyStringTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyStringTest.m; sourceTree = "<group>"; };
 		1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStringFormatTest.m; sourceTree = "<group>"; };
 		1B29556E143DCE7F00532BD7 /* JFFSimpleBlockHolderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSimpleBlockHolderTest.m; sourceTree = "<group>"; };
@@ -135,13 +136,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B0E89211563FA5200825E3C /* libc++.dylib in Frameworks */,
 				1B2D8B6C154BF37C00360296 /* libJFFTestTools.a in Frameworks */,
 				B69484661429E26100B8247E /* libJFFUtils.a in Frameworks */,
 				B69483EC1429C88400B8247E /* UIKit.framework in Frameworks */,
 				B69483EE1429C88400B8247E /* Foundation.framework in Frameworks */,
 				B69483F01429C88400B8247E /* CoreGraphics.framework in Frameworks */,
 				B69484031429D3D300B8247E /* GHUnitIOS.framework in Frameworks */,
-				534CDFDA14A8CA290068F4DF /* libstdc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +182,7 @@
 		B69483DC1429C88400B8247E = {
 			isa = PBXGroup;
 			children = (
+				1B0E89201563FA5200825E3C /* libc++.dylib */,
 				B69483F11429C88400B8247E /* JFFUtilsTest */,
 				B69483EA1429C88400B8247E /* Frameworks */,
 				B69483E81429C88400B8247E /* Products */,

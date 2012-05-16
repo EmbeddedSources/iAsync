@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0E89961563FAC800825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E89951563FAC800825E3C /* libc++.dylib */; };
 		1B166C9C1546ED9200475B6A /* NSStringRFC_2965Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B166C9B1546ED9200475B6A /* NSStringRFC_2965Test.m */; };
 		1B2669E615623FBD0054E183 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2669E315623FA80054E183 /* libJFFTestTools.a */; };
 		1BE053111547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053101547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.m */; };
@@ -29,7 +30,6 @@
 		532284361445CDE000F0E723 /* JFFConectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 532284351445CDE000F0E723 /* JFFConectionTest.m */; };
 		53435961141F585600BE9563 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5343595F141F585600BE9563 /* 1.txt */; };
 		53435962141F585600BE9563 /* 1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 53435960141F585600BE9563 /* 1.zip */; };
-		5357CDF814A9F5050046EA34 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5357CDF714A9F5050046EA34 /* libstdc++.dylib */; };
 		539A55A61445BC3800FC2770 /* ConnectionsFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 539A55A51445BC3800FC2770 /* ConnectionsFactoryTest.m */; };
 		53A33F23141F600300469DAA /* JNTestBundleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A33F22141F600300469DAA /* JNTestBundleManager.m */; };
 		53A33F29141F64CC00469DAA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A33F28141F64CC00469DAA /* libz.dylib */; };
@@ -203,6 +203,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B0E89951563FAC800825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		1B166C9B1546ED9200475B6A /* NSStringRFC_2965Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringRFC_2965Test.m; sourceTree = "<group>"; };
 		1B2669DB15623FA80054E183 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		1BE053031547DFDE00270B58 /* NSHTTPCookieMatchesURLTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHTTPCookieMatchesURLTest.m; sourceTree = "<group>"; };
@@ -229,7 +230,6 @@
 		532284351445CDE000F0E723 /* JFFConectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFConectionTest.m; sourceTree = "<group>"; };
 		5343595F141F585600BE9563 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
 		53435960141F585600BE9563 /* 1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = 1.zip; sourceTree = "<group>"; };
-		5357CDF714A9F5050046EA34 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		539A55A51445BC3800FC2770 /* ConnectionsFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionsFactoryTest.m; sourceTree = "<group>"; };
 		53A33F21141F600300469DAA /* JNTestBundleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNTestBundleManager.h; sourceTree = "<group>"; };
 		53A33F22141F600300469DAA /* JNTestBundleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNTestBundleManager.m; sourceTree = "<group>"; };
@@ -252,6 +252,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B0E89961563FAC800825E3C /* libc++.dylib in Frameworks */,
 				1B2669E615623FBD0054E183 /* libJFFTestTools.a in Frameworks */,
 				5310BAF0141F51E000A3E2B1 /* libJFFScheduler.a in Frameworks */,
 				5310BAF1141F51F100A3E2B1 /* libJFFAsyncOperations.a in Frameworks */,
@@ -262,7 +263,6 @@
 				53A33F2B141F65F700469DAA /* CFNetwork.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				5310BA45141F4D7800A3E2B1 /* GHUnitIOS.framework in Frameworks */,
-				5357CDF814A9F5050046EA34 /* libstdc++.dylib in Frameworks */,
 				53A33F29141F64CC00469DAA /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,7 +367,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5357CDF714A9F5050046EA34 /* libstdc++.dylib */,
+				1B0E89951563FAC800825E3C /* libc++.dylib */,
 				53A33F2A141F65F700469DAA /* CFNetwork.framework */,
 				53A33F28141F64CC00469DAA /* libz.dylib */,
 				5310BA44141F4D7800A3E2B1 /* GHUnitIOS.framework */,

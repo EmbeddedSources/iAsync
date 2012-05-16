@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0E89441563FA7900825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E89431563FA7900825E3C /* libc++.dylib */; };
 		1B266A2E156245360054E183 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B266A2B156245030054E183 /* libJFFTestTools.a */; };
 		1B41ACFA151CCF7100566B1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41ACF9151CCF7100566B1B /* UIKit.framework */; };
 		1B41ACFC151CCF7100566B1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41ACFB151CCF7100566B1B /* Foundation.framework */; };
@@ -107,6 +108,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B0E89431563FA7900825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		1B266A23156245030054E183 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		1B41ACF5151CCF7100566B1B /* JFFSchedulerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFSchedulerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B41ACF9151CCF7100566B1B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -127,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B0E89441563FA7900825E3C /* libc++.dylib in Frameworks */,
 				1B266A2E156245360054E183 /* libJFFTestTools.a in Frameworks */,
 				1B41AD65151CD1EE00566B1B /* libJFFUtils.a in Frameworks */,
 				1B41AD50151CD1D100566B1B /* libJFFScheduler.a in Frameworks */,
@@ -169,6 +172,7 @@
 		1B41ACF8151CCF7100566B1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B0E89431563FA7900825E3C /* libc++.dylib */,
 				1B41AD19151CCF9300566B1B /* GHUnitIOS.framework */,
 				1B41ACF9151CCF7100566B1B /* UIKit.framework */,
 				1B41ACFB151CCF7100566B1B /* Foundation.framework */,
