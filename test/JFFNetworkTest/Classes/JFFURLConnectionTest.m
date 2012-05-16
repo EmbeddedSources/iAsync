@@ -12,7 +12,7 @@
 
 -(void)testValidDownloadCompletesCorrectly
 {
-    const NSUInteger initialCount_       = [ JFFURLConnection instancesCount ];
+    const NSUInteger initialCount_ = [ JFFURLConnection instancesCount ];
 
     __weak id< JNUrlConnection > wealConnection_ = nil;
     @autoreleasepool

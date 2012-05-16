@@ -199,9 +199,9 @@ static JFFAsyncOperationBinder differentTestDataLoader( BOOL* wasCalled_ )
     {
         storedDataString_ = data_;
         loaderWromCache_( nil, nil, ^( id data_, NSError* error_ )
-                         {
-                             cachedDataString_ = data_;
-                         } );
+        {
+            cachedDataString_ = data_;
+        } );
     } );
 
     GHAssertTrue( [ cachedDataString_ isEqualToString: storedDataString_ ], @"cached and stored data should be same" );
@@ -271,16 +271,16 @@ static JFFAsyncOperationBinder differentTestDataLoader( BOOL* wasCalled_ )
 -(void)testUseCachedDataIfCacheDataIsFresh
 {
     NSString* cacheName_ = @"URL_CACHES_FROM_DICT2";
-    
+
     NSDictionary* dbDescription_ = [ NSDictionary dictionaryWithObjectsAndKeys:
                                     [ NSDictionary dictionaryWithObjectsAndKeys: cachesFileName_, @"fileName", nil ], cacheName_
                                     , nil ];
-    
+
     CacheDBAdaptor* cache_ = [ CacheDBAdaptor new ];
-    
+
     id< JFFCacheDB > jffCache_ = [ [ [ JFFCaches alloc ] initWithDBInfoDictionary: dbDescription_ ] cacheByName: cacheName_ ];
     cache_.jffCacheDB = jffCache_;
-    
+
     NSURL* url_ = [ NSURL URLWithString: @"http://google.com" ];
     NSURL*(^urlBuilder_)(void) = ^NSURL*()
     {
