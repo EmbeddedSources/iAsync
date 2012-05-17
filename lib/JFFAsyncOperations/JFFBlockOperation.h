@@ -4,13 +4,13 @@
 
 @interface JFFBlockOperation : NSObject
 
-+(id)performOperationWithQueueName:( NSString* )queueName_
++(id)performOperationWithQueueName:( const char* )queueName_
                      loadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
                   didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_
                      progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_
-                        concurrent:( BOOL )concurrent_;
+                           barrier:( BOOL )barrier_;
 
-+(id)performOperationWithQueueName:( NSString* )queueName_
++(id)performOperationWithQueueName:( const char* )queueName_
                      loadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
                   didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_;
 

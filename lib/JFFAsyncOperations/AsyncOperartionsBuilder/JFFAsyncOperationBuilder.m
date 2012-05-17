@@ -1,5 +1,7 @@
 #import "JFFAsyncOperationBuilder.h"
 
+#import "JFFAsyncOperationInterface.h"
+
 JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterface > asyncObject_ )
 {
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_

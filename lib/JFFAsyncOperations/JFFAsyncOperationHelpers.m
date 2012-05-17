@@ -3,6 +3,7 @@
 #import "JFFAsyncOperationContinuity.h"
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 #import "JFFAsyncOperationBuilder.h"
+#import "JFFAsyncOperationInterface.h"
 
 #import <JFFScheduler/JFFScheduler.h>
 

@@ -13,4 +13,5 @@
 #import <JFFAsyncOperations/Extensions/NSArray+AsyncMap.h>
 #import <JFFAsyncOperations/Extensions/NSDictionary+AsyncMap.h>
 
+#import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationInterface.h>
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationBuilder.h>

@@ -3,21 +3,22 @@
 #import "JFFBlockOperation.h"
 #import "JFFAsyncOperationBuilder.h"
 
-#import "JFFAsyncOperationOperation.h"
+#import "JFFAsyncOperationAdapter.h"
 
-static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAmdQueue( JFFSyncOperationWithProgress progressLoadDataBlock_
-                                                                                  , NSString* queueName_
-                                                                                  , BOOL concurent_ )
+static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueue( JFFSyncOperationWithProgress progressLoadDataBlock_
+                                                                                  , const char* queueName_
+                                                                                  , BOOL barrier_ )
 {
-    JFFAsyncOperationOperation* asyncObj_ = [ JFFAsyncOperationOperation new ];
+    JFFAsyncOperationAdapter* asyncObj_ = [ JFFAsyncOperationAdapter new ];
     asyncObj_.loadDataBlock = progressLoadDataBlock_;
     asyncObj_.queueName     = queueName_;
+    asyncObj_.barrier       = barrier_;
     return buildAsyncOperationWithInterface( asyncObj_ );
 }
 
 static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_
-                                                                        , NSString* queueName_
-                                                                        , BOOL concurrent_ )
+                                                                        , const char* queueName_
+                                                                        , BOOL barrier_ )
 {
     loadDataBlock_ = [ loadDataBlock_ copy ];
     JFFSyncOperationWithProgress progressLoadDataBlock_ = ^id( NSError** error_
@@ -30,23 +31,23 @@ static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue( JFFSync
         return result_;
     };
 
-    return asyncOperationWithSyncOperationWithProgressBlockAmdQueue( progressLoadDataBlock_
+    return asyncOperationWithSyncOperationWithProgressBlockAndQueue( progressLoadDataBlock_
                                                                     , queueName_
-                                                                    , concurrent_ );
+                                                                    , barrier_ );
 }
 
-JFFAsyncOperation asyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, NSString* queueName_ )
-{
-    return privateAsyncOperationWithSyncOperationAndQueue( loadDataBlock_
-                                                          , queueName_
-                                                          , YES );
-}
-
-JFFAsyncOperation serialAsyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, NSString* queueName_ )
+JFFAsyncOperation asyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, const char* queueName_ )
 {
     return privateAsyncOperationWithSyncOperationAndQueue( loadDataBlock_
                                                           , queueName_
                                                           , NO );
+}
+
+JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, const char* queueName_ )
+{
+    return privateAsyncOperationWithSyncOperationAndQueue( loadDataBlock_
+                                                          , queueName_
+                                                          , YES );
 }
 
 JFFAsyncOperation asyncOperationWithSyncOperation( JFFSyncOperation loadDataBlock_ )
@@ -56,7 +57,7 @@ JFFAsyncOperation asyncOperationWithSyncOperation( JFFSyncOperation loadDataBloc
 
 JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock( JFFSyncOperationWithProgress progressLoadDataBlock_ )
 {
-    return asyncOperationWithSyncOperationWithProgressBlockAmdQueue( progressLoadDataBlock_
+    return asyncOperationWithSyncOperationWithProgressBlockAndQueue( progressLoadDataBlock_
                                                                     , nil
-                                                                    , YES );
+                                                                    , NO );
 }
