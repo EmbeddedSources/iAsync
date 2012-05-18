@@ -62,7 +62,6 @@ JFFAsyncOperation jSmartDataLoaderWithCache( JFFSmartUrlDataLoaderFields* args_ 
 
     if ( !analyzerForData_ )
     {
-        //JTODO test case when ( !analyzerForData_ )
         analyzerForData_ = ^JFFAsyncOperationBinder( NSURL* url_ )
         {
             JFFAnalyzer analyzer_ = ^id( NSData* data_, NSError** outError_ )
