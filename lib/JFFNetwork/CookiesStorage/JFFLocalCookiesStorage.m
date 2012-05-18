@@ -2,7 +2,6 @@
 
 #import "NSHTTPCookie+matchesURL.h"
 
-//JTODO store in file system
 @implementation JFFLocalCookiesStorage
 {
     NSMutableSet* _allCookies;

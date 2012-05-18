@@ -5,7 +5,6 @@
 
 @interface JNNsUrlConnection : JNAbstractConnection
 
-//!c TODO : add an opportunity to change the request. (JTODO ask)
 -(id)initWithURLConnectionParams:( JFFURLConnectionParams* )params_;
 
 -(void)start;
