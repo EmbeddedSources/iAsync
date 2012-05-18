@@ -2,7 +2,6 @@
 
 @implementation NSDictionary (BlocksAdditions)
 
-//JTODO test
 -(NSDictionary*)map:( JFFDictMappingBlock )block_
 {
     NSMutableDictionary* result_ = [ [ NSMutableDictionary alloc ] initWithCapacity: [ self count ] ];
@@ -15,7 +14,6 @@
     return [ [ NSDictionary alloc ] initWithDictionary: result_ ];
 }
 
-//JTODO test
 -(NSDictionary*)mapKey:( JFFDictMappingBlock )block_
 {
     NSMutableDictionary* result_ = [ [ NSMutableDictionary alloc ] initWithCapacity: [ self count ] ];
@@ -28,7 +26,6 @@
     return [ [ NSDictionary alloc ] initWithDictionary: result_ ];
 }
 
-//JTODO test
 -(NSUInteger)count:( JFFDictPredicateBlock )predicate_
 {
     __block NSUInteger count_ = 0;

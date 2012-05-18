@@ -22,7 +22,7 @@ static NSString* userAgent()
     return userAgent_;
 }
 
-//JTODO remove, use NSUserDefaults value first
+//try to remove this to use NSUserDefaults value instead
 +(NSString*)threadSafeUserAgent
 {
     static dispatch_once_t once_;
