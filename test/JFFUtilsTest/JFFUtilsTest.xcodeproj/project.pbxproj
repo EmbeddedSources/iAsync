@@ -182,7 +182,6 @@
 		B69483DC1429C88400B8247E = {
 			isa = PBXGroup;
 			children = (
-				1B0E89201563FA5200825E3C /* libc++.dylib */,
 				B69483F11429C88400B8247E /* JFFUtilsTest */,
 				B69483EA1429C88400B8247E /* Frameworks */,
 				B69483E81429C88400B8247E /* Products */,
@@ -201,6 +200,7 @@
 		B69483EA1429C88400B8247E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B0E89201563FA5200825E3C /* libc++.dylib */,
 				534CDFD914A8CA290068F4DF /* libstdc++.dylib */,
 				B69484021429D3D300B8247E /* GHUnitIOS.framework */,
 				B69483EB1429C88400B8247E /* UIKit.framework */,
