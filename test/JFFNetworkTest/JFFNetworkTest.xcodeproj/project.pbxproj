@@ -13,6 +13,7 @@
 		1BE053111547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053101547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.m */; };
 		1BE053131547F33D00270B58 /* JFFLocalCookiesStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0530C1547EA0400270B58 /* JFFLocalCookiesStorageTest.m */; };
 		1BE053141547F35E00270B58 /* NSHTTPCookieMatchesURLTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053031547DFDE00270B58 /* NSHTTPCookieMatchesURLTest.m */; };
+		1BEC485C156A27270099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEC485B156A27270099DA6D /* libstdc++.dylib */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -210,6 +211,7 @@
 		1BE0530C1547EA0400270B58 /* JFFLocalCookiesStorageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFLocalCookiesStorageTest.m; sourceTree = "<group>"; };
 		1BE0530F1547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSHTTPCookie+HTTPCookieWithHeader.h"; sourceTree = "<group>"; };
 		1BE053101547EA5C00270B58 /* NSHTTPCookie+HTTPCookieWithHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSHTTPCookie+HTTPCookieWithHeader.m"; sourceTree = "<group>"; };
+		1BEC485B156A27270099DA6D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* JFFNetworkTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFNetworkTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -252,6 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BEC485C156A27270099DA6D /* libstdc++.dylib in Frameworks */,
 				1B0E89961563FAC800825E3C /* libc++.dylib in Frameworks */,
 				1B2669E615623FBD0054E183 /* libJFFTestTools.a in Frameworks */,
 				5310BAF0141F51E000A3E2B1 /* libJFFScheduler.a in Frameworks */,
@@ -367,6 +370,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1BEC485B156A27270099DA6D /* libstdc++.dylib */,
 				1B0E89951563FAC800825E3C /* libc++.dylib */,
 				53A33F2A141F65F700469DAA /* CFNetwork.framework */,
 				53A33F28141F64CC00469DAA /* libz.dylib */,

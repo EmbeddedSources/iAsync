@@ -15,6 +15,7 @@
 		1B835A26142C8BC400FC004C /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B835A16142C8BAB00FC004C /* libJFFUtils.a */; };
 		1B835B5D142CD17D00FC004C /* libJFFScheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B835B5A142CD17300FC004C /* libJFFScheduler.a */; };
 		1B93690615650A5A00F8A394 /* JFFAsyncOperationUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B93690515650A5A00F8A394 /* JFFAsyncOperationUtilsTest.m */; };
+		1BEC48A4156A27660099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5357CDF914A9F5130046EA34 /* libstdc++.dylib */; };
 		65359B4E151A6DB90099D6FE /* AsyncOperationWithDelayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65359B4D151A6DB90099D6FE /* AsyncOperationWithDelayTest.m */; };
 		65359BD6151A81C40099D6FE /* ParalelBlockTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65359BD5151A81C40099D6FE /* ParalelBlockTest.m */; };
 		65A9948F14C1EC31001D36AE /* JFFDidFinishAsyncOperationBlockHolderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A67C8143F474300BC284F /* JFFDidFinishAsyncOperationBlockHolderTest.m */; };
@@ -186,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BEC48A4156A27660099DA6D /* libstdc++.dylib in Frameworks */,
 				1B0E89DF1563FB1100825E3C /* libc++.dylib in Frameworks */,
 				1B2D8C49154BFE7300360296 /* libJFFTestTools.a in Frameworks */,
 				1B835B5D142CD17D00FC004C /* libJFFScheduler.a in Frameworks */,

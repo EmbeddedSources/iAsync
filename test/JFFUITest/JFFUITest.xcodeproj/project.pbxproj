@@ -19,6 +19,7 @@
 		1B29556C143DCCB900532BD7 /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B295569143DCCAE00532BD7 /* libJFFUtils.a */; };
 		1BE054DE154829FB00270B58 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE054DB154829F000270B58 /* libJFFTestTools.a */; };
 		1BE054E115482A5400270B58 /* JFFActionSheetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE054E015482A5400270B58 /* JFFActionSheetTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1BEC47D4156A26950099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 538C141014A9F33B0097645A /* libstdc++.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BEC47D4156A26950099DA6D /* libstdc++.dylib in Frameworks */,
 				1B0E890F1563FA2A00825E3C /* libc++.dylib in Frameworks */,
 				1BE054DE154829FB00270B58 /* libJFFTestTools.a in Frameworks */,
 				1B29556C143DCCB900532BD7 /* libJFFUtils.a in Frameworks */,
