@@ -34,7 +34,7 @@ static NSString* identifier_ = @"Login&Password";
 {
     NSString* path_ = [ [ self class ] secureStorageFilePath ];
 
-    NSMutableDictionary* dict_ = [ NSMutableDictionary dictionaryWithContentsOfFile: path_ ];
+    NSMutableDictionary* dict_ = [ [ NSMutableDictionary alloc ] initWithContentsOfFile: path_ ];
     dict_ = dict_ ?: [ NSMutableDictionary new ];
 
     NSDictionary* loginPasswordData_ = [ [ NSDictionary alloc ] initWithObjectsAndKeys:
@@ -51,7 +51,7 @@ static NSString* identifier_ = @"Login&Password";
                       forURL:( NSURL* )url_
 {
     NSString* path_ = [ [ self class ] secureStorageFilePath ];
-    NSDictionary* dict_ = [ NSDictionary dictionaryWithContentsOfFile: path_ ];
+    NSDictionary* dict_ = [ [ NSDictionary alloc ] initWithContentsOfFile: path_ ];
 
     NSDictionary* loginPasswordData_ = [ dict_ objectForKey: [ url_ description ] ];
 
