@@ -157,7 +157,7 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
 
 -(void)actionSheet:( UIActionSheet* )actionSheet_ clickedButtonAtIndex:( NSInteger )button_index_
 {
-    JFFAlertButton* alertButton_ = [ _alertButtons objectAtIndex: button_index_ ];
+    JFFAlertButton* alertButton_ = [ self->_alertButtons objectAtIndex: button_index_ ];
 
     if ( alertButton_ )
         alertButton_.action();
@@ -185,12 +185,14 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
 {
     JFFActionSheetsContainer* container_ = [ JFFActionSheetsContainer sharedActionSheetsContainer ];
 
-    if ( [ container_ containsActionSheet: self ] )
+    JFFPendingActionSheet* actionSheetsStruct_ = [ container_ firstPendingActionSheet ];
+    if ( actionSheetsStruct_.actionSheet == self )
     {
-        [ container_ removeActionSheet: self ];
+        [ self->_actionSheet dismissWithClickedButtonIndex: buttonIndex_ animated: animated_ ];
         return;
     }
-    [ _actionSheet dismissWithClickedButtonIndex: buttonIndex_ animated: animated_ ];
+
+    [ container_ removeActionSheet: self ];
 }
 
 @end

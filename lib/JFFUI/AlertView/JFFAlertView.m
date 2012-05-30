@@ -3,8 +3,7 @@
 #import "JFFAlertButton.h"
 #import "NSObject+JFFAlertButton.h"
 
-static NSMutableArray* active_alerts_ = nil;
-static NSInteger first_alert_index_ = 1;
+#import "JFFAlertViewsContainer.h"
 
 @interface JFFAlertView () < UIAlertViewDelegate >
 
@@ -34,31 +33,19 @@ static NSInteger first_alert_index_ = 1;
 
 +(void)activeAlertsAddAlert:( JFFAlertView* )alertView_
 {
-    //JTODO refactor
-    if ( !active_alerts_ )
-    {
-        active_alerts_ = [ [ NSMutableArray alloc ] initWithCapacity: 1 ];
-    }
-
-    [ active_alerts_ addObject: alertView_ ];
+    JFFAlertViewsContainer* container_ = [ JFFAlertViewsContainer sharedAlertViewsContainer ];
+    [ container_ addAlertView: alertView_ ];
 }
 
 +(BOOL)activeAlertsRemoveAlert:( JFFAlertView* )alertView_
 {
-    if ( !active_alerts_ )
-        return NO;
+    JFFAlertViewsContainer* container_ = [ JFFAlertViewsContainer sharedAlertViewsContainer ];
 
-    NSUInteger result_ = [ active_alerts_ indexOfObject: alertView_ ];
-    //JTODO refactor
-    if ( result_ != NSNotFound )
-        [ active_alerts_ removeObjectAtIndex: result_ ];
+    BOOL result_ = [ container_ containsAlertView: alertView_ ];
 
-    if ( ![ active_alerts_ count ] )
-    {
-        active_alerts_ = nil;
-    }
+    [ container_ removeAlertView: alertView_ ];
 
-    return result_ != NSNotFound;
+    return result_;
 }
 
 -(void)dismissWithClickedButtonIndex:( NSInteger )buttonIndex_ animated:( BOOL )animated_
@@ -76,17 +63,14 @@ static NSInteger first_alert_index_ = 1;
 
 +(void)dismissAllAlertViews
 {
-    if ( !active_alerts_)
-        return;
-
-    NSArray* temporary_active_alerts_ = [ [ NSArray alloc ] initWithArray: active_alerts_ ];
-
-    for ( JFFAlertView* alert_view_ in temporary_active_alerts_ )
+    JFFAlertViewsContainer* container_ = [ JFFAlertViewsContainer sharedAlertViewsContainer ];
+    [ container_ each: ^( JFFAlertView* alertView_ )
     {
-        [ alert_view_ forceDismiss ];
-    }
+        [ alertView_ forceDismiss ];
+    } ];
 
-    active_alerts_ = nil;
+    //may be can be removed, test this
+    [ container_ removeAllAlertViews ];
 }
 
 +(void)showAlertWithTitle:( NSString* )title_
@@ -197,60 +181,66 @@ otherButtonTitlesArray:( NSArray* )other_button_titles_
 
 +(id)alertWithTitle:( NSString* )title_
             message:( NSString* )message_
-  cancelButtonTitle:( id )cancel_button_title_
-  otherButtonTitles:( id )other_button_titles_, ...
+  cancelButtonTitle:( id )cancelButtonTitle_
+  otherButtonTitles:( id )otherButtonTitles_, ...
 {
     [ NSThread assertMainThread ];
 
-    NSMutableArray* other_alert_buttons_ = [ NSMutableArray new ];
-    NSMutableArray* other_alert_string_titles_ = [ NSMutableArray new ];
+    NSMutableArray* otherAlertButtons_ = [ NSMutableArray new ];
+    NSMutableArray* otherAlertStringTitles_ = [ NSMutableArray new ];
 
     va_list args;
-    va_start( args, other_button_titles_ );
-    for ( NSString* button_title_ = other_button_titles_;
-         button_title_ != nil;
-         button_title_ = va_arg( args, NSString* ) )
+    va_start( args, otherButtonTitles_ );
+    for ( NSString* buttonTitle_ = otherButtonTitles_;
+         buttonTitle_ != nil;
+         buttonTitle_ = va_arg( args, NSString* ) )
     {
-        JFFAlertButton* alert_button_ = [ button_title_ toAlertButton ];
-        [ other_alert_buttons_ addObject: alert_button_ ];
-        [ other_alert_string_titles_ addObject: alert_button_.title ];
+        JFFAlertButton* alertButton_ = [ buttonTitle_ toAlertButton ];
+        [ otherAlertButtons_ addObject: alertButton_ ];
+        [ otherAlertStringTitles_ addObject: alertButton_.title ];
     }
     va_end( args );
 
-    JFFAlertButton* cancel_button_ = [ cancel_button_title_ toAlertButton ];
-    if ( cancel_button_ )
+    JFFAlertButton* cancelButton_ = [ cancelButtonTitle_ toAlertButton ];
+    if ( cancelButton_ )
     {
-        [ other_alert_buttons_ insertObject: cancel_button_ atIndex: 0 ];
+        [ otherAlertButtons_ insertObject: cancelButton_ atIndex: 0 ];
     }
 
-    JFFAlertView* alert_view_ = [ [ self alloc ] initWithTitle: title_
+    JFFAlertView* alertView_ = [ [ self alloc ] initWithTitle: title_
                                                        message: message_
-                                             cancelButtonTitle: cancel_button_.title
-                                        otherButtonTitlesArray: other_alert_string_titles_ ];
+                                             cancelButtonTitle: cancelButton_.title
+                                        otherButtonTitlesArray: otherAlertStringTitles_ ];
 
-    alert_view_->_alertButtons = other_alert_buttons_;
+    alertView_->_alertButtons = otherAlertButtons_;
 
-    return alert_view_;
+    return alertView_;
 }
 
 -(void)show
 {
-    [ [ self class ] activeAlertsAddAlert: self ];
+    JFFAlertViewsContainer* container_ = [ JFFAlertViewsContainer sharedAlertViewsContainer ];
 
-    //JTODO move to container pending logic
-    if ( [ active_alerts_ count ] == first_alert_index_ )
+    if ( [ container_ count ] == 0 )
     {
         [ self forceShow ];
     }
+
+    [ container_ addAlertView: self ];
 }
 
 -(void)exclusiveShow
 {
-    _exclusive = YES;
+    self->_exclusive = YES;
 
-    //JTODO remove predicate
-    NSPredicate* predicate_ = [ NSPredicate predicateWithFormat: @"SELF.exclusive = %d", YES ];
-    if ( [ [ active_alerts_ filteredArrayUsingPredicate: predicate_ ] count ] == 0 )
+    JFFAlertViewsContainer* container_ = [ JFFAlertViewsContainer sharedAlertViewsContainer ];
+
+    UIAlertView* exclusiveAlertView_ = [ container_ firstMatch: ^BOOL( JFFAlertView* object_ )
+    {
+        return object_->_exclusive;
+    } ];
+
+    if ( !exclusiveAlertView_ )
     {
         [ self show ];
     }
@@ -269,14 +259,13 @@ otherButtonTitlesArray:( NSArray* )other_button_titles_
     [ self->_alertView show ];
 }
 
-
 #pragma mark UIAlertViewDelegate
 
 -(void)alertView:( UIAlertView* )alertView_ clickedButtonAtIndex:( NSInteger )buttonIndex_
 {
-    JFFAlertButton* alert_button_ = [ _alertButtons objectAtIndex: buttonIndex_ ];
-    if ( alert_button_ )
-        alert_button_.action();
+    JFFAlertButton* alertButton_ = [ _alertButtons objectAtIndex: buttonIndex_ ];
+    if ( alertButton_ )
+        alertButton_.action();
 }
 
 -(void)didPresentAlertView:( UIAlertView* )alertView_
@@ -287,13 +276,10 @@ otherButtonTitlesArray:( NSArray* )other_button_titles_
 
 -(void)alertView:( UIAlertView* )alert_view_ didDismissWithButtonIndex:( NSInteger )buttonIndex_
 {
-    BOOL removed_ = [ [ self class ] activeAlertsRemoveAlert: self ];
+    [ [ self class ] activeAlertsRemoveAlert: self ];
 
-    if ( [ active_alerts_ count ] <= 0 )
-        return;
-
-    if ( removed_ )
-        [ [ active_alerts_ objectAtIndex: 0 ] forceShow ];
+    JFFAlertViewsContainer* container_ = [ JFFAlertViewsContainer sharedAlertViewsContainer ];
+    [ [ container_ firstAlertView ] forceShow ];
 }
 
 -(BOOL)isOnScreen
