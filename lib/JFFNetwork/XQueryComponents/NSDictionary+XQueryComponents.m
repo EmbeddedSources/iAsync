@@ -16,7 +16,7 @@ static NSString* const queryComponentSeparator_ = @"&";
 -(NSString*)stringFromQueryComponentAndKey:( NSString* )key_
 {
     NSString* value_ = [ [ self description ] stringByEncodingURLFormat ];
-    return [ NSString stringWithFormat: queryComponentFormat_, key_, value_ ];
+    return [ [ NSString alloc ] initWithFormat: queryComponentFormat_, key_, value_ ];
 }
 
 -(NSArray*)arrayOfQueryComponentsForKey:( NSString* )key_

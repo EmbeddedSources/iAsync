@@ -53,7 +53,6 @@
     BOOL isConnectionMismatch_ = ( connection_ != _nativeConnection );
     if ( isConnectionMismatch_ )
     {
-        //!c TODO : handle this properly
         NSLog( @"JNNsUrlConnection : connection mismatch" );
         NSAssert( NO, @"JNNsUrlConnection : connection mismatch" );
         return NO;
