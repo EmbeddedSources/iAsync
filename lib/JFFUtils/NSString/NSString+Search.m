@@ -8,7 +8,7 @@
 
     NSUInteger result_ = 0;
 
-    NSRange searchRange_ = NSMakeRange( 0, [ self length ] );
+    NSRange searchRange_ = { 0, [ self length ] };
     NSRange range_ = [ self rangeOfCharacterFromSet: set_
                                             options: NSLiteralSearch
                                               range: searchRange_ ];

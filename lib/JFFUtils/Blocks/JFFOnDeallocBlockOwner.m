@@ -17,10 +17,7 @@
 -(void)dealloc
 {
     if ( _block )
-    {
         _block();
-        _block = nil;//JTODO may be bug
-    }
 }
 
 @end

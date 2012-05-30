@@ -12,7 +12,8 @@
         return;
     }
 
-    [ self setArray: [ self subarrayWithRange: NSMakeRange( 0, new_size_ ) ] ];
+    NSRange range_ = { 0, new_size_ };
+    [ self setArray: [ self subarrayWithRange: range_ ] ];
 }
 
 @end

@@ -92,7 +92,6 @@
     } ];
 }
 
-//JTODO test
 -(NSDictionary*)map:( JFFDictMappingBlock )block_
 {
     NSMutableDictionary* result_ = [ [ NSMutableDictionary alloc ] initWithCapacity: [ self count ] ];

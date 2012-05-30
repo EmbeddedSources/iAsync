@@ -4,7 +4,6 @@
 
 @interface JFFMutableAssignArray : NSObject
 
-//JTODO remove array property
 @property ( nonatomic, copy, readonly ) NSArray* array;
 
 +(id)arrayWithObject:( id )anObject_;
