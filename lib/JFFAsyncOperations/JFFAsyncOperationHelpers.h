@@ -18,6 +18,10 @@ JFFAsyncOperation asyncOperationWithFinishCallbackBlock( JFFAsyncOperation loade
 JFFAsyncOperation asyncOperationWithFinishHookBlock( JFFAsyncOperation loader_
                                                     , JFFDidFinishAsyncOperationHook finishCallbackHook_ );
 
+JFFAsyncOperation asyncOperationWithStartAndFinishBlocks( JFFAsyncOperation loader_
+                                                         , JFFSimpleBlock startBlock_
+                                                         , JFFDidFinishAsyncOperationHandler finishCallback_ );
+
 JFFAsyncOperation asyncOperationWithAnalyzer( id data_, JFFAnalyzer analyzer_ );
 
 JFFAsyncOperationBinder asyncOperationBinderWithAnalyzer( JFFAnalyzer analyzer_ );

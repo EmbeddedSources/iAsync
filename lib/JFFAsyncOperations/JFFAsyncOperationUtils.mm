@@ -11,7 +11,7 @@ static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueu
 {
     JFFAsyncOperationAdapter* asyncObj_ = [ JFFAsyncOperationAdapter new ];
     asyncObj_.loadDataBlock = progressLoadDataBlock_;
-    asyncObj_.queueName     = queueName_;
+    asyncObj_.queueName     = queueName_ ?: "";
     asyncObj_.barrier       = barrier_;
     return buildAsyncOperationWithInterface( asyncObj_ );
 }
@@ -24,7 +24,6 @@ static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue( JFFSync
     JFFSyncOperationWithProgress progressLoadDataBlock_ = ^id( NSError** error_
                                                               , JFFAsyncOperationProgressHandler progressCallback_ )
     {
-        //JTODO test this if
         id result_ = loadDataBlock_( error_ );
         if ( result_ && progressCallback_ )
             progressCallback_( result_ );
