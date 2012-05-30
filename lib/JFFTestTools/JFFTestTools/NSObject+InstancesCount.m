@@ -164,7 +164,7 @@ static bool AmIBeingDebugged(void)
 
                 if ( !method_added_ )
                 {
-                    //TODO create name allocWithZoneHook dynamicaly and allocWithZonePrototype use block instead
+                    // create name allocWithZoneHook dynamicaly and allocWithZonePrototype use block instead
                     [ [ self class ] hookClassMethodForClass: class_
                                                 withSelector: @selector( allocWithZone: )
                                      prototypeMethodSelector: @selector( alloCWithZonePrototype: )
@@ -191,7 +191,7 @@ static bool AmIBeingDebugged(void)
 
 +(void)enableInstancesCounting
 {
-    //JTODO fix for release mode also
+    // try to fix for release mode also
     if ( AmIBeingDebugged() )
         [ [ JFFNSObjectInstancesCounter sharedObjectInstancesCounter ] enableInstancesCountingForClass: [ self class ] ];
 }
