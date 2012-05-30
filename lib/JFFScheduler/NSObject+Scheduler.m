@@ -9,6 +9,7 @@
 
 @implementation NSObject (Scheduler)
 
+//JTODO maybe do not own userInfo_
 //JTODO test !!!
 -(void)performSelector:( SEL )selector_
           timeInterval:( NSTimeInterval )timeInterval_
@@ -46,13 +47,13 @@
 }
 
 -(void)performSelector:( SEL )selector_
-          timeInterval:( NSTimeInterval )time_interval_
-              userInfo:( id )user_info_ 
+          timeInterval:( NSTimeInterval )timeInterval_
+              userInfo:( id )userInfo_ 
                repeats:( BOOL )repeats_
 {
     [ self performSelector: selector_
-              timeInterval: time_interval_
-                  userInfo: user_info_ 
+              timeInterval: timeInterval_
+                  userInfo: userInfo_ 
                    repeats: repeats_
                  scheduler: [ JFFScheduler sharedByThreadScheduler ] ];
 }
