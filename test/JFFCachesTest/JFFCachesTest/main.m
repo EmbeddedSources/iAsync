@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     setenv( "GHUNIT_AUTOEXIT" , "YES", 1 );
     NSSetUncaughtExceptionHandler(&exceptionHandler);
 
-   int retVal = 0;
+    int retVal = 0;
     
     @autoreleasepool {
     
