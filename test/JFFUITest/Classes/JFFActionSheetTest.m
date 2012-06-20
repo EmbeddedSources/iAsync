@@ -66,18 +66,18 @@
 
     GHAssertNotNil( weakActionSheet_, @"OK" );
 
-//    void (^hideActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
-//    {
-//        [ weakActionSheet_ dismissWithClickedButtonIndex: 0
-//                                                animated: NO ];
-//
-//        finishTest_();
-//    };
-//
-//    [ self performAsyncRequestOnMainThreadWithBlock: hideActionSheetBlock_
-//                                           selector: _cmd ];
-//
-//    GHAssertNil( weakActionSheet_, @"OK" );
+    void (^hideActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
+    {
+        [ weakActionSheet_ dismissWithClickedButtonIndex: 0
+                                                animated: NO ];
+
+        finishTest_();
+    };
+
+    [ self performAsyncRequestOnMainThreadWithBlock: hideActionSheetBlock_
+                                           selector: _cmd ];
+
+    GHAssertNil( weakActionSheet_, @"OK" );
 }
 
 @end

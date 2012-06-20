@@ -6,10 +6,11 @@
                   domain:( NSString* )domain_
                     code:( NSInteger )code_
 {
-    NSDictionary* user_info_ = [ NSDictionary dictionaryWithObject: description_ forKey: NSLocalizedDescriptionKey ];
+    NSDictionary* userInfo_ = [ NSDictionary dictionaryWithObject: description_
+                                                           forKey: NSLocalizedDescriptionKey ];
     return [ super initWithDomain: domain_
                              code: code_
-                         userInfo: user_info_ ];
+                         userInfo: userInfo_ ];
 }
 
 -(id)initWithDescription:( NSString* )description_ code:( NSInteger )code_

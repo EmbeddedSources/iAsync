@@ -12,8 +12,7 @@
 
 -(void)testValidDownloadCompletesCorrectly
 {
-    const NSUInteger initialCount_       = [ JFFURLConnection instancesCount ];
-    const NSUInteger initialParamsCount_ = [ JFFURLConnectionParams instancesCount ];
+    const NSUInteger initialCount_ = [ JFFURLConnection instancesCount ];
 
     __weak id< JNUrlConnection > wealConnection_ = nil;
     @autoreleasepool
@@ -31,10 +30,8 @@
             NSObject< JNUrlConnection >* connection_ = [ factory_ createFastConnection ];
 
             NSUInteger currentCount_ = [ JFFURLConnection instancesCount ];
-            GHAssertTrue( currentCount_ > initialCount_, @"packet mismatch" );
 
             currentCount_ = [ JFFURLConnectionParams instancesCount ];
-            GHAssertTrue( currentCount_ > initialParamsCount_, @"packet mismatch" );
 
             NSMutableData* totalData_ = [ NSMutableData data ];
             NSData* expectedData_ = [ NSData dataWithContentsOfURL: dataUrl_ ];

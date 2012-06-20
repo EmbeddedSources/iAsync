@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0E89DF1563FB1100825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E89DE1563FB1100825E3C /* libc++.dylib */; };
 		1B12CB3B144D5C5900DFE2B1 /* JFFAsyncOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B12CB3A144D5C5900DFE2B1 /* JFFAsyncOperationManager.m */; };
 		1B2D8C49154BFE7300360296 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2D8C46154BFE6400360296 /* libJFFTestTools.a */; };
 		1B7A10A414C036D900F37C95 /* AsyncOperationBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7A10A314C036D900F37C95 /* AsyncOperationBinder.m */; };
 		1B835A25142C8BC400FC004C /* libJFFAsyncOperations.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B835A20142C8BB300FC004C /* libJFFAsyncOperations.a */; };
 		1B835A26142C8BC400FC004C /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B835A16142C8BAB00FC004C /* libJFFUtils.a */; };
 		1B835B5D142CD17D00FC004C /* libJFFScheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B835B5A142CD17300FC004C /* libJFFScheduler.a */; };
-		5357CDFA14A9F5130046EA34 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5357CDF914A9F5130046EA34 /* libstdc++.dylib */; };
+		1B93690615650A5A00F8A394 /* JFFAsyncOperationUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B93690515650A5A00F8A394 /* JFFAsyncOperationUtilsTest.m */; };
+		1BEC48A4156A27660099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5357CDF914A9F5130046EA34 /* libstdc++.dylib */; };
 		65359B4E151A6DB90099D6FE /* AsyncOperationWithDelayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65359B4D151A6DB90099D6FE /* AsyncOperationWithDelayTest.m */; };
 		65359BD6151A81C40099D6FE /* ParalelBlockTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65359BD5151A81C40099D6FE /* ParalelBlockTest.m */; };
 		65A9948F14C1EC31001D36AE /* JFFDidFinishAsyncOperationBlockHolderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A67C8143F474300BC284F /* JFFDidFinishAsyncOperationBlockHolderTest.m */; };
@@ -149,6 +151,7 @@
 
 /* Begin PBXFileReference section */
 		1B0857D014516076001DDE0A /* FailOnFirstErrorGroupOfAsyncOperationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailOnFirstErrorGroupOfAsyncOperationsTest.m; sourceTree = "<group>"; };
+		1B0E89DE1563FB1100825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		1B12CB39144D5C5900DFE2B1 /* JFFAsyncOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationManager.h; sourceTree = "<group>"; };
 		1B12CB3A144D5C5900DFE2B1 /* JFFAsyncOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationManager.m; sourceTree = "<group>"; };
 		1B2A67C8143F474300BC284F /* JFFDidFinishAsyncOperationBlockHolderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDidFinishAsyncOperationBlockHolderTest.m; sourceTree = "<group>"; };
@@ -159,6 +162,7 @@
 		1B835A0E142C8BAB00FC004C /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
 		1B835A18142C8BB300FC004C /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../../lib/JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
 		1B835B52142CD17300FC004C /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../../lib/JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
+		1B93690515650A5A00F8A394 /* JFFAsyncOperationUtilsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationUtilsTest.m; sourceTree = "<group>"; };
 		1BA2551F1443114300C9B2BE /* SequenceOfAsyncOperationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequenceOfAsyncOperationsTest.m; sourceTree = "<group>"; };
 		1BA27738144D9B1B00774C8E /* TrySequenceOfAsyncOperationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrySequenceOfAsyncOperationsTest.m; sourceTree = "<group>"; };
 		1BED04FF144EBF2800B8DC2A /* GroupOfAsyncOperationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupOfAsyncOperationsTest.m; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BEC48A4156A27660099DA6D /* libstdc++.dylib in Frameworks */,
+				1B0E89DF1563FB1100825E3C /* libc++.dylib in Frameworks */,
 				1B2D8C49154BFE7300360296 /* libJFFTestTools.a in Frameworks */,
 				1B835B5D142CD17D00FC004C /* libJFFScheduler.a in Frameworks */,
 				1B835A25142C8BC400FC004C /* libJFFAsyncOperations.a in Frameworks */,
@@ -191,7 +197,6 @@
 				8D29EF8F13BE066900041B6A /* Foundation.framework in Frameworks */,
 				8D29EF9113BE066900041B6A /* CoreGraphics.framework in Frameworks */,
 				8D29EFB313BE070F00041B6A /* GHUnitIOS.framework in Frameworks */,
-				5357CDFA14A9F5130046EA34 /* libstdc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +275,7 @@
 		8D29EF8B13BE066900041B6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B0E89DE1563FB1100825E3C /* libc++.dylib */,
 				5357CDF914A9F5130046EA34 /* libstdc++.dylib */,
 				8D29EFB213BE070F00041B6A /* GHUnitIOS.framework */,
 				8D29EF8C13BE066900041B6A /* UIKit.framework */,
@@ -295,6 +301,7 @@
 				1B7A10A314C036D900F37C95 /* AsyncOperationBinder.m */,
 				65359B4D151A6DB90099D6FE /* AsyncOperationWithDelayTest.m */,
 				65359BD5151A81C40099D6FE /* ParalelBlockTest.m */,
+				1B93690515650A5A00F8A394 /* JFFAsyncOperationUtilsTest.m */,
 			);
 			path = JFFAsyncOperationsTest;
 			sourceTree = "<group>";
@@ -517,6 +524,7 @@
 				65A9949614C1EC3A001D36AE /* CachedAsyncOperationsTest.m in Sources */,
 				65359B4E151A6DB90099D6FE /* AsyncOperationWithDelayTest.m in Sources */,
 				65359BD6151A81C40099D6FE /* ParalelBlockTest.m in Sources */,
+				1B93690615650A5A00F8A394 /* JFFAsyncOperationUtilsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

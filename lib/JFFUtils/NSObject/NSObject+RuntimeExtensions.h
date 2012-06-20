@@ -7,26 +7,26 @@
 
 +(BOOL)addInstanceMethodIfNeedWithSelector:( SEL )selector_
                                    toClass:( Class )class_
-                         newMethodSelector:( SEL )new_selector_;
+                         newMethodSelector:( SEL )newSelector_;
 
 +(BOOL)addClassMethodIfNeedWithSelector:( SEL )selector_
                                 toClass:( Class )class_;
 
 +(BOOL)addClassMethodIfNeedWithSelector:( SEL )selector_
                                 toClass:( Class )class_
-                      newMethodSelector:( SEL )new_selector_;
+                      newMethodSelector:( SEL )newSelector_;
 
 +(void)hookInstanceMethodForClass:( Class )class_
-                     withSelector:( SEL )target_selector_
-          prototypeMethodSelector:( SEL )prototype_selector_
-               hookMethodSelector:( SEL )hook_selector_;
+                     withSelector:( SEL )targetSelector_
+          prototypeMethodSelector:( SEL )prototypeSelector_
+               hookMethodSelector:( SEL )hookSelector_;
 
 +(void)hookClassMethodForClass:( Class )class_
-                  withSelector:( SEL )target_selector_
-       prototypeMethodSelector:( SEL )prototype_selector_
-            hookMethodSelector:( SEL )hook_selector_;
+                  withSelector:( SEL )targetSelector_
+       prototypeMethodSelector:( SEL )prototypeSelector_
+            hookMethodSelector:( SEL )hookSelector_;
 
-+(BOOL)hasInstanceMethodWithSelector:( SEL )method_selector_;
-+(BOOL)hasClassMethodWithSelector:( SEL )method_selector_;
++(BOOL)hasInstanceMethodWithSelector:( SEL )methodSelector_;
++(BOOL)hasClassMethodWithSelector:( SEL )methodSelector_;
 
 @end

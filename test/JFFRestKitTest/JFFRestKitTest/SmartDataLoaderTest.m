@@ -1,4 +1,6 @@
 
+static NSString* const cachesFileName_ = @"cachesFileName";
+
 @interface CacheDBAdaptor : NSObject < JFFRestKitCache >
 
 @property ( nonatomic, strong ) id< JFFCacheDB >  jffCacheDB;
@@ -52,7 +54,7 @@ static JFFAsyncOperationBinder badTestDataLoader()
 
 static NSString* differntServerResponse_ = @"differnt response";
 
-static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
+static JFFAsyncOperationBinder differentTestDataLoader( BOOL* wasCalled_ )
 {
     return ^JFFAsyncOperation( NSURL* url_ )
     {
@@ -71,6 +73,12 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
 }
 
 @implementation SmartDataLoaderTest
+
+-(void)tearDown
+{
+    NSString* path_ = [ NSString cachesPathByAppendingPathComponent: cachesFileName_ ];
+    [ [ NSFileManager defaultManager ] removeItemAtPath: path_ error: nil ];
+}
 
 // @"/sitecore"
 -(void)testSmartDataLoaderWithoutCache
@@ -148,7 +156,7 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
     NSString* cacheName_ = @"URL_CACHES_FROM_DICT";
     
     NSDictionary* dbDescription_ = [ NSDictionary dictionaryWithObjectsAndKeys:
-                                    [ NSDictionary dictionaryWithObjectsAndKeys: @"cachesFileName", @"fileName", nil ], cacheName_
+                                    [ NSDictionary dictionaryWithObjectsAndKeys: cachesFileName_, @"fileName", nil ], cacheName_
                                     , nil ];
     
     CacheDBAdaptor* cache_ = [ CacheDBAdaptor new ];
@@ -191,9 +199,9 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
     {
         storedDataString_ = data_;
         loaderWromCache_( nil, nil, ^( id data_, NSError* error_ )
-                         {
-                             cachedDataString_ = data_;
-                         } );
+        {
+            cachedDataString_ = data_;
+        } );
     } );
 
     GHAssertTrue( [ cachedDataString_ isEqualToString: storedDataString_ ], @"cached and stored data should be same" );
@@ -205,7 +213,7 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
     NSString* cacheName_ = @"URL_CACHES_FROM_DICT1";
 
     NSDictionary* dbDescription_ = [ NSDictionary dictionaryWithObjectsAndKeys:
-                                    [ NSDictionary dictionaryWithObjectsAndKeys: @"cachesFileName1", @"fileName", nil ], cacheName_
+                                    [ NSDictionary dictionaryWithObjectsAndKeys: cachesFileName_, @"fileName", nil ], cacheName_
                                     , nil ];
 
     CacheDBAdaptor* cache_ = [ CacheDBAdaptor new ];
@@ -263,16 +271,16 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
 -(void)testUseCachedDataIfCacheDataIsFresh
 {
     NSString* cacheName_ = @"URL_CACHES_FROM_DICT2";
-    
+
     NSDictionary* dbDescription_ = [ NSDictionary dictionaryWithObjectsAndKeys:
-                                    [ NSDictionary dictionaryWithObjectsAndKeys: @"cachesFileName2", @"fileName", nil ], cacheName_
+                                    [ NSDictionary dictionaryWithObjectsAndKeys: cachesFileName_, @"fileName", nil ], cacheName_
                                     , nil ];
-    
+
     CacheDBAdaptor* cache_ = [ CacheDBAdaptor new ];
-    
+
     id< JFFCacheDB > jffCache_ = [ [ [ JFFCaches alloc ] initWithDBInfoDictionary: dbDescription_ ] cacheByName: cacheName_ ];
     cache_.jffCacheDB = jffCache_;
-    
+
     NSURL* url_ = [ NSURL URLWithString: @"http://google.com" ];
     NSURL*(^urlBuilder_)(void) = ^NSURL*()
     {
@@ -280,7 +288,6 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
     };
 
     BOOL wasCalled_ = NO;
-    JFFAsyncOperationBinder dataLoaderForURL_ = testDataLoader( &wasCalled_ );
 
     JFFAsyncBinderForURL analyzerForData_ = ^JFFAsyncOperationBinder( NSURL* url_ )
     {
@@ -293,7 +300,7 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
 
     JFFSmartUrlDataLoaderFields* args_ = [ JFFSmartUrlDataLoaderFields new ];
     args_.urlBuilder        = urlBuilder_;
-    args_.dataLoaderForURL  = dataLoaderForURL_;
+    args_.dataLoaderForURL  = testDataLoader( &wasCalled_ );
     args_.analyzerForData   = analyzerForData_;
     args_.cache             = cache_;
     args_.cacheDataLifeTime = 5.5;
@@ -302,9 +309,9 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
 
     BOOL wasCalledAgain_ = NO;
 
-    args_.dataLoaderForURL  = differntTestDataLoader( &wasCalledAgain_ );
+    args_.dataLoaderForURL  = differentTestDataLoader( &wasCalledAgain_ );
 
-    JFFAsyncOperation differntLoader_ = jSmartDataLoaderWithCache( args_ );
+    JFFAsyncOperation differentLoader_ = jSmartDataLoaderWithCache( args_ );
 
     __block NSString* storedDataString_ = nil;
     __block NSString* cachedDataString_ = nil;
@@ -312,7 +319,7 @@ static JFFAsyncOperationBinder differntTestDataLoader( BOOL* wasCalled_ )
     loader_( nil, nil, ^( id data_, NSError* error_ )
     {
         storedDataString_ = data_;
-        differntLoader_( nil, nil, ^( id data_, NSError* error_ )
+        differentLoader_( nil, nil, ^( id data_, NSError* error_ )
         {
             cachedDataString_ = data_;
         } );

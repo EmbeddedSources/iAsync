@@ -19,6 +19,7 @@
 		1B168310146AD4C800832839 /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */; };
 		1B1B280814D825A700FA5388 /* NSString+IsEmailValid.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1B280614D825A600FA5388 /* NSString+IsEmailValid.h */; };
 		1B1B280914D825A700FA5388 /* NSString+IsEmailValid.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B280714D825A600FA5388 /* NSString+IsEmailValid.m */; };
+		1B266C9D15627F7D0054E183 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B266C9C15627F7D0054E183 /* libc++.dylib */; };
 		1B26EC5D14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC5C14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B3CDDE51445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3CDDE31445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h */; };
 		1B3CDDE61445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE41445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m */; };
@@ -29,7 +30,7 @@
 		1B6AAD8E1447039B00EA1D96 /* NSString+Trimm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B6AAD8C1447039B00EA1D96 /* NSString+Trimm.h */; };
 		1B6AAD8F1447039B00EA1D96 /* NSString+Trimm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6AAD8D1447039B00EA1D96 /* NSString+Trimm.m */; };
 		1B76089A1444912F0059E977 /* JGCDAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B7608981444912F0059E977 /* JGCDAdditions.h */; };
-		1B76089B1444912F0059E977 /* JGCDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7608991444912F0059E977 /* JGCDAdditions.m */; };
+		1B76089B1444912F0059E977 /* JGCDAdditions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1B7608991444912F0059E977 /* JGCDAdditions.mm */; };
 		1B90996B14EA4D9500B19283 /* NSString+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B90996914EA4D9500B19283 /* NSString+Base64.h */; };
 		1B90996C14EA4D9500B19283 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B90996A14EA4D9500B19283 /* NSString+Base64.m */; };
 		1B909B7F14EA918800B19283 /* JFFMemoryMgmt.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B909B7C14EA918800B19283 /* JFFMemoryMgmt.h */; };
@@ -131,7 +132,7 @@
 		5391042C14A88C04007315A3 /* NSObject+Const0.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE75CFE1434B3450076E068 /* NSObject+Const0.m */; };
 		5391042E14A88C04007315A3 /* JFFSingleThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01FB014447B7600A627B1 /* JFFSingleThreadProxy.m */; };
 		5391042F14A88C04007315A3 /* JFFResultContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01FB51444824100A627B1 /* JFFResultContext.m */; };
-		5391043014A88C04007315A3 /* JGCDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7608991444912F0059E977 /* JGCDAdditions.m */; };
+		5391043014A88C04007315A3 /* JGCDAdditions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1B7608991444912F0059E977 /* JGCDAdditions.mm */; };
 		5391043414A88C04007315A3 /* NSArray+NoThrowObjectAtIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CDDE41445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m */; };
 		5391043514A88C04007315A3 /* NSString+Trimm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6AAD8D1447039B00EA1D96 /* NSString+Trimm.m */; };
 		5391043614A88C04007315A3 /* UIWebView+UserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676BA144C3FE900B14D49 /* UIWebView+UserAgent.m */; };
@@ -170,7 +171,7 @@
 		65648BE213924326001E163C /* JFFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648BE013924326001E163C /* JFFError.m */; };
 		65802A5D148BF2930040A93A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65802A5C148BF2930040A93A /* Cocoa.framework */; };
 		65802A6B148BF2B10040A93A /* JFFUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE27B1391BD7800DD6890 /* JFFUtils.h */; };
-		65802A6C148BF2B50040A93A /* JGCDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7608991444912F0059E977 /* JGCDAdditions.m */; };
+		65802A6C148BF2B50040A93A /* JGCDAdditions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1B7608991444912F0059E977 /* JGCDAdditions.mm */; };
 		65802A6D148BF2B80040A93A /* JFFResultContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01FB51444824100A627B1 /* JFFResultContext.m */; };
 		65802A6E148BF2BA0040A93A /* JFFMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB67B1913E97FCF0024EA6C /* JFFMulticastDelegate.m */; };
 		65802A6F148BF2BE0040A93A /* JFFMutableAssignDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1820C1467D71B0033BEFF /* JFFMutableAssignDictionary.m */; };
@@ -230,7 +231,7 @@
 		7E57F47714F937E0002D139B /* JFFMutableAssignDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1820C1467D71B0033BEFF /* JFFMutableAssignDictionary.m */; };
 		7E57F47914F937E0002D139B /* JFFMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB67B1913E97FCF0024EA6C /* JFFMulticastDelegate.m */; };
 		7E57F47B14F937E0002D139B /* JFFResultContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01FB51444824100A627B1 /* JFFResultContext.m */; };
-		7E57F47D14F937E0002D139B /* JGCDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7608991444912F0059E977 /* JGCDAdditions.m */; };
+		7E57F47D14F937E0002D139B /* JGCDAdditions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1B7608991444912F0059E977 /* JGCDAdditions.mm */; };
 		7E57F47F14F937E0002D139B /* JSignedRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B104D8D1483C8410025FDDA /* JSignedRange.m */; };
 		7E57F48214F937E0002D139B /* JFFCastFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5349A6C514A9CEA7008ECCA6 /* JFFCastFunctions.mm */; };
 		7E57F48314F93840002D139B /* NSString+ToURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676CC144C474500B14D49 /* NSString+ToURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -297,6 +298,7 @@
 		1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUIDCreation.m"; sourceTree = "<group>"; };
 		1B1B280614D825A600FA5388 /* NSString+IsEmailValid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+IsEmailValid.h"; sourceTree = "<group>"; };
 		1B1B280714D825A600FA5388 /* NSString+IsEmailValid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+IsEmailValid.m"; sourceTree = "<group>"; };
+		1B266C9C15627F7D0054E183 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		1B26EC5C14DABADA00A1A875 /* NSNotificationCenterNewFeaturesRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationCenterNewFeaturesRuntime.m; sourceTree = "<group>"; };
 		1B3CDDE31445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+NoThrowObjectAtIndex.h"; sourceTree = "<group>"; };
 		1B3CDDE41445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+NoThrowObjectAtIndex.m"; sourceTree = "<group>"; };
@@ -307,7 +309,7 @@
 		1B6AAD8C1447039B00EA1D96 /* NSString+Trimm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Trimm.h"; sourceTree = "<group>"; };
 		1B6AAD8D1447039B00EA1D96 /* NSString+Trimm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Trimm.m"; sourceTree = "<group>"; };
 		1B7608981444912F0059E977 /* JGCDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGCDAdditions.h; sourceTree = "<group>"; };
-		1B7608991444912F0059E977 /* JGCDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGCDAdditions.m; sourceTree = "<group>"; };
+		1B7608991444912F0059E977 /* JGCDAdditions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JGCDAdditions.mm; sourceTree = "<group>"; };
 		1B90996914EA4D9500B19283 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		1B90996A14EA4D9500B19283 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
 		1B909B7C14EA918800B19283 /* JFFMemoryMgmt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFMemoryMgmt.h; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B266C9D15627F7D0054E183 /* libc++.dylib in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +467,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B266C9C15627F7D0054E183 /* libc++.dylib */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 				65802A5C148BF2930040A93A /* Cocoa.framework */,
 				65802A5E148BF2930040A93A /* Other Frameworks */,
@@ -627,7 +631,7 @@
 				1BD01FB41444824100A627B1 /* JFFResultContext.h */,
 				1BD01FB51444824100A627B1 /* JFFResultContext.m */,
 				1B7608981444912F0059E977 /* JGCDAdditions.h */,
-				1B7608991444912F0059E977 /* JGCDAdditions.m */,
+				1B7608991444912F0059E977 /* JGCDAdditions.mm */,
 				1B104D911483C85A0025FDDA /* JSignedRange.h */,
 				1B104D8D1483C8410025FDDA /* JSignedRange.m */,
 				534CDFC014A8C2930068F4DF /* JFFCastFunctions.hpp */,
@@ -1052,7 +1056,7 @@
 				5391042C14A88C04007315A3 /* NSObject+Const0.m in Sources */,
 				5391042E14A88C04007315A3 /* JFFSingleThreadProxy.m in Sources */,
 				5391042F14A88C04007315A3 /* JFFResultContext.m in Sources */,
-				5391043014A88C04007315A3 /* JGCDAdditions.m in Sources */,
+				5391043014A88C04007315A3 /* JGCDAdditions.mm in Sources */,
 				5391043414A88C04007315A3 /* NSArray+NoThrowObjectAtIndex.m in Sources */,
 				5391043514A88C04007315A3 /* NSString+Trimm.m in Sources */,
 				5391043614A88C04007315A3 /* UIWebView+UserAgent.m in Sources */,
@@ -1073,7 +1077,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65802A6C148BF2B50040A93A /* JGCDAdditions.m in Sources */,
+				65802A6C148BF2B50040A93A /* JGCDAdditions.mm in Sources */,
 				65802A6D148BF2B80040A93A /* JFFResultContext.m in Sources */,
 				65802A6E148BF2BA0040A93A /* JFFMulticastDelegate.m in Sources */,
 				65802A6F148BF2BE0040A93A /* JFFMutableAssignDictionary.m in Sources */,
@@ -1140,7 +1144,7 @@
 				7E57F47714F937E0002D139B /* JFFMutableAssignDictionary.m in Sources */,
 				7E57F47914F937E0002D139B /* JFFMulticastDelegate.m in Sources */,
 				7E57F47B14F937E0002D139B /* JFFResultContext.m in Sources */,
-				7E57F47D14F937E0002D139B /* JGCDAdditions.m in Sources */,
+				7E57F47D14F937E0002D139B /* JGCDAdditions.mm in Sources */,
 				7E57F47F14F937E0002D139B /* JSignedRange.m in Sources */,
 				7E57F48214F937E0002D139B /* JFFCastFunctions.mm in Sources */,
 			);
@@ -1169,7 +1173,7 @@
 				1BE75D001434B3450076E068 /* NSObject+Const0.m in Sources */,
 				1BD01FB214447B7600A627B1 /* JFFSingleThreadProxy.m in Sources */,
 				1BD01FB71444824100A627B1 /* JFFResultContext.m in Sources */,
-				1B76089B1444912F0059E977 /* JGCDAdditions.m in Sources */,
+				1B76089B1444912F0059E977 /* JGCDAdditions.mm in Sources */,
 				1B3CDDE61445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m in Sources */,
 				1B6AAD8F1447039B00EA1D96 /* NSString+Trimm.m in Sources */,
 				1BA676BC144C3FE900B14D49 /* UIWebView+UserAgent.m in Sources */,
@@ -1228,10 +1232,9 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFUtils_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = ../;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFUtils;
 				SDKROOT = iphoneos;
 			};
@@ -1247,9 +1250,8 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFUtils_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFUtils;
 				SDKROOT = iphoneos;
 			};
@@ -1259,7 +1261,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1275,7 +1277,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

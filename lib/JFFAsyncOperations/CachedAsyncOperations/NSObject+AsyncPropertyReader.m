@@ -93,7 +93,7 @@ static void clearDataForPropertyExtractor( JFFPropertyExtractor* property_extrac
 static JFFCancelAsyncOperation cancelBlock( JFFPropertyExtractor* property_extractor_
                                            , JFFCallbacksBlocksHolder* callbacks_ )
 {
-    return ^void( BOOL cancel_operation_ )
+    return ^void( BOOL cancelOperation_ )
     {
         JFFCancelAsyncOperation cancel_ = property_extractor_.cancelBlock;
         if ( !cancel_ )
@@ -101,7 +101,7 @@ static JFFCancelAsyncOperation cancelBlock( JFFPropertyExtractor* property_extra
 
         cancel_ = [ cancel_ copy ];
 
-        if ( cancel_operation_ )
+        if ( cancelOperation_ )
         {
             cancel_( YES );
             clearDataForPropertyExtractor( property_extractor_ );
@@ -132,7 +132,7 @@ static JFFDidFinishAsyncOperationHandler doneCallbackBlock( JFFPropertyExtractor
             assert( 0 );//@"should be result or error"
         }
 
-        NSArray* copy_delegates_ = [ propertyExtractor_.delegates map: ^id( id obj_ )
+        NSArray* copyDelegates_ = [ propertyExtractor_.delegates map: ^id( id obj_ )
         {
             JFFCallbacksBlocksHolder* callback_ = obj_;
             return [ [ JFFCallbacksBlocksHolder alloc ] initWithOnProgressBlock: callback_.onProgressBlock
@@ -152,14 +152,14 @@ static JFFDidFinishAsyncOperationHandler doneCallbackBlock( JFFPropertyExtractor
 
         clearDataForPropertyExtractor( propertyExtractor_ );
 
-        [ copy_delegates_ each: ^void( id obj_ )
+        [ copyDelegates_ each: ^void( id obj_ )
         {
             JFFCallbacksBlocksHolder* callback_ = obj_;
             if ( callback_.didLoadDataBlock )
                 callback_.didLoadDataBlock( result_, result_ ? nil : error_ );
         } ];
 
-        clearDelegates( copy_delegates_ );
+        clearDelegates( copyDelegates_ );
     };
 }
 
@@ -180,11 +180,11 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
 
     JFFCancelAsyncOperationHandler cancelCallback_ = ^void( BOOL canceled_ )
     {
-        JFFCancelAsyncOperationHandler cancel_callback_ = callbacks_.onCancelBlock;
+        JFFCancelAsyncOperationHandler cancelCallback_ = callbacks_.onCancelBlock;
         clearDataForPropertyExtractor( propertyExtractor_ );
 
-        if ( cancel_callback_ )
-            cancel_callback_( canceled_ );
+        if ( cancelCallback_ )
+            cancelCallback_( canceled_ );
     };
 
     propertyExtractor_.cancelBlock = propertyExtractor_.asyncLoader( progressCallback_

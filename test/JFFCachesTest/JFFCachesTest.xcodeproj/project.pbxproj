@@ -20,6 +20,8 @@
 		0617250C152B310000549265 /* libJFFAsyncOperations.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06172506152B30F900549265 /* libJFFAsyncOperations.a */; };
 		06172519152B324200549265 /* cacheTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06172518152B324200549265 /* cacheTest.m */; };
 		0617255B152B33BD00549265 /* DBInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0617255A152B33BD00549265 /* DBInfo.plist */; };
+		1B0E89BC1563FAEC00825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E89BB1563FAEC00825E3C /* libc++.dylib */; };
+		1BEC4882156A27460099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEC4881156A27460099DA6D /* libstdc++.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +135,8 @@
 		061724F8152B30F800549265 /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../../lib/JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
 		06172518152B324200549265 /* cacheTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cacheTest.m; sourceTree = "<group>"; };
 		0617255A152B33BD00549265 /* DBInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DBInfo.plist; sourceTree = "<group>"; };
+		1B0E89BB1563FAEC00825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		1BEC4881156A27460099DA6D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BEC4882156A27460099DA6D /* libstdc++.dylib in Frameworks */,
+				1B0E89BC1563FAEC00825E3C /* libc++.dylib in Frameworks */,
 				0617250C152B310000549265 /* libJFFAsyncOperations.a in Frameworks */,
 				061724F7152B30E100549265 /* libJFFUtils.a in Frameworks */,
 				061724CE152B307E00549265 /* libJFFScheduler.a in Frameworks */,
@@ -176,6 +182,8 @@
 		06172484152B2B6100549265 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1BEC4881156A27460099DA6D /* libstdc++.dylib */,
+				1B0E89BB1563FAEC00825E3C /* libc++.dylib */,
 				061724BA152B303C00549265 /* libsqlite3.dylib */,
 				061724A5152B2C3600549265 /* GHUnitIOS.framework */,
 				06172485152B2B6100549265 /* UIKit.framework */,

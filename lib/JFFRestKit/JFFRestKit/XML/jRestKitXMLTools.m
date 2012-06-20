@@ -9,8 +9,7 @@ CXMLDocument* xmlDocumentWithData( NSData* data_, NSError** outError_ )
 {
     if ( [ data_ length ] == 0 )
     {
-        if ( outError_ )
-            *outError_ = [ JFFRestKitParseEmptyXMLError new ];
+        [ [ JFFRestKitParseEmptyXMLError new ] setToPointer: outError_ ];
         return nil;
     }
 
@@ -20,13 +19,15 @@ CXMLDocument* xmlDocumentWithData( NSData* data_, NSError** outError_ )
                                                             options: 0
                                                               error: &parseError_ ];
 
-    xmlErrorPtr xmlError_ = xmlCtxtGetLastError( document_->xmlCtxt );
+    xmlErrorPtr xmlError_ = nil;
+    if ( document_ )
+        xmlError_ = xmlCtxtGetLastError( document_->xmlCtxt );
 
     if ( !parseError_ && xmlError_ )
     {
         NSString* errorDescription_ = [ [ NSString alloc ] initWithUTF8String: xmlError_->message ];
         parseError_ = [ JFFRestKitParseInvalidXMLError errorWithDescription: errorDescription_ ];
-        document_ = nil;
+        document_   = nil;
     }
 
     [ parseError_ setToPointer: outError_ ];

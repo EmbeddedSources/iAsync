@@ -14,8 +14,6 @@
 		1B9026C1143F35F800D3B0A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9026C0143F35F800D3B0A0 /* Foundation.framework */; };
 		1B9026DA143F36A100D3B0A0 /* JFFAsyncOperations_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 1B9026D9143F36A100D3B0A0 /* JFFAsyncOperations_Prefix.pch */; };
 		1B902724143F36B700D3B0A0 /* JFFAsyncOperationsBlockDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B9026F6143F36B700D3B0A0 /* JFFAsyncOperationsBlockDefinitions.h */; };
-		1B902727143F36B700D3B0A0 /* JFFAsyncOperationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B9026F9143F36B700D3B0A0 /* JFFAsyncOperationUtils.h */; };
-		1B902728143F36B700D3B0A0 /* JFFAsyncOperationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9026FA143F36B700D3B0A0 /* JFFAsyncOperationUtils.m */; };
 		1B90272D143F36B700D3B0A0 /* JFFActiveLoaderData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B902701143F36B700D3B0A0 /* JFFActiveLoaderData.h */; };
 		1B90272E143F36B700D3B0A0 /* JFFActiveLoaderData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B902702143F36B700D3B0A0 /* JFFActiveLoaderData.m */; };
 		1B90272F143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancerContexts.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B902703143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancerContexts.h */; };
@@ -39,8 +37,6 @@
 		1B9026C0143F35F800D3B0A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1B9026D9143F36A100D3B0A0 /* JFFAsyncOperations_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperations_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		1B9026F6143F36B700D3B0A0 /* JFFAsyncOperationsBlockDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationsBlockDefinitions.h; sourceTree = SOURCE_ROOT; };
-		1B9026F9143F36B700D3B0A0 /* JFFAsyncOperationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationUtils.h; sourceTree = SOURCE_ROOT; };
-		1B9026FA143F36B700D3B0A0 /* JFFAsyncOperationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationUtils.m; sourceTree = SOURCE_ROOT; };
 		1B902701143F36B700D3B0A0 /* JFFActiveLoaderData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFActiveLoaderData.h; sourceTree = "<group>"; };
 		1B902702143F36B700D3B0A0 /* JFFActiveLoaderData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFActiveLoaderData.m; sourceTree = "<group>"; };
 		1B902703143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancerContexts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationLoadBalancerContexts.h; sourceTree = "<group>"; };
@@ -103,8 +99,6 @@
 				1B0857D51451711D001DDE0A /* JFFCallbacksBlocksHolder.h */,
 				1B9026FF143F36B700D3B0A0 /* LoadBalancer */,
 				1B9026F6143F36B700D3B0A0 /* JFFAsyncOperationsBlockDefinitions.h */,
-				1B9026F9143F36B700D3B0A0 /* JFFAsyncOperationUtils.h */,
-				1B9026FA143F36B700D3B0A0 /* JFFAsyncOperationUtils.m */,
 				1B9026C3143F35F800D3B0A0 /* Supporting Files */,
 			);
 			path = JFFAsyncOpNoARC;
@@ -152,7 +146,6 @@
 			files = (
 				1B9026DA143F36A100D3B0A0 /* JFFAsyncOperations_Prefix.pch in Headers */,
 				1B902724143F36B700D3B0A0 /* JFFAsyncOperationsBlockDefinitions.h in Headers */,
-				1B902727143F36B700D3B0A0 /* JFFAsyncOperationUtils.h in Headers */,
 				1B90272D143F36B700D3B0A0 /* JFFActiveLoaderData.h in Headers */,
 				1B90272F143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancerContexts.h in Headers */,
 				1B902731143F36B700D3B0A0 /* JFFContextLoaders.h in Headers */,
@@ -217,7 +210,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B902728143F36B700D3B0A0 /* JFFAsyncOperationUtils.m in Sources */,
 				1B90272E143F36B700D3B0A0 /* JFFActiveLoaderData.m in Sources */,
 				1B902730143F36B700D3B0A0 /* JFFAsyncOperationLoadBalancerContexts.m in Sources */,
 				1B902732143F36B700D3B0A0 /* JFFContextLoaders.m in Sources */,

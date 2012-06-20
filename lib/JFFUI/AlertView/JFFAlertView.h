@@ -1,5 +1,7 @@
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 
+@class JFFAlertButton;
+
 @interface JFFAlertView : NSObject
 
 @property ( nonatomic ) BOOL dismissBeforeEnterBackground;
@@ -10,15 +12,17 @@
 //cancelButtonTitle, otherButtonTitles - pass NSString(button title) or JFFAlertButton
 +(id)alertWithTitle:( NSString* )title_
             message:( NSString* )message_
-  cancelButtonTitle:( id )cancel_button_title_
-  otherButtonTitles:( id )other_button_titles_, ...;
+  cancelButtonTitle:( id )cancelButtonTitle_
+  otherButtonTitles:( id )otherButtonTitles_, ...;
 
 //pass NSString(button title) or JFFAlertButton
--(void)addAlertButton:( id )alert_button_;
+-(void)addAlertButton:( id )alertButton_;
 
 -(void)addAlertButtonWithTitle:( NSString* )title_
                         action:( JFFSimpleBlock )action_;
 
++(id)waitAlertWithTitle:( NSString* )title_
+           cancelButton:( JFFAlertButton* )button_;
 
 +(void)dismissAllAlertViews;
 
@@ -33,6 +37,5 @@
 -(void)exclusiveShow;
 -(void)show;
 -(void)forceDismiss;
-
 
 @end

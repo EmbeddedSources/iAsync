@@ -2,15 +2,14 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^JFFAsyncOperationInterfaceHandler)( id, NSError* );
+@protocol JFFAsyncOperationInterface;
 
-@protocol JFFAsyncOperationInterface < NSObject >
-
--(void)asyncOperationWithResultHandler:( JFFAsyncOperationInterfaceHandler )handler_
-                       progressHandler:( void (^)( id ) )progress_;
-
--(void)cancel:( BOOL )canceled_;
-
-@end
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterface > object_ );
+
+#ifdef __cplusplus
+} /* closing brace for extern "C" */
+#endif

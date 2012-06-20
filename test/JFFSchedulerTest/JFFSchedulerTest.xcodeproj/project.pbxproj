@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0E89441563FA7900825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E89431563FA7900825E3C /* libc++.dylib */; };
+		1B266A2E156245360054E183 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B266A2B156245030054E183 /* libJFFTestTools.a */; };
 		1B41ACFA151CCF7100566B1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41ACF9151CCF7100566B1B /* UIKit.framework */; };
 		1B41ACFC151CCF7100566B1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41ACFB151CCF7100566B1B /* Foundation.framework */; };
 		1B41ACFE151CCF7100566B1B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41ACFD151CCF7100566B1B /* CoreGraphics.framework */; };
@@ -16,9 +18,24 @@
 		1B41AD1D151CD08100566B1B /* JFFSchedulerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B41AD1C151CD08100566B1B /* JFFSchedulerTest.m */; };
 		1B41AD50151CD1D100566B1B /* libJFFScheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41AD47151CD1C500566B1B /* libJFFScheduler.a */; };
 		1B41AD65151CD1EE00566B1B /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41AD5C151CD1E000566B1B /* libJFFUtils.a */; };
+		1BEC47F7156A26B80099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEC47F6156A26B80099DA6D /* libstdc++.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1B266A2A156245030054E183 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B266A23156245030054E183 /* JFFTestTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1BE0542B154826DA00270B58;
+			remoteInfo = JFFTestTools;
+		};
+		1B266A2C156245320054E183 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B266A23156245030054E183 /* JFFTestTools.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BE0542A154826DA00270B58;
+			remoteInfo = JFFTestTools;
+		};
 		1B41AD46151CD1C500566B1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1B41AD3C151CD1C400566B1B /* JFFScheduler.xcodeproj */;
@@ -92,6 +109,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B0E89431563FA7900825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		1B266A23156245030054E183 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		1B41ACF5151CCF7100566B1B /* JFFSchedulerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFSchedulerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B41ACF9151CCF7100566B1B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1B41ACFB151CCF7100566B1B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,6 +123,7 @@
 		1B41AD1C151CD08100566B1B /* JFFSchedulerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSchedulerTest.m; sourceTree = "<group>"; };
 		1B41AD3C151CD1C400566B1B /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../../lib/JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
 		1B41AD51151CD1E000566B1B /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
+		1BEC47F6156A26B80099DA6D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +131,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BEC47F7156A26B80099DA6D /* libstdc++.dylib in Frameworks */,
+				1B0E89441563FA7900825E3C /* libc++.dylib in Frameworks */,
+				1B266A2E156245360054E183 /* libJFFTestTools.a in Frameworks */,
 				1B41AD65151CD1EE00566B1B /* libJFFUtils.a in Frameworks */,
 				1B41AD50151CD1D100566B1B /* libJFFScheduler.a in Frameworks */,
 				1B41ACFA151CCF7100566B1B /* UIKit.framework in Frameworks */,
@@ -123,6 +146,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B266A24156245030054E183 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1B266A2B156245030054E183 /* libJFFTestTools.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		1B41ACEA151CCF7000566B1B = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +175,8 @@
 		1B41ACF8151CCF7100566B1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B0E89431563FA7900825E3C /* libc++.dylib */,
+				1BEC47F6156A26B80099DA6D /* libstdc++.dylib */,
 				1B41AD19151CCF9300566B1B /* GHUnitIOS.framework */,
 				1B41ACF9151CCF7100566B1B /* UIKit.framework */,
 				1B41ACFB151CCF7100566B1B /* Foundation.framework */,
@@ -175,6 +208,7 @@
 		1B41AD3B151CD0FF00566B1B /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				1B266A23156245030054E183 /* JFFTestTools.xcodeproj */,
 				1B41AD51151CD1E000566B1B /* JFFUtils.xcodeproj */,
 				1B41AD3C151CD1C400566B1B /* JFFScheduler.xcodeproj */,
 			);
@@ -217,6 +251,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1B266A2D156245320054E183 /* PBXTargetDependency */,
 				1B41AD64151CD1EB00566B1B /* PBXTargetDependency */,
 				1B41AD4F151CD1CD00566B1B /* PBXTargetDependency */,
 			);
@@ -249,6 +284,10 @@
 					ProjectRef = 1B41AD3C151CD1C400566B1B /* JFFScheduler.xcodeproj */;
 				},
 				{
+					ProductGroup = 1B266A24156245030054E183 /* Products */;
+					ProjectRef = 1B266A23156245030054E183 /* JFFTestTools.xcodeproj */;
+				},
+				{
 					ProductGroup = 1B41AD52151CD1E000566B1B /* Products */;
 					ProjectRef = 1B41AD51151CD1E000566B1B /* JFFUtils.xcodeproj */;
 				},
@@ -261,6 +300,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		1B266A2B156245030054E183 /* libJFFTestTools.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFTestTools.a;
+			remoteRef = 1B266A2A156245030054E183 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		1B41AD47151CD1C500566B1B /* libJFFScheduler.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -345,6 +391,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1B266A2D156245320054E183 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFTestTools;
+			targetProxy = 1B266A2C156245320054E183 /* PBXContainerItemProxy */;
+		};
 		1B41AD4F151CD1CD00566B1B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JFFScheduler;
@@ -389,7 +440,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../lib;
+				HEADER_SEARCH_PATHS = (
+					../../lib,
+					../../lib/JFFTestTools,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -409,7 +463,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../lib;
+				HEADER_SEARCH_PATHS = (
+					../../lib,
+					../../lib/JFFTestTools,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;

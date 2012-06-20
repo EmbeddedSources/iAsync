@@ -18,8 +18,8 @@
 {
     NSUInteger itemsCount_ = [ self count ];
 
-    NSMutableSet*   processedObjects_ = [ NSMutableSet   setWithCapacity  : itemsCount_ ];
-    NSMutableArray* result_           = [ NSMutableArray arrayWithCapacity: itemsCount_ ];
+    NSMutableSet*   processedObjects_ = [ [ NSMutableSet alloc ] initWithCapacity  : itemsCount_ ];
+    NSMutableArray* result_           = [ [ NSMutableArray alloc ] initWithCapacity: itemsCount_ ];
 
     for ( id item_ in self )
     {
@@ -31,7 +31,7 @@
     }
 
     //Shrink the capacity
-    return [ NSArray arrayWithArray: result_ ];
+    return [ [ NSArray alloc ] initWithArray: result_ ];
 }
 
 -(NSArray*)uniqueBy:( JFFEqualityCheckerBlock )predicate_
@@ -39,7 +39,7 @@
     NSMutableArray* myCopy_ = [ [ NSMutableArray alloc ] initWithArray: self ];
 
     NSUInteger items_count_ = [ self count ];
-    NSMutableArray* result_ = [ NSMutableArray arrayWithCapacity: items_count_ ];
+    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: items_count_ ];
 
     NSArray* filtered_ = nil;
     JFFPredicateBlock search_predicate_ = nil;

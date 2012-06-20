@@ -21,26 +21,26 @@
 @property ( nonatomic, readonly ) BOOL       isPagingEnabled ;
 @property ( nonatomic, readonly ) NSUInteger numberOfRows    ;
 
--(NSArray*)prepareIndexPathEntriesForBottomCells:( NSUInteger )cells_count_;
--(NSUInteger)suggestElementsToAddCountForIndexPath:( NSIndexPath* )index_path_
-                                   overflowOccured:( BOOL* )is_overflow_;
+-(NSArray*)prepareIndexPathEntriesForBottomCells:( NSUInteger )cellsCount_;
+-(NSUInteger)suggestElementsToAddCountForIndexPath:( NSIndexPath* )indexPath_
+                                   overflowOccured:( BOOL* )isOverflow_;
 -(NSUInteger)suggestElementsToAddCountForIndex:( NSUInteger )index_
-                               overflowOccured:( BOOL* )out_is_overflow_;
+                               overflowOccured:( BOOL* )outIsOverflow_;
 
 @property ( nonatomic, readonly ) BOOL hasNoElements;
 @property ( nonatomic, readonly ) BOOL allElementsLoaded;
 @property ( nonatomic, readonly ) NSIndexPath* loadMoreIndexPath;
 
--(BOOL)isLoadMoreIndexPath:( NSIndexPath* )index_path_;
+-(BOOL)isLoadMoreIndexPath:( NSIndexPath* )indexPath_;
 
--(NSInteger)currentCountToStartWith:( NSInteger )total_elements_count_;
+-(NSInteger)currentCountToStartWith:( NSInteger )totalElementsCount_;
 
 +(NSArray*)defaultUpdateScopeForIndex:( NSUInteger )index_;
 
 
--(void)autoLoadingScrollTableView:( id<JUTableViewHolder> )table_view_holder_
-                 toRowAtIndexPath:( NSIndexPath* )index_path_ 
-                 atScrollPosition:( UITableViewScrollPosition )scroll_position_ 
+-(void)autoLoadingScrollTableView:( id<JUTableViewHolder> )tableViewHolder_
+                 toRowAtIndexPath:( NSIndexPath* )indexPath_ 
+                 atScrollPosition:( UITableViewScrollPosition )scrollPosition_ 
                          animated:( BOOL )animated_;
 
 @end

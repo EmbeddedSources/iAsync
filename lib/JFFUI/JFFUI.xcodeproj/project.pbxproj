@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B260343156546D900316C7C /* JFFAlertViewsContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B260341156546D900316C7C /* JFFAlertViewsContainer.h */; };
+		1B260344156546D900316C7C /* JFFAlertViewsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B260342156546D900316C7C /* JFFAlertViewsContainer.m */; };
+		1B2812EA1578C1F400BC70D9 /* JFFWaitAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2812E81578C1F400BC70D9 /* JFFWaitAlertView.h */; };
+		1B2812EB1578C1F400BC70D9 /* JFFWaitAlertView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1B2812E91578C1F400BC70D9 /* JFFWaitAlertView.mm */; };
 		1B29555A143DCB3A00532BD7 /* JULoadMoreCellscalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B295558143DCB3A00532BD7 /* JULoadMoreCellscalculator.h */; };
 		1B29555B143DCB3A00532BD7 /* JULoadMoreCellscalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B295559143DCB3A00532BD7 /* JULoadMoreCellscalculator.m */; };
 		1B29555F143DCB7300532BD7 /* UITableView+WithinUpdates.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B29555D143DCB7300532BD7 /* UITableView+WithinUpdates.h */; };
@@ -80,6 +84,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B260341156546D900316C7C /* JFFAlertViewsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAlertViewsContainer.h; sourceTree = "<group>"; };
+		1B260342156546D900316C7C /* JFFAlertViewsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAlertViewsContainer.m; sourceTree = "<group>"; };
+		1B2812E81578C1F400BC70D9 /* JFFWaitAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFWaitAlertView.h; sourceTree = "<group>"; };
+		1B2812E91578C1F400BC70D9 /* JFFWaitAlertView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFWaitAlertView.mm; sourceTree = "<group>"; };
 		1B295558143DCB3A00532BD7 /* JULoadMoreCellscalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JULoadMoreCellscalculator.h; sourceTree = "<group>"; };
 		1B295559143DCB3A00532BD7 /* JULoadMoreCellscalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JULoadMoreCellscalculator.m; sourceTree = "<group>"; };
 		1B29555D143DCB7300532BD7 /* UITableView+WithinUpdates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+WithinUpdates.h"; sourceTree = "<group>"; };
@@ -284,6 +292,10 @@
 				1BB414DD154835340032B7D5 /* JFFPendingActionSheet.m */,
 				1BE053B515480F4400270B58 /* JFFActionSheetsContainer.h */,
 				1BE053B615480F4400270B58 /* JFFActionSheetsContainer.m */,
+				1B260341156546D900316C7C /* JFFAlertViewsContainer.h */,
+				1B260342156546D900316C7C /* JFFAlertViewsContainer.m */,
+				1B2812E81578C1F400BC70D9 /* JFFWaitAlertView.h */,
+				1B2812E91578C1F400BC70D9 /* JFFWaitAlertView.mm */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -338,6 +350,8 @@
 				1B5E1AD214D0203B0075049A /* UIViewController+PresentTopViewController.h in Headers */,
 				1BE053B715480F4400270B58 /* JFFActionSheetsContainer.h in Headers */,
 				1BB414DE154835340032B7D5 /* JFFPendingActionSheet.h in Headers */,
+				1B260343156546D900316C7C /* JFFAlertViewsContainer.h in Headers */,
+				1B2812EA1578C1F400BC70D9 /* JFFWaitAlertView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +465,8 @@
 				1B5E1AD314D0203B0075049A /* UIViewController+PresentTopViewController.m in Sources */,
 				1BE053B815480F4400270B58 /* JFFActionSheetsContainer.m in Sources */,
 				1BB414DF154835340032B7D5 /* JFFPendingActionSheet.m in Sources */,
+				1B260344156546D900316C7C /* JFFAlertViewsContainer.m in Sources */,
+				1B2812EB1578C1F400BC70D9 /* JFFWaitAlertView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,7 +514,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -513,7 +529,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

@@ -73,7 +73,7 @@
 
     if ( [ _downloadingSpeedInfo count ] > 1 )
     {
-        NSRange range_ = NSMakeRange( 0, [ _downloadingSpeedInfo count ] - 1 );
+        NSRange range_ = { 0, [ _downloadingSpeedInfo count ] - 1 };
         NSArray* arrayExcludeLast_ = [ _downloadingSpeedInfo subarrayWithRange: range_ ];
 
         NSUInteger donloadedBytes_ = 0;

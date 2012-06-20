@@ -5,7 +5,7 @@
 
 @interface JFFContextLoaders ()
 
-//JTODO move to ARC and remove inner properties
+// JTODO move to ARC and remove inner properties
 @property ( nonatomic, retain ) NSMutableArray* activeLoadersData;
 @property ( nonatomic, retain ) NSMutableArray* pendingLoadersData;
 
@@ -13,14 +13,14 @@
 
 @implementation JFFContextLoaders
 
-@synthesize activeLoadersData = _active_loaders_data;
-@synthesize pendingLoadersData = _pending_loaders_data;
+@synthesize activeLoadersData = _activeLoadersData;
+@synthesize pendingLoadersData = _pendingLoadersData;
 @synthesize name = _name;
 
 -(void)dealloc
 {
-    [ _active_loaders_data release ];
-    [ _pending_loaders_data release ];
+    [ _activeLoadersData release ];
+    [ _pendingLoadersData release ];
     [ _name release ];
 
     [ super dealloc ];
@@ -28,20 +28,20 @@
 
 -(NSMutableArray*)activeLoadersData
 {
-    if ( !_active_loaders_data )
+    if ( !_activeLoadersData )
     {
-        _active_loaders_data = [ NSMutableArray new ];
+        _activeLoadersData = [ NSMutableArray new ];
     }
-    return _active_loaders_data;
+    return _activeLoadersData;
 }
 
 -(NSMutableArray*)pendingLoadersData
 {
-    if ( !_pending_loaders_data )
+    if ( !_pendingLoadersData )
     {
-        _pending_loaders_data = [ NSMutableArray new ];
+        _pendingLoadersData = [ NSMutableArray new ];
     }
-    return _pending_loaders_data;
+    return _pendingLoadersData;
 }
 
 @end
@@ -108,6 +108,10 @@
 {
     JFFPedingLoaderData* data_ = [ [ self.pendingLoadersData objectAtIndex: 0 ] retain ];
     [ self.pendingLoadersData removeObjectAtIndex: 0 ];
+    if ( [ self.pendingLoadersData count ] == 0 )
+    {
+        self.pendingLoadersData = nil;
+    }
     return [ data_ autorelease ];
 }
 

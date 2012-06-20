@@ -10,7 +10,7 @@
     static const NSUInteger quotes_count_ = 2;
     NSUInteger range_length_ = [ quoted_string_ length ] - quotes_count_;
 
-    NSRange result_ = NSMakeRange( first_quote_offset_, range_length_ );
+    NSRange result_ = { first_quote_offset_, range_length_ };
     return result_;
 }
 

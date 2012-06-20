@@ -3,6 +3,7 @@
 #import "JFFAsyncOperationContinuity.h"
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 #import "JFFAsyncOperationBuilder.h"
+#import "JFFAsyncOperationInterface.h"
 
 #import <JFFScheduler/JFFScheduler.h>
 
@@ -99,6 +100,32 @@ JFFAsyncOperation asyncOperationWithFinishHookBlock( JFFAsyncOperation loader_
         {
             finishCallbackHook_( result_, error_, doneCallback_ );
         } );
+    };
+}
+
+JFFAsyncOperation asyncOperationWithStartAndFinishBlocks( JFFAsyncOperation loader_
+                                                         , JFFSimpleBlock startBlock_
+                                                         , JFFDidFinishAsyncOperationHandler finishCallback_ )
+{
+    startBlock_     = [ startBlock_ copy ];
+    finishCallback_ = [ finishCallback_ copy ];
+
+    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+                                    , JFFCancelAsyncOperationHandler cancelCallback_
+                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    {
+        if ( startBlock_ )
+            startBlock_();
+
+        doneCallback_ = [ doneCallback_ copy ];
+        JFFDidFinishAsyncOperationHandler doneCallback2_ = ^( id result_, NSError* error_ )
+        {
+            if ( finishCallback_ )
+                finishCallback_( result_, error_ );
+            if ( doneCallback_ )
+                doneCallback_( result_, error_ );
+        };
+        return loader_( progressCallback_, cancelCallback_, doneCallback2_ );
     };
 }
 

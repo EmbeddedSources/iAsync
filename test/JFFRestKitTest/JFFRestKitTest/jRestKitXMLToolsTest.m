@@ -34,6 +34,21 @@
     GHAssertNotNil( error_, @"ok" );
 }
 
+-(void)testDocumentOfInvalidXMLDoc
+{
+    NSMutableData* data_ = [ NSMutableData new ];
+
+    char bytes_[] = { 0,0,0,0 };
+    [ data_ appendBytes: bytes_ length: sizeof( bytes_ )/sizeof( char ) ];
+
+    NSError* error_;
+
+    CXMLDocument* document_ = xmlDocumentWithData( data_, &error_ );
+
+    GHAssertNil( document_, @"ok" );
+    GHAssertNotNil( error_, @"ok" );
+}
+
 -(void)testDocumentOfEmptyXML
 {
     {

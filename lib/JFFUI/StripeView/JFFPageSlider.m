@@ -25,7 +25,7 @@
 , activeIndex
 , firstIndex
 , delegate
-, viewByIndex;
+, viewByIndex = _viewByIndex;
 
 -(void)dealloc
 {
@@ -50,7 +50,7 @@
 
 -(void)initialize
 {
-    viewByIndex = [ NSMutableDictionary new ];
+    self->_viewByIndex = [ NSMutableDictionary new ];
 
     scrollView = [ [ UIScrollView alloc ] initWithFrame: self.bounds ];
     scrollView.backgroundColor = [ UIColor clearColor ];
@@ -61,7 +61,8 @@
     scrollView.scrollEnabled = NO;
     [ self addSubviewAndScale: scrollView ];
 
-    _previousVisiableIndexesRange = NSMakeRange( 0, 1 );
+    NSRange range_ = { 0, 1 };
+    self->_previousVisiableIndexesRange = range_;
 
     if ( self.delegate )
         [ self reloadData ];
@@ -92,16 +93,17 @@
 -(CGRect)elementFrameForIndex:( NSInteger )index_
 {
     CGFloat x_ = self.bounds.size.width * ( index_ - firstIndex );
-    return CGRectMake( x_, 0.f, self.bounds.size.width, self.bounds.size.height );
+    CGRect frame_ = { { x_, 0.f }, { self.bounds.size.width, self.bounds.size.height } };
+    return frame_;
 }
 
 -(void)removeAllElements
 {
-    [ viewByIndex enumerateKeysAndObjectsUsingBlock: ^( id key, UIView* view_, BOOL* stop )
+    [ self->_viewByIndex enumerateKeysAndObjectsUsingBlock: ^( id key, UIView* view_, BOOL* stop )
     {
         [ view_ removeFromSuperview ];
     } ];
-    [ viewByIndex removeAllObjects ];
+    [ self->_viewByIndex removeAllObjects ];
 }
 
 -(void)updateScrollViewContentSize
@@ -114,14 +116,14 @@
 -(UIView*)viewAtIndex:( NSInteger )index_
 {
     NSNumber* index_number_ = [ [ NSNumber alloc ] initWithInteger: index_ ];
-    return [ viewByIndex objectForKey: index_number_ ];
+    return [ self->_viewByIndex objectForKey: index_number_ ];
 }
 
 -(void)cacheAndPositionView:( UIView* )view_
                     toIndex:( NSInteger )index_
 {
     NSNumber* index_number_ = [ [ NSNumber alloc ] initWithInteger: index_ ];
-    [ viewByIndex setObject: view_ forKey: index_number_ ];
+    [ self->_viewByIndex setObject: view_ forKey: index_number_ ];
     view_.frame = [ self elementFrameForIndex: index_ ];
 }
 
@@ -156,15 +158,16 @@
 
 -(CGPoint)offsetForIndex:( NSInteger )index_
 {
-    return CGPointMake( ( index_ - firstIndex ) * scrollView.bounds.size.width
-                       , scrollView.contentOffset.y );
+    CGPoint result_ = { ( index_ - firstIndex ) * scrollView.bounds.size.width
+        , scrollView.contentOffset.y };
+    return result_;
 }
 
 -(void)layoutSubviews
 {
     [ super layoutSubviews ];
 
-    [ viewByIndex enumerateKeysAndObjectsUsingBlock: ^( NSNumber* index_, UIView* view_, BOOL* stop_ )
+    [ self->_viewByIndex enumerateKeysAndObjectsUsingBlock: ^( NSNumber* index_, UIView* view_, BOOL* stop_ )
     {
         view_.frame = [ self elementFrameForIndex: [ index_ integerValue ] ];
     } ];
@@ -177,7 +180,7 @@
 -(UIView*)elementAtIndex:( NSInteger )index_
 {
     NSNumber* number_index_ = [ [ NSNumber alloc ] initWithInteger: index_ ];
-    return [ viewByIndex objectForKey: number_index_ ];
+    return [ self->_viewByIndex objectForKey: number_index_ ];
 }
 
 -(NSArray*)visibleElements
@@ -214,9 +217,9 @@
     }
 
     NSNumber* numberIndex_ = [ NSNumber numberWithInteger: index_ ];
-    UIView* view_ = [ viewByIndex objectForKey: numberIndex_ ];
+    UIView* view_ = [ self->_viewByIndex objectForKey: numberIndex_ ];
     [ view_ removeFromSuperview ];
-    [ viewByIndex removeObjectForKey: numberIndex_ ];
+    [ self->_viewByIndex removeObjectForKey: numberIndex_ ];
 }
 
 -(void)removeViewsInRange:( JSignedRange )range_
@@ -248,8 +251,9 @@
     NSInteger last_index_ = ceilf( scrollView.contentOffset.x / scrollView.bounds.size.width ) + firstIndex;
     last_index_ = fmin( last_index_, self.lastIndex );
 
-    _previousVisiableIndexesRange = NSMakeRange( first_index_, last_index_ - first_index_ + 1 );
-    return _previousVisiableIndexesRange;
+    NSRange range_ = { first_index_, last_index_ - first_index_ + 1 };
+    self->_previousVisiableIndexesRange = range_;
+    return self->_previousVisiableIndexesRange;
 }
 
 -(NSInteger)lastIndex
