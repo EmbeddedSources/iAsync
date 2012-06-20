@@ -3,6 +3,7 @@
 //
 
 #ifdef __OBJC__
+    #import <DDURLBuilder/DDURLBuilder.h>
    #import <Cocoa/Cocoa.h>
 
    #include <zlib.h>

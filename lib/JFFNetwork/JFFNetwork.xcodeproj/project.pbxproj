@@ -147,6 +147,14 @@
 		65F47AD01539A3BE00D8C865 /* NSURL+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F47ACE1539A3BE00D8C865 /* NSURL+XQueryComponents.m */; };
 		65F47AD31539A3FF00D8C865 /* NSDictionary+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F47AD11539A3FE00D8C865 /* NSDictionary+XQueryComponents.h */; };
 		65F47AD41539A3FF00D8C865 /* NSDictionary+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F47AD21539A3FF00D8C865 /* NSDictionary+XQueryComponents.m */; };
+		7E6AF966157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */; };
+		7E6AF967157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */; };
+		7E6AF968157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */; };
+		7E6AF969157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */; };
+		7E6AF96A157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */; };
+		7E6AF96B157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */; };
+		7E6AF96C157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */; };
+		7E6AF96D157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */; };
 		7E8F204414F9494300588C7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5AE6DE13F3E6C600EB6143 /* Foundation.framework */; };
 		7E8F204A14F9494300588C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E8F204814F9494300588C7D /* InfoPlist.strings */; };
 		7E8F205014F949A000588C7D /* JNConnectionsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF9414449AF5005D745F /* JNConnectionsFactory.m */; };
@@ -211,6 +219,23 @@
 		8DD71E9D13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD71E9B13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7E894BC0158239BD00557C36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E54C1D8157F8687007D89F1;
+			remoteInfo = DDUrlBuilder;
+		};
+		7E894BC2158239BD00557C36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E54C1F1157F889A007D89F1;
+			remoteInfo = DDUrlBuilderTest;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1B15CCB11535CAF4005F2B56 /* JFFAsyncOperationNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationNetwork.h; sourceTree = "<group>"; };
 		1B15CCB21535CAF4005F2B56 /* JFFAsyncOperationNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationNetwork.m; sourceTree = "<group>"; };
@@ -266,7 +291,10 @@
 		65F47ACE1539A3BE00D8C865 /* NSURL+XQueryComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+XQueryComponents.m"; sourceTree = "<group>"; };
 		65F47AD11539A3FE00D8C865 /* NSDictionary+XQueryComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+XQueryComponents.h"; sourceTree = "<group>"; };
 		65F47AD21539A3FF00D8C865 /* NSDictionary+XQueryComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+XQueryComponents.m"; sourceTree = "<group>"; };
-		7E8F204314F9494300588C7D /* JFFNetworkFW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; name = JFFNetworkFW.framework; path = JFFNetworkFW; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUrlLocationValidator.h; sourceTree = "<group>"; };
+		7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUrlLocationValidator.m; sourceTree = "<group>"; };
+		7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DDUrlBuilder.xcodeproj; path = "../../../davedelong-Demos/DDURLBuilder/DDUrlBuilder/DDUrlBuilder.xcodeproj"; sourceTree = "<group>"; };
+		7E8F204314F9494300588C7D /* JFFNetworkFW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = JFFNetworkFW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8F204714F9494300588C7D /* JFFNetworkFW-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFNetworkFW-Info.plist"; sourceTree = "<group>"; };
 		7E8F204914F9494300588C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E8F204B14F9494300588C7D /* JFFNetworkFW-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFNetworkFW-Prefix.pch"; sourceTree = "<group>"; };
@@ -358,6 +386,8 @@
 			children = (
 				1B15CCB11535CAF4005F2B56 /* JFFAsyncOperationNetwork.h */,
 				1B15CCB21535CAF4005F2B56 /* JFFAsyncOperationNetwork.m */,
+				7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */,
+				7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -442,6 +472,15 @@
 			path = XQueryComponents;
 			sourceTree = "<group>";
 		};
+		7E894BBC158239BD00557C36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E894BC1158239BD00557C36 /* libDDUrlBuilder.a */,
+				7E894BC3158239BD00557C36 /* DDUrlBuilderTest.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7E8F204514F9494300588C7D /* JFFNetworkFW */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,6 +525,7 @@
 		8D5AE6DD13F3E6C600EB6143 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */,
 				8D5AE6DE13F3E6C600EB6143 /* Foundation.framework */,
 				5383421A141E6A3B00473CF2 /* libz.dylib */,
 				65802B23148BFC230040A93A /* Cocoa.framework */,
@@ -597,6 +637,7 @@
 				539103AF14A88BCA007315A3 /* JNAbstractConnection.h in Headers */,
 				539103B114A88BCA007315A3 /* JNConnectionsFactory.h in Headers */,
 				539103B314A88BCA007315A3 /* NSURL+Cookies.h in Headers */,
+				7E6AF968157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +672,7 @@
 				65802B5F148BFC8F0040A93A /* JNGzipErrorsLogger.h in Headers */,
 				65802B61148BFC930040A93A /* JNConnectionsFactory.h in Headers */,
 				65802B63148BFCB20040A93A /* JNUrlResponse.h in Headers */,
+				7E6AF967157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +702,7 @@
 				7E8F20AE14F949DD00588C7D /* JNConstants.h in Headers */,
 				7E8F20AF14F949DD00588C7D /* JNUrlConnectionCallbacks.h in Headers */,
 				7E8F20B014F949DD00588C7D /* JFFNetwork.h in Headers */,
+				7E6AF969157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +747,7 @@
 				1B166C931546E5AD00475B6A /* JFFLocalCookiesStorage.h in Headers */,
 				1B166C981546E65C00475B6A /* NSString+RFC_2965.h in Headers */,
 				1BE052FF1547DF5600270B58 /* NSHTTPCookie+matchesURL.h in Headers */,
+				7E6AF966157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,6 +844,12 @@
 			mainGroup = 8D5AE6D013F3E6C500EB6143;
 			productRefGroup = 8D5AE6DC13F3E6C600EB6143 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7E894BBC158239BD00557C36 /* Products */;
+					ProjectRef = 7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8D5AE6DA13F3E6C600EB6143 /* JFFNetwork */,
@@ -809,6 +859,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7E894BC1158239BD00557C36 /* libDDUrlBuilder.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDDUrlBuilder.a;
+			remoteRef = 7E894BC0158239BD00557C36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E894BC3158239BD00557C36 /* DDUrlBuilderTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DDUrlBuilderTest.octest;
+			remoteRef = 7E894BC2158239BD00557C36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7E8F203F14F9494300588C7D /* Resources */ = {
@@ -889,6 +956,7 @@
 				5391038E14A88BCA007315A3 /* JNAbstractConnection.m in Sources */,
 				5391039014A88BCA007315A3 /* JNConnectionsFactory.m in Sources */,
 				5391039214A88BCA007315A3 /* NSURL+Cookies.m in Sources */,
+				7E6AF96C157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,6 +982,7 @@
 				65802B5D148BFC8F0040A93A /* JNZipDecoder.m in Sources */,
 				65802B60148BFC8F0040A93A /* JNGzipErrorsLogger.m in Sources */,
 				65802B62148BFC930040A93A /* JNConnectionsFactory.m in Sources */,
+				7E6AF96B157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -939,6 +1008,7 @@
 				7E8F207814F949A000588C7D /* JNNsUrlConnection.m in Sources */,
 				7E8F207A14F949A000588C7D /* JFFNetworkBlocksFunctions.m in Sources */,
 				7E8F207C14F949A000588C7D /* JFFUrlResponseLogger.m in Sources */,
+				7E6AF96D157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -974,6 +1044,7 @@
 				1B166C941546E5AD00475B6A /* JFFLocalCookiesStorage.m in Sources */,
 				1B166C991546E65C00475B6A /* NSString+RFC_2965.m in Sources */,
 				1BE053001547DF5600270B58 /* NSHTTPCookie+matchesURL.m in Sources */,
+				7E6AF96A157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1109,6 +1180,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1121,7 +1193,11 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../;
+				HEADER_SEARCH_PATHS = (
+					../,
+					"../../../davedelong-Demos/",
+				);
+				USER_HEADER_SEARCH_PATHS = ../;
 			};
 			name = Debug;
 		};
@@ -1131,12 +1207,17 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../;
+				HEADER_SEARCH_PATHS = (
+					../,
+					"../../../davedelong-Demos/",
+				);
+				USER_HEADER_SEARCH_PATHS = ../;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

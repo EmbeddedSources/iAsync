@@ -22,8 +22,8 @@
 
     if ( self )
     {
-        _date       = [ NSDate new ];
-        _bytesCount = bytesCount_;
+        self->_date       = [ NSDate new ];
+        self->_bytesCount = bytesCount_;
     }
 
     return self;
