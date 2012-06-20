@@ -59,17 +59,9 @@
 
 -(void)dismissWithClickedButtonIndex:( NSInteger )buttonIndex_ animated:( BOOL )animated_
 {
-    JFFAlertViewsContainer* container_ = [ JFFAlertViewsContainer sharedAlertViewsContainer ];
-    NSUInteger count_ = [ container_ count ];
-
+    self->_alertView.delegate = nil;
     [ self->_alertView dismissWithClickedButtonIndex: buttonIndex_ animated: NO ];
-
-    //workaround - sometimes  delegate (alertView:didDismissWithButtonIndex:) does not called
-    if ( 0 != count_ && [ container_ count ] == count_ )
-    {
-        [ [ self class ] activeAlertsRemoveAlert: self ];
-        [ [ container_ firstAlertView ] forceShow ];
-    }
+    [ self alertView: self->_alertView didDismissWithButtonIndex: buttonIndex_ ];
 }
 
 -(void)forceDismiss
@@ -84,7 +76,7 @@
 +(void)dismissAllAlertViews
 {
     JFFAlertViewsContainer* container_ = [ JFFAlertViewsContainer sharedAlertViewsContainer ];
-    [ container_ each: ^( JFFAlertView* alertView_ )
+    [ container_ each: ^void( JFFAlertView* alertView_ )
     {
         [ alertView_ forceDismiss ];
     } ];
@@ -145,7 +137,7 @@
                                                cancelButtonTitle: button_
                                                otherButtonTitles: nil ];
 
-    alertView_.self.dismissBeforeEnterBackground = NO;
+    alertView_.dismissBeforeEnterBackground = NO;
 
     return alertView_;
 }
@@ -348,6 +340,5 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
     // dodikk - no need to unsubscribe a single event
     [ [ NSNotificationCenter defaultCenter ] removeObserver: self ];    
 }
-
 
 @end

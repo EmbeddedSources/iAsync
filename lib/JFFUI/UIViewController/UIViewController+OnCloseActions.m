@@ -58,9 +58,9 @@ static char didCloseActionKey_;
 
 -(void)closeControllerWithReason:( BOOL )ok_
 {
-    JFFWillCloseActionBlock will_close_block_ = self.actController.willCloseAction;
+    JFFWillCloseActionBlock willCloseBlock_ = self.actController.willCloseAction;
 
-    JFFDidCloseActionBlock did_close_block_ = self.actController.didCloseAction;
+    JFFDidCloseActionBlock didCloseBlock_ = self.actController.didCloseAction;
     self.actController.didCloseAction = nil;
 
     JFFCloseSelfBlock closeAction_ = self.actController.closeAction;
@@ -68,13 +68,13 @@ static char didCloseActionKey_;
 
     if ( closeAction_ )
     {
-        closeAction_( will_close_block_ ? will_close_block_() : YES );
+        closeAction_( willCloseBlock_ ? willCloseBlock_() : YES );
         self.actController.willCloseAction = nil;
     }
 
-    if ( did_close_block_ )
+    if ( didCloseBlock_ )
     {
-        did_close_block_( ok_ );
+        didCloseBlock_( ok_ );
     }
 }
 
@@ -104,10 +104,10 @@ static char didCloseActionKey_;
 {
     if ( view_controller_.navigationController.topViewController )
     {
-        __unsafe_unretained UIViewController* controller_to_close_ = view_controller_;
-        controller_to_close_.closeAction = ^void( BOOL animated_ )
+        __unsafe_unretained UIViewController* controllerToClose_ = view_controller_;
+        controllerToClose_.closeAction = ^void( BOOL animated_ )
         {
-            [ controller_to_close_.navigationController popViewControllerAnimated: animated_ ];
+            [ controllerToClose_.navigationController popViewControllerAnimated: animated_ ];
         };
     }
 
@@ -121,6 +121,7 @@ static char didCloseActionKey_;
               prototypeMethodSelector: @selector( pushViewControllerPrototype:animated: )
                    hookMethodSelector: @selector( pushViewControllerHook:animated: ) ];
 
+    //JTODO remove deprecated
     [ self hookInstanceMethodForClass: [ UIViewController class ]
                          withSelector: @selector( presentModalViewController:animated: )
               prototypeMethodSelector: @selector( presentModalViewControllerPrototype:animated: )

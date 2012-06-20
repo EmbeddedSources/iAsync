@@ -93,7 +93,7 @@
 -(CGRect)elementFrameForIndex:( NSInteger )index_
 {
     CGFloat x_ = self.bounds.size.width * ( index_ - firstIndex );
-    CGRect frame_ = { { x_, 0.f }, { self.bounds.size.width, self.bounds.size.height } };
+    CGRect frame_ = { { x_, 0.f }, self.bounds.size };
     return frame_;
 }
 
