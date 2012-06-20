@@ -6,8 +6,3 @@
 @interface JFFRestKitNoURLError : JFFRestKitError
 @end
 
-@interface JFFRestKitParseEmptyXMLError : JFFRestKitError
-@end
-
-@interface JFFRestKitParseInvalidXMLError : JFFRestKitError
-@end

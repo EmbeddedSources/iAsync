@@ -5,9 +5,3 @@
 
 @implementation JFFRestKitNoURLError
 @end
-
-@implementation JFFRestKitParseEmptyXMLError
-@end
-
-@implementation JFFRestKitParseInvalidXMLError
-@end
