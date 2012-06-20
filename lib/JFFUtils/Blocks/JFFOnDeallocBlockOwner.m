@@ -9,15 +9,15 @@
     self = [ super init ];
 
     NSParameterAssert( block_ );
-    _block = block_;
+    self->_block = [ block_ copy ];
 
     return self;
 }
 
 -(void)dealloc
 {
-    if ( _block )
-        _block();
+    if ( self->_block )
+        self->_block();
 }
 
 @end
