@@ -23,8 +23,8 @@
 -(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
                        progressHandler:( void (^)( id ) )progress_
 {
-    _scheduler = [ JFFScheduler new ];
-    [ _scheduler addBlock: ^( JFFCancelScheduledBlock cancel_ )
+    self->_scheduler = [ JFFScheduler new ];
+    [ self->_scheduler addBlock: ^( JFFCancelScheduledBlock cancel_ )
     {
         cancel_();
         if ( progress_ )
@@ -36,7 +36,7 @@
 
 -(void)cancel:( BOOL )canceled_
 {
-    _scheduler = nil;
+    self->_scheduler = nil;
 }
 
 @end
@@ -201,6 +201,12 @@ JFFAsyncOperation asyncOperationWithChangedError( JFFAsyncOperation loader_
                                                            , NSError* error_
                                                            , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
+        if ( nil != error_ )
+        {
+            //JTODO remove this log - we have a lot of logs - it is imposiible to undastand what happens
+            NSLog( @"[!!!ERROR!!!] asyncOperationWithChangedError - %@",  error_ );
+        }
+
         if ( doneCallback_ )
             doneCallback_( result_, error_ ? errorBuilder_( error_ ) : nil );
     };

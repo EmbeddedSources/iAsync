@@ -5,6 +5,10 @@
 
 @class NSArray;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 ///////////////////////// ADD OBSERVERS OF ASYNC OP. RESULT ////////////////////////
 
 JFFAsyncOperation asyncOperationWithResult( id result_ );
@@ -46,4 +50,8 @@ JFFAsyncOperation ignorePregressLoader( JFFAsyncOperation loader_ );
 
 ///////////////////////////////////// SEQUENCE /////////////////////////////////////
 
-JFFAnalyzer analyzerAsSequenceOfAnalyzers( JFFAnalyzer firstAnalyzer_, ... );
+JFFAnalyzer analyzerAsSequenceOfAnalyzers( JFFAnalyzer firstAnalyzer_, ... ) NS_REQUIRES_NIL_TERMINATION;
+
+#ifdef __cplusplus
+} /* closing brace for extern "C" */
+#endif

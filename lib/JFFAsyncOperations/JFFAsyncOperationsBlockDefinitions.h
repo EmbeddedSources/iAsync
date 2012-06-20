@@ -27,6 +27,8 @@ typedef JFFCancelAsyncOperation (^JFFAsyncOperation)( JFFAsyncOperationProgressH
                                                      , JFFCancelAsyncOperationHandler cancelCallback_
                                                      , JFFDidFinishAsyncOperationHandler doneCallback_ );
 
+//@@ next binder receives the result of the previous operation
+//@@ next binder may receive an error if previous operation fails and the binder gets called
 typedef JFFAsyncOperation (^JFFAsyncOperationBinder)( id result_ );
 
 typedef void (^JFFDidFinishAsyncOperationHook)( id result_
