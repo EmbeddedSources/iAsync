@@ -5,6 +5,6 @@
 //lazy load property, any object can be added to this array
 @property ( nonatomic, strong ) NSMutableArray* resultOwnerships;
 
-@property ( nonatomic, strong, readonly ) NSMutableArray* lazyResultOwnerships;
+@property ( nonatomic, readonly ) NSMutableArray* lazyResultOwnerships;
 
 @end

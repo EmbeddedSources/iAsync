@@ -196,17 +196,12 @@ JFFAsyncOperation asyncOperationWithChangedError( JFFAsyncOperation loader_
 {
     if ( !errorBuilder_ )
         return loader_;
+
     errorBuilder_ = [ errorBuilder_ copy ];
     JFFDidFinishAsyncOperationHook finishCallbackHook_ = ^( id result_
                                                            , NSError* error_
                                                            , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
-        if ( nil != error_ )
-        {
-            //JTODO remove this log - we have a lot of logs - it is imposiible to undastand what happens
-            NSLog( @"[!!!ERROR!!!] asyncOperationWithChangedError - %@",  error_ );
-        }
-
         if ( doneCallback_ )
             doneCallback_( result_, error_ ? errorBuilder_( error_ ) : nil );
     };

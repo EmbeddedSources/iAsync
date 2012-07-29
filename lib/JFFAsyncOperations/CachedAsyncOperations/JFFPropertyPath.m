@@ -12,8 +12,8 @@
 
     if ( self )
     {
-        _name = name_;
-        _key  = key_;
+        self->_name = name_;
+        self->_key  = key_;
     }
 
     return self;

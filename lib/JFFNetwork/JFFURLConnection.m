@@ -288,45 +288,44 @@ static void readStreamCallback( CFReadStreamRef stream_
     [ self acceptCookiesForHeaders: allHeadersDict_ ];
 
     //JTODO test redirects (cyclic for example)
-    if ( 302 == statusCode_ || 301 == statusCode_ )
+    if ( 302 == statusCode_ )
     {
         NSDebugLog( @"JConnection - creating URL..." );
+        NSDebugLog( @"%@", self->_params.url );
         NSString* location_ = [ allHeadersDict_ objectForKey: @"Location" ];
         if ( ![ NSUrlLocationValidator isValidLocation: location_ ] )
         {
-            //JTODO fix this - should redirect like NSUrlConnection when full url location got
             NSLog( @"[!!!WARNING!!!] JConnection : path for URL is invalid. Ignoring..." );
             location_ = @"/";
         }
 
         DDURLBuilder* urlBuilder_ = [ DDURLBuilder URLBuilderWithURL: self->_params.url ];
         urlBuilder_.path = location_;
-        
+
         self->_params.url = [ urlBuilder_ URL ];
+        NSDebugLog( @"%@", self->_params.url );
         NSDebugLog( @"Done." );
 
         [ self start ];
-
-        return NO;
     }
-
-    self->_responseHandled = YES;
-
-    if ( self.didReceiveResponseBlock )
+    else
     {
-        JFFURLResponse* urlResponse_ = [ JFFURLResponse new ];
+        self->_responseHandled = YES;
 
-        urlResponse_.statusCode      = statusCode_;
-        urlResponse_.allHeaderFields = allHeadersDict_;
+        if ( self.didReceiveResponseBlock )
+        {
+            JFFURLResponse* urlResponse_ = [ JFFURLResponse new ];
+
+            urlResponse_.statusCode      = statusCode_;
+            urlResponse_.allHeaderFields = allHeadersDict_;
             urlResponse_.url             = self->_params.url;
 
-        self.didReceiveResponseBlock( urlResponse_ );
-        self.didReceiveResponseBlock = nil;
+            self.didReceiveResponseBlock( urlResponse_ );
+            self.didReceiveResponseBlock = nil;
 
-        _urlResponse = urlResponse_;
+            _urlResponse = urlResponse_;
+        }
     }
-
-    return YES;
 }
 
 @end

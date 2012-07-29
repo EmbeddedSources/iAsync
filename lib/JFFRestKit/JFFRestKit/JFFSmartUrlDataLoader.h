@@ -20,8 +20,16 @@ typedef id (^JFFCacheKeyForURLBuilder)( NSURL* );
 
 @end
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 JFFAsyncOperation jSmartDataLoaderWithCache( JFFSmartUrlDataLoaderFields* args_ );
 
 JFFAsyncOperation jSmartDataLoader( NSURL*(^urlBuilder_)(void)
                                    , JFFAsyncOperationBinder dataLoaderForURL_
                                    , JFFAsyncBinderForURL analyzerForData_ );
+
+#ifdef __cplusplus
+} /* closing brace for extern "C" */
+#endif

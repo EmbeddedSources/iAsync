@@ -80,10 +80,10 @@ static char didCloseActionKey_;
 
 @end
 
-@interface ESPresentViewControllerHooks : NSObject
+@interface JFFPresentViewControllerHooks : NSObject
 @end
 
-@implementation ESPresentViewControllerHooks
+@implementation JFFPresentViewControllerHooks
 
 -(void)presentModalViewControllerPrototype:( UIViewController* )modal_view_controller_
                                   animated:( BOOL )animated_

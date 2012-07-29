@@ -34,7 +34,7 @@
     self.objectPropertyData = nil;
 
     jff_retainAutorelease( _object );
-    _object = nil;
+    self->_object = nil;
     //self.propertyPath = nil;
 }
 

@@ -17,10 +17,19 @@
 //Creates a new NSArray containing the values returned by the block.
 -(NSArray*)map:( JFFMappingBlock )block_;
 
+
+//Invokes block once for each element of self.
+//Creates a new NSArray containing the values returned by the block.
+//if error happens it is suppressed
+-(NSArray*)forceMap:( JFFMappingBlock )block_;
+
+
 //Invokes block once for each element of self.
 //Creates a new NSArray containing the values returned by the block.
 //or return nil if error happens
 -(NSArray*)map:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_;
+-(NSArray*)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_;
+
 
 //Invokes block once for each element of self.
 //Creates a new NSDictionary containing the values and keys returned by the block.

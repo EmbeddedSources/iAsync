@@ -10,6 +10,10 @@
 , JFFLocalCookiesStorage
 , JFFURLConnectionParams;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 JFFAsyncOperation genericChunkedURLResponseLoader( JFFURLConnectionParams* params_ );
 
 JFFAsyncOperation genericDataURLResponseLoader( JFFURLConnectionParams* params_ );
@@ -34,5 +38,9 @@ JFFAsyncOperation liveDataURLResponseLoader(
    NSURL* url_
    , NSData* postData_
    , NSDictionary* headers_ );
+
+#ifdef __cplusplus
+} /* closing brace for extern "C" */
+#endif
 
 #endif //JFF_NETWORK_BLOCKS_FUNCTIONS_INCLUDED

@@ -6,3 +6,5 @@
 @interface JFFRestKitNoURLError : JFFRestKitError
 @end
 
+@interface JFFRestKitEmptyFileResponseError : JFFRestKitError
+@end

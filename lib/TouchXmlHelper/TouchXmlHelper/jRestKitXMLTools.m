@@ -25,7 +25,7 @@ CXMLDocument* xmlDocumentWithData( NSData* data_, NSError** outError_ )
     if ( !parseError_ && xmlError_ )
     {
         NSString* errorDescription_ = [ [ NSString alloc ] initWithUTF8String: xmlError_->message ];
-        parseError_ = [ JFFRestKitParseInvalidXMLError errorWithDescription: errorDescription_ ];
+        parseError_ = [ JFFRestKitParseInvalidXMLError newErrorWithDescription: errorDescription_ ];
         document_   = nil;
     }
 

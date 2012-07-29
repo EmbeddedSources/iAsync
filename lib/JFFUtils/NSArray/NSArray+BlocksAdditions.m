@@ -59,6 +59,43 @@
     return [ [ NSArray alloc ] initWithArray: result_ ];
 }
 
+-(NSArray*)forceMap:( JFFMappingBlock )block_
+{
+    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
+
+    for ( id object_ in self )
+    {
+        id newObject_ = block_( object_ );
+        if ( newObject_ )
+        {
+            [ result_ addObject: newObject_ ];
+        }
+    }
+
+    return [ [ NSArray alloc ] initWithArray: result_ ];
+}
+
+-(NSArray*)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_
+{
+    NSParameterAssert( NULL != outError_ );
+    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
+
+    for ( id object_ in self )
+    {
+        id newObject_ = block_( object_, outError_ );
+        if ( newObject_ )
+        {
+            [ result_ addObject: newObject_ ];
+        }
+        else if ( nil != *outError_ )
+        {
+            return nil;
+        }
+    }
+
+    return [ [ NSArray alloc ] initWithArray: result_ ];
+}
+
 -(NSDictionary*)mapDict:( JFFMappingDictBlock )block_
 {
     NSMutableArray* keys_   = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];

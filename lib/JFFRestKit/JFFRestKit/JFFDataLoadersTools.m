@@ -1,5 +1,7 @@
 #import "JFFDataLoadersTools.h"
 
+#import "JFFRestKitError.h"
+
 JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedDataLoader_ )
 {
     chunkedDataLoader_ = [ chunkedDataLoader_ copy ];
@@ -65,7 +67,13 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
             }
 
             if ( doneCallback_ )
+            {
+                if ( result_ == nil && error_ == nil )
+                {
+                    error_ = [ JFFRestKitEmptyFileResponseError new ];
+                }
                 doneCallback_( result_, error_ );
+            }
         };
 
         return chunkedDataLoader_( progressWrapperCallback_

@@ -42,11 +42,12 @@ JFFAsyncOperation trySequenceOfAsyncOperationsArray( NSArray* loaders_ );
 /////////////////////////////// TRY SEQUENCE WITH BINDING ///////////////////////////////
 
 //calls loaders while success
-//@@ next binder may receive an error if previous operation fails
+//@@ next binder will receive an error if previous operation fails
 JFFAsyncOperation bindTrySequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
-                                                   , JFFAsyncOperationBinder secondLoaderBinder_, ... ) NS_REQUIRES_NIL_TERMINATION;
+                                                   , JFFAsyncOperationBinder secondLoaderBinder_
+                                                   , ... ) NS_REQUIRES_NIL_TERMINATION;
 
-//@@ next binder may receive an error if previous operation fails
+//@@ next binder will receive an error if previous operation fails
 JFFAsyncOperation bindTrySequenceOfAsyncOperationsArray( JFFAsyncOperation firstLoader_
                                                         , NSArray* loadersBinders_ );
 
