@@ -12,17 +12,17 @@ typedef BOOL (^JFFPredicate)();
 
 +(BOOL)addMethodIfNeedWithSelector:( SEL )selector_
                            toClass:( Class )class_
-                 newMethodSelector:( SEL )new_selector_
-                         hasMethod:( JFFPredicate )has_method_
+                 newMethodSelector:( SEL )newSelector_
+                         hasMethod:( JFFPredicate )hasMethod_
                       methodGetter:( JFFMethodGetter )method_getter_
 {
-    if ( has_method_() )
+    if ( hasMethod_() )
         return NO;
 
     Method prototype_method_ = method_getter_();
     const char* type_encoding_ = method_getTypeEncoding( prototype_method_ );
     BOOL result_ = class_addMethod( class_
-                                   , new_selector_
+                                   , newSelector_
                                    , method_getImplementation( prototype_method_ )
                                    , type_encoding_ );
     NSAssert( result_, @"method should be added" );
@@ -39,21 +39,21 @@ typedef BOOL (^JFFPredicate)();
 
 +(BOOL)addInstanceMethodIfNeedWithSelector:( SEL )selector_
                                    toClass:( Class )class_
-                         newMethodSelector:( SEL )new_selector_
+                         newMethodSelector:( SEL )newSelector_
 {
-    JFFPredicate respond_to_selector_ = ^BOOL()
+    JFFPredicate respondToSelector_ = ^BOOL()
     {
-        return [ class_ hasInstanceMethodWithSelector: new_selector_ ];
+        return [ class_ hasInstanceMethodWithSelector: newSelector_ ];
     };
-    JFFMethodGetter method_getter_ = ^Method()
+    JFFMethodGetter methodGetter_ = ^Method()
     {
         return class_getInstanceMethod( self, selector_ );
     };
     return [ self addMethodIfNeedWithSelector: selector_
                                       toClass: class_
-                            newMethodSelector: new_selector_
-                                    hasMethod: respond_to_selector_
-                                 methodGetter: method_getter_ ];
+                            newMethodSelector: newSelector_
+                                    hasMethod: respondToSelector_
+                                 methodGetter: methodGetter_ ];
 }
 
 +(BOOL)addClassMethodIfNeedWithSelector:( SEL )selector_

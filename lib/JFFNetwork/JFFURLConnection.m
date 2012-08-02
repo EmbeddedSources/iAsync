@@ -220,7 +220,7 @@ static void readStreamCallback( CFReadStreamRef stream_
         return;
     }
 
-    NSString* contentEncoding_ = [ _urlResponse.allHeaderFields objectForKey: @"Content-Encoding" ];
+    NSString* contentEncoding_ = self->_urlResponse.allHeaderFields[ @"Content-Encoding" ];
     id< JNHttpDecoder > decoder_ = [ JNHttpEncodingsFactory decoderForHeaderString: contentEncoding_ ];
 
     NSError* decoderError_ = nil;
@@ -292,7 +292,7 @@ static void readStreamCallback( CFReadStreamRef stream_
     {
         NSDebugLog( @"JConnection - creating URL..." );
         NSDebugLog( @"%@", self->_params.url );
-        NSString* location_ = [ allHeadersDict_ objectForKey: @"Location" ];
+        NSString* location_ = allHeadersDict_[ @"Location" ];
         if ( ![ NSUrlLocationValidator isValidLocation: location_ ] )
         {
             NSLog( @"[!!!WARNING!!!] JConnection : path for URL is invalid. Ignoring..." );

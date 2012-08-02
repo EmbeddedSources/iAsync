@@ -15,12 +15,10 @@ typedef void (^JFFNotificationCenterBlock)( NSNotification* notification_ );
 
 @implementation JFFNotificationCenterBlockHolder
 
-@synthesize block, queue;
-
 -(void)dealloc
 {
-   [ block release ];
-   [ queue release ];
+   [ self->_block release ];
+   [ self->_queue release ];
 
    [ super dealloc ];
 }

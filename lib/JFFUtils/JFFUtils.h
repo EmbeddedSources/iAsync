@@ -49,3 +49,4 @@
 #import <JFFUtils/JFFSingleThreadProxy.h>
 #import <JFFUtils/JFFError.h>
 #import <JFFUtils/JSignedRange.h>
+#import <JFFUtils/JFFClangLiterals.h>

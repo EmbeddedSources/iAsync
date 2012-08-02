@@ -15,11 +15,6 @@
     UIActionSheet*  _actionSheet;
 }
 
-@synthesize dismissBeforeEnterBackground = _dismissBeforeEnterBackground;
-
-@synthesize cancelButtonIndex
-, numberOfButtons;
-
 -(void)dealloc
 {
     [ [ NSNotificationCenter defaultCenter ] removeObserver: self ];
@@ -157,7 +152,7 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
 
 -(void)actionSheet:( UIActionSheet* )actionSheet_ clickedButtonAtIndex:( NSInteger )button_index_
 {
-    JFFAlertButton* alertButton_ = [ self->_alertButtons objectAtIndex: button_index_ ];
+    JFFAlertButton* alertButton_ = self->_alertButtons[ button_index_ ];
 
     if ( alertButton_ )
         alertButton_.action();

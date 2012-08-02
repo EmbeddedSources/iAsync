@@ -42,8 +42,6 @@ char jffSchedulerKey_;
     NSMutableArray* _cancelBlocks;
 }
 
-@synthesize queue = _queue;
-
 -(void)dealloc
 {
     [ self cancelAllScheduledOperations ];

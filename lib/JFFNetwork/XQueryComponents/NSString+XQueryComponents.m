@@ -29,17 +29,17 @@
         if ( [ keyValuePairArray_ count ] < 2 )
             continue;
         
-        NSString* key_ = [ [ keyValuePairArray_ objectAtIndex: 0 ] stringByDecodingURLFormat ];
-        NSString* value_ = [ [ keyValuePairArray_ objectAtIndex: 1 ] stringByDecodingURLFormat ];
-        NSMutableArray* results_ = [ queryComponents_ objectForKey: key_ ]; // URL spec says that multiple values are allowed per key
+        NSString* key_ = [ keyValuePairArray_[ 0 ] stringByDecodingURLFormat ];
+        NSString* value_ = [ keyValuePairArray_[ 1 ] stringByDecodingURLFormat ];
+        NSMutableArray* results_ = queryComponents_[ key_ ]; // URL spec says that multiple values are allowed per key
         if( !results_ )// First object
         {
             results_ = [ [ NSMutableArray alloc ] initWithCapacity: 1 ];
-            [ queryComponents_ setObject: results_ forKey: key_ ];
+            queryComponents_[ key_ ] = results_;
         }
         [ results_ addObject: value_ ];
     }
-    return [ [ NSDictionary alloc ] initWithDictionary: queryComponents_ ];
+    return [ queryComponents_ copy ];
 }
 
 @end

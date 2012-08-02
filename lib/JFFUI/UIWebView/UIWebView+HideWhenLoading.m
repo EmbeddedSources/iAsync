@@ -18,8 +18,6 @@ static char property_key_;
 
 @implementation JUIWebViewDelegateProxy
 
-@synthesize webView = _webView;
-
 #pragma mark UIWebViewDelegate
 
 -(void)didFinishLoading

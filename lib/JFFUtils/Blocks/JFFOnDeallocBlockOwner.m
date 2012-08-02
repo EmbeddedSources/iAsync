@@ -2,8 +2,6 @@
 
 @implementation JFFOnDeallocBlockOwner
 
-@synthesize block = _block;
-
 -(id)initWithBlock:( JFFSimpleBlock )block_
 {
     self = [ super init ];

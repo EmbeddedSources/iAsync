@@ -13,9 +13,6 @@
 
 @implementation JFFDownloadedBytesPerDate
 
-@synthesize date       = _date;
-@synthesize bytesCount = _bytesCount;
-
 -(id)initWithBytesCount:( NSUInteger )bytesCount_
 {
     self = [ super init ];
@@ -82,7 +79,7 @@
             donloadedBytes_ += item_.bytesCount;
         }
 
-        JFFDownloadedBytesPerDate* firstItem_ = [ arrayExcludeLast_ objectAtIndex: 0 ];
+        JFFDownloadedBytesPerDate* firstItem_ = arrayExcludeLast_[ 0 ];
         NSDate* lastDate_ = ( [ arrayExcludeLast_ count ] == 1 ) ? [ NSDate new ] : firstItem_.date;
 
         JFFDownloadedBytesPerDate* lastItem_ = [ arrayExcludeLast_ lastObject ];
@@ -95,16 +92,16 @@
 
 -(void)stop
 {
-    _scheduler = nil;
+    self->_scheduler = nil;
 
-    _downloadingSpeedInfo = [ NSMutableArray new ];
+    self->_downloadingSpeedInfo = [ NSMutableArray new ];
     [ self calculateDownloadSpeed ];
 }
 
--(void)bytesReceived:( NSUInteger )bytes_count_
+-(void)bytesReceived:( NSUInteger )bytesCount_
 {
-    JFFDownloadedBytesPerDate* item_ = [ [ JFFDownloadedBytesPerDate alloc ] initWithBytesCount: bytes_count_ ];
-    [ _downloadingSpeedInfo insertObject: item_ atIndex: 0 ];
+    JFFDownloadedBytesPerDate* item_ = [ [ JFFDownloadedBytesPerDate alloc ] initWithBytesCount: bytesCount_ ];
+    [ self->_downloadingSpeedInfo insertObject: item_ atIndex: 0 ];
 
     [ self removeOldItemsFromDownloadingSpeedInfo ];
 }

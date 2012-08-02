@@ -1,5 +1,7 @@
 #import "NSDictionary+BlocksAdditions.h"
 
+#import "JFFClangLiterals.h"
+
 @implementation NSDictionary (BlocksAdditions)
 
 -(NSDictionary*)map:( JFFDictMappingBlock )block_
@@ -9,9 +11,9 @@
     {
         id newObject_ = block_( key_, object_ );
         if ( newObject_ )
-            [ result_ setObject: newObject_ forKey: key_ ];
+            result_[ key_ ] = newObject_;
     } ];
-    return [ [ NSDictionary alloc ] initWithDictionary: result_ ];
+    return [ result_ copy ];
 }
 
 -(NSDictionary*)mapKey:( JFFDictMappingBlock )block_
@@ -21,9 +23,9 @@
     {
         id newKey_ = block_( key_, object_ );
         if ( newKey_ )
-            [ result_ setObject: object_ forKey: newKey_ ];
+            result_[ newKey_ ] = object_;
     } ];
-    return [ [ NSDictionary alloc ] initWithDictionary: result_ ];
+    return [ result_ copy ];
 }
 
 -(NSUInteger)count:( JFFDictPredicateBlock )predicate_

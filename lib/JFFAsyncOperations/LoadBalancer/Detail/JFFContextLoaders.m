@@ -13,35 +13,31 @@
 
 @implementation JFFContextLoaders
 
-@synthesize activeLoadersData = _activeLoadersData;
-@synthesize pendingLoadersData = _pendingLoadersData;
-@synthesize name = _name;
-
 -(void)dealloc
 {
-    [ _activeLoadersData release ];
-    [ _pendingLoadersData release ];
-    [ _name release ];
+    [ self->_activeLoadersData release ];
+    [ self->_pendingLoadersData release ];
+    [ self->_name release ];
 
     [ super dealloc ];
 }
 
 -(NSMutableArray*)activeLoadersData
 {
-    if ( !_activeLoadersData )
+    if ( !self->_activeLoadersData )
     {
-        _activeLoadersData = [ NSMutableArray new ];
+        self->_activeLoadersData = [ NSMutableArray new ];
     }
-    return _activeLoadersData;
+    return self->_activeLoadersData;
 }
 
 -(NSMutableArray*)pendingLoadersData
 {
-    if ( !_pendingLoadersData )
+    if ( !self->_pendingLoadersData )
     {
-        _pendingLoadersData = [ NSMutableArray new ];
+        self->_pendingLoadersData = [ NSMutableArray new ];
     }
-    return _pendingLoadersData;
+    return self->_pendingLoadersData;
 }
 
 @end
@@ -50,7 +46,7 @@
 
 -(NSUInteger)activeLoadersNumber
 {
-    return [ self.activeLoadersData count ];
+    return [ self->_activeLoadersData count ];
 }
 
 -(void)addActiveNativeLoader:( JFFAsyncOperation )native_loader_
@@ -106,7 +102,7 @@
 
 -(JFFPedingLoaderData*)popPendingLoaderData
 {
-    JFFPedingLoaderData* data_ = [ [ self.pendingLoadersData objectAtIndex: 0 ] retain ];
+    JFFPedingLoaderData* data_ = [ self.pendingLoadersData[ 0 ] retain ];
     [ self.pendingLoadersData removeObjectAtIndex: 0 ];
     if ( [ self.pendingLoadersData count ] == 0 )
     {

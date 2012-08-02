@@ -6,10 +6,6 @@
 
 @implementation JFFAsyncOperationNetwork
 
-@synthesize params        = _params;
-@synthesize connection    = _connection;
-@synthesize resultContext = _resultContext;
-
 -(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
                        progressHandler:( void (^)( id ) )progress_
 {

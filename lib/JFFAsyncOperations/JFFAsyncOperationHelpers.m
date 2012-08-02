@@ -18,8 +18,6 @@
     JFFScheduler* _scheduler;
 }
 
-@synthesize duration = _duration;
-
 -(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
                        progressHandler:( void (^)( id ) )progress_
 {
@@ -68,6 +66,7 @@ JFFAsyncOperation asyncOperationWithError( NSError* error_ )
 JFFAsyncOperation asyncOperationWithFinishCallbackBlock( JFFAsyncOperation loader_
                                                         , JFFDidFinishAsyncOperationHandler finishCallbackBlock_ )
 {
+    assert( loader_ );
     finishCallbackBlock_ = [ finishCallbackBlock_ copy ];
     loader_ = [ loader_ copy ];
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
@@ -88,6 +87,7 @@ JFFAsyncOperation asyncOperationWithFinishCallbackBlock( JFFAsyncOperation loade
 JFFAsyncOperation asyncOperationWithFinishHookBlock( JFFAsyncOperation loader_
                                                     , JFFDidFinishAsyncOperationHook finishCallbackHook_ )
 {
+    assert( loader_ );// should not be nil"
     assert( finishCallbackHook_ );// should not be nil"
     finishCallbackHook_ = [ finishCallbackHook_ copy ];
     loader_ = [ loader_ copy ];

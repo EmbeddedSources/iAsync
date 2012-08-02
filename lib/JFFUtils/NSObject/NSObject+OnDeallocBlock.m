@@ -43,7 +43,7 @@
 
 -(void)removeOnDeallocBlock:( void(^)( void ) )block_
 {
-   NSArray* ownerships_ = [ [ NSArray alloc ] initWithArray: self.ownerships ];
+    NSArray* ownerships_ = [ self.ownerships copy ];
    for ( id object_ in ownerships_ )
    {
       if ( [ object_ removeOnDeallocBlockBlock: block_ fromArray: self.ownerships ] )

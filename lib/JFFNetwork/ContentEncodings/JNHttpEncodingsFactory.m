@@ -7,11 +7,9 @@
 
 +(id<JNHttpDecoder>)decoderForHeaderString:( NSString* )headerString_
 {
-    NSDictionary* decoderClasses_ = [ [ NSDictionary alloc ] initWithObjectsAndKeys: 
-                                     [ JNGzipDecoder class ], @"gzip"
-                                     , nil ];
+    NSDictionary* decoderClasses_ = @{ @"gzip" : [ JNGzipDecoder class ] };
 
-    Class decoderClass_ = [ decoderClasses_ objectForKey: headerString_ ];
+    Class decoderClass_ = decoderClasses_[ headerString_ ];
     if ( Nil == decoderClass_ )
     {
         return [ self stubDecoder ];

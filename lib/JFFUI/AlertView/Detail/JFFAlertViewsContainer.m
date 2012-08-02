@@ -60,7 +60,7 @@
     if ( !block_ || !self->_activeAlertViews )
         return;
 
-    NSArray* tmpArray_ = [ [ NSArray alloc ] initWithArray: self->_activeAlertViews ];
+    NSArray* tmpArray_ = [ self->_activeAlertViews copy ];
     for ( JFFAlertView* alertView_ in tmpArray_ )
     {
         block_( alertView_ );

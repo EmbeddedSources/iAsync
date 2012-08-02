@@ -15,11 +15,11 @@ static JFFAsyncOperationBinder MergeBinders( MergeTwoBindersPtr merger_, NSArray
 {
     assert( [ blocks_ lastObject ] );// should not be empty
 
-    JFFAsyncOperationBinder firstBinder_ = [ blocks_ objectAtIndex: 0 ];
+    JFFAsyncOperationBinder firstBinder_ = blocks_[ 0 ];
 
     for ( NSUInteger index_ = 1; index_ < [ blocks_ count ]; ++index_ )
     {
-        JFFAsyncOperationBinder secondBinder_ = [ blocks_ objectAtIndex: index_ ];
+        JFFAsyncOperationBinder secondBinder_ = blocks_[ index_ ];
         firstBinder_ = merger_( firstBinder_, secondBinder_ );
     }
 
@@ -343,10 +343,10 @@ static void notifyGroupResult( JFFDidFinishAsyncOperationHandler doneCallback_
     NSMutableArray* finalResult_ = nil;
     if ( !error_ )
     {
-        NSArray* firstResult_ = [ complexResult_ objectAtIndex: 0 ];
+        NSArray* firstResult_ = complexResult_[ 0 ];
         finalResult_ = [ [ NSMutableArray alloc ] initWithCapacity: [ firstResult_ count ] + 1 ];
         [ finalResult_ addObjectsFromArray: firstResult_ ];
-        [ finalResult_ addObject: [ complexResult_ objectAtIndex: 1 ] ];
+        [ finalResult_ addObject: complexResult_[ 1 ] ];
     }
     doneCallback_( finalResult_, error_ );
 }
@@ -382,7 +382,7 @@ static JFFAsyncOperation groupOfAsyncOperationsPair( JFFAsyncOperation firstLoad
             return ^void( id result_, NSError* error_ )
             {
                 if ( result_ )
-                    [ complexResult_ replaceObjectAtIndex: index_ withObject: result_ ];
+                    complexResult_[ index_ ] = result_;
 
                 if ( loaded_ )
                 {
@@ -467,7 +467,7 @@ static JFFAsyncOperation resultToArrayForLoader( JFFAsyncOperation loader_ )
 {
     JFFAsyncOperationBinder secondLoaderBinder_ = asyncOperationBinderWithAnalyzer( ^( id result_, NSError** error_ )
     {
-        return [ NSArray arrayWithObject: result_ ];
+        return @[ result_ ];
     } );
     return bindSequenceOfAsyncOperations( loader_, secondLoaderBinder_, nil );
 }
@@ -475,9 +475,9 @@ static JFFAsyncOperation resultToArrayForLoader( JFFAsyncOperation loader_ )
 static JFFAsyncOperation MergeGroupLoaders( MergeTwoLoadersPtr merger_, NSArray* blocks_ )
 {
     if ( ![ blocks_ lastObject ] )
-        return asyncOperationWithResult( [ NSArray new ] );
+        return asyncOperationWithResult( @[] );
 
-    JFFAsyncOperation firstBlock_ = [ blocks_ objectAtIndex: 0 ];
+    JFFAsyncOperation firstBlock_ = blocks_[ 0 ];
     JFFAsyncOperation arrayFirstBlock_ = resultToArrayForLoader( firstBlock_ );
 
     for ( JFFAsyncOperation secondBlock_ in blocks_ )
@@ -563,7 +563,7 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair( JFFAsyncOpe
             return ^void( id result_, NSError* error_ )
             {
                 if ( result_ )
-                    [ complexResult_ replaceObjectAtIndex: index_ withObject: result_ ];
+                    complexResult_[ index_ ] = result_;
                 BOOL firstError_ = error_ && cancelCallbackHolder_;
                 if ( loaded_ || firstError_ )
                 {

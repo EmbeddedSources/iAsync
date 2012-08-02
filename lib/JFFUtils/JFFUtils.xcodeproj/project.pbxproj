@@ -38,6 +38,9 @@
 		1B909B8114EA918800B19283 /* JFFRuntimeInitializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B909B7E14EA918800B19283 /* JFFRuntimeInitializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B909B8514EA919400B19283 /* NSString+Format.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B909B8314EA919400B19283 /* NSString+Format.h */; };
 		1B909B8614EA919400B19283 /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B909B8414EA919400B19283 /* NSString+Format.m */; };
+		1B9C101015C802E600C20BCA /* JFFClangLiterals.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B9C100F15C802E600C20BCA /* JFFClangLiterals.h */; };
+		1B9C101115C802E600C20BCA /* JFFClangLiterals.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B9C100F15C802E600C20BCA /* JFFClangLiterals.h */; };
+		1B9C101215C802E600C20BCA /* JFFClangLiterals.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B9C100F15C802E600C20BCA /* JFFClangLiterals.h */; };
 		1BA30C2C151A384100329EA6 /* JFFRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA30C2A151A384100329EA6 /* JFFRuntime.h */; };
 		1BA30C2D151A384100329EA6 /* JFFRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA30C2B151A384100329EA6 /* JFFRuntime.m */; };
 		1BA676BB144C3FE900B14D49 /* UIWebView+UserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676B9144C3FE900B14D49 /* UIWebView+UserAgent.h */; };
@@ -333,6 +336,7 @@
 		1B909B7E14EA918800B19283 /* JFFRuntimeInitializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRuntimeInitializer.m; sourceTree = "<group>"; };
 		1B909B8314EA919400B19283 /* NSString+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Format.h"; sourceTree = "<group>"; };
 		1B909B8414EA919400B19283 /* NSString+Format.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Format.m"; sourceTree = "<group>"; };
+		1B9C100F15C802E600C20BCA /* JFFClangLiterals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFClangLiterals.h; sourceTree = "<group>"; };
 		1BA30C2A151A384100329EA6 /* JFFRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRuntime.h; sourceTree = "<group>"; };
 		1BA30C2B151A384100329EA6 /* JFFRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRuntime.m; sourceTree = "<group>"; };
 		1BA676B9144C3FE900B14D49 /* UIWebView+UserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UserAgent.h"; sourceTree = "<group>"; };
@@ -658,6 +662,7 @@
 				1B104D8D1483C8410025FDDA /* JSignedRange.m */,
 				534CDFC014A8C2930068F4DF /* JFFCastFunctions.hpp */,
 				5349A6C514A9CEA7008ECCA6 /* JFFCastFunctions.mm */,
+				1B9C100F15C802E600C20BCA /* JFFClangLiterals.h */,
 				651BE27B1391BD7800DD6890 /* JFFUtils.h */,
 			);
 			name = Classes;
@@ -781,6 +786,7 @@
 				538E1CAE14B32201006BD40A /* NSDecimalNumber+Increment.h in Headers */,
 				7E44D668158F179400A2C11E /* NSURL+CPlusPlus.h in Headers */,
 				7E44D673158F189F00A2C11E /* NSString+CPlusPlus.h in Headers */,
+				1B9C101215C802E600C20BCA /* JFFClangLiterals.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,6 +799,7 @@
 				538E1CAD14B32201006BD40A /* NSDecimalNumber+Increment.h in Headers */,
 				7E44D667158F179400A2C11E /* NSURL+CPlusPlus.h in Headers */,
 				7E44D672158F189F00A2C11E /* NSString+CPlusPlus.h in Headers */,
+				1B9C101115C802E600C20BCA /* JFFClangLiterals.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +905,7 @@
 				1BE053071547E61A00270B58 /* NSSet+BlocksAdditions.h in Headers */,
 				7E44D666158F179400A2C11E /* NSURL+CPlusPlus.h in Headers */,
 				7E44D671158F189F00A2C11E /* NSString+CPlusPlus.h in Headers */,
+				1B9C101015C802E600C20BCA /* JFFClangLiterals.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,7 +990,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "JFFUtils" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1302,7 +1310,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1319,7 +1326,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1378,6 +1384,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1408,6 +1415,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (

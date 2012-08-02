@@ -4,15 +4,11 @@
 
 @implementation JFFURLResponse
 
-@synthesize statusCode
-, allHeaderFields
-, url;
-
 @dynamic expectedContentLength;
 
 -(long long)expectedContentLength
 {
-    return [ [ allHeaderFields objectForKey: @"Content-Length" ] longLongValue ];
+    return [ self->_allHeaderFields[ @"Content-Length" ] longLongValue ];
 }
 
 #pragma mark -

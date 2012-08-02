@@ -2,9 +2,6 @@
 
 @implementation JFFAlertButton
 
-@synthesize title;
-@synthesize action;
-
 -(id)initButton:( NSString* )title_ action:( JFFSimpleBlock )action_
 {
     self = [ super init ];

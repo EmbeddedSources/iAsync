@@ -304,7 +304,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "JFFScheduler" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -448,7 +448,6 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFScheduler_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFScheduler;
@@ -463,7 +462,6 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFScheduler_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFScheduler;
@@ -475,7 +473,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -491,7 +488,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -541,6 +537,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -570,6 +567,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (

@@ -2,6 +2,8 @@
 #import "NSArray+BlocksAdditions.h"
 #import "NSArray+IsEmpty.h"
 
+#import "JFFClangLiterals.h"
+
 @implementation NSArray( RemoveDuplicates )
 
 -(NSArray*)arrayByRemovingDuplicates
@@ -31,34 +33,34 @@
     }
 
     //Shrink the capacity
-    return [ [ NSArray alloc ] initWithArray: result_ ];
+    return [ result_ copy ];
 }
 
 -(NSArray*)uniqueBy:( JFFEqualityCheckerBlock )predicate_
 {
-    NSMutableArray* myCopy_ = [ [ NSMutableArray alloc ] initWithArray: self ];
+    NSMutableArray* myCopy_ = [ self mutableCopy ];
 
-    NSUInteger items_count_ = [ self count ];
-    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: items_count_ ];
+    NSUInteger itemsCount_ = [ self count ];
+    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: itemsCount_ ];
 
     NSArray* filtered_ = nil;
-    JFFPredicateBlock search_predicate_ = nil;
+    JFFPredicateBlock searchPredicate_ = nil;
     while ( [ myCopy_ hasElements ] )
     {
-        id firstItem_ = [ myCopy_ objectAtIndex: 0 ];
+        id firstItem_ = myCopy_[ 0 ];
 
-        search_predicate_ = ^BOOL( id itemObject_ )
+        searchPredicate_ = ^BOOL( id itemObject_ )
         {
             return predicate_( firstItem_, itemObject_ );
         };
-        filtered_ = [ myCopy_ select: search_predicate_ ];
+        filtered_ = [ myCopy_ select: searchPredicate_ ];
 
         [ result_ addObject: firstItem_ ];
         [ myCopy_ removeObjectsInArray: filtered_ ];
     }
 
     //Shrink the capacity
-    return [ NSArray arrayWithArray: result_ ];
+    return [ result_ copy ];
 }
 
 @end

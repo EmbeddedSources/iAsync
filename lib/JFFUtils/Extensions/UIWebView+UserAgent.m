@@ -51,9 +51,7 @@ static NSString* userAgent()
                                , webViewUserAgent_
                                , userAgentAddition_ ];
 
-    NSDictionary* dictionnary_ = [ [ NSDictionary alloc ] initWithObjectsAndKeys:
-                                  newUserAgent_, @"UserAgent"
-                                  , nil];
+    NSDictionary* dictionnary_ = @{ @"UserAgent" : newUserAgent_ };
     [ [ NSUserDefaults standardUserDefaults ] registerDefaults: dictionnary_ ];
 }
 

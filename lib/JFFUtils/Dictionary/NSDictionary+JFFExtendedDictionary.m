@@ -1,17 +1,19 @@
 #import "NSDictionary+JFFExtendedDictionary.h"
 
+#import "JFFClangLiterals.h"
+
 @implementation NSDictionary (JFFExtendedDictionary)
 
 -(NSDictionary*)dictionaryByAddingObjectsFromDictionary:( NSDictionary* )dictionary_
 {
-    NSMutableDictionary* result_ = [ [ NSMutableDictionary alloc ] initWithDictionary: self ];
+    NSMutableDictionary* result_ = [ self mutableCopy ];
 
     [ dictionary_ enumerateKeysAndObjectsUsingBlock: ^( id key_, id object_, BOOL *stop_ )
     {
-        [ result_ setObject: object_ forKey: key_ ];
+        result_[ key_ ] = object_;
     } ];
 
-    return [ [ NSDictionary alloc ] initWithDictionary: result_ ];
+    return [ result_ copy ];
 }
 
 @end

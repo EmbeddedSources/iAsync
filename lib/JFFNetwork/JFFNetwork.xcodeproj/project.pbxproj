@@ -832,7 +832,7 @@
 		8D5AE6D213F3E6C500EB6143 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 8D5AE6D513F3E6C500EB6143 /* Build configuration list for PBXProject "JFFNetwork" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1099,6 +1099,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
@@ -1106,7 +1107,6 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFNetworkMacOS/JFFNetworkMacOS-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1120,6 +1120,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1128,7 +1129,6 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFNetworkMacOS/JFFNetworkMacOS-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1180,7 +1180,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1189,7 +1188,6 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1207,9 +1205,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

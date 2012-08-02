@@ -7,10 +7,6 @@
 
 @implementation JULoadMoreCellscalculator
 
-@synthesize currentCount = _current_count;
-@synthesize pageSize     = _page_size;
-@synthesize totalElementsCount = _total_elements_count;
-
 @dynamic isPagingDisabled;
 @dynamic isPagingEnabled ;
 @dynamic numberOfRows    ;
@@ -74,18 +70,18 @@ static const NSUInteger RIPagingDisabled         = 0;
       return nil;
    }
    
-   NSMutableArray* index_paths_ = [ NSMutableArray arrayWithCapacity: cells_count_ ];
-   
-   NSUInteger new_row_index_ = self.currentCount + 1; //right after LoadMore button.
-   for ( int i = 0; i < cells_count_; ++i, ++new_row_index_ )
+   NSMutableArray* indexPaths_ = [ [ NSMutableArray alloc ] initWithCapacity: cells_count_ ];
+
+   NSUInteger newRowIndex_ = self.currentCount + 1; //right after LoadMore button.
+   for ( int i = 0; i < cells_count_; ++i, ++newRowIndex_ )
    {
-      NSIndexPath* new_item_ = [ NSIndexPath indexPathForRow: new_row_index_
-                                                   inSection: 0 ];
-      
-      [ index_paths_ addObject: new_item_ ];
+      NSIndexPath* newItem_ = [ NSIndexPath indexPathForRow: newRowIndex_
+                                                  inSection: 0 ];
+
+      [ indexPaths_ addObject: newItem_ ];
    }
-   
-   return index_paths_;
+
+   return indexPaths_;
 }
 
 -(NSUInteger)suggestElementsToAddCountForIndexPath:( NSIndexPath* )index_path_
@@ -176,7 +172,7 @@ static const NSUInteger RIPagingDisabled         = 0;
 }
 
 
--(void)insertToTableView:( id<JUTableViewHolder> )table_view_holder_
+-(void)insertToTableView:( id<JUTableViewHolder> )tableViewHolder_
              bottomCells:(NSUInteger)cells_count_
          overflowOccured:( BOOL )is_overflow_
 {
@@ -190,29 +186,29 @@ static const NSUInteger RIPagingDisabled         = 0;
    
     NSArray* index_paths_ = [ self prepareIndexPathEntriesForBottomCells: cells_count_ ];
    
-    NSDebugLog( @"index_path_[%d] : %@ .. %@", [ index_paths_ count ], [ index_paths_ objectAtIndex: 0 ], [ index_paths_ lastObject ] );
+    NSDebugLog( @"index_path_[%d] : %@ .. %@", [ index_paths_ count ], index_paths_[ 0 ], [ index_paths_ lastObject ] );
     NSDebugLog( @"page size : %d", [ self pageSize ] );
-   
-    [ table_view_holder_.tableView withinUpdates: ^void( void )
+
+    [ tableViewHolder_.tableView withinUpdates: ^void( void )
     {
         NSDebugLog( @"beginUpdates" );      
-        NSArray* load_more_path_array_ = [ NSArray arrayWithObject: self.loadMoreIndexPath ];
-       
-        [ [ table_view_holder_ tableView ] reloadRowsAtIndexPaths: load_more_path_array_
+        NSArray* load_more_path_array_ = @[ self.loadMoreIndexPath ];
+
+        [ [ tableViewHolder_ tableView ] reloadRowsAtIndexPaths: load_more_path_array_
                                                  withRowAnimation: UITableViewRowAnimationNone ];
-       
-       
-        [ [ table_view_holder_ tableView ] insertRowsAtIndexPaths: index_paths_ 
+
+
+        [ [ tableViewHolder_ tableView ] insertRowsAtIndexPaths: index_paths_ 
                                                  withRowAnimation: UITableViewRowAnimationNone ];
-       
-       
+
+
         NSDebugLog( @"Updating currentCount..." );
         self.currentCount += cells_count_;
         if ( is_overflow_ && ( self.currentCount < self.totalElementsCount ) )
         {
             ++self.currentCount;
         }
-        [ table_view_holder_ setCurrentCount: self.currentCount ];
+        [ tableViewHolder_ setCurrentCount: self.currentCount ];
 
         NSDebugLog( @"currentCount : %d", self.currentCount );
         NSDebugLog( @"endUpdates" );
@@ -265,9 +261,9 @@ static const NSUInteger RIPagingDisabled         = 0;
 #pragma mark Utils
 +(NSArray*)defaultUpdateScopeForIndex:( NSUInteger )index_
 {
-    NSIndexPath* index_path_ = [ NSIndexPath indexPathForRow: index_
-                                                   inSection: 0 ];
-    NSArray* result_ = [ NSArray arrayWithObject: index_path_ ];
+    NSIndexPath* indexPath_ = [ NSIndexPath indexPathForRow: index_
+                                                  inSection: 0 ];
+    NSArray* result_ = @[ indexPath_ ];
 
     return result_;
 }

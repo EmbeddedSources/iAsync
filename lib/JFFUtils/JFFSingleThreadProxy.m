@@ -9,9 +9,6 @@
 @end
 
 @implementation JFFProxyObjectContainer
-
-@synthesize target;
-
 @end
 
 @implementation JFFSingleThreadProxy

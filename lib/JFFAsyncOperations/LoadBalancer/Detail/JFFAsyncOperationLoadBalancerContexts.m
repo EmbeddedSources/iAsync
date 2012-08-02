@@ -3,16 +3,15 @@
 #import "JFFContextLoaders.h"
 
 @implementation JFFAsyncOperationLoadBalancerContexts
-
-@synthesize currentContextName = _currentContextName;
-@synthesize activeContextName = _activeContextName;
-@synthesize contextLoadersByName = _contextLoadersByName;
+{
+    NSMutableDictionary* _contextLoadersByName;
+}
 
 -(void)dealloc
 {
-    [ _currentContextName release ];
-    [ _activeContextName release ];
-    [ _contextLoadersByName release ];
+    [ self->_currentContextName release ];
+    [ self->_activeContextName release ];
+    [ self->_contextLoadersByName release ];
 
     [ super dealloc ];
 }

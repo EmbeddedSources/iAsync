@@ -2,11 +2,9 @@
 
 @implementation JFFAssignProxy
 
-@synthesize target = _target;
-
 -(id)initWithTarget:( id )target_
 {
-    _target = target_;
+    self->_target = target_;
 
     return self;
 }

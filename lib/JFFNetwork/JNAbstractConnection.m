@@ -2,11 +2,6 @@
 
 @implementation JNAbstractConnection
 
-@synthesize didReceiveResponseBlock = _didReceiveResponseBlock;
-@synthesize didReceiveDataBlock     = _didReceiveDataBlock    ;
-@synthesize didFinishLoadingBlock   = _didFinishLoadingBlock  ;
-@synthesize shouldAcceptCertificateBlock = _shouldAcceptCertificateBlock;
-
 #pragma mark -
 #pragma mark Not Supported
 -(void)start

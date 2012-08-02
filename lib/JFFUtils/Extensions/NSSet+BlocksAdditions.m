@@ -15,13 +15,13 @@
 
 -(NSArray*)selectArray:( JFFPredicateBlock )predicate_
 {
-    NSMutableArray* result_ = [ NSMutableArray new ];
+    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
     for ( id object_ in self )
     {
         if ( predicate_( object_ ) )
             [ result_ addObject: object_ ];
     }
-    return [ [ NSArray alloc ] initWithArray: result_ ];
+    return [ result_ copy ];
 }
 
 @end

@@ -3,6 +3,7 @@
 
 #import <JFFUtils/NSObject/NSObject+RuntimeExtensions.h>
 #import <JFFUtils/NSObject/NSObject+OnDeallocBlock.h>
+#import <JFFUtils/JFFClangLiterals.h>
 
 #include <assert.h>
 #include <stdbool.h>
@@ -52,7 +53,12 @@ static bool AmIBeingDebugged(void)
 
 @implementation JFFNSObjectInstancesCounter
 
-@synthesize instancesNumberByClassName = _instancesNumberByClassName;
+-(void)dealloc
+{
+    [ self->_instancesNumberByClassName release ];
+
+    [ super dealloc ];
+}
 
 -(id)init
 {
@@ -60,7 +66,7 @@ static bool AmIBeingDebugged(void)
 
     if ( self )
     {
-        self.instancesNumberByClassName = [ NSMutableDictionary dictionary ];
+        self->_instancesNumberByClassName = [ NSMutableDictionary new ];
     }
 
     return self;
@@ -79,11 +85,10 @@ static bool AmIBeingDebugged(void)
     @synchronized( self )
     {
         NSString* className_ = NSStringFromClass( class_ );
-        NSNumber* number_ = [ self.instancesNumberByClassName objectForKey: className_ ];
+        NSNumber* number_ = self.instancesNumberByClassName[ className_ ];
         NSUInteger instances_count_  = [ number_ unsignedIntValue ];
-        NSNumber* instancesCountNum_ = [ NSNumber numberWithUnsignedInteger: ++instances_count_ ];
-        [ self.instancesNumberByClassName setObject: instancesCountNum_
-                                             forKey: className_ ];
+        NSNumber* instancesCountNum_ = @( ++instances_count_ );
+        self.instancesNumberByClassName[ instancesCountNum_ ] = className_;
     }
 }
 
@@ -91,12 +96,11 @@ static bool AmIBeingDebugged(void)
 {
     @synchronized( self )
     {
-        NSString* class_name_ = NSStringFromClass( class_ );
-        NSNumber* number_ = [ self.instancesNumberByClassName objectForKey: class_name_ ];
+        NSString* className_ = NSStringFromClass( class_ );
+        NSNumber* number_ = self.instancesNumberByClassName[ className_ ];
         NSUInteger instancesCount_  = [ number_ unsignedIntValue ];
-        NSNumber* instancesCountNum_ = [ NSNumber numberWithUnsignedInteger: --instancesCount_ ];
-        [ self.instancesNumberByClassName setObject: instancesCountNum_
-                                             forKey: class_name_ ];
+        NSNumber* instancesCountNum_ = @( --instancesCount_ );
+        self.instancesNumberByClassName[ instancesCountNum_ ] = className_;
     }
 }
 
@@ -150,12 +154,11 @@ static bool AmIBeingDebugged(void)
 {
     @synchronized( self )
     {
-        NSString* class_name_ = NSStringFromClass( class_ );
-        NSNumber* number_ = [ self.instancesNumberByClassName objectForKey: class_name_ ];
+        NSString* className_ = NSStringFromClass( class_ );
+        NSNumber* number_ = self.instancesNumberByClassName[ className_ ];
         if ( !number_ )
         {
-            NSNumber* firstIndex_ = [ NSNumber numberWithInteger: 0 ];
-            [ self.instancesNumberByClassName setObject: firstIndex_ forKey: class_name_ ];
+            self.instancesNumberByClassName[ @0 ] = className_;
             
             {
                 BOOL method_added_ = [ [ self class ] addClassMethodIfNeedWithSelector: @selector( alloCWithZoneToAdding: )
@@ -180,7 +183,7 @@ static bool AmIBeingDebugged(void)
     @synchronized( self )
     {
         NSString* class_name_ = NSStringFromClass( class_ );
-        NSNumber* number_ = [ self.instancesNumberByClassName objectForKey: class_name_ ];
+        NSNumber* number_ = self.instancesNumberByClassName[ class_name_ ];
         return [ number_ unsignedIntValue ];
     }
 }

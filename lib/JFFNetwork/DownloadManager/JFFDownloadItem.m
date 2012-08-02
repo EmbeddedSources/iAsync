@@ -39,13 +39,6 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     JFFMulticastDelegate< JFFDownloadItemDelegate >* _multicastDelegate;
 }
 
-@synthesize url = _url;
-@synthesize localFilePath = _local_file_path;
-@synthesize stopBlock = _stop_block;
-@synthesize downlodingSpeed = _downloding_speed;
-@synthesize downloadedFileLength = _downloaded_file_length;
-@synthesize fileLength = _file_length;
-
 @dynamic downloadedFlag;
 @dynamic downloaded;
 @dynamic activeDownload;
@@ -300,7 +293,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
                                                          , JFFDidFinishAsyncOperationHandler done_callback_ )
     {
         NSString* range_ = [ NSString stringWithFormat: @"bytes=%qu-", self.downloadedFileLength ];
-        NSDictionary* headers_ = [ NSDictionary dictionaryWithObject: range_ forKey: @"Range" ];
+        NSDictionary* headers_ = @{ @"Range" : range_ };
 
         JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
         params_.url     = self.url;

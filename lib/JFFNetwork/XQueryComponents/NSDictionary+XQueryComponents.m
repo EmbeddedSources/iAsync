@@ -22,7 +22,7 @@ static NSString* const queryComponentSeparator_ = @"&";
 -(NSArray*)arrayOfQueryComponentsForKey:( NSString* )key_
 {
     NSString* component_ = [ self stringFromQueryComponentAndKey: key_ ];
-    return [ NSArray arrayWithObject: component_ ];
+    return @[ component_ ];
 }
 
 @end
@@ -45,7 +45,7 @@ static NSString* const queryComponentSeparator_ = @"&";
 {
     NSArray* result_ = [ [ self allKeys ] flatten: ^NSArray*( id key_ )
     {
-        NSObject* values_ = [ self objectForKey: key_ ];
+        NSObject* values_ = self[ key_ ];
         NSString* encodedKey_ = [ key_ stringByEncodingURLFormat ];
         return [ values_ arrayOfQueryComponentsForKey: encodedKey_ ];
     } ];
@@ -54,7 +54,7 @@ static NSString* const queryComponentSeparator_ = @"&";
 
 -(NSString*)firstValueIfExsistsForKey:( NSString* )key_
 {
-    return [ [ self objectForKey: key_ ] noThrowObjectAtIndex: 0 ];
+    return [ self[ key_ ] noThrowObjectAtIndex: 0 ];
 }
 
 @end

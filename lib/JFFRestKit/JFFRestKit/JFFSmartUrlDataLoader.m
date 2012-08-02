@@ -24,14 +24,6 @@
 @end
 
 @implementation JFFSmartUrlDataLoaderFields
-
-@synthesize urlBuilder
-, dataLoaderForURL
-, analyzerForData
-, cache
-, cacheKeyForURL
-, cacheDataLifeTime;
-
 @end
 
 @interface JFFResponseDataWithUpdateData : NSObject
@@ -42,10 +34,6 @@
 @end
 
 @implementation JFFResponseDataWithUpdateData
-
-@synthesize data       = _data;
-@synthesize updateDate = _updateDate;
-
 @end
 
 JFFAsyncOperation jSmartDataLoaderWithCache( JFFSmartUrlDataLoaderFields* args_ )

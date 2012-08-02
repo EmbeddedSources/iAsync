@@ -17,11 +17,6 @@
     BOOL _barrier;
 }
 
-@synthesize loadDataBlock      = _loadDataBlock;
-@synthesize didLoadDataBlock   = _didLoadDataBlock;
-@synthesize progressBlock      = _progressBlock;
-@synthesize finishedOrCanceled = _finishedOrCanceled;
-
 -(void)dealloc
 {
     NSAssert( !self->_didLoadDataBlock, @"should be nil" );
@@ -115,7 +110,10 @@
                     [ self progressWithInfo: info_ ];
                 } );
             };
-            opResult_ = loadDataBlock_( &error_, progressCallback_ );
+            @autoreleasepool
+            {
+                opResult_ = loadDataBlock_( &error_, progressCallback_ );
+            }
         }
         @catch ( NSException* ex_ )
         {

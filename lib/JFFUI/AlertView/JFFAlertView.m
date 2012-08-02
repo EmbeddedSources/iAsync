@@ -23,8 +23,6 @@
     BOOL _ignoreDismiss;
 }
 
-@synthesize dismissBeforeEnterBackground = _dismissBeforeEnterBackground;
-@synthesize didPresentHandler = _didPresentHandler;
 @dynamic isOnScreen;
 
 -(void)dealloc
@@ -295,7 +293,7 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
 
 -(void)alertView:( UIAlertView* )alertView_ clickedButtonAtIndex:( NSInteger )buttonIndex_
 {
-    JFFAlertButton* alertButton_ = [ _alertButtons objectAtIndex: buttonIndex_ ];
+    JFFAlertButton* alertButton_ = self->_alertButtons[ buttonIndex_ ];
 
     if ( alertButton_ )
     {

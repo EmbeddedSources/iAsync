@@ -1,5 +1,7 @@
 #import "JFFSecureStorage.h"
 
+#import <JFFUtils/JFFClangLiterals.h>
+
 static NSString* identifier_ = @"Login&Password";
 
 @protocol JFFSecureStorage < NSObject >
@@ -37,12 +39,9 @@ static NSString* identifier_ = @"Login&Password";
     NSMutableDictionary* dict_ = [ [ NSMutableDictionary alloc ] initWithContentsOfFile: path_ ];
     dict_ = dict_ ?: [ NSMutableDictionary new ];
 
-    NSDictionary* loginPasswordData_ = [ [ NSDictionary alloc ] initWithObjectsAndKeys:
-                                        login_     , @"login"
-                                        , password_, @"password"
-                                        , nil ];
+    NSDictionary* loginPasswordData_ = @{ @"login" : login_, @"password" : password_ };
 
-    [ dict_ setObject: loginPasswordData_ forKey: [ url_ description ] ];
+    dict_[ [ url_ description ] ] = loginPasswordData_;
 
     [ dict_ writeToFile: path_ atomically: YES ];
 }
@@ -53,14 +52,14 @@ static NSString* identifier_ = @"Login&Password";
     NSString* path_ = [ [ self class ] secureStorageFilePath ];
     NSDictionary* dict_ = [ [ NSDictionary alloc ] initWithContentsOfFile: path_ ];
 
-    NSDictionary* loginPasswordData_ = [ dict_ objectForKey: [ url_ description ] ];
+    NSDictionary* loginPasswordData_ = dict_[ [ url_ description ] ];
 
     if ( login_ )
     {
-        *login_ = [ loginPasswordData_ objectForKey: @"login" ];
+        *login_ = loginPasswordData_[ @"login" ];
     }
 
-    return [ loginPasswordData_ objectForKey: @"password" ];
+    return loginPasswordData_[ @"password" ];
 }
 
 @end
@@ -76,24 +75,18 @@ static NSString* identifier_ = @"Login&Password";
 
 @implementation JFFDeviceSecureStorage
 
-@synthesize genericPasswordQuery = _genericPasswordQuery;
-
 -(id)init
 {
     self = [ super init ];
 
     if ( self )
     {
-        _genericPasswordQuery = [ NSMutableDictionary new ];
+        self->_genericPasswordQuery = [ NSMutableDictionary new ];
 
-        [ _genericPasswordQuery setObject: identifier_
-                                   forKey: (__bridge id)kSecAttrGeneric ];
-        [ _genericPasswordQuery setObject: (__bridge id)kSecClassGenericPassword
-                                   forKey: (__bridge id)kSecClass ];
-        [ _genericPasswordQuery setObject: (__bridge id)kSecMatchLimitOne
-                                   forKey: (__bridge id)kSecMatchLimit ];
-        [ _genericPasswordQuery setObject: (__bridge id)kCFBooleanTrue
-                                   forKey: (__bridge id)kSecReturnAttributes ];
+        self->_genericPasswordQuery[ (__bridge id)kSecAttrGeneric      ] = identifier_;
+        self->_genericPasswordQuery[ (__bridge id)kSecClass            ] = (__bridge id)kSecClassGenericPassword;
+        self->_genericPasswordQuery[ (__bridge id)kSecMatchLimit       ] = (__bridge id)kSecMatchLimitOne;
+        self->_genericPasswordQuery[ (__bridge id)kSecReturnAttributes ] = (__bridge id)kCFBooleanTrue;
     }
 
     return self;
@@ -101,13 +94,10 @@ static NSString* identifier_ = @"Login&Password";
 
 -(NSString*)passwordFromSecItemFormat:( NSDictionary* )dictionaryToConvert_
 {
-    NSMutableDictionary* returnDictionary_ =
-    [ [ NSMutableDictionary alloc ] initWithDictionary: dictionaryToConvert_ ];
+    NSMutableDictionary* returnDictionary_ = [ dictionaryToConvert_ mutableCopy ];
 
-    [ returnDictionary_ setObject: (__bridge id)kCFBooleanTrue
-                           forKey: (__bridge id)kSecReturnData ];
-    [ returnDictionary_ setObject: (__bridge id)kSecClassGenericPassword
-                           forKey: (__bridge id)kSecClass ];
+    returnDictionary_[ (__bridge id)kSecReturnData ] = (__bridge id)kCFBooleanTrue;
+    returnDictionary_[ (__bridge id)kSecClass      ] = (__bridge id)kSecClassGenericPassword;
 
     NSData*   passwordData_ = nil;
     NSString* password_     = nil;
@@ -136,7 +126,7 @@ static NSString* identifier_ = @"Login&Password";
 {
     if ( login_ )
     {
-        *login_ = [ dictionaryToConvert_ objectForKey: (__bridge id)kSecAttrAccount ];
+        *login_ = dictionaryToConvert_[ (__bridge id)kSecAttrAccount ];
         NSLog( @"*login_: %@", *login_ );
     }
 
@@ -145,16 +135,13 @@ static NSString* identifier_ = @"Login&Password";
 
 -(NSMutableDictionary*)dictionaryToSecItemFormat:( NSDictionary* )dictionaryToConvert_
 {
-    NSMutableDictionary* returnDictionary_ =
-    [ [ NSMutableDictionary alloc ] initWithDictionary: dictionaryToConvert_ ];
+    NSMutableDictionary* returnDictionary_ = [ dictionaryToConvert_ mutableCopy ];
 
-    NSString* passwordString_ = [ dictionaryToConvert_ objectForKey: (__bridge id)kSecValueData ];
-    NSString* urlString_      = [ [ dictionaryToConvert_ objectForKey: (__bridge id)kSecAttrService ] description ];
+    NSString* passwordString_ = dictionaryToConvert_[ (__bridge id)kSecValueData ];
+    NSString* urlString_      = [ dictionaryToConvert_[ (__bridge id)kSecAttrService ] description ];
 
-    [ returnDictionary_ setObject: [ passwordString_ dataUsingEncoding: NSUTF8StringEncoding ]
-                           forKey: (__bridge id)kSecValueData ];
-    [ returnDictionary_ setObject: urlString_
-                           forKey: (__bridge id)kSecAttrService ];
+    returnDictionary_[ (__bridge id)kSecValueData   ] = [ passwordString_ dataUsingEncoding: NSUTF8StringEncoding ];
+    returnDictionary_[ (__bridge id)kSecAttrService ] = urlString_;
 
     return returnDictionary_;
 }
@@ -164,23 +151,22 @@ static NSString* identifier_ = @"Login&Password";
     NSMutableDictionary* result_ = [ NSMutableDictionary new ];
 
     // Default attributes for keychain item.
-    [ result_ setObject: @"" forKey: (__bridge id)kSecAttrAccount ];
-    [ result_ setObject: @"" forKey: (__bridge id)kSecAttrLabel ];
-    [ result_ setObject: @"" forKey: (__bridge id)kSecAttrDescription ];
+    result_[ (__bridge id)kSecAttrAccount     ] = @"";
+    result_[ (__bridge id)kSecAttrLabel       ] = @"";
+    result_[ (__bridge id)kSecAttrDescription ] = @"";
 
     // Default data for keychain item.
-    [ result_ setObject: @"" forKey: (__bridge id)kSecValueData ];
-    [ result_ setObject: identifier_ forKey: (__bridge id)kSecAttrGeneric ];
+    result_[ (__bridge id)kSecValueData   ] = @"";
+    result_[ (__bridge id)kSecAttrGeneric ] = identifier_;
 
     return result_;
 }
 
 -(NSDictionary*)queryForURL:( NSURL* )url_
 {
-    NSMutableDictionary* result_ =
-        [ [ NSMutableDictionary alloc ] initWithDictionary: self.genericPasswordQuery ];
-    [ result_ setObject: [ url_ description ] forKey: (__bridge id)kSecAttrService ];
-    return [ [ NSDictionary alloc ] initWithDictionary: result_ ];
+    NSMutableDictionary* result_ = [ self.genericPasswordQuery mutableCopy ];
+    result_[ (__bridge id)kSecAttrService ] = [ url_ description ];
+    return [ result_ copy ];
 }
 
 -(void)writeToKeychainLogin:( NSString* )login_
@@ -192,11 +178,10 @@ static NSString* identifier_ = @"Login&Password";
 
     NSMutableDictionary* keychainItemData_ = [ self defaultKeychainItemData ];
 
-    [ keychainItemData_ setObject: login_    forKey: (__bridge id)kSecAttrAccount ];
-    [ keychainItemData_ setObject: password_ forKey: (__bridge id)kSecValueData   ];
-    [ keychainItemData_ setObject: url_      forKey: (__bridge id)kSecAttrService ];
-    [ keychainItemData_ setObject: (__bridge id)kSecAttrAccessibleWhenUnlocked 
-                           forKey: (__bridge id)kSecAttrAccessible ];
+    keychainItemData_[ (__bridge id)kSecAttrAccount    ] = login_;
+    keychainItemData_[ (__bridge id)kSecValueData      ] = password_;
+    keychainItemData_[ (__bridge id)kSecAttrService    ] = url_;
+    keychainItemData_[ (__bridge id)kSecAttrAccessible ] = (__bridge id)kSecAttrAccessibleWhenUnlocked;
 
     NSMutableDictionary* updateItem_ = nil;
 
@@ -211,8 +196,8 @@ static NSString* identifier_ = @"Login&Password";
     {
         NSDictionary* attributes_ = (__bridge_transfer NSDictionary *)cfresult_;
 
-        updateItem_ = [ [ NSMutableDictionary alloc ] initWithDictionary: attributes_ ];
-        [ updateItem_ setObject: (__bridge id)kSecClassGenericPassword forKey: (__bridge id)kSecClass ];
+        updateItem_ = [ attributes_ mutableCopy ];
+        updateItem_[ (__bridge id)kSecClass ] = (__bridge id)kSecClassGenericPassword;
 
         CFDictionaryRef cfSecDictionary_ = (__bridge_retained CFDictionaryRef)secDictionary_;
         CFDictionaryRef cfUpdateItem_    = (__bridge_retained CFDictionaryRef)updateItem_;
@@ -225,7 +210,7 @@ static NSString* identifier_ = @"Login&Password";
     else
     {
         // No previous item found, add the new one.
-        [ secDictionary_ setObject: (__bridge id)kSecClassGenericPassword forKey: (__bridge id)kSecClass ];
+        secDictionary_[ (__bridge id)kSecClass ] = (__bridge id)kSecClassGenericPassword;
 
         CFDictionaryRef cfSecDictionary_ = (__bridge_retained CFDictionaryRef)secDictionary_;
 
@@ -282,8 +267,6 @@ static NSString* identifier_ = @"Login&Password";
 @end
 
 @implementation JFFSecureStorage
-
-@synthesize secureStorage = _secureStorage;
 
 -(id)init
 {

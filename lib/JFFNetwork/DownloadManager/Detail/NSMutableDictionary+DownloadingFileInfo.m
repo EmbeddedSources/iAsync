@@ -24,7 +24,7 @@
 {
     NSMutableDictionary* dict_ = [ self dictionaryWithDownloadFilesInfo ];
 
-    NSNumber* fileLength_ = [ dict_ objectForKey: [ url_ absoluteString ] ];
+    NSNumber* fileLength_ = dict_[ [ url_ absoluteString ] ];
     if ( fileLength_ )
     {
         return [ fileLength_ unsignedLongLongValue ];
@@ -32,13 +32,12 @@
     return NSURLResponseUnknownLength;
 }
 
-+(void)setFileLength:( unsigned long long )file_length_
++(void)setFileLength:( unsigned long long )fileLength_
    forDestinationURL:( NSURL* )url_
 {
     NSMutableDictionary* dict_ = [ self dictionaryWithDownloadFilesInfo ];
 
-    NSNumber* fileLengthNumber_ = [ NSNumber numberWithUnsignedLongLong: file_length_ ];
-    [ dict_ setObject: fileLengthNumber_ forKey: [ url_ absoluteString ] ];
+    dict_[ [ url_ absoluteString ] ] = @( fileLength_ );
 
     [ dict_ writeToFileDownloadFilesInfo ];
 }

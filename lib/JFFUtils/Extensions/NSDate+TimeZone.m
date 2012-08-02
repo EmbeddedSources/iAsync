@@ -26,7 +26,7 @@
 
     unsigned long long timeIntervalSince_1970_ = [ dateWithTimeZone_ timeIntervalSince1970 ] * 1000;
 
-    return [ NSNumber numberWithUnsignedLongLong: timeIntervalSince_1970_ ];
+    return @( timeIntervalSince_1970_ );
 }
 
 @end

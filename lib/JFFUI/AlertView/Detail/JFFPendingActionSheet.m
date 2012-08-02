@@ -2,9 +2,6 @@
 
 @implementation JFFPendingActionSheet
 
-@synthesize actionSheet = _actionSheet;
-@synthesize view        = _view;
-
 -(id)initWithActionSheet:( JFFActionSheet* )actionSheet_
                     view:( UIView* )view_
 {

@@ -2,8 +2,6 @@
 
 @implementation JFFSimpleBlockHolder
 
-@synthesize simpleBlock = _simple_block;
-
 -(void)performBlockOnce
 {
    if ( !self.simpleBlock )

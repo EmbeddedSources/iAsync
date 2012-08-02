@@ -7,6 +7,8 @@
 
 #include "JFFUtilsBlockDefinitions.h"
 
+#import "JFFClangLiterals.h"
+
 @interface JFFAutoRemoveFromDictAssignProxy : JFFAssignProxy
 
 @property ( nonatomic, copy ) JFFSimpleBlock onDeallocBlock;
@@ -14,8 +16,6 @@
 @end
 
 @implementation JFFAutoRemoveFromDictAssignProxy
-
-@synthesize onDeallocBlock = _onDeallocBlock;
 
 -(void)onAddToMutableAssignDictionary:( JFFMutableAssignDictionary* )dict_
                                   key:( id )key_
@@ -43,8 +43,6 @@
 @end
 
 @implementation JFFMutableAssignDictionary
-
-@synthesize mutableDictionary = _mutableDictionary;
 
 -(void)dealloc
 {
@@ -82,6 +80,11 @@
     return proxy_.target;
 }
 
+-(id)objectForKeyedSubscript:( id )key_
+{
+    return [ self objectForKey: key_ ];
+}
+
 -(void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block_
 {
     [ self->_mutableDictionary enumerateKeysAndObjectsUsingBlock: ^( id key_
@@ -99,29 +102,34 @@
     {
         id newObject_ = block_( key_, object_ );
         if ( newObject_ )
-            [ result_ setObject: newObject_ forKey: key_ ];
+            result_[ key_ ] = newObject_;
     } ];
-    return [ [ NSDictionary alloc ] initWithDictionary: result_ ];
+    return [ result_ copy ];
 }
 
 -(void)removeObjectForKey:( id )key_
 {
-    JFFAutoRemoveFromDictAssignProxy* proxy_ = [ self->_mutableDictionary objectForKey: key_ ];
+    JFFAutoRemoveFromDictAssignProxy* proxy_ = self->_mutableDictionary[ key_ ];
     [ proxy_ onRemoveFromMutableAssignDictionary: self ];
     [ self->_mutableDictionary removeObjectForKey: key_ ];
 }
 
 -(void)setObject:( id )object_ forKey:( id )key_
 {
-    id previous_object_ = [ self objectForKey: key_ ];
+    id previous_object_ = self[ key_ ];
     if ( previous_object_ )
     {
         [ self removeObjectForKey: key_ ];
     }
 
     JFFAutoRemoveFromDictAssignProxy* proxy_ = [ [ JFFAutoRemoveFromDictAssignProxy alloc ] initWithTarget: object_ ];
-    [ self.mutableDictionary setObject: proxy_ forKey: key_ ];
+    self.mutableDictionary[ key_ ] = proxy_;
     [ proxy_ onAddToMutableAssignDictionary: self key: key_ ];
+}
+
+-(void)setObject:( id )newValue_ forKeyedSubscript:( id )key_
+{
+    [ self setObject: newValue_ forKey: key_ ];
 }
 
 -(NSString*)description
