@@ -2,10 +2,6 @@
 
 @implementation JFFCallbacksBlocksHolder
 
-@synthesize onProgressBlock;
-@synthesize onCancelBlock;
-@synthesize didLoadDataBlock;
-
 -(id)initWithOnProgressBlock:( JFFAsyncOperationProgressHandler )onProgressBlock_
                onCancelBlock:( JFFCancelAsyncOperationHandler )onCancelBlock_
             didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_

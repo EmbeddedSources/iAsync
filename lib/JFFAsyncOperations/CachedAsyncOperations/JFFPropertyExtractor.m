@@ -21,9 +21,6 @@
     SEL _propertySetSelector;
 }
 
-@synthesize propertyPath = _propertyPath;
-@synthesize object = _object;
-
 @dynamic delegates
 , asyncLoader
 , didFinishBlock
@@ -34,7 +31,7 @@
     self.objectPropertyData = nil;
 
     jff_retainAutorelease( _object );
-    _object = nil;
+    self->_object = nil;
     //self.propertyPath = nil;
 }
 
@@ -101,9 +98,9 @@
     return data_;
 }
 
--(void)setObjectPropertyData:( JFFObjectRelatedPropertyData* )object_property_data_
+-(void)setObjectPropertyData:( JFFObjectRelatedPropertyData* )objectPropertyData_
 {
-    [ self.object setPropertyData: object_property_data_ forPropertPath: self.propertyPath ];
+    [ self.object setPropertyData: objectPropertyData_ forPropertPath: self.propertyPath ];
 }
 
 -(id)forwardingTargetForSelector:( SEL )selector_

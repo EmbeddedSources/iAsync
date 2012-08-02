@@ -2,9 +2,6 @@
 
 @implementation JFFPropertyPath
 
-@synthesize name = _name;
-@synthesize key = _key;
-
 -(id)initWithName:( NSString* )name_
               key:( id< NSCopying, NSObject > )key_
 {
@@ -12,8 +9,8 @@
 
     if ( self )
     {
-        _name = name_;
-        _key  = key_;
+        self->_name = name_;
+        self->_key  = key_;
     }
 
     return self;

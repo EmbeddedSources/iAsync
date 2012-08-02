@@ -2,8 +2,6 @@
 
 @implementation JFFAsyncOperationProgressBlockHolder
 
-@synthesize progressBlock;
-
 -(void)performProgressBlockWithArgument:( id )progress_info_
 {
     if ( self.progressBlock )

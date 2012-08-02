@@ -16,7 +16,7 @@ static char property_data_property_key_;
 
 -(JFFObjectRelatedPropertyData*)propertyDataForPropertPath:( JFFPropertyPath* )propertyPath_
 {
-    id data_ = [ self.propertyDataByPropertyName objectForKey: propertyPath_.name ];
+    id data_ = self.propertyDataByPropertyName[ propertyPath_.name ];
     if ( propertyPath_.key == nil )
     {
         return data_;
@@ -28,7 +28,7 @@ static char property_data_property_key_;
 {
     if ( propertyPath_.key )
     {
-        NSMutableDictionary* subDict_ = [ self.propertyDataByPropertyName objectForKey: propertyPath_.name ];
+        NSMutableDictionary* subDict_ = self.propertyDataByPropertyName[ propertyPath_.name ];
         [ subDict_ removeObjectForKey: propertyPath_.key ];
         if ( [ subDict_ count ] == 0 )
         {
@@ -63,18 +63,18 @@ static char property_data_property_key_;
 
     if ( propertyPath_.key )
     {
-        NSMutableDictionary* sub_dict_ = [ self.propertyDataByPropertyName objectForKey: propertyPath_.name ];
-        if ( sub_dict_ == nil )
+        NSMutableDictionary* subDict_ = [ self.propertyDataByPropertyName objectForKey: propertyPath_.name ];
+        if ( subDict_ == nil )
         {
-            sub_dict_ = [ NSMutableDictionary new ];
-            [ self.propertyDataByPropertyName setObject: sub_dict_ forKey: propertyPath_.name ];
+            subDict_ = [ NSMutableDictionary new ];
+            self.propertyDataByPropertyName[ propertyPath_.name ] = subDict_;
         }
 
-        [ sub_dict_ setObject: property_ forKey: propertyPath_.key ];
+        subDict_[ propertyPath_.key ] = property_;
         return;
     }
 
-    [ self.propertyDataByPropertyName setObject: property_ forKey: propertyPath_.name ];
+    self.propertyDataByPropertyName[ propertyPath_.name ] = property_;
 }
 
 -(NSMutableDictionary*)propertyDataByPropertyName

@@ -2,8 +2,6 @@
 
 @implementation JFFCancelAsyncOperationBlockHolder
 
-@synthesize cancelBlock;
-
 -(void)performCancelBlockOnceWithArgument:( BOOL )cancel_
 {
     if ( !self.cancelBlock )

@@ -4,11 +4,6 @@
 
 @implementation JFFAsyncOperationAdapter
 
-@synthesize operation     = _operation;
-@synthesize loadDataBlock = _loadDataBlock;
-@synthesize queueName     = _queueName;
-@synthesize barrier       = _barrier;
-
 -(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
                        progressHandler:( void (^)( id ) )progress_
 {

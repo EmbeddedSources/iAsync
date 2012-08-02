@@ -2,8 +2,6 @@
 
 @implementation JFFDidFinishAsyncOperationBlockHolder
 
-@synthesize didFinishBlock = _did_finish_block;
-
 -(void)performDidFinishBlockOnceWithResult:( id )result_ error:( NSError* )error_
 {
     if ( !self.didFinishBlock )

@@ -189,7 +189,7 @@
 		65648C381392490F001E163C /* JFFAsyncOperationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationUtils.h; sourceTree = "<group>"; };
 		65648C391392490F001E163C /* JFFAsyncOperationUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFAsyncOperationUtils.mm; sourceTree = "<group>"; };
 		65648C5013924A77001E163C /* JFFAsyncOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperations.h; sourceTree = "<group>"; };
-		7E8F20C914F94BDF00588C7D /* JFFAsyncOperationsFW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; name = JFFAsyncOperationsFW.framework; path = JFFAsyncOperationsFW; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E8F20C914F94BDF00588C7D /* JFFAsyncOperationsFW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = JFFAsyncOperationsFW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8F20CD14F94BDF00588C7D /* JFFAsyncOperationsFW-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFAsyncOperationsFW-Info.plist"; sourceTree = "<group>"; };
 		7E8F20CF14F94BDF00588C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E8F20D114F94BDF00588C7D /* JFFAsyncOperationsFW-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFAsyncOperationsFW-Prefix.pch"; sourceTree = "<group>"; };
@@ -822,7 +822,6 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -837,7 +836,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

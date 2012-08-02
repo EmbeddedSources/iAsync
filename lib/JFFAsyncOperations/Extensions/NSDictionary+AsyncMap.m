@@ -20,7 +20,7 @@
                                                                , JFFDidFinishAsyncOperationHandler doneCallback_ )
         {
             if ( result_ )
-                [ finalResult_ setObject: result_ forKey: key_ ];
+                finalResult_[ key_ ] = result_;
             if ( doneCallback_ )
                 doneCallback_( result_, error_ );
         };
@@ -32,7 +32,7 @@
     JFFAsyncOperation loader_ = failOnFirstErrorGroupOfAsyncOperationsArray( asyncOperations_ );
     JFFChangedResultBuilder resultBuilder_ = ^id( id localResult_ )
     {
-        return [ [ NSDictionary alloc ] initWithDictionary: finalResult_ ];
+        return [ finalResult_ copy ];
     };
     loader_ = asyncOperationWithChangedResult( loader_, resultBuilder_ );
 
