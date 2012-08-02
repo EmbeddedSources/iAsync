@@ -5,6 +5,9 @@
 
 #import "NSMutableURLRequest+CreateRequestWithURLParams.h"
 
+#define NSURLConnectionDoesNotWorkWithLocalFiles
+
+
 @implementation JNNsUrlConnection
 {
     NSURLConnection* _nativeConnection;
@@ -33,11 +36,51 @@
     return self;
 }
 
+#ifdef NSURLConnectionDoesNotWorkWithLocalFiles
+-(void)processLocalFileWithPath:( NSString* )path_
+{
+    NSError* error_;
+    //STODO read file in separate thread
+    //STODO read big files by chunks
+    NSData* data_ = [ NSData dataWithContentsOfFile: path_
+                                            options: 0
+                                              error: &error_ ];
+    if ( error_ )
+    {
+        [ self connection: self->_nativeConnection
+         didFailWithError: error_ ];
+    }
+    else
+    {
+        NSHTTPURLResponse* response_ =
+        [ [ NSHTTPURLResponse alloc ] initWithURL: self->_params.url
+                                       statusCode: 200
+                                      HTTPVersion: @"HTTP/1.1"
+                                     headerFields: nil ];
+        [ self connection: self->_nativeConnection
+       didReceiveResponse: response_ ];
+
+        [ self connection: self->_nativeConnection
+           didReceiveData: data_ ];
+
+        [ self connectionDidFinishLoading: self->_nativeConnection ];
+    }
+}
+#endif
+
 #pragma mark -
 #pragma mark JNUrlConnection
 -(void)start
 {
-    [ _nativeConnection start ];
+#ifdef NSURLConnectionDoesNotWorkWithLocalFiles
+    if ( [ self->_params.url isFileURL ] )
+    {
+        NSString* path_ = [ self->_params.url path ];
+        [ self processLocalFileWithPath: path_ ];
+        return;
+    }
+#endif
+    [ self->_nativeConnection start ];
 }
 
 -(void)cancel

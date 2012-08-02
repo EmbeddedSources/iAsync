@@ -1,6 +1,5 @@
 #import "CXMLNode+Custom.h"
 
-#import "CXMLNode_XPathExtensions.h"
 
 @implementation CXMLNode (Custom)
 

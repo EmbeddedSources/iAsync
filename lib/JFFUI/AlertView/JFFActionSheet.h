@@ -12,7 +12,7 @@
 +(id)actionSheetWithTitle:( NSString* )title_
         cancelButtonTitle:( id )cancel_button_title_
    destructiveButtonTitle:( id )destructive_button_title_
-        otherButtonTitles:( id )other_button_titles_, ...;
+        otherButtonTitles:( id )other_button_titles_, ... NS_REQUIRES_NIL_TERMINATION;
 
 -(void)showInView:( UIView* )view_;
 

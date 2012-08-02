@@ -22,8 +22,8 @@
 
     if ( self )
     {
-        _date       = [ NSDate new ];
-        _bytesCount = bytesCount_;
+        self->_date       = [ NSDate new ];
+        self->_bytesCount = bytesCount_;
     }
 
     return self;
@@ -82,8 +82,8 @@
             donloadedBytes_ += item_.bytesCount;
         }
 
-        JFFDownloadedBytesPerDate* first_item_ = [ arrayExcludeLast_ objectAtIndex: 0 ];
-        NSDate* lastDate_ = ( [ arrayExcludeLast_ count ] == 1 ) ? [ NSDate new ] : first_item_.date;
+        JFFDownloadedBytesPerDate* firstItem_ = [ arrayExcludeLast_ objectAtIndex: 0 ];
+        NSDate* lastDate_ = ( [ arrayExcludeLast_ count ] == 1 ) ? [ NSDate new ] : firstItem_.date;
 
         JFFDownloadedBytesPerDate* lastItem_ = [ arrayExcludeLast_ lastObject ];
         speed_ = (float) donloadedBytes_ /

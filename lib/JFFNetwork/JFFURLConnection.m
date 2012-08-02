@@ -9,6 +9,11 @@
 #import "JFFURLConnectionParams.h"
 #import "JFFLocalCookiesStorage.h"
 
+#import "NSUrlLocationValidator.h"
+
+//#define SHOW_DEBUG_LOGS
+#import <JFFLibrary/JDebugLog.h>
+
 @interface JFFURLConnection ()
 
 -(void)handleResponseForReadStream:( CFReadStreamRef )stream_;
@@ -24,6 +29,14 @@ static void readStreamCallback( CFReadStreamRef stream_
     __unsafe_unretained JFFURLConnection* self_ = (__bridge JFFURLConnection*)selfContext_;
     switch( event_ )
     {
+        case kCFStreamEventNone:
+        {
+            break;
+        }
+        case kCFStreamEventOpenCompleted:
+        {
+            break;
+        }
         case kCFStreamEventHasBytesAvailable:
         {
             [ self_ handleResponseForReadStream: stream_ ];
@@ -37,12 +50,16 @@ static void readStreamCallback( CFReadStreamRef stream_
             }
             break;
         }
+        case kCFStreamEventCanAcceptBytes:
+        {
+            break;
+        }
         case kCFStreamEventErrorOccurred:
         {
             [ self_ handleResponseForReadStream: stream_ ];
 
             CFStreamError error_ = CFReadStreamGetError( stream_ );
-            NSString* errorDescription_ = [ NSString stringWithFormat: @"CFStreamError domain: %d", error_.domain ];
+            NSString* errorDescription_ = [ NSString stringWithFormat: @"CFStreamError domain: %ld", error_.domain ];
 
             [ self_ handleFinish: [ JFFError errorWithDescription: errorDescription_
                                                              code: error_.error ] ];
@@ -242,13 +259,13 @@ static void readStreamCallback( CFReadStreamRef stream_
 
     for ( NSHTTPCookie* cookie_ in cookies_ )
     {
-        [ _cookiesStorage setCookie: cookie_ ];
+        [ self->_cookiesStorage setCookie: cookie_ ];
     }
 }
 
 -(void)handleResponseForReadStream:( CFReadStreamRef )stream_
 {
-    if ( _responseHandled )
+    if ( self->_responseHandled )
     {
         return;
     }
@@ -273,16 +290,27 @@ static void readStreamCallback( CFReadStreamRef stream_
     //JTODO test redirects (cyclic for example)
     if ( 302 == statusCode_ )
     {
+        NSDebugLog( @"JConnection - creating URL..." );
+        NSDebugLog( @"%@", self->_params.url );
         NSString* location_ = [ allHeadersDict_ objectForKey: @"Location" ];
-        _params.url = [ [ NSURL alloc ] initWithScheme: _params.url.scheme
-                                                  host: _params.url.host
-                                                  path: location_ ];
+        if ( ![ NSUrlLocationValidator isValidLocation: location_ ] )
+        {
+            NSLog( @"[!!!WARNING!!!] JConnection : path for URL is invalid. Ignoring..." );
+            location_ = @"/";
+        }
+
+        DDURLBuilder* urlBuilder_ = [ DDURLBuilder URLBuilderWithURL: self->_params.url ];
+        urlBuilder_.path = location_;
+
+        self->_params.url = [ urlBuilder_ URL ];
+        NSDebugLog( @"%@", self->_params.url );
+        NSDebugLog( @"Done." );
 
         [ self start ];
     }
     else
     {
-        _responseHandled = YES;
+        self->_responseHandled = YES;
 
         if ( self.didReceiveResponseBlock )
         {
@@ -290,7 +318,7 @@ static void readStreamCallback( CFReadStreamRef stream_
 
             urlResponse_.statusCode      = statusCode_;
             urlResponse_.allHeaderFields = allHeadersDict_;
-            urlResponse_.url             = _params.url;
+            urlResponse_.url             = self->_params.url;
 
             self.didReceiveResponseBlock( urlResponse_ );
             self.didReceiveResponseBlock = nil;

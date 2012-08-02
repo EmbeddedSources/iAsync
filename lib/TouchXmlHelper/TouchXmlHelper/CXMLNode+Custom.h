@@ -1,4 +1,4 @@
-#import <CXMLNode.h>
+#import <TouchXML/CXMLNode.h>
 
 @interface CXMLNode (Custom)
 

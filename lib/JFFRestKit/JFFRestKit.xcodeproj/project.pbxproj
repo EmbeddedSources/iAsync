@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B06B79E15498DE30077D996 /* CXMLElement+Custom.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B06B79C15498DE30077D996 /* CXMLElement+Custom.h */; };
-		1B06B79F15498DE30077D996 /* CXMLElement+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B06B79D15498DE30077D996 /* CXMLElement+Custom.m */; };
-		1B06B7A315498E260077D996 /* CXMLNode+Custom.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B06B7A115498E260077D996 /* CXMLNode+Custom.h */; };
-		1B06B7A415498E260077D996 /* CXMLNode+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B06B7A215498E260077D996 /* CXMLNode+Custom.m */; };
-		1B06B7BD154992FB0077D996 /* jRestKitXMLTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B06B7BB154992FB0077D996 /* jRestKitXMLTools.h */; };
-		1B06B7BE154992FB0077D996 /* jRestKitXMLTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B06B7BC154992FB0077D996 /* jRestKitXMLTools.m */; };
 		1B32850E153FFDD000BE99CC /* JFFDataLoadersTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B32850C153FFDD000BE99CC /* JFFDataLoadersTools.h */; };
 		1B32850F153FFDD000BE99CC /* JFFDataLoadersTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B32850D153FFDD000BE99CC /* JFFDataLoadersTools.m */; };
 		1B7ABA85152D973A005DD4CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B7ABA84152D973A005DD4CA /* Foundation.framework */; };
@@ -20,15 +14,21 @@
 		65A0BD6B15301D890007A3B5 /* JFFSmartUrlDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A0BD6915301D890007A3B5 /* JFFSmartUrlDataLoader.m */; };
 		65E307BC1531E9B200E0B781 /* JFFRestKitError.h in Headers */ = {isa = PBXBuildFile; fileRef = 65E307BA1531E9B200E0B781 /* JFFRestKitError.h */; };
 		65E307BD1531E9B200E0B781 /* JFFRestKitError.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E307BB1531E9B200E0B781 /* JFFRestKitError.m */; };
+		7E59D33B1585EE1800D6192D /* jRestKitBinders.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E59D3391585EE1800D6192D /* jRestKitBinders.h */; };
+		7E59D33C1585EE1800D6192D /* jRestKitBinders.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E59D33A1585EE1800D6192D /* jRestKitBinders.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7E25B3FB15860F9200469187 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E25B3F715860F9200469187 /* TouchXmlHelper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E25B3B815860D2600469187;
+			remoteInfo = TouchXmlHelper;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		1B06B79C15498DE30077D996 /* CXMLElement+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLElement+Custom.h"; sourceTree = "<group>"; };
-		1B06B79D15498DE30077D996 /* CXMLElement+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLElement+Custom.m"; sourceTree = "<group>"; };
-		1B06B7A115498E260077D996 /* CXMLNode+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLNode+Custom.h"; sourceTree = "<group>"; };
-		1B06B7A215498E260077D996 /* CXMLNode+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLNode+Custom.m"; sourceTree = "<group>"; };
-		1B06B7BB154992FB0077D996 /* jRestKitXMLTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jRestKitXMLTools.h; sourceTree = "<group>"; };
-		1B06B7BC154992FB0077D996 /* jRestKitXMLTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jRestKitXMLTools.m; sourceTree = "<group>"; };
 		1B32850C153FFDD000BE99CC /* JFFDataLoadersTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDataLoadersTools.h; sourceTree = "<group>"; };
 		1B32850D153FFDD000BE99CC /* JFFDataLoadersTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDataLoadersTools.m; sourceTree = "<group>"; };
 		1B7ABA81152D973A005DD4CA /* libJFFRestKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFRestKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +40,9 @@
 		65E307BA1531E9B200E0B781 /* JFFRestKitError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRestKitError.h; sourceTree = "<group>"; };
 		65E307BB1531E9B200E0B781 /* JFFRestKitError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRestKitError.m; sourceTree = "<group>"; };
 		65E307BE1531EC3B00E0B781 /* JFFRestKitCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFRestKitCache.h; sourceTree = "<group>"; };
+		7E25B3F715860F9200469187 /* TouchXmlHelper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TouchXmlHelper.xcodeproj; path = ../TouchXmlHelper/TouchXmlHelper.xcodeproj; sourceTree = "<group>"; };
+		7E59D3391585EE1800D6192D /* jRestKitBinders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jRestKitBinders.h; sourceTree = "<group>"; };
+		7E59D33A1585EE1800D6192D /* jRestKitBinders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jRestKitBinders.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,12 +60,8 @@
 		1B06B79A15498DD20077D996 /* XML */ = {
 			isa = PBXGroup;
 			children = (
-				1B06B79C15498DE30077D996 /* CXMLElement+Custom.h */,
-				1B06B79D15498DE30077D996 /* CXMLElement+Custom.m */,
-				1B06B7A115498E260077D996 /* CXMLNode+Custom.h */,
-				1B06B7A215498E260077D996 /* CXMLNode+Custom.m */,
-				1B06B7BB154992FB0077D996 /* jRestKitXMLTools.h */,
-				1B06B7BC154992FB0077D996 /* jRestKitXMLTools.m */,
+				7E59D3391585EE1800D6192D /* jRestKitBinders.h */,
+				7E59D33A1585EE1800D6192D /* jRestKitBinders.m */,
 			);
 			path = XML;
 			sourceTree = "<group>";
@@ -87,6 +86,7 @@
 		1B7ABA83152D973A005DD4CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E25B3F715860F9200469187 /* TouchXmlHelper.xcodeproj */,
 				1B7ABA84152D973A005DD4CA /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -117,6 +117,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7E25B3F815860F9200469187 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E25B3FC15860F9200469187 /* libTouchXmlHelper.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -127,9 +135,7 @@
 				65A0BD6A15301D890007A3B5 /* JFFSmartUrlDataLoader.h in Headers */,
 				65E307BC1531E9B200E0B781 /* JFFRestKitError.h in Headers */,
 				1B32850E153FFDD000BE99CC /* JFFDataLoadersTools.h in Headers */,
-				1B06B79E15498DE30077D996 /* CXMLElement+Custom.h in Headers */,
-				1B06B7A315498E260077D996 /* CXMLNode+Custom.h in Headers */,
-				1B06B7BD154992FB0077D996 /* jRestKitXMLTools.h in Headers */,
+				7E59D33B1585EE1800D6192D /* jRestKitBinders.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,12 +177,28 @@
 			mainGroup = 1B7ABA76152D9739005DD4CA;
 			productRefGroup = 1B7ABA82152D973A005DD4CA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7E25B3F815860F9200469187 /* Products */;
+					ProjectRef = 7E25B3F715860F9200469187 /* TouchXmlHelper.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1B7ABA80152D973A005DD4CA /* JFFRestKit */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7E25B3FC15860F9200469187 /* libTouchXmlHelper.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTouchXmlHelper.a;
+			remoteRef = 7E25B3FB15860F9200469187 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1B7ABA7D152D973A005DD4CA /* Sources */ = {
@@ -186,9 +208,7 @@
 				65A0BD6B15301D890007A3B5 /* JFFSmartUrlDataLoader.m in Sources */,
 				65E307BD1531E9B200E0B781 /* JFFRestKitError.m in Sources */,
 				1B32850F153FFDD000BE99CC /* JFFDataLoadersTools.m in Sources */,
-				1B06B79F15498DE30077D996 /* CXMLElement+Custom.m in Sources */,
-				1B06B7A415498E260077D996 /* CXMLNode+Custom.m in Sources */,
-				1B06B7BE154992FB0077D996 /* jRestKitXMLTools.m in Sources */,
+				7E59D33C1585EE1800D6192D /* jRestKitBinders.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,8 +236,9 @@
 				HEADER_SEARCH_PATHS = (
 					.,
 					../,
-					"../../lib-third-party/TouchXML/Source",
+					../../../TouchXML/,
 					"$(SDKROOT)/usr/include/libxml2/**",
+					../TouchXmlHelper,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -238,8 +259,9 @@
 				HEADER_SEARCH_PATHS = (
 					.,
 					../,
-					"../../lib-third-party/TouchXML/Source",
+					../../../TouchXML/,
 					"$(SDKROOT)/usr/include/libxml2/**",
+					../TouchXmlHelper,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;

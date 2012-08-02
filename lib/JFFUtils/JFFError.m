@@ -30,7 +30,7 @@
     return [ [ self alloc ] initWithDescription: description_ code: code_ ];
 }
 
-+(id)errorWithDescription:( NSString* )description_
++(id)newErrorWithDescription:( NSString* )description_
 {
     return [ [ self alloc ] initWithDescription: description_ ];
 }

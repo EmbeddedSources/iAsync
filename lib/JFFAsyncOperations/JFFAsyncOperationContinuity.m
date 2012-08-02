@@ -43,13 +43,16 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder first
     return ^JFFAsyncOperation( id bindResult_ )
     {
         JFFAsyncOperation firstLoader_ = firstBinder_( bindResult_ );
+        assert( firstLoader_ );//expected loader
         return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
                                         , JFFCancelAsyncOperationHandler cancelCallback_
                                         , JFFDidFinishAsyncOperationHandler doneCallback_ )
         {
             __block JFFCancelAsyncOperation cancelBlockHolder_;
 
+            progressCallback_ = [ progressCallback_ copy ];
             doneCallback_ = [ doneCallback_ copy ];
+
             JFFCancelAsyncOperation firstCancel_ = firstLoader_( progressCallback_
                                                                 , cancelCallback_
                                                                 , ^void( id result_, NSError* error_ )
@@ -86,6 +89,7 @@ JFFAsyncOperation sequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
                                             , JFFAsyncOperation secondLoader_
                                             , ... )
 {
+    firstLoader_ = [ firstLoader_ copy ];
     JFFAsyncOperationBinder firstBlock_ = ^JFFAsyncOperation( id result_ )
     {
         return firstLoader_;
@@ -114,10 +118,10 @@ JFFAsyncOperation sequenceOfAsyncOperationsArray( NSArray* loaders_ )
     assert( loaders_.lastObject ); //should not be empty
     loaders_ = [ loaders_ map: ^id( id object_ )
     {
-        JFFAsyncOperation loader_ = object_;
+        JFFAsyncOperation loader_ = [ object_ copy ];
         return ^JFFAsyncOperation( id result_ )
         {
-            return [ loader_ copy ];
+            return loader_;
         };
     } ];
     return MergeBinders( bindSequenceOfBindersPair, loaders_ )( nil );
@@ -157,7 +161,7 @@ JFFAsyncOperation bindSequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
     {
         return firstLoader_;
     };
-    [ binders_ addObject: firstBinder_ ];
+    [ binders_ addObject: [ firstBinder_ copy ] ];
 
     va_list args;
     va_start( args, secondLoaderBinder_ );
@@ -165,7 +169,7 @@ JFFAsyncOperation bindSequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
          nextBinder_ != nil;
          nextBinder_ = va_arg( args, JFFAsyncOperationBinder ) )
     {
-        [ binders_ addObject: nextBinder_ ];
+        [ binders_ addObject: [ nextBinder_ copy ] ];
     }
     va_end( args );
 
@@ -183,9 +187,12 @@ JFFAsyncOperation bindSequenceOfAsyncOperationsArray( JFFAsyncOperation firstLoa
     {
         return firstLoader_;
     };
-    [ binders_ addObject: firstBinder_ ];
+    [ binders_ addObject: [ firstBinder_ copy ] ];
 
-    [ binders_ addObjectsFromArray: loadersBinders_ ];
+    for ( JFFAsyncOperation binder_ in loadersBinders_ )
+    {
+        [ binders_ addObject: [ binder_ copy ] ];
+    }
 
     return binderAsSequenceOfBindersArray( binders_ )( nil );
 }
@@ -245,6 +252,7 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair( JFFAsyncOperationBi
 JFFAsyncOperation trySequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
                                                , JFFAsyncOperation secondLoader_, ... )
 {
+    firstLoader_ = [ firstLoader_ copy ];
     JFFAsyncOperationBinder firstBlock_ = ^JFFAsyncOperation( id data_ )
     {
         return firstLoader_;
@@ -287,6 +295,7 @@ JFFAsyncOperation trySequenceOfAsyncOperationsArray( NSArray* loaders_ )
 JFFAsyncOperation bindTrySequenceOfAsyncOperations( JFFAsyncOperation firstLoader_
                                                    , JFFAsyncOperationBinder secondLoaderBinder_, ... )
 {
+    firstLoader_ = [ firstLoader_ copy ];
     JFFAsyncOperationBinder firstBlock_ = ^JFFAsyncOperation( id data_ )
     {
         return firstLoader_;
@@ -314,10 +323,12 @@ JFFAsyncOperation bindTrySequenceOfAsyncOperationsArray( JFFAsyncOperation first
     {
         return firstLoader_;
     };
-    [ binders_ addObject: firstBinder_ ];
+    [ binders_ addObject: [ firstBinder_ copy ] ];
 
-    if ( [ loadersBinders_ count ] )
-        [ binders_ addObjectsFromArray: loadersBinders_ ];
+    for ( JFFAsyncOperation binder_ in loadersBinders_ )
+    {
+        [ binders_ addObject: [ binder_ copy ] ];
+    }
 
     return MergeBinders( bindTrySequenceOfBindersPair, binders_ )( nil );
 }
@@ -469,12 +480,12 @@ static JFFAsyncOperation MergeGroupLoaders( MergeTwoLoadersPtr merger_, NSArray*
     JFFAsyncOperation firstBlock_ = [ blocks_ objectAtIndex: 0 ];
     JFFAsyncOperation arrayFirstBlock_ = resultToArrayForLoader( firstBlock_ );
 
-    for ( JFFAsyncOperation second_block_ in blocks_ )
+    for ( JFFAsyncOperation secondBlock_ in blocks_ )
     {
-        if ( second_block_ == firstBlock_ )
+        if ( secondBlock_ == firstBlock_ )
             continue;
 
-        arrayFirstBlock_ = merger_( arrayFirstBlock_, second_block_ );
+        arrayFirstBlock_ = merger_( arrayFirstBlock_, secondBlock_ );
     }
 
     return arrayFirstBlock_;
@@ -485,18 +496,17 @@ JFFAsyncOperation groupOfAsyncOperationsArray( NSArray* blocks_ )
     return MergeGroupLoaders( groupOfAsyncOperationsPair, blocks_ );
 }
 
-JFFAsyncOperation groupOfAsyncOperations( JFFAsyncOperation first_loader_, ... )
+JFFAsyncOperation groupOfAsyncOperations( JFFAsyncOperation firstLoader_, ... )
 {
     NSMutableArray* loaders_ = [ NSMutableArray new ];
 
     va_list args;
-    va_start( args, first_loader_ );
-    for ( JFFAsyncOperation next_block_ = first_loader_;
-         next_block_ != nil;
-         next_block_ = va_arg( args, JFFAsyncOperation ) )
+    va_start( args, firstLoader_ );
+    for ( JFFAsyncOperation nextBlock_ = firstLoader_;
+         nextBlock_ != nil;
+         nextBlock_ = va_arg( args, JFFAsyncOperation ) )
     {
-        next_block_ = [ next_block_ copy ];
-        [ loaders_ addObject: next_block_ ];
+        [ loaders_ addObject: [ nextBlock_ copy ] ];
     }
     va_end( args );
 
@@ -628,12 +638,11 @@ JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperations( JFFAsyncOperation firs
 
     va_list args;
     va_start( args, firstLoader_ );
-    for ( JFFAsyncOperation next_block_ = firstLoader_;
-         next_block_ != nil;
-         next_block_ = va_arg( args, JFFAsyncOperation ) )
+    for ( JFFAsyncOperation nextBlock_ = firstLoader_;
+         nextBlock_ != nil;
+         nextBlock_ = va_arg( args, JFFAsyncOperation ) )
     {
-        next_block_ = [ next_block_ copy ];
-        [ loaders_ addObject: next_block_ ];
+        [ loaders_ addObject: [ nextBlock_ copy ] ];
     }
     va_end( args );
 
@@ -701,7 +710,7 @@ JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
 
         __block JFFDidFinishAsyncOperationHook finishHookHolder_ = nil;
 
-        __block NSInteger currentLeftCount = maxRepeatCount_;
+        __block NSInteger currentLeftCount_ = maxRepeatCount_;
 
         JFFDidFinishAsyncOperationHook finish_callback_hook_ = ^( id result_
                                                                  , NSError* error_
@@ -710,7 +719,7 @@ JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
             JFFResultContext* context_ = [ JFFResultContext new ];
             context_.result = result_;
             context_.error  = error_ ;
-            if ( !predicate_( context_ ) || currentLeftCount == 0 )
+            if ( !predicate_( context_ ) || currentLeftCount_ == 0 )
             {
                 finishHookHolder_ = nil;
                 if ( doneCallback_ )
@@ -718,9 +727,9 @@ JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
             }
             else
             {
-                currentLeftCount = currentLeftCount > 0
-                    ? currentLeftCount - 1
-                    : currentLeftCount;
+                currentLeftCount_ = currentLeftCount_ > 0
+                    ? currentLeftCount_ - 1
+                    : currentLeftCount_;
 
                 JFFAsyncOperation loader_ = asyncOperationWithFinishHookBlock( nativeLoader_
                                                                               , finishHookHolder_ );

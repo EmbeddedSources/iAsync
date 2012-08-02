@@ -1,6 +1,3 @@
-
-#import <JFFRestKit/XML/jRestKitXMLTools.h>
-
 @interface jRestKitXMLToolsTest : GHTestCase
 @end
 

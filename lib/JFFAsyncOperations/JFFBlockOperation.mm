@@ -57,11 +57,11 @@
 
 -(void)finalizeOperations
 {
-    self.finishedOrCanceled = YES;
+    self->_finishedOrCanceled = YES;
 
-    self.loadDataBlock    = nil;
-    self.didLoadDataBlock = nil;
-    self.progressBlock    = nil;
+    self->_loadDataBlock    = nil;
+    self->_didLoadDataBlock = nil;
+    self->_progressBlock    = nil;
 }
 
 -(void)didFinishOperationWithResult:( id )result_
@@ -87,7 +87,7 @@
         return;
 
     dispatch_queue_t currentQueue_ = dispatch_get_current_queue();
-    NSAssert( currentQueue_ == _currentQueue, @"Invalid current queue queue" );
+    NSAssert( currentQueue_ == self->_currentQueue, @"Invalid current queue queue" );
 
     [ self finalizeOperations ];
 }
@@ -124,7 +124,7 @@
             NSString* description_ = [ NSString stringWithFormat: @"exception: %@, reason: %@"
                                       , ex_.name
                                       , ex_.reason ];
-            error_ = [ JFFError errorWithDescription: description_ ];
+            error_ = [ JFFError newErrorWithDescription: description_ ];
         }
 
         dispatch_async( self->_currentQueue, ^

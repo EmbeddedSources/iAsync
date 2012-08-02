@@ -1,0 +1,348 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7E25B3BC15860D2600469187 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E25B3BB15860D2600469187 /* Foundation.framework */; };
+		7E25B3D215860D7100469187 /* CXMLElement+Custom.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E25B3C815860D7100469187 /* CXMLElement+Custom.h */; };
+		7E25B3D315860D7100469187 /* CXMLElement+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E25B3C915860D7100469187 /* CXMLElement+Custom.m */; };
+		7E25B3D415860D7100469187 /* CXMLNode+Custom.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E25B3CA15860D7100469187 /* CXMLNode+Custom.h */; };
+		7E25B3D515860D7100469187 /* CXMLNode+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E25B3CB15860D7100469187 /* CXMLNode+Custom.m */; };
+		7E25B3D615860D7100469187 /* JFFRestKitParseEmptyXMLError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E25B3CC15860D7100469187 /* JFFRestKitParseEmptyXMLError.h */; };
+		7E25B3D715860D7100469187 /* JFFRestKitParseEmptyXMLError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E25B3CD15860D7100469187 /* JFFRestKitParseEmptyXMLError.m */; };
+		7E25B3D815860D7100469187 /* JFFRestKitParseInvalidXMLError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E25B3CE15860D7100469187 /* JFFRestKitParseInvalidXMLError.h */; };
+		7E25B3D915860D7100469187 /* JFFRestKitParseInvalidXMLError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E25B3CF15860D7100469187 /* JFFRestKitParseInvalidXMLError.m */; };
+		7E25B3DA15860D7100469187 /* jRestKitXMLTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E25B3D015860D7100469187 /* jRestKitXMLTools.h */; };
+		7E25B3DB15860D7100469187 /* jRestKitXMLTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E25B3D115860D7100469187 /* jRestKitXMLTools.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7E25B3EE15860ED300469187 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E25B3E215860ED300469187 /* TouchXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457940FF0D82217800EB2D22;
+			remoteInfo = TouchXML_UnitTests;
+		};
+		7E25B3F015860ED300469187 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E25B3E215860ED300469187 /* TouchXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451E6E311152EB4A0024ABA5;
+			remoteInfo = Validator;
+		};
+		7E25B3F215860ED300469187 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E25B3E215860ED300469187 /* TouchXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B0E823A1563882000825E3C;
+			remoteInfo = TouchXMLiOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7E25B3B815860D2600469187 /* libTouchXmlHelper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTouchXmlHelper.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E25B3BB15860D2600469187 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7E25B3BF15860D2600469187 /* TouchXmlHelper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TouchXmlHelper-Prefix.pch"; sourceTree = "<group>"; };
+		7E25B3C015860D2600469187 /* TouchXmlHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TouchXmlHelper.h; sourceTree = "<group>"; };
+		7E25B3C815860D7100469187 /* CXMLElement+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLElement+Custom.h"; sourceTree = "<group>"; };
+		7E25B3C915860D7100469187 /* CXMLElement+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLElement+Custom.m"; sourceTree = "<group>"; };
+		7E25B3CA15860D7100469187 /* CXMLNode+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CXMLNode+Custom.h"; sourceTree = "<group>"; };
+		7E25B3CB15860D7100469187 /* CXMLNode+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CXMLNode+Custom.m"; sourceTree = "<group>"; };
+		7E25B3CC15860D7100469187 /* JFFRestKitParseEmptyXMLError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRestKitParseEmptyXMLError.h; sourceTree = "<group>"; };
+		7E25B3CD15860D7100469187 /* JFFRestKitParseEmptyXMLError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRestKitParseEmptyXMLError.m; sourceTree = "<group>"; };
+		7E25B3CE15860D7100469187 /* JFFRestKitParseInvalidXMLError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRestKitParseInvalidXMLError.h; sourceTree = "<group>"; };
+		7E25B3CF15860D7100469187 /* JFFRestKitParseInvalidXMLError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRestKitParseInvalidXMLError.m; sourceTree = "<group>"; };
+		7E25B3D015860D7100469187 /* jRestKitXMLTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jRestKitXMLTools.h; sourceTree = "<group>"; };
+		7E25B3D115860D7100469187 /* jRestKitXMLTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jRestKitXMLTools.m; sourceTree = "<group>"; };
+		7E25B3E215860ED300469187 /* TouchXML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TouchXML.xcodeproj; path = ../../../TouchXML/TouchXML.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7E25B3B515860D2600469187 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E25B3BC15860D2600469187 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7E25B3AD15860D2600469187 = {
+			isa = PBXGroup;
+			children = (
+				7E25B3BD15860D2600469187 /* TouchXmlHelper */,
+				7E25B3BA15860D2600469187 /* Frameworks */,
+				7E25B3B915860D2600469187 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7E25B3B915860D2600469187 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E25B3B815860D2600469187 /* libTouchXmlHelper.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E25B3BA15860D2600469187 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E25B3E215860ED300469187 /* TouchXML.xcodeproj */,
+				7E25B3BB15860D2600469187 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7E25B3BD15860D2600469187 /* TouchXmlHelper */ = {
+			isa = PBXGroup;
+			children = (
+				7E25B3C815860D7100469187 /* CXMLElement+Custom.h */,
+				7E25B3C915860D7100469187 /* CXMLElement+Custom.m */,
+				7E25B3CA15860D7100469187 /* CXMLNode+Custom.h */,
+				7E25B3CB15860D7100469187 /* CXMLNode+Custom.m */,
+				7E25B3CC15860D7100469187 /* JFFRestKitParseEmptyXMLError.h */,
+				7E25B3CD15860D7100469187 /* JFFRestKitParseEmptyXMLError.m */,
+				7E25B3CE15860D7100469187 /* JFFRestKitParseInvalidXMLError.h */,
+				7E25B3CF15860D7100469187 /* JFFRestKitParseInvalidXMLError.m */,
+				7E25B3D015860D7100469187 /* jRestKitXMLTools.h */,
+				7E25B3D115860D7100469187 /* jRestKitXMLTools.m */,
+				7E25B3C015860D2600469187 /* TouchXmlHelper.h */,
+				7E25B3BE15860D2600469187 /* Supporting Files */,
+			);
+			path = TouchXmlHelper;
+			sourceTree = "<group>";
+		};
+		7E25B3BE15860D2600469187 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7E25B3BF15860D2600469187 /* TouchXmlHelper-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7E25B3E315860ED300469187 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E25B3EF15860ED300469187 /* TouchXML_UnitTests.octest */,
+				7E25B3F115860ED300469187 /* Validator.app */,
+				7E25B3F315860ED300469187 /* libTouchXMLiOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7E25B3B615860D2600469187 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E25B3D215860D7100469187 /* CXMLElement+Custom.h in Headers */,
+				7E25B3D415860D7100469187 /* CXMLNode+Custom.h in Headers */,
+				7E25B3D615860D7100469187 /* JFFRestKitParseEmptyXMLError.h in Headers */,
+				7E25B3D815860D7100469187 /* JFFRestKitParseInvalidXMLError.h in Headers */,
+				7E25B3DA15860D7100469187 /* jRestKitXMLTools.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7E25B3B715860D2600469187 /* TouchXmlHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E25B3C515860D2600469187 /* Build configuration list for PBXNativeTarget "TouchXmlHelper" */;
+			buildPhases = (
+				7E25B3B415860D2600469187 /* Sources */,
+				7E25B3B515860D2600469187 /* Frameworks */,
+				7E25B3B615860D2600469187 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TouchXmlHelper;
+			productName = TouchXmlHelper;
+			productReference = 7E25B3B815860D2600469187 /* libTouchXmlHelper.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7E25B3AF15860D2600469187 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = Sitecore;
+			};
+			buildConfigurationList = 7E25B3B215860D2600469187 /* Build configuration list for PBXProject "TouchXmlHelper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7E25B3AD15860D2600469187;
+			productRefGroup = 7E25B3B915860D2600469187 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7E25B3E315860ED300469187 /* Products */;
+					ProjectRef = 7E25B3E215860ED300469187 /* TouchXML.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				7E25B3B715860D2600469187 /* TouchXmlHelper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7E25B3EF15860ED300469187 /* TouchXML_UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = TouchXML_UnitTests.octest;
+			remoteRef = 7E25B3EE15860ED300469187 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E25B3F115860ED300469187 /* Validator.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Validator.app;
+			remoteRef = 7E25B3F015860ED300469187 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E25B3F315860ED300469187 /* libTouchXMLiOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTouchXMLiOS.a;
+			remoteRef = 7E25B3F215860ED300469187 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7E25B3B415860D2600469187 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E25B3D315860D7100469187 /* CXMLElement+Custom.m in Sources */,
+				7E25B3D515860D7100469187 /* CXMLNode+Custom.m in Sources */,
+				7E25B3D715860D7100469187 /* JFFRestKitParseEmptyXMLError.m in Sources */,
+				7E25B3D915860D7100469187 /* JFFRestKitParseInvalidXMLError.m in Sources */,
+				7E25B3DB15860D7100469187 /* jRestKitXMLTools.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7E25B3C315860D2600469187 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../TouchXML,
+					.,
+					"/usr/include/libxml2/**",
+					..,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7E25B3C415860D2600469187 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../TouchXML,
+					.,
+					"/usr/include/libxml2/**",
+					..,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7E25B3C615860D2600469187 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/TouchXmlHelper.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TouchXmlHelper/TouchXmlHelper-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7E25B3C715860D2600469187 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/TouchXmlHelper.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TouchXmlHelper/TouchXmlHelper-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7E25B3B215860D2600469187 /* Build configuration list for PBXProject "TouchXmlHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E25B3C315860D2600469187 /* Debug */,
+				7E25B3C415860D2600469187 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E25B3C515860D2600469187 /* Build configuration list for PBXNativeTarget "TouchXmlHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E25B3C615860D2600469187 /* Debug */,
+				7E25B3C715860D2600469187 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7E25B3AF15860D2600469187 /* Project object */;
+}

@@ -34,6 +34,13 @@
     
 }
 
+-(CXMLElement*)firstElementForNameNoThrow:( NSString* )name_
+{
+    return [ self firstElementIfExistsForName: name_
+                            logMessageEnabled: YES
+                                   shouldFail: NO ];
+}
+
 -(CXMLElement*)firstElementIfExistsForName:( NSString* )name_
 {
     return [ self firstElementIfExistsForName: name_

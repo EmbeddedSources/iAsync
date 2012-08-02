@@ -135,7 +135,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     if ( !result_ && outError_ )
     {
         static NSString* const errorDescription_ = @"Invalid arguments. This \"local path\" used for another url";
-        *outError_ = [ JFFError errorWithDescription: errorDescription_ ];
+        *outError_ = [ JFFError newErrorWithDescription: errorDescription_ ];
     }
 
     return result_;

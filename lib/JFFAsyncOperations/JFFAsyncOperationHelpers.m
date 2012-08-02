@@ -23,8 +23,8 @@
 -(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
                        progressHandler:( void (^)( id ) )progress_
 {
-    _scheduler = [ JFFScheduler new ];
-    [ _scheduler addBlock: ^( JFFCancelScheduledBlock cancel_ )
+    self->_scheduler = [ JFFScheduler new ];
+    [ self->_scheduler addBlock: ^( JFFCancelScheduledBlock cancel_ )
     {
         cancel_();
         if ( progress_ )
@@ -36,7 +36,7 @@
 
 -(void)cancel:( BOOL )canceled_
 {
-    _scheduler = nil;
+    self->_scheduler = nil;
 }
 
 @end
@@ -196,6 +196,7 @@ JFFAsyncOperation asyncOperationWithChangedError( JFFAsyncOperation loader_
 {
     if ( !errorBuilder_ )
         return loader_;
+
     errorBuilder_ = [ errorBuilder_ copy ];
     JFFDidFinishAsyncOperationHook finishCallbackHook_ = ^( id result_
                                                            , NSError* error_
