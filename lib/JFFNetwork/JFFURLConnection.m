@@ -323,7 +323,7 @@ static void readStreamCallback( CFReadStreamRef stream_
             self.didReceiveResponseBlock( urlResponse_ );
             self.didReceiveResponseBlock = nil;
 
-            _urlResponse = urlResponse_;
+            self->_urlResponse = urlResponse_;
         }
     }
 }

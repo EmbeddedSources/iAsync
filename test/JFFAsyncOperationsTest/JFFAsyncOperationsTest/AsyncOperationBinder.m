@@ -90,7 +90,7 @@
             finalError_ = error_;
         } );
 
-        NSError* failError_ = [ JFFError errorWithDescription: @"error1" ];
+        NSError* failError_ = [ JFFError newErrorWithDescription: @"error1" ];
         firstLoader_.loaderFinishBlock.didFinishBlock( nil, failError_ );
 
         GHAssertFalse( binderCalled_, @"OK" );

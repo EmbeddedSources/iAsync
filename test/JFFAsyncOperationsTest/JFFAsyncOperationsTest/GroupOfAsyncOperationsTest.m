@@ -83,7 +83,7 @@
         GHAssertFalse( second_loader_.finished, @"Second loader not finished yet" );
         GHAssertFalse( group_loader_failed_, @"Group loader not failed yet" );
 
-        second_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
+        second_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError newErrorWithDescription: @"some error" ] );
 
         GHAssertTrue( second_loader_.finished, @"Second loader finished already" );
         GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
@@ -132,7 +132,7 @@
         GHAssertFalse( first_loader_.finished, @"First loader not finished yet" );
         GHAssertFalse( group_loader_failed_, @"Group loader failed already" );
 
-        first_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
+        first_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError newErrorWithDescription: @"some error" ] );
 
         GHAssertTrue( first_loader_.finished, @"First loader finished already" );
         GHAssertTrue( second_loader_.finished, @"Second loader not finished yet" );
@@ -429,7 +429,7 @@ typedef JFFAsyncOperation (*MergeLoadersPtr)( JFFAsyncOperation, ... );
 
                 GHAssertFalse( group_loader_finished_, @"First loader not canceled yet" );
 
-                loader1_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
+                loader1_.loaderFinishBlock.didFinishBlock( nil, [ JFFError newErrorWithDescription: @"some error" ] );
 
                 {
                     NSObject* result3_ = [ NSObject new ];

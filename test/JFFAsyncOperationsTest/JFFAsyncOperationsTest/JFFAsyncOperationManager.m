@@ -81,7 +81,7 @@
             if ( self.finishAtLoading )
                 self.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
             else
-                self.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
+                self.loaderFinishBlock.didFinishBlock( nil, [ JFFError newErrorWithDescription: @"some error" ] );
             return JFFStubCancelAsyncOperationBlock;
         }
 

@@ -194,14 +194,16 @@ static bool AmIBeingDebugged(void)
 
 +(void)enableInstancesCounting
 {
+    //does not work with new runtime, fix me
     // try to fix for release mode also
-    if ( AmIBeingDebugged() )
-        [ [ JFFNSObjectInstancesCounter sharedObjectInstancesCounter ] enableInstancesCountingForClass: [ self class ] ];
+//    if ( AmIBeingDebugged() )
+//        [ [ JFFNSObjectInstancesCounter sharedObjectInstancesCounter ] enableInstancesCountingForClass: [ self class ] ];
 }
 
 +(NSUInteger)instancesCount
 {
-    return [ [ JFFNSObjectInstancesCounter sharedObjectInstancesCounter ] instancesCountForClass: [ self class ] ];
+    return 0;
+//    return [ [ JFFNSObjectInstancesCounter sharedObjectInstancesCounter ] instancesCountForClass: [ self class ] ];
 }
 
 @end
