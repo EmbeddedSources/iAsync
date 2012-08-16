@@ -677,32 +677,28 @@
 		65B1F93B151A8B74000A1736 /* JFFAsyncOperationsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFAsyncOperationsFW.framework;
-			path = JFFAsyncOperationsFW;
+			path = JFFAsyncOperationsFW.framework;
 			remoteRef = 65B1F93A151A8B74000A1736 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		65B1F940151A8B74000A1736 /* JFFNetworkFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFNetworkFW.framework;
-			path = JFFNetworkFW;
+			path = JFFNetworkFW.framework;
 			remoteRef = 65B1F93F151A8B74000A1736 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		65B1F945151A8B74000A1736 /* JFFSchedulerFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFSchedulerFW.framework;
-			path = JFFSchedulerFW;
+			path = JFFSchedulerFW.framework;
 			remoteRef = 65B1F944151A8B74000A1736 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		65B1F94A151A8B74000A1736 /* JFFUtilsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFUtilsFW.framework;
-			path = JFFUtilsFW;
+			path = JFFUtilsFW.framework;
 			remoteRef = 65B1F949151A8B74000A1736 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

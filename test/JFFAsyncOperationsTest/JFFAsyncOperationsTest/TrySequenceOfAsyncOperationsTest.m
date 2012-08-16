@@ -48,7 +48,7 @@
         GHAssertFalse( second_loader_.finished, @"Second loader not finished yet" );
         GHAssertFalse( sequence_loader_finished_, @"Sequence loader not finished yet" );
 
-        first_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
+        first_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError newErrorWithDescription: @"some error" ] );
 
         GHAssertTrue( first_loader_.finished, @"First loader finished already" );
         GHAssertFalse( second_loader_.finished, @"Second loader not finished yet" );
@@ -107,29 +107,29 @@
 {
     @autoreleasepool
     {
-        JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
-        JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* firstLoader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* secondLoader_ = [ JFFAsyncOperationManager new ];
 
-        JFFAsyncOperation loader_ = trySequenceOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
+        JFFAsyncOperation loader_ = trySequenceOfAsyncOperations( firstLoader_.loader, secondLoader_.loader, nil );
 
         JFFCancelAsyncOperation cancel_ = loader_( nil, nil, nil );
 
-        GHAssertFalse( first_loader_.canceled, @"still not canceled" );
-        GHAssertFalse( second_loader_.canceled, @"still not canceled" );
+        GHAssertFalse( firstLoader_.canceled, @"still not canceled" );
+        GHAssertFalse( secondLoader_.canceled, @"still not canceled" );
 
-        first_loader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
+        firstLoader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError newErrorWithDescription: @"some error" ] );
 
-        GHAssertFalse( first_loader_.canceled, @"still not canceled" );
-        GHAssertFalse( second_loader_.canceled, @"still not canceled" );
+        GHAssertFalse( firstLoader_.canceled, @"still not canceled" );
+        GHAssertFalse( secondLoader_.canceled, @"still not canceled" );
 
         cancel_( YES );
 
-        GHAssertFalse( first_loader_.canceled, @"canceled" );
-        GHAssertTrue( second_loader_.canceled, @"still not canceled" );
-        GHAssertTrue( second_loader_.cancelFlag, @"canceled" );
+        GHAssertFalse( firstLoader_.canceled, @"canceled" );
+        GHAssertTrue( secondLoader_.canceled, @"still not canceled" );
+        GHAssertTrue( secondLoader_.cancelFlag, @"canceled" );
 
-        [ second_loader_ release ];
-        [ first_loader_ release ];
+        [ secondLoader_ release ];
+        [ firstLoader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );

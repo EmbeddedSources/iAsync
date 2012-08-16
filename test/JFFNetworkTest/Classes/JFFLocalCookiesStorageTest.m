@@ -18,9 +18,38 @@
     }
 }
 
+//TODO fix
+//?????
+-(void)testHTTPCookieExparationDate
+{
+    NSString* header_ = @"ws-alr1.dk.sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=Wed, 05-Aug-2012 07:21:54 GMT; path=/sitecore/login";
+
+    NSURL* url_ = [ NSURL URLWithString: @"http://ws-alr1.dk.sitecore.net/sitecore/login" ];
+
+    NSHTTPCookie* cookie_ = [ NSHTTPCookie HTTPCookieWithHeader: header_ url: url_ ];
+
+    NSHTTPCookieStorage   * storage_      = [ NSHTTPCookieStorage sharedHTTPCookieStorage ];
+    JFFLocalCookiesStorage* localStorage_ = [ JFFLocalCookiesStorage new ];
+
+    //set cookies_
+    {
+        [ storage_      setCookie: cookie_ ];
+        [ localStorage_ setCookie: cookie_ ];
+    }
+
+    //get cookie for url_
+    {
+        NSHTTPCookie* result1Cookie_ = [ [ storage_      cookiesForURL: url_ ] lastObject ];
+        NSHTTPCookie* result2Cookie_ = [ [ localStorage_ cookiesForURL: url_ ] lastObject ];
+
+        GHAssertNil( result1Cookie_, @"OK" );
+        GHAssertNil( result2Cookie_, @"OK" );
+    }
+}
+
 -(void)testHTTPCookiePathMatchWithSameDomain
 {
-    NSString* header_ = @"ws-alr1.dk.sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=Wed, 25-Jul-2012 07:21:54 GMT; path=/sitecore/login";
+    NSString* header_ = @"ws-alr1.dk.sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=Wed, 05-Aug-2013 07:21:54 GMT; path=/sitecore/login";
 
     NSURL* url_ = [ NSURL URLWithString: @"http://ws-alr1.dk.sitecore.net/sitecore/login" ];
 

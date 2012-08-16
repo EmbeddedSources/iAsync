@@ -300,7 +300,7 @@
 
         loader_( nil, nil, nil );
 
-        firstLoader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError errorWithDescription: @"some error" ] );
+        firstLoader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError newErrorWithDescription: @"some error" ] );
 
         [ second_loader_ release ];
         [ firstLoader_ release ];
