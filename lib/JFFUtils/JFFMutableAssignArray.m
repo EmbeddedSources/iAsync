@@ -55,7 +55,7 @@
 {
     if ( !self->_mutableArray )
     {
-        self->_mutableArray = [ NSMutableArray new ];
+        self->_mutableArray = [ @[] mutableCopy ];
     }
     return self->_mutableArray;
 }
@@ -77,7 +77,7 @@
 
 -(BOOL)containsObject:( id )object_
 {
-    return [ _mutableArray firstMatch: ^BOOL( id element_ )
+    return [ self->_mutableArray firstMatch: ^BOOL( id element_ )
     {
         JFFAutoRemoveAssignProxy* proxy_ = element_;
         return proxy_.target == object_;
@@ -86,7 +86,7 @@
 
 -(void)removeObject:( id )object_
 {
-    NSUInteger index_ = [ _mutableArray firstIndexOfObjectMatch: ^BOOL( id element_ )
+    NSUInteger index_ = [ self->_mutableArray firstIndexOfObjectMatch: ^BOOL( id element_ )
     {
         JFFAutoRemoveAssignProxy* proxy_ = element_;
         return proxy_.target == object_;
@@ -123,7 +123,7 @@
 
 -(id)firstMatch:( JFFPredicateBlock )predicate_
 {
-    for ( JFFAutoRemoveAssignProxy* proxy_ in _mutableArray )
+    for ( JFFAutoRemoveAssignProxy* proxy_ in self->_mutableArray )
     {
         if ( predicate_( proxy_.target ) )
             return proxy_.target;

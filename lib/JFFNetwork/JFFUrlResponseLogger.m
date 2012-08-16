@@ -8,13 +8,13 @@
     NSAssert( [ url_response_ respondsToSelector: @selector( expectedContentLength ) ], @"[!!! ERROR !!!] expectedContentLength not supported" );
     NSAssert( [ url_response_ respondsToSelector: @selector( allHeaderFields       ) ], @"[!!! ERROR !!!] allHeaderFields not supported"       );
 
-    NSMutableString* result_ = [ NSMutableString stringWithFormat: @"<<< UrlResponse. HttpStatusCode = %d \n", [ url_response_ statusCode ] ] ;
+    NSMutableString* result_ = [ [ NSMutableString alloc ] initWithFormat: @"<<< UrlResponse. HttpStatusCode = %d \n", [ url_response_ statusCode ] ] ;
     [ result_ appendFormat: @"Result length = %lld \n", [ url_response_ expectedContentLength ] ];
 
-    NSString* header_fields_ = [ self dumpHttpHeaderFields: [ url_response_ allHeaderFields ] ];
-    [ result_ appendString: header_fields_ ];
+    NSString* headerFields_ = [ self dumpHttpHeaderFields: [ url_response_ allHeaderFields ] ];
+    [ result_ appendString: headerFields_ ];
 
-    return result_;
+    return [ result_ copy ];
 }
 
 +(NSString*)dumpHttpHeaderFields:( NSDictionary* )allHeaderFields_
@@ -28,7 +28,7 @@
         [ result_ appendFormat: @"\t%@ = %@ \n", key_, obj_ ];
     } ];
 
-   return result_;
+    return [ result_ copy ];
 }
 
 @end

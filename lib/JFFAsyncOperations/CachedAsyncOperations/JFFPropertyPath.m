@@ -18,7 +18,7 @@
 
 -(NSString*)description
 {
-    return [ NSString stringWithFormat: @"<JFFPropertyPath name: %@ key: %@>", self.name, self.key ];
+    return [ [ NSString alloc ] initWithFormat: @"<JFFPropertyPath name: %@ key: %@>", self.name, self.key ];
 }
 
 @end

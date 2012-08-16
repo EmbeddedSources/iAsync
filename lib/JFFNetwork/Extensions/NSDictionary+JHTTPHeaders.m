@@ -5,7 +5,11 @@
 -(id)initWithContentType:( NSString* )contentType_
 {
     NSParameterAssert( contentType_ );
-    return [ self initWithObjectsAndKeys: contentType_, @"Content-Type", nil ];
+
+    id objects_[] = { contentType_    };
+    id keys_   [] = { @"Content-Type" };
+
+    return [ self initWithObjects: objects_ forKeys: keys_ count: 1 ];
 }
 
 +(id)headersDictionadyWithUploadContentType

@@ -18,8 +18,6 @@
     }
 }
 
-//TODO fix
-//?????
 -(void)testHTTPCookieExparationDate
 {
     NSString* header_ = @"ws-alr1.dk.sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=Wed, 05-Aug-2012 07:21:54 GMT; path=/sitecore/login";
@@ -49,7 +47,17 @@
 
 -(void)testHTTPCookiePathMatchWithSameDomain
 {
-    NSString* header_ = @"ws-alr1.dk.sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=Wed, 05-Aug-2013 07:21:54 GMT; path=/sitecore/login";
+    NSDate* now_ = [ [ NSDate new ] dateByAddingTimeInterval: 10000. ];
+
+    NSDateFormatter* formatter_ = [ NSDateFormatter new ];
+    [ formatter_ setLocale: [ [ NSLocale alloc ] initWithLocaleIdentifier: @"en_US_POSIX" ] ];
+    formatter_.timeZone = [ NSTimeZone timeZoneWithName: @"GMT" ];
+    formatter_.dateFormat = @"EEE, dd-MMM-YYYY hh:mm:ss";
+
+    static NSString* const headerFormat_ = @"ws-alr1.dk.sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=%@ GMT; path=/sitecore/login";
+
+    NSString* header_ = [ [ NSString alloc ] initWithFormat: headerFormat_
+                         , [ formatter_ stringFromDate: now_ ] ];
 
     NSURL* url_ = [ NSURL URLWithString: @"http://ws-alr1.dk.sitecore.net/sitecore/login" ];
 
@@ -106,7 +114,17 @@
 
 -(void)testHTTPCookieDotDomainMatch
 {
-    NSString* header_ = @"ws-alr1.dk.sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=Wed, 25-Jul-2012 07:21:54 GMT; Domain=sitecore.net; path=/";
+    NSDate* now_ = [ [ NSDate new ] dateByAddingTimeInterval: 10000. ];
+
+    NSDateFormatter* formatter_ = [ NSDateFormatter new ];
+    [ formatter_ setLocale: [ [ NSLocale alloc ] initWithLocaleIdentifier: @"en_US_POSIX" ] ];
+    formatter_.timeZone = [ NSTimeZone timeZoneWithName: @"GMT" ];
+    formatter_.dateFormat = @"EEE, dd-MMM-YYYY hh:mm:ss";
+
+    static NSString* const headerFormat_ = @"ws-alr1.dk.sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=%@ GMT; Domain=sitecore.net; path=/";
+
+    NSString* header_ = [ [ NSString alloc ] initWithFormat: headerFormat_
+                         , [ formatter_ stringFromDate: now_ ] ];
 
     NSURL* url_ = [ NSURL URLWithString: @"http://ws-alr1.dk.sitecore.net/sitecore/login" ];
 
@@ -163,7 +181,17 @@
 
 -(void)testHTTPCookieNoDotDomainMatch
 {
-    NSString* header_ = @"sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=Wed, 25-Jul-2012 07:21:54 GMT; path=/";
+    NSDate* now_ = [ [ NSDate new ] dateByAddingTimeInterval: 10000. ];
+    
+    NSDateFormatter* formatter_ = [ NSDateFormatter new ];
+    [ formatter_ setLocale: [ [ NSLocale alloc ] initWithLocaleIdentifier: @"en_US_POSIX" ] ];
+    formatter_.timeZone = [ NSTimeZone timeZoneWithName: @"GMT" ];
+    formatter_.dateFormat = @"EEE, dd-MMM-YYYY hh:mm:ss";
+
+    static NSString* const headerFormat_ = @"sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=%@ GMT; path=/";
+
+    NSString* header_ = [ [ NSString alloc ] initWithFormat: headerFormat_
+                         , [ formatter_ stringFromDate: now_ ] ];
 
     NSURL* url_ = [ NSURL URLWithString: @"http://sitecore.net/sitecore/login" ];
 

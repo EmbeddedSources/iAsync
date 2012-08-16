@@ -369,10 +369,7 @@ static JFFAsyncOperation groupOfAsyncOperationsPair( JFFAsyncOperation firstLoad
         __block BOOL loaded_ = NO;
         __block NSError* errorHolder_;
 
-        NSMutableArray* complexResult_ = [ [ NSMutableArray alloc ] initWithObjects:
-                                          [ NSNull null ]
-                                          , [ NSNull null ]
-                                          , nil ];
+        NSMutableArray* complexResult_ = [ @[ [ NSNull null ], [ NSNull null ] ] mutableCopy ];
 
         doneCallback_ = [ doneCallback_ copy ];
 
@@ -551,10 +548,7 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair( JFFAsyncOpe
                 cancelCallback_( canceled_ );
         } copy ];// "cancelCallbackHolder_" used as flag for done
 
-        NSMutableArray* complexResult_ = [ NSMutableArray arrayWithObjects:
-                                          [ NSNull null ]
-                                          , [ NSNull null ]
-                                          , nil ];
+        NSMutableArray* complexResult_ = [ @[ [ NSNull null ], [ NSNull null ] ] mutableCopy ];
 
         doneCallback_ = [ doneCallback_ copy ];
         JFFDidFinishAsyncOperationHandler (^makeResultHandler_)( NSUInteger ) =

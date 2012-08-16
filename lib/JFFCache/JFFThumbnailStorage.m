@@ -5,7 +5,7 @@
 
 #import <UIKit/UIKit.h>
 
-static id storage_instance_ = nil;
+static id storageInstance_ = nil;
 
 @interface JFFThumbnailStorage ()
 
@@ -14,8 +14,6 @@ static id storage_instance_ = nil;
 @end
 
 @implementation JFFThumbnailStorage
-
-@synthesize imagesByUrl = _imagesByUrl;
 
 -(id)init
 {
@@ -39,32 +37,32 @@ static id storage_instance_ = nil;
 
 -(NSMutableDictionary*)imagesByUrl
 {
-    if ( !_imagesByUrl )
+    if ( !self->_imagesByUrl )
     {
-        _imagesByUrl = [ NSMutableDictionary new ];
+        self->_imagesByUrl = [ NSMutableDictionary new ];
     }
 
-    return _imagesByUrl;
+    return self->_imagesByUrl;
 }
 
 +(JFFThumbnailStorage*)sharedStorage
 {
-    if ( !storage_instance_ )
+    if ( !storageInstance_ )
     {
-        storage_instance_ = [ self new ];
+        storageInstance_ = [ self new ];
     }
 
-    return storage_instance_;
+    return storageInstance_;
 }
 
 -(void)handleMemoryWarning:( NSNotification* )notification_
 {
-    self.imagesByUrl = nil;
+    self->_imagesByUrl = nil;
 }
 
 +(void)setSharedStorage:( JFFThumbnailStorage* )storage_
 {
-    storage_instance_ = storage_;
+    storageInstance_ = storage_;
 }
 
 -(id< JFFCacheDB >)thumbnailDB
@@ -74,20 +72,21 @@ static id storage_instance_ = nil;
 
 -(UIImage*)cachedImageForURL:( NSURL* )url_
 {
-    NSString* url_string_ = [ url_ description ];
-    NSData* chached_data_ = [ [ self thumbnailDB ] dataForKey: url_string_ ];
+    NSString* urlString_ = [ url_ description ];
+    NSData* chachedData_ = [ [ self thumbnailDB ] dataForKey: urlString_ ];
 
-    UIImage* result_image_ = chached_data_ ? [ UIImage imageWithData: chached_data_ ] : nil;
-    if ( chached_data_ && !result_image_ )
+    UIImage* resultImage_ = chachedData_ ? [ UIImage imageWithData: chachedData_ ] : nil;
+    if ( chachedData_ && !resultImage_ )
         NSLog( @"JFFThumbnailStorage: can not create image from cache with url: %@", url_ );
-    return result_image_;
+
+    return resultImage_;
 }
 
 -(JFFAsyncOperationBinder)createImageBlockWithUrl:( NSURL* )url_
 {
     JFFAnalyzer analyzer_ = ^id( NSData* imageData_, NSError** outError_ )
     {
-        UIImage* resultImage_ = [ UIImage imageWithData: imageData_ ];
+        UIImage* resultImage_ = [ [ UIImage alloc ] initWithData: imageData_ ];
 
         if ( resultImage_ )
         {
@@ -98,8 +97,11 @@ static id storage_instance_ = nil;
         }
 
         NSLog( @"JFFThumbnailStorage: can not create image from cache with url: %@", url_ );
-        NSError* error_ = [ JFFError errorWithDescription: @"invalid response" ];
-        [ error_ setToPointer: outError_ ];
+        if ( outError_ )
+        {
+            NSError* error_ = [ JFFError newErrorWithDescription: @"invalid response" ];
+            [ error_ setToPointer: outError_ ];
+        }
 
         return nil;
     };
@@ -114,14 +116,16 @@ static id storage_instance_ = nil;
     {
         if ( !url_ )
         {
-            doneCallback_( nil, [ JFFError errorWithDescription: @"incorrect url" ] );
+            if ( doneCallback_ )
+                doneCallback_( nil, [ JFFError newErrorWithDescription: @"incorrect url" ] );
             return JFFStubCancelAsyncOperationBlock;
         }
 
         UIImage* cachedImage_ = [ self.imagesByUrl objectForKey: url_ ];
         if ( cachedImage_ )
         {
-            doneCallback_( cachedImage_, nil );
+            if ( doneCallback_ )
+                doneCallback_( cachedImage_, nil );
             return JFFStubCancelAsyncOperationBlock;
         }
 
@@ -129,13 +133,16 @@ static id storage_instance_ = nil;
         if ( cachedImage_ )
         {
             [ self.imagesByUrl setObject: cachedImage_ forKey: url_ ];
-            doneCallback_( cachedImage_, nil );
+            if ( doneCallback_ )
+                doneCallback_( cachedImage_, nil );
             return JFFStubCancelAsyncOperationBlock;
         }
 
         JFFAsyncOperation loaderBlock_ = asyncOperationWithSyncOperation( ^id( NSError** error_ )
         {
-            return [ NSData dataWithContentsOfURL: url_ options: NSDataReadingMappedIfSafe error: error_ ];
+            return [ [ NSData alloc ] initWithContentsOfURL: url_
+                                                    options: NSDataReadingMappedIfSafe
+                                                      error: error_ ];
         } );
         //loader_block_ = balancedAsyncOperation( loader_block_ );
 
@@ -154,7 +161,7 @@ static id storage_instance_ = nil;
 
 -(UIImage*)imageForURL:( NSURL* )url_
 {
-    return [ self.imagesByUrl objectForKey: url_ ];
+    return [ self->_imagesByUrl objectForKey: url_ ];
 }
 
 @end

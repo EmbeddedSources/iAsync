@@ -10,48 +10,40 @@
     NSArray* expected_ = nil;
 
     {
-        items_ = [ NSArray arrayWithObjects: 
-                    @"abra"
+        items_ = @[ @"abra"
                   , @"shwabra"
                   , @"kadabra"
                   , @"abra"
                   , @"habra"
                   , @"kadabra"
-                  , @"ABra"
-                  , nil ];
+                  , @"ABra" ];
 
         received_ = [ items_ unique ];
-        expected_ = [ NSArray arrayWithObjects: 
-                        @"abra"
+        expected_ = @[  @"abra"
                      , @"shwabra"
                      , @"kadabra"
                      , @"habra"
-                     , @"ABra"
-                     , nil ];
+                     , @"ABra" ];
 
         GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
     }
 
     {
-        items_ = [ NSArray arrayWithObjects: 
-                    @"one"
+        items_ = @[ @"one"
                   , @"two"
                   , @"three"
                   , @"two"
                   , @"one"
                   , @"four"
                   , @"five"
-                  , @"one"
-                  , nil ];
+                  , @"one" ];
 
         received_ = [ items_ unique ];
-        expected_ = [ NSArray arrayWithObjects: 
-                        @"one"
+        expected_ = @[ @"one"
                      , @"two"
                      , @"three"
                      , @"four"
-                     , @"five"
-                     , nil ];      
+                     , @"five" ];
 
         GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
     }
@@ -64,7 +56,7 @@
     NSArray* expected_ = nil;
 
     {
-        items_ = [ NSArray array ];
+        items_ = @[];
 
         received_ = [ items_ unique ];
         expected_ = items_;
@@ -79,61 +71,52 @@
     NSArray* items_    = nil;
     NSArray* received_ = nil;
     NSArray* expected_ = nil;
-   
+
     JFFEqualityCheckerBlock predicate_ = ^( id left_, id right_ )
     {
         NSComparisonResult result1_ = [ left_  caseInsensitiveCompare: right_ ];
         NSComparisonResult result2_ = [ right_ caseInsensitiveCompare: left_  ];
 
-        BOOL result_equal_ = ( result1_      == result2_ );
-        BOOL result_same_  = ( NSOrderedSame == result2_ );
+        BOOL resultEqual_ = ( result1_      == result2_ );
+        BOOL resultSame_  = ( NSOrderedSame == result2_ );
 
-        return (BOOL)( result_same_ && result_equal_ );
+        return (BOOL)( resultSame_ && resultEqual_ );
     };
 
     {
-        items_ = [ NSArray arrayWithObjects: 
-                  @"abra"
+        items_ = @[ @"abra"
                   , @"shwabra"
                   , @"kadabra"
                   , @"abRa"
                   , @"habra"
                   , @"KAdabRA"
-                  , @"ABra"
-                  , nil ];
-
+                  , @"ABra" ];
 
         received_ = [ items_ uniqueBy: predicate_ ];
-        expected_ = [ NSArray arrayWithObjects: 
-                     @"abra"
+        expected_ = @[ @"abra"
                      , @"shwabra"
                      , @"kadabra"
-                     , @"habra"
-                     , nil ];
+                     , @"habra" ];
 
         GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
     }
    
     {
-        items_ = [ NSArray arrayWithObjects: 
-                    @"one"
+        items_ = @[ @"one"
                   , @"Two"
                   , @"THREE"
                   , @"two"
                   , @"One"
                   , @"four"
                   , @"five"
-                  , @"ONE"
-                  , nil ];
+                  , @"ONE" ];
 
         received_ = [ items_ uniqueBy: predicate_ ];
-        expected_ = [ NSArray arrayWithObjects: 
-                        @"one"
+        expected_ = @[ @"one"
                      , @"Two"
                      , @"THREE"
                      , @"four"
-                     , @"five"
-                     , nil ];      
+                     , @"five" ];
 
         GHAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
     }

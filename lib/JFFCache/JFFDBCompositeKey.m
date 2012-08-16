@@ -10,13 +10,11 @@
 
 @implementation JFFDBCompositeKey
 
-@synthesize keys;
-
 -(id)copyWithZone:( NSZone* )zone_
 {
     JFFDBCompositeKey* copy_ = [ [ [ self class ] allocWithZone: zone_ ] init ];
 
-    copy_->keys = [ self.keys copyWithZone: zone_ ];
+    copy_->_keys = [ self.keys copyWithZone: zone_ ];
 
     return copy_;
 }
@@ -28,8 +26,8 @@
 
 -(BOOL)isEqual:( id )object_
 {
-    JFFDBCompositeKey* other_object_ = object_;
-    return [ other_object_.keys isEqual: self.keys ];
+    JFFDBCompositeKey* otherObject_ = object_;
+    return [ otherObject_.keys isEqual: self.keys ];
 }
 
 -(id)initWithKeys:( NSArray* )keys_
@@ -38,7 +36,7 @@
 
     if ( self )
     {
-        self.keys = [ NSArray arrayWithArray: keys_ ];
+        self->_keys = [ keys_ copy ];
     }
 
     return self;
@@ -49,9 +47,9 @@
     NSMutableArray* keys_ = [ NSMutableArray new ];
     va_list args;
     va_start( args, key_ );
-    for ( NSString* current_key_ = key_; current_key_ != nil; current_key_ = va_arg( args, NSString* ) )
+    for ( NSString* currentKey_ = key_; currentKey_ != nil; currentKey_ = va_arg( args, NSString* ) )
     {
-        [ keys_ addObject: current_key_ ];
+        [ keys_ addObject: currentKey_ ];
     }
     va_end( args );
 

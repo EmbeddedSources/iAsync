@@ -119,7 +119,7 @@
         {
             NSLog( @"critical error: %@", ex_ );
             opResult_ = nil;
-            NSString* description_ = [ NSString stringWithFormat: @"exception: %@, reason: %@"
+            NSString* description_ = [ [ NSString alloc ] initWithFormat: @"exception: %@, reason: %@"
                                       , ex_.name
                                       , ex_.reason ];
             error_ = [ JFFError newErrorWithDescription: description_ ];

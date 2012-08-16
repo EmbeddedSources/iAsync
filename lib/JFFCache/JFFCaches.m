@@ -11,9 +11,6 @@
 static JFFCaches* sharedCachesInstance_ = nil;
 
 @interface JFFInternalCacheDB : JFFBaseDB
-{
-    NSString* _configPropertyName;
-}
 
 @property ( nonatomic ) NSString* configPropertyName;
 
@@ -21,16 +18,14 @@ static JFFCaches* sharedCachesInstance_ = nil;
 
 @implementation JFFInternalCacheDB
 
-@synthesize configPropertyName;
-
 -(void)configureCachesWithCacheDBWithName:( NSString* )dbPropertyName_
                                    dbInfo:( JFFDBInfo* )dbInfo_
 {
-    self.configPropertyName = dbPropertyName_;
+    self->_configPropertyName = dbPropertyName_;
 
     NSDictionary* dbInfoDict_ = [ dbInfo_ dbInfo ];
     NSTimeInterval removeRarelyAccessDataDelay_ =
-        [ dbInfoDict_ autoRemoveByLastAccessDateForDBWithName: self.configPropertyName ];
+        [ dbInfoDict_ autoRemoveByLastAccessDateForDBWithName: self->_configPropertyName ];
     if ( removeRarelyAccessDataDelay_ != 0 )
     {
         __weak JFFInternalCacheDB* self_ = self;
@@ -78,8 +73,8 @@ static JFFCaches* sharedCachesInstance_ = nil;
 
     NSDictionary* dbInfo_ = [ [ JFFDBInfo sharedDBInfo ] dbInfo ];
 
-    NSInteger lastVersion_ = [ dbInfo_ versionForDBWithName: _configPropertyName ];
-    NSInteger current_version_ = [ currentDbInfo_ versionForDBWithName: _configPropertyName ];
+    NSInteger lastVersion_ = [ dbInfo_ versionForDBWithName: self->_configPropertyName ];
+    NSInteger current_version_ = [ currentDbInfo_ versionForDBWithName: self->_configPropertyName ];
 
     if ( lastVersion_ > current_version_ )
     {
@@ -160,12 +155,12 @@ static JFFCaches* sharedCachesInstance_ = nil;
 
 -(NSMutableDictionary*)mutableCacheDbByName
 {
-    if ( !_mutableCacheDbByName )
+    if ( !self->_mutableCacheDbByName )
     {
-        _mutableCacheDbByName = [ NSMutableDictionary new ];
+        self->_mutableCacheDbByName = [ NSMutableDictionary new ];
     }
 
-    return _mutableCacheDbByName;
+    return self->_mutableCacheDbByName;
 }
 
 -(NSDictionary*)cacheDbByName

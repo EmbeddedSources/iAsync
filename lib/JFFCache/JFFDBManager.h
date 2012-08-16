@@ -2,8 +2,6 @@
 
 @interface JFFDBManager : NSObject
 
-+(id)manager;
-
 -(void)synchronizeDB;
 
 @end

@@ -2,8 +2,8 @@
 
 #include <objc/message.h>
 
-static const NSUInteger test_class_method_result_ = 34;//just rendomize number
-static const NSUInteger test_instance_method_result_ = 35;//just rendomize number
+static const NSUInteger testClassMethodResult_ = 34;//just rendomize number
+static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
 
 @interface NSTestClass : NSObject
 @end
@@ -22,12 +22,12 @@ static const NSUInteger test_instance_method_result_ = 35;//just rendomize numbe
 
 +(NSUInteger)classMethodWithLongNameForUniquenessPurposes
 {
-    return test_class_method_result_;
+    return testClassMethodResult_;
 }
 
 -(NSUInteger)instanceMethodWithLongNameForUniquenessPurposes
 {
-    return test_instance_method_result_;
+    return testInstanceMethodResult_;
 }
 
 @end
@@ -75,7 +75,7 @@ static const NSUInteger test_instance_method_result_ = 35;//just rendomize numbe
                      , @"NSTestClass has classMethodWithLongNameForUniquenessPurposes2 method" );
 
         NSUInteger method_result_ = (NSUInteger)objc_msgSend( [ NSTestClass class ], @selector( classMethodWithLongNameForUniquenessPurposes2 ) );
-        GHAssertTrue( test_class_method_result_ == method_result_, @"check implementation of new method" );
+        GHAssertTrue( testClassMethodResult_ == method_result_, @"check implementation of new method" );
 
         first_test_run_ = NO;
     }
@@ -99,7 +99,7 @@ static const NSUInteger test_instance_method_result_ = 35;//just rendomize numbe
 
         NSTestClass* instance_ = [ NSTestClass new ];
         NSUInteger method_result_ = (NSUInteger)objc_msgSend( instance_, new_method_selector_ );
-        GHAssertTrue( test_instance_method_result_ == method_result_, @"check implementation of new method" );
+        GHAssertTrue( testInstanceMethodResult_ == method_result_, @"check implementation of new method" );
 
         first_test_run_ = NO;
    }

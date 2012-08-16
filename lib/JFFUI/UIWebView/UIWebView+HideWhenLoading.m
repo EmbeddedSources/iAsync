@@ -6,7 +6,7 @@ static char property_key_;
 
 @interface UIWebView (HideWhenLoadingInternal)
 
-@property ( nonatomic, strong ) JUIWebViewDelegateProxy* proxy;
+@property ( nonatomic ) JUIWebViewDelegateProxy* proxy;
 
 @end
 

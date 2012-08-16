@@ -16,7 +16,7 @@
 -(NSString*)description
 {
     NSString* custom_ = [ JFFUrlResponseLogger descriptionStringForUrlResponse: self ];
-    return [ NSString stringWithFormat: @"%@ \n   %@", [ super description ], custom_ ];
+    return [ [ NSString alloc ] initWithFormat: @"%@ \n   %@", [ super description ], custom_ ];
 }
 
 @end

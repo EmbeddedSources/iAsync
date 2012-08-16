@@ -21,20 +21,20 @@
 -(void)testAssignProxyDealloc
 {
     JFFAssignProxy* proxy_ = nil;
-    __block BOOL target_deallocated_ = NO;
+    __block BOOL targetDeallocated_ = NO;
 
     @autoreleasepool
     {
         ProxyTargetTest* target_ = [ ProxyTargetTest new ];
         [ target_ addOnDeallocBlock: ^void( void )
         {
-            target_deallocated_ = YES;
+            targetDeallocated_ = YES;
         } ];
 
         proxy_ = [ [ JFFAssignProxy alloc ] initWithTarget: target_ ];
     }
 
-    GHAssertTrue( target_deallocated_, @"Target should be dealloced" );
+    GHAssertTrue( targetDeallocated_, @"Target should be dealloced" );
 }
 
 -(void)testAssignProxyMethodCalls

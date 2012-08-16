@@ -5,7 +5,7 @@
 
 -(void)testEmptyArrayRemainsEmptyOnShrink
 {
-    NSMutableArray* items_ = [ NSMutableArray array ];
+    NSMutableArray* items_ = [ @[] mutableCopy ];
 
     GHAssertNotNil( items_               , @"Array should be empty" );
     GHAssertTrue  ( 0 == [ items_ count ], @"Array should be empty" );
@@ -17,15 +17,13 @@
 
 -(void)testArrayBecomesEmptyForZeroArg
 {
-    NSMutableArray* items_ = [ NSMutableArray arrayWithObjects: 
-                              @"one"
-                              , @"two"
-                              , @"three"
-                              , @"four"
-                              , @"five"
-                              , @"six"
-                              , @"seven"
-                              , nil ];
+    NSMutableArray* items_ = [ @[ @"one"
+                                , @"two"
+                                , @"three"
+                                , @"four"
+                                , @"five"
+                                , @"six"
+                                , @"seven" ] mutableCopy ];
 
     GHAssertNotNil( items_               , @"Array should be valid"     );
     GHAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
@@ -40,15 +38,13 @@
     NSMutableArray* items_ = nil;
 
     {
-        items_ = [ NSMutableArray arrayWithObjects:
-                  @"one"
-                  , @"two"
-                  , @"three"
-                  , @"four"
-                  , @"five"
-                  , @"six"
-                  , @"seven"
-                  , nil ];
+        items_ = [ @[ @"one"
+                    , @"two"
+                    , @"three"
+                    , @"four"
+                    , @"five"
+                    , @"six"
+                    , @"seven" ] mutableCopy ];
 
         GHAssertNotNil( items_               , @"Array should be valid"     );
         GHAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
@@ -66,15 +62,13 @@
     NSMutableArray* items_ = nil;
 
     {
-        items_ = [ NSMutableArray arrayWithObjects: 
-                        @"one" 
-                        , @"two" 
-                        , @"three" 
-                        , @"four" 
-                        , @"five" 
-                        , @"six" 
-                        , @"seven" 
-                        , nil ];
+        items_ = [ @[ @"one"
+                    , @"two"
+                    , @"three"
+                    , @"four"
+                    , @"five"
+                    , @"six"
+                    , @"seven" ] mutableCopy ];
 
         GHAssertNotNil( items_               , @"Array should be valid"     );
         GHAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
@@ -87,15 +81,13 @@
     }
 
     {
-        items_ = [ NSMutableArray arrayWithObjects: 
-                  @"one" 
-                  , @"two" 
-                  , @"three" 
-                  , @"four" 
-                  , @"five" 
-                  , @"six" 
-                  , @"seven" 
-                  , nil ];
+        items_ = [ @[ @"one"
+                    , @"two"
+                    , @"three"
+                    , @"four"
+                    , @"five"
+                    , @"six"
+                    , @"seven" ] mutableCopy ];
 
         GHAssertNotNil( items_               , @"Array should be valid"     );
         GHAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );

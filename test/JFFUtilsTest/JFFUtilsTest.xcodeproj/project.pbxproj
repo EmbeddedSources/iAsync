@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B0E89211563FA5200825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E89201563FA5200825E3C /* libc++.dylib */; };
+		1B14143815DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B14143715DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m */; };
 		1B2D8B6C154BF37C00360296 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2D8B69154BF36C00360296 /* libJFFTestTools.a */; };
 		1B2D8B7D154BFA1F00360296 /* JUArrayAdditionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BCF8E514323E7D00E896B3 /* JUArrayAdditionsTest.m */; };
 		1B2D8B7E154BFA2300360296 /* JUMutableArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */; };
@@ -94,6 +95,7 @@
 
 /* Begin PBXFileReference section */
 		1B0E89201563FA5200825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		1B14143715DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateDifferenceStringFromDateTest.m; sourceTree = "<group>"; };
 		1B26EC6D14DABFB800A1A875 /* EmptyStringTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyStringTest.m; sourceTree = "<group>"; };
 		1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStringFormatTest.m; sourceTree = "<group>"; };
 		1B29556E143DCE7F00532BD7 /* JFFSimpleBlockHolderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSimpleBlockHolderTest.m; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				6515B96B152B737F00518996 /* NSObject_IsEqualTwoObjectsTest.m */,
 				1BC7424E154C0384002F3909 /* NumberOfCharacterFromStringTest.m */,
 				7E7225DD1588891400210CBE /* DevNullTest.m */,
+				1B14143715DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
@@ -422,6 +425,7 @@
 				1B2D8B8D154BFA3200360296 /* NSObject_IsEqualTwoObjectsTest.m in Sources */,
 				1BC7424F154C0384002F3909 /* NumberOfCharacterFromStringTest.m in Sources */,
 				7E7225DE1588891400210CBE /* DevNullTest.m in Sources */,
+				1B14143815DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

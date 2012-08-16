@@ -22,6 +22,8 @@
 #import <JFFUtils/NSString/NSString+StringWithCutPrefix.h>
 #import <JFFUtils/NSString/NSString+Base64.h>
 
+#import <JFFUtils/NSDate/NSDate+DateDifference.h>
+
 #import <JFFUtils/ToURL/NSString+ToURL.h>
 #import <JFFUtils/ToURL/NSURL+ToURL.h>
 
@@ -32,7 +34,6 @@
 #import <JFFUtils/Extensions/UIWebView+UserAgent.h>
 #import <JFFUtils/Extensions/NSDecimalNumber+Increment.h>
 #import <JFFUtils/Extensions/UIColor+ColorForHex.h>
-#import <JFFUtils/Extensions/NSDate+TimeZone.h>
 #import <JFFUtils/Extensions/NSError+setToPointer.h>
 #import <JFFUtils/Extensions/NSSet+BlocksAdditions.h>
 

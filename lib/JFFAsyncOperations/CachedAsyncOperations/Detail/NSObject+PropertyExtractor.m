@@ -8,7 +8,7 @@ static char property_data_property_key_;
 
 @interface NSObject (PropertyExtractorPrivate)
 
-@property ( nonatomic, strong ) NSMutableDictionary* propertyDataByPropertyName;
+@property ( nonatomic ) NSMutableDictionary* propertyDataByPropertyName;
 
 @end
 

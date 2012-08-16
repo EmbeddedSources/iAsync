@@ -38,17 +38,17 @@ static NSString* const createRecords_ =
     if ( self )
     {
         NSString* const dbPath_ = [ NSString cachesPathByAppendingPathComponent: dbName_ ];
-        if ( sqlite3_open( [ dbPath_ UTF8String ], &_db ) != SQLITE_OK )
+        if ( sqlite3_open( [ dbPath_ UTF8String ], &self->_db ) != SQLITE_OK )
         {
             NSLog( @"Can't open %@ db", dbPath_ );
             return nil;
         }
 
         const char *cacheSizePragma_ = "PRAGMA cache_size = 1000";
-        if ( sqlite3_exec( _db, cacheSizePragma_, 0, 0, 0 ) != SQLITE_OK )
+        if ( sqlite3_exec( self->_db, cacheSizePragma_, 0, 0, 0 ) != SQLITE_OK )
         {
             NSAssert1( 0, @"Error: failed to execute pragma statement with message '%s'."
-                      , sqlite3_errmsg( _db ) );
+                      , sqlite3_errmsg( self->_db ) );
         }
     }
 
@@ -58,7 +58,7 @@ static NSString* const createRecords_ =
 -(BOOL)prepareQuery:( NSString* )sql_
           statement:( sqlite3_stmt** )statement_
 {
-    return sqlite3_prepare_v2( _db
+    return sqlite3_prepare_v2( self->_db
                               , [ sql_ UTF8String ]
                               , -1
                               , statement_
@@ -68,7 +68,7 @@ static NSString* const createRecords_ =
 -(BOOL)execQuery:( NSString* )sql_
 {
     char* error_message_ = 0;
-    if ( sqlite3_exec( _db, [ sql_ UTF8String ], 0, 0, &error_message_ ) != SQLITE_OK )
+    if ( sqlite3_exec( self->_db, [ sql_ UTF8String ], 0, 0, &error_message_ ) != SQLITE_OK )
     {
         NSLog( @"%@ error: %s", sql_, error_message_ );
 
@@ -81,12 +81,12 @@ static NSString* const createRecords_ =
 
 -(NSString*)errorMessage
 {
-    return [ NSString stringWithUTF8String: sqlite3_errmsg( _db ) ];
+    return [ [ NSString alloc ] initWithUTF8String: sqlite3_errmsg( _db ) ];
 }
 
 -(void)dealloc
 {
-    sqlite3_close( _db );
+    sqlite3_close( self->_db );
 }
 
 @end
@@ -100,9 +100,6 @@ static NSString* const createRecords_ =
 
 @implementation JFFBaseDB
 
-@synthesize db = _db;
-@synthesize name = _name;
-
 -(id)initWithDBName:( NSString* )dbName_
           cacheName:( NSString* )cacheName_
 {
@@ -110,10 +107,10 @@ static NSString* const createRecords_ =
 
     if ( self )
     {
-        _name = cacheName_;
+        self->_name = cacheName_;
 
-        _db = [ [ JFFSQLiteDB alloc ] initWithDBName: dbName_ ];
-        [ _db execQuery: createRecords_ ];
+        self->_db = [ [ JFFSQLiteDB alloc ] initWithDBName: dbName_ ];
+        [ self->_db execQuery: createRecords_ ];
     }
 
     return self;
@@ -126,37 +123,37 @@ static NSString* const createRecords_ =
 
 -(BOOL)execQuery:( NSString* )sql_
 {
-    return [ self.db execQuery: sql_ ];
+    return [ self->_db execQuery: sql_ ];
 }
 
 -(BOOL)prepareQuery:( NSString* )sql_
           statement:( sqlite3_stmt** )statement_;
 {
-    return [ self.db prepareQuery: sql_ statement: statement_ ];
+    return [ self->_db prepareQuery: sql_ statement: statement_ ];
 }
 
 -(NSString*)errorMessage
 {
-    return [ self.db errorMessage ];
+    return [ self->_db errorMessage ];
 }
 
 -(void)updateAccessTime:( NSString* )record_id_
 {
-    [ self execQuery: [ NSString stringWithFormat: @"UPDATE records SET access_time='%f' WHERE record_id='%@';"
+    [ self execQuery: [ [ NSString alloc ] initWithFormat: @"UPDATE records SET access_time='%f' WHERE record_id='%@';"
                        , [ self currentTime ]
                        , record_id_ ] ];
 }
 
 -(NSString*)fileLinkForRecordId:( NSString* )recordId_
 {
-    NSString* query_ = [ NSString stringWithFormat: @"SELECT file_link FROM records WHERE record_id='%@';"
+    NSString* query_ = [ [ NSString alloc ] initWithFormat: @"SELECT file_link FROM records WHERE record_id='%@';"
                         , recordId_ ];
 
     sqlite3_stmt* statement_ = 0;
 
     NSString* result_ = nil;
 
-    if ( [ self.db prepareQuery: query_ statement: &statement_ ] )
+    if ( [ self->_db prepareQuery: query_ statement: &statement_ ] )
     {
         if ( sqlite3_step( statement_ ) == SQLITE_ROW )
         {
@@ -186,10 +183,10 @@ static NSString* const createRecords_ =
 {
     fileLink_ = [ NSString cachesPathByAppendingPathComponent: fileLink_ ];
     [ [ NSFileManager defaultManager ] removeItemAtPath: fileLink_ error: nil ];
-    
-    NSString* removeQuery_ = [ NSString stringWithFormat: @"DELETE FROM records WHERE record_id LIKE '%@';"
+
+    NSString* removeQuery_ = [ [ NSString alloc ] initWithFormat: @"DELETE FROM records WHERE record_id LIKE '%@';"
                               , recordId_ ];
-    
+
     sqlite3_stmt* statement_ = 0;
     if ( [ self prepareQuery: removeQuery_ statement: &statement_ ] )
     {
@@ -210,7 +207,7 @@ static NSString* const createRecords_ =
     NSURL* url_ = [ NSURL fileURLWithPath: fileLink_ ];
     [ data_ writeToURL: url_ atomically: NO ];
 
-    NSString* updateQuery_ = [ NSString stringWithFormat: @"UPDATE records SET update_time='%f', access_time='%f' WHERE record_id='%@';"
+    NSString* updateQuery_ = [ [ NSString alloc ] initWithFormat: @"UPDATE records SET update_time='%f', access_time='%f' WHERE record_id='%@';"
                                , [ self currentTime ]
                                , [ self currentTime ]
                                , recordId_ ];
@@ -231,7 +228,7 @@ static NSString* const createRecords_ =
 {
     NSString* fileLink_ = [ NSString createUuid ];
 
-    NSString* addQuery_ = [ NSString stringWithFormat: @"INSERT INTO records (record_id, file_link, update_time, access_time) VALUES ('%@', '%@', '%f', '%f');"
+    NSString* addQuery_ = [ [ NSString alloc ] initWithFormat: @"INSERT INTO records (record_id, file_link, update_time, access_time) VALUES ('%@', '%@', '%f', '%f');"
                            , recordId_
                            , fileLink_
                            , [ self currentTime ]
@@ -261,11 +258,11 @@ static NSString* const createRecords_ =
 
 //JTODO test !!!!
 -(void)removeRecordsToDate:( NSDate* )date_
-             dateFieldName:( NSString* )field_name_
+             dateFieldName:( NSString* )fieldName_
 {
     ///First remove all files
-    NSString* query_ = [ NSString stringWithFormat: @"SELECT file_link FROM records WHERE %@ < '%f';"
-                        , field_name_
+    NSString* query_ = [ [ NSString alloc ] initWithFormat: @"SELECT file_link FROM records WHERE %@ < '%f';"
+                        , fieldName_
                         , [ date_ timeIntervalSince1970 ] ];
 
     sqlite3_stmt* statement_ = 0;
@@ -286,12 +283,12 @@ static NSString* const createRecords_ =
     //////////
 
     {
-        NSString* remove_query_ = [ NSString stringWithFormat: @"DELETE FROM records WHERE %@ < '%f';"
-                                   , field_name_
+        NSString* removeQuery_ = [ [ NSString alloc ] initWithFormat: @"DELETE FROM records WHERE %@ < '%f';"
+                                   , fieldName_
                                    , [ date_ timeIntervalSince1970 ] ];
 
         sqlite3_stmt* statement_ = 0;
-        if ( [ self prepareQuery: remove_query_ statement: &statement_ ] )
+        if ( [ self prepareQuery: removeQuery_ statement: &statement_ ] )
         {
             if( sqlite3_step( statement_ ) != SQLITE_DONE )
             {
@@ -325,7 +322,7 @@ static NSString* const createRecords_ =
     static const NSUInteger linkIndex_ = 0;
     static const NSUInteger dateIndex_ = 1;
 
-    NSString* query_ = [ NSString stringWithFormat: @"SELECT file_link, update_time FROM records WHERE record_id='%@';", recordId_ ];
+    NSString* query_ = [ [ NSString alloc ] initWithFormat: @"SELECT file_link, update_time FROM records WHERE record_id='%@';", recordId_ ];
 
     NSData* recordData_ = nil;
 
@@ -369,7 +366,7 @@ static NSString* const createRecords_ =
         while ( sqlite3_step( statement_ ) == SQLITE_ROW )
         {
             const unsigned char * str_ = sqlite3_column_text( statement_, 0 );
-            NSString* fileLink_ = [ [ NSString alloc ] initWithUTF8String: (const char *)str_ ];
+            NSString* fileLink_ = @((const char *)str_);
             
             fileLink_ = [ NSString cachesPathByAppendingPathComponent: fileLink_ ];
             [ [ NSFileManager defaultManager ] removeItemAtPath: fileLink_ error: nil ];

@@ -20,7 +20,7 @@
 
     {
         NSMutableString* empty_ = [ NSMutableString stringWithString: @"" ];
-        NSString* str_ = [ NSString stringWithString: empty_ ];
+        NSString* str_ = [ empty_ copy ];
         GHAssertFalse( [ str_ hasSymbols ], @"Nil String[%@] should have no symbols", str_ );
     }
 

@@ -7,11 +7,6 @@
 
 @implementation JFFDBManager
 
-+(id)manager
-{
-    return [ self new ];
-}
-
 -(void)migrateDB
 {
     NSDictionary* cacheDbByName_ = [ [ JFFCaches sharedCaches ] cacheDbByName ];

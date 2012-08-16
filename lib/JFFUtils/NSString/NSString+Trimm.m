@@ -4,34 +4,36 @@
 
 -(NSRange)rangeForQuotesRemoval
 {
-    NSString* quoted_string_ = self;
+    NSString* quotedString_ = self;
 
-    static const NSUInteger first_quote_offset_ = 1;
-    static const NSUInteger quotes_count_ = 2;
-    NSUInteger range_length_ = [ quoted_string_ length ] - quotes_count_;
+    static const NSUInteger firstQuoteOffset_ = 1;
+    static const NSUInteger quotesCount_ = 2;
+    NSUInteger rangeLength_ = [ quotedString_ length ] - quotesCount_;
 
-    NSRange result_ = { first_quote_offset_, range_length_ };
+    NSRange result_ = { firstQuoteOffset_, rangeLength_ };
     return result_;
 }
 
 -(NSString*)stringByTrimmingWhitespaces
 {
-    return [ self stringByTrimmingCharactersInSet: [ NSCharacterSet whitespaceAndNewlineCharacterSet ] ];
+    NSCharacterSet* set_ = [ NSCharacterSet whitespaceAndNewlineCharacterSet ];
+    return [ self stringByTrimmingCharactersInSet: set_ ];
 }
 
 -(NSString*)stringByTrimmingPunctuation
 {
-    return [ self stringByTrimmingCharactersInSet: [ NSCharacterSet punctuationCharacterSet ] ];
+    NSCharacterSet* set_ = [ NSCharacterSet punctuationCharacterSet ];
+    return [ self stringByTrimmingCharactersInSet: set_ ];
 }
 
 -(NSString*)stringByTrimmingQuotes
 {
-    NSRange range_without_quotes_ = [ self rangeForQuotesRemoval ];
-    NSString* result_ = [ self substringWithRange: range_without_quotes_ ];
-   
-    NSCharacterSet* term_whitespaces_ = [ NSCharacterSet whitespaceAndNewlineCharacterSet ];
-   
-    return [ result_ stringByTrimmingCharactersInSet: term_whitespaces_ ];
+    NSRange rangeWithoutQuotes_ = [ self rangeForQuotesRemoval ];
+    NSString* result_ = [ self substringWithRange: rangeWithoutQuotes_ ];
+
+    NSCharacterSet* termWhitespaces_ = [ NSCharacterSet whitespaceAndNewlineCharacterSet ];
+
+    return [ result_ stringByTrimmingCharactersInSet: termWhitespaces_ ];
 }
 
 @end

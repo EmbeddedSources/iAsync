@@ -69,7 +69,7 @@ static NSString* identifier_ = @"Login&Password";
     NSMutableDictionary* _genericPasswordQuery;
 }
 
-@property ( nonatomic, strong, readonly ) NSDictionary* genericPasswordQuery;
+@property ( nonatomic, readonly ) NSDictionary* genericPasswordQuery;
 
 @end
 
@@ -262,7 +262,7 @@ static NSString* identifier_ = @"Login&Password";
 
 @interface JFFSecureStorage ()
 
-@property ( nonatomic, strong ) id< JFFSecureStorage > secureStorage;
+@property ( nonatomic ) id< JFFSecureStorage > secureStorage;
 
 @end
 

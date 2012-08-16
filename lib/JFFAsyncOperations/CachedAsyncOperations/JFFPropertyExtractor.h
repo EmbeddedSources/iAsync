@@ -6,16 +6,16 @@
 
 @interface JFFPropertyExtractor : NSObject
 
-@property ( nonatomic, strong ) JFFPropertyPath* propertyPath;
-@property ( nonatomic, strong ) NSObject* object;
+@property ( nonatomic ) JFFPropertyPath* propertyPath;
+@property ( nonatomic ) NSObject* object;
 
 //object related data
-@property ( nonatomic, strong ) NSMutableArray* delegates;
+@property ( nonatomic ) NSMutableArray* delegates;
 @property ( nonatomic, copy ) JFFCancelAsyncOperation cancelBlock;
 @property ( nonatomic, copy ) JFFAsyncOperation asyncLoader;
 @property ( nonatomic, copy ) JFFDidFinishAsyncOperationHandler didFinishBlock;
 
-@property ( nonatomic, strong ) id property;
+@property ( nonatomic ) id property;
 
 -(void)clearData;
 
