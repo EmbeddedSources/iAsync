@@ -4,6 +4,8 @@
 #import "JNConnectionsFactory.h"
 #import "JNUrlConnection.h"
 
+#import <JFFNetwork/JNUrlResponse.h>
+
 @implementation JFFAsyncOperationNetwork
 
 -(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_

@@ -26,7 +26,8 @@
         JFFSyncOperationWithProgress progressLoadDataBlock_ = ^id( NSError** error_
                                                                   , JFFAsyncOperationProgressHandler progressCallback_ )
         {
-            progressCallback_( [ NSNull null ] );
+            if ( progressCallback_ )
+                progressCallback_( [ NSNull null ] );
             return [ NSNull null ];
         };
         JFFAsyncOperation loader_ = asyncOperationWithSyncOperationWithProgressBlock( progressLoadDataBlock_ );

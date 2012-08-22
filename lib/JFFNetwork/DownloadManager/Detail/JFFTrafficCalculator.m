@@ -116,8 +116,8 @@
         [ self_ calculateDownloadSpeed ];
     };
 
-    _scheduler = [ JFFScheduler new ];
-    [ _scheduler addBlock: block_ duration: calculateSpeedInterval_ ];
+    self->_scheduler = [ JFFScheduler new ];
+    [ self->_scheduler addBlock: block_ duration: calculateSpeedInterval_ ];
 }
 
 @end

@@ -121,7 +121,7 @@ static id storageInstance_ = nil;
             return JFFStubCancelAsyncOperationBlock;
         }
 
-        UIImage* cachedImage_ = [ self.imagesByUrl objectForKey: url_ ];
+        UIImage* cachedImage_ = self.imagesByUrl[ url_ ];
         if ( cachedImage_ )
         {
             if ( doneCallback_ )
@@ -132,7 +132,7 @@ static id storageInstance_ = nil;
         cachedImage_ = [ self cachedImageForURL: url_ ];
         if ( cachedImage_ )
         {
-            [ self.imagesByUrl setObject: cachedImage_ forKey: url_ ];
+            self.imagesByUrl[ url_ ] = cachedImage_;
             if ( doneCallback_ )
                 doneCallback_( cachedImage_, nil );
             return JFFStubCancelAsyncOperationBlock;
@@ -161,7 +161,7 @@ static id storageInstance_ = nil;
 
 -(UIImage*)imageForURL:( NSURL* )url_
 {
-    return [ self->_imagesByUrl objectForKey: url_ ];
+    return self->_imagesByUrl[ url_ ];
 }
 
 @end

@@ -98,13 +98,13 @@ static JFFCaches* sharedCachesInstance_ = nil;
 -(id< JFFCacheDB >)registerAndCreateCacheDBWithName:( NSString* )dbPropertyName_
                                              dbInfo:( JFFDBInfo* )dbInfo_
 {
-    id< JFFCacheDB > result_ = [ self.mutableCacheDbByName objectForKey: dbPropertyName_ ];
+    id< JFFCacheDB > result_ = self.mutableCacheDbByName[ dbPropertyName_ ];
 
     if ( !result_ )
     {
         result_ = [ JFFInternalCacheDB internalCacheDBWithName: dbPropertyName_
                                                         dbInfo: dbInfo_ ];
-        [ self.mutableCacheDbByName setObject: result_ forKey: dbPropertyName_ ];
+        self.mutableCacheDbByName[ dbPropertyName_ ] = result_;
     }
 
     return result_;
@@ -170,7 +170,7 @@ static JFFCaches* sharedCachesInstance_ = nil;
 
 -(id< JFFCacheDB >)cacheByName:( NSString* )name_
 {
-    return [ self.cacheDbByName objectForKey: name_ ];
+    return self.cacheDbByName[ name_ ];
 }
 
 -(id< JFFCacheDB >)thumbnailDB

@@ -8,8 +8,8 @@
 
     if ( self )
     {
-        self.title = title_;
-        self.action = action_;
+        self->_title  = title_;
+        self->_action = action_;
     }
 
     return self;

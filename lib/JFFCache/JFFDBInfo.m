@@ -103,29 +103,29 @@ static NSString* const timeToLiveInHours_ = @"timeToLiveInHours";
 
 -(NSString*)fileNameForDBWithName:( NSString* )name_
 {
-    return [ [ self objectForKey: name_ ] objectForKey: @"fileName" ];
+    return self[ name_ ][ @"fileName" ];
 }
 
 -(NSTimeInterval)timeToLiveForDBWithName:( NSString* )name_
 {
-    NSTimeInterval hours_ = [ [ [ self objectForKey: name_ ] objectForKey: timeToLiveInHours_ ] doubleValue ];
+    NSTimeInterval hours_ = [ self[ name_ ][ timeToLiveInHours_ ] doubleValue ];
     return hours_ * 3600.;
 }
 
 -(NSTimeInterval)autoRemoveByLastAccessDateForDBWithName:( NSString* )name_
 {
-    NSNumber* number_ = [ [ self objectForKey: name_ ] objectForKey: @"autoRemoveByLastAccessDateInHours" ];
+    NSNumber* number_ = self[ name_ ][ @"autoRemoveByLastAccessDateInHours" ];
     return number_ ? [ number_ doubleValue ] * 3600. : 0.;
 }
 
 -(NSUInteger)versionForDBWithName:( NSString* )name_
 {
-    return [ [ [ self objectForKey: name_ ] objectForKey: @"version" ] intValue ];
+    return [ self[ name_ ][ @"version" ] intValue ];
 }
 
 -(BOOL)hasExpirationDateDBWithName:( NSString* )name_
 {
-    return [ [ self objectForKey: name_ ] objectForKey: timeToLiveInHours_ ] != nil;
+    return self[ name_ ][ timeToLiveInHours_ ] != nil;
 }
 
 @end

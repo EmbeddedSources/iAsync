@@ -72,8 +72,8 @@
 
 -(void)progressWithInfo:( id )info_
 {
-    if ( self.progressBlock )
-        self.progressBlock( info_ );
+    if ( self->_progressBlock )
+        self->_progressBlock( info_ );
 }
 
 -(void)cancel

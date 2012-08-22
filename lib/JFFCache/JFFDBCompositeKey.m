@@ -14,7 +14,10 @@
 {
     JFFDBCompositeKey* copy_ = [ [ [ self class ] allocWithZone: zone_ ] init ];
 
-    copy_->_keys = [ self.keys copyWithZone: zone_ ];
+    if ( copy_ )
+    {
+        copy_->_keys = [ self->_keys copyWithZone: zone_ ];
+    }
 
     return copy_;
 }
@@ -62,7 +65,7 @@
     NSArray* newKeys_ = [ NSArray arrayWithSize: size_ producer: ^id( NSUInteger index_ )
     {
         return [ indexes_ containsIndex: index_ ] 
-                    ? [ compositeKey_.keys objectAtIndex: index_ ] 
+                    ? compositeKey_.keys[ index_ ]
                     : @"%";
     } ];
 

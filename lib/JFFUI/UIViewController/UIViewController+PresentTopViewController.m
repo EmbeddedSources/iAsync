@@ -6,9 +6,7 @@
                        animated:( BOOL )flag_
                      completion:(void (^)(void))completion_
 {
-    UIViewController* presentingController_ = self.presentedViewController
-        ? self.presentedViewController
-        : self;
+    UIViewController* presentingController_ = self.presentedViewController ?: self;
     [ presentingController_ presentViewController: viewControllerToPresent_
                                          animated: flag_
                                        completion: completion_ ];

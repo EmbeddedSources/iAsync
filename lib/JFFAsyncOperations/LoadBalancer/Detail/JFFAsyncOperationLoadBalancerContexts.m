@@ -9,8 +9,8 @@
 
 -(void)dealloc
 {
-    [ self->_currentContextName release ];
-    [ self->_activeContextName release ];
+    [ self->_currentContextName   release ];
+    [ self->_activeContextName    release ];
     [ self->_contextLoadersByName release ];
 
     [ super dealloc ];
@@ -31,40 +31,40 @@
 
 -(NSString*)currentContextName
 {
-    if ( !_currentContextName )
+    if ( !self->_currentContextName )
     {
-        _currentContextName = [ self.activeContextName retain ];
+        self->_currentContextName = [ self.activeContextName retain ];
     }
-    return _currentContextName;
+    return self->_currentContextName;
 }
 
 -(NSString*)activeContextName
 {
-    if ( !_activeContextName )
+    if ( !self->_activeContextName )
     {
-        _activeContextName = [ @"default" retain ];
+        self->_activeContextName = [ @"default" retain ];
     }
-    return _activeContextName;
+    return self->_activeContextName;
 }
 
 -(NSMutableDictionary*)contextLoadersByName
 {
-    if ( !_contextLoadersByName )
+    if ( !self->_contextLoadersByName )
     {
-        _contextLoadersByName = [ NSMutableDictionary new ];
+        self->_contextLoadersByName = [ NSMutableDictionary new ];
     }
-    return _contextLoadersByName;
+    return self->_contextLoadersByName;
 }
 
 -(JFFContextLoaders*)contextLoadersForName:( NSString* )name_
 {
-    JFFContextLoaders* contextLoaders_ = [ self.contextLoadersByName objectForKey: name_ ];
+    JFFContextLoaders* contextLoaders_ = self.contextLoadersByName[ name_ ];
     if ( !contextLoaders_ )
     {
         contextLoaders_ = [ JFFContextLoaders new ];
         contextLoaders_.name = name_;
 
-        [ self.contextLoadersByName setValue: contextLoaders_ forKey: name_ ];
+        self.contextLoadersByName[ name_ ] = contextLoaders_;
 
         [ contextLoaders_ release ];
     }
