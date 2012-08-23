@@ -76,7 +76,7 @@
 
 -(id)objectForKey:( id )key_
 {
-    JFFAutoRemoveFromDictAssignProxy* proxy_ = [ self->_mutableDictionary objectForKey: key_ ];
+    JFFAutoRemoveFromDictAssignProxy* proxy_ = self->_mutableDictionary[ key_ ];
     return proxy_.target;
 }
 
