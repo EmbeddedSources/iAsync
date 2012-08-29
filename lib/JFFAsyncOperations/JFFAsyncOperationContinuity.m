@@ -51,7 +51,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder first
             __block JFFCancelAsyncOperation cancelBlockHolder_;
 
             progressCallback_ = [ progressCallback_ copy ];
-            doneCallback_ = [ doneCallback_ copy ];
+            doneCallback_     = [ doneCallback_     copy ];
 
             JFFCancelAsyncOperation firstCancel_ = firstLoader_( progressCallback_
                                                                 , cancelCallback_
@@ -189,10 +189,10 @@ JFFAsyncOperation bindSequenceOfAsyncOperationsArray( JFFAsyncOperation firstLoa
     };
     [ binders_ addObject: [ firstBinder_ copy ] ];
 
-    for ( JFFAsyncOperation binder_ in loadersBinders_ )
-    {
-        [ binders_ addObject: [ binder_ copy ] ];
-    }
+     for ( JFFAsyncOperation binder_ in loadersBinders_ )
+     {
+         [ binders_ addObject: [ binder_ copy ] ];
+     }
 
     return binderAsSequenceOfBindersArray( binders_ )( nil );
 }

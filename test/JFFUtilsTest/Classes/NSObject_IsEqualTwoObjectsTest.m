@@ -25,7 +25,7 @@
     {
         NSObject* object1_ = [ NSObject new ];
         NSObject* object2_ = object1_;
-        
+
         GHAssertTrue( [ NSObject object: object1_
                               isEqualTo: object2_ ], @"OK" );
     }

@@ -4,7 +4,7 @@
 
 -(void)presentTopViewController:( UIViewController* )viewControllerToPresent_
                        animated:( BOOL )flag_
-                     completion:(void (^)(void))completion_
+                     completion:( void (^)(void) )completion_
 {
     UIViewController* presentingController_ = self.presentedViewController ?: self;
     [ presentingController_ presentViewController: viewControllerToPresent_

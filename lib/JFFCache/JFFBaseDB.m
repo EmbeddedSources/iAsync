@@ -81,7 +81,7 @@ static NSString* const createRecords_ =
 
 -(NSString*)errorMessage
 {
-    return @( sqlite3_errmsg( _db ) );
+    return [ [ NSString alloc ] initWithUTF8String: sqlite3_errmsg( _db ) ];
 }
 
 -(void)dealloc
@@ -157,7 +157,8 @@ static NSString* const createRecords_ =
     {
         if ( sqlite3_step( statement_ ) == SQLITE_ROW )
         {
-             result_ = @( (const char *)sqlite3_column_text( statement_, 0 ) );
+            const unsigned char * str_ = sqlite3_column_text( statement_, 0 );
+             result_ = [ [ NSString alloc ] initWithUTF8String: (const char *)str_ ];
         }
         sqlite3_finalize( statement_ );
     }
@@ -271,7 +272,7 @@ static NSString* const createRecords_ =
         while ( sqlite3_step( statement_ ) == SQLITE_ROW )
         {
             const unsigned char * str_ = sqlite3_column_text( statement_, 0 );
-            NSString* fileLink_ = @( (const char *)str_ );
+            NSString* fileLink_ = [ [ NSString alloc ] initWithUTF8String: (const char *)str_ ];
 
             fileLink_ = [ NSString cachesPathByAppendingPathComponent: fileLink_ ];
             [ [ NSFileManager defaultManager ] removeItemAtPath: fileLink_ error: nil ];
@@ -331,14 +332,14 @@ static NSString* const createRecords_ =
         if ( sqlite3_step( statement_ ) == SQLITE_ROW )
         {
             const unsigned char * str_ = sqlite3_column_text( statement_, linkIndex_ );
-            NSString* fileLink_ = @( (const char *)str_ );
+            NSString* fileLink_ = [ [ NSString alloc ] initWithUTF8String: (const char *)str_ ];
             fileLink_ = [ NSString cachesPathByAppendingPathComponent: fileLink_ ];
             recordData_ = [ NSData dataWithContentsOfFile: fileLink_ ];
 
             if ( date_ && recordData_ )
             {
                 NSTimeInterval dateInetrval_ = sqlite3_column_double( statement_, dateIndex_ );
-                *date_ = [ [ NSDate alloc ]initWithTimeIntervalSince1970: dateInetrval_ ];
+                *date_ = [ NSDate dateWithTimeIntervalSince1970: dateInetrval_ ];
             }
         }
         sqlite3_finalize( statement_ );

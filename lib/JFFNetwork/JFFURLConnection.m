@@ -301,7 +301,7 @@ static void readStreamCallback( CFReadStreamRef stream_
 
         DDURLBuilder* urlBuilder_ = [ DDURLBuilder URLBuilderWithURL: self->_params.url ];
         urlBuilder_.path = location_;
-
+        
         self->_params.url = [ urlBuilder_ URL ];
         NSDebugLog( @"%@", self->_params.url );
         NSDebugLog( @"Done." );
