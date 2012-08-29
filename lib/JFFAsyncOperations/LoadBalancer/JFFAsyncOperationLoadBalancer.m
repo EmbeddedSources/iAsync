@@ -8,10 +8,10 @@
 #import "JFFDidFinishAsyncOperationBlockHolder.h"
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 
-static const NSUInteger max_operation_count_ = 5;
+static const NSUInteger maxOperationCount_ = 5;
 static const NSUInteger total_max_operation_count_ = 7;
 
-static NSUInteger global_active_number_ = 0;
+static NSUInteger globalActiveNumber_ = 0;
 
 //JTODO test this
 
@@ -129,7 +129,7 @@ static void finishExecuteOfNativeLoader( JFFAsyncOperation native_loader_
 {
     if ( [ context_loaders_ removeActiveNativeLoader: native_loader_ ] )
     {
-        --global_active_number_;
+        --globalActiveNumber_;
         logBalancerState();
     }
 }
@@ -242,7 +242,7 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
             return JFFStubCancelAsyncOperationBlock;
         }
 
-        ++global_active_number_;
+        ++globalActiveNumber_;
 
         JFFCancelAsyncOperation wrapped_cancel_block_ = [ [ ^void( BOOL canceled_ )
         {
@@ -271,54 +271,54 @@ static BOOL canPeformAsyncOperationForContext( JFFContextLoaders* contextLoaders
 {
     // TODO check condition yet
     BOOL isActiveContext_ = [ sharedBalancer().activeContextName isEqualToString: contextLoaders_.name ];
-    return ( ( isActiveContext_ && contextLoaders_.activeLoadersNumber < max_operation_count_ )
-            || 0 == global_active_number_ )
-        && global_active_number_ <= total_max_operation_count_;
+    return ( ( isActiveContext_ && contextLoaders_.activeLoadersNumber < maxOperationCount_ )
+            || 0 == globalActiveNumber_ )
+        && globalActiveNumber_ <= total_max_operation_count_;
 }
 
-JFFAsyncOperation balancedAsyncOperation( JFFAsyncOperation native_loader_ )
+JFFAsyncOperation balancedAsyncOperation( JFFAsyncOperation nativeLoader_ )
 {
     JFFContextLoaders* contextLoaders_ = [ sharedBalancer() currentContextLoaders ];
 
-    native_loader_ = [ [ native_loader_ copy ] autorelease ];
-    return [ [ ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
-                                        , JFFCancelAsyncOperationHandler cancel_callback_
-                                        , JFFDidFinishAsyncOperationHandler done_callback_ )
+    nativeLoader_ = [ [ nativeLoader_ copy ] autorelease ];
+    return [ [ ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+                                        , JFFCancelAsyncOperationHandler cancelCallback_
+                                        , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
         if ( canPeformAsyncOperationForContext( contextLoaders_ ) )
         {
-            JFFAsyncOperation context_loader_ = wrappedAsyncOperationWithContext( native_loader_
+            JFFAsyncOperation contextLoader_ = wrappedAsyncOperationWithContext( nativeLoader_
                                                                                  , contextLoaders_ );
-            return context_loader_( progress_callback_, cancel_callback_, done_callback_ );
+            return contextLoader_( progressCallback_, cancelCallback_, doneCallback_ );
         }
 
-        cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
-        [ contextLoaders_ addPendingNativeLoader: native_loader_
-                                progressCallback: progress_callback_
-                                  cancelCallback: cancel_callback_
-                                    doneCallback: done_callback_ ];
+        cancelCallback_ = [ [ cancelCallback_ copy ] autorelease ];
+        [ contextLoaders_ addPendingNativeLoader: nativeLoader_
+                                progressCallback: progressCallback_
+                                  cancelCallback: cancelCallback_
+                                    doneCallback: doneCallback_ ];
 
         logBalancerState();
 
         JFFCancelAsyncOperation cancel_ = [ [ ^void( BOOL canceled_ )
         {
-            if ( ![ contextLoaders_ containsPendingNativeLoader: native_loader_ ] )
+            if ( ![ contextLoaders_ containsPendingNativeLoader: nativeLoader_ ] )
             {
                 //cancel only wrapped cancel block
-                [ contextLoaders_ cancelActiveNativeLoader: native_loader_ cancel: canceled_ ];
+                [ contextLoaders_ cancelActiveNativeLoader: nativeLoader_ cancel: canceled_ ];
                 return;
             }
 
             if ( canceled_ )
             {
-                [ contextLoaders_ removePendingNativeLoader: native_loader_ ];
-                cancel_callback_( YES );
+                [ contextLoaders_ removePendingNativeLoader: nativeLoader_ ];
+                cancelCallback_( YES );
             }
             else
             {
-                cancel_callback_( NO );
+                cancelCallback_( NO );
 
-                [ contextLoaders_ unsubscribePendingNativeLoader: native_loader_ ];
+                [ contextLoaders_ unsubscribePendingNativeLoader: nativeLoader_ ];
             }
         } copy ] autorelease ];
 

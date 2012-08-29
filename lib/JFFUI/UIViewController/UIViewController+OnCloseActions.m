@@ -85,33 +85,33 @@ static char didCloseActionKey_;
 
 @implementation JFFPresentViewControllerHooks
 
--(void)presentModalViewControllerPrototype:( UIViewController* )modal_view_controller_
+-(void)presentModalViewControllerPrototype:( UIViewController* )modalViewController_
                                   animated:( BOOL )animated_
 {
-    __unsafe_unretained UIViewController* controller_to_close_ = modal_view_controller_;
-    controller_to_close_.closeAction = ^void( BOOL animated_ )
+    __unsafe_unretained UIViewController* controllerToClose_ = modalViewController_;
+    controllerToClose_.closeAction = ^void( BOOL animated_ )
     {
-        [ controller_to_close_ dismissModalViewControllerAnimated: animated_ ];
+        [ controllerToClose_ dismissModalViewControllerAnimated: animated_ ];
     };
 
     objc_msgSend( self
                  , @selector( presentModalViewControllerHook:animated: )
-                 , modal_view_controller_
+                 , modalViewController_
                  , animated_ );
 }
 
--(void)pushViewControllerPrototype:( UIViewController* )view_controller_ animated:( BOOL )animated_
+-(void)pushViewControllerPrototype:( UIViewController* )viewController_ animated:( BOOL )animated_
 {
-    if ( view_controller_.navigationController.topViewController )
+    if ( viewController_.navigationController.topViewController )
     {
-        __unsafe_unretained UIViewController* controllerToClose_ = view_controller_;
+        __unsafe_unretained UIViewController* controllerToClose_ = viewController_;
         controllerToClose_.closeAction = ^void( BOOL animated_ )
         {
             [ controllerToClose_.navigationController popViewControllerAnimated: animated_ ];
         };
     }
 
-    objc_msgSend( self, @selector( pushViewControllerHook:animated: ), view_controller_, animated_ );
+    objc_msgSend( self, @selector( pushViewControllerHook:animated: ), viewController_, animated_ );
 }
 
 +(void)load

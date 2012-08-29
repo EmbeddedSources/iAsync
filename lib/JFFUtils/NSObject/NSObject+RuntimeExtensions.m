@@ -66,43 +66,43 @@ typedef BOOL (^JFFPredicate)();
 
 +(BOOL)addClassMethodIfNeedWithSelector:( SEL )selector_
                                 toClass:( Class )class_
-                      newMethodSelector:( SEL )new_selector_
+                      newMethodSelector:( SEL )newSelector_
 {
-    JFFPredicate respond_to_selector_ = ^BOOL()
+    JFFPredicate respondToSelector_ = ^BOOL()
     {
-        return [ class_ hasClassMethodWithSelector: new_selector_ ];
+        return [ class_ hasClassMethodWithSelector: newSelector_ ];
     };
-    JFFMethodGetter method_getter_ = ^Method()
+    JFFMethodGetter methodGetter_ = ^Method()
     {
         return class_getClassMethod( self, selector_ );
     };
     return [ self addMethodIfNeedWithSelector: selector_
                                       toClass: object_getClass( class_ )
-                            newMethodSelector: new_selector_
-                                    hasMethod: respond_to_selector_
-                                 methodGetter: method_getter_ ];
+                            newMethodSelector: newSelector_
+                                    hasMethod: respondToSelector_
+                                 methodGetter: methodGetter_ ];
 }
 
 //JTODO check if class contains hooked method
 //typedef Class (^JFFClassForClass)( Class cls_ );
 +(void)hookMethodForClass:( Class )class_
-            classForClass:( JFFClassForClass )class_for_class_
-             withSelector:( SEL )target_selector_
-  prototypeMethodSelector:( SEL )prototype_selector_
-       hookMethodSelector:( SEL )hook_selector_
-             methodGetter:( JFFMethodGetterForClassAndSelector )method_getter_
+            classForClass:( JFFClassForClass )classForClass_
+             withSelector:( SEL )targetSelector_
+  prototypeMethodSelector:( SEL )prototypeSelector_
+       hookMethodSelector:( SEL )hookSelector_
+             methodGetter:( JFFMethodGetterForClassAndSelector )methodGetter_
 {
-    Method target_method_ = method_getter_( class_, target_selector_ );
-    Method prototype_method_ = method_getter_( [ self class ], prototype_selector_ );
-    const char* type_encoding_ = method_getTypeEncoding( prototype_method_ );
-    BOOL method_added_ = class_addMethod( class_for_class_( class_ )
-                                         , hook_selector_
-                                         , method_getImplementation( prototype_method_ )
-                                         , type_encoding_ );
-    NSAssert( method_added_, @"should be added" );
-    Method hook_method_ = method_getter_( class_, hook_selector_ );
+    Method targetMethod_ = methodGetter_( class_, targetSelector_ );
+    Method prototypeMethod_ = methodGetter_( [ self class ], prototypeSelector_ );
+    const char* typeEncoding_ = method_getTypeEncoding( prototypeMethod_ );
+    BOOL methodAdded_ = class_addMethod( classForClass_( class_ )
+                                         , hookSelector_
+                                         , method_getImplementation( prototypeMethod_ )
+                                         , typeEncoding_ );
+    NSAssert( methodAdded_, @"should be added" );
+    Method hookMethod_ = methodGetter_( class_, hookSelector_ );
 
-    method_exchangeImplementations( target_method_, hook_method_ );
+    method_exchangeImplementations( targetMethod_, hookMethod_ );
 }
 
 +(void)hookInstanceMethodForClass:( Class )class_
@@ -124,26 +124,26 @@ typedef BOOL (^JFFPredicate)();
 }
 
 +(void)hookClassMethodForClass:( Class )class_
-                  withSelector:( SEL )target_selector_
-       prototypeMethodSelector:( SEL )prototype_selector_
-            hookMethodSelector:( SEL )hook_selector_
+                  withSelector:( SEL )targetSelector_
+       prototypeMethodSelector:( SEL )prototypeSelector_
+            hookMethodSelector:( SEL )hookSelector_
 {
-    NSAssert( [ class_ hasClassMethodWithSelector: target_selector_ ], @"Method with target slector should exists" );
-    JFFMethodGetterForClassAndSelector method_getter_ = ^Method( Class cls_, SEL selector_ )
+    NSAssert( [ class_ hasClassMethodWithSelector: targetSelector_ ], @"Method with target slector should exists" );
+    JFFMethodGetterForClassAndSelector methodGetter_ = ^Method( Class cls_, SEL selector_ )
     {
         return class_getClassMethod( class_, selector_ );
     };
     [ self hookMethodForClass: class_
                 classForClass: ^Class( Class class_ ) { return object_getClass( class_ ); }
-                 withSelector: target_selector_
-      prototypeMethodSelector: prototype_selector_
-           hookMethodSelector: hook_selector_
-                 methodGetter: method_getter_ ];
+                 withSelector: targetSelector_
+      prototypeMethodSelector: prototypeSelector_
+           hookMethodSelector: hookSelector_
+                 methodGetter: methodGetter_ ];
 }
 
-+(BOOL)hasMethodForMethodGetter:( JFFMethodGetterForClass )method_getter_
++(BOOL)hasMethodForMethodGetter:( JFFMethodGetterForClass )methodGetter_
 {
-    Method method_ = method_getter_( [ self class ] );
+    Method method_ = methodGetter_( [ self class ] );
 
     if ( !method_ )
         return NO;
@@ -151,23 +151,23 @@ typedef BOOL (^JFFPredicate)();
     if ( ![ self superclass ] )
         return YES;
 
-    Method super_method_ = method_getter_( [ self superclass ] );
-    return method_ != super_method_;
+    Method superMethod_ = methodGetter_( [ self superclass ] );
+    return method_ != superMethod_;
 }
 
-+(BOOL)hasInstanceMethodWithSelector:( SEL )method_selector_
++(BOOL)hasInstanceMethodWithSelector:( SEL )methodSelector_
 {
     return [ self hasMethodForMethodGetter: ^Method( Class class_ )
     {
-        return class_getInstanceMethod( class_, method_selector_ );
+        return class_getInstanceMethod( class_, methodSelector_ );
     } ];
 }
 
-+(BOOL)hasClassMethodWithSelector:( SEL )method_selector_
++(BOOL)hasClassMethodWithSelector:( SEL )methodSelector_
 {
     return [ self hasMethodForMethodGetter: ^Method( Class class_ )
     {
-        return class_getClassMethod( class_, method_selector_ );
+        return class_getClassMethod( class_, methodSelector_ );
     } ];
 }
 
