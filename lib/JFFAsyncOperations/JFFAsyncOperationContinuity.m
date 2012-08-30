@@ -682,7 +682,7 @@ JFFAsyncOperation asyncOperationWithDoneBlock( JFFAsyncOperation loader_
 }
 
 JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
-                                       , JFFPredicateBlock predicate_
+                                       , JFFResultPredicateBlock predicate_
                                        , NSTimeInterval delay_
                                        , NSInteger maxRepeatCount_ )
 {
@@ -706,14 +706,11 @@ JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
 
         __block NSInteger currentLeftCount_ = maxRepeatCount_;
 
-        JFFDidFinishAsyncOperationHook finish_callback_hook_ = ^( id result_
+        JFFDidFinishAsyncOperationHook finishCallbackHook_ = ^( id result_
                                                                  , NSError* error_
                                                                  , JFFDidFinishAsyncOperationHandler doneCallback_ )
         {
-            JFFResultContext* context_ = [ JFFResultContext new ];
-            context_.result = result_;
-            context_.error  = error_ ;
-            if ( !predicate_( context_ ) || currentLeftCount_ == 0 )
+            if ( !predicate_( result_, error_ ) || currentLeftCount_ == 0 )
             {
                 finishHookHolder_ = nil;
                 if ( doneCallback_ )
@@ -733,7 +730,7 @@ JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
             }
         };
 
-        finishHookHolder_ = [ finish_callback_hook_ copy ];
+        finishHookHolder_ = [ finishCallbackHook_ copy ];
 
         JFFAsyncOperation loader_ = asyncOperationWithFinishHookBlock( nativeLoader_
                                                                       , finishHookHolder_ );
