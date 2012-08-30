@@ -361,7 +361,8 @@
 		061724CD152B306800549265 /* JFFSchedulerFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			path = JFFSchedulerFW.framework;
+			name = JFFSchedulerFW.framework;
+			path = JFFSchedulerFW;
 			remoteRef = 061724CC152B306800549265 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -389,7 +390,8 @@
 		061724DD152B30C300549265 /* JFFUtilsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			path = JFFUtilsFW.framework;
+			name = JFFUtilsFW.framework;
+			path = JFFUtilsFW;
 			remoteRef = 061724DC152B30C300549265 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -410,7 +412,8 @@
 		0617250A152B30F900549265 /* JFFAsyncOperationsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			path = JFFAsyncOperationsFW.framework;
+			name = JFFAsyncOperationsFW.framework;
+			path = JFFAsyncOperationsFW;
 			remoteRef = 06172509152B30F900549265 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

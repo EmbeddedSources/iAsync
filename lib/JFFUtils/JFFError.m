@@ -32,7 +32,7 @@
 
 +(id)newErrorWithDescription:( NSString* )description_
 {
-    return [ [ self alloc ] initWithDescription: description_ ];
+     return [ [ self alloc ] initWithDescription: description_ ];
 }
 
 @end

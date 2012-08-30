@@ -4,7 +4,7 @@
 
 -(NSString*)toCompositeKey
 {
-    NSAssert(NO, @"Don't support this method.\n");
+    NSAssert( NO, @"Don't support this method.\n" );
     return nil;
 }
 

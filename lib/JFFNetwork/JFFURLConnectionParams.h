@@ -6,12 +6,12 @@
 
 @interface JFFURLConnectionParams : NSObject
 
-@property ( nonatomic ) NSURL* url;
-@property ( nonatomic ) NSData* httpBody;
-@property ( nonatomic ) NSString* httpMethod;
-@property ( nonatomic ) NSDictionary* headers;
+@property ( nonatomic, strong ) NSURL* url;
+@property ( nonatomic, strong ) NSData* httpBody;
+@property ( nonatomic, strong ) NSString* httpMethod;
+@property ( nonatomic, strong ) NSDictionary* headers;
 @property ( nonatomic ) BOOL useLiveConnection; 
-@property ( nonatomic ) JFFLocalCookiesStorage* cookiesStorage;
+@property ( nonatomic, strong ) JFFLocalCookiesStorage* cookiesStorage;
 @property ( nonatomic, copy   ) JFFShouldAcceptCertificateForHost certificateCallback;
 
 @end

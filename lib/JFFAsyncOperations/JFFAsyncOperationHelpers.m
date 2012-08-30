@@ -68,7 +68,7 @@ JFFAsyncOperation asyncOperationWithFinishCallbackBlock( JFFAsyncOperation loade
 {
     assert( loader_ );
     finishCallbackBlock_ = [ finishCallbackBlock_ copy ];
-    loader_ = [ loader_ copy ];
+    loader_              = [ loader_ copy ];
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
                                     , JFFCancelAsyncOperationHandler cancelCallback_
                                     , JFFDidFinishAsyncOperationHandler doneCallback_ )
@@ -90,7 +90,7 @@ JFFAsyncOperation asyncOperationWithFinishHookBlock( JFFAsyncOperation loader_
     assert( loader_ );// should not be nil"
     assert( finishCallbackHook_ );// should not be nil"
     finishCallbackHook_ = [ finishCallbackHook_ copy ];
-    loader_ = [ loader_ copy ];
+    loader_             = [ loader_             copy ];
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
                                     , JFFCancelAsyncOperationHandler cancelCallback_
                                     , JFFDidFinishAsyncOperationHandler doneCallback_ )

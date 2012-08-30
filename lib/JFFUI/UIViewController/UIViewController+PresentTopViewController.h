@@ -6,6 +6,6 @@
 
 -(void)presentTopViewController:( UIViewController* )viewControllerToPresent_
                        animated:( BOOL )flag_
-                     completion:(void (^)(void))completion_;
+                     completion:( void (^)(void) )completion_;
 
 @end

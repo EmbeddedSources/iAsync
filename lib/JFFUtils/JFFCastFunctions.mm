@@ -14,7 +14,7 @@ BOOL class_srcIsSuperclassOfDest( Class src, Class dest )
    {
       return NO;
    }
-   
+
    return class_srcIsSuperclassOfDest( src, super_dest_ );
 }
 
