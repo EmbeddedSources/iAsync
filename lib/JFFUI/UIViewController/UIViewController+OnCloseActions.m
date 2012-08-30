@@ -85,18 +85,18 @@ static char didCloseActionKey_;
 
 @implementation JFFPresentViewControllerHooks
 
--(void)presentModalViewControllerPrototype:( UIViewController* )modal_view_controller_
+-(void)presentModalViewControllerPrototype:( UIViewController* )modalViewController_
                                   animated:( BOOL )animated_
 {
-    __unsafe_unretained UIViewController* controller_to_close_ = modal_view_controller_;
-    controller_to_close_.closeAction = ^void( BOOL animated_ )
+    __unsafe_unretained UIViewController* controllerToClose_ = modalViewController_;
+    controllerToClose_.closeAction = ^void( BOOL animated_ )
     {
-        [ controller_to_close_ dismissModalViewControllerAnimated: animated_ ];
+        [ controllerToClose_ dismissModalViewControllerAnimated: animated_ ];
     };
 
     objc_msgSend( self
                  , @selector( presentModalViewControllerHook:animated: )
-                 , modal_view_controller_
+                 , modalViewController_
                  , animated_ );
 }
 

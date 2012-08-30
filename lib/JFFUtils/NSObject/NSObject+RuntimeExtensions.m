@@ -14,17 +14,17 @@ typedef BOOL (^JFFPredicate)();
                            toClass:( Class )class_
                  newMethodSelector:( SEL )newSelector_
                          hasMethod:( JFFPredicate )hasMethod_
-                      methodGetter:( JFFMethodGetter )method_getter_
+                      methodGetter:( JFFMethodGetter )methodGetter_
 {
     if ( hasMethod_() )
         return NO;
 
-    Method prototype_method_ = method_getter_();
-    const char* type_encoding_ = method_getTypeEncoding( prototype_method_ );
+    Method prototypeMethod_ = methodGetter_();
+    const char* typeEncoding_ = method_getTypeEncoding( prototypeMethod_ );
     BOOL result_ = class_addMethod( class_
                                    , newSelector_
-                                   , method_getImplementation( prototype_method_ )
-                                   , type_encoding_ );
+                                   , method_getImplementation( prototypeMethod_ )
+                                   , typeEncoding_ );
     NSAssert( result_, @"method should be added" );
     return result_;
 }
@@ -83,8 +83,6 @@ typedef BOOL (^JFFPredicate)();
                                  methodGetter: methodGetter_ ];
 }
 
-//JTODO check if class contains hooked method
-//typedef Class (^JFFClassForClass)( Class cls_ );
 +(void)hookMethodForClass:( Class )class_
             classForClass:( JFFClassForClass )classForClass_
              withSelector:( SEL )targetSelector_
@@ -92,10 +90,16 @@ typedef BOOL (^JFFPredicate)();
        hookMethodSelector:( SEL )hookSelector_
              methodGetter:( JFFMethodGetterForClassAndSelector )methodGetter_
 {
-    Method targetMethod_ = methodGetter_( class_, targetSelector_ );
-    Method prototypeMethod_ = methodGetter_( [ self class ], prototypeSelector_ );
+    Class targetClass_ = classForClass_( class_ );
+
+    Method targetMethod_    = methodGetter_( class_, targetSelector_    );
+    Method prototypeMethod_ = methodGetter_( self  , prototypeSelector_ );
+
+    NSParameterAssert( targetMethod_    );
+    NSParameterAssert( prototypeMethod_ );
+
     const char* typeEncoding_ = method_getTypeEncoding( prototypeMethod_ );
-    BOOL methodAdded_ = class_addMethod( classForClass_( class_ )
+    BOOL methodAdded_ = class_addMethod( targetClass_
                                          , hookSelector_
                                          , method_getImplementation( prototypeMethod_ )
                                          , typeEncoding_ );
@@ -106,21 +110,20 @@ typedef BOOL (^JFFPredicate)();
 }
 
 +(void)hookInstanceMethodForClass:( Class )class_
-                     withSelector:( SEL )target_selector_
-          prototypeMethodSelector:( SEL )prototype_selector_
-               hookMethodSelector:( SEL )hook_selector_
+                     withSelector:( SEL )targetSelector_
+          prototypeMethodSelector:( SEL )prototypeSelector_
+               hookMethodSelector:( SEL )hookSelector_
 {
-    NSAssert( [ class_ hasInstanceMethodWithSelector: target_selector_ ], @"Method with target slector should exists" );
-    JFFMethodGetterForClassAndSelector method_getter_ = ^Method( Class class_, SEL selector_ )
+    JFFMethodGetterForClassAndSelector methodGetter_ = ^Method( Class class_, SEL selector_ )
     {
         return class_getInstanceMethod( class_, selector_ );
     };
     [ self hookMethodForClass: class_
                 classForClass: ^Class( Class class_ ) { return class_; }
-                 withSelector: target_selector_
-      prototypeMethodSelector: prototype_selector_
-           hookMethodSelector: hook_selector_
-                 methodGetter: method_getter_ ];
+                 withSelector: targetSelector_
+      prototypeMethodSelector: prototypeSelector_
+           hookMethodSelector: hookSelector_
+                 methodGetter: methodGetter_ ];
 }
 
 +(void)hookClassMethodForClass:( Class )class_
@@ -128,10 +131,9 @@ typedef BOOL (^JFFPredicate)();
        prototypeMethodSelector:( SEL )prototypeSelector_
             hookMethodSelector:( SEL )hookSelector_
 {
-    NSAssert( [ class_ hasClassMethodWithSelector: targetSelector_ ], @"Method with target slector should exists" );
-    JFFMethodGetterForClassAndSelector methodGetter_ = ^Method( Class cls_, SEL selector_ )
+    JFFMethodGetterForClassAndSelector methodGetter_ = ^Method( Class otherClass_, SEL selector_ )
     {
-        return class_getClassMethod( class_, selector_ );
+        return class_getClassMethod( otherClass_, selector_ );
     };
     [ self hookMethodForClass: class_
                 classForClass: ^Class( Class class_ ) { return object_getClass( class_ ); }

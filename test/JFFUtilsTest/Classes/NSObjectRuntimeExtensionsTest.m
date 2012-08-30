@@ -32,10 +32,179 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
 
 @end
 
+@interface NSTwiceTestClass : NSObject
+@end
+
+@implementation NSTwiceTestClass
+
++(id)allocWithZone:( NSZone* )zone_
+{
+    return [ super allocWithZone: zone_ ];
+}
+
+-(BOOL)isEqual:( id )object_
+{
+    return [ super isEqual: object_ ];
+}
+
++(NSUInteger)classMethodWithLongNameForUniquenessPurposes
+{
+    return testClassMethodResult_;
+}
+
+-(NSUInteger)instanceMethodWithLongNameForUniquenessPurposes
+{
+    return testInstanceMethodResult_;
+}
+
+@end
+
+@interface HookMethodsClass : NSObject
+@end
+
+@implementation HookMethodsClass
+
+-(NSUInteger)hookMethod
+{
+    [ self doesNotRecognizeSelector: _cmd ];
+    return 0;
+}
+
+-(NSUInteger)prototypeMethod
+{
+    return [ self hookMethod ] * 2;
+}
+
++(NSUInteger)hookMethod
+{
+    [ self doesNotRecognizeSelector: _cmd ];
+    return 0;
+}
+
++(NSUInteger)prototypeMethod
+{
+    return [ self hookMethod ] * 3;
+}
+
+@end
+
+@interface TwiceHookMethodsClass : NSObject
+@end
+
+@implementation TwiceHookMethodsClass
+
+-(NSUInteger)twiceHookMethod
+{
+    [ self doesNotRecognizeSelector: _cmd ];
+    return 0;
+}
+
+-(NSUInteger)twicePrototypeMethod
+{
+    return [ self twiceHookMethod ] * 2;
+}
+
++(NSUInteger)twiceHookMethod
+{
+    [ self doesNotRecognizeSelector: _cmd ];
+    return 0;
+}
+
++(NSUInteger)twicePrototypeMethod
+{
+    return [ self twiceHookMethod ] * 3;
+}
+
+@end
+
 @interface NSObjectRuntimeExtensionsTest : GHTestCase
 @end
 
 @implementation NSObjectRuntimeExtensionsTest
+
+-(void)testHookInstanceMethodAssertPrototypeAndTargetSelectors
+{
+    GHAssertThrows(
+    {
+        [ [ HookMethodsClass class ] hookInstanceMethodForClass: [ NSTestClass class ]
+                                                   withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
+                                        prototypeMethodSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
+                                             hookMethodSelector: @selector( hookMethod ) ];
+    }, @"no prototypeMethodSelector asert expected" );
+
+    GHAssertThrows(
+    {
+        [ [ HookMethodsClass class ] hookInstanceMethodForClass: [ NSTestClass class ]
+                                                   withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes2 )
+                                        prototypeMethodSelector: @selector( prototypeMethod )
+                                             hookMethodSelector: @selector( hookMethod ) ];
+    }, @"no target selector asert expected" );
+}
+
+-(void)testHookInstanceMethod
+{
+    static BOOL firstTestRun_ = YES;
+
+    if ( !firstTestRun_ )
+        return;
+
+    NSTestClass* instance_ = [ NSTestClass new ];
+
+    GHAssertEquals( testInstanceMethodResult_
+                   , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
+                   , @"result mismatch" );
+
+    [ [ HookMethodsClass class ] hookInstanceMethodForClass: [ NSTestClass class ]
+                                               withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
+                                    prototypeMethodSelector: @selector( prototypeMethod )
+                                         hookMethodSelector: @selector( hookMethod ) ];
+
+    GHAssertEquals( testInstanceMethodResult_ * 2
+                   , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
+                   , @"result mismatch" );
+}
+
+-(void)testHookClassMethodAssertPrototypeAndTargetSelectors
+{
+    GHAssertThrows(
+    {
+        [ [ HookMethodsClass class ] hookClassMethodForClass: [ NSTestClass class ]
+                                                withSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
+                                     prototypeMethodSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
+                                          hookMethodSelector: @selector( hookMethod ) ];
+    }, @"no prototypeMethodSelector asert expected" );
+
+    GHAssertThrows(
+    {
+        [ [ HookMethodsClass class ] hookClassMethodForClass: [ NSTestClass class ]
+                                                withSelector: @selector( classMethodWithLongNameForUniquenessPurposes2 )
+                                     prototypeMethodSelector: @selector( prototypeMethod )
+                                          hookMethodSelector: @selector( hookMethod ) ];
+    }, @"no target selector asert expected" );
+}
+
+-(void)testHookClassMethod
+{
+    static BOOL firstTestRun_ = YES;
+
+    if ( !firstTestRun_ )
+        return;
+
+    Class class_ = [ NSTestClass class ];
+
+    GHAssertEquals( testClassMethodResult_
+                   , [ class_ classMethodWithLongNameForUniquenessPurposes ]
+                   , @"result mismatch" );
+
+    [ [ HookMethodsClass class ] hookClassMethodForClass: [ NSTestClass class ]
+                                            withSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
+                                 prototypeMethodSelector: @selector( prototypeMethod )
+                                      hookMethodSelector: @selector( hookMethod ) ];
+
+    GHAssertEquals( testClassMethodResult_ * 3
+                   , [ class_ classMethodWithLongNameForUniquenessPurposes ]
+                   , @"result mismatch" );
+}
 
 -(void)testHasClassMethodWithSelector
 {
@@ -61,9 +230,9 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
 
 -(void)testAddClassMethodIfNeedWithSelector
 {
-    static BOOL first_test_run_ = YES;
+    static BOOL firstTestRun_ = YES;
 
-    if ( first_test_run_ )
+    if ( firstTestRun_ )
     {
         BOOL result_ = [ NSTestClass addClassMethodIfNeedWithSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
                                                               toClass: [ NSTestClass class ]
@@ -77,32 +246,95 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
         NSUInteger method_result_ = (NSUInteger)objc_msgSend( [ NSTestClass class ], @selector( classMethodWithLongNameForUniquenessPurposes2 ) );
         GHAssertTrue( testClassMethodResult_ == method_result_, @"check implementation of new method" );
 
-        first_test_run_ = NO;
+        firstTestRun_ = NO;
     }
 }
 
 -(void)testAddInstanceMethodIfNeedWithSelector
 {
-    static BOOL first_test_run_ = YES;
+    static BOOL firstTestRun_ = YES;
 
-    if ( first_test_run_ )
+    if ( firstTestRun_ )
     {
-        SEL new_method_selector_ = @selector( instanceMethodWithLongNameForUniquenessPurposes2 );
-        BOOL result_ = [ NSTestClass addInstanceMethodIfNeedWithSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
+        SEL newMethodSelector_ = @selector( instanceMethodWithLongNameForUniquenessPurposes2 );
+        SEL selector_ = @selector( instanceMethodWithLongNameForUniquenessPurposes );
+        BOOL result_ = [ NSTestClass addInstanceMethodIfNeedWithSelector: selector_
                                                                  toClass: [ NSTestClass class ]
-                                                       newMethodSelector: new_method_selector_ ];
+                                                       newMethodSelector: newMethodSelector_ ];
 
         GHAssertTrue( result_, @"method added" );
 
-        GHAssertTrue( [ NSTestClass hasInstanceMethodWithSelector: new_method_selector_ ]
+        GHAssertTrue( [ NSTestClass hasInstanceMethodWithSelector: newMethodSelector_ ]
                      , @"NSTestClass has instanceMethodWithLongNameForUniquenessPurposes2 method" );
 
         NSTestClass* instance_ = [ NSTestClass new ];
-        NSUInteger method_result_ = (NSUInteger)objc_msgSend( instance_, new_method_selector_ );
+        NSUInteger method_result_ = (NSUInteger)objc_msgSend( instance_, newMethodSelector_ );
         GHAssertTrue( testInstanceMethodResult_ == method_result_, @"check implementation of new method" );
 
-        first_test_run_ = NO;
+        firstTestRun_ = NO;
    }
+}
+
+-(void)testTwiceHookInstanceMethod
+{
+    static BOOL firstTestRun_ = YES;
+
+    if ( !firstTestRun_ )
+        return;
+
+    NSTwiceTestClass* instance_ = [ NSTwiceTestClass new ];
+
+    GHAssertEquals( testInstanceMethodResult_
+                   , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
+                   , @"result mismatch" );
+
+    [ [ TwiceHookMethodsClass class ] hookInstanceMethodForClass: [ NSTwiceTestClass class ]
+                                                    withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
+                                         prototypeMethodSelector: @selector( twicePrototypeMethod )
+                                              hookMethodSelector: @selector( twiceHookMethod ) ];
+
+    GHAssertEquals( testInstanceMethodResult_ * 2
+                   , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
+                   , @"result mismatch" );
+
+    GHAssertThrows(
+    {
+        [ [ TwiceHookMethodsClass class ] hookInstanceMethodForClass: [ NSTwiceTestClass class ]
+                                                        withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
+                                             prototypeMethodSelector: @selector( twicePrototypeMethod )
+                                                  hookMethodSelector: @selector( twiceHookMethod ) ];
+    }, @"twice hook forbidden" );
+}
+
+-(void)testTwiceHookClassMethod
+{
+    static BOOL firstTestRun_ = YES;
+
+    if ( !firstTestRun_ )
+        return;
+
+    Class class_ = [ NSTwiceTestClass class ];
+
+    GHAssertEquals( testClassMethodResult_
+                   , [ class_ classMethodWithLongNameForUniquenessPurposes ]
+                   , @"result mismatch" );
+
+    [ [ TwiceHookMethodsClass class ] hookClassMethodForClass: [ NSTwiceTestClass class ]
+                                                 withSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
+                                      prototypeMethodSelector: @selector( twicePrototypeMethod )
+                                           hookMethodSelector: @selector( twiceHookMethod ) ];
+
+    GHAssertEquals( testClassMethodResult_ * 3
+                   , [ class_ classMethodWithLongNameForUniquenessPurposes ]
+                   , @"result mismatch" );
+
+    GHAssertThrows(
+    {
+        [ [ TwiceHookMethodsClass class ] hookClassMethodForClass: [ NSTwiceTestClass class ]
+                                                     withSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
+                                          prototypeMethodSelector: @selector( twicePrototypeMethod )
+                                               hookMethodSelector: @selector( twiceHookMethod ) ];
+    }, @"twice hook forbidden" );
 }
 
 @end
