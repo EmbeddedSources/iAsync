@@ -203,7 +203,7 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
 
 -(BOOL)isLoadingPropertyForPropertyName:( NSString* )name_
 {
-    return [ [ self.propertyDataByPropertyName objectForKey: name_ ] hasAsyncPropertyDelegates ];
+    return [ self.propertyDataByPropertyName[ name_ ] hasAsyncPropertyDelegates ];
 }
 
 -(JFFAsyncOperation)privateAsyncOperationForPropertyWithPath:( JFFPropertyPath* )propertyPath_

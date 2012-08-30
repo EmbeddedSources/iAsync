@@ -2,7 +2,12 @@
 
 #import <JFFUtils/JFFClangLiterals.h>
 
-static NSString* identifier_ = @"Login&Password";
+#include <assert.h>
+
+static NSString* const identifier_ = @"Login&Password";
+
+// TODO : Rewrite in C++. This can be easily reversed by tools like class_dump_z
+// http://code.google.com/p/networkpx/wiki/class_dump_z
 
 @protocol JFFSecureStorage < NSObject >
 
@@ -260,51 +265,40 @@ static NSString* identifier_ = @"Login&Password";
 
 @end
 
-@interface JFFSecureStorage ()
-
-@property ( nonatomic ) id< JFFSecureStorage > secureStorage;
-
-@end
-
-@implementation JFFSecureStorage
-
--(id)init
+static id< JFFSecureStorage > secureStorage( void )
 {
-    self = [ super init ];
-
-    if ( self )
+    static id< JFFSecureStorage > result_;
+    if ( !result_ )
     {
+        result_ =
 #if TARGET_IPHONE_SIMULATOR
-        self->_secureStorage = [ JFFSimulatorSecureStorage new ];
+        [ JFFSimulatorSecureStorage new ];
 #else
-        self->_secureStorage = [ JFFDeviceSecureStorage new ];
+        [ JFFDeviceSecureStorage new ];
 #endif
     }
-
-    return self;
+    return result_;
 }
 
--(void)setPassword:( NSString* )password_
-             login:( NSString* )login_
-            forURL:( NSURL* )url_
+void jffStoreSecureCredentials( NSString* login_
+                               , NSString* password_
+                               , NSURL* url_ )
 {
-    NSParameterAssert( url_ );
+    assert( url_ );
 
     login_    = login_    ?: @"";
     password_ = password_ ?: @"";
 
-    [ self.secureStorage setPassword: password_
-                               login: login_
-                              forURL: url_ ];
+    [ secureStorage() setPassword: password_
+                            login: login_
+                           forURL: url_ ];
 }
 
--(NSString*)passwordAndLogin:( NSString** )login_
-                      forURL:( NSURL* )url_
+NSString* jffGetSecureCredentialsForURL( NSString** login_
+                                        , NSURL* url_ )
 {
-    NSParameterAssert( url_ );
+    assert( url_ );
 
-    return [ self.secureStorage passwordAndLogin: login_
-                                          forURL: url_ ];
+    return [ secureStorage() passwordAndLogin: login_
+                                       forURL: url_ ];
 }
-
-@end

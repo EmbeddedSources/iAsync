@@ -71,9 +71,9 @@ int main(int argc, char *argv[])
     setenv( "WRITE_JUNIT_XML", "YES", 1 );
     setenv( "GHUNIT_AUTOEXIT" , "YES", 1 );
     NSSetUncaughtExceptionHandler(&exceptionHandler);
-   
-    @autoreleasepool {
-   
+
+    @autoreleasepool
+    {
         [ JFFSimpleBlockHolder enableInstancesCounting ];
         // Register any special test case classes
         //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  

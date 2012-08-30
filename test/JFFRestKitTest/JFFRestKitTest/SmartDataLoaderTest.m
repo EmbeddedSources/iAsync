@@ -48,7 +48,7 @@ static JFFAsyncOperationBinder badTestDataLoader()
 {
     return ^JFFAsyncOperation( NSURL* url_ )
     {
-        return asyncOperationWithError( [ JFFError errorWithDescription: @"test error" ] );
+        return asyncOperationWithError( [ JFFError newErrorWithDescription: @"test error" ] );
     };
 }
 
@@ -76,7 +76,7 @@ static JFFAsyncOperationBinder differentTestDataLoader( BOOL* wasCalled_ )
 
 -(void)tearDown
 {
-    NSString* path_ = [ NSString cachesPathByAppendingPathComponent: cachesFileName_ ];
+    NSString* path_ = [ NSString documentsPathByAppendingPathComponent: cachesFileName_ ];
     [ [ NSFileManager defaultManager ] removeItemAtPath: path_ error: nil ];
 }
 
@@ -131,7 +131,7 @@ static JFFAsyncOperationBinder differentTestDataLoader( BOOL* wasCalled_ )
     {
         return ^JFFAsyncOperation( NSData* data_ )
         {
-            errorToFail_ = [ JFFError errorWithDescription: @"test error" ];
+            errorToFail_ = [ JFFError newErrorWithDescription: @"test error" ];
             return asyncOperationWithError( errorToFail_ );
         };
     };
@@ -153,24 +153,22 @@ static JFFAsyncOperationBinder differentTestDataLoader( BOOL* wasCalled_ )
 //Use cached data if cannot load data
 -(void)testUseCachedDataIfCannotLoadData
 {
-    NSString* cacheName_ = @"URL_CACHES_FROM_DICT";
-    
-    NSDictionary* dbDescription_ = [ NSDictionary dictionaryWithObjectsAndKeys:
-                                    [ NSDictionary dictionaryWithObjectsAndKeys: cachesFileName_, @"fileName", nil ], cacheName_
-                                    , nil ];
-    
+    static NSString* const cacheName_ = @"URL_CACHES_FROM_DICT";
+
+    NSDictionary* dbDescription_ = @{ cacheName_ : @{ @"fileName" : cachesFileName_ } };
+
     CacheDBAdaptor* cache_ = [ CacheDBAdaptor new ];
-    
+
     cache_.jffCacheDB = [ [ [ JFFCaches alloc ] initWithDBInfoDictionary: dbDescription_ ] cacheByName: cacheName_ ];
-    
+
     NSURL* url_ = [ NSURL URLWithString: @"http://google.com" ];
     NSURL*(^urlBuilder_)(void) = ^NSURL*()
     {
         return url_;
     };
-    
+
     JFFAsyncOperationBinder dataLoaderForURL_ = testDataLoader( NULL );
-    
+
     JFFAsyncBinderForURL analyzerForData_ = ^JFFAsyncOperationBinder( NSURL* url_ )
     {
         return ^JFFAsyncOperation( NSData* data_ )
@@ -204,7 +202,7 @@ static JFFAsyncOperationBinder differentTestDataLoader( BOOL* wasCalled_ )
         } );
     } );
 
-    GHAssertTrue( [ cachedDataString_ isEqualToString: storedDataString_ ], @"cached and stored data should be same" );
+    GHAssertEqualObjects( cachedDataString_, storedDataString_, @"cached and stored data should be same" );
 }
 
 //Try load data if cache data old
@@ -212,9 +210,7 @@ static JFFAsyncOperationBinder differentTestDataLoader( BOOL* wasCalled_ )
 {
     NSString* cacheName_ = @"URL_CACHES_FROM_DICT1";
 
-    NSDictionary* dbDescription_ = [ NSDictionary dictionaryWithObjectsAndKeys:
-                                    [ NSDictionary dictionaryWithObjectsAndKeys: cachesFileName_, @"fileName", nil ], cacheName_
-                                    , nil ];
+    NSDictionary* dbDescription_ = @{ cacheName_ : @{ @"fileName" : cachesFileName_ } };
 
     CacheDBAdaptor* cache_ = [ CacheDBAdaptor new ];
 
@@ -262,9 +258,8 @@ static JFFAsyncOperationBinder differentTestDataLoader( BOOL* wasCalled_ )
             cachedDataString_ = data_;
         } );
     } );
-    
-    GHAssertTrue( [ cachedDataString_ isEqualToString: storedDataString_ ]
-                 , @"cached and stored data should be same" );
+
+    GHAssertEqualObjects( cachedDataString_, storedDataString_, @"cached and stored data should be same" );
 }
 
 //Use cached data if cache data is fresh
@@ -272,9 +267,7 @@ static JFFAsyncOperationBinder differentTestDataLoader( BOOL* wasCalled_ )
 {
     NSString* cacheName_ = @"URL_CACHES_FROM_DICT2";
 
-    NSDictionary* dbDescription_ = [ NSDictionary dictionaryWithObjectsAndKeys:
-                                    [ NSDictionary dictionaryWithObjectsAndKeys: cachesFileName_, @"fileName", nil ], cacheName_
-                                    , nil ];
+    NSDictionary* dbDescription_ = @{ cacheName_: @{ @"fileName": cachesFileName_ } };
 
     CacheDBAdaptor* cache_ = [ CacheDBAdaptor new ];
 

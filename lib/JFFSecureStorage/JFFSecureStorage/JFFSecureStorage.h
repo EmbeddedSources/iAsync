@@ -1,19 +1,20 @@
 #import <Foundation/Foundation.h>
 
-// TODO : Rewrite in C++. This can be easily reversed by tools like class_dump_z
-// http://code.google.com/p/networkpx/wiki/class_dump_z
-
 //TODO : Use own custom encryption as the one from Apple is exploited
 
 @protocol JFFSecureStorage;
 
-@interface JFFSecureStorage : NSObject
+#ifdef __cplusplus
+extern "C" {
+#endif
 
--(void)setPassword:( NSString* )password_
-             login:( NSString* )login_
-            forURL:( NSURL* )url_;
+void jffStoreSecureCredentials( NSString* login_
+                               , NSString* password_
+                               , NSURL* url_ );
 
--(NSString*)passwordAndLogin:( NSString** )login_
-                      forURL:( NSURL* )url_;
+NSString* jffGetSecureCredentialsForURL( NSString** login_
+                                        , NSURL* url_ );
 
-@end
+#ifdef __cplusplus
+} /* closing brace for extern "C" */
+#endif

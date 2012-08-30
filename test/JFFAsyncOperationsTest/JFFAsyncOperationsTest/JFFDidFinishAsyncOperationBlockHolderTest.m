@@ -7,48 +7,48 @@
 
 -(void)testDidFinishAsyncOperationBlockHolder
 {
-   __block BOOL holder_deallocated_ = NO;
+    __block BOOL holderDeallocated_ = NO;
 
-   @autoreleasepool
-   {
-      JFFDidFinishAsyncOperationBlockHolder* holder_ = [ JFFDidFinishAsyncOperationBlockHolder new ];
-      [ holder_ addOnDeallocBlock: ^void( void )
-      {
-         holder_deallocated_ = YES;
-      } ];
+    @autoreleasepool
+    {
+        JFFDidFinishAsyncOperationBlockHolder* holder_ = [ JFFDidFinishAsyncOperationBlockHolder new ];
+        [ holder_ addOnDeallocBlock: ^void( void )
+        {
+            holderDeallocated_ = YES;
+        } ];
 
-      __block BOOL block_context_deallocated_ = NO;
-      NSObject* block_context_ = [ NSObject new ];
-      [ block_context_ addOnDeallocBlock: ^void( void )
-      {
-         block_context_deallocated_ = YES;
-      } ];
+        __block BOOL blockContextDeallocated_ = NO;
+        __block NSUInteger finishBlockCallsNumber_ = 0;
 
-      __block NSUInteger finish_block_calls_number_ = 0;
-      holder_.didFinishBlock = ^( id result_, NSError* error_ )
-      {
-         if ( [ block_context_ class ] )
-            ++finish_block_calls_number_;
-      };
+        @autoreleasepool
+        {
+            NSObject* blockContext_ = [ NSObject new ];
+            [ blockContext_ addOnDeallocBlock: ^void( void )
+            {
+                blockContextDeallocated_ = YES;
+            } ];
 
-      [ block_context_ release ];
+            holder_.didFinishBlock = ^( id result_, NSError* error_ )
+            {
+                if ( [ blockContext_ class ] )
+                    ++finishBlockCallsNumber_;
+            };
+        }
 
-      GHAssertFalse( block_context_deallocated_, @"context not deallocated" );
+        GHAssertFalse( blockContextDeallocated_, @"context not deallocated" );
 
-      holder_.onceDidFinishBlock( nil, nil );
+        holder_.onceDidFinishBlock( nil, nil );
 
-      GHAssertTrue( nil == holder_.didFinishBlock, @"finish block empty" );
-      GHAssertTrue( block_context_deallocated_, @"context deallocated" );
-      GHAssertTrue( 1 == finish_block_calls_number_, @"block once was called" );
+        GHAssertTrue( nil == holder_.didFinishBlock, @"finish block empty" );
+        GHAssertTrue( blockContextDeallocated_, @"context deallocated" );
+        GHAssertTrue( 1 == finishBlockCallsNumber_, @"block once was called" );
 
-      holder_.onceDidFinishBlock( nil, nil );
+        holder_.onceDidFinishBlock( nil, nil );
 
-      GHAssertTrue( 1 == finish_block_calls_number_, @"block still once was called" );
+        GHAssertTrue( 1 == finishBlockCallsNumber_, @"block still once was called" );
+    }
 
-      [ holder_ release ];
-   }
-
-   GHAssertTrue( holder_deallocated_, @"holder deallocated" );
+    GHAssertTrue( holderDeallocated_, @"holder deallocated" );
 }
 
 @end

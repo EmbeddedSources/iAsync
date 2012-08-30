@@ -53,8 +53,6 @@
         GHAssertTrue( secondLoader_.finished, @"Second loader not finished yet" );
         GHAssertTrue( groupLoaderFinished_, @"Group loader finished already" );
 
-        [ secondLoader_ release ];
-        [ firstLoader_ release ];
     }
 
    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -100,8 +98,6 @@
         GHAssertFalse( mainCanceled_, @"Group loader canceled" );
         GHAssertTrue ( mainFinished_, @"Group loader finished" );
 
-        [ secondLoader_ release ];
-        [ firstLoader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -147,8 +143,6 @@
         GHAssertFalse( mainCanceled_, @"Group loader canceled" );
         GHAssertTrue ( mainFinished_, @"Group loader finished" );
 
-        [ secondLoader_ release ];
-        [ firstLoader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -188,8 +182,6 @@
         GHAssertTrue( secondLoader_.cancelFlag, @"Second loader canceled already" );
         GHAssertTrue( mainCanceled_, @"Group loader canceled already" );
 
-        [ secondLoader_ release ];
-        [ firstLoader_  release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -229,8 +221,6 @@
         GHAssertFalse( second_loader_.cancelFlag, @"Second loader canceled already" );
         GHAssertTrue( main_canceled_, @"Group loader canceled already" );
 
-        [ second_loader_ release ];
-        [ first_loader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -268,8 +258,6 @@
         GHAssertTrue( secondLoader_.cancelFlag, @"Second loader canceled already" );
         GHAssertTrue( main_canceled_, @"Group loader canceled already" );
 
-        [ secondLoader_ release ];
-        [ firstLoader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );

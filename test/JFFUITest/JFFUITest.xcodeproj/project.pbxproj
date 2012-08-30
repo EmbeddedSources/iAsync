@@ -313,8 +313,7 @@
 		1BE054D01548298A00270B58 /* JFFUtilsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFUtilsFW.framework;
-			path = JFFUtilsFW;
+			path = JFFUtilsFW.framework;
 			remoteRef = 1BE054CF1548298A00270B58 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

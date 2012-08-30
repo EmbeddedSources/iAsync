@@ -18,8 +18,6 @@
 		1B3A3854147683E9007D8C10 /* UIView+AllSubviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3A3852147683E9007D8C10 /* UIView+AllSubviews.h */; };
 		1B3A3855147683E9007D8C10 /* UIView+AllSubviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3A3853147683E9007D8C10 /* UIView+AllSubviews.m */; };
 		1B49CFA8143C6D3500E8AACE /* UIWebViewNewFeaturesRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B49CFA6143C6D3400E8AACE /* UIWebViewNewFeaturesRuntime.m */; };
-		1B5E1ACE14D01FA50075049A /* UIViewController+OnCloseActions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5E1ACC14D01FA50075049A /* UIViewController+OnCloseActions.h */; };
-		1B5E1ACF14D01FA50075049A /* UIViewController+OnCloseActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5E1ACD14D01FA50075049A /* UIViewController+OnCloseActions.m */; };
 		1B5E1AD214D0203B0075049A /* UIViewController+PresentTopViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5E1AD014D0203A0075049A /* UIViewController+PresentTopViewController.h */; };
 		1B5E1AD314D0203B0075049A /* UIViewController+PresentTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5E1AD114D0203A0075049A /* UIViewController+PresentTopViewController.m */; };
 		1B7F58421435BDC000FF06EC /* UIWebView+HideWhenLoading.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B7F583E1435BDC000FF06EC /* UIWebView+HideWhenLoading.h */; };
@@ -95,8 +93,6 @@
 		1B3A3852147683E9007D8C10 /* UIView+AllSubviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AllSubviews.h"; sourceTree = "<group>"; };
 		1B3A3853147683E9007D8C10 /* UIView+AllSubviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AllSubviews.m"; sourceTree = "<group>"; };
 		1B49CFA6143C6D3400E8AACE /* UIWebViewNewFeaturesRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWebViewNewFeaturesRuntime.m; sourceTree = "<group>"; };
-		1B5E1ACC14D01FA50075049A /* UIViewController+OnCloseActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+OnCloseActions.h"; sourceTree = "<group>"; };
-		1B5E1ACD14D01FA50075049A /* UIViewController+OnCloseActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+OnCloseActions.m"; sourceTree = "<group>"; };
 		1B5E1AD014D0203A0075049A /* UIViewController+PresentTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PresentTopViewController.h"; sourceTree = "<group>"; };
 		1B5E1AD114D0203A0075049A /* UIViewController+PresentTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PresentTopViewController.m"; sourceTree = "<group>"; };
 		1B7F583E1435BDC000FF06EC /* UIWebView+HideWhenLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HideWhenLoading.h"; sourceTree = "<group>"; };
@@ -208,8 +204,6 @@
 		1B5E1ACA14D01F900075049A /* UIViewController */ = {
 			isa = PBXGroup;
 			children = (
-				1B5E1ACC14D01FA50075049A /* UIViewController+OnCloseActions.h */,
-				1B5E1ACD14D01FA50075049A /* UIViewController+OnCloseActions.m */,
 				1B5E1AD014D0203A0075049A /* UIViewController+PresentTopViewController.h */,
 				1B5E1AD114D0203A0075049A /* UIViewController+PresentTopViewController.m */,
 			);
@@ -346,7 +340,6 @@
 				1BD361691455A0630036F786 /* JFFPageSlider.h in Headers */,
 				1BD3616C1455A2F80036F786 /* JFFPageSliderDelegate.h in Headers */,
 				1B3A3854147683E9007D8C10 /* UIView+AllSubviews.h in Headers */,
-				1B5E1ACE14D01FA50075049A /* UIViewController+OnCloseActions.h in Headers */,
 				1B5E1AD214D0203B0075049A /* UIViewController+PresentTopViewController.h in Headers */,
 				1BE053B715480F4400270B58 /* JFFActionSheetsContainer.h in Headers */,
 				1BB414DE154835340032B7D5 /* JFFPendingActionSheet.h in Headers */,
@@ -461,7 +454,6 @@
 				1B295560143DCB7300532BD7 /* UITableView+WithinUpdates.m in Sources */,
 				1BD3616A1455A0630036F786 /* JFFPageSlider.m in Sources */,
 				1B3A3855147683E9007D8C10 /* UIView+AllSubviews.m in Sources */,
-				1B5E1ACF14D01FA50075049A /* UIViewController+OnCloseActions.m in Sources */,
 				1B5E1AD314D0203B0075049A /* UIViewController+PresentTopViewController.m in Sources */,
 				1BE053B815480F4400270B58 /* JFFActionSheetsContainer.m in Sources */,
 				1BB414DF154835340032B7D5 /* JFFPendingActionSheet.m in Sources */,

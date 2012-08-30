@@ -52,8 +52,6 @@
         GHAssertTrue( secondLoader_.finished, @"Second loader not finished yet" );
         GHAssertTrue( group_loader_finished_, @"Group loader finished already" );
 
-        [ secondLoader_ release ];
-        [ firstLoader_  release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -95,8 +93,6 @@
         GHAssertTrue( second_loader_.finished, @"Second loader not finished yet" );
         GHAssertTrue( group_loader_failed_, @"Group loader failed already" );
 
-        [ second_loader_ release ];
-        [ first_loader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -138,8 +134,6 @@
         GHAssertTrue( second_loader_.finished, @"Second loader not finished yet" );
         GHAssertTrue( group_loader_failed_, @"Group loader failed already" );
 
-        [ second_loader_ release ];
-        [ first_loader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -177,8 +171,6 @@
         GHAssertTrue( second_loader_.cancelFlag, @"Second loader canceled already" );
         GHAssertTrue( main_canceled_, @"Group loader canceled already" );
 
-        [ second_loader_ release ];
-        [ first_loader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -216,8 +208,6 @@
         GHAssertFalse( second_loader_.cancelFlag, @"Second loader canceled already" );
         GHAssertTrue( main_canceled_, @"Group loader canceled already" );
 
-        [ second_loader_ release ];
-        [ first_loader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -255,8 +245,6 @@
         GHAssertTrue( second_loader_.cancelFlag, @"Second loader canceled already" );
         GHAssertTrue( main_canceled_, @"Group loader canceled already" );
 
-        [ second_loader_ release ];
-        [ first_loader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -307,8 +295,6 @@
         GHAssertFalse( second_loader_.canceled, @"Second loader canceled already" );
         GHAssertTrue( main_canceled_, @"Group loader canceled already" );
 
-        [ second_loader_ release ];
-        [ first_loader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -326,48 +312,46 @@ typedef JFFAsyncOperation (*MergeLoadersPtr)( JFFAsyncOperation, ... );
         {
             for ( int j = 0; j < 2; ++j )
             {
-                JFFAsyncOperationManager* first_loader_  = [ [ JFFAsyncOperationManager new ] autorelease ];
-                JFFAsyncOperationManager* second_loader_ = [ [ JFFAsyncOperationManager new ] autorelease ];
-                JFFAsyncOperationManager* third_loader_  = [ [ JFFAsyncOperationManager new ] autorelease ];
+                JFFAsyncOperationManager* first_loader_  = [ JFFAsyncOperationManager new ];
+                JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
+                JFFAsyncOperationManager* third_loader_  = [ JFFAsyncOperationManager new ];
 
                 JFFAsyncOperation loader_ = func_( first_loader_  .loader
                                                   , second_loader_.loader
                                                   , third_loader_ .loader
                                                   , nil );
 
-                JFFResultContext* resultContext_ = [ [ JFFResultContext new ] autorelease ];
+                __block id resultContext_;
                 JFFDidFinishAsyncOperationHandler done_callback_ = ^void( id result_, NSError* error_ )
                 {
-                    resultContext_.result = result_;
+                    resultContext_ = result_;
                 };
                 loader_( nil, nil, done_callback_ );
 
-                NSArray* results_ = [ NSArray arrayWithObjects: @"0", @"1", @"2", nil ];
-                NSArray* loadersResults_ = [ NSArray arrayWithObjects:
-                                            first_loader_   .loaderFinishBlock.didFinishBlock
+                NSArray* results_ = @[ @"0", @"1", @"2" ];
+                NSArray* loadersResults_ = @[ first_loader_ .loaderFinishBlock.didFinishBlock
                                             , second_loader_.loaderFinishBlock.didFinishBlock
-                                            , third_loader_ .loaderFinishBlock.didFinishBlock
-                                            , nil ];
+                                            , third_loader_ .loaderFinishBlock.didFinishBlock ];
 
                 NSMutableArray* indexes_ = [ NSMutableArray arrayWithArray: results_ ];
 
-                NSUInteger firstIndex_ = [ [ indexes_ objectAtIndex: i ] integerValue ];
-                [ indexes_ removeObject: [ indexes_ objectAtIndex: i ] ];
+                NSUInteger firstIndex_ = [ indexes_[ i ] integerValue ];
+                [ indexes_ removeObject: indexes_[ i ] ];
 
-                NSUInteger secondIndex_ = [ [ indexes_ objectAtIndex: j ] integerValue ];
-                [ indexes_ removeObject: [ indexes_ objectAtIndex: j ] ];
+                NSUInteger secondIndex_ = [ indexes_[ j ] integerValue ];
+                [ indexes_ removeObject: indexes_[ j ] ];
 
-                NSUInteger thirdIndex_ = [ [ indexes_ objectAtIndex: 0 ] integerValue ];
+                NSUInteger thirdIndex_ = [ indexes_[ 0 ] integerValue ];
 
-                JFFDidFinishAsyncOperationHandler loader1_ = [ loadersResults_ objectAtIndex: firstIndex_  ];
-                JFFDidFinishAsyncOperationHandler loader2_ = [ loadersResults_ objectAtIndex: secondIndex_ ];
-                JFFDidFinishAsyncOperationHandler loader3_ = [ loadersResults_ objectAtIndex: thirdIndex_  ];
+                JFFDidFinishAsyncOperationHandler loader1_ = loadersResults_[ firstIndex_  ];
+                JFFDidFinishAsyncOperationHandler loader2_ = loadersResults_[ secondIndex_ ];
+                JFFDidFinishAsyncOperationHandler loader3_ = loadersResults_[ thirdIndex_  ];
 
-                loader1_( [ results_ objectAtIndex: firstIndex_  ], nil );
-                loader2_( [ results_ objectAtIndex: secondIndex_ ], nil );
-                loader3_( [ results_ objectAtIndex: thirdIndex_  ], nil );
+                loader1_( results_[ firstIndex_  ], nil );
+                loader2_( results_[ secondIndex_ ], nil );
+                loader3_( results_[ thirdIndex_  ], nil );
 
-                GHAssertTrue( [ resultContext_.result isEqual: results_ ], @"OK" );
+                GHAssertTrue( [ resultContext_ isEqual: results_ ], @"OK" );
             }
         }
     }
@@ -438,11 +422,8 @@ typedef JFFAsyncOperation (*MergeLoadersPtr)( JFFAsyncOperation, ... );
                         result3WasDeallocated_ = YES;
                     } ];
                     loader3_.loaderFinishBlock.didFinishBlock( result3_, nil );
-                    [ result3_ release ];
                 }
 
-                [ loader1_ release ];
-                [ loader3_ release ];
             }
             //@autoreleasepool
 
@@ -453,17 +434,13 @@ typedef JFFAsyncOperation (*MergeLoadersPtr)( JFFAsyncOperation, ... );
                     result2WasDeallocated_ = YES;
                 } ];
                 loader2_.loaderFinishBlock.didFinishBlock( result2_, nil );
-                [ result2_ release ];
             }
-            [ loader2_ release ];
 
             loader4_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
-            [ loader4_ release ];
         }
 
         loader5_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
 
-        [ loader5_ release ];
     }
 
     GHAssertTrue( result2WasDeallocated_, @"OK" );

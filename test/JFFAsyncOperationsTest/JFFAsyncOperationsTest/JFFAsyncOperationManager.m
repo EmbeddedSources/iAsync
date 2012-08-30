@@ -5,34 +5,17 @@
 
 @interface JFFAsyncOperationManager ()
 
-@property ( nonatomic, retain ) JFFDidFinishAsyncOperationBlockHolder* loaderFinishBlock;
-@property ( nonatomic, retain ) JFFCancelAsyncOperationBlockHolder* loaderCancelBlock;
+@property ( nonatomic ) JFFDidFinishAsyncOperationBlockHolder* loaderFinishBlock;
+@property ( nonatomic ) JFFCancelAsyncOperationBlockHolder* loaderCancelBlock;
 
-@property ( nonatomic, assign ) NSUInteger loadingCount;
-@property ( nonatomic, assign ) BOOL finished;
-@property ( nonatomic, assign ) BOOL canceled;
-@property ( nonatomic, assign ) BOOL cancelFlag;
+@property ( nonatomic ) NSUInteger loadingCount;
+@property ( nonatomic ) BOOL finished;
+@property ( nonatomic ) BOOL canceled;
+@property ( nonatomic ) BOOL cancelFlag;
 
 @end
 
 @implementation JFFAsyncOperationManager
-
-@synthesize loaderFinishBlock;
-@synthesize loaderCancelBlock;
-@synthesize finished;
-@synthesize canceled;
-@synthesize cancelFlag;
-@synthesize finishAtLoading;
-@synthesize failAtLoading;
-@synthesize loadingCount;
-
--(void)dealloc
-{
-    [ loaderFinishBlock release ];
-    [ loaderCancelBlock release ];
-
-    [ super dealloc ];
-}
 
 -(id)init
 {
@@ -40,8 +23,8 @@
 
     if ( self )
     {
-        loaderFinishBlock = [ JFFDidFinishAsyncOperationBlockHolder new ];
-        loaderCancelBlock = [ JFFCancelAsyncOperationBlockHolder    new ];
+        self->_loaderFinishBlock = [ JFFDidFinishAsyncOperationBlockHolder new ];
+        self->_loaderCancelBlock = [ JFFCancelAsyncOperationBlockHolder    new ];
     }
 
     return self;
@@ -56,7 +39,7 @@
 
 -(JFFAsyncOperation)loader
 {
-    return [ [ ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
+    return [ ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
                                         , JFFCancelAsyncOperationHandler cancelCallback_
                                         , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
@@ -64,7 +47,7 @@
 
         doneCallback_ = [ doneCallback_ copy ];
 
-        __block JFFAsyncOperationManager* self_ = self;
+        __weak JFFAsyncOperationManager* self_ = self;
 
         self.loaderFinishBlock.didFinishBlock = ^( id result_, NSError* error_ )
         {
@@ -74,7 +57,6 @@
             if ( doneCallback_ )
                 doneCallback_( result_, error_ );
         };
-        [ doneCallback_ release ];
 
         if ( self.finishAtLoading || self.failAtLoading )
         {
@@ -85,7 +67,7 @@
             return JFFStubCancelAsyncOperationBlock;
         }
 
-        cancelCallback_ = [ [ cancelCallback_ copy ] autorelease ];
+        cancelCallback_ = [ cancelCallback_ copy ];
         self.loaderCancelBlock.cancelBlock = ^( BOOL canceled_ )
         {
             self.loaderFinishBlock.didFinishBlock = nil;
@@ -95,7 +77,7 @@
                 cancelCallback_( canceled_ );
         };
         return self.loaderCancelBlock.onceCancelBlock;
-    } copy ] autorelease ];
+    } copy ];
 }
 
 @end

@@ -43,21 +43,18 @@
             finalResult_ = result_;
         } );
 
-        id firstResult_ = [ NSNumber numberWithInt: 1 ];
+        id firstResult_ = @1;
         firstLoader_.loaderFinishBlock.didFinishBlock( firstResult_, nil );
 
         GHAssertTrue( monadResult_ == firstResult_, @"OK" );
         GHAssertFalse( secondLoader_.finished, @"OK" );
         GHAssertNil( finalResult_, @"OK" );
 
-        id secondResult_ = [ NSNumber numberWithInt: 2 ];
+        id secondResult_ = @2;
         secondLoader_.loaderFinishBlock.didFinishBlock( secondResult_, nil );
 
         GHAssertTrue( secondLoader_.finished, @"OK" );
         GHAssertTrue( finalResult_ == secondResult_, @"OK" );
-
-        [ firstLoader_  release ];
-        [ secondLoader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
@@ -95,9 +92,6 @@
 
         GHAssertFalse( binderCalled_, @"OK" );
         GHAssertTrue( failError_ == finalError_, @"OK" );
-
-        [ firstLoader_  release ];
-        [ secondLoader_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );

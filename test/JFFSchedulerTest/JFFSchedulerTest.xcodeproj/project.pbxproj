@@ -19,6 +19,7 @@
 		1B41AD50151CD1D100566B1B /* libJFFScheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41AD47151CD1C500566B1B /* libJFFScheduler.a */; };
 		1B41AD65151CD1EE00566B1B /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41AD5C151CD1E000566B1B /* libJFFUtils.a */; };
 		1BEC47F7156A26B80099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEC47F6156A26B80099DA6D /* libstdc++.dylib */; };
+		1BEE3D2615EFB43E0024D249 /* PerformSelectorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE3D2515EFB43E0024D249 /* PerformSelectorTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		1B41AD3C151CD1C400566B1B /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../../lib/JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
 		1B41AD51151CD1E000566B1B /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
 		1BEC47F6156A26B80099DA6D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		1BEE3D2515EFB43E0024D249 /* PerformSelectorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerformSelectorTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 			children = (
 				1B41AD00151CCF7100566B1B /* Supporting Files */,
 				1B41AD1C151CD08100566B1B /* JFFSchedulerTest.m */,
+				1BEE3D2515EFB43E0024D249 /* PerformSelectorTest.m */,
 			);
 			path = JFFSchedulerTest;
 			sourceTree = "<group>";
@@ -331,8 +334,7 @@
 		1B41AD4D151CD1C500566B1B /* JFFSchedulerFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFSchedulerFW.framework;
-			path = JFFSchedulerFW;
+			path = JFFSchedulerFW.framework;
 			remoteRef = 1B41AD4C151CD1C500566B1B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -360,8 +362,7 @@
 		1B41AD62151CD1E000566B1B /* JFFUtilsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFUtilsFW.framework;
-			path = JFFUtilsFW;
+			path = JFFUtilsFW.framework;
 			remoteRef = 1B41AD61151CD1E000566B1B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -385,6 +386,7 @@
 			files = (
 				1B41AD06151CCF7100566B1B /* main.m in Sources */,
 				1B41AD1D151CD08100566B1B /* JFFSchedulerTest.m in Sources */,
+				1BEE3D2615EFB43E0024D249 /* PerformSelectorTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,44 +20,42 @@
 {
     @autoreleasepool
     {
-        NSObject* obj_ = [ NSObject new ];
-
-        __block BOOL cancel_callback_called_ = NO;
-
-        JFFCancelAsyncOperation cancel_ = nil;
+        __block BOOL cancelCallbackCalled_ = NO;
+        JFFCancelAsyncOperation cancel_;
 
         @autoreleasepool
         {
-            JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
-                                                                    , JFFCancelAsyncOperationHandler cancel_callback_
-                                                                    , JFFDidFinishAsyncOperationHandler done_callback_ )
+            NSObject* obj_ = [ NSObject new ];
+
+            @autoreleasepool
             {
-                cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
-                return [ [ ^void( BOOL cancel_ )
+                JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
+                                                                        , JFFCancelAsyncOperationHandler cancelCallback_
+                                                                        , JFFDidFinishAsyncOperationHandler done_callback_ )
                 {
-                    if ( cancel_callback_ )
-                        cancel_callback_( cancel_ );
-                } copy ] autorelease ];
-            };
+                    cancelCallback_ = [ cancelCallback_ copy ];
+                    return [ ^void( BOOL cancel_ )
+                    {
+                        if ( cancelCallback_ )
+                            cancelCallback_( cancel_ );
+                    } copy ];
+                };
 
-            operation_ = [ obj_ autoUnsubsribeOnDeallocAsyncOperation: operation_ ];
+                operation_ = [ obj_ autoUnsubsribeOnDeallocAsyncOperation: operation_ ];
 
-            cancel_ = operation_( nil, ^( BOOL canceled_ )
-            {
-                cancel_callback_called_ = YES;
-            }, nil );
-            [ cancel_ retain ];
+                cancel_ = operation_( nil, ^( BOOL canceled_ )
+                {
+                    cancelCallbackCalled_ = YES;
+                }, nil );
+            }
         }
 
-        [ obj_ release ];
-
-        GHAssertTrue( cancel_callback_called_, @"Cancel callback should be called" );
-        cancel_callback_called_ = NO;
+        GHAssertTrue( cancelCallbackCalled_, @"Cancel callback should be called" );
+        cancelCallbackCalled_ = NO;
 
         cancel_( YES );
-        [ cancel_ release ];
 
-        GHAssertFalse( cancel_callback_called_, @"Cancel callback should not be called after dealloc" );
+        GHAssertFalse( cancelCallbackCalled_, @"Cancel callback should not be called after dealloc" );
     }
 
     GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"All object of this class should be deallocated" );
@@ -70,37 +68,31 @@
 {
     @autoreleasepool
     {
-        NSObject* obj_ = [ NSObject new ];
-
-        __block NSUInteger cancel_callback_call_count_ = 0;
+        __block NSUInteger cancelCallbackCallCount_ = 0;
 
         @autoreleasepool
         {
-            NSAutoreleasePool* pool_ = [ NSAutoreleasePool new ];
+            NSObject* obj_ = [ NSObject new ];
 
-            JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
-                                                                    , JFFCancelAsyncOperationHandler cancel_callback_
-                                                                    , JFFDidFinishAsyncOperationHandler done_callback_ )
+            JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+                                                                    , JFFCancelAsyncOperationHandler cancelCallback_
+                                                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
             {
-                cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
-                return [ [ ^void( BOOL cancel_ )
+                cancelCallback_ = [ cancelCallback_ copy ];
+                return [ ^void( BOOL cancel_ )
                 {
-                    ++cancel_callback_call_count_;
-                    if ( cancel_callback_ )
-                        cancel_callback_( cancel_ );
-                } copy ] autorelease ];
+                    ++cancelCallbackCallCount_;
+                    if ( cancelCallback_ )
+                        cancelCallback_( cancel_ );
+                } copy ];
             };
 
             operation_ = [ obj_ autoUnsubsribeOnDeallocAsyncOperation: operation_ ];
 
             operation_( nil, nil, nil );
-
-            [ pool_ release ];
         }
 
-        [ obj_ release ];
-
-        GHAssertTrue( 1 == cancel_callback_call_count_, @"Cancel callback should not be called after dealloc" );
+        GHAssertTrue( 1 == cancelCallbackCallCount_, @"Cancel callback should not be called after dealloc" );
     }
 
     GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"All object of this class should be deallocated" );
@@ -115,36 +107,35 @@
     {
         NSObject* obj_ = [ NSObject new ];
 
-        __block BOOL cancel_block_called_ = NO;
+        __block BOOL cancelBlockCalled_ = NO;
 
         JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
                                                                 , JFFCancelAsyncOperationHandler cancel_callback_
                                                                 , JFFDidFinishAsyncOperationHandler done_callback_ )
         {
-            cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
-            return [ [ ^void( BOOL cancel_ )
+            cancel_callback_ = [ cancel_callback_ copy ];
+            return [ ^void( BOOL cancel_ )
             {
-                cancel_block_called_ = cancel_;
+                cancelBlockCalled_ = cancel_;
                 if ( cancel_callback_ )
                     cancel_callback_( cancel_ );
-            } copy ] autorelease ];
+            } copy ];
         };
 
         operation_ = [ obj_ autoUnsubsribeOnDeallocAsyncOperation: operation_ ];
 
-        __block BOOL cancel_callback_called_ = NO;
+        __block BOOL cancelCallbackCalled_ = NO;
 
         JFFCancelAsyncOperation cancel_ = operation_( nil, ^( BOOL canceled_ )
         {
-            cancel_callback_called_ = YES;
+            cancelCallbackCalled_ = YES;
         }, nil );
 
         cancel_( YES );
 
-        GHAssertTrue( cancel_callback_called_, @"Cancel callback should not be called after dealloc" );
-        GHAssertTrue( cancel_block_called_, @"Cancel callback should not be called after dealloc" );
+        GHAssertTrue( cancelCallbackCalled_, @"Cancel callback should not be called after dealloc" );
+        GHAssertTrue( cancelBlockCalled_, @"Cancel callback should not be called after dealloc" );
 
-        [ obj_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"All object of this class should be deallocated" );
@@ -158,66 +149,67 @@
 {
     @autoreleasepool
     {
-        NSObject* operation_owner_ = [ NSObject new ];
+        NSObject* operationOwner_ = [ NSObject new ];
 
-        __block BOOL native_cancel_block_called_ = NO;
+        __block BOOL nativeCancelBlockCalled_ = NO;
 
-        JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
-                                                                , JFFCancelAsyncOperationHandler cancel_callback_
-                                                                , JFFDidFinishAsyncOperationHandler done_callback_ )
+        JFFAsyncOperation operation_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+                                                                , JFFCancelAsyncOperationHandler cancelCallback_
+                                                                , JFFDidFinishAsyncOperationHandler doneCallback_ )
         {
-            cancel_callback_ = [ [ cancel_callback_ copy ] autorelease ];
-            return [ [ ^void( BOOL cancel_ )
+            cancelCallback_ = [ cancelCallback_ copy ];
+            return [ ^void( BOOL cancel_ )
             {
-                native_cancel_block_called_ = YES;
-                if ( cancel_callback_ )
-                    cancel_callback_( cancel_ );
-            } copy ] autorelease ];
+                nativeCancelBlockCalled_ = YES;
+                if ( cancelCallback_ )
+                    cancelCallback_( cancel_ );
+            } copy ];
         };
 
-        JFFAsyncOperation auto_cancel_operation_ = [ operation_owner_ autoCancelOnDeallocAsyncOperation: operation_ ];
+        JFFAsyncOperation autoCancelOperation_ = [ operationOwner_ autoCancelOnDeallocAsyncOperation: operation_ ];
 
         __block BOOL deallocated_ = NO;
+        JFFCancelAsyncOperation cancel_;
+        __block BOOL cancelCallbackCalled_ = NO;
 
-        NSObject* owned_by_callbacks_ = [ NSObject new ];
-        [ owned_by_callbacks_ addOnDeallocBlock: ^void( void )
+        @autoreleasepool
         {
-            deallocated_ = YES;
-        } ];
+            NSObject* ownedByCallbacks_ = [ NSObject new ];
+            [ ownedByCallbacks_ addOnDeallocBlock: ^void( void )
+            {
+                deallocated_ = YES;
+            } ];
 
-        JFFAsyncOperationProgressHandler progress_callback_ = ^void( id progress_info_ )
-        {
-            //simulate using object in callback block
-            [ owned_by_callbacks_ class ];
-        };
-        __block BOOL cancel_callback_called_ = NO;
-        JFFCancelAsyncOperationHandler cancel_callback_ = ^void( BOOL canceled_ )
-        {
-            cancel_callback_called_ = !canceled_;
-            //simulate using object in callback block
-            [ owned_by_callbacks_ class ];
-        };
-        JFFDidFinishAsyncOperationHandler done_callback_ = ^void( id result_, NSError* error_ )
-        {
-            //simulate using object in callback block
-            [ owned_by_callbacks_ class ];
-        };
+            JFFAsyncOperationProgressHandler progress_callback_ = ^void( id progressInfo_ )
+            {
+                //simulate using object in callback block
+                [ ownedByCallbacks_ class ];
+            };
+            JFFCancelAsyncOperationHandler cancel_callback_ = ^void( BOOL canceled_ )
+            {
+                cancelCallbackCalled_ = !canceled_;
+                //simulate using object in callback block
+                [ ownedByCallbacks_ class ];
+            };
+            JFFDidFinishAsyncOperationHandler done_callback_ = ^void( id result_, NSError* error_ )
+            {
+                //simulate using object in callback block
+                [ ownedByCallbacks_ class ];
+            };
 
-        JFFCancelAsyncOperation cancel_ = auto_cancel_operation_( progress_callback_
-                                                                 , cancel_callback_
-                                                                 , done_callback_ );
-
-        [ owned_by_callbacks_ release ];
+            cancel_ = autoCancelOperation_( progress_callback_
+                                           , cancel_callback_
+                                           , done_callback_ );
+        }
 
         GHAssertFalse( deallocated_, @"owned_by_callbacks_ object should not be deallocated" );
 
         cancel_( NO );
 
-        GHAssertTrue( native_cancel_block_called_, @"Native cancel block should not be called" );
+        GHAssertTrue( nativeCancelBlockCalled_, @"Native cancel block should not be called" );
         GHAssertTrue( deallocated_, @"owned_by_callbacks_ objet should be deallocated" );
-        GHAssertTrue( cancel_callback_called_, @"cancel callback should ba called" );
+        GHAssertTrue( cancelCallbackCalled_, @"cancel callback should ba called" );
 
-        [ operation_owner_ release ];
     }
 
     GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"OK" );
@@ -230,64 +222,66 @@
 {
     @autoreleasepool
     {
-        NSObject* operation_owner_ = [ NSObject new ];
-
-        NSObject* delegate_ = [ NSObject new ];
-        __block BOOL delegateDeallocated_ = NO;
-        [ delegate_ addOnDeallocBlock: ^void( void )
-        {
-            delegateDeallocated_ = YES;
-        } ];
-
-        __block BOOL native_cancel_block_called_ = NO;
-        __block BOOL unsibscribe_cancel_block_called_ = NO;
-
-        JFFAsyncOperation operation_ = nil;
+        __block BOOL nativeCancelBlockCalled_ = NO;
 
         @autoreleasepool
         {
-            operation_ = [ [ ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
-                                                      , JFFCancelAsyncOperationHandler cancel_callback_
-                                                      , JFFDidFinishAsyncOperationHandler done_callback_ )
+            NSObject* operationOwner_ = [ NSObject new ];
+
+            __block BOOL unsibscribeCancelBlockCalled_ = NO;
+            __block BOOL delegateDeallocated_ = NO;
+
+            @autoreleasepool
             {
-                return [ [ ^void( BOOL cancel_ )
+                NSObject* delegate_ = [ NSObject new ];
+                [ delegate_ addOnDeallocBlock: ^void( void )
                 {
-                    if ( cancel_callback_ )
-                        cancel_callback_( cancel_ );
-                    native_cancel_block_called_ = YES;
-                } copy ] autorelease ];
-            } copy ] autorelease ];
-            [ operation_ retain ];//like native operation still living
+                    delegateDeallocated_ = YES;
+                } ];
 
-            JFFAsyncOperation auto_cancel_operation_ = [ operation_owner_ autoCancelOnDeallocAsyncOperation: operation_ ];
+                JFFAsyncOperation operation_ = nil;
 
-            __block id weak_delegate_ = delegate_;
+                @autoreleasepool
+                {
+                    operation_ = [ ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+                                                              , JFFCancelAsyncOperationHandler cancelCallback_
+                                                              , JFFDidFinishAsyncOperationHandler doneCallback_ )
+                    {
+                        return [ ^void( BOOL cancel_ )
+                        {
+                            if ( cancelCallback_ )
+                                cancelCallback_( cancel_ );
+                            nativeCancelBlockCalled_ = YES;
+                        } copy ];
+                    } copy ];
+                    //like native operation still living
 
-            JFFCancelAsyncOperationHandler unsubscribe_callback_ = ^( BOOL canceled_ )
-            {
-                unsibscribe_cancel_block_called_ = !canceled_;
-            };
-            [ weak_delegate_ autoUnsubsribeOnDeallocAsyncOperation: auto_cancel_operation_ ]( nil
-                                                                                             , unsubscribe_callback_
-                                                                                             , ^void( id result_
-                                                                                                  , NSError* error_ )
-            {
-                NSLog( @"notify delegate: %@, with owner: %@", weak_delegate_, operation_owner_ );
-            } );
+                    JFFAsyncOperation autoCancelOperation_ = [ operationOwner_ autoCancelOnDeallocAsyncOperation: operation_ ];
+
+                    __unsafe_unretained id weakDelegate_ = delegate_;
+
+                    JFFCancelAsyncOperationHandler unsubscribeCallback_ = ^( BOOL canceled_ )
+                    {
+                        unsibscribeCancelBlockCalled_ = !canceled_;
+                    };
+                    [ weakDelegate_ autoUnsubsribeOnDeallocAsyncOperation: autoCancelOperation_ ]( nil
+                                                                                                     , unsubscribeCallback_
+                                                                                                     , ^void( id result_
+                                                                                                          , NSError* error_ )
+                    {
+                        NSLog( @"notify delegate: %@, with owner: %@", weakDelegate_, operationOwner_ );
+                    } );
+                }
+            }
+
+            GHAssertTrue( delegateDeallocated_            , @"OK" );
+            GHAssertTrue( nativeCancelBlockCalled_     , @"OK" );
+            GHAssertTrue( unsibscribeCancelBlockCalled_, @"OK" );
+            nativeCancelBlockCalled_ = NO;
+
         }
 
-        [ delegate_ release ];
-
-        GHAssertTrue( delegateDeallocated_            , @"OK" );
-        GHAssertTrue( native_cancel_block_called_     , @"OK" );
-        GHAssertTrue( unsibscribe_cancel_block_called_, @"OK" );
-        native_cancel_block_called_ = NO;
-
-        [ operation_owner_ release ];
-
-        GHAssertFalse( native_cancel_block_called_, @"operation_ should be canceled here" );
-
-        [ operation_ release ];
+        GHAssertFalse( nativeCancelBlockCalled_, @"operation_ should be canceled here" );
     }
 
     GHAssertTrue( 0 == [ JFFSimpleBlockHolder                  instancesCount ], @"OK" );

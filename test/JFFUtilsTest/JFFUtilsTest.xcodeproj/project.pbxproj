@@ -248,7 +248,6 @@
 				1B90263F143EF04400D3B0A0 /* JFFAssignProxyTest.m */,
 				1B90269E143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m */,
 				1B80C1DF1442CE5A007D4309 /* NSObjectRuntimeExtensionsTest.m */,
-				1B80C23F14430049007D4309 /* NSObjectInstancesCountTest.m */,
 				1BD182401467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m */,
 				1B902642143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m */,
 				534CDFD714A8C8280068F4DF /* ObjCppCastingTest.mm */,
@@ -258,6 +257,7 @@
 				1BC7424E154C0384002F3909 /* NumberOfCharacterFromStringTest.m */,
 				7E7225DD1588891400210CBE /* DevNullTest.m */,
 				1B14143715DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m */,
+				1B80C23F14430049007D4309 /* NSObjectInstancesCountTest.m */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;

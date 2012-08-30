@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		1B0BFD0C1561477700853028 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0BFD0B1561477700853028 /* libxml2.dylib */; };
-		1B0BFD1B15614F1500853028 /* jRestKitXMLToolsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0BFD1A15614F1500853028 /* jRestKitXMLToolsTest.m */; };
 		1B0E896C1563FA9C00825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E896B1563FA9C00825E3C /* libc++.dylib */; };
 		1BEC4832156A27060099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEC4831156A27060099DA6D /* libstdc++.dylib */; };
+		1BEE3D5D15EFB7630024D249 /* SmartDataLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E308671531EF0000E0B781 /* SmartDataLoaderTest.m */; };
+		1BEE3D5E15EFB7630024D249 /* jRestKitXMLToolsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0BFD1A15614F1500853028 /* jRestKitXMLToolsTest.m */; };
 		65E308201531EE1B00E0B781 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3081F1531EE1B00E0B781 /* UIKit.framework */; };
 		65E308221531EE1B00E0B781 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308211531EE1B00E0B781 /* Foundation.framework */; };
 		65E308241531EE1B00E0B781 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308231531EE1B00E0B781 /* CoreGraphics.framework */; };
 		65E3082A1531EE1B00E0B781 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65E308281531EE1B00E0B781 /* InfoPlist.strings */; };
 		65E3082C1531EE1B00E0B781 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E3082B1531EE1B00E0B781 /* main.m */; };
 		65E3083D1531EE9200E0B781 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3083C1531EE9200E0B781 /* GHUnitIOS.framework */; };
-		65E308681531EF0100E0B781 /* SmartDataLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E308671531EF0000E0B781 /* SmartDataLoaderTest.m */; };
 		65E308931531EF5E00E0B781 /* libJFFAsyncOperations.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308611531EEE000E0B781 /* libJFFAsyncOperations.a */; };
 		65E308941531EF5E00E0B781 /* libJFFCache.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308591531EED900E0B781 /* libJFFCache.a */; };
 		65E308951531EF5E00E0B781 /* libJFFRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308531531EECF00E0B781 /* libJFFRestKit.a */; };
@@ -495,8 +495,7 @@
 		65E3084D1531EEC500E0B781 /* JFFUtilsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFUtilsFW.framework;
-			path = JFFUtilsFW;
+			path = JFFUtilsFW.framework;
 			remoteRef = 65E3084C1531EEC500E0B781 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -531,8 +530,7 @@
 		65E308651531EEE000E0B781 /* JFFAsyncOperationsFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFAsyncOperationsFW.framework;
-			path = JFFAsyncOperationsFW;
+			path = JFFAsyncOperationsFW.framework;
 			remoteRef = 65E308641531EEE000E0B781 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -560,8 +558,7 @@
 		65E308CA1531F1E900E0B781 /* JFFSchedulerFW.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework.static;
-			name = JFFSchedulerFW.framework;
-			path = JFFSchedulerFW;
+			path = JFFSchedulerFW.framework;
 			remoteRef = 65E308C91531F1E900E0B781 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -612,8 +609,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65E3082C1531EE1B00E0B781 /* main.m in Sources */,
-				65E308681531EF0100E0B781 /* SmartDataLoaderTest.m in Sources */,
-				1B0BFD1B15614F1500853028 /* jRestKitXMLToolsTest.m in Sources */,
+				1BEE3D5D15EFB7630024D249 /* SmartDataLoaderTest.m in Sources */,
+				1BEE3D5E15EFB7630024D249 /* jRestKitXMLToolsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

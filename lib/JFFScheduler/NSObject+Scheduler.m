@@ -9,7 +9,6 @@
 
 @implementation NSObject (Scheduler)
 
-//JTODO maybe do not own userInfo_
 //JTODO test !!!
 -(void)performSelector:( SEL )selector_
           timeInterval:( NSTimeInterval )timeInterval_
