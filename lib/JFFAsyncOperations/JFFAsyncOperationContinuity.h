@@ -76,7 +76,7 @@ JFFAsyncOperation asyncOperationWithDoneBlock( JFFAsyncOperation loader_
 ///////////////////////// AUTO REPEAT CIRCLE ////////////////////////
 
 JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation loader_
-                                       , JFFPredicateBlock predicate_
+                                       , JFFResultPredicateBlock predicate_
                                        , NSTimeInterval delay_
                                        , NSInteger max_repeat_count_ );
 

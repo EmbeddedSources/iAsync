@@ -13,13 +13,13 @@
 {
     SEL selector_ = [ invocation_ selector ];
 
-    if ( [ self.target respondsToSelector: selector_ ] )
-        [ invocation_ invokeWithTarget: self.target ];
+    if ( [ self->_target respondsToSelector: selector_ ] )
+        [ invocation_ invokeWithTarget: self->_target ];
 }
 
 -(NSMethodSignature*)methodSignatureForSelector:( SEL )selector_
 {
-   return [ self.target methodSignatureForSelector: selector_ ];
+   return [ self->_target methodSignatureForSelector: selector_ ];
 }
 
 @end

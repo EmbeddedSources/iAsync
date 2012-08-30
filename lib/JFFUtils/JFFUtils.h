@@ -21,6 +21,7 @@
 #import <JFFUtils/NSString/NSString+IsEmpty.h>
 #import <JFFUtils/NSString/NSString+StringWithCutPrefix.h>
 #import <JFFUtils/NSString/NSString+Base64.h>
+#import <JFFUtils/NSString/NSString+FileAttributes.h>
 
 #import <JFFUtils/NSDate/NSDate+DateDifference.h>
 
@@ -46,7 +47,6 @@
 #import <JFFUtils/JFFMutableAssignArray.h>
 #import <JFFUtils/JFFMutableAssignDictionary.h>
 #import <JFFUtils/JFFMulticastDelegate.h>
-#import <JFFUtils/JFFResultContext.h>
 #import <JFFUtils/JFFSingleThreadProxy.h>
 #import <JFFUtils/JFFError.h>
 #import <JFFUtils/JSignedRange.h>

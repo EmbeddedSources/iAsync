@@ -74,9 +74,9 @@ static JFFCaches* sharedCachesInstance_ = nil;
     NSDictionary* dbInfo_ = [ [ JFFDBInfo sharedDBInfo ] dbInfo ];
 
     NSInteger lastVersion_ = [ dbInfo_ versionForDBWithName: self->_configPropertyName ];
-    NSInteger current_version_ = [ currentDbInfo_ versionForDBWithName: self->_configPropertyName ];
+    NSInteger currentVersion_ = [ currentDbInfo_ versionForDBWithName: self->_configPropertyName ];
 
-    if ( lastVersion_ > current_version_ )
+    if ( lastVersion_ > currentVersion_ )
     {
         [ self removeAllRecords ];
     }

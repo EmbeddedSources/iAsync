@@ -10,10 +10,10 @@
     }
 
     id eachObject_;
-    va_list argument_list_;
+    va_list argumentList_;
 
-    va_start(argument_list_, format_ );
-    eachObject_ = va_arg( argument_list_, id );
+    va_start( argumentList_, format_ );
+    eachObject_ = va_arg(  argumentList_, id );
 
     while ( eachObject_ )
     {
@@ -27,12 +27,12 @@
             return nil;
         }
 
-        eachObject_ = va_arg( argument_list_, id );
+        eachObject_ = va_arg( argumentList_, id );
     }
 
-    va_start( argument_list_, format_ );
+    va_start(  argumentList_, format_ );
     return [ [ NSString alloc ] initWithFormat: format_ 
-                                     arguments: argument_list_ ] ;
+                                     arguments:  argumentList_ ] ;
 }
 
 @end

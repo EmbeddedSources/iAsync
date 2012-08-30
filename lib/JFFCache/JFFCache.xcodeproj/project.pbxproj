@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B2A4AA815EF6921004ABB2E /* NSString+CacheFSManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2A4AA615EF6921004ABB2E /* NSString+CacheFSManager.h */; };
+		1B2A4AA915EF6921004ABB2E /* NSString+CacheFSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A4AA715EF6921004ABB2E /* NSString+CacheFSManager.m */; };
 		1BDA4D5E1450044700DCEDDE /* NSObject+CompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D4D1450044700DCEDDE /* NSObject+CompositeKey.h */; };
 		1BDA4D5F1450044700DCEDDE /* NSObject+CompositeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D4E1450044700DCEDDE /* NSObject+CompositeKey.m */; };
 		1BDA4D601450044700DCEDDE /* NSString+CompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D4F1450044700DCEDDE /* NSString+CompositeKey.h */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		1B1C0B88152D8EB700ECF555 /* JFFCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFCache.h; sourceTree = SOURCE_ROOT; };
+		1B2A4AA615EF6921004ABB2E /* NSString+CacheFSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CacheFSManager.h"; sourceTree = "<group>"; };
+		1B2A4AA715EF6921004ABB2E /* NSString+CacheFSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CacheFSManager.m"; sourceTree = "<group>"; };
 		1BDA4D4D1450044700DCEDDE /* NSObject+CompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CompositeKey.h"; sourceTree = "<group>"; };
 		1BDA4D4E1450044700DCEDDE /* NSObject+CompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CompositeKey.m"; sourceTree = "<group>"; };
 		1BDA4D4F1450044700DCEDDE /* NSString+CompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CompositeKey.h"; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 				1BDA4D4E1450044700DCEDDE /* NSObject+CompositeKey.m */,
 				1BDA4D4F1450044700DCEDDE /* NSString+CompositeKey.h */,
 				1BDA4D501450044700DCEDDE /* NSString+CompositeKey.m */,
+				1B2A4AA615EF6921004ABB2E /* NSString+CacheFSManager.h */,
+				1B2A4AA715EF6921004ABB2E /* NSString+CacheFSManager.m */,
 			);
 			path = Details;
 			sourceTree = SOURCE_ROOT;
@@ -146,6 +152,7 @@
 				1BDA4D691450044700DCEDDE /* JFFDBInfo.h in Headers */,
 				1BDA4D6B1450044700DCEDDE /* JFFDBManager.h in Headers */,
 				1BDA4D6D1450044700DCEDDE /* JFFThumbnailStorage.h in Headers */,
+				1B2A4AA815EF6921004ABB2E /* NSString+CacheFSManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +214,7 @@
 				1BDA4D6A1450044700DCEDDE /* JFFDBInfo.m in Sources */,
 				1BDA4D6C1450044700DCEDDE /* JFFDBManager.m in Sources */,
 				1BDA4D6E1450044700DCEDDE /* JFFThumbnailStorage.m in Sources */,
+				1B2A4AA915EF6921004ABB2E /* NSString+CacheFSManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
