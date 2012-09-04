@@ -25,7 +25,7 @@
 
     if ( self )
     {
-        _params = params_;
+        self->_params = params_;
     }
 
     return self;
@@ -35,12 +35,12 @@
 #pragma mark Factory
 -(id< JNUrlConnection >)createFastConnection
 {
-    return [ [ JFFURLConnection alloc] initWithURLConnectionParams: _params ];
+    return [ [ JFFURLConnection alloc] initWithURLConnectionParams: self->_params ];
 }
 
 -(id< JNUrlConnection >)createStandardConnection
 {
-    return [ [ JNNsUrlConnection alloc ] initWithURLConnectionParams: _params ];
+    return [ [ JNNsUrlConnection alloc ] initWithURLConnectionParams: self->_params ];
 }
 
 @end

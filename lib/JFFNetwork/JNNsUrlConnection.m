@@ -7,7 +7,6 @@
 
 #define NSURLConnectionDoesNotWorkWithLocalFiles
 
-
 @implementation JNNsUrlConnection
 {
     NSURLConnection* _nativeConnection;
@@ -22,15 +21,20 @@
 
     if ( self )
     {
-        _params = params_;
+        self->_params = params_;
 
-        NSMutableURLRequest* request_ = [ NSMutableURLRequest mutableURLRequestWithParams: params_ ];
+#ifdef NSURLConnectionDoesNotWorkWithLocalFiles
+        if ( ![ self->_params.url isFileURL ] )
+#endif
+        {
+            NSMutableURLRequest* request_ = [ NSMutableURLRequest mutableURLRequestWithParams: params_ ];
 
-        NSURLConnection* nativeConnection_ = [ [ NSURLConnection alloc ] initWithRequest: request_
-                                                                                delegate: self
-                                                                        startImmediately: NO ];
+            NSURLConnection* nativeConnection_ = [ [ NSURLConnection alloc ] initWithRequest: request_
+                                                                                    delegate: self
+                                                                            startImmediately: NO ];
 
-        _nativeConnection = nativeConnection_;
+            self->_nativeConnection = nativeConnection_;
+        }
     }
 
     return self;
@@ -42,9 +46,9 @@
     NSError* error_;
     //STODO read file in separate thread
     //STODO read big files by chunks
-    NSData* data_ = [ NSData dataWithContentsOfFile: path_
-                                            options: 0
-                                              error: &error_ ];
+    NSData* data_ = [ [ NSData alloc ] initWithContentsOfFile: path_
+                                                      options: 0
+                                                        error: &error_ ];
     if ( error_ )
     {
         [ self connection: self->_nativeConnection
@@ -86,7 +90,7 @@
 -(void)cancel
 {
     [ self clearCallbacks ];
-    [ _nativeConnection cancel ];
+    [ self->_nativeConnection cancel ];
 }
 
 #pragma mark -

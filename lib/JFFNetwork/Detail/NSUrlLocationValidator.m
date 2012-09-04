@@ -26,7 +26,7 @@
 
 +(BOOL)isLocationValidURL:( NSString* )location_
 {
-    NSURL* url_ =  [ NSURL URLWithString: location_ ];
+    NSURL* url_ = [ [ NSURL alloc ] initWithString: location_ ];
     return ( nil != url_ );
 }
 

@@ -95,8 +95,8 @@ static void readStreamCallback( CFReadStreamRef stream_
 
     if ( self )
     {
-        _params = params_;
-        _cookiesStorage = _params.cookiesStorage ?: [ NSHTTPCookieStorage sharedHTTPCookieStorage ];
+        self->_params = params_;
+        self->_cookiesStorage = self->_params.cookiesStorage ?: [ NSHTTPCookieStorage sharedHTTPCookieStorage ];
     }
 
     return self;
@@ -104,13 +104,13 @@ static void readStreamCallback( CFReadStreamRef stream_
 
 -(void)start
 {
-    [ self startConnectionWithPostData: _params.httpBody
-                               headers: _params.headers ];
+    [ self startConnectionWithPostData: self->_params.httpBody
+                               headers: self->_params.headers ];
 }
 
 -(void)applyCookiesForHTTPRequest:( CFHTTPMessageRef )httpRequest_
 {
-    NSArray* availableCookies_ = [ _cookiesStorage cookiesForURL: _params.url ];
+    NSArray* availableCookies_ = [ _cookiesStorage cookiesForURL: self->_params.url ];
 
     NSDictionary* headers_ = [ NSHTTPCookie requestHeaderFieldsWithCookies: availableCookies_ ];
 
@@ -128,15 +128,15 @@ static void readStreamCallback( CFReadStreamRef stream_
 -(void)startConnectionWithPostData:( NSData* )data_
                            headers:( NSDictionary* )headers_
 {
-    CFStringRef method_ = (__bridge  CFStringRef) (_params.httpMethod ?: @"GET");
-    if ( !_params.httpMethod && data_ )
+    CFStringRef method_ = (__bridge  CFStringRef) (self->_params.httpMethod ?: @"GET");
+    if ( !self->_params.httpMethod && data_ )
     {
         method_ = (CFStringRef) @"POST";
     }
 
     CFHTTPMessageRef httpRequest_ = CFHTTPMessageCreateRequest( NULL
                                                                , method_
-                                                               , (__bridge CFURLRef)_params.url
+                                                               , (__bridge CFURLRef)self->_params.url
                                                                , kCFHTTPVersion1_1 );
 
     [ self applyCookiesForHTTPRequest: httpRequest_ ];
@@ -157,11 +157,11 @@ static void readStreamCallback( CFReadStreamRef stream_
     //   CFReadStreamCreateForStreamedHTTPRequest( CFAllocatorRef alloc,
     //                                             CFHTTPMessageRef requestHeaders,
     //                                             CFReadStreamRef	requestBody )
-    _readStream = CFReadStreamCreateForHTTPRequest( NULL, httpRequest_ );
+    self->_readStream = CFReadStreamCreateForHTTPRequest( NULL, httpRequest_ );
     CFRelease( httpRequest_ );
 
     //Prefer using keep-alive packages
-    Boolean keepAliveSetResult_ = CFReadStreamSetProperty( _readStream
+    Boolean keepAliveSetResult_ = CFReadStreamSetProperty( self->_readStream
                                                           , kCFStreamPropertyHTTPAttemptPersistentConnection
                                                           , kCFBooleanTrue );
     if ( FALSE == keepAliveSetResult_ )
@@ -180,24 +180,24 @@ static void readStreamCallback( CFReadStreamRef stream_
 
     CFOptionFlags registered_events_ = kCFStreamEventHasBytesAvailable
         | kCFStreamEventErrorOccurred | kCFStreamEventEndEncountered;
-    if ( CFReadStreamSetClient( _readStream, registered_events_, readStreamCallback, &streamContext_ ) )
+    if ( CFReadStreamSetClient( self->_readStream, registered_events_, readStreamCallback, &streamContext_ ) )
     {
-        CFReadStreamScheduleWithRunLoop( _readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
+        CFReadStreamScheduleWithRunLoop( self->_readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
     }
 
-    CFReadStreamOpen( _readStream );
+    CFReadStreamOpen( self->_readStream );
 }
 
 -(void)closeReadStream
 {
-    if ( _readStream )
+    if ( self->_readStream )
     {
-        CFReadStreamUnscheduleFromRunLoop( _readStream
+        CFReadStreamUnscheduleFromRunLoop( self->_readStream
                                           , CFRunLoopGetCurrent()
                                           , kCFRunLoopCommonModes );
-        CFReadStreamClose( _readStream );
-        CFRelease( _readStream );
-        _readStream = nil;
+        CFReadStreamClose( self->_readStream );
+        CFRelease( self->_readStream );
+        self->_readStream = nil;
     }
 }
 
@@ -255,7 +255,7 @@ static void readStreamCallback( CFReadStreamRef stream_
 -(void)acceptCookiesForHeaders:( NSDictionary* )headers_
 {
     NSArray* cookies_ = [ NSHTTPCookie cookiesWithResponseHeaderFields: headers_
-                                                                forURL: _params.url ];
+                                                                forURL: self->_params.url ];
 
     for ( NSHTTPCookie* cookie_ in cookies_ )
     {
@@ -293,16 +293,23 @@ static void readStreamCallback( CFReadStreamRef stream_
         NSDebugLog( @"JConnection - creating URL..." );
         NSDebugLog( @"%@", self->_params.url );
         NSString* location_ = allHeadersDict_[ @"Location" ];
-        if ( ![ NSUrlLocationValidator isValidLocation: location_ ] )
+        if ( [ NSUrlLocationValidator isLocationValidURL: location_ ] )
         {
-            NSLog( @"[!!!WARNING!!!] JConnection : path for URL is invalid. Ignoring..." );
-            location_ = @"/";
+            self->_params.url = [ [ NSURL alloc ] initWithString: location_ ];
+        }
+        else
+        {
+            //??? corect logic here? JTODO test
+            if ( ![ NSUrlLocationValidator isValidLocation: location_ ] )
+            {
+                NSLog( @"[!!!WARNING!!!] JConnection : redirect location for URL is invalid. Ignoring..." );
+                location_ = @"/";
+            }
+            self->_params.url = [ [ NSURL alloc ] initWithScheme: self->_params.url.scheme
+                                                            host: self->_params.url.host
+                                                            path: location_ ];
         }
 
-        DDURLBuilder* urlBuilder_ = [ DDURLBuilder URLBuilderWithURL: self->_params.url ];
-        urlBuilder_.path = location_;
-        
-        self->_params.url = [ urlBuilder_ URL ];
         NSDebugLog( @"%@", self->_params.url );
         NSDebugLog( @"Done." );
 
