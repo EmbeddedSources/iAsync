@@ -5,8 +5,6 @@ static const NSTimeInterval TIMEOUT = 10.f;
 @interface InvalidPathForJConnectionTest : GHAsyncTestCase< NSURLConnectionDelegate >
 @end
 
-
-
 @implementation InvalidPathForJConnectionTest
 
 -(void)setUp
