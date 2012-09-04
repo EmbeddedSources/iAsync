@@ -2,10 +2,10 @@
 
 @implementation JFFAsyncOperationProgressBlockHolder
 
--(void)performProgressBlockWithArgument:( id )progress_info_
+-(void)performProgressBlockWithArgument:( id )progressInfo_
 {
     if ( self.progressBlock )
-        self.progressBlock( progress_info_ );
+        self.progressBlock( progressInfo_ );
 }
 
 @end
