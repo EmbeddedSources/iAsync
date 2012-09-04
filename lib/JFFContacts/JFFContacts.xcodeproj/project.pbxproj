@@ -1,0 +1,595 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE29B80C15F60083000A05B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80B15F60083000A05B8 /* Foundation.framework */; };
+		CE29B81115F60083000A05B8 /* JFFContacts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE29B81015F60083000A05B8 /* JFFContacts.h */; };
+		CE29B81B15F60084000A05B8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B81A15F60084000A05B8 /* SenTestingKit.framework */; };
+		CE29B81D15F60084000A05B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B81C15F60084000A05B8 /* UIKit.framework */; };
+		CE29B81E15F60084000A05B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80B15F60083000A05B8 /* Foundation.framework */; };
+		CE29B82115F60084000A05B8 /* libJFFContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80815F60083000A05B8 /* libJFFContacts.a */; };
+		CE29B82715F60084000A05B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE29B82515F60084000A05B8 /* InfoPlist.strings */; };
+		CE29B82A15F60084000A05B8 /* JFFContactsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B82915F60084000A05B8 /* JFFContactsTests.m */; };
+		CE29B84D15F6015B000A05B8 /* JFFAddressBookFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE29B83D15F6015A000A05B8 /* JFFAddressBookFactory.mm */; };
+		CE29B84E15F6015B000A05B8 /* JFFContact.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B83F15F6015A000A05B8 /* JFFContact.m */; };
+		CE29B85715F60213000A05B8 /* NSArray+kABMultiValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B85615F60213000A05B8 /* NSArray+kABMultiValue.m */; };
+		CE91A95D15F61716002B220B /* JFFContactFieldsKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91A95C15F61716002B220B /* JFFContactFieldsKeys.m */; };
+		CE91A9EB15F62F25002B220B /* JFFContactField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91A9EA15F62F25002B220B /* JFFContactField.m */; };
+		CE91A9EF15F62FB4002B220B /* JFFContactDateField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91A9EE15F62FB4002B220B /* JFFContactDateField.m */; };
+		CE91A9F215F62FED002B220B /* JFFContactDictionaryArrayField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91A9F115F62FED002B220B /* JFFContactDictionaryArrayField.m */; };
+		CE91A9F515F63062002B220B /* JFFContactEmailsField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91A9F415F63062002B220B /* JFFContactEmailsField.m */; };
+		CE91A9F815F6307D002B220B /* JFFContactPhotoField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91A9F715F6307D002B220B /* JFFContactPhotoField.m */; };
+		CE91A9FB15F63098002B220B /* JFFContactStringArrayField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91A9FA15F63096002B220B /* JFFContactStringArrayField.m */; };
+		CE91A9FE15F630C2002B220B /* JFFContactStringField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91A9FD15F630C2002B220B /* JFFContactStringField.m */; };
+		CE91AA0115F63107002B220B /* JFFAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91AA0015F63107002B220B /* JFFAddressBook.m */; };
+		CE91AA0715F64ABF002B220B /* NSArray+ContactsDataFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91AA0615F64ABE002B220B /* NSArray+ContactsDataFilters.m */; };
+		CE91AA0B15F64C55002B220B /* JFFAsyncContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91AA0A15F64C55002B220B /* JFFAsyncContacts.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE29B81F15F60084000A05B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE29B7FF15F60083000A05B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE29B80715F60083000A05B8;
+			remoteInfo = JFFContacts;
+		};
+		CE29B86215F60330000A05B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+		CE29B86415F60330000A05B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802A5B148BF2930040A93A;
+			remoteInfo = JFFUtilsMacOS;
+		};
+		CE29B86615F60330000A05B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391044314A88C04007315A3;
+			remoteInfo = "JFFUtils-clang";
+		};
+		CE29B86815F60330000A05B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E57F42414F93738002D139B;
+			remoteInfo = JFFUtilsFW;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE29B80615F60083000A05B8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				CE29B81115F60083000A05B8 /* JFFContacts.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CE29B80815F60083000A05B8 /* libJFFContacts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFContacts.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE29B80B15F60083000A05B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE29B80F15F60083000A05B8 /* JFFContacts-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFContacts-Prefix.pch"; sourceTree = "<group>"; };
+		CE29B81015F60083000A05B8 /* JFFContacts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFContacts.h; sourceTree = "<group>"; };
+		CE29B81915F60084000A05B8 /* JFFContactsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFContactsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE29B81A15F60084000A05B8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		CE29B81C15F60084000A05B8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		CE29B82415F60084000A05B8 /* JFFContactsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFContactsTests-Info.plist"; sourceTree = "<group>"; };
+		CE29B82615F60084000A05B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE29B82815F60084000A05B8 /* JFFContactsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFContactsTests.h; sourceTree = "<group>"; };
+		CE29B82915F60084000A05B8 /* JFFContactsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFFContactsTests.m; sourceTree = "<group>"; };
+		CE29B83C15F60159000A05B8 /* JFFAddressBookFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBookFactory.h; sourceTree = "<group>"; };
+		CE29B83D15F6015A000A05B8 /* JFFAddressBookFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFAddressBookFactory.mm; sourceTree = "<group>"; };
+		CE29B83E15F6015A000A05B8 /* JFFContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContact.h; sourceTree = "<group>"; };
+		CE29B83F15F6015A000A05B8 /* JFFContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFContact.m; sourceTree = "<group>"; };
+		CE29B85515F60213000A05B8 /* NSArray+kABMultiValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+kABMultiValue.h"; sourceTree = "<group>"; };
+		CE29B85615F60213000A05B8 /* NSArray+kABMultiValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+kABMultiValue.m"; sourceTree = "<group>"; };
+		CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
+		CE91A95B15F61716002B220B /* JFFContactFieldsKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContactFieldsKeys.h; sourceTree = "<group>"; };
+		CE91A95C15F61716002B220B /* JFFContactFieldsKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFContactFieldsKeys.m; sourceTree = "<group>"; };
+		CE91A9E915F62F25002B220B /* JFFContactField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContactField.h; sourceTree = "<group>"; };
+		CE91A9EA15F62F25002B220B /* JFFContactField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFContactField.m; sourceTree = "<group>"; };
+		CE91A9ED15F62FB4002B220B /* JFFContactDateField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContactDateField.h; sourceTree = "<group>"; };
+		CE91A9EE15F62FB4002B220B /* JFFContactDateField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFContactDateField.m; sourceTree = "<group>"; };
+		CE91A9F015F62FED002B220B /* JFFContactDictionaryArrayField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContactDictionaryArrayField.h; sourceTree = "<group>"; };
+		CE91A9F115F62FED002B220B /* JFFContactDictionaryArrayField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFContactDictionaryArrayField.m; sourceTree = "<group>"; };
+		CE91A9F315F63061002B220B /* JFFContactEmailsField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContactEmailsField.h; sourceTree = "<group>"; };
+		CE91A9F415F63062002B220B /* JFFContactEmailsField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFContactEmailsField.m; sourceTree = "<group>"; };
+		CE91A9F615F6307D002B220B /* JFFContactPhotoField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContactPhotoField.h; sourceTree = "<group>"; };
+		CE91A9F715F6307D002B220B /* JFFContactPhotoField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFContactPhotoField.m; sourceTree = "<group>"; };
+		CE91A9F915F63095002B220B /* JFFContactStringArrayField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContactStringArrayField.h; sourceTree = "<group>"; };
+		CE91A9FA15F63096002B220B /* JFFContactStringArrayField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFContactStringArrayField.m; sourceTree = "<group>"; };
+		CE91A9FC15F630C2002B220B /* JFFContactStringField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContactStringField.h; sourceTree = "<group>"; };
+		CE91A9FD15F630C2002B220B /* JFFContactStringField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFContactStringField.m; sourceTree = "<group>"; };
+		CE91A9FF15F63107002B220B /* JFFAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBook.h; sourceTree = "<group>"; };
+		CE91AA0015F63107002B220B /* JFFAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAddressBook.m; sourceTree = "<group>"; };
+		CE91AA0515F64ABE002B220B /* NSArray+ContactsDataFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ContactsDataFilters.h"; sourceTree = "<group>"; };
+		CE91AA0615F64ABE002B220B /* NSArray+ContactsDataFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ContactsDataFilters.m"; sourceTree = "<group>"; };
+		CE91AA0915F64C55002B220B /* JFFAsyncContacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncContacts.h; sourceTree = "<group>"; };
+		CE91AA0A15F64C55002B220B /* JFFAsyncContacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncContacts.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE29B80515F60083000A05B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE29B80C15F60083000A05B8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE29B81515F60084000A05B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE29B81B15F60084000A05B8 /* SenTestingKit.framework in Frameworks */,
+				CE29B81D15F60084000A05B8 /* UIKit.framework in Frameworks */,
+				CE29B81E15F60084000A05B8 /* Foundation.framework in Frameworks */,
+				CE29B82115F60084000A05B8 /* libJFFContacts.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE29B7FD15F60083000A05B8 = {
+			isa = PBXGroup;
+			children = (
+				CE29B80D15F60083000A05B8 /* JFFContacts */,
+				CE29B82215F60084000A05B8 /* JFFContactsTests */,
+				CE29B80A15F60083000A05B8 /* Frameworks */,
+				CE29B80915F60083000A05B8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE29B80915F60083000A05B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE29B80815F60083000A05B8 /* libJFFContacts.a */,
+				CE29B81915F60084000A05B8 /* JFFContactsTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE29B80A15F60083000A05B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */,
+				CE29B80B15F60083000A05B8 /* Foundation.framework */,
+				CE29B81A15F60084000A05B8 /* SenTestingKit.framework */,
+				CE29B81C15F60084000A05B8 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE29B80D15F60083000A05B8 /* JFFContacts */ = {
+			isa = PBXGroup;
+			children = (
+				CE29B83315F6009B000A05B8 /* Details */,
+				CE29B81015F60083000A05B8 /* JFFContacts.h */,
+				CE91A95B15F61716002B220B /* JFFContactFieldsKeys.h */,
+				CE91A95C15F61716002B220B /* JFFContactFieldsKeys.m */,
+				CE29B83C15F60159000A05B8 /* JFFAddressBookFactory.h */,
+				CE29B83D15F6015A000A05B8 /* JFFAddressBookFactory.mm */,
+				CE29B83E15F6015A000A05B8 /* JFFContact.h */,
+				CE29B83F15F6015A000A05B8 /* JFFContact.m */,
+				CE91A9FF15F63107002B220B /* JFFAddressBook.h */,
+				CE91AA0015F63107002B220B /* JFFAddressBook.m */,
+				CE91AA0815F64C3C002B220B /* Async */,
+				CE29B80E15F60083000A05B8 /* Supporting Files */,
+			);
+			path = JFFContacts;
+			sourceTree = "<group>";
+		};
+		CE29B80E15F60083000A05B8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE29B80F15F60083000A05B8 /* JFFContacts-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE29B82215F60084000A05B8 /* JFFContactsTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE29B82815F60084000A05B8 /* JFFContactsTests.h */,
+				CE29B82915F60084000A05B8 /* JFFContactsTests.m */,
+				CE29B82315F60084000A05B8 /* Supporting Files */,
+			);
+			path = JFFContactsTests;
+			sourceTree = "<group>";
+		};
+		CE29B82315F60084000A05B8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE29B82415F60084000A05B8 /* JFFContactsTests-Info.plist */,
+				CE29B82515F60084000A05B8 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE29B83315F6009B000A05B8 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				CE91AA0515F64ABE002B220B /* NSArray+ContactsDataFilters.h */,
+				CE91AA0615F64ABE002B220B /* NSArray+ContactsDataFilters.m */,
+				CE29B85515F60213000A05B8 /* NSArray+kABMultiValue.h */,
+				CE29B85615F60213000A05B8 /* NSArray+kABMultiValue.m */,
+				CE91A9E915F62F25002B220B /* JFFContactField.h */,
+				CE91A9EA15F62F25002B220B /* JFFContactField.m */,
+				CE91A9ED15F62FB4002B220B /* JFFContactDateField.h */,
+				CE91A9EE15F62FB4002B220B /* JFFContactDateField.m */,
+				CE91A9F015F62FED002B220B /* JFFContactDictionaryArrayField.h */,
+				CE91A9F115F62FED002B220B /* JFFContactDictionaryArrayField.m */,
+				CE91A9F315F63061002B220B /* JFFContactEmailsField.h */,
+				CE91A9F415F63062002B220B /* JFFContactEmailsField.m */,
+				CE91A9F615F6307D002B220B /* JFFContactPhotoField.h */,
+				CE91A9F715F6307D002B220B /* JFFContactPhotoField.m */,
+				CE91A9F915F63095002B220B /* JFFContactStringArrayField.h */,
+				CE91A9FA15F63096002B220B /* JFFContactStringArrayField.m */,
+				CE91A9FC15F630C2002B220B /* JFFContactStringField.h */,
+				CE91A9FD15F630C2002B220B /* JFFContactStringField.m */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		CE29B85915F60330000A05B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE29B86315F60330000A05B8 /* libJFFUtils.a */,
+				CE29B86515F60330000A05B8 /* libJFFUtilsMacOS.a */,
+				CE29B86715F60330000A05B8 /* libJFFUtils-clang.a */,
+				CE29B86915F60330000A05B8 /* JFFUtilsFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE91AA0815F64C3C002B220B /* Async */ = {
+			isa = PBXGroup;
+			children = (
+				CE91AA0915F64C55002B220B /* JFFAsyncContacts.h */,
+				CE91AA0A15F64C55002B220B /* JFFAsyncContacts.m */,
+			);
+			path = Async;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE29B80715F60083000A05B8 /* JFFContacts */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE29B82D15F60084000A05B8 /* Build configuration list for PBXNativeTarget "JFFContacts" */;
+			buildPhases = (
+				CE29B80415F60083000A05B8 /* Sources */,
+				CE29B80515F60083000A05B8 /* Frameworks */,
+				CE29B80615F60083000A05B8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JFFContacts;
+			productName = JFFContacts;
+			productReference = CE29B80815F60083000A05B8 /* libJFFContacts.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		CE29B81815F60084000A05B8 /* JFFContactsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE29B83015F60084000A05B8 /* Build configuration list for PBXNativeTarget "JFFContactsTests" */;
+			buildPhases = (
+				CE29B81415F60084000A05B8 /* Sources */,
+				CE29B81515F60084000A05B8 /* Frameworks */,
+				CE29B81615F60084000A05B8 /* Resources */,
+				CE29B81715F60084000A05B8 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE29B82015F60084000A05B8 /* PBXTargetDependency */,
+			);
+			name = JFFContactsTests;
+			productName = JFFContactsTests;
+			productReference = CE29B81915F60084000A05B8 /* JFFContactsTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE29B7FF15F60083000A05B8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = EmbeddedSources;
+			};
+			buildConfigurationList = CE29B80215F60083000A05B8 /* Build configuration list for PBXProject "JFFContacts" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CE29B7FD15F60083000A05B8;
+			productRefGroup = CE29B80915F60083000A05B8 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CE29B85915F60330000A05B8 /* Products */;
+					ProjectRef = CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				CE29B80715F60083000A05B8 /* JFFContacts */,
+				CE29B81815F60084000A05B8 /* JFFContactsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CE29B86315F60330000A05B8 /* libJFFUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtils.a;
+			remoteRef = CE29B86215F60330000A05B8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE29B86515F60330000A05B8 /* libJFFUtilsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtilsMacOS.a;
+			remoteRef = CE29B86415F60330000A05B8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE29B86715F60330000A05B8 /* libJFFUtils-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFUtils-clang.a";
+			remoteRef = CE29B86615F60330000A05B8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE29B86915F60330000A05B8 /* JFFUtilsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFUtilsFW.framework;
+			remoteRef = CE29B86815F60330000A05B8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE29B81615F60084000A05B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE29B82715F60084000A05B8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CE29B81715F60084000A05B8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE29B80415F60083000A05B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE29B84D15F6015B000A05B8 /* JFFAddressBookFactory.mm in Sources */,
+				CE29B84E15F6015B000A05B8 /* JFFContact.m in Sources */,
+				CE29B85715F60213000A05B8 /* NSArray+kABMultiValue.m in Sources */,
+				CE91A95D15F61716002B220B /* JFFContactFieldsKeys.m in Sources */,
+				CE91A9EB15F62F25002B220B /* JFFContactField.m in Sources */,
+				CE91A9EF15F62FB4002B220B /* JFFContactDateField.m in Sources */,
+				CE91A9F215F62FED002B220B /* JFFContactDictionaryArrayField.m in Sources */,
+				CE91A9F515F63062002B220B /* JFFContactEmailsField.m in Sources */,
+				CE91A9F815F6307D002B220B /* JFFContactPhotoField.m in Sources */,
+				CE91A9FB15F63098002B220B /* JFFContactStringArrayField.m in Sources */,
+				CE91A9FE15F630C2002B220B /* JFFContactStringField.m in Sources */,
+				CE91AA0115F63107002B220B /* JFFAddressBook.m in Sources */,
+				CE91AA0715F64ABF002B220B /* NSArray+ContactsDataFilters.m in Sources */,
+				CE91AA0B15F64C55002B220B /* JFFAsyncContacts.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE29B81415F60084000A05B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE29B82A15F60084000A05B8 /* JFFContactsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE29B82015F60084000A05B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE29B80715F60083000A05B8 /* JFFContacts */;
+			targetProxy = CE29B81F15F60084000A05B8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CE29B82515F60084000A05B8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE29B82615F60084000A05B8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE29B82B15F60084000A05B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../,
+					.,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CE29B82C15F60084000A05B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../,
+					.,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE29B82E15F60084000A05B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/JFFContacts.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFContacts/JFFContacts-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CE29B82F15F60084000A05B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/JFFContacts.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFContacts/JFFContacts-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		CE29B83115F60084000A05B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFContacts/JFFContacts-Prefix.pch";
+				INFOPLIST_FILE = "JFFContactsTests/JFFContactsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		CE29B83215F60084000A05B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFContacts/JFFContacts-Prefix.pch";
+				INFOPLIST_FILE = "JFFContactsTests/JFFContactsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE29B80215F60083000A05B8 /* Build configuration list for PBXProject "JFFContacts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE29B82B15F60084000A05B8 /* Debug */,
+				CE29B82C15F60084000A05B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE29B82D15F60084000A05B8 /* Build configuration list for PBXNativeTarget "JFFContacts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE29B82E15F60084000A05B8 /* Debug */,
+				CE29B82F15F60084000A05B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE29B83015F60084000A05B8 /* Build configuration list for PBXNativeTarget "JFFContactsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE29B83115F60084000A05B8 /* Debug */,
+				CE29B83215F60084000A05B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE29B7FF15F60083000A05B8 /* Project object */;
+}

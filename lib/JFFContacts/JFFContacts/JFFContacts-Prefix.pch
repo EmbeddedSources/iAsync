@@ -1,0 +1,9 @@
+//
+// Prefix header for all source files of the 'JFFContacts' target in the 'JFFContacts' project
+//
+
+#ifdef __OBJC__
+    #import <JFFUtils/JFFUtils.h>
+
+    #import <Foundation/Foundation.h>
+#endif
