@@ -53,4 +53,22 @@
                                                  step: [ string_ length ] ];
 }
 
+-(BOOL)containsString:( NSString* )string_
+{
+    NSRange range_ = [ self rangeOfString: string_
+                                  options: NSLiteralSearch
+                                    range: (NSRange){ 0, [ self length ] } ];
+
+    return range_.location != NSNotFound;
+}
+
+-(BOOL)caseInsensitiveContainsString:( NSString* )string_
+{
+    NSRange range_ = [ self rangeOfString: string_
+                                  options: NSCaseInsensitiveSearch
+                                    range: (NSRange){ 0, [ self length ] } ];
+
+    return range_.location != NSNotFound;
+}
+
 @end

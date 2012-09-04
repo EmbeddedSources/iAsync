@@ -5,4 +5,7 @@
 -(NSUInteger)numberOfCharacterFromString:( NSString* )string_;
 -(NSUInteger)numberOfStringsFromString:( NSString* )string_;
 
+-(BOOL)containsString:( NSString* )string_;
+-(BOOL)caseInsensitiveContainsString:( NSString* )string_;
+
 @end
