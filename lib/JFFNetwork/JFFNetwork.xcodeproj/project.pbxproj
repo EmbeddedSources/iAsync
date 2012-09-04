@@ -147,14 +147,6 @@
 		65F47AD01539A3BE00D8C865 /* NSURL+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F47ACE1539A3BE00D8C865 /* NSURL+XQueryComponents.m */; };
 		65F47AD31539A3FF00D8C865 /* NSDictionary+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F47AD11539A3FE00D8C865 /* NSDictionary+XQueryComponents.h */; };
 		65F47AD41539A3FF00D8C865 /* NSDictionary+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F47AD21539A3FF00D8C865 /* NSDictionary+XQueryComponents.m */; };
-		7E6AF966157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */; };
-		7E6AF967157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */; };
-		7E6AF968157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */; };
-		7E6AF969157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */; };
-		7E6AF96A157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */; };
-		7E6AF96B157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */; };
-		7E6AF96C157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */; };
-		7E6AF96D157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */; };
 		7E8F204414F9494300588C7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5AE6DE13F3E6C600EB6143 /* Foundation.framework */; };
 		7E8F204A14F9494300588C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E8F204814F9494300588C7D /* InfoPlist.strings */; };
 		7E8F205014F949A000588C7D /* JNConnectionsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF9414449AF5005D745F /* JNConnectionsFactory.m */; };
@@ -217,6 +209,11 @@
 		8DD71E9913F54AE7004C90A9 /* JFFDownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD71E9813F54AE7004C90A9 /* JFFDownloadItem.m */; };
 		8DD71E9C13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD71E9A13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.h */; };
 		8DD71E9D13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD71E9B13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.m */; };
+		CE29B5E215F5E821000A05B8 /* NSURL+URLWithLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = CE29B5E015F5E821000A05B8 /* NSURL+URLWithLocation.h */; };
+		CE29B5E315F5E821000A05B8 /* NSURL+URLWithLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */; };
+		CE29B5E415F5E823000A05B8 /* NSURL+URLWithLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */; };
+		CE29B5E515F5E823000A05B8 /* NSURL+URLWithLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */; };
+		CE29B5E615F5E824000A05B8 /* NSURL+URLWithLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,8 +288,6 @@
 		65F47ACE1539A3BE00D8C865 /* NSURL+XQueryComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+XQueryComponents.m"; sourceTree = "<group>"; };
 		65F47AD11539A3FE00D8C865 /* NSDictionary+XQueryComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+XQueryComponents.h"; sourceTree = "<group>"; };
 		65F47AD21539A3FF00D8C865 /* NSDictionary+XQueryComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+XQueryComponents.m"; sourceTree = "<group>"; };
-		7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUrlLocationValidator.h; sourceTree = "<group>"; };
-		7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUrlLocationValidator.m; sourceTree = "<group>"; };
 		7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DDUrlBuilder.xcodeproj; path = "../../../davedelong-Demos/DDURLBuilder/DDUrlBuilder/DDUrlBuilder.xcodeproj"; sourceTree = "<group>"; };
 		7E8F204314F9494300588C7D /* JFFNetworkFW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = JFFNetworkFW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8F204714F9494300588C7D /* JFFNetworkFW-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFNetworkFW-Info.plist"; sourceTree = "<group>"; };
@@ -320,6 +315,8 @@
 		8DD71E9813F54AE7004C90A9 /* JFFDownloadItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFFDownloadItem.m; path = DownloadManager/JFFDownloadItem.m; sourceTree = SOURCE_ROOT; };
 		8DD71E9A13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+DownloadingFileInfo.h"; sourceTree = "<group>"; };
 		8DD71E9B13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+DownloadingFileInfo.m"; sourceTree = "<group>"; };
+		CE29B5E015F5E821000A05B8 /* NSURL+URLWithLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+URLWithLocation.h"; sourceTree = "<group>"; };
+		CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URLWithLocation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -386,8 +383,8 @@
 			children = (
 				1B15CCB11535CAF4005F2B56 /* JFFAsyncOperationNetwork.h */,
 				1B15CCB21535CAF4005F2B56 /* JFFAsyncOperationNetwork.m */,
-				7E6AF964157DF98900CA8ED4 /* NSUrlLocationValidator.h */,
-				7E6AF965157DF98900CA8ED4 /* NSUrlLocationValidator.m */,
+				CE29B5E015F5E821000A05B8 /* NSURL+URLWithLocation.h */,
+				CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -637,7 +634,6 @@
 				539103AF14A88BCA007315A3 /* JNAbstractConnection.h in Headers */,
 				539103B114A88BCA007315A3 /* JNConnectionsFactory.h in Headers */,
 				539103B314A88BCA007315A3 /* NSURL+Cookies.h in Headers */,
-				7E6AF968157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -672,7 +668,6 @@
 				65802B5F148BFC8F0040A93A /* JNGzipErrorsLogger.h in Headers */,
 				65802B61148BFC930040A93A /* JNConnectionsFactory.h in Headers */,
 				65802B63148BFCB20040A93A /* JNUrlResponse.h in Headers */,
-				7E6AF967157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,7 +697,6 @@
 				7E8F20AE14F949DD00588C7D /* JNConstants.h in Headers */,
 				7E8F20AF14F949DD00588C7D /* JNUrlConnectionCallbacks.h in Headers */,
 				7E8F20B014F949DD00588C7D /* JFFNetwork.h in Headers */,
-				7E6AF969157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,7 +741,7 @@
 				1B166C931546E5AD00475B6A /* JFFLocalCookiesStorage.h in Headers */,
 				1B166C981546E65C00475B6A /* NSString+RFC_2965.h in Headers */,
 				1BE052FF1547DF5600270B58 /* NSHTTPCookie+matchesURL.h in Headers */,
-				7E6AF966157DF98900CA8ED4 /* NSUrlLocationValidator.h in Headers */,
+				CE29B5E215F5E821000A05B8 /* NSURL+URLWithLocation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -956,7 +950,7 @@
 				5391038E14A88BCA007315A3 /* JNAbstractConnection.m in Sources */,
 				5391039014A88BCA007315A3 /* JNConnectionsFactory.m in Sources */,
 				5391039214A88BCA007315A3 /* NSURL+Cookies.m in Sources */,
-				7E6AF96C157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */,
+				CE29B5E515F5E823000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,7 +976,7 @@
 				65802B5D148BFC8F0040A93A /* JNZipDecoder.m in Sources */,
 				65802B60148BFC8F0040A93A /* JNGzipErrorsLogger.m in Sources */,
 				65802B62148BFC930040A93A /* JNConnectionsFactory.m in Sources */,
-				7E6AF96B157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */,
+				CE29B5E415F5E823000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1008,7 +1002,7 @@
 				7E8F207814F949A000588C7D /* JNNsUrlConnection.m in Sources */,
 				7E8F207A14F949A000588C7D /* JFFNetworkBlocksFunctions.m in Sources */,
 				7E8F207C14F949A000588C7D /* JFFUrlResponseLogger.m in Sources */,
-				7E6AF96D157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */,
+				CE29B5E615F5E824000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1044,7 +1038,7 @@
 				1B166C941546E5AD00475B6A /* JFFLocalCookiesStorage.m in Sources */,
 				1B166C991546E65C00475B6A /* NSString+RFC_2965.m in Sources */,
 				1BE053001547DF5600270B58 /* NSHTTPCookie+matchesURL.m in Sources */,
-				7E6AF96A157DF98900CA8ED4 /* NSUrlLocationValidator.m in Sources */,
+				CE29B5E315F5E821000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 #import "JFFURLConnectionParams.h"
 #import "JFFLocalCookiesStorage.h"
 
-#import "NSUrlLocationValidator.h"
+#import "NSURL+URLWithLocation.h"
 
 //#define SHOW_DEBUG_LOGS
 #import <JFFLibrary/JDebugLog.h>
@@ -288,27 +288,22 @@ static void readStreamCallback( CFReadStreamRef stream_
     [ self acceptCookiesForHeaders: allHeadersDict_ ];
 
     //JTODO test redirects (cyclic for example)
-    if ( 302 == statusCode_ )
+    if ( ( 301 <= statusCode_ && statusCode_ <= 303 ) || 307 == statusCode_ )
     {
         NSDebugLog( @"JConnection - creating URL..." );
         NSDebugLog( @"%@", self->_params.url );
         NSString* location_ = allHeadersDict_[ @"Location" ];
-        if ( [ NSUrlLocationValidator isLocationValidURL: location_ ] )
+        if ( [ location_ hasPrefix: @"/" ] )
         {
-            self->_params.url = [ [ NSURL alloc ] initWithString: location_ ];
+            self->_params.url = [ self->_params.url URLWithLocation: location_ ];
         }
         else
         {
-            //??? corect logic here? JTODO test
-            if ( ![ NSUrlLocationValidator isValidLocation: location_ ] )
-            {
-                NSLog( @"[!!!WARNING!!!] JConnection : redirect location for URL is invalid. Ignoring..." );
-                location_ = @"/";
-            }
-            self->_params.url = [ [ NSURL alloc ] initWithScheme: self->_params.url.scheme
-                                                            host: self->_params.url.host
-                                                            path: location_ ];
+            self->_params.url = [ [ NSURL alloc ] initWithString: location_ ];
         }
+
+        if ( !self->_params.url )
+            self->_params.url = [ self->_params.url URLWithLocation: @"/" ];
 
         NSDebugLog( @"%@", self->_params.url );
         NSDebugLog( @"Done." );
