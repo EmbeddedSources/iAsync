@@ -10,7 +10,7 @@
     @autoreleasepool
     {
         JFFSimpleBlockHolder* holder_ = [ JFFSimpleBlockHolder new ];
-        //GHAssertTrue( 0 != [ JFFSimpleBlockHolder instancesCount ], @"Block holder should exists" );
+        GHAssertTrue( 0 != [ JFFSimpleBlockHolder instancesCount ], @"Block holder should exists" );
 
         __block BOOL blockContextDeallocated_ = NO;
         __block NSUInteger performBlockCount_ = 0;

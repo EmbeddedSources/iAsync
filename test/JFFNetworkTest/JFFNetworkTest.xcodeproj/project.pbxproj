@@ -44,7 +44,6 @@
 		53A33F4A141F9AA000469DAA /* 1-Incomplete.zip in Resources */ = {isa = PBXBuildFile; fileRef = 53A33F49141F9A9F00469DAA /* 1-Incomplete.zip */; };
 		65C1D70B1539BE950092F5E6 /* JFFURLConnectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C1D70A1539BE950092F5E6 /* JFFURLConnectionTest.m */; };
 		65F47AC51539A33500D8C865 /* StringFromQueryComponentsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F47AC41539A33500D8C865 /* StringFromQueryComponentsTest.m */; };
-		7E25B2F2158608C200469187 /* libDDUrlBuilder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E25B2ED158608AC00469187 /* libDDUrlBuilder.a */; };
 		7E6AF999157E038F00CA8ED4 /* UrlPathValidatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF998157E038F00CA8ED4 /* UrlPathValidatorTest.m */; };
 		7E6AF99C157E0BF100CA8ED4 /* InvalidPathForJConnectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF99B157E0BF100CA8ED4 /* InvalidPathForJConnectionTest.m */; };
 		7E6AF9A0157E105600CA8ED4 /* BadHeadersMockNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF99F157E105600CA8ED4 /* BadHeadersMockNetwork.m */; };
@@ -205,27 +204,6 @@
 			remoteGlobalIDString = 7E57F42414F93738002D139B;
 			remoteInfo = JFFUtilsFW;
 		};
-		7E25B2EC158608AC00469187 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E25B2E7158608AC00469187 /* DDUrlBuilder.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7E54C1D8157F8687007D89F1;
-			remoteInfo = DDUrlBuilder;
-		};
-		7E25B2EE158608AC00469187 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E25B2E7158608AC00469187 /* DDUrlBuilder.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7E54C1F1157F889A007D89F1;
-			remoteInfo = DDUrlBuilderTest;
-		};
-		7E25B2F0158608BA00469187 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E25B2E7158608AC00469187 /* DDUrlBuilder.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 7E54C1D7157F8687007D89F1;
-			remoteInfo = DDUrlBuilder;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -271,7 +249,6 @@
 		53A33F49141F9A9F00469DAA /* 1-Incomplete.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "1-Incomplete.zip"; sourceTree = "<group>"; };
 		65C1D70A1539BE950092F5E6 /* JFFURLConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFURLConnectionTest.m; sourceTree = "<group>"; };
 		65F47AC41539A33500D8C865 /* StringFromQueryComponentsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringFromQueryComponentsTest.m; sourceTree = "<group>"; };
-		7E25B2E7158608AC00469187 /* DDUrlBuilder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DDUrlBuilder.xcodeproj; path = "../../../davedelong-Demos/DDURLBuilder/DDUrlBuilder/DDUrlBuilder.xcodeproj"; sourceTree = "<group>"; };
 		7E6AF998157E038F00CA8ED4 /* UrlPathValidatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlPathValidatorTest.m; sourceTree = "<group>"; };
 		7E6AF99B157E0BF100CA8ED4 /* InvalidPathForJConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvalidPathForJConnectionTest.m; sourceTree = "<group>"; };
 		7E6AF99E157E105600CA8ED4 /* BadHeadersMockNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadHeadersMockNetwork.h; sourceTree = "<group>"; };
@@ -284,7 +261,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E25B2F2158608C200469187 /* libDDUrlBuilder.a in Frameworks */,
 				1BEC485C156A27270099DA6D /* libstdc++.dylib in Frameworks */,
 				1B0E89961563FAC800825E3C /* libc++.dylib in Frameworks */,
 				1B2669E615623FBD0054E183 /* libJFFTestTools.a in Frameworks */,
@@ -368,7 +344,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				7E25B2E7158608AC00469187 /* DDUrlBuilder.xcodeproj */,
 				1B2669DB15623FA80054E183 /* JFFTestTools.xcodeproj */,
 				5310BA84141F51AD00A3E2B1 /* JFFAsyncOperations.xcodeproj */,
 				5310BA87141F51AD00A3E2B1 /* JFFNetwork.xcodeproj */,
@@ -472,15 +447,6 @@
 			path = TestData;
 			sourceTree = "<group>";
 		};
-		7E25B2E8158608AC00469187 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7E25B2ED158608AC00469187 /* libDDUrlBuilder.a */,
-				7E25B2EF158608AC00469187 /* DDUrlBuilderTest.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7E6AF99D157E102C00CA8ED4 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
@@ -505,7 +471,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				7E25B2F1158608BA00469187 /* PBXTargetDependency */,
 				1B2669E515623FB90054E183 /* PBXTargetDependency */,
 				5310BB0C141F52CB00A3E2B1 /* PBXTargetDependency */,
 				5310BB0E141F52CB00A3E2B1 /* PBXTargetDependency */,
@@ -556,10 +521,6 @@
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 7E25B2E8158608AC00469187 /* Products */;
-					ProjectRef = 7E25B2E7158608AC00469187 /* DDUrlBuilder.xcodeproj */;
-				},
 				{
 					ProductGroup = 5310BA85141F51AD00A3E2B1 /* Products */;
 					ProjectRef = 5310BA84141F51AD00A3E2B1 /* JFFAsyncOperations.xcodeproj */;
@@ -702,20 +663,6 @@
 			remoteRef = 65B1F949151A8B74000A1736 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7E25B2ED158608AC00469187 /* libDDUrlBuilder.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libDDUrlBuilder.a;
-			remoteRef = 7E25B2EC158608AC00469187 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E25B2EF158608AC00469187 /* DDUrlBuilderTest.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = DDUrlBuilderTest.octest;
-			remoteRef = 7E25B2EE158608AC00469187 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -827,11 +774,6 @@
 			isa = PBXTargetDependency;
 			target = 5310BB45141F574300A3E2B1 /* JFFNetworkTestData */;
 			targetProxy = 5310BB4B141F574E00A3E2B1 /* PBXContainerItemProxy */;
-		};
-		7E25B2F1158608BA00469187 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = DDUrlBuilder;
-			targetProxy = 7E25B2F0158608BA00469187 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
