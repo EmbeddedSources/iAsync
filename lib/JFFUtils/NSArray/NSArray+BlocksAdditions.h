@@ -10,6 +10,11 @@
 +(id)arrayWithSize:( NSUInteger )size_
           producer:( JFFProducerBlock )block_;
 
+//Calls block once for number from 0(zero) to (size_ - 1)
+//Creates a new NSArray containing the values returned by the block.
++(id)arrayWithCapacity:( NSUInteger )size_
+  ignoringNilsProducer:( JFFProducerBlock )block_;
+
 //Calls block once for each element in self, passing that element as a parameter.
 -(void)each:( JFFActionBlock )block_;
 
@@ -17,18 +22,15 @@
 //Creates a new NSArray containing the values returned by the block.
 -(NSArray*)map:( JFFMappingBlock )block_;
 
-
 //Invokes block once for each element of self.
 //Creates a new NSArray containing the values returned by the block.
 //if error happens it is suppressed
 -(NSArray*)forceMap:( JFFMappingBlock )block_;
 
-
 //Invokes block once for each element of self.
 //Creates a new NSArray containing the values returned by the block.
 //or return nil if error happens
 -(NSArray*)map:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_;
--(NSArray*)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_;
 
 //Invokes block once for each element of self.
 //Creates a new NSArray containing the values returned by the block. Passes index of element in block as argument.

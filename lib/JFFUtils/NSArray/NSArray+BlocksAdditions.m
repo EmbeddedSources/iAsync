@@ -4,6 +4,34 @@
 
 @implementation NSArray (BlocksAdditions)
 
++(id)arrayWithSize:( NSUInteger )size_
+          producer:( JFFProducerBlock )block_
+{
+    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: size_ ];
+
+    for ( NSUInteger index_ = 0; index_ < size_; ++index_ )
+    {
+        [ result_ addObject: block_( index_ ) ];
+    }
+
+    return [ result_ copy ];
+}
+
++(id)arrayWithCapacity:( NSUInteger )capacity_
+  ignoringNilsProducer:( JFFProducerBlock )block_
+{
+    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: capacity_ ];
+
+    for ( NSUInteger index_ = 0; index_ < capacity_; ++index_ )
+    {
+        id object_ = block_( index_ );
+        if ( object_ )
+            [ result_ addObject: object_ ];
+    }
+
+    return [ result_ copy ];
+}
+
 -(void)each:( JFFActionBlock )block_
 {
     [ self enumerateObjectsUsingBlock: ^void( id obj_, NSUInteger idx_, BOOL* stop_ )
@@ -20,7 +48,7 @@
     } ];
 }
 
--(NSArray*)selectWithIndex:( JFFPredicateWithIndexBlock )predicate_;
+-(NSArray*)selectWithIndex:( JFFPredicateWithIndexBlock )predicate_
 {
     NSIndexSet* indexes_ = [ self indexesOfObjectsPassingTest: ^BOOL( id obj_, NSUInteger idx_, BOOL* stop_ ) 
     {
@@ -77,27 +105,6 @@
     return [ result_ copy ];
 }
 
--(NSArray*)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_
-{
-    NSParameterAssert( NULL != outError_ );
-    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
-
-    for ( id object_ in self )
-    {
-        id newObject_ = block_( object_, outError_ );
-        if ( newObject_ )
-        {
-            [ result_ addObject: newObject_ ];
-        }
-        else if ( nil != *outError_ )
-        {
-            return nil;
-        }
-    }
-
-    return [ result_ copy ];
-}
-
 -(NSArray*)mapWithIndex:( JFFMappingWithErrorAndIndexBlock )block_ error:( NSError** )outError_
 {
     __block NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
@@ -146,19 +153,6 @@
         NSArray* objectItems_ = block_( object_ );
         [ result_ addObjectsFromArray: objectItems_ ]; 
     } ];
-
-    return [ result_ copy ];
-}
-
-+(id)arrayWithSize:( NSUInteger )size_
-          producer:( JFFProducerBlock )block_
-{
-    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: size_ ];
-
-    for ( NSUInteger index_ = 0; index_ < size_; ++index_ )
-    {
-        [ result_ addObject: block_( index_ ) ];
-    }
 
     return [ result_ copy ];
 }
