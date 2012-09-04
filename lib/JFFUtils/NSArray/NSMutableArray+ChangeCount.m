@@ -2,17 +2,17 @@
 
 @implementation NSMutableArray ( ChangeCount )
 
--(void)shrinkToSize:( NSUInteger )new_size_
+-(void)shrinkToSize:( NSUInteger )newSize_
 {
     NSUInteger count_ = [ self count ];
 
-    if ( count_ <= new_size_ )
+    if ( count_ <= newSize_ )
     {
         //The size already fits
         return;
     }
 
-    NSRange range_ = { 0, new_size_ };
+    NSRange range_ = { 0, newSize_ };
     [ self setArray: [ self subarrayWithRange: range_ ] ];
 }
 

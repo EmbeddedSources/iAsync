@@ -98,6 +98,27 @@
     return [ result_ copy ];
 }
 
+-(NSArray*)mapWithIndex:( JFFMappingWithErrorAndIndexBlock )block_ error:( NSError** )outError_
+{
+    __block NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
+
+    [ self enumerateObjectsUsingBlock: ^( id object_, NSUInteger idx_, BOOL* stop_ )
+    {
+        id newObject_ = block_( object_, idx_, outError_ );
+        if ( newObject_ )
+        {
+            [ result_ addObject: newObject_ ];
+        }
+        else
+        {
+            result_ = nil;
+            *stop_ = YES;
+        }
+    } ];
+  
+    return [ result_ copy ];
+}
+
 -(NSDictionary*)mapDict:( JFFMappingDictBlock )block_
 {
     NSMutableArray* keys_   = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];

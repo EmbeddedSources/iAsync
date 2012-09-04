@@ -19,37 +19,37 @@
 
 -(void)dealloc
 {
-    JFFProxyObjectContainer* container_ = _container;
-    void (^release_listener_)( void ) = ^void( void )
+    JFFProxyObjectContainer* container_ = self->_container;
+    void (^releaseListener_)( void ) = ^void( void )
     {
         container_.target = nil;
     };
-    dispatch_async( _dispatchQueue, release_listener_ );
-    dispatch_release( _dispatchQueue );
+    dispatch_async( self->_dispatchQueue, releaseListener_ );
+    dispatch_release( self->_dispatchQueue );
 }
 
 -(id)initWithTargetFactory:( JFFObjectFactory )factory_
-             dispatchQueue:( dispatch_queue_t )dispatch_queue_
+             dispatchQueue:( dispatch_queue_t )dispatchQueue_
 {
-    _dispatchQueue = dispatch_queue_;
-    dispatch_retain( _dispatchQueue );
+    self->_dispatchQueue = dispatchQueue_;
+    dispatch_retain( self->_dispatchQueue );
 
     factory_ = [ factory_ copy ];
-    void (^release_listener_)( void ) = ^void( void )
+    void (^releaseListener_)( void ) = ^void( void )
     {
-        _container = [ JFFProxyObjectContainer new ];
-        _container.target = factory_();
+        self->_container = [ JFFProxyObjectContainer new ];
+        self->_container.target = factory_();
     };
-    dispatch_async( _dispatchQueue, release_listener_ );
+    dispatch_async( self->_dispatchQueue, releaseListener_ );
 
     return self;
 }
 
 +(id)singleThreadProxyWithTargetFactory:( JFFObjectFactory )factory_
-                          dispatchQueue:( dispatch_queue_t )dispatch_queue_
+                          dispatchQueue:( dispatch_queue_t )dispatchQueue_
 {
     return [ [ self alloc ] initWithTargetFactory: factory_
-                                    dispatchQueue: dispatch_queue_ ];
+                                    dispatchQueue: dispatchQueue_ ];
 }
 
 -(void)forwardInvocation:( NSInvocation* )invocation_
@@ -58,20 +58,20 @@
 
     void (^forward_invocation_)( void ) = ^void( void )
     {
-        if ( [ _container.target respondsToSelector: selector_ ] )
-            [ invocation_ invokeWithTarget: _container.target ];
+        if ( [ self->_container.target respondsToSelector: selector_ ] )
+            [ invocation_ invokeWithTarget: self->_container.target ];
     };
-    safe_dispatch_sync( _dispatchQueue, forward_invocation_ );
+    safe_dispatch_sync( self->_dispatchQueue, forward_invocation_ );
 }
 
 -(NSMethodSignature*)methodSignatureForSelector:( SEL )selector_
 {
     __block id resut_ = nil;
-    void (^method_signature_)( void ) = ^void( void )
+    void (^methodSignature_)( void ) = ^void( void )
     {
-        resut_ = [ _container.target methodSignatureForSelector: selector_ ];
+        resut_ = [ self->_container.target methodSignatureForSelector: selector_ ];
     };
-    safe_dispatch_sync( _dispatchQueue, method_signature_ );
+    safe_dispatch_sync( self->_dispatchQueue, methodSignature_ );
     return resut_;
 }
 
