@@ -2,27 +2,27 @@
 
 #import "NSString+XQueryComponents.h"
 
-static NSString* const queryComponentFormat_ = @"%@=%@";
-static NSString* const queryComponentSeparator_ = @"&";
+static NSString* const queryComponentFormat = @"%@=%@";
+static NSString* const queryComponentSeparator = @"&";
 
 @interface NSObject (XQueryComponents)
 
--(NSArray*)arrayOfQueryComponentsForKey:( NSString* )key_;
+- (NSArray*)arrayOfQueryComponentsForKey:(NSString *)key;
 
 @end
 
 @implementation NSObject (XQueryComponents)
 
--(NSString*)stringFromQueryComponentAndKey:( NSString* )key_
+- (NSString*)stringFromQueryComponentAndKey:( NSString* )key
 {
-    NSString* value_ = [ [ self description ] stringByEncodingURLFormat ];
-    return [ [ NSString alloc ] initWithFormat: queryComponentFormat_, key_, value_ ];
+    NSString* value = [ [ self description ] stringByEncodingURLFormat ];
+    return [ [ NSString alloc ] initWithFormat: queryComponentFormat, key, value ];
 }
 
--(NSArray*)arrayOfQueryComponentsForKey:( NSString* )key_
+- (NSArray*)arrayOfQueryComponentsForKey:(NSString *)key
 {
-    NSString* component_ = [ self stringFromQueryComponentAndKey: key_ ];
-    return @[ component_ ];
+    NSString *component = [self stringFromQueryComponentAndKey:key];
+    return @[component];
 }
 
 @end
@@ -31,9 +31,9 @@ static NSString* const queryComponentSeparator_ = @"&";
 
 -(NSArray*)arrayOfQueryComponentsForKey:( NSString* )key_
 {
-    return [ self map: ^id( id value_ )
+    return [ self map: ^id(id value)
     {
-        return [ value_ stringFromQueryComponentAndKey: key_ ];
+        return [ value stringFromQueryComponentAndKey: key_ ];
     } ];
 }
 
@@ -41,20 +41,20 @@ static NSString* const queryComponentSeparator_ = @"&";
 
 @implementation NSDictionary (XQueryComponents)
 
--(NSString*)stringFromQueryComponents
+- (NSString*)stringFromQueryComponents
 {
-    NSArray* result_ = [ [ self allKeys ] flatten: ^NSArray*( id key_ )
+    NSArray *result = [[self allKeys]flatten:^NSArray*(id key)
     {
-        NSObject* values_ = self[ key_ ];
-        NSString* encodedKey_ = [ key_ stringByEncodingURLFormat ];
-        return [ values_ arrayOfQueryComponentsForKey: encodedKey_ ];
+        NSObject *values = self[key];
+        NSString *encodedKey = [key stringByEncodingURLFormat];
+        return [values arrayOfQueryComponentsForKey:encodedKey];
     } ];
-    return [ result_ componentsJoinedByString: queryComponentSeparator_ ];
+    return [result componentsJoinedByString:queryComponentSeparator];
 }
 
--(NSString*)firstValueIfExsistsForKey:( NSString* )key_
+- (NSString*)firstValueIfExsistsForKey:( NSString* )key_
 {
-    return [ self[ key_ ] noThrowObjectAtIndex: 0 ];
+    return [self[key_]noThrowObjectAtIndex:0];
 }
 
 @end
