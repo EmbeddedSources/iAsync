@@ -16,4 +16,3 @@
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationInterface.h>
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationBuilder.h>
 
-extern const char* kJFFMainQueueName;

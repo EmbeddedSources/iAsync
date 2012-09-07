@@ -2,10 +2,6 @@
 
 #include <dispatch/dispatch.h>
 
-//JTODO remove constant
-
-const char* kJFFMainQueueName = "com.apple.main-tread";
-
 @interface JFFBlockOperation ()
 
 @property ( nonatomic, copy ) JFFSyncOperationWithProgress loadDataBlock;
