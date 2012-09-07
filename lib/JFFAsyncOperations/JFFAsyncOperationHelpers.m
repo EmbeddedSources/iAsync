@@ -63,6 +63,33 @@ JFFAsyncOperation asyncOperationWithError( NSError* error_ )
     };
 }
 
+JFFAsyncOperation currentQeueAsyncOpWithResult( JFFSyncOperation block_ )
+{
+    assert( block_ );
+    block_ = [ block_ copy ];
+
+    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+                                    , JFFCancelAsyncOperationHandler cancelCallback_
+                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    {
+        NSError* error_;
+        id result_;
+        if ( block_ )
+        {
+            result_ = block_( &error_ );
+        }
+        else
+        {
+            error_ = [ JFFError newErrorWithDescription: NSLocalizedString( @"NOT_SPECIFIED_BLOCK_ERROR", nil ) ];
+        }
+
+        if ( doneCallback_ )
+            doneCallback_( result_, error_ );
+
+        return JFFStubCancelAsyncOperationBlock;
+    };
+}
+
 JFFAsyncOperation asyncOperationWithFinishCallbackBlock( JFFAsyncOperation loader_
                                                         , JFFDidFinishAsyncOperationHandler finishCallbackBlock_ )
 {
