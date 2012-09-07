@@ -7,7 +7,7 @@
 @property ( nonatomic, readonly ) NSString* name;
 @property ( nonatomic, readonly ) ABPropertyID propertyID;
 
-@property ( nonatomic, strong ) id value;
+@property ( nonatomic ) id value;
 
 +(id)contactFieldWithName:( NSString* )name_
                propertyID:( ABPropertyID )propertyID_;

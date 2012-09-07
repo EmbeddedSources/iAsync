@@ -2,8 +2,6 @@
 
 #import "JFFAddressBook.h"
 
-//using namespace ::Utils;
-
 @implementation JFFAddressBookFactory
 
 +(void)asyncAddressBookWithOnCreatedBlock:( JFFAddressBookOnCreated )callback_
@@ -21,13 +19,14 @@
 
     CFErrorRef error_ = NULL;
     ABAddressBookRef result_ = ABAddressBookCreateWithOptions( 0, &error_ );
-    ObjcScopedGuard rawBookGuard_( ^() { CFRelease( result_ ); } );
 
     if ( NULL != error_ )
     {
         NSLog( @"[!!!ERROR!!!] - ABAddressBookCreateWithOptions : %@", (__bridge NSError*)error_ );
         return;
     }
+
+    callback_ = [ callback_ copy ];
 
     JFFAddressBook* bookWrapper_ = [ [ JFFAddressBook alloc ] initWithRawBook: result_ ];
     ABAddressBookRequestAccessCompletionHandler onAddressBookAccess_ =
@@ -38,7 +37,6 @@
             callback_( bookWrapper_, ::ABAddressBookGetAuthorizationStatus(), retError_ );
         };
 
-    rawBookGuard_.Release();
     ABAddressBookRequestAccessWithCompletion( result_, onAddressBookAccess_ );
 #endif
 }
@@ -63,9 +61,9 @@
     static NSArray* const errors_ =
     @[
         @"kABAuthorizationStatusNotDetermined",
-        @"kABAuthorizationStatusRestricted",
-        @"kABAuthorizationStatusDenied",
-        @"kABAuthorizationStatusAuthorized"
+        @"kABAuthorizationStatusRestricted"   ,
+        @"kABAuthorizationStatusDenied"       ,
+        @"kABAuthorizationStatusAuthorized"   ,
     ];
 
     return errors_[ status_ ];
@@ -93,6 +91,5 @@
          }
      } ];
 }
-
 
 @end
