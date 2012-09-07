@@ -1,0 +1,11 @@
+//
+// Prefix header for all source files of the 'JFFSocial' target in the 'JFFSocial' project
+//
+
+#ifdef __OBJC__
+    #import <JFFNetwork/JFFNetwork.h>
+    #import <JFFAsyncOperations/JFFAsyncOperations.h>
+    #import <JFFUtils/JFFUtils.h>
+
+    #import <Foundation/Foundation.h>
+#endif

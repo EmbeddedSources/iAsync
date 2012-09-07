@@ -1,0 +1,54 @@
+#import "JFFAsyncTwitterRequest.h"
+
+#import <Twitter/Twitter.h>
+
+@implementation JFFTwitterResponse
+@end
+
+@interface JFFAsyncTwitterRequest : NSObject <JFFAsyncOperationInterface>
+
+@property (nonatomic) TWRequest *request;
+
+@end
+
+@implementation JFFAsyncTwitterRequest
+
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+                        progressHandler:(void(^)(id))progress
+{
+    handler = [ handler copy ];
+
+    [self.request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
+    {
+        if (!handler)
+            return;
+
+        if (error)
+        {
+            handler(nil, error);
+        }
+        else
+        {
+            JFFTwitterResponse *result = [JFFTwitterResponse new];
+            result.responseData = responseData;
+            result.urlResponse  = urlResponse;
+
+            handler(result, nil);
+        }
+    }];
+}
+
+- (void)cancel:( BOOL )canceled_
+{
+}
+
+@end
+
+
+JFFAsyncOperation jffTwitterRequest(TWRequest *request)
+{
+    JFFAsyncTwitterRequest *object = [JFFAsyncTwitterRequest new];
+    object.request = request;
+
+    return buildAsyncOperationWithInterface(object);
+}

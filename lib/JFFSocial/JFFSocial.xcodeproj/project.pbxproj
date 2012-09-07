@@ -1,0 +1,805 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE4F600C15F8B2BB00271035 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F600B15F8B2BB00271035 /* Foundation.framework */; };
+		CE4F601115F8B2BB00271035 /* JFFSocial.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE4F601015F8B2BB00271035 /* JFFSocial.h */; };
+		CE4F601C15F8B30C00271035 /* JFFSocialTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F601B15F8B30C00271035 /* JFFSocialTwitter.m */; };
+		CE4F606E15F8B63F00271035 /* JFFSocialAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F606D15F8B63F00271035 /* JFFSocialAccount.m */; };
+		CE4F609115F8B85300271035 /* JFFAsyncTwitterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F609015F8B85300271035 /* JFFAsyncTwitterRequest.m */; };
+		CE4F609415F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F609315F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m */; };
+		CE4F609815F8BA5700271035 /* JFFSocialError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F609715F8BA5700271035 /* JFFSocialError.m */; };
+		CE4F620115F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F620015F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m */; };
+		CE4F621015F8F57100271035 /* JFFAsyncTwitterCreateAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F620F15F8F57000271035 /* JFFAsyncTwitterCreateAccount.m */; };
+		CE4F621315F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F621215F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m */; };
+		CE4F623E15F9D34800271035 /* JFFNoTwitterAccountsError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F623D15F9D34800271035 /* JFFNoTwitterAccountsError.m */; };
+		CE5A033E15F9FE74005CC01A /* JFFTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A033D15F9FE74005CC01A /* JFFTweet.m */; };
+		CE5A034115F9FE86005CC01A /* JFFTwitterAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A034015F9FE86005CC01A /* JFFTwitterAccount.m */; };
+		CE5A034415F9FFEF005CC01A /* NSArray+TweetsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A034315F9FFEF005CC01A /* NSArray+TweetsJSONParser.m */; };
+		CE5A034715FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A034615FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.m */; };
+		CE5A034B15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A034A15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m */; };
+		CE5A034E15FA05F4005CC01A /* JFFParseJSONObjectError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A034D15FA05F4005CC01A /* JFFParseJSONObjectError.m */; };
+		CE85430D15FA25DE00750066 /* JFFSocialAsyncUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85430C15FA25DE00750066 /* JFFSocialAsyncUtils.m */; };
+		CE85431015FA29F600750066 /* AsyncAnalyzers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85430F15FA29F500750066 /* AsyncAnalyzers.m */; };
+		CE85432115FA37C600750066 /* JFFDirectTweetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85432015FA37C600750066 /* JFFDirectTweetMessage.m */; };
+		CECF90AC15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CECF90AB15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE4F602A15F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F602415F8B56300271035 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFAsyncOperations;
+		};
+		CE4F602C15F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F602415F8B56300271035 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391037B14A88BB5007315A3;
+			remoteInfo = "JFFAsyncOperations-clang";
+		};
+		CE4F602E15F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F602415F8B56300271035 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F20C914F94BDF00588C7D;
+			remoteInfo = JFFAsyncOperationsFW;
+		};
+		CE4F603415F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFScheduler;
+		};
+		CE4F603615F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802B07148BFB850040A93A;
+			remoteInfo = JFFSchedulerMacOS;
+		};
+		CE4F603815F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103C614A88BD6007315A3;
+			remoteInfo = "JFFScheduler-clang";
+		};
+		CE4F603A15F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F202A14F9484F00588C7D;
+			remoteInfo = JFFSchedulerFW;
+		};
+		CE4F604015F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+		CE4F604215F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802A5B148BF2930040A93A;
+			remoteInfo = JFFUtilsMacOS;
+		};
+		CE4F604415F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391044314A88C04007315A3;
+			remoteInfo = "JFFUtils-clang";
+		};
+		CE4F604615F8B56300271035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E57F42414F93738002D139B;
+			remoteInfo = JFFUtilsFW;
+		};
+		CE5A018015F9EEC4005CC01A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D5AE6DB13F3E6C600EB6143;
+			remoteInfo = JFFNetwork;
+		};
+		CE5A018215F9EEC4005CC01A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802B22148BFC230040A93A;
+			remoteInfo = JFFNetworkMacOS;
+		};
+		CE5A018415F9EEC4005CC01A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103B714A88BCA007315A3;
+			remoteInfo = "JFFNetwork-clang";
+		};
+		CE5A018615F9EEC4005CC01A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F204314F9494300588C7D;
+			remoteInfo = JFFNetworkFW;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE4F600615F8B2BB00271035 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				CE4F601115F8B2BB00271035 /* JFFSocial.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CE41F6BB15FA12E700A742EE /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		CE41F75E15FA15A000A742EE /* JFFSocialTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFSocialTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4F600815F8B2BB00271035 /* libJFFSocial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFSocial.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4F600B15F8B2BB00271035 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE4F600F15F8B2BB00271035 /* JFFSocial-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFSocial-Prefix.pch"; sourceTree = "<group>"; };
+		CE4F601015F8B2BB00271035 /* JFFSocial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFSocial.h; sourceTree = "<group>"; };
+		CE4F601A15F8B30C00271035 /* JFFSocialTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialTwitter.h; sourceTree = "<group>"; };
+		CE4F601B15F8B30C00271035 /* JFFSocialTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialTwitter.m; sourceTree = "<group>"; };
+		CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
+		CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
+		CE4F602415F8B56300271035 /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
+		CE4F606C15F8B63F00271035 /* JFFSocialAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialAccount.h; sourceTree = "<group>"; };
+		CE4F606D15F8B63F00271035 /* JFFSocialAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialAccount.m; sourceTree = "<group>"; };
+		CE4F608F15F8B85300271035 /* JFFAsyncTwitterRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncTwitterRequest.h; sourceTree = "<group>"; };
+		CE4F609015F8B85300271035 /* JFFAsyncTwitterRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncTwitterRequest.m; sourceTree = "<group>"; };
+		CE4F609215F8B87B00271035 /* JFFAsyncTwitterAccessRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncTwitterAccessRequest.h; sourceTree = "<group>"; };
+		CE4F609315F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncTwitterAccessRequest.m; sourceTree = "<group>"; };
+		CE4F609615F8BA5700271035 /* JFFSocialError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialError.h; sourceTree = "<group>"; };
+		CE4F609715F8BA5700271035 /* JFFSocialError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialError.m; sourceTree = "<group>"; };
+		CE4F61FF15F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterAccountAccessNotGrantedError.h; sourceTree = "<group>"; };
+		CE4F620015F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterAccountAccessNotGrantedError.m; sourceTree = "<group>"; };
+		CE4F620E15F8F56F00271035 /* JFFAsyncTwitterCreateAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncTwitterCreateAccount.h; sourceTree = "<group>"; };
+		CE4F620F15F8F57000271035 /* JFFAsyncTwitterCreateAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncTwitterCreateAccount.m; sourceTree = "<group>"; };
+		CE4F621115F8F76100271035 /* JFFTwitterAccountCanceledCreationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterAccountCanceledCreationError.h; sourceTree = "<group>"; };
+		CE4F621215F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterAccountCanceledCreationError.m; sourceTree = "<group>"; };
+		CE4F623C15F9D34800271035 /* JFFNoTwitterAccountsError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFNoTwitterAccountsError.h; sourceTree = "<group>"; };
+		CE4F623D15F9D34800271035 /* JFFNoTwitterAccountsError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFNoTwitterAccountsError.m; sourceTree = "<group>"; };
+		CE4F658D15F9ED4700271035 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFNetwork.xcodeproj; path = ../JFFNetwork/JFFNetwork.xcodeproj; sourceTree = "<group>"; };
+		CE5A033C15F9FE74005CC01A /* JFFTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTweet.h; sourceTree = "<group>"; };
+		CE5A033D15F9FE74005CC01A /* JFFTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTweet.m; sourceTree = "<group>"; };
+		CE5A033F15F9FE86005CC01A /* JFFTwitterAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterAccount.h; sourceTree = "<group>"; };
+		CE5A034015F9FE86005CC01A /* JFFTwitterAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterAccount.m; sourceTree = "<group>"; };
+		CE5A034215F9FFEF005CC01A /* NSArray+TweetsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+TweetsJSONParser.h"; sourceTree = "<group>"; };
+		CE5A034315F9FFEF005CC01A /* NSArray+TweetsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+TweetsJSONParser.m"; sourceTree = "<group>"; };
+		CE5A034515FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFTwitterAccount+TwitterJSONApiParser.h"; sourceTree = "<group>"; };
+		CE5A034615FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFFTwitterAccount+TwitterJSONApiParser.m"; sourceTree = "<group>"; };
+		CE5A034915FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFTweet+TwitterJSONApiParser.h"; sourceTree = "<group>"; };
+		CE5A034A15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFFTweet+TwitterJSONApiParser.m"; sourceTree = "<group>"; };
+		CE5A034C15FA05F4005CC01A /* JFFParseJSONObjectError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFParseJSONObjectError.h; sourceTree = "<group>"; };
+		CE5A034D15FA05F4005CC01A /* JFFParseJSONObjectError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFParseJSONObjectError.m; sourceTree = "<group>"; };
+		CE85430B15FA25DE00750066 /* JFFSocialAsyncUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialAsyncUtils.h; sourceTree = "<group>"; };
+		CE85430C15FA25DE00750066 /* JFFSocialAsyncUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialAsyncUtils.m; sourceTree = "<group>"; };
+		CE85430E15FA29F500750066 /* AsyncAnalyzers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncAnalyzers.h; sourceTree = "<group>"; };
+		CE85430F15FA29F500750066 /* AsyncAnalyzers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncAnalyzers.m; sourceTree = "<group>"; };
+		CE85431F15FA37C600750066 /* JFFDirectTweetMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDirectTweetMessage.h; sourceTree = "<group>"; };
+		CE85432015FA37C600750066 /* JFFDirectTweetMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDirectTweetMessage.m; sourceTree = "<group>"; };
+		CECF90AA15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFDirectTweetMessage+TwitterJSONApiParser.h"; sourceTree = "<group>"; };
+		CECF90AB15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFFDirectTweetMessage+TwitterJSONApiParser.m"; sourceTree = "<group>"; };
+		CEE3A9B215FA0EC000F3DC99 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CEE3A9B415FA0EC900F3DC99 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		CEE3A9B615FA0ECE00F3DC99 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		CEE3A9B815FA0ED700F3DC99 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		CEE3A9BA15FA0EDF00F3DC99 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		CEE3A9BC15FA0EE700F3DC99 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		CEE3AADA15FA104C00F3DC99 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE4F600515F8B2BB00271035 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE4F600C15F8B2BB00271035 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE4F63BF15F9E1F200271035 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE4F5FFD15F8B2BB00271035 = {
+			isa = PBXGroup;
+			children = (
+				CE4F600D15F8B2BB00271035 /* JFFSocial */,
+				CE4F600A15F8B2BB00271035 /* Frameworks */,
+				CE4F600915F8B2BB00271035 /* Products */,
+				CE4F601D15F8B55300271035 /* Dependencies */,
+			);
+			sourceTree = "<group>";
+		};
+		CE4F600915F8B2BB00271035 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F600815F8B2BB00271035 /* libJFFSocial.a */,
+				CE41F75E15FA15A000A742EE /* JFFSocialTest.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE4F600A15F8B2BB00271035 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE41F6BB15FA12E700A742EE /* libstdc++.6.dylib */,
+				CEE3A9BC15FA0EE700F3DC99 /* libz.dylib */,
+				CEE3A9BA15FA0EDF00F3DC99 /* libc++.dylib */,
+				CEE3A9B815FA0ED700F3DC99 /* libstdc++.dylib */,
+				CEE3AADA15FA104C00F3DC99 /* UIKit.framework */,
+				CEE3A9B615FA0ECE00F3DC99 /* Twitter.framework */,
+				CEE3A9B415FA0EC900F3DC99 /* Accounts.framework */,
+				CEE3A9B215FA0EC000F3DC99 /* CFNetwork.framework */,
+				CE4F600B15F8B2BB00271035 /* Foundation.framework */,
+				CE4F658D15F9ED4700271035 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE4F600D15F8B2BB00271035 /* JFFSocial */ = {
+			isa = PBXGroup;
+			children = (
+				CE85430A15FA25BB00750066 /* Details */,
+				CE4F609515F8BA4300271035 /* Errors */,
+				CE4F601915F8B2D800271035 /* Twitter */,
+				CE4F601015F8B2BB00271035 /* JFFSocial.h */,
+				CE4F606C15F8B63F00271035 /* JFFSocialAccount.h */,
+				CE4F606D15F8B63F00271035 /* JFFSocialAccount.m */,
+				CE4F600E15F8B2BB00271035 /* Supporting Files */,
+			);
+			path = JFFSocial;
+			sourceTree = "<group>";
+		};
+		CE4F600E15F8B2BB00271035 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F600F15F8B2BB00271035 /* JFFSocial-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE4F601915F8B2D800271035 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				CE5A033B15F9FE59005CC01A /* Model */,
+				CE4F609915F8BB0B00271035 /* Errors */,
+				CE4F604915F8B5DC00271035 /* Parsers */,
+				CE4F604815F8B5C800271035 /* AsyncAdapters */,
+				CE4F601A15F8B30C00271035 /* JFFSocialTwitter.h */,
+				CE4F601B15F8B30C00271035 /* JFFSocialTwitter.m */,
+			);
+			path = Twitter;
+			sourceTree = "<group>";
+		};
+		CE4F601D15F8B55300271035 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */,
+				CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */,
+				CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */,
+				CE4F602415F8B56300271035 /* JFFAsyncOperations.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		CE4F601F15F8B56300271035 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F604115F8B56300271035 /* libJFFUtils.a */,
+				CE4F604315F8B56300271035 /* libJFFUtilsMacOS.a */,
+				CE4F604515F8B56300271035 /* libJFFUtils-clang.a */,
+				CE4F604715F8B56300271035 /* JFFUtilsFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE4F602215F8B56300271035 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F603515F8B56300271035 /* libJFFScheduler.a */,
+				CE4F603715F8B56300271035 /* libJFFSchedulerMacOS.a */,
+				CE4F603915F8B56300271035 /* libJFFScheduler-clang.a */,
+				CE4F603B15F8B56300271035 /* JFFSchedulerFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE4F602515F8B56300271035 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F602B15F8B56300271035 /* libJFFAsyncOperations.a */,
+				CE4F602D15F8B56300271035 /* libJFFAsyncOperations-clang.a */,
+				CE4F602F15F8B56300271035 /* JFFAsyncOperationsFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE4F604815F8B5C800271035 /* AsyncAdapters */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F608F15F8B85300271035 /* JFFAsyncTwitterRequest.h */,
+				CE4F609015F8B85300271035 /* JFFAsyncTwitterRequest.m */,
+				CE4F609215F8B87B00271035 /* JFFAsyncTwitterAccessRequest.h */,
+				CE4F609315F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m */,
+				CE4F620E15F8F56F00271035 /* JFFAsyncTwitterCreateAccount.h */,
+				CE4F620F15F8F57000271035 /* JFFAsyncTwitterCreateAccount.m */,
+			);
+			path = AsyncAdapters;
+			sourceTree = "<group>";
+		};
+		CE4F604915F8B5DC00271035 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				CE5A034215F9FFEF005CC01A /* NSArray+TweetsJSONParser.h */,
+				CE5A034315F9FFEF005CC01A /* NSArray+TweetsJSONParser.m */,
+				CE5A034515FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.h */,
+				CE5A034615FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.m */,
+				CE5A034915FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.h */,
+				CE5A034A15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m */,
+				CECF90AA15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.h */,
+				CECF90AB15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m */,
+				CE85430E15FA29F500750066 /* AsyncAnalyzers.h */,
+				CE85430F15FA29F500750066 /* AsyncAnalyzers.m */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
+		CE4F609515F8BA4300271035 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F609615F8BA5700271035 /* JFFSocialError.h */,
+				CE4F609715F8BA5700271035 /* JFFSocialError.m */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		CE4F609915F8BB0B00271035 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F61FF15F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.h */,
+				CE4F620015F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m */,
+				CE4F621115F8F76100271035 /* JFFTwitterAccountCanceledCreationError.h */,
+				CE4F621215F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m */,
+				CE4F623C15F9D34800271035 /* JFFNoTwitterAccountsError.h */,
+				CE4F623D15F9D34800271035 /* JFFNoTwitterAccountsError.m */,
+				CE5A034C15FA05F4005CC01A /* JFFParseJSONObjectError.h */,
+				CE5A034D15FA05F4005CC01A /* JFFParseJSONObjectError.m */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		CE5A017615F9EEC4005CC01A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE5A018115F9EEC4005CC01A /* libJFFNetwork.a */,
+				CE5A018315F9EEC4005CC01A /* libJFFNetworkMacOS.a */,
+				CE5A018515F9EEC4005CC01A /* libJFFNetwork-clang.a */,
+				CE5A018715F9EEC4005CC01A /* JFFNetworkFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE5A033B15F9FE59005CC01A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE5A033C15F9FE74005CC01A /* JFFTweet.h */,
+				CE5A033D15F9FE74005CC01A /* JFFTweet.m */,
+				CE5A033F15F9FE86005CC01A /* JFFTwitterAccount.h */,
+				CE5A034015F9FE86005CC01A /* JFFTwitterAccount.m */,
+				CE85431F15FA37C600750066 /* JFFDirectTweetMessage.h */,
+				CE85432015FA37C600750066 /* JFFDirectTweetMessage.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CE85430A15FA25BB00750066 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				CE85430B15FA25DE00750066 /* JFFSocialAsyncUtils.h */,
+				CE85430C15FA25DE00750066 /* JFFSocialAsyncUtils.m */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE4F600715F8B2BB00271035 /* JFFSocial */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE4F601615F8B2BB00271035 /* Build configuration list for PBXNativeTarget "JFFSocial" */;
+			buildPhases = (
+				CE4F600415F8B2BB00271035 /* Sources */,
+				CE4F600515F8B2BB00271035 /* Frameworks */,
+				CE4F600615F8B2BB00271035 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JFFSocial;
+			productName = JFFSocial;
+			productReference = CE4F600815F8B2BB00271035 /* libJFFSocial.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		CE4F63C215F9E1F200271035 /* JFFSocialTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE4F63D315F9E1F200271035 /* Build configuration list for PBXNativeTarget "JFFSocialTest" */;
+			buildPhases = (
+				CE4F63BE15F9E1F200271035 /* Sources */,
+				CE4F63BF15F9E1F200271035 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JFFSocialTest;
+			productName = JFFSocialTest;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE4F5FFF15F8B2BB00271035 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = EmbeddedSources;
+			};
+			buildConfigurationList = CE4F600215F8B2BB00271035 /* Build configuration list for PBXProject "JFFSocial" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CE4F5FFD15F8B2BB00271035;
+			productRefGroup = CE4F600915F8B2BB00271035 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CE4F602515F8B56300271035 /* Products */;
+					ProjectRef = CE4F602415F8B56300271035 /* JFFAsyncOperations.xcodeproj */;
+				},
+				{
+					ProductGroup = CE5A017615F9EEC4005CC01A /* Products */;
+					ProjectRef = CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = CE4F602215F8B56300271035 /* Products */;
+					ProjectRef = CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */;
+				},
+				{
+					ProductGroup = CE4F601F15F8B56300271035 /* Products */;
+					ProjectRef = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				CE4F600715F8B2BB00271035 /* JFFSocial */,
+				CE4F63C215F9E1F200271035 /* JFFSocialTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CE4F602B15F8B56300271035 /* libJFFAsyncOperations.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperations.a;
+			remoteRef = CE4F602A15F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE4F602D15F8B56300271035 /* libJFFAsyncOperations-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFAsyncOperations-clang.a";
+			remoteRef = CE4F602C15F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE4F602F15F8B56300271035 /* JFFAsyncOperationsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFAsyncOperationsFW.framework;
+			remoteRef = CE4F602E15F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE4F603515F8B56300271035 /* libJFFScheduler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFScheduler.a;
+			remoteRef = CE4F603415F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE4F603715F8B56300271035 /* libJFFSchedulerMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFSchedulerMacOS.a;
+			remoteRef = CE4F603615F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE4F603915F8B56300271035 /* libJFFScheduler-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFScheduler-clang.a";
+			remoteRef = CE4F603815F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE4F603B15F8B56300271035 /* JFFSchedulerFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFSchedulerFW.framework;
+			remoteRef = CE4F603A15F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE4F604115F8B56300271035 /* libJFFUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtils.a;
+			remoteRef = CE4F604015F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE4F604315F8B56300271035 /* libJFFUtilsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtilsMacOS.a;
+			remoteRef = CE4F604215F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE4F604515F8B56300271035 /* libJFFUtils-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFUtils-clang.a";
+			remoteRef = CE4F604415F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE4F604715F8B56300271035 /* JFFUtilsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFUtilsFW.framework;
+			remoteRef = CE4F604615F8B56300271035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE5A018115F9EEC4005CC01A /* libJFFNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFNetwork.a;
+			remoteRef = CE5A018015F9EEC4005CC01A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE5A018315F9EEC4005CC01A /* libJFFNetworkMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFNetworkMacOS.a;
+			remoteRef = CE5A018215F9EEC4005CC01A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE5A018515F9EEC4005CC01A /* libJFFNetwork-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFNetwork-clang.a";
+			remoteRef = CE5A018415F9EEC4005CC01A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE5A018715F9EEC4005CC01A /* JFFNetworkFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFNetworkFW.framework;
+			remoteRef = CE5A018615F9EEC4005CC01A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE4F600415F8B2BB00271035 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE4F601C15F8B30C00271035 /* JFFSocialTwitter.m in Sources */,
+				CE4F606E15F8B63F00271035 /* JFFSocialAccount.m in Sources */,
+				CE4F609115F8B85300271035 /* JFFAsyncTwitterRequest.m in Sources */,
+				CE4F609415F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m in Sources */,
+				CE4F609815F8BA5700271035 /* JFFSocialError.m in Sources */,
+				CE4F620115F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m in Sources */,
+				CE4F621015F8F57100271035 /* JFFAsyncTwitterCreateAccount.m in Sources */,
+				CE4F621315F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m in Sources */,
+				CE4F623E15F9D34800271035 /* JFFNoTwitterAccountsError.m in Sources */,
+				CE5A033E15F9FE74005CC01A /* JFFTweet.m in Sources */,
+				CE5A034115F9FE86005CC01A /* JFFTwitterAccount.m in Sources */,
+				CE5A034415F9FFEF005CC01A /* NSArray+TweetsJSONParser.m in Sources */,
+				CE5A034715FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.m in Sources */,
+				CE5A034B15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m in Sources */,
+				CE5A034E15FA05F4005CC01A /* JFFParseJSONObjectError.m in Sources */,
+				CE85430D15FA25DE00750066 /* JFFSocialAsyncUtils.m in Sources */,
+				CE85431015FA29F600750066 /* AsyncAnalyzers.m in Sources */,
+				CE85432115FA37C600750066 /* JFFDirectTweetMessage.m in Sources */,
+				CECF90AC15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE4F63BE15F9E1F200271035 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CE4F601415F8B2BB00271035 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../,
+					.,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CE4F601515F8B2BB00271035 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../,
+					.,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE4F601715F8B2BB00271035 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/JFFSocial.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFSocial/JFFSocial-Prefix.pch";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CE4F601815F8B2BB00271035 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/JFFSocial.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFSocial/JFFSocial-Prefix.pch";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		CE4F63D415F9E1F200271035 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFSocialTest/JFFSocialTest-Prefix.pch";
+				INFOPLIST_FILE = "JFFSocialTest/JFFSocialTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		CE4F63D515F9E1F200271035 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFSocialTest/JFFSocialTest-Prefix.pch";
+				INFOPLIST_FILE = "JFFSocialTest/JFFSocialTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE4F600215F8B2BB00271035 /* Build configuration list for PBXProject "JFFSocial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE4F601415F8B2BB00271035 /* Debug */,
+				CE4F601515F8B2BB00271035 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE4F601615F8B2BB00271035 /* Build configuration list for PBXNativeTarget "JFFSocial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE4F601715F8B2BB00271035 /* Debug */,
+				CE4F601815F8B2BB00271035 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE4F63D315F9E1F200271035 /* Build configuration list for PBXNativeTarget "JFFSocialTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE4F63D415F9E1F200271035 /* Debug */,
+				CE4F63D515F9E1F200271035 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE4F5FFF15F8B2BB00271035 /* Project object */;
+}
