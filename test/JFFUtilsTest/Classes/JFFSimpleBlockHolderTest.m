@@ -5,6 +5,11 @@
 
 @implementation JFFSimpleBlockHolderTest
 
+-(void)setUp
+{
+    [JFFSimpleBlockHolder enableInstancesCounting];
+}
+
 -(void)testSimpleBlockHolderBehavior
 {
     @autoreleasepool

@@ -34,8 +34,6 @@
 // If you are using the static library and importing header files manually
 //#import "GHUnit.h"
 
-#import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
-
 void exceptionHandler(NSException *exception);
 
 // Default exception handler
@@ -74,7 +72,6 @@ int main(int argc, char *argv[])
 
     @autoreleasepool
     {
-        [ JFFSimpleBlockHolder enableInstancesCounting ];
         // Register any special test case classes
         //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  
    
@@ -89,7 +86,7 @@ int main(int argc, char *argv[])
         {
             retVal = UIApplicationMain(argc, argv, nil, @"GHUnitIPhoneAppDelegate");
         }
-   
+
         return retVal;
     }
 }

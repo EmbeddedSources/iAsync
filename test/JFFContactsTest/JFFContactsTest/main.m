@@ -34,8 +34,6 @@
 // If you are using the static library and importing header files manually
 //#import "GHUnit.h"
 
-#import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
-
 void exceptionHandler(NSException *exception);
 
 // Default exception handler
