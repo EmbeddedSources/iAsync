@@ -1,6 +1,5 @@
 #import "jRestKitBinders.h"
 
-
 //JTODO test
 JFFAsyncOperationBinder xmlDocumentWithDataAsyncBinder( void )
 {

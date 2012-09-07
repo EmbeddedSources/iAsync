@@ -40,7 +40,7 @@
         self->_container = [ JFFProxyObjectContainer new ];
         self->_container.target = factory_();
     };
-    dispatch_async( self->_dispatchQueue, releaseListener_ );
+    safe_dispatch_sync( self->_dispatchQueue, releaseListener_ );
 
     return self;
 }
@@ -56,12 +56,12 @@
 {
     SEL selector_ = [ invocation_ selector ];
 
-    void (^forward_invocation_)( void ) = ^void( void )
+    void (^forwardInvocation_)( void ) = ^void( void )
     {
         if ( [ self->_container.target respondsToSelector: selector_ ] )
             [ invocation_ invokeWithTarget: self->_container.target ];
     };
-    safe_dispatch_sync( self->_dispatchQueue, forward_invocation_ );
+    safe_dispatch_sync( self->_dispatchQueue, forwardInvocation_ );
 }
 
 -(NSMethodSignature*)methodSignatureForSelector:( SEL )selector_
