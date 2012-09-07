@@ -2,13 +2,13 @@
 
 @implementation NSString (UUIDCreation)
 
-+(NSString*)createUuid
++ (NSString *)createUuid
 {
-    CFUUIDRef uuid_ = CFUUIDCreate( NULL );
-    NSString* result_ = (__bridge_transfer NSString *)CFUUIDCreateString( NULL, uuid_ );
-    CFRelease( uuid_ );
+    CFUUIDRef uuid = CFUUIDCreate( NULL );
+    NSString* result = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, uuid);
+    CFRelease( uuid );
 
-    return result_;
+    return result;
 }
 
 @end
