@@ -5,15 +5,16 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^JFFActionBlock)( id object_ );
-typedef id (^JFFMappingBlock)( id object_ );
-typedef id (^JFFMappingWithErrorBlock)( id object_, NSError** outError_ );
-typedef id (^JFFMappingWithErrorAndIndexBlock)( id object_, NSInteger idx, NSError** outError_ );
-typedef void (^JFFMappingDictBlock)( id object_, id* key_, id* value_ );
-typedef id (^JFFProducerBlock)( NSUInteger index_ );
-typedef NSArray* (^JFFFlattenBlock)( id object_ );
+typedef void (^JFFActionBlock)(id object);
+typedef id (^JFFMappingBlock)(id object);
+typedef id (^JFFMappingWithErrorBlock)(id object, NSError **outError);
+typedef id (^JFFMappingWithErrorAndIndexBlock)(id object, NSInteger idx, NSError **outError);
+typedef void (^JFFMappingDictBlock)(id object,id *key, id *value);
+typedef id (^JFFProducerBlock)(NSUInteger index);
+typedef NSArray* (^JFFFlattenBlock)(id object);
 
-typedef void (^JFFTransformBlock)( id first_object_, id second_object_ );
-typedef BOOL (^JFFEqualityCheckerBlock)( id first_object_, id second_object_ );
+typedef void (^JFFTransformBlock)(id firstObject, id secondObject);
+typedef NSUInteger (^JFFElementIndexBlock)( id object_ );
+typedef BOOL (^JFFEqualityCheckerBlock)( id firstObject_, id secondObject_ );
 
 #endif //__JU_ARRAY_HELPER_BLOCKS_H__

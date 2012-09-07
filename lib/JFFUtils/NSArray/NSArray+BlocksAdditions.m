@@ -2,7 +2,21 @@
 
 #import "JFFClangLiterals.h"
 
+@implementation NSMutableArray (BlocksAdditions)
+
++(id)converToCurrentTypeMutableArray:( NSMutableArray* )array_
+{
+    return array_;
+}
+
+@end
+
 @implementation NSArray (BlocksAdditions)
+
++(id)converToCurrentTypeMutableArray:( NSMutableArray* )array_
+{
+    return [ array_ copy ];
+}
 
 +(id)arrayWithSize:( NSUInteger )size_
           producer:( JFFProducerBlock )block_
@@ -14,7 +28,7 @@
         [ result_ addObject: block_( index_ ) ];
     }
 
-    return [ result_ copy ];
+    return [ self converToCurrentTypeMutableArray: result_ ];
 }
 
 +(id)arrayWithCapacity:( NSUInteger )capacity_
@@ -29,7 +43,7 @@
             [ result_ addObject: object_ ];
     }
 
-    return [ result_ copy ];
+    return [ self converToCurrentTypeMutableArray: result_ ];
 }
 
 -(void)each:( JFFActionBlock )block_
@@ -198,6 +212,32 @@
     {
         block_( self[ itemIndex_ ], other_[ itemIndex_ ] );
     }
+}
+
+-(NSArray*)devideIntoArrayWithSize:( NSUInteger )size_
+                 elementIndexBlock:( JFFElementIndexBlock )block_
+{
+    NSParameterAssert( size_ > 0 );
+    NSParameterAssert( block_    );
+
+    NSMutableArray* mResult_ = [ NSMutableArray arrayWithSize: size_
+                                                    producer: ^id( NSUInteger index_ )
+    {
+        return [ NSMutableArray new ];
+    } ];
+
+    [ self enumerateObjectsUsingBlock: ^( id obj_, NSUInteger idx_, BOOL* stop_ )
+    {
+        NSUInteger inserIndex_ = block_( obj_ );
+        [ mResult_[ inserIndex_ ] addObject: obj_ ];
+    } ];
+
+    NSArray* result_ = [ mResult_ map: ^id( id object_ )
+    {
+        return [ object_ copy ];
+    } ];
+
+    return result_;
 }
 
 @end

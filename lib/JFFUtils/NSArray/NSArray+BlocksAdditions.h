@@ -65,4 +65,8 @@
 -(void)transformWithArray:( NSArray* )other_
                 withBlock:( JFFTransformBlock )block_;
 
+//Invokes the block passing parallel in successive elements from self and other NSArray,
+-(NSArray*)devideIntoArrayWithSize:( NSUInteger )size_
+                 elementIndexBlock:( JFFElementIndexBlock )block_;
+
 @end
