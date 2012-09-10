@@ -32,7 +32,7 @@ JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterfa
         __unsafe_unretained id< JFFAsyncOperationInterface > weakAsyncObject__ = asyncObject_;
 
         doneCallback_ = [ doneCallback_ copy ];
-        __block void (^completionHandler)( id, NSError* ) = [ ^( id result_, NSError* error_ )
+        __block void (^completionHandler)(id, NSError*) = [ ^( id result_, NSError* error_ )
         {
             //use asyncObject_ in if to own it while waiting result
             if ( doneCallback_ && asyncObject_ )
@@ -74,12 +74,12 @@ JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterfa
                                        progressHandler:progressHandlerWrapper ];
 
         __block JFFCancelAsyncOperationHandler cancelCallbackHolder_ = [ cancelCallback_ copy ];
-        return ^( BOOL canceled_ )
+        return ^(BOOL canceled)
         {
             if ( !proxy.completionHandler )
                 return;
 
-            [ weakAsyncObject__ cancel: canceled_ ];
+            [weakAsyncObject__ cancel:canceled];
 
             proxy           = nil;
             progressHandler = nil;
@@ -88,7 +88,7 @@ JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterfa
             {
                 JFFCancelAsyncOperationHandler tmpCallback_ = cancelCallbackHolder_;
                 cancelCallbackHolder_ = nil;
-                tmpCallback_( canceled_ );
+                tmpCallback_(canceled);
             }
         };
     };
