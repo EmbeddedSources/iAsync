@@ -2,9 +2,9 @@
 
 @implementation NSString (ToURL)
 
--(NSURL*)toURL
+- (NSURL*)toURL
 {
-    return [ NSURL URLWithString: self ];
+    return [[NSURL alloc]initWithString:self];
 }
 
 @end

@@ -11,6 +11,8 @@
 #import <JFFUtils/NSArray/NSArray+NoThrowObjectAtIndex.h>
 #import <JFFUtils/NSArray/NSArray+IsEmpty.h>
 
+#import <JFFUtils/NSOrderedSet/NSOrderedSet+NoThrowObjectAtIndex.h>
+
 #import <JFFUtils/NSString/NSString+IsEmailValid.h>
 #import <JFFUtils/NSString/NSString+Format.h>
 #import <JFFUtils/NSString/NSString+Search.h>

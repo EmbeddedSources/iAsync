@@ -71,16 +71,16 @@
     return [ self objectsAtIndexes: indexes_ ];
 }
 
--(NSArray*)map:( JFFMappingBlock )block_
+- (NSArray*)map:(JFFMappingBlock)block
 {
-    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
+    NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
 
-    for ( id object_ in self )
+    for (id object in self)
     {
-        [ result_ addObject: block_( object_ ) ];
+        [result addObject:block(object)];
     }
 
-    return [ result_ copy ];
+    return [result copy];
 }
 
 -(NSArray*)map:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_

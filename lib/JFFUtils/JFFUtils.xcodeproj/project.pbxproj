@@ -82,6 +82,8 @@
 		1BE2ABF114E524DF003097D3 /* UIColor+ColorForHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2ABED14E524D0003097D3 /* UIColor+ColorForHex.m */; };
 		1BE75CFF1434B3450076E068 /* NSObject+Const0.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE75CFD1434B3450076E068 /* NSObject+Const0.h */; };
 		1BE75D001434B3450076E068 /* NSObject+Const0.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE75CFE1434B3450076E068 /* NSObject+Const0.m */; };
+		37063C6715FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 37063C6515FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.h */; };
+		37063C6815FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063C6615FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.m */; };
 		5349A6C614A9CEA7008ECCA6 /* JFFCastFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5349A6C514A9CEA7008ECCA6 /* JFFCastFunctions.mm */; };
 		5349A6C714A9CEA7008ECCA6 /* JFFCastFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5349A6C514A9CEA7008ECCA6 /* JFFCastFunctions.mm */; };
 		5349A6C814A9CEA7008ECCA6 /* JFFCastFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5349A6C514A9CEA7008ECCA6 /* JFFCastFunctions.mm */; };
@@ -373,6 +375,8 @@
 		1BE2ABED14E524D0003097D3 /* UIColor+ColorForHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorForHex.m"; sourceTree = "<group>"; };
 		1BE75CFD1434B3450076E068 /* NSObject+Const0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Const0.h"; sourceTree = "<group>"; };
 		1BE75CFE1434B3450076E068 /* NSObject+Const0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Const0.m"; sourceTree = "<group>"; };
+		37063C6515FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOrderedSet+NoThrowObjectAtIndex.h"; sourceTree = "<group>"; };
+		37063C6615FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOrderedSet+NoThrowObjectAtIndex.m"; sourceTree = "<group>"; };
 		5349A6C514A9CEA7008ECCA6 /* JFFCastFunctions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFCastFunctions.mm; sourceTree = "<group>"; };
 		534CDFC014A8C2930068F4DF /* JFFCastFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JFFCastFunctions.hpp; sourceTree = "<group>"; };
 		538E1CAA14B32201006BD40A /* NSDecimalNumber+Increment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDecimalNumber+Increment.h"; sourceTree = "<group>"; };
@@ -590,6 +594,15 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		37063C6315FE0B7400B4B059 /* NSOrderedSet */ = {
+			isa = PBXGroup;
+			children = (
+				37063C6515FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.h */,
+				37063C6615FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.m */,
+			);
+			path = NSOrderedSet;
+			sourceTree = "<group>";
+		};
 		651BE0A41390496200DD6890 /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +655,7 @@
 		651BE0BF1390496700DD6890 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				37063C6315FE0B7400B4B059 /* NSOrderedSet */,
 				1B14141115DBCCF100EFB2B8 /* NSDate */,
 				1B054D4B1521C6DA008E4B9E /* Dictionary */,
 				1BA30C28151A383200329EA6 /* Runtime */,
@@ -911,6 +925,7 @@
 				1B9C101015C802E600C20BCA /* JFFClangLiterals.h in Headers */,
 				1B14141E15DBCD3F00EFB2B8 /* NSDate+DateDifference.h in Headers */,
 				1B2A4A9E15EF62A3004ABB2E /* NSString+FileAttributes.h in Headers */,
+				37063C6715FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1258,6 +1273,7 @@
 				7E44D675158F189F00A2C11E /* NSString+CPlusPlus.mm in Sources */,
 				1B14142215DBCD3F00EFB2B8 /* NSDate+DateDifference.m in Sources */,
 				1B2A4AA215EF62A3004ABB2E /* NSString+FileAttributes.m in Sources */,
+				37063C6815FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
