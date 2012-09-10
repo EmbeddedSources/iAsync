@@ -302,7 +302,7 @@ static void readStreamCallback( CFReadStreamRef stream_
         }
         else
         {
-            self->_params.url = [ [ NSURL alloc ] initWithString: location_ ];
+            self->_params.url = [location_ toURL];
         }
 
         if ( !self->_params.url )

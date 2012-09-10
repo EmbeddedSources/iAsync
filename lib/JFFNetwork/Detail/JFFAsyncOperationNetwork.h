@@ -11,7 +11,6 @@
 
 @property (nonatomic) JFFURLConnectionParams* params;
 @property (nonatomic) id< JNUrlConnection > connection;
-@property (nonatomic) id resultContext;
 @property (nonatomic, copy) JFFAnalyzer responseAnalyzer;
 
 @end

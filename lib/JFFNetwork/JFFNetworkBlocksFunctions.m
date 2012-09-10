@@ -84,11 +84,11 @@ JFFAsyncOperation dataURLResponseLoader(
    , NSData* postData_
    , NSDictionary* headers_ )
 {
-    JFFURLConnectionParams* params_ = [JFFURLConnectionParams new];
-    params_.url      = url_;
-    params_.httpBody = postData_;
-    params_.headers  = headers_;
-    return genericDataURLResponseLoader(params_);
+    JFFURLConnectionParams* params = [JFFURLConnectionParams new];
+    params.url      = url_;
+    params.httpBody = postData_;
+    params.headers  = headers_;
+    return genericDataURLResponseLoader(params);
 }
 
 JFFAsyncOperation liveChunkedURLResponseLoader( 

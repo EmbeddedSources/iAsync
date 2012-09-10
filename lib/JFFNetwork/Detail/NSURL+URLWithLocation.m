@@ -29,15 +29,15 @@ static NSString* loginAndPasswordComponentStr( NSString* login_, NSString* passw
     NSParameterAssert( [ location_ hasPrefix: @"/" ] );
 
     static NSString* const urlFormat_ = @"%@://%@%@%@%@";
-    NSString* urlString_ = [ [ NSString alloc ] initWithFormat: urlFormat_
-                            , self.scheme
-                            , loginAndPasswordComponentStr( self.user, self.password )
-                            , self.host
-                            , portComponentStr( self.port )
-                            , location_
-                            ];
+    NSString* urlString = [ [ NSString alloc ] initWithFormat: urlFormat_
+                           , self.scheme
+                           , loginAndPasswordComponentStr( self.user, self.password )
+                           , self.host
+                           , portComponentStr( self.port )
+                           , location_
+                           ];
 
-    NSURL* result_ = [ [ NSURL alloc ] initWithString: urlString_ ];
+    NSURL* result_ = [urlString toURL];
 
     return result_;
 }

@@ -8,16 +8,19 @@
 
 @implementation JFFAsyncOperationNetwork
 
--(void)asyncOperationWithResultHandler:(void (^)(id, NSError *) )handler
-                       progressHandler:(void (^)(id) )progress
+-(void)asyncOperationWithResultHandler:(void(^)(id, NSError *))handler
+                       progressHandler:(void(^)(id))progress
 {
+    NSParameterAssert(handler );
+    NSParameterAssert(progress);
+
     {
         JNConnectionsFactory* factory =
-        [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: self.params ];
+        [[JNConnectionsFactory alloc]initWithURLConnectionParams:self.params];
 
         self.connection = self.params.useLiveConnection
-            ? [factory createFastConnection    ]
-            : [factory createStandardConnection];
+        ?[factory createFastConnection    ]
+        :[factory createStandardConnection];
     }
 
     self.connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
@@ -27,15 +30,15 @@
     progress = [progress copy];
     self.connection.didReceiveDataBlock = ^(NSData *data)
     {
-        if (progress)
-            progress(data);
+        progress(data);
     };
 
-    handler = [ handler copy ];
+    __block id resultHolder;
+
+    handler = [handler copy];
     JFFDidFinishLoadingHandler finish = [^(NSError *error)
     {
-        if (handler)
-            handler(error?nil:unretainedSelf.resultContext, error);
+        handler(error?nil:resultHolder, error);
     }copy];
 
     self.connection.didFinishLoadingBlock = finish;
@@ -44,17 +47,17 @@
     {
         if ( !unretainedSelf->_responseAnalyzer )
         {
-            unretainedSelf.resultContext = response;
+            resultHolder = response;
             return;
         }
 
         NSError *error;
-        unretainedSelf.resultContext = unretainedSelf->_responseAnalyzer(response, &error);
+        resultHolder = unretainedSelf->_responseAnalyzer(response, &error);
 
         if (error)
         {
-            finish(error);
             [unretainedSelf forceCancel];
+            finish(error);
         }
     };
 
@@ -66,9 +69,9 @@
     [self cancel:YES];
 }
 
--(void)cancel:( BOOL )canceled_
+-(void)cancel:(BOOL)canceled
 {
-    if (canceled_)
+    if (canceled)
     {
         [self.connection cancel];
         self.connection = nil;
