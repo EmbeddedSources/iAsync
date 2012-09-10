@@ -10,23 +10,23 @@ typedef BOOL (^JFFPredicate)();
 
 @implementation NSObject (RuntimeExtensions)
 
-+(BOOL)addMethodIfNeedWithSelector:( SEL )selector_
-                           toClass:( Class )class_
-                 newMethodSelector:( SEL )newSelector_
-                         hasMethod:( JFFPredicate )hasMethod_
-                      methodGetter:( JFFMethodGetter )methodGetter_
++(BOOL)addMethodIfNeedWithSelector:(SEL)selector_
+                           toClass:(Class)class
+                 newMethodSelector:(SEL)newSelector
+                         hasMethod:(JFFPredicate)hasMethod
+                      methodGetter:(JFFMethodGetter)methodGetter
 {
-    if ( hasMethod_() )
+    if ( hasMethod() )
         return NO;
 
-    Method prototypeMethod_ = methodGetter_();
-    const char* typeEncoding_ = method_getTypeEncoding( prototypeMethod_ );
-    BOOL result_ = class_addMethod( class_
-                                   , newSelector_
-                                   , method_getImplementation( prototypeMethod_ )
-                                   , typeEncoding_ );
-    NSAssert( result_, @"method should be added" );
-    return result_;
+    Method prototypeMethod = methodGetter();
+    const char* typeEncoding = method_getTypeEncoding(prototypeMethod);
+    BOOL result = class_addMethod( class
+                                  , newSelector
+                                  , method_getImplementation(prototypeMethod)
+                                  , typeEncoding );
+    NSAssert(result, @"method should be added");
+    return result;
 }
 
 +(BOOL)addInstanceMethodIfNeedWithSelector:( SEL )selector_

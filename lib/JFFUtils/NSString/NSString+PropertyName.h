@@ -2,8 +2,8 @@
 
 @interface NSString (PropertyName)
 
--(id)propertyGetNameFromPropertyName;
+- (id)propertyGetNameFromPropertyName;
 
--(id)propertySetNameForPropertyName;
+- (id)propertySetNameForPropertyName;
 
 @end

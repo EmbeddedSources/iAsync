@@ -1,3 +1,3 @@
 #import <Foundation/Foundation.h>
 
-void enumerateAllClassesWithBlock( void(^)( Class ) );
+void enumerateAllClassesWithBlock(void(^)(Class));

@@ -2,20 +2,19 @@
 
 #include <objc/runtime.h>
 
-void enumerateAllClassesWithBlock( void(^block_)( Class ) )
+void enumerateAllClassesWithBlock(void(^block)(Class))
 {
-    if ( !block_ )
-        return;
+    assert(block);
 
-    int numClasses_ = objc_getClassList( NULL, 0 );
-    Class classes_[ sizeof( Class ) * numClasses_ ];
+    int numClasses = objc_getClassList(NULL, 0);
+    Class classes[sizeof(Class) * numClasses];
 
-    numClasses_ = objc_getClassList( classes_, numClasses_ );
+    numClasses = objc_getClassList(classes, numClasses);
 
-    for ( int index_ = 0; index_ < numClasses_; ++index_ )
+    for (int index = 0; index < numClasses; ++index)
     {
-        Class class_ = classes_[ index_ ];
-        if ( class_getClassMethod( class_, @selector( conformsToProtocol: ) ) )
-            block_( class_ );
+        Class class = classes[index];
+        if (class_getClassMethod(class, @selector(conformsToProtocol:)))
+            block(class);
     }
 }

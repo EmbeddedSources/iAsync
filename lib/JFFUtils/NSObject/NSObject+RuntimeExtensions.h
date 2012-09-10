@@ -2,31 +2,31 @@
 
 @interface NSObject (RuntimeExtensions)
 
-+(BOOL)addInstanceMethodIfNeedWithSelector:( SEL )selector_
-                                   toClass:( Class )class_;
++ (BOOL)addInstanceMethodIfNeedWithSelector:(SEL)selector
+                                    toClass:(Class)targetClass;
 
-+(BOOL)addInstanceMethodIfNeedWithSelector:( SEL )selector_
-                                   toClass:( Class )class_
-                         newMethodSelector:( SEL )newSelector_;
++ (BOOL)addInstanceMethodIfNeedWithSelector:(SEL)selector
+                                    toClass:(Class)targetClass
+                          newMethodSelector:(SEL)newSelector;
 
-+(BOOL)addClassMethodIfNeedWithSelector:( SEL )selector_
-                                toClass:( Class )class_;
++ (BOOL)addClassMethodIfNeedWithSelector:(SEL)selector
+                                 toClass:(Class)targetClass;
 
-+(BOOL)addClassMethodIfNeedWithSelector:( SEL )selector_
-                                toClass:( Class )class_
-                      newMethodSelector:( SEL )newSelector_;
++ (BOOL)addClassMethodIfNeedWithSelector:(SEL)selector
+                                 toClass:(Class)targetClass
+                       newMethodSelector:(SEL)newSelector;
 
-+(void)hookInstanceMethodForClass:( Class )class_
-                     withSelector:( SEL )targetSelector_
-          prototypeMethodSelector:( SEL )prototypeSelector_
-               hookMethodSelector:( SEL )hookSelector_;
++ (void)hookInstanceMethodForClass:(Class)targetClass
+                      withSelector:(SEL)targetSelector
+           prototypeMethodSelector:(SEL)prototypeSelector
+                hookMethodSelector:(SEL)hookSelector;
 
-+(void)hookClassMethodForClass:( Class )class_
-                  withSelector:( SEL )targetSelector_
-       prototypeMethodSelector:( SEL )prototypeSelector_
-            hookMethodSelector:( SEL )hookSelector_;
++ (void)hookClassMethodForClass:(Class)targetClass
+                   withSelector:(SEL)targetSelector
+        prototypeMethodSelector:(SEL)prototypeSelector
+             hookMethodSelector:(SEL)hookSelector;
 
-+(BOOL)hasInstanceMethodWithSelector:( SEL )methodSelector_;
-+(BOOL)hasClassMethodWithSelector:( SEL )methodSelector_;
++ (BOOL)hasInstanceMethodWithSelector:(SEL)methodSelector;
++ (BOOL)hasClassMethodWithSelector:(SEL)methodSelector;
 
 @end
