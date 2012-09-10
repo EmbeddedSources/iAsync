@@ -4,9 +4,9 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^JFFSimpleBlock)( void );
-typedef BOOL (^JFFPredicateBlock)( id object_ );
-typedef BOOL (^JFFPredicateWithIndexBlock)( id object_, NSUInteger index_ );
-typedef id (^JFFAnalyzer)( id result_, NSError** error_ );
+typedef BOOL (^JFFPredicateBlock)(id object);
+typedef BOOL (^JFFPredicateWithIndexBlock)(id object, NSUInteger index);
+typedef id (^JFFAnalyzer)(id result, NSError **error);
 typedef BOOL (^JFFResultPredicateBlock)( id result_, NSError* error_ );
 
 #endif //JFF_UTILS_BLOCK_DEFINITIONS

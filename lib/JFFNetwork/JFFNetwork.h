@@ -32,3 +32,5 @@
 
 #import <JFFNetwork/Extensions/NSURL+Cookies.h>
 #import <JFFNetwork/Extensions/NSDictionary+JHTTPHeaders.h>
+
+#import <JFFNetwork/JHttpError.h>

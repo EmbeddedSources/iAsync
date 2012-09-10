@@ -14,7 +14,7 @@ typedef id (^JFFSyncOperation)( NSError** error_ );
 typedef id (^JFFSyncOperationWithProgress)( NSError** error_
                                            , JFFAsyncOperationProgressHandler progressCallback_ );
 
-typedef void (^JFFDidFinishAsyncOperationHandler)( id result_, NSError* error_ );
+typedef void (^JFFDidFinishAsyncOperationHandler)(id result, NSError *error);
 
 typedef void (^JFFCancelAsyncOperation)( BOOL unsubscribeOnlyIfNo_ );
 

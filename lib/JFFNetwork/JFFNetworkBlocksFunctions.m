@@ -1,15 +1,35 @@
 #import "JFFNetworkBlocksFunctions.h"
 
+#import "JHttpError.h"
+#import "JNUrlResponse.h"
+#import "JHttpFlagChecker.h"
 #import "JFFURLConnectionParams.h"
 #import "JFFAsyncOperationNetwork.h"
 
 #import "NSURL+Cookies.h"
 
-JFFAsyncOperation genericChunkedURLResponseLoader( JFFURLConnectionParams* params_ )
+JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams *params)
 {
-    JFFAsyncOperationNetwork* asyncObj_ = [ JFFAsyncOperationNetwork new ];
-    asyncObj_.params = params_;
-    return buildAsyncOperationWithInterface( asyncObj_ );
+    JFFAsyncOperationNetwork* asyncObj = [JFFAsyncOperationNetwork new];
+    asyncObj.params = params;
+    asyncObj.responseAnalyzer = ^id(id< JNUrlResponse > response, NSError **error)
+    {
+        NSInteger statusCode = [response statusCode];
+
+        if ([JHttpFlagChecker isDownloadErrorFlag:statusCode])
+        {
+            if (error)
+            {
+                JHttpError *httpError = [[JHttpError alloc]initWithHttpCode:statusCode];
+                [httpError setToPointer:error];
+            }
+            return nil;
+        }
+
+        return response;
+    };
+
+    return buildAsyncOperationWithInterface(asyncObj);
 }
 
 JFFAsyncOperation genericDataURLResponseLoader( JFFURLConnectionParams* params_ )
@@ -51,11 +71,11 @@ JFFAsyncOperation chunkedURLResponseLoader(
    , NSData* postData_
    , NSDictionary* headers_ )
 {
-    JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
+    JFFURLConnectionParams* params_ = [JFFURLConnectionParams new];
     params_.url      = url_;
     params_.httpBody = postData_;
     params_.headers  = headers_;
-    return genericChunkedURLResponseLoader( params_ );
+    return genericChunkedURLResponseLoader(params_);
 }
 
 JFFAsyncOperation dataURLResponseLoader( 
@@ -63,11 +83,11 @@ JFFAsyncOperation dataURLResponseLoader(
    , NSData* postData_
    , NSDictionary* headers_ )
 {
-    JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
+    JFFURLConnectionParams* params_ = [JFFURLConnectionParams new];
     params_.url      = url_;
     params_.httpBody = postData_;
     params_.headers  = headers_;
-    return genericDataURLResponseLoader( params_ );
+    return genericDataURLResponseLoader(params_);
 }
 
 JFFAsyncOperation liveChunkedURLResponseLoader( 
@@ -75,23 +95,23 @@ JFFAsyncOperation liveChunkedURLResponseLoader(
    , NSData* postData_
    , NSDictionary* headers_ )
 {
-    JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
+    JFFURLConnectionParams* params_ = [JFFURLConnectionParams new];
     params_.url      = url_;
     params_.httpBody = postData_;
     params_.headers  = headers_;
     params_.useLiveConnection = YES;
-    return genericChunkedURLResponseLoader( params_ );
+    return genericChunkedURLResponseLoader(params_);
 }
 
 JFFAsyncOperation liveDataURLResponseLoader(
-   NSURL* url_
-   , NSData* postData_
-   , NSDictionary* headers_ )
+   NSURL* url
+   , NSData* postData
+   , NSDictionary* headers )
 {
-    JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
-    params_.url      = url_;
-    params_.httpBody = postData_;
-    params_.headers  = headers_;
+    JFFURLConnectionParams* params_ = [JFFURLConnectionParams new];
+    params_.url      = url;
+    params_.httpBody = postData;
+    params_.headers  = headers;
     params_.useLiveConnection = YES;
-    return genericDataURLResponseLoader( params_ );
+    return genericDataURLResponseLoader(params_);
 }

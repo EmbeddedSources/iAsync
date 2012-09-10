@@ -1,5 +1,6 @@
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationBuilder.h>
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationInterface.h>
+#import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 
 #import <Foundation/Foundation.h>
 
@@ -8,8 +9,9 @@
 
 @interface JFFAsyncOperationNetwork : NSObject < JFFAsyncOperationInterface >
 
-@property ( nonatomic ) JFFURLConnectionParams* params;
-@property ( nonatomic ) id< JNUrlConnection > connection;
-@property ( nonatomic ) id resultContext;
+@property (nonatomic) JFFURLConnectionParams* params;
+@property (nonatomic) id< JNUrlConnection > connection;
+@property (nonatomic) id resultContext;
+@property (nonatomic, copy) JFFAnalyzer responseAnalyzer;
 
 @end

@@ -11,23 +11,65 @@
     [ JFFURLConnection enableInstancesCounting ];//JTODO test
 }
 
+//http://jigsaw.w3.org/HTTP/negbad
+-(void)testHttp406NotAcceptableCode
+{
+    NSUInteger initialInstancesCount_ = [JFFURLConnection instancesCount];
+
+    [ self prepare ];
+
+    __block NSError* didFinishLoadingBlockError;
+
+    NSURL* dataUrl = [NSURL URLWithString: @"http://jigsaw.w3.org/HTTP/negbad"];
+    NSData* expectedData = [[NSData alloc] initWithContentsOfURL:dataUrl];
+
+    __block NSMutableData* totalData;
+
+    @autoreleasepool
+    {
+        JFFAsyncOperationProgressHandler progress = ^(NSData *dataChunk)
+        {
+            if (!totalData)
+                totalData = [NSMutableData new];
+            [totalData appendData:dataChunk];
+        };
+
+        JFFDidFinishAsyncOperationHandler finish = ^(id result, NSError *error)
+        {
+            didFinishLoadingBlockError = error;
+            [ self notify: kGHUnitWaitStatusSuccess
+              forSelector: _cmd ];
+        };
+
+        liveChunkedURLResponseLoader(dataUrl, nil, nil)(progress, nil, finish);
+
+        [self waitForStatus: kGHUnitWaitStatusSuccess
+                    timeout: 61.];
+    }
+
+    GHAssertTrue( [didFinishLoadingBlockError isKindOfClass:[JHttpError class]], @"Expected error with class - %@", [JHttpError class] );
+    GHAssertNil( expectedData, @"packet mismatch" );
+    GHAssertNil( totalData   , @"packet mismatch" );
+
+    GHAssertTrue( initialInstancesCount_ == [ JFFURLConnection instancesCount ], @"packet mismatch" );
+}
+
 //http://jigsaw.w3.org/HTTP/300/Go_301
 -(void)testRedirectOnHttp301Code
 {
-    NSUInteger initialInstancesCount_ = [ JFFURLConnection instancesCount ];
+    NSUInteger initialInstancesCount_ = [JFFURLConnection instancesCount];
 
     [ self prepare ];
 
     __block NSError* didFinishLoadingBlockError_;
 
     NSURL* dataUrl_ = [ NSURL URLWithString: @"http://jigsaw.w3.org/HTTP/300/301.html" ];
-    NSData* expectedData_ = [ [ NSData alloc ] initWithContentsOfURL: dataUrl_ ];
+    NSData* expectedData_ = [[NSData alloc] initWithContentsOfURL:dataUrl_];
 
     NSMutableData* totalData_ = [ NSMutableData new ];
 
     @autoreleasepool
     {
-        
         JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
         params_.url = dataUrl_;
 
@@ -43,7 +85,7 @@
         {
             [ totalData_ appendData: dataChunk_ ];
         };
-        
+
         connection_.didFinishLoadingBlock = ^( NSError* error_ )
         {
             didFinishLoadingBlockError_ = error_;

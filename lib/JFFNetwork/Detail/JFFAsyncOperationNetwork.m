@@ -8,49 +8,69 @@
 
 @implementation JFFAsyncOperationNetwork
 
--(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
-                       progressHandler:( void (^)( id ) )progress_
+-(void)asyncOperationWithResultHandler:(void (^)(id, NSError *) )handler
+                       progressHandler:(void (^)(id) )progress
 {
     {
-        JNConnectionsFactory* factory_ =
+        JNConnectionsFactory* factory =
         [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: self.params ];
 
         self.connection = self.params.useLiveConnection
-            ? [ factory_ createFastConnection     ]
-            : [ factory_ createStandardConnection ];
+            ? [factory createFastConnection    ]
+            : [factory createStandardConnection];
     }
 
     self.connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
 
-    __unsafe_unretained JFFAsyncOperationNetwork* self_ = self;
+    __unsafe_unretained JFFAsyncOperationNetwork* unretainedSelf = self;
 
-    progress_ = [ progress_ copy ];
-    self.connection.didReceiveDataBlock = ^( NSData* data_ )
+    progress = [progress copy];
+    self.connection.didReceiveDataBlock = ^(NSData *data)
     {
-        if ( progress_ )
-            progress_( data_ );
+        if (progress)
+            progress(data);
     };
 
-    handler_ = [ handler_ copy ];
-    self.connection.didFinishLoadingBlock = ^( NSError* error_ )
+    handler = [ handler copy ];
+    JFFDidFinishLoadingHandler finish = [^(NSError *error)
     {
-        if ( handler_ )
-            handler_( error_ ? nil : self_.resultContext, error_ );
+        if (handler)
+            handler(error?nil:unretainedSelf.resultContext, error);
+    }copy];
+
+    self.connection.didFinishLoadingBlock = finish;
+
+    self.connection.didReceiveResponseBlock = ^void(id< JNUrlResponse > response)
+    {
+        if ( !unretainedSelf->_responseAnalyzer )
+        {
+            unretainedSelf.resultContext = response;
+            return;
+        }
+
+        NSError *error;
+        unretainedSelf.resultContext = unretainedSelf->_responseAnalyzer(response, &error);
+
+        if (error)
+        {
+            finish(error);
+            [unretainedSelf forceCancel];
+        }
     };
 
-    self.connection.didReceiveResponseBlock = ^void( id< JNUrlResponse > response_ )
-    {
-        self_.resultContext = response_;
-    };
+    [self.connection start];
+}
 
-    [ self.connection start ];
+-(void)forceCancel
+{
+    [self cancel:YES];
 }
 
 -(void)cancel:( BOOL )canceled_
 {
-    if ( canceled_ )
+    if (canceled_)
     {
-        [ self.connection cancel ];
+        [self.connection cancel];
         self.connection = nil;
     }
 }
