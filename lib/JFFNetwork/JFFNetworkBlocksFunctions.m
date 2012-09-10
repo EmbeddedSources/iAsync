@@ -32,34 +32,35 @@ JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams *params
     return buildAsyncOperationWithInterface(asyncObj);
 }
 
-JFFAsyncOperation genericDataURLResponseLoader( JFFURLConnectionParams* params_ )
+JFFAsyncOperation genericDataURLResponseLoader(JFFURLConnectionParams *params)
 {
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                     , JFFCancelAsyncOperationHandler cancelCallback_
-                                     , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    params = [params copy];
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        JFFAsyncOperation loader_ = genericChunkedURLResponseLoader( params_ );
+        JFFAsyncOperation loader = genericChunkedURLResponseLoader(params);
 
-        NSMutableData* responseData_ = [ NSMutableData new ];
-        progressCallback_ = [ progressCallback_ copy ];
-        JFFAsyncOperationProgressHandler dataProgressCallback_ = ^void( id progressInfo_ )
+        NSMutableData* responseData = [ NSMutableData new ];
+        progressCallback = [progressCallback copy];
+        JFFAsyncOperationProgressHandler dataProgressCallback = ^void(id progressInfo)
         {
-            if ( progressCallback_ )
-                progressCallback_( progressInfo_ );
-            [ responseData_ appendData: progressInfo_ ];
+            if (progressCallback)
+                progressCallback(progressInfo);
+            [responseData appendData:progressInfo];
         };
 
-        JFFDidFinishAsyncOperationHandler doneCallbackWrapper_ = nil;
-        if ( doneCallback_ )
+        JFFDidFinishAsyncOperationHandler doneCallbackWrapper;
+        if (doneCallback)
         {
-            doneCallback_ = [ doneCallback_ copy ];
-            doneCallbackWrapper_ = ^void( id result_, NSError* error_ )
+            doneCallback = [doneCallback copy];
+            doneCallbackWrapper = ^void(id result, NSError *error)
             {
-                doneCallback_( result_ ? responseData_ : nil, error_ );
+                doneCallback(result?responseData:nil, error);
             };
         }
 
-        return loader_( dataProgressCallback_, cancelCallback_, doneCallbackWrapper_ );
+        return loader(dataProgressCallback, cancelCallback, doneCallbackWrapper);
     };
 }
 
