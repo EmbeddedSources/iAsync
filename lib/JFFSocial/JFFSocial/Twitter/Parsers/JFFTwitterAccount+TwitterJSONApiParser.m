@@ -27,7 +27,7 @@
 
         {
             NSString* avatarUrlString = dict[@"profile_image_url"];
-            result.avatarURL = [[NSURL alloc]initWithString:avatarUrlString];
+            result.avatarURL = [avatarUrlString toURL];
         }
     }
 

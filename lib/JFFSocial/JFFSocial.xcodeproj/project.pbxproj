@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37063AA315FA3E9200B4B059 /* JFFSocialForsquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063AA215FA3E9200B4B059 /* JFFSocialForsquare.m */; };
+		37063AA715FA4BB900B4B059 /* JFFForsquareSessionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063AA615FA4BB900B4B059 /* JFFForsquareSessionStorage.m */; };
 		CE4F600C15F8B2BB00271035 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F600B15F8B2BB00271035 /* Foundation.framework */; };
 		CE4F601115F8B2BB00271035 /* JFFSocial.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE4F601015F8B2BB00271035 /* JFFSocial.h */; };
 		CE4F601C15F8B30C00271035 /* JFFSocialTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F601B15F8B30C00271035 /* JFFSocialTwitter.m */; };
@@ -152,6 +154,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		37063AA115FA3E9200B4B059 /* JFFSocialForsquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialForsquare.h; sourceTree = "<group>"; };
+		37063AA215FA3E9200B4B059 /* JFFSocialForsquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialForsquare.m; sourceTree = "<group>"; };
+		37063AA515FA4BB900B4B059 /* JFFForsquareSessionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFForsquareSessionStorage.h; sourceTree = "<group>"; };
+		37063AA615FA4BB900B4B059 /* JFFForsquareSessionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFForsquareSessionStorage.m; sourceTree = "<group>"; };
 		CE41F6BB15FA12E700A742EE /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		CE41F75E15FA15A000A742EE /* JFFSocialTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFSocialTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4F600815F8B2BB00271035 /* libJFFSocial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFSocial.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,6 +235,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37063AA015FA3E0C00B4B059 /* Forsquare */ = {
+			isa = PBXGroup;
+			children = (
+				37063AA415FA4B1600B4B059 /* ForsquareSession */,
+				37063AA115FA3E9200B4B059 /* JFFSocialForsquare.h */,
+				37063AA215FA3E9200B4B059 /* JFFSocialForsquare.m */,
+			);
+			path = Forsquare;
+			sourceTree = "<group>";
+		};
+		37063AA415FA4B1600B4B059 /* ForsquareSession */ = {
+			isa = PBXGroup;
+			children = (
+				37063AA515FA4BB900B4B059 /* JFFForsquareSessionStorage.h */,
+				37063AA615FA4BB900B4B059 /* JFFForsquareSessionStorage.m */,
+			);
+			path = ForsquareSession;
+			sourceTree = "<group>";
+		};
 		CE4F5FFD15F8B2BB00271035 = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +293,7 @@
 		CE4F600D15F8B2BB00271035 /* JFFSocial */ = {
 			isa = PBXGroup;
 			children = (
+				37063AA015FA3E0C00B4B059 /* Forsquare */,
 				CE85430A15FA25BB00750066 /* Details */,
 				CE4F609515F8BA4300271035 /* Errors */,
 				CE4F601915F8B2D800271035 /* Twitter */,
@@ -640,8 +666,12 @@
 				CE5A034E15FA05F4005CC01A /* JFFParseJSONObjectError.m in Sources */,
 				CE85430D15FA25DE00750066 /* JFFSocialAsyncUtils.m in Sources */,
 				CE85431015FA29F600750066 /* AsyncAnalyzers.m in Sources */,
+				37063AA315FA3E9200B4B059 /* JFFSocialForsquare.m in Sources */,
+				37063AA715FA4BB900B4B059 /* JFFForsquareSessionStorage.m in Sources */,
+
 				CE85432115FA37C600750066 /* JFFDirectTweetMessage.m in Sources */,
 				CECF90AC15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
