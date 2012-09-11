@@ -2,6 +2,20 @@
 #import <JFFTestTools/GHAsyncTestCase+MainThreadTests.h>
 #import <JFFUtils/JFFUtils.h>
 
+//TODO workaround to hook delegate method
+//TODO fix this workaround
+@implementation GHUnitIPhoneAppDelegate (OpenApplicationAsyncOpTest)
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return NO;
+}
+
+@end
+
 @interface OpenApplicationAsyncOpTest : GHAsyncTestCase
 @end
 
@@ -20,6 +34,7 @@
 
         loader(nil, nil, ^(id result, NSError *error)
         {
+            resultURL = result;
             finishTest();
         });
     };
@@ -27,8 +42,9 @@
     [ self performAsyncRequestOnMainThreadWithBlock: test
                                            selector: _cmd ];
 
-    NSLog(@"resultURL: %@", resultURL);
-    GHAssertNotNil( resultURL, @"OK" );
+    GHAssertEqualObjects(@"ce275877963c451ca44e2c04b69f2029",
+                         [resultURL scheme],
+                         @"result url mismatch");
 }
 
 @end
