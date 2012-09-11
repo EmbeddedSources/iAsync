@@ -152,8 +152,8 @@
 
         object.delegate = delegate;
 
-        id sentObject = [NSNull null];
-        [object.delegate someDelegateMethod:[NSNull null]];
+        id sentObject = [NSObject new];
+        [object.delegate someDelegateMethod:sentObject];
 
         GHAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
         GHAssertTrue(proxyDelegate1.methodCallArgument == sentObject, @"method was called");
@@ -165,8 +165,8 @@
 {
     [self performBlockWIthMemoryTest:^()
     {
-        TestDelegateObject *delegate   = [TestDelegateObject new];
-        TestObjectWithDelegate *object = [TestObjectWithDelegate new];
+        TestDelegateObject     *delegate = [TestDelegateObject     new];
+        TestObjectWithDelegate *object   = [TestObjectWithDelegate new];
 
         @autoreleasepool
         {
@@ -179,8 +179,8 @@
 
         object.delegate = delegate;
 
-        id sentObject = [NSNull null];
-        [object.delegate someDelegateMethod:[NSNull null]];
+        id sentObject = [NSObject new];
+        [object.delegate someDelegateMethod:sentObject];
 
         GHAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
     }];
