@@ -4,6 +4,7 @@
 #import <JFFUI/AlertView/NSError+Alert.h>
 
 #import <JFFUI/Extensions/UINib+FirstObject.h>
+#import <JFFUI/Extensions/UIApplication+OpenApplicationAsyncOp.h>
 
 #import <JFFUI/UIViewController/UIViewController+PresentTopViewController.h>
 
