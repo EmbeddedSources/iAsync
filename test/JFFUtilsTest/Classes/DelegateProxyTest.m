@@ -40,13 +40,15 @@
 
 @implementation DelegateProxyTest
 
--(void)testDelegateSetAndGetTheSameObject
+-(void)testSetProxyDelegate
 {
     TestDelegateObject *delegate = [TestDelegateObject new];
     TestObjectWithDelegate *object = [TestObjectWithDelegate new];
 
+    TestProxyDelegateObject *proxyDelegate = [TestProxyDelegateObject new];
+
     //hook object
-    [object addDelegateProxy:[TestProxyDelegateObject new]
+    [object addDelegateProxy:proxyDelegate
                 delegateName:@"delegate"];
 
     object.delegate = delegate;

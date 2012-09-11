@@ -19,6 +19,26 @@ static void validateArguments(id proxy,
     assert([[targetObject class] hasInstanceMethodWithSelector:NSSelectorFromString([delegateName propertySetNameForPropertyName])]);
 }
 
+@implementation NSString (DelegateProxy)
+
+- (NSString*)hookedGetterMethodNameForClass:(Class)targetClass
+{
+    NSString *result = [[NSString alloc]initWithFormat:@"hookedDelegateGetterName_%@_%@",
+                        targetClass,
+                        self];
+    return result;
+}
+
+- (NSString*)hookedSetterMethodNameForClass:(Class)targetClass
+{
+    NSString *result = [[NSString alloc]initWithFormat:@"hookedDelegateSetterName_%@_%@",
+                        targetClass,
+                        self];
+    return result;
+}
+
+@end
+
 @interface JFFDelegateProxyClassMethods : NSObject
 @end
 
@@ -28,10 +48,16 @@ static void validateArguments(id proxy,
 {
     NSString *delegateName = NSStringFromSelector(_cmd);
     NSArray *delegateNameComponents = [delegateName componentsSeparatedByString:@"_"];
-    NSString *hookedGetterName = [[NSString alloc]initWithFormat:@"hookedDelegateGetterName_%@_%@",
-                                  [self class],
-                                  [delegateNameComponents lastObject]];
+    NSString *hookedGetterName = [[delegateNameComponents lastObject]hookedGetterMethodNameForClass:[self class]];
     return objc_msgSend(self, NSSelectorFromString(hookedGetterName));
+}
+
+- (id)delegateSetterHookMethod:(id)delegate
+{
+    NSString *delegateName = NSStringFromSelector(_cmd);
+    NSArray *delegateNameComponents = [delegateName componentsSeparatedByString:@"_"];
+    NSString *hookedSetterName = [[delegateNameComponents lastObject]hookedSetterMethodNameForClass:[self class]];
+    return objc_msgSend(self, NSSelectorFromString(hookedSetterName), delegate);
 }
 
 @end
@@ -49,9 +75,7 @@ static void validateArguments(id proxy,
         NSString *prototypeMethodName = [[NSString alloc]initWithFormat:@"prototypeDelegateGetterName_%@_%@",
                                          [self class],
                                          delegateName];
-        NSString *hookedMethodName = [[NSString alloc]initWithFormat:@"hookedDelegateGetterName_%@_%@",
-                                    [self class],
-                                    delegateName];
+        NSString *hookedGetterName = [delegateName hookedGetterMethodNameForClass:[self class]];
 
         if ([prototypeClass addInstanceMethodIfNeedWithSelector:@selector(delegateGetterHookMethod)
                                                         toClass:prototypeClass
@@ -60,7 +84,25 @@ static void validateArguments(id proxy,
             [prototypeClass hookInstanceMethodForClass:[self class]
                                           withSelector:NSSelectorFromString(delegateName)
                                prototypeMethodSelector:NSSelectorFromString(prototypeMethodName)
-                                    hookMethodSelector:NSSelectorFromString(hookedMethodName)];
+                                    hookMethodSelector:NSSelectorFromString(hookedGetterName)];
+        }
+    }
+
+    {
+        delegateName = [delegateName propertySetNameForPropertyName];
+        NSString *prototypeMethodName = [[NSString alloc]initWithFormat:@"prototypeDelegateSetterName_%@_%@",
+                                         [self class],
+                                         delegateName];
+        NSString *hookedSetterName = [delegateName hookedSetterMethodNameForClass:[self class]];
+
+        if ([prototypeClass addInstanceMethodIfNeedWithSelector:@selector(delegateSetterHookMethod:)
+                                                        toClass:prototypeClass
+                                              newMethodSelector:NSSelectorFromString(prototypeMethodName)])
+        {
+            [prototypeClass hookInstanceMethodForClass:[self class]
+                                          withSelector:NSSelectorFromString(delegateName)
+                               prototypeMethodSelector:NSSelectorFromString(prototypeMethodName)
+                                    hookMethodSelector:NSSelectorFromString(hookedSetterName)];
         }
     }
 }
