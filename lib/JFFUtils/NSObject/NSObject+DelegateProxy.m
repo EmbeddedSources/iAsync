@@ -3,43 +3,65 @@
 #import "JFFAssignProxy.h"
 #import "JFFMutableAssignArray.h"
 
+#import "JFFClangLiterals.h"
 #import "DelegateProxyUtils.h"
+#import "JFFProxyDelegatesDispatcher.h"
 
 #include <objc/runtime.h>
+#include <objc/message.h>
 
 static char proxyDelegatesKey;
-static char realDelegateKey;
-
-@interface NSObject (DelegateProxyPrivate)
-
-@property (nonatomic, weak) id realDelegateWeakObject;
-
-- (JFFMutableAssignArray*)lazyProxyDelegatesWeakMutableArray;
-- (JFFMutableAssignArray*)lazyRealDelegateWeakMutableArray;
-
-@end
 
 @implementation NSObject (DelegateProxy)
 
-- (JFFMutableAssignArray*)lazyProxyDelegatesWeakMutableArray
+- (NSMutableDictionary*)lazyProxyDelegatesDictionary
 {
-    if (!objc_getAssociatedObject(self, &proxyDelegatesKey))
+    NSMutableDictionary *result = objc_getAssociatedObject(self, &proxyDelegatesKey);
+
+    if (!result)
     {
-        objc_setAssociatedObject(self, &proxyDelegatesKey, [JFFMutableAssignArray new], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        result = [NSMutableDictionary new];
+        objc_setAssociatedObject(self, &proxyDelegatesKey, result, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    return objc_getAssociatedObject(self, &proxyDelegatesKey);
+
+    return result;
 }
 
-- (id)realDelegateWeakObject
+- (JFFMutableAssignArray*)proxyDelegatesForDelegateWithName:(NSString *)delegateName
 {
-    JFFAssignProxy *resultProxy = objc_getAssociatedObject(self, &realDelegateKey);
-    return resultProxy.target;
+    NSMutableDictionary *arrayByDelegateName = [self lazyProxyDelegatesDictionary];
+
+    JFFMutableAssignArray *delegates = arrayByDelegateName[delegateName];
+    return delegates;
 }
 
-- (void)setRealDelegateWeakObject:(id)delegate
+- (JFFMutableAssignArray*)lazyProxyDelegatesForDelegateWithName:(NSString *)delegateName
 {
-    JFFAssignProxy *proxy = [[JFFAssignProxy alloc]initWithTarget:delegate];
-    objc_setAssociatedObject(self, &realDelegateKey, proxy, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    NSMutableDictionary *arrayByDelegateName = [self lazyProxyDelegatesDictionary];
+
+    JFFMutableAssignArray *delegates = arrayByDelegateName[delegateName];
+
+    if (!delegates)
+    {
+        delegates = [JFFMutableAssignArray new];
+        arrayByDelegateName[delegateName] = delegates;
+    }
+
+    return delegates;
+}
+
+- (JFFProxyDelegatesDispatcher *)proxyDelegatesDispatcherForHookedGetterName:(NSString *)hookedGetterName
+                                                                delegateName:(NSString *)delegateName
+{
+    JFFMutableAssignArray *delegates = [self proxyDelegatesForDelegateWithName:delegateName];
+
+    id realDelegate = objc_msgSend(self, NSSelectorFromString(hookedGetterName));
+
+    JFFProxyDelegatesDispatcher *dispatcher =
+    [JFFProxyDelegatesDispatcher newProxyDelegatesDispatcherWithRealDelegate:realDelegate
+                                                                   delegates:delegates];
+
+    return dispatcher;
 }
 
 - (void)addDelegateProxy:(id)proxy
@@ -48,6 +70,12 @@ static char realDelegateKey;
     jff_validateSeteDelegateProxyMethodArguments(proxy, delegateName, self);
 
     hookDelegateSetterAndGetterMethodsForProxyDelegate(delegateName, [self class]);
+
+    //add proxy object
+    {
+        JFFMutableAssignArray *delegates = [self lazyProxyDelegatesForDelegateWithName:delegateName];
+        [delegates addObject:proxy];
+    }
 }
 
 - (void)removeDelegateProxy:(id)proxy
@@ -57,21 +85,11 @@ static char realDelegateKey;
 
     hookDelegateSetterAndGetterMethodsForProxyDelegate(delegateName, [self class]);
 
-    [self doesNotRecognizeSelector:_cmd];
-}
-
-- (void)setDelegateProxy:(id)proxy
-            delegateName:(NSString *)delegateName
-{
-    if (proxy)
+    //remove proxy object
     {
-        [self addDelegateProxy:proxy
-                  delegateName:delegateName];
-        return;
+        JFFMutableAssignArray *delegates = [self proxyDelegatesForDelegateWithName:delegateName];
+        [delegates removeObject:proxy];
     }
-
-    [self removeDelegateProxy:proxy
-                 delegateName:delegateName];
 }
 
 @end

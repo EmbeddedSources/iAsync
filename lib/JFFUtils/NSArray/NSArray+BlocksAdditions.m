@@ -4,71 +4,71 @@
 
 @implementation NSMutableArray (BlocksAdditions)
 
-+(id)converToCurrentTypeMutableArray:( NSMutableArray* )array_
++ (id)converToCurrentTypeMutableArray:(NSMutableArray *)array
 {
-    return array_;
+    return array;
 }
 
 @end
 
 @implementation NSArray (BlocksAdditions)
 
-+(id)converToCurrentTypeMutableArray:( NSMutableArray* )array_
++ (id)converToCurrentTypeMutableArray:(NSMutableArray *)array
 {
-    return [ array_ copy ];
+    return [array copy];
 }
 
-+(id)arrayWithSize:( NSUInteger )size_
-          producer:( JFFProducerBlock )block_
++ (id)arrayWithSize:(NSUInteger)size
+           producer:(JFFProducerBlock)block
 {
-    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: size_ ];
+    NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:size];
 
-    for ( NSUInteger index_ = 0; index_ < size_; ++index_ )
+    for ( NSUInteger index = 0; index < size; ++index )
     {
-        [ result_ addObject: block_( index_ ) ];
+        [result addObject:block(index)];
     }
 
-    return [ self converToCurrentTypeMutableArray: result_ ];
+    return [self converToCurrentTypeMutableArray:result];
 }
 
-+(id)arrayWithCapacity:( NSUInteger )capacity_
-  ignoringNilsProducer:( JFFProducerBlock )block_
++ (id)arrayWithCapacity:(NSUInteger)capacity
+   ignoringNilsProducer:(JFFProducerBlock)block
 {
-    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: capacity_ ];
+    NSMutableArray* result = [[NSMutableArray alloc]initWithCapacity:capacity];
 
-    for ( NSUInteger index_ = 0; index_ < capacity_; ++index_ )
+    for ( NSUInteger index = 0; index < capacity; ++index )
     {
-        id object_ = block_( index_ );
-        if ( object_ )
-            [ result_ addObject: object_ ];
+        id object = block(index);
+        if (object)
+            [result addObject:object];
     }
 
-    return [ self converToCurrentTypeMutableArray: result_ ];
+    return [self converToCurrentTypeMutableArray:result];
 }
 
--(void)each:( JFFActionBlock )block_
+- (void)each:(JFFActionBlock)block
 {
-    [ self enumerateObjectsUsingBlock: ^void( id obj_, NSUInteger idx_, BOOL* stop_ )
+    [self enumerateObjectsUsingBlock:^void(id obj, NSUInteger idx, BOOL *stop)
     {
-        block_( obj_ );
-    } ];
+        block(obj);
+    }];
 }
 
--(NSArray*)select:( JFFPredicateBlock )predicate_
+- (NSArray*)select:(JFFPredicateBlock)predicate
 {
-    return [ self selectWithIndex: ^( id obj_, NSUInteger idx_ )
+    return [self selectWithIndex:^(id obj, NSUInteger idx)
     {
-        return predicate_( obj_ );
-    } ];
+        return predicate(obj);
+    }];
 }
 
--(NSArray*)selectWithIndex:( JFFPredicateWithIndexBlock )predicate_
+- (NSArray*)selectWithIndex:(JFFPredicateWithIndexBlock)predicate
 {
-    NSIndexSet* indexes_ = [ self indexesOfObjectsPassingTest: ^BOOL( id obj_, NSUInteger idx_, BOOL* stop_ ) 
+    NSIndexSet *indexes = [self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) 
     {
-        return predicate_( obj_, idx_ );
+        return predicate(obj, idx);
     } ];
-    return [ self objectsAtIndexes: indexes_ ];
+    return [self objectsAtIndexes:indexes];
 }
 
 - (NSArray*)map:(JFFMappingBlock)block
@@ -83,16 +83,16 @@
     return [result copy];
 }
 
--(NSArray*)map:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_
+- (NSArray*)map:(JFFMappingWithErrorBlock)block error:(NSError **)outError
 {
-    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
+    NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
 
-    for ( id object_ in self )
+    for (id object in self)
     {
-        id newObject_ = block_( object_, outError_ );
-        if ( newObject_ )
+        id newObject = block(object, outError);
+        if (newObject)
         {
-            [ result_ addObject: newObject_ ];
+            [result addObject:newObject];
         }
         else
         {
@@ -100,7 +100,7 @@
         }
     }
 
-    return [ result_ copy ];
+    return [result copy];
 }
 
 -(NSArray*)forceMap:( JFFMappingBlock )block_
