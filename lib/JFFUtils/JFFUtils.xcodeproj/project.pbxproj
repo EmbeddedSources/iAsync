@@ -312,6 +312,12 @@
 		8DB67B2013E980B70024EA6C /* JFFAssignProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB67B1E13E980B70024EA6C /* JFFAssignProxy.m */; };
 		AA747D9F0F9514B9006C5449 /* JFFUtils_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFUtils_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		CEA0979C15FF2ADE0080DEF7 /* DelegateProxyUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA0979A15FF2ADE0080DEF7 /* DelegateProxyUtils.h */; };
+		CEA0979D15FF2ADE0080DEF7 /* DelegateProxyUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0979B15FF2ADE0080DEF7 /* DelegateProxyUtils.m */; };
+		CEA097A015FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA0979E15FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.h */; };
+		CEA097A115FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0979F15FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.m */; };
+		CEA097A415FF2C860080DEF7 /* JFFDelegateProxyClassMethods.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA097A215FF2C850080DEF7 /* JFFDelegateProxyClassMethods.h */; };
+		CEA097A515FF2C860080DEF7 /* JFFDelegateProxyClassMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097A315FF2C850080DEF7 /* JFFDelegateProxyClassMethods.m */; };
 		CEC851AC15F4E20E0022F479 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC851AB15F4E20E0022F479 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -435,6 +441,12 @@
 		8DB67B1E13E980B70024EA6C /* JFFAssignProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAssignProxy.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* JFFUtils_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFUtils_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CEA0979A15FF2ADE0080DEF7 /* DelegateProxyUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateProxyUtils.h; sourceTree = "<group>"; };
+		CEA0979B15FF2ADE0080DEF7 /* DelegateProxyUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateProxyUtils.m; sourceTree = "<group>"; };
+		CEA0979E15FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DelegateProxySelectorsNames.h"; sourceTree = "<group>"; };
+		CEA0979F15FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DelegateProxySelectorsNames.m"; sourceTree = "<group>"; };
+		CEA097A215FF2C850080DEF7 /* JFFDelegateProxyClassMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDelegateProxyClassMethods.h; sourceTree = "<group>"; };
+		CEA097A315FF2C850080DEF7 /* JFFDelegateProxyClassMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDelegateProxyClassMethods.m; sourceTree = "<group>"; };
 		CEC851AB15F4E20E0022F479 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libJFFUtils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFUtils.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -640,6 +652,7 @@
 		651BE0AD1390496200DD6890 /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
+				CEA0979715FF2AAC0080DEF7 /* Details */,
 				651BE137139107EA00DD6890 /* NSObject+Ownerships.h */,
 				651BE138139107EA00DD6890 /* NSObject+Ownerships.m */,
 				651BE1CB1391A36800DD6890 /* NSObject+OnDeallocBlock.h */,
@@ -760,6 +773,27 @@
 				7E57F42C14F93738002D139B /* JFFUtilsFW-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEA0979715FF2AAC0080DEF7 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				CEA0979915FF2ABF0080DEF7 /* DelegateProxy */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		CEA0979915FF2ABF0080DEF7 /* DelegateProxy */ = {
+			isa = PBXGroup;
+			children = (
+				CEA0979A15FF2ADE0080DEF7 /* DelegateProxyUtils.h */,
+				CEA0979B15FF2ADE0080DEF7 /* DelegateProxyUtils.m */,
+				CEA0979E15FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.h */,
+				CEA0979F15FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.m */,
+				CEA097A215FF2C850080DEF7 /* JFFDelegateProxyClassMethods.h */,
+				CEA097A315FF2C850080DEF7 /* JFFDelegateProxyClassMethods.m */,
+			);
+			path = DelegateProxy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -933,6 +967,9 @@
 				1B2A4A9E15EF62A3004ABB2E /* NSString+FileAttributes.h in Headers */,
 				37063C6715FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.h in Headers */,
 				655C20E715FE5A4000022B11 /* NSObject+DelegateProxy.h in Headers */,
+				CEA0979C15FF2ADE0080DEF7 /* DelegateProxyUtils.h in Headers */,
+				CEA097A015FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.h in Headers */,
+				CEA097A415FF2C860080DEF7 /* JFFDelegateProxyClassMethods.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1282,6 +1319,9 @@
 				1B2A4AA215EF62A3004ABB2E /* NSString+FileAttributes.m in Sources */,
 				37063C6815FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.m in Sources */,
 				655C20E815FE5A4000022B11 /* NSObject+DelegateProxy.m in Sources */,
+				CEA0979D15FF2ADE0080DEF7 /* DelegateProxyUtils.m in Sources */,
+				CEA097A115FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.m in Sources */,
+				CEA097A515FF2C860080DEF7 /* JFFDelegateProxyClassMethods.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -48,7 +48,7 @@
     TestProxyDelegateObject *proxyDelegate = [TestProxyDelegateObject new];
 
     //hook object
-    [object addDelegateProxy:proxyDelegate
+    [object setDelegateProxy:proxyDelegate
                 delegateName:@"delegate"];
 
     object.delegate = delegate;

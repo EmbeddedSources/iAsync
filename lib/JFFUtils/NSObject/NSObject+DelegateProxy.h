@@ -2,10 +2,7 @@
 
 @interface NSObject (DelegateProxy)
 
-- (void)addDelegateProxy:(id)proxy
+- (void)setDelegateProxy:(id)proxy
             delegateName:(NSString *)delegateName;
-
-- (void)removeDelegateProxy:(id)proxy
-               delegateName:(NSString *)delegateName;
 
 @end

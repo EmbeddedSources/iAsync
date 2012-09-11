@@ -1,16 +1,16 @@
 #import "NSString+PropertyName.h"
 
-static NSString* setterPreffix_ = @"set";
-static NSString* setterSuffix_ = @":";
+static NSString* setterPreffix = @"set";
+static NSString* setterSuffix  = @":";
 
 @implementation NSString (PropertyName)
 
 -(id)propertyGetNameFromPropertyName
 {
-    NSUInteger stringLength_ = [ self length ];
+    NSUInteger stringLength_ = [self length];
     if ( stringLength_ <= 4
-        || [ self characterAtIndex: stringLength_ - 1 ] != ':'
-        || ![ self hasPrefix: setterPreffix_ ] )
+        || [self characterAtIndex:stringLength_ - 1] != ':'
+        || ![self hasPrefix:setterPreffix] )
         return nil;
 
     NSRange range1_ = { 3, 1 };
@@ -23,17 +23,17 @@ static NSString* setterSuffix_ = @":";
 
 -(id)propertySetNameForPropertyName
 {
-    if ( [ self hasSuffix: setterSuffix_ ] )
+    if ([self hasSuffix: setterSuffix])
         return nil;
 
-    NSUInteger stringLength_ = [ self length ];
-    NSRange range1_ = { 0, 1 };
-    NSString* propertyNamePart1_ = [ [ self substringWithRange: range1_ ] capitalizedString ];
-    NSRange range2_ = { 1, stringLength_ - 1 };
-    NSString* propertyNamePart2_ = [ self substringWithRange: range2_ ];
-    NSString* result_ = [ propertyNamePart1_ stringByAppendingString: propertyNamePart2_ ];
+    NSUInteger stringLength = [self length];
+    NSRange range1 = {0, 1};
+    NSString *propertyNamePart1 = [[self substringWithRange:range1]capitalizedString];
+    NSRange range2 = {1, stringLength - 1};
+    NSString *propertyNamePart2= [self substringWithRange:range2];
+    NSString *result = [propertyNamePart1 stringByAppendingString:propertyNamePart2];
 
-    return [ [ setterPreffix_ stringByAppendingString: result_ ] stringByAppendingString: setterSuffix_ ];
+    return [[setterPreffix stringByAppendingString:result]stringByAppendingString:setterSuffix];
 }
 
 @end
