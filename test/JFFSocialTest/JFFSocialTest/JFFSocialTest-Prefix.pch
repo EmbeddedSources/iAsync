@@ -9,6 +9,7 @@
 #endif
 
 #ifdef __OBJC__
+    #import <JFFUI/JFFUI.h>
     #import <JFFUtils/JFFUtils.h>
     #import <JFFTestTools/JFFTestTools.h>
     #import <JFFSocial/JFFSocial.h>
