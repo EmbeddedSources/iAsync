@@ -11,7 +11,7 @@
 
 @interface JFFAutoRemoveAssignProxy : JFFAssignProxy
 
-@property ( nonatomic, copy ) JFFSimpleBlock onDeallocBlock;
+@property (nonatomic, copy) JFFSimpleBlock onDeallocBlock;
 
 @end
 
@@ -19,26 +19,26 @@
 
 -(void)onAddToMutableAssignArray:( JFFMutableAssignArray* )array_
 {
-    __unsafe_unretained JFFMutableAssignArray* unretainedArray_ = array_;
-    __unsafe_unretained JFFAutoRemoveAssignProxy* self_ = self;
+    __unsafe_unretained JFFMutableAssignArray* unretainedArray = array_;
+    __unsafe_unretained JFFAutoRemoveAssignProxy* unretainedSelf = self;
     self.onDeallocBlock = ^void( void )
     {
-        [ unretainedArray_ removeObject: self_.target ];
+        [unretainedArray removeObject:unretainedSelf.target];
     };
-    [ self.target addOnDeallocBlock: self.onDeallocBlock ];
+    [self.target addOnDeallocBlock:self.onDeallocBlock];
 }
 
--(void)onRemoveFromMutableAssignArray:( JFFMutableAssignArray* )array_
+- (void)onRemoveFromMutableAssignArray:(JFFMutableAssignArray *)array
 {
-    [ self.target removeOnDeallocBlock: self.onDeallocBlock ];
-    self.onDeallocBlock = nil;
+    [self.target removeOnDeallocBlock:self.onDeallocBlock];
+    self->_onDeallocBlock = nil;
 }
 
 @end
 
 @interface JFFMutableAssignArray ()
 
-@property ( nonatomic ) NSMutableArray* mutableArray;
+@property (nonatomic) NSMutableArray* mutableArray;
 
 @end
 
@@ -55,24 +55,24 @@
 {
     if ( !self->_mutableArray )
     {
-        self->_mutableArray = [ @[] mutableCopy ];
+        self->_mutableArray = [@[] mutableCopy];
     }
     return self->_mutableArray;
 }
 
 -(NSArray*)array
 {
-    return [ self->_mutableArray map: ^id( JFFAutoRemoveAssignProxy* proxy_ )
+    return [self->_mutableArray map:^id(JFFAutoRemoveAssignProxy *proxy)
     {
-        return proxy_.target;
-    } ];
+        return proxy.target;
+    }];
 }
 
--(void)addObject:( id )object_
+- (void)addObject:(id)object
 {
-    JFFAutoRemoveAssignProxy* proxy_ = [ [ JFFAutoRemoveAssignProxy alloc ] initWithTarget: object_ ];
-    [ self.mutableArray addObject: proxy_ ];
-    [ proxy_ onAddToMutableAssignArray: self ];
+    JFFAutoRemoveAssignProxy* proxy = [[JFFAutoRemoveAssignProxy alloc] initWithTarget:object];
+    [self.mutableArray addObject: proxy];
+    [proxy onAddToMutableAssignArray:self];
 }
 
 -(BOOL)containsObject:( id )object_
@@ -86,59 +86,67 @@
 
 -(void)removeObject:( id )object_
 {
-    NSUInteger index_ = [ self->_mutableArray firstIndexOfObjectMatch: ^BOOL( id element_ )
+    NSUInteger index = [ self->_mutableArray firstIndexOfObjectMatch: ^BOOL( id element_ )
     {
         JFFAutoRemoveAssignProxy* proxy_ = element_;
         return proxy_.target == object_;
     } ];
 
-    if ( index_ != NSNotFound )
+    if (index != NSNotFound)
     {
-        JFFAutoRemoveAssignProxy* proxy_ = self->_mutableArray[ index_ ];
+        JFFAutoRemoveAssignProxy* proxy_ = self->_mutableArray[ index ];
         [  proxy_ onRemoveFromMutableAssignArray: self ];
-        [ self->_mutableArray removeObjectAtIndex: index_ ];
+        [ self->_mutableArray removeObjectAtIndex: index ];
     }
 }
 
--(void)removeAllObjects
+- (void)removeAllObjects
 {
-    for( JFFAutoRemoveAssignProxy* proxy_ in self->_mutableArray )
+    for (JFFAutoRemoveAssignProxy *proxy in self->_mutableArray)
     {
-        [  proxy_ onRemoveFromMutableAssignArray: self ];
+        [proxy onRemoveFromMutableAssignArray:self];
     }
-    [ self->_mutableArray removeAllObjects ];
+    [self->_mutableArray removeAllObjects];
 }
 
--(NSUInteger)count
+- (NSUInteger)count
 {
-    return [ self->_mutableArray count ];
+    return [self->_mutableArray count];
 }
 
-+(id)arrayWithObject:( id )anObject_
+- (id)initWithObject:( id )anObject
 {
-    JFFMutableAssignArray* result_ = [ self new ];
-    [ result_ addObject: anObject_ ];
-    return result_;
+    self = [super init];
+
+    [self addObject: anObject];
+
+    return self;
 }
 
--(id)firstMatch:( JFFPredicateBlock )predicate_
+- (id)firstMatch:( JFFPredicateBlock )predicate_
 {
-    for ( JFFAutoRemoveAssignProxy* proxy_ in self->_mutableArray )
+    for (JFFAutoRemoveAssignProxy* proxy in self->_mutableArray)
     {
-        if ( predicate_( proxy_.target ) )
-            return proxy_.target;
+        if (predicate_(proxy.target))
+            return proxy.target;
     }
     return nil;
 }
 
--(void)enumerateObjectsUsingBlock:( void (^)( id, NSUInteger, BOOL* ) )block_
+- (void)enumerateObjectsUsingBlock:(void (^)(id, NSUInteger, BOOL *))block
 {
-    [ _mutableArray enumerateObjectsUsingBlock: ^void( JFFAutoRemoveAssignProxy* proxy_
-                                                      , NSUInteger midx_
-                                                      , BOOL* mstop_ )
+    [self->_mutableArray enumerateObjectsUsingBlock:^void(JFFAutoRemoveAssignProxy* proxy,
+                                                          NSUInteger midx,
+                                                          BOOL* mstop)
     {
-        block_( proxy_.target, midx_, mstop_ );
-    } ];
+        block(proxy.target, midx, mstop);
+    }];
+}
+
+- (id)lastObject
+{
+    JFFAutoRemoveAssignProxy *proxy = [self->_mutableArray lastObject];
+    return proxy.target;
 }
 
 @end

@@ -2,24 +2,24 @@
 
 @implementation JFFAssignProxy
 
--(id)initWithTarget:( id )target_
+- (id)initWithTarget:(id)target
 {
-    self->_target = target_;
+    self->_target = target;
 
     return self;
 }
 
--(void)forwardInvocation:( NSInvocation* )invocation_
+- (void)forwardInvocation:(NSInvocation *)invocation
 {
-    SEL selector_ = [ invocation_ selector ];
+    SEL selector = [invocation selector];
 
-    if ( [ self->_target respondsToSelector: selector_ ] )
-        [ invocation_ invokeWithTarget: self->_target ];
+    if ([self->_target respondsToSelector:selector])
+        [invocation invokeWithTarget:self->_target];
 }
 
--(NSMethodSignature*)methodSignatureForSelector:( SEL )selector_
+- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector
 {
-   return [ self->_target methodSignatureForSelector: selector_ ];
+   return [self->_target methodSignatureForSelector:selector];
 }
 
 @end

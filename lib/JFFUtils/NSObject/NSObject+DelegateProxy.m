@@ -1,9 +1,16 @@
 #import "NSObject+DelegateProxy.h"
 
+#import "JFFAssignProxy.h"
+#import "JFFMutableAssignArray.h"
+
 #import "NSObject+RuntimeExtensions.h"
 #import "NSString+PropertyName.h"
 
 #include <objc/message.h>
+#include <objc/runtime.h>
+
+static char proxyDelegatesKey;
+static char realDelegateKey;
 
 static void validateArguments(id proxy,
                               NSString *delegateName,
@@ -13,9 +20,9 @@ static void validateArguments(id proxy,
     assert(proxy);
     assert(targetObject);
 
-    //should has a propery getter
+    //should has a property getter
     assert([[targetObject class] hasInstanceMethodWithSelector:NSSelectorFromString(delegateName)]);
-    //should has a propery setter
+    //should has a property setter
     assert([[targetObject class] hasInstanceMethodWithSelector:NSSelectorFromString([delegateName propertySetNameForPropertyName])]);
 }
 
@@ -36,6 +43,15 @@ static void validateArguments(id proxy,
                         self];
     return result;
 }
+
+@end
+
+@interface NSObject (DelegateProxyPrivate)
+
+@property (nonatomic, weak) id realDelegateWeakObject;
+
+- (JFFMutableAssignArray*)lazyProxyDelegatesWeakMutableArray;
+- (JFFMutableAssignArray*)lazyRealDelegateWeakMutableArray;
 
 @end
 
@@ -63,6 +79,27 @@ static void validateArguments(id proxy,
 @end
 
 @implementation NSObject (DelegateProxy)
+
+- (JFFMutableAssignArray*)lazyProxyDelegatesWeakMutableArray
+{
+    if (!objc_getAssociatedObject(self, &proxyDelegatesKey))
+    {
+        objc_setAssociatedObject(self, &proxyDelegatesKey, [JFFMutableAssignArray new], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return objc_getAssociatedObject(self, &proxyDelegatesKey);
+}
+
+- (id)realDelegateWeakObject
+{
+    JFFAssignProxy *resultProxy = objc_getAssociatedObject(self, &realDelegateKey);
+    return resultProxy.target;
+}
+
+- (void)setRealDelegateWeakObject:(id)delegate
+{
+    JFFAssignProxy *proxy = [[JFFAssignProxy alloc]initWithTarget:delegate];
+    objc_setAssociatedObject(self, &realDelegateKey, proxy, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 - (void)addDelegateProxy:(id)proxy
             delegateName:(NSString *)delegateName
@@ -111,6 +148,8 @@ static void validateArguments(id proxy,
                delegateName:(NSString *)delegateName
 {
     validateArguments(proxy, delegateName, self);
+
+    [self doesNotRecognizeSelector:_cmd];
 }
 
 @end

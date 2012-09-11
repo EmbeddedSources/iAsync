@@ -4,19 +4,20 @@
 
 @interface JFFMutableAssignArray : NSObject
 
-@property ( nonatomic, copy, readonly ) NSArray* array;
-
-+(id)arrayWithObject:( id )anObject_;
+@property (nonatomic, copy, readonly) NSArray *array;
 
 //compare elements by pointers only
--(void)addObject:( id )object_;
--(BOOL)containsObject:( id )object_;
--(void)removeObject:( id )object_;
--(void)removeAllObjects;
+- (void)addObject:(id)object;
+- (BOOL)containsObject:(id)object;
+- (void)removeObject:(id)object;
+- (void)removeAllObjects;
 
 -(NSUInteger)count;
 
--(id)firstMatch:( JFFPredicateBlock )predicate_;
--(void)enumerateObjectsUsingBlock:( void (^)( id obj, NSUInteger idx, BOOL* stop ) )block_;
+- (id)firstMatch:(JFFPredicateBlock)predicate;
+- (void)enumerateObjectsUsingBlock:(void(^)(id obj, NSUInteger idx, BOOL *stop))block;
+
+//TODO test it
+- (id)lastObject;
 
 @end

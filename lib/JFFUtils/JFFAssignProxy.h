@@ -2,8 +2,8 @@
 
 @interface JFFAssignProxy : NSProxy
 
-@property ( nonatomic, unsafe_unretained, readonly ) id target;
+@property (nonatomic, unsafe_unretained, readonly) id target;
 
--(id)initWithTarget:( id )target_;
+- (id)initWithTarget:(id)target;
 
 @end
