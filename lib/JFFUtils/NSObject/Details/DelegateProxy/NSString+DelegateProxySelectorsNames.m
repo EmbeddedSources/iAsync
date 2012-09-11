@@ -10,12 +10,4 @@
     return result;
 }
 
-- (NSString*)hookedSetterMethodNameForClass:(Class)targetClass
-{
-    NSString *result = [[NSString alloc]initWithFormat:@"hookedDelegateSetterName_%@_%@",
-                        targetClass,
-                        self];
-    return result;
-}
-
 @end

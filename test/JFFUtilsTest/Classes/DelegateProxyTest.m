@@ -1,4 +1,7 @@
 
+#import <JFFUtils/NSObject/Details/DelegateProxy/JFFProxyDelegatesDispatcher.h>
+#import <JFFUtils/NSObject/Details/DelegateProxy/JFFDelegateProxyClassMethods.h>
+
 @protocol TestDelegateProtocol <NSObject>
 
 @optional
@@ -72,88 +75,139 @@
 
 @implementation DelegateProxyTest
 
--(void)testSetProxyDelegate
+- (NSArray*)classesToTestOnLeaks
 {
-    TestDelegateObject *delegate   = [TestDelegateObject new];
-    TestObjectWithDelegate *object = [TestObjectWithDelegate new];
-
-    TestProxyDelegateObject *proxyDelegate = [TestProxyDelegateObject new];
-
-    //hook object
-    [object addDelegateProxy:proxyDelegate
-                delegateName:@"delegate"];
-
-    object.delegate = delegate;
-
-    GHAssertTrue(object.delegate != delegate, @"not the same object");
+    return @[
+    [TestObjectWithDelegate                         class],
+    [TestDelegateObject                             class],
+    [TestProxyDelegateObject                        class],
+    [TestProxyDelegateShouldNotReceiveMessageObject class],
+    [JFFProxyDelegatesDispatcher                    class],
+    [JFFDelegateProxyClassMethods                   class],
+    ];
 }
 
--(void)testProxyDelegateMessageGot
+- (void)setUpClass
 {
-    TestDelegateObject *delegate   = [TestDelegateObject new];
-    TestObjectWithDelegate *object = [TestObjectWithDelegate new];
-
-    TestProxyDelegateObject *proxyDelegate1 = [TestProxyDelegateObject new];
-    TestProxyDelegateObject *proxyDelegate2 = [TestProxyDelegateObject new];
-
-    //hook object
-    [object addDelegateProxy:proxyDelegate1
-                delegateName:@"delegate"];
-    
-    [object addDelegateProxy:proxyDelegate2
-                delegateName:@"delegate"];
-
-    object.delegate = delegate;
-
-    id sentObject = [NSNull null];
-    [object.delegate someDelegateMethod:[NSNull null]];
-
-    GHAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
-    GHAssertTrue(proxyDelegate1.methodCallArgument == sentObject, @"method was called");
-    GHAssertTrue(proxyDelegate2.methodCallArgument == sentObject, @"method was called");
+    for (Class class in [self classesToTestOnLeaks])
+    {
+        [class enableInstancesCounting];
+    }
 }
 
--(void)testProxyDelegateAfterRemoveFromMemory
+- (void)performBlockWIthMemoryTest:(JFFSimpleBlock)block
 {
-    TestDelegateObject *delegate   = [TestDelegateObject new];
-    TestObjectWithDelegate *object = [TestObjectWithDelegate new];
+    NSArray *initialInstancesCouns = [[self classesToTestOnLeaks]map:^id(id object)
+    {
+        return @([object instancesCount]);
+    }];
 
     @autoreleasepool
     {
-        TestProxyDelegateShouldNotReceiveMessageObject *proxyDelegate = [TestProxyDelegateShouldNotReceiveMessageObject new];
+        block();
+    }
+
+    [[self classesToTestOnLeaks]enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    {
+        NSNumber *num = [initialInstancesCouns objectAtIndex:idx];
+        GHAssertEqualObjects(num, @([obj instancesCount]), @"we got a leak");
+    }];
+}
+
+- (void)testSetProxyDelegate
+{
+    [self performBlockWIthMemoryTest:^()
+    {
+        TestDelegateObject *delegate   = [TestDelegateObject     new];
+        TestObjectWithDelegate *object = [TestObjectWithDelegate new];
+
+        TestProxyDelegateObject *proxyDelegate = [TestProxyDelegateObject new];
 
         //hook object
         [object addDelegateProxy:proxyDelegate
                     delegateName:@"delegate"];
-    }
 
-    object.delegate = delegate;
+        object.delegate = delegate;
 
-    id sentObject = [NSNull null];
-    [object.delegate someDelegateMethod:[NSNull null]];
+        GHAssertTrue(object.delegate != delegate, @"not the same object");
+    }];
+}
 
-    GHAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
+- (void)testProxyDelegateMessageGot
+{
+    [self performBlockWIthMemoryTest:^()
+    {
+        TestDelegateObject *delegate   = [TestDelegateObject new];
+        TestObjectWithDelegate *object = [TestObjectWithDelegate new];
+
+        TestProxyDelegateObject *proxyDelegate1 = [TestProxyDelegateObject new];
+        TestProxyDelegateObject *proxyDelegate2 = [TestProxyDelegateObject new];
+
+        //hook object
+        [object addDelegateProxy:proxyDelegate1
+                    delegateName:@"delegate"];
+        
+        [object addDelegateProxy:proxyDelegate2
+                    delegateName:@"delegate"];
+
+        object.delegate = delegate;
+
+        id sentObject = [NSNull null];
+        [object.delegate someDelegateMethod:[NSNull null]];
+
+        GHAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
+        GHAssertTrue(proxyDelegate1.methodCallArgument == sentObject, @"method was called");
+        GHAssertTrue(proxyDelegate2.methodCallArgument == sentObject, @"method was called");
+    }];
+}
+
+-(void)testProxyDelegateAfterRemoveFromMemory
+{
+    [self performBlockWIthMemoryTest:^()
+    {
+        TestDelegateObject *delegate   = [TestDelegateObject new];
+        TestObjectWithDelegate *object = [TestObjectWithDelegate new];
+
+        @autoreleasepool
+        {
+            TestProxyDelegateShouldNotReceiveMessageObject *proxyDelegate = [TestProxyDelegateShouldNotReceiveMessageObject new];
+
+            //hook object
+            [object addDelegateProxy:proxyDelegate
+                        delegateName:@"delegate"];
+        }
+
+        object.delegate = delegate;
+
+        id sentObject = [NSNull null];
+        [object.delegate someDelegateMethod:[NSNull null]];
+
+        GHAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
+    }];
 }
 
 -(void)testProxyDelegateAfterRemoveFromObservers
 {
-    TestDelegateObject *delegate   = [TestDelegateObject new];
-    TestObjectWithDelegate *object = [TestObjectWithDelegate new];
+    [self performBlockWIthMemoryTest:^()
+    {
+        TestDelegateObject *delegate   = [TestDelegateObject new];
+        TestObjectWithDelegate *object = [TestObjectWithDelegate new];
 
-    TestProxyDelegateShouldNotReceiveMessageObject *proxyDelegate = [TestProxyDelegateShouldNotReceiveMessageObject new];
+        TestProxyDelegateShouldNotReceiveMessageObject *proxyDelegate = [TestProxyDelegateShouldNotReceiveMessageObject new];
 
-    [object addDelegateProxy:proxyDelegate
-                delegateName:@"delegate"];
+        [object addDelegateProxy:proxyDelegate
+                    delegateName:@"delegate"];
 
-    object.delegate = delegate;
+        object.delegate = delegate;
 
-    [object removeDelegateProxy:proxyDelegate
-                   delegateName:@"delegate"];
+        [object removeDelegateProxy:proxyDelegate
+                       delegateName:@"delegate"];
 
-    id sentObject = [NSNull null];
-    [object.delegate someDelegateMethod:[NSNull null]];
+        id sentObject = [NSNull null];
+        [object.delegate someDelegateMethod:[NSNull null]];
 
-    GHAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
+        GHAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
+    }];
 }
 
 @end

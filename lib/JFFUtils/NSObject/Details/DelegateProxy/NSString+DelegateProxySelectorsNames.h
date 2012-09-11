@@ -3,6 +3,5 @@
 @interface NSString (DelegateProxySelectorsNames)
 
 - (NSString*)hookedGetterMethodNameForClass:(Class)targetClass;
-- (NSString*)hookedSetterMethodNameForClass:(Class)targetClass;
 
 @end

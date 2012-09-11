@@ -15,10 +15,6 @@ void jff_validateSeteDelegateProxyMethodArguments(id proxy, NSString *delegateNa
 
     //should has a property getter
     assert([[targetObject class] hasInstanceMethodWithSelector:NSSelectorFromString(delegateName)]);
-
-    //TODO remove
-    //should has a property setter
-    assert([[targetObject class] hasInstanceMethodWithSelector:NSSelectorFromString([delegateName propertySetNameForPropertyName])]);
 }
 
 void hookDelegateSetterAndGetterMethodsForProxyDelegate(NSString *delegateName,
@@ -40,25 +36,6 @@ void hookDelegateSetterAndGetterMethodsForProxyDelegate(NSString *delegateName,
                                           withSelector:NSSelectorFromString(delegateName)
                                prototypeMethodSelector:NSSelectorFromString(prototypeMethodName)
                                     hookMethodSelector:NSSelectorFromString(hookedGetterName)];
-        }
-    }
-
-    //TODO remove this hook
-    {
-        delegateName = [delegateName propertySetNameForPropertyName];
-        NSString *prototypeMethodName = [[NSString alloc]initWithFormat:@"prototypeDelegateSetterName_%@_%@",
-                                         targetClass,
-                                         delegateName];
-        NSString *hookedSetterName = [delegateName hookedSetterMethodNameForClass:targetClass];
-
-        if ([prototypeClass addInstanceMethodIfNeedWithSelector:@selector(delegateSetterHookMethod:)
-                                                        toClass:prototypeClass
-                                              newMethodSelector:NSSelectorFromString(prototypeMethodName)])
-        {
-            [prototypeClass hookInstanceMethodForClass:targetClass
-                                          withSelector:NSSelectorFromString(delegateName)
-                               prototypeMethodSelector:NSSelectorFromString(prototypeMethodName)
-                                    hookMethodSelector:NSSelectorFromString(hookedSetterName)];
         }
     }
 }
