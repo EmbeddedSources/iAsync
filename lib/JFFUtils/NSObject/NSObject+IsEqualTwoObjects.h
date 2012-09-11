@@ -2,7 +2,7 @@
 
 @interface NSObject (IsEqualTwoObjects)
 
-+(BOOL)object:( NSObject* )object1_
-    isEqualTo:( NSObject* )object2_;
++ (BOOL)object:(NSObject *)object1
+     isEqualTo:(NSObject *)object2;
 
 @end

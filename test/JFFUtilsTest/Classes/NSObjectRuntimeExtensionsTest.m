@@ -319,21 +319,21 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
                    , [ class_ classMethodWithLongNameForUniquenessPurposes ]
                    , @"result mismatch" );
 
-    [ [ TwiceHookMethodsClass class ] hookClassMethodForClass: [ NSTwiceTestClass class ]
-                                                 withSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
-                                      prototypeMethodSelector: @selector( twicePrototypeMethod )
-                                           hookMethodSelector: @selector( twiceHookMethod ) ];
+    [[TwiceHookMethodsClass class]hookClassMethodForClass:[NSTwiceTestClass class]
+                                             withSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
+                                  prototypeMethodSelector:@selector(twicePrototypeMethod)
+                                       hookMethodSelector:@selector(twiceHookMethod)];
 
-    GHAssertEquals( testClassMethodResult_ * 3
-                   , [ class_ classMethodWithLongNameForUniquenessPurposes ]
-                   , @"result mismatch" );
+    GHAssertEquals(testClassMethodResult_ * 3,
+                   [ class_ classMethodWithLongNameForUniquenessPurposes ],
+                   @"result mismatch" );
 
     GHAssertThrows(
     {
-        [ [ TwiceHookMethodsClass class ] hookClassMethodForClass: [ NSTwiceTestClass class ]
-                                                     withSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
-                                          prototypeMethodSelector: @selector( twicePrototypeMethod )
-                                               hookMethodSelector: @selector( twiceHookMethod ) ];
+        [[TwiceHookMethodsClass class]hookClassMethodForClass:[NSTwiceTestClass class]
+                                                 withSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
+                                      prototypeMethodSelector:@selector(twicePrototypeMethod)
+                                           hookMethodSelector:@selector(twiceHookMethod) ];
     }, @"twice hook forbidden" );
 }
 
