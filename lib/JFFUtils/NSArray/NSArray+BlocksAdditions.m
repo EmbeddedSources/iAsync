@@ -103,20 +103,20 @@
     return [result copy];
 }
 
--(NSArray*)forceMap:( JFFMappingBlock )block_
+- (NSArray*)forceMap:(JFFMappingBlock)block
 {
-    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
+    NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
 
-    for ( id object_ in self )
+    for (id object in self)
     {
-        id newObject_ = block_( object_ );
-        if ( newObject_ )
+        id newObject = block(object);
+        if (newObject)
         {
-            [ result_ addObject: newObject_ ];
+            [result addObject:newObject];
         }
     }
 
-    return [ result_ copy ];
+    return [result copy];
 }
 
 -(NSArray*)mapWithIndex:( JFFMappingWithErrorAndIndexBlock )block_ error:( NSError** )outError_
@@ -171,21 +171,25 @@
     return [ result_ copy ];
 }
 
--(NSUInteger)count:( JFFPredicateBlock )predicate_
+- (NSUInteger)count:(JFFPredicateBlock)predicate
 {
-    __block NSUInteger count_ = 0;
+    __block NSUInteger count = 0;
 
-    [ self each: ^void( id object_ ) { if ( predicate_( object_ ) ) ++count_; } ];
+    [self each: ^void(id object)
+    {
+        if (predicate(object))
+            ++count;
+    }];
 
-    return count_;
+    return count;
 }
 
--(id)firstMatch:( JFFPredicateBlock )predicate_
+- (id)firstMatch:(JFFPredicateBlock)predicate
 {
-    for ( id object_ in self )
+    for (id object in self)
     {
-        if ( predicate_( object_ ) )
-            return object_;
+        if (predicate(object))
+            return object;
     }
     return nil;
 }
