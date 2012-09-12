@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		37063AA315FA3E9200B4B059 /* JFFSocialForsquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063AA215FA3E9200B4B059 /* JFFSocialForsquare.m */; };
 		37063AA715FA4BB900B4B059 /* JFFForsquareSessionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063AA615FA4BB900B4B059 /* JFFForsquareSessionStorage.m */; };
+		37063EEB15FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063EEA15FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.m */; };
+		371D85DA15FF31BD001C1C2C /* JFFFoursquareAuthURLError.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D85D915FF31BD001C1C2C /* JFFFoursquareAuthURLError.m */; };
+		371D875415FF6090001C1C2C /* JFFAsyncFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D875315FF6090001C1C2C /* JFFAsyncFoursquareRequest.m */; };
 		CE4F600C15F8B2BB00271035 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F600B15F8B2BB00271035 /* Foundation.framework */; };
 		CE4F601115F8B2BB00271035 /* JFFSocial.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE4F601015F8B2BB00271035 /* JFFSocial.h */; };
 		CE4F601C15F8B30C00271035 /* JFFSocialTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F601B15F8B30C00271035 /* JFFSocialTwitter.m */; };
@@ -26,9 +29,19 @@
 		CE5A034715FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A034615FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.m */; };
 		CE5A034B15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A034A15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m */; };
 		CE5A034E15FA05F4005CC01A /* JFFParseJSONObjectError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A034D15FA05F4005CC01A /* JFFParseJSONObjectError.m */; };
-		CE85430D15FA25DE00750066 /* JFFSocialAsyncUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85430C15FA25DE00750066 /* JFFSocialAsyncUtils.m */; };
 		CE85431015FA29F600750066 /* AsyncAnalyzers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85430F15FA29F500750066 /* AsyncAnalyzers.m */; };
 		CE85432115FA37C600750066 /* JFFDirectTweetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85432015FA37C600750066 /* JFFDirectTweetMessage.m */; };
+		CEB2350615FF6840005E5CF5 /* JFFSocialInstagram.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2350515FF6840005E5CF5 /* JFFSocialInstagram.m */; };
+		CEB2367715FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2367615FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.m */; };
+		CEB2367F15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2367E15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.m */; };
+		CEB2368215FF8010005E5CF5 /* JFFInstagramResponseError.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2368115FF8010005E5CF5 /* JFFInstagramResponseError.m */; };
+		CEB2368515FF877C005E5CF5 /* JFFInstagramAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2368415FF877C005E5CF5 /* JFFInstagramAccount.m */; };
+		CEB236D416006AF6005E5CF5 /* JFFSocialInstagramApi.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB236D316006AF6005E5CF5 /* JFFSocialInstagramApi.m */; };
+		CEB236D516006BBA005E5CF5 /* JFFSocialAsyncUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85430C15FA25DE00750066 /* JFFSocialAsyncUtils.m */; };
+		CEB236D816006F05005E5CF5 /* JFFInstagramJSONDataAnalyzers.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB236D716006F05005E5CF5 /* JFFInstagramJSONDataAnalyzers.m */; };
+		CEB236DB1600757E005E5CF5 /* JFFInstagramUsersListResponseError.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB236DA1600757E005E5CF5 /* JFFInstagramUsersListResponseError.m */; };
+		CEB23770160098B0005E5CF5 /* JFFInstagramMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2376F160098B0005E5CF5 /* JFFInstagramMediaItem.m */; };
+		CEB237851600AE6C005E5CF5 /* JFFInstagramComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB237841600AE6B005E5CF5 /* JFFInstagramComment.m */; };
 		CECF90AC15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CECF90AB15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +151,20 @@
 			remoteGlobalIDString = 7E8F204314F9494300588C7D;
 			remoteInfo = JFFNetworkFW;
 		};
+		CEB2366B15FF6E3A005E5CF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFUI;
+		};
+		CEB2366D15FF6E3A005E5CF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103F014A88BE1007315A3;
+			remoteInfo = "JFFUI-clang";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -158,6 +185,12 @@
 		37063AA215FA3E9200B4B059 /* JFFSocialForsquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialForsquare.m; sourceTree = "<group>"; };
 		37063AA515FA4BB900B4B059 /* JFFForsquareSessionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFForsquareSessionStorage.h; sourceTree = "<group>"; };
 		37063AA615FA4BB900B4B059 /* JFFForsquareSessionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFForsquareSessionStorage.m; sourceTree = "<group>"; };
+		37063EE915FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncFoursquaerLogin.h; sourceTree = "<group>"; };
+		37063EEA15FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncFoursquaerLogin.m; sourceTree = "<group>"; };
+		371D85D815FF31BD001C1C2C /* JFFFoursquareAuthURLError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFoursquareAuthURLError.h; sourceTree = "<group>"; };
+		371D85D915FF31BD001C1C2C /* JFFFoursquareAuthURLError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFoursquareAuthURLError.m; sourceTree = "<group>"; };
+		371D875215FF6090001C1C2C /* JFFAsyncFoursquareRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncFoursquareRequest.h; sourceTree = "<group>"; };
+		371D875315FF6090001C1C2C /* JFFAsyncFoursquareRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncFoursquareRequest.m; sourceTree = "<group>"; };
 		CE41F6BB15FA12E700A742EE /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		CE41F75E15FA15A000A742EE /* JFFSocialTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFSocialTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4F600815F8B2BB00271035 /* libJFFSocial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFSocial.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +238,27 @@
 		CE85430F15FA29F500750066 /* AsyncAnalyzers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncAnalyzers.m; sourceTree = "<group>"; };
 		CE85431F15FA37C600750066 /* JFFDirectTweetMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDirectTweetMessage.h; sourceTree = "<group>"; };
 		CE85432015FA37C600750066 /* JFFDirectTweetMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDirectTweetMessage.m; sourceTree = "<group>"; };
+		CEB2350415FF6840005E5CF5 /* JFFSocialInstagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialInstagram.h; sourceTree = "<group>"; };
+		CEB2350515FF6840005E5CF5 /* JFFSocialInstagram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialInstagram.m; sourceTree = "<group>"; };
+		CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUI.xcodeproj; path = "/Users/user/Sources/paparam.ru/HumanCloud/lib-third-party/iAsync/test/JFFSocialTest/../../lib/JFFUI/JFFUI.xcodeproj"; sourceTree = "<absolute>"; };
+		CEB2367515FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInvalidInstagramResponseURLError.h; sourceTree = "<group>"; };
+		CEB2367615FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInvalidInstagramResponseURLError.m; sourceTree = "<group>"; };
+		CEB2367D15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramAuthedAccount.h; sourceTree = "<group>"; };
+		CEB2367E15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInstagramAuthedAccount.m; sourceTree = "<group>"; };
+		CEB2368015FF8010005E5CF5 /* JFFInstagramResponseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramResponseError.h; sourceTree = "<group>"; };
+		CEB2368115FF8010005E5CF5 /* JFFInstagramResponseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInstagramResponseError.m; sourceTree = "<group>"; };
+		CEB2368315FF877C005E5CF5 /* JFFInstagramAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramAccount.h; sourceTree = "<group>"; };
+		CEB2368415FF877C005E5CF5 /* JFFInstagramAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInstagramAccount.m; sourceTree = "<group>"; };
+		CEB236D216006AF6005E5CF5 /* JFFSocialInstagramApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialInstagramApi.h; sourceTree = "<group>"; };
+		CEB236D316006AF6005E5CF5 /* JFFSocialInstagramApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialInstagramApi.m; sourceTree = "<group>"; };
+		CEB236D616006F05005E5CF5 /* JFFInstagramJSONDataAnalyzers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramJSONDataAnalyzers.h; sourceTree = "<group>"; };
+		CEB236D716006F05005E5CF5 /* JFFInstagramJSONDataAnalyzers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInstagramJSONDataAnalyzers.m; sourceTree = "<group>"; };
+		CEB236D91600757E005E5CF5 /* JFFInstagramUsersListResponseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramUsersListResponseError.h; sourceTree = "<group>"; };
+		CEB236DA1600757E005E5CF5 /* JFFInstagramUsersListResponseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInstagramUsersListResponseError.m; sourceTree = "<group>"; };
+		CEB2376E160098B0005E5CF5 /* JFFInstagramMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramMediaItem.h; sourceTree = "<group>"; };
+		CEB2376F160098B0005E5CF5 /* JFFInstagramMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInstagramMediaItem.m; sourceTree = "<group>"; };
+		CEB237831600AE6B005E5CF5 /* JFFInstagramComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramComment.h; sourceTree = "<group>"; };
+		CEB237841600AE6B005E5CF5 /* JFFInstagramComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInstagramComment.m; sourceTree = "<group>"; };
 		CECF90AA15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFDirectTweetMessage+TwitterJSONApiParser.h"; sourceTree = "<group>"; };
 		CECF90AB15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFFDirectTweetMessage+TwitterJSONApiParser.m"; sourceTree = "<group>"; };
 		CEE3A9B215FA0EC000F3DC99 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -238,6 +292,8 @@
 		37063AA015FA3E0C00B4B059 /* Forsquare */ = {
 			isa = PBXGroup;
 			children = (
+				371D85C715FF314D001C1C2C /* Errors */,
+				37063ED815FE1B3F00B4B059 /* AsyncAdapters */,
 				37063AA415FA4B1600B4B059 /* ForsquareSession */,
 				37063AA115FA3E9200B4B059 /* JFFSocialForsquare.h */,
 				37063AA215FA3E9200B4B059 /* JFFSocialForsquare.m */,
@@ -252,6 +308,26 @@
 				37063AA615FA4BB900B4B059 /* JFFForsquareSessionStorage.m */,
 			);
 			path = ForsquareSession;
+			sourceTree = "<group>";
+		};
+		37063ED815FE1B3F00B4B059 /* AsyncAdapters */ = {
+			isa = PBXGroup;
+			children = (
+				37063EE915FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.h */,
+				37063EEA15FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.m */,
+				371D875215FF6090001C1C2C /* JFFAsyncFoursquareRequest.h */,
+				371D875315FF6090001C1C2C /* JFFAsyncFoursquareRequest.m */,
+			);
+			path = AsyncAdapters;
+			sourceTree = "<group>";
+		};
+		371D85C715FF314D001C1C2C /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				371D85D815FF31BD001C1C2C /* JFFFoursquareAuthURLError.h */,
+				371D85D915FF31BD001C1C2C /* JFFFoursquareAuthURLError.m */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 		CE4F5FFD15F8B2BB00271035 = {
@@ -293,6 +369,7 @@
 		CE4F600D15F8B2BB00271035 /* JFFSocial */ = {
 			isa = PBXGroup;
 			children = (
+				CEB234F315FF67EC005E5CF5 /* Instagram */,
 				37063AA015FA3E0C00B4B059 /* Forsquare */,
 				CE85430A15FA25BB00750066 /* Details */,
 				CE4F609515F8BA4300271035 /* Errors */,
@@ -329,6 +406,7 @@
 		CE4F601D15F8B55300271035 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */,
 				CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */,
 				CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */,
 				CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */,
@@ -456,6 +534,66 @@
 			path = Details;
 			sourceTree = "<group>";
 		};
+		CEB234F315FF67EC005E5CF5 /* Instagram */ = {
+			isa = PBXGroup;
+			children = (
+				CEB236D116006AE4005E5CF5 /* Details */,
+				CEB2367C15FF7E70005E5CF5 /* Model */,
+				CEB2367415FF760F005E5CF5 /* Errors */,
+				CEB2350415FF6840005E5CF5 /* JFFSocialInstagram.h */,
+				CEB2350515FF6840005E5CF5 /* JFFSocialInstagram.m */,
+			);
+			path = Instagram;
+			sourceTree = "<group>";
+		};
+		CEB2365C15FF6E39005E5CF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEB2366C15FF6E3A005E5CF5 /* libJFFUI.a */,
+				CEB2366E15FF6E3A005E5CF5 /* libJFFUI copy.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEB2367415FF760F005E5CF5 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				CEB2367515FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.h */,
+				CEB2367615FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.m */,
+				CEB2368015FF8010005E5CF5 /* JFFInstagramResponseError.h */,
+				CEB2368115FF8010005E5CF5 /* JFFInstagramResponseError.m */,
+				CEB236D91600757E005E5CF5 /* JFFInstagramUsersListResponseError.h */,
+				CEB236DA1600757E005E5CF5 /* JFFInstagramUsersListResponseError.m */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		CEB2367C15FF7E70005E5CF5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEB2367D15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.h */,
+				CEB2367E15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.m */,
+				CEB2368315FF877C005E5CF5 /* JFFInstagramAccount.h */,
+				CEB2368415FF877C005E5CF5 /* JFFInstagramAccount.m */,
+				CEB2376E160098B0005E5CF5 /* JFFInstagramMediaItem.h */,
+				CEB2376F160098B0005E5CF5 /* JFFInstagramMediaItem.m */,
+				CEB237831600AE6B005E5CF5 /* JFFInstagramComment.h */,
+				CEB237841600AE6B005E5CF5 /* JFFInstagramComment.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEB236D116006AE4005E5CF5 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				CEB236D216006AF6005E5CF5 /* JFFSocialInstagramApi.h */,
+				CEB236D316006AF6005E5CF5 /* JFFSocialInstagramApi.m */,
+				CEB236D616006F05005E5CF5 /* JFFInstagramJSONDataAnalyzers.h */,
+				CEB236D716006F05005E5CF5 /* JFFInstagramJSONDataAnalyzers.m */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -522,6 +660,10 @@
 				{
 					ProductGroup = CE4F602215F8B56300271035 /* Products */;
 					ProjectRef = CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */;
+				},
+				{
+					ProductGroup = CEB2365C15FF6E39005E5CF5 /* Products */;
+					ProjectRef = CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */;
 				},
 				{
 					ProductGroup = CE4F601F15F8B56300271035 /* Products */;
@@ -642,6 +784,21 @@
 			remoteRef = CE5A018615F9EEC4005CC01A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		CEB2366C15FF6E3A005E5CF5 /* libJFFUI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUI.a;
+			remoteRef = CEB2366B15FF6E3A005E5CF5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEB2366E15FF6E3A005E5CF5 /* libJFFUI copy.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			name = "libJFFUI copy.a";
+			path = "libJFFUI-clang.a";
+			remoteRef = CEB2366D15FF6E3A005E5CF5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -664,14 +821,25 @@
 				CE5A034715FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.m in Sources */,
 				CE5A034B15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m in Sources */,
 				CE5A034E15FA05F4005CC01A /* JFFParseJSONObjectError.m in Sources */,
-				CE85430D15FA25DE00750066 /* JFFSocialAsyncUtils.m in Sources */,
 				CE85431015FA29F600750066 /* AsyncAnalyzers.m in Sources */,
 				37063AA315FA3E9200B4B059 /* JFFSocialForsquare.m in Sources */,
 				37063AA715FA4BB900B4B059 /* JFFForsquareSessionStorage.m in Sources */,
-
 				CE85432115FA37C600750066 /* JFFDirectTweetMessage.m in Sources */,
 				CECF90AC15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m in Sources */,
-
+				CEB2350615FF6840005E5CF5 /* JFFSocialInstagram.m in Sources */,
+				37063EEB15FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.m in Sources */,
+				371D85DA15FF31BD001C1C2C /* JFFFoursquareAuthURLError.m in Sources */,
+				371D875415FF6090001C1C2C /* JFFAsyncFoursquareRequest.m in Sources */,
+				CEB2367715FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.m in Sources */,
+				CEB2367F15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.m in Sources */,
+				CEB2368215FF8010005E5CF5 /* JFFInstagramResponseError.m in Sources */,
+				CEB2368515FF877C005E5CF5 /* JFFInstagramAccount.m in Sources */,
+				CEB236D416006AF6005E5CF5 /* JFFSocialInstagramApi.m in Sources */,
+				CEB236D516006BBA005E5CF5 /* JFFSocialAsyncUtils.m in Sources */,
+				CEB236D816006F05005E5CF5 /* JFFInstagramJSONDataAnalyzers.m in Sources */,
+				CEB236DB1600757E005E5CF5 /* JFFInstagramUsersListResponseError.m in Sources */,
+				CEB23770160098B0005E5CF5 /* JFFInstagramMediaItem.m in Sources */,
+				CEB237851600AE6C005E5CF5 /* JFFInstagramComment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

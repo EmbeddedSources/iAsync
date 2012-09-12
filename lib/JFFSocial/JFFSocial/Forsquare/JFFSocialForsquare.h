@@ -4,6 +4,8 @@
 
 @interface JFFSocialForsquare : NSObject
 
++ (JFFAsyncOperation)authLoader;
+
 + (JFFAsyncOperation)friendsLoader;
 
 @end

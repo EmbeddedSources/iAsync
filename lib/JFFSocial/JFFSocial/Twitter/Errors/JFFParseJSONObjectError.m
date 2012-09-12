@@ -2,6 +2,11 @@
 
 @implementation JFFParseJSONObjectError
 
+- (id)init
+{
+    return [ self initWithDescription: NSLocalizedString( @"PARSE_JSON_OBJECT_ERROR", nil ) ];
+}
+
 - (id)copyWithZone:(NSZone *)zone
 {
     JFFParseJSONObjectError *copy = [[self class] allocWithZone:zone];
