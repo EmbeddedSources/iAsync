@@ -19,15 +19,13 @@ JFFAsyncOperation genericChunkedURLResponseLoader( JFFURLConnectionParams* param
 JFFAsyncOperation genericDataURLResponseLoader( JFFURLConnectionParams* params_ );
 
 // Backward compatibility versions
-JFFAsyncOperation chunkedURLResponseLoader( 
-   NSURL* url_
-   , NSData* postData_
-   , NSDictionary* headers_ );
+JFFAsyncOperation chunkedURLResponseLoader(NSURL *url,
+                                           NSData *postData,
+                                           NSDictionary *headers);
 
-JFFAsyncOperation dataURLResponseLoader( 
-   NSURL* url_
-   , NSData* postData_
-   , NSDictionary* headers_ );
+JFFAsyncOperation dataURLResponseLoader(NSURL *url,
+                                        NSData *postData,
+                                        NSDictionary *headers);
 
 JFFAsyncOperation liveChunkedURLResponseLoader( 
    NSURL* url_

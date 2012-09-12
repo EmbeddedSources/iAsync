@@ -2,44 +2,44 @@
 
 @implementation NSString (XQueryComponents)
 
--(NSString*)stringByDecodingURLFormat
+- (NSString*)stringByDecodingURLFormat
 {
-    return [ self stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding ];
+    return [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
--(NSString*)stringByEncodingURLFormat
+- (NSString*)stringByEncodingURLFormat
 {
-    static NSString* unsafe_ = @" <>#%'\";?:@&=+$/,{}|\\^~[]`-*!()";
-    CFStringRef resultRef_ = CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault
-                                                                     , (__bridge CFStringRef)self
-                                                                     , NULL
-                                                                     , (__bridge CFStringRef)unsafe_
-                                                                     , kCFStringEncodingUTF8 );
-    return (__bridge_transfer NSString*)resultRef_;
+    static NSString *unsafe = @" <>#%'\";?:@&=+$/,{}|\\^~[]`-*!()";
+    CFStringRef resultRef = CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault,
+                                                                    (__bridge CFStringRef)self,
+                                                                    NULL,
+                                                                    (__bridge CFStringRef)unsafe,
+                                                                    kCFStringEncodingUTF8 );
+    return (__bridge_transfer NSString*)resultRef;
 }
 
 -(NSDictionary*)dictionaryFromQueryComponents
 {
-    NSMutableDictionary* queryComponents_ = [ NSMutableDictionary new ];
-    for ( NSString* keyValuePairString_ in [ self componentsSeparatedByString: @"&" ] )
+    NSMutableDictionary *queryComponents = [ NSMutableDictionary new ];
+    for (NSString *keyValuePairString in [self componentsSeparatedByString:@"&"])
     {
-        NSArray* keyValuePairArray_ = [ keyValuePairString_ componentsSeparatedByString: @"=" ];
+        NSArray *keyValuePairArray = [keyValuePairString componentsSeparatedByString:@"="];
         
         // Verify that there is at least one key, and at least one value.  Ignore extra = signs
-        if ( [ keyValuePairArray_ count ] < 2 )
+        if ( [ keyValuePairArray count ] < 2 )
             continue;
         
-        NSString* key_ = [ keyValuePairArray_[ 0 ] stringByDecodingURLFormat ];
-        NSString* value_ = [ keyValuePairArray_[ 1 ] stringByDecodingURLFormat ];
-        NSMutableArray* results_ = queryComponents_[ key_ ]; // URL spec says that multiple values are allowed per key
+        NSString* key   = [keyValuePairArray[0]stringByDecodingURLFormat];
+        NSString* value = [keyValuePairArray[1]stringByDecodingURLFormat];
+        NSMutableArray* results_ = queryComponents[ key ]; // URL spec says that multiple values are allowed per key
         if( !results_ )// First object
         {
-            results_ = [ [ NSMutableArray alloc ] initWithCapacity: 1 ];
-            queryComponents_[ key_ ] = results_;
+            results_ = [[NSMutableArray alloc]initWithCapacity:1];
+            queryComponents[key] = results_;
         }
-        [ results_ addObject: value_ ];
+        [results_ addObject: value];
     }
-    return [ queryComponents_ copy ];
+    return [queryComponents copy];
 }
 
 @end

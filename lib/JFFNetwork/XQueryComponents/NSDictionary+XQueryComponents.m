@@ -2,7 +2,7 @@
 
 #import "NSString+XQueryComponents.h"
 
-static NSString* const queryComponentFormat = @"%@=%@";
+static NSString* const queryComponentFormat    = @"%@=%@";
 static NSString* const queryComponentSeparator = @"&";
 
 @interface NSObject (XQueryComponents)
@@ -13,10 +13,10 @@ static NSString* const queryComponentSeparator = @"&";
 
 @implementation NSObject (XQueryComponents)
 
-- (NSString*)stringFromQueryComponentAndKey:( NSString* )key
+- (NSString*)stringFromQueryComponentAndKey:(NSString *)key
 {
-    NSString* value = [ [ self description ] stringByEncodingURLFormat ];
-    return [ [ NSString alloc ] initWithFormat: queryComponentFormat, key, value ];
+    NSString *value = [[self description]stringByEncodingURLFormat];
+    return [[NSString alloc]initWithFormat:queryComponentFormat, key, value];
 }
 
 - (NSArray*)arrayOfQueryComponentsForKey:(NSString *)key
@@ -29,11 +29,11 @@ static NSString* const queryComponentSeparator = @"&";
 
 @implementation NSArray (XQueryComponents)
 
--(NSArray*)arrayOfQueryComponentsForKey:( NSString* )key_
+- (NSArray*)arrayOfQueryComponentsForKey:(NSString *)key
 {
-    return [ self map: ^id(id value)
+    return [self map:^id(id value)
     {
-        return [ value stringFromQueryComponentAndKey: key_ ];
+        return [value stringFromQueryComponentAndKey:key];
     } ];
 }
 
@@ -52,9 +52,9 @@ static NSString* const queryComponentSeparator = @"&";
     return [result componentsJoinedByString:queryComponentSeparator];
 }
 
-- (NSString*)firstValueIfExsistsForKey:( NSString* )key_
+- (NSString*)firstValueIfExsistsForKey:(NSString *)key
 {
-    return [self[key_]noThrowObjectAtIndex:0];
+    return [self[key]noThrowObjectAtIndex:0];
 }
 
 @end
