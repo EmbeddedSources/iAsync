@@ -26,60 +26,60 @@ static JFFAsyncOperationBinder MergeBinders( MergeTwoBindersPtr merger_, NSArray
     return firstBinder_;
 }
 
-JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder firstBinder_
-                                                  , JFFAsyncOperationBinder secondBinder_ );
+JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstBinder,
+                                                  JFFAsyncOperationBinder secondBinder);
 
-JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder firstBinder_
-                                                  , JFFAsyncOperationBinder secondBinder_ )
+JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstBinder,
+                                                  JFFAsyncOperationBinder secondBinder)
 {
-    assert( firstBinder_ ); // should not be nil;
+    assert(firstBinder); // should not be nil;
 
-    firstBinder_  = [ firstBinder_  copy ];
-    secondBinder_ = [ secondBinder_ copy ];
+    firstBinder  = [firstBinder  copy];
+    secondBinder = [secondBinder copy];
 
-    if ( !secondBinder_ )
-        return firstBinder_;
+    if (!secondBinder)
+        return firstBinder;
 
-    return ^JFFAsyncOperation( id bindResult_ )
+    return ^JFFAsyncOperation(id bindResult)
     {
-        JFFAsyncOperation firstLoader_ = firstBinder_( bindResult_ );
-        assert( firstLoader_ );//expected loader
-        return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                        , JFFCancelAsyncOperationHandler cancelCallback_
-                                        , JFFDidFinishAsyncOperationHandler doneCallback_ )
+        JFFAsyncOperation firstLoader = firstBinder(bindResult);
+        assert(firstLoader);//expected loader
+        return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                        JFFCancelAsyncOperationHandler cancelCallback,
+                                        JFFDidFinishAsyncOperationHandler doneCallback)
         {
-            __block JFFCancelAsyncOperation cancelBlockHolder_;
+            __block JFFCancelAsyncOperation cancelBlockHolder;
 
-            progressCallback_ = [ progressCallback_ copy ];
-            doneCallback_     = [ doneCallback_     copy ];
+            progressCallback = [progressCallback copy];
+            doneCallback     = [doneCallback     copy];
 
-            JFFCancelAsyncOperation firstCancel_ = firstLoader_( progressCallback_
-                                                                , cancelCallback_
-                                                                , ^void( id result_, NSError* error_ )
+            JFFCancelAsyncOperation firstCancel_ = firstLoader(progressCallback,
+                                                               cancelCallback,
+                                                               ^void(id result, NSError *error)
             {
-                if ( error_ )
+                if (error)
                 {
-                    if ( doneCallback_ )
-                        doneCallback_( nil, error_ );
+                    if (doneCallback)
+                        doneCallback(nil, error);
                 }
                 else
                 {
-                    JFFAsyncOperation secondLoader_ = secondBinder_( result_ );
-                    assert( secondLoader_ );//result loader should not be nil
-                    cancelBlockHolder_ = secondLoader_( progressCallback_
-                                                       , cancelCallback_
-                                                       , doneCallback_ );
+                    JFFAsyncOperation secondLoader = secondBinder(result);
+                    assert(secondLoader);//result loader should not be nil
+                    cancelBlockHolder = secondLoader(progressCallback,
+                                                     cancelCallback,
+                                                     doneCallback);
                 }
             } );
-            if ( !cancelBlockHolder_ )
-                cancelBlockHolder_ = firstCancel_;
+            if (!cancelBlockHolder)
+                cancelBlockHolder = firstCancel_;
 
-            return ^( BOOL canceled_ )
+            return ^(BOOL canceled)
             {
-                if ( !cancelBlockHolder_ )
+                if (!cancelBlockHolder)
                     return;
-                cancelBlockHolder_( canceled_ );
-                cancelBlockHolder_ = nil;
+                cancelBlockHolder(canceled);
+                cancelBlockHolder = nil;
             };
         };
     };
