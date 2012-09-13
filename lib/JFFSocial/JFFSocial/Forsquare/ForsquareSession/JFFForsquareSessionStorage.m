@@ -56,7 +56,7 @@
 {
     self.authorizeHendler = hendler;
     
-    NSURL *authURL = [NSURL URLWithString:[[self class] authURLString]];
+    NSURL *authURL = [[[self class] authURLString]toURL];
     
     if ([[UIApplication sharedApplication] canOpenURL:authURL])
     {
@@ -79,7 +79,9 @@
         NSString *accessToken = [[self class] accessTokenWithURL:url];
         if (accessToken ) {
             [[self class] saveAccessToken:accessToken];
-            self.authorizeHendler(accessToken, nil);
+            if (self.authorizeHendler) {
+                self.authorizeHendler(accessToken, nil);
+            }
             return YES;
         }
     }

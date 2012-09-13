@@ -1,5 +1,6 @@
 #import "JFFSocialAsyncUtils.h"
 
+//TODO move to common library
 JFFAsyncOperationBinder asyncJsonDataAnalizer()
 {
     JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSData *data)

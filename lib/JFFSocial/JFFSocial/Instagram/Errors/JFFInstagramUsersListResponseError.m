@@ -9,7 +9,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFInstagramUsersListResponseError *copy = [[self class] allocWithZone:zone];
+    JFFInstagramUsersListResponseError *copy = [[[self class] allocWithZone:zone]init];
 
     if (copy)
     {

@@ -4,12 +4,12 @@
 
 - (id)init
 {
-    return [ self initWithDescription: NSLocalizedString( @"PARSE_JSON_OBJECT_ERROR", nil ) ];
+    return [self initWithDescription:NSLocalizedString(@"PARSE_JSON_OBJECT_ERROR", nil)];
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFParseJSONObjectError *copy = [[self class] allocWithZone:zone];
+    JFFParseJSONObjectError *copy = [[[self class]allocWithZone:zone]init];
 
     if (copy)
     {

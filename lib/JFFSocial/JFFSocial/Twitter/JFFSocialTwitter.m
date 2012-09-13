@@ -81,7 +81,7 @@ static JFFAsyncOperation tritterAccountsLoader()
 {
     JFFAsyncOperationBinder requestBinder = ^JFFAsyncOperation(NSArray *accountStroreAndAccounts)
     {
-        TWRequest *request = [[TWRequest alloc] initWithURL:[NSURL URLWithString:urlString]
+        TWRequest *request = [[TWRequest alloc] initWithURL:[urlString toURL]
                                                  parameters:parameters
                                               requestMethod:requestMethod];
 

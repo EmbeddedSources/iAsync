@@ -2,22 +2,20 @@
 
 #import <Foundation/Foundation.h>
 
+@class JFFInstagramCredentials;
+
 @interface JFFSocialInstagram : NSObject
 
 + (JFFAsyncOperation)userLoaderForForUserId:(NSString *)userId
                                 accessToken:(NSString *)accessToken;
 
-+ (JFFAsyncOperation)authedUserLoaderWithClientId:(NSString *)clientId
-                                     clientSecret:(NSString *)clientSecret
-                                      redirectURI:(NSString *)redirectURI;
+//TODO hide from public interfaces
++ (JFFAsyncOperation)authedUserLoaderWithCredentials:(JFFInstagramCredentials *)credentials;
 
 + (JFFAsyncOperation)followedByLoaderForUserId:(NSString *)userId
                                    accessToken:(NSString *)accessToken;
 
-//TODO remove
-+ (JFFAsyncOperation)followedByLoaderWithClientId:(NSString *)clientId
-                                     clientSecret:(NSString *)clientSecret
-                                      redirectURI:(NSString *)redirectURI;
++ (JFFAsyncOperation)followedByLoaderWithCredentials:(JFFInstagramCredentials *)credentials;
 
 + (JFFAsyncOperation)recentMediaItemsLoaderForUserId:(NSString *)userId
                                          accessToken:(NSString *)accessToken;
@@ -29,5 +27,12 @@
 + (JFFAsyncOperation)notifyUsersFollowersWithId:(NSString *)userId
                                         message:(NSString *)message
                                     accessToken:(NSString *)accessToken;
+
++ (JFFAsyncOperation)notifyUsersFollowersWithCredentials:(JFFInstagramCredentials *)credentials
+                                                 message:(NSString *)message;
+
++ (JFFAsyncOperation)notifyUsersWithCredentials:(JFFInstagramCredentials *)credentials
+                                       usersIds:(NSArray *)usersIds
+                                        message:(NSString *)message;
 
 @end

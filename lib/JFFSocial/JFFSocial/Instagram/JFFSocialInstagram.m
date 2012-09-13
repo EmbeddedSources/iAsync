@@ -1,5 +1,6 @@
 #import "JFFSocialInstagram.h"
 
+#import "JFFInstagramCredentials.h"
 #import "JFFInstagramMediaItem.h"
 #import "JFFInstagramAuthedAccount.h"
 
@@ -11,6 +12,8 @@
 
 #import "JFFInstagramJSONDataAnalyzers.h"
 
+static NSString *globalAccessToken;
+
 @implementation JFFSocialInstagram
 
 + (JFFAsyncOperation)userLoaderForForUserId:(NSString *)userId
@@ -21,11 +24,27 @@
     return bindSequenceOfAsyncOperations(loader, jsonDataToOneAccountBinder(), nil);
 }
 
-+ (JFFAsyncOperation)authedUserLoaderWithClientId:(NSString *)clientId
-                                     clientSecret:(NSString *)clientSecret
-                                      redirectURI:(NSString *)redirectURI
++ (JFFAsyncOperation)instagramAccessTokenLoaderForCredentials:(JFFInstagramCredentials *)redentials
 {
-    JFFAsyncOperation oAuthUrlLoader = codeURLLoader(redirectURI, clientId);
+    if (globalAccessToken)
+    {
+        return asyncOperationWithResult(globalAccessToken);
+    }
+
+    JFFAsyncOperation accountLoader = [self authedUserLoaderWithCredentials:redentials];
+
+    JFFAsyncOperationBinder saveAccessTokenBinder = ^JFFAsyncOperation(JFFInstagramAuthedAccount *account)
+    {
+        globalAccessToken = account.instagramAccessToken;
+        return asyncOperationWithResult(globalAccessToken);
+    };
+
+    return bindSequenceOfAsyncOperations(accountLoader, saveAccessTokenBinder, nil);
+}
+
++ (JFFAsyncOperation)authedUserLoaderWithCredentials:(JFFInstagramCredentials *)redentials
+{
+    JFFAsyncOperation oAuthUrlLoader = codeURLLoader(redentials.redirectURI, redentials.clientId);
 
     JFFAsyncOperationBinder urlToCodeBinder = ^JFFAsyncOperation(NSURL *url)
     {
@@ -45,9 +64,9 @@
 
     JFFAsyncOperationBinder userDataBinder = ^JFFAsyncOperation(NSString *code)
     {
-        return authedUserDataLoader(redirectURI,
-                                    clientId,
-                                    clientSecret,
+        return authedUserDataLoader(redentials.redirectURI,
+                                    redentials.clientId,
+                                    redentials.clientSecret,
                                     code
                                     );
     };
@@ -69,18 +88,14 @@
     return bindSequenceOfAsyncOperations(loader, jsonDataToAccountsBinder(), nil);
 }
 
-+ (JFFAsyncOperation)followedByLoaderWithClientId:(NSString *)clientId
-                                     clientSecret:(NSString *)clientSecret
-                                      redirectURI:(NSString *)redirectURI
++ (JFFAsyncOperation)followedByLoaderWithCredentials:(JFFInstagramCredentials *)credentials
 {
-    JFFAsyncOperation userLoader = [self authedUserLoaderWithClientId:clientId
-                                                         clientSecret:clientSecret
-                                                          redirectURI:redirectURI];
+    JFFAsyncOperation userLoader = [self instagramAccessTokenLoaderForCredentials:credentials];
 
-    JFFAsyncOperationBinder userRelatedDataBinder = ^JFFAsyncOperation(JFFInstagramAuthedAccount *account)
+    JFFAsyncOperationBinder userRelatedDataBinder = ^JFFAsyncOperation(NSString *accessToken)
     {
-        return [self followedByLoaderForUserId:account.instagramAccountId
-                                   accessToken:account.instagramAccessToken];
+        return [self followedByLoaderForUserId:@"self"
+                                   accessToken:accessToken];
     };
 
     return bindSequenceOfAsyncOperations(userLoader,
@@ -109,13 +124,10 @@
                                          nil);
 }
 
-+ (JFFAsyncOperation)notifyUsersFollowersWithId:(NSString *)userId
-                                        message:(NSString *)message
-                                    accessToken:(NSString *)accessToken
++ (JFFAsyncOperation)notifyUsersWithLoader:(JFFAsyncOperation)usersLoader
+                                   message:(NSString *)message
+                               accessToken:(NSString *)accessToken
 {
-    JFFAsyncOperation usersLoader = [self followedByLoaderForUserId:userId
-                                                        accessToken:accessToken];
-
     JFFAsyncOperationBinder recentMediaItemsBinder = ^JFFAsyncOperation(NSArray *accounts)
     {
         NSArray *mediaItemsLoaders = [accounts map:^id(JFFInstagramAccount *account)
@@ -153,6 +165,61 @@
                                          recentMediaItemsBinder,
                                          selectFirstMediaItemsBinder,
                                          commentEachMediaItemsBinder,
+                                         nil);
+}
+
++ (JFFAsyncOperation)notifyUsersFollowersWithId:(NSString *)userId
+                                        message:(NSString *)message
+                                    accessToken:(NSString *)accessToken
+{
+    JFFAsyncOperation usersLoader = [self followedByLoaderForUserId:userId
+                                                        accessToken:accessToken];
+
+    return [self notifyUsersWithLoader:usersLoader
+                               message:message
+                           accessToken:accessToken];
+}
+
++ (JFFAsyncOperation)notifyUsersFollowersWithCredentials:(JFFInstagramCredentials *)credentials
+                                                 message:(NSString *)message
+{
+    JFFAsyncOperation accessTokenLoader = [self instagramAccessTokenLoaderForCredentials:credentials];
+
+    JFFAsyncOperationBinder notifyBinder = ^JFFAsyncOperation(NSString *accessToken)
+    {
+        return [self notifyUsersFollowersWithId:@"self"
+                                        message:message
+                                    accessToken:accessToken];
+    };
+
+    return bindSequenceOfAsyncOperations(accessTokenLoader,
+                                         notifyBinder,
+                                         nil);
+}
+
++ (JFFAsyncOperation)notifyUsersWithCredentials:(JFFInstagramCredentials *)credentials
+                                       usersIds:(NSArray *)usersIds
+                                        message:(NSString *)message
+{
+    JFFAsyncOperation accessTokenLoader = [self instagramAccessTokenLoaderForCredentials:credentials];
+    
+    JFFAsyncOperationBinder notifyBinder = ^JFFAsyncOperation(NSString *accessToken)
+    {
+        NSArray *usersLoaders = [usersIds map:^id(NSString *userId)
+        {
+            return [self userLoaderForForUserId:userId
+                                    accessToken:accessToken];
+        }];
+
+        JFFAsyncOperation usersLoader = groupOfAsyncOperationsArray(usersLoaders);
+
+        return [self notifyUsersWithLoader:usersLoader
+                                   message:message
+                               accessToken:accessToken];
+    };
+
+    return bindSequenceOfAsyncOperations(accessTokenLoader,
+                                         notifyBinder,
                                          nil);
 }
 

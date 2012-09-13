@@ -14,6 +14,7 @@
 
 //Instagram headers
 #import <JFFSocial/Instagram/JFFSocialInstagram.h>
+#import <JFFSocial/Instagram/JFFInstagramCredentials.h>
 #import <JFFSocial/Instagram/Model/JFFInstagramAccount.h>
 #import <JFFSocial/Instagram/Model/JFFInstagramAuthedAccount.h>
 #import <JFFSocial/Instagram/Model/JFFInstagramMediaItem.h>
