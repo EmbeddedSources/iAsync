@@ -24,15 +24,18 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
 //likes - to like and unlike items on a user’s behalf
 
 //comments
--(void)RtestInstagramAuthedUser
+-(void)testInstagramAuthedUser
 {
     __block JFFInstagramAuthedAccount *account;
 
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
-        JFFAsyncOperation loader = [JFFSocialInstagram authedUserLoaderWithClientId:clientId
-                                                                       clientSecret:clientSecret
-                                                                        redirectURI:redirectURI];
+        JFFInstagramCredentials *credentials = [JFFInstagramCredentials new];
+        credentials.clientId     = clientId;
+        credentials.clientSecret = clientSecret;
+        credentials.redirectURI  = redirectURI;
+
+        JFFAsyncOperation loader = [JFFSocialInstagram authedUserLoaderWithCredentials:credentials];
 
         loader(nil,nil,^(id result,NSError *error)
         {
@@ -53,15 +56,18 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
 
 }
 
--(void)RtestInstagramFollowersLoader
+-(void)testInstagramFollowersLoader
 {
     __block NSArray *followers;
 
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
-        JFFAsyncOperation loader = [JFFSocialInstagram followedByLoaderWithClientId:clientId
-                                                                       clientSecret:clientSecret
-                                                                        redirectURI:redirectURI];
+        JFFInstagramCredentials *credentials = [JFFInstagramCredentials new];
+        credentials.clientId     = clientId;
+        credentials.clientSecret = clientSecret;
+        credentials.redirectURI  = redirectURI;
+
+        JFFAsyncOperation loader = [JFFSocialInstagram followedByLoaderWithCredentials:credentials];
 
         loader(nil,nil,^(id result,NSError *error)
         {
@@ -72,8 +78,6 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
 
     [self performAsyncRequestOnMainThreadWithBlock:block
                                           selector:_cmd];
-
-    NSLog(@"followers: %@",followers);
 
     GHAssertNotNil(followers, @"ok");
 
@@ -100,7 +104,7 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
                          , [vlg2Account.avatarURL description], @"instagram url mismatch");
 }
 
--(void)RtestInstagramAuthedUserByAccessToken
+-(void)testInstagramAuthedUserByAccessToken
 {
     __block JFFInstagramAuthedAccount *account;
 
@@ -129,7 +133,7 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
                          , [account.avatarURL description], @"instagram url mismatch");
 }
 
--(void)RtestLoadOwnMediaItems
+-(void)testLoadOwnMediaItems
 {
     __block NSArray *mediaItems;
 
@@ -156,7 +160,7 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
     GHAssertEqualObjects( @"277393673043504646_220778258", mediaItem.mediaItemId, @"instagram id mismatch");
 }
 
--(void)RtestLoadVlg1MediaItems
+-(void)testLoadVlg1MediaItems
 {
     __block NSArray *mediaItems;
 
@@ -183,7 +187,7 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
     GHAssertEqualObjects( @"278621428023433649_221327437", mediaItem.mediaItemId, @"instagram id mismatch");
 }
 
--(void)RtestCommentVlg1MediaItem
+-(void)testCommentVlg1MediaItem
 {
     __block JFFInstagramComment *comment;
 

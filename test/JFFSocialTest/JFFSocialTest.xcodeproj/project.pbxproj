@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		371D861615FF34DA001C1C2C /* FoursquareApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D861515FF34DA001C1C2C /* FoursquareApiTest.m */; };
 		CE4F60AA15F8BD1600271035 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60A915F8BD1600271035 /* UIKit.framework */; };
 		CE4F60AC15F8BD1600271035 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60AB15F8BD1600271035 /* Foundation.framework */; };
 		CE4F60AE15F8BD1600271035 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60AD15F8BD1600271035 /* CoreGraphics.framework */; };
@@ -20,7 +21,6 @@
 		CE4F613D15F8BE2600271035 /* libJFFScheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F611915F8BD8500271035 /* libJFFScheduler.a */; };
 		CE4F613E15F8BE2600271035 /* libJFFSocial.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F610415F8BD8000271035 /* libJFFSocial.a */; };
 		CE4F614015F8BE2E00271035 /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60E815F8BD7C00271035 /* libJFFUtils.a */; };
-		CE4F615715F8BE7000271035 /* TwitterApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F615615F8BE7000271035 /* TwitterApiTest.m */; };
 		CE4F615F15F8BF6200271035 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F615E15F8BF6200271035 /* Twitter.framework */; };
 		CE4F61FC15F8E77F00271035 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F615D15F8BEDB00271035 /* libJFFTestTools.a */; };
 		CE5A01C915F9F16B005CC01A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5A01C815F9F16B005CC01A /* CFNetwork.framework */; };
@@ -29,7 +29,6 @@
 		CEB2347815FF61F6005E5CF5 /* libJFFUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB2347315FF61EC005E5CF5 /* libJFFUI.a */; };
 		CEB234F215FF6776005E5CF5 /* libJFFNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB234E915FF6767005E5CF5 /* libJFFNetwork.a */; };
 		CEB2361F15FF6BD1005E5CF5 /* GHUnitIPhoneAppDelegate+OpenWithURL.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2361E15FF6BD1005E5CF5 /* GHUnitIPhoneAppDelegate+OpenWithURL.m */; };
-		CEB2365A15FF6C8C005E5CF5 /* InstagramApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2365915FF6C8C005E5CF5 /* InstagramApiTest.m */; };
 		CECF90A915FA3B3B009E707A /* direct_message_send.json in Resources */ = {isa = PBXBuildFile; fileRef = CECF90A815FA3B3B009E707A /* direct_message_send.json */; };
 /* End PBXBuildFile section */
 
@@ -667,9 +666,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4F60B615F8BD1600271035 /* main.m in Sources */,
-				CE4F615715F8BE7000271035 /* TwitterApiTest.m in Sources */,
+				371D84D815FF20B6001C1C2C /* (null) in Sources */,
+				371D861615FF34DA001C1C2C /* FoursquareApiTest.m in Sources */,
 				CEB2361F15FF6BD1005E5CF5 /* GHUnitIPhoneAppDelegate+OpenWithURL.m in Sources */,
-				CEB2365A15FF6C8C005E5CF5 /* InstagramApiTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    return [JFFForsquareSessionStorage handleAuthOpenURL:url];
+    return NO;
 }
 
 @end

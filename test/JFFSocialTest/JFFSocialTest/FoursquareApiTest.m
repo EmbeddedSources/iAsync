@@ -1,9 +1,18 @@
 
 #import <JFFSocial/Forsquare/ForsquareSession/JFFForsquareSessionStorage.h>
+#import <JFFSocial/Forsquare/JFFSocialForsquare.h>
+
+#import <JFFTestTools/GHAsyncTestCase+MainThreadTests.h>
+
+#import <JFFSocial/Forsquare/Model/FoursquareUserModel.h>
+
 /*
 
  fq111://authorize#access_token=0WA2I2N1RDHMOVKZESV15ELMALCGC1T2M23UPJMYEMM2WNMZ
+ Logined via Facebook - test.dev.and@gmail.com, pwd: 123qweasdzxc456
 */
+
+
 
 #define ACCESS_TOKEN @"0WA2I2N1RDHMOVKZESV15ELMALCGC1T2M23UPJMYEMM2WNMZ"
 
@@ -30,16 +39,91 @@
 
 - (void)testAuth
 {
+
+    TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
+    {
+        JFFAsyncOperation loader = [JFFSocialForsquare authLoader];
+        
+        loader(nil,nil,^(id result,NSError *error)
+               {
+                   NSLog(@"Access token: %@", result);
+                   finishBLock();
+               });
+    };
+    
+    [ self performAsyncRequestOnMainThreadWithBlock:block
+                                           selector:_cmd ];
+}
+
+- (void)testFriendsLoader
+{
     [self prepare];
     
     SEL selector = _cmd;
-    [[JFFForsquareSessionStorage shared] openSessionWithHandler:^(NSString *result, NSError *error) {
-        if ([result length] > 0) {
-            [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
-        }
-    }];
+    [JFFSocialForsquare myFriendsLoader] (nil, nil, ^(id result, NSError *error)
+                                          {
+                                              if (!error && [result isKindOfClass:[NSArray class]] && [result count] > 0)
+                                              {
+                                                  for (FoursquareUserModel *model  in result) {
+                                                      NSLog(@"Model: %@", model.contacts);
+                                                  }
+                                                  
+                                                  [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
+                                              }
+                                              else
+                                              {
+                                                  [self notify:kGHUnitWaitStatusFailure forSelector:selector];
+                                              }
+                                              
+                                          });
     
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1000.0];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:100.0];
+}
+
+- (void)testCheckinsLoader
+{
+    [self prepare];
+    
+    SEL selector = _cmd;
+    [JFFSocialForsquare checkinsLoaderWithUserId:nil limit:1] (nil, nil, ^(id result, NSError *error)
+                                          {
+                                              if (!error && [result isKindOfClass:[NSArray class]] && [result count] > 0)
+                                              {
+                                                  [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
+                                              }
+                                              else
+                                              {
+                                                  [self notify:kGHUnitWaitStatusFailure forSelector:selector];
+                                              }
+                                              
+                                          });
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:100.0];
+}
+
+- (void)testAddPostToCheckin
+{
+    [self prepare];
+    
+    SEL selector = _cmd;
+    [JFFSocialForsquare addPostToCheckin:@"5051a006e4b08eccb1257587"
+                                withText:@"Hi!"
+                                     url:@"http://wishdates.com"
+                               contentID:nil]
+    (nil, nil, ^(id result, NSError *error)
+     {
+         if (!error)
+         {
+             [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
+         }
+         else
+         {
+             [self notify:kGHUnitWaitStatusFailure forSelector:selector];
+         }
+         
+     });
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:100.0];
 }
 
 @end

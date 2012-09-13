@@ -47,7 +47,7 @@
 
 -(void)testHTTPCookiePathMatchWithSameDomain
 {
-    NSDate* now_ = [ [ NSDate new ] dateByAddingTimeInterval: 100000. ];
+    NSDate* now_ = [NSDate distantFuture];
 
     NSDateFormatter* formatter_ = [ NSDateFormatter new ];
     [ formatter_ setLocale: [ [ NSLocale alloc ] initWithLocaleIdentifier: @"en_US_POSIX" ] ];
@@ -114,17 +114,17 @@
 
 -(void)testHTTPCookieDotDomainMatch
 {
-    NSDate* now_ = [ [ NSDate new ] dateByAddingTimeInterval: 100000. ];
+    NSDate *now = [NSDate distantFuture];
 
-    NSDateFormatter* formatter_ = [ NSDateFormatter new ];
-    [ formatter_ setLocale: [ [ NSLocale alloc ] initWithLocaleIdentifier: @"en_US_POSIX" ] ];
-    formatter_.timeZone = [ [ NSTimeZone alloc ] initWithName: @"GMT" ];
-    formatter_.dateFormat = @"EEE, dd-MMM-YYYY hh:mm:ss";
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"en_US_POSIX"]];
+    formatter.timeZone = [[NSTimeZone alloc]initWithName:@"GMT"];
+    formatter.dateFormat = @"EEE, dd-MMM-YYYY hh:mm:ss";
 
     static NSString* const headerFormat_ = @"ws-alr1.dk.sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=%@ GMT; Domain=sitecore.net; path=/";
 
-    NSString* header_ = [ [ NSString alloc ] initWithFormat: headerFormat_
-                         , [ formatter_ stringFromDate: now_ ] ];
+    NSString* header_ = [[NSString alloc]initWithFormat:headerFormat_
+                         , [formatter stringFromDate:now]];
 
     NSURL* url_ = [ NSURL URLWithString: @"http://ws-alr1.dk.sitecore.net/sitecore/login" ];
 
@@ -181,7 +181,7 @@
 
 -(void)testHTTPCookieNoDotDomainMatch
 {
-    NSDate* now_ = [ [ NSDate new ] dateByAddingTimeInterval: 100000. ];
+    NSDate* now_ = [NSDate distantFuture];
     
     NSDateFormatter* formatter_ = [ NSDateFormatter new ];
     [ formatter_ setLocale: [ [ NSLocale alloc ] initWithLocaleIdentifier: @"en_US_POSIX" ] ];
