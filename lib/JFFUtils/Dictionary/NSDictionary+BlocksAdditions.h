@@ -4,12 +4,12 @@
 
 @interface NSDictionary (BlocksAdditions)
 
--(NSDictionary*)map:( JFFDictMappingBlock )block_;
--(NSDictionary*)mapKey:( JFFDictMappingBlock )block_;
+- (NSDictionary*)map:(JFFDictMappingBlock)block;
+- (NSDictionary*)mapKey:(JFFDictMappingBlock)block;
 
--(NSUInteger)count:( JFFDictPredicateBlock )predicate_;
+- (NSUInteger)count:(JFFDictPredicateBlock)predicate;
 
 //Calls block once for each element in self, passing that element and key as a parameter.
--(void)each:( JFFDictActionBlock )block_;
+- (void)each:(JFFDictActionBlock)block;
 
 @end

@@ -28,40 +28,40 @@
     dispatch_release( self->_dispatchQueue );
 }
 
--(id)initWithTargetFactory:( JFFObjectFactory )factory_
-             dispatchQueue:( dispatch_queue_t )dispatchQueue_
+- (id)initWithTargetFactory:(JFFObjectFactory)factory
+              dispatchQueue:(dispatch_queue_t)dispatchQueue
 {
-    self->_dispatchQueue = dispatchQueue_;
-    dispatch_retain( self->_dispatchQueue );
+    self->_dispatchQueue = dispatchQueue;
+    dispatch_retain(self->_dispatchQueue);
 
-    factory_ = [ factory_ copy ];
-    void (^releaseListener_)( void ) = ^void( void )
+    factory = [factory copy];
+    void (^releaseListener)(void) = ^void(void)
     {
         self->_container = [ JFFProxyObjectContainer new ];
-        self->_container.target = factory_();
+        self->_container.target = factory();
     };
-    safe_dispatch_sync( self->_dispatchQueue, releaseListener_ );
+    safe_dispatch_sync(self->_dispatchQueue, releaseListener);
 
     return self;
 }
 
-+(id)singleThreadProxyWithTargetFactory:( JFFObjectFactory )factory_
-                          dispatchQueue:( dispatch_queue_t )dispatchQueue_
++ (id)singleThreadProxyWithTargetFactory:(JFFObjectFactory)factory
+                           dispatchQueue:(dispatch_queue_t)dispatchQueue
 {
-    return [ [ self alloc ] initWithTargetFactory: factory_
-                                    dispatchQueue: dispatchQueue_ ];
+    return [[self alloc]initWithTargetFactory:factory
+                                dispatchQueue:dispatchQueue];
 }
 
--(void)forwardInvocation:( NSInvocation* )invocation_
+-(void)forwardInvocation:( NSInvocation* )invocation
 {
-    SEL selector_ = [ invocation_ selector ];
+    SEL selector = [invocation selector];
 
-    void (^forwardInvocation_)( void ) = ^void( void )
+    void (^forwardInvocation)(void) = ^void(void)
     {
-        if ( [ self->_container.target respondsToSelector: selector_ ] )
-            [ invocation_ invokeWithTarget: self->_container.target ];
+        if ([self->_container.target respondsToSelector:selector])
+            [invocation invokeWithTarget:self->_container.target];
     };
-    safe_dispatch_sync( self->_dispatchQueue, forwardInvocation_ );
+    safe_dispatch_sync(self->_dispatchQueue, forwardInvocation);
 }
 
 -(NSMethodSignature*)methodSignatureForSelector:( SEL )selector_
