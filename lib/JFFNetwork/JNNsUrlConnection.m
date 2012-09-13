@@ -11,27 +11,38 @@
 {
     NSURLConnection* _nativeConnection;
     JFFURLConnectionParams* _params;
+    NSRunLoop *_connectRunLoop;
 }
 
--(id)initWithURLConnectionParams:( JFFURLConnectionParams* )params_
+//TODO: Test Connection with runloops!
+
+- (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
-    NSParameterAssert( params_ );
+    NSParameterAssert(params);
 
-    self = [ super init ];
+    self = [super init];
 
-    if ( self )
+    if (self)
     {
-        self->_params = params_;
+        self->_params = params;
 
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
         if ( ![ self->_params.url isFileURL ] )
 #endif
         {
-            NSMutableURLRequest* request_ = [ NSMutableURLRequest mutableURLRequestWithParams: params_ ];
+            NSMutableURLRequest* request_ = [NSMutableURLRequest mutableURLRequestWithParams:params];
 
             NSURLConnection* nativeConnection_ = [ [ NSURLConnection alloc ] initWithRequest: request_
                                                                                     delegate: self
                                                                             startImmediately: NO ];
+            
+            //mm: Create runloop if need. Neccessary for call NSURLConnectionDelegate
+            NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+            if (runLoop != [NSRunLoop mainRunLoop])
+            {
+                self->_connectRunLoop = runLoop;
+                [nativeConnection_ scheduleInRunLoop:runLoop forMode: NSDefaultRunLoopMode];
+            }
 
             self->_nativeConnection = nativeConnection_;
         }
@@ -41,18 +52,19 @@
 }
 
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
--(void)processLocalFileWithPath:( NSString* )path_
+- (void)processLocalFileWithPath:(NSString *)path
 {
-    NSError* error_;
+    NSError* error;
     //STODO read file in separate thread
     //STODO read big files by chunks
-    NSData* data_ = [ [ NSData alloc ] initWithContentsOfFile: path_
-                                                      options: 0
-                                                        error: &error_ ];
-    if ( error_ )
+    NSData *data_ = [[NSData alloc]initWithContentsOfFile:path
+                                                  options:0
+                                                    error:&error];
+
+    if (error)
     {
-        [ self connection: self->_nativeConnection
-         didFailWithError: error_ ];
+        [self connection:self->_nativeConnection
+        didFailWithError:error];
     }
     else
     {
@@ -74,7 +86,7 @@
 
 #pragma mark -
 #pragma mark JNUrlConnection
--(void)start
+- (void)start
 {
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
     if ( [ self->_params.url isFileURL ] )
@@ -85,12 +97,28 @@
     }
 #endif
     [ self->_nativeConnection start ];
+
+    if (self->_nativeConnection)
+    {
+        [self->_connectRunLoop run];
+    }
 }
 
--(void)cancel
+- (void)cancel
 {
-    [ self clearCallbacks ];
-    [ self->_nativeConnection cancel ];
+    [self clearCallbacks];
+    [self->_nativeConnection cancel];
+}
+
+- (void)clearCallbacks
+{
+    [super clearCallbacks];
+
+    if (self->_connectRunLoop)
+    {
+        [self->_nativeConnection unscheduleFromRunLoop:self->_connectRunLoop
+                                               forMode:NSDefaultRunLoopMode];
+    }
 }
 
 #pragma mark -

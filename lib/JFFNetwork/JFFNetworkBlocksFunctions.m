@@ -8,11 +8,9 @@
 
 #import "NSURL+Cookies.h"
 
-JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams *params)
+static JFFAnalyzer downloadErrorFlagResponseAnalyzer()
 {
-    JFFAsyncOperationNetwork* asyncObj = [JFFAsyncOperationNetwork new];
-    asyncObj.params = params;
-    asyncObj.responseAnalyzer = ^id(id< JNUrlResponse > response, NSError **error)
+    return ^id(id< JNUrlResponse > response, NSError **error)
     {
         NSInteger statusCode = [response statusCode];
 
@@ -28,18 +26,30 @@ JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams *params
 
         return response;
     };
+}
+
+static JFFAsyncOperation privateGenericChunkedURLResponseLoader(JFFURLConnectionParams *params, JFFAnalyzer responseAnalyzer)
+{
+    JFFAsyncOperationNetwork* asyncObj = [JFFAsyncOperationNetwork new];
+    asyncObj.params           = params;
+    asyncObj.responseAnalyzer = responseAnalyzer;
 
     return buildAsyncOperationWithInterface(asyncObj);
 }
 
-JFFAsyncOperation genericDataURLResponseLoader(JFFURLConnectionParams *params)
+JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams* params)
+{
+    return privateGenericChunkedURLResponseLoader(params, nil);
+}
+
+static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionParams *params, JFFAnalyzer responseAnalyzer)
 {
     params = [params copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        JFFAsyncOperation loader = genericChunkedURLResponseLoader(params);
+        JFFAsyncOperation loader = privateGenericChunkedURLResponseLoader(params, responseAnalyzer);
 
         NSMutableData* responseData = [ NSMutableData new ];
         progressCallback = [progressCallback copy];
@@ -64,6 +74,11 @@ JFFAsyncOperation genericDataURLResponseLoader(JFFURLConnectionParams *params)
     };
 }
 
+JFFAsyncOperation genericDataURLResponseLoader(JFFURLConnectionParams *params)
+{
+    return privateGenericDataURLResponseLoader(params, nil);
+}
+
 #pragma mark -
 #pragma mark Compatibility
 
@@ -72,11 +87,11 @@ JFFAsyncOperation chunkedURLResponseLoader(
    , NSData* postData_
    , NSDictionary* headers_ )
 {
-    JFFURLConnectionParams* params_ = [JFFURLConnectionParams new];
-    params_.url      = url_;
-    params_.httpBody = postData_;
-    params_.headers  = headers_;
-    return genericChunkedURLResponseLoader(params_);
+    JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+    params.url      = url_;
+    params.httpBody = postData_;
+    params.headers  = headers_;
+    return privateGenericChunkedURLResponseLoader(params, downloadErrorFlagResponseAnalyzer());
 }
 
 JFFAsyncOperation dataURLResponseLoader(NSURL *url,
@@ -87,7 +102,7 @@ JFFAsyncOperation dataURLResponseLoader(NSURL *url,
     params.url      = url;
     params.httpBody = postData;
     params.headers  = headers;
-    return genericDataURLResponseLoader(params);
+    return privateGenericDataURLResponseLoader(params, downloadErrorFlagResponseAnalyzer());
 }
 
 JFFAsyncOperation liveChunkedURLResponseLoader( 
@@ -100,7 +115,7 @@ JFFAsyncOperation liveChunkedURLResponseLoader(
     params_.httpBody = postData_;
     params_.headers  = headers_;
     params_.useLiveConnection = YES;
-    return genericChunkedURLResponseLoader(params_);
+    return privateGenericChunkedURLResponseLoader(params_, downloadErrorFlagResponseAnalyzer());
 }
 
 JFFAsyncOperation liveDataURLResponseLoader(
@@ -113,5 +128,16 @@ JFFAsyncOperation liveDataURLResponseLoader(
     params_.httpBody = postData;
     params_.headers  = headers;
     params_.useLiveConnection = YES;
-    return genericDataURLResponseLoader(params_);
+    return privateGenericDataURLResponseLoader(params_, downloadErrorFlagResponseAnalyzer());
+}
+
+JFFAsyncOperation perkyDataURLResponseLoader(NSURL *url,
+                                             NSData *postData,
+                                             NSDictionary *headers)
+{
+    JFFURLConnectionParams* params = [JFFURLConnectionParams new];
+    params.url      = url;
+    params.httpBody = postData;
+    params.headers  = headers;
+    return genericDataURLResponseLoader(params);
 }

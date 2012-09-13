@@ -14,9 +14,9 @@
 extern "C" {
 #endif
 
-JFFAsyncOperation genericChunkedURLResponseLoader( JFFURLConnectionParams* params_ );
+JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams *params);
 
-JFFAsyncOperation genericDataURLResponseLoader( JFFURLConnectionParams* params_ );
+JFFAsyncOperation genericDataURLResponseLoader(JFFURLConnectionParams *params);
 
 // Backward compatibility versions
 JFFAsyncOperation chunkedURLResponseLoader(NSURL *url,
@@ -36,6 +36,10 @@ JFFAsyncOperation liveDataURLResponseLoader(
    NSURL* url_
    , NSData* postData_
    , NSDictionary* headers_ );
+
+JFFAsyncOperation perkyDataURLResponseLoader(NSURL *url,
+                                             NSData *postData,
+                                             NSDictionary *headers);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

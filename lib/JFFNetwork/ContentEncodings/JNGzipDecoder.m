@@ -9,27 +9,27 @@ NSString* kGzipErrorDomain = @"gzip.error";
 @implementation JNGzipDecoder
 
 //http://www.cocoadev.com/index.pl?NSDataCategory
--(NSData*)decodeData:( NSData*   )encoded_data_
-               error:( NSError** )error_
+- (NSData*)decodeData:(NSData *)encodedData_
+                error:(NSError **)outError
 {
-    NSParameterAssert( error_ );
-    *error_ = nil;
+    NSParameterAssert(outError);
+    *outError = nil;
 
-    if ( 0 == [ encoded_data_ length ] ) 
+    if ( 0 == [ encodedData_ length ] ) 
     {
-        return encoded_data_;
+        return encodedData_;
     }
 
-    NSUInteger full_length_ = [ encoded_data_ length ];
-    NSUInteger half_length_ = [ encoded_data_ length ] / 2;
+    NSUInteger full_length_ = [ encodedData_ length ];
+    NSUInteger half_length_ = [ encodedData_ length ] / 2;
 
     NSMutableData* decompressed_ = [ NSMutableData dataWithLength: full_length_ + half_length_ ];
     BOOL done_   = NO;
     int  status_ = 0 ;
 
     z_stream strm  = {0};
-    strm.next_in   = (Bytef *)[ encoded_data_ bytes ];
-    strm.avail_in  = (uInt)[ encoded_data_ length ];
+    strm.next_in   = (Bytef *)[ encodedData_ bytes ];
+    strm.avail_in  = (uInt)[ encodedData_ length ];
     strm.total_out = 0;
     strm.zalloc    = Z_NULL;
     strm.zfree     = Z_NULL;
@@ -39,7 +39,7 @@ NSString* kGzipErrorDomain = @"gzip.error";
     {
         NSLog( @"[!!! ERROR !!!] : JNGzipDecoder -- inflateInit2 failed" );
 
-        *error_ = [ NSError errorWithDomain: kGzipErrorDomain
+        *outError = [ NSError errorWithDomain: kGzipErrorDomain
                                        code: kJNGzipInitFailed
                                    userInfo: nil ];
         return nil;
@@ -70,9 +70,9 @@ NSString* kGzipErrorDomain = @"gzip.error";
     {
         NSLog( @"[!!! WARNING !!!] JNZipDecoder -- unexpected EOF" );
       
-        *error_ = [ NSError errorWithDomain: kGzipErrorDomain
-                                       code: kJNGzipUnexpectedEOF
-                                   userInfo: nil ];
+        *outError = [ NSError errorWithDomain: kGzipErrorDomain
+                                         code: kJNGzipUnexpectedEOF
+                                     userInfo: nil ];
 
         return nil;
     }
@@ -88,9 +88,9 @@ NSString* kGzipErrorDomain = @"gzip.error";
             , status_
             , [ JNGzipErrorsLogger zipErrorMessageFromCode: status_ ] );
       
-    *error_ = [ NSError errorWithDomain: kGzipErrorDomain
-                                   code: status_
-                               userInfo: nil ];
+    *outError = [ NSError errorWithDomain: kGzipErrorDomain
+                                     code: status_
+                                 userInfo: nil ];
       
     return nil;
 }

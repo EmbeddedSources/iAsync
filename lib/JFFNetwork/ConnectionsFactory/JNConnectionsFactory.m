@@ -17,15 +17,15 @@
     return nil;
 }
 
--(id)initWithURLConnectionParams:( JFFURLConnectionParams* )params_
+- (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
-    NSParameterAssert( params_.url );
+    NSParameterAssert(params.url);
 
     self = [ super init ];
 
     if ( self )
     {
-        self->_params = params_;
+        self->_params = params;
     }
 
     return self;

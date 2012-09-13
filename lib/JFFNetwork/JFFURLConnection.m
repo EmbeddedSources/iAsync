@@ -64,8 +64,8 @@ static void readStreamCallback( CFReadStreamRef stream_
             CFStreamError error_ = CFReadStreamGetError( stream_ );
             NSString* errorDescription_ = [ [ NSString alloc ] initWithFormat: @"CFStreamError domain: %ld", error_.domain ];
 
-            [ self_ handleFinish: [ JFFError errorWithDescription: errorDescription_
-                                                             code: error_.error ] ];
+            [ self_ handleFinish:[JFFError newErrorWithDescription:errorDescription_
+                                                              code:error_.error]];
             break;
         }
         case kCFStreamEventEndEncountered:
