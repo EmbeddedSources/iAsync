@@ -2,37 +2,38 @@
 
 @implementation JFFError
 
--(id)initWithDescription:( NSString* )description_
-                  domain:( NSString* )domain_
-                    code:( NSInteger )code_
+- (id)initWithDescription:(NSString *)description
+                   domain:(NSString *)domain
+                     code:(NSInteger)code
 {
-    NSDictionary* userInfo_ = @{ NSLocalizedDescriptionKey : description_ };
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : description };
 
-    return [ super initWithDomain: domain_
-                             code: code_
-                         userInfo: userInfo_ ];
+    return [super initWithDomain:domain
+                            code:code
+                        userInfo:userInfo];
 }
 
--(id)initWithDescription:( NSString* )description_ code:( NSInteger )code_
+- (id)initWithDescription:(NSString *)description code:(NSInteger)code
 {
-    return [ self initWithDescription: description_
-                               domain: @"com.just_for_fun.library"
-                                 code: code_ ];
+    return [self initWithDescription:description
+                              domain:@"com.just_for_fun.library"
+                                code:code];
 }
 
--(id)initWithDescription:( NSString* )description_
+- (id)initWithDescription:(NSString *)description
 {
-    return [ self initWithDescription: description_ code: 0 ];
+    return [self initWithDescription:description code:0];
 }
 
-+(id)errorWithDescription:( NSString* )description_ code:( NSInteger )code_
++ (id)newErrorWithDescription:(NSString *)description
 {
-    return [ [ self alloc ] initWithDescription: description_ code: code_ ];
+    return [self newErrorWithDescription:description code:0];
 }
 
-+(id)newErrorWithDescription:( NSString* )description_
++ (id)newErrorWithDescription:(NSString *)description
+                         code:(NSInteger)code
 {
-     return [ [ self alloc ] initWithDescription: description_ ];
+    return [[self alloc] initWithDescription:description code:code];
 }
 
 @end

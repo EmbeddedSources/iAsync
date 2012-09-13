@@ -40,9 +40,12 @@
 #import <JFFUtils/Extensions/UIColor+ColorForHex.h>
 #import <JFFUtils/Extensions/NSError+setToPointer.h>
 #import <JFFUtils/Extensions/NSSet+BlocksAdditions.h>
+#import <JFFUtils/Extensions/NSData+ToString.h>
 
 #import <JFFUtils/Dictionary/NSDictionary+BlocksAdditions.h>
 #import <JFFUtils/Dictionary/NSDictionary+JFFExtendedDictionary.h>
+#import <JFFUtils/Dictionary/NSDictionary+ValueWithType.h>
+#import <JFFUtils/Dictionary/NSMutableDictionary+IgnoringAddNilValue.h>
 
 #import <JFFUtils/Runtime/JFFRuntime.h>
 
