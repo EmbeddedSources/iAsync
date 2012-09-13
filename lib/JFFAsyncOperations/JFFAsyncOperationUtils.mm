@@ -16,30 +16,30 @@ static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueu
     return buildAsyncOperationWithInterface( asyncObj_ );
 }
 
-static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_
-                                                                        , const char* queueName_
-                                                                        , BOOL barrier_ )
+static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
+                                                                        const char* queueName,
+                                                                        BOOL barrier )
 {
-    loadDataBlock_ = [ loadDataBlock_ copy ];
-    JFFSyncOperationWithProgress progressLoadDataBlock_ = ^id( NSError** error_
-                                                              , JFFAsyncOperationProgressHandler progressCallback_ )
+    loadDataBlock = [loadDataBlock copy];
+    JFFSyncOperationWithProgress progressLoadDataBlock= ^id(NSError *__autoreleasing *error,
+                                                              JFFAsyncOperationProgressHandler progressCallback)
     {
-        id result_ = loadDataBlock_( error_ );
-        if ( result_ && progressCallback_ )
-            progressCallback_( result_ );
-        return result_;
+        id result = loadDataBlock(error);
+        if (result && progressCallback)
+            progressCallback(result);
+        return result;
     };
 
-    return asyncOperationWithSyncOperationWithProgressBlockAndQueue( progressLoadDataBlock_
-                                                                    , queueName_
-                                                                    , barrier_ );
+    return asyncOperationWithSyncOperationWithProgressBlockAndQueue(progressLoadDataBlock,
+                                                                    queueName,
+                                                                    barrier );
 }
 
-JFFAsyncOperation asyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, const char* queueName_ )
+JFFAsyncOperation asyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock, const char *queueName)
 {
-    return privateAsyncOperationWithSyncOperationAndQueue( loadDataBlock_
-                                                          , queueName_
-                                                          , NO );
+    return privateAsyncOperationWithSyncOperationAndQueue(loadDataBlock,
+                                                          queueName,
+                                                          NO );
 }
 
 JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, const char* queueName_ )

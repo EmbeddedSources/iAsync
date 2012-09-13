@@ -7,6 +7,9 @@
 
 #import <JFFScheduler/JFFScheduler.h>
 
+@implementation JFFAsyncTimerResult : NSObject
+@end
+
 @interface JFFAsyncOperationScheduler : NSObject < JFFAsyncOperationInterface >
 
 @property ( nonatomic ) NSTimeInterval duration;
@@ -18,35 +21,38 @@
     JFFScheduler* _scheduler;
 }
 
--(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
-                       progressHandler:( void (^)( id ) )progress_
+- (void)asyncOperationWithResultHandler:(void(^)(id, NSError *))handler
+                        progressHandler:(void(^)(id))progress
 {
-    self->_scheduler = [ JFFScheduler new ];
-    [ self->_scheduler addBlock: ^( JFFCancelScheduledBlock cancel_ )
+    handler  = [handler  copy];
+    progress = [progress copy];
+
+    self->_scheduler = [JFFScheduler new];
+    [self->_scheduler addBlock:^(JFFCancelScheduledBlock cancel)
     {
-        cancel_();
-        if ( progress_ )
-            progress_( [ NSNull null ] );
-        if ( handler_ )
-            handler_( [ NSNull null ], nil );
-    } duration: self.duration ];
+        cancel();
+        if (progress)
+            progress([JFFAsyncTimerResult new]);
+        if (handler)
+            handler([JFFAsyncTimerResult new], nil);
+    }duration:self.duration];
 }
 
--(void)cancel:( BOOL )canceled_
+- (void)cancel:(BOOL)canceled
 {
     self->_scheduler = nil;
 }
 
 @end
 
-JFFAsyncOperation asyncOperationWithResult( id result_ )
+JFFAsyncOperation asyncOperationWithResult(id result)
 {
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        if ( doneCallback_ )
-            doneCallback_( result_, nil );
+        if (doneCallback)
+            doneCallback(result, nil);
         return JFFStubCancelAsyncOperationBlock;
     };
 }
@@ -63,10 +69,10 @@ JFFAsyncOperation asyncOperationWithError( NSError* error_ )
     };
 }
 
-JFFAsyncOperation currentQeueAsyncOpWithResult( JFFSyncOperation block_ )
+JFFAsyncOperation currentQeueAsyncOpWithResult( JFFSyncOperation block )
 {
-    assert( block_ );
-    block_ = [ block_ copy ];
+    assert( block );
+    block = [block copy];
 
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
                                     , JFFCancelAsyncOperationHandler cancelCallback_
@@ -74,9 +80,9 @@ JFFAsyncOperation currentQeueAsyncOpWithResult( JFFSyncOperation block_ )
     {
         NSError* error_;
         id result_;
-        if ( block_ )
+        if ( block )
         {
-            result_ = block_( &error_ );
+            result_ = block( &error_ );
         }
         else
         {
@@ -249,11 +255,11 @@ JFFAsyncOperation asyncOperationWithResultOrError( JFFAsyncOperation loader_
     } );
 }
 
-JFFAsyncOperation asyncOperationWithDelay( NSTimeInterval delay_ )
+JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay)
 {
-    JFFAsyncOperationScheduler* asyncObject_ = [ JFFAsyncOperationScheduler new ];
-    asyncObject_.duration = delay_;
-    return buildAsyncOperationWithInterface( asyncObject_ );
+    JFFAsyncOperationScheduler *asyncObject = [JFFAsyncOperationScheduler new];
+    asyncObject.duration = delay;
+    return buildAsyncOperationWithInterface(asyncObject);
 }
 
 JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder firstBinder_
@@ -288,13 +294,23 @@ JFFAnalyzer analyzerAsSequenceOfAnalyzers( JFFAnalyzer firstAnalyzer_, ... )
     };
 }
 
-JFFAsyncOperation ignorePregressLoader( JFFAsyncOperation loader_ )
+JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader)
 {
-    loader_ = [ loader_ copy ];
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    loader = [loader copy];
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        return loader_( nil, cancelCallback_, doneCallback_ );
+        return loader(nil, cancelCallback, doneCallback);
+    };
+}
+
+JFFAsyncOperationBinder ignorePregressBinder(JFFAsyncOperationBinder binder)
+{
+    binder = [binder copy];
+    return ^JFFAsyncOperation(id data)
+    {
+        JFFAsyncOperation loader = binder(data);
+        return ignorePregressLoader(loader);
     };
 }

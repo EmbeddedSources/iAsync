@@ -30,80 +30,80 @@
 {
     self.objectPropertyData = nil;
 
-    jff_retainAutorelease( _object );
+    jff_retainAutorelease(self->_object);
     self->_object = nil;
     //self.propertyPath = nil;
 }
 
 -(SEL)propertyGetSelector
 {
-    if ( !_propertyGetSelector )
+    if (!self->_propertyGetSelector)
     {
-        _propertyGetSelector = NSSelectorFromString( self.propertyPath.name );
+        self->_propertyGetSelector = NSSelectorFromString(self.propertyPath.name);
     }
-    return _propertyGetSelector;
+    return self->_propertyGetSelector;
 }
 
 -(SEL)propertySetSelector
 {
-    if ( !_propertySetSelector )
+    if ( !self->_propertySetSelector )
     {
         NSString* setPropertyName_ = [ self.propertyPath.name propertySetNameForPropertyName ];
-        _propertySetSelector = NSSelectorFromString( setPropertyName_ );
+        self->_propertySetSelector = NSSelectorFromString( setPropertyName_ );
     }
-    return _propertySetSelector;
+    return self->_propertySetSelector;
 }
 
--(id)property
+- (id)property
 {
     id result_ = objc_msgSend( self.object, self.propertyGetSelector );
-    return self.propertyPath.key ? [ result_ objectForKey: self.propertyPath.key ] : result_;
+    return self.propertyPath.key?[result_ objectForKey:self.propertyPath.key]:result_;
 }
 
--(void)setProperty:( id )property_
+- (void)setProperty:(id)property
 {
-    if ( !self.propertyPath.key )
+    if (!self.propertyPath.key)
     {
-        objc_msgSend( self.object, self.propertySetSelector, property_ );
+        objc_msgSend(self.object, self.propertySetSelector, property);
         return;
     }
 
-    NSMutableDictionary* dict_ = objc_msgSend( self.object, self.propertyGetSelector );
+    NSMutableDictionary* dict = objc_msgSend(self.object, self.propertyGetSelector);
 
-    if ( !dict_ )
+    if ( !dict )
     {
-        dict_ = [ NSMutableDictionary new ];
-        objc_msgSend( self.object, self.propertySetSelector, dict_ );
+        dict = [NSMutableDictionary new];
+        objc_msgSend(self.object, self.propertySetSelector, dict);
     }
 
-    if ( property_ )
+    if (property)
     {
-        [ dict_ setObject: property_ forKey: self.propertyPath.key ];
+        [dict setObject:property forKey:self.propertyPath.key];
         return;
     }
 
-    [ dict_ removeObjectForKey: self.propertyPath.key ];
+    [dict removeObjectForKey:self.propertyPath.key];
 }
 
 ////////////////////////OBJECT RELATED DATA///////////////////////
 
--(JFFObjectRelatedPropertyData*)objectPropertyData
+- (JFFObjectRelatedPropertyData*)objectPropertyData
 {
-    JFFObjectRelatedPropertyData* data_ = [ self.object propertyDataForPropertPath: self.propertyPath ];
-    if ( !data_ )
+    JFFObjectRelatedPropertyData* data = [self.object propertyDataForPropertPath:self.propertyPath];
+    if (!data)
     {
-        data_ = [ JFFObjectRelatedPropertyData new ];
-        [ self.object setPropertyData: data_ forPropertPath: self.propertyPath ];
+        data = [JFFObjectRelatedPropertyData new];
+        [self.object setPropertyData:data forPropertPath:self.propertyPath];
     }
-    return data_;
+    return data;
 }
 
--(void)setObjectPropertyData:( JFFObjectRelatedPropertyData* )objectPropertyData_
+- (void)setObjectPropertyData:(JFFObjectRelatedPropertyData *)objectPropertyData
 {
-    [ self.object setPropertyData: objectPropertyData_ forPropertPath: self.propertyPath ];
+    [self.object setPropertyData:objectPropertyData forPropertPath:self.propertyPath];
 }
 
--(id)forwardingTargetForSelector:( SEL )selector_
+- (id)forwardingTargetForSelector:(SEL)selector
 {
     return self.objectPropertyData;
 }

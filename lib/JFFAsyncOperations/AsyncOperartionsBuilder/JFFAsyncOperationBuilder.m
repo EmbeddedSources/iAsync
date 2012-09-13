@@ -23,30 +23,30 @@
 
 @end
 
-JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterface > asyncObject_ )
+JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterface >asyncObject )
 {
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
+                                    , JFFCancelAsyncOperationHandler cancelCallback
                                     , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
-        __unsafe_unretained id< JFFAsyncOperationInterface > weakAsyncObject__ = asyncObject_;
+        __unsafe_unretained id< JFFAsyncOperationInterface > weakAsyncObject = asyncObject;
 
         doneCallback_ = [ doneCallback_ copy ];
         __block void (^completionHandler)(id, NSError*) = [ ^( id result_, NSError* error_ )
         {
             //use asyncObject_ in if to own it while waiting result
-            if ( doneCallback_ && asyncObject_ )
+            if (doneCallback_ && asyncObject)
                 doneCallback_( result_, error_ );
         } copy ];
         progressCallback_ = [ progressCallback_ copy ];
         __block void (^progressHandler)( id ) = [ ^( id data_ )
         {
             if ( progressCallback_ )
-                progressCallback_( data_ );
+                progressCallback_(data_);
         } copy ];
 
         completionHandler = [completionHandler copy];
-        JFFObjectFactory factory_ = ^id()
+        JFFObjectFactory factory = ^id()
         {
             JFFComplitionHandlerNotifier *result = [JFFComplitionHandlerNotifier new];
             result.completionHandler = completionHandler;
@@ -54,7 +54,7 @@ JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterfa
         };
 
         __block JFFComplitionHandlerNotifier* proxy = (JFFComplitionHandlerNotifier*)
-            [JFFSingleThreadProxy singleThreadProxyWithTargetFactory:factory_
+            [JFFSingleThreadProxy singleThreadProxyWithTargetFactory:factory
                                                        dispatchQueue:dispatch_get_current_queue()];
 
         void (^completionHandlerWrapper)(id, NSError *) = [^(id result,NSError *error)
@@ -70,16 +70,16 @@ JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterfa
                 progressHandler(data);
         }copy];
 
-        [ asyncObject_ asyncOperationWithResultHandler:completionHandlerWrapper
-                                       progressHandler:progressHandlerWrapper ];
+        [asyncObject asyncOperationWithResultHandler:completionHandlerWrapper
+                                     progressHandler:progressHandlerWrapper];
 
-        __block JFFCancelAsyncOperationHandler cancelCallbackHolder_ = [ cancelCallback_ copy ];
+        __block JFFCancelAsyncOperationHandler cancelCallbackHolder_ = [cancelCallback copy];
         return ^(BOOL canceled)
         {
-            if ( !proxy.completionHandler )
+            if (!proxy.completionHandler)
                 return;
 
-            [weakAsyncObject__ cancel:canceled];
+            [weakAsyncObject cancel:canceled];
 
             proxy           = nil;
             progressHandler = nil;

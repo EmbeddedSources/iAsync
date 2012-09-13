@@ -681,78 +681,78 @@ JFFAsyncOperation asyncOperationWithDoneBlock( JFFAsyncOperation loader_
     };
 }
 
-JFFAsyncOperation repeatAsyncOperation( JFFAsyncOperation nativeLoader_
-                                       , JFFResultPredicateBlock predicate_
-                                       , NSTimeInterval delay_
-                                       , NSInteger maxRepeatCount_ )
+JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
+                                       JFFResultPredicateBlock continuePredicate,
+                                       NSTimeInterval delay,
+                                       NSInteger maxRepeatCount)
 {
-    assert( nativeLoader_ );// can not be nil
-    assert( predicate_    );// can not be nil
+    assert(nativeLoader);// can not be nil
+    assert(continuePredicate   );// can not be nil
 
-    nativeLoader_ = [ nativeLoader_ copy ];
-    predicate_    = [ predicate_    copy ];
+    nativeLoader      = [nativeLoader      copy];
+    continuePredicate = [continuePredicate copy];
 
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        progressCallback_ = [ progressCallback_ copy ];
-        cancelCallback_   = [ cancelCallback_   copy ];
-        doneCallback_     = [ doneCallback_     copy ];
+        progressCallback = [progressCallback copy];
+        cancelCallback   = [cancelCallback   copy];
+        doneCallback     = [doneCallback     copy];
 
-        __block JFFCancelAsyncOperation cancelBlockHolder_;
+        __block JFFCancelAsyncOperation cancelBlockHolder;
 
-        __block JFFDidFinishAsyncOperationHook finishHookHolder_ = nil;
+        __block JFFDidFinishAsyncOperationHook finishHookHolder = nil;
 
-        __block NSInteger currentLeftCount_ = maxRepeatCount_;
+        __block NSInteger currentLeftCount = maxRepeatCount;
 
-        JFFDidFinishAsyncOperationHook finishCallbackHook_ = ^( id result_
-                                                                 , NSError* error_
-                                                                 , JFFDidFinishAsyncOperationHandler doneCallback_ )
+        JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
+                                                              NSError *error,
+                                                              JFFDidFinishAsyncOperationHandler doneCallback)
         {
-            if ( !predicate_( result_, error_ ) || currentLeftCount_ == 0 )
+            if (!continuePredicate(result, error) || currentLeftCount == 0)
             {
-                finishHookHolder_ = nil;
-                if ( doneCallback_ )
-                    doneCallback_( result_, error_ );
+                finishHookHolder = nil;
+                if (doneCallback)
+                    doneCallback(result, error);
             }
             else
             {
-                currentLeftCount_ = currentLeftCount_ > 0
-                    ? currentLeftCount_ - 1
-                    : currentLeftCount_;
+                currentLeftCount = currentLeftCount > 0
+                ?currentLeftCount - 1
+                :currentLeftCount;
 
-                JFFAsyncOperation loader_ = asyncOperationWithFinishHookBlock( nativeLoader_
-                                                                              , finishHookHolder_ );
-                loader_ = asyncOperationAfterDelay( delay_, loader_ );
+                JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(nativeLoader,
+                                                                             finishHookHolder);
+                loader = asyncOperationAfterDelay(delay, loader);
 
-                cancelBlockHolder_ = loader_( progressCallback_, cancelCallback_, doneCallback_ );
+                cancelBlockHolder = loader(progressCallback, cancelCallback, doneCallback);
             }
         };
 
-        finishHookHolder_ = [ finishCallbackHook_ copy ];
+        finishHookHolder = [finishCallbackHook copy];
 
-        JFFAsyncOperation loader_ = asyncOperationWithFinishHookBlock( nativeLoader_
-                                                                      , finishHookHolder_ );
+        JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(nativeLoader,
+                                                                     finishHookHolder);
 
-        cancelBlockHolder_ = loader_( progressCallback_, cancelCallback_, doneCallback_ );
+        cancelBlockHolder = loader( progressCallback, cancelCallback, doneCallback );
 
-        return ^( BOOL canceled_ )
+        return ^(BOOL canceled)
         {
-            finishHookHolder_ = nil;
+            finishHookHolder = nil;
 
-            if ( !cancelBlockHolder_ )
+            if (!cancelBlockHolder)
                 return;
-            cancelBlockHolder_( canceled_ );
-            cancelBlockHolder_ = nil;
+            cancelBlockHolder(canceled);
+            cancelBlockHolder = nil;
         };
     };
 }
 
-JFFAsyncOperation asyncOperationAfterDelay( NSTimeInterval delay_
-                                           , JFFAsyncOperation loader_ )
+JFFAsyncOperation asyncOperationAfterDelay(NSTimeInterval delay,
+                                           JFFAsyncOperation loader)
 {
-    return sequenceOfAsyncOperations( asyncOperationWithDelay( delay_ )
-                                     , loader_
-                                     , nil );
+    return sequenceOfAsyncOperations(asyncOperationWithDelay(delay),
+                                     loader,
+                                     nil );
 }
