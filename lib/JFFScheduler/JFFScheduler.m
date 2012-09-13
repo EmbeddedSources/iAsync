@@ -5,7 +5,7 @@
 
 #include <objc/runtime.h>
 
-char jffSchedulerKey_;
+char jffSchedulerKey;
 
 @interface NSThread (JFFScheduler)
 
@@ -17,23 +17,23 @@ char jffSchedulerKey_;
 
 -(JFFScheduler*)jffScheduler
 {
-    id result_ = objc_getAssociatedObject( self, &jffSchedulerKey_ );
-    if ( !result_ )
+    id result = objc_getAssociatedObject(self, &jffSchedulerKey);
+    if (!result)
     {
-        result_ = [ JFFScheduler new ];
-        objc_setAssociatedObject( self
-                                 , &jffSchedulerKey_
-                                 , result_
-                                 , OBJC_ASSOCIATION_RETAIN_NONATOMIC );
+        result = [JFFScheduler new];
+        objc_setAssociatedObject(self,
+                                 &jffSchedulerKey,
+                                 result,
+                                 OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    return result_;
+    return result;
 }
 
 @end
 
 @interface JFFScheduler ()
 
-@property ( nonatomic ) dispatch_queue_t queue;
+@property (nonatomic) dispatch_queue_t queue;
 
 @end
 
@@ -49,78 +49,78 @@ char jffSchedulerKey_;
     dispatch_release( self->_queue );
 }
 
--(id)init
+- (id)init
 {
     self = [ super init ];
 
-    if ( self )
+    if (self)
     {
         self->_queue = dispatch_get_current_queue();
-        dispatch_retain( self->_queue );
-        self->_cancelBlocks = [ NSMutableArray new ];
+        dispatch_retain(self->_queue);
+        self->_cancelBlocks = [NSMutableArray new];
     }
 
     return self;
 }
 
-+(id)sharedByThreadScheduler
++ (id)sharedByThreadScheduler
 {
-    NSThread* thread_ = [ NSThread currentThread ];
-    return thread_.jffScheduler;
+    NSThread *thread = [NSThread currentThread];
+    return thread.jffScheduler;
 }
 
--(JFFCancelScheduledBlock)addBlock:( JFFScheduledBlock )actionBlock_
-                          duration:( NSTimeInterval )duration_
+- (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)actionBlock
+                           duration:(NSTimeInterval)duration
 {
-    NSParameterAssert( actionBlock_ );
-    if ( !actionBlock_ )
+    NSParameterAssert(actionBlock);
+    if (!actionBlock)
         return ^(){ /* do nothing */ };
 
-    __block dispatch_source_t timer_ = dispatch_source_create( DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self->_queue );
+    __block dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self->_queue);
 
-    int64_t delta_ = duration_ * NSEC_PER_SEC;
-    dispatch_source_set_timer( timer_
+    int64_t delta_ = duration * NSEC_PER_SEC;
+    dispatch_source_set_timer( timer
                               , dispatch_time( DISPATCH_TIME_NOW, delta_ )
                               , delta_
                               , 0 );
 
-    __unsafe_unretained JFFScheduler* self_ = self;
+    __unsafe_unretained JFFScheduler* weakSelf = self;
 
-    JFFSimpleBlockHolder* cancelTimerBlockHolder_ = [ JFFSimpleBlockHolder new ];
-    __unsafe_unretained JFFSimpleBlockHolder* weakCancelTimerBlockHolder_ = cancelTimerBlockHolder_;
-    cancelTimerBlockHolder_.simpleBlock = ^void( void )
+    JFFSimpleBlockHolder* cancelTimerBlockHolder = [JFFSimpleBlockHolder new];
+    __unsafe_unretained JFFSimpleBlockHolder* weakCancelTimerBlockHolder = cancelTimerBlockHolder;
+    cancelTimerBlockHolder.simpleBlock = ^void( void )
     {
-        if ( !timer_ )
+        if (!timer)
             return;
 
-        dispatch_source_cancel( timer_ );
-        dispatch_release( timer_ );
-        timer_ = NULL;
+        dispatch_source_cancel(timer);
+        dispatch_release(timer);
+        timer = NULL;
 
-        [ self_->_cancelBlocks removeObject: weakCancelTimerBlockHolder_.simpleBlock ];
+        [ weakSelf->_cancelBlocks removeObject: weakCancelTimerBlockHolder.simpleBlock ];
     };
 
-    [ self->_cancelBlocks addObject: cancelTimerBlockHolder_.simpleBlock ];
+    [ self->_cancelBlocks addObject: cancelTimerBlockHolder.simpleBlock ];
 
-    actionBlock_ = [ actionBlock_ copy ];
-    dispatch_block_t eventHandlerBlock_ = [ ^void( void )
+    actionBlock = [actionBlock copy];
+    dispatch_block_t eventHandlerBlock = [^void(void)
     {
-        actionBlock_( cancelTimerBlockHolder_.onceSimpleBlock );
-    } copy ];
+        actionBlock(cancelTimerBlockHolder.onceSimpleBlock);
+    }copy];
 
-    dispatch_source_set_event_handler( timer_, eventHandlerBlock_ );
+    dispatch_source_set_event_handler(timer, eventHandlerBlock);
 
-    dispatch_resume( timer_ );
+    dispatch_resume(timer);
 
-    return cancelTimerBlockHolder_.onceSimpleBlock;
+    return cancelTimerBlockHolder.onceSimpleBlock;
 }
 
--(void)cancelAllScheduledOperations
+- (void)cancelAllScheduledOperations
 {
-    NSSet* cancelBlocks_ = [ self->_cancelBlocks copy ];
+    NSSet *cancelBlocks = [self->_cancelBlocks copy];
     self->_cancelBlocks = nil;
-    for ( JFFCancelScheduledBlock cancel_ in cancelBlocks_ )
-        cancel_();
+    for (JFFCancelScheduledBlock cancel in cancelBlocks)
+        cancel();
 }
 
 @end

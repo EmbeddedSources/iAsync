@@ -2,19 +2,19 @@
 
 #include <float.h>
 
-NSTimeInterval performTimeCalculator( JFFSimpleBlock block_, NSUInteger times_ )
+NSTimeInterval performTimeCalculator(JFFSimpleBlock block, NSUInteger times)
 {
-    NSTimeInterval result_ = DBL_MAX;
+    NSTimeInterval result = DBL_MAX;
 
-    for ( NSUInteger index_ = 0; index_ < times_; ++index_ )
+    for (NSUInteger index = 0; index < times; ++index)
     {
-        NSDate* startDate_ = [ NSDate new ];
+        NSDate* startDate = [NSDate new];
         @autoreleasepool
         {
-            block_();
+            block();
         }
-        NSDate* endDate_ = [ NSDate new ];
-        result_ = fmin( result_, [ endDate_ timeIntervalSinceDate: startDate_ ] );
+        NSDate* endDate = [NSDate new];
+        result = fmin(result, [endDate timeIntervalSinceDate:startDate]);
     }
-    return result_;
+    return result;
 }

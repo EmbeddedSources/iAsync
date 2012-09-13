@@ -8,11 +8,11 @@
     self.value = ( __bridge_transfer NSString* )value_;
 }
 
--(void)setPropertyFromValue:( id )value_
+- (void)setPropertyFromValue:(id)value
                    toRecord:( ABRecordRef )record_
 {
-    NSParameterAssert( value_ );
-    self.value = value_;
+    NSParameterAssert(value);
+    self.value = value;
 
     CFErrorRef error_ = NULL;
     bool didSet = ABRecordSetValue( record_
