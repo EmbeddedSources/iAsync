@@ -1,0 +1,10 @@
+//
+// Prefix header for all source files of the 'JFFJsonTools' target in the 'JFFJsonTools' project
+//
+
+#ifdef __OBJC__
+    #import <JFFAsyncOperations/JFFAsyncOperations.h>
+    #import <JFFUtils/JFFUtils.h>
+
+    #import <Foundation/Foundation.h>
+#endif
