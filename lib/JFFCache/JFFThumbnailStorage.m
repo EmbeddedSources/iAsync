@@ -5,26 +5,26 @@
 
 #import <UIKit/UIKit.h>
 
-static id storageInstance_ = nil;
+static id glStorageInstance = nil;
 
 @interface JFFThumbnailStorage ()
 
-@property ( nonatomic ) NSMutableDictionary* imagesByUrl;
+@property (nonatomic) NSMutableDictionary *imagesByUrl;
 
 @end
 
 @implementation JFFThumbnailStorage
 
--(id)init
+- (id)init
 {
-    self = [ super init ];
+    self = [super init];
 
     if ( self )
     {
-        [ [ NSNotificationCenter defaultCenter ] addObserver: self
-                                                    selector: @selector( handleMemoryWarning: )
-                                                        name: UIApplicationDidReceiveMemoryWarningNotification
-                                                      object: [ UIApplication sharedApplication ] ];
+        [[NSNotificationCenter defaultCenter]addObserver:self
+                                                selector:@selector(handleMemoryWarning:)
+                                                    name:UIApplicationDidReceiveMemoryWarningNotification
+                                                  object:[UIApplication sharedApplication]];
     }
 
     return self;
@@ -32,14 +32,14 @@ static id storageInstance_ = nil;
 
 -(void)dealloc
 {
-    [ [ NSNotificationCenter defaultCenter ] removeObserver: self ];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 -(NSMutableDictionary*)imagesByUrl
 {
-    if ( !self->_imagesByUrl )
+    if (!self->_imagesByUrl)
     {
-        self->_imagesByUrl = [ NSMutableDictionary new ];
+        self->_imagesByUrl = [NSMutableDictionary new];
     }
 
     return self->_imagesByUrl;
@@ -47,115 +47,118 @@ static id storageInstance_ = nil;
 
 +(JFFThumbnailStorage*)sharedStorage
 {
-    if ( !storageInstance_ )
+    if ( !glStorageInstance )
     {
-        storageInstance_ = [ self new ];
+        glStorageInstance = [self new];
     }
 
-    return storageInstance_;
+    return glStorageInstance;
 }
 
--(void)handleMemoryWarning:( NSNotification* )notification_
+-(void)handleMemoryWarning:(NSNotification *)notification
 {
     self->_imagesByUrl = nil;
 }
 
-+(void)setSharedStorage:( JFFThumbnailStorage* )storage_
++(void)setSharedStorage:(JFFThumbnailStorage *)storage
 {
-    storageInstance_ = storage_;
+    glStorageInstance = storage;
 }
 
 -(id< JFFCacheDB >)thumbnailDB
 {
-    return [ [ JFFCaches sharedCaches ] thumbnailDB ];
+    return [[JFFCaches sharedCaches]thumbnailDB];
 }
 
--(UIImage*)cachedImageForURL:( NSURL* )url_
+- (UIImage *)cachedImageForURL:(NSURL *)url
 {
-    NSString* urlString_ = [ url_ description ];
-    NSData* chachedData_ = [ [ self thumbnailDB ] dataForKey: urlString_ ];
+    NSString* urlString = [url description];
+    NSData* chachedData = [[self thumbnailDB]dataForKey:urlString];
 
-    UIImage* resultImage_ = chachedData_ ? [ UIImage imageWithData: chachedData_ ] : nil;
-    if ( chachedData_ && !resultImage_ )
-        NSLog( @"JFFThumbnailStorage: can not create image from cache with url: %@", url_ );
+    UIImage *resultImage = chachedData?[UIImage imageWithData:chachedData]:nil;
+    if (chachedData && !resultImage)
+        NSLog(@"JFFThumbnailStorage: can not create image from cache with url: %@", url);
 
-    return resultImage_;
+    return resultImage;
 }
 
--(JFFAsyncOperationBinder)createImageBlockWithUrl:( NSURL* )url_
+- (JFFAsyncOperationBinder)createImageBlockWithUrl:(NSURL *)url
 {
-    JFFAnalyzer analyzer_ = ^id( NSData* imageData_, NSError** outError_ )
+    JFFAnalyzer analyzer = ^id(NSData *imageData, NSError **outError)
     {
-        UIImage* resultImage_ = [ [ UIImage alloc ] initWithData: imageData_ ];
+        UIImage *resultImage = [[UIImage alloc]initWithData:imageData];
 
-        if ( resultImage_ )
+        if (resultImage)
         {
-            [ [ self thumbnailDB ] setData: imageData_
-                                    forKey: [ url_ description ] ];
+            //TODO set data in separate thread !!!! ?????
+            [[self thumbnailDB]setData:imageData
+                                forKey:[url description]];
 
-            return resultImage_;
+            return resultImage;
         }
 
-        NSLog( @"JFFThumbnailStorage: can not create image from cache with url: %@", url_ );
-        if ( outError_ )
+        NSLog( @"JFFThumbnailStorage: can not create image from cache with url: %@", url );
+        if (outError)
         {
-            NSError* error_ = [ JFFError newErrorWithDescription: @"invalid response" ];
-            [ error_ setToPointer: outError_ ];
+            NSError *error = [JFFError newErrorWithDescription:@"invalid response"];
+            [error setToPointer:outError];
         }
 
         return nil;
     };
-    return asyncOperationBinderWithAnalyzer( analyzer_ );
+    return asyncOperationBinderWithAnalyzer(analyzer);
 }
 
--(JFFAsyncOperation)thumbnailLoaderForUrl:( NSURL* )url_
+- (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url
 {
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
-                                    , JFFCancelAsyncOperationHandler cancel_callback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        if ( !url_ )
+        if (!url)
         {
-            if ( doneCallback_ )
-                doneCallback_( nil, [ JFFError newErrorWithDescription: @"incorrect url" ] );
+            if (doneCallback)
+                doneCallback(nil, [JFFError newErrorWithDescription:@"incorrect url"]);
             return JFFStubCancelAsyncOperationBlock;
         }
 
-        UIImage* cachedImage_ = self.imagesByUrl[ url_ ];
-        if ( cachedImage_ )
+        //TODO remove redundant cache logic
+        UIImage *cachedImage = self.imagesByUrl[url];
+        if (cachedImage)
         {
-            if ( doneCallback_ )
-                doneCallback_( cachedImage_, nil );
+            if (doneCallback)
+                doneCallback(cachedImage, nil);
             return JFFStubCancelAsyncOperationBlock;
         }
 
-        cachedImage_ = [ self cachedImageForURL: url_ ];
-        if ( cachedImage_ )
+        //TODO remove redundant cache logic
+        cachedImage = [self cachedImageForURL:url];
+        if ( cachedImage )
         {
-            self.imagesByUrl[ url_ ] = cachedImage_;
-            if ( doneCallback_ )
-                doneCallback_( cachedImage_, nil );
+            self.imagesByUrl[url] = cachedImage;
+            if (doneCallback)
+                doneCallback cachedImage, nil );
             return JFFStubCancelAsyncOperationBlock;
         }
 
-        JFFAsyncOperation loaderBlock_ = asyncOperationWithSyncOperation( ^id( NSError** error_ )
+        JFFAsyncOperation loaderBlock = asyncOperationWithSyncOperation(^id(NSError **error)
         {
-            return [ [ NSData alloc ] initWithContentsOfURL: url_
-                                                    options: NSDataReadingMappedIfSafe
-                                                      error: error_ ];
+            return [[NSData alloc]initWithContentsOfURL:url
+                                                options:NSDataReadingMappedIfSafe
+                                                  error:error];
         } );
         //loader_block_ = balancedAsyncOperation( loader_block_ );
 
-        JFFAsyncOperationBinder createImageBlock_ = [ self createImageBlockWithUrl: url_ ];
+        JFFAsyncOperationBinder createImageBlock = [self createImageBlockWithUrl:url];
 
-        loaderBlock_ = bindSequenceOfAsyncOperations( loaderBlock_, createImageBlock_, nil );
+        loaderBlock = bindSequenceOfAsyncOperations(loaderBlock, createImageBlock, nil);
 
-        JFFPropertyPath* propertyPath_ = [ [ JFFPropertyPath alloc ] initWithName: @"imagesByUrl"
-                                                                              key: url_ ];
+        JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc]initWithName:@"imagesByUrl"
+                                                                         key:url];
 
-        JFFAsyncOperation asyncLoader_ = [ self asyncOperationForPropertyWithPath: propertyPath_
-                                                                   asyncOperation: loaderBlock_ ];
-        return asyncLoader_( progress_callback_, cancel_callback_, doneCallback_ );
+        JFFAsyncOperation asyncLoader = [self asyncOperationForPropertyWithPath:propertyPath
+                                                                 asyncOperation:loaderBlock];
+        return asyncLoader(progressCallback, cancelCallback, doneCallback);
     };
 }
 

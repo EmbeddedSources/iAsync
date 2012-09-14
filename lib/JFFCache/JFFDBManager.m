@@ -7,20 +7,20 @@
 
 @implementation JFFDBManager
 
--(void)migrateDB
+- (void)migrateDB
 {
-    NSDictionary* cacheDbByName_ = [ [ JFFCaches sharedCaches ] cacheDbByName ];
-    [ cacheDbByName_ enumerateKeysAndObjectsUsingBlock: ^( id key, id< JFFCacheDB > db_, BOOL* stop_ )
+    NSDictionary *cacheDbByName = [[JFFCaches sharedCaches]cacheDbByName];
+    [cacheDbByName enumerateKeysAndObjectsUsingBlock:^(id key, id< JFFCacheDB > db, BOOL *stop)
     {
-        [ db_ migrateDB ];
+        [db migrateDB];
     } ];
 
-    [ [ JFFDBInfo sharedDBInfo ] setCurrentDbInfo: [ [ JFFDBInfo sharedDBInfo ] dbInfo ] ];
+    [[JFFDBInfo sharedDBInfo]setCurrentDbInfo:[[JFFDBInfo sharedDBInfo]dbInfo]];
 }
 
--(void)synchronizeDB
+- (void)synchronizeDB
 {
-    [ self migrateDB ];
+    [self migrateDB];
 }
 
 @end

@@ -4,15 +4,15 @@
 
 @interface JFFCaches : NSObject
 
-@property ( nonatomic, readonly ) NSDictionary* cacheDbByName;
+@property (nonatomic, readonly) NSDictionary *cacheDbByName;
 
-+(JFFCaches*)sharedCaches;
-+(void)setSharedCaches:( JFFCaches* )caches_;
++ (JFFCaches *)sharedCaches;
++ (void)setSharedCaches:(JFFCaches *)caches;
 
--(id)initWithDBInfoDictionary:( NSDictionary* )cachesInfo_;
+- (id)initWithDBInfoDictionary:(NSDictionary *)cachesInfo;
 
--(id< JFFCacheDB >)cacheByName:( NSString* )name_;
+- (id< JFFCacheDB >)cacheByName:(NSString *)name;
 
--(id< JFFCacheDB >)thumbnailDB;
+- (id< JFFCacheDB >)thumbnailDB;
 
 @end

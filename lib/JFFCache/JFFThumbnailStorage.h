@@ -6,11 +6,11 @@
 
 @interface JFFThumbnailStorage : NSObject
 
-+(JFFThumbnailStorage*)sharedStorage;
-+(void)setSharedStorage:( JFFThumbnailStorage* )storage_;
++ (JFFThumbnailStorage *)sharedStorage;
++ (void)setSharedStorage:(JFFThumbnailStorage *)storage;
 
--(UIImage*)imageForURL:( NSURL* )url_;
+- (UIImage *)imageForURL:(NSURL *)url;
 
--(JFFAsyncOperation)thumbnailLoaderForUrl:( NSURL* )url_;
+- (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url;
 
 @end
