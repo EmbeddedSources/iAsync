@@ -7,8 +7,6 @@
 #import "JFFInstagramResponseError.h"
 #import "JFFInstagramUsersListResponseError.h"
 
-#import "JFFSocialAsyncUtils.h"
-
 @implementation JFFInstagramAccount (JFFInstagramJSONDataAnalyzers)
 
 + (id)newInstagramAccountWithJSONObject:(NSDictionary *)userJsonObject
@@ -124,7 +122,7 @@ static JFFAsyncOperationBinder generalJsonDataBinderWithAnalizer(JFFAnalyzer ana
 
     return ^JFFAsyncOperation(NSData *data)
     {
-        JFFAsyncOperation loader = asyncJsonDataAnalizer()(data);
+        JFFAsyncOperation loader = asyncOperationBinderJsonDataParser()(data);
 
         JFFAsyncOperationBinder jsonToAccountBinder = ^JFFAsyncOperation(id jsonObject)
         {

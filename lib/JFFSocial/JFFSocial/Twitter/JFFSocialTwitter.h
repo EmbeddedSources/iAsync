@@ -2,14 +2,23 @@
 
 #import <UIKit/UIKit.h>
 
-//JTODO remove class or rename
+typedef void(^JFFSocialTwitterDidLoginCallback)(NSString *login);
+
 @interface JFFSocialTwitter : NSObject
+
++ (BOOL)isAuthorized;
 
 + (JFFAsyncOperation)usersNearbyCoordinatesLantitude:(double)lantitude longitude:(double)longitude;
 
 + (JFFAsyncOperation)followersLoader;
 
-+ (JFFAsyncOperation)sendMessage:(NSString *)message
-                toFollowerWithId:(NSString *)userId;
++ (JFFAsyncOperation)sendDirectMessage:(NSString *)message
+                      toFollowerWithId:(NSString *)userId;
+
++ (JFFAsyncOperation)sendTweetMessage:(NSString *)message;
+
+#pragma mark callbacks
+
++ (void)setDidLoginCallback:(JFFSocialTwitterDidLoginCallback)didLoginCallback;
 
 @end

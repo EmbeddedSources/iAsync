@@ -4,7 +4,6 @@
 #import "JFFInstagramMediaItem.h"
 #import "JFFInstagramAuthedAccount.h"
 
-#import "JFFSocialAsyncUtils.h"
 #import "JFFInstagramResponseError.h"
 #import "JFFInvalidInstagramResponseURLError.h"
 
@@ -12,9 +11,20 @@
 
 #import "JFFInstagramJSONDataAnalyzers.h"
 
-static NSString *globalAccessToken;
+#define INSTAGRAM_ACCESS_TOKEN_KEY @"INSTAGRAM_ACCESS_TOKEN_KEY"
 
 @implementation JFFSocialInstagram
+
++ (NSString *)accessToken
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:INSTAGRAM_ACCESS_TOKEN_KEY];
+}
+
++ (void)saveAccessToken:(NSString *)accessToken
+{
+    [[NSUserDefaults standardUserDefaults] setValue:accessToken forKey:INSTAGRAM_ACCESS_TOKEN_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 + (JFFAsyncOperation)userLoaderForForUserId:(NSString *)userId
                                 accessToken:(NSString *)accessToken
@@ -26,56 +36,78 @@ static NSString *globalAccessToken;
 
 + (JFFAsyncOperation)instagramAccessTokenLoaderForCredentials:(JFFInstagramCredentials *)redentials
 {
-    if (globalAccessToken)
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        return asyncOperationWithResult(globalAccessToken);
-    }
+        JFFAsyncOperation loader;
 
-    JFFAsyncOperation accountLoader = [self authedUserLoaderWithCredentials:redentials];
+        NSString *accessToken = [self accessToken];//TODO save accessToken for given credentials
+        if (accessToken)
+        {
+            loader = asyncOperationWithResult(accessToken);
+        }
+        else
+        {
+            JFFAsyncOperation accountLoader = [self authedUserLoaderWithCredentials:redentials];
 
-    JFFAsyncOperationBinder saveAccessTokenBinder = ^JFFAsyncOperation(JFFInstagramAuthedAccount *account)
-    {
-        globalAccessToken = account.instagramAccessToken;
-        return asyncOperationWithResult(globalAccessToken);
+            JFFAsyncOperationBinder saveAccessTokenBinder = ^JFFAsyncOperation(JFFInstagramAuthedAccount *account)
+            {
+                [self saveAccessToken:account.instagramAccessToken];
+                return asyncOperationWithResult(account.instagramAccessToken);
+            };
+
+            loader = bindSequenceOfAsyncOperations(accountLoader, saveAccessTokenBinder, nil);
+        }
+        return loader(progressCallback,
+                      cancelCallback,
+                      doneCallback);
     };
-
-    return bindSequenceOfAsyncOperations(accountLoader, saveAccessTokenBinder, nil);
 }
 
 + (JFFAsyncOperation)authedUserLoaderWithCredentials:(JFFInstagramCredentials *)redentials
 {
-    JFFAsyncOperation oAuthUrlLoader = codeURLLoader(redentials.redirectURI, redentials.clientId);
-
-    JFFAsyncOperationBinder urlToCodeBinder = ^JFFAsyncOperation(NSURL *url)
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        NSDictionary *params = [[url query]dictionaryFromQueryComponents];
-        NSArray* codeParams = params[@"code"];
+        JFFAsyncOperation oAuthUrlLoader = codeURLLoader(redentials.redirectURI, redentials.clientId);
 
-        if ([codeParams count]==0)
+        JFFAsyncOperationBinder urlToCodeBinder = ^JFFAsyncOperation(NSURL *url)
         {
-            JFFInvalidInstagramResponseURLError *error = [JFFInvalidInstagramResponseURLError new];
-            error.url = url;
-            return asyncOperationWithError(error);
-        }
+            NSDictionary *params = [[url query]dictionaryFromQueryComponents];
+            NSArray* codeParams = params[@"code"];
 
-        NSString *code = codeParams[0];
-        return asyncOperationWithResult(code);
+            if ([codeParams count]==0)
+            {
+                JFFInvalidInstagramResponseURLError *error = [JFFInvalidInstagramResponseURLError new];
+                error.url = url;
+                return asyncOperationWithError(error);
+            }
+
+            NSString *code = codeParams[0];
+            return asyncOperationWithResult(code);
+        };
+
+        JFFAsyncOperationBinder userDataBinder = ^JFFAsyncOperation(NSString *code)
+        {
+            return authedUserDataLoader(redentials.redirectURI,
+                                        redentials.clientId,
+                                        redentials.clientSecret,
+                                        code
+                                        );
+        };
+
+        JFFAsyncOperation loader = bindSequenceOfAsyncOperations(oAuthUrlLoader,
+                                                                 urlToCodeBinder,
+                                                                 userDataBinder,
+                                                                 jsonDataToAuthedAccountBinder(),
+                                                                 nil );
+
+        return loader(progressCallback,
+                      cancelCallback,
+                      doneCallback);
     };
-
-    JFFAsyncOperationBinder userDataBinder = ^JFFAsyncOperation(NSString *code)
-    {
-        return authedUserDataLoader(redentials.redirectURI,
-                                    redentials.clientId,
-                                    redentials.clientSecret,
-                                    code
-                                    );
-    };
-
-    return bindSequenceOfAsyncOperations(oAuthUrlLoader,
-                                         urlToCodeBinder,
-                                         userDataBinder,
-                                         jsonDataToAuthedAccountBinder(),
-                                         nil );
 }
 
 + (JFFAsyncOperation)followedByLoaderForUserId:(NSString *)userId

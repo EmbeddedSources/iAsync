@@ -9,9 +9,6 @@
 + (JFFAsyncOperation)userLoaderForForUserId:(NSString *)userId
                                 accessToken:(NSString *)accessToken;
 
-//TODO hide from public interfaces
-+ (JFFAsyncOperation)authedUserLoaderWithCredentials:(JFFInstagramCredentials *)credentials;
-
 + (JFFAsyncOperation)followedByLoaderForUserId:(NSString *)userId
                                    accessToken:(NSString *)accessToken;
 

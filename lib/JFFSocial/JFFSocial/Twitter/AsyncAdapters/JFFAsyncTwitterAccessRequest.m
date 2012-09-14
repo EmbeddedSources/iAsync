@@ -10,10 +10,11 @@
 
 @implementation JFFAsyncTwitterAccessRequest
 
--(void)asyncOperationWithResultHandler:( JFFAsyncOperationInterfaceHandler )handler
-                       progressHandler:( void (^)( id ) )progress_
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+                        progressHandler:(void(^)(id))progress
 {
-    handler = [handler copy];
+    handler  = [handler copy];
+    progress = [progress copy];
 
     ACAccountStore *accountStore = [ACAccountStore new];
 

@@ -9,10 +9,11 @@
 
 @implementation JFFAsyncTwitterCreateAccount
 
--(void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
-                       progressHandler:(void(^)(id))progress_ {
-
-    handler = [handler copy];
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+                        progressHandler:(void(^)(id))progress
+{
+    handler  = [handler  copy];
+    progress = [progress copy];
 
     TWTweetComposeViewController *viewController = [TWTweetComposeViewController new];
 
@@ -22,16 +23,19 @@
     UIViewController *controller = [UIViewController new];
 
     //fire tweetComposeView to show "No Twitter Accounts" alert view on iOS5.1
-    viewController.completionHandler = ^(TWTweetComposeViewControllerResult result) {
-        if (result == TWTweetComposeViewControllerResultCancelled) {
+    viewController.completionHandler = ^(TWTweetComposeViewControllerResult result)
+    {
+        if (result == TWTweetComposeViewControllerResultCancelled)
+        {
             [controller dismissViewControllerAnimated:NO completion:^()
-             {
-                 [controller.view removeFromSuperview];
-                 if(handler)
-                     handler(nil, [JFFTwitterAccountCanceledCreationError new]);
-             }];
+            {
+                [controller.view removeFromSuperview];
+                if(handler)
+                    handler(nil, [JFFTwitterAccountCanceledCreationError new]);
+            }];
         }
-        else {
+        else
+        {
             NSParameterAssert( NO );
         }
     };
@@ -44,11 +48,13 @@
     [viewController.view endEditing:YES];
 }
 
--(void)cancel:( BOOL )canceled_ {
+- (void)cancel:(BOOL)canceled
+{
 }
 
 @end
 
-JFFAsyncOperation jffCreateTwitterAccountLoader() {
+JFFAsyncOperation jffCreateTwitterAccountLoader()
+{
     return buildAsyncOperationWithInterface([JFFAsyncTwitterCreateAccount new]);
 }

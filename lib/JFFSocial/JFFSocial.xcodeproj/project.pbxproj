@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37063AA315FA3E9200B4B059 /* JFFSocialForsquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063AA215FA3E9200B4B059 /* JFFSocialForsquare.m */; };
-		37063AA715FA4BB900B4B059 /* JFFForsquareSessionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063AA615FA4BB900B4B059 /* JFFForsquareSessionStorage.m */; };
+		37063AA315FA3E9200B4B059 /* JFFSocialFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063AA215FA3E9200B4B059 /* JFFSocialFoursquare.m */; };
+		37063AA715FA4BB900B4B059 /* JFFFoursquareSessionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063AA615FA4BB900B4B059 /* JFFFoursquareSessionStorage.m */; };
 		37063EEB15FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 37063EEA15FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.m */; };
 		371D85DA15FF31BD001C1C2C /* JFFFoursquareAuthURLError.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D85D915FF31BD001C1C2C /* JFFFoursquareAuthURLError.m */; };
 		371D875415FF6090001C1C2C /* JFFAsyncFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D875315FF6090001C1C2C /* JFFAsyncFoursquareRequest.m */; };
@@ -23,6 +23,7 @@
 		37497DB21601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB11601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m */; };
 		37497DB51601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB41601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m */; };
 		37497DB81601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB71601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m */; };
+		502AFF7816029E09009BCEEF /* JFFFoursquareNotFoundUsersCheckinsError.m in Sources */ = {isa = PBXBuildFile; fileRef = 502AFF7716029E09009BCEEF /* JFFFoursquareNotFoundUsersCheckinsError.m */; };
 		CE4F600C15F8B2BB00271035 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F600B15F8B2BB00271035 /* Foundation.framework */; };
 		CE4F601115F8B2BB00271035 /* JFFSocial.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE4F601015F8B2BB00271035 /* JFFSocial.h */; };
 		CE4F601C15F8B30C00271035 /* JFFSocialTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F601B15F8B30C00271035 /* JFFSocialTwitter.m */; };
@@ -48,7 +49,6 @@
 		CEB2368215FF8010005E5CF5 /* JFFInstagramResponseError.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2368115FF8010005E5CF5 /* JFFInstagramResponseError.m */; };
 		CEB2368515FF877C005E5CF5 /* JFFInstagramAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2368415FF877C005E5CF5 /* JFFInstagramAccount.m */; };
 		CEB236D416006AF6005E5CF5 /* JFFSocialInstagramApi.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB236D316006AF6005E5CF5 /* JFFSocialInstagramApi.m */; };
-		CEB236D516006BBA005E5CF5 /* JFFSocialAsyncUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85430C15FA25DE00750066 /* JFFSocialAsyncUtils.m */; };
 		CEB236D816006F05005E5CF5 /* JFFInstagramJSONDataAnalyzers.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB236D716006F05005E5CF5 /* JFFInstagramJSONDataAnalyzers.m */; };
 		CEB236DB1600757E005E5CF5 /* JFFInstagramUsersListResponseError.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB236DA1600757E005E5CF5 /* JFFInstagramUsersListResponseError.m */; };
 		CEB23770160098B0005E5CF5 /* JFFInstagramMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2376F160098B0005E5CF5 /* JFFInstagramMediaItem.m */; };
@@ -193,10 +193,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		37063AA115FA3E9200B4B059 /* JFFSocialForsquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialForsquare.h; sourceTree = "<group>"; };
-		37063AA215FA3E9200B4B059 /* JFFSocialForsquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialForsquare.m; sourceTree = "<group>"; };
-		37063AA515FA4BB900B4B059 /* JFFForsquareSessionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFForsquareSessionStorage.h; sourceTree = "<group>"; };
-		37063AA615FA4BB900B4B059 /* JFFForsquareSessionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFForsquareSessionStorage.m; sourceTree = "<group>"; };
+		37063AA115FA3E9200B4B059 /* JFFSocialFoursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialFoursquare.h; sourceTree = "<group>"; };
+		37063AA215FA3E9200B4B059 /* JFFSocialFoursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialFoursquare.m; sourceTree = "<group>"; };
+		37063AA515FA4BB900B4B059 /* JFFFoursquareSessionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFoursquareSessionStorage.h; sourceTree = "<group>"; };
+		37063AA615FA4BB900B4B059 /* JFFFoursquareSessionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFoursquareSessionStorage.m; sourceTree = "<group>"; };
 		37063EE915FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncFoursquaerLogin.h; sourceTree = "<group>"; };
 		37063EEA15FE1B9A00B4B059 /* JFFAsyncFoursquaerLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncFoursquaerLogin.m; sourceTree = "<group>"; };
 		371D85D815FF31BD001C1C2C /* JFFFoursquareAuthURLError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFoursquareAuthURLError.h; sourceTree = "<group>"; };
@@ -225,6 +225,8 @@
 		37497DB41601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+FqCheckinsAPIParser.m"; sourceTree = "<group>"; };
 		37497DB61601DD2400AF0C29 /* NSDictionary+FqAPIResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FqAPIResponseParser.h"; sourceTree = "<group>"; };
 		37497DB71601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FqAPIResponseParser.m"; sourceTree = "<group>"; };
+		502AFF7616029E09009BCEEF /* JFFFoursquareNotFoundUsersCheckinsError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFoursquareNotFoundUsersCheckinsError.h; sourceTree = "<group>"; };
+		502AFF7716029E09009BCEEF /* JFFFoursquareNotFoundUsersCheckinsError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFoursquareNotFoundUsersCheckinsError.m; sourceTree = "<group>"; };
 		CE41F6BB15FA12E700A742EE /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		CE41F75E15FA15A000A742EE /* JFFSocialTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFSocialTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4F600815F8B2BB00271035 /* libJFFSocial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFSocial.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -266,8 +268,6 @@
 		CE5A034A15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFFTweet+TwitterJSONApiParser.m"; sourceTree = "<group>"; };
 		CE5A034C15FA05F4005CC01A /* JFFParseJSONObjectError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFParseJSONObjectError.h; sourceTree = "<group>"; };
 		CE5A034D15FA05F4005CC01A /* JFFParseJSONObjectError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFParseJSONObjectError.m; sourceTree = "<group>"; };
-		CE85430B15FA25DE00750066 /* JFFSocialAsyncUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialAsyncUtils.h; sourceTree = "<group>"; };
-		CE85430C15FA25DE00750066 /* JFFSocialAsyncUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialAsyncUtils.m; sourceTree = "<group>"; };
 		CE85430E15FA29F500750066 /* AsyncAnalyzers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncAnalyzers.h; sourceTree = "<group>"; };
 		CE85430F15FA29F500750066 /* AsyncAnalyzers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncAnalyzers.m; sourceTree = "<group>"; };
 		CE85431F15FA37C600750066 /* JFFDirectTweetMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDirectTweetMessage.h; sourceTree = "<group>"; };
@@ -325,27 +325,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		37063AA015FA3E0C00B4B059 /* Forsquare */ = {
+		37063AA015FA3E0C00B4B059 /* Foursquare */ = {
 			isa = PBXGroup;
 			children = (
 				37497ADF160068F900AF0C29 /* Model */,
 				37497ACE1600681200AF0C29 /* Parsers */,
 				371D85C715FF314D001C1C2C /* Errors */,
 				37063ED815FE1B3F00B4B059 /* AsyncAdapters */,
-				37063AA415FA4B1600B4B059 /* ForsquareSession */,
-				37063AA115FA3E9200B4B059 /* JFFSocialForsquare.h */,
-				37063AA215FA3E9200B4B059 /* JFFSocialForsquare.m */,
+				37063AA415FA4B1600B4B059 /* FoursquareSession */,
+				37063AA115FA3E9200B4B059 /* JFFSocialFoursquare.h */,
+				37063AA215FA3E9200B4B059 /* JFFSocialFoursquare.m */,
 			);
-			path = Forsquare;
+			path = Foursquare;
 			sourceTree = "<group>";
 		};
-		37063AA415FA4B1600B4B059 /* ForsquareSession */ = {
+		37063AA415FA4B1600B4B059 /* FoursquareSession */ = {
 			isa = PBXGroup;
 			children = (
-				37063AA515FA4BB900B4B059 /* JFFForsquareSessionStorage.h */,
-				37063AA615FA4BB900B4B059 /* JFFForsquareSessionStorage.m */,
+				37063AA515FA4BB900B4B059 /* JFFFoursquareSessionStorage.h */,
+				37063AA615FA4BB900B4B059 /* JFFFoursquareSessionStorage.m */,
 			);
-			path = ForsquareSession;
+			path = FoursquareSession;
 			sourceTree = "<group>";
 		};
 		37063ED815FE1B3F00B4B059 /* AsyncAdapters */ = {
@@ -369,6 +369,8 @@
 				371D88A015FF7A94001C1C2C /* JFFFoursquareAuthInvalidAccessTokenError.m */,
 				371D88B215FF7C7C001C1C2C /* JFFFoursquareCachedAccessTokenError.h */,
 				371D88B315FF7C7C001C1C2C /* JFFFoursquareCachedAccessTokenError.m */,
+				502AFF7616029E09009BCEEF /* JFFFoursquareNotFoundUsersCheckinsError.h */,
+				502AFF7716029E09009BCEEF /* JFFFoursquareNotFoundUsersCheckinsError.m */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -451,11 +453,10 @@
 		CE4F600D15F8B2BB00271035 /* JFFSocial */ = {
 			isa = PBXGroup;
 			children = (
-				CEB234F315FF67EC005E5CF5 /* Instagram */,
-				37063AA015FA3E0C00B4B059 /* Forsquare */,
-				CE85430A15FA25BB00750066 /* Details */,
-				CE4F609515F8BA4300271035 /* Errors */,
 				CE4F601915F8B2D800271035 /* Twitter */,
+				CEB234F315FF67EC005E5CF5 /* Instagram */,
+				37063AA015FA3E0C00B4B059 /* Foursquare */,
+				CE4F609515F8BA4300271035 /* Errors */,
 				CE4F601015F8B2BB00271035 /* JFFSocial.h */,
 				CE4F606C15F8B63F00271035 /* JFFSocialAccount.h */,
 				CE4F606D15F8B63F00271035 /* JFFSocialAccount.m */,
@@ -605,15 +606,6 @@
 				CE85432015FA37C600750066 /* JFFDirectTweetMessage.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		CE85430A15FA25BB00750066 /* Details */ = {
-			isa = PBXGroup;
-			children = (
-				CE85430B15FA25DE00750066 /* JFFSocialAsyncUtils.h */,
-				CE85430C15FA25DE00750066 /* JFFSocialAsyncUtils.m */,
-			);
-			path = Details;
 			sourceTree = "<group>";
 		};
 		CEB234F315FF67EC005E5CF5 /* Instagram */ = {
@@ -906,8 +898,8 @@
 				CE5A034B15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m in Sources */,
 				CE5A034E15FA05F4005CC01A /* JFFParseJSONObjectError.m in Sources */,
 				CE85431015FA29F600750066 /* AsyncAnalyzers.m in Sources */,
-				37063AA315FA3E9200B4B059 /* JFFSocialForsquare.m in Sources */,
-				37063AA715FA4BB900B4B059 /* JFFForsquareSessionStorage.m in Sources */,
+				37063AA315FA3E9200B4B059 /* JFFSocialFoursquare.m in Sources */,
+				37063AA715FA4BB900B4B059 /* JFFFoursquareSessionStorage.m in Sources */,
 				CE85432115FA37C600750066 /* JFFDirectTweetMessage.m in Sources */,
 				CECF90AC15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m in Sources */,
 				CEB2350615FF6840005E5CF5 /* JFFSocialInstagram.m in Sources */,
@@ -922,7 +914,6 @@
 				CEB2368215FF8010005E5CF5 /* JFFInstagramResponseError.m in Sources */,
 				CEB2368515FF877C005E5CF5 /* JFFInstagramAccount.m in Sources */,
 				CEB236D416006AF6005E5CF5 /* JFFSocialInstagramApi.m in Sources */,
-				CEB236D516006BBA005E5CF5 /* JFFSocialAsyncUtils.m in Sources */,
 				CEB236D816006F05005E5CF5 /* JFFInstagramJSONDataAnalyzers.m in Sources */,
 				CEB236DB1600757E005E5CF5 /* JFFInstagramUsersListResponseError.m in Sources */,
 				CEB23770160098B0005E5CF5 /* JFFInstagramMediaItem.m in Sources */,
@@ -936,6 +927,7 @@
 				37497DB21601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m in Sources */,
 				37497DB51601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m in Sources */,
 				37497DB81601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m in Sources */,
+				502AFF7816029E09009BCEEF /* JFFFoursquareNotFoundUsersCheckinsError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -973,6 +965,7 @@
 				HEADER_SEARCH_PATHS = (
 					../,
 					.,
+					../JFFJsonTools,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -996,6 +989,7 @@
 				HEADER_SEARCH_PATHS = (
 					../,
 					.,
+					../JFFJsonTools,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;

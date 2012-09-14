@@ -23,3 +23,18 @@
 //Instagram errors headers
 #import <JFFSocial/Instagram/Errors/JFFInstagramResponseError.h>
 #import <JFFSocial/Instagram/Errors/JFFInvalidInstagramResponseURLError.h>
+
+
+//Foursquare header
+#import <JFFSocial/Foursquare/JFFSocialFoursquare.h>
+#import <JFFSocial/Foursquare/Model/FoursquareUserModel.h>
+#import <JFFSocial/Foursquare/Model/FoursquareCheckinsModel.h>
+
+//Foursquare errors header
+#import <JFFSocial/Foursquare/Errors/JFFFoursquareAuthURLError.h>
+#import <JFFSocial/Foursquare/Errors/JFFFoursquareAuthInvalidAccessTokenError.h>
+#import <JFFSocial/Foursquare/Errors/JFFFoursquareCachedAccessTokenError.h>
+#import <JFFSocial/Foursquare/Errors/ParserErrors/JFFFoursquareAPIServerError.h>
+#import <JFFSocial/Foursquare/Errors/ParserErrors/JFFFoursquaerAPIInvalidResponseError.h>
+#import <JFFSocial/Foursquare/Errors/JFFFoursquareNotFoundUsersCheckinsError.h>
+

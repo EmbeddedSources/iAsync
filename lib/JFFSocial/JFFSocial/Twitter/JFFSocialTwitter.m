@@ -5,13 +5,14 @@
 
 #import "JFFAsyncTwitterCreateAccount.h"
 #import "JFFNoTwitterAccountsError.h"
-#import "JFFSocialAsyncUtils.h"
 #import "AsyncAnalyzers.h"
 
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
 
 #define DEFAULT_SEARCH_RADIUS 100.0f
+
+static JFFSocialTwitterDidLoginCallback globalDidLoginCallback;
 
 static JFFAsyncOperation tritterAccountsLoader()
 {
@@ -51,28 +52,31 @@ static JFFAsyncOperation tritterAccountsLoader()
                                                    );
         }
 
-        return loader(progressCallback, cancelCallback, doneCallback);
+        doneCallback = [doneCallback copy];
+        JFFDidFinishAsyncOperationHandler doneCallbackWp = ^(id result, NSError *error)
+        {
+            if (doneCallback)
+                doneCallback(result, error);
+
+            if (globalDidLoginCallback)
+                globalDidLoginCallback(nil);
+        };
+
+        return loader(progressCallback, cancelCallback, doneCallbackWp);
     };
 
     return sequenceOfAsyncOperations(jffTwitterAccessRequestLoader(),
                                      accountsLoader,
                                      nil
-                                     );;
-
+                                     );
 }
 
 @implementation JFFSocialTwitter
 
-#pragma mark - MMSocialServiceProtocol
-
-/*- (BOOL)isAuthorized
++ (BOOL)isAuthorized
 {
     return [TWTweetComposeViewController canSendTweet];
-}*/
-
-#pragma mark - JFF Async operations
-
-#pragma mark Users request
+}
 
 + (JFFAsyncOperation)generalTwitterApiDataLoaderWithURLString:(NSString *)urlString
                                                    parameters:(NSDictionary *)parameters
@@ -98,7 +102,7 @@ static JFFAsyncOperation tritterAccountsLoader()
 
     return bindSequenceOfAsyncOperations(loaderOperation,
                                          twitterResponseToNSData(),
-                                         asyncJsonDataAnalizer(),
+                                         asyncOperationBinderJsonDataParser(),
                                          ayncAnalizer,
                                          nil);
 }
@@ -144,8 +148,8 @@ static JFFAsyncOperation tritterAccountsLoader()
     return bindSequenceOfAsyncOperations(followersIds, usersForIds, nil);
 }
 
-+ (JFFAsyncOperation)sendMessage:(NSString *)message
-                toFollowerWithId:(NSString *)userId
++ (JFFAsyncOperation)sendDirectMessage:(NSString *)message
+                      toFollowerWithId:(NSString *)userId
 {
     NSDictionary *params = @{
     @"text"    : message,
@@ -157,6 +161,24 @@ static JFFAsyncOperation tritterAccountsLoader()
                                                                 requestMethod:TWRequestMethodPOST
                                                                  ayncAnalizer:asyncJSONObjectToDirectTweet()];
     return result;
+}
+
++ (JFFAsyncOperation)sendTweetMessage:(NSString *)message
+{
+    NSDictionary *params = @{
+    @"status" : message,
+    };
+
+    JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:@"http://api.twitter.com/1/statuses/update.json"
+                                                                   parameters:params
+                                                                requestMethod:TWRequestMethodPOST
+                                                                 ayncAnalizer:asyncJSONObjectToDirectTweet()];
+    return result;
+}
+
++ (void)setDidLoginCallback:(JFFSocialTwitterDidLoginCallback)didLoginCallback
+{
+    globalDidLoginCallback = [didLoginCallback copy];
 }
 
 @end

@@ -3,6 +3,7 @@
 //
 
 #ifdef __OBJC__
+    #import <JFFJsonTools/JFFJsonTools.h>
     #import <JFFNetwork/JFFNetwork.h>
     #import <JFFAsyncOperations/JFFAsyncOperations.h>
     #import <JFFUtils/JFFUtils.h>
