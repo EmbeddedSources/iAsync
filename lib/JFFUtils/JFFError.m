@@ -2,11 +2,16 @@
 
 @implementation JFFError
 
++ (NSString *)jffErrorsDomain
+{
+    return @"com.just_for_fun.library";
+}
+
 - (id)initWithDescription:(NSString *)description
                    domain:(NSString *)domain
                      code:(NSInteger)code
 {
-    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : description };
+    NSDictionary *userInfo = @{NSLocalizedDescriptionKey : description};
 
     return [super initWithDomain:domain
                             code:code
@@ -16,7 +21,7 @@
 - (id)initWithDescription:(NSString *)description code:(NSInteger)code
 {
     return [self initWithDescription:description
-                              domain:@"com.just_for_fun.library"
+                              domain:[[self class] jffErrorsDomain]
                                 code:code];
 }
 
