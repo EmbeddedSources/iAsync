@@ -111,7 +111,7 @@
     NSUInteger twitterAccountIndex = 0;
     {
         JFFTwitterAccount* twitterAccount = users[twitterAccountIndex];
-        
+
         GHAssertEqualStrings( @"806425640", twitterAccount.twitterAccountId, @"tweet id mismatch");
         GHAssertEqualStrings( @"hc_test1", twitterAccount.name, @"tweet name mismatch");
         GHAssertNotNil( twitterAccount.avatarURL, @"tweet avatarURL mismatch");
@@ -138,12 +138,12 @@
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
         NSLog(@"sending tweet message: %@", message);
-        JFFAsyncOperation loader = [JFFSocialTwitter sendMessage:messageToSend
-                                                toFollowerWithId:@"806425640"];
+        JFFAsyncOperation loader = [JFFSocialTwitter sendDirectMessage:messageToSend
+                                                      toFollowerWithId:@"806425640"];
 
         loader(nil,nil,^(id result,NSError *error)
         {
-            if ( [error isMemberOfClass:[JFFTwitterAccountAccessNotGrantedError class]] )
+            if ([error isMemberOfClass:[JFFTwitterAccountAccessNotGrantedError class]])
             {
                 finishBLock();
                 return;

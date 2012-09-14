@@ -1,5 +1,12 @@
 
 #import <JFFTestTools/GHAsyncTestCase+MainThreadTests.h>
+
+@interface JFFSocialInstagram (InstagramApiTest)
+
++ (JFFAsyncOperation)authedUserLoaderWithCredentials:(JFFInstagramCredentials *)redentials;
+
+@end
+
 /*
  Test account:
 
@@ -24,7 +31,7 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
 //likes - to like and unlike items on a user’s behalf
 
 //comments
--(void)testInstagramAuthedUser
+-(void)RtestInstagramAuthedUser
 {
     __block JFFInstagramAuthedAccount *account;
 

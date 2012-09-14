@@ -1,5 +1,5 @@
 
-#import <JFFSocial/Forsquare/ForsquareSession/JFFForsquareSessionStorage.h>
+#import <JFFSocial/Foursquare/FoursquareSession/JFFFoursquareSessionStorage.h>
 
 @interface GHUnitIPhoneAppDelegate (OpenWithURL)
 @end

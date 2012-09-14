@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		371D861615FF34DA001C1C2C /* FoursquareApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D861515FF34DA001C1C2C /* FoursquareApiTest.m */; };
+		374980AC1602185A00AF0C29 /* test-img1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 374980AB1602185A00AF0C29 /* test-img1.jpg */; };
 		CE4F60AA15F8BD1600271035 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60A915F8BD1600271035 /* UIKit.framework */; };
 		CE4F60AC15F8BD1600271035 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60AB15F8BD1600271035 /* Foundation.framework */; };
 		CE4F60AE15F8BD1600271035 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60AD15F8BD1600271035 /* CoreGraphics.framework */; };
@@ -25,6 +25,7 @@
 		CE4F61FC15F8E77F00271035 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F615D15F8BEDB00271035 /* libJFFTestTools.a */; };
 		CE5A01C915F9F16B005CC01A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5A01C815F9F16B005CC01A /* CFNetwork.framework */; };
 		CE5A01CB15F9F17D005CC01A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5A01CA15F9F17D005CC01A /* libz.dylib */; };
+		CE84AE5A160349DB00019CAF /* InstagramApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2365915FF6C8C005E5CF5 /* InstagramApiTest.m */; };
 		CE85420A15FA16E000750066 /* twitter_geolocation.json in Resources */ = {isa = PBXBuildFile; fileRef = CE85420915FA16E000750066 /* twitter_geolocation.json */; };
 		CEB2347815FF61F6005E5CF5 /* libJFFUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB2347315FF61EC005E5CF5 /* libJFFUI.a */; };
 		CEB234F215FF6776005E5CF5 /* libJFFNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB234E915FF6767005E5CF5 /* libJFFNetwork.a */; };
@@ -212,6 +213,7 @@
 
 /* Begin PBXFileReference section */
 		371D861515FF34DA001C1C2C /* FoursquareApiTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoursquareApiTest.m; sourceTree = "<group>"; };
+		374980AB1602185A00AF0C29 /* test-img1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "test-img1.jpg"; sourceTree = "<group>"; };
 		CE4F60A515F8BD1600271035 /* JFFSocialTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFSocialTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4F60A915F8BD1600271035 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE4F60AB15F8BD1600271035 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -272,6 +274,7 @@
 		CE41F73015FA150C00A742EE /* TestData */ = {
 			isa = PBXGroup;
 			children = (
+				374980AB1602185A00AF0C29 /* test-img1.jpg */,
 				CE85420915FA16E000750066 /* twitter_geolocation.json */,
 				CECF90A815FA3B3B009E707A /* direct_message_send.json */,
 			);
@@ -655,6 +658,7 @@
 				CE4F60B415F8BD1600271035 /* InfoPlist.strings in Resources */,
 				CE85420A15FA16E000750066 /* twitter_geolocation.json in Resources */,
 				CECF90A915FA3B3B009E707A /* direct_message_send.json in Resources */,
+				374980AC1602185A00AF0C29 /* test-img1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,9 +670,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4F60B615F8BD1600271035 /* main.m in Sources */,
-				371D84D815FF20B6001C1C2C /* (null) in Sources */,
-				371D861615FF34DA001C1C2C /* FoursquareApiTest.m in Sources */,
 				CEB2361F15FF6BD1005E5CF5 /* GHUnitIPhoneAppDelegate+OpenWithURL.m in Sources */,
+				CE84AE5A160349DB00019CAF /* InstagramApiTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

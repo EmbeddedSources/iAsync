@@ -1,10 +1,10 @@
 
-#import <JFFSocial/Forsquare/ForsquareSession/JFFForsquareSessionStorage.h>
-#import <JFFSocial/Forsquare/JFFSocialForsquare.h>
+#import <JFFSocial/Foursquare/FoursquareSession/JFFFoursquareSessionStorage.h>
+#import <JFFSocial/Foursquare/JFFSocialFoursquare.h>
 
 #import <JFFTestTools/GHAsyncTestCase+MainThreadTests.h>
 
-#import <JFFSocial/Forsquare/Model/FoursquareUserModel.h>
+#import <JFFSocial/Foursquare/Model/FoursquareUserModel.h>
 
 /*
 
@@ -24,17 +24,17 @@
 
 - (void)testAuthURLHandling
 {
-    NSURL *frAuthGoodURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@#access_token=%@", [JFFForsquareSessionStorage redirectURI], ACCESS_TOKEN]];
+    NSURL *frAuthGoodURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@#access_token=%@", [JFFFoursquareSessionStorage redirectURI], ACCESS_TOKEN]];
     NSURL *frAuthBadURL1 = [NSURL URLWithString:@"http://#access_token=0WA2I2N1RDHMOVKZESV15ELMALCGC1T2M23UPJMYEMM2WNMZ"];
-    NSURL *frAuthBadURL2 = [NSURL URLWithString:[NSString stringWithFormat:@"%@#access_token=", [JFFForsquareSessionStorage redirectURI]]];
-    NSURL *frAuthBadURL3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@#=0WA2I2N1RDHMOVKZESV15ELMALCGC1T2M23UPJMYEMM2WNMZ", [JFFForsquareSessionStorage redirectURI]]];
+    NSURL *frAuthBadURL2 = [NSURL URLWithString:[NSString stringWithFormat:@"%@#access_token=", [JFFFoursquareSessionStorage redirectURI]]];
+    NSURL *frAuthBadURL3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@#=0WA2I2N1RDHMOVKZESV15ELMALCGC1T2M23UPJMYEMM2WNMZ", [JFFFoursquareSessionStorage redirectURI]]];
     
-    GHAssertTrue([JFFForsquareSessionStorage handleAuthOpenURL:frAuthGoodURL],  @"valid auth URL didn`t handle");
-    GHAssertFalse([JFFForsquareSessionStorage handleAuthOpenURL:frAuthBadURL1], @"did handle invalid URL %@", frAuthBadURL1);
-    GHAssertFalse([JFFForsquareSessionStorage handleAuthOpenURL:frAuthBadURL2], @"did handle invalid URL %@", frAuthBadURL2);
-    GHAssertFalse([JFFForsquareSessionStorage handleAuthOpenURL:frAuthBadURL3], @"did handle invalid URL %@", frAuthBadURL3);
+    GHAssertTrue([JFFFoursquareSessionStorage handleAuthOpenURL:frAuthGoodURL],  @"valid auth URL didn`t handle");
+    GHAssertFalse([JFFFoursquareSessionStorage handleAuthOpenURL:frAuthBadURL1], @"did handle invalid URL %@", frAuthBadURL1);
+    GHAssertFalse([JFFFoursquareSessionStorage handleAuthOpenURL:frAuthBadURL2], @"did handle invalid URL %@", frAuthBadURL2);
+    GHAssertFalse([JFFFoursquareSessionStorage handleAuthOpenURL:frAuthBadURL3], @"did handle invalid URL %@", frAuthBadURL3);
     
-    GHAssertEqualStrings([JFFForsquareSessionStorage accessToken], ACCESS_TOKEN, @"invalid stored access token");
+    GHAssertEqualStrings([JFFFoursquareSessionStorage accessToken], ACCESS_TOKEN, @"invalid stored access token");
 }
 
 - (void)testAuth
@@ -42,7 +42,7 @@
 
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
-        JFFAsyncOperation loader = [JFFSocialForsquare authLoader];
+        JFFAsyncOperation loader = [JFFSocialFoursquare authLoader];
         
         loader(nil,nil,^(id result,NSError *error)
                {
@@ -60,7 +60,7 @@
     [self prepare];
     
     SEL selector = _cmd;
-    [JFFSocialForsquare myFriendsLoader] (nil, nil, ^(id result, NSError *error)
+    [JFFSocialFoursquare myFriendsLoader] (nil, nil, ^(id result, NSError *error)
                                           {
                                               if (!error && [result isKindOfClass:[NSArray class]] && [result count] > 0)
                                               {
@@ -85,7 +85,7 @@
     [self prepare];
     
     SEL selector = _cmd;
-    [JFFSocialForsquare checkinsLoaderWithUserId:nil limit:1] (nil, nil, ^(id result, NSError *error)
+    [JFFSocialFoursquare checkinsLoaderWithUserId:nil limit:1] (nil, nil, ^(id result, NSError *error)
                                           {
                                               if (!error && [result isKindOfClass:[NSArray class]] && [result count] > 0)
                                               {
@@ -106,12 +106,63 @@
     [self prepare];
     
     SEL selector = _cmd;
-    [JFFSocialForsquare addPostToCheckin:@"5051a006e4b08eccb1257587"
+    [JFFSocialFoursquare addPostToCheckin:@"5051a006e4b08eccb1257587"
                                 withText:@"Hi!"
                                      url:@"http://wishdates.com"
                                contentID:nil]
     (nil, nil, ^(id result, NSError *error)
      {
+         if (!error)
+         {
+             [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
+         }
+         else
+         {
+             [self notify:kGHUnitWaitStatusFailure forSelector:selector];
+         }
+         
+     });
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:100.0];
+}
+
+//- (void)testAddPhotoToCheckin
+//{
+//    [self prepare];
+//    
+//    SEL selector = _cmd;
+//    
+//    [JFFSocialFoursquare addPhoto:[UIImage imageNamed:@"test-img1.jpg"]
+//                       toCheckin:@"5051a006e4b08eccb1257587"
+//                            text:@"Hi!" url:@"http://wishdates.com"
+//                       contentID:nil]
+//    (nil, nil, ^(id result, NSError *error)
+//     {
+//         NSLog(@"Result: %@", result);
+//         if (!error)
+//         {
+//             [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
+//         }
+//         else
+//         {
+//             [self notify:kGHUnitWaitStatusFailure forSelector:selector];
+//         }
+//         
+//     });
+//    
+//    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:100.0];
+//}
+
+- (void)testInviteUser
+{
+    [self prepare];
+    
+    SEL selector = _cmd;
+    
+    [JFFSocialFoursquare inviteUserLoader:@"self" text:@"Hi! Nice place!" url:@"http://wishdates.com"]
+    (nil, nil, ^(id result, NSError *error)
+     {
+         NSLog(@"Result: %@", result);
          if (!error)
          {
              [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
