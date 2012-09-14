@@ -75,6 +75,7 @@ JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
 
 ///////////////////////// AUTO REPEAT CIRCLE ////////////////////////
 
+//TODO move timer depend methods to JFFScheduler async category
 JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation loader,
                                        JFFResultPredicateBlock continuePredicate,
                                        NSTimeInterval delay,

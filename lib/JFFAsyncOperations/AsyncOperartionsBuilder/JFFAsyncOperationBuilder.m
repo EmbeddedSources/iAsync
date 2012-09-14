@@ -23,26 +23,26 @@
 
 @end
 
-JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterface >asyncObject )
+JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterface >asyncObject)
 {
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
         __unsafe_unretained id< JFFAsyncOperationInterface > weakAsyncObject = asyncObject;
 
-        doneCallback_ = [ doneCallback_ copy ];
-        __block void (^completionHandler)(id, NSError*) = [ ^( id result_, NSError* error_ )
+        doneCallback = [doneCallback copy];
+        __block void (^completionHandler)(id, NSError*) = [^(id result, NSError *error)
         {
             //use asyncObject_ in if to own it while waiting result
-            if (doneCallback_ && asyncObject)
-                doneCallback_( result_, error_ );
+            if (doneCallback && asyncObject)
+                doneCallback(result, error);
         } copy ];
-        progressCallback_ = [ progressCallback_ copy ];
+        progressCallback = [progressCallback copy];
         __block void (^progressHandler)( id ) = [ ^( id data_ )
         {
-            if ( progressCallback_ )
-                progressCallback_(data_);
+            if (progressCallback)
+                progressCallback(data_);
         } copy ];
 
         completionHandler = [completionHandler copy];
