@@ -21,6 +21,14 @@
 		1BB02E421546A29600439B66 /* NSDictionary+JHTTPHeaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB02E401546A29600439B66 /* NSDictionary+JHTTPHeaders.m */; };
 		1BE052FF1547DF5600270B58 /* NSHTTPCookie+matchesURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE052FD1547DF5600270B58 /* NSHTTPCookie+matchesURL.h */; };
 		1BE053001547DF5600270B58 /* NSHTTPCookie+matchesURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE052FE1547DF5600270B58 /* NSHTTPCookie+matchesURL.m */; };
+		374980A31602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */; };
+		374980A41602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */; };
+		374980A51602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */; };
+		374980A61602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */; };
+		374980A71602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */; };
+		374980A81602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */; };
+		374980A91602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */; };
+		374980AA1602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */; };
 		5310B9F1141F489200A3E2B1 /* JNConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5310B9EF141F489200A3E2B1 /* JNConstants.h */; };
 		5316F433141E151C00C3D9A9 /* JFFUrlResponseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5316F431141E151C00C3D9A9 /* JFFUrlResponseLogger.h */; };
 		5316F434141E151C00C3D9A9 /* JFFUrlResponseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316F432141E151C00C3D9A9 /* JFFUrlResponseLogger.m */; };
@@ -264,6 +272,8 @@
 		1BB02E401546A29600439B66 /* NSDictionary+JHTTPHeaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JHTTPHeaders.m"; sourceTree = "<group>"; };
 		1BE052FD1547DF5600270B58 /* NSHTTPCookie+matchesURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSHTTPCookie+matchesURL.h"; sourceTree = "<group>"; };
 		1BE052FE1547DF5600270B58 /* NSHTTPCookie+matchesURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSHTTPCookie+matchesURL.m"; sourceTree = "<group>"; };
+		374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DataForHTTPPost.h"; sourceTree = "<group>"; };
+		374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DataForHTTPPost.m"; sourceTree = "<group>"; };
 		5310B9EF141F489200A3E2B1 /* JNConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNConstants.h; sourceTree = "<group>"; };
 		5316F431141E151C00C3D9A9 /* JFFUrlResponseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFUrlResponseLogger.h; sourceTree = "<group>"; };
 		5316F432141E151C00C3D9A9 /* JFFUrlResponseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFUrlResponseLogger.m; sourceTree = "<group>"; };
@@ -440,6 +450,8 @@
 		53E074BB144EFB3500CB146F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */,
+				374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */,
 				53E074BC144EFBA000CB146F /* NSURL+Cookies.h */,
 				53E074BD144EFBA000CB146F /* NSURL+Cookies.m */,
 				1B15CCBA1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.h */,
@@ -660,6 +672,7 @@
 				539103B314A88BCA007315A3 /* NSURL+Cookies.h in Headers */,
 				7E54F3BE15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
 				7E54F3CB15FA298E006F386A /* JHttpError.h in Headers */,
+				374980A51602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +709,7 @@
 				65802B63148BFCB20040A93A /* JNUrlResponse.h in Headers */,
 				7E54F3BD15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
 				7E54F3CA15FA298E006F386A /* JHttpError.h in Headers */,
+				374980A41602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,6 +741,7 @@
 				7E8F20B014F949DD00588C7D /* JFFNetwork.h in Headers */,
 				7E54F3BF15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
 				7E54F3CC15FA298E006F386A /* JHttpError.h in Headers */,
+				374980A61602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,6 +789,7 @@
 				CE29B5E215F5E821000A05B8 /* NSURL+URLWithLocation.h in Headers */,
 				7E54F3BC15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
 				7E54F3C915FA298E006F386A /* JHttpError.h in Headers */,
+				374980A31602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -985,6 +1001,7 @@
 				CE29B5E515F5E823000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 				7E54F3C215FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
 				7E54F3CF15FA298E006F386A /* JHttpError.m in Sources */,
+				374980A91602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1013,6 +1030,7 @@
 				CE29B5E415F5E823000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 				7E54F3C115FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
 				7E54F3CE15FA298E006F386A /* JHttpError.m in Sources */,
+				374980A81602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,6 +1059,7 @@
 				CE29B5E615F5E824000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 				7E54F3C315FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
 				7E54F3D015FA298E006F386A /* JHttpError.m in Sources */,
+				374980AA1602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,6 +1098,7 @@
 				CE29B5E315F5E821000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 				7E54F3C015FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
 				7E54F3CD15FA298E006F386A /* JHttpError.m in Sources */,
+				374980A71602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
