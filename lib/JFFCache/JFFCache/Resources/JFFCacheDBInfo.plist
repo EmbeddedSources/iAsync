@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ES_THUMBNAIL_DB</key>
+	<dict>
+		<key>fileName</key>
+		<string>WDThumbnails.sqlite</string>
+		<key>maxItems</key>
+		<integer>0</integer>
+		<key>version</key>
+		<integer>1</integer>
+		<key>timeToLiveInHours</key>
+		<integer>24</integer>
+		<key>autoRemoveByLastAccessDateInHours</key>
+		<real>72</real>
+	</dict>
+</dict>
+</plist>

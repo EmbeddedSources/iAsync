@@ -53,6 +53,7 @@
 		65168477144F4ECD0014670E /* libJFFCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFCache.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6516847A144F4ECD0014670E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6516847E144F4ECD0014670E /* JFFCache-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFCache-Prefix.pch"; sourceTree = "<group>"; };
+		CE84AD46160327A600019CAF /* JFFCacheDBInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JFFCacheDBInfo.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +109,7 @@
 		6516847C144F4ECD0014670E /* JFFCache */ = {
 			isa = PBXGroup;
 			children = (
+				CE84AD441603279200019CAF /* Resources */,
 				1BDA4D4C1450044700DCEDDE /* Details */,
 				1BDA4D511450044700DCEDDE /* JFFBaseDB.h */,
 				1BDA4D521450044700DCEDDE /* JFFBaseDB.m */,
@@ -134,6 +136,14 @@
 				6516847E144F4ECD0014670E /* JFFCache-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE84AD441603279200019CAF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE84AD46160327A600019CAF /* JFFCacheDBInfo.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
