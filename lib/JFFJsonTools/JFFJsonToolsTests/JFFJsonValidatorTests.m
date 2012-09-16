@@ -249,26 +249,26 @@
 {
     {
         JFFJsonValidationError *error;
-        
+
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@1, @3]
                                                  withJsonPattern:@[@1, @2, @3]
                                                            error:&error];
-        
+
         STAssertNotNil(error, @"error should be nil");
         STAssertFalse(result, @"ivalid result value");
     }
-    
+
     {
         JFFJsonValidationError *error;
-        
+
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@""]
                                                  withJsonPattern:@[]
                                                            error:&error];
-        
+
         STAssertNotNil(error, @"error should be nil");
         STAssertFalse(result, @"ivalid result value");
     }
-    
+
     {
         JFFJsonValidationError *error;
         
@@ -278,6 +278,20 @@
         
         STAssertNotNil(error, @"error should be nil");
         STAssertFalse(result, @"ivalid result value");
+    }
+}
+
+- (void)testNestedArrayObjectsMatch
+{
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@[@1], @[@1, @2], @[@1, @2, @3]]
+                                                 withJsonPattern:@[@[[NSNumber class]]]
+                                                           error:&error];
+
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
     }
 }
 

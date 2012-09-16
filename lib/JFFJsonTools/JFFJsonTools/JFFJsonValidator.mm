@@ -145,15 +145,15 @@ static BOOL isJsonObject(id object)
 
     if (!isClass(jsonPattern))
     {
-        if ([jsonPattern count] == 1 && isClass(jsonPattern[0]))
+        if ([jsonPattern count] == 1)
         {
             //all elements should have a given class
             for (id subElement in self)
             {
-                if (![subElement validateWithJsonPatternClass:jsonPattern[0]
-                                               rootJsonObject:rootJsonObject
-                                              rootJsonPattern:rootJsonPattern
-                                                        error:outError])
+                if (![subElement validateWithJsonPattern:jsonPattern[0]
+                                          rootJsonObject:rootJsonObject
+                                         rootJsonPattern:rootJsonPattern
+                                                   error:outError])
                 {
                     return NO;
                 }
@@ -161,11 +161,21 @@ static BOOL isJsonObject(id object)
             return YES;
         }
 
-        if (![self validateWithJsonPatternValue:jsonPattern
-                                 rootJsonObject:rootJsonObject
-                                rootJsonPattern:rootJsonPattern
-                                          error:outError])
+        if ([jsonPattern count]!=[self count])
         {
+            if (outError)
+            {
+                JFFJsonValidationError *error = [JFFJsonValidationError new];
+                error.jsonObject  = rootJsonObject ;
+                error.jsonPattern = rootJsonPattern;
+
+                static NSString *const messageFormat = @"jsonObject: %@ does not match array: %@";
+                error.message = [[NSString alloc]initWithFormat:messageFormat,
+                                 self,
+                                 jsonPattern];
+
+                *outError = error;
+            }
             return NO;
         }
 
