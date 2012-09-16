@@ -161,6 +161,14 @@ static BOOL isJsonObject(id object)
             return YES;
         }
 
+        if (![self validateWithJsonPatternValue:jsonPattern
+                                 rootJsonObject:rootJsonObject
+                                rootJsonPattern:rootJsonPattern
+                                          error:outError])
+        {
+            return NO;
+        }
+
         for (NSUInteger index = 0; index < [self count]; ++index)
         {
             id subPattern = jsonPattern[index];

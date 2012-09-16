@@ -245,18 +245,41 @@
     }
 }
 
-//TODO
-/*- (void)testArrayValueMismatch
+- (void)testArrayValueMismatch
 {
-    JFFJsonValidationError *error;
+    {
+        JFFJsonValidationError *error;
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@1, @3]
+                                                 withJsonPattern:@[@1, @2, @3]
+                                                           error:&error];
+        
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
+    }
     
-    BOOL result = [JFFJsonObjectValidator validateJsonObject:@(3)
-                                             withJsonPattern:@(2)
-                                                       error:&error];
+    {
+        JFFJsonValidationError *error;
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@""]
+                                                 withJsonPattern:@[]
+                                                           error:&error];
+        
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
+    }
     
-    STAssertNotNil(error, @"error should be nil");
-    STAssertFalse(result, @"ivalid result value");
-}*/
+    {
+        JFFJsonValidationError *error;
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@1]
+                                                 withJsonPattern:@[@"1"]
+                                                           error:&error];
+        
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
+    }
+}
 
 //TODO test nested objects
 
