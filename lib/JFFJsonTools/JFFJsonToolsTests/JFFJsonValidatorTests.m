@@ -4,7 +4,6 @@
 
 #import "JFFJsonValidationError.h"
 
-//[NSNull       class],
 //[NSDictionary class],
 //[NSArray      class],
 
@@ -156,6 +155,84 @@
     }
 }
 
+////// NSArray type tests /////
+
+- (void)testArrayTypeMatch
+{
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@1, @2, @3]
+                                                 withJsonPattern:[NSArray class]
+                                                           error:&error];
+
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@1, @2, @3]
+                                                 withJsonPattern:@[[NSNumber class]]
+                                                           error:&error];
+
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+}
+
+- (void)testArrayTypeMismatch
+{
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@{}
+                                                 withJsonPattern:[NSArray class]
+                                                           error:&error];
+
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
+    }
+
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@1, @"2", @3]
+                                                 withJsonPattern:@[[NSNumber class]]
+                                                           error:&error];
+
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
+    }
+}
+
+////// Array value tests /////
+
+/*- (void)testArrayValueMatch
+{
+    JFFJsonValidationError *error;
+    
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:@(2)
+                                             withJsonPattern:@(2)
+                                                       error:&error];
+    
+    STAssertNil(error, @"error should be nil");
+    STAssertTrue(result, @"ivalid result value");
+}
+
+- (void)testArrayValueMismatch
+{
+    JFFJsonValidationError *error;
+    
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:@(3)
+                                             withJsonPattern:@(2)
+                                                       error:&error];
+    
+    STAssertNotNil(error, @"error should be nil");
+    STAssertFalse(result, @"ivalid result value");
+}*/
+
 ////// Null value tests /////
 
 - (void)testNullValueMatch
@@ -165,7 +242,7 @@
     BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNull null]
                                              withJsonPattern:[NSNull null]
                                                        error:&error];
-    
+
     STAssertNil(error, @"error should be nil");
     STAssertTrue(result, @"ivalid result value");
 }

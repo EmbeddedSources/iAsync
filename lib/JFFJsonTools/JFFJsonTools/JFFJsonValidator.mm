@@ -66,12 +66,12 @@ static BOOL isJsonObject(id object)
     return YES;
 }
 
-- (BOOL)validateWithJsonPattern:(id)jsonPattern
-                 rootJsonObject:(id)rootJsonObject
-                rootJsonPattern:(id)rootJsonPattern
-                          error:(NSError *__autoreleasing *)outError
+- (BOOL)validateWithJsonPatternClass:(id)jsonPattern
+                      rootJsonObject:(id)rootJsonObject
+                     rootJsonPattern:(id)rootJsonPattern
+                               error:(NSError *__autoreleasing *)outError
 {
-    if (![self isKindOfClass:[jsonPattern class]])
+    if (isClass(jsonPattern) && ![self isKindOfClass:jsonPattern])
     {
         if (outError)
         {
@@ -86,6 +86,22 @@ static BOOL isJsonObject(id object)
 
             *outError = error;
         }
+        return NO;
+    }
+
+    return YES;
+}
+
+- (BOOL)validateWithJsonPattern:(id)jsonPattern
+                 rootJsonObject:(id)rootJsonObject
+                rootJsonPattern:(id)rootJsonPattern
+                          error:(NSError *__autoreleasing *)outError
+{
+    if (![self validateWithJsonPatternClass:jsonPattern
+                             rootJsonObject:rootJsonObject
+                            rootJsonPattern:rootJsonPattern
+                                      error:outError])
+    {
         return NO;
     }
 
@@ -119,7 +135,46 @@ static BOOL isJsonObject(id object)
                 rootJsonPattern:(id)rootJsonPattern
                           error:(NSError *__autoreleasing *)outError
 {
-    return NO;
+    if (![self validateWithJsonPatternClass:jsonPattern
+                             rootJsonObject:rootJsonObject
+                            rootJsonPattern:rootJsonPattern
+                                      error:outError])
+    {
+        return NO;
+    }
+
+    if (!isClass(jsonPattern))
+    {
+        if ([jsonPattern count] == 1 && isClass(jsonPattern[0]))
+        {
+            //all elements should have a given class
+            for (id subElement in self)
+            {
+                if (![subElement validateWithJsonPatternClass:jsonPattern[0]
+                                               rootJsonObject:rootJsonObject
+                                              rootJsonPattern:rootJsonPattern
+                                                        error:outError])
+                {
+                    return NO;
+                }
+            }
+            return YES;
+        }
+
+        //TODO compare as values all subelements
+//        for (id subElement in self)
+//        {
+//            if ([subElement validateWithJsonPatternClass:jsonPattern[0]
+//                                          rootJsonObject:rootJsonObject
+//                                         rootJsonPattern:rootJsonPattern
+//                                                   error:outError])
+//            {
+//                return NO;
+//            }
+//        }
+    }
+
+    return YES;
 }
 
 @end
