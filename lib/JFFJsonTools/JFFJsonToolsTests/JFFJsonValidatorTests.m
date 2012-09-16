@@ -209,19 +209,43 @@
 
 ////// Array value tests /////
 
-/*- (void)testArrayValueMatch
+- (void)testArrayValueMatch
 {
-    JFFJsonValidationError *error;
-    
-    BOOL result = [JFFJsonObjectValidator validateJsonObject:@(2)
-                                             withJsonPattern:@(2)
-                                                       error:&error];
-    
-    STAssertNil(error, @"error should be nil");
-    STAssertTrue(result, @"ivalid result value");
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@1, @2, @3]
+                                                 withJsonPattern:@[@1, @2, @3]
+                                                           error:&error];
+
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[]
+                                                 withJsonPattern:@[]
+                                                           error:&error];
+
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@"1"]
+                                                 withJsonPattern:@[@"1"]
+                                                           error:&error];
+
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
 }
 
-- (void)testArrayValueMismatch
+/*- (void)testArrayValueMismatch
 {
     JFFJsonValidationError *error;
     

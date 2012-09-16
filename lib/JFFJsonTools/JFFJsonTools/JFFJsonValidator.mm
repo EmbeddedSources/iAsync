@@ -161,17 +161,13 @@ static BOOL isJsonObject(id object)
             return YES;
         }
 
-        //TODO compare as values all subelements
-//        for (id subElement in self)
-//        {
-//            if ([subElement validateWithJsonPatternClass:jsonPattern[0]
-//                                          rootJsonObject:rootJsonObject
-//                                         rootJsonPattern:rootJsonPattern
-//                                                   error:outError])
-//            {
-//                return NO;
-//            }
-//        }
+        if (![self validateWithJsonPatternValue:jsonPattern
+                                 rootJsonObject:rootJsonObject
+                                rootJsonPattern:rootJsonPattern
+                                          error:outError])
+        {
+            return NO;
+        }
     }
 
     return YES;
@@ -195,56 +191,6 @@ static BOOL isJsonObject(id object)
                                 rootJsonObject:rootJsonObject
                                rootJsonPattern:rootJsonPattern
                                          error:outError];
-
-    if ([jsonObject isKindOfClass:[NSArray class]])
-    {
-        NSArray *arrayJsonObject = jsonObject;
-
-        static NSArray *allJsonTypes;
-        if (!allJsonTypes)
-        {
-            allJsonTypes = @[
-            [NSString     class],
-            [NSNumber     class],
-            [NSDictionary class],
-            [NSArray      class],
-            [NSNull       class],
-            ];
-        }
-
-        NSArray *allowedJsonTypes = [jsonPattern count]==0?allJsonTypes:jsonPattern;
-
-        id objectWithUnexpectedType = [arrayJsonObject firstMatch:^BOOL(id object)
-        {
-            return ![allowedJsonTypes containsObject:[object class]];
-        }];
-
-        if (objectWithUnexpectedType)
-        {
-            if (outError)
-            {
-                JFFJsonValidationError *error = [JFFJsonValidationError new];
-                error.jsonObject  = rootJsonObject ;
-                error.jsonPattern = rootJsonPattern;
-
-                static NSString *const messageFormat = @"jsonObject: %@ does not match types: %@";
-                error.message = [[NSString alloc]initWithFormat:messageFormat,
-                                 objectWithUnexpectedType,
-                                 allowedJsonTypes];
-
-                *outError = error;
-            }
-            return NO;
-        }
-
-        return YES;
-    }
-
-//    if ([jsonObject isKindOfClass:[jsonPattern class]])
-//    {
-//    }
-
-    return NO;
 }
 
 + (BOOL)validateJsonObject:(id)jsonObject
