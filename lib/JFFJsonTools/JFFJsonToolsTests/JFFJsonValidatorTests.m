@@ -452,9 +452,7 @@
     STAssertFalse(result, @"ivalid result value");
 }
 
-////// TODO 
-
-- (void)RtestPassNilJsonPattern
+- (void)testPassNilJsonPattern
 {
     STAssertThrows(
     {
@@ -464,7 +462,7 @@
     }, @"assert expected");
 }
 
-- (void)RtestInvalidTypeOfRootJsonObject
+- (void)testInvalidTypeOfRootJsonObject
 {
     {
         JFFJsonValidationError *error;
@@ -488,10 +486,6 @@
         STAssertEqualObjects(error.jsonObject , @[], @"ok");
         STAssertEqualObjects(error.jsonPattern, @{}, @"ok");
     }
-}
-
-- (void)RtestJsonObjectValueMismatch
-{
 }
 
 @end

@@ -71,7 +71,8 @@ static BOOL isJsonObject(id object)
                      rootJsonPattern:(id)rootJsonPattern
                                error:(NSError *__autoreleasing *)outError
 {
-    if (isClass(jsonPattern) && ![self isKindOfClass:jsonPattern])
+    Class checkClass = isClass(jsonPattern)?jsonPattern:[jsonPattern class];
+    if (![self isKindOfClass:checkClass])
     {
         if (outError)
         {
