@@ -4,26 +4,13 @@
 
 #import "JFFJsonValidationError.h"
 
+//TODO
 //[NSDictionary class],
 //[NSArray      class],
 
 #include <objc/runtime.h>
 
 @implementation JFFJsonValidatorTests
-
-- (void)setUp
-{
-    [super setUp];
-    
-    // Set-up code here.
-}
-
-- (void)tearDown
-{
-    // Tear-down code here.
-    
-    [super tearDown];
-}
 
 ////// String type tests /////
 
@@ -293,9 +280,133 @@
         STAssertNil(error, @"error should be nil");
         STAssertTrue(result, @"ivalid result value");
     }
+
+    //TODO test nested objects
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@[@1, @2], @[@1, @"2"], @[@1, @2, @"3"]]
+                                                 withJsonPattern:@[@[[NSNumber class]], @[@1, @"2"], @[@1, @2, [NSString class]]]
+                                                           error:&error];
+
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
 }
 
-//TODO test nested objects
+- (void)testDictionaryMatchElements
+{
+    {
+        JFFJsonValidationError *error;
+
+        id nestedPattern =
+        @{
+        @"some_num"   : [NSNumber class],
+        @"num_2"      : @2,
+        @"some_str"   : [NSString class],
+        @"str_22"     : @"22",
+        @"some_null"  : [NSString class],
+        @"nested_ar"  : @[@[[NSNumber class]], @[@1, @"2"], @[@1, @2, [NSString class]]],
+        };
+
+        id pattern =
+        @{
+        @"some_num"   : [NSNumber class],
+        @"num_2"      : @2,
+        @"some_str"   : [NSString class],
+        @"str_22"     : @"22",
+        @"some_null"  : [NSString class],
+        @"nested_ar"  : @[@[[NSNumber class]], @[@1, @"2"], @[@1, @2, [NSString class]]],
+        @"nested_obj" : nestedPattern,
+        };
+
+        id nestedObject =
+        @{
+        @"some_num"  : @3,
+        @"num_2"     : @2,
+        @"some_str"  : @"str3",
+        @"str_22"    : @"22",
+        @"some_null" : [NSNull null],
+        @"nested_ar" : @[@[@1, @2], @[@1, @"2"], @[@1, @2, @"3"]],
+        };
+
+        id object =
+        @{
+        @"some_num"  : @3,
+        @"num_2"     : @2,
+        @"some_str"  : @"str3",
+        @"str_22"    : @"22",
+        @"some_null" : [NSNull null],
+        @"nested_ar" : @[@[@1, @2], @[@1, @"2"], @[@1, @2, @"3"]],
+        @"nested_obj" : nestedObject,
+        };
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+- (void)testDictionaryMisatchElements_some_num
+{
+    {
+        JFFJsonValidationError *error;
+        
+        id nestedPattern =
+        @{
+        @"some_num"   : [NSNumber class],
+        @"num_2"      : @2,
+        @"some_str"   : [NSString class],
+        @"str_22"     : @"22",
+        @"some_null"  : [NSString class],
+        @"nested_ar"  : @[@[[NSNumber class]], @[@1, @"2"], @[@1, @2, [NSString class]]],
+        };
+        
+        id pattern =
+        @{
+        @"some_num"   : [NSNumber class],
+        @"num_2"      : @2,
+        @"some_str"   : [NSString class],
+        @"str_22"     : @"22",
+        @"some_null"  : [NSString class],
+        @"nested_ar"  : @[@[[NSNumber class]], @[@1, @"2"], @[@1, @2, [NSString class]]],
+        @"nested_obj" : nestedPattern,
+        };
+        
+        id nestedObject =
+        @{
+        @"some_num"  : @3,
+        @"num_2"     : @2,
+        @"some_str"  : @"str3",
+        @"str_22"    : @"22",
+        @"some_null" : [NSNull null],
+        @"nested_ar" : @[@[@1, @2], @[@1, @"2"], @[@1, @2, @"3"]],
+        };
+        
+        id object =
+        @{
+        @"some_num"  : @"3",
+        @"num_2"     : @2,
+        @"some_str"  : @"str3",
+        @"str_22"    : @"22",
+        @"some_null" : [NSNull null],
+        @"nested_ar" : @[@[@1, @2], @[@1, @"2"], @[@1, @2, @"3"]],
+        @"nested_obj" : nestedObject,
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
+    }
+}
 
 ////// Null value tests /////
 

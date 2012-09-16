@@ -52,12 +52,12 @@ static BOOL isJsonObject(id object)
             JFFJsonValidationError *error = [JFFJsonValidationError new];
             error.jsonObject  = rootJsonObject ;
             error.jsonPattern = rootJsonPattern;
-            
+
             static NSString *const messageFormat = @"jsonObject: %@ does not match value: %@";
             error.message = [[NSString alloc]initWithFormat:messageFormat,
                              self,
                              jsonPattern];
-            
+
             *outError = error;
         }
         return NO;
@@ -215,6 +215,7 @@ static BOOL isJsonObject(id object)
     }
 
     __block BOOL result = YES;
+    __block NSError *tmpError;
 
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
     {
@@ -223,12 +224,14 @@ static BOOL isJsonObject(id object)
         if (subPattern && ![obj validateWithJsonPattern:subPattern
                                          rootJsonObject:rootJsonObject
                                         rootJsonPattern:rootJsonPattern
-                                                  error:outError])
+                                                  error:&tmpError])
         {
             result = NO;
             *stop = YES;
         }
     }];
+
+    [tmpError setToPointer:outError];
 
     return result;
 }
