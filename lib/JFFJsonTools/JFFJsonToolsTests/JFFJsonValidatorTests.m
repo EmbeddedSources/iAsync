@@ -4,6 +4,12 @@
 
 #import "JFFJsonValidationError.h"
 
+//[NSNull       class],
+//[NSDictionary class],
+//[NSArray      class],
+
+#include <objc/runtime.h>
+
 @implementation JFFJsonValidatorTests
 
 - (void)setUp
@@ -20,7 +26,165 @@
     [super tearDown];
 }
 
-- (void)testPassNilJsonPattern
+////// String type tests /////
+
+- (void)testStringTypeMatch
+{
+    JFFJsonValidationError *error;
+
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:@"test"
+                                             withJsonPattern:[NSString class]
+                                                       error:&error];
+
+    STAssertNil(error, @"error should be nil");
+    STAssertTrue(result, @"ivalid result value");
+}
+
+- (void)testStringTypeMismatch
+{
+    JFFJsonValidationError *error;
+
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNumber numberWithBool:NO]
+                                             withJsonPattern:[NSString class]
+                                                       error:&error];
+
+    STAssertNotNil(error, @"error should be nil");
+    STAssertFalse(result, @"ivalid result value");
+}
+
+////// String value tests /////
+
+- (void)testStringValueMatch
+{
+    JFFJsonValidationError *error;
+
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:@"test"
+                                             withJsonPattern:@"test"
+                                                       error:&error];
+
+    STAssertNil(error, @"error should be nil");
+    STAssertTrue(result, @"ivalid result value");
+}
+
+- (void)testStringValueMismatch
+{
+    JFFJsonValidationError *error;
+
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:@"test"
+                                             withJsonPattern:@"test1"
+                                                       error:&error];
+
+    STAssertNotNil(error, @"error should be nil");
+    STAssertFalse(result, @"ivalid result value");
+}
+
+////// Number type tests /////
+
+- (void)testNumberTypeMatch
+{
+    JFFJsonValidationError *error;
+
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:@(1)
+                                             withJsonPattern:[NSNumber class]
+                                                       error:&error];
+
+    STAssertNil(error, @"error should be nil");
+    STAssertTrue(result, @"ivalid result value");
+}
+
+- (void)testNumberTypeMismatch
+{
+    JFFJsonValidationError *error;
+
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:@""
+                                             withJsonPattern:[NSNumber class]
+                                                       error:&error];
+
+    STAssertNotNil(error, @"error should be nil");
+    STAssertFalse(result, @"ivalid result value");
+}
+
+////// Number value tests /////
+
+- (void)testNumberValueMatch
+{
+    JFFJsonValidationError *error;
+
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:@(2)
+                                             withJsonPattern:@(2)
+                                                       error:&error];
+
+    STAssertNil(error, @"error should be nil");
+    STAssertTrue(result, @"ivalid result value");
+}
+
+- (void)testNumberValueMismatch
+{
+    JFFJsonValidationError *error;
+
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:@(3)
+                                             withJsonPattern:@(2)
+                                                       error:&error];
+
+    STAssertNotNil(error, @"error should be nil");
+    STAssertFalse(result, @"ivalid result value");
+}
+
+////// Null type tests /////
+
+- (void)testNullTypeMatch
+{
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNull null]
+                                                 withJsonPattern:[NSNumber class]
+                                                           error:&error];
+
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+    {
+        JFFJsonValidationError *error;
+
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNull null]
+                                                 withJsonPattern:[NSString class]
+                                                           error:&error];
+
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+}
+
+////// Null value tests /////
+
+- (void)testNullValueMatch
+{
+    JFFJsonValidationError *error;
+
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNull null]
+                                             withJsonPattern:[NSNull null]
+                                                       error:&error];
+    
+    STAssertNil(error, @"error should be nil");
+    STAssertTrue(result, @"ivalid result value");
+}
+
+- (void)testNullValueMismatch
+{
+    JFFJsonValidationError *error;
+
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNull null]
+                                             withJsonPattern:@(2)
+                                                       error:&error];
+
+    STAssertNotNil(error, @"error should be nil");
+    STAssertFalse(result, @"ivalid result value");
+}
+
+////// TODO 
+
+- (void)RtestPassNilJsonPattern
 {
     STAssertThrows(
     {
@@ -30,7 +194,7 @@
     }, @"assert expected");
 }
 
-- (void)testInvalidTypeOfRootJsonObject
+- (void)RtestInvalidTypeOfRootJsonObject
 {
     {
         JFFJsonValidationError *error;
@@ -56,7 +220,7 @@
     }
 }
 
-- (void)testJsonObjectValueMismatch
+- (void)RtestJsonObjectValueMismatch
 {
 }
 

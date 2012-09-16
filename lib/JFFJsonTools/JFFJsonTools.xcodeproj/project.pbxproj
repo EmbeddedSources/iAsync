@@ -588,6 +588,10 @@
 					.,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -611,6 +615,10 @@
 					.,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -622,7 +630,6 @@
 				DSTROOT = /tmp/JFFJsonTools.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFJsonTools/JFFJsonTools-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -634,7 +641,6 @@
 				DSTROOT = /tmp/JFFJsonTools.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFJsonTools/JFFJsonTools-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -650,7 +656,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFJsonTools/JFFJsonTools-Prefix.pch";
 				INFOPLIST_FILE = "JFFJsonToolsTests/JFFJsonToolsTests-Info.plist";
-				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -666,7 +671,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFJsonTools/JFFJsonTools-Prefix.pch";
 				INFOPLIST_FILE = "JFFJsonToolsTests/JFFJsonToolsTests-Info.plist";
-				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
