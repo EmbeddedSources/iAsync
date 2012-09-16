@@ -245,6 +245,7 @@
     }
 }
 
+//TODO
 /*- (void)testArrayValueMismatch
 {
     JFFJsonValidationError *error;
@@ -256,6 +257,8 @@
     STAssertNotNil(error, @"error should be nil");
     STAssertFalse(result, @"ivalid result value");
 }*/
+
+//TODO test nested objects
 
 ////// Null value tests /////
 

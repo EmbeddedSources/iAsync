@@ -161,16 +161,58 @@ static BOOL isJsonObject(id object)
             return YES;
         }
 
-        if (![self validateWithJsonPatternValue:jsonPattern
-                                 rootJsonObject:rootJsonObject
-                                rootJsonPattern:rootJsonPattern
-                                          error:outError])
+        for (NSUInteger index = 0; index < [self count]; ++index)
         {
-            return NO;
+            id subPattern = jsonPattern[index];
+            id subObject  =        self[index];
+
+            if (![subObject validateWithJsonPattern:subPattern
+                                     rootJsonObject:rootJsonObject
+                                    rootJsonPattern:rootJsonPattern
+                                              error:outError])
+            {
+                return NO;
+            }
         }
     }
 
     return YES;
+}
+
+@end
+
+@implementation NSDictionary (JFFJsonObjectValidator)
+
+- (BOOL)validateWithJsonPattern:(id)jsonPattern
+                 rootJsonObject:(id)rootJsonObject
+                rootJsonPattern:(id)rootJsonPattern
+                          error:(NSError *__autoreleasing *)outError
+{
+    if (![self validateWithJsonPatternClass:jsonPattern
+                             rootJsonObject:rootJsonObject
+                            rootJsonPattern:rootJsonPattern
+                                      error:outError])
+    {
+        return NO;
+    }
+
+    __block BOOL result = YES;
+
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    {
+        id subPattern = jsonPattern[key];
+
+        if (subPattern && ![obj validateWithJsonPattern:subPattern
+                                         rootJsonObject:rootJsonObject
+                                        rootJsonPattern:rootJsonPattern
+                                                  error:outError])
+        {
+            result = NO;
+            *stop = YES;
+        }
+    }];
+
+    return result;
 }
 
 @end
