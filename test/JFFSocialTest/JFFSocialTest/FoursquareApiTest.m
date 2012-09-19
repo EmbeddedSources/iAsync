@@ -13,12 +13,10 @@
 */
 
 
-
 #define ACCESS_TOKEN @"0WA2I2N1RDHMOVKZESV15ELMALCGC1T2M23UPJMYEMM2WNMZ"
 
 @interface FoursquareApiTest : GHAsyncTestCase
 @end
-
 
 @implementation FoursquareApiTest
 
@@ -107,9 +105,9 @@
     
     SEL selector = _cmd;
     [JFFSocialFoursquare addPostToCheckin:@"5051a006e4b08eccb1257587"
-                                withText:@"Hi!"
-                                     url:@"http://wishdates.com"
-                               contentID:nil]
+                                 withText:@"Hi!"
+                                      url:@"http://wishdates.com"
+                                contentID:nil]
     (nil, nil, ^(id result, NSError *error)
      {
          if (!error)

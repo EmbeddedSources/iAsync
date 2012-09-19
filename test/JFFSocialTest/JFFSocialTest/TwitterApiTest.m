@@ -29,14 +29,14 @@
 -(void)testTwitterNearbyCoordinates
 {
     __block BOOL finishedAsNotGrantedAccess = NO;
-
+    
     __block NSArray *users;
-
+    
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
         JFFAsyncOperation loader = [JFFSocialTwitter usersNearbyCoordinatesLantitude:40.3
                                                                            longitude:71.51];
-
+        
         loader(nil,nil,^(id result,NSError *error)
         {
             if ([error isMemberOfClass:[JFFTwitterAccountAccessNotGrantedError class]])
@@ -48,21 +48,21 @@
             finishBLock();
         });
     };
-
-    [ self performAsyncRequestOnMainThreadWithBlock:block
-                                           selector:_cmd ];
-
+    
+    [self performAsyncRequestOnMainThreadWithBlock:block
+                                           selector:_cmd];
+    
     if (finishedAsNotGrantedAccess)
     {
         //skip asserts
         return;
     }
-
+    
     GHAssertNotNil(users, @"ok");
     GHAssertEquals( (NSUInteger)100, [users count], @"tweets count mismatch");
-
+    
     JFFTwitterAccount* firstAccount = users[0];
-
+    
     GHAssertNotNil( firstAccount.twitterAccountId, @"tweet id mismatch");
     GHAssertNotNil( firstAccount.name, @"tweet name mismatch");
     GHAssertNotNil( firstAccount.avatarURL, @"tweet avatarURL mismatch");

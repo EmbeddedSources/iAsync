@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		374980AC1602185A00AF0C29 /* test-img1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 374980AB1602185A00AF0C29 /* test-img1.jpg */; };
+		CE4448A7160779E400DD85B0 /* TwitterApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F615615F8BE7000271035 /* TwitterApiTest.m */; };
 		CE4F60AA15F8BD1600271035 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60A915F8BD1600271035 /* UIKit.framework */; };
 		CE4F60AC15F8BD1600271035 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60AB15F8BD1600271035 /* Foundation.framework */; };
 		CE4F60AE15F8BD1600271035 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60AD15F8BD1600271035 /* CoreGraphics.framework */; };
@@ -23,9 +24,9 @@
 		CE4F614015F8BE2E00271035 /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60E815F8BD7C00271035 /* libJFFUtils.a */; };
 		CE4F615F15F8BF6200271035 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F615E15F8BF6200271035 /* Twitter.framework */; };
 		CE4F61FC15F8E77F00271035 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F615D15F8BEDB00271035 /* libJFFTestTools.a */; };
+		CE532DF6160702AB0029920A /* libJFFJsonTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE532DF1160702940029920A /* libJFFJsonTools.a */; };
 		CE5A01C915F9F16B005CC01A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5A01C815F9F16B005CC01A /* CFNetwork.framework */; };
 		CE5A01CB15F9F17D005CC01A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5A01CA15F9F17D005CC01A /* libz.dylib */; };
-		CE84AE5A160349DB00019CAF /* InstagramApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2365915FF6C8C005E5CF5 /* InstagramApiTest.m */; };
 		CE85420A15FA16E000750066 /* twitter_geolocation.json in Resources */ = {isa = PBXBuildFile; fileRef = CE85420915FA16E000750066 /* twitter_geolocation.json */; };
 		CEB2347815FF61F6005E5CF5 /* libJFFUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB2347315FF61EC005E5CF5 /* libJFFUI.a */; };
 		CEB234F215FF6776005E5CF5 /* libJFFNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB234E915FF6767005E5CF5 /* libJFFNetwork.a */; };
@@ -153,6 +154,27 @@
 			remoteGlobalIDString = 1BE0542A154826DA00270B58;
 			remoteInfo = JFFTestTools;
 		};
+		CE532DF0160702940029920A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE532DE5160702940029920A /* JFFJsonTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE532C0916036CE40029920A;
+			remoteInfo = JFFJsonTools;
+		};
+		CE532DF2160702940029920A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE532DE5160702940029920A /* JFFJsonTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE532C1A16036CE40029920A;
+			remoteInfo = JFFJsonToolsTests;
+		};
+		CE532DF4160702A00029920A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F60EF15F8BD8000271035 /* JFFSocial.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CE4F600715F8B2BB00271035;
+			remoteInfo = JFFSocial;
+		};
 		CEB2347215FF61EC005E5CF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEB2346A15FF61EB005E5CF5 /* JFFUI.xcodeproj */;
@@ -233,6 +255,7 @@
 		CE4F615615F8BE7000271035 /* TwitterApiTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterApiTest.m; sourceTree = "<group>"; };
 		CE4F615815F8BEDB00271035 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		CE4F615E15F8BF6200271035 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		CE532DE5160702940029920A /* JFFJsonTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFJsonTools.xcodeproj; path = ../../lib/JFFJsonTools/JFFJsonTools.xcodeproj; sourceTree = "<group>"; };
 		CE5A01C815F9F16B005CC01A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CE5A01CA15F9F17D005CC01A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		CE85420915FA16E000750066 /* twitter_geolocation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twitter_geolocation.json; sourceTree = "<group>"; };
@@ -248,6 +271,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE532DF6160702AB0029920A /* libJFFJsonTools.a in Frameworks */,
 				CEB234F215FF6776005E5CF5 /* libJFFNetwork.a in Frameworks */,
 				CEB2347815FF61F6005E5CF5 /* libJFFUI.a in Frameworks */,
 				CE5A01CB15F9F17D005CC01A /* libz.dylib in Frameworks */,
@@ -343,6 +367,7 @@
 		CE4F60C915F8BD2700271035 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				CE532DE5160702940029920A /* JFFJsonTools.xcodeproj */,
 				CE4F60EF15F8BD8000271035 /* JFFSocial.xcodeproj */,
 				CEB234E115FF6767005E5CF5 /* JFFNetwork.xcodeproj */,
 				CEB2346A15FF61EB005E5CF5 /* JFFUI.xcodeproj */,
@@ -402,6 +427,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CE532DE6160702940029920A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE532DF1160702940029920A /* libJFFJsonTools.a */,
+				CE532DF3160702940029920A /* JFFJsonToolsTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CEB2346B15FF61EB005E5CF5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +478,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CE532DF5160702A00029920A /* PBXTargetDependency */,
 				CEB234F115FF6770005E5CF5 /* PBXTargetDependency */,
 				CEB2347715FF61F1005E5CF5 /* PBXTargetDependency */,
 				CE5A01C615F9F117005CC01A /* PBXTargetDependency */,
@@ -480,6 +515,10 @@
 				{
 					ProductGroup = CE4F612115F8BD8F00271035 /* Products */;
 					ProjectRef = CE4F612015F8BD8F00271035 /* JFFAsyncOperations.xcodeproj */;
+				},
+				{
+					ProductGroup = CE532DE6160702940029920A /* Products */;
+					ProjectRef = CE532DE5160702940029920A /* JFFJsonTools.xcodeproj */;
 				},
 				{
 					ProductGroup = CEB234E215FF6767005E5CF5 /* Products */;
@@ -605,6 +644,20 @@
 			remoteRef = CE4F615C15F8BEDB00271035 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		CE532DF1160702940029920A /* libJFFJsonTools.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFJsonTools.a;
+			remoteRef = CE532DF0160702940029920A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE532DF3160702940029920A /* JFFJsonToolsTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFJsonToolsTests.octest;
+			remoteRef = CE532DF2160702940029920A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CEB2347315FF61EC005E5CF5 /* libJFFUI.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -671,7 +724,7 @@
 			files = (
 				CE4F60B615F8BD1600271035 /* main.m in Sources */,
 				CEB2361F15FF6BD1005E5CF5 /* GHUnitIPhoneAppDelegate+OpenWithURL.m in Sources */,
-				CE84AE5A160349DB00019CAF /* InstagramApiTest.m in Sources */,
+				CE4448A7160779E400DD85B0 /* TwitterApiTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +750,11 @@
 			isa = PBXTargetDependency;
 			name = JFFTestTools;
 			targetProxy = CE4F61FD15F8E78600271035 /* PBXContainerItemProxy */;
+		};
+		CE532DF5160702A00029920A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFSocial;
+			targetProxy = CE532DF4160702A00029920A /* PBXContainerItemProxy */;
 		};
 		CE5A01C615F9F117005CC01A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
