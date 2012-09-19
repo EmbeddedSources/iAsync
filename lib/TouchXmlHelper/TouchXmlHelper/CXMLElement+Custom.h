@@ -2,9 +2,9 @@
 
 @interface CXMLElement (Custom)
 
--(CXMLElement*)firstElementForName:( NSString* )name_;
+- (CXMLElement *)firstElementForName:(NSString *)name;
 
--(CXMLElement*)firstElementForNameNoThrow:( NSString* )name_;
--(CXMLElement*)firstElementIfExistsForName:( NSString* )name_;
+- (CXMLElement *)firstElementForNameNoThrow:(NSString *)name;
+- (CXMLElement *)firstElementIfExistsForName:(NSString *)name;
 
 @end

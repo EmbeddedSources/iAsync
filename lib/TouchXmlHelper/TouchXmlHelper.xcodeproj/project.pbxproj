@@ -18,6 +18,8 @@
 		7E25B3D915860D7100469187 /* JFFRestKitParseInvalidXMLError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E25B3CF15860D7100469187 /* JFFRestKitParseInvalidXMLError.m */; };
 		7E25B3DA15860D7100469187 /* jRestKitXMLTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E25B3D015860D7100469187 /* jRestKitXMLTools.h */; };
 		7E25B3DB15860D7100469187 /* jRestKitXMLTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E25B3D115860D7100469187 /* jRestKitXMLTools.m */; };
+		CE102F4516089E8C004229C5 /* asyncXMLParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = CE102F4316089E8C004229C5 /* asyncXMLParsers.h */; };
+		CE102F4616089E8C004229C5 /* asyncXMLParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE102F4416089E8C004229C5 /* asyncXMLParsers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		7E25B3D015860D7100469187 /* jRestKitXMLTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jRestKitXMLTools.h; sourceTree = "<group>"; };
 		7E25B3D115860D7100469187 /* jRestKitXMLTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jRestKitXMLTools.m; sourceTree = "<group>"; };
 		7E25B3E215860ED300469187 /* TouchXML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TouchXML.xcodeproj; path = ../../../TouchXML/TouchXML.xcodeproj; sourceTree = "<group>"; };
+		CE102F4316089E8C004229C5 /* asyncXMLParsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asyncXMLParsers.h; sourceTree = "<group>"; };
+		CE102F4416089E8C004229C5 /* asyncXMLParsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asyncXMLParsers.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,8 @@
 				7E25B3CF15860D7100469187 /* JFFRestKitParseInvalidXMLError.m */,
 				7E25B3D015860D7100469187 /* jRestKitXMLTools.h */,
 				7E25B3D115860D7100469187 /* jRestKitXMLTools.m */,
+				CE102F4316089E8C004229C5 /* asyncXMLParsers.h */,
+				CE102F4416089E8C004229C5 /* asyncXMLParsers.m */,
 				7E25B3C015860D2600469187 /* TouchXmlHelper.h */,
 				7E25B3BE15860D2600469187 /* Supporting Files */,
 			);
@@ -149,6 +155,7 @@
 				7E25B3D615860D7100469187 /* JFFRestKitParseEmptyXMLError.h in Headers */,
 				7E25B3D815860D7100469187 /* JFFRestKitParseInvalidXMLError.h in Headers */,
 				7E25B3DA15860D7100469187 /* jRestKitXMLTools.h in Headers */,
+				CE102F4516089E8C004229C5 /* asyncXMLParsers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +245,7 @@
 				7E25B3D715860D7100469187 /* JFFRestKitParseEmptyXMLError.m in Sources */,
 				7E25B3D915860D7100469187 /* JFFRestKitParseInvalidXMLError.m in Sources */,
 				7E25B3DB15860D7100469187 /* jRestKitXMLTools.m in Sources */,
+				CE102F4616089E8C004229C5 /* asyncXMLParsers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
