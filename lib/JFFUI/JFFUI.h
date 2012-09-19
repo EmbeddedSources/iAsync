@@ -5,6 +5,7 @@
 
 #import <JFFUI/Extensions/UINib+FirstObject.h>
 #import <JFFUI/Extensions/UIApplication+OpenApplicationAsyncOp.h>
+#import <JFFUI/Extensions/UIImageView+CachedAsyncImageLoader.h>
 
 #import <JFFUI/UIViewController/UIViewController+PresentTopViewController.h>
 
