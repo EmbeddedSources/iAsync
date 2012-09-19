@@ -1,4 +1,8 @@
+#import <JFFJsonTools/JFFOptionalObjectField.h>
+
 #import <Foundation/Foundation.h>
+
+#define jOptional(object) ([JFFOptionalObjectField newOptionalObjectFieldWithFieldKey:object])
 
 @interface JFFJsonObjectValidator : NSObject
 

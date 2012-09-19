@@ -4,8 +4,6 @@
 
 #import "JFFJsonValidationError.h"
 
-#include <objc/runtime.h>
-
 @implementation JFFJsonValidatorTests
 {
     id _jsonObjectPatter;
@@ -305,11 +303,10 @@
         STAssertNil(error, @"error should be nil");
         STAssertTrue(result, @"ivalid result value");
     }
-
-    //TODO test nested objects
+    
     {
         JFFJsonValidationError *error;
-
+        
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@[@1, @2], @[@1, @"2"], @[@1, @2, @"3"]]
                                                  withJsonPattern:@[@[[NSNumber class]], @[@1, @"2"], @[@1, @2, [NSString class]]]
                                                            error:&error];
@@ -422,6 +419,76 @@
         STAssertNotNil(error, @"error should be nil");
         STAssertFalse(result, @"ivalid result value");
     }
+}
+
+- (void)testDictionaryCheckOptionalKeys
+{
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        };
+        
+        id pattern =
+        @{
+        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        jOptional(@"data") : [NSDictionary class],
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        };
+        
+        id pattern =
+        @{
+        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        @"data" : [NSDictionary class],
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
+    }
+}
+
+- (void)testSomeSpecialStrangeCase
+{
+    NSString *str = @"{\"previous_cursor_str\":\"0\",\"next_cursor\":0,\"ids\":[806434819,806425640],\"previous_cursor\":0,\"next_cursor_str\":\"0\"}";
+    
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data
+                                                               options:0
+                                                                 error:NULL];
+    
+    id jsonPattern = @{
+    @"ids" : @[[NSNumber class]],
+    };
+    
+    JFFJsonValidationError *error;
+    
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:jsonObject
+                                             withJsonPattern:jsonPattern
+                                                       error:&error];
+
+    STAssertNil(error, @"error should be nil");
+    STAssertTrue(result, @"ivalid result value");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
