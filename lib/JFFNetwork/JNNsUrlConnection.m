@@ -112,6 +112,7 @@
 {
     [self clearCallbacks];
     [self->_nativeConnection cancel];
+    self->_nativeConnection = nil;
 }
 
 - (void)clearCallbacks
@@ -201,17 +202,17 @@ didReceiveResponse:( NSHTTPURLResponse* )response_
 
 #pragma mark -
 #pragma mark https
--(BOOL)connection:(NSURLConnection *)connection_ 
-canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protection_space_ 
+-(BOOL)connection:(NSURLConnection *)connection
+canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
 {
-    return [ protection_space_.authenticationMethod isEqualToString: NSURLAuthenticationMethodServerTrust ];
+    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
 }
 
 //http://stackoverflow.com/questions/933331/how-to-use-nsurlconnection-to-connect-with-ssl-for-an-untrusted-cert
--(void)connection:( NSURLConnection* )connection_
-didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge_ 
+- (void)connection:(NSURLConnection *)connection_
+didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-    NSString* authenticationMethod_ = challenge_.protectionSpace.authenticationMethod;
+    NSString* authenticationMethod_ = challenge.protectionSpace.authenticationMethod;
     BOOL isTrustCheck_ = [ authenticationMethod_ isEqualToString: NSURLAuthenticationMethodServerTrust ];
 
     if ( isTrustCheck_ )
@@ -219,19 +220,19 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge_
         BOOL isTrustedHost_ = NO;
         if ( nil != self.shouldAcceptCertificateBlock )
         {
-            isTrustedHost_ = self.shouldAcceptCertificateBlock( challenge_.protectionSpace.host );
+            isTrustedHost_ = self.shouldAcceptCertificateBlock( challenge.protectionSpace.host );
         }
 
         if ( isTrustedHost_ )
         {
-            NSURLCredential* cred_ = [ NSURLCredential credentialForTrust: challenge_.protectionSpace.serverTrust ];
+            NSURLCredential* cred_ = [ NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust ];
 
-            [ challenge_.sender useCredential: cred_
-                   forAuthenticationChallenge: challenge_ ];
+            [ challenge.sender useCredential:cred_
+                  forAuthenticationChallenge:challenge];
         }
     }
 
-    [ challenge_.sender continueWithoutCredentialForAuthenticationChallenge: challenge_ ];
+    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
 
 -(NSCachedURLResponse *)connection:(NSURLConnection *)connection

@@ -43,20 +43,4 @@
     return [ [ JNNsUrlConnection alloc ] initWithURLConnectionParams: self->_params ];
 }
 
--(id< JNUrlConnection >)createConnection
-{
-    if ( nil == self->_params )
-    {
-        return nil;
-    }
-    else if ( self->_params.useLiveConnection )
-    {
-        return [ self createFastConnection ];
-    }
-    else
-    {
-        return [ self createStandardConnection ];
-    }
-}
-
 @end

@@ -5,8 +5,8 @@
  */
 @protocol JNUrlResponse < NSObject >
 
-@property ( nonatomic ) NSInteger statusCode;
-@property ( nonatomic ) NSDictionary* allHeaderFields;
-@property ( nonatomic, readonly ) long long expectedContentLength;
+@property (nonatomic) NSInteger statusCode;
+@property (nonatomic) NSDictionary *allHeaderFields;
+@property (nonatomic, readonly) long long expectedContentLength;
 
 @end
