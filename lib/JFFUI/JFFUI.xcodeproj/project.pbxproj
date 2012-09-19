@@ -81,6 +81,8 @@
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		CEA097C615FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */; };
 		CEA097C715FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */; };
+		CEE235EA1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */; };
+		CEE235EB1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +130,8 @@
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+OpenApplicationAsyncOp.h"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.h"; sourceTree = SOURCE_ROOT; };
 		CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+OpenApplicationAsyncOp.m"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.m"; sourceTree = SOURCE_ROOT; };
+		CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+CachedAsyncImageLoader.h"; path = "Extensions/UIImageView+CachedAsyncImageLoader.h"; sourceTree = SOURCE_ROOT; };
+		CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+CachedAsyncImageLoader.m"; path = "Extensions/UIImageView+CachedAsyncImageLoader.m"; sourceTree = SOURCE_ROOT; };
 		D2AAC07E0554694100DB518D /* libJFFUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -221,6 +225,8 @@
 				1B81FAEE14330E4400997278 /* UINib+FirstObject.m */,
 				CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */,
 				CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */,
+				CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */,
+				CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */,
 			);
 			name = Extensions;
 			path = ./JFFUI/Extensions;
@@ -352,6 +358,7 @@
 				1B260343156546D900316C7C /* JFFAlertViewsContainer.h in Headers */,
 				1B2812EA1578C1F400BC70D9 /* JFFWaitAlertView.h in Headers */,
 				CEA097C615FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h in Headers */,
+				CEE235EA1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +474,7 @@
 				1B260344156546D900316C7C /* JFFAlertViewsContainer.m in Sources */,
 				1B2812EB1578C1F400BC70D9 /* JFFWaitAlertView.mm in Sources */,
 				CEA097C715FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m in Sources */,
+				CEE235EB1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

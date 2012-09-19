@@ -59,7 +59,6 @@ JFFAsyncOperationInterface
 
 @implementation UIApplication (OpenApplicationAsyncOp)
 
-//TODO fix twice calling of same loader
 - (JFFAsyncOperation)asyncOperationWithApplicationURL:(NSURL *)url
 {
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
