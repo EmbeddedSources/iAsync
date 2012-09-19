@@ -2,18 +2,18 @@
 
 #include <objc/runtime.h>
 
-static char ownershipsKey_;
+static char ownershipsKey;
 
 @implementation NSObject (Ownerships)
 
 //should not autorelease returned value
-- (NSMutableArray*)ownerships
+- (NSMutableArray *)ownerships
 {
-    if (!objc_getAssociatedObject(self, &ownershipsKey_))
+    if (!objc_getAssociatedObject(self, &ownershipsKey))
     {
-        objc_setAssociatedObject(self, &ownershipsKey_, [NSMutableArray new], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &ownershipsKey,[NSMutableArray new], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    return objc_getAssociatedObject(self, &ownershipsKey_);
+    return objc_getAssociatedObject(self, &ownershipsKey);
 }
 
 @end
