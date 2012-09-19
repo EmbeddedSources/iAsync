@@ -14,10 +14,10 @@
 
 -(void)notifyCallbackWithResult:(id)result error:(NSError*)error
 {
-    if (_completionHandler)
+    if (self->_completionHandler)
     {
-        _completionHandler(result,error);
-        _completionHandler = nil;
+        self->_completionHandler(result, error);
+        self->_completionHandler = nil;
     }
 }
 
