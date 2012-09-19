@@ -22,14 +22,14 @@ static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue(JFFSyncO
 {
     loadDataBlock = [loadDataBlock copy];
     JFFSyncOperationWithProgress progressLoadDataBlock= ^id(NSError *__autoreleasing *error,
-                                                              JFFAsyncOperationProgressHandler progressCallback)
+                                                            JFFAsyncOperationProgressHandler progressCallback)
     {
         id result = loadDataBlock(error);
         if (result && progressCallback)
             progressCallback(result);
         return result;
     };
-
+    
     return asyncOperationWithSyncOperationWithProgressBlockAndQueue(progressLoadDataBlock,
                                                                     queueName,
                                                                     barrier );
@@ -49,9 +49,9 @@ JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue( JFFSyncOperati
                                                           , YES );
 }
 
-JFFAsyncOperation asyncOperationWithSyncOperation( JFFSyncOperation loadDataBlock_ )
+JFFAsyncOperation asyncOperationWithSyncOperation(JFFSyncOperation loadDataBlock)
 {
-    return asyncOperationWithSyncOperationAndQueue( loadDataBlock_, nil );
+    return asyncOperationWithSyncOperationAndQueue(loadDataBlock, nil);
 }
 
 JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock( JFFSyncOperationWithProgress progressLoadDataBlock_ )

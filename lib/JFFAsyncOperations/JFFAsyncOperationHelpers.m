@@ -162,28 +162,28 @@ JFFAsyncOperation asyncOperationWithStartAndFinishBlocks( JFFAsyncOperation load
     };
 }
 
-JFFAsyncOperation asyncOperationWithAnalyzer( id data_, JFFAnalyzer analyzer_ )
+JFFAsyncOperation asyncOperationWithAnalyzer(id data, JFFAnalyzer analyzer)
 {
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        NSError* localError_;
-        id localResult_ = analyzer_( data_, &localError_ );
-
-        if ( doneCallback_ )
-            doneCallback_( localError_ ? nil : localResult_, localError_ );
-
+        NSError *localError;
+        id localResult = analyzer(data, &localError);
+        
+        if (doneCallback)
+            doneCallback(localError?nil:localResult, localError);
+        
         return JFFStubCancelAsyncOperationBlock;
     };
 }
 
-JFFAsyncOperationBinder asyncOperationBinderWithAnalyzer( JFFAnalyzer analyzer_ )
+JFFAsyncOperationBinder asyncOperationBinderWithAnalyzer(JFFAnalyzer analyzer)
 {
-    analyzer_ = [ analyzer_ copy ];
-    return ^( id result_ )
+    analyzer = [analyzer copy];
+    return ^(id result)
     {
-        return asyncOperationWithAnalyzer( result_, analyzer_ );
+        return asyncOperationWithAnalyzer(result, analyzer);
     };
 }
 
