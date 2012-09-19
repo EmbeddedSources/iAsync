@@ -12,7 +12,6 @@
 		1B2D8B6C154BF37C00360296 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2D8B69154BF36C00360296 /* libJFFTestTools.a */; };
 		1B2D8B7D154BFA1F00360296 /* JUArrayAdditionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BCF8E514323E7D00E896B3 /* JUArrayAdditionsTest.m */; };
 		1B2D8B7E154BFA2300360296 /* JUMutableArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */; };
-		1B2D8B7F154BFA2A00360296 /* EmptyStringTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC6D14DABFB800A1A875 /* EmptyStringTest.m */; };
 		1B2D8B80154BFA2A00360296 /* JFFStringFormatTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */; };
 		1B2D8B81154BFA3200360296 /* JFFSimpleBlockHolderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B29556E143DCE7F00532BD7 /* JFFSimpleBlockHolderTest.m */; };
 		1B2D8B82154BFA3200360296 /* JFFOnDeallocBlockOwnerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9025C3143DDA1200D3B0A0 /* JFFOnDeallocBlockOwnerTest.m */; };
@@ -92,12 +91,18 @@
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = JFFUtils;
 		};
+		CE444A3E160860B500DD85B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE444A1C1608609100DD85B0;
+			remoteInfo = JFFUtilsTest;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1B0E89201563FA5200825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		1B14143715DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateDifferenceStringFromDateTest.m; sourceTree = "<group>"; };
-		1B26EC6D14DABFB800A1A875 /* EmptyStringTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyStringTest.m; sourceTree = "<group>"; };
 		1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStringFormatTest.m; sourceTree = "<group>"; };
 		1B29556E143DCE7F00532BD7 /* JFFSimpleBlockHolderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSimpleBlockHolderTest.m; sourceTree = "<group>"; };
 		1B2D8B61154BF36C00360296 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
@@ -240,7 +245,6 @@
 			isa = PBXGroup;
 			children = (
 				534CDFDB14A8CA910068F4DF /* mock */,
-				1B26EC6D14DABFB800A1A875 /* EmptyStringTest.m */,
 				1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */,
 				534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */,
 				53BCF8E514323E7D00E896B3 /* JUArrayAdditionsTest.m */,
@@ -272,6 +276,7 @@
 				1B61C41C14A2065800542F46 /* libJFFUtilsMacOS.a */,
 				534CDFD414A8C7E00068F4DF /* libJFFUtils-clang.a */,
 				6515B960152B726E00518996 /* JFFUtilsFW.framework */,
+				CE444A3F160860B500DD85B0 /* JFFUtilsTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -370,6 +375,13 @@
 			remoteRef = B69484641429E24B00B8247E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		CE444A3F160860B500DD85B0 /* JFFUtilsTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFUtilsTest.octest;
+			remoteRef = CE444A3E160860B500DD85B0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -411,7 +423,6 @@
 				534CE02E14A8CE8C0068F4DF /* JMChild.m in Sources */,
 				1B2D8B7D154BFA1F00360296 /* JUArrayAdditionsTest.m in Sources */,
 				1B2D8B7E154BFA2300360296 /* JUMutableArrayTest.m in Sources */,
-				1B2D8B7F154BFA2A00360296 /* EmptyStringTest.m in Sources */,
 				1B2D8B80154BFA2A00360296 /* JFFStringFormatTest.m in Sources */,
 				1B2D8B81154BFA3200360296 /* JFFSimpleBlockHolderTest.m in Sources */,
 				1B2D8B82154BFA3200360296 /* JFFOnDeallocBlockOwnerTest.m in Sources */,
