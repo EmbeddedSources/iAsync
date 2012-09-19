@@ -14,8 +14,6 @@
 		65A0BD6B15301D890007A3B5 /* JFFSmartUrlDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A0BD6915301D890007A3B5 /* JFFSmartUrlDataLoader.m */; };
 		65E307BC1531E9B200E0B781 /* JFFRestKitError.h in Headers */ = {isa = PBXBuildFile; fileRef = 65E307BA1531E9B200E0B781 /* JFFRestKitError.h */; };
 		65E307BD1531E9B200E0B781 /* JFFRestKitError.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E307BB1531E9B200E0B781 /* JFFRestKitError.m */; };
-		7E59D33B1585EE1800D6192D /* jRestKitBinders.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E59D3391585EE1800D6192D /* jRestKitBinders.h */; };
-		7E59D33C1585EE1800D6192D /* jRestKitBinders.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E59D33A1585EE1800D6192D /* jRestKitBinders.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +39,6 @@
 		65E307BB1531E9B200E0B781 /* JFFRestKitError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRestKitError.m; sourceTree = "<group>"; };
 		65E307BE1531EC3B00E0B781 /* JFFRestKitCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFRestKitCache.h; sourceTree = "<group>"; };
 		7E25B3F715860F9200469187 /* TouchXmlHelper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TouchXmlHelper.xcodeproj; path = ../TouchXmlHelper/TouchXmlHelper.xcodeproj; sourceTree = "<group>"; };
-		7E59D3391585EE1800D6192D /* jRestKitBinders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jRestKitBinders.h; sourceTree = "<group>"; };
-		7E59D33A1585EE1800D6192D /* jRestKitBinders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jRestKitBinders.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,15 +53,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1B06B79A15498DD20077D996 /* XML */ = {
-			isa = PBXGroup;
-			children = (
-				7E59D3391585EE1800D6192D /* jRestKitBinders.h */,
-				7E59D33A1585EE1800D6192D /* jRestKitBinders.m */,
-			);
-			path = XML;
-			sourceTree = "<group>";
-		};
 		1B7ABA76152D9739005DD4CA = {
 			isa = PBXGroup;
 			children = (
@@ -95,7 +82,6 @@
 		1B7ABA86152D973A005DD4CA /* JFFRestKit */ = {
 			isa = PBXGroup;
 			children = (
-				1B06B79A15498DD20077D996 /* XML */,
 				65E307BE1531EC3B00E0B781 /* JFFRestKitCache.h */,
 				65E307BA1531E9B200E0B781 /* JFFRestKitError.h */,
 				65E307BB1531E9B200E0B781 /* JFFRestKitError.m */,
@@ -135,7 +121,6 @@
 				65A0BD6A15301D890007A3B5 /* JFFSmartUrlDataLoader.h in Headers */,
 				65E307BC1531E9B200E0B781 /* JFFRestKitError.h in Headers */,
 				1B32850E153FFDD000BE99CC /* JFFDataLoadersTools.h in Headers */,
-				7E59D33B1585EE1800D6192D /* jRestKitBinders.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,7 +193,6 @@
 				65A0BD6B15301D890007A3B5 /* JFFSmartUrlDataLoader.m in Sources */,
 				65E307BD1531E9B200E0B781 /* JFFRestKitError.m in Sources */,
 				1B32850F153FFDD000BE99CC /* JFFDataLoadersTools.m in Sources */,
-				7E59D33C1585EE1800D6192D /* jRestKitBinders.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

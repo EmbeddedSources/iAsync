@@ -3,8 +3,5 @@
     #import <JFFAsyncOperations/JFFAsyncOperations.h>
     #import <JFFUtils/JFFUtils.h>
 
-    #import <TouchXmlHelper/TouchXmlHelper.h>
-    #import <TouchXML/TouchXML.h>
-
     #import <Foundation/Foundation.h>
 #endif

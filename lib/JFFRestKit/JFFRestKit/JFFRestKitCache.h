@@ -3,8 +3,8 @@
 @protocol JFFRestKitCache <NSObject>
 
 @required
--(void)setData:( NSData* )data_ forKey:( NSString* )key_;
--(NSData*)dataForKey:( NSString* )data_ lastUpdateDate:( NSDate** )date_;
+- (void)setData:(NSData *)data forKey:(NSString *)key;
+- (NSData*)dataForKey:(NSString *)key lastUpdateDate:(NSDate **)date;
 
 @end
 

@@ -28,140 +28,152 @@
 
 @interface JFFResponseDataWithUpdateData : NSObject
 
-@property ( nonatomic ) NSData* data;
-@property ( nonatomic ) NSDate* updateDate;
+@property (nonatomic) NSData *data;
+@property (nonatomic) NSDate *updateDate;
 
 @end
 
 @implementation JFFResponseDataWithUpdateData
 @end
 
-JFFAsyncOperation jSmartDataLoaderWithCache( JFFSmartUrlDataLoaderFields* args_ )
+JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args)
 {
-    JFFURLBuilderBinder      urlBuilder_        = args_.urlBuilder;
-    JFFAsyncOperationBinder  dataLoaderForURL_  = args_.dataLoaderForURL;
-    JFFAsyncBinderForURL     analyzerForData_   = args_.analyzerForData;
-    id< JFFRestKitCache >    cache_             = args_.cache;
-    JFFCacheKeyForURLBuilder cacheKeyForURL_    = args_.cacheKeyForURL;
-    NSTimeInterval           cacheDataLifeTime_ = args_.cacheDataLifeTime;
-
-    assert( urlBuilder_       );//should not be nil
-    assert( dataLoaderForURL_ );//should not be nil
-
-    if ( !analyzerForData_ )
+    JFFURLBuilderBinder urlBuilder                    = args.urlBuilder;
+    JFFAsyncOperationBinder dataLoaderForURL          = args.dataLoaderForURL;
+    JFFAsyncBinderForURL analyzerForData              = args.analyzerForData;
+    id< JFFRestKitCache > cache                       = args.cache;
+    JFFCacheKeyForURLBuilder cacheKeyForURL           = args.cacheKeyForURL;
+    JFFCacheLastUpdateDateForKey lastUpdateDateForKey = args.lastUpdateDateForKey;
+    NSTimeInterval cacheDataLifeTime                  = args.cacheDataLifeTime;
+    BOOL doesNotIgnoreFreshDataLoadFail               = args.doesNotIgnoreFreshDataLoadFail;
+    
+    assert(urlBuilder      );//should not be nil
+    assert(dataLoaderForURL);//should not be nil
+    
+    if (!analyzerForData)
     {
-        analyzerForData_ = ^JFFAsyncOperationBinder( NSURL* url_ )
+        analyzerForData = ^JFFAsyncOperationBinder(NSURL *url)
         {
-            JFFAnalyzer analyzer_ = ^id( NSData* data_, NSError** outError_ )
+            JFFAnalyzer analyzer = ^id(NSData *data, NSError *__autoreleasing *outError)
             {
-                return data_;
+                return data;
             };
-            return asyncOperationBinderWithAnalyzer( analyzer_ );
+            return asyncOperationBinderWithAnalyzer(analyzer);
         };
     }
-
-    NSURL* url_ = urlBuilder_();
-
-    if ( !url_ )
+    
+    NSURL *url = urlBuilder();
+    
+    if (!url)
     {
-        return asyncOperationWithError( [ JFFRestKitNoURLError new ] );
+        return asyncOperationWithError([JFFRestKitNoURLError new]);
     }
-
-    id key_ = nil;
-    if ( cache_ )
+    
+    id key;
+    if (cache)
     {
-        key_ = cacheKeyForURL_
-            ? cacheKeyForURL_( url_ )
-            : [ url_ description ];
+        key = cacheKeyForURL
+            ? cacheKeyForURL(url)
+            : [url description];
     }
-
-    JFFAsyncOperation urlLoader_ = asyncOperationWithResult( url_ );
-
-    JFFAsyncOperationBinder cachedDataLoaderForURL_ =
-    ^JFFAsyncOperation( NSURL* url_ )
+    
+    JFFAsyncOperation urlLoader = asyncOperationWithResult(url);
+    
+    JFFAsyncOperationBinder cachedDataLoaderForURL =
+    ^JFFAsyncOperation(NSURL *url)
     {
-        NSDate* lastUpdateDate_ = nil;
-        NSData* cachedData_ = [ cache_ dataForKey: key_
-                                   lastUpdateDate: &lastUpdateDate_ ];
-
-        if ( cachedData_ )
+        NSDate *lastUpdateDate;
+        NSData *cachedData;
+        if (lastUpdateDateForKey)
         {
-            NSDate* newDate_ = [ lastUpdateDate_ dateByAddingTimeInterval: cacheDataLifeTime_ ];
-            if ( [ newDate_ compare: [ NSDate new ] ] == NSOrderedDescending )
+            lastUpdateDate = lastUpdateDateForKey(key);
+            cachedData = [cache dataForKey:key
+                            lastUpdateDate:NULL];
+        }
+        else
+        {
+            cachedData = [cache dataForKey:key
+                            lastUpdateDate:&lastUpdateDate];
+        }
+        
+        if (cachedData)
+        {
+            NSDate *newDate = [lastUpdateDate dateByAddingTimeInterval:cacheDataLifeTime];
+            if ([newDate compare:[NSDate new]] == NSOrderedDescending)
             {
-                JFFResponseDataWithUpdateData* result_ = [ JFFResponseDataWithUpdateData new ];
-                result_.updateDate = lastUpdateDate_;
-                result_.data       = cachedData_;
-                return asyncOperationWithResult( result_ );
+                JFFResponseDataWithUpdateData *result = [JFFResponseDataWithUpdateData new];
+                result.updateDate = lastUpdateDate;
+                result.data       = cachedData;
+                return asyncOperationWithResult(result);
             }
         }
-
-        JFFDidFinishAsyncOperationHook finishCallbackHook_ = ^( NSData* srvResponse_
-                                                               , NSError* error_
-                                                               , JFFDidFinishAsyncOperationHandler doneCallback_ )
+        
+        JFFDidFinishAsyncOperationHook finishCallbackHook = ^(NSData* srvResponse,
+                                                              NSError* error,
+                                                              JFFDidFinishAsyncOperationHandler doneCallback)
         {
-            if ( !doneCallback_ )
+            if (!doneCallback)
                 return;
-
+            
             //logs [ srvResponse_ logResponse ];
-
-            if ( srvResponse_ )
+            
+            if (srvResponse)
             {
-                JFFResponseDataWithUpdateData* newResult_ = [ JFFResponseDataWithUpdateData new ];
-                newResult_.data = srvResponse_;
-                doneCallback_( newResult_, nil );
+                JFFResponseDataWithUpdateData *newResult = [JFFResponseDataWithUpdateData new];
+                newResult.data = srvResponse;
+                doneCallback(newResult, nil);
                 return;
             }
-
-            if ( cachedData_ )
+            
+            if (cachedData && !doesNotIgnoreFreshDataLoadFail)
             {
-                JFFResponseDataWithUpdateData* newResult_ = [ JFFResponseDataWithUpdateData new ];
-                newResult_.updateDate = lastUpdateDate_;
-                newResult_.data       = cachedData_;
-                doneCallback_( newResult_, nil );
+                JFFResponseDataWithUpdateData *newResult = [JFFResponseDataWithUpdateData new];
+                newResult.updateDate = lastUpdateDate;
+                newResult.data       = cachedData;
+                doneCallback(newResult, nil);
                 return;
             }
-
-            doneCallback_( nil, error_ );
+            
+            doneCallback(nil, error);
         };
-        return asyncOperationWithFinishHookBlock( dataLoaderForURL_( url_ )
-                                                 , finishCallbackHook_ );
+        return asyncOperationWithFinishHookBlock(dataLoaderForURL(url),
+                                                 finishCallbackHook);
     };
-
-    JFFAsyncOperationBinder analizer_ = ^JFFAsyncOperation( JFFResponseDataWithUpdateData* response_ )
+    
+    JFFAsyncOperationBinder analizer = ^JFFAsyncOperation(JFFResponseDataWithUpdateData *response)
     {
-        JFFAsyncOperationBinder binder_ = analyzerForData_( url_ );
-        JFFAsyncOperation analyzer_ = binder_( response_.data );
-
-        JFFAsyncOperationBinder cacheBinder_ = ^JFFAsyncOperation( id analizedData_ )
+        JFFAsyncOperationBinder binder = analyzerForData(url);
+        JFFAsyncOperation analyzer = binder(response.data);
+        
+        JFFAsyncOperationBinder cacheBinder = ^JFFAsyncOperation(id analizedData)
         {
-            if ( !response_.updateDate )
+            if (!response.updateDate)
             {
-                [ cache_ setData: response_.data
-                          forKey: key_ ];
+                [cache setData:response.data
+                        forKey:key];
             }
-            return asyncOperationWithResult( analizedData_ );
+            return asyncOperationWithResult(analizedData);
         };
-
-        return bindSequenceOfAsyncOperations( analyzer_
-                                             , cache_ ? cacheBinder_ : nil
-                                             , nil );
+        
+        return bindSequenceOfAsyncOperations(analyzer,
+                                             cache?cacheBinder:nil,
+                                             nil);
     };
-
-    return bindSequenceOfAsyncOperations( urlLoader_
-                                         , cachedDataLoaderForURL_
-                                         , analizer_
-                                         , nil );
+    
+    return bindSequenceOfAsyncOperations(urlLoader,
+                                         cachedDataLoaderForURL,
+                                         analizer,
+                                         nil);
 }
 
-JFFAsyncOperation jSmartDataLoader( NSURL*(^urlBuilder_)(void)
-                                   , JFFAsyncOperationBinder dataLoaderForURL_
-                                   , JFFAsyncBinderForURL analyzerForData_ )
+JFFAsyncOperation jSmartDataLoader(NSURL*(^urlBuilder)(void),
+                                   JFFAsyncOperationBinder dataLoaderForURL,
+                                   JFFAsyncBinderForURL analyzerForData)
 {
-    JFFSmartUrlDataLoaderFields* args_ = [ JFFSmartUrlDataLoaderFields new ];
-    args_.urlBuilder       = urlBuilder_;
-    args_.dataLoaderForURL = dataLoaderForURL_;
-    args_.analyzerForData  = analyzerForData_;
-
-    return jSmartDataLoaderWithCache( args_ );
+    JFFSmartUrlDataLoaderFields *args = [JFFSmartUrlDataLoaderFields new];
+    args.urlBuilder       = urlBuilder;
+    args.dataLoaderForURL = dataLoaderForURL;
+    args.analyzerForData  = analyzerForData;
+    
+    return jSmartDataLoaderWithCache(args);
 }
