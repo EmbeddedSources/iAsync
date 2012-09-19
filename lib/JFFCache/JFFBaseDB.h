@@ -4,22 +4,22 @@
 
 @interface JFFBaseDB : NSObject
 
-@property ( nonatomic, readonly ) JFFSQLiteDB* db;
-@property ( nonatomic, readonly ) NSString* name;
+@property (nonatomic, readonly) JFFSQLiteDB *db;
+@property (nonatomic, readonly) NSString    *name;
 
--(id)initWithDBName:( NSString* )dbName_
-          cacheName:( NSString* )cacheName_;
+- (id)initWithDBName:(NSString *)dbName
+           cacheName:(NSString *)cacheName;
 
--(NSData*)dataForKey:( id )key_;
--(NSData*)dataForKey:( id )key_ lastUpdateTime:( NSDate** )date_;
+- (NSData*)dataForKey:(id)key;
+- (NSData*)dataForKey:(id)key lastUpdateTime:(NSDate **)date;
 
--(void)setData:( NSData* )data_ forKey:( id )key_;
+- (void)setData:(NSData *)data forKey:(id)key;
 
--(void)removeRecordsToUpdateDate:( NSDate* )date_;
--(void)removeRecordsToAccessDate:( NSDate* )date_;
+- (void)removeRecordsToUpdateDate:(NSDate *)date;
+- (void)removeRecordsToAccessDate:(NSDate *)date;
 
--(void)removeRecordsForKey:( id )key_;
+- (void)removeRecordsForKey:(id)key;
 
--(void)removeAllRecords;
+- (void)removeAllRecords;
 
 @end

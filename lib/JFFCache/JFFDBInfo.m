@@ -107,11 +107,10 @@ static NSString* const timeToLiveInHours = @"timeToLiveInHours";
     return self[name][@"fileName"];
 }
 
-//TODO not used now
-- (NSTimeInterval)timeToLiveForDBWithName:(NSString *)name
+- (NSNumber*)timeToLiveInHoursForDBWithName:(NSString *)name
 {
-    NSTimeInterval hours = [self[name][timeToLiveInHours]doubleValue];
-    return hours * 3600.;
+    NSNumber *result = self[name][timeToLiveInHours];
+    return result;
 }
 
 - (NSTimeInterval)autoRemoveByLastAccessDateForDBWithName:(NSString *)name
@@ -123,12 +122,6 @@ static NSString* const timeToLiveInHours = @"timeToLiveInHours";
 - (NSUInteger)versionForDBWithName:(NSString *)name
 {
     return [self[name][@"version"]intValue];
-}
-
-//TODO not used now
-- (BOOL)hasExpirationDateDBWithName:( NSString* )name_
-{
-    return self[name][timeToLiveInHours] != nil;
 }
 
 @end

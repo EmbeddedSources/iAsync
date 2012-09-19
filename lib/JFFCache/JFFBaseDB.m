@@ -19,10 +19,10 @@ static NSString* const createRecords_ =
     sqlite3* _db;
 }
 
--(id)initWithDBName:( NSString* )db_name_;
+- (id)initWithDBName:(NSString *)dbName;
 
--(BOOL)prepareQuery:( NSString* )sql_
-          statement:( sqlite3_stmt** )statement_;
+- (BOOL)prepareQuery:(NSString *)sql
+           statement:(sqlite3_stmt **)statement;
 
 -(BOOL)execQuery:( NSString* )sql_;
 
@@ -108,7 +108,7 @@ static NSString* const createRecords_ =
           cacheName:( NSString* )cacheName_
 {
     self = [ super init ];
-
+    
     if ( self )
     {
         self->_name = cacheName_;
@@ -116,7 +116,7 @@ static NSString* const createRecords_ =
         self->_db = [ [ JFFSQLiteDB alloc ] initWithDBName: dbName_ ];
         [ self->_db execQuery: createRecords_ ];
     }
-
+    
     return self;
 }
 
@@ -169,7 +169,7 @@ static NSString* const createRecords_ =
     return result_;   
 }
 
--(void)removeRecordsForKey:( id )key_ 
+-(void)removeRecordsForKey:( id )key_
 {
     NSString* recordId_ = [ key_ toCompositeKey ];
 
@@ -313,41 +313,65 @@ static NSString* const createRecords_ =
     return [ self dataForKey: key_ lastUpdateTime: nil ];
 }
 
--(NSData*)dataForKey:( id )key_ lastUpdateTime:( NSDate** )date_
+- (NSData *)dataForKey:(id)key lastUpdateTime:(NSDate **)date
 {
-    NSString* recordId_ = [ key_ toCompositeKey ];
-
-    static const NSUInteger linkIndex_ = 0;
-    static const NSUInteger dateIndex_ = 1;
-
-    NSString* query_ = [ [ NSString alloc ] initWithFormat: @"SELECT file_link, update_time FROM records WHERE record_id='%@';", recordId_ ];
-
-    NSData* recordData_ = nil;
-
-    sqlite3_stmt* statement_ = 0;
-    if ( [ self.db prepareQuery: query_ statement: &statement_ ] )
+    NSString *recordId = [key toCompositeKey];
+    
+    static const NSUInteger linkIndex = 0;
+    static const NSUInteger dateIndex = 1;
+    
+    NSString *query = [[NSString alloc]initWithFormat: @"SELECT file_link, update_time FROM records WHERE record_id='%@';", recordId];
+    
+    NSData *recordData;
+    
+    sqlite3_stmt *statement = 0;
+    if ([self.db prepareQuery:query statement:&statement])
     {
-        if ( sqlite3_step( statement_ ) == SQLITE_ROW )
+        if (sqlite3_step(statement) == SQLITE_ROW)
         {
-            const unsigned char * str_ = sqlite3_column_text( statement_, linkIndex_ );
-            NSString* fileLink_ = @( (const char *)str_ );
-            recordData_ = [ fileLink_ cacheDBFileLinkData ];
-
-            if ( date_ && recordData_ )
+            const unsigned char *str = sqlite3_column_text(statement, linkIndex);
+            NSString *fileLink = @((const char *)str);
+            recordData = [fileLink cacheDBFileLinkData];
+            
+            if (date && recordData)
             {
-                NSTimeInterval dateInetrval_ = sqlite3_column_double( statement_, dateIndex_ );
-                *date_ = [ [ NSDate alloc ] initWithTimeIntervalSince1970: dateInetrval_ ];
+                NSTimeInterval dateInetrval = sqlite3_column_double(statement, dateIndex);
+                *date = [[NSDate alloc] initWithTimeIntervalSince1970:dateInetrval];
             }
         }
-        sqlite3_finalize( statement_ );
+        sqlite3_finalize(statement);
     }
-
-    if ( recordData_ )
+    
+    if (recordData)
     {
-        [ self updateAccessTime: recordId_ ];
+        [self updateAccessTime:recordId];
     }
+    
+    return recordData;
+}
 
-    return recordData_;
+- (NSDate *)lastUpdateTimeForKey:(id)key
+{
+    NSString *recordId = [key toCompositeKey];
+    
+    static const NSUInteger dateIndex = 0;
+    
+    NSString *query = [[NSString alloc]initWithFormat: @"SELECT update_time FROM records WHERE record_id='%@';", recordId];
+    
+    NSDate *result;
+    
+    sqlite3_stmt *statement = 0;
+    if ([self.db prepareQuery:query statement:&statement])
+    {
+        if (sqlite3_step(statement) == SQLITE_ROW)
+        {
+            NSTimeInterval dateInetrval = sqlite3_column_double(statement, dateIndex);
+            result = [[NSDate alloc] initWithTimeIntervalSince1970:dateInetrval];
+        }
+        sqlite3_finalize(statement);
+    }
+    
+    return result;
 }
 
 //JTODO test

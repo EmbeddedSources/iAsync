@@ -18,11 +18,11 @@ static JFFCaches* sharedCachesInstance= nil;
 
 @implementation JFFInternalCacheDB
 
--(void)configureCachesWithCacheDBWithName:(NSString *)dbPropertyName_
-                                   dbInfo:(JFFDBInfo *)dbInfo
+- (void)configureCachesWithCacheDBWithName:(NSString *)dbPropertyName
+                                    dbInfo:(JFFDBInfo *)dbInfo
 {
-    self->_configPropertyName = dbPropertyName_;
-
+    self->_configPropertyName = dbPropertyName;
+    
     NSDictionary *dbInfoDict = [dbInfo dbInfo];
     NSTimeInterval removeRarelyAccessDataDelay =
         [ dbInfoDict autoRemoveByLastAccessDateForDBWithName: self->_configPropertyName ];
@@ -44,9 +44,9 @@ static JFFCaches* sharedCachesInstance= nil;
                       dbInfo:( JFFDBInfo* )dbInfo_
 {
     NSString* dbName_ = [ dbInfo_.dbInfo fileNameForDBWithName: dbPropertyName_ ];
-
+    
     self = [ super initWithDBName: dbName_ cacheName: dbPropertyName_ ];
-
+    
     if ( self )
     {
         [ self configureCachesWithCacheDBWithName: dbPropertyName_
@@ -65,21 +65,28 @@ static JFFCaches* sharedCachesInstance= nil;
 
 -(void)migrateDB
 {
-    NSDictionary* currentDbInfo_ = [ [ JFFDBInfo sharedDBInfo ] currentDbInfo ];
-    if ( !currentDbInfo_ )
+    NSDictionary *currentDbInfo = [[JFFDBInfo sharedDBInfo] currentDbInfo];
+    if (!currentDbInfo)
     {
         return;
     }
-
-    NSDictionary* dbInfo_ = [ [ JFFDBInfo sharedDBInfo ] dbInfo ];
-
-    NSInteger lastVersion_ = [ dbInfo_ versionForDBWithName: self->_configPropertyName ];
-    NSInteger currentVersion_ = [ currentDbInfo_ versionForDBWithName: self->_configPropertyName ];
-
-    if ( lastVersion_ > currentVersion_ )
+    
+    NSDictionary *dbInfo = [[JFFDBInfo sharedDBInfo] dbInfo];
+    
+    NSInteger lastVersion = [dbInfo versionForDBWithName:self->_configPropertyName];
+    NSInteger currentVersion = [currentDbInfo versionForDBWithName:self->_configPropertyName];
+    
+    if (lastVersion > currentVersion)
     {
-        [ self removeAllRecords ];
+        [self removeAllRecords];
     }
+}
+
+- (NSNumber*)timeToLiveInHours
+{
+    NSDictionary *dbInfo = [[JFFDBInfo sharedDBInfo] dbInfo];
+    NSNumber *result = [dbInfo timeToLiveInHoursForDBWithName:self->_configPropertyName];
+    return result;
 }
 
 @end
@@ -95,85 +102,85 @@ static JFFCaches* sharedCachesInstance= nil;
     NSMutableDictionary* _mutableCacheDbByName;
 }
 
--(id< JFFCacheDB >)registerAndCreateCacheDBWithName:( NSString* )dbPropertyName_
-                                             dbInfo:( JFFDBInfo* )dbInfo_
+- (id< JFFCacheDB >)registerAndCreateCacheDBWithName:(NSString *)dbPropertyName
+                                              dbInfo:(JFFDBInfo *)dbInfo
 {
-    id< JFFCacheDB > result_ = self.mutableCacheDbByName[ dbPropertyName_ ];
-
-    if ( !result_ )
+    id< JFFCacheDB > result = self.mutableCacheDbByName[dbPropertyName];
+    
+    if (!result)
     {
-        result_ = [ JFFInternalCacheDB internalCacheDBWithName: dbPropertyName_
-                                                        dbInfo: dbInfo_ ];
-        self.mutableCacheDbByName[ dbPropertyName_ ] = result_;
+        result = [JFFInternalCacheDB internalCacheDBWithName:dbPropertyName
+                                                      dbInfo:dbInfo];
+        self.mutableCacheDbByName[dbPropertyName] = result;
     }
-
-    return result_;
+    
+    return result;
 }
 
--(void)setupCachesWithDBInfo:( JFFDBInfo* )dbInfo_
+- (void)setupCachesWithDBInfo:(JFFDBInfo *)dbInfo
 {
-    [ dbInfo_.dbInfo enumerateKeysAndObjectsUsingBlock: ^( id dbName_, id obj, BOOL* stop )
+    [dbInfo.dbInfo enumerateKeysAndObjectsUsingBlock:^(id dbName, id obj, BOOL *stop)
     {
-        [ self registerAndCreateCacheDBWithName: dbName_
-                                         dbInfo: dbInfo_ ];
+        [self registerAndCreateCacheDBWithName:dbName
+                                        dbInfo:dbInfo];
     } ];
 }
 
--(id)initWithDBInfoDictionary:( NSDictionary* )cachesInfo_
+- (id)initWithDBInfoDictionary:(NSDictionary *)cachesInfo
 {
-    JFFDBInfo* dbInfo_ = [ [ JFFDBInfo alloc ] initWithInfoDictionary: cachesInfo_ ];
-    return [ self initWithDBInfo: dbInfo_ ];  
+    JFFDBInfo *dbInfo = [[JFFDBInfo alloc]initWithInfoDictionary:cachesInfo];
+    return [self initWithDBInfo:dbInfo];
 }
 
--(id)initWithDBInfo:( JFFDBInfo* )dbInfo_
+- (id)initWithDBInfo:(JFFDBInfo *)dbInfo
 {
     self = [ super init ];
-
-    if ( self )
+    
+    if (self)
     {
-        [ self setupCachesWithDBInfo: dbInfo_ ];
+        [self setupCachesWithDBInfo:dbInfo];
     }
-
+    
     return self;
 }
 
-+(JFFCaches*)sharedCaches
++ (JFFCaches *)sharedCaches
 {
-    if ( !sharedCachesInstance)
+    if (!sharedCachesInstance)
     {
-        JFFDBInfo* dbInfo = [JFFDBInfo sharedDBInfo];
-        sharedCachesInstance= [[self alloc]initWithDBInfo:dbInfo];
+        JFFDBInfo *dbInfo = [JFFDBInfo sharedDBInfo];
+        sharedCachesInstance = [[self alloc]initWithDBInfo:dbInfo];
     }
-
+    
     return sharedCachesInstance;
 }
 
-+(void)setSharedCaches:( JFFCaches* )caches_
++ (void)setSharedCaches:(JFFCaches *)caches
 {
-    sharedCachesInstance = caches_;
+    sharedCachesInstance = caches;
 }
 
--(NSMutableDictionary*)mutableCacheDbByName
+- (NSMutableDictionary *)mutableCacheDbByName
 {
     if ( !self->_mutableCacheDbByName )
     {
-        self->_mutableCacheDbByName = [ NSMutableDictionary new ];
+        self->_mutableCacheDbByName = [NSMutableDictionary new];
     }
-
+    
     return self->_mutableCacheDbByName;
 }
 
--(NSDictionary*)cacheDbByName
+- (NSDictionary *)cacheDbByName
 {
     return self.mutableCacheDbByName;
 }
 
--(id< JFFCacheDB >)cacheByName:( NSString* )name_
+- (id< JFFCacheDB >)cacheByName:(NSString *)name
 {
-    return self.cacheDbByName[ name_ ];
+    return self.cacheDbByName[name];
 }
 
--(id< JFFCacheDB >)thumbnailDB
+- (id< JFFCacheDB >)thumbnailDB
 {
     return [self cacheByName:@"JFF_THUMBNAIL_DB"];
 }

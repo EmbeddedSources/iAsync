@@ -2,24 +2,23 @@
 
 @interface NSDictionary (DBInfo)
 
--(NSTimeInterval)timeToLiveForDBWithName:( NSString* )name_;
--(NSTimeInterval)autoRemoveByLastAccessDateForDBWithName:( NSString* )name_;
+- (NSNumber*)timeToLiveInHoursForDBWithName:(NSString *)name;
+- (NSTimeInterval)autoRemoveByLastAccessDateForDBWithName:(NSString *)name;
 
--(NSString*)fileNameForDBWithName:( NSString* )name_;
--(NSUInteger)versionForDBWithName:( NSString* )name_;
--(BOOL)hasExpirationDateDBWithName:( NSString* )name_;
+- (NSString*)fileNameForDBWithName:(NSString *)name;
+- (NSUInteger)versionForDBWithName:(NSString *)name;
 
 @end
 
 @interface JFFDBInfo : NSObject
 
-@property ( nonatomic, readonly ) NSDictionary* dbInfo;
-@property ( nonatomic ) NSDictionary* currentDbInfo;
+@property (nonatomic, readonly) NSDictionary *dbInfo;
+@property (nonatomic) NSDictionary *currentDbInfo;
 
--(id)initWithInfoPath:( NSString* )infoPath_;
--(id)initWithInfoDictionary:( NSDictionary* )infoDictionry_;
+- (id)initWithInfoPath:(NSString *)infoPath;
+- (id)initWithInfoDictionary:(NSDictionary *)infoDictionry;
 
-+(void)setSharedDBInfo:( JFFDBInfo* )dbInfo_;
-+(JFFDBInfo*)sharedDBInfo;
++ (void)setSharedDBInfo:(JFFDBInfo *)dbInfo;
++ (JFFDBInfo*)sharedDBInfo;
 
 @end
