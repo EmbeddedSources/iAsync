@@ -34,7 +34,6 @@
 #import <JFFSocial/Foursquare/Errors/JFFFoursquareAuthURLError.h>
 #import <JFFSocial/Foursquare/Errors/JFFFoursquareAuthInvalidAccessTokenError.h>
 #import <JFFSocial/Foursquare/Errors/JFFFoursquareCachedAccessTokenError.h>
-#import <JFFSocial/Foursquare/Errors/ParserErrors/JFFFoursquareAPIServerError.h>
 #import <JFFSocial/Foursquare/Errors/ParserErrors/JFFFoursquaerAPIInvalidResponseError.h>
 #import <JFFSocial/Foursquare/Errors/JFFFoursquareNotFoundUsersCheckinsError.h>
 

@@ -4,13 +4,30 @@
 
 + (id)fqUserModelWithDict:(NSDictionary *)dict error:(NSError **)outError
 {
+//TODO use validator
+//    id jsonPattern = @{
+//    @"id"           : [NSString class],
+//    @"firstName"    : [NSString class],
+//    @"lastName"     : [NSString class],
+//    @"contact"      : [NSDictionary class],
+//    @"photo.prefix" : [NSString class],
+//    @"photo.suffix" : [NSString class],
+//    };
+//    
+//    if( ![JFFJsonObjectValidator validateJsonObject:jsonObject
+//                                    withJsonPattern:jsonPattern
+//                                              error:outError])
+//    {
+//        return nil;
+//    }
+    
     FoursquareUserModel *model = [self new];
     
-    model.userID = [dict stringForKey:@"id"];
-    model.firstName = [dict stringForKey:@"firstName"];
-    model.lastName = [dict stringForKey:@"lastName"];
-    model.contacts = [dict dictionaryForKey:@"contact"];
-    model.photoURL = [[dict stringForKeyPath:@"photo.prefix"] stringByAppendingString:[dict stringForKeyPath:@"photo.suffix"]];
+    model.userID    = dict[@"id"];
+    model.firstName = dict[@"firstName"];
+    model.lastName  = dict[@"lastName"];
+    model.contacts  = [dict dictionaryForKey:@"contact"];
+    model.photoURL  = [[dict stringForKeyPath:@"photo.prefix"] stringByAppendingString:[dict stringForKeyPath:@"photo.suffix"]];
     
     return model;
 }

@@ -2,11 +2,24 @@
 
 @implementation FoursquareCheckinsModel (APIParser)
 
-+ (id)fqCheckinModelWithDict:(NSDictionary *)dict error:(NSError **)outError
++ (id)fqCheckinModelWithDict:(NSDictionary *)jsonObject error:(NSError **)outError
 {
+    id jsonPattern = @{
+    @"id"   : [NSString class],
+    @"type" : [NSString class],
+    };
+    
+    if( ![JFFJsonObjectValidator validateJsonObject:jsonObject
+                                    withJsonPattern:jsonPattern
+                                              error:outError])
+    {
+        return nil;
+    }
+    
     FoursquareCheckinsModel *checkin = [self new];
-    checkin.checkinID = [dict stringForKey:@"id"];
-    checkin.type = [dict stringForKey:@"type"];
+    
+    checkin.checkinID = jsonObject[@"id"];
+    checkin.type      = jsonObject[@"type"];
     
     return checkin;
 }

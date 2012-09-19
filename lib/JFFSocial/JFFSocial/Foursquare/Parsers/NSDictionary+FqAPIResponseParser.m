@@ -1,25 +1,27 @@
 #import "NSDictionary+FqAPIresponseParser.h"
 
-#import "JFFFoursquareAPIServerError.h"
-
 @implementation NSDictionary (FqAPIresponseParser)
 
-+ (id)fqApiresponseDictWithDict:(NSDictionary *)dict error:(NSError **)outError
++ (id)fqApiresponseDictWithDict:(NSDictionary *)jsonObject error:(NSError **)outError
 {
-    //TODO use JSON validator here
-    NSDictionary *metaDict = [dict dictionaryForKey:@"meta"];
-    NSInteger responseCode = [metaDict integerForKey:@"code"];
+    id jsonPattern = @{
+    @"meta"     :
+    @{
+        @"code"                   : [NSNumber numberWithInteger:200],
+        jOptional(@"errorDetail") : [NSString class],
+        jOptional(@"errorType")   : [NSString class],
+    },
+    @"response" : [NSDictionary class],
+    };
     
-    if (responseCode != 200) {
-        [[[JFFFoursquareAPIServerError alloc] initWithDictionary:metaDict] setToPointer:outError];
+    if (![JFFJsonObjectValidator validateJsonObject:jsonObject
+                                    withJsonPattern:jsonPattern
+                                              error:outError])
+    {
         return nil;
     }
     
-    NSDictionary *response = [dict dictionaryForKey:@"response"];
-    if (!response) {
-        [[[JFFFoursquareAPIServerError alloc] initWithDescription:NSLocalizedString(@"response dictionary not found", nil)] setToPointer:outError];
-        return nil;
-    }
+    NSDictionary *response = jsonObject[@"response"];
     
     return response;
 }

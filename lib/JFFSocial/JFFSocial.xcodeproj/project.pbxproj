@@ -17,7 +17,6 @@
 		37497AE21600693900AF0C29 /* FoursquareUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497AE11600693800AF0C29 /* FoursquareUserModel.m */; };
 		37497B851600910400AF0C29 /* FoursquareUserModel+APIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497B841600910400AF0C29 /* FoursquareUserModel+APIParser.m */; };
 		37497C761600A15600AF0C29 /* NSArray+FqFriendsAPIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497C751600A15600AF0C29 /* NSArray+FqFriendsAPIParser.m */; };
-		37497C8A1600A39400AF0C29 /* JFFFoursquareAPIServerError.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497C891600A39400AF0C29 /* JFFFoursquareAPIServerError.m */; };
 		37497CC61600A84E00AF0C29 /* JFFFoursquaerAPIInvalidResponseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497CC51600A84E00AF0C29 /* JFFFoursquaerAPIInvalidResponseError.m */; };
 		37497D9F1601D67C00AF0C29 /* FoursquareCheckinsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497D9E1601D67C00AF0C29 /* FoursquareCheckinsModel.m */; };
 		37497DB21601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB11601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m */; };
@@ -211,8 +210,6 @@
 		37497B841600910400AF0C29 /* FoursquareUserModel+APIParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FoursquareUserModel+APIParser.m"; sourceTree = "<group>"; };
 		37497C741600A15600AF0C29 /* NSArray+FqFriendsAPIParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+FqFriendsAPIParser.h"; sourceTree = "<group>"; };
 		37497C751600A15600AF0C29 /* NSArray+FqFriendsAPIParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+FqFriendsAPIParser.m"; sourceTree = "<group>"; };
-		37497C881600A39400AF0C29 /* JFFFoursquareAPIServerError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFoursquareAPIServerError.h; sourceTree = "<group>"; };
-		37497C891600A39400AF0C29 /* JFFFoursquareAPIServerError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFoursquareAPIServerError.m; sourceTree = "<group>"; };
 		37497CC41600A84E00AF0C29 /* JFFFoursquaerAPIInvalidResponseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFoursquaerAPIInvalidResponseError.h; sourceTree = "<group>"; };
 		37497CC51600A84E00AF0C29 /* JFFFoursquaerAPIInvalidResponseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFoursquaerAPIInvalidResponseError.m; sourceTree = "<group>"; };
 		37497D9D1601D67C00AF0C29 /* FoursquareCheckinsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareCheckinsModel.h; sourceTree = "<group>"; };
@@ -400,8 +397,6 @@
 		37497C871600A31900AF0C29 /* ParserErrors */ = {
 			isa = PBXGroup;
 			children = (
-				37497C881600A39400AF0C29 /* JFFFoursquareAPIServerError.h */,
-				37497C891600A39400AF0C29 /* JFFFoursquareAPIServerError.m */,
 				37497CC41600A84E00AF0C29 /* JFFFoursquaerAPIInvalidResponseError.h */,
 				37497CC51600A84E00AF0C29 /* JFFFoursquaerAPIInvalidResponseError.m */,
 			);
@@ -909,7 +904,6 @@
 				CEB237F21600C8E8005E5CF5 /* JFFInstagramCredentials.m in Sources */,
 				37497B851600910400AF0C29 /* FoursquareUserModel+APIParser.m in Sources */,
 				37497C761600A15600AF0C29 /* NSArray+FqFriendsAPIParser.m in Sources */,
-				37497C8A1600A39400AF0C29 /* JFFFoursquareAPIServerError.m in Sources */,
 				37497CC61600A84E00AF0C29 /* JFFFoursquaerAPIInvalidResponseError.m in Sources */,
 				37497D9F1601D67C00AF0C29 /* FoursquareCheckinsModel.m in Sources */,
 				37497DB21601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m in Sources */,

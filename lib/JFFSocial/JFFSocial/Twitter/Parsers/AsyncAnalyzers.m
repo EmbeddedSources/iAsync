@@ -22,7 +22,7 @@ JFFAsyncOperationBinder asyncJSONObjectToTwitterTweets()
         };
         return asyncOperationWithSyncOperation(loadDataBlock_);
     };
-
+    
     return parser;
 }
 
@@ -41,7 +41,7 @@ JFFAsyncOperationBinder asyncJSONObjectToTwitterUsers()
         };
         return asyncOperationWithSyncOperation(loadDataBlock_);
     };
-
+    
     return parser;
 }
 
@@ -65,11 +65,19 @@ JFFAsyncOperationBinder jsonObjectToTwitterUsersIds()
 {
     JFFAsyncOperationBinder result = ^JFFAsyncOperation(NSDictionary *jsonObject)
     {
-        assert(jsonObject);
-        //TODO validate jsonObject
-        return asyncOperationWithResult(jsonObject[@"ids"]);
+        return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *error)
+        {
+            id jsonPattern = @{
+            @"ids" : @[[NSNumber class]],
+            };
+            
+            BOOL result = [JFFJsonObjectValidator validateJsonObject:jsonObject
+                                                     withJsonPattern:jsonPattern
+                                                               error:error];
+            return result?jsonObject[@"ids"]:nil;
+        });
     };
-
+    
     return result;
 }
 
