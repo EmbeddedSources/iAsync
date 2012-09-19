@@ -6,7 +6,7 @@
 {
     NSInteger code = [errorDict integerForKey:@"code"];
     NSString *message = [errorDict stringForKey:@"errorDetail"];
-    NSString *domain = [errorDict stringForKey:@"invalid_auth"];
+    NSString *domain = [errorDict stringForKey:@"errorType"];
     return [self initWithDescription:message domain:domain code:code];
 }
 

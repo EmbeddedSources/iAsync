@@ -5,19 +5,31 @@
 #import "JFFInstagramAuthedAccount.h"
 
 #import "JFFInstagramResponseError.h"
-#import "JFFInstagramUsersListResponseError.h"
 
 @implementation JFFInstagramAccount (JFFInstagramJSONDataAnalyzers)
 
 + (id)newInstagramAccountWithJSONObject:(NSDictionary *)userJsonObject
-                                  error:(NSError **)error
+                                  error:(NSError **)outError
 {
+    id jsonPattern = @{
+    @"username"        : [NSString class],
+    @"profile_picture" : [NSString class],
+    @"id"              : [NSString class],
+    };
+    
+    if (![JFFJsonObjectValidator validateJsonObject:userJsonObject
+                                    withJsonPattern:jsonPattern
+                                              error:outError])
+    {
+        return nil;
+    }
+    
     JFFInstagramAccount *result = [self new];
-
+    
     result.name               =  userJsonObject[@"username"];
     result.avatarURL          = [userJsonObject[@"profile_picture"]toURL];
     result.instagramAccountId =  userJsonObject[@"id"];
-
+    
     return result;
 }
 
@@ -26,18 +38,28 @@
 @implementation JFFInstagramAuthedAccount (JFFInstagramJSONDataAnalyzers)
 
 + (id)newInstagramAuthedAccountWithJSONObject:(NSDictionary *)jsonObject
-                                        error:(NSError **)error
+                                        error:(NSError **)outError
 {
-    NSDictionary *userJsonObject = jsonObject[@"user"];
-
-    JFFInstagramAuthedAccount *result = [self newInstagramAccountWithJSONObject:userJsonObject
-                                                                          error:error];
-
+    id jsonPattern = @{
+    @"user"         : [NSDictionary class],
+    @"access_token" : [NSString class],
+    };
+    
+    if (![JFFJsonObjectValidator validateJsonObject:jsonObject
+                                    withJsonPattern:jsonPattern
+                                              error:outError])
+    {
+        return nil;
+    }
+    
+    JFFInstagramAuthedAccount *result = [self newInstagramAccountWithJSONObject:jsonObject[@"user"]
+                                                                          error:outError];
+    
     if (!result)
         return nil;
-
+    
     result.instagramAccessToken = jsonObject[@"access_token"];
-
+    
     return result;
 }
 
@@ -46,19 +68,34 @@
 @implementation JFFInstagramMediaItem (JFFInstagramJSONDataAnalyzers)
 
 + (id)newInstagramMediaItemWithJSONObject:(NSDictionary *)jsonObject
-                                    error:(NSError **)error
+                                    error:(NSError **)outError
 {
+    id jsonPattern = @{
+    @"user" : [NSDictionary class],
+    @"id"   : [NSString class],
+    };
+    
+    if (![JFFJsonObjectValidator validateJsonObject:jsonObject
+                                    withJsonPattern:jsonPattern
+                                              error:outError])
+    {
+        return nil;
+    }
+    
     JFFInstagramAccount *user = [JFFInstagramAccount newInstagramAccountWithJSONObject:jsonObject[@"user"]
-                                                                                 error:error];
-
+                                                                                 error:outError];
+    
     if (!user)
         return nil;
-
+    
     JFFInstagramMediaItem *result = [self new];
-
-    result.mediaItemId = jsonObject[@"id"];
-    result.user        = user;
-
+    
+    if (result)
+    {
+        result.mediaItemId = jsonObject[@"id"];
+        result.user        = user;
+    }
+    
     return result;
 }
 
@@ -67,19 +104,34 @@
 @implementation JFFInstagramComment (JFFInstagramJSONDataAnalyzers)
 
 + (id)newInstagramCommentWithJSONObject:(NSDictionary *)jsonObject
-                                  error:(NSError **)error
+                                  error:(NSError **)outError
 {
-    JFFInstagramAccount *from = [JFFInstagramAccount newInstagramAccountWithJSONObject:jsonObject[@"user"]
-                                                                                 error:error];
-
+    id jsonPattern = @{
+    @"from" : [NSDictionary class],
+    @"text" : [NSString class],
+    };
+    
+    if (![JFFJsonObjectValidator validateJsonObject:jsonObject
+                                    withJsonPattern:jsonPattern
+                                              error:outError])
+    {
+        return nil;
+    }
+    
+    JFFInstagramAccount *from = [JFFInstagramAccount newInstagramAccountWithJSONObject:jsonObject[@"from"]
+                                                                                 error:outError];
+    
     if (!from)
         return nil;
-
+    
     JFFInstagramComment *result = [self new];
-
-    result.text = jsonObject[@"text"];
-    result.from = from;
-
+    
+    if (result)
+    {
+        result.text = jsonObject[@"text"];
+        result.from = from;
+    }
+    
     return result;
 }
 
@@ -88,7 +140,7 @@
 static NSError *validateJSONAuthedAccountObjectOnError(NSDictionary *jsonObject)
 {
     NSNumber *errorCode = jsonObject[@"code"];
-
+    
     if (errorCode)
     {
         JFFInstagramResponseError *error = [JFFInstagramResponseError new];
@@ -97,44 +149,44 @@ static NSError *validateJSONAuthedAccountObjectOnError(NSDictionary *jsonObject)
         error.errorMessage = jsonObject[@"error_message"];
         return error;
     }
-
+    
     return nil;
 }
 
 static NSError *validateJeneralJSONObjectOnError(NSDictionary *jsonObject)
 {
-    NSNumber *errorCode = jsonObject[@"meta"][@"code"];
-
-    if ([errorCode unsignedIntegerValue] != 200)
-    {
-        JFFInstagramUsersListResponseError *error = [JFFInstagramUsersListResponseError new];
-        error.jsonObject = jsonObject;
-        return error;
-    }
-
-    return nil;
+    NSError *error;
+    id jsonPattern = @{
+    @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+    };
+    
+    [JFFJsonObjectValidator validateJsonObject:jsonObject
+                               withJsonPattern:jsonPattern
+                                         error:&error];
+    
+    return error;
 }
 
 static JFFAsyncOperationBinder generalJsonDataBinderWithAnalizer(JFFAnalyzer analyzer)
 {
     assert(analyzer);
     analyzer = [analyzer copy];
-
+    
     return ^JFFAsyncOperation(NSData *data)
     {
         JFFAsyncOperation loader = asyncOperationBinderJsonDataParser()(data);
-
+        
         JFFAsyncOperationBinder jsonToAccountBinder = ^JFFAsyncOperation(id jsonObject)
         {
             NSError *error;
-
+            
             id result = analyzer(jsonObject, &error);
-
+            
             if (error)
             {
                 return asyncOperationWithError(error);
             }
-
+            
             return asyncOperationWithResult(result);
         };
         
@@ -147,16 +199,16 @@ JFFAsyncOperationBinder jsonDataToAuthedAccountBinder()
     return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError)
     {
         NSError *error = validateJSONAuthedAccountObjectOnError(jsonObject);
-
+        
         if (error)
         {
             [error setToPointer:outError];
             return nil;
         }
-
+        
         JFFInstagramAuthedAccount *result = [JFFInstagramAuthedAccount newInstagramAuthedAccountWithJSONObject:jsonObject
                                                                                                          error:outError];
-
+        
         return result;
     });
 }
@@ -166,18 +218,18 @@ JFFAsyncOperationBinder jsonDataToOneAccountBinder()
     return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError)
     {
         NSError *error = validateJeneralJSONObjectOnError(jsonObject);
-
+        
         if (error)
         {
             [error setToPointer:outError];
             return nil;
         }
-
+        
         NSDictionary *accountJson = jsonObject[@"data"];
-
+        
         id result = [JFFInstagramAccount newInstagramAccountWithJSONObject:accountJson
                                                                      error:outError];
-
+        
         return result;
     });
 }
@@ -187,13 +239,13 @@ JFFAsyncOperationBinder jsonDataToAccountsBinder()
     return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError)
     {
         NSError *error = validateJeneralJSONObjectOnError(jsonObject);
-
+        
         if (error)
         {
             [error setToPointer:outError];
             return nil;
         }
-
+        
         NSArray *accountsJson = jsonObject[@"data"];
         
         NSArray *result = [accountsJson map:^id(id object, NSError *__autoreleasing *outError)
@@ -235,18 +287,18 @@ JFFAsyncOperationBinder jsonDataToComment()
     return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError)
     {
         NSError *error = validateJeneralJSONObjectOnError(jsonObject);
-
+        
         if (error)
         {
             [error setToPointer:outError];
             return nil;
         }
-
+        
         NSDictionary *commentJson = jsonObject[@"data"];
-
+        
         id result = [JFFInstagramComment newInstagramCommentWithJSONObject:commentJson
                                                                      error:outError];
-
+        
         return result;
     });
 }

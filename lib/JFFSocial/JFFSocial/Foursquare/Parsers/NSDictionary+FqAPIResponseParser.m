@@ -6,6 +6,7 @@
 
 + (id)fqApiresponseDictWithDict:(NSDictionary *)dict error:(NSError **)outError
 {
+    //TODO use JSON validator here
     NSDictionary *metaDict = [dict dictionaryForKey:@"meta"];
     NSInteger responseCode = [metaDict integerForKey:@"code"];
     

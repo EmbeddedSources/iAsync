@@ -2,14 +2,25 @@
 
 @implementation JFFDirectTweetMessage (TwitterJSONApiParser)
 
-+ (id)newDirectTweetMessageWithTwitterJSONObject:(NSDictionary *)dict
-                                           error:(NSError **)error
++ (id)newDirectTweetMessageWithTwitterJSONObject:(NSDictionary *)jsonObject
+                                           error:(NSError **)outError
 {
+    id jsonPattern = @{
+    @"text" : [NSString class],
+    };
+    
+    if (![JFFJsonObjectValidator validateJsonObject:jsonObject
+                                    withJsonPattern:jsonPattern
+                                              error:outError])
+    {
+        return nil;
+    }
+
     JFFDirectTweetMessage *result = [self new];
 
     if (result)
     {
-        result.text = dict[@"text"];
+        result.text = jsonObject[@"text"];
     }
 
     return result;
