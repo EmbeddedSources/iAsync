@@ -354,6 +354,76 @@
     }
 }
 
+- (void)testDictionaryMatchNestedDictionaryElementClass
+{
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+        @"dict" : @{},
+        };
+        
+        id pattern =
+        @{
+        @"dict" : [NSDictionary class],
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+}
+
+- (void)testDictionaryCheckStatusCode
+{
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        @"data" : @{},
+        };
+        
+        id pattern =
+        @{
+        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        @"data" : @{},
+        };
+        
+        id pattern =
+        @{
+        @"meta" : @{@"code" : [NSNumber numberWithInteger:201]},
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 - (void)testDictionaryMisatchElements_nested_some_num
@@ -425,6 +495,32 @@
         STAssertFalse(result, @"ivalid result value");
     }
 }
+
+- (void)testDictionaryMisatchElements_hasNoProperty
+{
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+        @"num_22"       : @22,
+        };
+        
+        id pattern =
+        @{
+        @"num_22"       : @22,
+        @"required_num" : [NSNumber class],
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
+    }
+}
+
 
 ////// Null value tests /////
 

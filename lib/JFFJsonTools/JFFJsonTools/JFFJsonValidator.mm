@@ -214,26 +214,52 @@ static BOOL isJsonObject(id object)
     {
         return NO;
     }
-
+    
+    if (isClass(jsonPattern))
+    {
+        return YES;
+    }
+    
     __block BOOL result = YES;
     __block NSError *tmpError;
 
-    [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [jsonPattern enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
     {
-        id subPattern = jsonPattern[key];
+        id subElement = self[key];
 
-        if (subPattern && ![obj validateWithJsonPattern:subPattern
-                                         rootJsonObject:rootJsonObject
-                                        rootJsonPattern:rootJsonPattern
-                                                  error:&tmpError])
+        if (!subElement)
+        {
+            //set error
+            {
+                JFFJsonValidationError *error = [JFFJsonValidationError new];
+                error.jsonObject  = rootJsonObject ;
+                error.jsonPattern = rootJsonPattern;
+                
+                static NSString *const messageFormat = @"jsonObject: %@ has no a field named: %@, see pattern: %@";
+                error.message = [[NSString alloc]initWithFormat:messageFormat,
+                                 self,
+                                 key,
+                                 jsonPattern];
+                
+                tmpError = error;
+            }
+            
+            result = NO;
+            *stop = YES;
+        }
+        
+        if (![subElement validateWithJsonPattern:obj
+                                  rootJsonObject:rootJsonObject
+                                 rootJsonPattern:rootJsonPattern
+                                           error:&tmpError])
         {
             result = NO;
             *stop = YES;
         }
     }];
-
+    
     [tmpError setToPointer:outError];
-
+    
     return result;
 }
 
