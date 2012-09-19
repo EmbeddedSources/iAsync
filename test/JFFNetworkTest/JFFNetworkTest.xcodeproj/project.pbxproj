@@ -47,6 +47,7 @@
 		CE29B5F715F5ED47000A05B8 /* NSHTTPCookieMatchesURLTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053031547DFDE00270B58 /* NSHTTPCookieMatchesURLTest.m */; };
 		CE29B5F815F5ED47000A05B8 /* JFFLocalCookiesStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0530C1547EA0400270B58 /* JFFLocalCookiesStorageTest.m */; };
 		CE29B5F915F5ED47000A05B8 /* InvalidPathForJConnectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF99B157E0BF100CA8ED4 /* InvalidPathForJConnectionTest.m */; };
+		CE433777160A1A7300C2279F /* NSConnectionTestNoArc.m in Sources */ = {isa = PBXBuildFile; fileRef = CE433776160A1A7300C2279F /* NSConnectionTestNoArc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +205,13 @@
 			remoteGlobalIDString = 7E57F42414F93738002D139B;
 			remoteInfo = JFFUtilsFW;
 		};
+		CE433772160A1A5800C2279F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5310BA8D141F51AD00A3E2B1 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE444A1C1608609100DD85B0;
+			remoteInfo = JFFUtilsTest;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -254,6 +262,7 @@
 		7E6AF99F157E105600CA8ED4 /* BadHeadersMockNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadHeadersMockNetwork.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* JFFNetworkTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JFFNetworkTest-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		CE29B5E815F5E983000A05B8 /* URLWithLocationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLWithLocationTest.m; sourceTree = "<group>"; };
+		CE433776160A1A7300C2279F /* NSConnectionTestNoArc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSConnectionTestNoArc.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +299,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CE433775160A1A7300C2279F /* NoArc */,
 				1BE0530E1547EA1E00270B58 /* Details */,
 				7E6AF99D157E102C00CA8ED4 /* Mock */,
 				53A33F21141F600300469DAA /* JNTestBundleManager.h */,
@@ -431,6 +441,7 @@
 				5357CDF314A9F4F80046EA34 /* libJFFUtilsMacOS.a */,
 				5357CDF514A9F4F80046EA34 /* libJFFUtils-clang.a */,
 				65B1F94A151A8B74000A1736 /* JFFUtilsFW.framework */,
+				CE433773160A1A5800C2279F /* JFFUtilsTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -455,6 +466,14 @@
 			);
 			path = Mock;
 			sourceTree = "<group>";
+		};
+		CE433775160A1A7300C2279F /* NoArc */ = {
+			isa = PBXGroup;
+			children = (
+				CE433776160A1A7300C2279F /* NSConnectionTestNoArc.m */,
+			);
+			path = NoArc;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -663,6 +682,13 @@
 			remoteRef = 65B1F949151A8B74000A1736 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		CE433773160A1A5800C2279F /* JFFUtilsTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFUtilsTest.octest;
+			remoteRef = CE433772160A1A5800C2279F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -732,6 +758,7 @@
 				CE29B5F715F5ED47000A05B8 /* NSHTTPCookieMatchesURLTest.m in Sources */,
 				CE29B5F815F5ED47000A05B8 /* JFFLocalCookiesStorageTest.m in Sources */,
 				CE29B5F915F5ED47000A05B8 /* InvalidPathForJConnectionTest.m in Sources */,
+				CE433777160A1A7300C2279F /* NSConnectionTestNoArc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

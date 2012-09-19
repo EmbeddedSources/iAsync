@@ -308,6 +308,9 @@ static void readStreamCallback( CFReadStreamRef stream_
         if ( !self->_params.url )
             self->_params.url = [ self->_params.url URLWithLocation: @"/" ];
 
+        self->_params.httpMethod = @"GET";
+        self->_params.httpBody = nil;
+
         NSDebugLog( @"%@", self->_params.url );
         NSDebugLog( @"Done." );
 

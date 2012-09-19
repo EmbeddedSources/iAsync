@@ -15,6 +15,10 @@
 }
 
 //TODO: Test Connection with runloops!
+-(void)dealloc
+{
+    [ self cancel ];
+}
 
 - (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
@@ -171,11 +175,13 @@ didReceiveResponse:( NSHTTPURLResponse* )response_
         return;
     }
 
-    if ( nil != self.didFinishLoadingBlock )
-    {
-        self.didFinishLoadingBlock( nil );
-    }
+    JFFDidFinishLoadingHandler finish_ = self.didFinishLoadingBlock;
+    
     [ self cancel ];
+    if ( nil != finish_ )
+    {
+        finish_( nil );
+    }
 }
 
 -(void)connection:( NSURLConnection* )connection_
