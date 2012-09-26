@@ -12,7 +12,7 @@ DESTINATION* objc_kind_of_cast( id nsObject )
     {
         return nil;
     }
-
+    
     Class destination_class_ = [ DESTINATION class ];
     if ( ![ nsObject isKindOfClass: destination_class_ ] )
     {
@@ -41,12 +41,6 @@ DESTINATION* objc_member_of_cast( id nsObject )
 
     return (DESTINATION*)nsObject;
 }
-
-
-#pragma mark -
-#pragma mark dynamic cast
-extern BOOL class_srcIsSuperclassOfDest( Class src, Class dest );
-extern BOOL class_isClassesInSameHierarchy( Class src, Class dest );
 
 template < class DESTINATION >
 DESTINATION* objc_dynamic_cast( id nsObject )

@@ -1,7 +1,5 @@
 #import "EmptyStringTest.h"
 
-#import "NSString+IsEmpty.h"
-
 @implementation EmptyStringTest
 
 - (void)testNilStringIsEmpty
