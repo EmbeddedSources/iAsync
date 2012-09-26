@@ -20,9 +20,9 @@ typedef void (^JFFCancelAsyncOperation)(BOOL unsubscribeOnlyIfNo);
 
 typedef JFFCancelAsyncOperation JFFCancelAsyncOperationHandler;
 
-//@@ progressCallback_ -- nil | valid block
-//@@ cancelCallback_   -- nil | valid block
-//@@ doneCallback_     -- nil | valid block
+//@@ progressCallback -- nil | valid block
+//@@ cancelCallback   -- nil | valid block
+//@@ doneCallback     -- nil | valid block
 typedef JFFCancelAsyncOperation (^JFFAsyncOperation)(JFFAsyncOperationProgressHandler progressCallback,
                                                      JFFCancelAsyncOperationHandler cancelCallback,
                                                      JFFDidFinishAsyncOperationHandler doneCallback);

@@ -15,29 +15,29 @@ static NSUInteger globalActiveNumber = 0;
 
 //JTODO test this
 
-static JFFAsyncOperationLoadBalancerContexts* sharedBalancer()
+static JFFAsyncOperationLoadBalancerContexts *sharedBalancer()
 {
-    return [ JFFAsyncOperationLoadBalancerContexts sharedBalancer ];
+    return [JFFAsyncOperationLoadBalancerContexts sharedBalancer];
 }
 
-static void setBalancerCurrentContextName( NSString* context_name_ )
+static void setBalancerCurrentContextName( NSString *contextName)
 {
-    sharedBalancer().currentContextName = context_name_;
+    sharedBalancer().currentContextName = contextName;
 }
 
-static BOOL canPeformAsyncOperationForContext( JFFContextLoaders* context_loaders_ );
-static BOOL findAndTryToPerformNextNativeLoader( void );
+static BOOL canPeformAsyncOperationForContext(JFFContextLoaders *contextLoaders);
+static BOOL findAndTryToPerformNextNativeLoader(void);
 
-void setBalancerActiveContextName( NSString* context_name_ )
+void setBalancerActiveContextName(NSString *contextName)
 {
-    if ( [ sharedBalancer().activeContextName isEqualToString: context_name_ ] )
+    if ([sharedBalancer().activeContextName isEqualToString:contextName])
         return;
-
-    NSLog( @"!!!SET ACTIVE CONTEXT NAME: %@", context_name_ );
-    sharedBalancer().activeContextName = context_name_;
-    setBalancerCurrentContextName( context_name_ );
-
-    while ( findAndTryToPerformNextNativeLoader() );
+    
+    //NSLog( @"!!!SET ACTIVE CONTEXT NAME: %@", context_name_ );
+    sharedBalancer().activeContextName = contextName;
+    setBalancerCurrentContextName(contextName);
+    
+    while (findAndTryToPerformNextNativeLoader());
 }
 
 static void peformBlockWithinContext( JFFSimpleBlock block_, JFFContextLoaders* context_loaders_ )

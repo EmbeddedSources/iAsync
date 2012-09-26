@@ -56,8 +56,8 @@
 
 - (id)property
 {
-    id result_ = objc_msgSend( self.object, self.propertyGetSelector );
-    return self.propertyPath.key?[result_ objectForKey:self.propertyPath.key]:result_;
+    id result = objc_msgSend(self.object, self.propertyGetSelector);
+    return self.propertyPath.key?[result objectForKey:self.propertyPath.key]:result;
 }
 
 - (void)setProperty:(id)property

@@ -136,29 +136,27 @@ JFFAsyncOperation asyncOperationWithFinishHookBlock( JFFAsyncOperation loader_
     };
 }
 
-JFFAsyncOperation asyncOperationWithStartAndFinishBlocks( JFFAsyncOperation loader_
-                                                         , JFFSimpleBlock startBlock_
-                                                         , JFFDidFinishAsyncOperationHandler finishCallback_ )
+JFFAsyncOperation asyncOperationWithStartAndFinishBlocks(JFFAsyncOperation loader,
+                                                         JFFSimpleBlock startBlock,
+                                                         JFFDidFinishAsyncOperationHandler finishCallback)
 {
-    startBlock_     = [ startBlock_ copy ];
-    finishCallback_ = [ finishCallback_ copy ];
-
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
-        if ( startBlock_ )
-            startBlock_();
-
-        doneCallback_ = [ doneCallback_ copy ];
-        JFFDidFinishAsyncOperationHandler doneCallback2_ = ^( id result_, NSError* error_ )
-        {
-            if ( finishCallback_ )
-                finishCallback_( result_, error_ );
-            if ( doneCallback_ )
-                doneCallback_( result_, error_ );
+    startBlock     = [startBlock     copy];
+    finishCallback = [finishCallback copy];
+    
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        if (startBlock)
+            startBlock();
+        
+        doneCallback = [doneCallback copy];
+        JFFDidFinishAsyncOperationHandler wrappedDoneCallback = ^(id result, NSError *error) {
+            if (finishCallback)
+                finishCallback(result, error);
+            if (doneCallback)
+                doneCallback(result, error);
         };
-        return loader_( progressCallback_, cancelCallback_, doneCallback2_ );
+        return loader(progressCallback, cancelCallback, wrappedDoneCallback);
     };
 }
 
@@ -166,8 +164,7 @@ JFFAsyncOperation asyncOperationWithAnalyzer(id data, JFFAnalyzer analyzer)
 {
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         NSError *localError;
         id localResult = analyzer(data, &localError);
         

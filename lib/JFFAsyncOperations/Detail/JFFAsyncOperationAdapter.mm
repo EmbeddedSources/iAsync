@@ -4,21 +4,21 @@
 
 @implementation JFFAsyncOperationAdapter
 
--(void)asyncOperationWithResultHandler:( void (^)( id, NSError* ) )handler_
-                       progressHandler:( void (^)( id ) )progress_
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+                        progressHandler:(void (^)(id))progress
 {
-    self.operation = [ JFFBlockOperation performOperationWithQueueName: self.queueName.c_str()
-                                                         loadDataBlock: self.loadDataBlock
-                                                      didLoadDataBlock: handler_
-                                                         progressBlock: progress_
-                                                               barrier: self.barrier ];
+    self.operation = [JFFBlockOperation performOperationWithQueueName:self.queueName.c_str()
+                                                        loadDataBlock:self.loadDataBlock
+                                                     didLoadDataBlock:handler
+                                                        progressBlock:progress
+                                                              barrier:self.barrier];
 }
 
--(void)cancel:( BOOL )canceled_
+- (void)cancel:(BOOL)canceled
 {
-    if ( canceled_ )
+    if (canceled)
     {
-        [ self.operation cancel ];
+        [self.operation cancel];
         self.operation = nil;
     }
 }
