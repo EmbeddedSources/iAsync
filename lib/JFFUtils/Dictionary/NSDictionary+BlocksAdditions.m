@@ -4,47 +4,66 @@
 
 @implementation NSDictionary (BlocksAdditions)
 
--(NSDictionary*)map:( JFFDictMappingBlock )block_
+- (NSDictionary *)map:(JFFDictMappingBlock)block
 {
-    NSMutableDictionary* result_ = [ [ NSMutableDictionary alloc ] initWithCapacity: [ self count ] ];
-    [ self enumerateKeysAndObjectsUsingBlock: ^( id key_, id object_, BOOL* stop_ )
+    NSMutableDictionary *result = [[ NSMutableDictionary alloc] initWithCapacity:[self count]];
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
     {
-        id newObject_ = block_( key_, object_ );
-        if ( newObject_ )
-            result_[ key_ ] = newObject_;
-    } ];
-    return [ result_ copy ];
+        id newObject = block(key, object);
+        NSParameterAssert(newObject);
+        result[key] = newObject;
+    }];
+    return [result copy];
 }
 
--(NSDictionary*)mapKey:( JFFDictMappingBlock )block_
+- (NSDictionary *)map:(JFFDictMappingWithErrorBlock)block error:(NSError **)outError
 {
-    NSMutableDictionary* result_ = [ [ NSMutableDictionary alloc ] initWithCapacity: [ self count ] ];
-    [ self enumerateKeysAndObjectsUsingBlock: ^( id key_, id object_, BOOL* stop_ )
+    __block NSMutableDictionary *result = [[ NSMutableDictionary alloc] initWithCapacity:[self count]];
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
     {
-        id newKey_ = block_( key_, object_ );
-        if ( newKey_ )
-            result_[ newKey_ ] = object_;
-    } ];
-    return [ result_ copy ];
+        id newObject = block(key, object, outError);
+        
+        if (!newObject)
+        {
+            *stop = YES;
+            result = nil;
+            return;
+        }
+        
+        result[key] = newObject;
+    }];
+    return [result copy];
 }
 
--(NSUInteger)count:( JFFDictPredicateBlock )predicate_
+-(NSDictionary*)mapKey:(JFFDictMappingBlock )block
 {
-    __block NSUInteger count_ = 0;
-    [ self enumerateKeysAndObjectsUsingBlock: ^( id key_, id object_, BOOL* stop_ )
+    NSMutableDictionary *result = [[ NSMutableDictionary alloc ] initWithCapacity:[self count]];
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
     {
-        if ( predicate_( key_, object_ ) )
-            ++count_;
-    } ];
-    return count_;
+        id newKey = block(key, object);
+        NSParameterAssert(newKey);
+        result[newKey] = object;
+    }];
+    return [result copy];
 }
 
--(void)each:( JFFDictActionBlock )block_
+- (NSUInteger)count:(JFFDictPredicateBlock)predicate
 {
-    [ self enumerateKeysAndObjectsUsingBlock: ^( id key_, id object_, BOOL* stop_ )
+    __block NSUInteger count = 0;
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
     {
-        block_( key_, object_ );
-    } ];
+        if (predicate(key, object))
+            ++count;
+    }];
+    return count;
+}
+
+- (void)each:(JFFDictActionBlock)block
+{
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
+    {
+        block(key, object);
+    }];
 }
 
 @end
