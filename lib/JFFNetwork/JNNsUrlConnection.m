@@ -176,12 +176,12 @@ didReceiveResponse:( NSHTTPURLResponse* )response_
         return;
     }
 
-    JFFDidFinishLoadingHandler finish_ = self.didFinishLoadingBlock;
+    JFFDidFinishLoadingHandler finish = self.didFinishLoadingBlock;
     
-    [ self cancel ];
-    if ( nil != finish_ )
+    [self cancel];
+    if (nil != finish)
     {
-        finish_( nil );
+        finish(nil);
     }
 }
 
