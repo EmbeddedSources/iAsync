@@ -2,73 +2,73 @@
 
 @implementation NSString (Search)
 
--(NSUInteger)numberofOccurencesWithRangeSearcher:( NSRange(^)( NSRange ) )rangeSearcher_
-                                            step:( NSUInteger )step_
+- (NSUInteger)numberofOccurencesWithRangeSearcher:(NSRange(^)(NSRange))rangeSearcher
+                                             step:(NSUInteger)step
 {
-    NSUInteger result_ = 0;
-
-    NSRange searchRange_ = { 0, [ self length ] };
-    NSRange range_ = rangeSearcher_( searchRange_ );
-
-    while ( range_.location != NSNotFound )
+    NSUInteger result = 0;
+    
+    NSRange searchRange = {0, [self length]};
+    NSRange range = rangeSearcher(searchRange);
+    
+    while (range.location != NSNotFound)
     {
-        ++result_;
-
-        searchRange_.location = range_.location + step_;
-        searchRange_.length   = [ self length ] - searchRange_.location;
-        if ( searchRange_.location >= [ self length ] )
+        ++result;
+        
+        searchRange.location = range.location + step;
+        searchRange.length   = [ self length ] - searchRange.location;
+        if (searchRange.location >= [self length])
             break;
-
-        range_ = rangeSearcher_( searchRange_ );
+        
+        range = rangeSearcher(searchRange);
     }
-
-    return result_;
+    
+    return result;
 }
 
--(NSUInteger)numberOfCharacterFromString:( NSString* )string_
+- (NSUInteger)numberOfCharacterFromString:(NSString *)string
 {
-    NSCharacterSet* set_ = [ NSCharacterSet characterSetWithCharactersInString: string_ ];
-
-    NSRange (^rangeSearcher_)( NSRange ) = ^NSRange( NSRange rangeToSearch_ )
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString: string];
+    
+    NSRange (^rangeSearcher)(NSRange) = ^NSRange(NSRange rangeToSearch)
     {
-        return [ self rangeOfCharacterFromSet: set_
-                                      options: NSLiteralSearch
-                                        range: rangeToSearch_ ];
+        return [self rangeOfCharacterFromSet: set
+                                     options: NSLiteralSearch
+                                       range: rangeToSearch];
     };
-
-    return [ self numberofOccurencesWithRangeSearcher: rangeSearcher_
-                                                 step: 1 ];
+    
+    return [self numberofOccurencesWithRangeSearcher: rangeSearcher
+                                                step: 1];
 }
 
--(NSUInteger)numberOfStringsFromString:( NSString* )string_
+- (NSUInteger)numberOfStringsFromString:(NSString *)string
 {
-    NSRange (^rangeSearcher_)( NSRange ) = ^NSRange( NSRange rangeToSearch_ )
+    NSRange (^rangeSearcher)(NSRange) = ^NSRange(NSRange rangeToSearch)
     {
-        return [ self rangeOfString: string_
-                            options: NSLiteralSearch
-                              range: rangeToSearch_ ];
+        return [self rangeOfString: string
+                           options: NSLiteralSearch
+                             range: rangeToSearch];
     };
-
-    return [ self numberofOccurencesWithRangeSearcher: rangeSearcher_
-                                                 step: [ string_ length ] ];
+    
+    return [self numberofOccurencesWithRangeSearcher: rangeSearcher
+                                                step: [string length]];
 }
 
--(BOOL)containsString:( NSString* )string_
+- (BOOL)containsString:(NSString *)string
 {
-    NSRange range_ = [ self rangeOfString: string_
-                                  options: NSLiteralSearch
-                                    range: (NSRange){ 0, [ self length ] } ];
-
-    return range_.location != NSNotFound;
+    NSRange range = [self rangeOfString: string
+                                options: NSLiteralSearch
+                                  range: (NSRange){0, [self length]}];
+    
+    return range.location != NSNotFound;
 }
 
--(BOOL)caseInsensitiveContainsString:( NSString* )string_
+- (BOOL)caseInsensitiveContainsString:(NSString *)string
 {
-    NSRange range_ = [ self rangeOfString: string_
-                                  options: NSCaseInsensitiveSearch
-                                    range: (NSRange){ 0, [ self length ] } ];
-
-    return range_.location != NSNotFound;
+    NSRange range = [ self rangeOfString: string
+                                 options: NSCaseInsensitiveSearch
+                                   range: (NSRange){0, [self length]}];
+    
+    return range.location != NSNotFound;
 }
 
 @end

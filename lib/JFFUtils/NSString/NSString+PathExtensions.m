@@ -1,25 +1,25 @@
 #import "NSString+PathExtensions.h"
 
-@implementation NSString ( PathExtensions )
+@implementation NSString (PathExtensions)
 
-+(NSString*)pathWithDirectory:( NSSearchPathDirectory )directory_
-       appendingPathComponent:( NSString* )str_
++ (NSString *)pathWithDirectory:(NSSearchPathDirectory)directory
+         appendingPathComponent:(NSString *)str
 {
-    NSArray* pathes_ = NSSearchPathForDirectoriesInDomains( directory_, NSUserDomainMask, YES );
-    NSString* documentDirectory_ = [ pathes_ lastObject ];
-    return [ documentDirectory_ stringByAppendingPathComponent: str_ ];
+    NSArray  *pathes = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [pathes lastObject];
+    return [documentDirectory stringByAppendingPathComponent:str];
 }
 
-+(NSString*)documentsPathByAppendingPathComponent:( NSString* )str_
++ (NSString *)documentsPathByAppendingPathComponent:(NSString *)str
 {
-    return [ self pathWithDirectory: NSDocumentDirectory
-             appendingPathComponent: str_ ];
+    return [self pathWithDirectory:NSDocumentDirectory
+            appendingPathComponent:str];
 }
 
-+(NSString*)cachesPathByAppendingPathComponent:( NSString* )str_
++ (NSString *)cachesPathByAppendingPathComponent:(NSString *)str
 {
-    return [ self pathWithDirectory: NSCachesDirectory
-             appendingPathComponent: str_ ];
+    return [self pathWithDirectory:NSCachesDirectory
+            appendingPathComponent:str];
 }
 
 @end
