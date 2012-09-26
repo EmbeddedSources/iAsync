@@ -3,55 +3,55 @@
 #include <map>
 #include <string>
 
-static std::map< std::string, dispatch_queue_t > dispatchByLabel_;
-static NSString* const lockObject_ = @"0524a0b0-4bc8-47da-a1f5-6073ba5b59d9";
+static std::map< std::string, dispatch_queue_t > dispatchByLabel;
+static NSString* const lockObject = @"0524a0b0-4bc8-47da-a1f5-6073ba5b59d9";
 
-void safe_dispatch_sync( dispatch_queue_t queue_, dispatch_block_t block_ )
+void safe_dispatch_sync(dispatch_queue_t queue, dispatch_block_t block)
 {
-    if ( dispatch_get_current_queue() != queue_ )
-        dispatch_sync( queue_, block_ );
+    if (dispatch_get_current_queue() != queue)
+        dispatch_sync(queue, block);
     else
-        block_();
+        block();
 }
 
-void safe_dispatch_barrier_sync( dispatch_queue_t queue_, dispatch_block_t block_ )
+void safe_dispatch_barrier_sync(dispatch_queue_t queue, dispatch_block_t block)
 {
-    if ( dispatch_get_current_queue() != queue_ )
-        dispatch_barrier_sync( queue_, block_ );
+    if (dispatch_get_current_queue() != queue)
+        dispatch_barrier_sync(queue, block);
     else
-        block_();
+        block();
 }
 
-dispatch_queue_t dispatch_queue_get_or_create( const char *label_, dispatch_queue_attr_t attr_ )
+dispatch_queue_t dispatch_queue_get_or_create(const char *label, dispatch_queue_attr_t attr)
 {
-    @synchronized( lockObject_ )
+    @synchronized( lockObject )
     {
-        const std::string labelStr_( label_ );
-
-        dispatch_queue_t result_ = dispatchByLabel_[ labelStr_ ];
-        if ( result_ == NULL )
+        const std::string labelStr(label);
+        
+        dispatch_queue_t result = dispatchByLabel[labelStr];
+        if (result == NULL)
         {
-            result_ = dispatch_queue_create( label_, attr_ );
-            dispatchByLabel_[ labelStr_ ] = result_;
+            result = dispatch_queue_create(label, attr);
+            dispatchByLabel[labelStr] = result;
         }
-
-        return result_;
+        
+        return result;
     }
 }
 
-void dispatch_queue_release_by_label( const char *label_ )
+void dispatch_queue_release_by_label(const char *label)
 {
-    @synchronized( lockObject_ )
+    @synchronized( lockObject )
     {
-        const std::string labelStr_( label_ );
-
-        auto position_ = dispatchByLabel_.find( labelStr_ );
-        if ( position_ != dispatchByLabel_.end() )
+        const std::string labelStr(label);
+        
+        auto position = dispatchByLabel.find(labelStr);
+        if (position != dispatchByLabel.end())
         {
-            dispatch_queue_t queue_ = position_->second;
-            dispatch_release( queue_ );
-
-            dispatchByLabel_.erase( position_ );
+            dispatch_queue_t queue = position->second;
+            dispatch_release(queue);
+            
+            dispatchByLabel.erase(position);
         }
     }
 }
