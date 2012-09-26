@@ -21,13 +21,17 @@
 {
     NSString *delegateName = NSStringFromSelector(_cmd);
     NSArray *delegateNameComponents = [delegateName componentsSeparatedByString:@"_"];
-
+    
     NSString *hookedDelegateName = [delegateNameComponents lastObject];
-
+    
     NSString *hookedGetterName = [hookedDelegateName hookedGetterMethodNameForClass:[self class]];
-
-    return [self proxyDelegatesDispatcherForHookedGetterName:hookedGetterName
-                                                delegateName:hookedDelegateName];
+    
+    JFFProxyDelegatesDispatcher *proxy = [self proxyDelegatesDispatcherForHookedGetterName:hookedGetterName
+                                                                              delegateName:hookedDelegateName];
+    if (proxy)
+        return proxy;
+    
+    return objc_msgSend(self, NSSelectorFromString(hookedGetterName));
 }
 
 @end
