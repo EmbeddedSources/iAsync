@@ -27,6 +27,9 @@
 #import <JFFUtils/NSString/NSString+Base64.h>
 #import <JFFUtils/NSString/NSString+FileAttributes.h>
 
+#import <JFFUtils/NSSet/NSMutableSet+StorableSet.h>
+#import <JFFUtils/NSSet/NSSet+BlocksAdditions.h>
+
 #import <JFFUtils/NSDate/NSDate+DateDifference.h>
 
 #import <JFFUtils/ToURL/NSString+ToURL.h>
@@ -40,7 +43,6 @@
 #import <JFFUtils/Extensions/NSDecimalNumber+Increment.h>
 #import <JFFUtils/Extensions/UIColor+ColorForHex.h>
 #import <JFFUtils/Extensions/NSError+setToPointer.h>
-#import <JFFUtils/Extensions/NSSet+BlocksAdditions.h>
 #import <JFFUtils/Extensions/NSData+ToString.h>
 #import <JFFUtils/Extensions/UIImage+ScaleToSize.h>
 
