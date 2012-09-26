@@ -2,7 +2,7 @@
 
 @interface NSObject (OnDeallocBlock)
 
--(void)addOnDeallocBlock:( void(^)( void ) )block_;
--(void)removeOnDeallocBlock:( void(^)( void ) )block_;
+- (void)addOnDeallocBlock:(void(^)(void))block;
+- (void)removeOnDeallocBlock:(void(^)(void))block;
 
 @end
