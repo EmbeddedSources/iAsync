@@ -34,18 +34,17 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
 -(void)RtestInstagramAuthedUser
 {
     __block JFFInstagramAuthedAccount *account;
-
+    
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
         JFFInstagramCredentials *credentials = [JFFInstagramCredentials new];
         credentials.clientId     = clientId;
         credentials.clientSecret = clientSecret;
         credentials.redirectURI  = redirectURI;
-
+        
         JFFAsyncOperation loader = [JFFSocialInstagram authedUserLoaderWithCredentials:credentials];
-
-        loader(nil,nil,^(id result,NSError *error)
-        {
+        
+        loader(nil,nil,^(id result,NSError *error) {
             account = result;
             finishBLock();
         });
@@ -146,7 +145,7 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
 
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
-        JFFAsyncOperation loader = [JFFSocialInstagram recentMediaItemsLoaderForUserId:@"self"
+        JFFAsyncOperation loader = [JFFSocialInstagram recentMediaItemsLoaderForUserId:nil
                                                                            accessToken:accessToken];
 
         loader(nil,nil,^(id result,NSError *error)
@@ -165,6 +164,15 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
     JFFInstagramMediaItem *mediaItem = mediaItems[0];
 
     GHAssertEqualObjects( @"277393673043504646_220778258", mediaItem.mediaItemId, @"instagram id mismatch");
+
+    {
+        NSString *url = @"http://distilleryimage10.s3.amazonaws.com/38ec2cd4fb5511e19ca422000a1d0119_7.jpg";
+        GHAssertEqualObjects(url, [mediaItem.bigImageUrl description], @"instagram id mismatch");
+    }
+    {
+        NSString *url = @"http://distilleryimage10.s3.amazonaws.com/38ec2cd4fb5511e19ca422000a1d0119_5.jpg";
+        GHAssertEqualObjects(url, [mediaItem.thumbnailImageUrl description], @"instagram id mismatch");
+    }
 }
 
 -(void)testLoadVlg1MediaItems
@@ -187,11 +195,11 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
                                           selector:_cmd];
 
     GHAssertNotNil(mediaItems, @"ok");
-    GHAssertTrue([mediaItems count]>0, @"ok");
+    GHAssertTrue([mediaItems count]==2, @"ok");
 
     JFFInstagramMediaItem *mediaItem = mediaItems[0];
 
-    GHAssertEqualObjects( @"278621428023433649_221327437", mediaItem.mediaItemId, @"instagram id mismatch");
+    GHAssertEqualObjects( @"284572159972875249_221327437", mediaItem.mediaItemId, @"instagram id mismatch");
 }
 
 -(void)testCommentVlg1MediaItem
@@ -249,17 +257,6 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
     {
         GHAssertEqualObjects(commentText, comment.text, @"comment text mismatch");
     }
-
-//    NSArray *vlgsComments = [comments select:^BOOL(JFFInstagramComment *comment)
-//    {
-//        return [comment.from.name isEqualToString:@"vlg1"]
-//            || [comment.from.name isEqualToString:@"vlg2"];
-//    }];
-//
-//    vlgsComments = [vlgsComments sortedArrayUsingComparator: ^NSComparisonResult(JFFInstagramComment *obj1, JFFInstagramComment *obj2)
-//    {
-//        return [obj1.from.name compare:obj2.from.name];
-//    }];
 }
 
 @end
