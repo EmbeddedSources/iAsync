@@ -18,6 +18,7 @@
 #import <JFFSocial/Instagram/Model/JFFInstagramAccount.h>
 #import <JFFSocial/Instagram/Model/JFFInstagramAuthedAccount.h>
 #import <JFFSocial/Instagram/Model/JFFInstagramMediaItem.h>
+#import <JFFSocial/Instagram/Model/JFFInstagramMediaItemImage.h>
 #import <JFFSocial/Instagram/Model/JFFInstagramComment.h>
 
 //Instagram errors headers

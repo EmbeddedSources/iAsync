@@ -17,6 +17,9 @@
 + (JFFAsyncOperation)recentMediaItemsLoaderForUserId:(NSString *)userId
                                          accessToken:(NSString *)accessToken;
 
++ (JFFAsyncOperation)recentMediaItemsLoaderForUserId:(NSString *)userId
+                                         credentials:(JFFInstagramCredentials *)credentials;
+
 + (JFFAsyncOperation)commentMediaItemLoaderWithId:(NSString *)mediaItemId
                                           comment:(NSString *)comment
                                       accessToken:(NSString *)accessToken;

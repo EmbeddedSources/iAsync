@@ -41,6 +41,7 @@
 		CE5A034B15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A034A15FA043B005CC01A /* JFFTweet+TwitterJSONApiParser.m */; };
 		CE85431015FA29F600750066 /* AsyncAnalyzers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85430F15FA29F500750066 /* AsyncAnalyzers.m */; };
 		CE85432115FA37C600750066 /* JFFDirectTweetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85432015FA37C600750066 /* JFFDirectTweetMessage.m */; };
+		CEAAC3C4160B41F90058F88A /* JFFSocialMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAAC3C3160B41F90058F88A /* JFFSocialMediaItem.m */; };
 		CEB2350615FF6840005E5CF5 /* JFFSocialInstagram.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2350515FF6840005E5CF5 /* JFFSocialInstagram.m */; };
 		CEB2367715FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2367615FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.m */; };
 		CEB2367F15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2367E15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.m */; };
@@ -51,6 +52,7 @@
 		CEB23770160098B0005E5CF5 /* JFFInstagramMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2376F160098B0005E5CF5 /* JFFInstagramMediaItem.m */; };
 		CEB237851600AE6C005E5CF5 /* JFFInstagramComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB237841600AE6B005E5CF5 /* JFFInstagramComment.m */; };
 		CEB237F21600C8E8005E5CF5 /* JFFInstagramCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB237F11600C8E8005E5CF5 /* JFFInstagramCredentials.m */; };
+		CEC806BE160B576B005DC722 /* JFFInstagramMediaItemImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC806A9160B4F2F005DC722 /* JFFInstagramMediaItemImage.m */; };
 		CECF90AC15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CECF90AB15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +162,13 @@
 			remoteGlobalIDString = 7E8F204314F9494300588C7D;
 			remoteInfo = JFFNetworkFW;
 		};
+		CEAAC3D7160B41F90058F88A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE444A1C1608609100DD85B0;
+			remoteInfo = JFFUtilsTest;
+		};
 		CEB2366B15FF6E3A005E5CF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */;
@@ -265,6 +274,8 @@
 		CE85430F15FA29F500750066 /* AsyncAnalyzers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncAnalyzers.m; sourceTree = "<group>"; };
 		CE85431F15FA37C600750066 /* JFFDirectTweetMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDirectTweetMessage.h; sourceTree = "<group>"; };
 		CE85432015FA37C600750066 /* JFFDirectTweetMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDirectTweetMessage.m; sourceTree = "<group>"; };
+		CEAAC3C2160B41F90058F88A /* JFFSocialMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialMediaItem.h; sourceTree = "<group>"; };
+		CEAAC3C3160B41F90058F88A /* JFFSocialMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialMediaItem.m; sourceTree = "<group>"; };
 		CEB2350415FF6840005E5CF5 /* JFFSocialInstagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialInstagram.h; sourceTree = "<group>"; };
 		CEB2350515FF6840005E5CF5 /* JFFSocialInstagram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialInstagram.m; sourceTree = "<group>"; };
 		CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUI.xcodeproj; path = "/Users/user/Sources/paparam.ru/HumanCloud/lib-third-party/iAsync/test/JFFSocialTest/../../lib/JFFUI/JFFUI.xcodeproj"; sourceTree = "<absolute>"; };
@@ -286,6 +297,8 @@
 		CEB237841600AE6B005E5CF5 /* JFFInstagramComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInstagramComment.m; sourceTree = "<group>"; };
 		CEB237F01600C8E8005E5CF5 /* JFFInstagramCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramCredentials.h; sourceTree = "<group>"; };
 		CEB237F11600C8E8005E5CF5 /* JFFInstagramCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInstagramCredentials.m; sourceTree = "<group>"; };
+		CEC806A8160B4F2F005DC722 /* JFFInstagramMediaItemImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramMediaItemImage.h; sourceTree = "<group>"; };
+		CEC806A9160B4F2F005DC722 /* JFFInstagramMediaItemImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInstagramMediaItemImage.m; sourceTree = "<group>"; };
 		CECF90AA15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFDirectTweetMessage+TwitterJSONApiParser.h"; sourceTree = "<group>"; };
 		CECF90AB15FA3C52009E707A /* JFFDirectTweetMessage+TwitterJSONApiParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFFDirectTweetMessage+TwitterJSONApiParser.m"; sourceTree = "<group>"; };
 		CEE3A9B215FA0EC000F3DC99 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -449,6 +462,8 @@
 				CE4F601015F8B2BB00271035 /* JFFSocial.h */,
 				CE4F606C15F8B63F00271035 /* JFFSocialAccount.h */,
 				CE4F606D15F8B63F00271035 /* JFFSocialAccount.m */,
+				CEAAC3C2160B41F90058F88A /* JFFSocialMediaItem.h */,
+				CEAAC3C3160B41F90058F88A /* JFFSocialMediaItem.m */,
 				CE4F600E15F8B2BB00271035 /* Supporting Files */,
 			);
 			path = JFFSocial;
@@ -494,6 +509,7 @@
 				CE4F604315F8B56300271035 /* libJFFUtilsMacOS.a */,
 				CE4F604515F8B56300271035 /* libJFFUtils-clang.a */,
 				CE4F604715F8B56300271035 /* JFFUtilsFW.framework */,
+				CEAAC3D8160B41F90058F88A /* JFFUtilsTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -638,6 +654,8 @@
 				CEB2368415FF877C005E5CF5 /* JFFInstagramAccount.m */,
 				CEB2376E160098B0005E5CF5 /* JFFInstagramMediaItem.h */,
 				CEB2376F160098B0005E5CF5 /* JFFInstagramMediaItem.m */,
+				CEC806A8160B4F2F005DC722 /* JFFInstagramMediaItemImage.h */,
+				CEC806A9160B4F2F005DC722 /* JFFInstagramMediaItemImage.m */,
 				CEB237831600AE6B005E5CF5 /* JFFInstagramComment.h */,
 				CEB237841600AE6B005E5CF5 /* JFFInstagramComment.m */,
 			);
@@ -845,6 +863,13 @@
 			remoteRef = CE5A018615F9EEC4005CC01A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		CEAAC3D8160B41F90058F88A /* JFFUtilsTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFUtilsTest.octest;
+			remoteRef = CEAAC3D7160B41F90058F88A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CEB2366C15FF6E3A005E5CF5 /* libJFFUI.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -910,6 +935,8 @@
 				37497DB51601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m in Sources */,
 				37497DB81601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m in Sources */,
 				502AFF7816029E09009BCEEF /* JFFFoursquareNotFoundUsersCheckinsError.m in Sources */,
+				CEAAC3C4160B41F90058F88A /* JFFSocialMediaItem.m in Sources */,
+				CEC806BE160B576B005DC722 /* JFFInstagramMediaItemImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

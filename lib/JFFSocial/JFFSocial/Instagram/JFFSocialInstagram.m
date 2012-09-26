@@ -20,7 +20,7 @@
     return [[NSUserDefaults standardUserDefaults] stringForKey:INSTAGRAM_ACCESS_TOKEN_KEY];
 }
 
-+ (void)saveAccessToken:(NSString *)accessToken
++ (void)setAccessToken:(NSString *)accessToken
 {
     [[NSUserDefaults standardUserDefaults] setValue:accessToken forKey:INSTAGRAM_ACCESS_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -30,7 +30,7 @@
                                 accessToken:(NSString *)accessToken
 {
     JFFAsyncOperation loader = userDataLoader(userId, accessToken);
-
+    
     return bindSequenceOfAsyncOperations(loader, jsonDataToOneAccountBinder(), nil);
 }
 
@@ -40,25 +40,18 @@
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        JFFAsyncOperation loader;
-
-        NSString *accessToken = [self accessToken];//TODO save accessToken for given credentials
-        if (accessToken)
+        JFFAsyncOperation accountLoader = [self authedUserLoaderWithCredentials:redentials];
+        
+        JFFAsyncOperationBinder accountToAccessTokenBinder = ^JFFAsyncOperation(JFFInstagramAuthedAccount *account)
         {
-            loader = asyncOperationWithResult(accessToken);
-        }
-        else
-        {
-            JFFAsyncOperation accountLoader = [self authedUserLoaderWithCredentials:redentials];
-
-            JFFAsyncOperationBinder saveAccessTokenBinder = ^JFFAsyncOperation(JFFInstagramAuthedAccount *account)
-            {
-                [self saveAccessToken:account.instagramAccessToken];
-                return asyncOperationWithResult(account.instagramAccessToken);
-            };
-
-            loader = bindSequenceOfAsyncOperations(accountLoader, saveAccessTokenBinder, nil);
-        }
+            return asyncOperationWithResult(account.instagramAccessToken);
+        };
+        
+        JFFAsyncOperation loader = bindSequenceOfAsyncOperations(accountLoader, accountToAccessTokenBinder, nil);
+        
+        loader = [self asyncOperationForPropertyWithName:@"accessToken"
+                                          asyncOperation:loader];
+        
         return loader(progressCallback,
                       cancelCallback,
                       doneCallback);
@@ -72,23 +65,23 @@
                                     JFFDidFinishAsyncOperationHandler doneCallback)
     {
         JFFAsyncOperation oAuthUrlLoader = codeURLLoader(redentials.redirectURI, redentials.clientId);
-
+        
         JFFAsyncOperationBinder urlToCodeBinder = ^JFFAsyncOperation(NSURL *url)
         {
             NSDictionary *params = [[url query]dictionaryFromQueryComponents];
             NSArray* codeParams = params[@"code"];
-
+            
             if ([codeParams count]==0)
             {
                 JFFInvalidInstagramResponseURLError *error = [JFFInvalidInstagramResponseURLError new];
                 error.url = url;
                 return asyncOperationWithError(error);
             }
-
+            
             NSString *code = codeParams[0];
             return asyncOperationWithResult(code);
         };
-
+        
         JFFAsyncOperationBinder userDataBinder = ^JFFAsyncOperation(NSString *code)
         {
             return authedUserDataLoader(redentials.redirectURI,
@@ -97,13 +90,13 @@
                                         code
                                         );
         };
-
+        
         JFFAsyncOperation loader = bindSequenceOfAsyncOperations(oAuthUrlLoader,
                                                                  urlToCodeBinder,
                                                                  userDataBinder,
                                                                  jsonDataToAuthedAccountBinder(),
-                                                                 nil );
-
+                                                                 nil);
+        
         return loader(progressCallback,
                       cancelCallback,
                       doneCallback);
@@ -116,20 +109,20 @@
     JFFAsyncOperation loader = followersJSONDataLoader(userId,
                                                        accessToken
                                                        );
-
+    
     return bindSequenceOfAsyncOperations(loader, jsonDataToAccountsBinder(), nil);
 }
 
 + (JFFAsyncOperation)followedByLoaderWithCredentials:(JFFInstagramCredentials *)credentials
 {
     JFFAsyncOperation userLoader = [self instagramAccessTokenLoaderForCredentials:credentials];
-
+    
     JFFAsyncOperationBinder userRelatedDataBinder = ^JFFAsyncOperation(NSString *accessToken)
     {
         return [self followedByLoaderForUserId:@"self"
                                    accessToken:accessToken];
     };
-
+    
     return bindSequenceOfAsyncOperations(userLoader,
                                          userRelatedDataBinder,
                                          nil );
@@ -138,11 +131,29 @@
 + (JFFAsyncOperation)recentMediaItemsLoaderForUserId:(NSString *)userId
                                          accessToken:(NSString *)accessToken
 {
+    userId = userId?:@"self";
+    
     JFFAsyncOperation loader = mediaItemsDataLoader(userId, accessToken);
-
+    
     return bindSequenceOfAsyncOperations(loader,
                                          jsonDataToMediaItems(),
                                          nil);
+}
+
++ (JFFAsyncOperation)recentMediaItemsLoaderForUserId:(NSString *)userId
+                                         credentials:(JFFInstagramCredentials *)credentials
+{
+    JFFAsyncOperation userLoader = [self instagramAccessTokenLoaderForCredentials:credentials];
+    
+    JFFAsyncOperationBinder userRelatedDataBinder = ^JFFAsyncOperation(NSString *accessToken)
+    {
+        return [self recentMediaItemsLoaderForUserId:userId
+                                         accessToken:accessToken];
+    };
+    
+    return bindSequenceOfAsyncOperations(userLoader,
+                                         userRelatedDataBinder,
+                                         nil );
 }
 
 + (JFFAsyncOperation)commentMediaItemLoaderWithId:(NSString *)mediaItemId
@@ -170,7 +181,7 @@
 
         return groupOfAsyncOperationsArray(mediaItemsLoaders);
     };
-
+    
     JFFAsyncOperationBinder selectFirstMediaItemsBinder = ^JFFAsyncOperation(NSArray *arrayOfArrayMediaItems)
     {
         NSArray *result = [arrayOfArrayMediaItems forceMap:^id(NSArray *mediaItems)
@@ -180,7 +191,7 @@
 
         return asyncOperationWithResult(result);
     };
-
+    
     JFFAsyncOperationBinder commentEachMediaItemsBinder = ^JFFAsyncOperation(NSArray *mediaItems)
     {
         NSArray *commentMediaItemsLoaders = [mediaItems map:^id(JFFInstagramMediaItem *mediaItem)
@@ -192,7 +203,7 @@
 
         return groupOfAsyncOperationsArray(commentMediaItemsLoaders);
     };
-
+    
     return bindSequenceOfAsyncOperations(usersLoader,
                                          recentMediaItemsBinder,
                                          selectFirstMediaItemsBinder,
@@ -206,7 +217,7 @@
 {
     JFFAsyncOperation usersLoader = [self followedByLoaderForUserId:userId
                                                         accessToken:accessToken];
-
+    
     return [self notifyUsersWithLoader:usersLoader
                                message:message
                            accessToken:accessToken];
@@ -242,14 +253,14 @@
             return [self userLoaderForForUserId:userId
                                     accessToken:accessToken];
         }];
-
+        
         JFFAsyncOperation usersLoader = groupOfAsyncOperationsArray(usersLoaders);
-
+        
         return [self notifyUsersWithLoader:usersLoader
                                    message:message
                                accessToken:accessToken];
     };
-
+    
     return bindSequenceOfAsyncOperations(accessTokenLoader,
                                          notifyBinder,
                                          nil);

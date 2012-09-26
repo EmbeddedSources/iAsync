@@ -43,7 +43,7 @@
     }];
 }
 
--(void)cancel:( BOOL )canceled_
+- (void)cancel:(BOOL)canceled
 {
 }
 
