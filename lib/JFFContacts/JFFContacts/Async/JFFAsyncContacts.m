@@ -10,34 +10,34 @@
 
 @implementation JFFAsyncAllContactsLoader
 
--(void)asyncOperationWithResultHandler:( JFFAsyncOperationInterfaceHandler )handler_
-                       progressHandler:( JFFAsyncOperationInterfaceProgressHandler )progress_
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    handler_  = [ handler_ copy ];
-    progress_ = [ progress_ copy ];
-
-    JFFAddressBookSuccessCallback onSuccess_ = ^( JFFAddressBook* book_ )
+    handler  = [handler  copy];
+    progress = [progress copy];
+    
+    JFFAddressBookSuccessCallback onSuccess = ^(JFFAddressBook *book)
     {
-        NSArray* result_ = [ JFFContact allContactsAddressBook: book_ ];
-
-        if ( progress_ )
-            progress_( result_ );
-
-        if ( handler_ )
-            handler_( result_, nil );
+        NSArray *result = [JFFContact allContactsAddressBook:book];
+        
+        if (progress)
+            progress(result);
+        
+        if (handler)
+            handler(result, nil);
     };
-
-    JFFAddressBookErrorCallback onFailure_ = ^( ABAuthorizationStatus status_, NSError* error_ )
+    
+    JFFAddressBookErrorCallback onFailure = ^(ABAuthorizationStatus status, NSError *error)
     {
-        if ( handler_ )
-            handler_( nil, error_ );
+        if (handler)
+            handler(nil, error);
     };
-
-    [ JFFAddressBookFactory asyncAddressBookWithSuccessBlock: onSuccess_
-                                               errorCallback: onFailure_ ];
+    
+    [JFFAddressBookFactory asyncAddressBookWithSuccessBlock:onSuccess
+                                              errorCallback:onFailure];
 }
 
--(void)cancel:( BOOL )canceled_
+- (void)cancel:(BOOL)canceled
 {
 }
 
