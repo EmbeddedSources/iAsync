@@ -1,7 +1,5 @@
 #import "ProperIsKindOfClassTest.h"
 
-#import "NSObject+ProperIsKindOfClass.h"
-
 @implementation ProperIsKindOfClassTest
 
 - (void)testNSStringIsKindOfNSObject
@@ -115,14 +113,14 @@
 {
     const void* keys  [] = {@"key1", @"key2"};
     const void* values[] = {@"val1", @"val2"};
-    CFDictionaryRef dictRef = CFDictionaryCreate (
-                                                  NULL,
-                                                  keys,
-                                                  values,
-                                                  2,
-                                                  NULL,
-                                                  NULL
-                                                  );
+    CFDictionaryRef dictRef = CFDictionaryCreate(
+                                                 NULL,
+                                                 keys,
+                                                 values,
+                                                 2,
+                                                 NULL,
+                                                 NULL
+                                                 );
     
     id nsDictionaryClass = [NSDictionary class];
     id nsDictionaryLiteralClass = [@{} class];
@@ -133,8 +131,16 @@
     STAssertFalse([dictionaryRefClass  isKindOfClass:nsDictionaryClass], @"ok");
     STAssertTrue([dictionaryRefClass   isSubclassOfClass:nsDictionaryClass], @"ok");
     
-    STAssertTrue([(__bridge id)dictRef isKindOfClass:nsDictionaryLiteralClass], @"ok");
-    STAssertTrue([dictionaryRefClass   isSubclassOfClass:nsDictionaryLiteralClass], @"ok");
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.f)
+    {
+        STAssertFalse([(__bridge id)dictRef isKindOfClass:nsDictionaryLiteralClass], @"ok");
+        STAssertFalse([dictionaryRefClass   isSubclassOfClass:nsDictionaryLiteralClass], @"ok");
+    }
+    else
+    {
+        STAssertTrue([(__bridge id)dictRef isKindOfClass:nsDictionaryLiteralClass], @"ok");
+        STAssertTrue([dictionaryRefClass   isSubclassOfClass:nsDictionaryLiteralClass], @"ok");
+    }
     STAssertFalse([nsDictionaryClass   isSubclassOfClass:nsDictionaryLiteralClass], @"ok");
     
     STAssertTrue([(__bridge id)dictRef properIsKindOfClass:nsDictionaryClass], @"ok");
