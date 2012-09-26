@@ -2,8 +2,8 @@
 
 @interface JFFMulticastDelegate : NSObject
 
--(void)addDelegate:( id )delegate_;
--(void)removeDelegate:( id )delegate_;
--(void)removeAllDelegates;
+- (void)addDelegate:(id)delegate;
+- (void)removeDelegate:(id)delegate;
+- (void)removeAllDelegates;
 
 @end

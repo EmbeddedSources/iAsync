@@ -4,70 +4,70 @@
 
 @implementation JFFMulticastDelegate
 {
-    JFFMutableAssignArray* _delegates;
+    JFFMutableAssignArray *_delegates;
 }
 
--(JFFMutableAssignArray*)delegates
+- (JFFMutableAssignArray *)delegates
 {
-    if ( !_delegates )
+    if (!self->_delegates)
     {
-        _delegates = [ JFFMutableAssignArray new ];
+        self->_delegates = [JFFMutableAssignArray new];
     }
-    return _delegates;
+    return self->_delegates;
 }
 
--(void)addDelegate:( id )delegate_
+- (void)addDelegate:(id)delegate
 {
-    if ( ![ self.delegates containsObject: delegate_ ] )
+    if (![self.delegates containsObject:delegate])
     {
-        [ self.delegates addObject: delegate_ ];
+        [self.delegates addObject:delegate];
     }
 }
 
--(void)removeDelegate:( id )delegate_
+- (void)removeDelegate:(id)delegate
 {
-    [ _delegates removeObject: delegate_ ];
+    [self->_delegates removeObject:delegate];
 }
 
--(void)removeAllDelegates
+- (void)removeAllDelegates
 {
-    [ _delegates removeAllObjects ];
+    [self->_delegates removeAllObjects];
 }
 
--(void)forwardInvocation:( NSInvocation* )invocation_
+- (void)forwardInvocation:(NSInvocation *)invocation
 {
-    SEL selector_ = [ invocation_ selector ];
-
-    [ _delegates enumerateObjectsUsingBlock: ^void( id delegate_
-                                                   , NSUInteger idx_
-                                                   , BOOL* stop_ )
+    SEL selector = [invocation selector];
+    
+    [self->_delegates enumerateObjectsUsingBlock:^void(id delegate,
+                                                       NSUInteger idx,
+                                                       BOOL *stop)
     {
-        if ( [ delegate_ respondsToSelector: selector_ ] )
+        if ([delegate respondsToSelector:selector])
         {
-            [ invocation_ invokeWithTarget: delegate_ ];
+            [invocation invokeWithTarget:delegate];
         }
-    } ];
+    }];
 }
 
--(NSMethodSignature*)methodSignatureForSelector:( SEL )selector_
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
-    __block NSMethodSignature* result_ = nil;
-    [ _delegates enumerateObjectsUsingBlock: ^void( id delegate_
-                                                   , NSUInteger idx_
-                                                   , BOOL* stop_ )
+    __block NSMethodSignature *result;
+    [self->_delegates enumerateObjectsUsingBlock:^void(id delegate,
+                                                       NSUInteger idx,
+                                                       BOOL *stop)
     {
-        result_ = [ delegate_ methodSignatureForSelector: selector_ ];
-        if( result_ )
-            *stop_ = YES;
-    } ];
-
-    if ( result_ )
-        return result_;
-
-    return [ [ self class ] instanceMethodSignatureForSelector: @selector( doNothing ) ];
+        result = [delegate methodSignatureForSelector:selector];
+        if (result)
+            *stop = YES;
+    }];
+    
+    if (result)
+        return result;
+    
+    return [[self class] instanceMethodSignatureForSelector:@selector(doNothing)];
 }
 
--(void)doNothing
+- (void)doNothing
 {
 }
 

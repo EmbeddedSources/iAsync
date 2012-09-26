@@ -4,7 +4,7 @@
 
 @interface JFFProxyObjectContainer : NSObject
 
-@property ( retain, nonatomic ) id target;
+@property (nonatomic ) id target;
 
 @end
 
@@ -13,19 +13,19 @@
 
 @implementation JFFSingleThreadProxy
 {
-    JFFProxyObjectContainer* _container;
+    JFFProxyObjectContainer *_container;
     dispatch_queue_t _dispatchQueue;
 }
 
 -(void)dealloc
 {
-    JFFProxyObjectContainer* container_ = self->_container;
-    void (^releaseListener_)( void ) = ^void( void )
+    JFFProxyObjectContainer * container = self->_container;
+    void (^releaseListener)(void) = ^void(void)
     {
-        container_.target = nil;
+        container.target = nil;
     };
-    dispatch_async( self->_dispatchQueue, releaseListener_ );
-    dispatch_release( self->_dispatchQueue );
+    dispatch_async(self->_dispatchQueue, releaseListener);
+    dispatch_release(self->_dispatchQueue);
 }
 
 - (id)initWithTargetFactory:(JFFObjectFactory)factory
@@ -33,7 +33,7 @@
 {
     self->_dispatchQueue = dispatchQueue;
     dispatch_retain(self->_dispatchQueue);
-
+    
     factory = [factory copy];
     void (^releaseListener)(void) = ^void(void)
     {
@@ -41,7 +41,7 @@
         self->_container.target = factory();
     };
     safe_dispatch_sync(self->_dispatchQueue, releaseListener);
-
+    
     return self;
 }
 
@@ -64,15 +64,15 @@
     safe_dispatch_sync(self->_dispatchQueue, forwardInvocation);
 }
 
--(NSMethodSignature*)methodSignatureForSelector:( SEL )selector_
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
-    __block id resut_ = nil;
-    void (^methodSignature_)( void ) = ^void( void )
+    __block id resut;
+    void (^methodSignature)(void) = ^void(void)
     {
-        resut_ = [ self->_container.target methodSignatureForSelector: selector_ ];
+        resut = [self->_container.target methodSignatureForSelector:selector];
     };
-    safe_dispatch_sync( self->_dispatchQueue, methodSignature_ );
-    return resut_;
+    safe_dispatch_sync(self->_dispatchQueue, methodSignature);
+    return resut;
 }
 
 @end

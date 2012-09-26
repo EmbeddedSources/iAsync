@@ -11,26 +11,26 @@
 
 @interface JFFAutoRemoveFromDictAssignProxy : JFFAssignProxy
 
-@property ( nonatomic, copy ) JFFSimpleBlock onDeallocBlock;
+@property (nonatomic, copy) JFFSimpleBlock onDeallocBlock;
 
 @end
 
 @implementation JFFAutoRemoveFromDictAssignProxy
 
--(void)onAddToMutableAssignDictionary:( JFFMutableAssignDictionary* )dict_
-                                  key:( id )key_
+- (void)onAddToMutableAssignDictionary:(JFFMutableAssignDictionary *)dict
+                                   key:(id)key
 {
-    __unsafe_unretained JFFMutableAssignDictionary* unretainedDict_ = dict_;
-    self.onDeallocBlock = ^void( void )
+    __unsafe_unretained JFFMutableAssignDictionary *unretainedDict = dict;
+    self.onDeallocBlock = ^void(void)
     {
-        [ unretainedDict_ removeObjectForKey: key_ ];
+        [unretainedDict removeObjectForKey:key];
     };
-    [ self.target addOnDeallocBlock: self.onDeallocBlock ];
+    [self.target addOnDeallocBlock:self.onDeallocBlock];
 }
 
--(void)onRemoveFromMutableAssignDictionary:( JFFMutableAssignDictionary* )array_
+- (void)onRemoveFromMutableAssignDictionary:(JFFMutableAssignDictionary *)array
 {
-    [ self.target removeOnDeallocBlock: self.onDeallocBlock ];
+    [self.target removeOnDeallocBlock:self.onDeallocBlock];
     self.onDeallocBlock = nil;
 }
 
@@ -38,103 +38,104 @@
 
 @interface JFFMutableAssignDictionary ()
 
-@property ( nonatomic ) NSMutableDictionary* mutableDictionary;
+@property (nonatomic) NSMutableDictionary *mutableDictionary;
 
 @end
 
 @implementation JFFMutableAssignDictionary
 
--(void)dealloc
+- (void)dealloc
 {
-    [ self removeAllObjects ];
+    [self removeAllObjects];
 }
 
--(void)removeAllObjects
+- (void)removeAllObjects
 {
-    [ self->_mutableDictionary enumerateKeysAndObjectsUsingBlock: ^( id key
-                                                             , JFFAutoRemoveFromDictAssignProxy* proxy_
-                                                             , BOOL* stop )
+    [self->_mutableDictionary enumerateKeysAndObjectsUsingBlock:^(id key,
+                                                                  JFFAutoRemoveFromDictAssignProxy *proxy,
+                                                                  BOOL *stop)
     {
-        [  proxy_ onRemoveFromMutableAssignDictionary: self ];
+        [proxy onRemoveFromMutableAssignDictionary:self];
     } ];
-    [ self->_mutableDictionary removeAllObjects ];
+    [self->_mutableDictionary removeAllObjects];
 }
 
--(NSMutableDictionary*)mutableDictionary
+- (NSMutableDictionary *)mutableDictionary
 {
-    if ( !self->_mutableDictionary )
+    if (!self->_mutableDictionary)
     {
-        self->_mutableDictionary = [ NSMutableDictionary new ];
+        self->_mutableDictionary = [NSMutableDictionary new];
     }
     return self->_mutableDictionary;
 }
 
--(NSUInteger)count
+- (NSUInteger)count
 {
-    return [ self->_mutableDictionary count ];
+    return [self->_mutableDictionary count];
 }
 
--(id)objectForKey:( id )key_
+- (id)objectForKey:(id)key
 {
-    JFFAutoRemoveFromDictAssignProxy* proxy_ = self->_mutableDictionary[ key_ ];
-    return proxy_.target;
+    JFFAutoRemoveFromDictAssignProxy *proxy = self->_mutableDictionary[key];
+    return proxy.target;
 }
 
--(id)objectForKeyedSubscript:( id )key_
+- (id)objectForKeyedSubscript:(id)key
 {
-    return [ self objectForKey: key_ ];
+    return [self objectForKey:key];
 }
 
--(void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block_
+- (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block
 {
-    [ self->_mutableDictionary enumerateKeysAndObjectsUsingBlock: ^( id key_
-                                                                    , JFFAutoRemoveFromDictAssignProxy* proxy_
-                                                                    , BOOL* stop_ )
+    [self->_mutableDictionary enumerateKeysAndObjectsUsingBlock:^(id key,
+                                                                  JFFAutoRemoveFromDictAssignProxy *proxy,
+                                                                  BOOL *stop)
     {
-        block_( key_, proxy_.target, stop_ );
-    } ];
+        block(key, proxy.target, stop);
+    }];
 }
 
--(NSDictionary*)map:( JFFDictMappingBlock )block_
+//TODO test
+- (NSDictionary*)map:(JFFDictMappingBlock)block
 {
-    NSMutableDictionary* result_ = [ [ NSMutableDictionary alloc ] initWithCapacity: [ self count ] ];
-    [ self enumerateKeysAndObjectsUsingBlock: ^( id key_, id object_, BOOL* stop_ )
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
     {
-        id newObject_ = block_( key_, object_ );
-        if ( newObject_ )
-            result_[ key_ ] = newObject_;
-    } ];
-    return [ result_ copy ];
+        id newObject = block(key, object);
+        NSParameterAssert(newObject);
+        result[key] = newObject;
+    }];
+    return [result copy];
 }
 
--(void)removeObjectForKey:( id )key_
+- (void)removeObjectForKey:(id)key
 {
-    JFFAutoRemoveFromDictAssignProxy* proxy_ = self->_mutableDictionary[ key_ ];
-    [ proxy_ onRemoveFromMutableAssignDictionary: self ];
-    [ self->_mutableDictionary removeObjectForKey: key_ ];
+    JFFAutoRemoveFromDictAssignProxy *proxy = self->_mutableDictionary[key];
+    [proxy onRemoveFromMutableAssignDictionary:self];
+    [self->_mutableDictionary removeObjectForKey:key];
 }
 
--(void)setObject:( id )object_ forKey:( id )key_
+- (void)setObject:(id)object forKey:(id)key
 {
-    id previous_object_ = self[ key_ ];
-    if ( previous_object_ )
+    id previousObject = self[key];
+    if (previousObject)
     {
-        [ self removeObjectForKey: key_ ];
+        [self removeObjectForKey:key];
     }
-
-    JFFAutoRemoveFromDictAssignProxy* proxy_ = [ [ JFFAutoRemoveFromDictAssignProxy alloc ] initWithTarget: object_ ];
-    self.mutableDictionary[ key_ ] = proxy_;
-    [ proxy_ onAddToMutableAssignDictionary: self key: key_ ];
+    
+    JFFAutoRemoveFromDictAssignProxy *proxy = [[JFFAutoRemoveFromDictAssignProxy alloc] initWithTarget:object];
+    self.mutableDictionary[key] = proxy;
+    [proxy onAddToMutableAssignDictionary:self key:key];
 }
 
--(void)setObject:( id )newValue_ forKeyedSubscript:( id )key_
+- (void)setObject:(id)newValue forKeyedSubscript:(id)key
 {
-    [ self setObject: newValue_ forKey: key_ ];
+    [self setObject:newValue forKey:key];
 }
 
--(NSString*)description
+- (NSString *)description
 {
-    return [ self->_mutableDictionary description ];
+    return [self->_mutableDictionary description];
 }
 
 @end

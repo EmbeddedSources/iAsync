@@ -4,19 +4,19 @@
 
 @interface JFFMutableAssignDictionary : NSObject
 
--(void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block_;
--(NSDictionary*)map:( JFFDictMappingBlock )block_;
+- (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block;
+- (NSDictionary *)map:(JFFDictMappingBlock)block;
 
--(NSUInteger)count;
+- (NSUInteger)count;
 
--(id)objectForKey:( id )key_;
--(id)objectForKeyedSubscript:( id )key_;
+- (id)objectForKey:(id)key;
+- (id)objectForKeyedSubscript:(id)key;
 
--(void)removeObjectForKey:( id )key_;
+- (void)removeObjectForKey:(id)key;
 
--(void)setObject:( id )object_ forKey:( id )key_;
--(void)setObject:( id )newValue_ forKeyedSubscript:( id )key_;
+- (void)setObject:(id)object forKey:(id)key;
+- (void)setObject:(id)newValue forKeyedSubscript:(id)key;
 
--(void)removeAllObjects;
+- (void)removeAllObjects;
 
 @end
