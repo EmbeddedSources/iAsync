@@ -67,19 +67,19 @@
     NSIndexSet *indexes = [self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) 
     {
         return predicate(obj, idx);
-    } ];
+    }];
     return [self objectsAtIndexes:indexes];
 }
 
 - (NSArray*)map:(JFFMappingBlock)block
 {
     NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
-
+    
     for (id object in self)
     {
         [result addObject:block(object)];
     }
-
+    
     return [result copy];
 }
 
@@ -119,68 +119,68 @@
     return [result copy];
 }
 
--(NSArray*)mapWithIndex:( JFFMappingWithErrorAndIndexBlock )block_ error:( NSError** )outError_
+- (NSArray *)mapWithIndex:(JFFMappingWithErrorAndIndexBlock)block error:(NSError **)outError
 {
-    __block NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
-
-    [ self enumerateObjectsUsingBlock: ^( id object_, NSUInteger idx_, BOOL* stop_ )
+    __block NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity: [self count]];
+    
+    [self enumerateObjectsUsingBlock: ^(id object, NSUInteger idx, BOOL *stop)
     {
-        id newObject_ = block_( object_, idx_, outError_ );
-        if ( newObject_ )
+        id newObject = block(object, idx, outError);
+        if (newObject)
         {
-            [ result_ addObject: newObject_ ];
+            [result addObject: newObject];
         }
         else
         {
-            result_ = nil;
-            *stop_ = YES;
+            result = nil;
+            *stop  = YES;
         }
     } ];
-  
-    return [ result_ copy ];
+    
+    return [result copy];
 }
 
--(NSDictionary*)mapDict:( JFFMappingDictBlock )block_
+- (NSDictionary *)mapDict:(JFFMappingDictBlock)block
 {
-    NSMutableArray* keys_   = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
-    NSMutableArray* values_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
+    NSMutableArray *keys   = [[NSMutableArray alloc] initWithCapacity:[self count]];
+    NSMutableArray *values = [[NSMutableArray alloc] initWithCapacity:[self count]];
 
-    for ( id object_ in self )
+    for ( id object in self )
     {
-        id key_;
-        id value_;
-        block_( object_, &key_, &value_ );
-        [ keys_   addObject: key_   ];
-        [ values_ addObject: value_ ];
+        id key;
+        id value;
+        block(object, &key, &value);
+        [keys   addObject: key  ];
+        [values addObject: value];
     }
-
-    return [ [ NSDictionary alloc ] initWithObjects: values_
-                                            forKeys: keys_ ];
+    
+    return [[NSDictionary alloc] initWithObjects: values
+                                         forKeys: keys];
 }
 
--(NSArray*)flatten:( JFFFlattenBlock )block_
+- (NSArray *)flatten:(JFFFlattenBlock)block
 {
-    NSMutableArray* result_ = [ NSMutableArray new ];
-
-    [ self each: ^void( id object_ ) 
+    NSMutableArray *result = [NSMutableArray new];
+    
+    [self each:^void(id object)
     {
-        NSArray* objectItems_ = block_( object_ );
-        [ result_ addObjectsFromArray: objectItems_ ]; 
-    } ];
-
-    return [ result_ copy ];
+        NSArray *objectItems = block(object);
+        [result addObjectsFromArray:objectItems];
+    }];
+    
+    return [result copy];
 }
 
 - (NSUInteger)count:(JFFPredicateBlock)predicate
 {
     __block NSUInteger count = 0;
-
+    
     [self each: ^void(id object)
     {
         if (predicate(object))
             ++count;
     }];
-
+    
     return count;
 }
 
@@ -194,54 +194,54 @@
     return nil;
 }
 
--(NSUInteger)firstIndexOfObjectMatch:( JFFPredicateBlock )predicate_
+- (NSUInteger)firstIndexOfObjectMatch:(JFFPredicateBlock)predicate
 {
-    NSUInteger result_ = 0;
-    for ( id object_ in self )
+    NSUInteger result = 0;
+    for (id object in self)
     {
-        if ( predicate_( object_ ) )
-            return result_;
-        ++result_;
+        if (predicate(object))
+            return result;
+        ++result;
     }
     return NSNotFound;
 }
 
--(void)transformWithArray:( NSArray* )other_
-                withBlock:( JFFTransformBlock )block_
+- (void)transformWithArray:(NSArray *)other
+                 withBlock:(JFFTransformBlock)block
 {
-    NSAssert( [ self count ] == [ other_ count ], @"Dimensions must match to perform transform action" );
-
-    NSUInteger arraySize_ = [ self count ];
-    for ( NSUInteger itemIndex_ = 0; itemIndex_ < arraySize_; ++itemIndex_ )
+    NSAssert([self count] == [other count], @"Dimensions must match to perform transform action");
+    
+    NSUInteger arraySize = [self count];
+    for (NSUInteger itemIndex = 0; itemIndex < arraySize; ++itemIndex)
     {
-        block_( self[ itemIndex_ ], other_[ itemIndex_ ] );
+        block(self[itemIndex], other[itemIndex]);
     }
 }
 
--(NSArray*)devideIntoArrayWithSize:( NSUInteger )size_
-                 elementIndexBlock:( JFFElementIndexBlock )block_
+- (NSArray *)devideIntoArrayWithSize:(NSUInteger)size
+                   elementIndexBlock:(JFFElementIndexBlock)block
 {
-    NSParameterAssert( size_ > 0 );
-    NSParameterAssert( block_    );
-
-    NSMutableArray* mResult_ = [ NSMutableArray arrayWithSize: size_
-                                                    producer: ^id( NSUInteger index_ )
+    NSParameterAssert(size > 0);
+    NSParameterAssert(block   );
+    
+    NSMutableArray *mResult = [NSMutableArray arrayWithSize: size
+                                                   producer: ^id(NSUInteger index)
     {
-        return [ NSMutableArray new ];
-    } ];
-
-    [ self enumerateObjectsUsingBlock: ^( id obj_, NSUInteger idx_, BOOL* stop_ )
+        return [NSMutableArray new];
+    }];
+    
+    [self enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop)
     {
-        NSUInteger inserIndex_ = block_( obj_ );
-        [ mResult_[ inserIndex_ ] addObject: obj_ ];
-    } ];
-
-    NSArray* result_ = [ mResult_ map: ^id( id object_ )
+        NSUInteger inserIndex = block(obj);
+        [mResult[inserIndex] addObject: obj];
+    }];
+    
+    NSArray *result = [mResult map: ^id(id object)
     {
-        return [ object_ copy ];
-    } ];
-
-    return result_;
+        return [object copy];
+    }];
+    
+    return result;
 }
 
 @end

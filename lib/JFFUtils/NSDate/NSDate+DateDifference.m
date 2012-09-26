@@ -4,70 +4,70 @@
 
 @implementation NSDate (DateDifference)
 
--(NSString*)dateDifferenceStringFromDate:( NSDate* )fromDate_
+- (NSString *)dateDifferenceStringFromDate:(NSDate *)fromDate
 {
-    NSComparisonResult order_ = [ self compare: fromDate_ ];
-    if ( order_ != NSOrderedDescending )
+    NSComparisonResult order = [self compare: fromDate];
+    if (order != NSOrderedDescending)
     {
-        NSParameterAssert( NO );
+        NSParameterAssert(NO);
         return nil;
     }
-
-    NSCalendar* gregorian_ = [ [ NSCalendar alloc ] initWithCalendarIdentifier: NSGregorianCalendar ];
-    unsigned int unitFlags_ = NSYearCalendarUnit | NSMonthCalendarUnit |
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+    unsigned int unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |
     NSDayCalendarUnit |
     NSHourCalendarUnit | NSMinuteCalendarUnit |
     NSSecondCalendarUnit;
-
-    NSDateComponents* components_ = [ gregorian_ components: unitFlags_
-                                                   fromDate: fromDate_
-                                                     toDate: self
-                                                    options: 0 ];
-
-    NSString* result_;
-    NSUInteger dateComponent_;
-
-    if ( [ components_ year ] )
+    
+    NSDateComponents *components = [gregorian components: unitFlags
+                                                fromDate: fromDate
+                                                  toDate: self
+                                                 options: 0];
+    
+    NSString *result;
+    NSUInteger dateComponent;
+    
+    if ([components year])
     {
-        dateComponent_ = [ components_ year ];
-        result_        = dateComponent_ == 1
-            ? NSLocalizedString( @"YEAR", nil )
-            : NSLocalizedString( @"YEARS", nil );
+        dateComponent = [components year];
+        result        = dateComponent == 1
+        ? NSLocalizedString(@"YEAR", nil)
+        : NSLocalizedString(@"YEARS", nil);
     }
-    else if ( [ components_ month ] )
+    else if ([components month])
     {
-        dateComponent_ = [ components_ month ];
-        result_        = dateComponent_ == 1
-            ? NSLocalizedString( @"MONTH", nil )
-            : NSLocalizedString( @"MONTHS", nil );
+        dateComponent = [components month];
+        result        = dateComponent == 1
+        ? NSLocalizedString(@"MONTH", nil)
+        : NSLocalizedString(@"MONTHS", nil);
     }
-    else if ( [ components_ day ] )
+    else if ([components day])
     {
-        dateComponent_ = [ components_ day ];
-        result_        = dateComponent_ == 1
-            ? NSLocalizedString( @"DAY", nil )
-            : NSLocalizedString( @"DAYS", nil );
+        dateComponent = [components day];
+        result        = dateComponent == 1
+        ? NSLocalizedString(@"DAY", nil)
+        : NSLocalizedString(@"DAYS", nil);
     }
-    else if ( [ components_ minute ] )
+    else if ([components minute])
     {
-        dateComponent_ = [ components_ minute ];
-        result_        = dateComponent_ == 1
-            ? NSLocalizedString( @"MINUTE", nil )
-            : NSLocalizedString( @"MINUTES", nil );
+        dateComponent = [components minute];
+        result        = dateComponent == 1
+        ? NSLocalizedString(@"MINUTE", nil)
+        : NSLocalizedString(@"MINUTES", nil);
     }
     else
     {
-        dateComponent_ = [ components_ second ];
-        dateComponent_ = dateComponent_ < 1 ? 1 : dateComponent_;
-        result_        = dateComponent_ == 1
-            ? NSLocalizedString( @"SECOND", nil )
-            : NSLocalizedString( @"SECONDS", nil );
+        dateComponent = [components second];
+        dateComponent = dateComponent < 1 ? 1 : dateComponent;
+        result        = dateComponent == 1
+        ? NSLocalizedString(@"SECOND", nil)
+        : NSLocalizedString(@"SECONDS", nil);
     }
-
-    NSString* numberStr_ = [ [ NSString alloc ] initWithFormat: @"%d ", dateComponent_ ];
-    result_ = [ numberStr_ stringByAppendingString: result_ ];
-
-    return result_;
+    
+    NSString *numberStr = [[NSString alloc] initWithFormat: @"%d ", dateComponent];
+    result = [numberStr stringByAppendingString: result];
+    
+    return result;
 }
 
 @end
