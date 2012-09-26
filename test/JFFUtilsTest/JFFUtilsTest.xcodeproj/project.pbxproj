@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1B0E89211563FA5200825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E89201563FA5200825E3C /* libc++.dylib */; };
-		1B14143815DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B14143715DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m */; };
 		1B2D8B6C154BF37C00360296 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2D8B69154BF36C00360296 /* libJFFTestTools.a */; };
 		1B2D8B7D154BFA1F00360296 /* JUArrayAdditionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BCF8E514323E7D00E896B3 /* JUArrayAdditionsTest.m */; };
 		1B2D8B7E154BFA2300360296 /* JUMutableArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */; };
@@ -19,18 +18,9 @@
 		1B2D8B84154BFA3200360296 /* JFFAssignProxyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B90263F143EF04400D3B0A0 /* JFFAssignProxyTest.m */; };
 		1B2D8B85154BFA3200360296 /* JFFMulticastDelegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B90269E143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m */; };
 		1B2D8B86154BFA3200360296 /* NSObjectRuntimeExtensionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B80C1DF1442CE5A007D4309 /* NSObjectRuntimeExtensionsTest.m */; };
-		1B2D8B87154BFA3200360296 /* NSObjectInstancesCountTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B80C23F14430049007D4309 /* NSObjectInstancesCountTest.m */; };
 		1B2D8B88154BFA3200360296 /* JFFMutableAssignDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD182401467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m */; };
 		1B2D8B89154BFA3200360296 /* JFFMutableAssignArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B902642143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m */; };
-		1B2D8B8A154BFA3200360296 /* ObjCppCastingTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 534CDFD714A8C8280068F4DF /* ObjCppCastingTest.mm */; };
-		1B2D8B8B154BFA3200360296 /* ClassHierarchyCheckerTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5349A6CB14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm */; };
-		1B2D8B8C154BFA3200360296 /* ObjcDynamicCastTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 532E281814A9E9A300111144 /* ObjcDynamicCastTest.mm */; };
-		1B2D8B8D154BFA3200360296 /* NSObject_IsEqualTwoObjectsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6515B96B152B737F00518996 /* NSObject_IsEqualTwoObjectsTest.m */; };
-		1BC7424F154C0384002F3909 /* NumberOfCharacterFromStringTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC7424E154C0384002F3909 /* NumberOfCharacterFromStringTest.m */; };
 		534CDFDE14A8CAAC0068F4DF /* JMStringHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */; };
-		534CE02B14A8CE7B0068F4DF /* JMParent.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CE02A14A8CE7B0068F4DF /* JMParent.m */; };
-		534CE02E14A8CE8C0068F4DF /* JMChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CE02D14A8CE8C0068F4DF /* JMChild.m */; };
-		655C20E415FE57B200022B11 /* DelegateProxyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C20E315FE57B200022B11 /* DelegateProxyTest.m */; };
 		7E7225DE1588891400210CBE /* DevNullTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7225DD1588891400210CBE /* DevNullTest.m */; };
 		B69483EC1429C88400B8247E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69483EB1429C88400B8247E /* UIKit.framework */; };
 		B69483EE1429C88400B8247E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69483ED1429C88400B8247E /* Foundation.framework */; };
@@ -39,6 +29,8 @@
 		B69483F81429C88400B8247E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B69483F71429C88400B8247E /* main.m */; };
 		B69484031429D3D300B8247E /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69484021429D3D300B8247E /* GHUnitIOS.framework */; };
 		B69484661429E26100B8247E /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B69484651429E24B00B8247E /* libJFFUtils.a */; };
+		CE57FBC21611F2EF00124D90 /* NSMutableSet_StorableSetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57FBC11611F2EF00124D90 /* NSMutableSet_StorableSetTest.m */; };
+		CE57FBE11611FA0900124D90 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CDFD914A8CA290068F4DF /* libstdc++.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,33 +94,21 @@
 
 /* Begin PBXFileReference section */
 		1B0E89201563FA5200825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		1B14143715DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateDifferenceStringFromDateTest.m; sourceTree = "<group>"; };
 		1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStringFormatTest.m; sourceTree = "<group>"; };
 		1B29556E143DCE7F00532BD7 /* JFFSimpleBlockHolderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSimpleBlockHolderTest.m; sourceTree = "<group>"; };
 		1B2D8B61154BF36C00360296 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		1B80C1DF1442CE5A007D4309 /* NSObjectRuntimeExtensionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectRuntimeExtensionsTest.m; sourceTree = "<group>"; };
-		1B80C23F14430049007D4309 /* NSObjectInstancesCountTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectInstancesCountTest.m; sourceTree = "<group>"; };
 		1B9025C3143DDA1200D3B0A0 /* JFFOnDeallocBlockOwnerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFOnDeallocBlockOwnerTest.m; sourceTree = "<group>"; };
 		1B902621143DF1B300D3B0A0 /* NSObject+OwnershipsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+OwnershipsTest.m"; sourceTree = "<group>"; };
 		1B90263F143EF04400D3B0A0 /* JFFAssignProxyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAssignProxyTest.m; sourceTree = "<group>"; };
 		1B902642143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMutableAssignArrayTest.m; sourceTree = "<group>"; };
 		1B90269E143F1C3600D3B0A0 /* JFFMulticastDelegateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMulticastDelegateTest.m; sourceTree = "<group>"; };
-		1BC7424E154C0384002F3909 /* NumberOfCharacterFromStringTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberOfCharacterFromStringTest.m; sourceTree = "<group>"; };
 		1BD182401467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMutableAssignDictionaryTest.m; sourceTree = "<group>"; };
-		532E281814A9E9A300111144 /* ObjcDynamicCastTest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjcDynamicCastTest.mm; sourceTree = "<group>"; };
-		5349A6CB14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ClassHierarchyCheckerTest.mm; sourceTree = "<group>"; };
 		534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUMutableArrayTest.m; sourceTree = "<group>"; };
-		534CDFD714A8C8280068F4DF /* ObjCppCastingTest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjCppCastingTest.mm; sourceTree = "<group>"; };
 		534CDFD914A8CA290068F4DF /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		534CDFDC14A8CAAC0068F4DF /* JMStringHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStringHolder.h; sourceTree = "<group>"; };
 		534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStringHolder.m; sourceTree = "<group>"; };
-		534CE02914A8CE7B0068F4DF /* JMParent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMParent.h; sourceTree = "<group>"; };
-		534CE02A14A8CE7B0068F4DF /* JMParent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMParent.m; sourceTree = "<group>"; };
-		534CE02C14A8CE8C0068F4DF /* JMChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMChild.h; sourceTree = "<group>"; };
-		534CE02D14A8CE8C0068F4DF /* JMChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMChild.m; sourceTree = "<group>"; };
 		53BCF8E514323E7D00E896B3 /* JUArrayAdditionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUArrayAdditionsTest.m; sourceTree = "<group>"; };
-		6515B96B152B737F00518996 /* NSObject_IsEqualTwoObjectsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObject_IsEqualTwoObjectsTest.m; sourceTree = "<group>"; };
-		655C20E315FE57B200022B11 /* DelegateProxyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateProxyTest.m; sourceTree = "<group>"; };
 		7E7225DD1588891400210CBE /* DevNullTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevNullTest.m; sourceTree = "<group>"; };
 		B69483E71429C88400B8247E /* JFFUtilsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFUtilsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B69483EB1429C88400B8247E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -140,6 +120,7 @@
 		B69483F91429C88400B8247E /* JFFUtilsTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFUtilsTest-Prefix.pch"; sourceTree = "<group>"; };
 		B69484021429D3D300B8247E /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../../frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
 		B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
+		CE57FBC11611F2EF00124D90 /* NSMutableSet_StorableSetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableSet_StorableSetTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE57FBE11611FA0900124D90 /* libstdc++.dylib in Frameworks */,
 				1B0E89211563FA5200825E3C /* libc++.dylib in Frameworks */,
 				1B2D8B6C154BF37C00360296 /* libJFFTestTools.a in Frameworks */,
 				B69484661429E26100B8247E /* libJFFUtils.a in Frameworks */,
@@ -182,10 +164,6 @@
 			children = (
 				534CDFDC14A8CAAC0068F4DF /* JMStringHolder.h */,
 				534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */,
-				534CE02914A8CE7B0068F4DF /* JMParent.h */,
-				534CE02A14A8CE7B0068F4DF /* JMParent.m */,
-				534CE02C14A8CE8C0068F4DF /* JMChild.h */,
-				534CE02D14A8CE8C0068F4DF /* JMChild.m */,
 			);
 			path = mock;
 			sourceTree = "<group>";
@@ -256,15 +234,8 @@
 				1B80C1DF1442CE5A007D4309 /* NSObjectRuntimeExtensionsTest.m */,
 				1BD182401467E28B0033BEFF /* JFFMutableAssignDictionaryTest.m */,
 				1B902642143EF92A00D3B0A0 /* JFFMutableAssignArrayTest.m */,
-				534CDFD714A8C8280068F4DF /* ObjCppCastingTest.mm */,
-				5349A6CB14A9D01C008ECCA6 /* ClassHierarchyCheckerTest.mm */,
-				532E281814A9E9A300111144 /* ObjcDynamicCastTest.mm */,
-				6515B96B152B737F00518996 /* NSObject_IsEqualTwoObjectsTest.m */,
-				1BC7424E154C0384002F3909 /* NumberOfCharacterFromStringTest.m */,
 				7E7225DD1588891400210CBE /* DevNullTest.m */,
-				1B14143715DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m */,
-				1B80C23F14430049007D4309 /* NSObjectInstancesCountTest.m */,
-				655C20E315FE57B200022B11 /* DelegateProxyTest.m */,
+				CE57FBC11611F2EF00124D90 /* NSMutableSet_StorableSetTest.m */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
@@ -419,8 +390,6 @@
 			files = (
 				B69483F81429C88400B8247E /* main.m in Sources */,
 				534CDFDE14A8CAAC0068F4DF /* JMStringHolder.m in Sources */,
-				534CE02B14A8CE7B0068F4DF /* JMParent.m in Sources */,
-				534CE02E14A8CE8C0068F4DF /* JMChild.m in Sources */,
 				1B2D8B7D154BFA1F00360296 /* JUArrayAdditionsTest.m in Sources */,
 				1B2D8B7E154BFA2300360296 /* JUMutableArrayTest.m in Sources */,
 				1B2D8B80154BFA2A00360296 /* JFFStringFormatTest.m in Sources */,
@@ -430,17 +399,10 @@
 				1B2D8B84154BFA3200360296 /* JFFAssignProxyTest.m in Sources */,
 				1B2D8B85154BFA3200360296 /* JFFMulticastDelegateTest.m in Sources */,
 				1B2D8B86154BFA3200360296 /* NSObjectRuntimeExtensionsTest.m in Sources */,
-				1B2D8B87154BFA3200360296 /* NSObjectInstancesCountTest.m in Sources */,
 				1B2D8B88154BFA3200360296 /* JFFMutableAssignDictionaryTest.m in Sources */,
 				1B2D8B89154BFA3200360296 /* JFFMutableAssignArrayTest.m in Sources */,
-				1B2D8B8A154BFA3200360296 /* ObjCppCastingTest.mm in Sources */,
-				1B2D8B8B154BFA3200360296 /* ClassHierarchyCheckerTest.mm in Sources */,
-				1B2D8B8C154BFA3200360296 /* ObjcDynamicCastTest.mm in Sources */,
-				1B2D8B8D154BFA3200360296 /* NSObject_IsEqualTwoObjectsTest.m in Sources */,
-				1BC7424F154C0384002F3909 /* NumberOfCharacterFromStringTest.m in Sources */,
 				7E7225DE1588891400210CBE /* DevNullTest.m in Sources */,
-				1B14143815DBD17B00EFB2B8 /* DateDifferenceStringFromDateTest.m in Sources */,
-				655C20E415FE57B200022B11 /* DelegateProxyTest.m in Sources */,
+				CE57FBC21611F2EF00124D90 /* NSMutableSet_StorableSetTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
