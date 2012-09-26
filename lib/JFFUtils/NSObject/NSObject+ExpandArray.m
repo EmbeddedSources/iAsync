@@ -2,7 +2,8 @@
 
 @implementation NSObject (ExpandArray)
 
--(id)expandArray
+//TODO test and remove -[NSObject expandArray]
+- (id)expandArray
 {
     return self;
 }
@@ -11,22 +12,22 @@
 
 @implementation NSArray (ExpandArray)
 
--(id)expandArray
+- (id)expandArray
 {
-    NSMutableArray* result_ = [ NSMutableArray new ];
-    for ( id object_ in self )
+    NSMutableArray *result = [NSMutableArray new];
+    for (id object in self)
     {
-        id newValue_ = [ object_ expandArray ];
-        if ( [ newValue_ isKindOfClass: [ NSArray class ] ] )
+        id newValue = [object expandArray];
+        if ([newValue isKindOfClass: [NSArray class]])
         {
-            [ result_ addObjectsFromArray: newValue_ ];
+            [result addObjectsFromArray: newValue];
         }
         else
         {
-            [ result_ addObject: newValue_ ];
+            [result addObject: newValue];
         }
     }
-    return result_;
+    return result;
 }
 
 @end
