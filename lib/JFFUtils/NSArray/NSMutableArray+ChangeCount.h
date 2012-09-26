@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
-@interface NSMutableArray ( ChangeCount )
+@interface NSMutableArray (ChangeCount)
 
--(void)shrinkToSize:( NSUInteger )new_size_;
+- (void)shrinkToSize:(NSUInteger)newSize;
 
 @end

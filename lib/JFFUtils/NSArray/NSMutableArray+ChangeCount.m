@@ -1,19 +1,19 @@
 #import "NSMutableArray+ChangeCount.h"
 
-@implementation NSMutableArray ( ChangeCount )
+@implementation NSMutableArray (ChangeCount)
 
--(void)shrinkToSize:( NSUInteger )newSize_
+- (void)shrinkToSize:(NSUInteger)newSize
 {
-    NSUInteger count_ = [ self count ];
-
-    if ( count_ <= newSize_ )
+    NSUInteger count = [self count];
+    
+    if (count <= newSize)
     {
         //The size already fits
         return;
     }
-
-    NSRange range_ = { 0, newSize_ };
-    [ self setArray: [ self subarrayWithRange: range_ ] ];
+    
+    NSRange range = {0, newSize};
+    [self setArray:[self subarrayWithRange:range]];
 }
 
 @end

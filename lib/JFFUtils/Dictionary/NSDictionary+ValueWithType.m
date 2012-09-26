@@ -96,19 +96,19 @@
 - (NSNumber *)numberWithBoolForKey:(NSString *)key
 {
     id value = self[key];
-
+    
     if (value == nil || [value isKindOfClass:[NSNumber class]])
     {
         return value;
     }
-
+    
     if ([value isKindOfClass:[NSString class]])
     {
         return @([value boolValue]);
     }
-
+    
     NSLog(@"!!!WARNING!!! Bool value for key %@ not found", key);
-
+    
     return nil;
 }
      
@@ -117,19 +117,19 @@
 - (NSNumber *)numberWithDoubleForKey:(NSString *)key
 {
     id value = self[key];
-
+    
     if (value == nil || [value isKindOfClass:[NSNumber class]])
     {
         return value;
     }
-
+    
     if ([value isKindOfClass:[NSString class]])
     {
         return @([value doubleValue]);
     }
-
-    NSLog(@"!!!WARNING!!! Double value for key \"%@\" not found", key);
-
+    
+//    NSLog(@"!!!WARNING!!! Double value for key \"%@\" not found", key);
+    
     return nil;
 }
 
@@ -138,14 +138,14 @@
 - (NSDictionary *)dictionaryForKey:(NSString *)key
 {
     id value = self[key];
-
+    
     if ([value isKindOfClass:[NSDictionary class]])
     {
         return value;
     }
-
-    NSLog(@"!!!WARNING!!! Dictionary for key \"%@\" not found", key);
-
+    
+//    NSLog(@"!!!WARNING!!! Dictionary for key \"%@\" not found", key);
+    
     return nil;
 }
      
@@ -154,14 +154,14 @@
 - (NSArray *)arrayForKey:(NSString *)key
 {
     id value = self[key];
-
+    
     if ([value isKindOfClass:[NSArray class]])
     {
         return value;
     }
-
+    
     NSLog(@"!!!WARNING!!! Array for key \"%@\" not found", key);
-
+    
     return nil;
 }
 
