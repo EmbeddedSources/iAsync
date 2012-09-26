@@ -588,7 +588,6 @@
     }
 }
 
-
 ////// Null value tests /////
 
 - (void)testNullValueMatch
@@ -648,6 +647,60 @@
         STAssertFalse(result, @"NO expected");
         STAssertEqualObjects(error.jsonObject , @[], @"ok");
         STAssertEqualObjects(error.jsonPattern, @{}, @"ok");
+    }
+}
+
+- (void)testValidAnyNSObjectSubclass
+{
+    {
+        JFFJsonValidationError *error;
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@{}
+                                                 withJsonPattern:[NSObject class]
+                                                           error:&error];
+        
+        STAssertTrue(result, @"NO expected");
+        STAssertNil(error, @"ok");
+    }
+    {
+        JFFJsonValidationError *error;
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@[]
+                                                 withJsonPattern:[NSObject class]
+                                                           error:&error];
+        
+        STAssertTrue(result, @"NO expected");
+        STAssertNil(error, @"ok");
+    }
+    {
+        JFFJsonValidationError *error;
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@1
+                                                 withJsonPattern:[NSObject class]
+                                                           error:&error];
+        
+        STAssertTrue(result, @"NO expected");
+        STAssertNil(error, @"ok");
+    }
+    {
+        JFFJsonValidationError *error;
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:@"1"
+                                                 withJsonPattern:[NSObject class]
+                                                           error:&error];
+        
+        STAssertTrue(result, @"NO expected");
+        STAssertNil(error, @"ok");
+    }
+    {
+        JFFJsonValidationError *error;
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNull null]
+                                                 withJsonPattern:[NSObject class]
+                                                           error:&error];
+        
+        STAssertTrue(result, @"NO expected");
+        STAssertNil(error, @"ok");
     }
 }
 
