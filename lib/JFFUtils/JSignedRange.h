@@ -9,6 +9,6 @@ typedef struct
    NSInteger length;
 } JSignedRange;
 
-JSignedRange JSignedRangeMake( NSInteger location_, NSInteger length_ );
+JSignedRange JSignedRangeMake(NSInteger location, NSInteger length);
 
 #endif //JFFUTILS_JSIGNED_RANGE_H_INCLUDED

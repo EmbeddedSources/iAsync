@@ -1,9 +1,10 @@
 #include "JSignedRange.h"
 
-JSignedRange JSignedRangeMake( NSInteger location_, NSInteger length_ )
+//TODO remove JSignedRangeMake
+JSignedRange JSignedRangeMake(NSInteger location, NSInteger length)
 {
-    JSignedRange range_;
-    range_.location = location_;
-    range_.length   = length_;
-    return range_;
+   JSignedRange range;
+   range.location = location;
+   range.length   = length;
+   return range;
 }
