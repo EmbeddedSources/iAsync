@@ -3,51 +3,36 @@
 #import "NSObject+Ownerships.h"
 #import "JFFOnDeallocBlockOwner.h"
 
-@interface NSObject (OnDeallocBlockPrivate)
-
--(BOOL)removeOnDeallocBlockBlock:( void(^)( void ) )block_ fromArray:( NSMutableArray* )array_;
-
-@end
-
-@implementation NSObject (OnDeallocBlockPrivate)
-
--(BOOL)removeOnDeallocBlockBlock:( void(^)( void ) )block_ fromArray:( NSMutableArray* )array_
-{
-    return NO;
-}
-
-@end
-
 @implementation JFFOnDeallocBlockOwner (OnDeallocBlockPrivate)
 
--(BOOL)removeOnDeallocBlockBlock:( void(^)( void ) )block_ fromArray:( NSMutableArray* )array_
+- (BOOL)cantainsOnDeallocBlock:(void(^)(void))block
 {
-    if ( self.block == block_ )
-    {
-        self.block = nil;
-        [ array_ removeObject: self ];
-        return YES;
-    }
-    return NO;
+    return self.block == block;
 }
 
 @end
 
 @implementation NSObject (OnDeallocBlock)
 
--(void)addOnDeallocBlock:( void(^)( void ) )block_
+- (void)addOnDeallocBlock:(void(^)(void))block
 {
-    JFFOnDeallocBlockOwner* owner_ = [ [ JFFOnDeallocBlockOwner alloc ] initWithBlock: block_ ];
-    [ self.ownerships addObject: owner_ ];
+    JFFOnDeallocBlockOwner *owner = [[JFFOnDeallocBlockOwner alloc] initWithBlock:block];
+    [self addOwnedObject:owner];
 }
 
--(void)removeOnDeallocBlock:( void(^)( void ) )block_
+- (void)removeOnDeallocBlock:(void(^)(void))block
 {
-    NSArray* ownerships_ = [ self.ownerships copy ];
-    for ( id object_ in ownerships_ )
-    {
-        if ( [ object_ removeOnDeallocBlockBlock: block_ fromArray: self.ownerships ] )
-            break;
+    @autoreleasepool {
+        JFFOnDeallocBlockOwner *objectToRemove = [self firstOwnedObjectMatch:^BOOL(void(^object)(void)) {
+            if ([object isKindOfClass:[JFFOnDeallocBlockOwner class]])
+                 return [object cantainsOnDeallocBlock:block];
+            return NO;
+        }];
+        
+        if (objectToRemove) {
+            objectToRemove.block = nil;
+            [self removeOwnedObject:objectToRemove];
+        }
     }
 }
 
