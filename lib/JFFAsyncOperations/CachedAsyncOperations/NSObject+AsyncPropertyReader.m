@@ -16,12 +16,12 @@
 
 @implementation JFFCachePropertyExtractor
 
--(id)property
+- (id)property
 {
     return nil;
 }
 
--(void)setProperty:( id )propertyPath_
+- (void)setProperty:(id)propertyPath
 {
 }
 
@@ -29,7 +29,7 @@
 
 @interface NSObject (PrivateAsyncPropertyReader)
 
--(BOOL)hasAsyncPropertyDelegates;
+- (BOOL)hasAsyncPropertyDelegates;
 
 @end
 
@@ -38,20 +38,18 @@
 
 @implementation NSDictionary (AsyncPropertyReader)
 
--(BOOL)hasAsyncPropertyDelegates
+- (BOOL)hasAsyncPropertyDelegates
 {
-    __block BOOL result_ = NO;
-
-    [ self enumerateKeysAndObjectsUsingBlock: ^void( id key, id value_, BOOL* stop )
-    {
-        if ( [ value_ hasAsyncPropertyDelegates ] )
-        {
-            *stop = YES;
-            result_ = YES;
+    __block BOOL result = NO;
+    
+    [self enumerateKeysAndObjectsUsingBlock:^void(id key, id value, BOOL *stop) {
+        if ([value hasAsyncPropertyDelegates]) {
+            *stop  = YES;
+            result = YES;
         }
-    } ];
-
-    return result_;
+    }];
+    
+    return result;
 }
 
 @end
@@ -61,61 +59,56 @@
 
 @implementation JFFObjectRelatedPropertyData (AsyncPropertyReader)
 
--(BOOL)hasAsyncPropertyDelegates
+- (BOOL)hasAsyncPropertyDelegates
 {
-    return [ self.delegates count ] > 0;
+    return [self.delegates hasElements];
 }
 
 @end
 
-static void clearDelegates( NSArray* delegates_ )
+static void clearDelegates(NSArray *delegates)
 {
-    [ delegates_ each: ^void( id obj_ )
-    {
-        JFFCallbacksBlocksHolder* callback_ = obj_;
-        callback_.didLoadDataBlock = nil;
-        callback_.onCancelBlock = nil;
-        callback_.onProgressBlock = nil;
-    } ];
+    [delegates each:^void(id obj) {
+        JFFCallbacksBlocksHolder *callback = obj;
+        callback.didLoadDataBlock = nil;
+        callback.onCancelBlock    = nil;
+        callback.onProgressBlock  = nil;
+    }];
 }
 
-static void clearDataForPropertyExtractor( JFFPropertyExtractor* property_extractor_ )
+static void clearDataForPropertyExtractor(JFFPropertyExtractor *propertyExtractor)
 {
-    clearDelegates( property_extractor_.delegates );
-    property_extractor_.delegates = nil;
-    property_extractor_.cancelBlock = nil;
-    property_extractor_.didFinishBlock = nil;
-    property_extractor_.asyncLoader = nil;
-
-    [ property_extractor_ clearData ];
+    clearDelegates(propertyExtractor.delegates);
+    propertyExtractor.delegates      = nil;
+    propertyExtractor.cancelBlock    = nil;
+    propertyExtractor.didFinishBlock = nil;
+    propertyExtractor.asyncLoader    = nil;
+    
+    [propertyExtractor clearData];
 }
 
-static JFFCancelAsyncOperation cancelBlock( JFFPropertyExtractor* property_extractor_
-                                           , JFFCallbacksBlocksHolder* callbacks_ )
+static JFFCancelAsyncOperation cancelBlock(JFFPropertyExtractor *propertyExtractor,
+                                           JFFCallbacksBlocksHolder *callbacks)
 {
-    return ^void( BOOL cancelOperation_ )
-    {
-        JFFCancelAsyncOperation cancel_ = property_extractor_.cancelBlock;
-        if ( !cancel_ )
+    return ^void(BOOL cancelOperation) {
+        JFFCancelAsyncOperation cancel = propertyExtractor.cancelBlock;
+        if (!cancel)
             return;
-
-        cancel_ = [ cancel_ copy ];
-
-        if ( cancelOperation_ )
-        {
-            cancel_( YES );
-            clearDataForPropertyExtractor( property_extractor_ );
-        }
-        else
-        {
-            [ property_extractor_.delegates removeObject: callbacks_ ];
-            callbacks_.didLoadDataBlock = nil;
-            callbacks_.onProgressBlock = nil;
-
-            if ( callbacks_.onCancelBlock )
-                callbacks_.onCancelBlock( NO );
-
-            callbacks_.onCancelBlock = nil;
+        
+        cancel = [cancel copy];
+        
+        if (cancelOperation) {
+            cancel( YES );
+            clearDataForPropertyExtractor(propertyExtractor);
+        } else {
+            [propertyExtractor.delegates removeObject:callbacks];
+            callbacks.didLoadDataBlock = nil;
+            callbacks.onProgressBlock  = nil;
+            
+            if (callbacks.onCancelBlock)
+                callbacks.onCancelBlock(NO);
+            
+            callbacks.onCancelBlock = nil;
         }
     };
 }
@@ -342,10 +335,10 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
         return [ JFFCachePropertyExtractor new ];
     };
 
-    return [ self asyncOperationForPropertyWithPath: propertyPath_
-                      propertyExtractorFactoryBlock: factory_
-                                     asyncOperation: asyncOperation_
-                             didFinishLoadDataBlock: nil ];
+    return [self asyncOperationForPropertyWithPath:propertyPath_
+                     propertyExtractorFactoryBlock:factory_
+                                    asyncOperation:asyncOperation_
+                            didFinishLoadDataBlock:nil];
 }
 
 @end
