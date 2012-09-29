@@ -4,38 +4,39 @@
 
 @interface JFFAlertView : NSObject
 
-@property ( nonatomic ) BOOL dismissBeforeEnterBackground;
-@property ( nonatomic, copy ) JFFSimpleBlock didPresentHandler;
-@property ( nonatomic, readonly ) BOOL isOnScreen;
+@property (nonatomic) BOOL dismissBeforeEnterBackground;
+@property (nonatomic, copy) JFFSimpleBlock didPresentHandler;
+@property (nonatomic, readonly) BOOL isOnScreen;
 
 
 //cancelButtonTitle, otherButtonTitles - pass NSString(button title) or JFFAlertButton
-+(id)alertWithTitle:( NSString* )title_
-            message:( NSString* )message_
-  cancelButtonTitle:( id )cancelButtonTitle_
-  otherButtonTitles:( id )otherButtonTitles_, ... NS_REQUIRES_NIL_TERMINATION;
++ (id)alertWithTitle:(NSString *)title
+             message:(NSString *)message
+   cancelButtonTitle:(id)cancelButtonTitle
+   otherButtonTitles:(id)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 //pass NSString(button title) or JFFAlertButton
--(void)addAlertButton:( id )alertButton_;
+- (void)addAlertButton:(id)alertButton;
 
--(void)addAlertButtonWithTitle:( NSString* )title_
-                        action:( JFFSimpleBlock )action_;
+- (void)addAlertButtonWithTitle:(NSString *)title
+                         action:(JFFSimpleBlock)action;
 
-+(id)waitAlertWithTitle:( NSString* )title_
-           cancelButton:( JFFAlertButton* )button_;
++ (id)waitAlertWithTitle:(NSString *)title
+            cancelButton:(JFFAlertButton *)button;
 
-+(void)dismissAllAlertViews;
++ (void)dismissAllAlertViews;
 
-+(void)showAlertWithTitle:( NSString* )title_
-              description:( NSString* )description_;
++ (void)showAlertWithTitle:(NSString *)title
+               description:(NSString *)description;
 
-+(void)showErrorWithDescription:( NSString* )description_;
-+(void)showExclusiveErrorWithDescription:( NSString* )description_;
-+(void)showInformationWithDescription:( NSString* )description_;
++ (void)showErrorWithDescription:(NSString *)description;
++ (void)showExclusiveErrorWithDescription:(NSString *)description;
++ (void)showInformationWithDescription:(NSString *)description;
++ (void)showExclusiveAlertWithDescription:(NSString *)description;
 
 //If call several times, only first alert will be showed
--(void)exclusiveShow;
--(void)show;
--(void)forceDismiss;
+- (void)exclusiveShow;
+- (void)show;
+- (void)forceDismiss;
 
 @end
