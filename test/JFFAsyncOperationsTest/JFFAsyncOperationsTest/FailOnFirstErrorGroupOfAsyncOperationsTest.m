@@ -21,13 +21,13 @@
 {
     @autoreleasepool
     {
-        JFFAsyncOperationManager* firstLoader_  = [ JFFAsyncOperationManager new ];
-        JFFAsyncOperationManager* secondLoader_ = [ JFFAsyncOperationManager new ];
-
-        JFFAsyncOperation loader_ = failOnFirstErrorGroupOfAsyncOperations( firstLoader_.loader
-                                                                           , secondLoader_.loader
-                                                                           , nil );
-
+        JFFAsyncOperationManager *firstLoader  = [JFFAsyncOperationManager new];
+        JFFAsyncOperationManager *secondLoader = [JFFAsyncOperationManager new];
+        
+        JFFAsyncOperation loader_ = failOnFirstErrorGroupOfAsyncOperations(firstLoader.loader,
+                                                                           secondLoader.loader,
+                                                                           nil );
+        
         __block BOOL groupLoaderFinished_ = NO;
         loader_( nil, nil, ^( id result_, NSError* error_ )
         {
@@ -36,21 +36,21 @@
                 groupLoaderFinished_ = YES;
             }
         } );
-
-        GHAssertFalse( firstLoader_.finished, @"First loader not finished yet" );
-        GHAssertFalse( secondLoader_.finished, @"Second loader not finished yet" );
+        
+        GHAssertFalse( firstLoader.finished, @"First loader not finished yet" );
+        GHAssertFalse( secondLoader.finished, @"Second loader not finished yet" );
         GHAssertFalse( groupLoaderFinished_, @"Group loader not finished yet" );
 
-        secondLoader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+        secondLoader.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
 
-        GHAssertTrue( secondLoader_.finished, @"Second loader finished already" );
-        GHAssertFalse( firstLoader_.finished, @"First loader not finished yet" );
+        GHAssertTrue( secondLoader.finished, @"Second loader finished already" );
+        GHAssertFalse( firstLoader.finished, @"First loader not finished yet" );
         GHAssertFalse( groupLoaderFinished_, @"Group loader finished already" );
 
-        firstLoader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+        firstLoader.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
 
-        GHAssertTrue( firstLoader_.finished, @"First loader finished already" );
-        GHAssertTrue( secondLoader_.finished, @"Second loader not finished yet" );
+        GHAssertTrue( firstLoader.finished, @"First loader finished already" );
+        GHAssertTrue( secondLoader.finished, @"Second loader not finished yet" );
         GHAssertTrue( groupLoaderFinished_, @"Group loader finished already" );
 
     }
