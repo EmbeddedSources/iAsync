@@ -23,8 +23,7 @@
 {
     NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:size];
 
-    for ( NSUInteger index = 0; index < size; ++index )
-    {
+    for ( NSUInteger index = 0; index < size; ++index ) {
         [result addObject:block(index)];
     }
 
@@ -36,8 +35,7 @@
 {
     NSMutableArray* result = [[NSMutableArray alloc]initWithCapacity:capacity];
 
-    for ( NSUInteger index = 0; index < capacity; ++index )
-    {
+    for ( NSUInteger index = 0; index < capacity; ++index ) {
         id object = block(index);
         if (object)
             [result addObject:object];
@@ -48,24 +46,21 @@
 
 - (void)each:(JFFActionBlock)block
 {
-    [self enumerateObjectsUsingBlock:^void(id obj, NSUInteger idx, BOOL *stop)
-    {
+    [self enumerateObjectsUsingBlock:^void(id obj, NSUInteger idx, BOOL *stop) {
         block(obj);
     }];
 }
 
 - (NSArray*)select:(JFFPredicateBlock)predicate
 {
-    return [self selectWithIndex:^(id obj, NSUInteger idx)
-    {
+    return [self selectWithIndex:^(id obj, NSUInteger idx) {
         return predicate(obj);
     }];
 }
 
 - (NSArray*)selectWithIndex:(JFFPredicateWithIndexBlock)predicate
 {
-    NSIndexSet *indexes = [self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) 
-    {
+    NSIndexSet *indexes = [self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         return predicate(obj, idx);
     }];
     return [self objectsAtIndexes:indexes];
@@ -75,8 +70,7 @@
 {
     NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
     
-    for (id object in self)
-    {
+    for (id object in self) {
         [result addObject:block(object)];
     }
     
@@ -87,15 +81,11 @@
 {
     NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
 
-    for (id object in self)
-    {
+    for (id object in self) {
         id newObject = block(object, outError);
-        if (newObject)
-        {
+        if (newObject) {
             [result addObject:newObject];
-        }
-        else
-        {
+        } else {
             return nil;
         }
     }
@@ -107,11 +97,9 @@
 {
     NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
 
-    for (id object in self)
-    {
+    for (id object in self) {
         id newObject = block(object);
-        if (newObject)
-        {
+        if (newObject) {
             [result addObject:newObject];
         }
     }
@@ -123,15 +111,11 @@
 {
     __block NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity: [self count]];
     
-    [self enumerateObjectsUsingBlock: ^(id object, NSUInteger idx, BOOL *stop)
-    {
+    [self enumerateObjectsUsingBlock: ^(id object, NSUInteger idx, BOOL *stop) {
         id newObject = block(object, idx, outError);
-        if (newObject)
-        {
+        if (newObject) {
             [result addObject: newObject];
-        }
-        else
-        {
+        } else {
             result = nil;
             *stop  = YES;
         }
@@ -145,8 +129,7 @@
     NSMutableArray *keys   = [[NSMutableArray alloc] initWithCapacity:[self count]];
     NSMutableArray *values = [[NSMutableArray alloc] initWithCapacity:[self count]];
 
-    for ( id object in self )
-    {
+    for ( id object in self ) {
         id key;
         id value;
         block(object, &key, &value);
@@ -175,8 +158,7 @@
 {
     __block NSUInteger count = 0;
     
-    [self each: ^void(id object)
-    {
+    [self each: ^void(id object) {
         if (predicate(object))
             ++count;
     }];
@@ -186,8 +168,7 @@
 
 - (id)firstMatch:(JFFPredicateBlock)predicate
 {
-    for (id object in self)
-    {
+    for (id object in self) {
         if (predicate(object))
             return object;
     }
@@ -197,8 +178,7 @@
 - (NSUInteger)firstIndexOfObjectMatch:(JFFPredicateBlock)predicate
 {
     NSUInteger result = 0;
-    for (id object in self)
-    {
+    for (id object in self) {
         if (predicate(object))
             return result;
         ++result;
@@ -212,8 +192,7 @@
     NSAssert([self count] == [other count], @"Dimensions must match to perform transform action");
     
     NSUInteger arraySize = [self count];
-    for (NSUInteger itemIndex = 0; itemIndex < arraySize; ++itemIndex)
-    {
+    for (NSUInteger itemIndex = 0; itemIndex < arraySize; ++itemIndex) {
         block(self[itemIndex], other[itemIndex]);
     }
 }
@@ -224,20 +203,17 @@
     NSParameterAssert(size > 0);
     NSParameterAssert(block   );
     
-    NSMutableArray *mResult = [NSMutableArray arrayWithSize: size
-                                                   producer: ^id(NSUInteger index)
-    {
+    NSMutableArray *mResult = [NSMutableArray arrayWithSize:size
+                                                   producer:^id(NSUInteger index) {
         return [NSMutableArray new];
     }];
     
-    [self enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop)
-    {
+    [self enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
         NSUInteger inserIndex = block(obj);
         [mResult[inserIndex] addObject: obj];
     }];
     
-    NSArray *result = [mResult map: ^id(id object)
-    {
+    NSArray *result = [mResult map: ^id(id object) {
         return [object copy];
     }];
     

@@ -2,21 +2,20 @@
 
 @implementation JFFSimpleBlockHolder
 
--(void)performBlockOnce
+- (void)performBlockOnce
 {
-    if ( !self.simpleBlock )
+    if (!self->_simpleBlock)
         return;
 
-    JFFSimpleBlock block_ = self.simpleBlock;
-    self.simpleBlock = nil;
-    block_();
+    JFFSimpleBlock block = self.simpleBlock;
+    self->_simpleBlock = nil;
+    block();
 }
 
--(JFFSimpleBlock)onceSimpleBlock
+- (JFFSimpleBlock)onceSimpleBlock
 {
-    return ^void( void )
-    {
-        [ self performBlockOnce ];
+    return ^void( void ) {
+        [self performBlockOnce];
     };
 }
 
