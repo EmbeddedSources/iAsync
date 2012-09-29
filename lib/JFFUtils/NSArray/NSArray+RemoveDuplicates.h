@@ -3,11 +3,11 @@
 
 @interface NSArray( RemoveDuplicates )
 
--(NSArray*)arrayByRemovingDuplicates; //uses @selector(isEual:)
--(NSArray*)arrayByRemovingDuplicatesUsingIsEqualBlock:( JFFEqualityCheckerBlock )predicate_;
+- (NSArray *)arrayByRemovingDuplicates; //uses @selector(isEual:)
+- (NSArray *)arrayByRemovingDuplicatesUsingIsEqualBlock:(JFFEqualityCheckerBlock)predicate;
 
 //Same methods using functional programming notation
--(NSArray*)unique; //uses @selector(isEual:)
--(NSArray*)uniqueBy:( JFFEqualityCheckerBlock )predicate_;
+- (NSArray *)unique; //uses @selector(isEual:)
+- (NSArray *)uniqueBy:(JFFEqualityCheckerBlock)predicate;
 
 @end
