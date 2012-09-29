@@ -5,12 +5,10 @@
 NSTimeInterval performTimeCalculator(JFFSimpleBlock block, NSUInteger times)
 {
     NSTimeInterval result = DBL_MAX;
-
-    for (NSUInteger index = 0; index < times; ++index)
-    {
+    
+    for (NSUInteger index = 0; index < times; ++index) {
         NSDate* startDate = [NSDate new];
-        @autoreleasepool
-        {
+        @autoreleasepool {
             block();
         }
         NSDate* endDate = [NSDate new];

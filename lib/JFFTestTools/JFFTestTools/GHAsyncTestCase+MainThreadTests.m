@@ -12,8 +12,7 @@
     block = [block copy];
     void (^autoreleaseBlock)() = ^void()
     {
-        @autoreleasepool
-        {
+        @autoreleasepool {
             void (^didFinishCallback)(void) = ^void()
             {
                 objc_msgSend(self,
@@ -21,15 +20,15 @@
                              kGHUnitWaitStatusSuccess,
                              selector);
             };
-
+            
             block([didFinishCallback copy]);
         }
     };
-
+    
     objc_msgSend(self, @selector(prepare), nil);
-
+    
     dispatch_async(dispatch_get_main_queue(), autoreleaseBlock);
-
+    
     objc_msgSend(self,
                  @selector(waitForStatus:timeout:),
                  kGHUnitWaitStatusSuccess,

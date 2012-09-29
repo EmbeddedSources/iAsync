@@ -1,6 +1,7 @@
 //can not be under arc
 #import "NSObject+InstancesCount.h"
 
+#import <JFFUtils/Blocks/JFFOnDeallocBlockOwner.h>
 #import <JFFUtils/NSObject/NSObject+RuntimeExtensions.h>
 #import <JFFUtils/NSObject/NSObject+OnDeallocBlock.h>
 #import <JFFUtils/JFFClangLiterals.h>
@@ -13,82 +14,78 @@
 
 @implementation JFFNSObjectInstancesCounter
 
--(void)dealloc
+- (void)dealloc
 {
-    [ self->_instancesNumberByClassName release ];
-
-    [ super dealloc ];
+    [self->_instancesNumberByClassName release];
+    
+    [super dealloc];
 }
 
--(id)init
+- (id)init
 {
     self = [ super init ];
-
-    if ( self )
-    {
-        self->_instancesNumberByClassName = [ NSMutableDictionary new ];
+    
+    if (self) {
+        self->_instancesNumberByClassName = [NSMutableDictionary new];
     }
-
+    
     return self;
 }
 
-+(id)sharedObjectInstancesCounter
++ (id)sharedObjectInstancesCounter
 {
-    static dispatch_once_t once_;
-    static id instance_;
-    dispatch_once( &once_, ^{ instance_ = [ [ self class ] new ]; } );
-    return instance_;
+    static dispatch_once_t once;
+    static id instance;
+    dispatch_once(&once, ^{instance = [[self class] new];});
+    return instance;
 }
 
--(void)incrementInstancesCountForClass:( Class )class_
+- (void)incrementInstancesCountForClass:(Class)class
 {
-    @synchronized( self )
-    {
-        NSString* className_ = NSStringFromClass( class_ );
-        NSNumber* number_ = self->_instancesNumberByClassName[ className_ ];
-        NSUInteger instancesCount_  = [ number_ unsignedIntValue ];
-        NSNumber* instancesCountNum_ = @( ++instancesCount_ );
-        self->_instancesNumberByClassName[ className_ ] = instancesCountNum_;
+    @synchronized(self) {
+        NSString *className = NSStringFromClass(class);
+        NSNumber *number    = self->_instancesNumberByClassName[className];
+        NSUInteger instancesCount = [number unsignedIntValue];
+        NSNumber* instancesCountNum = @(++instancesCount);
+        self->_instancesNumberByClassName[className] = instancesCountNum;
     }
 }
 
--(void)decrementInstancesCountForClass:( Class )class_
+- (void)decrementInstancesCountForClass:(Class)class
 {
-    @synchronized( self )
-    {
-        NSString* className_ = NSStringFromClass( class_ );
-        NSNumber* number_ = self->_instancesNumberByClassName[ className_ ];
-        NSUInteger instancesCount_  = [ number_ unsignedIntValue ];
-        NSNumber* instancesCountNum_ = @( --instancesCount_ );
-        self->_instancesNumberByClassName[ className_ ] = instancesCountNum_;
+    @synchronized(self) {
+        NSString *className = NSStringFromClass(class);
+        NSNumber *number    = self->_instancesNumberByClassName[className];
+        NSUInteger instancesCount   = [number unsignedIntValue];
+        NSNumber* instancesCountNum = @(--instancesCount);
+        self->_instancesNumberByClassName[className] = instancesCountNum;
     }
 }
 
-+(void)incrementInstancesCountForClass:( Class )class_
++ (void)incrementInstancesCountForClass:(Class)class
 {
-    [ [ JFFNSObjectInstancesCounter sharedObjectInstancesCounter ] incrementInstancesCountForClass: class_ ];
+    [[JFFNSObjectInstancesCounter sharedObjectInstancesCounter] incrementInstancesCountForClass:class];
 }
 
-+(void)decrementInstancesCountForClass:( Class )class_
++ (void)decrementInstancesCountForClass:(Class)class
 {
-    [ [ JFFNSObjectInstancesCounter sharedObjectInstancesCounter ] decrementInstancesCountForClass: class_ ];
+    [[JFFNSObjectInstancesCounter sharedObjectInstancesCounter] decrementInstancesCountForClass:class];
 }
 
-+(id)instancesCounterAllocatorForClass:( Class )class_
-                         nativeAllocor:( id (^)( void ) )native_
++ (id)instancesCounterAllocatorForClass:(Class)class
+                          nativeAllocor:(id(^)(void))native
 {
-    [ JFFNSObjectInstancesCounter incrementInstancesCountForClass: class_ ];
-    NSObject* result_ = native_();
-    [ result_ addOnDeallocBlock: ^void( void )
-    {
-        [ JFFNSObjectInstancesCounter decrementInstancesCountForClass: class_ ];
-    } ];
-    return result_;
+    [JFFNSObjectInstancesCounter incrementInstancesCountForClass:class];
+    NSObject *result = native();
+    [result addOnDeallocBlock:^void(void) {
+        [JFFNSObjectInstancesCounter decrementInstancesCountForClass:class];
+    }];
+    return result;
 }
 
-+(id)allocWithZoneHook:( NSZone* )zone_
++ (id)allocWithZoneHook:(NSZone *)zone
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
@@ -103,11 +100,11 @@
 
 +(id)alloCWithZoneToAdding:( NSZone* )zone_
 {
-    return [ JFFNSObjectInstancesCounter instancesCounterAllocatorForClass: [ self class ]
-                                                             nativeAllocor: ^id( void )
+    return [JFFNSObjectInstancesCounter instancesCounterAllocatorForClass:[self class]
+                                                            nativeAllocor:^id(void)
     {
-        return [ super allocWithZone: zone_ ];
-    } ];
+        return [super allocWithZone:zone_];
+    }];
 }
 
 -(void)enableInstancesCountingForClass:( Class )class_
@@ -121,17 +118,17 @@
             self->_instancesNumberByClassName[ className_ ] = @0;
 
             {
-                BOOL methodAdded_ = [ [ self class ] addClassMethodIfNeedWithSelector: @selector( alloCWithZoneToAdding: )
-                                                                              toClass: class_
-                                                                    newMethodSelector: @selector( allocWithZone: ) ];
+                BOOL methodAdded_ = [ [ self class ] addClassMethodIfNeedWithSelector:@selector(alloCWithZoneToAdding:)
+                                                                              toClass:class_
+                                                                    newMethodSelector:@selector(allocWithZone:)];
 
-                if ( !methodAdded_ )
+                if (!methodAdded_)
                 {
                     // create name allocWithZoneHook dynamicaly and allocWithZonePrototype use block instead
-                    [ [ self class ] hookClassMethodForClass: class_
-                                                withSelector: @selector( allocWithZone: )
-                                     prototypeMethodSelector: @selector( alloCWithZonePrototype: )
-                                          hookMethodSelector: @selector( allocWithZoneHook: ) ];
+                    [[self class] hookClassMethodForClass:class_
+                                             withSelector:@selector(allocWithZone:)
+                                  prototypeMethodSelector:@selector(alloCWithZonePrototype:)
+                                       hookMethodSelector:@selector(allocWithZoneHook:)];
                 }
             }
         }
@@ -146,6 +143,15 @@
         NSNumber* number_ = self->_instancesNumberByClassName[ className_ ];
         return [ number_ unsignedIntValue ];
     }
+}
+
+@end
+
+@implementation JFFOnDeallocBlockOwner (InstancesCount)
+
++(void)enableInstancesCounting
+{
+    NSAssert(NO, @"Can not enable enstances counting for this class");
 }
 
 @end
