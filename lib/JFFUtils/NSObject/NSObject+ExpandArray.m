@@ -1,30 +1,24 @@
 #import "NSObject+ExpandArray.h"
 
-@implementation NSObject (ExpandArray)
-
-//TODO test and remove -[NSObject expandArray]
-- (id)expandArray
-{
-    return self;
-}
-
-@end
+#import "NSObject+ProperIsKindOfClass.h"
 
 @implementation NSArray (ExpandArray)
 
+//TODO test
 - (id)expandArray
 {
     NSMutableArray *result = [NSMutableArray new];
-    for (id object in self)
-    {
-        id newValue = [object expandArray];
-        if ([newValue isKindOfClass: [NSArray class]])
-        {
-            [result addObjectsFromArray: newValue];
+    for (id object in self) {
+        id newValue;
+        if ([object properIsKindOfClass:[NSArray class]]) {
+            newValue = [object expandArray];
+        } else {
+            newValue = self;
         }
-        else
-        {
-            [result addObject: newValue];
+        if ([newValue properIsKindOfClass:[NSArray class]]) {
+            [result addObjectsFromArray: newValue];
+        } else {
+            [result addObject:newValue];
         }
     }
     return result;
