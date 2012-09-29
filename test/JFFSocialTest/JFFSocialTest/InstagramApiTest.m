@@ -34,16 +34,16 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
 -(void)RtestInstagramAuthedUser
 {
     __block JFFInstagramAuthedAccount *account;
-    
+
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
         JFFInstagramCredentials *credentials = [JFFInstagramCredentials new];
         credentials.clientId     = clientId;
         credentials.clientSecret = clientSecret;
         credentials.redirectURI  = redirectURI;
-        
+
         JFFAsyncOperation loader = [JFFSocialInstagram authedUserLoaderWithCredentials:credentials];
-        
+
         loader(nil,nil,^(id result,NSError *error) {
             account = result;
             finishBLock();
@@ -72,9 +72,9 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
         credentials.clientId     = clientId;
         credentials.clientSecret = clientSecret;
         credentials.redirectURI  = redirectURI;
-
+        
         JFFAsyncOperation loader = [JFFSocialInstagram followedByLoaderWithCredentials:credentials];
-
+        
         loader(nil,nil,^(id result,NSError *error)
         {
             followers = result;
@@ -142,28 +142,28 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
 -(void)testLoadOwnMediaItems
 {
     __block NSArray *mediaItems;
-
+    
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
         JFFAsyncOperation loader = [JFFSocialInstagram recentMediaItemsLoaderForUserId:nil
                                                                            accessToken:accessToken];
-
+        
         loader(nil,nil,^(id result,NSError *error)
         {
             mediaItems = result;
             finishBLock();
         });
     };
-
+    
     [self performAsyncRequestOnMainThreadWithBlock:block
                                           selector:_cmd];
-
+    
     GHAssertNotNil(mediaItems, @"ok");
-    GHAssertTrue([mediaItems count]>0, @"ok");
-
+    GHAssertTrue([mediaItems count]==1, @"ok");
+    
     JFFInstagramMediaItem *mediaItem = mediaItems[0];
-
-    GHAssertEqualObjects( @"277393673043504646_220778258", mediaItem.mediaItemId, @"instagram id mismatch");
+    
+    GHAssertEqualObjects(@"277393673043504646_220778258", mediaItem.mediaItemId, @"instagram id mismatch");
 
     {
         NSString *url = @"http://distilleryimage10.s3.amazonaws.com/38ec2cd4fb5511e19ca422000a1d0119_7.jpg";
@@ -178,27 +178,27 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
 -(void)testLoadVlg1MediaItems
 {
     __block NSArray *mediaItems;
-
+    
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
         JFFAsyncOperation loader = [JFFSocialInstagram recentMediaItemsLoaderForUserId:@"221327437"
                                                                            accessToken:accessToken];
-
+        
         loader(nil,nil,^(id result,NSError *error)
         {
             mediaItems = result;
             finishBLock();
         });
     };
-
+    
     [self performAsyncRequestOnMainThreadWithBlock:block
                                           selector:_cmd];
-
+    
     GHAssertNotNil(mediaItems, @"ok");
     GHAssertTrue([mediaItems count]==2, @"ok");
-
+    
     JFFInstagramMediaItem *mediaItem = mediaItems[0];
-
+    
     GHAssertEqualObjects( @"284572159972875249_221327437", mediaItem.mediaItemId, @"instagram id mismatch");
 }
 
@@ -223,9 +223,9 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
 
     [self performAsyncRequestOnMainThreadWithBlock:block
                                           selector:_cmd];
-
+    
     GHAssertNotNil(comment, @"ok");
-
+    
     GHAssertEqualObjects(commentText, comment.text, @"instagram id mismatch");
 }
 
@@ -234,7 +234,7 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
     __block NSArray *comments;
     
     NSString *commentText = @"please visit site: www.wishdates.com, (this is test message)";
-
+    
     TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
     {
         JFFAsyncOperation loader = [JFFSocialInstagram notifyUsersFollowersWithId:@"self"
@@ -247,12 +247,12 @@ static NSString *const accessToken = @"220778258.ed29def.b8a18d6838c04b4790b3902
             finishBLock();
         });
     };
-
+    
     [self performAsyncRequestOnMainThreadWithBlock:block
                                           selector:_cmd];
-
+    
     GHAssertNotNil(comments, @"ok");
-
+    
     for (JFFInstagramComment *comment in comments)
     {
         GHAssertEqualObjects(commentText, comment.text, @"comment text mismatch");
