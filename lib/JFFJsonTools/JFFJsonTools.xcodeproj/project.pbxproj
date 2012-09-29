@@ -25,6 +25,7 @@
 		CE532D18160379660029920A /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE532D17160379660029920A /* libstdc++.dylib */; };
 		CE5330BB160722010029920A /* JFFOptionalObjectField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5330BA160722010029920A /* JFFOptionalObjectField.m */; };
 		CE5330BF160722760029920A /* NSObject+JFFJsonObjectValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5330BE160722760029920A /* NSObject+JFFJsonObjectValidator.m */; };
+		CE57FD8F1612F43200124D90 /* JFFAsyncJSONParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57FD8E1612F43200124D90 /* JFFAsyncJSONParserTests.m */; };
 		CEC80654160B4C69005DC722 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC80653160B4C69005DC722 /* UIKit.framework */; };
 		CEC80658160B4CAC005DC722 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC80657160B4CAC005DC722 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
@@ -178,6 +179,8 @@
 		CE5330BA160722010029920A /* JFFOptionalObjectField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFOptionalObjectField.m; sourceTree = "<group>"; };
 		CE5330BD160722760029920A /* NSObject+JFFJsonObjectValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JFFJsonObjectValidator.h"; sourceTree = "<group>"; };
 		CE5330BE160722760029920A /* NSObject+JFFJsonObjectValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JFFJsonObjectValidator.m"; sourceTree = "<group>"; };
+		CE57FD8D1612F43200124D90 /* JFFAsyncJSONParserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncJSONParserTests.h; sourceTree = "<group>"; };
+		CE57FD8E1612F43200124D90 /* JFFAsyncJSONParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncJSONParserTests.m; sourceTree = "<group>"; };
 		CEC80653160B4C69005DC722 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEC80657160B4CAC005DC722 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -274,6 +277,8 @@
 			children = (
 				CE532C2916036CE40029920A /* JFFJsonValidatorTests.h */,
 				CE532C2A16036CE40029920A /* JFFJsonValidatorTests.m */,
+				CE57FD8D1612F43200124D90 /* JFFAsyncJSONParserTests.h */,
+				CE57FD8E1612F43200124D90 /* JFFAsyncJSONParserTests.m */,
 				CE532C2416036CE40029920A /* Supporting Files */,
 			);
 			path = JFFJsonToolsTests;
@@ -566,6 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE532C2B16036CE40029920A /* JFFJsonValidatorTests.m in Sources */,
+				CE57FD8F1612F43200124D90 /* JFFAsyncJSONParserTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
