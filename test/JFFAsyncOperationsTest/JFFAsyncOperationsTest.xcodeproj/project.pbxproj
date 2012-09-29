@@ -147,6 +147,13 @@
 			remoteGlobalIDString = 65802A5B148BF2930040A93A;
 			remoteInfo = JFFUtilsMacOS;
 		};
+		CE28A105161793F40029BE05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B835A0E142C8BAB00FC004C /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE444A1C1608609100DD85B0;
+			remoteInfo = JFFUtilsTest;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -229,6 +236,7 @@
 				65D8B6C6148C025900C02FA4 /* libJFFUtilsMacOS.a */,
 				5357CE0514A9F5130046EA34 /* libJFFUtils-clang.a */,
 				6500345C151A646D008F16E7 /* JFFUtilsFW.framework */,
+				CE28A106161793F40029BE05 /* JFFUtilsTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -470,6 +478,13 @@
 			fileType = archive.ar;
 			path = libJFFUtilsMacOS.a;
 			remoteRef = 65D8B6C5148C025900C02FA4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE28A106161793F40029BE05 /* JFFUtilsTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFUtilsTest.octest;
+			remoteRef = CE28A105161793F40029BE05 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
