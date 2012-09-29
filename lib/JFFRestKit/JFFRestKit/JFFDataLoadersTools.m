@@ -6,16 +6,16 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
 {
     chunkedDataLoader_ = [ chunkedDataLoader_ copy ];
     return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
+                                    , JFFCancelAsyncOperationHandler cancelCallback
                                     , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
         __block NSString* filePath_   = nil;
-        __block NSFileHandle* handle_ = nil;
+        __block NSFileHandle* handle = nil;
 
         __block void (^closeFile_)() = ^()
         {
-            [ handle_ closeFile ];
-            handle_ = nil;
+            [ handle closeFile ];
+            handle = nil;
         };
 
         __block void (^closeAndRemoveFile_)() = ^()
@@ -28,32 +28,32 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
         };
 
         progressCallback_ = [ progressCallback_ copy ];
-        JFFAsyncOperationProgressHandler progressWrapperCallback_ = ^( id progressInfo_ )
+        JFFAsyncOperationProgressHandler progressWrapperCallback_ = ^( id progressInfo )
         {
-            if ( !handle_ )
+            if ( !handle )
             {
                 filePath_ = [ NSString createUuid ];
                 filePath_ = [ NSString cachesPathByAppendingPathComponent: filePath_ ];
                 [ [ NSFileManager defaultManager ] createFileAtPath: filePath_
                                                            contents: nil
                                                          attributes: nil ];
-                handle_ = [ NSFileHandle fileHandleForWritingAtPath: filePath_ ];
+                handle = [ NSFileHandle fileHandleForWritingAtPath: filePath_ ];
             }
 
             //STODO write in separate thread only ( dispatch_io_create_with_path )
-            [ handle_ writeData: progressInfo_ ];
-
+            [handle writeData:progressInfo];
+            
             if ( progressCallback_ )
-                progressCallback_( progressInfo_ );
+                progressCallback_( progressInfo );
         };
-
-        cancelCallback_ = [ cancelCallback_ copy ];
+        
+        cancelCallback = [cancelCallback copy];
         JFFCancelAsyncOperationHandler cancelWrapperCallback_ = ^( BOOL canceled_ )
         {
             closeAndRemoveFile_();
 
-            if ( cancelCallback_ )
-                cancelCallback_( canceled_ );
+            if ( cancelCallback )
+                cancelCallback( canceled_ );
         };
 
         JFFDidFinishAsyncOperationHandler doneWrapperCallback_ = ^( id response_, NSError* error_ )
