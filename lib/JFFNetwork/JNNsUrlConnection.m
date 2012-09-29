@@ -26,8 +26,7 @@
 
     self = [super init];
 
-    if (self)
-    {
+    if (self) {
         self->_params = params;
 
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
@@ -65,13 +64,10 @@
                                                   options:0
                                                     error:&error];
 
-    if (error)
-    {
+    if (error) {
         [self connection:self->_nativeConnection
         didFailWithError:error];
-    }
-    else
-    {
+    } else {
         NSHTTPURLResponse* response_ =
         [ [ NSHTTPURLResponse alloc ] initWithURL: self->_params.url
                                        statusCode: 200
@@ -93,8 +89,7 @@
 - (void)start
 {
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
-    if ( [ self->_params.url isFileURL ] )
-    {
+    if ( [ self->_params.url isFileURL ] ) {
         NSString* path_ = [ self->_params.url path ];
         [ self processLocalFileWithPath: path_ ];
         return;
@@ -102,8 +97,7 @@
 #endif
     [ self->_nativeConnection start ];
 
-    if (self->_nativeConnection)
-    {
+    if (self->_nativeConnection) {
         [self->_connectRunLoop run];
     }
 }
@@ -119,8 +113,7 @@
 {
     [super clearCallbacks];
 
-    if (self->_connectRunLoop)
-    {
+    if (self->_connectRunLoop) {
         [self->_nativeConnection unscheduleFromRunLoop:self->_connectRunLoop
                                                forMode:NSDefaultRunLoopMode];
     }
@@ -169,18 +162,16 @@ didReceiveResponse:( NSHTTPURLResponse* )response_
     }
 }
 
--(void)connectionDidFinishLoading:( NSURLConnection* )connection_
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    if ( ![ self assertConnectionMismatch: connection_ ] )
-    {
+    if (![self assertConnectionMismatch:connection]) {
         return;
     }
-
+    
     JFFDidFinishLoadingHandler finish = self.didFinishLoadingBlock;
     
     [self cancel];
-    if (nil != finish)
-    {
+    if (nil != finish) {
         finish(nil);
     }
 }

@@ -9,30 +9,30 @@
     return [ NSString documentsPathByAppendingPathComponent: @"JFFDownloadedFiles.data" ];
 }
 
-+(id)setWithDownloadedFiles
++ (id)setWithDownloadedFiles
 {
-    NSString* storePathForDownloadedFiles_ = [ self storePathForDownloadedFiles ];
-    NSArray* downloadedItems_ = [ [ NSArray alloc ] initWithContentsOfFile: storePathForDownloadedFiles_ ];
-    return [ [ self alloc ] initWithArray: downloadedItems_ ];
+    NSString *storePathForDownloadedFiles = [self storePathForDownloadedFiles];
+    NSArray  *downloadedItems = [[NSArray alloc] initWithContentsOfFile:storePathForDownloadedFiles];
+    return [[self alloc] initWithArray:downloadedItems];
 }
 
--(void)writeToFileDownloadedFiles
+- (void)writeToFileDownloadedFiles
 {
-    NSString* storePathForDownloadedFiles_ = [ [ self class ] storePathForDownloadedFiles ];
-    [ [ self allObjects ] writeToFile: storePathForDownloadedFiles_ atomically: YES ];
+    NSString *storePathForDownloadedFiles = [[self class] storePathForDownloadedFiles];
+    [[self allObjects] writeToFile:storePathForDownloadedFiles atomically:YES];
 }
 
--(void)addDownloadedFileWithPath:( NSString* )filePath_
+- (void)addDownloadedFileWithPath:(NSString *)filePath
 {
-    [ self addObject: filePath_ ];
-    [ self writeToFileDownloadedFiles ];
+    [self addObject:filePath];
+    [self writeToFileDownloadedFiles];
 }
 
--(void)removeDownloadedFileWithPath:( NSString* )filePath_
+- (void)removeDownloadedFileWithPath:(NSString *)filePath
 {
-    [ JFFFileManager removeFileForPath: filePath_ ];
-    [ self removeObject: filePath_ ];
-    [ self writeToFileDownloadedFiles ];
+    [JFFFileManager removeFileForPath:filePath];
+    [self removeObject:filePath];
+    [self writeToFileDownloadedFiles];
 }
 
 -(BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
