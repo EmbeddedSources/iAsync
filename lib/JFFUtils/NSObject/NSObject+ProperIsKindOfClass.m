@@ -34,8 +34,7 @@
 {
     BOOL result = [self properIsKindOfClassIsNSArray] && [aClass properIsKindOfClassIsNSArray];
     
-    if (!result)
-    {
+    if (!result) {
         result = [self properIsKindOfClassIsNSDictionary] && [aClass properIsKindOfClassIsNSDictionary];
     }
     
@@ -46,12 +45,10 @@
 {
     BOOL result = [self isSubclassOfClass:aClass];
     
-    if (!result)
-    {
+    if (!result) {
         result = [aClass isSubclassOfClass:self];
     }
-    if (!result)
-    {
+    if (!result) {
         result = [aClass fixedForLiteralClassesIsSubclassOfClass:self];
     }
     
