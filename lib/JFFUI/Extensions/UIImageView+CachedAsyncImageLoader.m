@@ -36,8 +36,7 @@ static char imageURLKey;
     
     __weak UIImageView* weakSelf = self;
     
-    JFFDidFinishAsyncOperationHandler doneCallback = ^(UIImage *result, NSError *error)
-    {
+    JFFDidFinishAsyncOperationHandler doneCallback = ^(UIImage *result, NSError *error) {
         if (result)
             [weakSelf jffSetImage:result URL:url];
     };

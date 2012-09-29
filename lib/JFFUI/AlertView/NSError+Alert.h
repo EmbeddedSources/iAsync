@@ -2,11 +2,11 @@
 
 @interface NSError (Alert)
 
--(void)showAlertWithTitle:( NSString* )title_;
+- (void)showAlertWithTitle:(NSString *)title;
 
--(void)showErrorAlert;
--(void)showExclusiveErrorAlert;
+- (void)showErrorAlert;
+- (void)showExclusiveErrorAlert;
 
--(void)writeErrorToNSLog;
+- (void)writeErrorToNSLog;
 
 @end

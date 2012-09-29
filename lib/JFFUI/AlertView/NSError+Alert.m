@@ -4,28 +4,28 @@
 
 @implementation NSError (Alert)
 
--(void)showAlertWithTitle:( NSString* )title_
+- (void)showAlertWithTitle:(NSString *)title
 {
-    [ self writeErrorToNSLog ];
-    [ JFFAlertView showAlertWithTitle: title_ description: [ self localizedDescription ] ];
+    [self writeErrorToNSLog];
+    [JFFAlertView showAlertWithTitle:title description:[self localizedDescription]];
 }
 
--(void)showErrorAlert
+- (void)showErrorAlert
 {
-    [ self writeErrorToNSLog ];
-    [ JFFAlertView showErrorWithDescription: [ self localizedDescription ] ];
+    [self writeErrorToNSLog];
+    [JFFAlertView showErrorWithDescription:[self localizedDescription]];
 }
 
--(void)writeErrorToNSLog
+- (void)writeErrorToNSLog
 {
-    NSLog( @"NSError : %@, domain : %@ code : %d", [ self localizedDescription ], [ self domain ], [ self code ] );
+    NSLog(@"NSError : %@, domain : %@ code : %d", [self localizedDescription], [self domain], [self code]);
 }
 
--(void)showExclusiveErrorAlert
+- (void)showExclusiveErrorAlert
 {
-    [ self writeErrorToNSLog ];
-
-    [ JFFAlertView showExclusiveErrorWithDescription: [ self localizedDescription ] ];
+    [self writeErrorToNSLog];
+    
+    [JFFAlertView showExclusiveErrorWithDescription:[self localizedDescription]];
 }
 
 @end
