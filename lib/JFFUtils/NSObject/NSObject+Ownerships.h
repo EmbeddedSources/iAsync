@@ -1,8 +1,14 @@
+#import <JFFUtils/NSArray/JUArrayHelperBlocks.h>
+
 #import <Foundation/Foundation.h>
 
 @interface NSObject (Ownerships)
 
 //lazy load property, any object can be added to this array
-@property (nonatomic, readonly) NSMutableArray *ownerships;
+- (void)addOwnedObject:(id)object;
+
+- (void)removeOwnedObject:(id)object;
+
+- (id)firstOwnedObjectMatch:(JFFPredicateBlock)predicate;
 
 @end
