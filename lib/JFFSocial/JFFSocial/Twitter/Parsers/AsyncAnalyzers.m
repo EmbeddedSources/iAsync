@@ -63,10 +63,8 @@ JFFAsyncOperationBinder asyncJSONObjectToDirectTweet()
 
 JFFAsyncOperationBinder jsonObjectToTwitterUsersIds()
 {
-    JFFAsyncOperationBinder result = ^JFFAsyncOperation(NSDictionary *jsonObject)
-    {
-        return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *error)
-        {
+    JFFAsyncOperationBinder result = ^JFFAsyncOperation(NSDictionary *jsonObject) {
+        return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *error) {
             id jsonPattern = @{
             @"ids" : @[[NSNumber class]],
             };
@@ -83,8 +81,7 @@ JFFAsyncOperationBinder jsonObjectToTwitterUsersIds()
 
 JFFAsyncOperationBinder twitterResponseToNSData()
 {
-    JFFAsyncOperationBinder result = ^JFFAsyncOperation(JFFTwitterResponse *response)
-    {
+    JFFAsyncOperationBinder result = ^JFFAsyncOperation(JFFTwitterResponse *response) {
         assert(response);
         //TODO process JFFTwitterResponse fields if valid
         return asyncOperationWithResult(response.responseData);

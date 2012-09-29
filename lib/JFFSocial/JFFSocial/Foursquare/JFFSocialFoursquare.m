@@ -236,8 +236,7 @@
     NSData *imageData = [NSData dataForHTTPPostWithData:UIImageJPEGRepresentation(image, 1.0) andFileName:@"name" andParameterName:@"photo"];
     NSData *httpBody = [imageData dataForHTTPPostByAppendingParameters:params];
     
-    JFFAsyncOperationBinder postLoaderBinder = ^JFFAsyncOperation (NSString *accessToken)
-    {
+    JFFAsyncOperationBinder postLoaderBinder = ^JFFAsyncOperation (NSString *accessToken) {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoaderWithHTTPBody(addPhotoURL, httpBody, accessToken),
                                              asyncOperationBinderJsonDataParser(),
                                              [self serverResponseAnalizer],
