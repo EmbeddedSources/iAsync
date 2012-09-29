@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
-@interface NSString ( Format ) 
+@interface NSString (Format)
 
-+(id)stringWithFormatCheckNill:( NSString* )format_, ... ;
++ (id)stringWithFormatCheckNill:(NSString *)format, ...;
 
 @end

@@ -17,12 +17,11 @@
 
 @implementation JFFAutoRemoveAssignProxy
 
--(void)onAddToMutableAssignArray:( JFFMutableAssignArray* )array_
+- (void)onAddToMutableAssignArray:(JFFMutableAssignArray *)array
 {
-    __unsafe_unretained JFFMutableAssignArray* unretainedArray = array_;
-    __unsafe_unretained JFFAutoRemoveAssignProxy* unretainedSelf = self;
-    self.onDeallocBlock = ^void( void )
-    {
+    __unsafe_unretained JFFMutableAssignArray    * unretainedArray = array;
+    __unsafe_unretained JFFAutoRemoveAssignProxy * unretainedSelf  = self;
+    self.onDeallocBlock = ^void(void) {
         [unretainedArray removeObject:unretainedSelf.target];
     };
     [self.target addOnDeallocBlock:self.onDeallocBlock];
@@ -30,7 +29,7 @@
 
 - (void)onRemoveFromMutableAssignArray:(JFFMutableAssignArray *)array
 {
-    [self.target removeOnDeallocBlock:self.onDeallocBlock];
+    [self.target removeOnDeallocBlock:self->_onDeallocBlock];
     self->_onDeallocBlock = nil;
 }
 
@@ -71,7 +70,7 @@
 - (void)addObject:(id)object
 {
     JFFAutoRemoveAssignProxy* proxy = [[JFFAutoRemoveAssignProxy alloc] initWithTarget:object];
-    [self.mutableArray addObject: proxy];
+    [self.mutableArray addObject:proxy];
     [proxy onAddToMutableAssignArray:self];
 }
 
@@ -86,11 +85,10 @@
 
 - (void)removeObject:(id)object
 {
-    NSUInteger index = [self->_mutableArray firstIndexOfObjectMatch:^BOOL(id element)
-    {
+    NSUInteger index = [self->_mutableArray firstIndexOfObjectMatch:^BOOL(id element) {
         JFFAutoRemoveAssignProxy *proxy = element;
         return proxy.target == object;
-    } ];
+    }];
     
     if (index != NSNotFound)
     {
@@ -117,9 +115,9 @@
 - (id)initWithObject:( id )anObject
 {
     self = [super init];
-
-    [self addObject: anObject];
-
+    
+    [self addObject:anObject];
+    
     return self;
 }
 
@@ -137,8 +135,7 @@
 {
     [self->_mutableArray enumerateObjectsUsingBlock:^void(JFFAutoRemoveAssignProxy *proxy,
                                                           NSUInteger midx,
-                                                          BOOL *mstop)
-    {
+                                                          BOOL *mstop) {
         block(proxy.target, midx, mstop);
     }];
 }

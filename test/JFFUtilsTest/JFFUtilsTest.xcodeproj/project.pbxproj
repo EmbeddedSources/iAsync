@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		1B0E89211563FA5200825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E89201563FA5200825E3C /* libc++.dylib */; };
 		1B2D8B6C154BF37C00360296 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2D8B69154BF36C00360296 /* libJFFTestTools.a */; };
-		1B2D8B7E154BFA2300360296 /* JUMutableArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */; };
-		1B2D8B80154BFA2A00360296 /* JFFStringFormatTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */; };
 		534CDFDE14A8CAAC0068F4DF /* JMStringHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */; };
 		7E7225DE1588891400210CBE /* DevNullTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7225DD1588891400210CBE /* DevNullTest.m */; };
 		B69483EC1429C88400B8247E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69483EB1429C88400B8247E /* UIKit.framework */; };
@@ -85,9 +83,7 @@
 
 /* Begin PBXFileReference section */
 		1B0E89201563FA5200825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStringFormatTest.m; sourceTree = "<group>"; };
 		1B2D8B61154BF36C00360296 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
-		534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUMutableArrayTest.m; sourceTree = "<group>"; };
 		534CDFD914A8CA290068F4DF /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		534CDFDC14A8CAAC0068F4DF /* JMStringHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStringHolder.h; sourceTree = "<group>"; };
 		534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStringHolder.m; sourceTree = "<group>"; };
@@ -207,8 +203,6 @@
 				534CDFDB14A8CA910068F4DF /* mock */,
 				7E7225DD1588891400210CBE /* DevNullTest.m */,
 				CE57FBC11611F2EF00124D90 /* NSMutableSet_StorableSetTest.m */,
-				1B26EC6E14DABFB800A1A875 /* JFFStringFormatTest.m */,
-				534C727A1431D9DE0085B41E /* JUMutableArrayTest.m */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
@@ -363,8 +357,6 @@
 			files = (
 				B69483F81429C88400B8247E /* main.m in Sources */,
 				534CDFDE14A8CAAC0068F4DF /* JMStringHolder.m in Sources */,
-				1B2D8B7E154BFA2300360296 /* JUMutableArrayTest.m in Sources */,
-				1B2D8B80154BFA2A00360296 /* JFFStringFormatTest.m in Sources */,
 				7E7225DE1588891400210CBE /* DevNullTest.m in Sources */,
 				CE57FBC21611F2EF00124D90 /* NSMutableSet_StorableSetTest.m in Sources */,
 			);

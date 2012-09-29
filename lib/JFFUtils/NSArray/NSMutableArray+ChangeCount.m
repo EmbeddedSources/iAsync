@@ -6,8 +6,7 @@
 {
     NSUInteger count = [self count];
     
-    if (count <= newSize)
-    {
+    if (count <= newSize) {
         //The size already fits
         return;
     }

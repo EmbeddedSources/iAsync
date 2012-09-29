@@ -1,38 +1,34 @@
 #import "NSString+Format.h"
 
-@implementation NSString ( Format )
+@implementation NSString (Format)
 
-+(id)stringWithFormatCheckNill:( NSString* )format_, ... 
++ (id)stringWithFormatCheckNill:(NSString *)format, ...
 {
-    if ( [ format_ length ] == 0 )
-    {
+    if ([format length] == 0) {
         return nil;
     }
-
-    id eachObject_;
-    va_list argumentList_;
-
-    va_start( argumentList_, format_ );
-    eachObject_ = va_arg(  argumentList_, id );
-
-    while ( eachObject_ )
-    {
-        if ( ![ eachObject_ isKindOfClass: [ NSObject class ] ] )
-        {
+    
+    id eachObject;
+    va_list argumentList;
+    
+    va_start(argumentList, format);
+    eachObject = va_arg(argumentList, id);
+    
+    while (eachObject) {
+        if (![eachObject isKindOfClass:[NSObject class]]) {
             return nil;
         }
-
-        if ( [ [ eachObject_ description ] length ] == 0 )
-        {
+        
+        if ([[eachObject description] length] == 0) {
             return nil;
         }
-
-        eachObject_ = va_arg( argumentList_, id );
+        
+        eachObject = va_arg(argumentList, id);
     }
-
-    va_start(  argumentList_, format_ );
-    return [ [ NSString alloc ] initWithFormat: format_ 
-                                     arguments:  argumentList_ ] ;
+    
+    va_start(argumentList, format);
+    return [[NSString alloc] initWithFormat:format
+                                  arguments:argumentList];
 }
 
 @end

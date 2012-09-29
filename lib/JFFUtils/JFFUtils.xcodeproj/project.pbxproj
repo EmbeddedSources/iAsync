@@ -323,6 +323,10 @@
 		CE03CAB2160CAD0500039011 /* NSObjectInstancesCountTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03CAB1160CAD0500039011 /* NSObjectInstancesCountTest.m */; };
 		CE102F3816089570004229C5 /* UIImage+ScaleToSize.h in Headers */ = {isa = PBXBuildFile; fileRef = CE102F3616089570004229C5 /* UIImage+ScaleToSize.h */; };
 		CE102F3916089570004229C5 /* UIImage+ScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = CE102F3716089570004229C5 /* UIImage+ScaleToSize.m */; };
+		CE2B32871617B55F003FB5F8 /* JUMutableArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2B32861617B55F003FB5F8 /* JUMutableArrayTest.m */; };
+		CE2B32891617B5BF003FB5F8 /* NSMutableArray+ChangeCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCDF9E414320B3200CEB6E7 /* NSMutableArray+ChangeCount.m */; };
+		CE2B328C1617B5E9003FB5F8 /* JFFStringFormatTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2B328B1617B5E9003FB5F8 /* JFFStringFormatTest.m */; };
+		CE2B328D1617B632003FB5F8 /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B909B8414EA919400B19283 /* NSString+Format.m */; };
 		CE444A1416085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.h in Headers */ = {isa = PBXBuildFile; fileRef = CE444A1216085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.h */; };
 		CE444A1516085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CE444A1316085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.m */; };
 		CE444A1E1608609100DD85B0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE444A1D1608609100DD85B0 /* SenTestingKit.framework */; };
@@ -530,6 +534,10 @@
 		CE03CAB1160CAD0500039011 /* NSObjectInstancesCountTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectInstancesCountTest.m; sourceTree = "<group>"; };
 		CE102F3616089570004229C5 /* UIImage+ScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScaleToSize.h"; sourceTree = "<group>"; };
 		CE102F3716089570004229C5 /* UIImage+ScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScaleToSize.m"; sourceTree = "<group>"; };
+		CE2B32851617B55F003FB5F8 /* JUMutableArrayTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUMutableArrayTest.h; sourceTree = "<group>"; };
+		CE2B32861617B55F003FB5F8 /* JUMutableArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUMutableArrayTest.m; sourceTree = "<group>"; };
+		CE2B328A1617B5E9003FB5F8 /* JFFStringFormatTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStringFormatTest.h; sourceTree = "<group>"; };
+		CE2B328B1617B5E9003FB5F8 /* JFFStringFormatTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStringFormatTest.m; sourceTree = "<group>"; };
 		CE444A1216085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ProperIsKindOfClass.h"; sourceTree = "<group>"; };
 		CE444A1316085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ProperIsKindOfClass.m"; sourceTree = "<group>"; };
 		CE444A1C1608609100DD85B0 /* JFFUtilsTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFUtilsTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -969,6 +977,10 @@
 				CEE6574516148DCC00C4D536 /* NSObjectRuntimeExtensionsTest.m */,
 				CEE6574816148F3000C4D536 /* JUArrayAdditionsTest.h */,
 				CEE6574916148F3000C4D536 /* JUArrayAdditionsTest.m */,
+				CE2B32851617B55F003FB5F8 /* JUMutableArrayTest.h */,
+				CE2B32861617B55F003FB5F8 /* JUMutableArrayTest.m */,
+				CE2B328A1617B5E9003FB5F8 /* JFFStringFormatTest.h */,
+				CE2B328B1617B5E9003FB5F8 /* JFFStringFormatTest.m */,
 			);
 			path = JFFUtilsTest;
 			sourceTree = "<group>";
@@ -1630,6 +1642,10 @@
 				CEE6574A16148F3000C4D536 /* JUArrayAdditionsTest.m in Sources */,
 				CEE6574B16148F7E00C4D536 /* NSArray+RemoveDuplicates.m in Sources */,
 				CEE6574C1614900000C4D536 /* NSArray+IsEmpty.m in Sources */,
+				CE2B32871617B55F003FB5F8 /* JUMutableArrayTest.m in Sources */,
+				CE2B32891617B5BF003FB5F8 /* NSMutableArray+ChangeCount.m in Sources */,
+				CE2B328C1617B5E9003FB5F8 /* JFFStringFormatTest.m in Sources */,
+				CE2B328D1617B632003FB5F8 /* NSString+Format.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
