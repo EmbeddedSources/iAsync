@@ -87,54 +87,48 @@
 
 - (void)setUpClass
 {
-    for (Class class in [self classesToTestOnLeaks])
-    {
+    for (Class class in [self classesToTestOnLeaks]) {
         [class enableInstancesCounting];
     }
 }
 
-- (void)performBlockWIthMemoryTest:(JFFSimpleBlock)block
+- (void)performBlockWithMemoryTest:(JFFSimpleBlock)block
 {
-    NSArray *initialInstancesCouns = [[self classesToTestOnLeaks]map:^id(id object)
-                                      {
-                                          return @([object instancesCount]);
-                                      }];
+    NSArray *initialInstancesCouns = [[self classesToTestOnLeaks]map:^id(id object) {
+        return @([object instancesCount]);
+    }];
     
-    @autoreleasepool
-    {
+    @autoreleasepool {
         block();
     }
     
-    [[self classesToTestOnLeaks]enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-     {
-         NSNumber *num = [initialInstancesCouns objectAtIndex:idx];
-         STAssertEqualObjects(num, @([obj instancesCount]), @"we got a leak");
-     }];
+    [[self classesToTestOnLeaks]enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSNumber *num = [initialInstancesCouns objectAtIndex:idx];
+        STAssertEqualObjects(num, @([obj instancesCount]), @"we got a leak");
+    }];
 }
 
 - (void)testSetProxyDelegate
 {
-    [self performBlockWIthMemoryTest:^()
-     {
-         TestDelegateObject *delegate   = [TestDelegateObject     new];
-         TestObjectWithDelegate *object = [TestObjectWithDelegate new];
-         
-         TestProxyDelegateObject *proxyDelegate = [TestProxyDelegateObject new];
-         
-         //hook object
-         [object addDelegateProxy:proxyDelegate
-                     delegateName:@"delegate"];
-         
-         object.delegate = delegate;
-         
-         STAssertTrue(object.delegate != delegate, @"not the same object");
-     }];
+    [self performBlockWithMemoryTest:^() {
+        TestDelegateObject *delegate   = [TestDelegateObject     new];
+        TestObjectWithDelegate *object = [TestObjectWithDelegate new];
+        
+        TestProxyDelegateObject *proxyDelegate = [TestProxyDelegateObject new];
+        
+        //hook object
+        [object addDelegateProxy:proxyDelegate
+                    delegateName:@"delegate"];
+        
+        object.delegate = delegate;
+        
+        STAssertTrue(object.delegate != delegate, @"not the same object");
+    }];
 }
 
 - (void)testProxyDelegateMessageGot
 {
-    [self performBlockWIthMemoryTest:^()
-     {
+    [self performBlockWithMemoryTest:^() {
          TestDelegateObject *delegate   = [TestDelegateObject new];
          TestObjectWithDelegate *object = [TestObjectWithDelegate new];
          
@@ -161,53 +155,50 @@
 
 -(void)testProxyDelegateAfterRemoveFromMemory
 {
-    [self performBlockWIthMemoryTest:^()
-     {
-         TestDelegateObject     *delegate = [TestDelegateObject     new];
-         TestObjectWithDelegate *object   = [TestObjectWithDelegate new];
-         
-         @autoreleasepool
-         {
-             TestProxyDelegateShouldNotReceiveMessageObject *proxyDelegate = [TestProxyDelegateShouldNotReceiveMessageObject new];
-             
-             //hook object
-             [object addDelegateProxy:proxyDelegate
-                         delegateName:@"delegate"];
-         }
-         
-         object.delegate = delegate;
-         
-         id sentObject = [NSObject new];
-         [object.delegate someDelegateMethod:sentObject];
-         
-         STAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
-     }];
+    [self performBlockWithMemoryTest:^() {
+        TestDelegateObject     *delegate = [TestDelegateObject     new];
+        TestObjectWithDelegate *object   = [TestObjectWithDelegate new];
+        
+        @autoreleasepool {
+            TestProxyDelegateShouldNotReceiveMessageObject *proxyDelegate = [TestProxyDelegateShouldNotReceiveMessageObject new];
+            
+            //hook object
+            [object addDelegateProxy:proxyDelegate
+                        delegateName:@"delegate"];
+        }
+        
+        object.delegate = delegate;
+        
+        id sentObject = [NSObject new];
+        [object.delegate someDelegateMethod:sentObject];
+        
+        STAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
+    }];
 }
 
 -(void)testProxyDelegateAfterRemoveFromObservers
 {
-    [self performBlockWIthMemoryTest:^()
-     {
-         TestDelegateObject *delegate   = [TestDelegateObject new];
-         TestObjectWithDelegate *object = [TestObjectWithDelegate new];
-         
-         TestProxyDelegateShouldNotReceiveMessageObject *proxyDelegate = [TestProxyDelegateShouldNotReceiveMessageObject new];
-         
-         [object addDelegateProxy:proxyDelegate
-                     delegateName:@"delegate"];
-         
-         object.delegate = delegate;
-         
-         [object removeDelegateProxy:proxyDelegate
-                        delegateName:@"delegate"];
-         
-         id sentObject = [NSNull null];
-         [object.delegate someDelegateMethod:[NSNull null]];
-         
-         STAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
-         
-         STAssertTrue(object.delegate == delegate, @"method was called");
-     }];
+    [self performBlockWithMemoryTest:^() {
+        TestDelegateObject *delegate   = [TestDelegateObject new];
+        TestObjectWithDelegate *object = [TestObjectWithDelegate new];
+        
+        TestProxyDelegateShouldNotReceiveMessageObject *proxyDelegate = [TestProxyDelegateShouldNotReceiveMessageObject new];
+        
+        [object addDelegateProxy:proxyDelegate
+                    delegateName:@"delegate"];
+        
+        object.delegate = delegate;
+        
+        [object removeDelegateProxy:proxyDelegate
+                       delegateName:@"delegate"];
+        
+        id sentObject = [NSNull null];
+        [object.delegate someDelegateMethod:[NSNull null]];
+        
+        STAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
+        
+        STAssertTrue(object.delegate == delegate, @"method was called");
+    }];
 }
 
 @end
