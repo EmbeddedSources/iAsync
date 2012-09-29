@@ -99,8 +99,7 @@
 - (NSDictionary*)map:(JFFDictMappingBlock)block
 {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
-    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
-    {
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
         id newObject = block(key, object);
         NSParameterAssert(newObject);
         result[key] = newObject;
@@ -118,8 +117,7 @@
 - (void)setObject:(id)object forKey:(id)key
 {
     id previousObject = self[key];
-    if (previousObject)
-    {
+    if (previousObject) {
         [self removeObjectForKey:key];
     }
     

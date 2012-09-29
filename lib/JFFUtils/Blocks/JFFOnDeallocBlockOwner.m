@@ -2,19 +2,21 @@
 
 @implementation JFFOnDeallocBlockOwner
 
--(id)initWithBlock:( JFFSimpleBlock )block_
+- (id)initWithBlock:(JFFSimpleBlock)block
 {
-    self = [ super init ];
-
-    NSParameterAssert( block_ );
-    self->_block = [ block_ copy ];
-
+    self = [super init];
+    
+    if (self) {
+        NSParameterAssert(block);
+        self->_block = [block copy];
+    }
+    
     return self;
 }
 
--(void)dealloc
+- (void)dealloc
 {
-    if ( self->_block )
+    if (self->_block)
         self->_block();
 }
 

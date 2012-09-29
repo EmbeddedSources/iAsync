@@ -4,8 +4,8 @@
 
 @interface JFFOnDeallocBlockOwner : NSObject
 
-@property ( nonatomic, copy ) JFFSimpleBlock block;
+@property (nonatomic, copy) JFFSimpleBlock block;
 
--(id)initWithBlock:( JFFSimpleBlock )block_;
+- (id)initWithBlock:(JFFSimpleBlock)block;
 
 @end
