@@ -12,13 +12,13 @@
 
 @interface JFFAsyncOperationScheduler : NSObject < JFFAsyncOperationInterface >
 
-@property ( nonatomic ) NSTimeInterval duration;
+@property (nonatomic) NSTimeInterval duration;
 
 @end
 
 @implementation JFFAsyncOperationScheduler
 {
-    JFFScheduler* _scheduler;
+    JFFScheduler *_scheduler;
 }
 
 - (void)asyncOperationWithResultHandler:(void(^)(id, NSError *))handler
@@ -26,7 +26,7 @@
 {
     handler  = [handler  copy];
     progress = [progress copy];
-
+    
     self->_scheduler = [JFFScheduler new];
     [self->_scheduler addBlock:^(JFFCancelScheduledBlock cancel)
     {
@@ -35,7 +35,7 @@
             progress([JFFAsyncTimerResult new]);
         if (handler)
             handler([JFFAsyncTimerResult new], nil);
-    }duration:self.duration];
+    } duration:self.duration];
 }
 
 - (void)cancel:(BOOL)canceled
@@ -49,22 +49,20 @@ JFFAsyncOperation asyncOperationWithResult(id result)
 {
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         if (doneCallback)
             doneCallback(result, nil);
         return JFFStubCancelAsyncOperationBlock;
     };
 }
 
-JFFAsyncOperation asyncOperationWithError( NSError* error_ )
+JFFAsyncOperation asyncOperationWithError(NSError *error)
 {
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
-        if ( doneCallback_ )
-            doneCallback_( nil, error_ );
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        if (doneCallback)
+            doneCallback(nil, error);
         return JFFStubCancelAsyncOperationBlock;
     };
 }
@@ -73,65 +71,57 @@ JFFAsyncOperation currentQeueAsyncOpWithResult( JFFSyncOperation block )
 {
     assert( block );
     block = [block copy];
-
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
-        NSError* error_;
-        id result_;
-        if ( block )
-        {
-            result_ = block( &error_ );
+    
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        NSError *error;
+        id result;
+        if (block) {
+            result = block(&error);
+        } else {
+            error = [JFFError newErrorWithDescription:NSLocalizedString(@"NOT_SPECIFIED_BLOCK_ERROR", nil)];
         }
-        else
-        {
-            error_ = [ JFFError newErrorWithDescription: NSLocalizedString( @"NOT_SPECIFIED_BLOCK_ERROR", nil ) ];
-        }
-
-        if ( doneCallback_ )
-            doneCallback_( result_, error_ );
-
+        
+        if (doneCallback)
+            doneCallback(result, error);
+        
         return JFFStubCancelAsyncOperationBlock;
     };
 }
 
-JFFAsyncOperation asyncOperationWithFinishCallbackBlock( JFFAsyncOperation loader_
-                                                        , JFFDidFinishAsyncOperationHandler finishCallbackBlock_ )
+JFFAsyncOperation asyncOperationWithFinishCallbackBlock(JFFAsyncOperation loader,
+                                                        JFFDidFinishAsyncOperationHandler finishCallbackBlock)
 {
-    assert( loader_ );
-    finishCallbackBlock_ = [ finishCallbackBlock_ copy ];
-    loader_              = [ loader_ copy ];
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
-        doneCallback_ = [ doneCallback_ copy ];
-        return loader_( progressCallback_, cancelCallback_, ^void( id result_, NSError* error_ )
-        {
-            if ( finishCallbackBlock_ )
-                finishCallbackBlock_( result_, error_ );
-            if ( doneCallback_ )
-                doneCallback_( result_, error_ );
-       } );
+    assert(loader);
+    finishCallbackBlock = [finishCallbackBlock copy];
+    loader              = [loader copy];
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        doneCallback = [doneCallback copy];
+        return loader(progressCallback, cancelCallback, ^void(id result, NSError *error) {
+            if (finishCallbackBlock)
+                finishCallbackBlock(result, error);
+            if (doneCallback)
+                doneCallback(result, error);
+       });
     };
 }
 
-JFFAsyncOperation asyncOperationWithFinishHookBlock( JFFAsyncOperation loader_
-                                                    , JFFDidFinishAsyncOperationHook finishCallbackHook_ )
+JFFAsyncOperation asyncOperationWithFinishHookBlock(JFFAsyncOperation loader,
+                                                    JFFDidFinishAsyncOperationHook finishCallbackHook)
 {
-    assert( loader_ );// should not be nil"
-    assert( finishCallbackHook_ );// should not be nil"
-    finishCallbackHook_ = [ finishCallbackHook_ copy ];
-    loader_             = [ loader_             copy ];
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
-        doneCallback_ = [ doneCallback_ copy ];
-        return loader_( progressCallback_, cancelCallback_, ^void( id result_, NSError* error_ )
-        {
-            finishCallbackHook_( result_, error_, doneCallback_ );
+    assert(loader);// should not be nil"
+    assert(finishCallbackHook);// should not be nil"
+    finishCallbackHook = [finishCallbackHook copy];
+    loader             = [loader             copy];
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        doneCallback = [doneCallback copy];
+        return loader(progressCallback, cancelCallback, ^void(id result, NSError *error) {
+            finishCallbackHook(result, error, doneCallback);
         } );
     };
 }
@@ -178,26 +168,24 @@ JFFAsyncOperation asyncOperationWithAnalyzer(id data, JFFAnalyzer analyzer)
 JFFAsyncOperationBinder asyncOperationBinderWithAnalyzer(JFFAnalyzer analyzer)
 {
     analyzer = [analyzer copy];
-    return ^(id result)
-    {
+    return ^(id result) {
         return asyncOperationWithAnalyzer(result, analyzer);
     };
 }
 
-JFFAsyncOperation asyncOperationWithChangedResult( JFFAsyncOperation loader_
-                                                  , JFFChangedResultBuilder resultBuilder_ )
+JFFAsyncOperation asyncOperationWithChangedResult(JFFAsyncOperation loader,
+                                                  JFFChangedResultBuilder resultBuilder)
 {
-    resultBuilder_ = [ resultBuilder_ copy ];
-    JFFAsyncOperationBinder secondLoaderBinder_ = asyncOperationBinderWithAnalyzer( ^id( id result_
-                                                                                        , NSError **error_ )
-    {
-        assert( result_ );//@"can not be nil";
-        id newResult_ = resultBuilder_ ? resultBuilder_( result_ ) : result_;
-        assert( newResult_ );//@"can not be nil";
-        return newResult_;
-    } );
-
-    return bindSequenceOfAsyncOperations( loader_, secondLoaderBinder_, nil );
+    resultBuilder = [resultBuilder copy];
+    JFFAsyncOperationBinder secondLoaderBinder = asyncOperationBinderWithAnalyzer(^id(id result,
+                                                                                      NSError **error) {
+        assert(result);//@"can not be nil";
+        id newResult = resultBuilder?resultBuilder(result):result;
+        assert(newResult);//@"can not be nil";
+        return newResult;
+    });
+    
+    return bindSequenceOfAsyncOperations(loader, secondLoaderBinder, nil);
 }
 
 JFFAsyncOperation asyncOperationResultAsProgress( JFFAsyncOperation loader_ )
@@ -296,8 +284,7 @@ JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader)
     loader = [loader copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         return loader(nil, cancelCallback, doneCallback);
     };
 }
@@ -305,8 +292,7 @@ JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader)
 JFFAsyncOperationBinder ignorePregressBinder(JFFAsyncOperationBinder binder)
 {
     binder = [binder copy];
-    return ^JFFAsyncOperation(id data)
-    {
+    return ^JFFAsyncOperation(id data) {
         JFFAsyncOperation loader = binder(data);
         return ignorePregressLoader(loader);
     };

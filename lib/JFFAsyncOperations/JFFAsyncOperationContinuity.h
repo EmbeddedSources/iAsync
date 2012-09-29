@@ -75,14 +75,14 @@ JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
 
 ///////////////////////// AUTO REPEAT CIRCLE ////////////////////////
 
-//TODO move timer depend methods to JFFScheduler async category
-JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation loader,
-                                       JFFResultPredicateBlock continuePredicate,
-                                       NSTimeInterval delay,
-                                       NSInteger maxRepeatCount);
-
-JFFAsyncOperation asyncOperationAfterDelay(NSTimeInterval delay,
-                                           JFFAsyncOperation loader);
+    //TODO test it
+    JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation loader,
+                                           JFFResultPredicateBlock continuePredicate,
+                                           NSTimeInterval delay,
+                                           NSInteger maxRepeatCount);
+    
+    JFFAsyncOperation asyncOperationAfterDelay(NSTimeInterval delay,
+                                               JFFAsyncOperation loader);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

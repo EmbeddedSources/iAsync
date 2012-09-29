@@ -14,11 +14,10 @@ typedef JFFAsyncOperation (*MergeTwoLoadersPtr)( JFFAsyncOperation, JFFAsyncOper
 static JFFAsyncOperationBinder MergeBinders(MergeTwoBindersPtr merger, NSArray *blocks)
 {
     assert([blocks lastObject]);// should not be empty
-
+    
     JFFAsyncOperationBinder firstBinder = blocks[0];
     
-    for (NSUInteger index = 1; index < [blocks count]; ++index)
-    {
+    for (NSUInteger index = 1; index < [blocks count]; ++index) {
         JFFAsyncOperationBinder secondBinder = blocks[index];
         firstBinder = merger(firstBinder, secondBinder);
     }
@@ -54,8 +53,8 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
             doneCallback     = [doneCallback     copy];
             
             JFFCancelAsyncOperation firstCancel = firstLoader(progressCallback,
-                                                               cancelCallback,
-                                                               ^void(id result, NSError *error)
+                                                              cancelCallback,
+                                                              ^void(id result, NSError *error)
             {
                 if (error)
                 {
@@ -278,13 +277,11 @@ JFFAsyncOperation trySequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
 
 JFFAsyncOperation trySequenceOfAsyncOperationsArray(NSArray *loaders)
 {
-    assert([loaders count] != 0);
+    assert([loaders hasElements]);
     
-    NSArray *binders = [loaders map:^id(id loader)
-    {
+    NSArray *binders = [loaders map:^id(id loader) {
         loader = [loader copy];
-        return ^JFFAsyncOperation(id data)
-        {
+        return ^JFFAsyncOperation(id data) {
             return loader;
         };
     } ];

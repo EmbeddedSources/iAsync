@@ -5,34 +5,33 @@
 
 @implementation NSDictionary (AsyncMap)
 
--(JFFAsyncOperation)asyncMap:( JFFAsyncDictMappingBlock )block_
+- (JFFAsyncOperation)asyncMap:(JFFAsyncDictMappingBlock)block
 {
-    NSMutableArray* asyncOperations_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
-
-    NSMutableDictionary* finalResult_ = [ [ NSMutableDictionary alloc ] initWithCapacity: [ self count ] ];
-
-    [ self enumerateKeysAndObjectsUsingBlock: ^( id key_, id object_, BOOL* stop_ )
-    {
-        JFFAsyncOperation loader_ = block_( key_, object_ );
-
-        JFFDidFinishAsyncOperationHook finishCallbackHook_ = ^( id result_
-                                                               , NSError* error_
-                                                               , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    NSMutableArray *asyncOperations = [[NSMutableArray alloc] initWithCapacity:[self count]];
+    
+    NSMutableDictionary *finalResult = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
+    
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
+        JFFAsyncOperation loader = block(key, object);
+        
+        JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
+                                                              NSError *error,
+                                                              JFFDidFinishAsyncOperationHandler doneCallback)
         {
-            if ( result_ )
-                finalResult_[ key_ ] = result_;
-            if ( doneCallback_ )
-                doneCallback_( result_, error_ );
+            if (result)
+                finalResult[key] = result;
+            if (doneCallback)
+                doneCallback(result, error);
         };
-        loader_ = asyncOperationWithFinishHookBlock( loader_, finishCallbackHook_ );
-
-        [ asyncOperations_ addObject: loader_ ];
+        loader = asyncOperationWithFinishHookBlock(loader, finishCallbackHook);
+        
+        [asyncOperations addObject:loader];
     } ];
-
-    JFFAsyncOperation loader_ = failOnFirstErrorGroupOfAsyncOperationsArray( asyncOperations_ );
-    JFFChangedResultBuilder resultBuilder_ = ^id( id localResult_ )
+    
+    JFFAsyncOperation loader_ = failOnFirstErrorGroupOfAsyncOperationsArray(asyncOperations);
+    JFFChangedResultBuilder resultBuilder_ = ^id(id localResult)
     {
-        return [ finalResult_ copy ];
+        return [finalResult copy];
     };
     loader_ = asyncOperationWithChangedResult( loader_, resultBuilder_ );
 
