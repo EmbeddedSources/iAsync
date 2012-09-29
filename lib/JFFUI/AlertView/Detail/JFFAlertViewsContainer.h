@@ -6,19 +6,19 @@
 
 @interface JFFAlertViewsContainer : NSObject
 
-+(id)sharedAlertViewsContainer;
++ (id)sharedAlertViewsContainer;
 
--(NSUInteger)count;
+- (NSUInteger)count;
 
--(void)addAlertView:( JFFAlertView* )alertView_;
--(void)removeAlertView:( JFFAlertView* )alertView_;
--(BOOL)containsAlertView:( JFFAlertView* )alertView_;
+- (void)addAlertView:(JFFAlertView *)alertView;
+- (void)removeAlertView:(JFFAlertView *)alertView;
+- (BOOL)containsAlertView:(JFFAlertView *)alertView;
 
--(JFFAlertView*)firstAlertView;
+- (JFFAlertView *)firstAlertView;
 
--(void)removeAllAlertViews;
+- (void)removeAllAlertViews;
 
--(void)each:( void(^)( JFFAlertView* alertView_ ) )block_;
--(id)firstMatch:( JFFPredicateBlock )predicate_;
+- (void)each:(void(^)(JFFAlertView *alertView))block;
+- (id)firstMatch:(JFFPredicateBlock)predicate;
 
 @end
