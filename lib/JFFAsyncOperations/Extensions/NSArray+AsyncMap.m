@@ -14,23 +14,22 @@
     return failOnFirstErrorGroupOfAsyncOperationsArray( asyncOperations_ );
 }
 
--(JFFAsyncOperation)tolerantFaultAsyncMap:( JFFAsyncOperationBinder )block_
+- (JFFAsyncOperation)tolerantFaultAsyncMap:(JFFAsyncOperationBinder)block
 {
-    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
-
-    NSArray* asyncOperations_ = [ self map: ^id( id object_ )
-    {
-        JFFAsyncOperation loader_ = block_( object_ );
-        JFFDidFinishAsyncOperationHandler finishCallbackBlock_ = ^void( id localResult_, NSError* error_ )
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
+    
+    NSArray *asyncOperations = [self map:^id(id object) {
+        JFFAsyncOperation loader = block(object);
+        JFFDidFinishAsyncOperationHandler finishCallbackBlock = ^void(id localResult, NSError *error)
         {
-            if ( localResult_ )
-                [ result_ addObject: localResult_ ];
+            if (localResult)
+                [result addObject:localResult];
         };
-        return asyncOperationWithFinishCallbackBlock( loader_, finishCallbackBlock_ );
-    } ];
-
-    JFFAsyncOperation loader_ = groupOfAsyncOperationsArray( asyncOperations_ );
-    return asyncOperationWithResultOrError( loader_, result_, nil );
+        return asyncOperationWithFinishCallbackBlock(loader, finishCallbackBlock);
+    }];
+    
+    JFFAsyncOperation loader = groupOfAsyncOperationsArray(asyncOperations);
+    return asyncOperationWithResultOrError(loader, result, nil);
 }
 
 @end
