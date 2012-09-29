@@ -14,7 +14,6 @@
 
 @end
 
-//TODO should be NSProxy
 @implementation JFFDelegateProxyClassMethods
 
 - (id)delegateGetterHookMethod

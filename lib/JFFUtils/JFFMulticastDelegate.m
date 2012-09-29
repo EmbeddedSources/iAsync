@@ -9,8 +9,7 @@
 
 - (JFFMutableAssignArray *)delegates
 {
-    if (!self->_delegates)
-    {
+    if (!self->_delegates) {
         self->_delegates = [JFFMutableAssignArray new];
     }
     return self->_delegates;
@@ -54,8 +53,7 @@
     __block NSMethodSignature *result;
     [self->_delegates enumerateObjectsUsingBlock:^void(id delegate,
                                                        NSUInteger idx,
-                                                       BOOL *stop)
-    {
+                                                       BOOL *stop) {
         result = [delegate methodSignatureForSelector:selector];
         if (result)
             *stop = YES;
