@@ -6,95 +6,86 @@
 
 @implementation NSObject (WeakAsyncOperation)
 
--(JFFAsyncOperation)autoUnsibscribeOrCancelAsyncOperation:( JFFAsyncOperation )nativeAsyncOp_
-                                                   cancel:( BOOL )cancelNativeAsyncOp_
+- (JFFAsyncOperation)autoUnsibscribeOrCancelAsyncOperation:(JFFAsyncOperation)nativeAsyncOp
+                                                    cancel:(BOOL)cancelNativeAsyncOp
 {
-    NSParameterAssert( nativeAsyncOp_ );
-
-    nativeAsyncOp_ = [ nativeAsyncOp_ copy ];
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    NSParameterAssert(nativeAsyncOp);
+    
+    nativeAsyncOp = [nativeAsyncOp copy];
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        __block BOOL finished_ = NO;
-        __unsafe_unretained id self_ = self;
-
-        JFFSimpleBlockHolder* ondeallocBlockHolder_ = [ JFFSimpleBlockHolder new ];
-
-        JFFSimpleBlockHolder* removeOndeallocBlockJolder_ = [ JFFSimpleBlockHolder new ];
-        removeOndeallocBlockJolder_.simpleBlock = ^void( void )
-        {
-            finished_ = YES;
-
-            if ( ondeallocBlockHolder_.simpleBlock )
-            {
-                [ self_ removeOnDeallocBlock: ondeallocBlockHolder_.simpleBlock ];
-                ondeallocBlockHolder_.simpleBlock = nil;
+        __block BOOL finished = NO;
+        __unsafe_unretained id weakSelf = self;
+        
+        JFFSimpleBlockHolder *ondeallocBlockHolder = [JFFSimpleBlockHolder new];
+        
+        JFFSimpleBlockHolder *removeOndeallocBlockHolder = [JFFSimpleBlockHolder new];
+        removeOndeallocBlockHolder.simpleBlock = ^void(void) {
+            finished = YES;
+            
+            if (ondeallocBlockHolder.simpleBlock) {
+                [weakSelf removeOnDeallocBlock:ondeallocBlockHolder.simpleBlock];
+                ondeallocBlockHolder.simpleBlock = nil;
             }
         };
-
-        __block JFFCancelAsyncOperation cancelCallbackHolder_;
-        cancelCallbackHolder_ = [ cancelCallback_ copy ];
-        JFFCancelAsyncOperationHandler cancelCallbackWrapper_ = ^void( BOOL cancelOp_ )
-        {
-            removeOndeallocBlockJolder_.onceSimpleBlock();
-            if ( cancelCallbackHolder_ )
-            {
-                cancelCallbackHolder_( cancelOp_ );
-                cancelCallbackHolder_ = nil;
+        
+        __block JFFCancelAsyncOperation cancelCallbackHolder;
+        cancelCallbackHolder = [cancelCallback copy];
+        JFFCancelAsyncOperationHandler cancelCallbackWrapper = ^void(BOOL cancelOp) {
+            removeOndeallocBlockHolder.onceSimpleBlock();
+            if (cancelCallbackHolder) {
+                cancelCallbackHolder(cancelOp);
+                cancelCallbackHolder = nil;
             }
         };
-
-        JFFDidFinishAsyncOperationBlockHolder* doneCallbackHolder_ = [ JFFDidFinishAsyncOperationBlockHolder new ];
-        doneCallbackHolder_.didFinishBlock = doneCallback_;
-        JFFDidFinishAsyncOperationHandler doneCallbackWrapper_ = ^void( id result_, NSError* error_ )
-        {
-            removeOndeallocBlockJolder_.onceSimpleBlock();
-            doneCallbackHolder_.onceDidFinishBlock( result_, error_ );
+        
+        JFFDidFinishAsyncOperationBlockHolder *doneCallbackHolder = [JFFDidFinishAsyncOperationBlockHolder new];
+        doneCallbackHolder.didFinishBlock = doneCallback;
+        JFFDidFinishAsyncOperationHandler doneCallbackWrapper = ^void(id result, NSError *error) {
+            removeOndeallocBlockHolder.onceSimpleBlock();
+            doneCallbackHolder.onceDidFinishBlock(result, error);
         };
-
-        JFFCancelAsyncOperation cancel_ = nativeAsyncOp_( progressCallback_
-                                                         , cancelCallbackWrapper_
-                                                         , doneCallbackWrapper_ );
-
-        if ( finished_ )
-        {
+        
+        JFFCancelAsyncOperation cancel = nativeAsyncOp(progressCallback,
+                                                       cancelCallbackWrapper,
+                                                       doneCallbackWrapper);
+        
+        if (finished) {
             return JFFStubCancelAsyncOperationBlock;
         }
-
-        ondeallocBlockHolder_.simpleBlock = ^void( void )
-        {
-            cancel_( cancelNativeAsyncOp_ );
+        
+        ondeallocBlockHolder.simpleBlock = ^void(void) {
+            cancel(cancelNativeAsyncOp);
         };
-
+        
         //try assert retain count
-        [ self addOnDeallocBlock: ondeallocBlockHolder_.simpleBlock ];
-
-        __block JFFCancelAsyncOperation cancelBlockHolder_ = [ ^void( BOOL canceled_ )
-        {
-            cancel_( canceled_ );
-        } copy ];
-
-        return ^( BOOL canceled_ )
-        {
-            if ( !cancelBlockHolder_ )
+        [self addOnDeallocBlock:ondeallocBlockHolder.simpleBlock];
+        
+        __block JFFCancelAsyncOperation cancelBlockHolder = [^void(BOOL canceled) {
+            cancel(canceled);
+        }copy];
+        
+        return ^(BOOL canceled) {
+            if (!cancelBlockHolder)
                 return;
-            cancelBlockHolder_( canceled_ );
-            cancelBlockHolder_ = nil;
+            cancelBlockHolder(canceled);
+            cancelBlockHolder = nil;
         };
     };
 }
 
--(JFFAsyncOperation)autoUnsubsribeOnDeallocAsyncOperation:( JFFAsyncOperation )native_async_op_
+- (JFFAsyncOperation)autoUnsubsribeOnDeallocAsyncOperation:(JFFAsyncOperation)nativeAsyncOp
 {
-    return [ self autoUnsibscribeOrCancelAsyncOperation: native_async_op_
-                                                 cancel: NO ];
+    return [self autoUnsibscribeOrCancelAsyncOperation:nativeAsyncOp
+                                                 cancel:NO];
 }
 
--(JFFAsyncOperation)autoCancelOnDeallocAsyncOperation:( JFFAsyncOperation )native_async_op_
+- (JFFAsyncOperation)autoCancelOnDeallocAsyncOperation:( JFFAsyncOperation )nativeAsyncOp
 {
-    return [ self autoUnsibscribeOrCancelAsyncOperation: native_async_op_
-                                                 cancel: YES ];
+    return [self autoUnsibscribeOrCancelAsyncOperation:nativeAsyncOp
+                                                cancel:YES];
 }
 
 @end
