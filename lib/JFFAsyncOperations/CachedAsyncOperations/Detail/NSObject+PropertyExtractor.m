@@ -4,87 +4,78 @@
 
 #include <objc/runtime.h>
 
-static char property_data_property_key_;
+static char propertyDataPropertyKey;
 
 @interface NSObject (PropertyExtractorPrivate)
 
-@property ( nonatomic ) NSMutableDictionary* propertyDataByPropertyName;
+@property (nonatomic) NSMutableDictionary *propertyDataByPropertyName;
 
 @end
 
 @implementation NSObject (PropertyExtractor)
 
--(JFFObjectRelatedPropertyData*)propertyDataForPropertPath:( JFFPropertyPath* )propertyPath_
+- (JFFObjectRelatedPropertyData *)propertyDataForPropertPath:(JFFPropertyPath *)propertyPath
 {
-    id data_ = self.propertyDataByPropertyName[ propertyPath_.name ];
-    if ( propertyPath_.key == nil )
-    {
-        return data_;
+    id data = self.propertyDataByPropertyName[propertyPath.name];
+    if (propertyPath.key == nil) {
+        return data;
     }
-    return [ data_ objectForKey: propertyPath_.key ];
+    return [data objectForKey: propertyPath.key];
 }
 
--(void)removePropertyForPropertPath:( JFFPropertyPath* )propertyPath_
+//TODO test
+- (void)removePropertyForPropertPath:(JFFPropertyPath *)propertyPath
 {
-    if ( propertyPath_.key )
-    {
-        NSMutableDictionary* subDict_ = self.propertyDataByPropertyName[ propertyPath_.name ];
-        [ subDict_ removeObjectForKey: propertyPath_.key ];
-        if ( [ subDict_ count ] == 0 )
-        {
-            [ self.propertyDataByPropertyName removeObjectForKey: propertyPath_.name ];
+    if (propertyPath.key) {
+        NSMutableDictionary *subDict = self.propertyDataByPropertyName[propertyPath.name];
+        [subDict removeObjectForKey:propertyPath.key];
+        if ([subDict count] == 0) {
+            [self.propertyDataByPropertyName removeObjectForKey:propertyPath.name];
         }
+    } else {
+        [ self.propertyDataByPropertyName removeObjectForKey:propertyPath.name ];
     }
-    else
-    {
-        [ self.propertyDataByPropertyName removeObjectForKey: propertyPath_.name ];
-    }
-
+    
     //clear property
-    if ( [ self.propertyDataByPropertyName count ] == 0 )
-    {
+    if ( [ self.propertyDataByPropertyName count ] == 0 ) {
         self.propertyDataByPropertyName = nil;
     }
 }
 
--(void)setPropertyData:( JFFObjectRelatedPropertyData* )property_
-        forPropertPath:( JFFPropertyPath* )propertyPath_
+- (void)setPropertyData:(JFFObjectRelatedPropertyData *)property
+         forPropertPath:(JFFPropertyPath *)propertyPath
 {
-    if ( !property_ )
-    {
-        [ self removePropertyForPropertPath: propertyPath_ ];
+    if (!property) {
+        [self removePropertyForPropertPath:propertyPath];
         return;
     }
-
-    if ( self.propertyDataByPropertyName == nil )
-    {
-        self.propertyDataByPropertyName = [ NSMutableDictionary new ];
+    
+    if (self.propertyDataByPropertyName == nil) {
+        self.propertyDataByPropertyName = [NSMutableDictionary new];
     }
-
-    if ( propertyPath_.key )
-    {
-        NSMutableDictionary* subDict_ = self.propertyDataByPropertyName[ propertyPath_.name ];
-        if ( subDict_ == nil )
-        {
-            subDict_ = [ NSMutableDictionary new ];
-            self.propertyDataByPropertyName[ propertyPath_.name ] = subDict_;
+    
+    if (propertyPath.key) {
+        NSMutableDictionary *subDict = self.propertyDataByPropertyName[propertyPath.name];
+        if (subDict == nil) {
+            subDict = [NSMutableDictionary new];
+            self.propertyDataByPropertyName[propertyPath.name] = subDict;
         }
-
-        subDict_[ propertyPath_.key ] = property_;
+        
+        subDict[propertyPath.key] = property;
         return;
     }
-
-    self.propertyDataByPropertyName[ propertyPath_.name ] = property_;
+    
+    self.propertyDataByPropertyName[propertyPath.name] = property;
 }
 
--(NSMutableDictionary*)propertyDataByPropertyName
+- (NSMutableDictionary *)propertyDataByPropertyName
 {
-    return objc_getAssociatedObject( self, &property_data_property_key_ );
+    return objc_getAssociatedObject(self, &propertyDataPropertyKey);
 }
 
--(void)setPropertyDataByPropertyName:( NSMutableDictionary* )dictionary_
+- (void)setPropertyDataByPropertyName:( NSMutableDictionary* )dictionary
 {
-    objc_setAssociatedObject( self, &property_data_property_key_, dictionary_, OBJC_ASSOCIATION_RETAIN_NONATOMIC );
+    objc_setAssociatedObject(self, &propertyDataPropertyKey, dictionary, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
