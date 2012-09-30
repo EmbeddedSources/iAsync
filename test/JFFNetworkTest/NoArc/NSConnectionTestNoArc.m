@@ -6,62 +6,58 @@
 
 -(void)setUp
 {
-    [ JNNsUrlConnection enableInstancesCounting ];
+    [JNNsUrlConnection enableInstancesCounting];
 }
 
 - (void)testValidDownloadCompletesCorrectly
 {
-    const NSUInteger initialCount_ = [JNNsUrlConnection instancesCount];
-    id< JNUrlConnection > connection_ = nil;
+    const NSUInteger initialCount = [JNNsUrlConnection instancesCount];
+    id< JNUrlConnection > connection;
     
-    
-    NSAutoreleasePool* pool_ = [ [ NSAutoreleasePool alloc ] init ];
-    [ self prepare ];
+    NSAutoreleasePool *pool = [NSAutoreleasePool new];
+    [self prepare];
     {
-        NSURL* dataUrl_ = [ [ JNTestBundleManager decodersDataBundle ] URLForResource: @"1"
-                                                                        withExtension: @"txt" ];
+        NSURL *dataUrl = [[JNTestBundleManager decodersDataBundle] URLForResource:@"1"
+                                                                    withExtension:@"txt"];
         
-        JFFURLConnectionParams* params_ = [ [ JFFURLConnectionParams new ] autorelease ];
-        params_.url = dataUrl_;
-        JNConnectionsFactory* factory_ = [ [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ] autorelease ];
-
-        connection_ = [ factory_ createStandardConnection ];
-
-        NSMutableData* totalData_ = [ NSMutableData data ];
-        NSData* expectedData_ = [ NSData dataWithContentsOfURL: dataUrl_ ];
-
-        connection_.didReceiveResponseBlock = ^( id response_ )
+        JFFURLConnectionParams *params = [[JFFURLConnectionParams new] autorelease];
+        params.url = dataUrl;
+        JNConnectionsFactory *factory = [[[JNConnectionsFactory alloc] initWithURLConnectionParams:params] autorelease];
+        
+        connection = [factory createStandardConnection];
+        
+        NSMutableData *totalData = [NSMutableData data];
+        NSData *expectedData = [NSData dataWithContentsOfURL:dataUrl];
+        
+        connection.didReceiveResponseBlock = ^(id response)
         {
             //IDLE
         };
-        connection_.didReceiveDataBlock = ^( NSData* data_chunk_ )
+        connection.didReceiveDataBlock = ^(NSData *dataChunk)
         {
-            [ totalData_ appendData: data_chunk_ ];
+            [totalData appendData:dataChunk];
         };
-
-        connection_.didFinishLoadingBlock = ^( NSError* error_ )
-        {
-            if ( nil != error_ )
-            {
-                [ self notify: kGHUnitWaitStatusFailure
-                  forSelector: _cmd ];
+        
+        connection.didFinishLoadingBlock = ^(NSError *error) {
+            if (nil != error) {
+                [self notify:kGHUnitWaitStatusFailure
+                 forSelector:_cmd];
                 return;
             }
-
-            GHAssertTrue( [ expectedData_ isEqualToData: totalData_ ], @"packet mismatch" );
-            [ self notify: kGHUnitWaitStatusSuccess 
-              forSelector: _cmd ];
+            
+            GHAssertTrue([expectedData isEqualToData:totalData], @"packet mismatch");
+            [self notify:kGHUnitWaitStatusSuccess
+             forSelector:_cmd];
         };
-
-        [ connection_ start ];
+        
+        [connection start];
     }
-    [ self waitForStatus: kGHUnitWaitStatusSuccess
-                 timeout: 61. ];
-    [ pool_ drain ];
-
-   
-    NSUInteger currentCount_ = [ JNNsUrlConnection instancesCount ];
-    GHAssertTrue( initialCount_ == currentCount_, @"packet mismatch" );
+    [self waitForStatus:kGHUnitWaitStatusSuccess
+                timeout:61.];
+    [pool drain];
+    
+    NSUInteger currentCount = [JNNsUrlConnection instancesCount];
+    GHAssertTrue(initialCount == currentCount, @"packet mismatch");
 }
 
 @end

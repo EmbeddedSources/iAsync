@@ -68,48 +68,44 @@
 
     @autoreleasepool
     {
-        [ self prepare ];
+        [self prepare];
 
         NSURL* dataUrl_ = [ [ NSURL alloc ] initWithString: @"http://www.google.com" ];
 
-        JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
-        params_.url = dataUrl_;
-        JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
-
-        id< JNUrlConnection > connection_ = [ factory_ createStandardConnection ];
-
-        connection_.didReceiveResponseBlock = ^( id response_ )
-        {
+        JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+        params.url = dataUrl_;
+        JNConnectionsFactory *factory = [[JNConnectionsFactory alloc] initWithURLConnectionParams:params];
+        
+        id< JNUrlConnection > connection = [factory createStandardConnection];
+        
+        connection.didReceiveResponseBlock = ^(id response) {
             //IDLE
         };
-
-        connection_.didReceiveDataBlock = ^( NSData* dataChunk_ )
-        {
+        
+        connection.didReceiveDataBlock = ^(NSData *dataChunk) {
             dataReceived_ = YES;
         };
-
-        connection_.didFinishLoadingBlock = ^( NSError* error_ )
-        {
-            if ( nil != error_ )
-            {
-                [ self notify: kGHUnitWaitStatusFailure
-                  forSelector: _cmd ];
+        
+        connection.didFinishLoadingBlock = ^(NSError *error) {
+            if (nil != error) {
+                [self notify:kGHUnitWaitStatusFailure
+                 forSelector:_cmd];
                 return;
             }
             
-            [ self notify: kGHUnitWaitStatusSuccess
-              forSelector: _cmd ];
+            [self notify:kGHUnitWaitStatusSuccess
+             forSelector:_cmd];
         };
-
-        [ connection_ start ];
-        [ self waitForStatus: kGHUnitWaitStatusSuccess
-                     timeout: 61. ];
+        
+        [connection start];
+        [self waitForStatus:kGHUnitWaitStatusSuccess
+                    timeout:61.];
     }
-
+    
     GHAssertTrue( dataReceived_, @"packet mismatch" );
-
-    NSUInteger currentCount_ = [ JNNsUrlConnection instancesCount ];
-    GHAssertTrue( initialCount_ == currentCount_, @"packet mismatch" );
+    
+    NSUInteger currentCount = [JNNsUrlConnection instancesCount];
+    GHAssertTrue(initialCount_ == currentCount, @"packet mismatch");
 }
 
 -(void)RtestInValidDownloadCompletesWithError

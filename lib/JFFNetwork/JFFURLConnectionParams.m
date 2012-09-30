@@ -6,8 +6,7 @@
 {
     JFFURLConnectionParams *copy = [[[self class]allocWithZone:zone]init];
     
-    if (copy)
-    {
+    if (copy) {
         copy->_url                 = [self->_url      copyWithZone:zone];
         copy->_httpBody            = [self->_httpBody copyWithZone:zone];
         copy->_headers             = [self->_headers  copyWithZone:zone];

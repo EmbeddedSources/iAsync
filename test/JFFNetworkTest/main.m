@@ -3,12 +3,6 @@
 
 void exceptionHandler(NSException *exception);
 
-// Default exception handler
-void exceptionHandler(NSException *exception)
-{ 
-    NSLog(@"%@\n%@", [exception reason], GHUStackTraceFromException(exception));
-}
-
 int main(int argc, char *argv[]) 
 {
     /*!
@@ -35,25 +29,20 @@ int main(int argc, char *argv[])
     setenv( "GHUNIT_AUTORUN" , "YES", 1 );
     setenv( "WRITE_JUNIT_XML", "YES", 1 );
     setenv( "GHUNIT_AUTOEXIT" , "YES", 1 );
-    NSSetUncaughtExceptionHandler(&exceptionHandler);
-
-    @autoreleasepool
-    {
+    
+    @autoreleasepool {
         // Register any special test case classes
         //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  
-   
+        
         int retVal = 0;
         // If GHUNIT_CLI is set we are using the command line interface and run the tests
         // Otherwise load the GUI app
-        if (getenv("GHUNIT_CLI"))
-        {
+        if (getenv("GHUNIT_CLI")) {
             retVal = [GHTestRunner run];
-        } 
-        else 
-        {
+        } else {
             retVal = UIApplicationMain(argc, argv, nil, @"GHUnitIPhoneAppDelegate");
         }
-
+        
         return retVal;
     }
 }
