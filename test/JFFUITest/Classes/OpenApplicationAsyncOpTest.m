@@ -4,7 +4,7 @@
 
 //TODO workaround to hook delegate method
 //TODO fix this workaround
-@implementation GHUnitIPhoneAppDelegate (OpenApplicationAsyncOpTest)
+@implementation GHUnitIOSAppDelegate (OpenApplicationAsyncOpTest)
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
