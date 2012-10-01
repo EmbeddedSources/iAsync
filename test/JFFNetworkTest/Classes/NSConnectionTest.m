@@ -110,14 +110,14 @@
 
 -(void)RtestInValidDownloadCompletesWithError
 {
-    [ self prepare ];
-
-    NSURL* dataUrl_ = [ NSURL URLWithString: @"http://kdjsfhjkfhsdfjkdhfjkds.com" ];
-
-    JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
-    params_.url = dataUrl_;
-    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
-
+    [self prepare];
+    
+    NSURL *dataUrl = [NSURL URLWithString:@"http://kdjsfhjkfhsdfjkdhfjkds.com"];
+    
+    JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+    params.url = dataUrl;
+    JNConnectionsFactory *factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams:params];
+    
     id< JNUrlConnection > connection_ = [ factory_ createStandardConnection ];
 
     connection_.didReceiveResponseBlock = ^( id response_ )
