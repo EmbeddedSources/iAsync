@@ -113,8 +113,7 @@ static id glStorageInstance = nil;
     
     args.dataLoaderForURL = ^JFFAsyncOperation(NSURL *url)
     {
-        return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError)
-        {
+        return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
             NSData *data = [[NSData alloc]initWithContentsOfURL:url
                                                         options:NSDataReadingMappedIfSafe
                                                           error:outError];

@@ -110,6 +110,13 @@
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = JFFScheduler;
 		};
+		CED001A616198EAD00368E7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEDBB8E115F60E840093FE95 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE444A1C1608609100DD85B0;
+			remoteInfo = JFFUtilsTest;
+		};
 		CEDBB8DF15F60E7C0093FE95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEDBB8DB15F60E7C0093FE95 /* JFFTestTools.xcodeproj */;
@@ -315,6 +322,7 @@
 				CEDBB8EB15F60E840093FE95 /* libJFFUtilsMacOS.a */,
 				CEDBB8ED15F60E840093FE95 /* libJFFUtils-clang.a */,
 				CEDBB8EF15F60E840093FE95 /* JFFUtilsFW.framework */,
+				CED001A716198EAD00368E7D /* JFFUtilsTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -449,6 +457,13 @@
 			fileType = wrapper.framework.static;
 			path = JFFSchedulerFW.framework;
 			remoteRef = CE91AA3315F64F71002B220B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CED001A716198EAD00368E7D /* JFFUtilsTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFUtilsTest.octest;
+			remoteRef = CED001A616198EAD00368E7D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CEDBB8E015F60E7C0093FE95 /* libJFFTestTools.a */ = {

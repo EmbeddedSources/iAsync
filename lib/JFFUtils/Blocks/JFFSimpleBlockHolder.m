@@ -6,7 +6,7 @@
 {
     if (!self->_simpleBlock)
         return;
-
+    
     JFFSimpleBlock block = self.simpleBlock;
     self->_simpleBlock = nil;
     block();

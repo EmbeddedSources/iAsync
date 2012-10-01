@@ -52,8 +52,7 @@
 
 - (NSMutableArray *)mutableArray
 {
-    if (!self->_mutableArray)
-    {
+    if (!self->_mutableArray) {
         self->_mutableArray = [@[] mutableCopy];
     }
     return self->_mutableArray;
@@ -61,8 +60,7 @@
 
 - (NSArray *)array
 {
-    return [self->_mutableArray map:^id(JFFAutoRemoveAssignProxy *proxy)
-    {
+    return [self->_mutableArray map:^id(JFFAutoRemoveAssignProxy *proxy) {
         return proxy.target;
     }];
 }
