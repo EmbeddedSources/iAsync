@@ -6,30 +6,27 @@
 
 -(void)testCallingOfPregressBlock
 {
-    NSObject* resultObject_ = [ NSObject new ];
-
-    JFFSyncOperation loadDataBlock_ = ^id( NSError** error_ )
-    {
-        return resultObject_;
+    NSObject *resultObject = [NSObject new];
+    
+    JFFSyncOperation loadDataBlock_ = ^id( NSError** error_ ) {
+        return resultObject;
     };
-
+    
     JFFAsyncOperation loader_ = asyncOperationWithSyncOperationAndQueue( loadDataBlock_, "com.test" );
-
+    
     __block BOOL resultCalled_ = NO;
-
-    JFFDidFinishAsyncOperationHandler doneCallback_ = ^( id result_, NSError* error_ )
-    {
+    
+    JFFDidFinishAsyncOperationHandler doneCallback_ = ^(id result, NSError *error) {
         resultCalled_ = YES;
         [ self notify: kGHUnitWaitStatusSuccess forSelector: _cmd ];
     };
-
+    
     __block BOOL progressCalled_ = NO;
     __block NSUInteger progressCallsCount_ = 0;
     __block BOOL progressCalledBeforeResult_ = NO;
-
-    JFFAsyncOperationProgressHandler progressCallback_ = ^( id info_ )
-    {
-        progressCalled_ = ( info_ == resultObject_ );
+    
+    JFFAsyncOperationProgressHandler progressCallback_ = ^(id info_) {
+        progressCalled_ = ( info_ == resultObject );
         ++progressCallsCount_;
         progressCalledBeforeResult_ = !resultCalled_;
     };
