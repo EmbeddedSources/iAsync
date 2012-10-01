@@ -1,0 +1,11 @@
+//
+// Prefix header for all source files of the 'JFFStoreKit' target in the 'JFFStoreKit' project
+//
+
+#ifdef __OBJC__
+    #import <JFFAsyncOperations/JFFAsyncOperations.h>
+    #import <JFFUtils/JFFUtils.h>
+    
+    #import <StoreKit/StoreKit.h>
+    #import <Foundation/Foundation.h>
+#endif
