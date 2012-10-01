@@ -30,12 +30,12 @@
         ++progressCallsCount_;
         progressCalledBeforeResult_ = !resultCalled_;
     };
-
+    
     loader_( progressCallback_, nil, doneCallback_ );
-
+    
     [ self prepare ];
     [ self waitForStatus: kGHUnitWaitStatusSuccess timeout: 1. ];
-
+    
     GHAssertTrue( progressCalled_, @"ok" );
     GHAssertTrue( progressCallsCount_ == 1, @"ok" );
     GHAssertTrue( progressCalledBeforeResult_, @"ok" );

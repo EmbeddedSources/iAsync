@@ -43,8 +43,7 @@
 
     self.connection.didReceiveResponseBlock = ^void(id< JNUrlResponse > response)
     {
-        if ( !unretainedSelf->_responseAnalyzer )
-        {
+        if ( !unretainedSelf->_responseAnalyzer ) {
             resultHolder = response;
             return;
         }
@@ -52,8 +51,7 @@
         NSError *error;
         resultHolder = unretainedSelf->_responseAnalyzer(response, &error);
 
-        if (error)
-        {
+        if (error) {
             [unretainedSelf forceCancel];
             finish(error);
         }

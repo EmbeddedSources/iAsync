@@ -31,8 +31,7 @@ static NSString* const queryComponentSeparator = @"&";
 
 - (NSArray*)arrayOfQueryComponentsForKey:(NSString *)key
 {
-    return [self map:^id(id value)
-    {
+    return [self map:^id(id value) {
         return [value stringFromQueryComponentAndKey:key];
     } ];
 }
@@ -43,8 +42,7 @@ static NSString* const queryComponentSeparator = @"&";
 
 - (NSString*)stringFromQueryComponents
 {
-    NSArray *result = [[self allKeys]flatten:^NSArray*(id key)
-    {
+    NSArray *result = [[self allKeys]flatten:^NSArray*(id key) {
         NSObject *values = self[key];
         NSString *encodedKey = [key stringByEncodingURLFormat];
         return [values arrayOfQueryComponentsForKey:encodedKey];

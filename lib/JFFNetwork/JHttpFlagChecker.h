@@ -2,8 +2,8 @@
 
 @interface JHttpFlagChecker : NSObject
 
-+(BOOL)isDownloadErrorFlag:( CFIndex )statusCode_;
-+(BOOL)isRedirectFlag:( CFIndex )statusCode_;
-+(BOOL)isSuccessFlag:( CFIndex )statusCode_;
++ (BOOL)isDownloadErrorFlag:(CFIndex)statusCode;
++ (BOOL)isRedirectFlag:(CFIndex)statusCode;
++ (BOOL)isSuccessFlag:(CFIndex)statusCode;
 
 @end

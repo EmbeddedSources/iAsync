@@ -225,18 +225,15 @@ static JFFAsyncOperationBinder generalJsonDataBinderWithAnalizer(JFFAnalyzer ana
     assert(analyzer);
     analyzer = [analyzer copy];
     
-    return ^JFFAsyncOperation(NSData *data)
-    {
+    return ^JFFAsyncOperation(NSData *data) {
         JFFAsyncOperation loader = asyncOperationBinderJsonDataParser()(data);
         
-        JFFAsyncOperationBinder jsonToAccountBinder = ^JFFAsyncOperation(id jsonObject)
-        {
+        JFFAsyncOperationBinder jsonToAccountBinder = ^JFFAsyncOperation(id jsonObject) {
             NSError *error;
             
             id result = analyzer(jsonObject, &error);
             
-            if (error)
-            {
+            if (error) {
                 return asyncOperationWithError(error);
             }
             
@@ -249,12 +246,10 @@ static JFFAsyncOperationBinder generalJsonDataBinderWithAnalizer(JFFAnalyzer ana
 
 JFFAsyncOperationBinder jsonDataToAuthedAccountBinder()
 {
-    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError)
-    {
+    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError) {
         NSError *error = validateJSONAuthedAccountObjectOnError(jsonObject);
         
-        if (error)
-        {
+        if (error) {
             [error setToPointer:outError];
             return nil;
         }
@@ -268,10 +263,8 @@ JFFAsyncOperationBinder jsonDataToAuthedAccountBinder()
 
 JFFAsyncOperationBinder jsonDataToOneAccountBinder()
 {
-    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError)
-    {
-        if (!validJeneralJSONObject(jsonObject, outError))
-        {
+    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError) {
+        if (!validJeneralJSONObject(jsonObject, outError)) {
             return nil;
         }
         
@@ -286,17 +279,14 @@ JFFAsyncOperationBinder jsonDataToOneAccountBinder()
 
 JFFAsyncOperationBinder jsonDataToAccountsBinder()
 {
-    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError)
-    {
-        if (!validJeneralJSONObject(jsonObject, outError))
-        {
+    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError) {
+        if (!validJeneralJSONObject(jsonObject, outError)) {
             return nil;
         }
         
         NSArray *accountsJson = jsonObject[@"data"];
         
-        NSArray *result = [accountsJson map:^id(id object, NSError *__autoreleasing *outError)
-        {
+        NSArray *result = [accountsJson map:^id(id object, NSError *__autoreleasing *outError) {
             return [JFFInstagramAccount newInstagramAccountWithJSONObject:object
                                                                     error:outError];
         } error:outError];
@@ -307,17 +297,14 @@ JFFAsyncOperationBinder jsonDataToAccountsBinder()
 
 JFFAsyncOperationBinder jsonDataToMediaItems()
 {
-    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError)
-    {
-        if (!validJeneralJSONObject(jsonObject, outError))
-        {
+    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError) {
+        if (!validJeneralJSONObject(jsonObject, outError)) {
             return nil;
         }
         
         NSArray *mediaItemsJson = jsonObject[@"data"];
         
-        NSArray *result = [mediaItemsJson map:^id(id object, NSError *__autoreleasing *outError)
-        {
+        NSArray *result = [mediaItemsJson map:^id(id object, NSError *__autoreleasing *outError) {
             return [JFFInstagramMediaItem newInstagramMediaItemWithJSONObject:object
                                                                         error:outError];
         } error:outError];
@@ -328,10 +315,8 @@ JFFAsyncOperationBinder jsonDataToMediaItems()
 
 JFFAsyncOperationBinder jsonDataToComment()
 {
-    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError)
-    {
-        if (!validJeneralJSONObject(jsonObject, outError))
-        {
+    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError) {
+        if (!validJeneralJSONObject(jsonObject, outError)) {
             return nil;
         }
         
