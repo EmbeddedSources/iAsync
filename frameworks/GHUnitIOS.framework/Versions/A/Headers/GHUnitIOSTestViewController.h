@@ -1,6 +1,6 @@
 //
-//  GHUnitIPhoneTestViewController.h
-//  GHUnitIPhone
+//  GHUnitIOSTestViewController.h
+//  GHUnitIOS
 //
 //  Created by Gabriel Handford on 2/20/09.
 //  Copyright 2009. All rights reserved.
@@ -27,10 +27,17 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#import <UIKit/UIKit.h>
 #import "GHTestViewModel.h"
+#import "GHUnitIOSTestView.h"
+#import "GHImageDiffView.h"
 
-@interface GHUnitIPhoneTestViewController : UIViewController <GHTestRunnerDelegate> {
-  UITextView *textView_;
+/*
+ View controller for a test.
+ */
+@interface GHUnitIOSTestViewController : UIViewController <GHTestRunnerDelegate, GHUnitIOSTestViewDelegate> {
+  GHUnitIOSTestView *testView_;
+  GHImageDiffView *imageDiffView_;
 
   GHTestNode *testNode_;
   

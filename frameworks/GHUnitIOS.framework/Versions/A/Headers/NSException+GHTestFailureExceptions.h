@@ -47,8 +47,6 @@
 //  the License.
 //
 
-@class NSString;
-
 extern NSString *const GHTestFilenameKey;
 extern NSString *const GHTestLineNumberKey;
 extern NSString *const GHTestFailureException;

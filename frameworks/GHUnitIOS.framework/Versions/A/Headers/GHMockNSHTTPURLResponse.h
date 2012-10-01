@@ -1,8 +1,8 @@
 //
-//  GHUnitIPhoneTableViewDataSource.h
-//  GHUnitIPhone
+//  GHMockNSHTTPURLResponse.h
+//  GHUnit
 //
-//  Created by Gabriel Handford on 5/5/09.
+//  Created by Gabriel Handford on 4/9/09.
 //  Copyright 2009. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,14 +27,20 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "GHTestViewModel.h"
+#import <Foundation/Foundation.h>
 
-@interface GHUnitIPhoneTableViewDataSource : GHTestViewModel <UITableViewDataSource> {
-  
+/*
+ NSHTTPURLResponse subclass for use with mocking.
+ Allows us to manually set the status code and headers in the response.
+ */
+@interface GHMockNSHTTPURLResponse : NSHTTPURLResponse {
+	NSInteger statusCode_;
+	NSDictionary *headers_;
 }
 
-- (GHTestNode *)nodeForIndexPath:(NSIndexPath *)indexPath;
+- (id)initWithStatusCode:(NSInteger)statusCode headers:(NSDictionary *)headers;
 
-- (void)setSelectedForAllNodes:(BOOL)selected;
+- (void)setStatusCode:(NSInteger)code;
+- (void)setHeaders:(NSDictionary *)headers;
 
 @end
