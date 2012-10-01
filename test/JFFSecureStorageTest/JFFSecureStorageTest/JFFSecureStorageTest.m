@@ -7,16 +7,16 @@
 -(void)testSecureStorage
 {
     NSURL* url_ = [ NSURL URLWithString: @"http://www.google.com" ];
-
+    
     {
         NSString* login_    = @"llll";
         NSString* password_ = @"ppp";
-
+        
         jffStoreSecureCredentials( login_, password_, url_ );
-
+        
         NSString* outLogin_ = nil;
         NSString* outPassword_ = jffGetSecureCredentialsForURL( &outLogin_, url_ );
-
+        
         GHAssertTrue( [ login_    isEqualToString: outLogin_    ], @"OK" );
         GHAssertTrue( [ password_ isEqualToString: outPassword_ ], @"OK" );
     }

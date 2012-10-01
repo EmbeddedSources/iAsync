@@ -32,15 +32,12 @@
     
     __block NSArray *users;
     
-    TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
-    {
+    TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock) {
         JFFAsyncOperation loader = [JFFSocialTwitter usersNearbyCoordinatesLantitude:40.3
                                                                            longitude:71.51];
         
-        loader(nil,nil,^(id result,NSError *error)
-        {
-            if ([error isMemberOfClass:[JFFTwitterAccountAccessNotGrantedError class]])
-            {
+        loader(nil,nil,^(id result,NSError *error) {
+            if ([error isMemberOfClass:[JFFTwitterAccountAccessNotGrantedError class]]) {
                 finishBLock();
                 return;
             }
@@ -52,8 +49,7 @@
     [self performAsyncRequestOnMainThreadWithBlock:block
                                            selector:_cmd];
     
-    if (finishedAsNotGrantedAccess)
-    {
+    if (finishedAsNotGrantedAccess) {
         //skip asserts
         return;
     }
@@ -74,14 +70,11 @@
 
     __block NSArray *users;
 
-    TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
-    {
+    TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock) {
         JFFAsyncOperation loader = [JFFSocialTwitter followersLoader];
 
-        loader(nil,nil,^(id result,NSError *error)
-        {
-            if ( [error isMemberOfClass:[JFFTwitterAccountAccessNotGrantedError class]] )
-            {
+        loader(nil,nil,^(id result,NSError *error) {
+            if ([error isMemberOfClass:[JFFTwitterAccountAccessNotGrantedError class]]) {
                 finishBLock();
                 return;
             }
@@ -93,8 +86,7 @@
     [ self performAsyncRequestOnMainThreadWithBlock:block
                                            selector:_cmd ];
 
-    if (finishedAsNotGrantedAccess)
-    {
+    if (finishedAsNotGrantedAccess) {
         //skip asserts
         return;
     }

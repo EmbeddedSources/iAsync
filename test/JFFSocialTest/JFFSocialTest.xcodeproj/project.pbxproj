@@ -35,6 +35,7 @@
 		CEB234F215FF6776005E5CF5 /* libJFFNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB234E915FF6767005E5CF5 /* libJFFNetwork.a */; };
 		CEB2361F15FF6BD1005E5CF5 /* GHUnitIPhoneAppDelegate+OpenWithURL.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2361E15FF6BD1005E5CF5 /* GHUnitIPhoneAppDelegate+OpenWithURL.m */; };
 		CECF90A915FA3B3B009E707A /* direct_message_send.json in Resources */ = {isa = PBXBuildFile; fileRef = CECF90A815FA3B3B009E707A /* direct_message_send.json */; };
+		CED000F016198B4B00368E7D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED000EF16198B4B00368E7D /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -305,6 +306,7 @@
 		CEB2361E15FF6BD1005E5CF5 /* GHUnitIPhoneAppDelegate+OpenWithURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GHUnitIPhoneAppDelegate+OpenWithURL.m"; sourceTree = "<group>"; };
 		CEB2365915FF6C8C005E5CF5 /* InstagramApiTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramApiTest.m; sourceTree = "<group>"; };
 		CECF90A815FA3B3B009E707A /* direct_message_send.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = direct_message_send.json; sourceTree = "<group>"; };
+		CED000EF16198B4B00368E7D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,6 +354,7 @@
 		CE4F609A15F8BD1600271035 = {
 			isa = PBXGroup;
 			children = (
+				CED000EF16198B4B00368E7D /* Default-568h@2x.png */,
 				CE4F60AF15F8BD1600271035 /* JFFSocialTest */,
 				CE4F60A815F8BD1600271035 /* Frameworks */,
 				CE4F60A615F8BD1600271035 /* Products */,
@@ -807,6 +810,7 @@
 				CE85420A15FA16E000750066 /* twitter_geolocation.json in Resources */,
 				CECF90A915FA3B3B009E707A /* direct_message_send.json in Resources */,
 				374980AC1602185A00AF0C29 /* test-img1.jpg in Resources */,
+				CED000F016198B4B00368E7D /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

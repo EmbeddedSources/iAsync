@@ -1,10 +1,7 @@
 
 #import <JFFSocial/Foursquare/FoursquareSession/JFFFoursquareSessionStorage.h>
 
-@interface GHUnitIPhoneAppDelegate (OpenWithURL)
-@end
-
-@implementation GHUnitIPhoneAppDelegate (OpenWithURL)
+@implementation GHUnitIOSAppDelegate (OpenWithURL)
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
