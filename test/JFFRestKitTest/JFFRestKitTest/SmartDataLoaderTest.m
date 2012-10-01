@@ -28,18 +28,16 @@ static NSString* const cachesFileName_ = @"cachesFileName";
 
 static JFFAsyncOperationBinder testDataLoader( BOOL* wasCalled_ )
 {
-    return ^JFFAsyncOperation( NSURL* url_ )
-    {
-        NSData* response_ = [ [ url_ description ] dataUsingEncoding: NSUTF8StringEncoding ];
-        return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                        , JFFCancelAsyncOperationHandler cancelCallback_
-                                        , JFFDidFinishAsyncOperationHandler doneCallback_ )
-        {
+    return ^JFFAsyncOperation(NSURL *url) {
+        NSData *response = [[url description] dataUsingEncoding:NSUTF8StringEncoding];
+        return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                        JFFCancelAsyncOperationHandler cancelCallback,
+                                        JFFDidFinishAsyncOperationHandler doneCallback) {
             if ( wasCalled_ )
                 *wasCalled_ = YES;
-            return asyncOperationWithResult( response_ )( progressCallback_
-                                                         , cancelCallback_
-                                                         , doneCallback_ );
+            return asyncOperationWithResult(response)(progressCallback,
+                                                      cancelCallback,
+                                                      doneCallback);
         };
     };
 }

@@ -1,6 +1,5 @@
 #import "CXMLNode+Custom.h"
 
-
 @implementation CXMLNode (Custom)
 
 -(CXMLNode*)firstNodeIfExistsForXPath:( NSString* )xpath_
@@ -31,10 +30,10 @@
 -(CXMLNode*)firstNodeIfExistsForXPath:( NSString* )xpath_
                     namespaceMappings:( NSDictionary* )namespaceMappings_
 {
-    return [ self firstNodeIfExistsForXPath: xpath_
-                          namespaceMappings: namespaceMappings_
-                          logMessageEnabled: NO
-                                 shouldFail: NO ];
+    return [self firstNodeIfExistsForXPath: xpath_
+                         namespaceMappings: namespaceMappings_
+                         logMessageEnabled: NO
+                                shouldFail: NO ];
 }
 
 -(CXMLNode*)firstNodeForXPath:( NSString* )xpath_

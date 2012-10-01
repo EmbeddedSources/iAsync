@@ -14,11 +14,8 @@
     #import <JFFCache/JFFCache.h>
     #import <JFFRestKit/JFFRestKit.h>
 
-    #import <TouchXmlHelper/TouchXmlHelper.h>
-    #import <TouchXML/TouchXML.h>
-
     #import <GHUnitIOS/GHUnit.h>
-
+    
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
