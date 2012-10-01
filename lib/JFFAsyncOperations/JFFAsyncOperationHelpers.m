@@ -28,11 +28,8 @@
     progress = [progress copy];
     
     self->_scheduler = [JFFScheduler new];
-    [self->_scheduler addBlock:^(JFFCancelScheduledBlock cancel)
-    {
+    [self->_scheduler addBlock:^(JFFCancelScheduledBlock cancel){
         cancel();
-        if (progress)
-            progress([JFFAsyncTimerResult new]);
         if (handler)
             handler([JFFAsyncTimerResult new], nil);
     } duration:self.duration];

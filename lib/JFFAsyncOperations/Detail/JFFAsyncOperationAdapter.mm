@@ -16,8 +16,7 @@
 
 - (void)cancel:(BOOL)canceled
 {
-    if (canceled)
-    {
+    if (canceled) {
         [self.operation cancel];
         self.operation = nil;
     }

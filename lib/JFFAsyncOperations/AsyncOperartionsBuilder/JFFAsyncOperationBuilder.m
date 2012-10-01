@@ -14,8 +14,7 @@
 
 -(void)notifyCallbackWithResult:(id)result error:(NSError*)error
 {
-    if (self->_completionHandler)
-    {
+    if (self->_completionHandler) {
         self->_completionHandler(result, error);
         self->_completionHandler = nil;
     }
@@ -39,10 +38,9 @@ JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterfac
                 doneCallback(result, error);
         } copy ];
         progressCallback = [progressCallback copy];
-        __block void (^progressHandler)( id ) = [ ^( id data_ )
-        {
+        __block void (^progressHandler)(id) = [^(id data) {
             if (progressCallback)
-                progressCallback(data_);
+                progressCallback(data);
         } copy ];
 
         completionHandler = [completionHandler copy];
@@ -57,8 +55,14 @@ JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterfac
             [JFFSingleThreadProxy singleThreadProxyWithTargetFactory:factory
                                                        dispatchQueue:dispatch_get_current_queue()];
 
+        __block BOOL progressCallbackWasCalled = NO;
+        
         void (^completionHandlerWrapper)(id, NSError *) = [^(id result,NSError *error)
         {
+            if (!progressCallbackWasCalled && result && progressHandler) {
+                progressHandler(result);
+            }
+            
             progressHandler = nil;
             [proxy notifyCallbackWithResult:result error:error];
             proxy = nil;
@@ -66,6 +70,7 @@ JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterfac
 
         void (^progressHandlerWrapper)(id) = [^(id data)
         {
+            progressCallbackWasCalled = YES;
             if (progressHandler)
                 progressHandler(data);
         }copy];
@@ -73,7 +78,7 @@ JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterfac
         [asyncObject asyncOperationWithResultHandler:completionHandlerWrapper
                                      progressHandler:progressHandlerWrapper];
 
-        __block JFFCancelAsyncOperationHandler cancelCallbackHolder_ = [cancelCallback copy];
+        __block JFFCancelAsyncOperationHandler cancelCallbackHolder = [cancelCallback copy];
         return ^(BOOL canceled)
         {
             if (!proxy.completionHandler)
@@ -84,11 +89,10 @@ JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterfac
             proxy           = nil;
             progressHandler = nil;
 
-            if ( cancelCallbackHolder_ )
-            {
-                JFFCancelAsyncOperationHandler tmpCallback_ = cancelCallbackHolder_;
-                cancelCallbackHolder_ = nil;
-                tmpCallback_(canceled);
+            if (cancelCallbackHolder) {
+                JFFCancelAsyncOperationHandler tmpCallback = cancelCallbackHolder;
+                cancelCallbackHolder = nil;
+                tmpCallback(canceled);
             }
         };
     };

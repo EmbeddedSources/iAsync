@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-JFFAsyncOperation buildAsyncOperationWithInterface( id< JFFAsyncOperationInterface > object_ );
+    JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterface > object);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */
