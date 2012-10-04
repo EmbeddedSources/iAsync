@@ -1,27 +1,28 @@
 #import "NSObject+ExpandArray.h"
 
-#import "NSObject+ProperIsKindOfClass.h"
+#import "NSObject+JFFMeaningClass.h"
 
 @implementation NSArray (ExpandArray)
 
-//TODO test
 - (id)expandArray
 {
     NSMutableArray *result = [NSMutableArray new];
     for (id object in self) {
         id newValue;
-        if ([object properIsKindOfClass:[NSArray class]]) {
+        Class objectClass = [object jffMeaningClass];
+        if ([objectClass isSubclassOfClass:[NSArray class]]) {
             newValue = [object expandArray];
         } else {
-            newValue = self;
+            newValue = object;
         }
-        if ([newValue properIsKindOfClass:[NSArray class]]) {
-            [result addObjectsFromArray: newValue];
+        Class newValueClass = [newValue jffMeaningClass];
+        if ([newValueClass isSubclassOfClass:[NSArray class]]) {
+            [result addObjectsFromArray:newValue];
         } else {
             [result addObject:newValue];
         }
     }
-    return result;
+    return [result copy];
 }
 
 @end

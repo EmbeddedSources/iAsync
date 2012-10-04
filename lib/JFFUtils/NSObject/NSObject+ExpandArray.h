@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
-@interface NSObject (ExpandArray)
+@interface NSArray (ExpandArray)
 
--(id)expandArray;
+- (id)expandArray;
 
 @end
