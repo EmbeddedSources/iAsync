@@ -24,8 +24,7 @@ JFFAsyncOperationBinder xmlDocumentWithDataAsyncBinder( void )
 //JTODO test
 JFFAsyncOperationBinder xmlDocumentWithStringAsyncBinder( void )
 {
-    return ^JFFAsyncOperation( NSString* str_ )
-    {
+    return ^JFFAsyncOperation(NSString *str_) {
         JFFAsyncOperationBinder binder_ = xmlDocumentWithDataAsyncBinder();
         //JTODO remove conversation from string to data
         NSData* data_ = [ str_ dataUsingEncoding: NSUTF8StringEncoding ];
