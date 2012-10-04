@@ -126,30 +126,27 @@
     });
 }
 
-+ (id)performOperationWithQueueName:( const char* )queueName_
-                      loadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
-                   didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_
-                      progressBlock:( JFFAsyncOperationProgressHandler )progressBlock_
-                            barrier:( BOOL )barrier_
++ (id)performOperationWithQueueName:(const char*)queueName
+                      loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock_
+                   didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock_
+                      progressBlock:(JFFAsyncOperationProgressHandler)progressBlock_
+                            barrier:(BOOL )barrier_
 {
-    NSParameterAssert( loadDataBlock_    );
-    NSParameterAssert( didLoadDataBlock_ );
-
+    NSParameterAssert(loadDataBlock_   );
+    NSParameterAssert(didLoadDataBlock_);
+    
     dispatch_queue_t currentQueue_ = dispatch_get_current_queue();
-
+    
     dispatch_queue_t queue_ = NULL;
-    if ( queueName_ != NULL && strlen( queueName_ ) != 0 )
-    {
-        queue_ = dispatch_queue_get_or_create( queueName_
+    if (queueName != NULL && strlen(queueName) != 0) {
+        queue_ = dispatch_queue_get_or_create( queueName
                                               , DISPATCH_QUEUE_CONCURRENT );
-    }
-    else
-    {
+    } else {
         queue_ = dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 );
     }
-
+    
     NSAssert( currentQueue_ != queue_, @"Invalid run queue" );
-
+    
     JFFBlockOperation* result_ = [ [ self alloc ] initWithLoadDataBlock: loadDataBlock_
                                                        didLoadDataBlock: didLoadDataBlock_
                                                           progressBlock: progressBlock_

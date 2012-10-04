@@ -4,15 +4,13 @@ JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)
 {
     assert(data);
     
-    JFFSyncOperation loadDataBlock = ^id(NSError **outError)
-    {
+    JFFSyncOperation loadDataBlock = ^id(NSError **outError) {
         NSError *jsonError;
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data
                                                                options:NSJSONReadingAllowFragments
                                                                  error:&jsonError];
         
-        if (jsonError)
-        {
+        if (jsonError) {
             [jsonError setToPointer:outError];
             return nil;
         }
@@ -25,8 +23,7 @@ JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)
 
 JFFAsyncOperationBinder asyncOperationBinderJsonDataParser()
 {
-    return ^JFFAsyncOperation(NSData *data)
-    {
+    return ^JFFAsyncOperation(NSData *data) {
         return asyncOperationJsonDataParser(data);
     };
 }

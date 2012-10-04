@@ -143,21 +143,20 @@ JFFAsyncOperationBinder binderAsSequenceOfBinders(JFFAsyncOperationBinder firstB
 
 JFFAsyncOperationBinder binderAsSequenceOfBindersArray(NSArray *binders)
 {
-    binders = [binders map:^id(id object)
-    {
+    binders = [binders map:^id(id object) {
         return [object copy];
-    } ];
+    }];
     return MergeBinders(bindSequenceOfBindersPair, binders);
 }
 
 JFFAsyncOperation bindSequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
                                                 JFFAsyncOperationBinder secondLoaderBinder, ... )
 {
+    assert(firstLoader);
     NSMutableArray *binders = [NSMutableArray new];
     
     firstLoader = [firstLoader copy];
-    JFFAsyncOperationBinder firstBinder = ^JFFAsyncOperation(id nilResult)
-    {
+    JFFAsyncOperationBinder firstBinder = ^JFFAsyncOperation(id nilResult) {
         return firstLoader;
     };
     [binders addObject:[firstBinder copy]];
@@ -166,8 +165,7 @@ JFFAsyncOperation bindSequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
     va_start(args, secondLoaderBinder);
     for (JFFAsyncOperationBinder nextBinder = secondLoaderBinder;
          nextBinder != nil;
-         nextBinder = va_arg(args, JFFAsyncOperationBinder))
-    {
+         nextBinder = va_arg(args, JFFAsyncOperationBinder)) {
         [binders addObject:[nextBinder copy]];
     }
     va_end(args);
@@ -681,8 +679,8 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
                                        NSTimeInterval delay,
                                        NSInteger maxRepeatCount)
 {
-    assert(nativeLoader);// can not be nil
-    assert(continuePredicate   );// can not be nil
+    assert(nativeLoader     );// can not be nil
+    assert(continuePredicate);// can not be nil
     
     nativeLoader      = [nativeLoader      copy];
     continuePredicate = [continuePredicate copy];
@@ -716,7 +714,7 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
                 currentLeftCount = currentLeftCount > 0
                 ?currentLeftCount - 1
                 :currentLeftCount;
-
+                
                 JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(nativeLoader,
                                                                              finishHookHolder);
                 loader = asyncOperationAfterDelay(delay, loader);

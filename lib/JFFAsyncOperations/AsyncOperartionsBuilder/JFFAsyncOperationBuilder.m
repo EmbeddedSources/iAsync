@@ -6,13 +6,13 @@
 
 @property (copy) JFFDidFinishAsyncOperationHandler completionHandler;
 
--(void)notifyCallbackWithResult:(id)result error:(NSError*)error;
+- (void)notifyCallbackWithResult:(id)result error:(NSError *)error;
 
 @end
 
 @implementation JFFComplitionHandlerNotifier
 
--(void)notifyCallbackWithResult:(id)result error:(NSError*)error
+-(void)notifyCallbackWithResult:(id)result error:(NSError *)error
 {
     if (self->_completionHandler) {
         self->_completionHandler(result, error);
@@ -22,6 +22,7 @@
 
 @end
 
+//TODO use factory and test
 JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterface >asyncObject)
 {
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
@@ -29,36 +30,33 @@ JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterfac
                                     JFFDidFinishAsyncOperationHandler doneCallback)
     {
         __unsafe_unretained id< JFFAsyncOperationInterface > weakAsyncObject = asyncObject;
-
+        
         doneCallback = [doneCallback copy];
-        __block void (^completionHandler)(id, NSError*) = [^(id result, NSError *error)
-        {
+        void (^completionHandler)(id, NSError*) = [^(id result, NSError *error) {
             //use asyncObject_ in if to own it while waiting result
             if (doneCallback && asyncObject)
                 doneCallback(result, error);
-        } copy ];
+        } copy];
         progressCallback = [progressCallback copy];
         __block void (^progressHandler)(id) = [^(id data) {
             if (progressCallback)
                 progressCallback(data);
-        } copy ];
-
+        } copy];
+        
         completionHandler = [completionHandler copy];
-        JFFObjectFactory factory = ^id()
-        {
+        JFFObjectFactory factory = ^id() {
             JFFComplitionHandlerNotifier *result = [JFFComplitionHandlerNotifier new];
             result.completionHandler = completionHandler;
             return result;
         };
-
+        
         __block JFFComplitionHandlerNotifier* proxy = (JFFComplitionHandlerNotifier*)
             [JFFSingleThreadProxy singleThreadProxyWithTargetFactory:factory
                                                        dispatchQueue:dispatch_get_current_queue()];
-
+        
         __block BOOL progressCallbackWasCalled = NO;
         
-        void (^completionHandlerWrapper)(id, NSError *) = [^(id result,NSError *error)
-        {
+        void (^completionHandlerWrapper)(id, NSError *) = [^(id result,NSError *error) {
             if (!progressCallbackWasCalled && result && progressHandler) {
                 progressHandler(result);
             }
@@ -66,29 +64,27 @@ JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterfac
             progressHandler = nil;
             [proxy notifyCallbackWithResult:result error:error];
             proxy = nil;
-        } copy ];
+        } copy];
 
-        void (^progressHandlerWrapper)(id) = [^(id data)
-        {
+        void (^progressHandlerWrapper)(id) = [^(id data) {
             progressCallbackWasCalled = YES;
             if (progressHandler)
                 progressHandler(data);
         }copy];
-
+        
         [asyncObject asyncOperationWithResultHandler:completionHandlerWrapper
                                      progressHandler:progressHandlerWrapper];
-
+        
         __block JFFCancelAsyncOperationHandler cancelCallbackHolder = [cancelCallback copy];
-        return ^(BOOL canceled)
-        {
+        return ^(BOOL canceled) {
             if (!proxy.completionHandler)
                 return;
-
+            
             [weakAsyncObject cancel:canceled];
-
+            
             proxy           = nil;
             progressHandler = nil;
-
+            
             if (cancelCallbackHolder) {
                 JFFCancelAsyncOperationHandler tmpCallback = cancelCallbackHolder;
                 cancelCallbackHolder = nil;

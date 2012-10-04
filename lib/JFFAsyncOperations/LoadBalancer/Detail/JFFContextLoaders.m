@@ -5,7 +5,7 @@
 
 @interface JFFContextLoaders ()
 
-// JTODO move to ARC and remove inner properties
+//JTODO move to ARC and remove inner properties
 @property ( nonatomic, retain ) NSMutableArray* activeLoadersData;
 @property ( nonatomic, retain ) NSMutableArray* pendingLoadersData;
 
@@ -15,27 +15,25 @@
 
 -(void)dealloc
 {
-    [ self->_activeLoadersData release ];
-    [ self->_pendingLoadersData release ];
-    [ self->_name release ];
-
-    [ super dealloc ];
+    [self->_activeLoadersData  release];
+    [self->_pendingLoadersData release];
+    [self->_name               release];
+    
+    [super dealloc];
 }
 
 -(NSMutableArray*)activeLoadersData
 {
-    if ( !self->_activeLoadersData )
-    {
-        self->_activeLoadersData = [ NSMutableArray new ];
+    if (!self->_activeLoadersData) {
+        self->_activeLoadersData = [NSMutableArray new];
     }
     return self->_activeLoadersData;
 }
 
 -(NSMutableArray*)pendingLoadersData
 {
-    if ( !self->_pendingLoadersData )
-    {
-        self->_pendingLoadersData = [ NSMutableArray new ];
+    if (!self->_pendingLoadersData) {
+        self->_pendingLoadersData = [NSMutableArray new];
     }
     return self->_pendingLoadersData;
 }
@@ -44,13 +42,12 @@
 
 @implementation JFFContextLoaders ( ActiveLoaders )
 
--(NSUInteger)activeLoadersNumber
-{
-    return [ self->_activeLoadersData count ];
+-(NSUInteger)activeLoadersNumber {
+    return [self->_activeLoadersData count];
 }
 
--(void)addActiveNativeLoader:( JFFAsyncOperation )native_loader_
-               wrappedCancel:( JFFCancelAsyncOperation )cancel_
+- (void)addActiveNativeLoader:(JFFAsyncOperation)native_loader_
+                wrappedCancel:(JFFCancelAsyncOperation)cancel_
 {
     JFFActiveLoaderData* data_ = [ JFFActiveLoaderData new ];
     data_.nativeLoader  = native_loader_;
@@ -61,10 +58,9 @@
     [ data_ release ];
 }
 
--(JFFActiveLoaderData*)activeLoaderDataForNativeLoader:( JFFAsyncOperation )native_loader_
+- (JFFActiveLoaderData*)activeLoaderDataForNativeLoader:(JFFAsyncOperation)native_loader_
 {
-    return [ self.activeLoadersData firstMatch: ^BOOL( id object_ )
-    {
+    return [ self.activeLoadersData firstMatch: ^BOOL(id object_) {
         JFFActiveLoaderData* loader_data_ = object_;
         return loader_data_.nativeLoader == native_loader_;
     } ];
@@ -78,7 +74,7 @@
         data_.wrappedCancel( canceled_ );
 }
 
--(BOOL)removeActiveNativeLoader:( JFFAsyncOperation )native_loader_
+- (BOOL)removeActiveNativeLoader:( JFFAsyncOperation )native_loader_
 {
     JFFActiveLoaderData* data_ = [ self activeLoaderDataForNativeLoader: native_loader_ ];
 
@@ -95,12 +91,12 @@
 
 @implementation JFFContextLoaders ( PendingLoaders )
 
--(NSUInteger)pendingLoadersNumber
+- (NSUInteger)pendingLoadersNumber
 {
     return [ self.pendingLoadersData count ];
 }
 
--(JFFPedingLoaderData*)popPendingLoaderData
+- (JFFPedingLoaderData*)popPendingLoaderData
 {
     JFFPedingLoaderData* data_ = [ self.pendingLoadersData[ 0 ] retain ];
     [ self.pendingLoadersData removeObjectAtIndex: 0 ];
@@ -111,10 +107,10 @@
     return [ data_ autorelease ];
 }
 
--(void)addPendingNativeLoader:( JFFAsyncOperation )native_loader_
-             progressCallback:( JFFAsyncOperationProgressHandler )progress_callback_
-               cancelCallback:( JFFCancelAsyncOperationHandler )cancel_callback_
-                 doneCallback:( JFFDidFinishAsyncOperationHandler )done_callback_
+- (void)addPendingNativeLoader:( JFFAsyncOperation )native_loader_
+              progressCallback:( JFFAsyncOperationProgressHandler )progress_callback_
+                cancelCallback:( JFFCancelAsyncOperationHandler )cancel_callback_
+                  doneCallback:( JFFDidFinishAsyncOperationHandler )done_callback_
 {
     JFFPedingLoaderData* data_ = [ JFFPedingLoaderData new ];
     data_.nativeLoader     = native_loader_;
@@ -127,28 +123,27 @@
     [ data_ release ];
 }
 
--(JFFPedingLoaderData*)pendingLoaderDataForNativeLoader:( JFFAsyncOperation )native_loader_
+- (JFFPedingLoaderData*)pendingLoaderDataForNativeLoader:( JFFAsyncOperation )native_loader_
 {
-    return [ self.pendingLoadersData firstMatch: ^BOOL( id object_ )
-    {
+    return [ self.pendingLoadersData firstMatch: ^BOOL( id object_ ) {
         JFFPedingLoaderData* loaderData_ = object_;
         return loaderData_.nativeLoader == native_loader_;
     } ];
 }
 
--(BOOL)containsPendingNativeLoader:( JFFAsyncOperation )native_loader_
+- (BOOL)containsPendingNativeLoader:( JFFAsyncOperation )native_loader_
 {
     return [ self pendingLoaderDataForNativeLoader: native_loader_ ] != nil;
 }
 
--(void)removePendingNativeLoader:( JFFAsyncOperation )native_loader_
+- (void)removePendingNativeLoader:( JFFAsyncOperation )native_loader_
 {
     JFFPedingLoaderData* data_ = [ self pendingLoaderDataForNativeLoader: native_loader_ ];
 
     [ self.pendingLoadersData removeObject: data_ ];
 }
 
--(void)unsubscribePendingNativeLoader:( JFFAsyncOperation )native_loader_
+- (void)unsubscribePendingNativeLoader:( JFFAsyncOperation )native_loader_
 {
     JFFPedingLoaderData* data_ = [ self pendingLoaderDataForNativeLoader: native_loader_ ];
     NSAssert( data_, @"pending loader data should exist" );

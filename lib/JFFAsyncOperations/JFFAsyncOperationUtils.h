@@ -4,13 +4,15 @@
 extern "C" {
 #endif
 
-JFFAsyncOperation asyncOperationWithSyncOperation( JFFSyncOperation loadDataBlock_ );
+    JFFAsyncOperation asyncOperationWithSyncOperation(JFFSyncOperation loadDataBlock);
 
-JFFAsyncOperation asyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, const char* queueName_ );
+    JFFAsyncOperation asyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
+                                                              const char *queueName);
 
-JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, const char* queueName_ );
+    JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
+                                                                     const char *queueName);
 
-JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock( JFFSyncOperationWithProgress progressLoadDataBlock_ );
+    JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock(JFFSyncOperationWithProgress progressLoadDataBlock);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */
