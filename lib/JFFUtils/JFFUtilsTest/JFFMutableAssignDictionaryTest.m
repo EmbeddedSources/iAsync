@@ -30,12 +30,11 @@
     {
         JFFMutableAssignDictionary* dict_ = [ JFFMutableAssignDictionary new ];
         
-        [ dict_ addOnDeallocBlock: ^void( void )
-         {
-             dict_deallocated_ = YES;
-         } ];
+        [dict_ addOnDeallocBlock:^void(void) {
+            dict_deallocated_ = YES;
+        }];
         
-        NSObject* target_ = [ NSObject new ];
+        NSObject *target_ = [NSObject new];
         [ dict_ setObject: target_ forKey: @"1" ];
     }
     
@@ -67,10 +66,10 @@
             
             [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                  if ( [ key isEqualToString: @"1" ] ) {
-                     STAssertTrue(obj == object1, @"OK");
+                     STAssertTrue(obj == object1, nil);
                      ++count_;
                  } else if ([key isEqualToString:@"2"]) {
-                     STAssertTrue(obj == object2, @"OK");
+                     STAssertTrue(obj == object2, nil);
                      ++count_;
                  } else {
                      STFail( @"should not be reached" );
@@ -110,13 +109,82 @@
             STAssertTrue([dict objectForKey:@"1"] == object, @"Dict contains object_");
         }
         
-        STAssertTrue(replacedObjectDealloced, @"OK");
+        STAssertTrue(replacedObjectDealloced, nil);
         
         NSObject *currentObject = [dict objectForKey:@"1"];
-        STAssertTrue(currentObject == object, @"OK");
+        STAssertTrue(currentObject == object, nil);
     }
     
     STAssertTrue(0 == [dict count], @"Empty dict");
+}
+
+- (void)testMapMethod
+{
+    JFFMutableAssignDictionary *dict = [JFFMutableAssignDictionary new];
+    
+    dict[@"1"] = @1;
+    dict[@"2"] = @2;
+    dict[@"3"] = @3;
+    
+    NSDictionary *result = [dict map:^id(id key, id object) {
+        NSUInteger num = [object unsignedIntegerValue];
+        return @(num * [key integerValue]);
+    }];
+    
+    STAssertTrue([result count] == 3, nil);
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 6.)
+        STAssertFalse([result isKindOfClass:[NSMutableDictionary class]], nil);
+    STAssertTrue([result isKindOfClass:[NSDictionary class]], nil);
+    
+    STAssertEqualObjects(@1, result[@"1"], nil);
+    STAssertEqualObjects(@4, result[@"2"], nil);
+    STAssertEqualObjects(@9, result[@"3"], nil);
+    
+    STAssertThrows({
+        [dict map:^id(id key, id object) {
+            NSUInteger num = [object unsignedIntegerValue];
+            if (num == 3)
+                return nil;
+            return @(num * 2);
+        }];
+    }, nil);
+}
+
+- (void)testEnumerateKeysAndObjectsUsingBlock
+{
+    NSDictionary *patternDict = @{
+    @"1" : @1,
+    @"2" : @2,
+    @"3" : @3,
+    };
+    
+    JFFMutableAssignDictionary *dict = [JFFMutableAssignDictionary new];
+    
+    [patternDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        dict[key] = obj;
+    }];
+    
+    __block NSUInteger count = 0;
+    NSMutableDictionary *resultDict = [NSMutableDictionary new];
+    
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        ++count;
+        resultDict[key] = obj;
+        STAssertEqualObjects(obj, patternDict[key], nil);
+    }];
+    
+    STAssertTrue(count == 3, nil);
+    STAssertEqualObjects(resultDict, patternDict, nil);
+    
+    count = 0;
+    
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        ++count;
+        if (count == 2)
+            *stop = YES;
+    }];
+    
+    STAssertTrue(count == 2, nil);
 }
 
 @end
