@@ -9,7 +9,7 @@
         NSObject *object2;
         
         STAssertTrue([NSObject object: object1
-                            isEqualTo: object2], @"OK");
+                            isEqualTo: object2], nil);
     }
     
     {
@@ -17,7 +17,7 @@
         NSObject *object2 = [NSObject new];
         
         STAssertFalse([NSObject object: object1
-                             isEqualTo: object2], @"OK");
+                             isEqualTo: object2], nil);
     }
     
     {
@@ -25,7 +25,7 @@
         NSObject *object2 = object1;
         
         STAssertTrue([NSObject object: object1
-                            isEqualTo: object2], @"OK");
+                            isEqualTo: object2], nil);
     }
     
     {
@@ -33,7 +33,7 @@
         NSObject *object2 = @"";
         
         STAssertFalse([NSObject object: object1
-                             isEqualTo: object2], @"OK");
+                             isEqualTo: object2], nil);
     }
     
     {
@@ -41,7 +41,7 @@
         NSObject *object2;
         
         STAssertFalse([NSObject object: object1
-                             isEqualTo: object2], @"OK");
+                             isEqualTo: object2], nil);
     }
     
     {
@@ -49,7 +49,7 @@
         NSObject *object2 = @"";
         
         STAssertTrue([NSObject object: object1
-                            isEqualTo: object2], @"OK" );
+                            isEqualTo: object2], nil );
     }
 }
 
