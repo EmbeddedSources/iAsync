@@ -13,6 +13,7 @@
 		CE102EEF16088D94004229C5 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE102EEE16088D94004229C5 /* libstdc++.dylib */; };
 		CE102EF116088DAE004229C5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE102EF016088DAE004229C5 /* libz.dylib */; };
 		CE78FD481608A57C005CE392 /* libJFFRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233F8160882DB00B34AD8 /* libJFFRestKit.a */; };
+		CED85D83161C41C200F28EBC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED85D82161C41C200F28EBC /* Default-568h@2x.png */; };
 		CEE233341608821E00B34AD8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233331608821E00B34AD8 /* UIKit.framework */; };
 		CEE233361608821E00B34AD8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233351608821E00B34AD8 /* Foundation.framework */; };
 		CEE233381608821E00B34AD8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233371608821E00B34AD8 /* CoreGraphics.framework */; };
@@ -264,6 +265,7 @@
 		CE102EEC16088D8E004229C5 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CE102EEE16088D94004229C5 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		CE102EF016088DAE004229C5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		CED85D82161C41C200F28EBC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CEE2332F1608821E00B34AD8 /* ImageCacheExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageCacheExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE233331608821E00B34AD8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEE233351608821E00B34AD8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -336,6 +338,7 @@
 		CEE233241608821E00B34AD8 = {
 			isa = PBXGroup;
 			children = (
+				CED85D82161C41C200F28EBC /* Default-568h@2x.png */,
 				CEE233391608821E00B34AD8 /* ImageCacheExample */,
 				CEE2335A1608821F00B34AD8 /* ImageCacheExampleTests */,
 				CEE234431608831500B34AD8 /* Resources */,
@@ -792,6 +795,7 @@
 				CEE2334A1608821F00B34AD8 /* MainStoryboard_iPad.storyboard in Resources */,
 				CEE234451608831500B34AD8 /* JFFCacheDBInfo.plist in Resources */,
 				CEE235EE16088A0F00B34AD8 /* loading.png in Resources */,
+				CED85D83161C41C200F28EBC /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

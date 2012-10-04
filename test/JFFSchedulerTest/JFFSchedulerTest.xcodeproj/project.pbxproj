@@ -20,6 +20,7 @@
 		1B41AD65151CD1EE00566B1B /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41AD5C151CD1E000566B1B /* libJFFUtils.a */; };
 		1BEC47F7156A26B80099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEC47F6156A26B80099DA6D /* libstdc++.dylib */; };
 		1BEE3D2615EFB43E0024D249 /* PerformSelectorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE3D2515EFB43E0024D249 /* PerformSelectorTest.m */; };
+		CE1BC2DB161B2E81007DEC95 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BC2DA161B2E81007DEC95 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		1B41AD51151CD1E000566B1B /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
 		1BEC47F6156A26B80099DA6D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		1BEE3D2515EFB43E0024D249 /* PerformSelectorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerformSelectorTest.m; sourceTree = "<group>"; };
+		CE1BC2DA161B2E81007DEC95 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 		1B41ACEA151CCF7000566B1B = {
 			isa = PBXGroup;
 			children = (
+				CE1BC2DA161B2E81007DEC95 /* Default-568h@2x.png */,
 				1B41ACFF151CCF7100566B1B /* JFFSchedulerTest */,
 				1B41AD3B151CD0FF00566B1B /* Dependencies */,
 				1B41ACF8151CCF7100566B1B /* Frameworks */,
@@ -389,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B41AD04151CCF7100566B1B /* InfoPlist.strings in Resources */,
+				CE1BC2DB161B2E81007DEC95 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +499,7 @@
 		1B41AD17151CCF7100566B1B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../frameworks\"",
@@ -507,6 +512,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -514,6 +520,7 @@
 		1B41AD18151CCF7100566B1B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../frameworks\"",
@@ -526,6 +533,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
