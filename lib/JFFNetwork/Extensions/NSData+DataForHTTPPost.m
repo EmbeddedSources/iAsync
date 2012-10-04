@@ -1,7 +1,5 @@
 #import "NSData+DataForHTTPPost.h"
 
-//TODO: ADD creating boundary
-
 @implementation NSData (DataForHTTPPost)
 
 + (NSData *)dataForHTTPPostWithData:(NSData *)data andFileName:(NSString *)fileName andParameterName:(NSString *)parameter

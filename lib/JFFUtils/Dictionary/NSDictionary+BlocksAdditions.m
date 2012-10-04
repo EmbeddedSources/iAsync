@@ -6,9 +6,8 @@
 
 - (NSDictionary *)map:(JFFDictMappingBlock)block
 {
-    NSMutableDictionary *result = [[ NSMutableDictionary alloc] initWithCapacity:[self count]];
-    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
-    {
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
         id newObject = block(key, object);
         NSParameterAssert(newObject);
         result[key] = newObject;
@@ -16,15 +15,13 @@
     return [result copy];
 }
 
-- (NSDictionary *)map:(JFFDictMappingWithErrorBlock)block error:(NSError **)outError
+- (NSDictionary *)map:(JFFDictMappingWithErrorBlock)block error:(NSError *__autoreleasing *)outError
 {
-    __block NSMutableDictionary *result = [[ NSMutableDictionary alloc] initWithCapacity:[self count]];
-    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
-    {
+    __block NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
         id newObject = block(key, object, outError);
         
-        if (!newObject)
-        {
+        if (!newObject) {
             *stop = YES;
             result = nil;
             return;
@@ -35,11 +32,10 @@
     return [result copy];
 }
 
--(NSDictionary*)mapKey:(JFFDictMappingBlock )block
+-(NSDictionary*)mapKey:(JFFDictMappingBlock)block
 {
-    NSMutableDictionary *result = [[ NSMutableDictionary alloc ] initWithCapacity:[self count]];
-    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
-    {
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
         id newKey = block(key, object);
         NSParameterAssert(newKey);
         result[newKey] = object;
@@ -50,8 +46,7 @@
 - (NSUInteger)count:(JFFDictPredicateBlock)predicate
 {
     __block NSUInteger count = 0;
-    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
-    {
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
         if (predicate(key, object))
             ++count;
     }];
@@ -60,8 +55,7 @@
 
 - (void)each:(JFFDictActionBlock)block
 {
-    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop)
-    {
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
         block(key, object);
     }];
 }
