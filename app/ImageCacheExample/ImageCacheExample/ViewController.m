@@ -41,8 +41,7 @@
     NSArray *imageUrls = [self imageUrls];
     
     [self->_imagesContainer.subviews enumerateObjectsUsingBlock:^(UIImageView *imageView,
-                                                                  NSUInteger idx, BOOL *stop)
-    {
+                                                                  NSUInteger idx, BOOL *stop) {
         [imageView setImageWithURL:imageUrls[idx]
                     andPlaceholder:placeholder];
     }];
