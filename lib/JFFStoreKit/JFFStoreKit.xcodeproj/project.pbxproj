@@ -20,6 +20,9 @@
 		CED0024D1619A33F00368E7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CED0024B1619A33F00368E7D /* InfoPlist.strings */; };
 		CED002501619A33F00368E7D /* JFFStoreKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CED0024F1619A33F00368E7D /* JFFStoreKitTests.m */; };
 		CED002621619A3C000368E7D /* asyncSKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED002611619A3C000368E7D /* asyncSKRequest.m */; };
+		CED85B6B161C2C4800F28EBC /* JFFStoreKitError.m in Sources */ = {isa = PBXBuildFile; fileRef = CED85B6A161C2C4800F28EBC /* JFFStoreKitError.m */; };
+		CED85B6E161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.m in Sources */ = {isa = PBXBuildFile; fileRef = CED85B6D161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.m */; };
+		CED85B71161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.m in Sources */ = {isa = PBXBuildFile; fileRef = CED85B70161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +128,12 @@
 		CED0024F1619A33F00368E7D /* JFFStoreKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFFStoreKitTests.m; sourceTree = "<group>"; };
 		CED002601619A3C000368E7D /* asyncSKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asyncSKRequest.h; sourceTree = "<group>"; };
 		CED002611619A3C000368E7D /* asyncSKRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asyncSKRequest.m; sourceTree = "<group>"; };
+		CED85B69161C2C4800F28EBC /* JFFStoreKitError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStoreKitError.h; sourceTree = "<group>"; };
+		CED85B6A161C2C4800F28EBC /* JFFStoreKitError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStoreKitError.m; sourceTree = "<group>"; };
+		CED85B6C161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStoreKitCanNoLoadProductError.h; sourceTree = "<group>"; };
+		CED85B6D161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStoreKitCanNoLoadProductError.m; sourceTree = "<group>"; };
+		CED85B6F161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStoreKitTransactionStateFailedError.h; sourceTree = "<group>"; };
+		CED85B70161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStoreKitTransactionStateFailedError.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,12 +215,13 @@
 		CED002331619A33E00368E7D /* JFFStoreKit */ = {
 			isa = PBXGroup;
 			children = (
+				CED85B5F161C2C1C00F28EBC /* Errors */,
 				CED0025F1619A37E00368E7D /* asyncAdapters */,
-				CED002361619A33E00368E7D /* JFFStoreKit.h */,
 				CEBCBDFF1619A7D8007F805F /* SKProduct+LocalizedPriceString.h */,
 				CEBCBE001619A7D8007F805F /* SKProduct+LocalizedPriceString.m */,
 				CEBCBE221619B1B2007F805F /* asyncPaymentOperations.h */,
 				CEBCBE231619B1B2007F805F /* asyncPaymentOperations.m */,
+				CED002361619A33E00368E7D /* JFFStoreKit.h */,
 				CED002341619A33E00368E7D /* Supporting Files */,
 			);
 			path = JFFStoreKit;
@@ -255,6 +265,19 @@
 				CEBCBE061619AB0A007F805F /* asyncSKPaymentQueue.m */,
 			);
 			path = asyncAdapters;
+			sourceTree = "<group>";
+		};
+		CED85B5F161C2C1C00F28EBC /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				CED85B69161C2C4800F28EBC /* JFFStoreKitError.h */,
+				CED85B6A161C2C4800F28EBC /* JFFStoreKitError.m */,
+				CED85B6C161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.h */,
+				CED85B6D161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.m */,
+				CED85B6F161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.h */,
+				CED85B70161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.m */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +452,9 @@
 				CEBCBE071619AB0A007F805F /* asyncSKPaymentQueue.m in Sources */,
 				CEBCBE241619B1B2007F805F /* asyncPaymentOperations.m in Sources */,
 				CEBCBE271619B729007F805F /* asyncSKProductRequest.m in Sources */,
+				CED85B6B161C2C4800F28EBC /* JFFStoreKitError.m in Sources */,
+				CED85B6E161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.m in Sources */,
+				CED85B71161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +509,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../;
+				HEADER_SEARCH_PATHS = (
+					../,
+					.,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 			};
@@ -503,7 +532,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../;
+				HEADER_SEARCH_PATHS = (
+					../,
+					.,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

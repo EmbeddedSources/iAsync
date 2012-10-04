@@ -1,5 +1,7 @@
 #import "asyncSKProductRequest.h"
 
+#import "JFFStoreKitCanNoLoadProductError.h"
+
 @interface JFFAsyncSKProductsRequestAdapter : NSObject <
 JFFAsyncOperationInterface,
 SKProductsRequestDelegate
@@ -9,17 +11,18 @@ SKProductsRequestDelegate
 
 @implementation JFFAsyncSKProductsRequestAdapter
 {
-    SKProductsRequest *_request;
+    SKProductsRequest                *_request;
     JFFAsyncOperationInterfaceHandler _handler;
-    SKProductsResponse *_response;
+    SKProductsResponse               *_response;
+    NSString                         *_productIdentifier;
 }
 
 - (id)initWithProductIdentifier:(NSString *)productIdentifier
 {
     self = [super init];
     
-    if (self)
-    {
+    if (self) {
+        self->_productIdentifier = productIdentifier;
         SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:
                                      [NSSet setWithObject:productIdentifier]];
         
@@ -50,10 +53,11 @@ SKProductsRequestDelegate
 {
     NSArray *products = self->_response.products;
     if ([products hasElements]) {
-        self->_handler(products, nil);
+        self->_handler([products lastObject], nil);
     } else {
-        //TODO create separate error
-        self->_handler(nil, [JFFError newErrorWithDescription:@"can not ta ta ta"]);
+        JFFStoreKitCanNoLoadProductError *error = [JFFStoreKitCanNoLoadProductError new];
+        error.productIdentifier = self->_productIdentifier;
+        self->_handler(nil, error);
     }
 }
 
