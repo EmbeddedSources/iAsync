@@ -274,7 +274,7 @@ static void readStreamCallback( CFReadStreamRef stream_
     }
 
     NSDictionary* allHeadersDict_;
-    CFIndex statusCode_;
+    CFIndex statusCode;
 
     {
         CFHTTPMessageRef response_ = (CFHTTPMessageRef)CFReadStreamCopyProperty( stream_, kCFStreamPropertyHTTPResponseHeader );
@@ -283,16 +283,15 @@ static void readStreamCallback( CFReadStreamRef stream_
             return;
 
         allHeadersDict_ = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields( response_ );
-        statusCode_ = CFHTTPMessageGetResponseStatusCode( response_ );
+        statusCode = CFHTTPMessageGetResponseStatusCode( response_ );
 
-        CFRelease( response_ );
+        CFRelease(response_);
     }
 
     [ self acceptCookiesForHeaders: allHeadersDict_ ];
 
     //JTODO test redirects (cyclic for example)
-    if ( [ JHttpFlagChecker isRedirectFlag: statusCode_ ] )
-    {
+    if ([JHttpFlagChecker isRedirectFlag:statusCode]) {
         NSDebugLog( @"JConnection - creating URL..." );
         NSDebugLog( @"%@", self->_params.url );
         NSString* location_ = allHeadersDict_[ @"Location" ];
@@ -322,15 +321,15 @@ static void readStreamCallback( CFReadStreamRef stream_
 
         if ( self.didReceiveResponseBlock )
         {
-            JFFURLResponse* urlResponse_ = [ JFFURLResponse new ];
-
-            urlResponse_.statusCode      = statusCode_;
+            JFFURLResponse* urlResponse_ = [JFFURLResponse new];
+            
+            urlResponse_.statusCode      = statusCode;
             urlResponse_.allHeaderFields = allHeadersDict_;
             urlResponse_.url             = self->_params.url;
-
+            
             self.didReceiveResponseBlock( urlResponse_ );
             self.didReceiveResponseBlock = nil;
-
+            
             self->_urlResponse = urlResponse_;
         }
     }
