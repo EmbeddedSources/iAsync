@@ -1,8 +1,8 @@
 #import "JFFDBInfo.h"
 
-static JFFDBInfo* sharedInfo = nil;
+static JFFDBInfo *sharedInfo = nil;
 
-static NSString* const timeToLiveInHours = @"timeToLiveInHours";
+static NSString *const timeToLiveInHours = @"timeToLiveInHours";
 
 @interface JFFDBInfo ()
 
@@ -14,31 +14,29 @@ static NSString* const timeToLiveInHours = @"timeToLiveInHours";
 {
     //try to remove this ivar
     NSDictionary* _currentDbInfo;
-
+    
     NSDictionary* _dbInfo;
 }
 
 -(id)initWithInfoPath:( NSString* )infoPath
 {
-    self = [ super init ];
-
-    if ( self )
-    {
+    self = [super init];
+    
+    if (self) {
         self->_dbInfoPath = infoPath;
     }
-
+    
     return self;
 }
 
 - (id)initWithInfoDictionary:(NSDictionary *)infoDictionry
 {
     self = [super init];
-
-    if (self)
-    {
+    
+    if (self) {
         self->_currentDbInfo = infoDictionry;
     }
-
+    
     return self;
 }
 
@@ -49,21 +47,24 @@ static NSString* const timeToLiveInHours = @"timeToLiveInHours";
 
 - (NSDictionary *)dbInfo
 {
-    if (!self->_dbInfo)
-    {
+    if (!self->_dbInfo) {
         self->_dbInfo = [self createDBInfo];
     }
     return self->_dbInfo;
 }
 
++ (JFFDBInfo *)newDbInfo
+{
+    NSString *defaultPath = [[NSBundle mainBundle]pathForResource:@"JFFCacheDBInfo" ofType:@"plist"];
+    return [[self alloc]initWithInfoPath:defaultPath];
+}
+
 + (JFFDBInfo *)sharedDBInfo
 {
-    if (!sharedInfo)
-    {
-        NSString *defaultPath = [[NSBundle mainBundle]pathForResource:@"JFFCacheDBInfo" ofType:@"plist"];
-        sharedInfo = [[self alloc]initWithInfoPath:defaultPath];
+    if (!sharedInfo) {
+        sharedInfo = [self newDbInfo];
     }
-
+    
     return sharedInfo;
 }
 
@@ -80,11 +81,10 @@ static NSString* const timeToLiveInHours = @"timeToLiveInHours";
 
 - (NSDictionary *)currentDbInfo
 {
-    if (!self->_currentDbInfo)
-    {
+    if (!self->_currentDbInfo) {
         self->_currentDbInfo = [[NSDictionary alloc]initWithContentsOfFile:[[self class]currentDBInfoFilePath]];
     }
-
+    
     return self->_currentDbInfo;
 }
 
@@ -92,9 +92,9 @@ static NSString* const timeToLiveInHours = @"timeToLiveInHours";
 {
     if (self->_currentDbInfo == currentDbInfo)
         return;
-
+    
     self->_currentDbInfo = currentDbInfo?:@{};
-
+    
     [self->_currentDbInfo writeToFile:[[self class]currentDBInfoFilePath]atomically:YES];
 }
 
@@ -115,7 +115,7 @@ static NSString* const timeToLiveInHours = @"timeToLiveInHours";
 
 - (NSTimeInterval)autoRemoveByLastAccessDateForDBWithName:(NSString *)name
 {
-    NSNumber* number = self[name][@"autoRemoveByLastAccessDateInHours"];
+    NSNumber *number = self[name][@"autoRemoveByLastAccessDateInHours"];
     return number?[number doubleValue] * 3600. : 0.;
 }
 
