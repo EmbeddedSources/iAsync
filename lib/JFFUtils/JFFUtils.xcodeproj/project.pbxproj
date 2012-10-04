@@ -323,19 +323,23 @@
 		CE03CAB2160CAD0500039011 /* NSObjectInstancesCountTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03CAB1160CAD0500039011 /* NSObjectInstancesCountTest.m */; };
 		CE102F3816089570004229C5 /* UIImage+ScaleToSize.h in Headers */ = {isa = PBXBuildFile; fileRef = CE102F3616089570004229C5 /* UIImage+ScaleToSize.h */; };
 		CE102F3916089570004229C5 /* UIImage+ScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = CE102F3716089570004229C5 /* UIImage+ScaleToSize.m */; };
+		CE1BC324161B33AB007DEC95 /* NSArray+ExpandArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1BC323161B33AB007DEC95 /* NSArray+ExpandArrayTest.m */; };
+		CE1BC326161B349A007DEC95 /* NSObject+ExpandArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EE0351487D03A00BA6680 /* NSObject+ExpandArray.m */; };
+		CE1BC36A161B38AF007DEC95 /* NSDictionary+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B054D4E1521C6F4008E4B9E /* NSDictionary+BlocksAdditions.m */; };
+		CE1BC36E161B3A51007DEC95 /* NSDictionary+BlocksAdditionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1BC36D161B3A51007DEC95 /* NSDictionary+BlocksAdditionsTest.m */; };
 		CE2B32871617B55F003FB5F8 /* JUMutableArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2B32861617B55F003FB5F8 /* JUMutableArrayTest.m */; };
 		CE2B32891617B5BF003FB5F8 /* NSMutableArray+ChangeCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCDF9E414320B3200CEB6E7 /* NSMutableArray+ChangeCount.m */; };
 		CE2B328C1617B5E9003FB5F8 /* JFFStringFormatTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2B328B1617B5E9003FB5F8 /* JFFStringFormatTest.m */; };
 		CE2B328D1617B632003FB5F8 /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B909B8414EA919400B19283 /* NSString+Format.m */; };
-		CE444A1416085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.h in Headers */ = {isa = PBXBuildFile; fileRef = CE444A1216085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.h */; };
-		CE444A1516085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CE444A1316085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.m */; };
+		CE444A1416085D5A00DD85B0 /* NSObject+JFFMeaningClass.h in Headers */ = {isa = PBXBuildFile; fileRef = CE444A1216085D5A00DD85B0 /* NSObject+JFFMeaningClass.h */; };
+		CE444A1516085D5A00DD85B0 /* NSObject+JFFMeaningClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CE444A1316085D5A00DD85B0 /* NSObject+JFFMeaningClass.m */; };
 		CE444A1E1608609100DD85B0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE444A1D1608609100DD85B0 /* SenTestingKit.framework */; };
 		CE444A1F1608609100DD85B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC851AB15F4E20E0022F479 /* UIKit.framework */; };
 		CE444A201608609100DD85B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		CE444A261608609100DD85B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE444A241608609100DD85B0 /* InfoPlist.strings */; };
 		CE444A46160860F300DD85B0 /* EmptyStringTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE444A45160860F300DD85B0 /* EmptyStringTest.m */; };
-		CE444A481608634700DD85B0 /* NSObject+ProperIsKindOfClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CE444A1316085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.m */; };
-		CE444A4B1608636400DD85B0 /* ProperIsKindOfClassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE444A4A1608636400DD85B0 /* ProperIsKindOfClassTest.m */; };
+		CE444A481608634700DD85B0 /* NSObject+JFFMeaningClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CE444A1316085D5A00DD85B0 /* NSObject+JFFMeaningClass.m */; };
+		CE444A4B1608636400DD85B0 /* JFFMeaningClassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE444A4A1608636400DD85B0 /* JFFMeaningClassTest.m */; };
 		CE444A6E1608698600DD85B0 /* NSString+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A3BB3E14DAB3CD008B71BE /* NSString+IsEmpty.m */; };
 		CE57F8BB1611998D00124D90 /* DateDifferenceStringFromDateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57F8BA1611998D00124D90 /* DateDifferenceStringFromDateTest.m */; };
 		CE57F8BD16119A5400124D90 /* NSDate+DateDifference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B14141D15DBCD3F00EFB2B8 /* NSDate+DateDifference.m */; };
@@ -374,6 +378,7 @@
 		CEB9082A160C73EC00EFC230 /* NSObject+OnDeallocBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1CC1391A36800DD6890 /* NSObject+OnDeallocBlock.m */; };
 		CEB9082B160C740300EFC230 /* JFFOnDeallocBlockOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1C21391A25500DD6890 /* JFFOnDeallocBlockOwner.m */; };
 		CEC851AC15F4E20E0022F479 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC851AB15F4E20E0022F479 /* UIKit.framework */; };
+		CED85A95161C23A200F28EBC /* JFFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648BE013924326001E163C /* JFFError.m */; };
 		CEDB80ED1601F08F007577B2 /* NSData+ToString.h in Headers */ = {isa = PBXBuildFile; fileRef = CEDB80EB1601F08F007577B2 /* NSData+ToString.h */; };
 		CEDB80EE1601F08F007577B2 /* NSData+ToString.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB80EC1601F08F007577B2 /* NSData+ToString.m */; };
 		CEE653CF16144C8900C4D536 /* JFFRuntimeInitializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B909B7E14EA918800B19283 /* JFFRuntimeInitializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -534,12 +539,16 @@
 		CE03CAB1160CAD0500039011 /* NSObjectInstancesCountTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectInstancesCountTest.m; sourceTree = "<group>"; };
 		CE102F3616089570004229C5 /* UIImage+ScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScaleToSize.h"; sourceTree = "<group>"; };
 		CE102F3716089570004229C5 /* UIImage+ScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScaleToSize.m"; sourceTree = "<group>"; };
+		CE1BC322161B33AB007DEC95 /* NSArray+ExpandArrayTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ExpandArrayTest.h"; sourceTree = "<group>"; };
+		CE1BC323161B33AB007DEC95 /* NSArray+ExpandArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ExpandArrayTest.m"; sourceTree = "<group>"; };
+		CE1BC36C161B3A51007DEC95 /* NSDictionary+BlocksAdditionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BlocksAdditionsTest.h"; sourceTree = "<group>"; };
+		CE1BC36D161B3A51007DEC95 /* NSDictionary+BlocksAdditionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BlocksAdditionsTest.m"; sourceTree = "<group>"; };
 		CE2B32851617B55F003FB5F8 /* JUMutableArrayTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUMutableArrayTest.h; sourceTree = "<group>"; };
 		CE2B32861617B55F003FB5F8 /* JUMutableArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUMutableArrayTest.m; sourceTree = "<group>"; };
 		CE2B328A1617B5E9003FB5F8 /* JFFStringFormatTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStringFormatTest.h; sourceTree = "<group>"; };
 		CE2B328B1617B5E9003FB5F8 /* JFFStringFormatTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStringFormatTest.m; sourceTree = "<group>"; };
-		CE444A1216085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ProperIsKindOfClass.h"; sourceTree = "<group>"; };
-		CE444A1316085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ProperIsKindOfClass.m"; sourceTree = "<group>"; };
+		CE444A1216085D5A00DD85B0 /* NSObject+JFFMeaningClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JFFMeaningClass.h"; sourceTree = "<group>"; };
+		CE444A1316085D5A00DD85B0 /* NSObject+JFFMeaningClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JFFMeaningClass.m"; sourceTree = "<group>"; };
 		CE444A1C1608609100DD85B0 /* JFFUtilsTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFUtilsTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE444A1D1608609100DD85B0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		CE444A231608609100DD85B0 /* JFFUtilsTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFUtilsTest-Info.plist"; sourceTree = "<group>"; };
@@ -547,8 +556,8 @@
 		CE444A2A1608609100DD85B0 /* JFFUtilsTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFUtilsTest-Prefix.pch"; sourceTree = "<group>"; };
 		CE444A44160860F300DD85B0 /* EmptyStringTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyStringTest.h; sourceTree = "<group>"; };
 		CE444A45160860F300DD85B0 /* EmptyStringTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyStringTest.m; sourceTree = "<group>"; };
-		CE444A491608636400DD85B0 /* ProperIsKindOfClassTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProperIsKindOfClassTest.h; sourceTree = "<group>"; };
-		CE444A4A1608636400DD85B0 /* ProperIsKindOfClassTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProperIsKindOfClassTest.m; sourceTree = "<group>"; };
+		CE444A491608636400DD85B0 /* JFFMeaningClassTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFMeaningClassTest.h; sourceTree = "<group>"; };
+		CE444A4A1608636400DD85B0 /* JFFMeaningClassTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMeaningClassTest.m; sourceTree = "<group>"; };
 		CE57F8B91611998D00124D90 /* DateDifferenceStringFromDateTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateDifferenceStringFromDateTest.h; sourceTree = "<group>"; };
 		CE57F8BA1611998D00124D90 /* DateDifferenceStringFromDateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateDifferenceStringFromDateTest.m; sourceTree = "<group>"; };
 		CE57F8BE1611A31F00124D90 /* NumberOfCharacterFromStringTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberOfCharacterFromStringTest.h; sourceTree = "<group>"; };
@@ -829,8 +838,8 @@
 				1BBD97DF15249C4200A34E64 /* NSObject+IsEqualTwoObjects.m */,
 				655C20E515FE5A4000022B11 /* NSObject+DelegateProxy.h */,
 				655C20E615FE5A4000022B11 /* NSObject+DelegateProxy.m */,
-				CE444A1216085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.h */,
-				CE444A1316085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.m */,
+				CE444A1216085D5A00DD85B0 /* NSObject+JFFMeaningClass.h */,
+				CE444A1316085D5A00DD85B0 /* NSObject+JFFMeaningClass.m */,
 			);
 			path = NSObject;
 			sourceTree = "<group>";
@@ -945,8 +954,6 @@
 				CE444A221608609100DD85B0 /* Supporting Files */,
 				CE444A44160860F300DD85B0 /* EmptyStringTest.h */,
 				CE444A45160860F300DD85B0 /* EmptyStringTest.m */,
-				CE444A491608636400DD85B0 /* ProperIsKindOfClassTest.h */,
-				CE444A4A1608636400DD85B0 /* ProperIsKindOfClassTest.m */,
 				CE914E52160B71B300C89F37 /* DelegateProxyTest.h */,
 				CE914E53160B71B300C89F37 /* DelegateProxyTest.m */,
 				CE03CAB0160CAD0500039011 /* NSObjectInstancesCountTest.h */,
@@ -963,8 +970,6 @@
 				CE609CF116134405008259CF /* JFFMutableAssignArrayTest.m */,
 				CEE653D11614502400C4D536 /* JFFOnDeallocBlockOwnerTest.h */,
 				CEE653D21614502400C4D536 /* JFFOnDeallocBlockOwnerTest.m */,
-				CEE653D41614512E00C4D536 /* JFFMutableAssignDictionaryTest.h */,
-				CEE653D51614512E00C4D536 /* JFFMutableAssignDictionaryTest.m */,
 				CEE653D816145C0D00C4D536 /* JFFMulticastDelegateTest.h */,
 				CEE653D916145C0D00C4D536 /* JFFMulticastDelegateTest.m */,
 				CEE653DC16145D1900C4D536 /* JFFAssignProxyTest.h */,
@@ -981,6 +986,14 @@
 				CE2B32861617B55F003FB5F8 /* JUMutableArrayTest.m */,
 				CE2B328A1617B5E9003FB5F8 /* JFFStringFormatTest.h */,
 				CE2B328B1617B5E9003FB5F8 /* JFFStringFormatTest.m */,
+				CE1BC322161B33AB007DEC95 /* NSArray+ExpandArrayTest.h */,
+				CE1BC323161B33AB007DEC95 /* NSArray+ExpandArrayTest.m */,
+				CEE653D41614512E00C4D536 /* JFFMutableAssignDictionaryTest.h */,
+				CEE653D51614512E00C4D536 /* JFFMutableAssignDictionaryTest.m */,
+				CE1BC36C161B3A51007DEC95 /* NSDictionary+BlocksAdditionsTest.h */,
+				CE1BC36D161B3A51007DEC95 /* NSDictionary+BlocksAdditionsTest.m */,
+				CE444A491608636400DD85B0 /* JFFMeaningClassTest.h */,
+				CE444A4A1608636400DD85B0 /* JFFMeaningClassTest.m */,
 			);
 			path = JFFUtilsTest;
 			sourceTree = "<group>";
@@ -1239,7 +1252,7 @@
 				CEDB80ED1601F08F007577B2 /* NSData+ToString.h in Headers */,
 				37497BD01600971C00AF0C29 /* NSDictionary+ValueWithType.h in Headers */,
 				37497DF31601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.h in Headers */,
-				CE444A1416085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.h in Headers */,
+				CE444A1416085D5A00DD85B0 /* NSObject+JFFMeaningClass.h in Headers */,
 				CE102F3816089570004229C5 /* UIImage+ScaleToSize.h in Headers */,
 				CE57FBB81611EFFF00124D90 /* NSSet+BlocksAdditions.h in Headers */,
 				CE57FBBD1611F0BF00124D90 /* NSMutableSet+StorableSet.h in Headers */,
@@ -1601,8 +1614,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE444A46160860F300DD85B0 /* EmptyStringTest.m in Sources */,
-				CE444A481608634700DD85B0 /* NSObject+ProperIsKindOfClass.m in Sources */,
-				CE444A4B1608636400DD85B0 /* ProperIsKindOfClassTest.m in Sources */,
+				CE444A481608634700DD85B0 /* NSObject+JFFMeaningClass.m in Sources */,
+				CE444A4B1608636400DD85B0 /* JFFMeaningClassTest.m in Sources */,
 				CE444A6E1608698600DD85B0 /* NSString+IsEmpty.m in Sources */,
 				CE914E54160B71B300C89F37 /* DelegateProxyTest.m in Sources */,
 				CE914E5F160C4B0C00C89F37 /* JFFProxyDelegatesDispatcher.m in Sources */,
@@ -1646,6 +1659,11 @@
 				CE2B32891617B5BF003FB5F8 /* NSMutableArray+ChangeCount.m in Sources */,
 				CE2B328C1617B5E9003FB5F8 /* JFFStringFormatTest.m in Sources */,
 				CE2B328D1617B632003FB5F8 /* NSString+Format.m in Sources */,
+				CE1BC324161B33AB007DEC95 /* NSArray+ExpandArrayTest.m in Sources */,
+				CE1BC326161B349A007DEC95 /* NSObject+ExpandArray.m in Sources */,
+				CE1BC36A161B38AF007DEC95 /* NSDictionary+BlocksAdditions.m in Sources */,
+				CE1BC36E161B3A51007DEC95 /* NSDictionary+BlocksAdditionsTest.m in Sources */,
+				CED85A95161C23A200F28EBC /* JFFError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1708,7 +1726,7 @@
 				CEDB80EE1601F08F007577B2 /* NSData+ToString.m in Sources */,
 				37497BD41600971C00AF0C29 /* NSDictionary+ValueWithType.m in Sources */,
 				37497DF71601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.m in Sources */,
-				CE444A1516085D5A00DD85B0 /* NSObject+ProperIsKindOfClass.m in Sources */,
+				CE444A1516085D5A00DD85B0 /* NSObject+JFFMeaningClass.m in Sources */,
 				CE102F3916089570004229C5 /* UIImage+ScaleToSize.m in Sources */,
 				CE57FBB91611EFFF00124D90 /* NSSet+BlocksAdditions.m in Sources */,
 				CE57FBBE1611F0BF00124D90 /* NSMutableSet+StorableSet.m in Sources */,
