@@ -9,50 +9,48 @@
 
 @implementation NSObject (Scheduler)
 
-//JTODO test !!!
--(void)performSelector:( SEL )selector_
-          timeInterval:( NSTimeInterval )timeInterval_
-              userInfo:( id )userInfo_
-               repeats:( BOOL )repeats_
-             scheduler:( JFFScheduler* )scheduler_
+- (void)performSelector:(SEL)selector
+           timeInterval:(NSTimeInterval)timeInterval
+               userInfo:(id)userInfo
+                repeats:(BOOL)repeats
+              scheduler:(JFFScheduler *)scheduler
 {
-    NSParameterAssert( scheduler_ );
+    NSParameterAssert(scheduler);
     
     //use signature's number params
-    NSString* selectorString_ = NSStringFromSelector( selector_ );
-    NSUInteger numOfArgs_ = [ selectorString_ numberOfCharacterFromString: @":" ];
-    NSAssert1( numOfArgs_ == 0 || numOfArgs_ == 1
-              , @"selector \"%@\" should has 0 or 1 parameters"
-              , selectorString_ );
+    NSString* selectorString = NSStringFromSelector(selector);
+    NSUInteger numOfArgs = [selectorString numberOfCharacterFromString:@":"];
+    NSAssert1(numOfArgs == 0 || numOfArgs == 1,
+              @"selector \"%@\" should has 0 or 1 parameters",
+              selectorString);
     
-    __unsafe_unretained id self_ = self;
+    __unsafe_unretained id unretainedSelf = self;
     
-    JFFScheduledBlock block_ = ^void( JFFCancelScheduledBlock cancel_ ) {
-        if ( !repeats_ ) {
-            [ self_ removeOnDeallocBlock: cancel_ ];
-            cancel_();
+    JFFScheduledBlock block = ^void(JFFCancelScheduledBlock cancel) {
+        if (!repeats) {
+            [unretainedSelf removeOnDeallocBlock:cancel];
+            cancel();
         }
         
-        numOfArgs_ == 1
-            ? objc_msgSend( self_, selector_, userInfo_ )
-            : objc_msgSend( self_, selector_ );
+        numOfArgs == 1
+        ? objc_msgSend(unretainedSelf, selector, userInfo)
+        : objc_msgSend(unretainedSelf, selector);
     };
     
-    JFFCancelScheduledBlock cancel_ = [ scheduler_ addBlock: block_
-                                                   duration: timeInterval_ ];
-    [self addOnDeallocBlock: cancel_];
+    JFFCancelScheduledBlock cancel = [scheduler addBlock:block duration:timeInterval];
+    [self addOnDeallocBlock:cancel];
 }
 
--(void)performSelector:( SEL )selector_
-          timeInterval:( NSTimeInterval )timeInterval_
-              userInfo:( id )userInfo_ 
-               repeats:( BOOL )repeats_
+- (void)performSelector:(SEL)selector
+           timeInterval:(NSTimeInterval)timeInterval
+               userInfo:(id)userInfo
+                repeats:(BOOL)repeats
 {
-    [ self performSelector: selector_
-              timeInterval: timeInterval_
-                  userInfo: userInfo_ 
-                   repeats: repeats_
-                 scheduler: [ JFFScheduler sharedByThreadScheduler ] ];
+    [self performSelector:selector
+             timeInterval:timeInterval
+                 userInfo:userInfo
+                  repeats:repeats
+                scheduler:[JFFScheduler sharedByThreadScheduler]];
 }
 
 @end
