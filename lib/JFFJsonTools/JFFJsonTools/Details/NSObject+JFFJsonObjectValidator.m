@@ -4,6 +4,7 @@
 #import "JFFJsonValidationError.h"
 
 #include <objc/runtime.h>
+#include <objc/message.h>
 
 static BOOL isClass(id object)
 {
@@ -17,10 +18,8 @@ static BOOL isClass(id object)
                      rootJsonPattern:(id)rootJsonPattern
                                error:(NSError *__autoreleasing *)outError
 {
-    if (!isClass(jsonPattern) && ![self isEqual:jsonPattern])
-    {
-        if (outError)
-        {
+    if (!isClass(jsonPattern) && ![self isEqual:jsonPattern]) {
+        if (outError) {
             JFFJsonValidationError *error = [JFFJsonValidationError new];
             error.jsonObject  = rootJsonObject ;
             error.jsonPattern = rootJsonPattern;
@@ -44,10 +43,12 @@ static BOOL isClass(id object)
                                error:(NSError *__autoreleasing *)outError
 {
     Class checkClass = isClass(jsonPattern)?jsonPattern:[jsonPattern class];
-    if (![self properIsKindOfClass:checkClass])
-    {
-        if (outError)
-        {
+    checkClass = [checkClass jffMeaningClass];
+    
+    SEL selector = isClass(self)?@selector(isSubclassOfClass:):@selector(isKindOfClass:);
+    
+    if (!objc_msgSend(self, selector, checkClass)) {
+        if (outError) {
             JFFJsonValidationError *error = [JFFJsonValidationError new];
             error.jsonObject  = rootJsonObject ;
             error.jsonPattern = rootJsonPattern;
@@ -73,8 +74,7 @@ static BOOL isClass(id object)
     if (![self validateWithJsonPatternClass:jsonPattern
                              rootJsonObject:rootJsonObject
                             rootJsonPattern:rootJsonPattern
-                                      error:outError])
-    {
+                                      error:outError]) {
         return NO;
     }
 
@@ -111,33 +111,26 @@ static BOOL isClass(id object)
     if (![self validateWithJsonPatternClass:jsonPattern
                              rootJsonObject:rootJsonObject
                             rootJsonPattern:rootJsonPattern
-                                      error:outError])
-    {
+                                      error:outError]) {
         return NO;
     }
     
-    if (!isClass(jsonPattern))
-    {
-        if ([jsonPattern count] == 1)
-        {
+    if (!isClass(jsonPattern)) {
+        if ([jsonPattern count] == 1) {
             //all elements should have a given class
-            for (id subElement in self)
-            {
+            for (id subElement in self) {
                 if (![subElement validateWithJsonPattern:jsonPattern[0]
                                           rootJsonObject:rootJsonObject
                                          rootJsonPattern:rootJsonPattern
-                                                   error:outError])
-                {
+                                                   error:outError]) {
                     return NO;
                 }
             }
             return YES;
         }
         
-        if ([jsonPattern count]!=[self count])
-        {
-            if (outError)
-            {
+        if ([jsonPattern count]!=[self count]) {
+            if (outError) {
                 JFFJsonValidationError *error = [JFFJsonValidationError new];
                 error.jsonObject  = rootJsonObject ;
                 error.jsonPattern = rootJsonPattern;
@@ -152,8 +145,7 @@ static BOOL isClass(id object)
             return NO;
         }
         
-        for (NSUInteger index = 0; index < [self count]; ++index)
-        {
+        for (NSUInteger index = 0; index < [self count]; ++index) {
             id subPattern = jsonPattern[index];
             id subObject  =        self[index];
             
