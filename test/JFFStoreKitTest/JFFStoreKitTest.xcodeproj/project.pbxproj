@@ -217,7 +217,6 @@
 		CEBCBE5D1619C923007F805F = {
 			isa = PBXGroup;
 			children = (
-				CEBCBEFC1619CF7A007F805F /* StoreKit.framework */,
 				CEBCBE721619C923007F805F /* JFFStoreKitTest */,
 				CEBCBE6B1619C923007F805F /* Frameworks */,
 				CEBCBE691619C923007F805F /* Products */,
@@ -237,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				CEBCBEE91619CCC2007F805F /* libstdc++.dylib */,
+				CEBCBEFC1619CF7A007F805F /* StoreKit.framework */,
 				CEBCBE921619CB36007F805F /* GHUnitIOS.framework */,
 				CEBCBE6C1619C923007F805F /* UIKit.framework */,
 				CEBCBE6E1619C923007F805F /* Foundation.framework */,
@@ -604,7 +604,7 @@
 					../../lib,
 					../../lib/JFFStoreKit,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -630,7 +630,7 @@
 					../../lib,
 					../../lib/JFFStoreKit,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -641,6 +641,7 @@
 		CEBCBE901619C923007F805F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../frameworks\"",
@@ -648,8 +649,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFStoreKitTest/JFFStoreKitTest-Prefix.pch";
 				INFOPLIST_FILE = "JFFStoreKitTest/JFFStoreKitTest-Info.plist";
-				OTHER_LDFLAGS = "-all_load";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -657,6 +662,7 @@
 		CEBCBE911619C923007F805F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../frameworks\"",
@@ -664,8 +670,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFStoreKitTest/JFFStoreKitTest-Prefix.pch";
 				INFOPLIST_FILE = "JFFStoreKitTest/JFFStoreKitTest-Info.plist";
-				OTHER_LDFLAGS = "-all_load";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -689,6 +699,7 @@
 				CEBCBE911619C923007F805F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

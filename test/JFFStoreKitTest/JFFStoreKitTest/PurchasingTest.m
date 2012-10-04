@@ -1,31 +1,68 @@
 
 #import <JFFTestTools/GHAsyncTestCase+MainThreadTests.h>
 
-@interface PurchasingTest : GHAsyncTestCase
+static NSString * const testProductIdentifier = @"test.free.purchase1";
 
+@interface PurchasingTest : GHAsyncTestCase
 @end
 
 @implementation PurchasingTest
 
-- (void)testFreePurchase
+- (void)testFreePurchaseWithProductIdentifier
 {
-    void(^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishBLock)
-    {
-        JFFAsyncOperationBinder srvCallback = ^JFFAsyncOperation(SKProduct *product)
-        {
+    __block id purchaseResult;
+    __block NSString *productIdentifier;
+    
+    void(^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishBLock) {
+        JFFAsyncOperationBinder srvCallback = ^JFFAsyncOperation(SKProduct *product) {
+            productIdentifier = product.productIdentifier;
             return asyncOperationWithResult(@"ok )");
         };
-        JFFAsyncOperation loader = [JFFPurchsing purcheserWithProductIdentifier:@"test.free.purchase1"
+        JFFAsyncOperation loader = [JFFPurchsing purcheserWithProductIdentifier:testProductIdentifier
                                                                     srvCallback:srvCallback];
         
         loader(nil, nil, ^(id result, NSError *error) {
+            purchaseResult = result;
+            
             finishBLock();
         });
     };
     [self performAsyncRequestOnMainThreadWithBlock:testBlock
                                           selector:_cmd];
     
-    GHAssertTrue(YES, nil);
+    GHAssertNotNil(purchaseResult, nil);
+    GHAssertEqualObjects(productIdentifier, testProductIdentifier, nil);
+}
+
+- (void)testFreePurchaseWithProduct
+{
+    __block id purchaseResult;
+    __block NSString *productIdentifier;
+    
+    void(^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishBLock) {
+        JFFAsyncOperation productLoader = asyncOperationWithProductIdentifier(testProductIdentifier);
+        
+        productLoader(nil, nil, ^(SKProduct *product, NSError *error) {
+            
+            JFFAsyncOperationBinder srvCallback = ^JFFAsyncOperation(SKProduct *product) {
+                productIdentifier = product.productIdentifier;
+                return asyncOperationWithResult(@"ok )");
+            };
+            JFFAsyncOperation loader = [JFFPurchsing purcheserWithProduct:product
+                                                              srvCallback:srvCallback];
+            
+            loader(nil, nil, ^(id result, NSError *error) {
+                purchaseResult = result;
+                
+                finishBLock();
+            });
+        });
+    };
+    [self performAsyncRequestOnMainThreadWithBlock:testBlock
+                                          selector:_cmd];
+    
+    GHAssertNotNil(purchaseResult, nil);
+    GHAssertEqualObjects(productIdentifier, testProductIdentifier, nil);
 }
 
 @end
