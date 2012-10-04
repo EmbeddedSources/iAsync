@@ -19,8 +19,8 @@
 
 - (void)onAddToMutableAssignArray:(JFFMutableAssignArray *)array
 {
-    __unsafe_unretained JFFMutableAssignArray    * unretainedArray = array;
-    __unsafe_unretained JFFAutoRemoveAssignProxy * unretainedSelf  = self;
+    __unsafe_unretained JFFMutableAssignArray    *unretainedArray = array;
+    __unsafe_unretained JFFAutoRemoveAssignProxy *unretainedSelf  = self;
     self.onDeallocBlock = ^void(void) {
         [unretainedArray removeObject:unretainedSelf.target];
     };
@@ -74,8 +74,7 @@
 
 - (BOOL)containsObject:(id)object
 {
-    return [self->_mutableArray firstMatch:^BOOL(id element)
-    {
+    return [self->_mutableArray firstMatch:^BOOL(id element) {
         JFFAutoRemoveAssignProxy *proxy = element;
         return proxy.target == object;
     }] != nil;
@@ -88,8 +87,7 @@
         return proxy.target == object;
     }];
     
-    if (index != NSNotFound)
-    {
+    if (index != NSNotFound) {
         JFFAutoRemoveAssignProxy *proxy = self->_mutableArray[index];
         [proxy onRemoveFromMutableAssignArray:self];
         [self->_mutableArray removeObjectAtIndex:index];
@@ -98,8 +96,7 @@
 
 - (void)removeAllObjects
 {
-    for (JFFAutoRemoveAssignProxy *proxy in self->_mutableArray)
-    {
+    for (JFFAutoRemoveAssignProxy *proxy in self->_mutableArray) {
         [proxy onRemoveFromMutableAssignArray:self];
     }
     [self->_mutableArray removeAllObjects];
@@ -121,8 +118,7 @@
 
 - (id)firstMatch:(JFFPredicateBlock)predicate
 {
-    for (JFFAutoRemoveAssignProxy *proxy in self->_mutableArray)
-    {
+    for (JFFAutoRemoveAssignProxy *proxy in self->_mutableArray) {
         if (predicate(proxy.target))
             return proxy.target;
     }

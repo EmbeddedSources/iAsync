@@ -12,12 +12,11 @@
 - (void)removeObject:(id)object;
 - (void)removeAllObjects;
 
--(NSUInteger)count;
+- (NSUInteger)count;
 
 - (id)firstMatch:(JFFPredicateBlock)predicate;
 - (void)enumerateObjectsUsingBlock:(void(^)(id obj, NSUInteger idx, BOOL *stop))block;
 
-//TODO test it
 - (id)lastObject;
 
 @end

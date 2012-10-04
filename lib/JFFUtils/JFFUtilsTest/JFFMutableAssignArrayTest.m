@@ -40,6 +40,16 @@
     STAssertNil(weakArray, @"Target should be dealloced");
 }
 
+- (void)testLastObject
+{
+    JFFMutableAssignArray *array = [JFFMutableAssignArray new];
+    
+    NSObject *object = [NSObject new];
+    [array addObject:object];
+    
+    STAssertTrue(object == [array lastObject], @"Target should be dealloced");
+}
+
 - (void)testContainsObject
 {
     @autoreleasepool {
