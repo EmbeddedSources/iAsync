@@ -3,10 +3,9 @@
 
 #include <Foundation/NSObjCRuntime.h>
 
-typedef struct
-{
-   NSInteger location;
-   NSInteger length;
+typedef struct {
+    NSInteger location;
+    NSInteger length;
 } JSignedRange;
 
 JSignedRange JSignedRangeMake(NSInteger location, NSInteger length);
