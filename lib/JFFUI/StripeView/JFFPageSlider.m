@@ -7,10 +7,10 @@
 
 @interface JFFPageSlider () < UIScrollViewDelegate >
 
-@property ( nonatomic ) UIScrollView* scrollView;
+@property ( nonatomic ) UIScrollView *scrollView;
 @property ( nonatomic ) NSInteger activeIndex;
 @property ( nonatomic ) NSInteger firstIndex;
-@property ( nonatomic ) NSMutableDictionary* viewByIndex;
+@property ( nonatomic ) NSMutableDictionary *viewByIndex;
 
 @end
 
@@ -28,17 +28,16 @@
     [ [ NSNotificationCenter defaultCenter ] removeObserver: self ];
 }
 
--(id)initWithFrame:( CGRect )frame_
-          delegate:( id< JFFPageSliderDelegate > )delegate_
+- (id)initWithFrame:(CGRect)frame
+           delegate:(id< JFFPageSliderDelegate >)delegate
 {
-    self = [ super initWithFrame: frame_ ];
-
-    if ( self )
-    {
-        self.delegate = delegate_;
-        [ self initialize ];
+    self = [super initWithFrame:frame];
+    
+    if ( self ) {
+        self.delegate = delegate;
+        [self initialize];
     }
-
+    
     return self;
 }
 

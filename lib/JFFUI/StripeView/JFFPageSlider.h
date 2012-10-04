@@ -6,35 +6,35 @@
 
 @interface JFFPageSlider : UIView
 
-@property ( nonatomic, readonly ) UIScrollView* scrollView;
+@property (nonatomic, readonly) UIScrollView *scrollView;
 
-@property ( nonatomic, readonly ) NSInteger activeIndex;
-@property ( nonatomic, readonly ) NSInteger firstIndex;
-@property ( nonatomic, readonly ) NSInteger lastIndex;
-@property ( nonatomic, readonly ) NSMutableDictionary* viewByIndex;
+@property (nonatomic, readonly) NSInteger activeIndex;
+@property (nonatomic, readonly) NSInteger firstIndex;
+@property (nonatomic, readonly) NSInteger lastIndex;
+@property (nonatomic, readonly) NSMutableDictionary *viewByIndex;
 
-@property ( nonatomic, weak ) IBOutlet id< JFFPageSliderDelegate > delegate;
+@property (nonatomic, weak) IBOutlet id< JFFPageSliderDelegate > delegate;
 
--(id)initWithFrame:( CGRect )frame_
-          delegate:( id< JFFPageSliderDelegate > )delegate_;
+- (id)initWithFrame:(CGRect)frame
+           delegate:(id< JFFPageSliderDelegate >)delegate;
 
--(void)reloadData;
+- (void)reloadData;
 
--(UIView*)elementAtIndex:( NSInteger )index_;
+- (UIView *)elementAtIndex:(NSInteger)index;
 
--(NSArray*)visibleElements;
+- (NSArray *)visibleElements;
 
--(void)slideForward;
--(void)slideBackward;
+- (void)slideForward;
+- (void)slideBackward;
 
--(void)pushFrontElement;
--(void)pushBackElement;
+- (void)pushFrontElement;
+- (void)pushBackElement;
 
--(void)slideToIndex:( NSInteger )index_ animated:(BOOL)animated_;
--(void)slideToIndex:( NSInteger )index_;
+- (void)slideToIndex:(NSInteger)index animated:(BOOL)animated;
+- (void)slideToIndex:(NSInteger)index;
 
--(UIView*)viewAtIndex:( NSInteger )index_;
+- (UIView *)viewAtIndex:(NSInteger)index;
 
--(void)removeViewsInRange:( JSignedRange )range_;
+- (void)removeViewsInRange:(JSignedRange)range;
 
 @end
