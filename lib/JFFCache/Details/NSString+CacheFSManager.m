@@ -14,12 +14,12 @@
     [ [ NSFileManager defaultManager ] removeItemAtPath: path_ error: nil ];
 }
 
--(void)cacheDBFileLinkSaveData:( NSData* )data_
+- (void)cacheDBFileLinkSaveData:(NSData *)data
 {
-    NSString* path_ = [ self cacheDBFileLinkPath ];
-    NSURL* url_ = [ [ NSURL alloc ] initFileURLWithPath: path_ isDirectory: NO ];
-    [ data_ writeToURL: url_ atomically: NO ];
-    [ path_ addSkipBackupAttribute ];
+    NSString *path = [self cacheDBFileLinkPath];
+    NSURL *url = [[NSURL alloc] initFileURLWithPath:path isDirectory:NO];
+    [data writeToURL:url atomically:NO];
+    [path addSkipBackupAttribute];
 }
 
 -(NSData*)cacheDBFileLinkData

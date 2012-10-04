@@ -23,8 +23,7 @@
 - (void)testObjectInstancesCount
 {
     NSUInteger initialInsancesCount = [TestClassA instancesCount];
-    @autoreleasepool
-    {
+    @autoreleasepool {
         TestClassA *a = [TestClassA new];
         STAssertTrue(1 == [TestClassA instancesCount] && a, @"We have instances of TestClassA");
     }
@@ -35,13 +34,11 @@
 {
     NSUInteger initialInsancesCountA = [TestClassA instancesCount];
     NSUInteger initialInsancesCountB = [TestClassB instancesCount];
-    @autoreleasepool
-    {
+    @autoreleasepool {
         id b = [TestClassB new];
         STAssertTrue(1 == [TestClassB instancesCount] && b, @"We have instances of TestClassB class");
         
-        @autoreleasepool
-        {
+        @autoreleasepool {
             id a = [TestClassA new];
             STAssertTrue(1 == [TestClassA instancesCount], @"We have instances of TestClassA class");
             STAssertTrue(1 == [TestClassB instancesCount] && a, @"We have instances of TestClassB class");
