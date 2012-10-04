@@ -15,6 +15,8 @@
 @property (nonatomic, readonly) NSDictionary *dbInfo;
 @property (nonatomic) NSDictionary *currentDbInfo;
 
++ (JFFDBInfo *)newDbInfo;
+
 - (id)initWithInfoPath:(NSString *)infoPath;
 - (id)initWithInfoDictionary:(NSDictionary *)infoDictionry;
 
