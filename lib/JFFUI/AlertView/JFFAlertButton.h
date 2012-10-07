@@ -4,9 +4,9 @@
 
 @interface JFFAlertButton : NSObject
 
-@property ( nonatomic ) NSString* title;
-@property ( nonatomic, copy ) JFFSimpleBlock action;
+@property (nonatomic) NSString *title;
+@property (nonatomic, copy) JFFSimpleBlock action;
 
-+(id)alertButton:( NSString* )title_ action:( JFFSimpleBlock )action_;
++ (id)alertButton:(NSString *)title action:(JFFSimpleBlock)action;
 
 @end

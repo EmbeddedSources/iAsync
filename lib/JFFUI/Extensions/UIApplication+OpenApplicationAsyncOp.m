@@ -61,18 +61,16 @@ JFFAsyncOperationInterface
 
 - (JFFAsyncOperation)asyncOperationWithApplicationURL:(NSURL *)url
 {
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
         JFFOpenApplicationWithURLDelegateProxy *proxy =
         [JFFOpenApplicationWithURLDelegateProxy new];
-
+        
         proxy.url = url;
         proxy.application = self;
-
-        return buildAsyncOperationWithInterface(proxy)(progressCallback, cancelCallback, doneCallback);
+        
+        return proxy;
     };
+    return buildAsyncOperationWithInterface(builder);
 }
 
 @end
