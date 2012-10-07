@@ -1,0 +1,625 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CEA097ED16216ED1005820FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA097EC16216ED1005820FA /* Foundation.framework */; };
+		CEA097F216216ED1005820FA /* JFFCoreData.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEA097F116216ED1005820FA /* JFFCoreData.h */; };
+		CEA097FC16216ED1005820FA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA097FB16216ED1005820FA /* SenTestingKit.framework */; };
+		CEA097FE16216ED1005820FA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA097FD16216ED1005820FA /* UIKit.framework */; };
+		CEA097FF16216ED1005820FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA097EC16216ED1005820FA /* Foundation.framework */; };
+		CEA0980216216ED1005820FA /* libJFFCoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA097E916216ED1005820FA /* libJFFCoreData.a */; };
+		CEA0980816216ED1005820FA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEA0980616216ED1005820FA /* InfoPlist.strings */; };
+		CEA0980B16216ED1005820FA /* JFFCoreDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0980A16216ED1005820FA /* JFFCoreDataTests.m */; };
+		CEA0981616216EE7005820FA /* JFFCoreDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0981516216EE7005820FA /* JFFCoreDataProvider.m */; };
+		CEA098191621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA098181621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m */; };
+		CEA0982E16217259005820FA /* JFFCoreDataOperationAsyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0982D16217259005820FA /* JFFCoreDataOperationAsyncAdapter.m */; };
+		CECEFBE416217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE316217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m */; };
+		CECEFBE716217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE616217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m */; };
+		CECEFBEA16218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE916218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CEA0980016216ED1005820FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA097E016216ED1005820FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEA097E816216ED1005820FA;
+			remoteInfo = JFFCoreData;
+		};
+		CEA0983C16217633005820FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA0983416217632005820FA /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+		CEA0983E16217633005820FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA0983416217632005820FA /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802A5B148BF2930040A93A;
+			remoteInfo = JFFUtilsMacOS;
+		};
+		CEA0984016217633005820FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA0983416217632005820FA /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391044314A88C04007315A3;
+			remoteInfo = "JFFUtils-clang";
+		};
+		CEA0984216217633005820FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA0983416217632005820FA /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E57F42414F93738002D139B;
+			remoteInfo = JFFUtilsFW;
+		};
+		CEA0984416217633005820FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA0983416217632005820FA /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE444A1C1608609100DD85B0;
+			remoteInfo = JFFUtilsTest;
+		};
+		CEA0984C16217638005820FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA0984616217638005820FA /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFAsyncOperations;
+		};
+		CEA0984E16217638005820FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA0984616217638005820FA /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391037B14A88BB5007315A3;
+			remoteInfo = "JFFAsyncOperations-clang";
+		};
+		CEA0985016217638005820FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA0984616217638005820FA /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F20C914F94BDF00588C7D;
+			remoteInfo = JFFAsyncOperationsFW;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CEA097E716216ED1005820FA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				CEA097F216216ED1005820FA /* JFFCoreData.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CEA097E916216ED1005820FA /* libJFFCoreData.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFCoreData.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEA097EC16216ED1005820FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CEA097F016216ED1005820FA /* JFFCoreData-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFCoreData-Prefix.pch"; sourceTree = "<group>"; };
+		CEA097F116216ED1005820FA /* JFFCoreData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFCoreData.h; sourceTree = "<group>"; };
+		CEA097FA16216ED1005820FA /* JFFCoreDataTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFCoreDataTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEA097FB16216ED1005820FA /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		CEA097FD16216ED1005820FA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		CEA0980516216ED1005820FA /* JFFCoreDataTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFCoreDataTests-Info.plist"; sourceTree = "<group>"; };
+		CEA0980716216ED1005820FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CEA0980916216ED1005820FA /* JFFCoreDataTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFCoreDataTests.h; sourceTree = "<group>"; };
+		CEA0980A16216ED1005820FA /* JFFCoreDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataTests.m; sourceTree = "<group>"; };
+		CEA0981416216EE7005820FA /* JFFCoreDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCoreDataProvider.h; sourceTree = "<group>"; };
+		CEA0981516216EE7005820FA /* JFFCoreDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataProvider.m; sourceTree = "<group>"; };
+		CEA098171621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+SaveAsyncOperation.h"; sourceTree = "<group>"; };
+		CEA098181621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+SaveAsyncOperation.m"; sourceTree = "<group>"; };
+		CEA0982C16217259005820FA /* JFFCoreDataOperationAsyncAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCoreDataOperationAsyncAdapter.h; sourceTree = "<group>"; };
+		CEA0982D16217259005820FA /* JFFCoreDataOperationAsyncAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataOperationAsyncAdapter.m; sourceTree = "<group>"; };
+		CEA0983416217632005820FA /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
+		CEA0984616217638005820FA /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
+		CECEFBE216217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ObjectInManagedObjectContext.h"; sourceTree = "<group>"; };
+		CECEFBE316217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ObjectInManagedObjectContext.m"; sourceTree = "<group>"; };
+		CECEFBE516217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ObjectInManagedObjectContext.h"; sourceTree = "<group>"; };
+		CECEFBE616217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ObjectInManagedObjectContext.m"; sourceTree = "<group>"; };
+		CECEFBE816218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+JFFCoreDataAsyncOperationAdapter.h"; sourceTree = "<group>"; };
+		CECEFBE916218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+JFFCoreDataAsyncOperationAdapter.m"; sourceTree = "<group>"; };
+		CECEFBEB16218094007A61C9 /* JFFObjectInManagedObjectContextProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFObjectInManagedObjectContextProtocol.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CEA097E616216ED1005820FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEA097ED16216ED1005820FA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEA097F616216ED1005820FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEA097FC16216ED1005820FA /* SenTestingKit.framework in Frameworks */,
+				CEA097FE16216ED1005820FA /* UIKit.framework in Frameworks */,
+				CEA097FF16216ED1005820FA /* Foundation.framework in Frameworks */,
+				CEA0980216216ED1005820FA /* libJFFCoreData.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CEA097DE16216ED1005820FA = {
+			isa = PBXGroup;
+			children = (
+				CEA097EE16216ED1005820FA /* JFFCoreData */,
+				CEA0983316217616005820FA /* Dependencies */,
+				CEA0980316216ED1005820FA /* JFFCoreDataTests */,
+				CEA097EB16216ED1005820FA /* Frameworks */,
+				CEA097EA16216ED1005820FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CEA097EA16216ED1005820FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEA097E916216ED1005820FA /* libJFFCoreData.a */,
+				CEA097FA16216ED1005820FA /* JFFCoreDataTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEA097EB16216ED1005820FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEA097EC16216ED1005820FA /* Foundation.framework */,
+				CEA097FB16216ED1005820FA /* SenTestingKit.framework */,
+				CEA097FD16216ED1005820FA /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CEA097EE16216ED1005820FA /* JFFCoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CECEFBE116217FA7007A61C9 /* ObjectInManagedObjectContext */,
+				CEA097EF16216ED1005820FA /* Supporting Files */,
+				CEA0981416216EE7005820FA /* JFFCoreDataProvider.h */,
+				CEA0981516216EE7005820FA /* JFFCoreDataProvider.m */,
+				CEA098171621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.h */,
+				CEA098181621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m */,
+				CEA0982C16217259005820FA /* JFFCoreDataOperationAsyncAdapter.h */,
+				CEA0982D16217259005820FA /* JFFCoreDataOperationAsyncAdapter.m */,
+				CEA097F116216ED1005820FA /* JFFCoreData.h */,
+			);
+			path = JFFCoreData;
+			sourceTree = "<group>";
+		};
+		CEA097EF16216ED1005820FA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CEA097F016216ED1005820FA /* JFFCoreData-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEA0980316216ED1005820FA /* JFFCoreDataTests */ = {
+			isa = PBXGroup;
+			children = (
+				CEA0980916216ED1005820FA /* JFFCoreDataTests.h */,
+				CEA0980A16216ED1005820FA /* JFFCoreDataTests.m */,
+				CEA0980416216ED1005820FA /* Supporting Files */,
+			);
+			path = JFFCoreDataTests;
+			sourceTree = "<group>";
+		};
+		CEA0980416216ED1005820FA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CEA0980516216ED1005820FA /* JFFCoreDataTests-Info.plist */,
+				CEA0980616216ED1005820FA /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEA0983316217616005820FA /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				CEA0984616217638005820FA /* JFFAsyncOperations.xcodeproj */,
+				CEA0983416217632005820FA /* JFFUtils.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		CEA0983516217632005820FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEA0983D16217633005820FA /* libJFFUtils.a */,
+				CEA0983F16217633005820FA /* libJFFUtilsMacOS.a */,
+				CEA0984116217633005820FA /* libJFFUtils-clang.a */,
+				CEA0984316217633005820FA /* JFFUtilsFW.framework */,
+				CEA0984516217633005820FA /* JFFUtilsTest.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEA0984716217638005820FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEA0984D16217638005820FA /* libJFFAsyncOperations.a */,
+				CEA0984F16217638005820FA /* libJFFAsyncOperations-clang.a */,
+				CEA0985116217638005820FA /* JFFAsyncOperationsFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CECEFBE116217FA7007A61C9 /* ObjectInManagedObjectContext */ = {
+			isa = PBXGroup;
+			children = (
+				CECEFBEB16218094007A61C9 /* JFFObjectInManagedObjectContextProtocol.h */,
+				CECEFBE216217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.h */,
+				CECEFBE316217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m */,
+				CECEFBE516217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.h */,
+				CECEFBE616217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m */,
+				CECEFBE816218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.h */,
+				CECEFBE916218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.m */,
+			);
+			path = ObjectInManagedObjectContext;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CEA097E816216ED1005820FA /* JFFCoreData */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEA0980E16216ED1005820FA /* Build configuration list for PBXNativeTarget "JFFCoreData" */;
+			buildPhases = (
+				CEA097E516216ED1005820FA /* Sources */,
+				CEA097E616216ED1005820FA /* Frameworks */,
+				CEA097E716216ED1005820FA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JFFCoreData;
+			productName = JFFCoreData;
+			productReference = CEA097E916216ED1005820FA /* libJFFCoreData.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		CEA097F916216ED1005820FA /* JFFCoreDataTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEA0981116216ED1005820FA /* Build configuration list for PBXNativeTarget "JFFCoreDataTests" */;
+			buildPhases = (
+				CEA097F516216ED1005820FA /* Sources */,
+				CEA097F616216ED1005820FA /* Frameworks */,
+				CEA097F716216ED1005820FA /* Resources */,
+				CEA097F816216ED1005820FA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEA0980116216ED1005820FA /* PBXTargetDependency */,
+			);
+			name = JFFCoreDataTests;
+			productName = JFFCoreDataTests;
+			productReference = CEA097FA16216ED1005820FA /* JFFCoreDataTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CEA097E016216ED1005820FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = EmbeddedSources;
+			};
+			buildConfigurationList = CEA097E316216ED1005820FA /* Build configuration list for PBXProject "JFFCoreData" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CEA097DE16216ED1005820FA;
+			productRefGroup = CEA097EA16216ED1005820FA /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CEA0984716217638005820FA /* Products */;
+					ProjectRef = CEA0984616217638005820FA /* JFFAsyncOperations.xcodeproj */;
+				},
+				{
+					ProductGroup = CEA0983516217632005820FA /* Products */;
+					ProjectRef = CEA0983416217632005820FA /* JFFUtils.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				CEA097E816216ED1005820FA /* JFFCoreData */,
+				CEA097F916216ED1005820FA /* JFFCoreDataTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CEA0983D16217633005820FA /* libJFFUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtils.a;
+			remoteRef = CEA0983C16217633005820FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEA0983F16217633005820FA /* libJFFUtilsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtilsMacOS.a;
+			remoteRef = CEA0983E16217633005820FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEA0984116217633005820FA /* libJFFUtils-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFUtils-clang.a";
+			remoteRef = CEA0984016217633005820FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEA0984316217633005820FA /* JFFUtilsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFUtilsFW.framework;
+			remoteRef = CEA0984216217633005820FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEA0984516217633005820FA /* JFFUtilsTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFUtilsTest.octest;
+			remoteRef = CEA0984416217633005820FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEA0984D16217638005820FA /* libJFFAsyncOperations.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperations.a;
+			remoteRef = CEA0984C16217638005820FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEA0984F16217638005820FA /* libJFFAsyncOperations-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFAsyncOperations-clang.a";
+			remoteRef = CEA0984E16217638005820FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEA0985116217638005820FA /* JFFAsyncOperationsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFAsyncOperationsFW.framework;
+			remoteRef = CEA0985016217638005820FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CEA097F716216ED1005820FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEA0980816216ED1005820FA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CEA097F816216ED1005820FA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CEA097E516216ED1005820FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEA0981616216EE7005820FA /* JFFCoreDataProvider.m in Sources */,
+				CEA098191621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m in Sources */,
+				CEA0982E16217259005820FA /* JFFCoreDataOperationAsyncAdapter.m in Sources */,
+				CECEFBE416217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m in Sources */,
+				CECEFBE716217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m in Sources */,
+				CECEFBEA16218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEA097F516216ED1005820FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEA0980B16216ED1005820FA /* JFFCoreDataTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CEA0980116216ED1005820FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEA097E816216ED1005820FA /* JFFCoreData */;
+			targetProxy = CEA0980016216ED1005820FA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CEA0980616216ED1005820FA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEA0980716216ED1005820FA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CEA0980C16216ED1005820FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					.,
+					../,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CEA0980D16216ED1005820FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					.,
+					../,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CEA0980F16216ED1005820FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/JFFCoreData.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFCoreData/JFFCoreData-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CEA0981016216ED1005820FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/JFFCoreData.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFCoreData/JFFCoreData-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		CEA0981216216ED1005820FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFCoreData/JFFCoreData-Prefix.pch";
+				INFOPLIST_FILE = "JFFCoreDataTests/JFFCoreDataTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		CEA0981316216ED1005820FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFCoreData/JFFCoreData-Prefix.pch";
+				INFOPLIST_FILE = "JFFCoreDataTests/JFFCoreDataTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CEA097E316216ED1005820FA /* Build configuration list for PBXProject "JFFCoreData" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEA0980C16216ED1005820FA /* Debug */,
+				CEA0980D16216ED1005820FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEA0980E16216ED1005820FA /* Build configuration list for PBXNativeTarget "JFFCoreData" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEA0980F16216ED1005820FA /* Debug */,
+				CEA0981016216ED1005820FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEA0981116216ED1005820FA /* Build configuration list for PBXNativeTarget "JFFCoreDataTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEA0981216216ED1005820FA /* Debug */,
+				CEA0981316216ED1005820FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CEA097E016216ED1005820FA /* Project object */;
+}
