@@ -51,14 +51,14 @@
     }];
 }
 
-- (NSArray*)select:(JFFPredicateBlock)predicate
+- (NSArray *)select:(JFFPredicateBlock)predicate
 {
     return [self selectWithIndex:^(id obj, NSUInteger idx) {
         return predicate(obj);
     }];
 }
 
-- (NSArray*)selectWithIndex:(JFFPredicateWithIndexBlock)predicate
+- (NSArray *)selectWithIndex:(JFFPredicateWithIndexBlock)predicate
 {
     NSIndexSet *indexes = [self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         return predicate(obj, idx);
@@ -66,7 +66,7 @@
     return [self objectsAtIndexes:indexes];
 }
 
-- (NSArray*)map:(JFFMappingBlock)block
+- (NSArray *)map:(JFFMappingBlock)block
 {
     NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
     
@@ -77,10 +77,10 @@
     return [result copy];
 }
 
-- (NSArray*)map:(JFFMappingWithErrorBlock)block error:(NSError **)outError
+- (NSArray *)map:(JFFMappingWithErrorBlock)block error:(NSError **)outError
 {
     NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
-
+    
     for (id object in self) {
         id newObject = block(object, outError);
         if (newObject) {
@@ -89,21 +89,21 @@
             return nil;
         }
     }
-
+    
     return [result copy];
 }
 
-- (NSArray*)forceMap:(JFFMappingBlock)block
+- (NSArray *)forceMap:(JFFMappingBlock)block
 {
     NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
-
+    
     for (id object in self) {
         id newObject = block(object);
         if (newObject) {
             [result addObject:newObject];
         }
     }
-
+    
     return [result copy];
 }
 
@@ -145,8 +145,7 @@
 {
     NSMutableArray *result = [NSMutableArray new];
     
-    [self each:^void(id object)
-    {
+    [self each:^void(id object) {
         NSArray *objectItems = block(object);
         [result addObjectsFromArray:objectItems];
     }];

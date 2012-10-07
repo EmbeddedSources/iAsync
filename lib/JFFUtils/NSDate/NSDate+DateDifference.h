@@ -2,6 +2,6 @@
 
 @interface NSDate (DateDifference)
 
--(NSString*)dateDifferenceStringFromDate:( NSDate* )fromDate_;
+- (NSString *)dateDifferenceStringFromDate:(NSDate *)fromDate;
 
 @end

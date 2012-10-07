@@ -4,12 +4,12 @@
 
 @implementation NSArray (NoThrowObjectAtIndex)
 
--(id)noThrowObjectAtIndex:( NSUInteger )index_
+- (id)noThrowObjectAtIndex:(NSUInteger)index
 {
-   if ( [ self count ] <= index_ )
+   if ([self count] <= index)
       return nil;
-
-   return self[ index_ ];
+    
+   return self[index];
 }
 
 @end

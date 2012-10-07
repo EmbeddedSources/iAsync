@@ -6,22 +6,22 @@
 
 @implementation NSArray( RemoveDuplicates )
 
-- (NSArray*)arrayByRemovingDuplicates
+- (NSArray *)arrayByRemovingDuplicates
 {
-    return [ self unique ];
+    return [self unique];
 }
 
-- (NSArray*)arrayByRemovingDuplicatesUsingIsEqualBlock:( JFFEqualityCheckerBlock )predicate_
+- (NSArray *)arrayByRemovingDuplicatesUsingIsEqualBlock:(JFFEqualityCheckerBlock)predicate
 {
-    return [ self uniqueBy: predicate_ ];
+    return [self uniqueBy:predicate];
 }
 
 - (NSArray *)unique
 {
     NSUInteger itemsCount = [self count];
     
-    NSMutableSet   * processedObjects = [[NSMutableSet   alloc] initWithCapacity:itemsCount];
-    NSMutableArray * result           = [[NSMutableArray alloc] initWithCapacity:itemsCount];
+    NSMutableSet   *processedObjects = [[NSMutableSet   alloc] initWithCapacity:itemsCount];
+    NSMutableArray *result           = [[NSMutableArray alloc] initWithCapacity:itemsCount];
     
     for (id item in self) {
         if (![processedObjects containsObject:item]) {
@@ -32,7 +32,6 @@
     
     //Shrink the capacity
     return [result copy];
-    //return [[[NSSet alloc] initWithArray:self] allObjects];
 }
 
 - (NSArray *)uniqueBy:(JFFEqualityCheckerBlock)predicate
@@ -42,10 +41,9 @@
     NSUInteger itemsCount  = [self count];
     NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:itemsCount];
     
-    NSArray* filtered = nil;
+    NSArray *filtered = nil;
     JFFPredicateBlock searchPredicate = nil;
-    while ([myCopy hasElements])
-    {
+    while ([myCopy hasElements]) {
         id firstItem = myCopy[0];
         
         searchPredicate = ^BOOL(id itemObject) {
