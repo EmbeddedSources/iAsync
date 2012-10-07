@@ -4,92 +4,89 @@
 
 @implementation JFFAddressBookFactory
 
-+(void)asyncAddressBookWithOnCreatedBlock:( JFFAddressBookOnCreated )callback_
++ (void)asyncAddressBookWithOnCreatedBlock:(JFFAddressBookOnCreated)callback
 {
-    NSParameterAssert( nil != callback_ );
+    NSParameterAssert(nil!=callback);
     
 #ifdef kCFCoreFoundationVersionNumber_iOS_5_1
-    if ( kCFCoreFoundationVersionNumber <= kCFCoreFoundationVersionNumber_iOS_5_1 )
-    {
+    if (kCFCoreFoundationVersionNumber <= kCFCoreFoundationVersionNumber_iOS_5_1) {
 #endif
-        [ self asyncLegacyAddressBookWithOnCreatedBlock: callback_ ];
+        [self asyncLegacyAddressBookWithOnCreatedBlock:callback];
         return;
 #ifdef kCFCoreFoundationVersionNumber_iOS_5_1
     }
-
-    CFErrorRef error_ = NULL;
-    ABAddressBookRef result_ = ABAddressBookCreateWithOptions( 0, &error_ );
-
-    if ( NULL != error_ )
-    {
-        NSLog( @"[!!!ERROR!!!] - ABAddressBookCreateWithOptions : %@", (__bridge NSError*)error_ );
+    
+    CFErrorRef error = NULL;
+    ABAddressBookRef result = ABAddressBookCreateWithOptions(0, &error);
+    
+    if (NULL != error) {
+        NSError *nsError = (__bridge NSError*)error;
+        NSLog(@"[!!!ERROR!!!] - ABAddressBookCreateWithOptions : %@", nsError);
+        if (result)
+            CFRelease(result);
+        if (callback)
+            callback(nil, kABAuthorizationStatusNotDetermined, nsError);
         return;
     }
-
-    callback_ = [ callback_ copy ];
-
-    JFFAddressBook* bookWrapper_ = [ [ JFFAddressBook alloc ] initWithRawBook: result_ ];
-    ABAddressBookRequestAccessCompletionHandler onAddressBookAccess_ =
-        ^( bool blockGranted_, CFErrorRef blockError_ )
-        {
-            NSError* retError_ = (__bridge NSError* )(blockError_);
-
-            callback_( bookWrapper_, ::ABAddressBookGetAuthorizationStatus(), retError_ );
+    
+    callback = [callback copy];
+    
+    ABAddressBookRequestAccessCompletionHandler onAddressBookAccess =
+        ^(bool blockGranted, CFErrorRef blockError) {
+            NSError *retError = (__bridge NSError *)(blockError);
+            
+            JFFAddressBook *bookWrapper = [[JFFAddressBook alloc] initWithRawBook:result];
+            callback(bookWrapper, ::ABAddressBookGetAuthorizationStatus(), retError);
         };
-
-    ABAddressBookRequestAccessWithCompletion( result_, onAddressBookAccess_ );
+    
+    ABAddressBookRequestAccessWithCompletion(result, onAddressBookAccess);
 #endif
 }
 
-+(void)asyncLegacyAddressBookWithOnCreatedBlock:( JFFAddressBookOnCreated )callback_
++ (void)asyncLegacyAddressBookWithOnCreatedBlock:(JFFAddressBookOnCreated)callback
 {
-    NSParameterAssert( nil != callback_ );
-
-    ABAddressBookRef result_ = ::ABAddressBookCreate();
-    JFFAddressBook* bookWrapper_ = [ [ JFFAddressBook alloc ] initWithRawBook: result_ ];
-
-    callback_( bookWrapper_, kABAuthorizationStatusAuthorized, nil );
+    NSParameterAssert(nil!=callback);
+    
+    ABAddressBookRef result = ::ABAddressBookCreate();
+    JFFAddressBook *bookWrapper = [[JFFAddressBook alloc] initWithRawBook:result];
+    
+    callback(bookWrapper, kABAuthorizationStatusAuthorized, nil);
 }
 
-+(NSString*)bookStatusToString:( ABAuthorizationStatus) status_
++ (NSString *)bookStatusToString:(ABAuthorizationStatus)status
 {
-    if ( status_ > kABAuthorizationStatusAuthorized )
-    {
+    if (status > kABAuthorizationStatusAuthorized) {
         return nil;
     }
-
-    static NSArray* const errors_ =
+    
+    static NSArray *const errors =
     @[
         @"kABAuthorizationStatusNotDetermined",
         @"kABAuthorizationStatusRestricted"   ,
         @"kABAuthorizationStatusDenied"       ,
         @"kABAuthorizationStatusAuthorized"   ,
     ];
-
-    return errors_[ status_ ];
+    
+    return errors[status];
 }
 
-+(void)asyncAddressBookWithSuccessBlock:( JFFAddressBookSuccessCallback )onSuccess_
-                          errorCallback:( JFFAddressBookErrorCallback )onFailure_
++ (void)asyncAddressBookWithSuccessBlock:(JFFAddressBookSuccessCallback)onSuccess
+                           errorCallback:(JFFAddressBookErrorCallback)onFailure
 {
-    NSParameterAssert( nil != onSuccess_ );
-    NSParameterAssert( nil != onFailure_ );
-
-    onSuccess_ = [ onSuccess_ copy ];
-    onFailure_ = [ onFailure_ copy ];
-
-    [ self asyncAddressBookWithOnCreatedBlock:
-     ^void( JFFAddressBook* book_, ABAuthorizationStatus status_, NSError* error_)
-     {
-         if ( kABAuthorizationStatusAuthorized != status_ )
-         {
-             onFailure_( status_, error_ );
+    NSParameterAssert(nil!=onSuccess);
+    NSParameterAssert(nil!=onFailure);
+    
+    onSuccess = [onSuccess copy];
+    onFailure = [onFailure copy];
+    
+    [self asyncAddressBookWithOnCreatedBlock:
+     ^void(JFFAddressBook *book, ABAuthorizationStatus status, NSError *error) {
+         if (kABAuthorizationStatusAuthorized != status) {
+             onFailure(status, error);
+         } else {
+             onSuccess(book);
          }
-         else
-         {
-             onSuccess_( book_ );
-         }
-     } ];
+     }];
 }
 
 @end

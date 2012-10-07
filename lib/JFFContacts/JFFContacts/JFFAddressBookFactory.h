@@ -16,16 +16,16 @@
 @protocol JFFAddressBookOwner;
 @class JFFAddressBook;
 
-typedef void(^JFFAddressBookOnCreated)( JFFAddressBook* book_, ABAuthorizationStatus status_, NSError* error_ );
-typedef void(^JFFAddressBookSuccessCallback)( JFFAddressBook* book_ );
-typedef void(^JFFAddressBookErrorCallback)( ABAuthorizationStatus status_, NSError* error_ );
+typedef void(^JFFAddressBookOnCreated)(JFFAddressBook *book, ABAuthorizationStatus status, NSError *error);
+typedef void(^JFFAddressBookSuccessCallback)(JFFAddressBook *book);
+typedef void(^JFFAddressBookErrorCallback)(ABAuthorizationStatus status, NSError *error);
 
 @interface JFFAddressBookFactory : NSObject
 
-+(void)asyncAddressBookWithOnCreatedBlock:( JFFAddressBookOnCreated )callback_;
-+(void)asyncAddressBookWithSuccessBlock:( JFFAddressBookSuccessCallback )onSuccess_
-                          errorCallback:( JFFAddressBookErrorCallback )onFailure_;
++ (void)asyncAddressBookWithOnCreatedBlock:(JFFAddressBookOnCreated)callback;
++ (void)asyncAddressBookWithSuccessBlock:(JFFAddressBookSuccessCallback)onSuccess
+                           errorCallback:(JFFAddressBookErrorCallback)onFailure;
 
-+(NSString*)bookStatusToString:( ABAuthorizationStatus) status_;
++ (NSString *)bookStatusToString:(ABAuthorizationStatus)status;
 
 @end
