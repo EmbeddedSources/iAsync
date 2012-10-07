@@ -1,5 +1,7 @@
 #import "ViewController.h"
 
+#import <JFFCache/JFFCache.h>
+
 @interface ViewController ()
 @end
 
@@ -10,9 +12,9 @@
 
 - (NSArray *)imageUrls
 {
-    if (!self->_imageUrls)
+    if (!_imageUrls)
     {
-        self->_imageUrls = @[
+        _imageUrls = @[
         [@"http://goo.gl/CHhyd" toURL],
         [@"http://goo.gl/yo4cu" toURL],
         [@"http://goo.gl/xpQj0" toURL],
@@ -31,7 +33,7 @@
         [@"http://goo.gl/0O8cX" toURL],
         ];
     }
-    return self->_imageUrls;
+    return _imageUrls;
 }
 
 - (void)reloadImages
@@ -40,8 +42,9 @@
     
     NSArray *imageUrls = [self imageUrls];
     
-    [self->_imagesContainer.subviews enumerateObjectsUsingBlock:^(UIImageView *imageView,
-                                                                  NSUInteger idx, BOOL *stop) {
+    [_imagesContainer.subviews enumerateObjectsUsingBlock:^(UIImageView *imageView,
+                                                            NSUInteger idx,
+                                                            BOOL *stop) {
         [imageView setImageWithURL:imageUrls[idx]
                     andPlaceholder:placeholder];
     }];
@@ -50,6 +53,11 @@
 - (IBAction)reloadAllImages
 {
     [self reloadImages];
+}
+
+- (IBAction)clearAllCache
+{
+    [[[JFFCaches sharedCaches]thumbnailDB] removeAllRecords];
 }
 
 - (void)viewDidLoad

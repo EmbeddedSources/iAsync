@@ -5,5 +5,6 @@
 @property (nonatomic, weak) IBOutlet UIView *imagesContainer;
 
 - (IBAction)reloadAllImages;
+- (IBAction)clearAllCache;
 
 @end
