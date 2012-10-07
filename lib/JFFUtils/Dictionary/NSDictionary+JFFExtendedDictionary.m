@@ -4,16 +4,15 @@
 
 @implementation NSDictionary (JFFExtendedDictionary)
 
--(NSDictionary*)dictionaryByAddingObjectsFromDictionary:( NSDictionary* )dictionary_
+- (NSDictionary *)dictionaryByAddingObjectsFromDictionary:(NSDictionary *)dictionary
 {
-    NSMutableDictionary* result_ = [ self mutableCopy ];
-
-    [ dictionary_ enumerateKeysAndObjectsUsingBlock: ^( id key_, id object_, BOOL *stop_ )
-    {
-        result_[ key_ ] = object_;
-    } ];
-
-    return [ result_ copy ];
+    NSMutableDictionary *result = [self mutableCopy];
+    
+    [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
+        result[key] = object;
+    }];
+    
+    return [result copy];
 }
 
 @end

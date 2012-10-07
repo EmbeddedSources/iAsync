@@ -52,7 +52,8 @@ static char propertyKey;
     
     NSString *storeFilePath = self.storeFilePath;
     BOOL result = [array writeToFile:storeFilePath atomically:YES];
-    [storeFilePath addSkipBackupAttribute];
+    if (result)
+        [storeFilePath addSkipBackupAttribute];
     return result;
 }
 

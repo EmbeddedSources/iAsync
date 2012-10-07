@@ -2,43 +2,40 @@
 
 #import "JFFClangLiterals.h"
 
+//TODO test
 @implementation NSDictionary (ValueWithType)
 
 - (NSString *)stringForKey:(NSString *)key
 {
     id value = self[key];
-
-    if (value == nil || [value isKindOfClass:[NSString class]])
-    {
+    
+    if (value == nil || [value isKindOfClass:[NSString class]]) {
         return value;
     }
-
-    if ([value respondsToSelector:@selector(description)] && ![value isKindOfClass:[NSNull class]])
-    {
+    
+    if ([value respondsToSelector:@selector(description)] && ![value isKindOfClass:[NSNull class]]) {
         return [value description];
     }
-
+    
     NSLog(@"!!!WARNING!!! String value for key %@ not found", key);
-
+    
     return nil;
 }
 
 - (NSString *)stringForKeyPath:(NSString *)key
 {
     id value = [self valueForKeyPath:key];
-
-    if (value == nil || [value isKindOfClass:[NSString class]])
-    {
+    
+    if (value == nil || [value isKindOfClass:[NSString class]]) {
         return value;
     }
-
-    if ([value respondsToSelector:@selector(description)] && ![value isKindOfClass:[NSNull class]] )
-    {
+    
+    if ([value respondsToSelector:@selector(description)] && ![value isKindOfClass:[NSNull class]] ) {
         return [value description];
     }
-
+    
     NSLog(@"!!!WARNING!!! String value for key %@ not found", key);
-
+    
     return nil;
 }
 
@@ -48,8 +45,7 @@
 
     if (value == nil 
         || [value isKindOfClass:[NSString class]] 
-        || [value isKindOfClass:[NSNumber class]]) 
-    {
+        || [value isKindOfClass:[NSNumber class]]) {
         return [value integerValue];
     }
 
@@ -60,16 +56,15 @@
 - (BOOL)boolForKey:(NSString *)key
 {
     id value = self[key];
-
+    
     if (value == nil 
         || [value isKindOfClass:[NSString class]] 
-        || [value isKindOfClass:[NSNumber class]]) 
-    {
+        || [value isKindOfClass:[NSNumber class]]) {
         return [value boolValue];
     }
-
+    
     NSLog(@"!!!WARNING!!! Bool value for key %@ not found", key);
-
+    
     return NO;
 }
 
@@ -77,19 +72,18 @@
 - (NSNumber *)numberWithIntegerForKey:(NSString *)key
 {
     id value = self[key];
-
-    if (value == nil || [value isKindOfClass:[NSNumber class]])
-    {
+    
+    if (value == nil || [value isKindOfClass:[NSNumber class]]) {
         return value;
     }
-
+    
     if ([value isKindOfClass:[NSString class]])
     {
         return @([value integerValue]);
     }
-
+    
     NSLog(@"!!!WARNING!!! Integer value for key %@ not found", key);
-
+    
     return nil;
 }
 
@@ -97,13 +91,11 @@
 {
     id value = self[key];
     
-    if (value == nil || [value isKindOfClass:[NSNumber class]])
-    {
+    if (value == nil || [value isKindOfClass:[NSNumber class]]) {
         return value;
     }
     
-    if ([value isKindOfClass:[NSString class]])
-    {
+    if ([value isKindOfClass:[NSString class]]) {
         return @([value boolValue]);
     }
     
@@ -118,13 +110,11 @@
 {
     id value = self[key];
     
-    if (value == nil || [value isKindOfClass:[NSNumber class]])
-    {
+    if (value == nil || [value isKindOfClass:[NSNumber class]]) {
         return value;
     }
     
-    if ([value isKindOfClass:[NSString class]])
-    {
+    if ([value isKindOfClass:[NSString class]]) {
         return @([value doubleValue]);
     }
     
@@ -139,8 +129,7 @@
 {
     id value = self[key];
     
-    if ([value isKindOfClass:[NSDictionary class]])
-    {
+    if ([value isKindOfClass:[NSDictionary class]]) {
         return value;
     }
     
@@ -155,8 +144,7 @@
 {
     id value = self[key];
     
-    if ([value isKindOfClass:[NSArray class]])
-    {
+    if ([value isKindOfClass:[NSArray class]]) {
         return value;
     }
     

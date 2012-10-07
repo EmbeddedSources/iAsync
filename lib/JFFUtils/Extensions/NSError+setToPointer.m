@@ -2,14 +2,13 @@
 
 @implementation NSError (setToPointer)
 
--(BOOL)setToPointer:( NSError** )outError_
+- (BOOL)setToPointer:(NSError **)outError
 {
-    if ( NULL == outError_ )
-    {
+    if (NULL == outError) {
         return NO;
     }
-
-    *outError_ = self;
+    
+    *outError = self;
     return YES;
 }
 

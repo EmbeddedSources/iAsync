@@ -2,6 +2,6 @@
 
 @interface NSError (setToPointer)
 
--(BOOL)setToPointer:( NSError** )outError_;
+- (BOOL)setToPointer:(NSError **)outError;
 
 @end

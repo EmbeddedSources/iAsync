@@ -18,8 +18,7 @@ static char proxyDelegatesKey;
 {
     NSMutableDictionary *result = objc_getAssociatedObject(self, &proxyDelegatesKey);
     
-    if (!result)
-    {
+    if (!result) {
         result = [NSMutableDictionary new];
         objc_setAssociatedObject(self, &proxyDelegatesKey, result, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
@@ -41,8 +40,7 @@ static char proxyDelegatesKey;
     
     JFFMutableAssignArray *delegates = arrayByDelegateName[delegateName];
     
-    if (!delegates)
-    {
+    if (!delegates) {
         delegates = [JFFMutableAssignArray new];
         arrayByDelegateName[delegateName] = delegates;
     }
@@ -55,8 +53,7 @@ static char proxyDelegatesKey;
 {
     JFFMutableAssignArray *delegates = [self proxyDelegatesForDelegateWithName:delegateName];
     
-    if ([delegates count] == 0)
-    {
+    if ([delegates count] == 0) {
         return nil;
     }
     

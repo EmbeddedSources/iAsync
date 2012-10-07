@@ -5,18 +5,18 @@
 
 @implementation JFFConst0
 
--(void)forwardInvocation:( NSInvocation* )invocation_
+- (void)forwardInvocation:(NSInvocation *)invocation
 {
 }
 
--(NSMethodSignature*)methodSignatureForSelector:( SEL )selector_
+- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector
 {
-   return [ [ self class ] instanceMethodSignatureForSelector: @selector( doNothing ) ];
+    return [[self class] instanceMethodSignatureForSelector:@selector(doNothing)];
 }
 
--(NSUInteger)doNothing
+- (NSUInteger)doNothing
 {
-   return 0;
+    return 0;
 }
 
 @end
@@ -25,10 +25,10 @@
 
 +(id)objectThatAlwaysReturnsZeroForAnyMethod
 {
-    static dispatch_once_t once_;
-    static id instance_;
-    dispatch_once( &once_, ^{ instance_ = [ JFFConst0 new ]; } );
-    return instance_;
+    static dispatch_once_t once;
+    static id instance;
+    dispatch_once(&once, ^{ instance = [JFFConst0 new]; });
+    return instance;
 }
 
 @end

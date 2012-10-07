@@ -4,8 +4,7 @@
 
 - (void)setObjectWithIgnoreNillValue:(id)anObject forKey:(id)aKey
 {
-    if (anObject)
-    {
+    if (anObject) {
         [self setObject:anObject forKey:aKey];
     }
 }
