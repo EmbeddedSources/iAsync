@@ -10,11 +10,9 @@
                                         selector:(SEL)selector
 {
     block = [block copy];
-    void (^autoreleaseBlock)() = ^void()
-    {
+    void (^autoreleaseBlock)() = ^void() {
         @autoreleasepool {
-            void (^didFinishCallback)(void) = ^void()
-            {
+            void (^didFinishCallback)(void) = ^void() {
                 objc_msgSend(self,
                              @selector(notify:forSelector:),
                              kGHUnitWaitStatusSuccess,
@@ -38,8 +36,7 @@
 + (void)load
 {
     Class class = NSClassFromString(@"GHAsyncTestCase");
-    if (class)
-    {
+    if (class) {
         [self addInstanceMethodIfNeedWithSelector:@selector(performAsyncRequestOnMainThreadWithBlock:selector:)
                                           toClass:class];
     }
