@@ -100,39 +100,45 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
     [ self addField: [ JFFContactPhotoField contactFieldWithName: JFFContactPhoto ] ];
 
     //JTODO localize all labels
-    NSArray* labels_ = @[ @"home", @"work" ];
-    [ self addField: [ JFFContactEmailsField contactFieldWithName: JFFContactEmails
-                                                       propertyID: kABPersonEmailProperty
-                                                           labels: labels_ ] ];
+    NSArray *labels = @[@"home", @"work"];
+    [self addField:[JFFContactEmailsField contactFieldWithName:JFFContactEmails
+                                                    propertyID:kABPersonEmailProperty
+                                                        labels:labels]];
+    
+    labels = @[
+    @"mobile",
+    @"iPhone",
+    @"home",
+    @"work",
+    @"main",
+    @"home fax",
+    @"work fax",
+    @"other fax",
+    @"pager",
+    @"other",
+    ];
+    [ self addField: [ JFFContactStringArrayField contactFieldWithName:JFFContactPhones
+                                                            propertyID:kABPersonPhoneProperty
+                                                                labels:labels]];
 
-    labels_ = @[ @"mobile"
-               , @"iPhone"
-               , @"home"
-               , @"work"
-               , @"main"
-               , @"home fax"
-               , @"work fax"
-               , @"other fax"
-               , @"pager"
-               , @"other" ];
-    [ self addField: [ JFFContactStringArrayField contactFieldWithName: JFFContactPhones
-                                                            propertyID: kABPersonPhoneProperty
-                                                                labels: labels_ ] ];
+    labels = @[
+    @"home page",
+    @"home",
+    @"work",
+    @"other"
+    ];
+    [ self addField: [ JFFContactStringArrayField contactFieldWithName:JFFContactWebsites
+                                                            propertyID:kABPersonURLProperty
+                                                                labels:labels]];
 
-    labels_ = @[ @"home page"
-               , @"home"
-               , @"work"
-               , @"other" ];
-    [ self addField: [ JFFContactStringArrayField contactFieldWithName: JFFContactWebsites
-                                                            propertyID: kABPersonURLProperty
-                                                                labels: labels_ ] ];
-
-    labels_ = @[ @"home"
-               , @"work"
-               , @"other" ];
-    [ self addField: [ JFFContactDictionaryArrayField contactFieldWithName: JFFContactAddresses
-                                                                propertyID: kABPersonAddressProperty
-                                                                    labels: labels_ ] ];
+    labels = @[
+    @"home",
+    @"work",
+    @"other",
+    ];
+    [ self addField: [ JFFContactDictionaryArrayField contactFieldWithName:JFFContactAddresses
+                                                                propertyID:kABPersonAddressProperty
+                                                                    labels:labels]];
 }
 
 -(id)initWithPerson:( ABRecordRef )person_
@@ -145,8 +151,8 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
         return nil;
     }
 
-    NSParameterAssert( person_ );
-    NSParameterAssert( nil != addressBook_ );
+    NSParameterAssert(person_);
+    NSParameterAssert(nil!=addressBook_);
     self->_addressBookWrapper = addressBook_;
     
     [ self initializeDynamicFields ];

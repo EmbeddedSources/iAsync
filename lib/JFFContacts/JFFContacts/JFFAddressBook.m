@@ -9,29 +9,28 @@
 
 @synthesize rawBook = _rawBook;
 
--(void)dealloc
+- (void)dealloc
 {
     CFRelease( self->_rawBook );
 }
 
--(id)init
+- (id)init
 {
     [ self doesNotRecognizeSelector: _cmd ];
     return nil;
 }
 
--(id)initWithRawBook:( ABAddressBookRef )rawBook_
+- (id)initWithRawBook:(ABAddressBookRef)rawBook_
 {
-    NSParameterAssert( NULL != rawBook_ );
-
-    self = [ super init ];
-    if ( nil == self )
-    {
+    NSParameterAssert(NULL != rawBook_);
+    
+    self = [super init];
+    if (nil == self) {
         return nil;
     }
-
+    
     self->_rawBook = rawBook_;
-
+    
     return self;
 }
 
