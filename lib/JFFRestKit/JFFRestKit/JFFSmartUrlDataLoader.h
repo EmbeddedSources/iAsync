@@ -8,7 +8,7 @@
 typedef id(^JFFURLBuilderBinder)(void);
 typedef JFFAsyncOperationBinder(^JFFAsyncBinderForURL)(NSURL *);
 typedef id (^JFFCacheKeyForURLBuilder)(NSURL *);
-typedef NSDate *(^JFFCacheLastUpdateDateForKey)(id key);
+typedef JFFAsyncOperation(^JFFCacheLastUpdateDateForKey)(id key);
 
 @interface JFFSmartUrlDataLoaderFields : NSObject
 
@@ -20,6 +20,14 @@ typedef NSDate *(^JFFCacheLastUpdateDateForKey)(id key);
 @property (nonatomic) BOOL doesNotIgnoreFreshDataLoadFail;
 @property (nonatomic) id< JFFRestKitCache > cache;
 @property (nonatomic) NSTimeInterval cacheDataLifeTime;
+
+@end
+
+//TODO move to JFFRestKitCache.h file
+@interface JFFResponseDataWithUpdateData : NSObject <JFFRestKitCachedData>
+
+@property (nonatomic) NSData *data;
+@property (nonatomic) NSDate *updateDate;
 
 @end
 

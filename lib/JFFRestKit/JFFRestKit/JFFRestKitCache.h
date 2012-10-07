@@ -1,10 +1,23 @@
+#import <JFFAsyncOperations/JFFAsyncOperationsBlockDefinitions.h>
+
 #import <Foundation/Foundation.h>
+
+//TODO add NSCopying methods id neads
+@protocol JFFRestKitCachedData <NSObject, NSCopying>
+
+@required
+- (NSData *)data;
+- (NSDate *)updateDate;
+
+@end
 
 @protocol JFFRestKitCache <NSObject>
 
 @required
-- (void)setData:(NSData *)data forKey:(NSString *)key;
-- (NSData*)dataForKey:(NSString *)key lastUpdateDate:(NSDate **)date;
+- (JFFAsyncOperation)loaderToSetData:(NSData *)data forKey:(NSString *)key;
+
+//returns JFFRestKitCachedData instance in result callback
+- (JFFAsyncOperation)cachedDataLoaderForKey:(NSString *)key;
 
 @end
 
