@@ -5,25 +5,30 @@
 
 #import "JFFAsyncOperationAdapter.h"
 
-static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueue( JFFSyncOperationWithProgress progressLoadDataBlock_
-                                                                                  , const char* queueName_
-                                                                                  , BOOL barrier_ )
+static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueue(JFFSyncOperationWithProgress progressLoadDataBlock,
+                                                                                  const char *queueName,
+                                                                                  BOOL barrier)
 {
-    JFFAsyncOperationAdapter* asyncObj_ = [ JFFAsyncOperationAdapter new ];
-    asyncObj_.loadDataBlock = progressLoadDataBlock_;
-    asyncObj_.queueName     = queueName_ ?: "";
-    asyncObj_.barrier       = barrier_;
-    return buildAsyncOperationWithInterface( asyncObj_ );
+    progressLoadDataBlock = [progressLoadDataBlock copy];
+    NSString *str = @(queueName?:"");
+    
+    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+        JFFAsyncOperationAdapter *asyncObject = [JFFAsyncOperationAdapter new];
+        asyncObject.loadDataBlock = progressLoadDataBlock;
+        asyncObject.queueName     = [str cStringUsingEncoding:NSUTF8StringEncoding];
+        asyncObject.barrier       = barrier;
+        return asyncObject;
+    };
+    return buildAsyncOperationWithInterface(builder);
 }
 
 static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
-                                                                        const char* queueName,
+                                                                        const char *queueName,
                                                                         BOOL barrier )
 {
     loadDataBlock = [loadDataBlock copy];
     JFFSyncOperationWithProgress progressLoadDataBlock= ^id(NSError *__autoreleasing *error,
-                                                            JFFAsyncOperationProgressHandler progressCallback)
-    {
+                                                            JFFAsyncOperationProgressHandler progressCallback) {
         id result = loadDataBlock(error);
         if (result && progressCallback)
             progressCallback(result);
@@ -39,14 +44,14 @@ JFFAsyncOperation asyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadD
 {
     return privateAsyncOperationWithSyncOperationAndQueue(loadDataBlock,
                                                           queueName,
-                                                          NO );
+                                                          NO);
 }
 
-JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue( JFFSyncOperation loadDataBlock_, const char* queueName_ )
+JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock, const char *queueName)
 {
-    return privateAsyncOperationWithSyncOperationAndQueue( loadDataBlock_
-                                                          , queueName_
-                                                          , YES );
+    return privateAsyncOperationWithSyncOperationAndQueue(loadDataBlock,
+                                                          queueName,
+                                                          YES);
 }
 
 JFFAsyncOperation asyncOperationWithSyncOperation(JFFSyncOperation loadDataBlock)
@@ -54,9 +59,9 @@ JFFAsyncOperation asyncOperationWithSyncOperation(JFFSyncOperation loadDataBlock
     return asyncOperationWithSyncOperationAndQueue(loadDataBlock, nil);
 }
 
-JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock( JFFSyncOperationWithProgress progressLoadDataBlock_ )
+JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock(JFFSyncOperationWithProgress progressLoadDataBlock)
 {
-    return asyncOperationWithSyncOperationWithProgressBlockAndQueue( progressLoadDataBlock_
-                                                                    , nil
-                                                                    , NO );
+    return asyncOperationWithSyncOperationWithProgressBlockAndQueue(progressLoadDataBlock,
+                                                                    nil,
+                                                                    NO);
 }

@@ -22,18 +22,20 @@
 
 @end
 
-//TODO use factory and test
-JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterface >asyncObject)
+//TODO test
+//TODO rename to buildAsyncOperationWithAdapterFactory
+JFFAsyncOperation buildAsyncOperationWithInterface(JFFAsyncOperationInstanceBuilder builder)
 {
+    builder = [builder copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
-        __unsafe_unretained id< JFFAsyncOperationInterface > weakAsyncObject = asyncObject;
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        id< JFFAsyncOperationInterface > asyncObject = builder();
+        __unsafe_unretained id< JFFAsyncOperationInterface > unretaintedAsyncObject = asyncObject;
         
         doneCallback = [doneCallback copy];
         void (^completionHandler)(id, NSError*) = [^(id result, NSError *error) {
-            //use asyncObject_ in if to own it while waiting result
+            //use asyncObject in if to own it while waiting result
             if (doneCallback && asyncObject)
                 doneCallback(result, error);
         } copy];
@@ -54,20 +56,13 @@ JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterfac
             [JFFSingleThreadProxy singleThreadProxyWithTargetFactory:factory
                                                        dispatchQueue:dispatch_get_current_queue()];
         
-        __block BOOL progressCallbackWasCalled = NO;
-        
-        void (^completionHandlerWrapper)(id, NSError *) = [^(id result,NSError *error) {
-            if (!progressCallbackWasCalled && result && progressHandler) {
-                progressHandler(result);
-            }
-            
+        void (^completionHandlerWrapper)(id, NSError *) = [^(id result, NSError *error) {
             progressHandler = nil;
             [proxy notifyCallbackWithResult:result error:error];
             proxy = nil;
         } copy];
-
+        
         void (^progressHandlerWrapper)(id) = [^(id data) {
-            progressCallbackWasCalled = YES;
             if (progressHandler)
                 progressHandler(data);
         }copy];
@@ -80,7 +75,7 @@ JFFAsyncOperation buildAsyncOperationWithInterface(id< JFFAsyncOperationInterfac
             if (!proxy.completionHandler)
                 return;
             
-            [weakAsyncObject cancel:canceled];
+            [unretaintedAsyncObject cancel:canceled];
             
             proxy           = nil;
             progressHandler = nil;

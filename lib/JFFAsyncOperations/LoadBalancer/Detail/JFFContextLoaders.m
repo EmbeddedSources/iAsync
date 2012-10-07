@@ -143,11 +143,11 @@
     [ self.pendingLoadersData removeObject: data_ ];
 }
 
-- (void)unsubscribePendingNativeLoader:( JFFAsyncOperation )native_loader_
+- (void)unsubscribePendingNativeLoader:(JFFAsyncOperation)nativeLoader
 {
-    JFFPedingLoaderData* data_ = [ self pendingLoaderDataForNativeLoader: native_loader_ ];
+    JFFPedingLoaderData* data_ = [self pendingLoaderDataForNativeLoader:nativeLoader];
     NSAssert( data_, @"pending loader data should exist" );
-
+    
     data_.progressCallback = nil;
     data_.cancelCallback   = nil;
     data_.doneCallback     = nil;

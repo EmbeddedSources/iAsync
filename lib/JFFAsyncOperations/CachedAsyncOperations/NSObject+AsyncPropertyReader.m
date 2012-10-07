@@ -113,177 +113,162 @@ static JFFCancelAsyncOperation cancelBlock(JFFPropertyExtractor *propertyExtract
     };
 }
 
-static JFFDidFinishAsyncOperationHandler doneCallbackBlock( JFFPropertyExtractor* propertyExtractor_ )
+static JFFDidFinishAsyncOperationHandler doneCallbackBlock(JFFPropertyExtractor *propertyExtractor)
 {
-    return ^void( id result_, NSError* error_ )
-    {
-        if ( !result_ && !error_ )
-        {
-            NSLog( @"Assert propertyPath object: %@ propertyPath: %@"
-                  , propertyExtractor_.object
-                  , propertyExtractor_.propertyPath );
-            assert( 0 );//@"should be result or error"
+    return ^void(id result, NSError *error) {
+        if (!result && !error) {
+            NSLog(@"Assert propertyPath object: %@ propertyPath: %@",
+                  propertyExtractor.object,
+                  propertyExtractor.propertyPath);
+            assert(0);//"should be result or error"
         }
-
-        NSArray* copyDelegates_ = [ propertyExtractor_.delegates map: ^id( id obj_ )
-        {
-            JFFCallbacksBlocksHolder* callback_ = obj_;
-            return [ [ JFFCallbacksBlocksHolder alloc ] initWithOnProgressBlock: callback_.onProgressBlock
-                                                                  onCancelBlock: callback_.onCancelBlock
-                                                               didLoadDataBlock: callback_.didLoadDataBlock ];
-        } ];
-
-        JFFDidFinishAsyncOperationHandler finish_block_ = [ propertyExtractor_.didFinishBlock copy ];
-
-        propertyExtractor_.property = result_;
-
-        if ( finish_block_ )
-        {
-            finish_block_( result_, error_ );
-            result_ = propertyExtractor_.property;
+        
+        NSArray *copyDelegates = [propertyExtractor.delegates map:^id(id obj) {
+            JFFCallbacksBlocksHolder *callback = obj;
+            return [[JFFCallbacksBlocksHolder alloc] initWithOnProgressBlock:callback.onProgressBlock
+                                                               onCancelBlock:callback.onCancelBlock
+                                                            didLoadDataBlock:callback.didLoadDataBlock];
+        }];
+        
+        JFFDidFinishAsyncOperationHandler finishBlock = [propertyExtractor.didFinishBlock copy];
+        
+        propertyExtractor.property = result;
+        
+        if (finishBlock) {
+            finishBlock(result, error);
+            result = propertyExtractor.property;
         }
-
-        clearDataForPropertyExtractor( propertyExtractor_ );
-
-        [ copyDelegates_ each: ^void( id obj_ )
-        {
-            JFFCallbacksBlocksHolder* callback_ = obj_;
-            if ( callback_.didLoadDataBlock )
-                callback_.didLoadDataBlock( result_, result_ ? nil : error_ );
-        } ];
-
-        clearDelegates( copyDelegates_ );
+        
+        clearDataForPropertyExtractor(propertyExtractor);
+        
+        [copyDelegates each:^void(id obj) {
+            JFFCallbacksBlocksHolder *callback = obj;
+            if (callback.didLoadDataBlock)
+                callback.didLoadDataBlock(result, error);
+        }];
+        
+        clearDelegates(copyDelegates);
     };
 }
 
-static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* propertyExtractor_
-                                                   , JFFCallbacksBlocksHolder* callbacks_ )
+static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propertyExtractor,
+                                                   JFFCallbacksBlocksHolder *callbacks)
 {
-    JFFAsyncOperationProgressHandler progressCallback_ = ^void( id progress_info_ )
-    {
-        [ propertyExtractor_.delegates each: ^void( id obj_ )
-        {
-            JFFCallbacksBlocksHolder* obj_callback_ = obj_;
-            if ( obj_callback_.onProgressBlock )
-                obj_callback_.onProgressBlock( progress_info_ );
+    JFFAsyncOperationProgressHandler progressCallback = ^void(id progressInfo) {
+        [propertyExtractor.delegates each:^void(id obj) {
+            JFFCallbacksBlocksHolder *objCallback = obj;
+            if (objCallback.onProgressBlock)
+                objCallback.onProgressBlock(progressInfo);
         } ];
     };
-
-    JFFDidFinishAsyncOperationHandler doneCallback_ = doneCallbackBlock( propertyExtractor_ );
-
-    JFFCancelAsyncOperationHandler cancelCallback_ = ^void( BOOL canceled_ )
-    {
-        JFFCancelAsyncOperationHandler cancelCallback_ = callbacks_.onCancelBlock;
-        clearDataForPropertyExtractor( propertyExtractor_ );
-
-        if ( cancelCallback_ )
-            cancelCallback_( canceled_ );
+    
+    JFFDidFinishAsyncOperationHandler doneCallback = doneCallbackBlock(propertyExtractor);
+    
+    JFFCancelAsyncOperationHandler cancelCallback = ^void(BOOL canceled) {
+        JFFCancelAsyncOperationHandler cancelCallback = callbacks.onCancelBlock;
+        clearDataForPropertyExtractor(propertyExtractor);
+        
+        if (cancelCallback)
+            cancelCallback(canceled);
     };
+    
+    propertyExtractor.cancelBlock = propertyExtractor.asyncLoader(progressCallback,
+                                                                  cancelCallback,
+                                                                  doneCallback);
 
-    propertyExtractor_.cancelBlock = propertyExtractor_.asyncLoader( progressCallback_
-                                                                    , cancelCallback_
-                                                                    , doneCallback_ );
-
-    if ( nil == propertyExtractor_.cancelBlock )
-    {
+    if (nil == propertyExtractor.cancelBlock)
         return JFFStubCancelAsyncOperationBlock;
-    }
-
-    return cancelBlock( propertyExtractor_, callbacks_ );
+    
+    return cancelBlock(propertyExtractor, callbacks);
 }
 
 @implementation NSObject (AsyncPropertyReader)
 
--(BOOL)isLoadingPropertyForPropertyName:( NSString* )name_
+-(BOOL)isLoadingPropertyForPropertyName:(NSString *)name
 {
-    return [ self.propertyDataByPropertyName[ name_ ] hasAsyncPropertyDelegates ];
+    return [self.propertyDataByPropertyName[name] hasAsyncPropertyDelegates];
 }
 
--(JFFAsyncOperation)privateAsyncOperationForPropertyWithPath:( JFFPropertyPath* )propertyPath_
-                               propertyExtractorFactoryBlock:( JFFPropertyExtractorFactoryBlock )factory_
-                                              asyncOperation:( JFFAsyncOperation )asyncOperation_
-                                      didFinishLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didFinishOperation_
+- (JFFAsyncOperation)privateAsyncOperationForPropertyWithPath:(JFFPropertyPath *)propertyPath
+                                propertyExtractorFactoryBlock:(JFFPropertyExtractorFactoryBlock)factory
+                                               asyncOperation:(JFFAsyncOperation)asyncOperation
+                                       didFinishLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didFinishOperation
 {
-    NSParameterAssert( asyncOperation_ );
-
-    asyncOperation_     = [ asyncOperation_     copy ];
-    didFinishOperation_ = [ didFinishOperation_ copy ];
-    factory_            = [ factory_            copy ];
-
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
-        JFFPropertyExtractor* propertyExtractor_ = factory_();
-        propertyExtractor_.object       = self;
-        propertyExtractor_.propertyPath = propertyPath_;
-
-        id result_ = propertyExtractor_.property;
-        if ( result_ )
-        {
-            if ( doneCallback_ )
-                doneCallback_( result_, nil );
+    NSParameterAssert(asyncOperation);
+    
+    asyncOperation     = [asyncOperation     copy];
+    didFinishOperation = [didFinishOperation copy];
+    factory            = [factory            copy];
+    
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        JFFPropertyExtractor *propertyExtractor = factory();
+        propertyExtractor.object       = self;
+        propertyExtractor.propertyPath = propertyPath;
+        
+        id result = propertyExtractor.property;
+        if (result) {
+            if (doneCallback)
+                doneCallback(result, nil);
             return JFFStubCancelAsyncOperationBlock;
         }
-
-        propertyExtractor_.asyncLoader    = asyncOperation_;
-        propertyExtractor_.didFinishBlock = didFinishOperation_;
-
-        JFFCallbacksBlocksHolder* callbacks_ =
-            [ [ JFFCallbacksBlocksHolder alloc ] initWithOnProgressBlock: progressCallback_
-                                                           onCancelBlock: cancelCallback_
-                                                        didLoadDataBlock: doneCallback_ ];
-
-        if ( nil == propertyExtractor_.delegates )
-        {
-            propertyExtractor_.delegates = [ @[ callbacks_ ] mutableCopy ];
+        
+        propertyExtractor.asyncLoader    = asyncOperation;
+        propertyExtractor.didFinishBlock = didFinishOperation;
+        
+        JFFCallbacksBlocksHolder *callbacks =
+            [[JFFCallbacksBlocksHolder alloc] initWithOnProgressBlock:progressCallback
+                                                        onCancelBlock:cancelCallback
+                                                     didLoadDataBlock:doneCallback];
+        
+        if (nil == propertyExtractor.delegates) {
+            propertyExtractor.delegates = [@[callbacks] mutableCopy];
         }
-
-        if ( propertyExtractor_.cancelBlock != nil )
-        {
-            [ propertyExtractor_.delegates addObject: callbacks_ ];
-            return cancelBlock( propertyExtractor_, callbacks_ );
+        
+        if (propertyExtractor.cancelBlock != nil) {
+            [propertyExtractor.delegates addObject:callbacks];
+            return cancelBlock(propertyExtractor, callbacks);
         }
-
-        return performNativeLoader( propertyExtractor_, callbacks_ );
+        
+        return performNativeLoader(propertyExtractor, callbacks);
     };
 }
 
--(JFFAsyncOperation)asyncOperationForPropertyWithPath:( JFFPropertyPath* )propertyPath_
-                        propertyExtractorFactoryBlock:( JFFPropertyExtractorFactoryBlock )factory_
-                                       asyncOperation:( JFFAsyncOperation )asyncOperation_
-                               didFinishLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didFinishOperation_
+- (JFFAsyncOperation)asyncOperationForPropertyWithPath:(JFFPropertyPath *)propertyPath
+                         propertyExtractorFactoryBlock:(JFFPropertyExtractorFactoryBlock)factory
+                                        asyncOperation:(JFFAsyncOperation)asyncOperation
+                                didFinishLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didFinishOperation
 {
-    NSAssert( propertyPath_.name && propertyPath_.key, @"propertyName argument should not be nil" );
-    return [ self privateAsyncOperationForPropertyWithPath: propertyPath_
-                             propertyExtractorFactoryBlock: factory_
-                                            asyncOperation: asyncOperation_
-                                    didFinishLoadDataBlock: didFinishOperation_ ];
+    NSAssert(propertyPath.name && propertyPath.key, @"propertyName argument should not be nil");
+    return [self privateAsyncOperationForPropertyWithPath:propertyPath
+                            propertyExtractorFactoryBlock:factory
+                                           asyncOperation:asyncOperation
+                                   didFinishLoadDataBlock:didFinishOperation];
 }
 
--(JFFAsyncOperation)asyncOperationForPropertyWithPath:( JFFPropertyPath* )propertyPath_
-                        propertyExtractorFactoryBlock:( JFFPropertyExtractorFactoryBlock )factory_
-                                       asyncOperation:( JFFAsyncOperation )asyncOperation_
+- (JFFAsyncOperation)asyncOperationForPropertyWithPath:(JFFPropertyPath *)propertyPath
+                         propertyExtractorFactoryBlock:(JFFPropertyExtractorFactoryBlock)factory
+                                        asyncOperation:(JFFAsyncOperation)asyncOperation
 {
-    return [ self asyncOperationForPropertyWithPath: propertyPath_
-                      propertyExtractorFactoryBlock: factory_
-                                     asyncOperation: asyncOperation_
-                             didFinishLoadDataBlock: nil ];
+    return [self asyncOperationForPropertyWithPath:propertyPath
+                     propertyExtractorFactoryBlock:factory
+                                    asyncOperation:asyncOperation
+                            didFinishLoadDataBlock:nil];
 }
 
--(JFFAsyncOperation)privateAsyncOperationForPropertyWithPath:( JFFPropertyPath* )propertyPath_
-                                              asyncOperation:( JFFAsyncOperation )asyncOperation_
-                                      didFinishLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didFinishOperation_
+- (JFFAsyncOperation)privateAsyncOperationForPropertyWithPath:(JFFPropertyPath *)propertyPath
+                                               asyncOperation:(JFFAsyncOperation)asyncOperation
+                                       didFinishLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didFinishOperation
 {
-    JFFPropertyExtractorFactoryBlock factory_ = ^JFFPropertyExtractor*( void )
-    {
-        return [ JFFPropertyExtractor new ];
+    JFFPropertyExtractorFactoryBlock factory = ^JFFPropertyExtractor*(void) {
+        return [JFFPropertyExtractor new];
     };
-
-    return [ self privateAsyncOperationForPropertyWithPath: propertyPath_
-                             propertyExtractorFactoryBlock: factory_
-                                            asyncOperation: asyncOperation_
-                                    didFinishLoadDataBlock: didFinishOperation_ ];
+    
+    return [self privateAsyncOperationForPropertyWithPath:propertyPath
+                            propertyExtractorFactoryBlock:factory
+                                           asyncOperation:asyncOperation
+                                   didFinishLoadDataBlock:didFinishOperation];
 }
 
 -(JFFAsyncOperation)asyncOperationForPropertyWithName:( NSString* )property_name_
@@ -314,14 +299,14 @@ static JFFCancelAsyncOperation performNativeLoader( JFFPropertyExtractor* proper
                              didFinishLoadDataBlock: nil ];
 }
 
--(JFFAsyncOperation)asyncOperationForPropertyWithPath:( JFFPropertyPath* )propertyPath_
-                                       asyncOperation:( JFFAsyncOperation )asyncOperation_
-                               didFinishLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didFinishOperation_
+- (JFFAsyncOperation)asyncOperationForPropertyWithPath:(JFFPropertyPath *)propertyPath
+                                        asyncOperation:(JFFAsyncOperation)asyncOperation
+                                didFinishLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didFinishOperation
 {
-    NSAssert( propertyPath_.name && propertyPath_.key, @"propertyName argument should not be nil" );
-    return [ self privateAsyncOperationForPropertyWithPath: propertyPath_
-                                            asyncOperation: asyncOperation_
-                                    didFinishLoadDataBlock: didFinishOperation_ ];
+    NSAssert(propertyPath.name && propertyPath.key, @"propertyName argument should not be nil");
+    return [self privateAsyncOperationForPropertyWithPath:propertyPath
+                                           asyncOperation:asyncOperation
+                                   didFinishLoadDataBlock:didFinishOperation];
 }
 
 -(JFFAsyncOperation)asyncOperationMergeLoaders:( JFFAsyncOperation )asyncOperation_

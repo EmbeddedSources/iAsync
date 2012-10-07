@@ -119,7 +119,7 @@ JFFAsyncOperation asyncOperationWithFinishHookBlock(JFFAsyncOperation loader,
         doneCallback = [doneCallback copy];
         return loader(progressCallback, cancelCallback, ^void(id result, NSError *error) {
             finishCallbackHook(result, error, doneCallback);
-        } );
+        });
     };
 }
 
@@ -206,73 +206,71 @@ JFFAsyncOperation asyncOperationResultAsProgress( JFFAsyncOperation loader_ )
     };
 }
 
-JFFAsyncOperation asyncOperationWithChangedError( JFFAsyncOperation loader_
-                                                 , JFFChangedErrorBuilder errorBuilder_ )
+JFFAsyncOperation asyncOperationWithChangedError(JFFAsyncOperation loader,
+                                                 JFFChangedErrorBuilder errorBuilder)
 {
-    if ( !errorBuilder_ )
-        return loader_;
-
-    errorBuilder_ = [ errorBuilder_ copy ];
-    JFFDidFinishAsyncOperationHook finishCallbackHook_ = ^( id result_
-                                                           , NSError* error_
-                                                           , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
-        if ( doneCallback_ )
-            doneCallback_( result_, error_ ? errorBuilder_( error_ ) : nil );
+    if (!errorBuilder)
+        return loader;
+    
+    errorBuilder = [errorBuilder copy];
+    JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
+                                                          NSError *error,
+                                                          JFFDidFinishAsyncOperationHandler doneCallback) {
+        if (doneCallback)
+            doneCallback(result, error?errorBuilder(error) : nil);
     };
-    return asyncOperationWithFinishHookBlock( loader_, finishCallbackHook_ );
+    return asyncOperationWithFinishHookBlock(loader, finishCallbackHook);
 }
 
-JFFAsyncOperation asyncOperationWithResultOrError( JFFAsyncOperation loader_
-                                                  , id result_
-                                                  , NSError* error_ )
+JFFAsyncOperation asyncOperationWithResultOrError(JFFAsyncOperation loader,
+                                                  id result,
+                                                  NSError *error)
 {
-    return asyncOperationWithFinishHookBlock( loader_
-                                             , ^( id localResult_
-                                                 , NSError* localError_
-                                                 , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
-        if ( doneCallback_ )
-            doneCallback_( result_, error_ );
-    } );
+    return asyncOperationWithFinishHookBlock(loader,
+                                             ^(id localResult,
+                                               NSError *localError,
+                                               JFFDidFinishAsyncOperationHandler doneCallback) {
+        if (doneCallback)
+            doneCallback(result, error);
+    });
 }
 
 JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay)
 {
-    JFFAsyncOperationScheduler *asyncObject = [JFFAsyncOperationScheduler new];
-    asyncObject.duration = delay;
-    return buildAsyncOperationWithInterface(asyncObject);
+    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+        JFFAsyncOperationScheduler *asyncObject = [JFFAsyncOperationScheduler new];
+        asyncObject.duration = delay;
+        return asyncObject;
+    };
+    return buildAsyncOperationWithInterface(builder);
 }
 
-JFFAsyncOperationBinder bindSequenceOfBindersPair( JFFAsyncOperationBinder firstBinder_
-                                                  , JFFAsyncOperationBinder secondBinder_ );
+JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstBinder,
+                                                  JFFAsyncOperationBinder secondBinder);
 
 //!!! not tested yet
-JFFAnalyzer analyzerAsSequenceOfAnalyzers( JFFAnalyzer firstAnalyzer_, ... )
+JFFAnalyzer analyzerAsSequenceOfAnalyzers(JFFAnalyzer firstAnalyzer, ...)
 {
-    JFFAsyncOperationBinder firstBinder_ = asyncOperationBinderWithAnalyzer( firstAnalyzer_ );
-
+    JFFAsyncOperationBinder firstBinder = asyncOperationBinderWithAnalyzer(firstAnalyzer);
+    
     va_list args;
-    va_start( args, firstAnalyzer_ );
-    for ( JFFAnalyzer nextAnalyzer_ = va_arg( args, JFFAnalyzer );
-         nextAnalyzer_ != nil;
-         nextAnalyzer_ = va_arg( args, JFFAnalyzer ) )
-    {
-        JFFAsyncOperationBinder nextBinder_ = asyncOperationBinderWithAnalyzer( nextAnalyzer_ );
-        firstBinder_ = bindSequenceOfBindersPair( firstBinder_, nextBinder_ );
+    va_start(args, firstAnalyzer);
+    for ( JFFAnalyzer nextAnalyzer = va_arg(args, JFFAnalyzer);
+         nextAnalyzer != nil;
+         nextAnalyzer = va_arg(args, JFFAnalyzer)) {
+        JFFAsyncOperationBinder nextBinder = asyncOperationBinderWithAnalyzer(nextAnalyzer);
+        firstBinder = bindSequenceOfBindersPair(firstBinder, nextBinder);
     }
-    va_end( args );
-
-    return ^id(id dataToAnalyze_, NSError** outError_)
-    {
-        JFFAsyncOperation loader_ = firstBinder_( dataToAnalyze_ );
-        __block id finalResult_ = nil;
-        loader_( nil, nil, ^( id loaderResult_, NSError* error_ )
-        {
-            [ error_ setToPointer: outError_ ];
-            finalResult_ = loaderResult_; 
-        } );
-        return finalResult_;
+    va_end(args);
+    
+    return ^id(id dataToAnalyze, NSError **outError) {
+        JFFAsyncOperation loader = firstBinder(dataToAnalyze);
+        __block id finalResult = nil;
+        loader(nil, nil, ^(id loaderResult, NSError *error) {
+            [error setToPointer:outError];
+            finalResult = loaderResult;
+        });
+        return finalResult;
     };
 }
 

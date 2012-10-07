@@ -11,7 +11,7 @@ typedef void (^JFFAsyncOperationProgressHandler)(id progressInfo);
 typedef id (^JFFSyncOperation)(NSError *__autoreleasing *outError);
 
 //This block should call progress_callback_ block only from own thread
-typedef id (^JFFSyncOperationWithProgress)(NSError **error,
+typedef id (^JFFSyncOperationWithProgress)(NSError *__autoreleasing *error,
                                            JFFAsyncOperationProgressHandler progressCallback);
 
 typedef void (^JFFDidFinishAsyncOperationHandler)(id result, NSError *error);

@@ -9,24 +9,23 @@
 
 -(void)dealloc
 {
-    [ self->_currentContextName   release ];
-    [ self->_activeContextName    release ];
-    [ self->_contextLoadersByName release ];
-
-    [ super dealloc ];
+    [self->_currentContextName   release];
+    [self->_activeContextName    release];
+    [self->_contextLoadersByName release];
+    
+    [super dealloc];
 }
 
-+(id)sharedBalancer
++ (id)sharedBalancer
 {
-    [ NSThread assertMainThread ];
-    static JFFAsyncOperationLoadBalancerContexts* instance_ = nil;
-
-    if ( !instance_ )
-    {
-        instance_ = [ self new ];
+    [NSThread assertMainThread];
+    static JFFAsyncOperationLoadBalancerContexts *instance;
+    
+    if (!instance) {
+        instance = [ self new ];
     }
-
-    return instance_;
+    
+    return instance;
 }
 
 -(NSString*)currentContextName

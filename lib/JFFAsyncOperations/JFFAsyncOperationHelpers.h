@@ -14,49 +14,49 @@ extern "C" {
 
 ///////////////////////// ADD OBSERVERS OF ASYNC OP. RESULT ////////////////////////
 
-JFFAsyncOperation asyncOperationWithResult( id result_ );
-JFFAsyncOperation asyncOperationWithError( NSError* error_ );
+JFFAsyncOperation asyncOperationWithResult(id result);
+JFFAsyncOperation asyncOperationWithError(NSError *error);
 
-JFFAsyncOperation currentQeueAsyncOpWithResult( JFFSyncOperation block_ );
+JFFAsyncOperation currentQeueAsyncOpWithResult(JFFSyncOperation block);
     
 //finish_callback_block_ called before loader_'s JFFDidFinishAsyncOperationHandler
-JFFAsyncOperation asyncOperationWithFinishCallbackBlock( JFFAsyncOperation loader_
-                                                        , JFFDidFinishAsyncOperationHandler finishCallbackBlock_ );
+JFFAsyncOperation asyncOperationWithFinishCallbackBlock(JFFAsyncOperation loader,
+                                                        JFFDidFinishAsyncOperationHandler finishCallbackBlock);
 
 //finish_callback_hook_ called instead loader_'s JFFDidFinishAsyncOperationHandler
-JFFAsyncOperation asyncOperationWithFinishHookBlock( JFFAsyncOperation loader_
-                                                    , JFFDidFinishAsyncOperationHook finishCallbackHook_ );
+JFFAsyncOperation asyncOperationWithFinishHookBlock(JFFAsyncOperation loader,
+                                                    JFFDidFinishAsyncOperationHook finishCallbackHook);
 
-JFFAsyncOperation asyncOperationWithStartAndFinishBlocks( JFFAsyncOperation loader_
-                                                         , JFFSimpleBlock startBlock_
-                                                         , JFFDidFinishAsyncOperationHandler finishCallback_ );
+JFFAsyncOperation asyncOperationWithStartAndFinishBlocks(JFFAsyncOperation loader,
+                                                         JFFSimpleBlock startBlock,
+                                                         JFFDidFinishAsyncOperationHandler finishCallback);
 
-JFFAsyncOperation asyncOperationWithAnalyzer( id data_, JFFAnalyzer analyzer_ );
+JFFAsyncOperation asyncOperationWithAnalyzer(id data, JFFAnalyzer analyzer);
 
-JFFAsyncOperationBinder asyncOperationBinderWithAnalyzer( JFFAnalyzer analyzer_ );
+JFFAsyncOperationBinder asyncOperationBinderWithAnalyzer(JFFAnalyzer analyzer);
 
-typedef id (^JFFChangedResultBuilder)(id result_);
-JFFAsyncOperation asyncOperationWithChangedResult( JFFAsyncOperation loader_
-                                                  , JFFChangedResultBuilder resultBuilder_ );
+typedef id (^JFFChangedResultBuilder)(id result);
+JFFAsyncOperation asyncOperationWithChangedResult(JFFAsyncOperation loader,
+                                                  JFFChangedResultBuilder resultBuilder);
 
-JFFAsyncOperation asyncOperationResultAsProgress( JFFAsyncOperation loader_ );
+JFFAsyncOperation asyncOperationResultAsProgress(JFFAsyncOperation loader);
 
-typedef NSError* (^JFFChangedErrorBuilder)(NSError* error_);
-JFFAsyncOperation asyncOperationWithChangedError( JFFAsyncOperation loader_
-                                                 , JFFChangedErrorBuilder errorBuilder_ );
+typedef NSError* (^JFFChangedErrorBuilder)(NSError *error);
+JFFAsyncOperation asyncOperationWithChangedError(JFFAsyncOperation loader,
+                                                 JFFChangedErrorBuilder errorBuilder);
 
-JFFAsyncOperation asyncOperationWithResultOrError( JFFAsyncOperation loader_
-                                                  , id result_
-                                                  , NSError* error_ );
+JFFAsyncOperation asyncOperationWithResultOrError(JFFAsyncOperation loader,
+                                                  id result,
+                                                  NSError *error);
 
-JFFAsyncOperation asyncOperationWithDelay( NSTimeInterval delay_ );
+JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay);
 
 JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader);
 JFFAsyncOperationBinder ignorePregressBinder(JFFAsyncOperationBinder binder);
 
 ///////////////////////////////////// SEQUENCE /////////////////////////////////////
 
-JFFAnalyzer analyzerAsSequenceOfAnalyzers( JFFAnalyzer firstAnalyzer_, ... ) NS_REQUIRES_NIL_TERMINATION;
+JFFAnalyzer analyzerAsSequenceOfAnalyzers(JFFAnalyzer firstAnalyzer, ...) NS_REQUIRES_NIL_TERMINATION;
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */
