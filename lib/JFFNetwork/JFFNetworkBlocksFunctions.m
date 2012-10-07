@@ -28,11 +28,15 @@ static JFFAnalyzer downloadErrorFlagResponseAnalyzer()
 static JFFAsyncOperation privateGenericChunkedURLResponseLoader(JFFURLConnectionParams *params,
                                                                 JFFAnalyzer responseAnalyzer)
 {
-    JFFAsyncOperationNetwork* asyncObj = [JFFAsyncOperationNetwork new];
-    asyncObj.params           = params;
-    asyncObj.responseAnalyzer = responseAnalyzer;
+    responseAnalyzer = [responseAnalyzer copy];
+    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+        JFFAsyncOperationNetwork* asyncObj = [JFFAsyncOperationNetwork new];
+        asyncObj.params           = params;
+        asyncObj.responseAnalyzer = responseAnalyzer;
+        return asyncObj;
+    };
     
-    return buildAsyncOperationWithInterface(asyncObj);
+    return buildAsyncOperationWithInterface(builder);
 }
 
 JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams* params)
@@ -54,9 +58,6 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
         JFFAsyncOperationProgressHandler dataProgressCallback = ^void(id progressInfo) {
             if (progressCallback)
                 progressCallback(progressInfo);
-            //TODO think about it
-            if ([progressInfo isKindOfClass:[NSData class]])
-                [responseData appendData:progressInfo];
         };
         
         JFFDidFinishAsyncOperationHandler doneCallbackWrapper;

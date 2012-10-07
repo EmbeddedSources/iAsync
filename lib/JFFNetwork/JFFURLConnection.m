@@ -60,10 +60,11 @@ static void readStreamCallback( CFReadStreamRef stream_
         case kCFStreamEventErrorOccurred:
         {
             [ self_ handleResponseForReadStream: stream_ ];
-
+            
             CFStreamError error_ = CFReadStreamGetError( stream_ );
-            NSString* errorDescription_ = [ [ NSString alloc ] initWithFormat: @"CFStreamError domain: %ld", error_.domain ];
-
+            NSString* errorDescription_ = [[NSString alloc] initWithFormat:@"CFStreamError domain: %ld", error_.domain];
+            
+            //TODO create separate error class
             [ self_ handleFinish:[JFFError newErrorWithDescription:errorDescription_
                                                               code:error_.error]];
             break;
@@ -131,16 +132,15 @@ static void readStreamCallback( CFReadStreamRef stream_
 -(void)startConnectionWithPostData:( NSData* )data_
                            headers:( NSDictionary* )headers_
 {
-    CFStringRef method_ = (__bridge  CFStringRef) (self->_params.httpMethod ?: @"GET");
-    if ( !self->_params.httpMethod && data_ )
-    {
-        method_ = (CFStringRef) @"POST";
+    CFStringRef method = (__bridge CFStringRef)(self->_params.httpMethod?:@"GET");
+    if ( !self->_params.httpMethod && data_ ) {
+        method = (__bridge  CFStringRef)@"POST";
     }
-
-    CFHTTPMessageRef httpRequest_ = CFHTTPMessageCreateRequest( NULL
-                                                               , method_
-                                                               , (__bridge CFURLRef)self->_params.url
-                                                               , kCFHTTPVersion1_1 );
+    
+    CFHTTPMessageRef httpRequest_ = CFHTTPMessageCreateRequest(NULL,
+                                                               method,
+                                                               (__bridge CFURLRef)self->_params.url,
+                                                               kCFHTTPVersion1_1);
 
     [ self applyCookiesForHTTPRequest: httpRequest_ ];
 
@@ -223,7 +223,7 @@ static void readStreamCallback( CFReadStreamRef stream_
         return;
     }
 
-    NSString* contentEncoding_ = self->_urlResponse.allHeaderFields[ @"Content-Encoding" ];
+    NSString* contentEncoding_ = self->_urlResponse.allHeaderFields[@"Content-Encoding"];
     id< JNHttpDecoder > decoder_ = [ JNHttpEncodingsFactory decoderForHeaderString: contentEncoding_ ];
 
     NSError* decoderError_ = nil;

@@ -19,6 +19,7 @@ static JFFMutableAssignArray* downloadItems_ = nil;
 
 long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
+//TODO move library to separate repository
 @interface JFFDownloadItem () < JFFTrafficCalculatorDelegate >
 
 @property ( nonatomic ) NSURL* url;
@@ -118,19 +119,20 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
                                 url:( NSURL* )url_
                               error:( NSError** )outError_
 {
-    BOOL result_ = [ downloadItems_ firstMatch: ^BOOL( id object_ )
+    BOOL result_ = [downloadItems_ firstMatch:^BOOL(id object_)
     {
         JFFDownloadItem* item_ = object_;
         return ![ item_.url isEqual: url_ ]
             && [ item_.localFilePath isEqualToString: local_file_path_ ];
-    } ] == nil;
-
-    if ( !result_ && outError_ )
-    {
+    }] == nil;
+    
+    if (!result_ && outError_) {
+        
+        //TODO use NSLocalizedString here
         static NSString* const errorDescription_ = @"Invalid arguments. This \"local path\" used for another url";
-        *outError_ = [ JFFError newErrorWithDescription: errorDescription_ ];
+        *outError_ = [JFFError newErrorWithDescription:errorDescription_];
     }
-
+    
     return result_;
 }
 
@@ -288,9 +290,9 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 -(JFFAsyncOperation)fileLoader
 {
-    JFFAsyncOperation loader_ = ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progress_callback_
-                                                         , JFFCancelAsyncOperationHandler cancel_callback_
-                                                         , JFFDidFinishAsyncOperationHandler done_callback_ )
+    JFFAsyncOperation loader_ = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progress_callback_,
+                                                         JFFCancelAsyncOperationHandler cancel_callback_,
+                                                         JFFDidFinishAsyncOperationHandler done_callback_)
     {
         NSString* range_ = [ [ NSString alloc ] initWithFormat: @"bytes=%qu-", self.downloadedFileLength ];
         NSDictionary* headers_ = @{ @"Range" : range_ };
