@@ -4,7 +4,7 @@
 
 - (id)init
 {
-    return [self initWithDescription:NSLocalizedString(@"Cached access token doesn't exist", nil)];
+    return [self initWithDescription:NSLocalizedString(@"FOUTSQUARE_CACHED_ACCESS_TOKEN_DOESNOT_EXIST", nil)];
 }
 
 @end

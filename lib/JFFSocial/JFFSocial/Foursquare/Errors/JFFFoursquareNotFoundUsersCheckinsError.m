@@ -4,7 +4,7 @@
 
 - (id)init
 {
-    return [self initWithDescription:NSLocalizedString(@"User checkins not found", nil)];
+    return [self initWithDescription:NSLocalizedString(@"FOUTSQUARE_USER_CHECKLIST_NOT_FOUND", nil)];
 }
 
 @end

@@ -10,7 +10,6 @@
 
 @end
 
-
 @implementation JFFAsyncFoursquaerLogin
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
@@ -22,11 +21,9 @@
     NSURL *url = [[JFFFoursquareSessionStorage authURLString] toURL];
     JFFAsyncOperation loader = [application asyncOperationWithApplicationURL:url];
     
-    loader(nil, nil, ^(id result, NSError *error)
-           {
-               handler (result, error);
-           });
-    
+    loader(nil, nil, ^(id result, NSError *error) {
+        handler (result, error);
+    });
 }
 
 - (void)cancel:(BOOL)canceled
@@ -41,7 +38,9 @@
 
 JFFAsyncOperation jffFoursquareLoginLoader ()
 {
-    JFFAsyncFoursquaerLogin *obj = [JFFAsyncFoursquaerLogin new];
+    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+        return [JFFAsyncFoursquaerLogin new];
+    };
     
-    return buildAsyncOperationWithInterface(obj);
+    return buildAsyncOperationWithInterface(builder);
 }

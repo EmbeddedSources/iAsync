@@ -11,18 +11,16 @@
     
     if (![JFFJsonObjectValidator validateJsonObject:jsonObject
                                     withJsonPattern:jsonPattern
-                                              error:outError])
-    {
+                                              error:outError]) {
         return nil;
     }
-
+    
     JFFDirectTweetMessage *result = [self new];
-
-    if (result)
-    {
+    
+    if (result) {
         result.text = jsonObject[@"text"];
     }
-
+    
     return result;
 }
 

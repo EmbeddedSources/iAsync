@@ -15,28 +15,21 @@
 {
     handler  = [handler copy];
     progress = [progress copy];
-
+    
     ACAccountStore *accountStore = [ACAccountStore new];
-
+    
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-
-    [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error)
-    {
+    
+    [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
         if (!handler)
             return;
-
-        if (error)
-        {
+        
+        if (error) {
             handler(nil, error);
-        }
-        else
-        {
-            if (granted)
-            {
+        } else {
+            if (granted) {
                 handler([NSNull null], nil);
-            }
-            else
-            {
+            } else {
                 handler(nil, [JFFTwitterAccountAccessNotGrantedError new]);
             }
         }
@@ -51,5 +44,8 @@
 
 JFFAsyncOperation jffTwitterAccessRequestLoader()
 {
-    return buildAsyncOperationWithInterface([JFFAsyncTwitterAccessRequest new]);
+    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+        return [JFFAsyncTwitterAccessRequest new];
+    };
+    return buildAsyncOperationWithInterface(builder);
 }

@@ -4,7 +4,7 @@
 
 - (id)init
 {
-    return [self initWithDescription:NSLocalizedString(@"Foursquare: Invalid API response", nil)];
+    return [self initWithDescription:NSLocalizedString(@"FOUTSQUARE_INVALID_API_RESPONSE", nil)];
 }
 
 @end

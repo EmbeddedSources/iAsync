@@ -47,17 +47,15 @@ JFFAsyncOperationBinder asyncJSONObjectToTwitterUsers()
 
 JFFAsyncOperationBinder asyncJSONObjectToDirectTweet()
 {
-    JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSDictionary *jsonObject)
-    {
-        JFFSyncOperation loadDataBlock_ = ^id(NSError **error)
-        {
+    JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSDictionary *jsonObject) {
+        JFFSyncOperation loadDataBlock_ = ^id(NSError **error) {
             id accounts =  [JFFDirectTweetMessage newDirectTweetMessageWithTwitterJSONObject:jsonObject
                                                                                        error:error];
             return accounts;
         };
         return asyncOperationWithSyncOperation(loadDataBlock_);
     };
-
+    
     return parser;
 }
 

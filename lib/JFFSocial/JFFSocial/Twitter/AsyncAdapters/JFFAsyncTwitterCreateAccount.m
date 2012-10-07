@@ -56,5 +56,8 @@
 
 JFFAsyncOperation jffCreateTwitterAccountLoader()
 {
-    return buildAsyncOperationWithInterface([JFFAsyncTwitterCreateAccount new]);
+    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+        return [JFFAsyncTwitterCreateAccount new];
+    };
+    return buildAsyncOperationWithInterface(builder);
 }

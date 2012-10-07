@@ -47,8 +47,11 @@
 
 JFFAsyncOperation jffTwitterRequest(TWRequest *request)
 {
-    JFFAsyncTwitterRequest *object = [JFFAsyncTwitterRequest new];
-    object.request = request;
-
-    return buildAsyncOperationWithInterface(object);
+    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+        JFFAsyncTwitterRequest *object = [JFFAsyncTwitterRequest new];
+        object.request = request;
+        return object;
+    };
+    
+    return buildAsyncOperationWithInterface(builder);
 }

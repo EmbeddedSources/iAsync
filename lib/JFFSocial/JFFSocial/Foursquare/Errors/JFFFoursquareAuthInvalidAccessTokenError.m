@@ -4,7 +4,7 @@
 
 - (id)init
 {
-    return [self initWithDescription:NSLocalizedString(@"Invalid access token", nil)];
+    return [self initWithDescription:NSLocalizedString(@"FOUTSQUARE_INVALID_ACCESS_TOKEN", nil)];
 }
 
 @end

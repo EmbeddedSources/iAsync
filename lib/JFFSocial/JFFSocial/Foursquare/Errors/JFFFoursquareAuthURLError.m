@@ -4,7 +4,7 @@
 
 - (id)init
 {
-    return [self initWithDescription:NSLocalizedString(@"Bad foursquare auth URL", nil)];
+    return [self initWithDescription:NSLocalizedString(@"FOUTSQUARE_BAD_AUTH_URL", nil)];
 }
 
 @end

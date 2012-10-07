@@ -78,22 +78,28 @@
 
 JFFAsyncOperation jffFoursquareRequestLoader (NSString *requestURL, NSString *httpMethod, NSString *accessToken, NSDictionary *parameters)
 {
-    JFFAsyncFoursquareRequest *request = [JFFAsyncFoursquareRequest new];
-    request.requestURL = requestURL;
-    request.httpMethod = httpMethod;
-    request.accessToken = accessToken;
-    request.parameters = parameters;
+    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+        JFFAsyncFoursquareRequest *request = [JFFAsyncFoursquareRequest new];
+        request.requestURL = requestURL;
+        request.httpMethod = httpMethod;
+        request.accessToken = accessToken;
+        request.parameters = parameters;
+        return request;
+    };
     
-    return buildAsyncOperationWithInterface(request);
+    return buildAsyncOperationWithInterface(builder);
 }
 
 JFFAsyncOperation jffFoursquareRequestLoaderWithHTTPBody (NSString *requestURL, NSData *httpBody, NSString *accessToken)
 {
-    JFFAsyncFoursquareRequest *request = [JFFAsyncFoursquareRequest new];
-    request.requestURL = requestURL;
-    request.httpBody = httpBody;
-    request.accessToken = accessToken;
-    request.httpMethod = @"POST";
+    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+        JFFAsyncFoursquareRequest *request = [JFFAsyncFoursquareRequest new];
+        request.requestURL  = requestURL;
+        request.httpBody    = httpBody;
+        request.accessToken = accessToken;
+        request.httpMethod  = @"POST";
+        return request;
+    };
     
-    return buildAsyncOperationWithInterface(request);
+    return buildAsyncOperationWithInterface(builder);
 }
