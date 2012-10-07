@@ -2,7 +2,7 @@
 
 JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)
 {
-    assert(data);
+    assert([data isKindOfClass:[NSData class]]);
     
     JFFSyncOperation loadDataBlock = ^id(NSError **outError) {
         NSError *jsonError;

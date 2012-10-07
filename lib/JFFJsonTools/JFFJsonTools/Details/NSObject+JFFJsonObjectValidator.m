@@ -187,26 +187,22 @@ static BOOL isClass(id object)
     __block BOOL result = YES;
     __block NSError *tmpError;
     
-    [jsonPattern enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
-     {
+    [jsonPattern enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
          id patternKey = key;
          
          BOOL isOptionalObjectField = [key isKindOfClass:[JFFOptionalObjectField class]];
          
-         if (isOptionalObjectField)
-         {
+         if (isOptionalObjectField) {
              patternKey = [key fieldKey];
          }
          
          id subElement = self[patternKey];
          
-         if (subElement == nil && isOptionalObjectField)
-         {
+         if (subElement == nil && isOptionalObjectField) {
              return;
          }
          
-         if (!subElement)
-         {
+         if (!subElement) {
              //set error
              {
                  JFFJsonValidationError *error = [JFFJsonValidationError new];
@@ -229,8 +225,7 @@ static BOOL isClass(id object)
          if (![subElement validateWithJsonPattern:obj
                                    rootJsonObject:rootJsonObject
                                   rootJsonPattern:rootJsonPattern
-                                            error:&tmpError])
-         {
+                                            error:&tmpError]) {
              result = NO;
              *stop = YES;
          }
