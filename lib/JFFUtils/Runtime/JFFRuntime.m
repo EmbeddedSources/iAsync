@@ -5,14 +5,13 @@
 void enumerateAllClassesWithBlock(void(^block)(Class))
 {
     assert(block);
-
+    
     int numClasses = objc_getClassList(NULL, 0);
     Class classes[sizeof(Class) * numClasses];
-
+    
     numClasses = objc_getClassList(classes, numClasses);
-
-    for (int index = 0; index < numClasses; ++index)
-    {
+    
+    for (int index = 0; index < numClasses; ++index) {
         Class class = classes[index];
         if (class_getClassMethod(class, @selector(conformsToProtocol:)))
             block(class);

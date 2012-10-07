@@ -17,8 +17,7 @@
 
 - (void)addDelegate:(id)delegate
 {
-    if (![self.delegates containsObject:delegate])
-    {
+    if (![self.delegates containsObject:delegate]) {
         [self.delegates addObject:delegate];
     }
 }
@@ -39,10 +38,8 @@
     
     [self->_delegates enumerateObjectsUsingBlock:^void(id delegate,
                                                        NSUInteger idx,
-                                                       BOOL *stop)
-    {
-        if ([delegate respondsToSelector:selector])
-        {
+                                                       BOOL *stop) {
+        if ([delegate respondsToSelector:selector]) {
             [invocation invokeWithTarget:delegate];
         }
     }];

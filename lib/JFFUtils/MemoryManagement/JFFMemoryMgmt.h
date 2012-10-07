@@ -7,8 +7,8 @@
 extern "C" {
 #endif
 
-id jff_retainAutorelease( id object_ );
-id jff_retain( id object_ );
+    id jff_retainAutorelease(id object);
+    id jff_retain(id object);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

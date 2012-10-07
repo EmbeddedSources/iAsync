@@ -2,24 +2,24 @@
 
 @interface NSArray (JFFClangLiterals)
 
--(id)objectAtIndexedSubscript:( NSUInteger )index_;
+- (id)objectAtIndexedSubscript:(NSUInteger)index;
 
 @end
 
 @interface NSMutableArray (JFFClangLiterals)
 
--(void)setObject:( id )anObject_ atIndexedSubscript:( NSUInteger )index_;
+- (void)setObject:(id)anObject atIndexedSubscript:(NSUInteger)index;
 
 @end
 
 @interface NSDictionary (JFFClangLiterals)
 
--(id)objectForKeyedSubscript:( id )key_;
+- (id)objectForKeyedSubscript:(id)key;
 
 @end
 
 @interface NSMutableDictionary (JFFClangLiterals)
 
--(void)setObject:( id )newValue_ forKeyedSubscript:( id )key_;
+- (void)setObject:(id)newValue forKeyedSubscript:(id)key;
 
 @end

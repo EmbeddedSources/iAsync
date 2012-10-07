@@ -20,8 +20,7 @@
 -(void)dealloc
 {
     JFFProxyObjectContainer * container = self->_container;
-    void (^releaseListener)(void) = ^void(void)
-    {
+    void (^releaseListener)(void) = ^void(void) {
         container.target = nil;
     };
     dispatch_async(self->_dispatchQueue, releaseListener);
@@ -35,9 +34,8 @@
     dispatch_retain(self->_dispatchQueue);
     
     factory = [factory copy];
-    void (^releaseListener)(void) = ^void(void)
-    {
-        self->_container = [ JFFProxyObjectContainer new ];
+    void (^releaseListener)(void) = ^ {
+        self->_container = [JFFProxyObjectContainer new];
         self->_container.target = factory();
     };
     safe_dispatch_sync(self->_dispatchQueue, releaseListener);
@@ -55,9 +53,8 @@
 -(void)forwardInvocation:( NSInvocation* )invocation
 {
     SEL selector = [invocation selector];
-
-    void (^forwardInvocation)(void) = ^void(void)
-    {
+    
+    void (^forwardInvocation)(void) = ^ {
         if ([self->_container.target respondsToSelector:selector])
             [invocation invokeWithTarget:self->_container.target];
     };
@@ -67,8 +64,7 @@
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
     __block id resut;
-    void (^methodSignature)(void) = ^void(void)
-    {
+    void (^methodSignature)(void) = ^ {
         resut = [self->_container.target methodSignatureForSelector:selector];
     };
     safe_dispatch_sync(self->_dispatchQueue, methodSignature);

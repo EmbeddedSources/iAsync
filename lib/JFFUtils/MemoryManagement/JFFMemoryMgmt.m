@@ -1,11 +1,11 @@
 #include "JFFMemoryMgmt.h"
 
-id jff_retainAutorelease( id object_ )
+id jff_retainAutorelease(id object)
 {
-    return [ [ object_ retain ] autorelease ];
+    return [[object retain] autorelease];
 }
 
-id jff_retain( id object_ )
+id jff_retain(id object)
 {
-    return [ object_ retain ];
+    return [object retain];
 }
