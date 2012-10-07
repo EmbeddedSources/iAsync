@@ -5,8 +5,7 @@
 - (NSSet *)select:(JFFPredicateBlock)predicate
 {
     NSMutableArray *result = [NSMutableArray new];
-    for (id object in self)
-    {
+    for (id object in self) {
         if (predicate(object))
             [result addObject:object];
     }
@@ -16,8 +15,7 @@
 - (NSArray *)selectArray:(JFFPredicateBlock)predicate
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
-    for (id object in self)
-    {
+    for (id object in self) {
         if (predicate(object))
             [result addObject:object];
     }

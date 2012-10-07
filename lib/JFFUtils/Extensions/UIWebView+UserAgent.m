@@ -2,57 +2,54 @@
 
 #include "JGCDAdditions.h"
 
-static NSString* userAgent_;
+static NSString* globalUserAgent;
 
 static NSString* userAgent()
 {
-    NSString* js_ = @"navigator.userAgent" ;
-    UIWebView* webView_ = [ UIWebView new ];
-    return [ webView_ stringByEvaluatingJavaScriptFromString: js_ ];
+    NSString *js = @"navigator.userAgent";
+    UIWebView *webView = [UIWebView new];
+    return [webView stringByEvaluatingJavaScriptFromString:js];
 }
 
 @implementation UIWebView (UserAgent)
 
-+(NSString*)userAgent
++ (NSString *)userAgent
 {
-    if ( !userAgent_ )
-    {
-        userAgent_ = userAgent();
+    if (!globalUserAgent) {
+        globalUserAgent = userAgent();
     }
-    return userAgent_;
+    return globalUserAgent;
 }
 
 //try to remove this to use NSUserDefaults value instead
-+(NSString*)threadSafeUserAgent
++ (NSString *)threadSafeUserAgent
 {
-    static dispatch_once_t once_;
-
-    dispatch_once( &once_, ^void( void )
-    {
-        void (^block_)(void) = ^()
-        {
-            userAgent_ = userAgent();
+    static dispatch_once_t once;
+    
+    dispatch_once(&once, ^{
+        void (^block)(void) = ^() {
+            globalUserAgent = userAgent();
         };
-
-        safe_dispatch_sync( dispatch_get_main_queue()
-                           , block_ );
-    } );
-
-    return userAgent_;
+        
+        safe_dispatch_sync(dispatch_get_main_queue(),
+                           block);
+    });
+    
+    return globalUserAgent;
 }
 
-+(void)setUserAgentAddition:( NSString* )userAgentAddition_
++ (void)setUserAgentAddition:(NSString *)userAgentAddition
 {
-    if ( [ userAgentAddition_ length ] == 0 )
+    if ([userAgentAddition length] == 0)
         return;
-
-    NSString* webViewUserAgent_ = [ UIWebView threadSafeUserAgent ];
-    NSString* newUserAgent_ = [ [ NSString alloc ] initWithFormat: @"%@ %@"
-                               , webViewUserAgent_
-                               , userAgentAddition_ ];
-
-    NSDictionary* dictionnary_ = @{ @"UserAgent" : newUserAgent_ };
-    [ [ NSUserDefaults standardUserDefaults ] registerDefaults: dictionnary_ ];
+    
+    NSString *webViewUserAgent = [UIWebView threadSafeUserAgent];
+    NSString *newUserAgent = [[NSString alloc] initWithFormat:@"%@ %@",
+                              webViewUserAgent,
+                              userAgentAddition];
+    
+    NSDictionary *dictionnary = @{@"UserAgent": newUserAgent};
+    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
 }
 
 @end

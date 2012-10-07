@@ -2,6 +2,6 @@
 
 @interface NSOrderedSet (NoThrowObjectAtIndex)
 
--(id)noThrowObjectAtIndex:( NSUInteger )index_;
+- (id)noThrowObjectAtIndex:(NSUInteger)index;
 
 @end

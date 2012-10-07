@@ -2,11 +2,11 @@
 
 @implementation NSString (StringWithCutPrefix)
 
--(id)stringWithCutPrefix:( NSString* )prefix_
+- (id)stringWithCutPrefix:(NSString *)prefix
 {
-    return [ self hasPrefix: prefix_ ]
-        ? [ self substringFromIndex: [ prefix_ length ] ]
-        : self;
+    return [self hasPrefix:prefix]
+    ? [self substringFromIndex:[prefix length]]
+    : self;
 }
 
 @end

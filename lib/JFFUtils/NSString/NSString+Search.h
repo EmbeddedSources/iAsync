@@ -2,10 +2,10 @@
 
 @interface NSString (Search)
 
--(NSUInteger)numberOfCharacterFromString:( NSString* )string_;
--(NSUInteger)numberOfStringsFromString:( NSString* )string_;
+- (NSUInteger)numberOfCharacterFromString:(NSString *)string;
+- (NSUInteger)numberOfStringsFromString:(NSString *)string;
 
--(BOOL)containsString:( NSString* )string_;
--(BOOL)caseInsensitiveContainsString:( NSString* )string_;
+- (BOOL)containsString:(NSString *)string;
+- (BOOL)caseInsensitiveContainsString:(NSString *)string;
 
 @end

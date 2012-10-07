@@ -2,9 +2,9 @@
 
 @interface UIWebView (UserAgent)
 
-+(NSString*)userAgent;
-+(NSString*)threadSafeUserAgent;
++ (NSString *)userAgent;
++ (NSString *)threadSafeUserAgent;
 
-+(void)setUserAgentAddition:( NSString* )userAgentAddition_;
++ (void)setUserAgentAddition:(NSString *)userAgentAddition;
 
 @end

@@ -103,8 +103,7 @@ static void logErrnoGlobalVariable(const char *attributeName)
     const char *attributeName = "com.apple.MobileBackup";
     int result = setxattr([self fileSystemRepresentation], attributeName, &b, 1, 0, 0);
     
-    if (result == -1)
-    {
+    if (result == -1) {
         logErrnoGlobalVariable(attributeName);
     }
 }

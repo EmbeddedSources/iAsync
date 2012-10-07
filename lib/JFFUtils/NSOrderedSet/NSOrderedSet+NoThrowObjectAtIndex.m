@@ -2,13 +2,13 @@
 
 @implementation NSOrderedSet (NoThrowObjectAtIndex)
 
--(id)noThrowObjectAtIndex:( NSUInteger )index_
+//TODO fix duplicate code
+- (id)noThrowObjectAtIndex:(NSUInteger)index
 {
-    if ( [ self count ] <= index_ )
+    if ([self count] <= index)
         return nil;
     
-    return [self objectAtIndex:index_];
+    return [self objectAtIndex:index];
 }
-
 
 @end

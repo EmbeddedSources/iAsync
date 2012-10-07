@@ -355,6 +355,8 @@
 		CE57FBDD1611F8FC00124D90 /* JMParent.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57FBDC1611F8FC00124D90 /* JMParent.m */; };
 		CE57FBE01611F90900124D90 /* JMChild.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57FBDF1611F90900124D90 /* JMChild.m */; };
 		CE609CF216134405008259CF /* JFFMutableAssignArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE609CF116134405008259CF /* JFFMutableAssignArrayTest.m */; };
+		CE7CF550161EBC4D008557D2 /* NSNumber+FSStorable.h in Headers */ = {isa = PBXBuildFile; fileRef = CE7CF54E161EBC4D008557D2 /* NSNumber+FSStorable.h */; };
+		CE7CF551161EBC4D008557D2 /* NSNumber+FSStorable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CF54F161EBC4D008557D2 /* NSNumber+FSStorable.m */; };
 		CE914E54160B71B300C89F37 /* DelegateProxyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE914E53160B71B300C89F37 /* DelegateProxyTest.m */; };
 		CE914E5E160C49D800C89F37 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE914E5B160C49C400C89F37 /* libJFFTestTools.a */; };
 		CE914E5F160C4B0C00C89F37 /* JFFProxyDelegatesDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097A715FF2E3E0080DEF7 /* JFFProxyDelegatesDispatcher.m */; };
@@ -576,6 +578,8 @@
 		CE57FBDF1611F90900124D90 /* JMChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMChild.m; sourceTree = "<group>"; };
 		CE609CF016134405008259CF /* JFFMutableAssignArrayTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFMutableAssignArrayTest.h; sourceTree = "<group>"; };
 		CE609CF116134405008259CF /* JFFMutableAssignArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFMutableAssignArrayTest.m; sourceTree = "<group>"; };
+		CE7CF54E161EBC4D008557D2 /* NSNumber+FSStorable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+FSStorable.h"; sourceTree = "<group>"; };
+		CE7CF54F161EBC4D008557D2 /* NSNumber+FSStorable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+FSStorable.m"; sourceTree = "<group>"; };
 		CE914E52160B71B300C89F37 /* DelegateProxyTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateProxyTest.h; sourceTree = "<group>"; };
 		CE914E53160B71B300C89F37 /* DelegateProxyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateProxyTest.m; sourceTree = "<group>"; };
 		CE914E56160C49C300C89F37 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = "/Users/user/Sources/paparam.ru/HumanCloud/lib-third-party/iAsync/test/JFFUtilsTest/../../lib/JFFTestTools/JFFTestTools.xcodeproj"; sourceTree = "<absolute>"; };
@@ -698,9 +702,9 @@
 		1B054D4B1521C6DA008E4B9E /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
+				1BC8A7CD1536CCC900CF1859 /* JUDictionaryHelperBlocks.h */,
 				37497BCE1600971C00AF0C29 /* NSDictionary+ValueWithType.h */,
 				37497BCF1600971C00AF0C29 /* NSDictionary+ValueWithType.m */,
-				1BC8A7CD1536CCC900CF1859 /* JUDictionaryHelperBlocks.h */,
 				1B054D4D1521C6F4008E4B9E /* NSDictionary+BlocksAdditions.h */,
 				1B054D4E1521C6F4008E4B9E /* NSDictionary+BlocksAdditions.m */,
 				1B054D511521C739008E4B9E /* NSDictionary+JFFExtendedDictionary.h */,
@@ -756,6 +760,8 @@
 				CEDB80EC1601F08F007577B2 /* NSData+ToString.m */,
 				CE102F3616089570004229C5 /* UIImage+ScaleToSize.h */,
 				CE102F3716089570004229C5 /* UIImage+ScaleToSize.m */,
+				CE7CF54E161EBC4D008557D2 /* NSNumber+FSStorable.h */,
+				CE7CF54F161EBC4D008557D2 /* NSNumber+FSStorable.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1256,6 +1262,7 @@
 				CE102F3816089570004229C5 /* UIImage+ScaleToSize.h in Headers */,
 				CE57FBB81611EFFF00124D90 /* NSSet+BlocksAdditions.h in Headers */,
 				CE57FBBD1611F0BF00124D90 /* NSMutableSet+StorableSet.h in Headers */,
+				CE7CF550161EBC4D008557D2 /* NSNumber+FSStorable.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1731,6 +1738,7 @@
 				CE57FBB91611EFFF00124D90 /* NSSet+BlocksAdditions.m in Sources */,
 				CE57FBBE1611F0BF00124D90 /* NSMutableSet+StorableSet.m in Sources */,
 				CEE653CF16144C8900C4D536 /* JFFRuntimeInitializer.m in Sources */,
+				CE7CF551161EBC4D008557D2 /* NSNumber+FSStorable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

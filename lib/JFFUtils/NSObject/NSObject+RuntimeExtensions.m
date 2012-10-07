@@ -3,28 +3,28 @@
 #include <objc/runtime.h>
 
 typedef Method (^JFFMethodGetter)();
-typedef Method (^JFFMethodGetterForClass)( Class cls_ );
-typedef Method (^JFFMethodGetterForClassAndSelector)( Class cls_, SEL selector_ );
-typedef Class (^JFFClassForClass)( Class cls_ );
+typedef Method (^JFFMethodGetterForClass)(Class cls);
+typedef Method (^JFFMethodGetterForClassAndSelector)(Class cls, SEL selector);
+typedef Class (^JFFClassForClass)(Class cls);
 typedef BOOL (^JFFPredicate)();
 
 @implementation NSObject (RuntimeExtensions)
 
-+(BOOL)addMethodIfNeedWithSelector:(SEL)selector_
-                           toClass:(Class)class
-                 newMethodSelector:(SEL)newSelector
-                         hasMethod:(JFFPredicate)hasMethod
-                      methodGetter:(JFFMethodGetter)methodGetter
++ (BOOL)addMethodIfNeedWithSelector:(SEL)selector
+                            toClass:(Class)class
+                  newMethodSelector:(SEL)newSelector
+                          hasMethod:(JFFPredicate)hasMethod
+                       methodGetter:(JFFMethodGetter)methodGetter
 {
-    if ( hasMethod() )
+    if (hasMethod())
         return NO;
-
+    
     Method prototypeMethod = methodGetter();
     const char* typeEncoding = method_getTypeEncoding(prototypeMethod);
-    BOOL result = class_addMethod( class
-                                  , newSelector
-                                  , method_getImplementation(prototypeMethod)
-                                  , typeEncoding );
+    BOOL result = class_addMethod(class,
+                                  newSelector,
+                                  method_getImplementation(prototypeMethod),
+                                  typeEncoding);
     NSAssert(result, @"method should be added");
     return result;
 }
@@ -41,12 +41,10 @@ typedef BOOL (^JFFPredicate)();
                                     toClass:(Class)class
                           newMethodSelector:(SEL)newSelector
 {
-    JFFPredicate respondToSelector = ^BOOL()
-    {
+    JFFPredicate respondToSelector = ^BOOL() {
         return [class hasInstanceMethodWithSelector:newSelector];
     };
-    JFFMethodGetter methodGetter = ^Method()
-    {
+    JFFMethodGetter methodGetter = ^Method() {
         return class_getInstanceMethod(self, selector);
     };
     return [self addMethodIfNeedWithSelector:selector
@@ -68,12 +66,10 @@ typedef BOOL (^JFFPredicate)();
                                  toClass:(Class)class
                        newMethodSelector:(SEL)newSelector
 {
-    JFFPredicate respondToSelector = ^BOOL()
-    {
+    JFFPredicate respondToSelector = ^BOOL() {
         return [class hasClassMethodWithSelector:newSelector];
     };
-    JFFMethodGetter methodGetter = ^Method()
-    {
+    JFFMethodGetter methodGetter = ^Method() {
         return class_getClassMethod(self, selector);
     };
     return [self addMethodIfNeedWithSelector:selector
@@ -114,8 +110,7 @@ typedef BOOL (^JFFPredicate)();
            prototypeMethodSelector:(SEL)prototypeSelector
                 hookMethodSelector:(SEL)hookSelector
 {
-    JFFMethodGetterForClassAndSelector methodGetter = ^Method(Class class, SEL selector)
-    {
+    JFFMethodGetterForClassAndSelector methodGetter = ^Method(Class class, SEL selector) {
         return class_getInstanceMethod(class, selector);
     };
     [self hookMethodForClass:class
@@ -131,8 +126,7 @@ typedef BOOL (^JFFPredicate)();
         prototypeMethodSelector:(SEL)prototypeSelector
              hookMethodSelector:(SEL)hookSelector
 {
-    JFFMethodGetterForClassAndSelector methodGetter = ^Method(Class otherClass, SEL selector)
-    {
+    JFFMethodGetterForClassAndSelector methodGetter = ^Method(Class otherClass, SEL selector) {
         return class_getClassMethod(otherClass, selector);
     };
     [self hookMethodForClass:class
@@ -150,8 +144,9 @@ typedef BOOL (^JFFPredicate)();
     if (!method)
         return NO;
     
-    if (![self superclass])
-        return YES;
+    //TODO ?
+//    if (![self superclass])
+//        return YES;
     
     Method superMethod = methodGetter([self superclass]);
     return method != superMethod;
@@ -159,16 +154,14 @@ typedef BOOL (^JFFPredicate)();
 
 + (BOOL)hasInstanceMethodWithSelector:(SEL)methodSelector
 {
-    return [self hasMethodForMethodGetter:^Method(Class class)
-    {
+    return [self hasMethodForMethodGetter:^Method(Class class) {
         return class_getInstanceMethod(class, methodSelector);
     }];
 }
 
 + (BOOL)hasClassMethodWithSelector:(SEL)methodSelector
 {
-    return [self hasMethodForMethodGetter:^Method(Class class)
-    {
+    return [self hasMethodForMethodGetter:^Method(Class class) {
         return class_getClassMethod(class, methodSelector);
     }];
 }
