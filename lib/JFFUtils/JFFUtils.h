@@ -43,6 +43,7 @@
 #import <JFFUtils/Extensions/UIWebView+UserAgent.h>
 #import <JFFUtils/Extensions/UIColor+ColorForHex.h>
 #import <JFFUtils/Extensions/UIImage+ScaleToSize.h>
+#import <JFFUtils/Extensions/NSNumber+FSStorable.h>
 #import <JFFUtils/Extensions/NSError+setToPointer.h>
 #import <JFFUtils/Extensions/NSThread+AssertMainThread.h>
 #import <JFFUtils/Extensions/NSDecimalNumber+Increment.h>
