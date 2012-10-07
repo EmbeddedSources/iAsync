@@ -33,48 +33,45 @@
     return [ otherObject_.keys isEqual: self.keys ];
 }
 
--(id)initWithKeys:( NSArray* )keys_
+- (id)initWithKeys:(NSArray *)keys
 {
-    self = [ super init ];
-
-    if ( self )
-    {
-        self->_keys = [ keys_ copy ];
+    self = [super init];
+    
+    if (self) {
+        self->_keys = [keys copy];
     }
-
+    
     return self;
 }
 
-+(id)compositeKeyWithKeys:( NSString* )key_, ...
++ (id)compositeKeyWithKeys:(NSString *)key, ...
 {
-    NSMutableArray* keys_ = [ NSMutableArray new ];
+    NSMutableArray *keys = [NSMutableArray new];
     va_list args;
-    va_start( args, key_ );
-    for ( NSString* currentKey_ = key_; currentKey_ != nil; currentKey_ = va_arg( args, NSString* ) )
-    {
-        [ keys_ addObject: currentKey_ ];
+    va_start(args, key);
+    for (NSString *currentKey = key; currentKey != nil; currentKey = va_arg(args, NSString*)) {
+        [keys addObject:currentKey];
     }
     va_end( args );
-
-    return [ [ self alloc ] initWithKeys: keys_ ];
+    
+    return [[self alloc] initWithKeys:keys];
 }
 
-+(id)compositeKeyWithKey:( JFFDBCompositeKey* )compositeKey_ forIndexes:( NSIndexSet* )indexes_
++ (id)compositeKeyWithKey:(JFFDBCompositeKey *)compositeKey forIndexes:(NSIndexSet *)indexes
 {
-    NSUInteger size_ = [ compositeKey_.keys count ];
-    NSArray* newKeys_ = [ NSArray arrayWithSize: size_ producer: ^id( NSUInteger index_ )
-    {
-        return [ indexes_ containsIndex: index_ ] 
-                    ? compositeKey_.keys[ index_ ]
-                    : @"%";
-    } ];
-
-    return [ [ JFFDBCompositeKey alloc ] initWithKeys: newKeys_ ];
+    NSUInteger size = [compositeKey.keys count];
+    NSArray *newKeys = [NSArray arrayWithSize:size producer:^id(NSUInteger index) {
+        return [indexes containsIndex:index]
+        ?compositeKey.keys[index]
+        :@"%";
+    }];
+    
+    return [[JFFDBCompositeKey alloc] initWithKeys:newKeys];
 }
 
--(NSString*)toCompositeKey
+- (NSString *)toCompositeKey
 {
-    return [ self.keys componentsJoinedByString: @"_" ];
+    return [self.keys componentsJoinedByString:@"_"];
 }
 
 @end

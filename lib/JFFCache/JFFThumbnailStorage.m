@@ -11,10 +11,8 @@
 
 static JFFAsyncBinderForURL imageDataToUIImageBinder()
 {
-    return ^JFFAsyncOperationBinder(NSURL *url)
-    {
-        return ^JFFAsyncOperation(NSData *imageData)
-        {
+    return ^JFFAsyncOperationBinder(NSURL *url) {
+        return ^JFFAsyncOperation(NSData *imageData) {
             UIImage *image = [UIImage imageWithData:imageData];
             
             if (image)
@@ -27,21 +25,52 @@ static JFFAsyncBinderForURL imageDataToUIImageBinder()
 }
 
 @interface JFFImageCacheAdapter : NSObject<JFFRestKitCache>
-
-@property (nonatomic) id< JFFCacheDB > thumbnailDB;
-
 @end
 
 @implementation JFFImageCacheAdapter
-
-- (void)setData:(NSData *)data forKey:(NSString *)key
 {
-    [self->_thumbnailDB setData:data forKey:key];
+    dispatch_queue_t _queue;
 }
 
-- (NSData*)dataForKey:(NSString *)key lastUpdateDate:(NSDate **)date
+- (dispatch_queue_t)dispatchQueue
 {
-    return [self->_thumbnailDB dataForKey:key lastUpdateTime:date];
+    if (self->_queue == NULL) {
+        static const char *label = "com.embedded_sources.jffcache.thumbnail_storage";
+        self->_queue = dispatch_queue_get_or_create(label, DISPATCH_QUEUE_CONCURRENT);
+    }
+    return self->_queue;
+}
+
+//TODO add read write locks
+- (JFFAsyncOperation)loaderToSetData:(NSData *)data forKey:(NSString *)key
+{
+    return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
+        
+        [[JFFCaches createThumbnailDB] setData:data forKey:key];
+        return [NSNull new];
+    });
+}
+
+- (JFFAsyncOperation)cachedDataLoaderForKey:(NSString *)key {
+    return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
+        
+        NSDate *date;
+        NSData *data = [[JFFCaches createThumbnailDB] dataForKey:key lastUpdateTime:&date];
+        
+        if (data) {
+            JFFResponseDataWithUpdateData *result = [JFFResponseDataWithUpdateData new];
+            result.data       = data;
+            result.updateDate = date;
+            return result;
+        }
+        
+        if (outError) {
+            NSString *description = [[NSString alloc] initWithFormat:@"no cached data for key: %@", key];
+            *outError = [JFFError newErrorWithDescription:description];
+        }
+        
+        return nil;
+    });
 }
 
 @end
@@ -56,10 +85,8 @@ static id glStorageInstance = nil;
 
 @implementation JFFThumbnailStorage
 
-- (NSCache *)imagesByUrl
-{
-    if (!self->_imagesByUrl)
-    {
+- (NSCache *)imagesByUrl {
+    if (!self->_imagesByUrl) {
         self->_imagesByUrl = [NSCache new];
     }
     
@@ -68,8 +95,7 @@ static id glStorageInstance = nil;
 
 + (JFFThumbnailStorage *)sharedStorage
 {
-    if ( !glStorageInstance )
-    {
+    if (!glStorageInstance) {
         glStorageInstance = [self new];
     }
     
@@ -81,16 +107,9 @@ static id glStorageInstance = nil;
     glStorageInstance = storage;
 }
 
-- (id< JFFCacheDB >)thumbnailDB
-{
-    id< JFFCacheDB > thumbnailDB = [[JFFCaches sharedCaches]thumbnailDB];
-    NSParameterAssert(thumbnailDB);
-    return thumbnailDB;
-}
-
 - (NSTimeInterval)cacheDataLifeTime
 {
-    NSNumber *timeToLiveInHours = [self.thumbnailDB timeToLiveInHours];
+    NSNumber *timeToLiveInHours = [[JFFCaches createThumbnailDB] timeToLiveInHours];
     NSParameterAssert(timeToLiveInHours);
     return [timeToLiveInHours doubleValue]*3600.;
 }
@@ -98,7 +117,6 @@ static id glStorageInstance = nil;
 - (JFFImageCacheAdapter *)imageCacheAdapter
 {
     JFFImageCacheAdapter *result = [JFFImageCacheAdapter new];
-    result.thumbnailDB = [self thumbnailDB];
     return result;
 }
 
@@ -111,8 +129,7 @@ static id glStorageInstance = nil;
     args.doesNotIgnoreFreshDataLoadFail = ignoreFreshDataLoadFail;
     args.cache = [self imageCacheAdapter];
     
-    args.dataLoaderForURL = ^JFFAsyncOperation(NSURL *url)
-    {
+    args.dataLoaderForURL = ^JFFAsyncOperation(NSURL *url) {
         return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
             NSData *data = [[NSData alloc]initWithContentsOfURL:url
                                                         options:NSDataReadingMappedIfSafe
@@ -150,12 +167,9 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
     args.cacheDataLifeTime = [self cacheDataLifeTime];
     args.cache = [self imageCacheAdapter];
     
-    args.dataLoaderForURL = ^JFFAsyncOperation(NSURL *url)
-    {
-        JFFAsyncOperationBinder scaledImageBinder = ^JFFAsyncOperation(UIImage *image)
-        {
-            JFFSyncOperation loadDataBlock = ^(NSError *__autoreleasing *outError)
-            {
+    args.dataLoaderForURL = ^JFFAsyncOperation(NSURL *url) {
+        JFFAsyncOperationBinder scaledImageBinder = ^JFFAsyncOperation(UIImage *image) {
+            JFFSyncOperation loadDataBlock = ^(NSError *__autoreleasing *outError) {
                 //TODO check error if can not resize
                 //TODO try to reuse created here resized image for result
                 UIImage *scaledImage = [image imageScaledToSize:scaleSize
@@ -175,15 +189,17 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
     //Do not cache invalid data here (may be no needs)
     args.analyzerForData = imageDataToUIImageBinder();
     
-    args.cacheKeyForURL = ^id(NSURL *url)
-    {
+    args.cacheKeyForURL = ^id(NSURL *url) {
         return cacheKeyForURLScaleSizeAndContentMode(url, scaleSize, contentMode);
     };
     
-    args.lastUpdateDateForKey = ^NSDate*(NSURL *url)
-    {
-        id< JFFCacheDB > thumbnailDB = [self thumbnailDB];
-        return [thumbnailDB lastUpdateTimeForKey:[url description]];
+    args.lastUpdateDateForKey = ^JFFAsyncOperation(NSURL *url) {
+        return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
+            id< JFFCacheDB > thumbnailDB = [JFFCaches createThumbnailDB];
+            NSDate *result = [thumbnailDB lastUpdateTimeForKey:[url description]];
+            //TODO wich date pass when no date, maybe 1907 year????
+            return result;
+        });
     };
     
     JFFAsyncOperation loader = jSmartDataLoaderWithCache(args);
@@ -196,8 +212,7 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
 {
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         JFFAsyncOperation loader = [self cachedInDBImageDataLoaderForUrl:url
                                                  ignoreFreshDataLoadFail:YES];
         
@@ -220,8 +235,7 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
 {
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         JFFAsyncOperation loader = [self cachedInDBImageDataLoaderForUrl:url
                                                  ignoreFreshDataLoadFail:NO];
         

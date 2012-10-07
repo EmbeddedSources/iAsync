@@ -15,4 +15,6 @@
 
 - (id< JFFCacheDB >)thumbnailDB;
 
++ (id< JFFCacheDB >)createThumbnailDB;
+
 @end

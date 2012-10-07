@@ -2,16 +2,16 @@
 
 @implementation NSString (CacheFSManager)
 
--(NSString*)cacheDBFileLinkPath
+- (NSString *)cacheDBFileLinkPath
 {
-    NSString* result_ = [ NSString documentsPathByAppendingPathComponent: self ];
-    return result_;
+    NSString *result = [NSString documentsPathByAppendingPathComponent:self];
+    return result;
 }
 
--(void)cacheDBFileLinkRemoveFile
+- (void)cacheDBFileLinkRemoveFile
 {
-    NSString* path_ = [ self cacheDBFileLinkPath ];
-    [ [ NSFileManager defaultManager ] removeItemAtPath: path_ error: nil ];
+    NSString *path = [self cacheDBFileLinkPath];
+    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 }
 
 - (void)cacheDBFileLinkSaveData:(NSData *)data
@@ -22,12 +22,12 @@
     [path addSkipBackupAttribute];
 }
 
--(NSData*)cacheDBFileLinkData
+- (NSData *)cacheDBFileLinkData
 {
-    NSString* path_ = [ self cacheDBFileLinkPath ];
-    NSData* result_ = [ [ NSData alloc ] initWithContentsOfFile: path_ ];
-
-    return result_;
+    NSString *path = [self cacheDBFileLinkPath];
+    NSData *result = [[NSData alloc] initWithContentsOfFile:path];
+    
+    return result;
 }
 
 @end

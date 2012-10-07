@@ -10,11 +10,10 @@
 - (void)migrateDB
 {
     NSDictionary *cacheDbByName = [[JFFCaches sharedCaches]cacheDbByName];
-    [cacheDbByName enumerateKeysAndObjectsUsingBlock:^(id key, id< JFFCacheDB > db, BOOL *stop)
-    {
+    [cacheDbByName enumerateKeysAndObjectsUsingBlock:^(id key, id< JFFCacheDB > db, BOOL *stop) {
         [db migrateDB];
-    } ];
-
+    }];
+    
     [[JFFDBInfo sharedDBInfo]setCurrentDbInfo:[[JFFDBInfo sharedDBInfo]dbInfo]];
 }
 

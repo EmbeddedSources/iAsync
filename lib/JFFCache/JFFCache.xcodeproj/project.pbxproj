@@ -27,6 +27,8 @@
 		1BDA4D6D1450044700DCEDDE /* JFFThumbnailStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D5C1450044700DCEDDE /* JFFThumbnailStorage.h */; };
 		1BDA4D6E1450044700DCEDDE /* JFFThumbnailStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D5D1450044700DCEDDE /* JFFThumbnailStorage.m */; };
 		6516847B144F4ECD0014670E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6516847A144F4ECD0014670E /* Foundation.framework */; };
+		CEDB12CD1621BCF000A13DCD /* NSDictionary+DBInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = CEDB12CB1621BCF000A13DCD /* NSDictionary+DBInfo.h */; };
+		CEDB12CE1621BCF000A13DCD /* NSDictionary+DBInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB12CC1621BCF000A13DCD /* NSDictionary+DBInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		6516847A144F4ECD0014670E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6516847E144F4ECD0014670E /* JFFCache-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFCache-Prefix.pch"; sourceTree = "<group>"; };
 		CE84AD46160327A600019CAF /* JFFCacheDBInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JFFCacheDBInfo.plist; sourceTree = "<group>"; };
+		CEDB12CB1621BCF000A13DCD /* NSDictionary+DBInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DBInfo.h"; sourceTree = "<group>"; };
+		CEDB12CC1621BCF000A13DCD /* NSDictionary+DBInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DBInfo.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 				1BDA4D501450044700DCEDDE /* NSString+CompositeKey.m */,
 				1B2A4AA615EF6921004ABB2E /* NSString+CacheFSManager.h */,
 				1B2A4AA715EF6921004ABB2E /* NSString+CacheFSManager.m */,
+				CEDB12CB1621BCF000A13DCD /* NSDictionary+DBInfo.h */,
+				CEDB12CC1621BCF000A13DCD /* NSDictionary+DBInfo.m */,
 			);
 			path = Details;
 			sourceTree = SOURCE_ROOT;
@@ -163,6 +169,7 @@
 				1BDA4D6B1450044700DCEDDE /* JFFDBManager.h in Headers */,
 				1BDA4D6D1450044700DCEDDE /* JFFThumbnailStorage.h in Headers */,
 				1B2A4AA815EF6921004ABB2E /* NSString+CacheFSManager.h in Headers */,
+				CEDB12CD1621BCF000A13DCD /* NSDictionary+DBInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +232,7 @@
 				1BDA4D6C1450044700DCEDDE /* JFFDBManager.m in Sources */,
 				1BDA4D6E1450044700DCEDDE /* JFFThumbnailStorage.m in Sources */,
 				1B2A4AA915EF6921004ABB2E /* NSString+CacheFSManager.m in Sources */,
+				CEDB12CE1621BCF000A13DCD /* NSDictionary+DBInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
