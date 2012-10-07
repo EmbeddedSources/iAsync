@@ -27,13 +27,12 @@
 
 - (NSData *)dataForHTTPPostByAppendingParameters:(NSDictionary *)parameters
 {
-    if (!parameters)
-    {
+    if (!parameters) {
         return self;
     }
     
     NSMutableData *newData = [self mutableCopy];
-
+    
     for (NSString *key in [parameters allKeys]) {
         [newData appendData:[[NSString stringWithFormat:@"--%@\r\n",BOUNDARY_STRING] dataUsingEncoding:NSUTF8StringEncoding]];
         [newData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];

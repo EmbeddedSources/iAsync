@@ -2,23 +2,23 @@
 
 @implementation NSString (XQueryComponents)
 
-- (NSString*)stringByDecodingURLFormat
+- (NSString *)stringByDecodingURLFormat
 {
     return [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (NSString*)stringByEncodingURLFormat
+- (NSString *)stringByEncodingURLFormat
 {
     static NSString *unsafe = @" <>#%'\";?:@&=+$/,{}|\\^~[]`-*!()";
-    CFStringRef resultRef = CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault,
+    CFStringRef resultRef = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                     (__bridge CFStringRef)self,
                                                                     NULL,
                                                                     (__bridge CFStringRef)unsafe,
-                                                                    kCFStringEncodingUTF8 );
+                                                                    kCFStringEncodingUTF8);
     return (__bridge_transfer NSString*)resultRef;
 }
 
--(NSDictionary*)dictionaryFromQueryComponents
+- (NSDictionary *)dictionaryFromQueryComponents
 {
     NSMutableDictionary *queryComponents = [ NSMutableDictionary new ];
     for (NSString *keyValuePairString in [self componentsSeparatedByString:@"&"])
@@ -32,8 +32,8 @@
         NSString* key   = [keyValuePairArray[0]stringByDecodingURLFormat];
         NSString* value = [keyValuePairArray[1]stringByDecodingURLFormat];
         NSMutableArray* results_ = queryComponents[ key ]; // URL spec says that multiple values are allowed per key
-        if( !results_ )// First object
-        {
+        // First object
+        if( !results_ ) {
             results_ = [[NSMutableArray alloc]initWithCapacity:1];
             queryComponents[key] = results_;
         }
