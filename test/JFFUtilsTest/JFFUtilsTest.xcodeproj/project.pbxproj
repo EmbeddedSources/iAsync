@@ -538,4 +538,4 @@
 /* End XCConfigurationList section */
 	};
 	rootObject = B69483DE1429C88400B8247E /* Project object */;
-}s
+}
