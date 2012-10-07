@@ -18,6 +18,8 @@
 		B69483F81429C88400B8247E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B69483F71429C88400B8247E /* main.m */; };
 		B69484031429D3D300B8247E /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69484021429D3D300B8247E /* GHUnitIOS.framework */; };
 		B69484661429E26100B8247E /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B69484651429E24B00B8247E /* libJFFUtils.a */; };
+		CE0656E4161EBDFB00926411 /* NSNumber+FSStorableTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0656E3161EBDFB00926411 /* NSNumber+FSStorableTest.m */; };
+		CE0656E6161EBF3D00926411 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0656E5161EBF3D00926411 /* Default-568h@2x.png */; };
 		CE57FBC21611F2EF00124D90 /* NSMutableSet_StorableSetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57FBC11611F2EF00124D90 /* NSMutableSet_StorableSetTest.m */; };
 		CE57FBE11611FA0900124D90 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CDFD914A8CA290068F4DF /* libstdc++.dylib */; };
 /* End PBXBuildFile section */
@@ -98,6 +100,8 @@
 		B69483F91429C88400B8247E /* JFFUtilsTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFUtilsTest-Prefix.pch"; sourceTree = "<group>"; };
 		B69484021429D3D300B8247E /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../../frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
 		B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
+		CE0656E3161EBDFB00926411 /* NSNumber+FSStorableTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+FSStorableTest.m"; sourceTree = "<group>"; };
+		CE0656E5161EBF3D00926411 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CE57FBC11611F2EF00124D90 /* NSMutableSet_StorableSetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableSet_StorableSetTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +153,7 @@
 		B69483DC1429C88400B8247E = {
 			isa = PBXGroup;
 			children = (
+				CE0656E5161EBF3D00926411 /* Default-568h@2x.png */,
 				B69483F11429C88400B8247E /* JFFUtilsTest */,
 				B69483EA1429C88400B8247E /* Frameworks */,
 				B69483E81429C88400B8247E /* Products */,
@@ -203,6 +208,7 @@
 				534CDFDB14A8CA910068F4DF /* mock */,
 				7E7225DD1588891400210CBE /* DevNullTest.m */,
 				CE57FBC11611F2EF00124D90 /* NSMutableSet_StorableSetTest.m */,
+				CE0656E3161EBDFB00926411 /* NSNumber+FSStorableTest.m */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
@@ -328,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B69483F61429C88400B8247E /* InfoPlist.strings in Resources */,
+				CE0656E6161EBF3D00926411 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +366,7 @@
 				534CDFDE14A8CAAC0068F4DF /* JMStringHolder.m in Sources */,
 				7E7225DE1588891400210CBE /* DevNullTest.m in Sources */,
 				CE57FBC21611F2EF00124D90 /* NSMutableSet_StorableSetTest.m in Sources */,
+				CE0656E4161EBDFB00926411 /* NSNumber+FSStorableTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,4 +538,4 @@
 /* End XCConfigurationList section */
 	};
 	rootObject = B69483DE1429C88400B8247E /* Project object */;
-}
+}s

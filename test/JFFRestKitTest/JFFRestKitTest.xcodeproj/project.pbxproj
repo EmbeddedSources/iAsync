@@ -24,6 +24,7 @@
 		65E308B81531F1CD00E0B781 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308B71531F1CD00E0B781 /* libsqlite3.dylib */; };
 		65E308CD1531F1FA00E0B781 /* libJFFScheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308C41531F1E900E0B781 /* libJFFScheduler.a */; };
 		CED0014C16198DDF00368E7D /* SmartDataLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E308671531EF0000E0B781 /* SmartDataLoaderTest.m */; };
+		CED85DB4161C61F300F28EBC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED85DB3161C61F300F28EBC /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +185,7 @@
 		65E308B51531F1C000E0B781 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		65E308B71531F1CD00E0B781 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		65E308B91531F1E800E0B781 /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../../lib/JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
+		CED85DB3161C61F300F28EBC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 		65E308101531EE1B00E0B781 = {
 			isa = PBXGroup;
 			children = (
+				CED85DB3161C61F300F28EBC /* Default-568h@2x.png */,
 				65E308251531EE1B00E0B781 /* JFFRestKitTest */,
 				65E3083E1531EEB000E0B781 /* Dependencies */,
 				65E3081E1531EE1B00E0B781 /* Frameworks */,
@@ -506,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65E3082A1531EE1B00E0B781 /* InfoPlist.strings in Resources */,
+				CED85DB4161C61F300F28EBC /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
