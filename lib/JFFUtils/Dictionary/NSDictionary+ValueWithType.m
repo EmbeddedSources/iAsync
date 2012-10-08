@@ -77,8 +77,7 @@
         return value;
     }
     
-    if ([value isKindOfClass:[NSString class]])
-    {
+    if ([value isKindOfClass:[NSString class]]) {
         return @([value integerValue]);
     }
     

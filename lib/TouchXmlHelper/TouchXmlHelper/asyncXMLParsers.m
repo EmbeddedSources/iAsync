@@ -3,8 +3,7 @@
 //JTODO test
 JFFAsyncOperationBinder xmlDocumentWithDataAsyncBinder( void )
 {
-    return ^JFFAsyncOperation( NSData* data_ )
-    {
+    return ^JFFAsyncOperation( NSData* data_ ) {
         return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
                                         , JFFCancelAsyncOperationHandler cancelCallback_
                                         , JFFDidFinishAsyncOperationHandler doneCallback_ )
@@ -24,10 +23,10 @@ JFFAsyncOperationBinder xmlDocumentWithDataAsyncBinder( void )
 //JTODO test
 JFFAsyncOperationBinder xmlDocumentWithStringAsyncBinder( void )
 {
-    return ^JFFAsyncOperation(NSString *str_) {
-        JFFAsyncOperationBinder binder_ = xmlDocumentWithDataAsyncBinder();
+    return ^JFFAsyncOperation(NSString *str) {
+        JFFAsyncOperationBinder binder = xmlDocumentWithDataAsyncBinder();
         //JTODO remove conversation from string to data
-        NSData* data_ = [ str_ dataUsingEncoding: NSUTF8StringEncoding ];
-        return binder_( data_ );
+        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+        return binder(data);
     };
 }

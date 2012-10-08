@@ -122,8 +122,7 @@
                                                                               toClass:class_
                                                                     newMethodSelector:@selector(allocWithZone:)];
 
-                if (!methodAdded_)
-                {
+                if (!methodAdded_) {
                     // create name allocWithZoneHook dynamicaly and allocWithZonePrototype use block instead
                     [[self class] hookClassMethodForClass:class_
                                              withSelector:@selector(allocWithZone:)

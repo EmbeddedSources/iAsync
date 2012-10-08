@@ -290,8 +290,7 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
                    , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
                    , @"result mismatch" );
     
-    STAssertThrows(
-                   {
+    STAssertThrows( {
                        [ [ TwiceHookMethodsClass class ] hookInstanceMethodForClass: [ NSTwiceTestClass class ]
                                                                        withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
                                                             prototypeMethodSelector: @selector( twicePrototypeMethod )

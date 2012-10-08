@@ -8,7 +8,7 @@
 {
     //CFArray
     {
-        //TODO crash on release
+        //TODO crash when release mode
 //        static Class literalArrayClass = nil;
 //        if (!literalArrayClass) {
 //            const void* cArray[] = {};
