@@ -430,7 +430,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
                 const unsigned char *str = sqlite3_column_text(statement, 0);
                 NSString *fileLink = @((const char *)str);
                 
-                //TODO remove files in separate tread, do nont wait it
+                //JTODO remove files in separate tread, do nont wait it
                 [fileLink cacheDBFileLinkRemoveFile];
             }
             sqlite3_finalize(statement);

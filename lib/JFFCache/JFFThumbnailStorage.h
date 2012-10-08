@@ -1,8 +1,6 @@
 #import <JFFAsyncOperations/JFFAsyncOperationsBlockDefinitions.h>
 
-#import <Foundation/Foundation.h>
-
-@class UIImage;
+#import <UIKit/UIKit.h>
 
 @interface JFFThumbnailStorage : NSObject
 
@@ -11,7 +9,6 @@
 
 - (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url;
 
-//TODO include constant UIViewContentMode here
 - (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url
                               scaledToSize:(CGSize)scaleSize
                                contentMode:(UIViewContentMode)contentMode;
