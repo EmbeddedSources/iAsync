@@ -20,8 +20,7 @@
     
     if (![JFFJsonObjectValidator validateJsonObject:userJsonObject
                                     withJsonPattern:jsonPattern
-                                              error:outError])
-    {
+                                              error:outError]) {
         return nil;
     }
     
@@ -48,8 +47,7 @@
     
     if (![JFFJsonObjectValidator validateJsonObject:jsonObject
                                     withJsonPattern:jsonPattern
-                                              error:outError])
-    {
+                                              error:outError]) {
         return nil;
     }
     
@@ -80,15 +78,13 @@
     
     if (![JFFJsonObjectValidator validateJsonObject:jsonObject
                                     withJsonPattern:jsonPattern
-                                              error:outError])
-    {
+                                              error:outError]) {
         return nil;
     }
     
     JFFInstagramMediaItemImage *result = [self new];
     
-    if (result)
-    {
+    if (result) {
         result.size = CGSizeMake([jsonObject[@"width" ] floatValue],
                                  [jsonObject[@"height"] floatValue]);
         result.url  = [[NSURL alloc] initWithString:jsonObject[@"url"]];
@@ -118,8 +114,7 @@
     
     if (![JFFJsonObjectValidator validateJsonObject:jsonObject
                                     withJsonPattern:jsonPattern
-                                              error:outError])
-    {
+                                              error:outError]) {
         return nil;
     }
     
@@ -131,8 +126,7 @@
     
     NSDictionary *imagesJsonObjects = jsonObject[@"images"];
     
-    JFFDictMappingWithErrorBlock mapBlock = ^(id key, id object, NSError **outError)
-    {
+    JFFDictMappingWithErrorBlock mapBlock = ^(id key, id object, NSError **outError) {
         return [JFFInstagramMediaItemImage newInstagramMediaItemImageWithJsonObject:object
                                                                               error:outError];
     };
@@ -144,8 +138,7 @@
     
     JFFInstagramMediaItem *result = [self new];
     
-    if (result)
-    {
+    if (result) {
         result.mediaItemId = jsonObject[@"id"];
         result.user        = user;
         result.images      = images;
@@ -168,8 +161,7 @@
     
     if (![JFFJsonObjectValidator validateJsonObject:jsonObject
                                     withJsonPattern:jsonPattern
-                                              error:outError])
-    {
+                                              error:outError]) {
         return nil;
     }
     
@@ -196,8 +188,7 @@ static NSError *validateJSONAuthedAccountObjectOnError(NSDictionary *jsonObject)
 {
     NSNumber *errorCode = jsonObject[@"code"];
     
-    if (errorCode)
-    {
+    if (errorCode) {
         JFFInstagramResponseError *error = [JFFInstagramResponseError new];
         error.errorCode    = [errorCode unsignedIntegerValue];
         error.errorType    = jsonObject[@"error_type"   ];

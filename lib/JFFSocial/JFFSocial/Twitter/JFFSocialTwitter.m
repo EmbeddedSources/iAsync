@@ -18,10 +18,8 @@ static JFFAsyncOperation tritterAccountsLoader()
 {
     JFFAsyncOperation accountsLoader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                                                 JFFCancelAsyncOperationHandler cancelCallback,
-                                                                JFFDidFinishAsyncOperationHandler doneCallback)
-    {
-        JFFAnalyzer twitterAccounts = ^id(id result, NSError **error)
-        {
+                                                                JFFDidFinishAsyncOperationHandler doneCallback) {
+        JFFAnalyzer twitterAccounts = ^id(id result, NSError **error) {
             ACAccountStore *accountStore = [ACAccountStore new];
 
             ACAccountType *type = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];

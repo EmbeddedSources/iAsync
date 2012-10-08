@@ -228,8 +228,7 @@
 {
     JFFAsyncOperation accessTokenLoader = [self instagramAccessTokenLoaderForCredentials:credentials];
 
-    JFFAsyncOperationBinder notifyBinder = ^JFFAsyncOperation(NSString *accessToken)
-    {
+    JFFAsyncOperationBinder notifyBinder = ^JFFAsyncOperation(NSString *accessToken) {
         return [self notifyUsersFollowersWithId:@"self"
                                         message:message
                                     accessToken:accessToken];
