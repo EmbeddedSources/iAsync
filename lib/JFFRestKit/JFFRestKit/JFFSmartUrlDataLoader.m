@@ -75,7 +75,7 @@
 
 static JFFAsyncOperationBinder dataLoaderWithCachedResultBinder(BOOL doesNotIgnoreFreshDataLoadFail,
                                                                 JFFAsyncOperationBinder dataLoaderForURL,
-                                                                NSURL *url)//TODO rename WIth
+                                                                NSURL *url)
 {
     dataLoaderForURL = [dataLoaderForURL copy];
     return ^JFFAsyncOperation(JFFErrorNoFreshData *noFreshDataError) {
