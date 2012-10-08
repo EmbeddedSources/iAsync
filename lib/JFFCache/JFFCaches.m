@@ -36,8 +36,10 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
         if (!autoremoveSchedulersByCacheName)
             autoremoveSchedulersByCacheName = [NSMutableDictionary new];
         
-        if (!scheduler)
+        if (!scheduler) {
             scheduler = [JFFScheduler new];
+            autoremoveSchedulersByCacheName[dbPropertyName] = scheduler;
+        }
         
         JFFScheduledBlock block = ^void(JFFCancelScheduledBlock cancel) {
             
@@ -45,10 +47,10 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
             
             JFFSyncOperation loadDataBlock = ^id(NSError *__autoreleasing *outError) {
                 JFFInternalCacheDB *cacheDB = [[self alloc] initWithCacheDBWithName:dbPropertyName
-                                                                           dbInfo:dbInfo];
+                                                                             dbInfo:dbInfo];
                 
                 [cacheDB removeRecordsToAccessDate:fromDate];
-                return [NSNull null];
+                return [NSNull new];
             };
             
             static const char *const queueName = "com.embedded_sources.dbcache.thread_to_remove_old_data";
@@ -89,7 +91,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
     return self;
 }
 
-//TODO check using of migrateDB method when multithreaded
+//JTODO check using of migrateDB method when multithreaded
 - (void)migrateDB
 {
     NSDictionary *currentDbInfo = [[JFFDBInfo sharedDBInfo] currentDbInfo];
