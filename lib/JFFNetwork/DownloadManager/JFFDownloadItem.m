@@ -20,7 +20,7 @@ static JFFMutableAssignArray* downloadItems_ = nil;
 long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 //TODO move library to separate repository
-@interface JFFDownloadItem () < JFFTrafficCalculatorDelegate >
+@interface JFFDownloadItem () <JFFTrafficCalculatorDelegate>
 
 @property ( nonatomic ) NSURL* url;
 @property ( nonatomic ) NSString* localFilePath;
@@ -115,25 +115,24 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
    return ( self.fileLength == NSURLResponseUnknownLength ) ? 0.f : (float) self.downloadedFileLength / self.fileLength;
 }
 
-+(BOOL)checkNotAlreadyUsedLocalPath:( NSString* )local_file_path_
-                                url:( NSURL* )url_
-                              error:( NSError** )outError_
++ (BOOL)checkNotAlreadyUsedLocalPath:(NSString *)localFilePath
+                                 url:(NSURL *)url
+                               error:(NSError **)outError
 {
-    BOOL result_ = [downloadItems_ firstMatch:^BOOL(id object_)
-    {
-        JFFDownloadItem* item_ = object_;
-        return ![ item_.url isEqual: url_ ]
-            && [ item_.localFilePath isEqualToString: local_file_path_ ];
+    BOOL result = [downloadItems_ firstMatch:^BOOL(id object) {
+        JFFDownloadItem *item_ = object;
+        return ![item_.url isEqual:url]
+            && [ item_.localFilePath isEqualToString:localFilePath];
     }] == nil;
     
-    if (!result_ && outError_) {
+    if (!result && outError) {
         
         //TODO use NSLocalizedString here
-        static NSString* const errorDescription_ = @"Invalid arguments. This \"local path\" used for another url";
-        *outError_ = [JFFError newErrorWithDescription:errorDescription_];
+        static NSString *const errorDescription = @"Invalid arguments. This \"local path\" used for another url";
+        *outError = [JFFError newErrorWithDescription:errorDescription];
     }
     
-    return result_;
+    return result;
 }
 
 +(id)downloadItemWithURL:( NSURL* )url_

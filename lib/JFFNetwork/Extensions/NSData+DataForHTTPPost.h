@@ -5,9 +5,13 @@
 
 @interface NSData (DataForHTTPPost)
 
-+ (NSData *)dataForHTTPPostWithData:(NSData *)data andFileName:(NSString *)fileName andParameterName:(NSString *)parameter;
++ (NSData *)dataForHTTPPostWithData:(NSData *)data
+                        andFileName:(NSString *)fileName
+                   andParameterName:(NSString *)parameter;
 
-+ (NSData *)mutableDataForHTTPPostWithData:(NSData *)data andFileName:(NSString *)fileName andParameterName:(NSString *)parameter;
++ (NSData *)mutableDataForHTTPPostWithData:(NSData *)data
+                               andFileName:(NSString *)fileName
+                          andParameterName:(NSString *)parameter;
 
 - (NSData *)dataForHTTPPostByAppendingParameters:(NSDictionary *)parameters;
 

@@ -17,69 +17,68 @@
 //TODO: Test Connection with runloops!
 -(void)dealloc
 {
-    [ self cancel ];
+    [self cancel];
 }
 
 - (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
     NSParameterAssert(params);
-
+    
     self = [super init];
-
+    
     if (self) {
         self->_params = params;
-
+        
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
         if ( ![ self->_params.url isFileURL ] )
 #endif
         {
             NSMutableURLRequest* request_ = [NSMutableURLRequest mutableURLRequestWithParams:params];
-
+            
             NSURLConnection* nativeConnection_ = [ [ NSURLConnection alloc ] initWithRequest: request_
                                                                                     delegate: self
                                                                             startImmediately: NO ];
             
             //mm: Create runloop if need. Neccessary for call NSURLConnectionDelegate
             NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-            if (runLoop != [NSRunLoop mainRunLoop])
-            {
+            if (runLoop != [NSRunLoop mainRunLoop]) {
                 self->_connectRunLoop = runLoop;
                 [nativeConnection_ scheduleInRunLoop:runLoop forMode: NSDefaultRunLoopMode];
             }
-
+            
             self->_nativeConnection = nativeConnection_;
         }
     }
-
+    
     return self;
 }
 
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
 - (void)processLocalFileWithPath:(NSString *)path
 {
-    NSError* error;
+    NSError *error;
     //STODO read file in separate thread
     //STODO read big files by chunks
     NSData *data_ = [[NSData alloc]initWithContentsOfFile:path
                                                   options:0
                                                     error:&error];
-
+    
     if (error) {
         [self connection:self->_nativeConnection
         didFailWithError:error];
     } else {
-        NSHTTPURLResponse* response_ =
+        NSHTTPURLResponse *response =
         [ [ NSHTTPURLResponse alloc ] initWithURL: self->_params.url
                                        statusCode: 200
                                       HTTPVersion: @"HTTP/1.1"
                                      headerFields: nil ];
-        [ self connection: self->_nativeConnection
-       didReceiveResponse: response_ ];
-
-        [ self connection: self->_nativeConnection
-           didReceiveData: data_ ];
-
-        [ self connectionDidFinishLoading: self->_nativeConnection ];
+        [self connection:self->_nativeConnection
+      didReceiveResponse:response];
+        
+        [self connection:self->_nativeConnection
+          didReceiveData:data_];
+        
+        [self connectionDidFinishLoading:self->_nativeConnection];
     }
 }
 #endif
@@ -121,44 +120,39 @@
 
 #pragma mark -
 #pragma mark NSUrlConnectionDelegate
--(BOOL)assertConnectionMismatch:( NSURLConnection* )connection_
+- (BOOL)assertConnectionMismatch:(NSURLConnection *)connection
 {
-    BOOL isConnectionMismatch_ = ( connection_ != _nativeConnection );
-    if ( isConnectionMismatch_ )
-    {
+    BOOL isConnectionMismatch = (connection != _nativeConnection);
+    if (isConnectionMismatch) {
         NSLog( @"JNNsUrlConnection : connection mismatch" );
         NSAssert( NO, @"JNNsUrlConnection : connection mismatch" );
         return NO;
     }
-
+    
     return YES;
 }
 
--(void)connection:( NSURLConnection* )connection_
-didReceiveResponse:( NSHTTPURLResponse* )response_
+- (void)connection:(NSURLConnection *)connection
+didReceiveResponse:(NSHTTPURLResponse *)response
 {
-    if ( ![ self assertConnectionMismatch: connection_ ] )
-    {
+    if (![self assertConnectionMismatch:connection]) {
         return;
     }
-
-    if ( nil != self.didReceiveResponseBlock )
-    {
-        self.didReceiveResponseBlock( response_ );
+    
+    if (nil != self.didReceiveResponseBlock) {
+        self.didReceiveResponseBlock(response);
     }
 }
 
--(void)connection:( NSURLConnection* )connection_
-   didReceiveData:( NSData* )chunk_
+- (void)connection:(NSURLConnection *)connection
+    didReceiveData:(NSData *)chunk
 {
-    if ( ![ self assertConnectionMismatch: connection_ ] )
-    {
+    if (![self assertConnectionMismatch:connection]) {
         return;
     }
-
-    if ( nil != self.didReceiveDataBlock )
-    {
-        self.didReceiveDataBlock( chunk_ );
+    
+    if (nil != self.didReceiveDataBlock) {
+        self.didReceiveDataBlock(chunk);
     }
 }
 
@@ -179,11 +173,10 @@ didReceiveResponse:( NSHTTPURLResponse* )response_
 -(void)connection:( NSURLConnection* )connection_
  didFailWithError:( NSError* )error_
 {
-    if ( ![ self assertConnectionMismatch: connection_ ] )
-    {
+    if ( ![ self assertConnectionMismatch: connection_ ] ) {
         return;
     }
-
+    
     if ( nil != self.didFinishLoadingBlock )
     {
         self.didFinishLoadingBlock( error_ );

@@ -29,7 +29,7 @@ static void readStreamCallback( CFReadStreamRef stream_
                                , CFStreamEventType event_
                                , void* selfContext_ )
 {
-    __unsafe_unretained JFFURLConnection* self_ = (__bridge JFFURLConnection*)selfContext_;
+    __unsafe_unretained JFFURLConnection* weakSelf = (__bridge JFFURLConnection*)selfContext_;
     switch( event_ )
     {
         case kCFStreamEventNone:
@@ -42,13 +42,13 @@ static void readStreamCallback( CFReadStreamRef stream_
         }
         case kCFStreamEventHasBytesAvailable:
         {
-            [ self_ handleResponseForReadStream: stream_ ];
+            [ weakSelf handleResponseForReadStream: stream_ ];
 
             UInt8 buffer_[ kJNMaxBufferSize ];
             CFIndex bytesRead_ = CFReadStreamRead( stream_, buffer_, kJNMaxBufferSize );
             if ( bytesRead_ > 0 )
             {
-                [ self_ handleData: buffer_
+                [ weakSelf handleData: buffer_
                             length: bytesRead_ ];
             }
             break;
@@ -59,21 +59,21 @@ static void readStreamCallback( CFReadStreamRef stream_
         }
         case kCFStreamEventErrorOccurred:
         {
-            [ self_ handleResponseForReadStream: stream_ ];
+            [ weakSelf handleResponseForReadStream: stream_ ];
             
             CFStreamError error_ = CFReadStreamGetError( stream_ );
             NSString* errorDescription_ = [[NSString alloc] initWithFormat:@"CFStreamError domain: %ld", error_.domain];
             
             //TODO create separate error class
-            [ self_ handleFinish:[JFFError newErrorWithDescription:errorDescription_
-                                                              code:error_.error]];
+            [weakSelf handleFinish:[JFFError newErrorWithDescription:errorDescription_
+                                                                code:error_.error]];
             break;
         }
         case kCFStreamEventEndEncountered:
         {
-            [ self_ handleResponseForReadStream: stream_ ];
-
-            [ self_ handleFinish: nil ];
+            [ weakSelf handleResponseForReadStream: stream_ ];
+            
+            [ weakSelf handleFinish: nil ];
             break;
         }
     }

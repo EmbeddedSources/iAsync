@@ -4,7 +4,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFURLConnectionParams *copy = [[[self class]allocWithZone:zone]init];
+    JFFURLConnectionParams *copy = [[[self class] allocWithZone:zone] init];
     
     if (copy) {
         copy->_url                 = [self->_url      copyWithZone:zone];
@@ -19,6 +19,12 @@
     }
     
     return copy;
+}
+
+- (NSString *)description
+{
+    static NSString *format = @"<JFFURLConnectionParams url:%@, httpBody:%@, headers:%@, useLiveConnection:%d>";
+    return [[NSString alloc] initWithFormat:format, _url, [_httpBody toString], _headers, _useLiveConnection];
 }
 
 @end

@@ -53,9 +53,11 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
         JFFAsyncOperation loader = privateGenericChunkedURLResponseLoader(params, responseAnalyzer);
         
-        NSMutableData* responseData = [NSMutableData new];
+        NSMutableData *responseData = [NSMutableData new];
         progressCallback = [progressCallback copy];
         JFFAsyncOperationProgressHandler dataProgressCallback = ^void(id progressInfo) {
+            assert([progressInfo isKindOfClass:[NSData class]]);
+            [responseData appendData:progressInfo];
             if (progressCallback)
                 progressCallback(progressInfo);
         };
@@ -64,6 +66,11 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
         if (doneCallback) {
             doneCallback = [doneCallback copy];
             doneCallbackWrapper = ^void(id result, NSError *error) {
+                
+                if ([responseData length] == 0 && !error) {
+                    NSLog(@"!!!WARNING!!! request with params: %@ got an empty reponse",
+                          params);
+                }
                 doneCallback(result?responseData:nil, error);
             };
         }
