@@ -47,14 +47,15 @@
         
         __block NSError *error = nil;
         id result = self.operationBlock(&error);
-        NSParameterAssert(result);
+        NSParameterAssert((result || error) && !(result && error));
         
         [[JFFCoreDataProvider sharedCoreDataProvider] saveMediationContext];
         
         [mainContext performBlock:^{
             
             id resultInMainContext = [result objectInManagedObjectContext:mainContext];
-            NSParameterAssert(resultInMainContext);
+            if (result)
+                NSParameterAssert(resultInMainContext);
             
             handler(resultInMainContext, error);
         }];

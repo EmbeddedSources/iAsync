@@ -154,13 +154,21 @@
 
 - (NSManagedObjectContext *)mediateRootContext
 {
-    if (!_mediateRootContext) {
+    if (_mediateRootContext)
+        return _mediateRootContext;
+    
+    @synchronized(self) {
+        
+        if (_mediateRootContext)
+            return _mediateRootContext;
+        
         _mediateRootContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         _mediateRootContext.parentContext = self.contextForSavingInStore;
         NSMergePolicy *mergePolicy = [[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyStoreTrumpMergePolicyType];
         _mediateRootContext.mergePolicy = mergePolicy;
+        
+        return _mediateRootContext;
     }
-    return _mediateRootContext;
 }
 
 - (void)saveMediationContext
@@ -179,16 +187,18 @@
 
 #pragma mark - Context for saving
 
-//- (NSManagedObjectContext *)
-
 - (NSManagedObjectContext *)contextForSavingInStore
 {
     if (self->_contextForSavingInStore != nil)
         return self->_contextForSavingInStore;
     
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    
-    if (coordinator != nil) {
+    @synchronized(self) {
+        
+        if (self->_contextForSavingInStore != nil)
+            return self->_contextForSavingInStore;
+        
+        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+        
         self->_contextForSavingInStore = [[NSManagedObjectContext alloc] initWithConcurrencyType:(NSPrivateQueueConcurrencyType)];
         [self->_contextForSavingInStore setPersistentStoreCoordinator: coordinator];
         
