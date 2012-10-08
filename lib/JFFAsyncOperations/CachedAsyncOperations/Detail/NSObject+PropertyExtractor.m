@@ -23,7 +23,7 @@ static char propertyDataPropertyKey;
     return [data objectForKey: propertyPath.key];
 }
 
-//TODO test
+//JTODO test
 - (void)removePropertyForPropertPath:(JFFPropertyPath *)propertyPath
 {
     if (propertyPath.key) {

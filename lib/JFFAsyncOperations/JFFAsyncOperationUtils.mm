@@ -37,7 +37,7 @@ static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue(JFFSyncO
     
     return asyncOperationWithSyncOperationWithProgressBlockAndQueue(progressLoadDataBlock,
                                                                     queueName,
-                                                                    barrier );
+                                                                    barrier);
 }
 
 JFFAsyncOperation asyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock, const char *queueName)
@@ -47,13 +47,15 @@ JFFAsyncOperation asyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadD
                                                           NO);
 }
 
-JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock, const char *queueName)
+JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
+                                                                 const char *queueName)
 {
     return privateAsyncOperationWithSyncOperationAndQueue(loadDataBlock,
                                                           queueName,
                                                           YES);
 }
 
+//TODO check using of all asyncOperationWithSyncOperation (without queue name) or remove asyncOperationWithSyncOperation at all
 JFFAsyncOperation asyncOperationWithSyncOperation(JFFSyncOperation loadDataBlock)
 {
     return asyncOperationWithSyncOperationAndQueue(loadDataBlock, nil);

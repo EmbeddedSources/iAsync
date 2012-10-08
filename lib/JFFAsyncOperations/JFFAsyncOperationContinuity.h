@@ -75,7 +75,7 @@ JFFAsyncOperationBinder binderAsSequenceOfBindersArray(NSArray *binders);
 
 ///////////////////////// AUTO REPEAT CIRCLE ////////////////////////
 
-    //TODO test it
+    //JTODO test it
     JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation loader,
                                            JFFResultPredicateBlock continuePredicate,
                                            NSTimeInterval delay,

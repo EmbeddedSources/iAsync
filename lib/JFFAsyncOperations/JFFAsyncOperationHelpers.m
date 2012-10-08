@@ -64,7 +64,7 @@ JFFAsyncOperation asyncOperationWithError(NSError *error)
     };
 }
 
-JFFAsyncOperation currentQeueAsyncOpWithResult( JFFSyncOperation block )
+JFFAsyncOperation asyncOperationWithSyncOperationInCurrentQueue( JFFSyncOperation block )
 {
     assert( block );
     block = [block copy];

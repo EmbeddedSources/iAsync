@@ -17,7 +17,7 @@ extern "C" {
 JFFAsyncOperation asyncOperationWithResult(id result);
 JFFAsyncOperation asyncOperationWithError(NSError *error);
 
-JFFAsyncOperation currentQeueAsyncOpWithResult(JFFSyncOperation block);
+JFFAsyncOperation asyncOperationWithSyncOperationInCurrentQueue(JFFSyncOperation block);
     
 //finish_callback_block_ called before loader_'s JFFDidFinishAsyncOperationHandler
 JFFAsyncOperation asyncOperationWithFinishCallbackBlock(JFFAsyncOperation loader,

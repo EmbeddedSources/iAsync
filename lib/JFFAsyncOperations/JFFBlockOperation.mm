@@ -35,8 +35,7 @@
 {
     self = [ super init ];
     
-    if ( self )
-    {
+    if (self) {
         self.loadDataBlock    = loadDataBlock;
         self.didLoadDataBlock = didLoadDataBlock;
         self.progressBlock    = progressBlock;
@@ -90,12 +89,13 @@
 - (void)performBackgroundOperationInQueue:(dispatch_queue_t)queue
                             loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
 {
-    void (*dispatch_async_method)( dispatch_queue_t, dispatch_block_t ) = self->_barrier
+    void (*dispatchAsyncMethod)(dispatch_queue_t, dispatch_block_t) = self->_barrier
     ? &dispatch_barrier_async
     : &dispatch_async;
     
-    dispatch_async_method(queue, ^
-    {
+    //static int val;
+    //NSLog(@"dispatchAsyncMethod+: %d", ++val);
+    dispatchAsyncMethod(queue, ^{
         if ( self.finishedOrCanceled )
             return;
         
@@ -121,53 +121,54 @@
         }
         
         dispatch_async( self->_currentQueue, ^ {
+            //NSLog(@"dispatchAsyncMethod+: %d", --val);
             [self didFinishOperationWithResult:opResult error:error];
         });
     });
 }
 
 + (id)performOperationWithQueueName:(const char*)queueName
-                      loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock_
-                   didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock_
-                      progressBlock:(JFFAsyncOperationProgressHandler)progressBlock_
-                            barrier:(BOOL )barrier_
+                      loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
+                   didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
+                      progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
+                            barrier:(BOOL)barrier
 {
-    NSParameterAssert(loadDataBlock_   );
-    NSParameterAssert(didLoadDataBlock_);
+    NSParameterAssert(loadDataBlock   );
+    NSParameterAssert(didLoadDataBlock);
     
-    dispatch_queue_t currentQueue_ = dispatch_get_current_queue();
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
     
-    dispatch_queue_t queue_ = NULL;
+    dispatch_queue_t queue = NULL;
     if (queueName != NULL && strlen(queueName) != 0) {
-        queue_ = dispatch_queue_get_or_create( queueName
-                                              , DISPATCH_QUEUE_CONCURRENT );
+        queue = dispatch_queue_get_or_create(queueName,
+                                             DISPATCH_QUEUE_CONCURRENT);
     } else {
-        queue_ = dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 );
+        queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     }
     
-    NSAssert( currentQueue_ != queue_, @"Invalid run queue" );
+    NSAssert(currentQueue != queue, @"Invalid run queue");
     
-    JFFBlockOperation* result_ = [ [ self alloc ] initWithLoadDataBlock: loadDataBlock_
-                                                       didLoadDataBlock: didLoadDataBlock_
-                                                          progressBlock: progressBlock_
-                                                           currentQueue: currentQueue_
-                                                                barrier: barrier_ ];
-
-    [ result_ performBackgroundOperationInQueue: queue_
-                                  loadDataBlock: loadDataBlock_ ];
-
-    return result_;
+    JFFBlockOperation *result = [[self alloc] initWithLoadDataBlock:loadDataBlock
+                                                   didLoadDataBlock:didLoadDataBlock
+                                                      progressBlock:progressBlock
+                                                       currentQueue:currentQueue
+                                                            barrier:barrier];
+    
+    [result performBackgroundOperationInQueue:queue
+                                loadDataBlock:loadDataBlock];
+    
+    return result;
 }
 
-+(id)performOperationWithQueueName:( const char* )queueName_
-                     loadDataBlock:( JFFSyncOperationWithProgress )loadDataBlock_
-                  didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didLoadDataBlock_
++ (id)performOperationWithQueueName:(const char *)queueName
+                      loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
+                   didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
 {
-    return [ self performOperationWithQueueName: queueName_
-                                  loadDataBlock: loadDataBlock_
-                               didLoadDataBlock: didLoadDataBlock_
-                                  progressBlock: nil
-                                        barrier: NO ];
+    return [self performOperationWithQueueName:queueName
+                                 loadDataBlock:loadDataBlock
+                              didLoadDataBlock:didLoadDataBlock
+                                 progressBlock:nil
+                                       barrier:NO];
 }
 
 @end

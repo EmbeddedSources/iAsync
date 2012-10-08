@@ -227,7 +227,7 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
                                                   nativeLoader,
                                                   contextLoaders);
         
-        // TODO check native loader no within balancer !!!
+        // JTODO check native loader no within balancer !!!
         JFFCancelAsyncOperation cancelBlock = nativeLoader(wrappedProgressCallback,
                                                             wrappedCancelCallback,
                                                             wrappedDoneCallback);
@@ -259,7 +259,7 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
 
 static BOOL canPeformAsyncOperationForContext(JFFContextLoaders *contextLoaders )
 {
-    // TODO check condition yet
+    // JTODO check condition yet
     BOOL isActiveContext = [sharedBalancer().activeContextName isEqualToString:contextLoaders.name];
     return ((isActiveContext && contextLoaders.activeLoadersNumber < maxOperationCount )
             || 0 == globalActiveNumber )

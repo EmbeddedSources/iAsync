@@ -22,8 +22,8 @@
 
 @end
 
-//TODO test
-//TODO rename to buildAsyncOperationWithAdapterFactory
+//JTODO test
+//JTODO rename to buildAsyncOperationWithAdapterFactory
 JFFAsyncOperation buildAsyncOperationWithInterface(JFFAsyncOperationInstanceBuilder builder)
 {
     builder = [builder copy];

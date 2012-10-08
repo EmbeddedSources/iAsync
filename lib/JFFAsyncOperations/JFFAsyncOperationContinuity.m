@@ -39,14 +39,12 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
     if (!secondBinder)
         return firstBinder;
     
-    return ^JFFAsyncOperation(id bindResult)
-    {
+    return ^JFFAsyncOperation(id bindResult) {
         JFFAsyncOperation firstLoader = firstBinder(bindResult);
         assert(firstLoader);//expected loader
         return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                         JFFCancelAsyncOperationHandler cancelCallback,
-                                        JFFDidFinishAsyncOperationHandler doneCallback)
-        {
+                                        JFFDidFinishAsyncOperationHandler doneCallback) {
             __block JFFCancelAsyncOperation cancelBlockHolder;
             
             progressCallback = [progressCallback copy];
@@ -54,27 +52,22 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
             
             JFFCancelAsyncOperation firstCancel = firstLoader(progressCallback,
                                                               cancelCallback,
-                                                              ^void(id result, NSError *error)
-            {
-                if (error)
-                {
+                                                              ^void(id result, NSError *error) {
+                if (error) {
                     if (doneCallback)
                         doneCallback(nil, error);
-                }
-                else
-                {
+                } else {
                     JFFAsyncOperation secondLoader = secondBinder(result);
                     assert(secondLoader);//result loader should not be nil
                     cancelBlockHolder = secondLoader(progressCallback,
                                                      cancelCallback,
                                                      doneCallback);
                 }
-            } );
+            });
             if (!cancelBlockHolder)
                 cancelBlockHolder = firstCancel;
             
-            return ^(BOOL canceled)
-            {
+            return ^(BOOL canceled) {
                 if (!cancelBlockHolder)
                     return;
                 cancelBlockHolder(canceled);
@@ -89,8 +82,7 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
                                             ...)
 {
     firstLoader = [firstLoader copy];
-    JFFAsyncOperationBinder firstBlock = ^JFFAsyncOperation(id result)
-    {
+    JFFAsyncOperationBinder firstBlock = ^JFFAsyncOperation(id result) {
         return firstLoader;
     };
     
@@ -98,11 +90,9 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
     va_start(args, secondLoader);
     for (JFFAsyncOperation secondBlock = secondLoader;
          secondBlock != nil;
-         secondBlock = va_arg(args, JFFAsyncOperation))
-    {
+         secondBlock = va_arg(args, JFFAsyncOperation)) {
         secondBlock = [secondBlock copy];
-        JFFAsyncOperationBinder secondBlockBinder = ^JFFAsyncOperation(id result)
-        {
+        JFFAsyncOperationBinder secondBlockBinder = ^JFFAsyncOperation(id result) {
             return secondBlock;
         };
         firstBlock = bindSequenceOfBindersPair(firstBlock, secondBlockBinder);
@@ -115,11 +105,9 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
 JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders)
 {
     assert(loaders.lastObject); //should not be empty
-    loaders = [loaders map: ^id(id object)
-    {
+    loaders = [loaders map: ^id(id object) {
         JFFAsyncOperation loader = [object copy];
-        return ^JFFAsyncOperation( id result_ )
-        {
+        return ^JFFAsyncOperation(id result) {
             return loader;
         };
     } ];
@@ -132,8 +120,7 @@ JFFAsyncOperationBinder binderAsSequenceOfBinders(JFFAsyncOperationBinder firstB
     va_start(args, firstBinder);
     for (JFFAsyncOperationBinder secondBinder = va_arg(args, JFFAsyncOperationBinder);
          secondBinder != nil;
-         secondBinder = va_arg(args, JFFAsyncOperationBinder))
-    {
+         secondBinder = va_arg(args, JFFAsyncOperationBinder)) {
         firstBinder = bindSequenceOfBindersPair(firstBinder, secondBinder);
     }
     va_end(args);
@@ -180,14 +167,12 @@ JFFAsyncOperation bindSequenceOfAsyncOperationsArray(JFFAsyncOperation firstLoad
     NSMutableArray *binders = [[NSMutableArray alloc]initWithCapacity:size];
     
     firstLoader = [firstLoader copy];
-    JFFAsyncOperationBinder firstBinder = ^JFFAsyncOperation(id nilResult)
-    {
+    JFFAsyncOperationBinder firstBinder = ^JFFAsyncOperation(id nilResult) {
         return firstLoader;
     };
     [binders addObject:[firstBinder copy]];
     
-    for (JFFAsyncOperation binder in loadersBinders)
-    {
+    for (JFFAsyncOperation binder in loadersBinders) {
         [binders addObject:[binder copy]];
     }
     
@@ -211,23 +196,18 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBin
         
         return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                         JFFCancelAsyncOperationHandler cancelCallback,
-                                        JFFDidFinishAsyncOperationHandler doneCallback)
-        {
+                                        JFFDidFinishAsyncOperationHandler doneCallback) {
             __block JFFCancelAsyncOperation cancelBlockHolder;
             
             doneCallback = [doneCallback copy];
             
             JFFCancelAsyncOperation firstCancel = firstLoader(progressCallback,
                                                               cancelCallback,
-                                                              ^void(id result, NSError *error)
-            {
-                if (error)
-                {
+                                                              ^void(id result, NSError *error) {
+                if (error) {
                     JFFAsyncOperation secondLoader = secondBinder(error);
                     cancelBlockHolder = secondLoader(progressCallback, cancelCallback, doneCallback);
-                }
-                else
-                {
+                } else {
                     if (doneCallback)
                         doneCallback(result, nil);
                 }
@@ -235,8 +215,7 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBin
             if (!cancelBlockHolder)
                 cancelBlockHolder = firstCancel;
             
-            return ^(BOOL canceled)
-            {
+            return ^(BOOL canceled) {
                 if (!cancelBlockHolder)
                     return;
                 cancelBlockHolder(canceled);
@@ -250,20 +229,17 @@ JFFAsyncOperation trySequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
                                                JFFAsyncOperation secondLoader, ...)
 {
     firstLoader = [firstLoader copy];
-    JFFAsyncOperationBinder firstBlock = ^JFFAsyncOperation(id data)
-    {
+    JFFAsyncOperationBinder firstBlock = ^JFFAsyncOperation(id data) {
         return firstLoader;
     };
     
     va_list args;
     va_start(args, secondLoader);
-    for ( JFFAsyncOperation secondBlock = secondLoader;
+    for (JFFAsyncOperation secondBlock = secondLoader;
          secondBlock != nil;
-         secondBlock = va_arg(args, JFFAsyncOperation) )
-    {
+         secondBlock = va_arg(args, JFFAsyncOperation)) {
         secondBlock = [secondBlock copy];
-        JFFAsyncOperationBinder secondBlockBinder = ^JFFAsyncOperation(id result)
-        {
+        JFFAsyncOperationBinder secondBlockBinder = ^JFFAsyncOperation(id result) {
             return secondBlock;
         };
         firstBlock = bindTrySequenceOfBindersPair(firstBlock, secondBlockBinder);
@@ -291,8 +267,7 @@ JFFAsyncOperation bindTrySequenceOfAsyncOperations(JFFAsyncOperation firstLoader
                                                    JFFAsyncOperationBinder secondLoaderBinder, ...)
 {
     firstLoader = [firstLoader copy];
-    JFFAsyncOperationBinder firstBlock = ^JFFAsyncOperation(id data)
-    {
+    JFFAsyncOperationBinder firstBlock = ^JFFAsyncOperation(id data) {
         return firstLoader;
     };
     
@@ -300,8 +275,7 @@ JFFAsyncOperation bindTrySequenceOfAsyncOperations(JFFAsyncOperation firstLoader
     va_start(args, secondLoaderBinder);
     for ( JFFAsyncOperationBinder secondBlockBinder = secondLoaderBinder;
          secondBlockBinder != nil;
-         secondBlockBinder = va_arg(args, JFFAsyncOperationBinder))
-    {
+         secondBlockBinder = va_arg(args, JFFAsyncOperationBinder)) {
         firstBlock = bindTrySequenceOfBindersPair(firstBlock, secondBlockBinder);
     }
     va_end(args);
@@ -314,14 +288,12 @@ JFFAsyncOperation bindTrySequenceOfAsyncOperationsArray(JFFAsyncOperation firstL
     NSMutableArray *binders = [[NSMutableArray alloc]initWithCapacity:[loadersBinders count]];
     
     firstLoader = [firstLoader copy];
-    JFFAsyncOperationBinder firstBinder = ^JFFAsyncOperation(id data)
-    {
+    JFFAsyncOperationBinder firstBinder = ^JFFAsyncOperation(id data) {
         return firstLoader;
     };
     [binders addObject:[firstBinder copy]];
     
-    for (JFFAsyncOperation binder in loadersBinders)
-    {
+    for (JFFAsyncOperation binder in loadersBinders) {
         [binders addObject:[binder copy]];
     }
     
@@ -336,8 +308,7 @@ static void notifyGroupResult(JFFDidFinishAsyncOperationHandler doneCallback,
         return;
     
     NSMutableArray *finalResult;
-    if (!error)
-    {
+    if (!error) {
         NSArray *firstResult = complexResult[0];
         finalResult = [[NSMutableArray alloc]initWithCapacity:[firstResult count] + 1];
         [finalResult addObjectsFromArray:firstResult];
@@ -359,8 +330,7 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         __block BOOL loaded = NO;
         __block NSError *errorHolder;
         
@@ -369,22 +339,18 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
         doneCallback = [doneCallback copy];
         
         JFFDidFinishAsyncOperationHandler (^makeResultHandler)(NSUInteger) =
-            ^JFFDidFinishAsyncOperationHandler(NSUInteger index)
-        {
-            return ^void(id result, NSError *error)
-            {
+            ^JFFDidFinishAsyncOperationHandler(NSUInteger index) {
+            return ^void(id result, NSError *error) {
                 if (result)
                     complexResult[index] = result;
                 
-                if (loaded)
-                {
+                if (loaded) {
                     error = error?error:errorHolder;
                     
                     if (result)
                         [error.lazyResultOwnerships addObject:result];
                     
-                    if (errorHolder && error != errorHolder && errorHolder.resultOwnerships)
-                    {
+                    if (errorHolder && error != errorHolder && errorHolder.resultOwnerships) {
                         [error.lazyResultOwnerships addObject:errorHolder.resultOwnerships];
                         errorHolder.resultOwnerships = nil;
                     }
@@ -405,12 +371,9 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
         
         cancelCallback = [cancelCallback copy];
         JFFCancelAsyncOperationHandler (^makeCancelHandler)(JFFCancelAsyncOperationBlockHolder *) =
-            ^(JFFCancelAsyncOperationBlockHolder *cancelHolder)
-        {
-            return ^void(BOOL canceled)
-            {
-                if (!blockCanceled)
-                {
+            ^(JFFCancelAsyncOperationBlockHolder *cancelHolder) {
+            return ^void(BOOL canceled) {
+                if (!blockCanceled) {
                     blockCanceled = YES;
                     cancelHolder.onceCancelBlock(canceled);
                     if (cancelCallback)
@@ -421,11 +384,9 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
         
         JFFDidFinishAsyncOperationHandler (^makeFinishHandler)(JFFCancelAsyncOperationBlockHolder*, NSUInteger) =
             ^JFFDidFinishAsyncOperationHandler(JFFCancelAsyncOperationBlockHolder *cancelHolder,
-                                               NSUInteger index)
-        {
+                                               NSUInteger index) {
             JFFDidFinishAsyncOperationHandler handler = makeResultHandler(index);
-            return ^void(id result, NSError *error )
-            {
+            return ^void(id result, NSError *error ) {
                 cancelHolder.cancelBlock = nil;
                 handler(result, error );
             };
@@ -441,10 +402,8 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
                                                  makeCancelHandler(cancelHolder1),
                                                  makeFinishHandler(cancelHolder2, 1));
         
-        return ^void(BOOL cancel)
-        {
-            if (!blockCanceled)
-            {
+        return ^void(BOOL cancel) {
+            if (!blockCanceled) {
                 blockCanceled = YES;
                 cancelHolder1.onceCancelBlock(cancel);
                 cancelHolder2.onceCancelBlock(cancel);
@@ -457,8 +416,7 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
 
 static JFFAsyncOperation resultToArrayForLoader(JFFAsyncOperation loader)
 {
-    JFFAnalyzer analyzer = ^(id result, NSError **error)
-    {
+    JFFAnalyzer analyzer = ^(id result, NSError **error) {
         return @[result];
     };
     JFFAsyncOperationBinder secondLoaderBinder = asyncOperationBinderWithAnalyzer(analyzer);
@@ -473,8 +431,7 @@ static JFFAsyncOperation MergeGroupLoaders(MergeTwoLoadersPtr merger, NSArray *b
     JFFAsyncOperation firstBlock = blocks[0];
     JFFAsyncOperation arrayFirstBlock = resultToArrayForLoader(firstBlock);
     
-    for (NSUInteger index = 1; index < [blocks count]; ++index)
-    {
+    for (NSUInteger index = 1; index < [blocks count]; ++index) {
         arrayFirstBlock = merger(arrayFirstBlock, blocks[index]);
     }
     
@@ -494,8 +451,7 @@ JFFAsyncOperation groupOfAsyncOperations(JFFAsyncOperation firstLoader, ...)
     va_start(args, firstLoader);
     for (JFFAsyncOperation nextBlock = firstLoader;
          nextBlock != nil;
-         nextBlock = va_arg(args, JFFAsyncOperation))
-    {
+         nextBlock = va_arg(args, JFFAsyncOperation)) {
         [loaders addObject:[nextBlock copy]];
     }
     va_end(args);
@@ -507,8 +463,7 @@ static JFFDidFinishAsyncOperationHandler cancelSafeResultBlock(JFFDidFinishAsync
                                                                JFFCancelAsyncOperationBlockHolder *cancelHolder)
 {
     resultBlock = [resultBlock copy];
-    return ^void(id result, NSError *error)
-    {
+    return ^void(id result, NSError *error) {
         cancelHolder.cancelBlock = nil;
         resultBlock(result, error);
     };
@@ -527,16 +482,14 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOper
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         __block BOOL loaded = NO;
         
         JFFCancelAsyncOperationBlockHolder *cancelHolder1 = [JFFCancelAsyncOperationBlockHolder new];
         JFFCancelAsyncOperationBlockHolder *cancelHolder2 = [JFFCancelAsyncOperationBlockHolder new];
         
         cancelCallback = [cancelCallback copy];
-        __block JFFCancelAsyncOperationHandler cancelCallbackHolder = [^(BOOL canceled)
-        {
+        __block JFFCancelAsyncOperationHandler cancelCallbackHolder = [^(BOOL canceled) {
             if (cancelCallback)
                 cancelCallback(canceled);
         }copy];// "cancelCallbackHolder" used as flag for done
@@ -545,19 +498,15 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOper
         
         doneCallback = [doneCallback copy];
         JFFDidFinishAsyncOperationHandler (^makeResultHandler)(NSUInteger) =
-            ^JFFDidFinishAsyncOperationHandler(NSUInteger index)
-        {
-            return ^void(id result, NSError *error)
-            {
+            ^JFFDidFinishAsyncOperationHandler(NSUInteger index) {
+            return ^void(id result, NSError *error) {
                 if (result)
                     complexResult[index] = result;
                 BOOL firstError = error && cancelCallbackHolder;
-                if (loaded || firstError)
-                {
+                if (loaded || firstError) {
                     cancelCallbackHolder = nil;
                     
-                    if (firstError)
-                    {
+                    if (firstError) {
                         cancelHolder1.onceCancelBlock(YES);
                         cancelHolder2.onceCancelBlock(YES);
                     }
@@ -570,15 +519,11 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOper
         };
         
         JFFCancelAsyncOperationHandler (^makeCancelCallback)(JFFCancelAsyncOperationBlockHolder *) =
-        ^(JFFCancelAsyncOperationBlockHolder *cancelHolder)
-        {
-            return ^void(BOOL canceled)
-            {
-                if (cancelCallbackHolder)
-                {
+        ^(JFFCancelAsyncOperationBlockHolder *cancelHolder) {
+            return ^void(BOOL canceled) {
+                if (cancelCallbackHolder) {
                     cancelHolder.onceCancelBlock(canceled);
-                    if (cancelCallbackHolder)
-                    {
+                    if (cancelCallbackHolder) {
                         cancelCallbackHolder(canceled);
                         cancelCallbackHolder = nil;
                     }
@@ -602,10 +547,8 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOper
         
         cancelHolder2.cancelBlock = !cancelCallbackHolder?JFFStubCancelAsyncOperationBlock:cancel2;
         
-        return ^void(BOOL cancel)
-        {
-            if (cancelCallbackHolder)
-            {
+        return ^void(BOOL cancel) {
+            if (cancelCallbackHolder) {
                 JFFCancelAsyncOperationHandler tmpCancelCallback = [cancelCallbackHolder copy];
                 cancelCallbackHolder = nil;
                 
@@ -627,8 +570,7 @@ JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperations(JFFAsyncOperation first
     va_start(args, firstLoader);
     for (JFFAsyncOperation nextBlock = firstLoader;
          nextBlock != nil;
-         nextBlock = va_arg(args, JFFAsyncOperation))
-    {
+         nextBlock = va_arg(args, JFFAsyncOperation)) {
         [loaders addObject:[nextBlock copy]];
     }
     va_end( args );
@@ -651,11 +593,9 @@ JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
     doneCallbackHook = [doneCallbackHook copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         cancelCallback = [cancelCallback copy];
-        JFFCancelAsyncOperationHandler wrappedCancelCallback = ^void(BOOL canceled)
-        {
+        JFFCancelAsyncOperationHandler wrappedCancelCallback = ^void(BOOL canceled) {
             doneCallbackHook();
             
             if (cancelCallback)
@@ -663,8 +603,7 @@ JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
         };
         
         doneCallback = [doneCallback copy];
-        JFFDidFinishAsyncOperationHandler wrappedDoneCallback = ^void(id result, NSError *error)
-        {
+        JFFDidFinishAsyncOperationHandler wrappedDoneCallback = ^void(id result, NSError *error) {
             doneCallbackHook();
             
             if (doneCallback)
@@ -687,8 +626,7 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         progressCallback = [progressCallback copy];
         cancelCallback   = [cancelCallback   copy];
         doneCallback     = [doneCallback     copy];
@@ -701,16 +639,12 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
         
         JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
                                                               NSError *error,
-                                                              JFFDidFinishAsyncOperationHandler doneCallback)
-        {
-            if (!continuePredicate(result, error) || currentLeftCount == 0)
-            {
+                                                              JFFDidFinishAsyncOperationHandler doneCallback) {
+            if (!continuePredicate(result, error) || currentLeftCount == 0) {
                 finishHookHolder = nil;
                 if (doneCallback)
                     doneCallback(result, error);
-            }
-            else
-            {
+            } else {
                 currentLeftCount = currentLeftCount > 0
                 ?currentLeftCount - 1
                 :currentLeftCount;
@@ -730,8 +664,7 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
         
         cancelBlockHolder = loader(progressCallback, cancelCallback, doneCallback);
         
-        return ^(BOOL canceled)
-        {
+        return ^(BOOL canceled) {
             finishHookHolder = nil;
             
             if (!cancelBlockHolder)
