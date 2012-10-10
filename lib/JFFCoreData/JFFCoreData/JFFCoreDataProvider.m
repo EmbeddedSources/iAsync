@@ -2,11 +2,8 @@
 
 #import "NSManagedObjectContext+SaveAsyncOperation.h"
 
-#define MINIMUM_NUMBER_OF_CHANGES_FOR_SAVING 5
-
 @interface JFFCoreDataProvider ()
 
-@property (nonatomic) NSManagedObjectContext *contextForSavingInStore;
 @property (nonatomic) NSManagedObjectContext *mediateRootContext;
 
 @property (readonly) NSManagedObjectModel *managedObjectModel;
@@ -39,9 +36,9 @@
     }
     
     //TODO create it once for thread
-    NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    managedObjectContext.parentContext = self.mediateRootContext;
-    return managedObjectContext;
+    NSManagedObjectContext *contextForCurrentThread = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    contextForCurrentThread.parentContext = self.mediateRootContext;
+    return contextForCurrentThread;
 }
 
 - (NSManagedObjectContext *)contextForMainThread
@@ -89,7 +86,7 @@
 - (NSPersistentStoreCoordinator *)newPersistentStoreCoordinator
 {
     NSURL *documentsStoreURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Wishdates.sqlite"];
-    NSError *error = nil;
+    NSError *error;
     
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     
@@ -147,7 +144,9 @@
 
 - (NSURL *)applicationDocumentsDirectory  //  returns the URL to the application's Documents directory
 {
-    return [[[NSFileManager defaultManager] URLsForDirectory: NSDocumentDirectory inDomains: NSUserDomainMask] lastObject];
+    NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                           inDomains:NSUserDomainMask];
+    return [urls lastObject];
 }
 
 #pragma mark - Mediate context
@@ -162,13 +161,16 @@
         if (_mediateRootContext)
             return _mediateRootContext;
         
-        _mediateRootContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        _mediateRootContext.parentContext = self.contextForSavingInStore;
-        NSMergePolicy *mergePolicy = [[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyStoreTrumpMergePolicyType];
-        _mediateRootContext.mergePolicy = mergePolicy;
+        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
         
-        return _mediateRootContext;
+        _mediateRootContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:(NSPrivateQueueConcurrencyType)];
+        [_mediateRootContext setPersistentStoreCoordinator: coordinator];
+        
+        NSMergePolicy *mergePolicy = [[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyStoreTrumpMergePolicyType];
+        [_mediateRootContext setMergePolicy:mergePolicy];
     }
+    
+    return _mediateRootContext;
 }
 
 - (void)saveMediationContext
@@ -177,53 +179,6 @@
         NSError *error = nil;
         [self.mediateRootContext save:&error];
         
-        [self saveRootContextIfNeed];
-        
-        if (error) {
-            NSLog(@"Error during saving root context: %@", error);
-        }
-    }];
-}
-
-#pragma mark - Context for saving
-
-- (NSManagedObjectContext *)contextForSavingInStore
-{
-    if (self->_contextForSavingInStore != nil)
-        return self->_contextForSavingInStore;
-    
-    @synchronized(self) {
-        
-        if (self->_contextForSavingInStore != nil)
-            return self->_contextForSavingInStore;
-        
-        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-        
-        self->_contextForSavingInStore = [[NSManagedObjectContext alloc] initWithConcurrencyType:(NSPrivateQueueConcurrencyType)];
-        [self->_contextForSavingInStore setPersistentStoreCoordinator: coordinator];
-        
-        NSMergePolicy *mergePolicy = [[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyStoreTrumpMergePolicyType];
-        [self->_contextForSavingInStore setMergePolicy:mergePolicy];
-        
-        //        self.saveRootContextTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(saveRootContextIfNeed) userInfo:nil repeats:YES];
-    }
-    
-    return self->_contextForSavingInStore;
-}
-
-- (void)saveRootContextIfNeed
-{
-    if ([self.contextForSavingInStore hasChanges]
-        && [self.contextForSavingInStore numberOfUnsavedChanges] > MINIMUM_NUMBER_OF_CHANGES_FOR_SAVING) {
-        [self saveRootContext];
-    }
-}
-
-- (void)saveRootContext
-{
-    [self.contextForSavingInStore performBlock:^ {
-        NSError *error = nil;
-        [self.contextForSavingInStore save:&error];
         if (error) {
             NSLog(@"Error during saving root context: %@", error);
         }

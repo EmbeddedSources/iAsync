@@ -1,12 +1,16 @@
 #import "NSManagedObjectContext+SaveAsyncOperation.h"
 
-#import "JFFCoreDataOperationAsyncAdapter.h"
+#import "JFFCoreDataAsyncOperationAdapter.h"
+
+#import "NSArray+ObjectInManagedObjectContext.h"
 
 @implementation NSManagedObjectContext (SaveAsyncOperation)
 
 - (JFFAsyncOperation)saveOperationLoader
 {
-    JFFSyncOperation block = ^id(NSError *__autoreleasing *outError) {
+    //TODO mm2
+    JFFCoreDataSyncOperation block = ^id<JFFObjectInManagedObjectContextProtocol>(NSManagedObjectContext *context,
+                                                                                  NSError **outError) {
         
         BOOL saved = [self save:outError];
         
@@ -15,9 +19,9 @@
             [self processPendingChanges];
         }
         
-        return saved?@YES:nil;
+        return saved?@[]:nil;
     };
-    return [JFFCoreDataOperationAsyncAdapter operationWithBlock:block];
+    return [JFFCoreDataAsyncOperationAdapter operationWithBlock:block];
 }
 
 - (NSUInteger)numberOfUnsavedChanges
@@ -25,9 +29,9 @@
 	NSManagedObjectContext *moc = self;
 	
 	NSUInteger unsavedCount = 0;
-	unsavedCount += [[moc updatedObjects] count];
+	unsavedCount += [[moc updatedObjects ] count];
 	unsavedCount += [[moc insertedObjects] count];
-	unsavedCount += [[moc deletedObjects] count];
+	unsavedCount += [[moc deletedObjects ] count];
 	
 	return unsavedCount;
 }

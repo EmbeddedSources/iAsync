@@ -1,4 +1,4 @@
-#import "JFFCoreDataOperationAsyncAdapter.h"
+#import "JFFCoreDataAsyncOperationAdapter.h"
 
 #import "JFFCoreDataProvider.h"
 
@@ -10,17 +10,15 @@
 
 @end
 
-@interface JFFCoreDataOperationAsyncAdapter () <JFFAsyncOperationInterface>
+@interface JFFCoreDataAsyncOperationAdapter () <JFFAsyncOperationInterface>
 
-@property (copy, nonatomic) JFFSyncOperation operationBlock;
+@property (copy, nonatomic) JFFCoreDataSyncOperation operationBlock;
 
 + (dispatch_queue_t)coreDataQueue;
 
 @end
 
-@implementation JFFCoreDataOperationAsyncAdapter
-
-@synthesize operationBlock = _operationBlock;
+@implementation JFFCoreDataAsyncOperationAdapter
 
 + (dispatch_queue_t)coreDataQueue
 {
@@ -45,8 +43,10 @@
     
     dispatch_async([[self class] coreDataQueue], ^{
         
+        NSManagedObjectContext *currentContext = [[JFFCoreDataProvider sharedCoreDataProvider] contextForCurrentThread];
+        
         __block NSError *error = nil;
-        id result = self.operationBlock(&error);
+        id result = self.operationBlock(currentContext, &error);
         NSParameterAssert((result || error) && !(result && error));
         
         [[JFFCoreDataProvider sharedCoreDataProvider] saveMediationContext];
@@ -66,19 +66,19 @@
 {
 }
 
-+ (JFFAsyncOperation)operationWithBlock:(JFFSyncOperation)block
++ (JFFAsyncOperation)operationWithBlock:(JFFCoreDataSyncOperation)block
 {
     NSParameterAssert(block);
     
     block = [block copy];
     
-    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
-        JFFCoreDataOperationAsyncAdapter *adapter = [JFFCoreDataOperationAsyncAdapter new];
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+        JFFCoreDataAsyncOperationAdapter *adapter = [JFFCoreDataAsyncOperationAdapter new];
         adapter.operationBlock = block;
         return adapter;
     };
     
-    return buildAsyncOperationWithInterface(builder);
+    return buildAsyncOperationWithAdapterFactory(factory);
 }
 
 @end

@@ -1,7 +1,6 @@
+#import <JFFCoreData/ObjectInManagedObjectContext/JFFObjectInManagedObjectContextProtocol.h>
+
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (ObjectInManagedObjectContext)
-
-- (id)objectInManagedObjectContext:(NSManagedObjectContext *)context;
-
+@interface NSDictionary (ObjectInManagedObjectContext) <JFFObjectInManagedObjectContextProtocol>
 @end

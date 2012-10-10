@@ -8,5 +8,4 @@
 
 - (NSUInteger)numberOfUnsavedChanges;
 
-
 @end

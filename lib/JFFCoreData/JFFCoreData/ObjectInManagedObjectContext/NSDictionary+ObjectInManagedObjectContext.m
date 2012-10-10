@@ -1,6 +1,6 @@
 #import "NSDictionary+ObjectInManagedObjectContext.h"
 
-#import "NSManagedObject+JFFCoreDataAsyncOperationAdapter.h"
+#import "NSManagedObject+ObjectInManagedObjectContext.h"
 
 @implementation NSDictionary (ObjectInManagedObjectContext)
 

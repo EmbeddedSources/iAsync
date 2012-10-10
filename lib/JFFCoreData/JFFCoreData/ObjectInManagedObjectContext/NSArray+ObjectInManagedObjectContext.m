@@ -1,6 +1,6 @@
 #import "NSArray+ObjectInManagedObjectContext.h"
 
-#import "NSManagedObject+JFFCoreDataAsyncOperationAdapter.h"
+#import "NSManagedObject+ObjectInManagedObjectContext.h"
 
 @implementation NSArray (ObjectInManagedObjectContext)
 

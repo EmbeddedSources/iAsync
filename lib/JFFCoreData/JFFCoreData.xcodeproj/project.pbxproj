@@ -17,10 +17,10 @@
 		CEA0980B16216ED1005820FA /* JFFCoreDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0980A16216ED1005820FA /* JFFCoreDataTests.m */; };
 		CEA0981616216EE7005820FA /* JFFCoreDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0981516216EE7005820FA /* JFFCoreDataProvider.m */; };
 		CEA098191621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA098181621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m */; };
-		CEA0982E16217259005820FA /* JFFCoreDataOperationAsyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0982D16217259005820FA /* JFFCoreDataOperationAsyncAdapter.m */; };
+		CEA0982E16217259005820FA /* JFFCoreDataAsyncOperationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0982D16217259005820FA /* JFFCoreDataAsyncOperationAdapter.m */; };
 		CECEFBE416217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE316217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m */; };
 		CECEFBE716217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE616217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m */; };
-		CECEFBEA16218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE916218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.m */; };
+		CECEFBEA16218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE916218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,16 +118,16 @@
 		CEA0981516216EE7005820FA /* JFFCoreDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataProvider.m; sourceTree = "<group>"; };
 		CEA098171621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+SaveAsyncOperation.h"; sourceTree = "<group>"; };
 		CEA098181621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+SaveAsyncOperation.m"; sourceTree = "<group>"; };
-		CEA0982C16217259005820FA /* JFFCoreDataOperationAsyncAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCoreDataOperationAsyncAdapter.h; sourceTree = "<group>"; };
-		CEA0982D16217259005820FA /* JFFCoreDataOperationAsyncAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataOperationAsyncAdapter.m; sourceTree = "<group>"; };
+		CEA0982C16217259005820FA /* JFFCoreDataAsyncOperationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCoreDataAsyncOperationAdapter.h; sourceTree = "<group>"; };
+		CEA0982D16217259005820FA /* JFFCoreDataAsyncOperationAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataAsyncOperationAdapter.m; sourceTree = "<group>"; };
 		CEA0983416217632005820FA /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
 		CEA0984616217638005820FA /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
 		CECEFBE216217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ObjectInManagedObjectContext.h"; sourceTree = "<group>"; };
 		CECEFBE316217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ObjectInManagedObjectContext.m"; sourceTree = "<group>"; };
 		CECEFBE516217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ObjectInManagedObjectContext.h"; sourceTree = "<group>"; };
 		CECEFBE616217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ObjectInManagedObjectContext.m"; sourceTree = "<group>"; };
-		CECEFBE816218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+JFFCoreDataAsyncOperationAdapter.h"; sourceTree = "<group>"; };
-		CECEFBE916218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+JFFCoreDataAsyncOperationAdapter.m"; sourceTree = "<group>"; };
+		CECEFBE816218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+ObjectInManagedObjectContext.h"; sourceTree = "<group>"; };
+		CECEFBE916218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+ObjectInManagedObjectContext.m"; sourceTree = "<group>"; };
 		CECEFBEB16218094007A61C9 /* JFFObjectInManagedObjectContextProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFObjectInManagedObjectContextProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,8 +193,8 @@
 				CEA0981516216EE7005820FA /* JFFCoreDataProvider.m */,
 				CEA098171621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.h */,
 				CEA098181621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m */,
-				CEA0982C16217259005820FA /* JFFCoreDataOperationAsyncAdapter.h */,
-				CEA0982D16217259005820FA /* JFFCoreDataOperationAsyncAdapter.m */,
+				CEA0982C16217259005820FA /* JFFCoreDataAsyncOperationAdapter.h */,
+				CEA0982D16217259005820FA /* JFFCoreDataAsyncOperationAdapter.m */,
 				CEA097F116216ED1005820FA /* JFFCoreData.h */,
 			);
 			path = JFFCoreData;
@@ -266,8 +266,8 @@
 				CECEFBE316217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m */,
 				CECEFBE516217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.h */,
 				CECEFBE616217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m */,
-				CECEFBE816218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.h */,
-				CECEFBE916218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.m */,
+				CECEFBE816218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.h */,
+				CECEFBE916218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m */,
 			);
 			path = ObjectInManagedObjectContext;
 			sourceTree = "<group>";
@@ -441,10 +441,10 @@
 			files = (
 				CEA0981616216EE7005820FA /* JFFCoreDataProvider.m in Sources */,
 				CEA098191621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m in Sources */,
-				CEA0982E16217259005820FA /* JFFCoreDataOperationAsyncAdapter.m in Sources */,
+				CEA0982E16217259005820FA /* JFFCoreDataAsyncOperationAdapter.m in Sources */,
 				CECEFBE416217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m in Sources */,
 				CECEFBE716217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m in Sources */,
-				CECEFBEA16218008007A61C9 /* NSManagedObject+JFFCoreDataAsyncOperationAdapter.m in Sources */,
+				CECEFBEA16218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
