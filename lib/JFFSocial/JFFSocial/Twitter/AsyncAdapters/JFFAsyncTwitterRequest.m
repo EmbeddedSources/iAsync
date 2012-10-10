@@ -44,14 +44,13 @@
 
 @end
 
-
 JFFAsyncOperation jffTwitterRequest(TWRequest *request)
 {
-    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncTwitterRequest *object = [JFFAsyncTwitterRequest new];
         object.request = request;
         return object;
     };
     
-    return buildAsyncOperationWithInterface(builder);
+    return buildAsyncOperationWithAdapterFactory(factory);
 }

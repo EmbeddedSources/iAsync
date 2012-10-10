@@ -78,7 +78,7 @@
 
 JFFAsyncOperation jffFoursquareRequestLoader (NSString *requestURL, NSString *httpMethod, NSString *accessToken, NSDictionary *parameters)
 {
-    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncFoursquareRequest *request = [JFFAsyncFoursquareRequest new];
         request.requestURL = requestURL;
         request.httpMethod = httpMethod;
@@ -87,12 +87,12 @@ JFFAsyncOperation jffFoursquareRequestLoader (NSString *requestURL, NSString *ht
         return request;
     };
     
-    return buildAsyncOperationWithInterface(builder);
+    return buildAsyncOperationWithAdapterFactory(factory);
 }
 
 JFFAsyncOperation jffFoursquareRequestLoaderWithHTTPBody (NSString *requestURL, NSData *httpBody, NSString *accessToken)
 {
-    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncFoursquareRequest *request = [JFFAsyncFoursquareRequest new];
         request.requestURL  = requestURL;
         request.httpBody    = httpBody;
@@ -101,5 +101,5 @@ JFFAsyncOperation jffFoursquareRequestLoaderWithHTTPBody (NSString *requestURL, 
         return request;
     };
     
-    return buildAsyncOperationWithInterface(builder);
+    return buildAsyncOperationWithAdapterFactory(factory);
 }
