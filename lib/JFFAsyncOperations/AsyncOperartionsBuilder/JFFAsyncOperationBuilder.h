@@ -9,7 +9,7 @@ typedef id< JFFAsyncOperationInterface >(^JFFAsyncOperationInstanceBuilder)(void
 extern "C" {
 #endif
 
-    JFFAsyncOperation buildAsyncOperationWithInterface(JFFAsyncOperationInstanceBuilder builder);
+    JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanceBuilder factory);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

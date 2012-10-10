@@ -149,11 +149,13 @@ JFFAsyncOperation asyncOperationWithStartAndFinishBlocks(JFFAsyncOperation loade
 
 JFFAsyncOperation asyncOperationWithAnalyzer(id data, JFFAnalyzer analyzer)
 {
+    analyzer = [analyzer copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
         NSError *localError;
         id localResult = analyzer(data, &localError);
+        assert((localResult || localError) && !(localResult && localError));
         
         if (doneCallback)
             doneCallback(localError?nil:localResult, localError);
@@ -237,12 +239,12 @@ JFFAsyncOperation asyncOperationWithResultOrError(JFFAsyncOperation loader,
 
 JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay)
 {
-    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncOperationScheduler *asyncObject = [JFFAsyncOperationScheduler new];
         asyncObject.duration = delay;
         return asyncObject;
     };
-    return buildAsyncOperationWithInterface(builder);
+    return buildAsyncOperationWithAdapterFactory(factory);
 }
 
 JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstBinder,

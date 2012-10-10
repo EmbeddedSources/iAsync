@@ -23,14 +23,13 @@
 @end
 
 //JTODO test
-//JTODO rename to buildAsyncOperationWithAdapterFactory
-JFFAsyncOperation buildAsyncOperationWithInterface(JFFAsyncOperationInstanceBuilder builder)
+JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanceBuilder factory)
 {
-    builder = [builder copy];
+    factory = [factory copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
-        id< JFFAsyncOperationInterface > asyncObject = builder();
+        id< JFFAsyncOperationInterface > asyncObject = factory();
         __unsafe_unretained id< JFFAsyncOperationInterface > unretaintedAsyncObject = asyncObject;
         
         doneCallback = [doneCallback copy];

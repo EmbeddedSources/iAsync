@@ -12,14 +12,14 @@ static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueu
     progressLoadDataBlock = [progressLoadDataBlock copy];
     NSString *str = @(queueName?:"");
     
-    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncOperationAdapter *asyncObject = [JFFAsyncOperationAdapter new];
         asyncObject.loadDataBlock = progressLoadDataBlock;
         asyncObject.queueName     = [str cStringUsingEncoding:NSUTF8StringEncoding];
         asyncObject.barrier       = barrier;
         return asyncObject;
     };
-    return buildAsyncOperationWithInterface(builder);
+    return buildAsyncOperationWithAdapterFactory(factory);
 }
 
 static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,

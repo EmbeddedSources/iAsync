@@ -190,8 +190,7 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBin
     if (secondBinder == nil)
         return firstBinder;
     
-    return ^JFFAsyncOperation(id data)
-    {
+    return ^JFFAsyncOperation(id data) {
         JFFAsyncOperation firstLoader = firstBinder(data);
         
         return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
