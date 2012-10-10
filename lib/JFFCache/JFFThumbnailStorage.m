@@ -4,11 +4,11 @@
 #import "JFFCaches.h"
 
 #import <JFFRestKit/JFFRestKit.h>
+#import <JFFNetwork/JFFNetworkBlocksFunctions.h>
 
 #import <UIKit/UIKit.h>
 
 static const char *const cacheQueueName   = "com.embedded_sources.jffcache.thumbnail_storage.cache";
-static const char *const networkQueueName = "com.embedded_sources.jffcache.thumbnail_storage.load_image_data";
 
 //TODO try to use NSURLCache
 static JFFAsyncBinderForURL imageDataToUIImageBinder()
@@ -119,12 +119,7 @@ static id glStorageInstance = nil;
     args.cache = [self imageCacheAdapter];
     
     args.dataLoaderForURL = ^JFFAsyncOperation(NSURL *url) {
-        return asyncOperationWithSyncOperationAndQueue(^id(NSError *__autoreleasing *outError) {
-            NSData *data = [[NSData alloc] initWithContentsOfURL:url
-                                                         options:NSDataReadingMappedIfSafe
-                                                           error:outError];
-            return data;
-        }, networkQueueName);
+        return dataURLResponseLoader(url, nil, nil);
     };
     //Do not cache invalid data here (may be no needs)
     args.analyzerForData = imageDataToUIImageBinder();
