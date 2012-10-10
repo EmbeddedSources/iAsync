@@ -61,7 +61,7 @@ JFFAsyncOperationInterface
 
 - (JFFAsyncOperation)asyncOperationWithApplicationURL:(NSURL *)url
 {
-    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFOpenApplicationWithURLDelegateProxy *proxy =
         [JFFOpenApplicationWithURLDelegateProxy new];
         
@@ -70,7 +70,7 @@ JFFAsyncOperationInterface
         
         return proxy;
     };
-    return buildAsyncOperationWithInterface(builder);
+    return buildAsyncOperationWithAdapterFactory(factory);
 }
 
 @end
