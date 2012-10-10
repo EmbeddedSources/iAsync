@@ -27,16 +27,14 @@ JFFAsyncOperation dataURLResponseLoader(NSURL *url,
                                         NSData *postData,
                                         NSDictionary *headers);
 
-JFFAsyncOperation liveChunkedURLResponseLoader( 
-   NSURL* url_
-   , NSData* postData_
-   , NSDictionary* headers_ );
+JFFAsyncOperation liveChunkedURLResponseLoader(NSURL *url,
+                                               NSData *postData,
+                                               NSDictionary *headers);
 
-JFFAsyncOperation liveDataURLResponseLoader(
-   NSURL* url_
-   , NSData* postData_
-   , NSDictionary* headers_ );
-
+JFFAsyncOperation liveDataURLResponseLoader(NSURL *url,
+                                            NSData *postData,
+                                            NSDictionary *headers);
+    
 JFFAsyncOperation perkyDataURLResponseLoader(NSURL *url,
                                              NSData *postData,
                                              NSDictionary *headers);

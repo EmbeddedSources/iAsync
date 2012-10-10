@@ -29,14 +29,14 @@ static JFFAsyncOperation privateGenericChunkedURLResponseLoader(JFFURLConnection
                                                                 JFFAnalyzer responseAnalyzer)
 {
     responseAnalyzer = [responseAnalyzer copy];
-    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
-        JFFAsyncOperationNetwork* asyncObj = [JFFAsyncOperationNetwork new];
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+        JFFAsyncOperationNetwork *asyncObj = [JFFAsyncOperationNetwork new];
         asyncObj.params           = params;
         asyncObj.responseAnalyzer = responseAnalyzer;
         return asyncObj;
     };
     
-    return buildAsyncOperationWithInterface(builder);
+    return buildAsyncOperationWithAdapterFactory(factory);
 }
 
 JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams* params)

@@ -33,20 +33,20 @@
         if ( ![ self->_params.url isFileURL ] )
 #endif
         {
-            NSMutableURLRequest* request_ = [NSMutableURLRequest mutableURLRequestWithParams:params];
+            NSMutableURLRequest *request = [NSMutableURLRequest mutableURLRequestWithParams:params];
             
-            NSURLConnection* nativeConnection_ = [ [ NSURLConnection alloc ] initWithRequest: request_
-                                                                                    delegate: self
-                                                                            startImmediately: NO ];
+            NSURLConnection *nativeConnection = [[NSURLConnection alloc] initWithRequest:request
+                                                                                delegate:self
+                                                                        startImmediately:NO];
             
             //mm: Create runloop if need. Neccessary for call NSURLConnectionDelegate
             NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
             if (runLoop != [NSRunLoop mainRunLoop]) {
                 self->_connectRunLoop = runLoop;
-                [nativeConnection_ scheduleInRunLoop:runLoop forMode: NSDefaultRunLoopMode];
+                [nativeConnection scheduleInRunLoop:runLoop forMode: NSDefaultRunLoopMode];
             }
             
-            self->_nativeConnection = nativeConnection_;
+            self->_nativeConnection = nativeConnection;
         }
     }
     
@@ -170,23 +170,22 @@ didReceiveResponse:(NSHTTPURLResponse *)response
     }
 }
 
--(void)connection:( NSURLConnection* )connection_
- didFailWithError:( NSError* )error_
+- (void)connection:(NSURLConnection *)connection
+  didFailWithError:(NSError *)error
 {
-    if ( ![ self assertConnectionMismatch: connection_ ] ) {
+    if (![ self assertConnectionMismatch:connection]) {
         return;
     }
     
-    if ( nil != self.didFinishLoadingBlock )
-    {
-        self.didFinishLoadingBlock( error_ );
-        [ self cancel ];
+    if (nil != self.didFinishLoadingBlock) {
+        self.didFinishLoadingBlock(error);
+        [self cancel];
     }
 }
 
 #pragma mark -
 #pragma mark https
--(BOOL)connection:(NSURLConnection *)connection
+- (BOOL)connection:(NSURLConnection *)connection
 canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
 {
     return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
@@ -196,23 +195,20 @@ canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
 - (void)connection:(NSURLConnection *)connection_
 didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-    NSString* authenticationMethod_ = challenge.protectionSpace.authenticationMethod;
-    BOOL isTrustCheck_ = [ authenticationMethod_ isEqualToString: NSURLAuthenticationMethodServerTrust ];
-
-    if ( isTrustCheck_ )
-    {
-        BOOL isTrustedHost_ = NO;
-        if ( nil != self.shouldAcceptCertificateBlock )
-        {
-            isTrustedHost_ = self.shouldAcceptCertificateBlock( challenge.protectionSpace.host );
+    NSString *authenticationMethod_ = challenge.protectionSpace.authenticationMethod;
+    BOOL isTrustCheck = [authenticationMethod_ isEqualToString: NSURLAuthenticationMethodServerTrust];
+    
+    if (isTrustCheck) {
+        BOOL isTrustedHost = NO;
+        if (nil != self.shouldAcceptCertificateBlock) {
+            isTrustedHost = self.shouldAcceptCertificateBlock(challenge.protectionSpace.host);
         }
-
-        if ( isTrustedHost_ )
-        {
-            NSURLCredential* cred_ = [ NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust ];
-
-            [ challenge.sender useCredential:cred_
-                  forAuthenticationChallenge:challenge];
+        
+        if (isTrustedHost) {
+            NSURLCredential *cred = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+            
+            [challenge.sender useCredential:cred
+                 forAuthenticationChallenge:challenge];
         }
     }
 

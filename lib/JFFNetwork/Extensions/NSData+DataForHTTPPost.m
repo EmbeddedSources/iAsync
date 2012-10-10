@@ -33,12 +33,13 @@
     
     NSMutableData *newData = [self mutableCopy];
     
-    for (NSString *key in [parameters allKeys]) {
+    [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+        
         [newData appendData:[[NSString stringWithFormat:@"--%@\r\n",BOUNDARY_STRING] dataUsingEncoding:NSUTF8StringEncoding]];
         [newData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-        [newData appendData:[[NSString stringWithFormat: @"%@", parameters[key]] dataUsingEncoding:NSUTF8StringEncoding]];
+        [newData appendData:[[obj description] dataUsingEncoding:NSUTF8StringEncoding]];
         [newData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",BOUNDARY_STRING] dataUsingEncoding:NSUTF8StringEncoding]];
-    }
+    }];
     
     return [newData copy];
 }
