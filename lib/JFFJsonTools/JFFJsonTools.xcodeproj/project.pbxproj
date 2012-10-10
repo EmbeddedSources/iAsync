@@ -26,6 +26,7 @@
 		CE5330BB160722010029920A /* JFFOptionalObjectField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5330BA160722010029920A /* JFFOptionalObjectField.m */; };
 		CE5330BF160722760029920A /* NSObject+JFFJsonObjectValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5330BE160722760029920A /* NSObject+JFFJsonObjectValidator.m */; };
 		CE57FD8F1612F43200124D90 /* JFFAsyncJSONParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57FD8E1612F43200124D90 /* JFFAsyncJSONParserTests.m */; };
+		CE8A186316249A7E0065D1BE /* JFFParseJsonError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8A186216249A7E0065D1BE /* JFFParseJsonError.m */; };
 		CEC80654160B4C69005DC722 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC80653160B4C69005DC722 /* UIKit.framework */; };
 		CEC80658160B4CAC005DC722 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC80657160B4CAC005DC722 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
@@ -181,6 +182,8 @@
 		CE5330BE160722760029920A /* NSObject+JFFJsonObjectValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JFFJsonObjectValidator.m"; sourceTree = "<group>"; };
 		CE57FD8D1612F43200124D90 /* JFFAsyncJSONParserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncJSONParserTests.h; sourceTree = "<group>"; };
 		CE57FD8E1612F43200124D90 /* JFFAsyncJSONParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncJSONParserTests.m; sourceTree = "<group>"; };
+		CE8A186116249A7E0065D1BE /* JFFParseJsonError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFParseJsonError.h; sourceTree = "<group>"; };
+		CE8A186216249A7E0065D1BE /* JFFParseJsonError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFParseJsonError.m; sourceTree = "<group>"; };
 		CEC80653160B4C69005DC722 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEC80657160B4CAC005DC722 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -343,6 +346,8 @@
 				CE532D07160374D00029920A /* JFFJsonToolsError.m */,
 				CE532D09160375190029920A /* JFFJsonValidationError.h */,
 				CE532D0A160375190029920A /* JFFJsonValidationError.m */,
+				CE8A186116249A7E0065D1BE /* JFFParseJsonError.h */,
+				CE8A186216249A7E0065D1BE /* JFFParseJsonError.m */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -563,6 +568,7 @@
 				CE532D0B160375190029920A /* JFFJsonValidationError.m in Sources */,
 				CE5330BB160722010029920A /* JFFOptionalObjectField.m in Sources */,
 				CE5330BF160722760029920A /* NSObject+JFFJsonObjectValidator.m in Sources */,
+				CE8A186316249A7E0065D1BE /* JFFParseJsonError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,10 +639,7 @@
 					.,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -660,10 +663,7 @@
 					.,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

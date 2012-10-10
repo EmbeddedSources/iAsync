@@ -1,5 +1,7 @@
 #import "JFFAsyncJSONParser.h"
 
+#import "JFFParseJsonError.h"
+
 JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)
 {
     assert([data isKindOfClass:[NSData class]]);
@@ -11,7 +13,12 @@ JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)
                                                                  error:&jsonError];
         
         if (jsonError) {
-            [jsonError setToPointer:outError];
+            if (outError) {
+                JFFParseJsonError *error = [JFFParseJsonError new];
+                error.nativeError = jsonError;
+                error.data        = data;
+                *outError = error;
+            }
             return nil;
         }
         

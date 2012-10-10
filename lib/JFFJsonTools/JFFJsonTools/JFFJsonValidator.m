@@ -6,8 +6,7 @@
 static NSArray *allJsonTypes(void)
 {
     static NSArray *allJsonTypes;
-    if (!allJsonTypes)
-    {
+    if (!allJsonTypes) {
         allJsonTypes = @[
         [NSString     class],
         [NSNumber     class],
@@ -21,11 +20,10 @@ static NSArray *allJsonTypes(void)
 
 static BOOL isJsonObject(id object)
 {
-    BOOL result = [allJsonTypes() firstMatch:^BOOL(id classElement)
-                   {
-                       BOOL result = [object isKindOfClass:classElement];
-                       return result;
-                   }] != nil;
+    BOOL result = [allJsonTypes() firstMatch:^BOOL(id classElement) {
+        BOOL result = [object isKindOfClass:classElement];
+        return result;
+    }] != nil;
     
     return result;
 }
