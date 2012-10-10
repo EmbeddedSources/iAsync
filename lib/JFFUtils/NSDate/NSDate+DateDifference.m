@@ -4,6 +4,7 @@
 
 @implementation NSDate (DateDifference)
 
+//TODO may be can be removed with using NSDateFormatter
 - (NSString *)dateDifferenceStringFromDate:(NSDate *)fromDate
 {
     NSComparisonResult order = [self compare:fromDate];
@@ -54,7 +55,7 @@
         : NSLocalizedString(@"SECONDS", nil);
     }
     
-    NSString *numberStr = [[NSString alloc] initWithFormat: @"%d ", dateComponent];
+    NSString *numberStr = [[NSString alloc] initWithFormat:@"%d ", dateComponent];
     result = [numberStr stringByAppendingString:result];
     
     return result;

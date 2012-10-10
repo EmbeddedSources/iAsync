@@ -71,7 +71,9 @@
     NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
     
     for (id object in self) {
-        [result addObject:block(object)];
+        id newObject = block(object);
+        NSParameterAssert(newObject);
+        [result addObject:newObject];
     }
     
     return [result copy];
