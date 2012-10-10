@@ -2,34 +2,31 @@
 
 #import "JFFRestKitError.h"
 
-JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedDataLoader_ )
+JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedDataLoader )
 {
-    chunkedDataLoader_ = [ chunkedDataLoader_ copy ];
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+    chunkedDataLoader = [chunkedDataLoader copy];
+    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback
                                     , JFFCancelAsyncOperationHandler cancelCallback
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
-    {
+                                    , JFFDidFinishAsyncOperationHandler doneCallback) {
         __block NSString *filePath;
         __block NSFileHandle *handle;
         
-        __block void (^closeFile_)() = ^{
+        __block void (^closeFile)() = ^{
             [ handle closeFile ];
             handle = nil;
         };
         
-        __block void (^closeAndRemoveFile_)() = ^{
-            closeFile_();
+        __block void (^closeAndRemoveFile)() = ^{
+            closeFile();
 
             if ( filePath )
                 [ [ NSFileManager defaultManager ] removeItemAtPath: filePath
                                                               error: nil ];
         };
         
-        progressCallback_ = [ progressCallback_ copy ];
-        JFFAsyncOperationProgressHandler progressWrapperCallback_ = ^( id progressInfo )
-        {
-            if ( !handle )
-            {
+        progressCallback = [progressCallback copy];
+        JFFAsyncOperationProgressHandler progressWrapperCallback = ^(id progressInfo) {
+            if ( !handle ) {
                 filePath = [NSString createUuid];
                 filePath = [NSString cachesPathByAppendingPathComponent:filePath];
                 [ [ NSFileManager defaultManager ] createFileAtPath:filePath
@@ -41,36 +38,36 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
             //STODO write in separate thread only ( dispatch_io_create_with_path )
             [handle writeData:progressInfo];
             
-            if ( progressCallback_ )
-                progressCallback_( progressInfo );
+            if (progressCallback)
+                progressCallback(progressInfo);
         };
         
         cancelCallback = [cancelCallback copy];
-        JFFCancelAsyncOperationHandler cancelWrapperCallback_ = ^( BOOL canceled_ ) {
-            closeAndRemoveFile_();
+        JFFCancelAsyncOperationHandler cancelWrapperCallback = ^(BOOL canceled) {
+            closeAndRemoveFile();
             
-            if ( cancelCallback )
-                cancelCallback( canceled_ );
+            if (cancelCallback)
+                cancelCallback(canceled);
         };
         
-        JFFDidFinishAsyncOperationHandler doneWrapperCallback_ = ^( id response_, NSError* error_ ) {
-            id result_ = response_;
+        JFFDidFinishAsyncOperationHandler doneWrapperCallback = ^(id response, NSError *error ) {
+            id result = response;
 
-            if ( response_ ) {
-                result_ = filePath;
-                closeFile_();
+            if (response) {
+                result = filePath;
+                closeFile();
             }
             
-            if ( doneCallback_ ) {
-                if ( result_ == nil && error_ == nil ) {
-                    error_ = [JFFRestKitEmptyFileResponseError new];
+            if (doneCallback) {
+                if ( result == nil && error == nil ) {
+                    error = [JFFRestKitEmptyFileResponseError new];
                 }
-                doneCallback_( result_, error_ );
+                doneCallback(result, error);
             }
         };
-
-        return chunkedDataLoader_( progressWrapperCallback_
-                                  , cancelWrapperCallback_
-                                  , doneWrapperCallback_ );
+        
+        return chunkedDataLoader(progressWrapperCallback,
+                                 cancelWrapperCallback,
+                                 doneWrapperCallback);
     };
 }

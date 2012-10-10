@@ -78,7 +78,7 @@ static JFFAsyncOperationBinder dataLoaderWithCachedResultBinder(BOOL doesNotIgno
                                                                 NSURL *url)
 {
     dataLoaderForURL = [dataLoaderForURL copy];
-    return ^JFFAsyncOperation(JFFErrorNoFreshData *noFreshDataError) {
+    return ^JFFAsyncOperation(NSError *bindError) {
     
         JFFDidFinishAsyncOperationHook finishCallbackHook = ^(NSData* srvResponse,
                                                               NSError* error,
@@ -95,6 +95,9 @@ static JFFAsyncOperationBinder dataLoaderWithCachedResultBinder(BOOL doesNotIgno
                 return;
             }
             
+            //TODO test [bindError isKindOfClass:[JFFErrorNoFreshData class]] issue, here it van got - not data in cache error !!!
+            JFFErrorNoFreshData *noFreshDataError =
+            (JFFErrorNoFreshData *)([bindError isKindOfClass:[JFFErrorNoFreshData class]]?bindError:nil);
             if (noFreshDataError.cachedData && !doesNotIgnoreFreshDataLoadFail) {
                 JFFResponseDataWithUpdateData *newResult = [JFFResponseDataWithUpdateData new];
                 newResult.updateDate = [noFreshDataError.cachedData updateDate];
