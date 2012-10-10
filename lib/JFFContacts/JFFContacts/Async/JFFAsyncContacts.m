@@ -45,8 +45,8 @@
 
 JFFAsyncOperation asyncAllContactsLoader( void )
 {
-    JFFAsyncOperationInstanceBuilder builder = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         return [JFFAsyncAllContactsLoader new];
     };
-    return buildAsyncOperationWithInterface(builder);
+    return buildAsyncOperationWithAdapterFactory(factory);
 }
