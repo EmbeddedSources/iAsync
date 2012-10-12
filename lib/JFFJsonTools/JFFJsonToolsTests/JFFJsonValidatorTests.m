@@ -196,11 +196,11 @@
 {
     {
         JFFJsonValidationError *error;
-
+        
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@{}
                                                  withJsonPattern:[NSArray class]
                                                            error:&error];
-
+        
         STAssertNotNil(error, @"error should be nil");
         STAssertFalse(result, @"ivalid result value");
     }
@@ -434,7 +434,7 @@
         id pattern =
         @{
         @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
-        jOptional(@"data") : [NSDictionary class],
+        jOptionalKey(@"data") : [NSDictionary class],
         };
         
         BOOL result = [JFFJsonObjectValidator validateJsonObject:object
@@ -605,19 +605,18 @@
 - (void)testNullValueMismatch
 {
     JFFJsonValidationError *error;
-
+    
     BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNull null]
                                              withJsonPattern:@(2)
                                                        error:&error];
-
+    
     STAssertNotNil(error, @"error should be nil");
     STAssertFalse(result, @"ivalid result value");
 }
 
 - (void)testPassNilJsonPattern
 {
-    STAssertThrows(
-    {
+    STAssertThrows( {
         [JFFJsonObjectValidator validateJsonObject:nil
                                    withJsonPattern:nil
                                              error:NULL];
@@ -628,22 +627,22 @@
 {
     {
         JFFJsonValidationError *error;
-
+        
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@{}
                                                  withJsonPattern:@[]
                                                            error:&error];
-
+        
         STAssertFalse(result, @"NO expected");
         STAssertEqualObjects(error.jsonObject , @{}, @"ok");
         STAssertEqualObjects(error.jsonPattern, @[], @"ok");
     }
     {
         JFFJsonValidationError *error;
-
+        
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@[]
                                                  withJsonPattern:@{}
                                                            error:&error];
-
+        
         STAssertFalse(result, @"NO expected");
         STAssertEqualObjects(error.jsonObject , @[], @"ok");
         STAssertEqualObjects(error.jsonPattern, @{}, @"ok");
@@ -701,6 +700,90 @@
         
         STAssertTrue(result, @"NO expected");
         STAssertNil(error, @"ok");
+    }
+}
+
+- (void)testJOptionalValue
+{
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+        @"region" : [NSNull new],
+        };
+        
+        id pattern =
+        @{
+        @"region" : @{@"a" : [NSString class]},
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
+    }
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+        @"region" : @{@"a" : @"b"},
+        };
+        
+        id pattern =
+        @{
+        @"region" : @{@"a" : [NSString class]},
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+        @"region" : [NSNull new],
+        };
+        
+        id pattern =
+        @{
+        @"region" : jOptionalValue(@{@"a" : [NSString class]}),
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+        @"region" : @{@"a" : @"b"},
+        };
+        
+        id pattern =
+        @{
+        @"region" : jOptionalValue(@{@"a" : [NSString class]}),
+        };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
     }
 }
 

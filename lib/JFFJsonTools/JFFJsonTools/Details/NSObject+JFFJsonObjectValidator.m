@@ -1,7 +1,8 @@
 #import "NSObject+JFFJsonObjectValidator.h"
 
-#import "JFFOptionalObjectField.h"
 #import "JFFJsonValidationError.h"
+#import "JFFOptionalObjectFieldKey.h"
+#import "JFFOptionalObjectFieldValue.h"
 
 #include <objc/runtime.h>
 #include <objc/message.h>
@@ -174,13 +175,11 @@ static BOOL isClass(id object)
     if (![self validateWithJsonPatternClass:jsonPattern
                              rootJsonObject:rootJsonObject
                             rootJsonPattern:rootJsonPattern
-                                      error:outError])
-    {
+                                      error:outError]) {
         return NO;
     }
     
-    if (isClass(jsonPattern))
-    {
+    if (isClass(jsonPattern)) {
         return YES;
     }
     
@@ -188,48 +187,56 @@ static BOOL isClass(id object)
     __block NSError *tmpError;
     
     [jsonPattern enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-         id patternKey = key;
-         
-         BOOL isOptionalObjectField = [key isKindOfClass:[JFFOptionalObjectField class]];
-         
-         if (isOptionalObjectField) {
-             patternKey = [key fieldKey];
-         }
-         
-         id subElement = self[patternKey];
-         
-         if (subElement == nil && isOptionalObjectField) {
-             return;
-         }
-         
-         if (!subElement) {
-             //set error
-             {
-                 JFFJsonValidationError *error = [JFFJsonValidationError new];
-                 error.jsonObject  = rootJsonObject ;
-                 error.jsonPattern = rootJsonPattern;
-                 
-                 static NSString *const messageFormat = @"jsonObject: %@ has no a field named: %@, see pattern: %@";
-                 error.message = [[NSString alloc]initWithFormat:messageFormat,
-                                  self,
-                                  patternKey,
-                                  jsonPattern];
-                 
-                 tmpError = error;
-             }
-             
-             result = NO;
-             *stop = YES;
-         }
-         
-         if (![subElement validateWithJsonPattern:obj
-                                   rootJsonObject:rootJsonObject
-                                  rootJsonPattern:rootJsonPattern
-                                            error:&tmpError]) {
-             result = NO;
-             *stop = YES;
-         }
-     }];
+        
+        id patternKey = key;
+        
+        BOOL isOptionalObjectField = [key isKindOfClass:[JFFOptionalObjectFieldKey class]];
+        
+        if (isOptionalObjectField) {
+            patternKey = [key fieldKey];
+        }
+        
+        id subElement = self[patternKey];
+        
+        if (subElement == nil && isOptionalObjectField) {
+            return;
+        }
+        
+        if ([obj isKindOfClass:[JFFOptionalObjectFieldValue class]]) {
+            if ([subElement isKindOfClass:[NSNull class]])
+                return;
+            
+            obj = [obj fieldValue];
+        }
+        
+        if (!subElement) {
+            //set error
+            {
+                JFFJsonValidationError *error = [JFFJsonValidationError new];
+                error.jsonObject  = rootJsonObject ;
+                error.jsonPattern = rootJsonPattern;
+                
+                static NSString *const messageFormat = @"jsonObject: %@ has no a field named: %@, see pattern: %@";
+                error.message = [[NSString alloc] initWithFormat:messageFormat,
+                                 self,
+                                 patternKey,
+                                 jsonPattern];
+                
+                tmpError = error;
+            }
+            
+            result = NO;
+            *stop = YES;
+        }
+        
+        if (![subElement validateWithJsonPattern:obj
+                                  rootJsonObject:rootJsonObject
+                                 rootJsonPattern:rootJsonPattern
+                                           error:&tmpError]) {
+            result = NO;
+            *stop = YES;
+        }
+    }];
     
     [tmpError setToPointer:outError];
     

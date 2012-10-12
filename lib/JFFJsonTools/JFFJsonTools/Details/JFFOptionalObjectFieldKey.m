@@ -1,13 +1,12 @@
-#import "JFFOptionalObjectField.h"
+#import "JFFOptionalObjectFieldKey.h"
 
-@implementation JFFOptionalObjectField : NSObject
+@implementation JFFOptionalObjectFieldKey : NSObject
 
 + (id)newOptionalObjectFieldWithFieldKey:(id)fieldKey
 {
-    JFFOptionalObjectField *result = [self new];
+    JFFOptionalObjectFieldKey *result = [self new];
     
-    if (result)
-    {
+    if (result) {
         result->_fieldKey = [fieldKey copy];
     }
     
@@ -16,10 +15,9 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFOptionalObjectField *copy = [[[self class] allocWithZone:zone] init];
+    JFFOptionalObjectFieldKey *copy = [[[self class] allocWithZone:zone] init];
     
-    if (copy)
-    {
+    if (copy) {
         copy->_fieldKey = [self->_fieldKey copyWithZone:zone];
     }
     

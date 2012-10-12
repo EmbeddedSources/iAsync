@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface JFFOptionalObjectField : NSObject<NSCopying>
+@interface JFFOptionalObjectFieldKey : NSObject<NSCopying>
 
 @property (nonatomic, readonly, copy) id fieldKey;
 

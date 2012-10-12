@@ -3,6 +3,9 @@
 #import "JFFJsonValidationError.h"
 #import "NSObject+JFFJsonObjectValidator.h"
 
+#import "JFFOptionalObjectFieldKey.h"
+#import "JFFOptionalObjectFieldValue.h"
+
 static NSArray *allJsonTypes(void)
 {
     static NSArray *allJsonTypes;
@@ -26,6 +29,16 @@ static BOOL isJsonObject(id object)
     }] != nil;
     
     return result;
+}
+
+id jOptionalKey(id object)
+{
+    return [JFFOptionalObjectFieldKey newOptionalObjectFieldWithFieldKey:object];
+}
+
+id jOptionalValue(id object)
+{
+    return [JFFOptionalObjectFieldValue newOptionalObjectFieldWithFieldValue:object];
 }
 
 @implementation JFFJsonObjectValidator
