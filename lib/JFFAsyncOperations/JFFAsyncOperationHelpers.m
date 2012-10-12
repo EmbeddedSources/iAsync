@@ -64,21 +64,16 @@ JFFAsyncOperation asyncOperationWithError(NSError *error)
     };
 }
 
-JFFAsyncOperation asyncOperationWithSyncOperationInCurrentQueue( JFFSyncOperation block )
+JFFAsyncOperation asyncOperationWithSyncOperationInCurrentQueue(JFFSyncOperation block)
 {
-    assert( block );
+    assert(block);
     block = [block copy];
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
         NSError *error;
-        id result;
-        if (block) {
-            result = block(&error);
-        } else {
-            error = [JFFError newErrorWithDescription:NSLocalizedString(@"NOT_SPECIFIED_BLOCK_ERROR", nil)];
-        }
+        id result = block(&error);
         
         if (doneCallback)
             doneCallback(result, error);
@@ -190,19 +185,18 @@ JFFAsyncOperation asyncOperationWithChangedResult(JFFAsyncOperation loader,
 JFFAsyncOperation asyncOperationResultAsProgress( JFFAsyncOperation loader_ )
 {
     loader_ = [ loader_ copy ];
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
+    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback
                                     , JFFCancelAsyncOperationHandler cancelCallback_
                                     , JFFDidFinishAsyncOperationHandler doneCallback_ )
     {
-        progressCallback_ = [ progressCallback_ copy ];
-        doneCallback_     = [ doneCallback_     copy ];
-        JFFDidFinishAsyncOperationHandler doneCallbackWrapper_ = ^( id result_, NSError* error_ )
-        {
-            if ( result_ && progressCallback_ )
-                progressCallback_( result_ );
-
+        progressCallback = [progressCallback copy];
+        doneCallback_    = [doneCallback_    copy];
+        JFFDidFinishAsyncOperationHandler doneCallbackWrapper_ = ^(id result, NSError *error) {
+            if (result && progressCallback)
+                progressCallback(result);
+            
             if ( doneCallback_ )
-                doneCallback_( result_, error_ );
+                doneCallback_(result, error);
         };
         return loader_( nil, cancelCallback_, doneCallbackWrapper_ );
     };
@@ -268,6 +262,7 @@ JFFAnalyzer analyzerAsSequenceOfAnalyzers(JFFAnalyzer firstAnalyzer, ...)
     return ^id(id dataToAnalyze, NSError **outError) {
         JFFAsyncOperation loader = firstBinder(dataToAnalyze);
         __block id finalResult = nil;
+        //loader called immediately here
         loader(nil, nil, ^(id loaderResult, NSError *error) {
             [error setToPointer:outError];
             finalResult = loaderResult;

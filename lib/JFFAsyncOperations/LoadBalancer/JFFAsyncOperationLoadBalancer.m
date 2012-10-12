@@ -167,17 +167,15 @@ static JFFDidFinishAsyncOperationHandler doneCallbackWrapper( JFFDidFinishAsyncO
                                                              , JFFContextLoaders* context_loaders_ )
 {
     native_done_callback_ = [ [ native_done_callback_ copy ] autorelease ];
-    return [ [ ^void( id result_, NSError* error_ )
-    {
+    return [ [ ^void(id result, NSError *error) {
         [ [ native_done_callback_ copy ] autorelease ];
 
         finishExecuteOfNativeLoader( native_loader_, context_loaders_ );
 
         if ( native_done_callback_ )
         {
-            peformBlockWithinContext( ^
-            {
-                native_done_callback_( result_, error_ );
+            peformBlockWithinContext( ^ {
+                native_done_callback_(result, error);
             }, context_loaders_ );
         }
 
