@@ -21,7 +21,7 @@
 + (id)arrayWithSize:(NSUInteger)size
            producer:(JFFProducerBlock)block
 {
-    NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:size];
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:size];
 
     for ( NSUInteger index = 0; index < size; ++index ) {
         [result addObject:block(index)];
@@ -33,7 +33,7 @@
 + (id)arrayWithCapacity:(NSUInteger)capacity
    ignoringNilsProducer:(JFFProducerBlock)block
 {
-    NSMutableArray* result = [[NSMutableArray alloc]initWithCapacity:capacity];
+    NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:capacity];
 
     for ( NSUInteger index = 0; index < capacity; ++index ) {
         id object = block(index);
@@ -68,7 +68,7 @@
 
 - (NSArray *)map:(JFFMappingBlock)block
 {
-    NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
     for (id object in self) {
         id newObject = block(object);
@@ -81,7 +81,7 @@
 
 - (NSArray *)map:(JFFMappingWithErrorBlock)block error:(NSError **)outError
 {
-    NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
     for (id object in self) {
         id newObject = block(object, outError);
@@ -97,7 +97,7 @@
 
 - (NSArray *)forceMap:(JFFMappingBlock)block
 {
-    NSMutableArray *result = [[NSMutableArray alloc]initWithCapacity:[self count]];
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
     for (id object in self) {
         id newObject = block(object);
@@ -111,17 +111,22 @@
 
 - (NSArray *)mapWithIndex:(JFFMappingWithErrorAndIndexBlock)block error:(NSError **)outError
 {
-    __block NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity: [self count]];
+    __block NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
+    
+    __block NSError *error;
     
     [self enumerateObjectsUsingBlock: ^(id object, NSUInteger idx, BOOL *stop) {
-        id newObject = block(object, idx, outError);
+        id newObject = block(object, idx, &error);
         if (newObject) {
             [result addObject: newObject];
         } else {
             result = nil;
             *stop  = YES;
         }
-    } ];
+    }];
+    
+    if (outError)
+        *outError = error;
     
     return [result copy];
 }

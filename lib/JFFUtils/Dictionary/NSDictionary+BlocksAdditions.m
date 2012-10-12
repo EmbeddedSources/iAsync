@@ -18,8 +18,11 @@
 - (NSDictionary *)map:(JFFDictMappingWithErrorBlock)block error:(NSError *__autoreleasing *)outError
 {
     __block NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
+    
+    __block NSError *error;
+    
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
-        id newObject = block(key, object, outError);
+        id newObject = block(key, object, &error);
         
         if (!newObject) {
             *stop = YES;
@@ -29,6 +32,10 @@
         
         result[key] = newObject;
     }];
+    
+    if (outError)
+        *outError = error;
+    
     return [result copy];
 }
 
