@@ -1,4 +1,4 @@
-#import <JFFUtils/NSArray/JUArrayHelperBlocks.h>
+#import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 
 #import <Foundation/Foundation.h>
 

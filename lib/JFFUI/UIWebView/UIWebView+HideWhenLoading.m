@@ -33,9 +33,9 @@ static char property_key_;
     [ self didFinishLoading ];
 }
 
--(void)webView:( UIWebView* )web_view_ didFailLoadWithError:( NSError* )error_
+-(void)webView:( UIWebView* )web_view_ didFailLoadWithError:( NSError* )error
 {
-    [ self didFinishLoading ];
+    [self didFinishLoading];
 }
 
 @end
