@@ -62,19 +62,19 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray( NSArray* element
     return [ values_ jffContactsSelectNotEmptyStrings ];
 }
 
--(void)setPropertyFromValue:( id )value_
-                   toRecord:( ABRecordRef )record_
+- (void)setPropertyFromValue:( id )value_
+                    toRecord:( ABRecordRef )record_
 {
-    NSParameterAssert( [ value_ isKindOfClass: [ NSArray class ] ] );
+    NSParameterAssert([value_ isKindOfClass:[NSArray class]]);
 
     self.value = value_;
 
-    CFErrorRef error_ = NULL;
+    CFErrorRef error = NULL;
     ABMutableMultiValueRef values_ = createMutableMultiValueWithArray( value_, self->_labels );
     BOOL didSet = ABRecordSetValue( record_
                                    , self.propertyID
                                    , values_
-                                   , &error_ );
+                                   , &error );
     if (!didSet) { NSLog( @"can not set %@", self.name ); }
     if ( values_ )
         CFRelease( values_ );

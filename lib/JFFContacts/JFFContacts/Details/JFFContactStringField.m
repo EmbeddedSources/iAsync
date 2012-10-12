@@ -9,16 +9,16 @@
 }
 
 - (void)setPropertyFromValue:(id)value
-                   toRecord:( ABRecordRef )record_
+                    toRecord:(ABRecordRef)record_
 {
     NSParameterAssert(value);
     self.value = value;
 
-    CFErrorRef error_ = NULL;
+    CFErrorRef error = NULL;
     bool didSet = ABRecordSetValue( record_
                                    , self.propertyID
                                    , (__bridge CFTypeRef)self.value
-                                   , &error_);
+                                   , &error);
     if (!didSet) { NSLog( @"can not set %@", self.name ); }
 }
 

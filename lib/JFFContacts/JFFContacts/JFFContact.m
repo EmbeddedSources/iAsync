@@ -244,12 +244,12 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
 
 -(BOOL)save
 {
-    CFErrorRef error_ = NULL;
-
+    CFErrorRef error = NULL;
+    
     bool result_ = false;
     if ( self.newContact )
     {
-        result_ = ABAddressBookAddRecord( self.addressBook, self.person, &error_ );
+        result_ = ABAddressBookAddRecord( self.addressBook, self.person, &error );
         if ( !result_ )
         {
             NSLog( @"can not add Person" );
@@ -257,7 +257,7 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
         }
     }
 
-    result_ = ABAddressBookSave( self.addressBook, &error_ );
+    result_ = ABAddressBookSave( self.addressBook, &error );
     if ( !result_ )
     {
         NSLog( @"can not save Person" );
@@ -277,16 +277,16 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
         return NO;
     }
 
-    CFErrorRef error_ = NULL;
-    bool result_ = ABAddressBookRemoveRecord( self.addressBook, self.rawPerson, &error_ );
+    CFErrorRef error = NULL;
+    bool result_ = ABAddressBookRemoveRecord( self.addressBook, self.rawPerson, &error );
     if ( !result_ )
     {
         NSLog( @"can not remove record from AddressBook" );
         return NO;
     }
 
-    error_ = NULL;
-    result_ = ABAddressBookSave( self.addressBook, &error_ );
+    error = NULL;
+    result_ = ABAddressBookSave( self.addressBook, &error );
     if ( !result_ )
     {
         NSLog( @"can not save AddressBook" );

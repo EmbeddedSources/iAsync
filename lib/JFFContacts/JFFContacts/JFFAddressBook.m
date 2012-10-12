@@ -34,11 +34,11 @@
     return self;
 }
 
--(BOOL)removeAllContactsWithError:( NSError** )error_
+- (BOOL)removeAllContactsWithError:(NSError **)error
 {
     ABAddressBookRef rawBook_ = self.rawBook;
     CFErrorRef rawError_ = NULL;
-    NSArray* contacts_ = (__bridge_transfer NSArray*)ABAddressBookCopyArrayOfAllPeople( rawBook_ );
+    NSArray* contacts_ = (__bridge_transfer NSArray*)ABAddressBookCopyArrayOfAllPeople(rawBook_);
     
     for ( id record_ in contacts_ )
     {
@@ -46,19 +46,17 @@
         ABAddressBookRemoveRecord( rawBook_, rawRecord_, &rawError_ );
         if ( NULL != rawError_ )
         {
-            [ (__bridge NSError*)rawError_ setToPointer: error_ ];
+            [ (__bridge NSError*)rawError_ setToPointer:error];
             return NO;
         }
     }
     
-
     ABAddressBookSave( rawBook_, &rawError_ );
-    if ( NULL != rawError_ )
-    {
-        [ (__bridge NSError*)rawError_ setToPointer: error_ ];
+    if ( NULL != rawError_ ) {
+        [ (__bridge NSError*)rawError_ setToPointer:error];
         return NO;
     }
-
+    
     return YES;
 }
 

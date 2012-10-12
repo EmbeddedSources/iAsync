@@ -30,8 +30,8 @@
     {
         if ( ABPersonHasImageData( record_ ) )
         {
-            CFErrorRef error_ = NULL;
-            ABPersonRemoveImageData( record_, &error_ );
+            CFErrorRef error = NULL;
+            ABPersonRemoveImageData( record_, &error );
         }
         return;
     }
@@ -44,8 +44,8 @@
 
     if ( data_ )
     {
-        CFErrorRef error_ = NULL;
-        bool didSet = ABPersonSetImageData( record_, ( __bridge CFDataRef )data_, &error_ );
+        CFErrorRef error = NULL;
+        bool didSet = ABPersonSetImageData( record_, ( __bridge CFDataRef )data_, &error );
         if (!didSet) { NSLog( @"can not set %@", self.name ); }
     }
 }
