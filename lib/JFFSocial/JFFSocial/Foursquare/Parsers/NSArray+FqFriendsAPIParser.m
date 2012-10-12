@@ -9,19 +9,15 @@
 
 + (NSArray *)fqFriendsWithDict:(NSDictionary *)response error:(NSError **)outError
 {
-     NSError *error = nil;
-    
     NSArray *friendsArray = [[response dictionaryForKey:@"friends"] arrayForKey:@"items"];
     
     if (friendsArray) {
         friendsArray = [friendsArray map:^id(NSDictionary *object, NSError *__autoreleasing *outError) {
             
-            NSError *error = nil;
-            FoursquareUserModel *userModel = [FoursquareUserModel fqUserModelWithDict:object error:&error];
-            [error setToPointer:outError];
+            FoursquareUserModel *userModel = [FoursquareUserModel fqUserModelWithDict:object error:outError];
             return userModel;
             
-        } error:&error];
+        } error:outError];
     }
     else
     {

@@ -26,9 +26,7 @@
     return ^JFFAsyncOperation (NSDictionary *response)
     {
         return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
-            NSError *error = nil;
-            id result = [NSDictionary fqApiresponseDictWithDict:response error:&error];
-            [error setToPointer:outError];
+            id result = [NSDictionary fqApiresponseDictWithDict:response error:outError];
             return result;
         });
     };
@@ -95,12 +93,7 @@
     return ^JFFAsyncOperation (NSDictionary *response)
     {
         return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
-            NSError *error = nil;
-            NSArray *users = [NSArray fqFriendsWithDict:response error:&error];
-            if (error) {
-                [error setToPointer:outError];
-                return nil;
-            }
+            NSArray *users = [NSArray fqFriendsWithDict:response error:outError];
             return users;
         });
     };
@@ -136,12 +129,7 @@
     return ^JFFAsyncOperation (NSDictionary *response)
     {
         return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
-            NSError *error = nil;
-            NSArray *checkins = [NSArray fqCheckinsWithDict:response error:&error];
-            if (error) {
-                [error setToPointer:outError];
-                return nil;
-            }
+            NSArray *checkins = [NSArray fqCheckinsWithDict:response error:outError];
             return checkins;
         });
     };

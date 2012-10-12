@@ -28,12 +28,9 @@ JFFAsyncOperationBinder asyncJSONObjectToTwitterTweets()
 
 JFFAsyncOperationBinder asyncJSONObjectToTwitterUsers()
 {
-    JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSArray *jsonObject)
-    {
-        JFFSyncOperation loadDataBlock_ = ^id(NSError **error)
-        {
-            NSArray *accounts = [jsonObject map:^id(id object, NSError *__autoreleasing *outError)
-            {
+    JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSArray *jsonObject) {
+        JFFSyncOperation loadDataBlock_ = ^id(NSError **error) {
+            NSArray *accounts = [jsonObject map:^id(id object, NSError *__autoreleasing *outError) {
                 return [JFFTwitterAccount newTwitterAccountWithTwitterJSONApiDictionary:object
                                                                                   error:outError];
             } error:error];

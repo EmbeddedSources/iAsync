@@ -7,22 +7,17 @@
 
 @implementation NSArray (FqCheckinsAPIParser)
 
-
 + (NSArray *)fqCheckinsWithDict:(NSDictionary *)response error:(NSError **)outError
 {
-    NSError *error = nil;
-    
     NSArray *friendsArray = [[response dictionaryForKey:@"checkins"] arrayForKey:@"items"];
     
     if (friendsArray) {
         friendsArray = [friendsArray map:^id(NSDictionary *object, NSError *__autoreleasing *outError) {
             
-            NSError *error = nil;
-            FoursquareCheckinsModel *checkinModel = [FoursquareCheckinsModel fqCheckinModelWithDict:object error:&error];
-            [error setToPointer:outError];
+            FoursquareCheckinsModel *checkinModel = [FoursquareCheckinsModel fqCheckinModelWithDict:object error:outError];
             return checkinModel;
             
-        } error:&error];
+        } error:outError];
     }
     else
     {

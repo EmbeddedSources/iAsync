@@ -15,8 +15,7 @@
 
     if (![JFFJsonObjectValidator validateJsonObject:jsonObject
                                     withJsonPattern:jsonPattern
-                                              error:outError])
-    {
+                                              error:outError]) {
         return nil;
     }
 
@@ -28,8 +27,7 @@
 
     JFFTweet *result = [self new];
 
-    if (result)
-    {
+    if (result) {
         result.tweetId = jsonObject[@"id_str"];
         result.text    = jsonObject[@"text"];
         result.user    = user;

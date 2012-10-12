@@ -13,15 +13,13 @@
     
     if (![JFFJsonObjectValidator validateJsonObject:jsonObject
                                     withJsonPattern:jsonPattern
-                                              error:outError])
-    {
+                                              error:outError]) {
         return nil;
     }
     
     JFFTwitterAccount *result = [self new];
     
-    if (result)
-    {
+    if (result) {
         result.twitterAccountId = jsonObject[@"id_str"];
         result.name             = jsonObject[@"name"  ];
         

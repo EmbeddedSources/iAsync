@@ -5,19 +5,18 @@
 + (id)fqApiresponseDictWithDict:(NSDictionary *)jsonObject error:(NSError **)outError
 {
     id jsonPattern = @{
-    @"meta"     :
+    @"meta" :
     @{
-        @"code"                   : [NSNumber numberWithInteger:200],
-        jOptional(@"errorDetail") : [NSString class],
-        jOptional(@"errorType")   : [NSString class],
+        @"code"                      : [NSNumber numberWithInteger:200],
+        jOptionalKey(@"errorDetail") : [NSString class],
+        jOptionalKey(@"errorType"  ) : [NSString class],
     },
     @"response" : [NSDictionary class],
     };
     
     if (![JFFJsonObjectValidator validateJsonObject:jsonObject
                                     withJsonPattern:jsonPattern
-                                              error:outError])
-    {
+                                              error:outError]) {
         return nil;
     }
     
