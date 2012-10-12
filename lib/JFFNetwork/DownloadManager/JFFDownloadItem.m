@@ -137,18 +137,18 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 +(id)downloadItemWithURL:( NSURL* )url_
            localFilePath:( NSString* )local_file_path_
-                   error:( NSError** )error_
+                   error:( NSError** )outError
 {
-    if ( ![ self checkNotAlreadyUsedLocalPath: local_file_path_ url: url_ error: error_ ] )
+    if ( ![ self checkNotAlreadyUsedLocalPath: local_file_path_ url: url_ error: outError ] )
         return nil;
-
+    
     id result_ = [ downloadItems_ firstMatch: ^BOOL( id object_ )
     {
         JFFDownloadItem* item_ = object_;
         return [ item_.url isEqual: url_ ]
             && [ item_.localFilePath isEqualToString: local_file_path_ ];
     } ];
-
+    
     if ( !result_ )
     {
         result_ = [ [ self alloc ] initWithURL: url_ localFilePath: local_file_path_ ];
@@ -196,11 +196,11 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 +(BOOL)removeDownloadForURL:( NSURL* )url_
               localFilePath:( NSString* )local_file_path_
-                      error:( NSError** )error_
+                      error:( NSError** )outError
 {
     @autoreleasepool
     {
-        JFFDownloadItem* item_ = [ self downloadItemWithURL: url_ localFilePath: local_file_path_ error: error_ ];
+        JFFDownloadItem* item_ = [ self downloadItemWithURL: url_ localFilePath: local_file_path_ error: outError ];
         [ item_ removeDownload ];
         return item_ != nil;
     }
@@ -228,10 +228,10 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     self->_trafficCalculator = nil;
 }
 
--(void)notifyFinishWithError:( NSError* )error_
+-(void)notifyFinishWithError:( NSError* )error
 {
-    if ( error_ )
-        [ self->_multicastDelegate didFailLoadingOfDownloadItem: self error: error_ ];
+    if ( error )
+        [ self->_multicastDelegate didFailLoadingOfDownloadItem: self error: error ];
     else
         [ self->_multicastDelegate didFinishLoadingOfDownloadItem: self ];
 }
@@ -349,9 +349,8 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     loader_ = [ self asyncOperationForPropertyWithName: @"downloadedFlag"
                                         asyncOperation: loader_ ];
 
-    JFFDidFinishAsyncOperationHandler did_finish_operation_ = ^void( id result_, NSError* error_ )
-    {
-        [ self notifyFinishWithError: error_ ];
+    JFFDidFinishAsyncOperationHandler did_finish_operation_ = ^void( id result_, NSError* error ) {
+        [ self notifyFinishWithError:error];
     };
     return asyncOperationWithFinishCallbackBlock( loader_
                                                  , did_finish_operation_ );

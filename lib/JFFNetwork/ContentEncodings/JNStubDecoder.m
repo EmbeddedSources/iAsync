@@ -3,11 +3,11 @@
 @implementation JNStubDecoder
 
 -(NSData*)decodeData:( NSData* )encoded_data_
-               error:( NSError** )error_
+               error:( NSError** )outError
 {
-    NSParameterAssert( error_ );
-    *error_ = nil;
-
+    NSParameterAssert( outError );
+    *outError = nil;
+    
     return encoded_data_;
 }
 

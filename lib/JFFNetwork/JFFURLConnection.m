@@ -21,7 +21,7 @@
 
 -(void)handleResponseForReadStream:( CFReadStreamRef )stream_;
 -(void)handleData:( void* )buffer_ length:( NSUInteger )length_;
--(void)handleFinish:( NSError* )error_;
+-(void)handleFinish:( NSError* )error;
 
 @end
 
@@ -61,12 +61,12 @@ static void readStreamCallback( CFReadStreamRef stream_
         {
             [ weakSelf handleResponseForReadStream: stream_ ];
             
-            CFStreamError error_ = CFReadStreamGetError( stream_ );
-            NSString* errorDescription_ = [[NSString alloc] initWithFormat:@"CFStreamError domain: %ld", error_.domain];
+            CFStreamError error = CFReadStreamGetError( stream_ );
+            NSString* errorDescription_ = [[NSString alloc] initWithFormat:@"CFStreamError domain: %ld", error.domain];
             
             //TODO create separate error class
             [weakSelf handleFinish:[JFFError newErrorWithDescription:errorDescription_
-                                                                code:error_.error]];
+                                                                code:error.error]];
             break;
         }
         case kCFStreamEventEndEncountered:
@@ -244,13 +244,13 @@ static void readStreamCallback( CFReadStreamRef stream_
     }
 }
 
--(void)handleFinish:( NSError* )error_
+-(void)handleFinish:( NSError* )error
 {
     [ self closeReadStream ];
 
     if ( self.didFinishLoadingBlock )
     {
-        self.didFinishLoadingBlock( error_ );
+        self.didFinishLoadingBlock( error );
     }
     [ self clearCallbacks ];
 }

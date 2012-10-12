@@ -2,6 +2,6 @@
 
 @interface JNGzipErrorsLogger : NSObject
 
-+(NSString*)zipErrorMessageFromCode:(int)error_code_;
++(NSString*)zipErrorMessageFromCode:(int)errorCode;
 
 @end

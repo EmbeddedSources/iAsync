@@ -9,10 +9,10 @@
 @implementation JNZipDecoder
 
 -(NSData*)decodeData:( NSData*   )encoded_data_
-               error:( NSError** )error_
+               error:( NSError** )outError
 {
-    NSParameterAssert( error_ );
-    *error_ = nil;
+    NSParameterAssert( outError );
+    *outError = nil;
     if (nil == encoded_data_) {
         return nil;
     }
@@ -28,10 +28,10 @@
               , uncompress_result_
               , [ JNGzipErrorsLogger zipErrorMessageFromCode: uncompress_result_ ] );
 
-        *error_ = [ NSError errorWithDomain: kGzipErrorDomain 
-                                       code: uncompress_result_ 
-                                   userInfo: nil ];
-
+        *outError = [NSError errorWithDomain:kGzipErrorDomain
+                                        code:uncompress_result_
+                                    userInfo:nil];
+        
         return nil;
     }
 

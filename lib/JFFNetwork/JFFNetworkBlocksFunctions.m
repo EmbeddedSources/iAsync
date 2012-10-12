@@ -29,7 +29,8 @@ static JFFAsyncOperation privateGenericChunkedURLResponseLoader(JFFURLConnection
                                                                 JFFAnalyzer responseAnalyzer)
 {
     responseAnalyzer = [responseAnalyzer copy];
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>() {
+        //NSLog(@"url: %@", params.url);
         JFFAsyncOperationNetwork *asyncObj = [JFFAsyncOperationNetwork new];
         asyncObj.params           = params;
         asyncObj.responseAnalyzer = responseAnalyzer;

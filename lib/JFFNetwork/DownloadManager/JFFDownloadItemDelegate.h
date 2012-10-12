@@ -7,7 +7,7 @@
 @optional
 -(void)didProgressChangeForDownloadItem:( JFFDownloadItem* )download_item_;
 
--(void)didFailLoadingOfDownloadItem:( JFFDownloadItem* )download_item_ error:( NSError* )error_;
+-(void)didFailLoadingOfDownloadItem:( JFFDownloadItem* )download_item_ error:( NSError* )error;
 
 -(void)didFinishLoadingOfDownloadItem:( JFFDownloadItem* )download_item_;
 
