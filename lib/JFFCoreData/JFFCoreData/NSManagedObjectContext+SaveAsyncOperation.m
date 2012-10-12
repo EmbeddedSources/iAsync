@@ -4,24 +4,27 @@
 
 #import "NSArray+ObjectInManagedObjectContext.h"
 
+#import <JFFAsyncOperations/JFFAsyncOperations.h>
+
 @implementation NSManagedObjectContext (SaveAsyncOperation)
 
 - (JFFAsyncOperation)saveOperationLoader
 {
-    //TODO mm2
-    JFFCoreDataSyncOperation block = ^id<JFFObjectInManagedObjectContextProtocol>(NSManagedObjectContext *context,
-                                                                                  NSError **outError) {
+    __weak NSManagedObjectContext *__self = self;
+    
+    JFFSyncOperation syncChangeModel = ^id(NSError **outError) {
         
-        BOOL saved = [self save:outError];
+        BOOL saved = [__self save:outError];
         
-        if ([self.undoManager groupingLevel] > 0) {
-            [self.undoManager endUndoGrouping];
-            [self processPendingChanges];
+        if ([__self.undoManager groupingLevel] > 0) {
+            [__self.undoManager endUndoGrouping];
+            [__self processPendingChanges];
         }
         
         return saved?@[]:nil;
     };
-    return [JFFCoreDataAsyncOperationAdapter operationWithBlock:block];
+    
+    return asyncOperationWithSyncOperationInCurrentQueue(syncChangeModel);
 }
 
 - (NSUInteger)numberOfUnsavedChanges

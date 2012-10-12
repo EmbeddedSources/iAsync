@@ -49,7 +49,7 @@
     _contextForMainThread = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     _contextForMainThread.parentContext = self.mediateRootContext;
     
-    NSMergePolicy *mergePolicy = [[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyStoreTrumpMergePolicyType];
+    NSMergePolicy *mergePolicy = [[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType];
     [_contextForMainThread setMergePolicy:mergePolicy];
     
     _contextForMainThread.undoManager = [NSUndoManager new];

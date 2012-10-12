@@ -1,14 +1,9 @@
 #import "JFFCoreDataAsyncOperationAdapter.h"
 
 #import "JFFCoreDataProvider.h"
+#import "JFFObjectInManagedObjectContextProtocol.h"
 
 #import <JFFAsyncOperations/JFFAsyncOperations.h>
-
-@interface NSObject (JFFCoreDataAsyncOperationAdapter)
-
-- (id)objectInManagedObjectContext:(NSManagedObjectContext *)context;
-
-@end
 
 @interface JFFCoreDataAsyncOperationAdapter () <JFFAsyncOperationInterface>
 
@@ -45,8 +40,8 @@
         
         NSManagedObjectContext *currentContext = [[JFFCoreDataProvider sharedCoreDataProvider] contextForCurrentThread];
         
-        __block NSError *error = nil;
-        id result = self.operationBlock(currentContext, &error);
+        NSError *error = nil;
+        id<JFFObjectInManagedObjectContextProtocol> result = self.operationBlock(currentContext, &error);
         NSParameterAssert((result || error) && !(result && error));
         
         [[JFFCoreDataProvider sharedCoreDataProvider] saveMediationContext];

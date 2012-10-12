@@ -4,7 +4,10 @@
 
 - (id)objectInManagedObjectContext:(NSManagedObjectContext *)context
 {
-    return [context objectWithID:self.objectID];
+    id newObject = [context objectWithID:self.objectID];
+    [context refreshObject:newObject mergeChanges:YES];
+    
+    return newObject;
 }
 
 @end
