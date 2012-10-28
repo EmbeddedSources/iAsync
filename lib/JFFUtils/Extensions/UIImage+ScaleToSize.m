@@ -11,12 +11,11 @@
     CGSize originalSize = self.size;
     CGFloat scale = MAX(targetSize.width / originalSize.width, targetSize.height / originalSize.height);
     
-    UIGraphicsBeginImageContext(targetSize);
-    
-    
     CGRect thumbnailRect = CGRectZero;
     thumbnailRect.size.width  = originalSize.width  * scale;
     thumbnailRect.size.height = originalSize.height * scale;
+    
+    UIGraphicsBeginImageContextWithOptions(thumbnailRect.size, YES, 0.0);
     
     [self drawInRect:thumbnailRect];
     

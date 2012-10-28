@@ -212,19 +212,19 @@
                           url:(NSString *)url
                     contentID:(NSString *)contentID
 {
-    static NSString *addPhotoURL = @"https://api.foursquare.com/v2/photos/add";
+    static NSString *const addPhotoURL = @"https://api.foursquare.com/v2/photos/add";
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
     [params setObjectWithIgnoreNillValue:text forKey:@"postText"];
     [params setObjectWithIgnoreNillValue:url forKey:@"postUrl"];
     [params setObjectWithIgnoreNillValue:contentID forKey:@"postContentId"];
     [params setObjectWithIgnoreNillValue:checkinID forKey:@"checkinId"];
-    [params setObject:@"1" forKey:@"post*"];
+    params[@"post*"] = @"1";
     
     NSData *imageData = [NSData dataForHTTPPostWithData:UIImageJPEGRepresentation(image, 1.0) andFileName:@"name" andParameterName:@"photo"];
     NSData *httpBody = [imageData dataForHTTPPostByAppendingParameters:params];
     
-    JFFAsyncOperationBinder postLoaderBinder = ^JFFAsyncOperation (NSString *accessToken) {
+    JFFAsyncOperationBinder postLoaderBinder = ^JFFAsyncOperation(NSString *accessToken) {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoaderWithHTTPBody(addPhotoURL, httpBody, accessToken),
                                              asyncOperationBinderJsonDataParser(),
                                              [self serverResponseAnalizer],

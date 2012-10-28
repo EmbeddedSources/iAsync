@@ -20,7 +20,7 @@ JFFAsyncOperation codeURLLoader(NSString *redirectURI,
 
     static NSString *const urlFormat = @"https://instagram.com/oauth/authorize/?%@";
 
-    NSString *urlString = [[NSString alloc]initWithFormat:urlFormat,[params stringFromQueryComponents]];
+    NSString *urlString = [[NSString alloc]initWithFormat:urlFormat, [params stringFromQueryComponents]];
 
     NSURL *url = [urlString toURL];
     JFFAsyncOperation loader = [application asyncOperationWithApplicationURL:url];
@@ -38,7 +38,7 @@ JFFAsyncOperation authedUserDataLoader(NSString *redirectURI,
     assert([clientId     length]>0);
     assert([clientSecret length]>0);
     assert([code         length]>0);
-
+    
     NSDictionary *params = @{
     @"client_id"     : clientId             ,
     @"client_secret" : clientSecret         ,
@@ -46,13 +46,13 @@ JFFAsyncOperation authedUserDataLoader(NSString *redirectURI,
     @"redirect_uri"  : redirectURI          ,
     @"code"          : code                 ,
     };
-
+    
     static NSString *const urlString = @"https://api.instagram.com/oauth/access_token";
     NSURL *url = [urlString toURL];
-
-    NSData *data = [[params stringFromQueryComponents]dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSData *data = [params dataFromQueryComponents];
     JFFAsyncOperation loader = dataURLResponseLoader(url, data, nil);
-
+    
     return loader;
 }
 
@@ -62,17 +62,19 @@ JFFAsyncOperation userDataLoader(NSString *userID,
 {
     assert([userID      length]>0);
     assert([accessToken length]>0);
-
+    
     NSDictionary *params = @{
     @"access_token" : accessToken,
     };
-
+    
     static NSString *const urlStringFormat = @"https://api.instagram.com/v1/users/%@/?%@";
-    NSString *const urlString = [[NSString alloc]initWithFormat:urlStringFormat, userID, [params stringFromQueryComponents]];
+    NSString *const urlString = [[NSString alloc] initWithFormat:urlStringFormat,
+                                 userID,
+                                 [params stringFromQueryComponents]];
     NSURL *url = [urlString toURL];
-
+    
     JFFAsyncOperation loader = dataURLResponseLoader(url, nil, nil);
-
+    
     return loader;
 }
 
@@ -82,17 +84,17 @@ JFFAsyncOperation followersJSONDataLoader(NSString *userID,
 {
     assert([userID      length]>0);
     assert([accessToken length]>0);
-
+    
     NSDictionary *params = @{
     @"access_token" : accessToken,
     };
-
+    
     static NSString *const urlStringFormat = @"https://api.instagram.com/v1/users/%@/followed-by?%@";
     NSString *const urlString = [[NSString alloc]initWithFormat:urlStringFormat, userID, [params stringFromQueryComponents]];
     NSURL *url = [urlString toURL];
-
+    
     JFFAsyncOperation loader = dataURLResponseLoader(url, nil, nil);
-
+    
     return loader;
 }
 
@@ -102,17 +104,17 @@ JFFAsyncOperation mediaItemsDataLoader(NSString *userID,
 {
     assert([userID      length]>0);
     assert([accessToken length]>0);
-
+    
     NSDictionary *params = @{
     @"access_token" : accessToken,
     };
-
+    
     static NSString *const urlStringFormat = @"https://api.instagram.com/v1/users/%@/media/recent?%@";
     NSString *const urlString = [[NSString alloc]initWithFormat:urlStringFormat, userID, [params stringFromQueryComponents]];
     NSURL *url = [urlString toURL];
-
+    
     JFFAsyncOperation loader = dataURLResponseLoader(url, nil, nil);
-
+    
     return loader;
 }
 
@@ -124,18 +126,18 @@ JFFAsyncOperation commentMediaItemDataLoader(NSString *mediaItemId,
     assert([mediaItemId length]>0);
     assert([comment     length]>0);
     assert([accessToken length]>0);
-
+    
     NSDictionary *params = @{
     @"access_token" : accessToken,
     @"text"         : comment    ,
     };
-
+    
     static NSString *const urlStringFormat = @"https://api.instagram.com/v1/media/%@/comments";
-    NSString *const urlString = [[NSString alloc]initWithFormat:urlStringFormat, mediaItemId];
+    NSString *const urlString = [[NSString alloc] initWithFormat:urlStringFormat, mediaItemId];
     NSURL *url = [urlString toURL];
-
-    NSData *data = [[params stringFromQueryComponents]dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSData *data = [params dataFromQueryComponents];
     JFFAsyncOperation loader = dataURLResponseLoader(url, data, nil);
-
+    
     return loader;
 }

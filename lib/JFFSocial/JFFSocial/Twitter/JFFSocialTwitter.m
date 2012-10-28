@@ -21,23 +21,23 @@ static JFFAsyncOperation tritterAccountsLoader()
                                                                 JFFDidFinishAsyncOperationHandler doneCallback) {
         JFFAnalyzer twitterAccounts = ^id(id result, NSError **error) {
             ACAccountStore *accountStore = [ACAccountStore new];
-
+            
             ACAccountType *type = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-
+            
             NSArray *accounts = [accountStore accountsWithAccountType:type];
-
+            
             if ([accounts count]>0)
                 return @[accountStore, accounts];
-
+            
             if (error)
                 *error = [JFFNoTwitterAccountsError new];
             return nil;
         };
-
+        
         NSArray *accounts = twitterAccounts(nil, NULL);
-
+        
         JFFAsyncOperation loader;
-
+        
         if ([accounts count] > 0)
         {
             loader = asyncOperationWithResult(accounts);
@@ -49,20 +49,20 @@ static JFFAsyncOperation tritterAccountsLoader()
                                                    nil
                                                    );
         }
-
+        
         doneCallback = [doneCallback copy];
         JFFDidFinishAsyncOperationHandler doneCallbackWp = ^(id result, NSError *error)
         {
             if (doneCallback)
                 doneCallback(result, error);
-
+            
             if (globalDidLoginCallback)
                 globalDidLoginCallback(nil);
         };
-
+        
         return loader(progressCallback, cancelCallback, doneCallbackWp);
     };
-
+    
     return sequenceOfAsyncOperations(jffTwitterAccessRequestLoader(),
                                      accountsLoader,
                                      nil
@@ -129,13 +129,12 @@ static JFFAsyncOperation tritterAccountsLoader()
                                                                          parameters:nil
                                                                       requestMethod:TWRequestMethodGET
                                                                        ayncAnalizer:jsonObjectToTwitterUsersIds()];
-
-    JFFAsyncOperationBinder usersForIds = ^JFFAsyncOperation(NSArray *ids)
-    {
+    
+    JFFAsyncOperationBinder usersForIds = ^JFFAsyncOperation(NSArray *ids) {
         NSDictionary *params = @{
         @"user_id" : [ids componentsJoinedByString:@","],
         };
-
+        
         JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:@"https://api.twitter.com/1.1/users/lookup.json"
                                                                        parameters:params
                                                                     requestMethod:TWRequestMethodGET

@@ -20,6 +20,7 @@
     JFFTwitterAccount *result = [self new];
     
     if (result) {
+        
         result.twitterAccountId = jsonObject[@"id_str"];
         result.name             = jsonObject[@"name"  ];
         

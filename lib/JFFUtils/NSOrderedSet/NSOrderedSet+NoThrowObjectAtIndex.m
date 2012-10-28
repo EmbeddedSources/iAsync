@@ -8,6 +8,7 @@
     if ([self count] <= index)
         return nil;
     
+    //has no method objectAtIndexedSubscript
     return [self objectAtIndex:index];
 }
 

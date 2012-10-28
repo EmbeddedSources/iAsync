@@ -38,12 +38,10 @@
 {
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         JFFAsyncOperation accountLoader = [self authedUserLoaderWithCredentials:redentials];
         
-        JFFAsyncOperationBinder accountToAccessTokenBinder = ^JFFAsyncOperation(JFFInstagramAuthedAccount *account)
-        {
+        JFFAsyncOperationBinder accountToAccessTokenBinder = ^JFFAsyncOperation(JFFInstagramAuthedAccount *account) {
             return asyncOperationWithResult(account.instagramAccessToken);
         };
         
@@ -192,10 +190,8 @@
         return asyncOperationWithResult(result);
     };
     
-    JFFAsyncOperationBinder commentEachMediaItemsBinder = ^JFFAsyncOperation(NSArray *mediaItems)
-    {
-        NSArray *commentMediaItemsLoaders = [mediaItems map:^id(JFFInstagramMediaItem *mediaItem)
-        {
+    JFFAsyncOperationBinder commentEachMediaItemsBinder = ^JFFAsyncOperation(NSArray *mediaItems) {
+        NSArray *commentMediaItemsLoaders = [mediaItems map:^id(JFFInstagramMediaItem *mediaItem) {
             return [self commentMediaItemLoaderWithId:mediaItem.mediaItemId
                                               comment:message
                                           accessToken:accessToken];
@@ -227,13 +223,13 @@
                                                  message:(NSString *)message
 {
     JFFAsyncOperation accessTokenLoader = [self instagramAccessTokenLoaderForCredentials:credentials];
-
+    
     JFFAsyncOperationBinder notifyBinder = ^JFFAsyncOperation(NSString *accessToken) {
         return [self notifyUsersFollowersWithId:@"self"
                                         message:message
                                     accessToken:accessToken];
     };
-
+    
     return bindSequenceOfAsyncOperations(accessTokenLoader,
                                          notifyBinder,
                                          nil);

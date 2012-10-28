@@ -82,10 +82,10 @@ char jffSchedulerKey;
                               delta,
                               0 );
     
-    __unsafe_unretained JFFScheduler* unretainedSelf = self;
+    __unsafe_unretained JFFScheduler *unretainedSelf = self;
     
-    JFFSimpleBlockHolder* cancelTimerBlockHolder = [JFFSimpleBlockHolder new];
-    __unsafe_unretained JFFSimpleBlockHolder* weakCancelTimerBlockHolder = cancelTimerBlockHolder;
+    JFFSimpleBlockHolder *cancelTimerBlockHolder = [JFFSimpleBlockHolder new];
+    __unsafe_unretained JFFSimpleBlockHolder *unretainedCancelTimerBlockHolder = cancelTimerBlockHolder;
     cancelTimerBlockHolder.simpleBlock = ^void(void) {
         if (!timer)
             return;
@@ -94,7 +94,7 @@ char jffSchedulerKey;
         dispatch_release(timer);
         timer = NULL;
         
-        [unretainedSelf->_cancelBlocks removeObject:weakCancelTimerBlockHolder.simpleBlock];
+        [unretainedSelf->_cancelBlocks removeObject:unretainedCancelTimerBlockHolder.simpleBlock];
     };
     
     [self->_cancelBlocks addObject:cancelTimerBlockHolder.simpleBlock];

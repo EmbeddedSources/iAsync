@@ -103,7 +103,7 @@
     }
     
     [[self classesToTestOnLeaks]enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSNumber *num = [initialInstancesCouns objectAtIndex:idx];
+        NSNumber *num = initialInstancesCouns[idx];
         STAssertEqualObjects(num, @([obj instancesCount]), @"we got a leak");
     }];
 }
