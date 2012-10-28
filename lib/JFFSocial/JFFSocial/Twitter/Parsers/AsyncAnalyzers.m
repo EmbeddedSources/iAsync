@@ -9,13 +9,12 @@
 
 JFFAsyncOperationBinder asyncJSONObjectToTwitterTweets()
 {
-    JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSDictionary *jsonObject)
-    {
-        JFFSyncOperation loadDataBlock_ = ^id(NSError **outError)
-        {
+    JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSDictionary *jsonObject) {
+        
+        JFFSyncOperation loadDataBlock_ = ^id(NSError **outError) {
+            
             NSArray *tweets = [NSArray newTweetsWithJSONObject:jsonObject error:outError];
-            NSArray *accounts = [tweets map:^id(JFFTweet *tweet)
-            {
+            NSArray *accounts = [tweets map:^id(JFFTweet *tweet) {
                 return tweet.user;
             }];
             return accounts;
@@ -29,11 +28,19 @@ JFFAsyncOperationBinder asyncJSONObjectToTwitterTweets()
 JFFAsyncOperationBinder asyncJSONObjectToTwitterUsers()
 {
     JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSArray *jsonObject) {
-        JFFSyncOperation loadDataBlock_ = ^id(NSError **error) {
+        
+        if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+            //TODO crash hot fix !!!
+            NSError *error = [JFFError newErrorWithDescription:@"TOD fix error"];
+            return asyncOperationWithError(error);
+        }
+        
+        assert([jsonObject isKindOfClass:[NSArray class]]);
+        JFFSyncOperation loadDataBlock_ = ^id(NSError **outError) {
             NSArray *accounts = [jsonObject map:^id(id object, NSError *__autoreleasing *outError) {
                 return [JFFTwitterAccount newTwitterAccountWithTwitterJSONApiDictionary:object
                                                                                   error:outError];
-            } error:error];
+            } error:outError];
             return accounts;
         };
         return asyncOperationWithSyncOperation(loadDataBlock_);
