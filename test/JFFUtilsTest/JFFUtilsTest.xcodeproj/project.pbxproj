@@ -22,6 +22,7 @@
 		CE0656E6161EBF3D00926411 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0656E5161EBF3D00926411 /* Default-568h@2x.png */; };
 		CE57FBC21611F2EF00124D90 /* NSMutableSet_StorableSetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57FBC11611F2EF00124D90 /* NSMutableSet_StorableSetTest.m */; };
 		CE57FBE11611FA0900124D90 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 534CDFD914A8CA290068F4DF /* libstdc++.dylib */; };
+		CEBBC8D2162869C0006CFCFB /* BlocksRuntimeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBC8D1162869C0006CFCFB /* BlocksRuntimeTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		CE0656E3161EBDFB00926411 /* NSNumber+FSStorableTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+FSStorableTest.m"; sourceTree = "<group>"; };
 		CE0656E5161EBF3D00926411 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CE57FBC11611F2EF00124D90 /* NSMutableSet_StorableSetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableSet_StorableSetTest.m; sourceTree = "<group>"; };
+		CEBBC8D1162869C0006CFCFB /* BlocksRuntimeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlocksRuntimeTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 				7E7225DD1588891400210CBE /* DevNullTest.m */,
 				CE57FBC11611F2EF00124D90 /* NSMutableSet_StorableSetTest.m */,
 				CE0656E3161EBDFB00926411 /* NSNumber+FSStorableTest.m */,
+				CEBBC8D1162869C0006CFCFB /* BlocksRuntimeTest.m */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
@@ -367,6 +370,7 @@
 				7E7225DE1588891400210CBE /* DevNullTest.m in Sources */,
 				CE57FBC21611F2EF00124D90 /* NSMutableSet_StorableSetTest.m in Sources */,
 				CE0656E4161EBDFB00926411 /* NSNumber+FSStorableTest.m in Sources */,
+				CEBBC8D2162869C0006CFCFB /* BlocksRuntimeTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,17 +4,16 @@
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
 @interface AsyncMonadTest : GHTestCase
-
 @end
 
 @implementation AsyncMonadTest
 
 -(void)setUp
 {
-    [ JFFCancelAsyncOperationBlockHolder    enableInstancesCounting ];
-    [ JFFDidFinishAsyncOperationBlockHolder enableInstancesCounting ];
-
-    [ JFFAsyncOperationManager enableInstancesCounting ];
+    [JFFCancelAsyncOperationBlockHolder    enableInstancesCounting];
+    [JFFDidFinishAsyncOperationBlockHolder enableInstancesCounting];
+    
+    [JFFAsyncOperationManager enableInstancesCounting];
 }
 
 -(void)testNormalFinish
@@ -66,15 +65,14 @@
 {
     @autoreleasepool
     {
-        JFFAsyncOperationManager* firstLoader_  = [ JFFAsyncOperationManager new ];
-        JFFAsyncOperationManager* secondLoader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager* firstLoader_  = [JFFAsyncOperationManager new];
+        JFFAsyncOperationManager* secondLoader_ = [JFFAsyncOperationManager new];
         JFFAsyncOperation secondLoaderBlock_ = secondLoader_.loader;
-
+        
         __block NSError* finalError_ = nil;
         __block BOOL binderCalled_ = NO;
-
-        JFFAsyncOperationBinder secondLoaderBinder_ = ^JFFAsyncOperation( id firstResult_ )
-        {
+        
+        JFFAsyncOperationBinder secondLoaderBinder_ = ^JFFAsyncOperation( id firstResult_ ) {
             binderCalled_ = YES;
             return secondLoaderBlock_;
         };

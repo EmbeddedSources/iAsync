@@ -32,6 +32,7 @@
 		8D29EF9713BE066900041B6A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D29EF9513BE066900041B6A /* InfoPlist.strings */; };
 		8D29EF9913BE066900041B6A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D29EF9813BE066900041B6A /* main.m */; };
 		8D29EFB313BE070F00041B6A /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D29EFB213BE070F00041B6A /* GHUnitIOS.framework */; };
+		CEBCFC1E163D42AB0009772F /* JFFLimitedLoadersQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCFC1D163D42AB0009772F /* JFFLimitedLoadersQueueTest.m */; };
 		CED00222161993D200368E7D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED00221161993D200368E7D /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -188,6 +189,7 @@
 		8D29EF9A13BE066900041B6A /* JFFAsyncOperationsTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFAsyncOperationsTest-Prefix.pch"; sourceTree = "<group>"; };
 		8D29EFB213BE070F00041B6A /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../../frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
 		8D29EFB513BE08F700041B6A /* MockTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockTest.m; sourceTree = "<group>"; };
+		CEBCFC1D163D42AB0009772F /* JFFLimitedLoadersQueueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFLimitedLoadersQueueTest.m; sourceTree = "<group>"; };
 		CED00221161993D200368E7D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -313,6 +315,7 @@
 				65359B4D151A6DB90099D6FE /* AsyncOperationWithDelayTest.m */,
 				65359BD5151A81C40099D6FE /* ParalelBlockTest.m */,
 				1B93690515650A5A00F8A394 /* JFFAsyncOperationUtilsTest.m */,
+				CEBCFC1D163D42AB0009772F /* JFFLimitedLoadersQueueTest.m */,
 			);
 			path = JFFAsyncOperationsTest;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				1BEE3AFF15EFA9D40024D249 /* CachedAsyncOperationsTest.m in Sources */,
 				1BEE3B0015EFA9D40024D249 /* AsyncOperationBinder.m in Sources */,
 				1BEE3B0115EFA9D40024D249 /* AsyncOperationWithDelayTest.m in Sources */,
+				CEBCFC1E163D42AB0009772F /* JFFLimitedLoadersQueueTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
