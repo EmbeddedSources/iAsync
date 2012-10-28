@@ -2,104 +2,59 @@
 
 #define FOURSQUARE_VERSION @"20120913"
 
-@interface JFFAsyncFoursquareRequest : NSObject <JFFAsyncOperationInterface>
-
-@property (nonatomic) NSString *requestURL;
-@property (nonatomic) NSString *httpMethod;
-@property (nonatomic) NSString *accessToken;
-@property (nonatomic) NSDictionary *parameters;
-
-@property (nonatomic) NSData *httpBody;
-
-@property (copy, nonatomic) JFFCancelAsyncOperation cancelRequestOperation;
-
-@end
-
-
-@implementation JFFAsyncFoursquareRequest
-
-- (NSDictionary *)requaredRequestParameters
+static NSDictionary *requaredParamsWithAccessToken(NSString *accessToken)
 {
-    return @{ @"v" : FOURSQUARE_VERSION,
-    @"oauth_token" : self.accessToken };
+    return @{
+    @"v" : FOURSQUARE_VERSION,
+    @"oauth_token" : accessToken
+    };
 }
 
-- (NSDictionary *)fullRequestParameters
+static JFFAsyncOperation generalFoursquareRequestLoader(NSString *requestURL,
+                                                        NSString *httpMethod,
+                                                        NSData *httpBody,
+                                                        NSString *accessToken,
+                                                        NSDictionary *parameters)
 {
-    return [[self requaredRequestParameters] dictionaryByAddingObjectsFromDictionary:self.parameters];
-}
-
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
-{
-    handler = [handler copy];
+    assert(accessToken);
     
     JFFURLConnectionParams *params = [JFFURLConnectionParams new];
     
-    NSString *paramsString = [[self fullRequestParameters] stringFromQueryComponents];
+    NSDictionary *requaredParams = requaredParamsWithAccessToken(accessToken);
     
-    params.httpMethod = self.httpMethod;
+    NSString *paramsString = [[requaredParams dictionaryByAddingObjectsFromDictionary:parameters] stringFromQueryComponents];
     
-    if ([self.httpMethod isEqualToString:@"POST"])
-    {
-        params.url = [self.requestURL toURL];
-        if (self.httpBody)
-        {
-            NSDictionary *requaredParams = [self requaredRequestParameters];
-            params.httpBody = [self.httpBody dataForHTTPPostByAppendingParameters:requaredParams];
+    params.httpMethod = httpMethod;
+    
+    if ([httpMethod isEqualToString:@"POST"]) {
+        params.url = [requestURL toURL];
+        if (httpBody) {
+            //may should pass (requaredParams + parameters) instead off requaredParams here
+            params.httpBody = [httpBody dataForHTTPPostByAppendingParameters:requaredParams];
+        } else {
+            httpBody = [paramsString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
         }
-        else
-        {
-            self.httpBody = [paramsString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-        }
+    } else {
+        params.url = [ [NSString stringWithFormat:@"%@?%@", requestURL, paramsString] toURL];
     }
-    else
-    {
-        params.url = [ [NSString stringWithFormat:@"%@?%@", self.requestURL, paramsString] toURL];
-    }
-
-    JFFAsyncOperation dataLoader = genericDataURLResponseLoader(params);
     
-    self.cancelRequestOperation = dataLoader (nil, nil, ^(id result, NSError *error)
-                                              {
-                                                  handler (result, error);
-                                              });
+    return genericDataURLResponseLoader(params);
 }
-
-- (void)cancel:(BOOL)canceled
-{
-    if (self.cancelRequestOperation) {
-        self.cancelRequestOperation (canceled);
-    }
-}
-
-@end
-
 
 JFFAsyncOperation jffFoursquareRequestLoader (NSString *requestURL, NSString *httpMethod, NSString *accessToken, NSDictionary *parameters)
 {
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
-        JFFAsyncFoursquareRequest *request = [JFFAsyncFoursquareRequest new];
-        request.requestURL = requestURL;
-        request.httpMethod = httpMethod;
-        request.accessToken = accessToken;
-        request.parameters = parameters;
-        return request;
-    };
-    
-    return buildAsyncOperationWithAdapterFactory(factory);
+    return generalFoursquareRequestLoader(requestURL,
+                                          httpMethod,
+                                          nil,
+                                          accessToken,
+                                          parameters);
 }
 
 JFFAsyncOperation jffFoursquareRequestLoaderWithHTTPBody (NSString *requestURL, NSData *httpBody, NSString *accessToken)
 {
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
-        JFFAsyncFoursquareRequest *request = [JFFAsyncFoursquareRequest new];
-        request.requestURL  = requestURL;
-        request.httpBody    = httpBody;
-        request.accessToken = accessToken;
-        request.httpMethod  = @"POST";
-        return request;
-    };
-    
-    return buildAsyncOperationWithAdapterFactory(factory);
+    return generalFoursquareRequestLoader(requestURL,
+                                          @"POST",
+                                          httpBody,
+                                          accessToken,
+                                          nil);
 }
