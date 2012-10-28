@@ -4,10 +4,10 @@
 
 -(void)dealloc
 {
-    [ self->_nativeLoader release ];
-    [ self->_wrappedCancel release ];
-
-    [ super dealloc ];
+    [_nativeLoader  release];
+    [_wrappedCancel release];
+    
+    [super dealloc];
 }
 
 @end

@@ -14,9 +14,9 @@
 
 -(void)notifyCallbackWithResult:(id)result error:(NSError *)error
 {
-    if (self->_completionHandler) {
-        self->_completionHandler(result, error);
-        self->_completionHandler = nil;
+    if (_completionHandler) {
+        _completionHandler(result, error);
+        _completionHandler = nil;
     }
 }
 
