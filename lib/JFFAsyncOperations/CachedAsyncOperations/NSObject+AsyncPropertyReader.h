@@ -37,4 +37,7 @@ typedef JFFPropertyExtractor *(^JFFPropertyExtractorFactoryBlock)(void);
 
 - (BOOL)isLoadingPropertyForPropertyName:(NSString *)name;
 
++ (JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
+                                   withArgument:(id< NSCopying, NSObject >)argument;
+
 @end

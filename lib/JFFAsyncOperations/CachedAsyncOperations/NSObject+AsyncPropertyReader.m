@@ -7,8 +7,8 @@
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 
 #import "NSObject+PropertyExtractor.h"
+#import "NSThread+AsyncPropertyReader.h"
 
-#include <objc/runtime.h>
 #include <assert.h>
 
 @interface JFFCachePropertyExtractor : JFFPropertyExtractor
@@ -279,24 +279,24 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
                              didFinishLoadDataBlock: nil ];
 }
 
--(JFFAsyncOperation)asyncOperationForPropertyWithName:( NSString* )propertyName_
-                                       asyncOperation:( JFFAsyncOperation )asyncOperation_
-                               didFinishLoadDataBlock:( JFFDidFinishAsyncOperationHandler )didFinishOperation_
+- (JFFAsyncOperation)asyncOperationForPropertyWithName:(NSString *)propertyName
+                                        asyncOperation:(JFFAsyncOperation)asyncOperation
+                                didFinishLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didFinishOperation
 {
-    NSParameterAssert( propertyName_ );
-    JFFPropertyPath* propertyPath_ = [ [ JFFPropertyPath alloc ] initWithName: propertyName_ key: nil ];
-
-    return [ self privateAsyncOperationForPropertyWithPath: propertyPath_
-                                            asyncOperation: asyncOperation_
-                                    didFinishLoadDataBlock: didFinishOperation_ ];
+    NSParameterAssert(propertyName);
+    JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:propertyName key:nil];
+    
+    return [self privateAsyncOperationForPropertyWithPath:propertyPath
+                                           asyncOperation:asyncOperation
+                                   didFinishLoadDataBlock:didFinishOperation];
 }
 
--(JFFAsyncOperation)asyncOperationForPropertyWithPath:( JFFPropertyPath* )propertyPath_
-                                       asyncOperation:( JFFAsyncOperation )asyncOperation_
+- (JFFAsyncOperation)asyncOperationForPropertyWithPath:(JFFPropertyPath *)propertyPath
+                                        asyncOperation:(JFFAsyncOperation)asyncOperation
 {
-    return [ self asyncOperationForPropertyWithPath: propertyPath_
-                                     asyncOperation: asyncOperation_
-                             didFinishLoadDataBlock: nil ];
+    return [self asyncOperationForPropertyWithPath:propertyPath
+                                    asyncOperation:asyncOperation
+                            didFinishLoadDataBlock:nil];
 }
 
 - (JFFAsyncOperation)asyncOperationForPropertyWithPath:(JFFPropertyPath *)propertyPath
@@ -309,21 +309,28 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
                                    didFinishLoadDataBlock:didFinishOperation];
 }
 
--(JFFAsyncOperation)asyncOperationMergeLoaders:( JFFAsyncOperation )asyncOperation_
-                                  withArgument:( id< NSCopying, NSObject > )argument_
+-(JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
+                                  withArgument:(id< NSCopying, NSObject >)argument
 {
-    static NSString* const name_ = @".__JFF_MERGE_LOADERS_BY_ARGUMENTS__.";
-    JFFPropertyPath* propertyPath_ = [ [ JFFPropertyPath alloc ] initWithName: name_
-                                                                          key: argument_ ];
-    JFFPropertyExtractorFactoryBlock factory_ = ^JFFPropertyExtractor*( void )
-    {
-        return [ JFFCachePropertyExtractor new ];
+    static NSString *const name = @".__JFF_MERGE_LOADERS_BY_ARGUMENTS__.";
+    JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:name
+                                                                      key:argument];
+    JFFPropertyExtractorFactoryBlock factory = ^JFFPropertyExtractor*{
+        return [JFFCachePropertyExtractor new];
     };
-
-    return [self asyncOperationForPropertyWithPath:propertyPath_
-                     propertyExtractorFactoryBlock:factory_
-                                    asyncOperation:asyncOperation_
+    
+    return [self asyncOperationForPropertyWithPath:propertyPath
+                     propertyExtractorFactoryBlock:factory
+                                    asyncOperation:asyncOperation
                             didFinishLoadDataBlock:nil];
+}
+
++ (JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
+                                   withArgument:(id< NSCopying, NSObject >)argument
+{
+    id object = [[NSThread currentThread] lazyLoaderMergeObject];
+    return [object asyncOperationMergeLoaders:asyncOperation
+                                 withArgument:argument];
 }
 
 @end
