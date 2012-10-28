@@ -9,6 +9,8 @@
 #import <JFFAsyncOperations/NSObject+AutoCancelAsyncOperation.h>
 #import <JFFAsyncOperations/JFFAsyncOperationContinuity.h>
 #import <JFFAsyncOperations/JFFAsyncOperationHelpers.h>
+
+#import <JFFAsyncOperations/LoadBalancer/JFFLimitedLoadersQueue.h>
 #import <JFFAsyncOperations/LoadBalancer/JFFAsyncOperationLoadBalancer.h>
 
 #import <JFFAsyncOperations/Extensions/NSArray+AsyncMap.h>
