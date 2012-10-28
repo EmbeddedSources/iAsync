@@ -34,21 +34,31 @@ static char imageURLKey;
     self.image           = placeholder;
     self.jffAsycImageURL = url;
     
-    __weak UIImageView* weakSelf = self;
+    __weak UIImageView *weakSelf = self;
     
     JFFDidFinishAsyncOperationHandler doneCallback = ^(UIImage *result, NSError *error) {
         if (result)
             [weakSelf jffSetImage:result URL:url];
     };
     
+    JFFThumbnailStorage *storage = [JFFThumbnailStorage sharedStorage];
+    
     //TODO use own view contentMode
     UIViewContentMode contentMode = UIViewContentModeScaleAspectFill;
     
-    JFFThumbnailStorage *storage = [JFFThumbnailStorage sharedStorage];
-    
-    [storage thumbnailLoaderForUrl:url
-                      scaledToSize:self.bounds.size
-                       contentMode:contentMode](nil, nil, doneCallback);
+    if (self.contentMode == UIViewContentModeScaleAspectFill
+        || self.contentMode == UIViewContentModeScaleAspectFit
+        || self.contentMode == UIViewContentModeScaleToFill)
+    {
+        [storage thumbnailLoaderForUrl:url
+                          scaledToSize:self.bounds.size
+                           contentMode:contentMode](nil, nil, doneCallback);
+    }
+    else
+    {
+        [storage thumbnailLoaderForUrl:url](nil, nil, doneCallback);
+    }
 }
+
 
 @end

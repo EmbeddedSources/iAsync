@@ -47,21 +47,20 @@ static char property_key_;
     return ( JUIWebViewDelegateProxy* )objc_getAssociatedObject( self, &property_key_ );
 }
 
--(void)setProxy:( JUIWebViewDelegateProxy* )proxy_
+- (void)setProxy:(JUIWebViewDelegateProxy *)proxy
 {
-    objc_setAssociatedObject( self, &property_key_, proxy_, OBJC_ASSOCIATION_RETAIN_NONATOMIC ) ;   
+    objc_setAssociatedObject(self, &property_key_, proxy, OBJC_ASSOCIATION_RETAIN_NONATOMIC) ;
 }
 
 -(void)hideWhenLoadingHTMLString:( NSString* )html_string_
 {
-    if ( !self.proxy )
-    {
-        self.proxy = [ JUIWebViewDelegateProxy new ];
+    if (!self.proxy) {
+        self.proxy = [JUIWebViewDelegateProxy new];
         self.proxy.webView = self;
     }
     self.delegate = self.proxy;
     self.hidden = YES;
-    [ self loadHTMLString: html_string_ baseURL: nil ];
+    [self loadHTMLString:html_string_ baseURL:nil];
 }
 
 @end

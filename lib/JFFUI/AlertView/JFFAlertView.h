@@ -29,6 +29,9 @@
 + (void)showAlertWithTitle:(NSString *)title
                description:(NSString *)description;
 
++ (void)showExclusiveAlertWithTitle:(NSString *)title
+                        description:(NSString *)description;
+
 + (void)showErrorWithDescription:(NSString *)description;
 + (void)showExclusiveErrorWithDescription:(NSString *)description;
 + (void)showInformationWithDescription:(NSString *)description;
