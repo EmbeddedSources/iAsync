@@ -2,21 +2,20 @@
 
 @implementation JFFCancelAsyncOperationBlockHolder
 
--(void)performCancelBlockOnceWithArgument:( BOOL )cancel_
+- (void)performCancelBlockOnceWithArgument:(BOOL)cancel
 {
-    if ( !self.cancelBlock )
+    if (!self.cancelBlock)
         return;
-
-    JFFCancelAsyncOperation block_ = self.cancelBlock;
+    
+    JFFCancelAsyncOperation block = self.cancelBlock;
     self.cancelBlock = nil;
-    block_( cancel_ );
+    block(cancel);
 }
 
--(JFFCancelAsyncOperation)onceCancelBlock
+- (JFFCancelAsyncOperation)onceCancelBlock
 {
-    return ^void( BOOL cancel_ )
-    {
-        [ self performCancelBlockOnceWithArgument: cancel_ ];
+    return ^void(BOOL cancel) {
+        [self performCancelBlockOnceWithArgument:cancel];
     };
 }
 

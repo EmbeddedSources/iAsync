@@ -5,21 +5,21 @@
 - (id)initWithName:(NSString *)name
                key:(id< NSCopying, NSObject >)key
 {
-    self = [ super init ];
+    self = [super init];
     
     if (self) {
-        self->_name = name;
-        self->_key  = key;
+        _name = name;
+        _key  = key;
     }
     
     return self;
 }
 
--(NSString*)description
+- (NSString *)description
 {
     return [[NSString alloc] initWithFormat:@"<JFFPropertyPath name: %@ key: %@>",
             self.name,
-            self.key ];
+            self.key];
 }
 
 @end

@@ -15,55 +15,55 @@
 
 -(void)dealloc
 {
-    [self->_activeLoadersData  release];
-    [self->_pendingLoadersData release];
-    [self->_name               release];
+    [_activeLoadersData  release];
+    [_pendingLoadersData release];
+    [_name               release];
     
     [super dealloc];
 }
 
 -(NSMutableArray*)activeLoadersData
 {
-    if (!self->_activeLoadersData) {
-        self->_activeLoadersData = [NSMutableArray new];
+    if (!_activeLoadersData) {
+        _activeLoadersData = [NSMutableArray new];
     }
-    return self->_activeLoadersData;
+    return _activeLoadersData;
 }
 
 -(NSMutableArray*)pendingLoadersData
 {
-    if (!self->_pendingLoadersData) {
-        self->_pendingLoadersData = [NSMutableArray new];
+    if (!_pendingLoadersData) {
+        _pendingLoadersData = [NSMutableArray new];
     }
-    return self->_pendingLoadersData;
+    return _pendingLoadersData;
 }
 
 @end
 
 @implementation JFFContextLoaders ( ActiveLoaders )
 
--(NSUInteger)activeLoadersNumber {
-    return [self->_activeLoadersData count];
+- (NSUInteger)activeLoadersNumber {
+    return [_activeLoadersData count];
 }
 
-- (void)addActiveNativeLoader:(JFFAsyncOperation)native_loader_
+- (void)addActiveNativeLoader:(JFFAsyncOperation)nativeLoader
                 wrappedCancel:(JFFCancelAsyncOperation)cancel_
 {
-    JFFActiveLoaderData* data_ = [ JFFActiveLoaderData new ];
-    data_.nativeLoader  = native_loader_;
-    data_.wrappedCancel = cancel_;
-
-    [ self.activeLoadersData addObject: data_ ];
-
-    [ data_ release ];
+    JFFActiveLoaderData *data = [JFFActiveLoaderData new];
+    data.nativeLoader  = nativeLoader;
+    data.wrappedCancel = cancel_;
+    
+    [self.activeLoadersData addObject:data];
+    
+    [data release];
 }
 
-- (JFFActiveLoaderData*)activeLoaderDataForNativeLoader:(JFFAsyncOperation)native_loader_
+- (JFFActiveLoaderData*)activeLoaderDataForNativeLoader:(JFFAsyncOperation)nativeLoader
 {
-    return [ self.activeLoadersData firstMatch: ^BOOL(id object_) {
+    return [self.activeLoadersData firstMatch: ^BOOL(id object_) {
         JFFActiveLoaderData* loader_data_ = object_;
-        return loader_data_.nativeLoader == native_loader_;
-    } ];
+        return loader_data_.nativeLoader == nativeLoader;
+    }];
 }
 
 -(void)cancelActiveNativeLoader:( JFFAsyncOperation )native_loader_ cancel:( BOOL )canceled_

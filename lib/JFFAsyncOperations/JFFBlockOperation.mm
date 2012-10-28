@@ -19,31 +19,31 @@
 
 - (void)dealloc
 {
-    NSAssert(!self->_didLoadDataBlock, @"should be nil");
-    NSAssert(!self->_progressBlock   , @"should be nil");
-    NSAssert(!self->_loadDataBlock   , @"should be nil");
+    NSAssert(!_didLoadDataBlock, @"should be nil");
+    NSAssert(!_progressBlock   , @"should be nil");
+    NSAssert(!_loadDataBlock   , @"should be nil");
     
-    dispatch_release(self->_currentQueue);
-    self->_currentQueue = NULL;
+    dispatch_release(_currentQueue);
+    _currentQueue = NULL;
 }
 
 - (id)initWithLoadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
            didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
               progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
-               currentQueue:(dispatch_queue_t )currentQueue
+               currentQueue:(dispatch_queue_t)currentQueue
                     barrier:(BOOL)barrier
 {
-    self = [ super init ];
+    self = [super init];
     
     if (self) {
         self.loadDataBlock    = loadDataBlock;
         self.didLoadDataBlock = didLoadDataBlock;
         self.progressBlock    = progressBlock;
         
-        self->_currentQueue = currentQueue;
-        dispatch_retain(self->_currentQueue);
+        _currentQueue = currentQueue;
+        dispatch_retain(_currentQueue);
         
-        self->_barrier = barrier;
+        _barrier = barrier;
     }
     
     return self;
@@ -51,28 +51,28 @@
 
 -(void)finalizeOperations
 {
-    self->_finishedOrCanceled = YES;
+    _finishedOrCanceled = YES;
 
-    self->_loadDataBlock    = nil;
-    self->_didLoadDataBlock = nil;
-    self->_progressBlock    = nil;
+    _loadDataBlock    = nil;
+    _didLoadDataBlock = nil;
+    _progressBlock    = nil;
 }
 
 - (void)didFinishOperationWithResult:(id)result
                                error:(NSError *)error
 {
-    if ( self.finishedOrCanceled )
+    if (self.finishedOrCanceled)
         return;
     
     self.didLoadDataBlock(result, error);
     
-    [ self finalizeOperations ];
+    [self finalizeOperations];
 }
 
 - (void)progressWithInfo:(id)info
 {
-    if (self->_progressBlock)
-        self->_progressBlock(info);
+    if (_progressBlock)
+        _progressBlock(info);
 }
 
 - (void)cancel
@@ -81,7 +81,7 @@
         return;
     
     dispatch_queue_t currentQueue = dispatch_get_current_queue();
-    NSAssert(currentQueue == self->_currentQueue, @"Invalid current queue queue");
+    NSAssert(currentQueue == _currentQueue, @"Invalid current queue queue");
     
     [self finalizeOperations];
 }
@@ -89,21 +89,21 @@
 - (void)performBackgroundOperationInQueue:(dispatch_queue_t)queue
                             loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
 {
-    void (*dispatchAsyncMethod)(dispatch_queue_t, dispatch_block_t) = self->_barrier
-    ? &dispatch_barrier_async
-    : &dispatch_async;
+    void (*dispatchAsyncMethod)(dispatch_queue_t, dispatch_block_t) = _barrier
+    ?&dispatch_barrier_async
+    :&dispatch_async;
     
-    //static int val;
-    //NSLog(@"dispatchAsyncMethod+: %d", ++val);
+//    static int val;
+//    NSLog(@"dispatchAsyncMethod+: %d", ++val);
     dispatchAsyncMethod(queue, ^{
-        if ( self.finishedOrCanceled )
+        if (self.finishedOrCanceled)
             return;
         
         NSError *error;
         id opResult;
         @try {
             JFFAsyncOperationProgressHandler progressCallback = ^(id info) {
-                dispatch_async(self->_currentQueue, ^ {
+                dispatch_async(_currentQueue, ^ {
                     [self progressWithInfo:info];
                 });
             };
@@ -120,8 +120,8 @@
             error = [JFFError newErrorWithDescription:description];
         }
         
-        dispatch_async( self->_currentQueue, ^ {
-            //NSLog(@"dispatchAsyncMethod+: %d", --val);
+        dispatch_async(_currentQueue, ^ {
+//            NSLog(@"dispatchAsyncMethod+: %d", --val);
             [self didFinishOperationWithResult:opResult error:error];
         });
     });

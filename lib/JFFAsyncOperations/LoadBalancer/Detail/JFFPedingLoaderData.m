@@ -4,12 +4,12 @@
 
 -(void)dealloc
 {
-    [ self->_nativeLoader     release ];
-    [ self->_progressCallback release ];
-    [ self->_cancelCallback   release ];
-    [ self->_doneCallback     release ];
-
-    [ super dealloc ];
+    [_nativeLoader     release];
+    [_progressCallback release];
+    [_cancelCallback   release];
+    [_doneCallback     release];
+    
+    [super dealloc];
 }
 
 @end

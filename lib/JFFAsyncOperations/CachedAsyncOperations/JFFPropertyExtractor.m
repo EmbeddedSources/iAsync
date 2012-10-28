@@ -30,28 +30,26 @@
 {
     self.objectPropertyData = nil;
 
-    jff_retainAutorelease(self->_object);
-    self->_object = nil;
+    jff_retainAutorelease(_object);
+    _object = nil;
     //self.propertyPath = nil;
 }
 
 -(SEL)propertyGetSelector
 {
-    if (!self->_propertyGetSelector)
-    {
-        self->_propertyGetSelector = NSSelectorFromString(self.propertyPath.name);
+    if (!_propertyGetSelector) {
+        _propertyGetSelector = NSSelectorFromString(self.propertyPath.name);
     }
-    return self->_propertyGetSelector;
+    return _propertyGetSelector;
 }
 
 -(SEL)propertySetSelector
 {
-    if ( !self->_propertySetSelector )
-    {
-        NSString* setPropertyName_ = [ self.propertyPath.name propertySetNameForPropertyName ];
-        self->_propertySetSelector = NSSelectorFromString( setPropertyName_ );
+    if (!_propertySetSelector) {
+        NSString *setPropertyName = [self.propertyPath.name propertySetNameForPropertyName];
+        _propertySetSelector = NSSelectorFromString(setPropertyName);
     }
-    return self->_propertySetSelector;
+    return _propertySetSelector;
 }
 
 - (id)property
@@ -62,36 +60,32 @@
 
 - (void)setProperty:(id)property
 {
-    if (!self.propertyPath.key)
-    {
+    if (!self.propertyPath.key) {
         objc_msgSend(self.object, self.propertySetSelector, property);
         return;
     }
 
     NSMutableDictionary* dict = objc_msgSend(self.object, self.propertyGetSelector);
-
-    if ( !dict )
-    {
+    
+    if (!dict) {
         dict = [NSMutableDictionary new];
         objc_msgSend(self.object, self.propertySetSelector, dict);
     }
-
-    if (property)
-    {
+    
+    if (property) {
         [dict setObject:property forKey:self.propertyPath.key];
         return;
     }
-
+    
     [dict removeObjectForKey:self.propertyPath.key];
 }
 
 ////////////////////////OBJECT RELATED DATA///////////////////////
 
-- (JFFObjectRelatedPropertyData*)objectPropertyData
+- (JFFObjectRelatedPropertyData *)objectPropertyData
 {
-    JFFObjectRelatedPropertyData* data = [self.object propertyDataForPropertPath:self.propertyPath];
-    if (!data)
-    {
+    JFFObjectRelatedPropertyData *data = [self.object propertyDataForPropertPath:self.propertyPath];
+    if (!data) {
         data = [JFFObjectRelatedPropertyData new];
         [self.object setPropertyData:data forPropertPath:self.propertyPath];
     }
