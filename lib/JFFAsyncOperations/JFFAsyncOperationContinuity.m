@@ -81,6 +81,7 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
                                             JFFAsyncOperation secondLoader,
                                             ...)
 {
+    assert(firstLoader);
     firstLoader = [firstLoader copy];
     JFFAsyncOperationBinder firstBlock = ^JFFAsyncOperation(id result) {
         return firstLoader;
@@ -572,7 +573,7 @@ JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperations(JFFAsyncOperation first
          nextBlock = va_arg(args, JFFAsyncOperation)) {
         [loaders addObject:[nextBlock copy]];
     }
-    va_end( args );
+    va_end(args);
     
     return failOnFirstErrorGroupOfAsyncOperationsArray(loaders);
 }
@@ -612,16 +613,17 @@ JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
     };
 }
 
+//TODO test it, on leaks also
 JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
-                                       JFFResultPredicateBlock continuePredicate,
+                                       JFFContinueLoaderWithResult continueLoaderBuilder,
                                        NSTimeInterval delay,
                                        NSInteger maxRepeatCount)
 {
-    assert(nativeLoader     );// can not be nil
-    assert(continuePredicate);// can not be nil
+    assert(nativeLoader         );// can not be nil
+    assert(continueLoaderBuilder);// can not be nil
     
-    nativeLoader      = [nativeLoader      copy];
-    continuePredicate = [continuePredicate copy];
+    nativeLoader          = [nativeLoader          copy];
+    continueLoaderBuilder = [continueLoaderBuilder copy];
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
@@ -639,7 +641,9 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
         JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
                                                               NSError *error,
                                                               JFFDidFinishAsyncOperationHandler doneCallback) {
-            if (!continuePredicate(result, error) || currentLeftCount == 0) {
+            
+            JFFAsyncOperation newLoader = continueLoaderBuilder(result, error);
+            if (!newLoader || currentLeftCount == 0) {
                 finishHookHolder = nil;
                 if (doneCallback)
                     doneCallback(result, error);
@@ -648,7 +652,7 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
                 ?currentLeftCount - 1
                 :currentLeftCount;
                 
-                JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(nativeLoader,
+                JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(newLoader,
                                                                              finishHookHolder);
                 loader = asyncOperationAfterDelay(delay, loader);
                 
@@ -679,5 +683,5 @@ JFFAsyncOperation asyncOperationAfterDelay(NSTimeInterval delay,
 {
     return sequenceOfAsyncOperations(asyncOperationWithDelay(delay),
                                      loader,
-                                     nil );
+                                     nil);
 }
