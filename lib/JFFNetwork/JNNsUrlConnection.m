@@ -192,11 +192,11 @@ canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
 }
 
 //http://stackoverflow.com/questions/933331/how-to-use-nsurlconnection-to-connect-with-ssl-for-an-untrusted-cert
-- (void)connection:(NSURLConnection *)connection_
+- (void)connection:(NSURLConnection *)connection
 didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
     NSString *authenticationMethod_ = challenge.protectionSpace.authenticationMethod;
-    BOOL isTrustCheck = [authenticationMethod_ isEqualToString: NSURLAuthenticationMethodServerTrust];
+    BOOL isTrustCheck = [authenticationMethod_ isEqualToString:NSURLAuthenticationMethodServerTrust];
     
     if (isTrustCheck) {
         BOOL isTrustedHost = NO;
@@ -211,7 +211,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
                  forAuthenticationChallenge:challenge];
         }
     }
-
+    
     [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
 

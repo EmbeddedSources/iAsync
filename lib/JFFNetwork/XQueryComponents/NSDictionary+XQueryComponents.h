@@ -2,7 +2,8 @@
 
 @interface NSDictionary (XQueryComponents)
 
--(NSString*)stringFromQueryComponents;
--(NSString*)firstValueIfExsistsForKey:( NSString* )key_;
+- (NSString *)stringFromQueryComponents;
+- (NSData *)dataFromQueryComponents;
+- (NSString *)firstValueIfExsistsForKey:(NSString *)key;
 
 @end

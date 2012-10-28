@@ -33,24 +33,29 @@ static NSString* const queryComponentSeparator = @"&";
 {
     return [self map:^id(id value) {
         return [value stringFromQueryComponentAndKey:key];
-    } ];
+    }];
 }
 
 @end
 
 @implementation NSDictionary (XQueryComponents)
 
-- (NSString*)stringFromQueryComponents
+- (NSString *)stringFromQueryComponents
 {
-    NSArray *result = [[self allKeys]flatten:^NSArray*(id key) {
+    NSArray *result = [[self allKeys] flatten:^NSArray*(id key) {
         NSObject *values = self[key];
         NSString *encodedKey = [key stringByEncodingURLFormat];
         return [values arrayOfQueryComponentsForKey:encodedKey];
-    } ];
+    }];
     return [result componentsJoinedByString:queryComponentSeparator];
 }
 
-- (NSString*)firstValueIfExsistsForKey:(NSString *)key
+- (NSData *)dataFromQueryComponents
+{
+    return [[self stringFromQueryComponents] dataUsingEncoding:NSUTF8StringEncoding];
+}
+
+- (NSString *)firstValueIfExsistsForKey:(NSString *)key
 {
     return [self[key]noThrowObjectAtIndex:0];
 }

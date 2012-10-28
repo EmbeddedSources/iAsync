@@ -30,8 +30,7 @@ static void readStreamCallback( CFReadStreamRef stream_
                                , void* selfContext_ )
 {
     __unsafe_unretained JFFURLConnection* weakSelf = (__bridge JFFURLConnection*)selfContext_;
-    switch( event_ )
-    {
+    switch( event_ ) {
         case kCFStreamEventNone:
         {
             break;
