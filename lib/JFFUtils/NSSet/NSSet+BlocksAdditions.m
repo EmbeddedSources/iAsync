@@ -18,12 +18,9 @@
 
 - (NSSet *)select:(JFFPredicateBlock)predicate
 {
-    NSMutableArray *result = [NSMutableArray new];
-    for (id object in self) {
-        if (predicate(object))
-            [result addObject:object];
-    }
-    return [[NSSet alloc] initWithArray:result];
+    return [self objectsPassingTest:^BOOL(id obj, BOOL *stop) {
+        return predicate(obj);
+    }];
 }
 
 - (NSArray *)selectArray:(JFFPredicateBlock)predicate
@@ -34,6 +31,15 @@
             [result addObject:object];
     }
     return [result copy];
+}
+
+- (id)firstMatch:(JFFPredicateBlock)predicate
+{
+    for (id object in self) {
+        if (predicate(object))
+            return object;
+    }
+    return nil;
 }
 
 @end
