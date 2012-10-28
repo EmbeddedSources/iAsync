@@ -65,7 +65,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
         safe_dispatch_barrier_sync(self.queue, ^ {
             NSString *const dbPath = [NSString documentsPathByAppendingPathComponent:dbName];
             
-            if (sqlite3_open([dbPath UTF8String], &self->_db) != SQLITE_OK) {
+            if (sqlite3_open([dbPath UTF8String], &_db) != SQLITE_OK) {
                 NSLog(@"open - %@ path: %@", [self errorMessage], dbPath);
                 return;
             };
@@ -74,10 +74,10 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
             
             const char *cacheSizePragma = "PRAGMA cache_size = 1000";
             
-            if (sqlite3_exec(self->_db, cacheSizePragma, 0, 0, 0) != SQLITE_OK) {
+            if (sqlite3_exec(_db, cacheSizePragma, 0, 0, 0) != SQLITE_OK) {
                 NSAssert1(0,
                           @"Error: failed to execute pragma statement with message '%s'.",
-                          sqlite3_errmsg(self->_db));
+                          sqlite3_errmsg(_db));
             }
             ok = YES;
         });
@@ -97,7 +97,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 - (BOOL)prepareQuery:(NSString *)sql
            statement:(sqlite3_stmt **)statement
 {
-    return sqlite3_prepare_v2(self->_db,
+    return sqlite3_prepare_v2(_db,
                               [sql UTF8String],
                               -1,
                               statement,
@@ -107,7 +107,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 - (BOOL)execQuery:(NSString *)sql
 {
     char *errorMessage = 0;
-    if (sqlite3_exec(self->_db, [sql UTF8String], 0, 0, &errorMessage) != SQLITE_OK) {
+    if (sqlite3_exec(_db, [sql UTF8String], 0, 0, &errorMessage) != SQLITE_OK) {
         NSLog(@"%@ error: %s", sql, errorMessage);
         
         sqlite3_free(errorMessage);
@@ -119,7 +119,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 
 - (NSString *)errorMessage
 {
-    return @(sqlite3_errmsg(self->_db));
+    return @(sqlite3_errmsg(_db));
 }
 
 @end
@@ -141,7 +141,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     self = [super init];
     
     if (self) {
-        self->_cacheName = cacheName;
+        _cacheName = cacheName;
     }
     
     return self;
@@ -149,14 +149,14 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 
 - (JFFSQLiteDB *)db
 {
-    if (!self->_db) {
-        self->_db = [[JFFSQLiteDB alloc] initWithDBName:self->_cacheName];
+    if (!_db) {
+        _db = [[JFFSQLiteDB alloc] initWithDBName:_cacheName];
         
-        dispatch_barrier_async(self->_db.queue, ^ {
-            [self->_db execQuery:createRecords];
+        dispatch_barrier_async(_db.queue, ^ {
+            [_db execQuery:createRecords];
         });
     }
-    return self->_db;
+    return _db;
 }
 
 - (NSTimeInterval)currentTime
@@ -373,8 +373,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
                 NSString *fileLink = @((const char *)str);
                 recordData = [fileLink cacheDBFileLinkData];
                 
-                if (date && recordData)
-                {
+                if (date && recordData) {
                     NSTimeInterval dateInetrval = sqlite3_column_double(statement, dateIndex);
                     *date = [[NSDate alloc] initWithTimeIntervalSince1970:dateInetrval];
                 }

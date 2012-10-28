@@ -85,7 +85,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
     self = [super initWithCacheFileName:dbPropertyName];
     
     if (self) {
-        self->_configPropertyName = dbPropertyName;
+        _configPropertyName = dbPropertyName;
     }
     
     return self;
@@ -101,8 +101,8 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
     
     NSDictionary *dbInfo = [[JFFDBInfo sharedDBInfo] dbInfo];
     
-    NSInteger lastVersion    = [dbInfo versionForDBWithName:self->_configPropertyName];
-    NSInteger currentVersion = [currentDbInfo versionForDBWithName:self->_configPropertyName];
+    NSInteger lastVersion    = [dbInfo versionForDBWithName:_configPropertyName];
+    NSInteger currentVersion = [currentDbInfo versionForDBWithName:_configPropertyName];
     
     if (lastVersion > currentVersion) {
         [self removeAllRecords];
@@ -112,7 +112,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
 - (NSNumber*)timeToLiveInHours
 {
     NSDictionary *dbInfo = [[JFFDBInfo sharedDBInfo] dbInfo];
-    NSNumber *result = [dbInfo timeToLiveInHoursForDBWithName:self->_configPropertyName];
+    NSNumber *result = [dbInfo timeToLiveInHoursForDBWithName:_configPropertyName];
     return result;
 }
 
