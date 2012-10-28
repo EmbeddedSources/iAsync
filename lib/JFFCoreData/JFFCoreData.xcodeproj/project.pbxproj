@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE025685162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CE025684162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m */; };
 		CEA097ED16216ED1005820FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA097EC16216ED1005820FA /* Foundation.framework */; };
 		CEA097F216216ED1005820FA /* JFFCoreData.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEA097F116216ED1005820FA /* JFFCoreData.h */; };
 		CEA097FC16216ED1005820FA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA097FB16216ED1005820FA /* SenTestingKit.framework */; };
@@ -103,6 +104,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE025683162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOrderedSet+ObjectInManagedObjectContext.h"; sourceTree = "<group>"; };
+		CE025684162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOrderedSet+ObjectInManagedObjectContext.m"; sourceTree = "<group>"; };
 		CEA097E916216ED1005820FA /* libJFFCoreData.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFCoreData.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA097EC16216ED1005820FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CEA097F016216ED1005820FA /* JFFCoreData-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFCoreData-Prefix.pch"; sourceTree = "<group>"; };
@@ -266,6 +269,8 @@
 				CECEFBE316217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m */,
 				CECEFBE516217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.h */,
 				CECEFBE616217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m */,
+				CE025683162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.h */,
+				CE025684162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m */,
 				CECEFBE816218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.h */,
 				CECEFBE916218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m */,
 			);
@@ -445,6 +450,7 @@
 				CECEFBE416217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m in Sources */,
 				CECEFBE716217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m in Sources */,
 				CECEFBEA16218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m in Sources */,
+				CE025685162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

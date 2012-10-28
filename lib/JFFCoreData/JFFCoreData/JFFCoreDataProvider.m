@@ -35,6 +35,11 @@
         return [self contextForMainThread];
     }
     
+    return [self contextForBackgroundThread];
+}
+
+- (NSManagedObjectContext *)contextForBackgroundThread
+{
     //TODO create it once for thread
     NSManagedObjectContext *contextForCurrentThread = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     contextForCurrentThread.parentContext = self.mediateRootContext;
