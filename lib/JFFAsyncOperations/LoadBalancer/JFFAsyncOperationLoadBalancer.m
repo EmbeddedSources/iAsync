@@ -53,14 +53,14 @@ static void peformBlockWithinContext( JFFSimpleBlock block_, JFFContextLoaders* 
 static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation native_loader_
                                                           , JFFContextLoaders* context_loaders_ );
 
-static void performInBalancerPedingLoaderData( JFFPedingLoaderData* pending_loader_data_
-                                              , JFFContextLoaders* context_loaders_ )
+static void performInBalancerPedingLoaderData(JFFPedingLoaderData *pendingLoaderData,
+                                              JFFContextLoaders   *contextLoaders)
 {
-    JFFAsyncOperation balanced_loader_ = wrappedAsyncOperationWithContext( pending_loader_data_.nativeLoader, context_loaders_ );
-
-    balanced_loader_( pending_loader_data_.progressCallback
-                     , pending_loader_data_.cancelCallback
-                     , pending_loader_data_.doneCallback );
+    JFFAsyncOperation balancedLoader = wrappedAsyncOperationWithContext(pendingLoaderData.nativeLoader, contextLoaders);
+    
+    balancedLoader(pendingLoaderData.progressCallback,
+                   pendingLoaderData.cancelCallback,
+                   pendingLoaderData.doneCallback);
 }
 
 static BOOL performLoaderFromContextIfPossible( JFFContextLoaders* context_loaders_ )
@@ -78,25 +78,23 @@ static BOOL performLoaderFromContextIfPossible( JFFContextLoaders* context_loade
 
 static BOOL findAndTryToPerformNextNativeLoader( void )
 {
-    JFFAsyncOperationLoadBalancerContexts* balancer_ = sharedBalancer();
-
-    JFFContextLoaders* active_loaders_ = [ balancer_ activeContextLoaders ];
-    if ( performLoaderFromContextIfPossible( active_loaders_ ) )
+    JFFAsyncOperationLoadBalancerContexts *balancer = sharedBalancer();
+    
+    JFFContextLoaders *activeLoaders = [balancer activeContextLoaders];
+    if (performLoaderFromContextIfPossible(activeLoaders))
         return YES;
-
-    __block BOOL result_ = NO;
-
-    [ balancer_.contextLoadersByName enumerateKeysAndObjectsUsingBlock: ^void( id key_
-                                                                              , id contextLoaders_
-                                                                              , BOOL* stop_ )
-    {
-        if ( performLoaderFromContextIfPossible( contextLoaders_ ) )
-        {
-            *stop_ = YES;
-            result_ = YES;
+    
+    __block BOOL result = NO;
+    
+    [balancer.contextLoadersByName enumerateKeysAndObjectsUsingBlock:^void(id key,
+                                                                           id contextLoaders,
+                                                                           BOOL *stop) {
+        if (performLoaderFromContextIfPossible(contextLoaders)) {
+            *stop  = YES;
+            result = YES;
         }
-    } ];
-
+    }];
+    
     return NO;
 }
 
@@ -105,61 +103,54 @@ static void logBalancerState()
     return;
     NSLog( @"|||||LOAD BALANCER|||||" );
     JFFAsyncOperationLoadBalancerContexts* balancer_ = sharedBalancer();
-    JFFContextLoaders* active_loaders_ = [ balancer_ activeContextLoaders ];
-    NSLog(@"Active context name: %@", active_loaders_.name);
-    NSLog(@"pending count: %d", active_loaders_.pendingLoadersNumber);
-    NSLog(@"active  count: %d", active_loaders_.activeLoadersNumber);
-
-    [ balancer_.contextLoadersByName enumerateKeysAndObjectsUsingBlock: ^( id name_
-                                                                          , JFFContextLoaders* contextLoaders_
-                                                                          , BOOL* stop_ )
-    {
-        if ( ![ name_ isEqualToString: active_loaders_.name ] )
-        {
-            NSLog( @"context name: %@", contextLoaders_.name );
-            NSLog( @"pending count: %d", contextLoaders_.pendingLoadersNumber );
-            NSLog( @"active  count: %d", contextLoaders_.activeLoadersNumber );
+    JFFContextLoaders* activeLoaders = [ balancer_ activeContextLoaders ];
+    NSLog(@"Active context name: %@", activeLoaders.name);
+    NSLog(@"pending count: %d", activeLoaders.pendingLoadersNumber);
+    NSLog(@"active  count: %d", activeLoaders.activeLoadersNumber);
+    
+    [balancer_.contextLoadersByName enumerateKeysAndObjectsUsingBlock:^(id name,
+                                                                        JFFContextLoaders *contextLoaders,
+                                                                        BOOL *stop) {
+        if (![name isEqualToString: activeLoaders.name ]) {
+            NSLog( @"context name: %@", contextLoaders.name );
+            NSLog( @"pending count: %d", contextLoaders.pendingLoadersNumber );
+            NSLog( @"active  count: %d", contextLoaders.activeLoadersNumber );
         }
-    } ];
+    }];
     NSLog( @"|||||END LOG|||||" );
 }
 
-static void finishExecuteOfNativeLoader( JFFAsyncOperation native_loader_
-                                        , JFFContextLoaders* context_loaders_ )
+static void finishExecuteOfNativeLoader( JFFAsyncOperation nativeLoader
+                                        , JFFContextLoaders* contextLoaders )
 {
-    if ( [ context_loaders_ removeActiveNativeLoader: native_loader_ ] )
-    {
+    if ([contextLoaders removeActiveNativeLoader:nativeLoader]) {
         --globalActiveNumber;
         logBalancerState();
     }
 }
 
-static JFFCancelAsyncOperationHandler cancelCallbackWrapper( JFFCancelAsyncOperationHandler nativeCancelCallback_
+static JFFCancelAsyncOperationHandler cancelCallbackWrapper( JFFCancelAsyncOperationHandler nativeCancelCallback
                                                             , JFFAsyncOperation native_loader_
                                                             , JFFContextLoaders* context_loaders_ )
 {
-    nativeCancelCallback_ = [ [ nativeCancelCallback_ copy ] autorelease ];
-    return [ [ ^void( BOOL canceled_ )
-    {
-        if ( !canceled_ )
-        {
+    nativeCancelCallback = [[nativeCancelCallback copy] autorelease];
+    return [[^void(BOOL canceled_) {
+        if ( !canceled_ ) {
             assert( NO );// @"balanced loaders should not be unsubscribed from native loader"
         }
-
-        [ [ nativeCancelCallback_ copy ] autorelease ];
-
+        
+        [[nativeCancelCallback copy] autorelease];
+        
         finishExecuteOfNativeLoader( native_loader_, context_loaders_ );
-
-        if ( nativeCancelCallback_ )
-        {
-            peformBlockWithinContext( ^
-            {
-                nativeCancelCallback_( canceled_ );
-         }, context_loaders_ );
+        
+        if (nativeCancelCallback) {
+            peformBlockWithinContext( ^{
+                nativeCancelCallback( canceled_ );
+            }, context_loaders_ );
       }
-
+        
       findAndTryToPerformNextNativeLoader();
-   } copy ] autorelease ];
+   } copy] autorelease];
 }
 
 static JFFDidFinishAsyncOperationHandler doneCallbackWrapper( JFFDidFinishAsyncOperationHandler native_done_callback_
@@ -283,7 +274,7 @@ JFFAsyncOperation balancedAsyncOperation(JFFAsyncOperation nativeLoader)
                               progressCallback:progressCallback
                                 cancelCallback:cancelCallback
                                   doneCallback:doneCallback];
-
+        
         logBalancerState();
         
         JFFCancelAsyncOperation cancel = [[^void(BOOL canceled) {
@@ -298,11 +289,11 @@ JFFAsyncOperation balancedAsyncOperation(JFFAsyncOperation nativeLoader)
                 cancelCallback(YES);
             } else {
                 cancelCallback(NO);
-
+                
                 [contextLoaders unsubscribePendingNativeLoader:nativeLoader];
             }
         }copy]autorelease];
-
+        
         return cancel;
     }copy]autorelease];
 }

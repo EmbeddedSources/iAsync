@@ -27,8 +27,8 @@
     handler  = [handler  copy];
     progress = [progress copy];
     
-    self->_scheduler = [JFFScheduler new];
-    [self->_scheduler addBlock:^(JFFCancelScheduledBlock cancel){
+    _scheduler = [JFFScheduler new];
+    [_scheduler addBlock:^(JFFCancelScheduledBlock cancel){
         cancel();
         if (handler)
             handler([JFFAsyncTimerResult new], nil);
@@ -37,7 +37,7 @@
 
 - (void)cancel:(BOOL)canceled
 {
-    self->_scheduler = nil;
+    _scheduler = nil;
 }
 
 @end
@@ -182,23 +182,23 @@ JFFAsyncOperation asyncOperationWithChangedResult(JFFAsyncOperation loader,
     return bindSequenceOfAsyncOperations(loader, secondLoaderBinder, nil);
 }
 
-JFFAsyncOperation asyncOperationResultAsProgress( JFFAsyncOperation loader_ )
+JFFAsyncOperation asyncOperationResultAsProgress(JFFAsyncOperation loader)
 {
-    loader_ = [ loader_ copy ];
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback
-                                    , JFFCancelAsyncOperationHandler cancelCallback_
-                                    , JFFDidFinishAsyncOperationHandler doneCallback_ )
+    loader = [loader copy];
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback)
     {
         progressCallback = [progressCallback copy];
-        doneCallback_    = [doneCallback_    copy];
-        JFFDidFinishAsyncOperationHandler doneCallbackWrapper_ = ^(id result, NSError *error) {
+        doneCallback     = [doneCallback     copy];
+        JFFDidFinishAsyncOperationHandler doneCallbackWrapper = ^(id result, NSError *error) {
             if (result && progressCallback)
                 progressCallback(result);
             
-            if ( doneCallback_ )
-                doneCallback_(result, error);
+            if (doneCallback)
+                doneCallback(result, error);
         };
-        return loader_( nil, cancelCallback_, doneCallbackWrapper_ );
+        return loader(nil, cancelCallback, doneCallbackWrapper);
     };
 }
 

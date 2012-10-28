@@ -9,9 +9,9 @@
 
 -(void)dealloc
 {
-    [self->_currentContextName   release];
-    [self->_activeContextName    release];
-    [self->_contextLoadersByName release];
+    [_currentContextName   release];
+    [_activeContextName    release];
+    [_contextLoadersByName release];
     
     [super dealloc];
 }
@@ -22,7 +22,7 @@
     static JFFAsyncOperationLoadBalancerContexts *instance;
     
     if (!instance) {
-        instance = [ self new ];
+        instance = [self new];
     }
     
     return instance;
@@ -30,54 +30,50 @@
 
 -(NSString*)currentContextName
 {
-    if ( !self->_currentContextName )
-    {
-        self->_currentContextName = [ self.activeContextName retain ];
+    if (!_currentContextName) {
+        _currentContextName = [self.activeContextName retain];
     }
-    return self->_currentContextName;
+    return _currentContextName;
 }
 
 -(NSString*)activeContextName
 {
-    if ( !self->_activeContextName )
-    {
-        self->_activeContextName = [ @"default" retain ];
+    if (!_activeContextName ) {
+        _activeContextName = [@"default" retain];
     }
-    return self->_activeContextName;
+    return _activeContextName;
 }
 
 -(NSMutableDictionary*)contextLoadersByName
 {
-    if ( !self->_contextLoadersByName )
-    {
-        self->_contextLoadersByName = [ NSMutableDictionary new ];
+    if (!_contextLoadersByName) {
+        _contextLoadersByName = [NSMutableDictionary new];
     }
-    return self->_contextLoadersByName;
+    return _contextLoadersByName;
 }
 
--(JFFContextLoaders*)contextLoadersForName:( NSString* )name_
+- (JFFContextLoaders *)contextLoadersForName:(NSString *)name
 {
-    JFFContextLoaders* contextLoaders_ = self.contextLoadersByName[ name_ ];
-    if ( !contextLoaders_ )
-    {
-        contextLoaders_ = [ JFFContextLoaders new ];
-        contextLoaders_.name = name_;
-
-        self.contextLoadersByName[ name_ ] = contextLoaders_;
-
-        [ contextLoaders_ release ];
+    JFFContextLoaders* contextLoaders = self.contextLoadersByName[name];
+    if (!contextLoaders) {
+        contextLoaders = [JFFContextLoaders new];
+        contextLoaders.name = name;
+        
+        self.contextLoadersByName[name] = contextLoaders;
+        
+        [contextLoaders release];
     }
-    return contextLoaders_;
+    return contextLoaders;
 }
 
--(JFFContextLoaders*)activeContextLoaders
+- (JFFContextLoaders *)activeContextLoaders
 {
-    return [ self contextLoadersForName: self.activeContextName ];
+    return [self contextLoadersForName:self.activeContextName];
 }
 
--(JFFContextLoaders*)currentContextLoaders
+- (JFFContextLoaders *)currentContextLoaders
 {
-    return [ self contextLoadersForName: self.currentContextName ];
+    return [self contextLoadersForName:self.currentContextName];
 }
 
 @end

@@ -2,7 +2,7 @@
 
 #import <Foundation/Foundation.h>
 
-void setBalancerActiveContextName( NSString* context_name_ );
+void setBalancerActiveContextName(NSString *contextName);
 
 //dont balance the same loader twice
-JFFAsyncOperation balancedAsyncOperation( JFFAsyncOperation loader_ );
+JFFAsyncOperation balancedAsyncOperation(JFFAsyncOperation loader);
