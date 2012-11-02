@@ -77,6 +77,8 @@ SKProductsRequestDelegate
 
 JFFAsyncOperation asyncOperationWithProductIdentifier(NSString *identifier)
 {
-    id asyncObject = [[JFFAsyncSKProductsRequestAdapter alloc] initWithProductIdentifier:identifier];
-    return buildAsyncOperationWithInterface(asyncObject);
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+        return [[JFFAsyncSKProductsRequestAdapter alloc] initWithProductIdentifier:identifier];
+    };
+    return buildAsyncOperationWithAdapterFactory(factory);
 }

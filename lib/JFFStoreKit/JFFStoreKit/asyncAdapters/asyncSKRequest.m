@@ -53,6 +53,8 @@ SKRequestDelegate
 
 JFFAsyncOperation asyncOperationWithSKRequest(SKRequest *request)
 {
-    id asyncObject = [JFFAsyncSKRequestAdapter newAsyncSKRequestAdapterWithRequest:request];
-    return buildAsyncOperationWithInterface(asyncObject);
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+        return [JFFAsyncSKRequestAdapter newAsyncSKRequestAdapterWithRequest:request];
+    };
+    return buildAsyncOperationWithAdapterFactory(factory);
 }

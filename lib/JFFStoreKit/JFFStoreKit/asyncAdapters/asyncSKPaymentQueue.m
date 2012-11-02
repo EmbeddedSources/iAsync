@@ -2,7 +2,10 @@
 
 #import "JFFStoreKitTransactionStateFailedError.h"
 
-@interface JFFAsyncSKPaymentAdapter : NSObject <SKPaymentTransactionObserver>
+@interface JFFAsyncSKPaymentAdapter : NSObject <
+SKPaymentTransactionObserver,
+JFFAsyncOperationInterface
+>
 @end
 
 @implementation JFFAsyncSKPaymentAdapter
@@ -118,6 +121,8 @@
 
 JFFAsyncOperation asyncOperationWithSKPayment(SKPayment *payment)
 {
-    id asyncObject = [JFFAsyncSKPaymentAdapter newAsyncSKPaymentAdapterWithRequest:payment];
-    return buildAsyncOperationWithInterface(asyncObject);
+    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+        return [JFFAsyncSKPaymentAdapter newAsyncSKPaymentAdapterWithRequest:payment];
+    };
+    return buildAsyncOperationWithAdapterFactory(factory);
 }
