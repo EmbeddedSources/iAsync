@@ -19,12 +19,12 @@
 
 -(void)dealloc
 {
-    JFFProxyObjectContainer * container = self->_container;
+    JFFProxyObjectContainer *container = _container;
     void (^releaseListener)(void) = ^void(void) {
         container.target = nil;
     };
-    dispatch_async(self->_dispatchQueue, releaseListener);
-    dispatch_release(self->_dispatchQueue);
+    dispatch_async(_dispatchQueue, releaseListener);
+    dispatch_release(_dispatchQueue);
 }
 
 - (id)initWithTargetFactory:(JFFObjectFactory)factory

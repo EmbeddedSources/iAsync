@@ -48,14 +48,12 @@ static char imageURLKey;
     
     if (self.contentMode == UIViewContentModeScaleAspectFill
         || self.contentMode == UIViewContentModeScaleAspectFit
-        || self.contentMode == UIViewContentModeScaleToFill)
-    {
+        || self.contentMode == UIViewContentModeScaleToFill) {
+    
         [storage thumbnailLoaderForUrl:url
                           scaledToSize:self.bounds.size
                            contentMode:contentMode](nil, nil, doneCallback);
-    }
-    else
-    {
+    } else {
         [storage thumbnailLoaderForUrl:url](nil, nil, doneCallback);
     }
 }

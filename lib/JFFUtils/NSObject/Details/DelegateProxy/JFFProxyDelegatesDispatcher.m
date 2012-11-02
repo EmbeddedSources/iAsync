@@ -28,8 +28,7 @@
 {
     SEL selector = [invocation selector];
 
-    [[self->_delegates array] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-    {
+    [[self->_delegates array] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if ([obj respondsToSelector:selector])
             [invocation invokeWithTarget:obj];
     }];
