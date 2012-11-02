@@ -10,27 +10,26 @@
 
 @implementation JFFDBCompositeKey
 
--(id)copyWithZone:( NSZone* )zone_
+- (id)copyWithZone:(NSZone *)zone
 {
-    JFFDBCompositeKey* copy_ = [ [ [ self class ] allocWithZone: zone_ ] init ];
-
-    if ( copy_ )
-    {
-        copy_->_keys = [ self->_keys copyWithZone: zone_ ];
+    JFFDBCompositeKey *copy = [[[self class] allocWithZone:zone] init];
+    
+    if (copy) {
+        copy->_keys = [self->_keys copyWithZone:zone];
     }
-
-    return copy_;
+    
+    return copy;
 }
 
--(NSUInteger)hash
+- (NSUInteger)hash
 {
     return [ self.keys hash ];
 }
 
--(BOOL)isEqual:( id )object_
+- (BOOL)isEqual:(id)object
 {
-    JFFDBCompositeKey* otherObject_ = object_;
-    return [ otherObject_.keys isEqual: self.keys ];
+    JFFDBCompositeKey *otherObject = object;
+    return [otherObject.keys isEqual:self.keys];
 }
 
 - (id)initWithKeys:(NSArray *)keys

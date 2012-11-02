@@ -26,6 +26,17 @@ static JFFAsyncBinderForURL imageDataToUIImageBinder()
     };
 }
 
+//TODO refactor this
+static JFFLimitedLoadersQueue *balancer(void)
+{
+    static dispatch_once_t once;
+    static JFFLimitedLoadersQueue *instance;
+    dispatch_once(&once, ^{
+        instance = [JFFLimitedLoadersQueue new];
+    });
+    return instance;
+}
+
 @interface JFFImageCacheAdapter : NSObject<JFFRestKitCache>
 @end
 
@@ -33,15 +44,17 @@ static JFFAsyncBinderForURL imageDataToUIImageBinder()
 
 - (JFFAsyncOperation)loaderToSetData:(NSData *)data forKey:(NSString *)key
 {
-    return asyncOperationWithSyncOperationAndQueue(^id(NSError *__autoreleasing *outError) {
+    JFFAsyncOperation loader = asyncOperationWithSyncOperationAndQueue(^id(NSError *__autoreleasing *outError) {
         
         [[JFFCaches createThumbnailDB] setData:data forKey:key];
         return [NSNull new];
     }, cacheQueueName);
+    
+    return [balancer() balancedLoaderWithLoader:loader];
 }
 
 - (JFFAsyncOperation)cachedDataLoaderForKey:(NSString *)key {
-    return asyncOperationWithSyncOperationAndQueue(^id(NSError *__autoreleasing *outError) {
+    JFFAsyncOperation loader = asyncOperationWithSyncOperationAndQueue(^id(NSError *__autoreleasing *outError) {
         
         NSDate *date;
         NSData *data = [[JFFCaches createThumbnailDB] dataForKey:key lastUpdateTime:&date];
@@ -60,6 +73,8 @@ static JFFAsyncBinderForURL imageDataToUIImageBinder()
         
         return nil;
     }, cacheQueueName);
+    
+    return [balancer() balancedLoaderWithLoader:loader];
 }
 
 @end
@@ -178,12 +193,14 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
     };
     
     args.lastUpdateDateForKey = ^JFFAsyncOperation(NSURL *url) {
-        return asyncOperationWithSyncOperationAndQueue(^id(NSError *__autoreleasing *outError) {
+        JFFAsyncOperation loader = asyncOperationWithSyncOperationAndQueue(^id(NSError *__autoreleasing *outError) {
             id< JFFCacheDB > thumbnailDB = [JFFCaches createThumbnailDB];
             NSDate *result = [thumbnailDB lastUpdateTimeForKey:[url description]];
             //TODO wich date pass when no date, maybe 1907 year????
             return result;
         }, cacheQueueName);
+        
+        return [balancer() balancedLoaderWithLoader:loader];
     };
     
     JFFAsyncOperation loader = jSmartDataLoaderWithCache(args);

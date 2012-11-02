@@ -2,8 +2,8 @@
 
 @interface NSString (CacheFSManager)
 
--(void)cacheDBFileLinkRemoveFile;
--(void)cacheDBFileLinkSaveData:( NSData* )data_;
--(NSData*)cacheDBFileLinkData;
+- (void)cacheDBFileLinkRemoveFile;
+- (void)cacheDBFileLinkSaveData:(NSData *)data;
+- (NSData *)cacheDBFileLinkData;
 
 @end
