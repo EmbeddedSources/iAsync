@@ -4,12 +4,10 @@
 
 @interface JFFCoreDataProvider : NSObject
 
-//TODO a lot of calls - refactor
 - (NSManagedObjectContext *)contextForCurrentThread;
 
 + (id)sharedCoreDataProvider;
 
-//TODO rename
-- (void)saveMediationContext;
+- (void)saveRootContext;
 
 @end

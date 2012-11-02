@@ -44,7 +44,7 @@
         id<JFFObjectInManagedObjectContextProtocol> result = self.operationBlock(currentContext, &error);
         NSParameterAssert((result || error) && !(result && error));
         
-        [[JFFCoreDataProvider sharedCoreDataProvider] saveMediationContext];
+        [[JFFCoreDataProvider sharedCoreDataProvider] saveRootContext];
         
         [mainContext performBlock:^{
             

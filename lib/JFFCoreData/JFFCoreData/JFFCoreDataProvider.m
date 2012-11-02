@@ -178,7 +178,7 @@
     return _mediateRootContext;
 }
 
-- (void)saveMediationContext
+- (void)saveRootContext
 {
     [self.mediateRootContext performBlock: ^{
         NSError *error = nil;

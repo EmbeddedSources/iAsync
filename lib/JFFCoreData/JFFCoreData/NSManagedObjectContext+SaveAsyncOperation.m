@@ -18,8 +18,8 @@
         
         if ([__self.undoManager groupingLevel] > 0) {
             [__self.undoManager endUndoGrouping];
-            [__self processPendingChanges];
         }
+        [__self processPendingChanges];
         
         return saved?@[]:nil;
     };
