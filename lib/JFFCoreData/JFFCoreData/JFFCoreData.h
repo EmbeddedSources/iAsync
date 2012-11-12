@@ -7,3 +7,5 @@
 #import <JFFCoreData/ObjectInManagedObjectContext/NSDictionary+ObjectInManagedObjectContext.h>
 #import <JFFCoreData/ObjectInManagedObjectContext/NSOrderedSet+ObjectInManagedObjectContext.h>
 #import <JFFCoreData/ObjectInManagedObjectContext/NSManagedObject+ObjectInManagedObjectContext.h>
+
+#import <JFFCoreData/ObjectInManagedObjectContext/NSManagedObject+UpdateManagedObjectFromContext.h>
