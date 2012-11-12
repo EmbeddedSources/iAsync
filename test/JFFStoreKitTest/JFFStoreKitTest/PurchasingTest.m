@@ -14,9 +14,9 @@ static NSString * const testProductIdentifier = @"test.free.purchase1";
     __block NSString *productIdentifier;
     
     void(^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishBLock) {
-        JFFAsyncOperationBinder srvCallback = ^JFFAsyncOperation(SKProduct *product) {
-            productIdentifier = product.productIdentifier;
-            return asyncOperationWithResult(@"ok )");
+        JFFAsyncOperationBinder srvCallback = ^JFFAsyncOperation(SKPaymentTransaction *transaction) {
+            productIdentifier = transaction.payment.productIdentifier; //product.productIdentifier;
+            return asyncOperationWithResult(@YES);
         };
         JFFAsyncOperation loader = [JFFPurchsing purcheserWithProductIdentifier:testProductIdentifier
                                                                     srvCallback:srvCallback];
@@ -40,13 +40,18 @@ static NSString * const testProductIdentifier = @"test.free.purchase1";
     __block NSString *productIdentifier;
     
     void(^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishBLock) {
-        JFFAsyncOperation productLoader = asyncOperationWithProductIdentifier(testProductIdentifier);
+        JFFAsyncOperation productLoader = skProductLoaderWithProductIdentifier(testProductIdentifier);
         
         productLoader(nil, nil, ^(SKProduct *product, NSError *error) {
             
-            JFFAsyncOperationBinder srvCallback = ^JFFAsyncOperation(SKProduct *product) {
-                productIdentifier = product.productIdentifier;
-                return asyncOperationWithResult(@"ok )");
+            if (error) {
+                finishBLock();
+                return;
+            }
+            
+            JFFAsyncOperationBinder srvCallback = ^JFFAsyncOperation(SKPaymentTransaction *transaction) {
+                productIdentifier = transaction.payment.productIdentifier;
+                return asyncOperationWithResult(@YES);
             };
             JFFAsyncOperation loader = [JFFPurchsing purcheserWithProduct:product
                                                               srvCallback:srvCallback];

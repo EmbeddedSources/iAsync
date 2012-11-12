@@ -66,6 +66,34 @@
     }
 }
 
+- (void)testOneOperationInQueue
+{
+    @autoreleasepool
+    {
+        JFFLimitedLoadersQueue *queue = [JFFLimitedLoadersQueue new];
+        queue.limitCount = 1;
+        
+        JFFAsyncOperationManager *loader1 = [JFFAsyncOperationManager new];
+        JFFAsyncOperationManager *loader2 = [JFFAsyncOperationManager new];
+        
+        JFFAsyncOperation balancedLoader1 = [queue balancedLoaderWithLoader:loader1.loader];
+        JFFAsyncOperation balancedLoader2 = [queue balancedLoaderWithLoader:loader2.loader];
+        
+        balancedLoader1(nil, nil, nil);
+        balancedLoader2(nil, nil, nil);
+        
+        GHAssertTrue(loader1.loadingCount == 1, nil);
+        GHAssertTrue(loader2.loadingCount == 0, nil);
+        
+        loader1.loaderFinishBlock.didFinishBlock([NSNull new], nil);
+        
+        GHAssertTrue(loader1.finished, nil);
+        GHAssertTrue(loader2.loadingCount == 1, nil);
+        
+        loader2.loaderFinishBlock.didFinishBlock([NSNull new], nil);
+    }
+}
+
 //TODO test when (active)native loader was canced
 //TODO test usibscribe balanced
 
