@@ -35,23 +35,23 @@
     
     JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
         
+        if (canceled) {
+            [_queue didFinishedActiveLoader:self];
+        }
+        
         if (_cancelCallback) {
             JFFCancelAsyncOperationHandler cancelCallback = _cancelLoader;
             _cancelLoader = nil;
             cancelCallback(canceled);
         }
-        
-        if (canceled) {
-            [_queue didFinishedActiveLoader:self];
-        }
     };
     
     JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
         
+        [_queue didFinishedActiveLoader:self];
+        
         if (_doneCallback)
             _doneCallback(result, error);
-        
-        [_queue didFinishedActiveLoader:self];
     };
     
     _cancelLoader = _loader(progressCallback, cancelCallback, doneCallback);

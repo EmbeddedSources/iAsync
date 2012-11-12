@@ -12,7 +12,7 @@
 
 @implementation JFFComplitionHandlerNotifier
 
--(void)notifyCallbackWithResult:(id)result error:(NSError *)error
+- (void)notifyCallbackWithResult:(id)result error:(NSError *)error
 {
     if (_completionHandler) {
         _completionHandler(result, error);
@@ -29,6 +29,7 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         id< JFFAsyncOperationInterface > asyncObject = factory();
         __unsafe_unretained id< JFFAsyncOperationInterface > unretaintedAsyncObject = asyncObject;
         
@@ -56,15 +57,17 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
                                                        dispatchQueue:dispatch_get_current_queue()];
         
         void (^completionHandlerWrapper)(id, NSError *) = [^(id result, NSError *error) {
-            progressHandler = nil;
-            [proxy notifyCallbackWithResult:result error:error];
+            
+            JFFComplitionHandlerNotifier* proxyOwner = proxy;
             proxy = nil;
+            progressHandler = nil;
+            [proxyOwner notifyCallbackWithResult:result error:error];
         } copy];
         
         void (^progressHandlerWrapper)(id) = [^(id data) {
             if (progressHandler)
                 progressHandler(data);
-        }copy];
+        } copy];
         
         [asyncObject asyncOperationWithResultHandler:completionHandlerWrapper
                                      progressHandler:progressHandlerWrapper];
