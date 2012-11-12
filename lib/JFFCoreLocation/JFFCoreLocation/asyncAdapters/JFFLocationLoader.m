@@ -1,5 +1,6 @@
 #import "JFFLocationLoader.h"
 
+#import "JFFLocationLoaderSupervisor.h"
 #import "JFFUnableToGetLocationError.h"
 #import "JFFLocationServicesDisabledError.h"
 
@@ -7,16 +8,15 @@
 
 @interface JFFCoreLocationAsyncAdapter : NSObject<
 JFFAsyncOperationInterface,
-CLLocationManagerDelegate
+JFFLocationObserver
 >
 
 @end
 
 @implementation JFFCoreLocationAsyncAdapter
 {
-    CLLocationManager *_locationManager;//TODO use shared location manager !!!
+    JFFLocationLoaderSupervisor *_supervisor;
     CLLocationAccuracy _accuracy;
-    
     JFFAsyncOperationInterfaceHandler _handler;
     
     JFFScheduler *_scheduler;
@@ -24,9 +24,7 @@ CLLocationManagerDelegate
 
 - (void)dealloc
 {
-    [_locationManager stopUpdatingLocation];
-    _locationManager.delegate = nil;
-    _locationManager = nil;
+    [self stopObserving];
 }
 
 - (id)initWithAccuracy:(CLLocationAccuracy)accuracy
@@ -48,7 +46,6 @@ CLLocationManagerDelegate
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    //TODO prompt message about using location service as soon as possible
     if (![CLLocationManager locationServicesEnabled]) {
         
         handler(nil, [JFFLocationServicesDisabledError new]);
@@ -58,44 +55,50 @@ CLLocationManagerDelegate
     handler = [handler copy];
     _handler = handler;
     
-    CLLocationManager *locationManager = [CLLocationManager new];
-    _locationManager = locationManager;
-    _locationManager.desiredAccuracy = _accuracy;
+    _supervisor = [JFFLocationLoaderSupervisor sharedLocationLoaderSupervisorWithAccuracy:_accuracy];
     
     static const NSTimeInterval twentyMinutes = 20*60;
     
-    CLLocation *location = _locationManager.location;
+    CLLocation *location = _supervisor.location;
     
     if ([location.timestamp compare:[[NSDate new] dateByAddingTimeInterval:-twentyMinutes]] == NSOrderedDescending
-        && [self processLocation:_locationManager.location]) {
+        && [self processLocation:location]) {
         return;
     }
     
-    _locationManager.delegate = self;
-    [_locationManager startUpdatingLocation];
+    [_supervisor addLocationObserver:self];
     
+    _scheduler = [JFFScheduler new];
     __weak JFFCoreLocationAsyncAdapter *weakSelf = self;
     [_scheduler addBlock:^(JFFCancelScheduledBlock cancel) {
         
         cancel();
         
-        if (locationManager.location) {
-            [weakSelf forceProcessLocation:locationManager.location];
-        } else {
-            handler(nil, [JFFUnableToGetLocationError new]);
-        }
+        [weakSelf onSchedulerWithHandler:handler];
     } duration:1.];
+}
+
+- (void)onSchedulerWithHandler:(JFFAsyncOperationInterfaceHandler)handler
+{
+    if (_supervisor.location) {
+        [self forceProcessLocation:_supervisor.location];
+    } else {
+        handler(nil, [JFFUnableToGetLocationError new]);
+    }
+}
+
+- (void)stopObserving
+{
+    [_supervisor removeLocationObserver:self];
+    _supervisor = nil;
 }
 
 - (void)cancel:(BOOL)canceled
 {
     if (canceled) {
-        [_locationManager stopUpdatingLocation];
-        _locationManager = nil;
+        [self stopObserving];
     }
 }
-
-#pragma mark CLLocationManagerDelegate
 
 - (void)forceProcessLocation:(CLLocation *)location
 {
@@ -118,17 +121,11 @@ CLLocationManagerDelegate
     return YES;
 }
 
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation
+#pragma mark JFFLocationObserver
+
+- (void)didUpdateLocation:(CLLocation *)newLocation
 {
     [self processLocation:newLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-     didUpdateLocations:(NSArray *)locations
-{
-    [self processLocation:[locations lastObject]];
 }
 
 @end

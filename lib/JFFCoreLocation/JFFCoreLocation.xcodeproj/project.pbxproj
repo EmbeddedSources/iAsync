@@ -18,6 +18,7 @@
 		CE206FBF16415636002476FD /* JFFLocationLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CE206FBE16415636002476FD /* JFFLocationLoader.m */; };
 		CE20708016415A9B002476FD /* JFFCoreLocationError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE20707F16415A9B002476FD /* JFFCoreLocationError.m */; };
 		CE20708416415B4A002476FD /* JFFLocationServicesDisabledError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE20708316415B4A002476FD /* JFFLocationServicesDisabledError.m */; };
+		CEA4EB99164F9A2800F4807D /* JFFLocationLoaderSupervisor.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA4EB98164F9A2800F4807D /* JFFLocationLoaderSupervisor.m */; };
 		CEDFF36316417755007E8B37 /* JFFUnableToGetLocationError.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDFF36216417755007E8B37 /* JFFUnableToGetLocationError.m */; };
 		CEE03A83164269ED00A5FA08 /* JFFPlacemarksLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE03A82164269ED00A5FA08 /* JFFPlacemarksLoader.m */; };
 		CEE03A8816426FD700A5FA08 /* CLLocation+UniqueLocationIdentificator.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE03A8716426FD700A5FA08 /* CLLocation+UniqueLocationIdentificator.m */; };
@@ -65,6 +66,8 @@
 		CE20707F16415A9B002476FD /* JFFCoreLocationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCoreLocationError.m; sourceTree = "<group>"; };
 		CE20708216415B4A002476FD /* JFFLocationServicesDisabledError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFLocationServicesDisabledError.h; sourceTree = "<group>"; };
 		CE20708316415B4A002476FD /* JFFLocationServicesDisabledError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFLocationServicesDisabledError.m; sourceTree = "<group>"; };
+		CEA4EB97164F9A2800F4807D /* JFFLocationLoaderSupervisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFFLocationLoaderSupervisor.h; path = JFFCoreLocation/asyncAdapters/Details/JFFLocationLoaderSupervisor.h; sourceTree = SOURCE_ROOT; };
+		CEA4EB98164F9A2800F4807D /* JFFLocationLoaderSupervisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFFLocationLoaderSupervisor.m; path = JFFCoreLocation/asyncAdapters/Details/JFFLocationLoaderSupervisor.m; sourceTree = SOURCE_ROOT; };
 		CEDFF36116417755007E8B37 /* JFFUnableToGetLocationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFUnableToGetLocationError.h; sourceTree = "<group>"; };
 		CEDFF36216417755007E8B37 /* JFFUnableToGetLocationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFUnableToGetLocationError.m; sourceTree = "<group>"; };
 		CEE03A81164269ED00A5FA08 /* JFFPlacemarksLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPlacemarksLoader.h; sourceTree = "<group>"; };
@@ -197,6 +200,8 @@
 			children = (
 				CEE03A8616426FD700A5FA08 /* CLLocation+UniqueLocationIdentificator.h */,
 				CEE03A8716426FD700A5FA08 /* CLLocation+UniqueLocationIdentificator.m */,
+				CEA4EB97164F9A2800F4807D /* JFFLocationLoaderSupervisor.h */,
+				CEA4EB98164F9A2800F4807D /* JFFLocationLoaderSupervisor.m */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -306,6 +311,7 @@
 				CEE03A83164269ED00A5FA08 /* JFFPlacemarksLoader.m in Sources */,
 				CEE03A8816426FD700A5FA08 /* CLLocation+UniqueLocationIdentificator.m in Sources */,
 				CEE03A8B164276A000A5FA08 /* JFFNoPlacemarksError.m in Sources */,
+				CEA4EB99164F9A2800F4807D /* JFFLocationLoaderSupervisor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

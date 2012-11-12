@@ -3,6 +3,7 @@
 //
 
 #ifdef __OBJC__
+    #import <JFFUtils/JFFUtils.h>
     #import <JFFAsyncOperations/JFFAsyncOperations.h>
     
     #import <CoreLocation/CoreLocation.h>
