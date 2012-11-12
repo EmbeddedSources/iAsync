@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37A360261642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A360251642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m */; };
+		37D865291643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D865281643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m */; };
 		CEBCBE011619A7D8007F805F /* SKProduct+LocalizedPriceString.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCBE001619A7D8007F805F /* SKProduct+LocalizedPriceString.m */; };
 		CEBCBE071619AB0A007F805F /* asyncSKPaymentQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCBE061619AB0A007F805F /* asyncSKPaymentQueue.m */; };
 		CEBCBE241619B1B2007F805F /* asyncPaymentOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCBE231619B1B2007F805F /* asyncPaymentOperations.m */; };
@@ -105,6 +107,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		37A360241642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStoreKitInvalidProductIdentifierError.h; sourceTree = "<group>"; };
+		37A360251642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStoreKitInvalidProductIdentifierError.m; sourceTree = "<group>"; };
+		37D865271643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKPaymentTransaction+ReceiptInBase64.h"; sourceTree = "<group>"; };
+		37D865281643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKPaymentTransaction+ReceiptInBase64.m"; sourceTree = "<group>"; };
 		CEBCBDEB1619A425007F805F /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
 		CEBCBDFF1619A7D8007F805F /* SKProduct+LocalizedPriceString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalizedPriceString.h"; sourceTree = "<group>"; };
 		CEBCBE001619A7D8007F805F /* SKProduct+LocalizedPriceString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+LocalizedPriceString.m"; sourceTree = "<group>"; };
@@ -159,6 +165,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37D8651D1643FD5600ABFD13 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				37D865271643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.h */,
+				37D865281643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		CEBCBDEC1619A425007F805F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +230,7 @@
 		CED002331619A33E00368E7D /* JFFStoreKit */ = {
 			isa = PBXGroup;
 			children = (
+				37D8651D1643FD5600ABFD13 /* Utils */,
 				CED85B5F161C2C1C00F28EBC /* Errors */,
 				CED0025F1619A37E00368E7D /* asyncAdapters */,
 				CEBCBDFF1619A7D8007F805F /* SKProduct+LocalizedPriceString.h */,
@@ -274,6 +290,8 @@
 				CED85B6A161C2C4800F28EBC /* JFFStoreKitError.m */,
 				CED85B6C161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.h */,
 				CED85B6D161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.m */,
+				37A360241642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.h */,
+				37A360251642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m */,
 				CED85B6F161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.h */,
 				CED85B70161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.m */,
 			);
@@ -455,6 +473,8 @@
 				CED85B6B161C2C4800F28EBC /* JFFStoreKitError.m in Sources */,
 				CED85B6E161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.m in Sources */,
 				CED85B71161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.m in Sources */,
+				37A360261642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m in Sources */,
+				37D865291643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

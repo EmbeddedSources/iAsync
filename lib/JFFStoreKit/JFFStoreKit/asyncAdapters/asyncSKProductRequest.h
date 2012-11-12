@@ -2,4 +2,4 @@
 
 #import <Foundation/Foundation.h>
 
-JFFAsyncOperation asyncOperationWithProductIdentifier(NSString *productIdentifier);
+JFFAsyncOperation skProductLoaderWithProductIdentifier(NSString *productIdentifier);

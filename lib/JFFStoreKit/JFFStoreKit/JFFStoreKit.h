@@ -7,3 +7,6 @@
 #import <JFFStoreKit/asyncAdapters/asyncSKProductRequest.h>
 
 #import <JFFStoreKit/Errors/JFFStoreKitCanNoLoadProductError.h>
+#import <JFFStoreKit/Errors/JFFStoreKitInvalidProductIdentifierError.h>
+
+#import <JFFStoreKit/Utils/SKPaymentTransaction+ReceiptInBase64.h>

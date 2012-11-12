@@ -10,7 +10,7 @@
 {
     srvCallback = [srvCallback copy];
     
-    JFFAsyncOperation productLoader = asyncOperationWithProductIdentifier(productIdentifier);
+    JFFAsyncOperation productLoader = skProductLoaderWithProductIdentifier(productIdentifier);
     
     JFFAsyncOperationBinder paymentBinder = ^JFFAsyncOperation(SKProduct *product) {
         return [self purcheserWithProduct:product srvCallback:srvCallback];
@@ -28,7 +28,7 @@
     JFFAsyncOperation paymentloader = asyncOperationWithSKPayment(payment);
     
     JFFAsyncOperationBinder srvPaymentBinder = ^JFFAsyncOperation(SKPaymentTransaction *transaction) {
-        JFFAsyncOperation srvLoader = srvCallback(product);
+        JFFAsyncOperation srvLoader = srvCallback(transaction);
         
         JFFAsyncOperationBinder removeTransaction = ^JFFAsyncOperation(id srvResult) {
             SKPaymentQueue *queue = [SKPaymentQueue defaultQueue];

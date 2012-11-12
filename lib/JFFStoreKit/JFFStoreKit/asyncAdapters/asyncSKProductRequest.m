@@ -1,6 +1,7 @@
 #import "asyncSKProductRequest.h"
 
 #import "JFFStoreKitCanNoLoadProductError.h"
+#import "JFFStoreKitInvalidProductIdentifierError.h"
 
 @interface JFFAsyncSKProductsRequestAdapter : NSObject <
 JFFAsyncOperationInterface,
@@ -55,7 +56,13 @@ SKProductsRequestDelegate
     if ([products hasElements]) {
         self->_handler([products lastObject], nil);
     } else {
-        JFFStoreKitCanNoLoadProductError *error = [JFFStoreKitCanNoLoadProductError new];
+        
+        NSString *invalidIdentifier = [self->_response.invalidProductIdentifiers lastObject];
+        
+        JFFStoreKitCanNoLoadProductError *error = ([invalidIdentifier isEqualToString:self->_productIdentifier])
+        ? [JFFStoreKitInvalidProductIdentifierError new]
+        : [JFFStoreKitCanNoLoadProductError new];
+        
         error.productIdentifier = self->_productIdentifier;
         self->_handler(nil, error);
     }
@@ -75,7 +82,7 @@ SKProductsRequestDelegate
 
 @end
 
-JFFAsyncOperation asyncOperationWithProductIdentifier(NSString *identifier)
+JFFAsyncOperation skProductLoaderWithProductIdentifier(NSString *identifier)
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         return [[JFFAsyncSKProductsRequestAdapter alloc] initWithProductIdentifier:identifier];

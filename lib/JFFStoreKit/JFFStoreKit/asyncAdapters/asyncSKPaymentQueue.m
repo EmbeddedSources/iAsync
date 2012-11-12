@@ -19,6 +19,17 @@ JFFAsyncOperationInterface
 
 - (void)dealloc
 {
+    [self unsubscribeFromObservervation];
+    _handler = nil;
+}
+
+- (void)doNothing:(id)objetc
+{
+    
+}
+
+- (void)unsubscribeFromObservervation
+{
     if (self->_addedToObservers)
         [self->_queue removeTransactionObserver:self];
 }
@@ -27,8 +38,7 @@ JFFAsyncOperationInterface
 {
     JFFAsyncSKPaymentAdapter *result = [self new];
     
-    if (result)
-    {
+    if (result) {
         result->_payment = payment;
         result->_queue   = [SKPaymentQueue defaultQueue];
         
@@ -86,12 +96,25 @@ JFFAsyncOperationInterface
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
+    if (!_handler) {
+        return;
+    }
+    
     SKPaymentTransaction *transaction = [self ownTransactionForTransactions:transactions];
+    
+    if (!transaction) {
+        return;
+    }
+
+    //TODO fix workaround for IOS 6.0
+    [self performSelector:@selector(doNothing:) withObject:self afterDelay:1.];
+    
     switch (transaction.transactionState)
     {
         case SKPaymentTransactionStatePurchased:
         {
             self->_handler(transaction, nil);
+            [self unsubscribeFromObservervation];
             break;
         }
         case SKPaymentTransactionStateFailed:
@@ -99,11 +122,13 @@ JFFAsyncOperationInterface
             [self->_queue finishTransaction:transaction];
             id error = [JFFStoreKitTransactionStateFailedError new];
             self->_handler(nil, error);
+            [self unsubscribeFromObservervation];
             break;
         }
         case SKPaymentTransactionStateRestored:
         {
             self->_handler(transaction, nil);
+            [self unsubscribeFromObservervation];
             break;
         }
         default:
