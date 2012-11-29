@@ -14,7 +14,9 @@ static const char *const cacheQueueName   = "com.embedded_sources.jffcache.thumb
 static JFFAsyncBinderForURL imageDataToUIImageBinder()
 {
     return ^JFFAsyncOperationBinder(NSURL *url) {
+        
         return ^JFFAsyncOperation(NSData *imageData) {
+            
             UIImage *image = [UIImage imageWithData:imageData];
             
             if (image)
@@ -23,6 +25,18 @@ static JFFAsyncBinderForURL imageDataToUIImageBinder()
             static NSString *const errorDescription = @"can not create image with given data";
             return asyncOperationWithError([JFFError newErrorWithDescription:errorDescription]);
         };
+        // TODO: Test perfomance
+//        return ^JFFAsyncOperation(NSData *imageData) {
+//            return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
+//                UIImage *image = [UIImage imageWithData:imageData];
+//                
+//                if (!image) {
+//                    static NSString *const errorDescription = @"can not create image with given data";
+//                    *outError = [JFFError newErrorWithDescription:errorDescription];
+//                }
+//                return image;
+//            });
+//        };
     };
 }
 
@@ -148,7 +162,7 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
                                                 CGSize scaleSize,
                                                 UIViewContentMode contentMode)
 {
-    return  [[NSString alloc]initWithFormat:@"resized_image_key:%@<->%@<->%d",
+    return  [[NSString alloc] initWithFormat:@"resized_image_key:%@<->%@<->%d",
              url,
              NSStringFromCGSize(scaleSize),
              contentMode];
@@ -211,15 +225,18 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
 //TODO add load balancer here
 - (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url
 {
+    if (url)
+        assert([url isKindOfClass:[NSURL class]]);
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         JFFAsyncOperation loader = [self cachedInDBImageDataLoaderForUrl:url
                                                  ignoreFreshDataLoadFail:YES];
         
         //TODO: also check the last update date here
-        JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc]initWithName:@"imagesByUrl"
-                                                                         key:url];
+        JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc] initWithName:@"imagesByUrl"
+                                                                          key:url];
         
         loader = [self asyncOperationForPropertyWithPath:propertyPath
                                           asyncOperation:loader];
@@ -234,9 +251,13 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
                               scaledToSize:(CGSize)scaleSize
                                contentMode:(UIViewContentMode)contentMode
 {
+    if (url)
+        assert([url isKindOfClass:[NSURL class]]);
+    
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         JFFAsyncOperation loader = [self cachedInDBImageDataLoaderForUrl:url
                                                  ignoreFreshDataLoadFail:NO];
         
@@ -248,8 +269,8 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
         id key = cacheKeyForURLScaleSizeAndContentMode(url, scaleSize, contentMode);
         
         //TODO: also check the last update date here
-        JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc]initWithName:@"imagesByUrl"
-                                                                         key:key];
+        JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc] initWithName:@"imagesByUrl"
+                                                                          key:key];
         
         loader = [self asyncOperationForPropertyWithPath:propertyPath
                                           asyncOperation:loader];
@@ -258,6 +279,28 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
                       cancelCallback,
                       doneCallback);
     };
+}
+
+#pragma Memory warning
+
+- (void)resetCache
+{
+    [self.imagesByUrl removeAllObjects];
+}
+
++ (void)addMemoryWarningObserving
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:NULL];
+}
+
++ (void)onMemoryWarning:(NSNotification *)notification
+{
+    [(JFFThumbnailStorage *)glStorageInstance resetCache];
+}
+
++ (void)load
+{//TODO subscribe each ThumbnailStorage
+    [self addMemoryWarningObserving];
 }
 
 @end
