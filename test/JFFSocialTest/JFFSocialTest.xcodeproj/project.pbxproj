@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		373035A2165E579D00540258 /* FoursquareApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D861515FF34DA001C1C2C /* FoursquareApiTest.m */; };
 		374980AC1602185A00AF0C29 /* test-img1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 374980AB1602185A00AF0C29 /* test-img1.jpg */; };
 		CE4F60AA15F8BD1600271035 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60A915F8BD1600271035 /* UIKit.framework */; };
 		CE4F60AC15F8BD1600271035 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F60AB15F8BD1600271035 /* Foundation.framework */; };
@@ -26,7 +27,6 @@
 		CE532DF6160702AB0029920A /* libJFFJsonTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE532DF1160702940029920A /* libJFFJsonTools.a */; };
 		CE5A01C915F9F16B005CC01A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5A01C815F9F16B005CC01A /* CFNetwork.framework */; };
 		CE5A01CB15F9F17D005CC01A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5A01CA15F9F17D005CC01A /* libz.dylib */; };
-		CE78FEFB1609BA0F005CE392 /* InstagramApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2365915FF6C8C005E5CF5 /* InstagramApiTest.m */; };
 		CE78FF071609BA54005CE392 /* libJFFCache.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE78FF041609BA49005CE392 /* libJFFCache.a */; };
 		CE78FF1A1609BA6F005CE392 /* libJFFRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE78FF151609BA61005CE392 /* libJFFRestKit.a */; };
 		CE78FF1C1609BA7D005CE392 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE78FF1B1609BA7D005CE392 /* libsqlite3.dylib */; };
@@ -823,7 +823,7 @@
 			files = (
 				CE4F60B615F8BD1600271035 /* main.m in Sources */,
 				CEB2361F15FF6BD1005E5CF5 /* GHUnitIPhoneAppDelegate+OpenWithURL.m in Sources */,
-				CE78FEFB1609BA0F005CE392 /* InstagramApiTest.m in Sources */,
+				373035A2165E579D00540258 /* FoursquareApiTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

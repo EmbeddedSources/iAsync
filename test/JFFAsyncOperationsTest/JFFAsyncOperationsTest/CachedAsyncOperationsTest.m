@@ -44,14 +44,14 @@
     {
         JFFAsyncOperationManager* nativeLoader_ = [ JFFAsyncOperationManager new ];
 
-        JFFPropertyPath* propertyPath_ = [ [ JFFPropertyPath alloc ] initWithName: @"dict"
-                                                                                key: @"1" ];
-
+        JFFPropertyPath* propertyPath_ = [[JFFPropertyPath alloc] initWithName:@"dict"
+                                                                           key:@"1"];
+        
         JFFPropertyExtractorFactoryBlock factory_ = ^JFFPropertyExtractor*( void )
         {
             return [ JFFPropertyExtractor new ];
         };
-
+        
         TestClassWithProperties* dataOwner_ = [ TestClassWithProperties new ];
 
         @autoreleasepool
@@ -249,49 +249,49 @@
 {
     @autoreleasepool
     {
-        JFFAsyncOperationManager* nativeLoader_ = [ JFFAsyncOperationManager new ];
-
-        JFFPropertyPath* propertyPath_ = [ [ JFFPropertyPath alloc ] initWithName: @"dict"
-                                                                                key: @"1" ];
-
+        JFFAsyncOperationManager *nativeLoader = [JFFAsyncOperationManager new];
+        
+        JFFPropertyPath* propertyPath_ = [[JFFPropertyPath alloc] initWithName:@"dict"
+                                                                           key:@"1"];
+        
         JFFPropertyExtractorFactoryBlock factory_ = ^JFFPropertyExtractor*( void )
         {
             return [ JFFPropertyExtractor new ];
         };
-
-        TestClassWithProperties* dataOwner_ = [ TestClassWithProperties new ];
-
+        
+        TestClassWithProperties *dataOwner_ = [TestClassWithProperties new];
+        
         JFFAsyncOperation cachedLoader_ = [ dataOwner_ asyncOperationForPropertyWithPath: propertyPath_
                                                            propertyExtractorFactoryBlock: factory_
-                                                                          asyncOperation: nativeLoader_.loader
+                                                                          asyncOperation: nativeLoader.loader
                                                                   didFinishLoadDataBlock: nil ];
 
-        GHAssertTrue( nativeLoader_.loadingCount == 0, @"OK" );
+        GHAssertTrue( nativeLoader.loadingCount == 0, @"OK" );
 
         __block BOOL finished1_ = NO;
         cachedLoader_( nil, nil, ^( id result_, NSError* error_ )
         {
             finished1_ = result_ != nil;
         } );
-
+        
         __block BOOL finished2_ = NO;
         cachedLoader_( nil, nil, ^( id result_, NSError* error_ )
         {
             finished2_ = result_ != nil;
         } );
-
+        
         JFFAsyncOperation cachedLoader2_ = [ dataOwner_ asyncOperationForPropertyWithPath: propertyPath_
                                                             propertyExtractorFactoryBlock: factory_
-                                                                           asyncOperation: nativeLoader_.loader
+                                                                           asyncOperation: nativeLoader.loader
                                                                    didFinishLoadDataBlock: nil ];
         __block BOOL finished3_ = NO;
         cachedLoader2_( nil, nil, ^( id result_, NSError* error_ )
         {
             finished3_ = result_ != nil;
         } );
-
-        GHAssertFalse( nativeLoader_.finished, @"OK" );
-        GHAssertTrue( nativeLoader_.loadingCount == 1, @"OK" );
+        
+        GHAssertFalse( nativeLoader.finished, @"OK" );
+        GHAssertTrue( nativeLoader.loadingCount == 1, @"OK" );
         GHAssertFalse( finished1_, @"OK" );
         GHAssertFalse( finished2_, @"OK" );
         GHAssertFalse( finished3_, @"OK" );
@@ -299,9 +299,9 @@
         GHAssertTrue( dataOwner_.dict[@"1"] == nil, @"OK" );
 
         id result_ = [ NSNull null ];
-        nativeLoader_.loaderFinishBlock.didFinishBlock( result_, nil );
+        nativeLoader.loaderFinishBlock.didFinishBlock( result_, nil );
 
-        GHAssertTrue( nativeLoader_.finished, @"OK" );
+        GHAssertTrue( nativeLoader.finished, @"OK" );
         GHAssertTrue( finished1_, @"OK" );
         GHAssertTrue( finished2_, @"OK" );
         GHAssertTrue( finished3_, @"OK" );

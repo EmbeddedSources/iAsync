@@ -12,8 +12,11 @@
  Logined via Facebook - test.dev.and@gmail.com, pwd: 123qweasdzxc456
 */
 
+//Test
+//#define ACCESS_TOKEN @"0WA2I2N1RDHMOVKZESV15ELMALCGC1T2M23UPJMYEMM2WNMZ"
 
-#define ACCESS_TOKEN @"0WA2I2N1RDHMOVKZESV15ELMALCGC1T2M23UPJMYEMM2WNMZ"
+//Live
+#define ACCESS_TOKEN @"VCRIQPPEEHXDA4FCDX1LHUTLHY1GMVQMPV2FWQSLVGIXFCBJ"
 
 @interface FoursquareApiTest : GHAsyncTestCase
 @end
@@ -99,7 +102,7 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:100.0];
 }
 
-- (void)testAddPostToCheckin
+- (void)testWAddPostToCheckin
 {
     [self prepare];
     
@@ -160,7 +163,7 @@
     [JFFSocialFoursquare inviteUserLoader:@"self" text:@"Hi! Nice place!" url:@"http://wishdates.com"]
     (nil, nil, ^(id result, NSError *error)
      {
-         NSLog(@"Result: %@", result);
+         NSLog(@"Result: %@, error: %@", result, error);
          if (!error)
          {
              [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
