@@ -5,7 +5,8 @@
 extern "C" {
 #endif
 
-JFFAsyncOperation asyncAllContactsLoader( void );
+    JFFAsyncOperation asyncAllContactsLoader();
+    JFFAsyncOperation requestAccessToContactsLoader();
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

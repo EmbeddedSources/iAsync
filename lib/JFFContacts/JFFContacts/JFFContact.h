@@ -23,18 +23,18 @@
 @property ( nonatomic, readonly ) ABAddressBookRef addressBook;
 @property ( nonatomic, readonly ) BOOL newContact;
 
--(id)initWithPerson:( ABRecordRef )person_
-        addressBook:( JFFAddressBook* )addressBook_;
+- (id)initWithPerson:(ABRecordRef)person
+         addressBook:(JFFAddressBook *)addressBook;
 
--(id)initWithFieldsDict:( NSDictionary* )args_
-            addressBook:( JFFAddressBook* )addressBook_;
+- (id)initWithFieldsDict:(NSDictionary *)args
+             addressBook:(JFFAddressBook *)addressBook;
 
--(BOOL)save;
--(BOOL)remove;
+- (BOOL)save;
+- (BOOL)remove;
 
-+(id)findContactWithContactInternalId:( ABRecordID )contactInternalId_
-                          addressBook:( JFFAddressBook* )addressBook_;
++ (id)findContactWithContactInternalId:(ABRecordID)contactInternalId
+                           addressBook:(JFFAddressBook *)addressBook;
 
-+(id)allContactsAddressBook:( JFFAddressBook* )addressBook_;
++ (id)allContactsAddressBook:(JFFAddressBook *)addressBook;
 
 @end

@@ -2,35 +2,33 @@
 
 #import "JFFContact.h"
 #import "JFFAddressBookFactory.h"
+#import "JFFAddressBookAccessError.h"
 
 #import <JFFAsyncOperations/JFFAsyncOperations.h>
 
-@interface JFFAsyncAllContactsLoader : NSObject < JFFAsyncOperationInterface >
+@interface JFFAsyncRequestAccessToContactsLoader : NSObject < JFFAsyncOperationInterface >
 @end
 
-@implementation JFFAsyncAllContactsLoader
+@implementation JFFAsyncRequestAccessToContactsLoader
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    handler  = [handler  copy];
-    progress = [progress copy];
+    NSParameterAssert(handler);
+    handler = [handler  copy];
     
-    JFFAddressBookSuccessCallback onSuccess = ^(JFFAddressBook *book)
-    {
-        NSArray *result = [JFFContact allContactsAddressBook:book];
+    JFFAddressBookSuccessCallback onSuccess = ^(JFFAddressBook *book) {
         
-        if (progress)
-            progress(result);
-        
-        if (handler)
-            handler(result, nil);
+        handler(book, nil);
     };
     
-    JFFAddressBookErrorCallback onFailure = ^(ABAuthorizationStatus status, NSError *error)
-    {
-        if (handler)
-            handler(nil, error);
+    JFFAddressBookErrorCallback onFailure = ^(ABAuthorizationStatus status, NSError *error) {
+        if (handler) {
+            
+            JFFAddressBookAccessError *resError = [JFFAddressBookAccessError new];
+            resError.nativeError = error;
+            handler(nil, resError);
+        }
     };
     
     [JFFAddressBookFactory asyncAddressBookWithSuccessBlock:onSuccess
@@ -45,8 +43,20 @@
 
 JFFAsyncOperation asyncAllContactsLoader( void )
 {
+    JFFAsyncOperationBinder contats = ^JFFAsyncOperation(JFFAddressBook *book) {
+        
+        return asyncOperationWithAnalyzer(nil, ^id(id result, NSError *__autoreleasing *outError) {
+            
+            return [JFFContact allContactsAddressBook:book];
+        });
+    };
+    return bindSequenceOfAsyncOperations(requestAccessToContactsLoader(), contats, nil);
+}
+
+JFFAsyncOperation requestAccessToContactsLoader()
+{
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
-        return [JFFAsyncAllContactsLoader new];
+        return [JFFAsyncRequestAccessToContactsLoader new];
     };
     return buildAsyncOperationWithAdapterFactory(factory);
 }

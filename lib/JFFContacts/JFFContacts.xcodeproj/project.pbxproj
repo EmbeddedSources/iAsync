@@ -29,6 +29,8 @@
 		CE91AA0115F63107002B220B /* JFFAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91AA0015F63107002B220B /* JFFAddressBook.m */; };
 		CE91AA0715F64ABF002B220B /* NSArray+ContactsDataFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91AA0615F64ABE002B220B /* NSArray+ContactsDataFilters.m */; };
 		CE91AA0B15F64C55002B220B /* JFFAsyncContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91AA0A15F64C55002B220B /* JFFAsyncContacts.m */; };
+		CE9A914B1656691400EFE858 /* JFFAddressBookError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A914A1656691400EFE858 /* JFFAddressBookError.m */; };
+		CE9A914E1656694C00EFE858 /* JFFAddressBookAccessError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A914D1656694C00EFE858 /* JFFAddressBookAccessError.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 7E57F42414F93738002D139B;
 			remoteInfo = JFFUtilsFW;
+		};
+		CE9A91461656690400EFE858 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE444A1C1608609100DD85B0;
+			remoteInfo = JFFUtilsTest;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -123,6 +132,10 @@
 		CE91AA0615F64ABE002B220B /* NSArray+ContactsDataFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ContactsDataFilters.m"; sourceTree = "<group>"; };
 		CE91AA0915F64C55002B220B /* JFFAsyncContacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncContacts.h; sourceTree = "<group>"; };
 		CE91AA0A15F64C55002B220B /* JFFAsyncContacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncContacts.m; sourceTree = "<group>"; };
+		CE9A91491656691400EFE858 /* JFFAddressBookError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBookError.h; sourceTree = "<group>"; };
+		CE9A914A1656691400EFE858 /* JFFAddressBookError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAddressBookError.m; sourceTree = "<group>"; };
+		CE9A914C1656694C00EFE858 /* JFFAddressBookAccessError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBookAccessError.h; sourceTree = "<group>"; };
+		CE9A914D1656694C00EFE858 /* JFFAddressBookAccessError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAddressBookAccessError.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +194,7 @@
 		CE29B80D15F60083000A05B8 /* JFFContacts */ = {
 			isa = PBXGroup;
 			children = (
+				CE9A91401656690300EFE858 /* Errors */,
 				CE29B83315F6009B000A05B8 /* Details */,
 				CE29B81015F60083000A05B8 /* JFFContacts.h */,
 				CE91A95B15F61716002B220B /* JFFContactFieldsKeys.h */,
@@ -256,6 +270,7 @@
 				CE29B86515F60330000A05B8 /* libJFFUtilsMacOS.a */,
 				CE29B86715F60330000A05B8 /* libJFFUtils-clang.a */,
 				CE29B86915F60330000A05B8 /* JFFUtilsFW.framework */,
+				CE9A91471656690400EFE858 /* JFFUtilsTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -267,6 +282,17 @@
 				CE91AA0A15F64C55002B220B /* JFFAsyncContacts.m */,
 			);
 			path = Async;
+			sourceTree = "<group>";
+		};
+		CE9A91401656690300EFE858 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				CE9A91491656691400EFE858 /* JFFAddressBookError.h */,
+				CE9A914A1656691400EFE858 /* JFFAddressBookError.m */,
+				CE9A914C1656694C00EFE858 /* JFFAddressBookAccessError.h */,
+				CE9A914D1656694C00EFE858 /* JFFAddressBookAccessError.m */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,6 +396,13 @@
 			remoteRef = CE29B86815F60330000A05B8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		CE9A91471656690400EFE858 /* JFFUtilsTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFUtilsTest.octest;
+			remoteRef = CE9A91461656690400EFE858 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -418,6 +451,8 @@
 				CE91AA0115F63107002B220B /* JFFAddressBook.m in Sources */,
 				CE91AA0715F64ABF002B220B /* NSArray+ContactsDataFilters.m in Sources */,
 				CE91AA0B15F64C55002B220B /* JFFAsyncContacts.m in Sources */,
+				CE9A914B1656691400EFE858 /* JFFAddressBookError.m in Sources */,
+				CE9A914E1656694C00EFE858 /* JFFAddressBookAccessError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

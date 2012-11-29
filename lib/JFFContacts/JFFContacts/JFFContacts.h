@@ -5,3 +5,5 @@
 #import <JFFContacts/JFFAddressBookFactory.h>
 
 #import <JFFContacts/Async/JFFAsyncContacts.h>
+
+#import <JFFContacts/Errors/JFFAddressBookAccessError.h>
