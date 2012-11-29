@@ -96,6 +96,8 @@
 		37497DF81601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DF21601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.m */; };
 		37497DF91601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DF21601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.m */; };
 		37497DFA1601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DF21601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.m */; };
+		37805592164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 37805590164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.h */; };
+		37805593164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 37805591164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.m */; };
 		534CDFC214A8C2930068F4DF /* JFFCastFunctions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 534CDFC014A8C2930068F4DF /* JFFCastFunctions.hpp */; };
 		534CDFC314A8C2930068F4DF /* JFFCastFunctions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 534CDFC014A8C2930068F4DF /* JFFCastFunctions.hpp */; };
 		534CDFC414A8C2930068F4DF /* JFFCastFunctions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 534CDFC014A8C2930068F4DF /* JFFCastFunctions.hpp */; };
@@ -483,6 +485,8 @@
 		37497BCF1600971C00AF0C29 /* NSDictionary+ValueWithType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ValueWithType.m"; sourceTree = "<group>"; };
 		37497DF11601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+IgnoringAddNilValue.h"; sourceTree = "<group>"; };
 		37497DF21601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+IgnoringAddNilValue.m"; sourceTree = "<group>"; };
+		37805590164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLocale+CurrentInterfaceLanguageCode.h"; sourceTree = "<group>"; };
+		37805591164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLocale+CurrentInterfaceLanguageCode.m"; sourceTree = "<group>"; };
 		534CDFC014A8C2930068F4DF /* JFFCastFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JFFCastFunctions.hpp; sourceTree = "<group>"; };
 		538E1CAA14B32201006BD40A /* NSDecimalNumber+Increment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDecimalNumber+Increment.h"; sourceTree = "<group>"; };
 		538E1CAB14B32201006BD40A /* NSDecimalNumber+Increment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDecimalNumber+Increment.m"; sourceTree = "<group>"; };
@@ -805,6 +809,15 @@
 			path = NSOrderedSet;
 			sourceTree = "<group>";
 		};
+		3780558E164D42F100459BA7 /* NSLocale */ = {
+			isa = PBXGroup;
+			children = (
+				37805590164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.h */,
+				37805591164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.m */,
+			);
+			path = NSLocale;
+			sourceTree = "<group>";
+		};
 		651BE0A41390496200DD6890 /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -862,6 +875,7 @@
 		651BE0BF1390496700DD6890 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3780558E164D42F100459BA7 /* NSLocale */,
 				CE57FBB41611EFE100124D90 /* NSSet */,
 				37063C6315FE0B7400B4B059 /* NSOrderedSet */,
 				1B14141115DBCCF100EFB2B8 /* NSDate */,
@@ -1271,6 +1285,7 @@
 				CE7CF550161EBC4D008557D2 /* NSNumber+FSStorable.h in Headers */,
 				CE998C481626B988002D39FD /* NSOrderedSet+BlocksAdditions.h in Headers */,
 				CE0B00451626D9C1003802A0 /* NSDateFormatter+MultiThreading.h in Headers */,
+				37805592164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1749,6 +1764,7 @@
 				CE7CF551161EBC4D008557D2 /* NSNumber+FSStorable.m in Sources */,
 				CE998C491626B988002D39FD /* NSOrderedSet+BlocksAdditions.m in Sources */,
 				CE0B00461626D9C1003802A0 /* NSDateFormatter+MultiThreading.m in Sources */,
+				37805593164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
