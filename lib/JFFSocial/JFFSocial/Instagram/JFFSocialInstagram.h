@@ -6,6 +6,8 @@
 
 @interface JFFSocialInstagram : NSObject
 
++ (JFFAsyncOperation)instagramAccessTokenLoaderForCredentials:(JFFInstagramCredentials *)redentials;
+
 + (JFFAsyncOperation)userLoaderForForUserId:(NSString *)userId
                                 accessToken:(NSString *)accessToken;
 
@@ -34,5 +36,7 @@
 + (JFFAsyncOperation)notifyUsersWithCredentials:(JFFInstagramCredentials *)credentials
                                        usersIds:(NSArray *)usersIds
                                         message:(NSString *)message;
+
++ (JFFAsyncOperation)logoutLoader;
 
 @end

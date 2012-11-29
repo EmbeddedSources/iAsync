@@ -39,6 +39,7 @@
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         JFFAsyncOperation accountLoader = [self authedUserLoaderWithCredentials:redentials];
         
         JFFAsyncOperationBinder accountToAccessTokenBinder = ^JFFAsyncOperation(JFFInstagramAuthedAccount *account) {
@@ -60,13 +61,13 @@
 {
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
-    {
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         JFFAsyncOperation oAuthUrlLoader = codeURLLoader(redentials.redirectURI, redentials.clientId);
         
         JFFAsyncOperationBinder urlToCodeBinder = ^JFFAsyncOperation(NSURL *url)
         {
-            NSDictionary *params = [[url query]dictionaryFromQueryComponents];
+            NSDictionary *params = [[url query] dictionaryFromQueryComponents];
             NSArray* codeParams = params[@"code"];
             
             if ([codeParams count]==0)
@@ -241,10 +242,10 @@
 {
     JFFAsyncOperation accessTokenLoader = [self instagramAccessTokenLoaderForCredentials:credentials];
     
-    JFFAsyncOperationBinder notifyBinder = ^JFFAsyncOperation(NSString *accessToken)
-    {
-        NSArray *usersLoaders = [usersIds map:^id(NSString *userId)
-        {
+    JFFAsyncOperationBinder notifyBinder = ^JFFAsyncOperation(NSString *accessToken) {
+        
+        NSArray *usersLoaders = [usersIds map:^id(NSString *userId) {
+            
             return [self userLoaderForForUserId:userId
                                     accessToken:accessToken];
         }];
@@ -259,6 +260,16 @@
     return bindSequenceOfAsyncOperations(accessTokenLoader,
                                          notifyBinder,
                                          nil);
+}
+
+#pragma mark - Logout
+
++ (JFFAsyncOperation)logoutLoader
+{
+    return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
+        [self setAccessToken:nil];
+        return @YES;
+    });
 }
 
 @end

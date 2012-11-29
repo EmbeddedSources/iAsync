@@ -21,18 +21,20 @@ static JFFAsyncOperation generalFoursquareRequestLoader(NSString *requestURL,
     JFFURLConnectionParams *params = [JFFURLConnectionParams new];
     
     NSDictionary *requaredParams = requaredParamsWithAccessToken(accessToken);
+    NSDictionary *fullParams = [requaredParams dictionaryByAddingObjectsFromDictionary:parameters];
     
-    NSString *paramsString = [[requaredParams dictionaryByAddingObjectsFromDictionary:parameters] stringFromQueryComponents];
+    NSString *paramsString = [fullParams stringFromQueryComponents];
     
     params.httpMethod = httpMethod;
     
     if ([httpMethod isEqualToString:@"POST"]) {
         params.url = [requestURL toURL];
         if (httpBody) {
-            //may should pass (requaredParams + parameters) instead off requaredParams here
-            params.httpBody = [httpBody dataForHTTPPostByAppendingParameters:requaredParams];
+            params.httpBody = [httpBody dataForHTTPPostByAppendingParameters:fullParams];
+            params.headers = @{ @"Content-Type" : @"multipart/form-data" };
         } else {
-            httpBody = [paramsString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+            params.httpBody = [paramsString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+            params.headers = @{ @"Content-Type" : @"application/x-www-form-urlencoded" };
         }
     } else {
         params.url = [ [NSString stringWithFormat:@"%@?%@", requestURL, paramsString] toURL];

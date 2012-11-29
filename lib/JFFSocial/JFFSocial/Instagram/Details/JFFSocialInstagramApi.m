@@ -20,7 +20,7 @@ JFFAsyncOperation codeURLLoader(NSString *redirectURI,
 
     static NSString *const urlFormat = @"https://instagram.com/oauth/authorize/?%@";
 
-    NSString *urlString = [[NSString alloc]initWithFormat:urlFormat, [params stringFromQueryComponents]];
+    NSString *urlString = [[NSString alloc] initWithFormat:urlFormat, [params stringFromQueryComponents]];
 
     NSURL *url = [urlString toURL];
     JFFAsyncOperation loader = [application asyncOperationWithApplicationURL:url];
@@ -51,7 +51,7 @@ JFFAsyncOperation authedUserDataLoader(NSString *redirectURI,
     NSURL *url = [urlString toURL];
     
     NSData *data = [params dataFromQueryComponents];
-    JFFAsyncOperation loader = dataURLResponseLoader(url, data, nil);
+    JFFAsyncOperation loader = perkyDataURLResponseLoader(url, data, nil);
     
     return loader;
 }
@@ -73,7 +73,7 @@ JFFAsyncOperation userDataLoader(NSString *userID,
                                  [params stringFromQueryComponents]];
     NSURL *url = [urlString toURL];
     
-    JFFAsyncOperation loader = dataURLResponseLoader(url, nil, nil);
+    JFFAsyncOperation loader = perkyDataURLResponseLoader(url, nil, nil);
     
     return loader;
 }
@@ -93,7 +93,7 @@ JFFAsyncOperation followersJSONDataLoader(NSString *userID,
     NSString *const urlString = [[NSString alloc]initWithFormat:urlStringFormat, userID, [params stringFromQueryComponents]];
     NSURL *url = [urlString toURL];
     
-    JFFAsyncOperation loader = dataURLResponseLoader(url, nil, nil);
+    JFFAsyncOperation loader = perkyDataURLResponseLoader(url, nil, nil);
     
     return loader;
 }
@@ -110,10 +110,10 @@ JFFAsyncOperation mediaItemsDataLoader(NSString *userID,
     };
     
     static NSString *const urlStringFormat = @"https://api.instagram.com/v1/users/%@/media/recent?%@";
-    NSString *const urlString = [[NSString alloc]initWithFormat:urlStringFormat, userID, [params stringFromQueryComponents]];
+    NSString *const urlString = [[NSString alloc] initWithFormat:urlStringFormat, userID, [params stringFromQueryComponents]];
     NSURL *url = [urlString toURL];
     
-    JFFAsyncOperation loader = dataURLResponseLoader(url, nil, nil);
+    JFFAsyncOperation loader = perkyDataURLResponseLoader(url, nil, nil);
     
     return loader;
 }
@@ -137,7 +137,7 @@ JFFAsyncOperation commentMediaItemDataLoader(NSString *mediaItemId,
     NSURL *url = [urlString toURL];
     
     NSData *data = [params dataFromQueryComponents];
-    JFFAsyncOperation loader = dataURLResponseLoader(url, data, nil);
+    JFFAsyncOperation loader = perkyDataURLResponseLoader(url, data, nil);
     
     return loader;
 }

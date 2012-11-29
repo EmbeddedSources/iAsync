@@ -8,6 +8,8 @@ typedef void(^JFFSocialTwitterDidLoginCallback)(NSString *login);
 
 + (BOOL)isAuthorized;
 
++ (JFFAsyncOperation)authorizationLoader;
+
 + (JFFAsyncOperation)usersNearbyCoordinatesLantitude:(double)lantitude longitude:(double)longitude;
 
 + (JFFAsyncOperation)followersLoader;

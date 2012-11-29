@@ -14,49 +14,52 @@
 
 static JFFSocialTwitterDidLoginCallback globalDidLoginCallback;
 
-static JFFAsyncOperation tritterAccountsLoader()
+static JFFSyncOperation twitterAccountsGetter()
+{
+    return ^id(NSError **error) {
+        
+        ACAccountStore *accountStore = [ACAccountStore new];
+        
+        ACAccountType *type = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+        
+        NSArray *accounts = [accountStore accountsWithAccountType:type];
+        
+        if ([accounts count]>0)
+            return @[accountStore, accounts];
+        
+        if (error)
+            *error = [JFFNoTwitterAccountsError new];
+        return nil;
+    };
+}
+
+static JFFAsyncOperation twitterAccountsLoaderIOS5()
 {
     JFFAsyncOperation accountsLoader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                                                 JFFCancelAsyncOperationHandler cancelCallback,
                                                                 JFFDidFinishAsyncOperationHandler doneCallback) {
-        JFFAnalyzer twitterAccounts = ^id(id result, NSError **error) {
-            ACAccountStore *accountStore = [ACAccountStore new];
-            
-            ACAccountType *type = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-            
-            NSArray *accounts = [accountStore accountsWithAccountType:type];
-            
-            if ([accounts count]>0)
-                return @[accountStore, accounts];
-            
-            if (error)
-                *error = [JFFNoTwitterAccountsError new];
-            return nil;
-        };
         
-        NSArray *accounts = twitterAccounts(nil, NULL);
+        JFFSyncOperation twitterAccounts = twitterAccountsGetter();
+        
+        NSArray *accounts = twitterAccounts(NULL);
         
         JFFAsyncOperation loader;
         
-        if ([accounts count] > 0)
-        {
+        if ([accounts count] > 0) {
             loader = asyncOperationWithResult(accounts);
-        }
-        else
-        {
-            loader = bindSequenceOfAsyncOperations(jffCreateTwitterAccountLoader(),
-                                                   asyncOperationBinderWithAnalyzer(twitterAccounts),
-                                                   nil
+        } else {
+            loader = sequenceOfAsyncOperations(jffCreateTwitterAccountLoader(),
+                                               asyncOperationWithSyncOperationInCurrentQueue(twitterAccounts),
+                                               nil
                                                    );
         }
         
         doneCallback = [doneCallback copy];
-        JFFDidFinishAsyncOperationHandler doneCallbackWp = ^(id result, NSError *error)
-        {
+        JFFDidFinishAsyncOperationHandler doneCallbackWp = ^(id result, NSError *error) {
             if (doneCallback)
                 doneCallback(result, error);
             
-            if (globalDidLoginCallback)
+            if (globalDidLoginCallback && result)
                 globalDidLoginCallback(nil);
         };
         
@@ -69,6 +72,27 @@ static JFFAsyncOperation tritterAccountsLoader()
                                      );
 }
 
+static JFFAsyncOperation twitterAccountsLoaderIOS6()
+{
+    if (![TWTweetComposeViewController canSendTweet]) {
+        return asyncOperationWithError([JFFNoTwitterAccountsError new]);
+    }
+    
+    return sequenceOfAsyncOperations(jffTwitterAccessRequestLoader(),
+                                     asyncOperationWithSyncOperationInCurrentQueue(twitterAccountsGetter()),
+                                     nil
+                                     );
+}
+
+static JFFAsyncOperation twitterAccountsLoader()
+{
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"6.0"] >= NSOrderedSame) {
+        return twitterAccountsLoaderIOS6();
+    }
+    
+    return twitterAccountsLoaderIOS5();
+}
+
 @implementation JFFSocialTwitter
 
 + (BOOL)isAuthorized
@@ -76,28 +100,33 @@ static JFFAsyncOperation tritterAccountsLoader()
     return [TWTweetComposeViewController canSendTweet];
 }
 
++ (JFFAsyncOperation)authorizationLoader
+{
+    return twitterAccountsLoader();
+}
+
 + (JFFAsyncOperation)generalTwitterApiDataLoaderWithURLString:(NSString *)urlString
                                                    parameters:(NSDictionary *)parameters
                                                 requestMethod:(TWRequestMethod)requestMethod
                                                  ayncAnalizer:(JFFAsyncOperationBinder)ayncAnalizer
 {
-    JFFAsyncOperationBinder requestBinder = ^JFFAsyncOperation(NSArray *accountStroreAndAccounts)
-    {
+    JFFAsyncOperationBinder requestBinder = ^JFFAsyncOperation(NSArray *accountStroreAndAccounts) {
+        
         TWRequest *request = [[TWRequest alloc] initWithURL:[urlString toURL]
                                                  parameters:parameters
                                               requestMethod:requestMethod];
-
+        
         request.account = accountStroreAndAccounts[1][0];
-
+        
         JFFAsyncOperation requestOperation = jffTwitterRequest(request);
-
+        
         return requestOperation;
     };
-
-    JFFAsyncOperation loaderOperation = bindSequenceOfAsyncOperations(tritterAccountsLoader(),
+    
+    JFFAsyncOperation loaderOperation = bindSequenceOfAsyncOperations(twitterAccountsLoader(),
                                                                       requestBinder,
                                                                       nil);
-
+    
     return bindSequenceOfAsyncOperations(loaderOperation,
                                          twitterResponseToNSData(),
                                          asyncOperationBinderJsonDataParser(),
@@ -111,7 +140,7 @@ static JFFAsyncOperation tritterAccountsLoader()
 
     NSDictionary *params = @{
     @"q"                : @"",
-    @"geocode"          : [[NSString alloc]initWithFormat:geocodeFormat, lantitude, longitude],
+    @"geocode"          : [[NSString alloc] initWithFormat:geocodeFormat, lantitude, longitude],
     @"count"            : @"100",
     @"include_entities" : @"true",
     @"result_type"      : @"recent",
@@ -125,13 +154,19 @@ static JFFAsyncOperation tritterAccountsLoader()
 
 + (JFFAsyncOperation)followersLoader
 {
-    JFFAsyncOperation followersIds = [self generalTwitterApiDataLoaderWithURLString:@"https://api.twitter.com/1.1/followers/ids.json"
+    NSString *urlString = @"https://api.twitter.com/1.1/followers/ids.json";
+    JFFAsyncOperation followersIds = [self generalTwitterApiDataLoaderWithURLString:urlString
                                                                          parameters:nil
                                                                       requestMethod:TWRequestMethodGET
                                                                        ayncAnalizer:jsonObjectToTwitterUsersIds()];
     
     JFFAsyncOperationBinder usersForIds = ^JFFAsyncOperation(NSArray *ids) {
-        NSDictionary *params = @{
+        
+        if ([ids count] == 0) {
+            return asyncOperationWithResult(@[]);
+        }
+        
+        id params = @{
         @"user_id" : [ids componentsJoinedByString:@","],
         };
         
@@ -152,8 +187,9 @@ static JFFAsyncOperation tritterAccountsLoader()
     @"text"    : message,
     @"user_id" : userId,
     };
-
-    JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:@"https://api.twitter.com/1.1/direct_messages/new.json"
+    
+    NSString *urlString = @"https://api.twitter.com/1.1/direct_messages/new.json";
+    JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:urlString
                                                                    parameters:params
                                                                 requestMethod:TWRequestMethodPOST
                                                                  ayncAnalizer:asyncJSONObjectToDirectTweet()];
@@ -165,7 +201,7 @@ static JFFAsyncOperation tritterAccountsLoader()
     NSDictionary *params = @{
     @"status" : message,
     };
-
+    
     JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:@"http://api.twitter.com/1/statuses/update.json"
                                                                    parameters:params
                                                                 requestMethod:TWRequestMethodPOST

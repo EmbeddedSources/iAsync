@@ -11,7 +11,7 @@ JFFAsyncOperationBinder asyncJSONObjectToTwitterTweets()
 {
     JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSDictionary *jsonObject) {
         
-        JFFSyncOperation loadDataBlock_ = ^id(NSError **outError) {
+        JFFSyncOperation loadDataBlock = ^id(NSError **outError) {
             
             NSArray *tweets = [NSArray newTweetsWithJSONObject:jsonObject error:outError];
             NSArray *accounts = [tweets map:^id(JFFTweet *tweet) {
@@ -19,7 +19,7 @@ JFFAsyncOperationBinder asyncJSONObjectToTwitterTweets()
             }];
             return accounts;
         };
-        return asyncOperationWithSyncOperation(loadDataBlock_);
+        return asyncOperationWithSyncOperation(loadDataBlock);
     };
     
     return parser;
@@ -29,21 +29,22 @@ JFFAsyncOperationBinder asyncJSONObjectToTwitterUsers()
 {
     JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSArray *jsonObject) {
         
-        if ([jsonObject isKindOfClass:[NSDictionary class]]) {
-            //TODO crash hot fix !!!
-            NSError *error = [JFFError newErrorWithDescription:@"TOD fix error"];
+        NSError *error;
+        if (![JFFJsonObjectValidator validateJsonObject:jsonObject
+                                        withJsonPattern:[NSArray class]
+                                                  error:&error]) {
+            
             return asyncOperationWithError(error);
         }
         
-        assert([jsonObject isKindOfClass:[NSArray class]]);
-        JFFSyncOperation loadDataBlock_ = ^id(NSError **outError) {
+        JFFSyncOperation loadDataBlock = ^id(NSError **outError) {
             NSArray *accounts = [jsonObject map:^id(id object, NSError *__autoreleasing *outError) {
                 return [JFFTwitterAccount newTwitterAccountWithTwitterJSONApiDictionary:object
                                                                                   error:outError];
             } error:outError];
             return accounts;
         };
-        return asyncOperationWithSyncOperation(loadDataBlock_);
+        return asyncOperationWithSyncOperation(loadDataBlock);
     };
     
     return parser;
@@ -52,12 +53,12 @@ JFFAsyncOperationBinder asyncJSONObjectToTwitterUsers()
 JFFAsyncOperationBinder asyncJSONObjectToDirectTweet()
 {
     JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSDictionary *jsonObject) {
-        JFFSyncOperation loadDataBlock_ = ^id(NSError **error) {
+        JFFSyncOperation loadDataBlock = ^id(NSError **error) {
             id accounts =  [JFFDirectTweetMessage newDirectTweetMessageWithTwitterJSONObject:jsonObject
                                                                                        error:error];
             return accounts;
         };
-        return asyncOperationWithSyncOperation(loadDataBlock_);
+        return asyncOperationWithSyncOperation(loadDataBlock);
     };
     
     return parser;
