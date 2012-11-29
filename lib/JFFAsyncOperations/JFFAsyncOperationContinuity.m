@@ -594,6 +594,7 @@ JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         cancelCallback = [cancelCallback copy];
         JFFCancelAsyncOperationHandler wrappedCancelCallback = ^void(BOOL canceled) {
             doneCallbackHook();

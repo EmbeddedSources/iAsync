@@ -31,6 +31,10 @@ JFFAsyncOperation asyncOperationWithStartAndFinishBlocks(JFFAsyncOperation loade
                                                          JFFSimpleBlock startBlock,
                                                          JFFDidFinishAsyncOperationHandler finishCallback);
 
+    JFFAsyncOperation asyncOperationWithStartAndDoneBlocks(JFFAsyncOperation loader,
+                                                           JFFSimpleBlock startBlock,
+                                                           JFFSimpleBlock doneBlock);
+
 JFFAsyncOperation asyncOperationWithAnalyzer(id data, JFFAnalyzer analyzer);
 
 JFFAsyncOperationBinder asyncOperationBinderWithAnalyzer(JFFAnalyzer analyzer);

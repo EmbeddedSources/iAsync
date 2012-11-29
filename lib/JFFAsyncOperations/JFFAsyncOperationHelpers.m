@@ -74,6 +74,7 @@ JFFAsyncOperation asyncOperationWithSyncOperationInCurrentQueue(JFFSyncOperation
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
         NSError *error;
         id result = block(&error);
+        assert((result || error) && (!result || !error));
         
         if (doneCallback)
             doneCallback(result, error);
@@ -139,6 +140,43 @@ JFFAsyncOperation asyncOperationWithStartAndFinishBlocks(JFFAsyncOperation loade
                 doneCallback(result, error);
         };
         return loader(progressCallback, cancelCallback, wrappedDoneCallback);
+    };
+}
+
+JFFAsyncOperation asyncOperationWithStartAndDoneBlocks(JFFAsyncOperation loader,
+                                                       JFFSimpleBlock startBlock,
+                                                       JFFSimpleBlock doneBlock)
+{
+    startBlock = [startBlock copy];
+    doneBlock  = [doneBlock  copy];
+    
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        
+        if (startBlock)
+            startBlock();
+        
+        cancelCallback = [cancelCallback copy];
+        JFFCancelAsyncOperationHandler wrappedCancelCallback = ^(BOOL canceled) {
+            
+            if (doneBlock)
+                doneBlock();
+            
+            if (cancelCallback)
+                cancelCallback(canceled);
+        };
+        
+        doneCallback = [doneCallback copy];
+        JFFDidFinishAsyncOperationHandler wrappedDoneCallback = ^(id result, NSError *error) {
+            
+            if (doneBlock)
+                doneBlock();
+            
+            if (doneCallback)
+                doneCallback(result, error);
+        };
+        return loader(progressCallback, wrappedCancelCallback, wrappedDoneCallback);
     };
 }
 
