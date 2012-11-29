@@ -1,5 +1,8 @@
 #import "UIApplication+OpenApplicationAsyncOp.h"
 
+#import "JFFOpenApplicationError.h"
+
+#import <JFFScheduler/NSObject+Scheduler.h>
 #import <JFFAsyncOperations/JFFAsyncOperations.h>
 
 static NSString *const delegateName = @"delegate";
@@ -23,10 +26,10 @@ JFFAsyncOperationInterface
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     [self->_application addDelegateProxy:self delegateName:delegateName];
-
+    
     self->_handler = [handler copy];
-
-    [self->_application openURL: self->_url];
+    
+    [self->_application openURL:self->_url];
 }
 
 - (void)cancel:(BOOL)canceled
@@ -37,8 +40,13 @@ JFFAsyncOperationInterface
 - (BOOL)finishWithURL:(NSURL *)url
 {
     [self->_application removeDelegateProxy:self delegateName:delegateName];
-    self->_handler(url, nil);
-
+    
+    if (url) {
+        self->_handler(url, nil);
+    } else {
+        self->_handler(nil, [JFFOpenApplicationError new]);
+    }
+    
     return YES;
 }
 
@@ -53,6 +61,14 @@ JFFAsyncOperationInterface
          annotation:(id)annotation
 {
     return [self finishWithURL:url];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    [self performSelector:@selector(finishWithURL:)
+             timeInterval:.5
+                 userInfo:nil
+                  repeats:NO];
 }
 
 @end

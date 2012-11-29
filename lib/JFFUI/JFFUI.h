@@ -21,3 +21,5 @@
 #import <JFFUI/Preview/NSURL+QLPreviewControllerDataSource.h>
 #import <JFFUI/StripeView/JFFPageSlider.h>
 #import <JFFUI/StripeView/JFFPageSliderDelegate.h>
+
+#import <JFFUI/Errors/JFFOpenApplicationError.h>

@@ -79,6 +79,10 @@
 		8D996F1F139F61200075A325 /* NSObject+JFFAlertButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D996F1D139F61200075A325 /* NSObject+JFFAlertButton.m */; };
 		AA747D9F0F9514B9006C5449 /* JFFUI_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFUI_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		CE9A9153165671D200EFE858 /* JFFUIError.h in Headers */ = {isa = PBXBuildFile; fileRef = CE9A9151165671D200EFE858 /* JFFUIError.h */; };
+		CE9A9154165671D200EFE858 /* JFFUIError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A9152165671D200EFE858 /* JFFUIError.m */; };
+		CE9A91571656722900EFE858 /* JFFOpenApplicationError.h in Headers */ = {isa = PBXBuildFile; fileRef = CE9A91551656722900EFE858 /* JFFOpenApplicationError.h */; };
+		CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */; };
 		CEA097C615FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */; };
 		CEA097C715FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */; };
 		CEE235EA1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */; };
@@ -128,6 +132,10 @@
 		8D996F1D139F61200075A325 /* NSObject+JFFAlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JFFAlertButton.m"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* JFFUI_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFUI_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE9A9151165671D200EFE858 /* JFFUIError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFUIError.h; sourceTree = "<group>"; };
+		CE9A9152165671D200EFE858 /* JFFUIError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFUIError.m; sourceTree = "<group>"; };
+		CE9A91551656722900EFE858 /* JFFOpenApplicationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFOpenApplicationError.h; sourceTree = "<group>"; };
+		CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFOpenApplicationError.m; sourceTree = "<group>"; };
 		CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+OpenApplicationAsyncOp.h"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.h"; sourceTree = SOURCE_ROOT; };
 		CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+OpenApplicationAsyncOp.m"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.m"; sourceTree = SOURCE_ROOT; };
 		CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+CachedAsyncImageLoader.h"; path = "Extensions/UIImageView+CachedAsyncImageLoader.h"; sourceTree = SOURCE_ROOT; };
@@ -186,6 +194,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CE9A914F165671C000EFE858 /* Errors */,
 				1B5E1ACA14D01F900075049A /* UIViewController */,
 				1BD361651455A04B0036F786 /* StripeView */,
 				1B295556143DCB0500532BD7 /* UITableView */,
@@ -306,6 +315,17 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		CE9A914F165671C000EFE858 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				CE9A9151165671D200EFE858 /* JFFUIError.h */,
+				CE9A9152165671D200EFE858 /* JFFUIError.m */,
+				CE9A91551656722900EFE858 /* JFFOpenApplicationError.h */,
+				CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -359,6 +379,8 @@
 				1B2812EA1578C1F400BC70D9 /* JFFWaitAlertView.h in Headers */,
 				CEA097C615FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h in Headers */,
 				CEE235EA1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h in Headers */,
+				CE9A9153165671D200EFE858 /* JFFUIError.h in Headers */,
+				CE9A91571656722900EFE858 /* JFFOpenApplicationError.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +497,8 @@
 				1B2812EB1578C1F400BC70D9 /* JFFWaitAlertView.mm in Sources */,
 				CEA097C715FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m in Sources */,
 				CEE235EB1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m in Sources */,
+				CE9A9154165671D200EFE858 /* JFFUIError.m in Sources */,
+				CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

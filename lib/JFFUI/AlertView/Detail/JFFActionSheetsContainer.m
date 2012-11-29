@@ -44,12 +44,12 @@
     }
 }
 
--(BOOL)containsActionSheet:( JFFActionSheet* )actionSheet_
+- (BOOL)containsActionSheet:(JFFActionSheet *)actionSheet
 {
-    return [ self->_activeActionSheets firstMatch: ^BOOL( JFFPendingActionSheet* pendingActionSheet_ )
+    return [self->_activeActionSheets any:^BOOL(JFFPendingActionSheet *pendingActionSheet)
     {
-        return pendingActionSheet_.actionSheet == actionSheet_;
-    } ] != nil;
+        return pendingActionSheet.actionSheet == actionSheet;
+    }];
 }
 
 -(JFFPendingActionSheet*)firstPendingActionSheet
@@ -64,10 +64,10 @@
 
 -(JFFPendingActionSheet*)objectToRemove:( JFFActionSheet* )actionSheet_
 {
-    return [ self->_activeActionSheets firstMatch: ^BOOL( JFFPendingActionSheet* pendingActionSheet_ )
+    return [self->_activeActionSheets firstMatch:^BOOL(JFFPendingActionSheet *pendingActionSheet_)
     {
         return pendingActionSheet_.actionSheet ==  actionSheet_;
-    } ];
+    }];
 }
 
 -(NSArray*)allActionSheets
