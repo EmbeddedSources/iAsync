@@ -348,13 +348,11 @@
 
                 JFFAsyncOperation  unsubscribeLoader_ = [ dataOwner_ autoUnsubsribeOnDeallocAsyncOperation: cachedLoader_ ];
 
-                [ dataOwner_ addOnDeallocBlock: ^()
-                {
+                [dataOwner_ addOnDeallocBlock:^() {
                     deallocated_ = YES;
-                } ];
-
-
-                unsubscribeLoader_( nil, nil, nil );
+                }];
+                
+                unsubscribeLoader_(nil, nil, nil);
             }
 
             nativeLoader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );

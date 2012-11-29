@@ -45,6 +45,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
         return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                         JFFCancelAsyncOperationHandler cancelCallback,
                                         JFFDidFinishAsyncOperationHandler doneCallback) {
+            
             __block JFFCancelAsyncOperation cancelBlockHolder;
             
             progressCallback = [progressCallback copy];
@@ -154,6 +155,7 @@ JFFAsyncOperation bindSequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
     for (JFFAsyncOperationBinder nextBinder = secondLoaderBinder;
          nextBinder != nil;
          nextBinder = va_arg(args, JFFAsyncOperationBinder)) {
+        
         [binders addObject:[nextBinder copy]];
     }
     va_end(args);
@@ -193,10 +195,12 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBin
     
     return ^JFFAsyncOperation(id data) {
         JFFAsyncOperation firstLoader = firstBinder(data);
+        assert(firstLoader);//expected loader
         
         return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                         JFFCancelAsyncOperationHandler cancelCallback,
                                         JFFDidFinishAsyncOperationHandler doneCallback) {
+            
             __block JFFCancelAsyncOperation cancelBlockHolder;
             
             doneCallback = [doneCallback copy];
@@ -276,6 +280,7 @@ JFFAsyncOperation bindTrySequenceOfAsyncOperations(JFFAsyncOperation firstLoader
     for ( JFFAsyncOperationBinder secondBlockBinder = secondLoaderBinder;
          secondBlockBinder != nil;
          secondBlockBinder = va_arg(args, JFFAsyncOperationBinder)) {
+        
         firstBlock = bindTrySequenceOfBindersPair(firstBlock, secondBlockBinder);
     }
     va_end(args);

@@ -3,13 +3,22 @@
 
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
+#import <JFFAsyncOperations/LoadBalancer/Details2/JFFBaseLoaderOwner.h>
+
 @interface JFFLimitedLoadersQueueTest : GHAsyncTestCase
 @end
 
 @implementation JFFLimitedLoadersQueueTest
 
+-(void)setUp
+{
+    [JFFBaseLoaderOwner enableInstancesCounting];
+}
+
 - (void)testPerormTwoBlocksAndOneWaits
 {
+    const NSUInteger initialSchedulerInstancesCount = [JFFBaseLoaderOwner instancesCount];
+    
     @autoreleasepool
     {
         JFFLimitedLoadersQueue *queue = [JFFLimitedLoadersQueue new];
@@ -64,10 +73,14 @@
         GHAssertTrue(loader3.canceled, nil);
         GHAssertTrue(canceled4       , nil);
     }
+    
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFBaseLoaderOwner instancesCount], @"OK");
 }
 
 - (void)testOneOperationInQueue
 {
+    const NSUInteger initialSchedulerInstancesCount = [JFFBaseLoaderOwner instancesCount];
+    
     @autoreleasepool
     {
         JFFLimitedLoadersQueue *queue = [JFFLimitedLoadersQueue new];
@@ -92,6 +105,8 @@
         
         loader2.loaderFinishBlock.didFinishBlock([NSNull new], nil);
     }
+    
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFBaseLoaderOwner instancesCount], @"OK");
 }
 
 //TODO test when (active)native loader was canced

@@ -51,6 +51,11 @@ static JFFLimitedLoadersQueue *balancer(void)
     return instance;
 }
 
+static JFFAsyncOperation balanced(JFFAsyncOperation loader)
+{
+    return [balancer() balancedLoaderWithLoader:loader];
+}
+
 @interface JFFImageCacheAdapter : NSObject<JFFRestKitCache>
 @end
 
@@ -64,7 +69,7 @@ static JFFLimitedLoadersQueue *balancer(void)
         return [NSNull new];
     }, cacheQueueName);
     
-    return [balancer() balancedLoaderWithLoader:loader];
+    return balanced(loader);
 }
 
 - (JFFAsyncOperation)cachedDataLoaderForKey:(NSString *)key {
@@ -88,12 +93,12 @@ static JFFLimitedLoadersQueue *balancer(void)
         return nil;
     }, cacheQueueName);
     
-    return [balancer() balancedLoaderWithLoader:loader];
+    return balanced(loader);
 }
 
 @end
 
-static id glStorageInstance = nil;
+static JFFThumbnailStorage *glStorageInstance = nil;
 
 @interface JFFThumbnailStorage ()
 
@@ -103,9 +108,29 @@ static id glStorageInstance = nil;
 
 @implementation JFFThumbnailStorage
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (id)init
+{
+    self = [super init];
+    
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onMemoryWarning:)
+                                                     name:UIApplicationDidReceiveMemoryWarningNotification
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
 - (NSCache *)imagesByUrl {
     if (!self->_imagesByUrl) {
         self->_imagesByUrl = [NSCache new];
+        [self->_imagesByUrl setCountLimit:200];
     }
     
     return self->_imagesByUrl;
@@ -192,7 +217,8 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
                 return result;
             };
             
-            return asyncOperationWithSyncOperation(loadDataBlock);
+            return asyncOperationWithSyncOperationAndQueue(loadDataBlock,
+                                                           "com.embedded_sources.jffcache.thumbnail_storage.cache.resize");
         };
         
         return bindSequenceOfAsyncOperations(dataToResizeLoader,
@@ -214,7 +240,7 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
             return result;
         }, cacheQueueName);
         
-        return [balancer() balancedLoaderWithLoader:loader];
+        return balanced(loader);
     };
     
     JFFAsyncOperation loader = jSmartDataLoaderWithCache(args);
@@ -227,6 +253,7 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
 {
     if (url)
         assert([url isKindOfClass:[NSURL class]]);
+    
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
@@ -285,22 +312,12 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
 
 - (void)resetCache
 {
-    [self.imagesByUrl removeAllObjects];
+    [_imagesByUrl removeAllObjects];
 }
 
-+ (void)addMemoryWarningObserving
+- (void)onMemoryWarning:(NSNotification *)notification
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:NULL];
-}
-
-+ (void)onMemoryWarning:(NSNotification *)notification
-{
-    [(JFFThumbnailStorage *)glStorageInstance resetCache];
-}
-
-+ (void)load
-{//TODO subscribe each ThumbnailStorage
-    [self addMemoryWarningObserving];
+    [self resetCache];
 }
 
 @end

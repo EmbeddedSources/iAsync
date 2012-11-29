@@ -43,14 +43,14 @@
 
 JFFAsyncOperation asyncAllContactsLoader( void )
 {
-    JFFAsyncOperationBinder contats = ^JFFAsyncOperation(JFFAddressBook *book) {
+    JFFAsyncOperationBinder contacts = ^JFFAsyncOperation(JFFAddressBook *book) {
         
         return asyncOperationWithAnalyzer(nil, ^id(id result, NSError *__autoreleasing *outError) {
             
             return [JFFContact allContactsAddressBook:book];
         });
     };
-    return bindSequenceOfAsyncOperations(requestAccessToContactsLoader(), contats, nil);
+    return bindSequenceOfAsyncOperations(requestAccessToContactsLoader(), contacts, nil);
 }
 
 JFFAsyncOperation requestAccessToContactsLoader()

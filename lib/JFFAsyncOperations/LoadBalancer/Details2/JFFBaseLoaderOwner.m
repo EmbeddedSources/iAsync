@@ -24,11 +24,22 @@
     return result;
 }
 
+- (void)clear
+{
+    _loader           = nil;
+    _queue            = nil;
+    _cancelLoader     = nil;
+    _progressCallback = nil;
+    _cancelCallback   = nil;
+    _doneCallback     = nil;
+}
+
 - (void)performLoader
 {
     NSParameterAssert(_cancelLoader == nil);
     
     JFFAsyncOperationProgressHandler progressCallback = ^(id progress) {
+        
         if (_progressCallback)
             _progressCallback(progress);
     };
@@ -44,6 +55,8 @@
             _cancelLoader = nil;
             cancelCallback(canceled);
         }
+        
+        [self clear];
     };
     
     JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
@@ -52,6 +65,8 @@
         
         if (_doneCallback)
             _doneCallback(result, error);
+        
+        [self clear];
     };
     
     _cancelLoader = _loader(progressCallback, cancelCallback, doneCallback);

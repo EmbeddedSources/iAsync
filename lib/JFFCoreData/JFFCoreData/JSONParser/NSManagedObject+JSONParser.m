@@ -8,7 +8,7 @@
                                  arrayData:(NSArray *)arrayData
                                primaryKeys:(JFFCoreDataCachePrimaryKeys)primaryKeysBlock
 {
-    if (!primaryKeysBlock)
+    if (!primaryKeysBlock || [arrayData count] == 0)
         return nil;
     
     NSArray *primaryKeyAndValues = primaryKeysBlock(arrayData);
@@ -19,7 +19,6 @@
     
     NSParameterAssert([primaryKeyValues count] == [arrayData count]);
     
-    //TODO fix hardcode ProfileModel
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([self class])];
     request.predicate = [NSPredicate predicateWithFormat:@"%K IN (%@)", modelKey, primaryKeyValues];
     request.includesPendingChanges = YES;
@@ -31,11 +30,15 @@
     NSParameterAssert(!error);
     NSParameterAssert(cachedObjects);
     
+    Class anyPrimaryKeyValue = [primaryKeyValues[0] jffMeaningClass];
+    
     NSMutableDictionary *objectByKeys = [NSMutableDictionary new];
     for (NSManagedObject *mnObject in cachedObjects) {
         
         id key = [mnObject valueForKey:modelKey];
-        NSParameterAssert(key);
+        
+        NSParameterAssert([key isKindOfClass:anyPrimaryKeyValue]);
+        
         objectByKeys[key] = mnObject;
     }
     
@@ -60,9 +63,6 @@
     
     context = context?:[[JFFCoreDataProvider sharedCoreDataProvider] contextForCurrentThread];
     
-    static NSTimeInterval timeInterval = 0.;
-    NSDate *startDate = [NSDate new];
-    
     NSArray *cachedObjectsResult = [self cachedManagedObjectsInContext:context
                                                              arrayData:arrayData
                                                            primaryKeys:primaryKeys];
@@ -76,12 +76,6 @@
         objectByKeys     = cachedObjectsResult[2];
     }
     
-    timeInterval += [[NSDate new] timeIntervalSinceDate:startDate];
-    NSLog(@"fetch time: %f", timeInterval);
-    
-    static NSTimeInterval timeInterval2 = 0.;
-    NSDate *startDate2 = [NSDate new];
-    
     NSArray *objects = [arrayData mapWithIndex:^id(NSDictionary *jsonObject,
                                                    NSInteger idx,
                                                    NSError *__autoreleasing *outError) {
@@ -93,19 +87,13 @@
         
         cachedObject = cachedObject?:[self createManagedObjectInContext:context];
         NSManagedObject *model = parser(jsonObject, cachedObject, outError);
-
-        [context save:outError];
-        
         return model;
     } error:outError];
-    
-    timeInterval2 += [[NSDate new] timeIntervalSinceDate:startDate2];
-    NSLog(@"parse ar time: %f", timeInterval2);
     
     if (!objects)
         return nil;
     
-    BOOL result = YES;//[context save:outError];
+    BOOL result = [context save:outError];
     
     return result?objects:nil;
 }

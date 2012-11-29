@@ -14,7 +14,7 @@
 
 -(void)testParalelTask
 {
-    const NSUInteger initialSchedulerInstancesCount_ = [ JFFBlockOperation instancesCount ];
+    const NSUInteger initialSchedulerInstancesCount = [JFFBlockOperation instancesCount];
 
     __block BOOL theSameThread_ = NO;
     __block BOOL theProgressOk_ = NO;
@@ -64,7 +64,7 @@
     [ self prepare ];
     [ self waitForStatus: kGHUnitWaitStatusSuccess timeout: 1. ];
 
-    GHAssertTrue( initialSchedulerInstancesCount_ == [ JFFBlockOperation instancesCount ], @"OK" );
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFBlockOperation instancesCount], @"OK");
 
     GHAssertTrue( theSameThread_, @"OK" );
     GHAssertTrue( theProgressOk_, @"OK" );

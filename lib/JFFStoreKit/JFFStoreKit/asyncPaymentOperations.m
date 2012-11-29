@@ -34,7 +34,7 @@
             SKPaymentQueue *queue = [SKPaymentQueue defaultQueue];
             [queue finishTransaction:transaction];
             
-            return asyncOperationWithResult([NSNull new]);
+            return asyncOperationWithResult(srvResult);
         };
         
         return bindSequenceOfAsyncOperations(srvLoader,
