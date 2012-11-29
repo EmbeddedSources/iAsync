@@ -23,6 +23,7 @@
 		CECEFBE416217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE316217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m */; };
 		CECEFBE716217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE616217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m */; };
 		CECEFBEA16218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE916218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m */; };
+		CEF9F26516662A7A008310DA /* NSManagedObject+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF9F26416662A7A008310DA /* NSManagedObject+JSONParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,9 @@
 		CECEFBE816218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+ObjectInManagedObjectContext.h"; sourceTree = "<group>"; };
 		CECEFBE916218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+ObjectInManagedObjectContext.m"; sourceTree = "<group>"; };
 		CECEFBEB16218094007A61C9 /* JFFObjectInManagedObjectContextProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFObjectInManagedObjectContextProtocol.h; sourceTree = "<group>"; };
+		CEF9F26316662A7A008310DA /* NSManagedObject+JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+JSONParser.h"; sourceTree = "<group>"; };
+		CEF9F26416662A7A008310DA /* NSManagedObject+JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+JSONParser.m"; sourceTree = "<group>"; };
+		CEF9F26616662D5F008310DA /* JSONParserDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONParserDefinitions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +197,7 @@
 		CEA097EE16216ED1005820FA /* JFFCoreData */ = {
 			isa = PBXGroup;
 			children = (
+				CEF9F26216662A7A008310DA /* JSONParser */,
 				CECEFBE116217FA7007A61C9 /* ObjectInManagedObjectContext */,
 				CEA097EF16216ED1005820FA /* Supporting Files */,
 				CEA0981416216EE7005820FA /* JFFCoreDataProvider.h */,
@@ -280,6 +285,16 @@
 				CE45A58D164BFCC80054700D /* NSManagedObject+UpdateManagedObjectFromContext.m */,
 			);
 			path = ObjectInManagedObjectContext;
+			sourceTree = "<group>";
+		};
+		CEF9F26216662A7A008310DA /* JSONParser */ = {
+			isa = PBXGroup;
+			children = (
+				CEF9F26616662D5F008310DA /* JSONParserDefinitions.h */,
+				CEF9F26316662A7A008310DA /* NSManagedObject+JSONParser.h */,
+				CEF9F26416662A7A008310DA /* NSManagedObject+JSONParser.m */,
+			);
+			path = JSONParser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -457,6 +472,7 @@
 				CECEFBEA16218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m in Sources */,
 				CE025685162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m in Sources */,
 				CE45A58E164BFCC80054700D /* NSManagedObject+UpdateManagedObjectFromContext.m in Sources */,
+				CEF9F26516662A7A008310DA /* NSManagedObject+JSONParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

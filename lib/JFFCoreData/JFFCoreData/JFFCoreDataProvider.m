@@ -63,6 +63,11 @@
     return _contextForMainThread;
 }
 
+- (void)resetMainThreadContext
+{
+    _contextForMainThread = nil;
+}
+
 + (NSManagedObjectModel *)newManagedObjectModelNamed:(NSString *)modelFileName
 {
 	NSString *path = [[NSBundle mainBundle] pathForResource:[modelFileName stringByDeletingPathExtension]
@@ -90,7 +95,7 @@
 
 - (NSPersistentStoreCoordinator *)newPersistentStoreCoordinator
 {
-    NSURL *documentsStoreURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Wishdates.sqlite"];
+    NSURL *documentsStoreURL = [self dataBaseFileURL];
     NSError *error;
     
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
@@ -128,6 +133,28 @@
     
     return persistentStoreCoordinator;
     
+}
+
+- (NSURL *)dataBaseFileURL
+{
+    return [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Wishdates.sqlite"];
+}
+
+- (BOOL)removeDatabaseFile:(NSError **)outError
+{
+    NSURL *dbUrl = [self dataBaseFileURL];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    BOOL result = YES;
+    if ([fileManager fileExistsAtPath:dbUrl.path]) {
+        result = [fileManager removeItemAtURL:dbUrl error:outError];
+    }
+    
+    _contextForMainThread = nil;
+    _mediateRootContext = nil;
+    _persistentStoreCoordinator = nil;
+    
+    return result;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator

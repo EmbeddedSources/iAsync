@@ -9,3 +9,5 @@
 #import <JFFCoreData/ObjectInManagedObjectContext/NSManagedObject+ObjectInManagedObjectContext.h>
 
 #import <JFFCoreData/ObjectInManagedObjectContext/NSManagedObject+UpdateManagedObjectFromContext.h>
+
+#import <JFFCoreData/JSONParser/NSManagedObject+JSONParser.h>

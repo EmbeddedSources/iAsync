@@ -6,8 +6,12 @@
 
 - (NSManagedObjectContext *)contextForCurrentThread;
 
+- (void)resetMainThreadContext;
+
 + (id)sharedCoreDataProvider;
 
 - (void)saveRootContext;
+
+- (BOOL)removeDatabaseFile:(NSError **)outError;
 
 @end
