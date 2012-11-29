@@ -74,10 +74,10 @@
 
 - (BOOL)containsObject:(id)object
 {
-    return [self->_mutableArray firstMatch:^BOOL(id element) {
+    return [self->_mutableArray any:^BOOL(id element) {
         JFFAutoRemoveAssignProxy *proxy = element;
         return proxy.target == object;
-    }] != nil;
+    }];
 }
 
 - (void)removeObject:(id)object
@@ -91,6 +91,10 @@
         JFFAutoRemoveAssignProxy *proxy = self->_mutableArray[index];
         [proxy onRemoveFromMutableAssignArray:self];
         [self->_mutableArray removeObjectAtIndex:index];
+    }
+    
+    if (_onRemoveObject) {
+        _onRemoveObject();
     }
 }
 
@@ -138,6 +142,20 @@
 {
     JFFAutoRemoveAssignProxy *proxy = [self->_mutableArray lastObject];
     return proxy.target;
+}
+
+- (BOOL)any:(JFFPredicateBlock)predicate
+{
+    id object = [self firstMatch:predicate];
+    return object != nil;
+}
+
+- (BOOL)all:(JFFPredicateBlock)predicate
+{
+    JFFPredicateBlock notPredicate = ^BOOL(id object) {
+        return !predicate(object);
+    };
+    return ![self any:notPredicate];
 }
 
 @end
