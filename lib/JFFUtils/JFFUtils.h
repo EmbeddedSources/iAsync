@@ -66,3 +66,5 @@
 #import <JFFUtils/JFFSingleThreadProxy.h>
 #import <JFFUtils/JFFMutableAssignArray.h>
 #import <JFFUtils/JFFMutableAssignDictionary.h>
+
+#import <JFFUtils/NSLocale/NSLocale+CurrentInterfaceLanguageCode.h>

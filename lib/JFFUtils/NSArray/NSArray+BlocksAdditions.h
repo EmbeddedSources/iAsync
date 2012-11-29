@@ -72,4 +72,8 @@
 - (NSArray*)devideIntoArrayWithSize:(NSUInteger)size
                   elementIndexBlock:(JFFElementIndexBlock)block;
 
+- (BOOL)any:(JFFPredicateBlock)predicate;
+
+- (BOOL)all:(JFFPredicateBlock)predicate;
+
 @end

@@ -226,4 +226,18 @@
     return result;
 }
 
+- (BOOL)any:(JFFPredicateBlock)predicate
+{
+    id object = [self firstMatch:predicate];
+    return object != nil;
+}
+
+- (BOOL)all:(JFFPredicateBlock)predicate
+{
+    JFFPredicateBlock notPredicate = ^BOOL(id object) {
+        return !predicate(object);
+    };
+    return ![self any:notPredicate];
+}
+
 @end
