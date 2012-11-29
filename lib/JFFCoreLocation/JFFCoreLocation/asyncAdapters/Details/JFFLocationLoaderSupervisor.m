@@ -24,6 +24,11 @@
     if (self) {
         _accuracy = accuracy;
         _observers = [JFFMutableAssignArray new];
+        
+        __weak JFFLocationLoaderSupervisor *weakSelf = self;
+        _observers.onRemoveObject = ^() {
+            [weakSelf tryMakeLiveLonger];
+        };
     }
     
     return self;
@@ -49,6 +54,12 @@
 - (CLLocation *)location
 {
     return self.locationManager.location;
+}
+
+- (void)tryMakeLiveLonger
+{
+    if ([_observers count] == 0)
+        [self makeLiveLonger];
 }
 
 - (void)makeLiveLonger
@@ -83,8 +94,7 @@
 {
     [_observers removeObject:observer];
     
-    if ([_observers count] == 0)
-        [self makeLiveLonger];
+    [self tryMakeLiveLonger];
 }
 
 - (void)notifyEachObserverWithLocation:(CLLocation *)newLocation

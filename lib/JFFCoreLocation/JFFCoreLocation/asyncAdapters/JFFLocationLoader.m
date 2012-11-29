@@ -22,11 +22,6 @@ JFFLocationObserver
     JFFScheduler *_scheduler;
 }
 
-- (void)dealloc
-{
-    [self stopObserving];
-}
-
 - (id)initWithAccuracy:(CLLocationAccuracy)accuracy
 {
     self = [super init];
@@ -46,12 +41,6 @@ JFFLocationObserver
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    if (![CLLocationManager locationServicesEnabled]) {
-        
-        handler(nil, [JFFLocationServicesDisabledError new]);
-        return;
-    }
-    
     handler = [handler copy];
     _handler = handler;
     
@@ -67,6 +56,12 @@ JFFLocationObserver
     }
     
     [_supervisor addLocationObserver:self];
+    
+    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+        
+        handler(nil, [JFFLocationServicesDisabledError new]);
+        return;
+    }
     
     _scheduler = [JFFScheduler new];
     __weak JFFCoreLocationAsyncAdapter *weakSelf = self;
@@ -116,9 +111,10 @@ JFFLocationObserver
         && location.verticalAccuracy <= 200.) {
         
         [self forceProcessLocation:location];
+        return YES;
     }
     
-    return YES;
+    return NO;
 }
 
 #pragma mark JFFLocationObserver
@@ -143,10 +139,10 @@ JFFLocationObserver
     
     id key = @{
     @"accuracy" : @(accuracy),
-    @"method"   : @"locationLoaderWithAccuracy",
-    @"class"    : @"JFFLocationLoader",
+    @"method"   : NSStringFromSelector(_cmd),
+    @"class"    : [self description],
     };
-    return [NSObject asyncOperationMergeLoaders:loader withArgument:key];
+    return [self asyncOperationMergeLoaders:loader withArgument:key];
 }
 
 @end

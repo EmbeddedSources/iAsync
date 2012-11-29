@@ -108,10 +108,10 @@ JFFAsyncOperationInterface
     
     id key = @{
     @"location" : [location uniqueLocationIdentificator],
-    @"method"   : @"placemarksLoaderForLocation",
-    @"class"    : @"JFFPlacemarksLoader",
+    @"method"   : NSStringFromSelector(_cmd),
+    @"class"    : [self description],
     };
-    return [NSObject asyncOperationMergeLoaders:loader withArgument:key];
+    return [self asyncOperationMergeLoaders:loader withArgument:key];
 }
 
 + (JFFAsyncOperation)placemarkLoaderForLocation:(CLLocation *)location
