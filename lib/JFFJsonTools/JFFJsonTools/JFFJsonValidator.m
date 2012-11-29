@@ -23,10 +23,10 @@ static NSArray *allJsonTypes(void)
 
 static BOOL isJsonObject(id object)
 {
-    BOOL result = [allJsonTypes() firstMatch:^BOOL(id classElement) {
+    BOOL result = [allJsonTypes() any:^BOOL(id classElement) {
         BOOL result = [object isKindOfClass:classElement];
         return result;
-    }] != nil;
+    }];
     
     return result;
 }
