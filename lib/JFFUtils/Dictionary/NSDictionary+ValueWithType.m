@@ -68,7 +68,6 @@
     return NO;
 }
 
-    
 - (NSNumber *)numberWithIntegerForKey:(NSString *)key
 {
     id value = self[key];

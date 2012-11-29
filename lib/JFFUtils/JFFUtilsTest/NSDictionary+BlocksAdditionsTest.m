@@ -165,4 +165,38 @@
     STAssertTrue(errorForMap == error, nil);
 }
 
+- (void)testAny
+{
+    NSArray *arr = @[@"a", @"b", @"c"];
+    
+    STAssertTrue([arr any:^BOOL(NSString *str) {
+        return [str isEqualToString:@"a"];
+    }], nil);
+    
+    STAssertTrue([arr any:^BOOL(NSString *str) {
+        return [str isEqualToString:@"b"];
+    }], nil);
+    
+    STAssertTrue([arr any:^BOOL(NSString *str) {
+        return [str isEqualToString:@"c"];
+    }], nil);
+    
+    STAssertFalse([arr any:^BOOL(NSString *str) {
+        return [str isEqualToString:@"d"];
+    }], nil);
+}
+
+- (void)testAll
+{
+    NSArray *arr = @[@"a", @"b", @"c"];
+    
+    STAssertTrue([arr all:^BOOL(NSString *str) {
+        return [str length] == 1;
+    }], nil);
+    
+    STAssertFalse([arr all:^BOOL(NSString *str) {
+        return [str isEqualToString:@"a"] || [str isEqualToString:@"b"];
+    }], nil);
+}
+
 @end
