@@ -8,4 +8,8 @@
 //Creates a new NSOrderedSet containing the values returned by the block.
 - (NSOrderedSet*)map:(JFFMappingBlock)block;
 
+- (id)firstMatch:(JFFPredicateBlock)predicate;
+- (BOOL)any:(JFFPredicateBlock)predicate;
+- (BOOL)all:(JFFPredicateBlock)predicate;
+
 @end
