@@ -67,8 +67,13 @@
 
 - (void)cancel:(BOOL)canceled
 {
-    if (canceled)
-    {
+    self.connection.didReceiveDataBlock          = nil;
+    self.connection.didFinishLoadingBlock        = nil;
+    self.connection.didReceiveResponseBlock      = nil;
+    self.connection.shouldAcceptCertificateBlock = nil;
+    
+    //TODO maybe always cancel?
+    if (canceled) {
         [self.connection cancel];
         self.connection = nil;
     }

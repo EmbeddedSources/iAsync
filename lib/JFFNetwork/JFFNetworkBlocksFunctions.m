@@ -48,10 +48,12 @@ JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams* params
 static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionParams *params,
                                                              JFFAnalyzer responseAnalyzer)
 {
+    assert([params.url isKindOfClass:[NSURL class]]);
     params = [params copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         JFFAsyncOperation loader = privateGenericChunkedURLResponseLoader(params, responseAnalyzer);
         
         NSMutableData *responseData = [NSMutableData new];
@@ -69,8 +71,7 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
             doneCallbackWrapper = ^void(id result, NSError *error) {
                 
                 if ([responseData length] == 0 && !error) {
-                    NSLog(@"!!!WARNING!!! request with params: %@ got an empty reponse",
-                          params);
+                    NSLog(@"!!!WARNING!!! request with params: %@ got an empty reponse", params);
                 }
                 doneCallback(result?responseData:nil, error);
             };
@@ -101,7 +102,7 @@ JFFAsyncOperation chunkedURLResponseLoader(
 }
 
 JFFAsyncOperation dataURLResponseLoader(NSURL *url,
-                                        NSData* postData,
+                                        NSData *postData,
                                         NSDictionary *headers)
 {
     JFFURLConnectionParams *params = [JFFURLConnectionParams new];
@@ -115,7 +116,7 @@ JFFAsyncOperation liveChunkedURLResponseLoader(NSURL *url,
                                                NSData *postData,
                                                NSDictionary *headers)
 {
-    JFFURLConnectionParams* params = [JFFURLConnectionParams new];
+    JFFURLConnectionParams *params = [JFFURLConnectionParams new];
     params.url      = url;
     params.httpBody = postData;
     params.headers  = headers;
@@ -127,7 +128,7 @@ JFFAsyncOperation liveDataURLResponseLoader(NSURL* url,
                                             NSData* postData,
                                             NSDictionary* headers)
 {
-    JFFURLConnectionParams* params_ = [JFFURLConnectionParams new];
+    JFFURLConnectionParams *params_ = [JFFURLConnectionParams new];
     params_.url      = url;
     params_.httpBody = postData;
     params_.headers  = headers;

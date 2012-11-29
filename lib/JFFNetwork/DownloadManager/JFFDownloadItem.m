@@ -119,11 +119,11 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
                                  url:(NSURL *)url
                                error:(NSError **)outError
 {
-    BOOL result = [downloadItems_ firstMatch:^BOOL(id object) {
+    BOOL result = ![downloadItems_ any:^BOOL(id object) {
         JFFDownloadItem *item_ = object;
         return ![item_.url isEqual:url]
             && [ item_.localFilePath isEqualToString:localFilePath];
-    }] == nil;
+    }];
     
     if (!result && outError) {
         
@@ -142,24 +142,23 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     if ( ![ self checkNotAlreadyUsedLocalPath: local_file_path_ url: url_ error: outError ] )
         return nil;
     
-    id result_ = [ downloadItems_ firstMatch: ^BOOL( id object_ )
-    {
-        JFFDownloadItem* item_ = object_;
+    id result = [ downloadItems_ firstMatch: ^BOOL(id object) {
+        JFFDownloadItem* item_ = object;
         return [ item_.url isEqual: url_ ]
             && [ item_.localFilePath isEqualToString: local_file_path_ ];
     } ];
     
-    if ( !result_ )
+    if ( !result )
     {
-        result_ = [ [ self alloc ] initWithURL: url_ localFilePath: local_file_path_ ];
+        result = [ [ self alloc ] initWithURL: url_ localFilePath: local_file_path_ ];
         if ( !downloadItems_ )
         {
             downloadItems_ = [ JFFMutableAssignArray new ];
         }
-        [ downloadItems_ addObject: result_ ];
+        [ downloadItems_ addObject: result ];
     }
 
-    return result_;
+    return result;
 }
 
 -(BOOL)downloaded

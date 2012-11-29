@@ -30,7 +30,7 @@
         self->_params = params;
         
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
-        if ( ![ self->_params.url isFileURL ] )
+        if (![self->_params.url isFileURL])
 #endif
         {
             NSMutableURLRequest *request = [NSMutableURLRequest mutableURLRequestWithParams:params];
@@ -94,8 +94,8 @@
         return;
     }
 #endif
-    [ self->_nativeConnection start ];
-
+    [self->_nativeConnection start];
+    
     if (self->_nativeConnection) {
         [self->_connectRunLoop run];
     }

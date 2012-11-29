@@ -23,8 +23,7 @@
 
     self = [ super init ];
 
-    if ( self )
-    {
+    if (self) {
         self->_params = params;
     }
 
