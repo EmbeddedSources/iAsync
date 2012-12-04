@@ -13,8 +13,7 @@ JFFAsyncOperationInterface
     SKPaymentQueue *_queue;
     SKPayment *_payment;
     BOOL _addedToObservers;
-    JFFAsyncOperationInterfaceHandler         _handler;
-    JFFAsyncOperationInterfaceProgressHandler _progress;
+    JFFAsyncOperationInterfaceHandler _handler;
 }
 
 - (void)dealloc
@@ -52,8 +51,6 @@ JFFAsyncOperationInterface
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    [self->_queue addPayment:self->_payment];
-    
     if (![SKPaymentQueue canMakePayments]) {
         //TODO create separate error
         //!!!! remove after ios 6.0
@@ -61,12 +58,34 @@ JFFAsyncOperationInterface
         return;
     }
     
-    self->_handler  = [handler  copy];
-    self->_progress = [progress copy];
+    self->_handler = [handler  copy];
+    
+    SKPaymentTransaction *transaction = [self ownPurchasedTransaction];
+    
+    if (!transaction) {
+        
+        [self->_queue addPayment:self->_payment];
+    } else {
+        
+        self->_handler(transaction, nil);
+        [self unsubscribeFromObservervation];
+    }
 }
 
 - (void)cancel:(BOOL)canceled
 {
+}
+
+- (SKPaymentTransaction *)ownPurchasedTransaction
+{
+    //SKPayment
+    SKPaymentTransaction *transaction = [_queue.transactions firstMatch:^BOOL(SKPaymentTransaction *transaction) {
+        
+        return transaction.transactionState == SKPaymentTransactionStatePurchased
+        && [self->_payment.productIdentifier isEqualToString:transaction.payment.productIdentifier];
+    }];
+    
+    return transaction;
 }
 
 - (SKPaymentTransaction *)ownTransactionForTransactions:(NSArray *)transactions
@@ -105,7 +124,7 @@ JFFAsyncOperationInterface
     if (!transaction) {
         return;
     }
-
+    
     //TODO fix workaround for IOS 6.0
     [self performSelector:@selector(doNothing:) withObject:self afterDelay:1.];
     
@@ -120,7 +139,7 @@ JFFAsyncOperationInterface
         case SKPaymentTransactionStateFailed:
         {
             [self->_queue finishTransaction:transaction];
-            id error = [JFFStoreKitTransactionStateFailedError new];
+            JFFStoreKitTransactionStateFailedError *error = [JFFStoreKitTransactionStateFailedError new];
             self->_handler(nil, error);
             [self unsubscribeFromObservervation];
             break;

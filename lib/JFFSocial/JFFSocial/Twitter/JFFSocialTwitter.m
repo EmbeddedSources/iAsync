@@ -50,8 +50,7 @@ static JFFAsyncOperation twitterAccountsLoaderIOS5()
         } else {
             loader = sequenceOfAsyncOperations(jffCreateTwitterAccountLoader(),
                                                asyncOperationWithSyncOperationInCurrentQueue(twitterAccounts),
-                                               nil
-                                                   );
+                                               nil);
         }
         
         doneCallback = [doneCallback copy];
