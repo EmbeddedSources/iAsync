@@ -85,6 +85,8 @@
 		CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */; };
 		CEA097C615FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */; };
 		CEA097C715FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */; };
+		CEC9CA87166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC9CA85166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.h */; };
+		CEC9CA88166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CA86166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.m */; };
 		CEE235EA1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */; };
 		CEE235EB1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */; };
 /* End PBXBuildFile section */
@@ -138,6 +140,8 @@
 		CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFOpenApplicationError.m; sourceTree = "<group>"; };
 		CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+OpenApplicationAsyncOp.h"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.h"; sourceTree = SOURCE_ROOT; };
 		CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+OpenApplicationAsyncOp.m"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.m"; sourceTree = SOURCE_ROOT; };
+		CEC9CA85166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+PerformSegueWithCallback.h"; path = "Extensions/UIViewController+PerformSegueWithCallback.h"; sourceTree = SOURCE_ROOT; };
+		CEC9CA86166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+PerformSegueWithCallback.m"; path = "Extensions/UIViewController+PerformSegueWithCallback.m"; sourceTree = SOURCE_ROOT; };
 		CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+CachedAsyncImageLoader.h"; path = "Extensions/UIImageView+CachedAsyncImageLoader.h"; sourceTree = SOURCE_ROOT; };
 		CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+CachedAsyncImageLoader.m"; path = "Extensions/UIImageView+CachedAsyncImageLoader.m"; sourceTree = SOURCE_ROOT; };
 		D2AAC07E0554694100DB518D /* libJFFUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +240,8 @@
 				CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */,
 				CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */,
 				CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */,
+				CEC9CA85166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.h */,
+				CEC9CA86166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.m */,
 			);
 			name = Extensions;
 			path = ./JFFUI/Extensions;
@@ -381,6 +387,7 @@
 				CEE235EA1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h in Headers */,
 				CE9A9153165671D200EFE858 /* JFFUIError.h in Headers */,
 				CE9A91571656722900EFE858 /* JFFOpenApplicationError.h in Headers */,
+				CEC9CA87166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +506,7 @@
 				CEE235EB1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m in Sources */,
 				CE9A9154165671D200EFE858 /* JFFUIError.m in Sources */,
 				CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */,
+				CEC9CA88166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
