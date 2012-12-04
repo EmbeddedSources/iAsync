@@ -10,4 +10,11 @@
     return languageCode;
 }
 
++ (NSString *)currentInterfaceISO2LanguageCode
+{
+    NSString *languageCode = [self currentInterfaceLanguageCode];
+    
+    return [[languageCode componentsSeparatedByString:@"_"] noThrowObjectAtIndex:0];
+}
+
 @end

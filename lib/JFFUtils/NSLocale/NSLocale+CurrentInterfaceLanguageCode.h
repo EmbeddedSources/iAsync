@@ -3,5 +3,6 @@
 @interface NSLocale (CurrentInterfaceLanguageCode)
 
 + (NSString *)currentInterfaceLanguageCode;
++ (NSString *)currentInterfaceISO2LanguageCode;
 
 @end
