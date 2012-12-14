@@ -4,19 +4,21 @@
 #import "JNUrlResponse.h"
 #import "JHttpFlagChecker.h"
 #import "JFFURLConnectionParams.h"
-#import "JFFAsyncOperationNetwork.h"
+#import "JFFNetworkAsyncOperation.h"
+
+#import "JFFNetworkResponseDataCallback.h"
 
 #import "NSURL+Cookies.h"
 
 static JFFAnalyzer downloadErrorFlagResponseAnalyzer()
 {
-    return ^id(id< JNUrlResponse > response, NSError **error) {
+    return ^id(id< JNUrlResponse > response, NSError **outError) {
         NSInteger statusCode = [response statusCode];
         
         if ([JHttpFlagChecker isDownloadErrorFlag:statusCode]) {
-            if (error) {
+            if (outError) {
                 JHttpError *httpError = [[JHttpError alloc]initWithHttpCode:statusCode];
-                [httpError setToPointer:error];
+                *outError = httpError;
             }
             return nil;
         }
@@ -31,7 +33,7 @@ static JFFAsyncOperation privateGenericChunkedURLResponseLoader(JFFURLConnection
     responseAnalyzer = [responseAnalyzer copy];
     JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>() {
         //NSLog(@"url: %@", params.url);
-        JFFAsyncOperationNetwork *asyncObj = [JFFAsyncOperationNetwork new];
+        JFFNetworkAsyncOperation *asyncObj = [JFFNetworkAsyncOperation new];
         asyncObj.params           = params;
         asyncObj.responseAnalyzer = responseAnalyzer;
         return asyncObj;
@@ -59,8 +61,12 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
         NSMutableData *responseData = [NSMutableData new];
         progressCallback = [progressCallback copy];
         JFFAsyncOperationProgressHandler dataProgressCallback = ^void(id progressInfo) {
-            assert([progressInfo isKindOfClass:[NSData class]]);
-            [responseData appendData:progressInfo];
+            
+            if ([progressInfo isKindOfClass:[JFFNetworkResponseDataCallback class]]) {
+                
+                JFFNetworkResponseDataCallback *responseChunkData = progressInfo;
+                [responseData appendData:responseChunkData.dataChunk];
+            }
             if (progressCallback)
                 progressCallback(progressInfo);
         };

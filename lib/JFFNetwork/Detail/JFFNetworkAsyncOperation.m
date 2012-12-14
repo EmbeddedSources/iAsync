@@ -1,21 +1,24 @@
-#import "JFFAsyncOperationNetwork.h"
+#import "JFFNetworkAsyncOperation.h"
 
 #import "JFFURLConnectionParams.h"
 #import "JNConnectionsFactory.h"
 #import "JNUrlConnection.h"
 
+#import "JFFNetworkResponseDataCallback.h"
+#import "JFFNetworkUploadProgressCallback.h"
+
 #import <JFFNetwork/JNUrlResponse.h>
 
-@implementation JFFAsyncOperationNetwork
+@implementation JFFNetworkAsyncOperation
 
 - (void)asyncOperationWithResultHandler:(void(^)(id, NSError *))handler
                         progressHandler:(void(^)(id))progress
 {
     NSParameterAssert(handler );
     NSParameterAssert(progress);
-
+    
     {
-        JNConnectionsFactory* factory =
+        JNConnectionsFactory *factory =
         [[JNConnectionsFactory alloc]initWithURLConnectionParams:self.params];
         
         self.connection = self.params.useLiveConnection
@@ -25,11 +28,22 @@
     
     self.connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
     
-    __unsafe_unretained JFFAsyncOperationNetwork* unretainedSelf = self;
+    __unsafe_unretained JFFNetworkAsyncOperation *unretainedSelf = self;
     
     progress = [progress copy];
-    self.connection.didReceiveDataBlock = ^(NSData *data) {
-        progress(data);
+    self.connection.didReceiveDataBlock = ^(NSData *dataChunk) {
+        
+        JFFNetworkResponseDataCallback *progressData = [JFFNetworkResponseDataCallback new];
+        progressData.dataChunk = dataChunk;
+        progress(progressData);
+    };
+    
+    self.connection.didUploadDataBlock = ^(NSNumber *progressNum) {
+        
+        JFFNetworkUploadProgressCallback *uploadProgress = [JFFNetworkUploadProgressCallback new];
+        uploadProgress.progress = progressNum;
+        uploadProgress.params   = unretainedSelf.params;
+        progress(uploadProgress);
     };
     
     __block id resultHolder;
@@ -37,26 +51,26 @@
     handler = [handler copy];
     JFFDidFinishLoadingHandler finish = [^(NSError *error) {
         handler(error?nil:resultHolder, error);
-    }copy];
+    } copy];
     
     self.connection.didFinishLoadingBlock = finish;
-
-    self.connection.didReceiveResponseBlock = ^void(id< JNUrlResponse > response)
+    
+    self.connection.didReceiveResponseBlock = ^void(id<JNUrlResponse> response)
     {
-        if ( !unretainedSelf->_responseAnalyzer ) {
+        if (!unretainedSelf->_responseAnalyzer) {
             resultHolder = response;
             return;
         }
-
+        
         NSError *error;
         resultHolder = unretainedSelf->_responseAnalyzer(response, &error);
-
+        
         if (error) {
             [unretainedSelf forceCancel];
             finish(error);
         }
     };
-
+    
     [self.connection start];
 }
 
@@ -70,6 +84,7 @@
     self.connection.didReceiveDataBlock          = nil;
     self.connection.didFinishLoadingBlock        = nil;
     self.connection.didReceiveResponseBlock      = nil;
+    self.connection.didUploadDataBlock           = nil;
     self.connection.shouldAcceptCertificateBlock = nil;
     
     //TODO maybe always cancel?

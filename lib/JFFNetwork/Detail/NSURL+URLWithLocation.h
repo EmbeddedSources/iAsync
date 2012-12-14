@@ -2,6 +2,6 @@
 
 @interface NSURL (URLWithLocation)
 
--(id)URLWithLocation:( NSString* )location_;
+- (id)URLWithLocation:(NSString *)location;
 
 @end

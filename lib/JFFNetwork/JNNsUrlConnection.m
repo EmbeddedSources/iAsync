@@ -7,6 +7,9 @@
 
 #define NSURLConnectionDoesNotWorkWithLocalFiles
 
+@interface JNNsUrlConnection () <NSURLConnectionDelegate>
+@end
+
 @implementation JNNsUrlConnection
 {
     NSURLConnection* _nativeConnection;
@@ -68,10 +71,10 @@
         didFailWithError:error];
     } else {
         NSHTTPURLResponse *response =
-        [ [ NSHTTPURLResponse alloc ] initWithURL: self->_params.url
-                                       statusCode: 200
-                                      HTTPVersion: @"HTTP/1.1"
-                                     headerFields: nil ];
+        [[NSHTTPURLResponse alloc] initWithURL:self->_params.url
+                                    statusCode:200
+                                   HTTPVersion:@"HTTP/1.1"
+                                  headerFields:nil];
         [self connection:self->_nativeConnection
       didReceiveResponse:response];
         
@@ -156,20 +159,6 @@ didReceiveResponse:(NSHTTPURLResponse *)response
     }
 }
 
--(void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    if (![self assertConnectionMismatch:connection]) {
-        return;
-    }
-    
-    JFFDidFinishLoadingHandler finish = self.didFinishLoadingBlock;
-    
-    [self cancel];
-    if (nil != finish) {
-        finish(nil);
-    }
-}
-
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
@@ -219,6 +208,34 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
                  willCacheResponse:(NSCachedURLResponse *)cachedResponse
 {
     return nil;
+}
+
+#pragma mark NSURLConnectionDataDelegate
+
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    if (![self assertConnectionMismatch:connection]) {
+        return;
+    }
+    
+    JFFDidFinishLoadingHandler finish = self.didFinishLoadingBlock;
+    
+    [self cancel];
+    if (nil != finish) {
+        finish(nil);
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection
+   didSendBodyData:(NSInteger)bytesWritten
+ totalBytesWritten:(NSInteger)totalBytesWritten
+totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+{
+    if (self.didUploadDataBlock) {
+        
+        NSNumber *progress = @((float)totalBytesWritten/totalBytesExpectedToWrite);
+        self.didUploadDataBlock(progress);
+    }
 }
 
 @end

@@ -10,6 +10,7 @@
         copy->_url                 = [self->_url      copyWithZone:zone];
         copy->_httpBody            = [self->_httpBody copyWithZone:zone];
         copy->_headers             = [self->_headers  copyWithZone:zone];
+        copy->_httpBodyStream      = self->_httpBodyStream;
         copy->_useLiveConnection   = self->_useLiveConnection;
         copy->_certificateCallback = self->_certificateCallback;
         

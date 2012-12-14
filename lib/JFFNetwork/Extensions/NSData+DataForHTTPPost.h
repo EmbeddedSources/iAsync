@@ -1,18 +1,18 @@
 #import <Foundation/Foundation.h>
 
-//TODO: ADD creating boundary
-#define BOUNDARY_STRING @"0xKhTmLbOuNdArY"
-
 @interface NSData (DataForHTTPPost)
 
 + (NSData *)dataForHTTPPostWithData:(NSData *)data
                         andFileName:(NSString *)fileName
-                   andParameterName:(NSString *)parameter;
+                   andParameterName:(NSString *)parameter
+                           boundary:(NSString *)boundary;
 
 + (NSData *)mutableDataForHTTPPostWithData:(NSData *)data
                                andFileName:(NSString *)fileName
-                          andParameterName:(NSString *)parameter;
+                          andParameterName:(NSString *)parameter
+                                  boundary:(NSString *)boundary;
 
-- (NSData *)dataForHTTPPostByAppendingParameters:(NSDictionary *)parameters;
+- (NSData *)dataForHTTPPostByAppendingParameters:(NSDictionary *)parameters
+                                        boundary:(NSString *)boundary;
 
 @end

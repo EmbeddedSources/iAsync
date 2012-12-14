@@ -43,12 +43,12 @@ static void readStreamCallback( CFReadStreamRef stream_
         {
             [ weakSelf handleResponseForReadStream: stream_ ];
 
-            UInt8 buffer_[ kJNMaxBufferSize ];
-            CFIndex bytesRead_ = CFReadStreamRead( stream_, buffer_, kJNMaxBufferSize );
-            if ( bytesRead_ > 0 )
+            UInt8 buffer[ kJNMaxBufferSize ];
+            CFIndex bytesRead = CFReadStreamRead( stream_, buffer, kJNMaxBufferSize );
+            if ( bytesRead > 0 )
             {
-                [ weakSelf handleData: buffer_
-                            length: bytesRead_ ];
+                [weakSelf handleData:buffer
+                              length:bytesRead];
             }
             break;
         }
@@ -107,17 +107,17 @@ static void readStreamCallback( CFReadStreamRef stream_
 
 -(void)start
 {
-    [ self startConnectionWithPostData: self->_params.httpBody
-                               headers: self->_params.headers ];
+    [self startConnectionWithPostData:self->_params.httpBody
+                              headers:self->_params.headers];
 }
 
 -(void)applyCookiesForHTTPRequest:( CFHTTPMessageRef )httpRequest_
 {
-    NSArray* availableCookies_ = [ _cookiesStorage cookiesForURL: self->_params.url ];
+    NSArray *availableCookies_ = [ _cookiesStorage cookiesForURL: self->_params.url ];
 
-    NSDictionary* headers_ = [ NSHTTPCookie requestHeaderFieldsWithCookies: availableCookies_ ];
+    NSDictionary *headers = [ NSHTTPCookie requestHeaderFieldsWithCookies: availableCookies_ ];
 
-    [ headers_ enumerateKeysAndObjectsUsingBlock: ^( id key_, id value_, BOOL *stop )
+    [headers enumerateKeysAndObjectsUsingBlock: ^( id key_, id value_, BOOL *stop )
     {
         CFHTTPMessageSetHeaderFieldValue ( httpRequest_
                                           , (__bridge CFStringRef)key_
@@ -217,29 +217,28 @@ static void readStreamCallback( CFReadStreamRef stream_
 -(void)handleData:( void* )buffer_ 
            length:( NSUInteger )length_
 {
-    if ( !self.didReceiveDataBlock )
-    {
+    if (!self.didReceiveDataBlock) {
         return;
     }
-
-    NSString* contentEncoding_ = self->_urlResponse.allHeaderFields[@"Content-Encoding"];
-    id< JNHttpDecoder > decoder_ = [ JNHttpEncodingsFactory decoderForHeaderString: contentEncoding_ ];
-
-    NSError* decoderError_ = nil;
-
-    NSData* rawNsData_ = [ [ NSData alloc ] initWithBytes: buffer_ 
+    
+    NSString *contentEncoding = self->_urlResponse.allHeaderFields[@"Content-Encoding"];
+    id< JNHttpDecoder > decoder = [ JNHttpEncodingsFactory decoderForHeaderString: contentEncoding ];
+    
+    NSError *decoderError;
+    
+    NSData *rawNsData = [ [ NSData alloc ] initWithBytes: buffer_
                                                    length: length_ ];
-
-    NSData* decodedData_ = [ decoder_ decodeData: rawNsData_ 
-                                           error: &decoderError_ ];
-
-    if ( nil == decodedData_ )
+    
+    NSData *decodedData = [decoder decodeData:rawNsData
+                                        error:&decoderError];
+    
+    if ( nil == decodedData )
     {
-        [ self handleFinish: decoderError_ ];
+        [ self handleFinish: decoderError ];
     }
     else 
     {
-        self.didReceiveDataBlock( decodedData_ );
+        self.didReceiveDataBlock(decodedData);
     }
 }
 

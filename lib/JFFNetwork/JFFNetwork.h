@@ -34,4 +34,7 @@
 #import <JFFNetwork/Extensions/NSDictionary+JHTTPHeaders.h>
 #import <JFFNetwork/Extensions/NSData+DataForHTTPPost.h>
 
+#import <JFFNetwork/Callbacks/JFFNetworkResponseDataCallback.h>
+#import <JFFNetwork/Callbacks/JFFNetworkUploadProgressCallback.h>
+
 #import <JFFNetwork/JHttpError.h>

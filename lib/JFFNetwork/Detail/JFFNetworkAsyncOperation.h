@@ -7,9 +7,9 @@
 @class JFFURLConnectionParams;
 @protocol JNUrlConnection;
 
-@interface JFFAsyncOperationNetwork : NSObject < JFFAsyncOperationInterface >
+@interface JFFNetworkAsyncOperation : NSObject <JFFAsyncOperationInterface>
 
-@property (nonatomic) JFFURLConnectionParams* params;
+@property (nonatomic) JFFURLConnectionParams *params;
 @property (nonatomic) id< JNUrlConnection > connection;
 @property (nonatomic, copy) JFFAnalyzer responseAnalyzer;
 

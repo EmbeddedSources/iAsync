@@ -2,15 +2,23 @@
 
 @implementation NSData (DataForHTTPPost)
 
-+ (NSData *)dataForHTTPPostWithData:(NSData *)data andFileName:(NSString *)fileName andParameterName:(NSString *)parameter
++ (NSData *)dataForHTTPPostWithData:(NSData *)data
+                        andFileName:(NSString *)fileName
+                   andParameterName:(NSString *)parameter
+                           boundary:(NSString *)boundary
 {
-    return [NSData dataWithData:[self mutableDataForHTTPPostWithData:data andFileName:fileName andParameterName:parameter]];
+    NSData *result = [self mutableDataForHTTPPostWithData:data
+                                              andFileName:fileName
+                                         andParameterName:parameter
+                                                 boundary:boundary];
+    return [result copy];
 }
 
-+ (NSData *)mutableDataForHTTPPostWithData:(NSData *)data andFileName:(NSString *)fileName andParameterName:(NSString *)parameter
++ (NSData *)mutableDataForHTTPPostWithData:(NSData *)data
+                               andFileName:(NSString *)fileName
+                          andParameterName:(NSString *)parameter
+                                  boundary:(NSString *)boundary
 {
-    NSString *boundary = BOUNDARY_STRING;
-    
     NSMutableData *body = [[NSMutableData alloc] initWithCapacity:[data length] + 512];
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", parameter, fileName] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -26,6 +34,7 @@
 }
 
 - (NSData *)dataForHTTPPostByAppendingParameters:(NSDictionary *)parameters
+                                        boundary:(NSString *)boundary
 {
     if (!parameters) {
         return self;
@@ -35,10 +44,10 @@
     
     [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
         
-        [newData appendData:[[NSString stringWithFormat:@"--%@\r\n",BOUNDARY_STRING] dataUsingEncoding:NSUTF8StringEncoding]];
+        [newData appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [newData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
         [newData appendData:[[obj description] dataUsingEncoding:NSUTF8StringEncoding]];
-        [newData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",BOUNDARY_STRING] dataUsingEncoding:NSUTF8StringEncoding]];
+        [newData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     }];
     
     return [newData copy];

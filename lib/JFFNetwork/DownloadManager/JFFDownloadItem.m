@@ -22,13 +22,13 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 //TODO move library to separate repository
 @interface JFFDownloadItem () <JFFTrafficCalculatorDelegate>
 
-@property ( nonatomic ) NSURL* url;
-@property ( nonatomic ) NSString* localFilePath;
-@property ( nonatomic ) float downlodingSpeed;
-@property ( nonatomic ) unsigned long long fileLength;
-@property ( nonatomic ) unsigned long long downloadedFileLength;
-@property ( nonatomic ) NSNull* downloadedFlag;
-@property ( nonatomic, copy   ) JFFCancelAsyncOperation stopBlock;
+@property (nonatomic) NSURL* url;
+@property (nonatomic) NSString* localFilePath;
+@property (nonatomic) float downlodingSpeed;
+@property (nonatomic) unsigned long long fileLength;
+@property (nonatomic) unsigned long long downloadedFileLength;
+@property (nonatomic) NSNull* downloadedFlag;
+@property (nonatomic, copy) JFFCancelAsyncOperation stopBlock;
 
 @end
 
@@ -264,19 +264,19 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     if ( !_file )
         self->_file = [ JFFFileManager createFileForPath: self.localFilePath ];
 
-    fwrite( [ data_ bytes ], 1, [ data_ length ], _file );
-    fflush( self->_file );
-
-    [ self.trafficCalculator bytesReceived: data_.length ];
-
+    fwrite([ data_ bytes ], 1, [ data_ length ], _file );
+    fflush(self->_file );
+    
+    [self.trafficCalculator bytesReceived:data_.length];
+    
     self.downloadedFileLength += data_.length;
-
-    if ( ( self.progress - _previousProgress ) > 0.005f )
+    
+    if ((self.progress - _previousProgress) > 0.005f)
     {
         self->_previousProgress = self.progress;
         [ self->_multicastDelegate didProgressChangeForDownloadItem: self ];
     }
-
+    
     if ( progress_callback_ )
         progress_callback_( self );
 }
@@ -288,71 +288,69 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 -(JFFAsyncOperation)fileLoader
 {
-    JFFAsyncOperation loader_ = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progress_callback_,
-                                                         JFFCancelAsyncOperationHandler cancel_callback_,
-                                                         JFFDidFinishAsyncOperationHandler done_callback_)
+    JFFAsyncOperation loader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                                         JFFCancelAsyncOperationHandler cancelCallback,
+                                                         JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        NSString* range_ = [ [ NSString alloc ] initWithFormat: @"bytes=%qu-", self.downloadedFileLength ];
-        NSDictionary* headers_ = @{ @"Range" : range_ };
-
-        JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
-        params_.url     = self.url;
-        params_.headers = headers_;
-        JFFURLConnection* connection_ = [ [ JFFURLConnection alloc ] initWithURLConnectionParams: params_ ];
-
-        progress_callback_ = [ progress_callback_ copy ];
-        connection_.didReceiveDataBlock = ^( NSData* data_ )
-        {
-            [ self didReceiveData: data_ 
-                  progressHandler: progress_callback_ ];
+        NSString *range_ = [[NSString alloc] initWithFormat:@"bytes=%qu-", self.downloadedFileLength];
+        NSDictionary *headers_ = @{ @"Range" : range_ };
+        
+        JFFURLConnectionParams* params = [ JFFURLConnectionParams new ];
+        params.url     = self.url;
+        params.headers = headers_;
+        JFFURLConnection* connection = [[JFFURLConnection alloc] initWithURLConnectionParams:params];
+        
+        progressCallback = [ progressCallback copy ];
+        connection.didReceiveDataBlock = ^(NSData *data) {
+            [self didReceiveData:data
+                 progressHandler:progressCallback];
         };
-
-        done_callback_ = [ done_callback_ copy ];
-        connection_.didFinishLoadingBlock = ^( NSError* error_ )
-        {
-            [ self didFinishLoadedWithError: error_ ];
-
-            if ( done_callback_ )
-                done_callback_( error_ ? nil : [ NSNull null ], error_ );
+        
+        doneCallback = [doneCallback copy];
+        connection.didFinishLoadingBlock = ^(NSError *error) {
+            
+            [self didFinishLoadedWithError:error];
+            
+            if (doneCallback)
+                doneCallback(error?nil:[NSNull new], error);
         };
-
-        connection_.didReceiveResponseBlock = ^( id/*< JNUrlResponse >*/ response_ )
-        {
-            [ self didReceiveResponse: response_ ];
+        
+        connection.didReceiveResponseBlock = ^(id/*< JNUrlResponse >*/ response) {
+            [self didReceiveResponse:response];
         };
-
-        JFFCancelAsyncOperationBlockHolder* cancelCallbackBlockHolder_ = [ JFFCancelAsyncOperationBlockHolder new ];
-        cancel_callback_ = [ cancel_callback_ copy ];
-        JFFCancelAsyncOperationHandler cancelCallbackWrapper_ = ^( BOOL canceled_ )
+        
+        JFFCancelAsyncOperationBlockHolder *cancelCallbackBlockHolder = [ JFFCancelAsyncOperationBlockHolder new ];
+        cancelCallback = [cancelCallback copy];
+        JFFCancelAsyncOperationHandler cancelCallbackWrapper = ^(BOOL canceled)
         {
-            [ self didCancelWithFlag: canceled_ cancelCallback: cancel_callback_ ];
+            [self didCancelWithFlag:canceled cancelCallback:cancelCallback];
         };
-        cancelCallbackBlockHolder_.cancelBlock = cancelCallbackWrapper_;
-
-        [ connection_ start ];
-
-        [ self->_multicastDelegate didProgressChangeForDownloadItem: self ];
-
-        self.stopBlock = ^void( BOOL canceled_ )
+        cancelCallbackBlockHolder.cancelBlock = cancelCallbackWrapper;
+        
+        [connection start];
+        
+        [self->_multicastDelegate didProgressChangeForDownloadItem:self];
+        
+        self.stopBlock = ^void(BOOL canceled)
         {
-            if ( canceled_ )
-                [ connection_ cancel ];
+            if (canceled)
+                [connection cancel];
             else
-                assert( NO );// pass canceled_ as YES only
-
-            cancelCallbackBlockHolder_.onceCancelBlock( canceled_ );
+                assert(NO);// pass canceled as YES only
+            
+            cancelCallbackBlockHolder.onceCancelBlock(canceled);
         };
         return self.stopBlock;
     };
-
-    loader_ = [ self asyncOperationForPropertyWithName: @"downloadedFlag"
-                                        asyncOperation: loader_ ];
-
-    JFFDidFinishAsyncOperationHandler did_finish_operation_ = ^void( id result_, NSError* error ) {
-        [ self notifyFinishWithError:error];
+    
+    loader = [self asyncOperationForPropertyWithName:@"downloadedFlag"
+                                      asyncOperation:loader];
+    
+    JFFDidFinishAsyncOperationHandler didFinishOperation = ^void(id result, NSError *error) {
+        [self notifyFinishWithError:error];
     };
-    return asyncOperationWithFinishCallbackBlock( loader_
-                                                 , did_finish_operation_ );
+    return asyncOperationWithFinishCallbackBlock(loader,
+                                                 didFinishOperation);
 }
 
 #pragma mark JFFTrafficCalculatorDelegate

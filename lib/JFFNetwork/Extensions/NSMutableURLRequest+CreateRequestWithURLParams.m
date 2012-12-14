@@ -5,23 +5,28 @@
 
 @implementation NSMutableURLRequest (CreateRequestWithURLParams)
 
-+(id)mutableURLRequestWithParams:( JFFURLConnectionParams* )params_
++ (id)mutableURLRequestWithParams:(JFFURLConnectionParams *)params
 {
-    static const NSTimeInterval timeout_ = 60.;
-    NSMutableURLRequest *request_ = [self requestWithURL:params_.url
-                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                         timeoutInterval:timeout_ ];
+    NSParameterAssert((!params.httpBody && !params.httpBodyStream) || !(params.httpBody && params.httpBodyStream));
     
-    NSString* httpMethod_ = params_.httpMethod ?: @"GET";
-    if ( !params_.httpMethod && params_.httpBody ) {
-        httpMethod_ = @"POST";
+    static const NSTimeInterval timeout = 60.;
+    NSMutableURLRequest *request = [self requestWithURL:params.url
+                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                        timeoutInterval:timeout];
+    
+    NSString *httpMethod = params.httpMethod ?: @"GET";
+    if (!params.httpMethod && (params.httpBody || params.httpBodyStream)) {
+        httpMethod = @"POST";
     }
     
-    [request_ setHTTPBody           : params_.httpBody];
-    [request_ setAllHTTPHeaderFields: params_.headers ];
-    [request_ setHTTPMethod         : httpMethod_     ];
+    [request setHTTPBodyStream:params.httpBodyStream];
+    if (params.httpBody)
+        [request setHTTPBody:params.httpBody];
     
-    return request_;
+    [request setAllHTTPHeaderFields:params.headers       ];
+    [request setHTTPMethod         :httpMethod           ];
+    
+    return request;
 }
 
 @end

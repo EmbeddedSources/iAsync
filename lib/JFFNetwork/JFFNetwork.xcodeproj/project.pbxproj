@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B15CCB31535CAF4005F2B56 /* JFFAsyncOperationNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B15CCB11535CAF4005F2B56 /* JFFAsyncOperationNetwork.h */; };
-		1B15CCB41535CAF4005F2B56 /* JFFAsyncOperationNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B15CCB21535CAF4005F2B56 /* JFFAsyncOperationNetwork.m */; };
+		1B15CCB31535CAF4005F2B56 /* JFFNetworkAsyncOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B15CCB11535CAF4005F2B56 /* JFFNetworkAsyncOperation.h */; };
+		1B15CCB41535CAF4005F2B56 /* JFFNetworkAsyncOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B15CCB21535CAF4005F2B56 /* JFFNetworkAsyncOperation.m */; };
 		1B15CCB81535CB39005F2B56 /* JFFURLConnectionParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B15CCB61535CB39005F2B56 /* JFFURLConnectionParams.h */; };
 		1B15CCB91535CB39005F2B56 /* JFFURLConnectionParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B15CCB71535CB39005F2B56 /* JFFURLConnectionParams.m */; };
 		1B15CCBC1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B15CCBA1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.h */; };
@@ -238,6 +238,12 @@
 		CE29B5E415F5E823000A05B8 /* NSURL+URLWithLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */; };
 		CE29B5E515F5E823000A05B8 /* NSURL+URLWithLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */; };
 		CE29B5E615F5E824000A05B8 /* NSURL+URLWithLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */; };
+		CEF162DF16760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF162DD16760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.h */; };
+		CEF162E016760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF162DE16760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.m */; };
+		CEF162E316760EF100B0B6E4 /* JFFNetworkResponseDataCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF162E116760EF100B0B6E4 /* JFFNetworkResponseDataCallback.h */; };
+		CEF162E416760EF100B0B6E4 /* JFFNetworkResponseDataCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF162E216760EF100B0B6E4 /* JFFNetworkResponseDataCallback.m */; };
+		CEF162E716760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF162E516760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.h */; };
+		CEF162E816760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF162E616760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,8 +264,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1B15CCB11535CAF4005F2B56 /* JFFAsyncOperationNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationNetwork.h; sourceTree = "<group>"; };
-		1B15CCB21535CAF4005F2B56 /* JFFAsyncOperationNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationNetwork.m; sourceTree = "<group>"; };
+		1B15CCB11535CAF4005F2B56 /* JFFNetworkAsyncOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFNetworkAsyncOperation.h; sourceTree = "<group>"; };
+		1B15CCB21535CAF4005F2B56 /* JFFNetworkAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFNetworkAsyncOperation.m; sourceTree = "<group>"; };
 		1B15CCB61535CB39005F2B56 /* JFFURLConnectionParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFURLConnectionParams.h; sourceTree = "<group>"; };
 		1B15CCB71535CB39005F2B56 /* JFFURLConnectionParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFURLConnectionParams.m; sourceTree = "<group>"; };
 		1B15CCBA1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+CreateRequestWithURLParams.h"; sourceTree = "<group>"; };
@@ -347,6 +353,12 @@
 		8DD71E9B13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+DownloadingFileInfo.m"; sourceTree = "<group>"; };
 		CE29B5E015F5E821000A05B8 /* NSURL+URLWithLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+URLWithLocation.h"; sourceTree = "<group>"; };
 		CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URLWithLocation.m"; sourceTree = "<group>"; };
+		CEF162DD16760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFNetworkAsyncOperationCallback.h; sourceTree = "<group>"; };
+		CEF162DE16760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFNetworkAsyncOperationCallback.m; sourceTree = "<group>"; };
+		CEF162E116760EF100B0B6E4 /* JFFNetworkResponseDataCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFNetworkResponseDataCallback.h; sourceTree = "<group>"; };
+		CEF162E216760EF100B0B6E4 /* JFFNetworkResponseDataCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFNetworkResponseDataCallback.m; sourceTree = "<group>"; };
+		CEF162E516760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFNetworkUploadProgressCallback.h; sourceTree = "<group>"; };
+		CEF162E616760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFNetworkUploadProgressCallback.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -411,8 +423,8 @@
 		534BEF1C14448DAD005D745F /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				1B15CCB11535CAF4005F2B56 /* JFFAsyncOperationNetwork.h */,
-				1B15CCB21535CAF4005F2B56 /* JFFAsyncOperationNetwork.m */,
+				1B15CCB11535CAF4005F2B56 /* JFFNetworkAsyncOperation.h */,
+				1B15CCB21535CAF4005F2B56 /* JFFNetworkAsyncOperation.m */,
 				CE29B5E015F5E821000A05B8 /* NSURL+URLWithLocation.h */,
 				CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */,
 			);
@@ -575,6 +587,7 @@
 		8D5AE6EF13F3E7EE00EB6143 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CEF162DC16760E9E00B0B6E4 /* Callbacks */,
 				1B166C8F1546E59800475B6A /* CookiesStorage */,
 				65F47AC61539A36D00D8C865 /* XQueryComponents */,
 				534BEF9214449ACC005D745F /* ConnectionsFactory */,
@@ -634,6 +647,19 @@
 				8DD71E9B13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.m */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		CEF162DC16760E9E00B0B6E4 /* Callbacks */ = {
+			isa = PBXGroup;
+			children = (
+				CEF162DD16760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.h */,
+				CEF162DE16760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.m */,
+				CEF162E116760EF100B0B6E4 /* JFFNetworkResponseDataCallback.h */,
+				CEF162E216760EF100B0B6E4 /* JFFNetworkResponseDataCallback.m */,
+				CEF162E516760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.h */,
+				CEF162E616760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.m */,
+			);
+			path = Callbacks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -776,7 +802,7 @@
 				534BEF1A14448D44005D745F /* JNAbstractConnection.h in Headers */,
 				534BEF9514449AF5005D745F /* JNConnectionsFactory.h in Headers */,
 				53E074BE144EFBA000CB146F /* NSURL+Cookies.h in Headers */,
-				1B15CCB31535CAF4005F2B56 /* JFFAsyncOperationNetwork.h in Headers */,
+				1B15CCB31535CAF4005F2B56 /* JFFNetworkAsyncOperation.h in Headers */,
 				1B15CCB81535CB39005F2B56 /* JFFURLConnectionParams.h in Headers */,
 				1B15CCBC1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.h in Headers */,
 				65F47ACA1539A38000D8C865 /* NSString+XQueryComponents.h in Headers */,
@@ -790,6 +816,9 @@
 				7E54F3BC15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
 				7E54F3C915FA298E006F386A /* JHttpError.h in Headers */,
 				374980A31602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
+				CEF162DF16760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.h in Headers */,
+				CEF162E316760EF100B0B6E4 /* JFFNetworkResponseDataCallback.h in Headers */,
+				CEF162E716760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,7 +1114,7 @@
 				534BEF1B14448D44005D745F /* JNAbstractConnection.m in Sources */,
 				534BEF9614449AF5005D745F /* JNConnectionsFactory.m in Sources */,
 				53E074BF144EFBA000CB146F /* NSURL+Cookies.m in Sources */,
-				1B15CCB41535CAF4005F2B56 /* JFFAsyncOperationNetwork.m in Sources */,
+				1B15CCB41535CAF4005F2B56 /* JFFNetworkAsyncOperation.m in Sources */,
 				1B15CCB91535CB39005F2B56 /* JFFURLConnectionParams.m in Sources */,
 				1B15CCBD1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.m in Sources */,
 				65F47ACB1539A38000D8C865 /* NSString+XQueryComponents.m in Sources */,
@@ -1099,6 +1128,9 @@
 				7E54F3C015FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
 				7E54F3CD15FA298E006F386A /* JHttpError.m in Sources */,
 				374980A71602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
+				CEF162E016760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.m in Sources */,
+				CEF162E416760EF100B0B6E4 /* JFFNetworkResponseDataCallback.m in Sources */,
+				CEF162E816760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
