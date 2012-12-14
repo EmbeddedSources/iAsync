@@ -30,6 +30,7 @@
     NSParameterAssert(!error);
     NSParameterAssert(cachedObjects);
     
+    //TODO remove jffMeaningClass at all
     Class anyPrimaryKeyValue = [primaryKeyValues[0] jffMeaningClass];
     
     NSMutableDictionary *objectByKeys = [NSMutableDictionary new];

@@ -40,7 +40,6 @@
 
 - (NSManagedObjectContext *)contextForBackgroundThread
 {
-    //TODO create it once for thread
     NSManagedObjectContext *contextForCurrentThread = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     contextForCurrentThread.parentContext = self.mediateRootContext;
     return contextForCurrentThread;
@@ -131,8 +130,9 @@
             abort();
     }
     
-    return persistentStoreCoordinator;
+    [[documentsStoreURL path] addSkipBackupAttribute];
     
+    return persistentStoreCoordinator;
 }
 
 - (NSURL *)dataBaseFileURL
