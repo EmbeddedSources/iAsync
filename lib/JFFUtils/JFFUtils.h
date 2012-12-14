@@ -37,6 +37,9 @@
 #import <JFFUtils/ToURL/NSURL+ToURL.h>
 #import <JFFUtils/ToURL/NSString+ToURL.h>
 
+#import <JFFUtils/UIImage/UIImage+ScaleToSize.h>
+#import <JFFUtils/UIImage/UIImage+FixOrientation.h>
+
 #import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 #import <JFFUtils/Blocks/JUContainersHelperBlocks.h>
@@ -44,7 +47,6 @@
 #import <JFFUtils/Extensions/NSData+ToString.h>
 #import <JFFUtils/Extensions/UIWebView+UserAgent.h>
 #import <JFFUtils/Extensions/UIColor+ColorForHex.h>
-#import <JFFUtils/Extensions/UIImage+ScaleToSize.h>
 #import <JFFUtils/Extensions/NSNumber+FSStorable.h>
 #import <JFFUtils/Extensions/NSError+setToPointer.h>
 #import <JFFUtils/Extensions/NSThread+AssertMainThread.h>

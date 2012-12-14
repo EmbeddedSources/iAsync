@@ -322,8 +322,6 @@
 		CE03CAB2160CAD0500039011 /* NSObjectInstancesCountTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03CAB1160CAD0500039011 /* NSObjectInstancesCountTest.m */; };
 		CE0B00451626D9C1003802A0 /* NSDateFormatter+MultiThreading.h in Headers */ = {isa = PBXBuildFile; fileRef = CE0B00431626D9C1003802A0 /* NSDateFormatter+MultiThreading.h */; };
 		CE0B00461626D9C1003802A0 /* NSDateFormatter+MultiThreading.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B00441626D9C1003802A0 /* NSDateFormatter+MultiThreading.m */; };
-		CE102F3816089570004229C5 /* UIImage+ScaleToSize.h in Headers */ = {isa = PBXBuildFile; fileRef = CE102F3616089570004229C5 /* UIImage+ScaleToSize.h */; };
-		CE102F3916089570004229C5 /* UIImage+ScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = CE102F3716089570004229C5 /* UIImage+ScaleToSize.m */; };
 		CE1BC324161B33AB007DEC95 /* NSArray+ExpandArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1BC323161B33AB007DEC95 /* NSArray+ExpandArrayTest.m */; };
 		CE1BC326161B349A007DEC95 /* NSObject+ExpandArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EE0351487D03A00BA6680 /* NSObject+ExpandArray.m */; };
 		CE1BC36A161B38AF007DEC95 /* NSDictionary+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B054D4E1521C6F4008E4B9E /* NSDictionary+BlocksAdditions.m */; };
@@ -401,6 +399,10 @@
 		CEE6574A16148F3000C4D536 /* JUArrayAdditionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE6574916148F3000C4D536 /* JUArrayAdditionsTest.m */; };
 		CEE6574B16148F7E00C4D536 /* NSArray+RemoveDuplicates.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BCF8DF143239D100E896B3 /* NSArray+RemoveDuplicates.m */; };
 		CEE6574C1614900000C4D536 /* NSArray+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E366C71433760A002AB0B9 /* NSArray+IsEmpty.m */; };
+		CEEAAD11167A0E4A00DD8A16 /* UIImage+ScaleToSize.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEAAD0F167A0E4A00DD8A16 /* UIImage+ScaleToSize.h */; };
+		CEEAAD12167A0E4A00DD8A16 /* UIImage+ScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEAAD10167A0E4A00DD8A16 /* UIImage+ScaleToSize.m */; };
+		CEEAAD15167A0E8D00DD8A16 /* UIImage+FixOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEAAD13167A0E8D00DD8A16 /* UIImage+FixOrientation.h */; };
+		CEEAAD16167A0E8D00DD8A16 /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEAAD14167A0E8D00DD8A16 /* UIImage+FixOrientation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -545,8 +547,6 @@
 		CE03CAB1160CAD0500039011 /* NSObjectInstancesCountTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectInstancesCountTest.m; sourceTree = "<group>"; };
 		CE0B00431626D9C1003802A0 /* NSDateFormatter+MultiThreading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+MultiThreading.h"; sourceTree = "<group>"; };
 		CE0B00441626D9C1003802A0 /* NSDateFormatter+MultiThreading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+MultiThreading.m"; sourceTree = "<group>"; };
-		CE102F3616089570004229C5 /* UIImage+ScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScaleToSize.h"; sourceTree = "<group>"; };
-		CE102F3716089570004229C5 /* UIImage+ScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScaleToSize.m"; sourceTree = "<group>"; };
 		CE1BC322161B33AB007DEC95 /* NSArray+ExpandArrayTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ExpandArrayTest.h"; sourceTree = "<group>"; };
 		CE1BC323161B33AB007DEC95 /* NSArray+ExpandArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ExpandArrayTest.m"; sourceTree = "<group>"; };
 		CE1BC36C161B3A51007DEC95 /* NSDictionary+BlocksAdditionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BlocksAdditionsTest.h"; sourceTree = "<group>"; };
@@ -619,6 +619,10 @@
 		CEE6574516148DCC00C4D536 /* NSObjectRuntimeExtensionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectRuntimeExtensionsTest.m; sourceTree = "<group>"; };
 		CEE6574816148F3000C4D536 /* JUArrayAdditionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JUArrayAdditionsTest.h; sourceTree = "<group>"; };
 		CEE6574916148F3000C4D536 /* JUArrayAdditionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JUArrayAdditionsTest.m; sourceTree = "<group>"; };
+		CEEAAD0F167A0E4A00DD8A16 /* UIImage+ScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScaleToSize.h"; sourceTree = "<group>"; };
+		CEEAAD10167A0E4A00DD8A16 /* UIImage+ScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScaleToSize.m"; sourceTree = "<group>"; };
+		CEEAAD13167A0E8D00DD8A16 /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
+		CEEAAD14167A0E8D00DD8A16 /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libJFFUtils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFUtils.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -767,8 +771,6 @@
 				1B10109614ED598300B9E6F4 /* NSError+setToPointer.m */,
 				CEDB80EB1601F08F007577B2 /* NSData+ToString.h */,
 				CEDB80EC1601F08F007577B2 /* NSData+ToString.m */,
-				CE102F3616089570004229C5 /* UIImage+ScaleToSize.h */,
-				CE102F3716089570004229C5 /* UIImage+ScaleToSize.m */,
 				CE7CF54E161EBC4D008557D2 /* NSNumber+FSStorable.h */,
 				CE7CF54F161EBC4D008557D2 /* NSNumber+FSStorable.m */,
 				CE0B00431626D9C1003802A0 /* NSDateFormatter+MultiThreading.h */,
@@ -875,6 +877,7 @@
 		651BE0BF1390496700DD6890 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CEEAAD0D167A0E3400DD8A16 /* UIImage */,
 				3780558E164D42F100459BA7 /* NSLocale */,
 				CE57FBB41611EFE100124D90 /* NSSet */,
 				37063C6315FE0B7400B4B059 /* NSOrderedSet */,
@@ -1098,6 +1101,17 @@
 			path = DelegateProxy;
 			sourceTree = "<group>";
 		};
+		CEEAAD0D167A0E3400DD8A16 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				CEEAAD0F167A0E4A00DD8A16 /* UIImage+ScaleToSize.h */,
+				CEEAAD10167A0E4A00DD8A16 /* UIImage+ScaleToSize.m */,
+				CEEAAD13167A0E8D00DD8A16 /* UIImage+FixOrientation.h */,
+				CEEAAD14167A0E8D00DD8A16 /* UIImage+FixOrientation.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1279,13 +1293,14 @@
 				37497BD01600971C00AF0C29 /* NSDictionary+ValueWithType.h in Headers */,
 				37497DF31601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.h in Headers */,
 				CE444A1416085D5A00DD85B0 /* NSObject+JFFMeaningClass.h in Headers */,
-				CE102F3816089570004229C5 /* UIImage+ScaleToSize.h in Headers */,
 				CE57FBB81611EFFF00124D90 /* NSSet+BlocksAdditions.h in Headers */,
 				CE57FBBD1611F0BF00124D90 /* NSMutableSet+StorableSet.h in Headers */,
 				CE7CF550161EBC4D008557D2 /* NSNumber+FSStorable.h in Headers */,
 				CE998C481626B988002D39FD /* NSOrderedSet+BlocksAdditions.h in Headers */,
 				CE0B00451626D9C1003802A0 /* NSDateFormatter+MultiThreading.h in Headers */,
 				37805592164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.h in Headers */,
+				CEEAAD11167A0E4A00DD8A16 /* UIImage+ScaleToSize.h in Headers */,
+				CEEAAD15167A0E8D00DD8A16 /* UIImage+FixOrientation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1757,7 +1772,6 @@
 				37497BD41600971C00AF0C29 /* NSDictionary+ValueWithType.m in Sources */,
 				37497DF71601FAB200AF0C29 /* NSMutableDictionary+IgnoringAddNilValue.m in Sources */,
 				CE444A1516085D5A00DD85B0 /* NSObject+JFFMeaningClass.m in Sources */,
-				CE102F3916089570004229C5 /* UIImage+ScaleToSize.m in Sources */,
 				CE57FBB91611EFFF00124D90 /* NSSet+BlocksAdditions.m in Sources */,
 				CE57FBBE1611F0BF00124D90 /* NSMutableSet+StorableSet.m in Sources */,
 				CEE653CF16144C8900C4D536 /* JFFRuntimeInitializer.m in Sources */,
@@ -1765,6 +1779,8 @@
 				CE998C491626B988002D39FD /* NSOrderedSet+BlocksAdditions.m in Sources */,
 				CE0B00461626D9C1003802A0 /* NSDateFormatter+MultiThreading.m in Sources */,
 				37805593164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.m in Sources */,
+				CEEAAD12167A0E4A00DD8A16 /* UIImage+ScaleToSize.m in Sources */,
+				CEEAAD16167A0E8D00DD8A16 /* UIImage+FixOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
