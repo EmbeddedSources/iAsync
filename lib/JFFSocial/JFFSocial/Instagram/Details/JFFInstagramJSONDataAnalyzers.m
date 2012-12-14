@@ -241,7 +241,9 @@ JFFAsyncOperationBinder jsonDataToAuthedAccountBinder()
         NSError *error = validateJSONAuthedAccountObjectOnError(jsonObject);
         
         if (error) {
-            [error setToPointer:outError];
+            if (outError) {
+                *outError = error;
+            }
             return nil;
         }
         

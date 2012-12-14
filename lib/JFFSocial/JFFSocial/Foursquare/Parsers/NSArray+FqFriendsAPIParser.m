@@ -21,7 +21,9 @@
     }
     else
     {
-        [[JFFFoursquaerAPIInvalidresponseError new] setToPointer:outError];
+        if (outError) {
+            *outError = [JFFFoursquaerAPIInvalidresponseError new];
+        }
     }
     
     return friendsArray;

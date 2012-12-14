@@ -136,15 +136,15 @@ static JFFAsyncOperation twitterAccountsLoader()
 + (JFFAsyncOperation)usersNearbyCoordinatesLantitude:(double)lantitude longitude:(double)longitude
 {
     static NSString *geocodeFormat = @"%f,%f,100mi";
-
-    NSDictionary *params = @{
+    
+    id params = @{
     @"q"                : @"",
     @"geocode"          : [[NSString alloc] initWithFormat:geocodeFormat, lantitude, longitude],
     @"count"            : @"100",
     @"include_entities" : @"true",
     @"result_type"      : @"recent",
     };
-
+    
     return [self generalTwitterApiDataLoaderWithURLString:@"https://api.twitter.com/1.1/search/tweets.json"
                                                parameters:params
                                             requestMethod:TWRequestMethodGET

@@ -36,16 +36,17 @@
 
 + (JFFAsyncOperation)cachedAuthLoader
 {
-    return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *error) {
+    return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
         NSString *cachedAccessToken = [JFFFoursquareSessionStorage accessToken];
         
         if (cachedAccessToken) {
             return cachedAccessToken;
         }
         
-        [[JFFFoursquareCachedAccessTokenError new] setToPointer:error];
+        if (outError) {
+            *outError = [JFFFoursquareCachedAccessTokenError new];
+        }
         return nil;
-        
     });
 }
 
@@ -221,8 +222,13 @@
     [params setObjectWithIgnoreNillValue:checkinID forKey:@"checkinId"];
     params[@"post*"] = @"1";
     
-    NSData *imageData = [NSData dataForHTTPPostWithData:UIImageJPEGRepresentation(image, 1.0) andFileName:@"name" andParameterName:@"photo"];
-    NSData *httpBody = [imageData dataForHTTPPostByAppendingParameters:params];
+    NSString *boundary = [NSString createUuid];
+    
+    NSData *imageData = [NSData dataForHTTPPostWithData:UIImageJPEGRepresentation(image, 1.0)
+                                            andFileName:@"name"
+                                       andParameterName:@"photo"
+                                               boundary:boundary];
+    NSData *httpBody = [imageData dataForHTTPPostByAppendingParameters:params boundary:boundary];
     
     JFFAsyncOperationBinder postLoaderBinder = ^JFFAsyncOperation(NSString *accessToken) {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoaderWithHTTPBody(addPhotoURL, httpBody, accessToken),
