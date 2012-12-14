@@ -30,6 +30,7 @@ static char performSegueCallbackKey;
         self.performSegueCallback = nil;
         callback(segue);
     }
+    
     if ([self respondsToSelector:@selector(prepareForSegueOriginal:sender:)]) {
         [self prepareForSegueOriginal:segue sender:sender];
     }
