@@ -10,4 +10,5 @@
 #import <JFFStoreKit/Errors/JFFStoreKitInvalidProductIdentifierError.h>
 
 #import <JFFStoreKit/Utils/SKPaymentTransaction+ReceiptInBase64.h>
+
 #import <JFFStoreKit/Errors/JFFStoreKitTransactionStateFailedError.h>
