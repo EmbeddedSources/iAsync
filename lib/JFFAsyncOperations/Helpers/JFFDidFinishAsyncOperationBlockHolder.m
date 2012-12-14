@@ -7,9 +7,9 @@
     if (!self.didFinishBlock)
         return;
 
-    JFFDidFinishAsyncOperationHandler block_ = self.didFinishBlock;
+    JFFDidFinishAsyncOperationHandler block = self.didFinishBlock;
     self.didFinishBlock = nil;
-    block_(result_, error);
+    block(result_, error);
 }
 
 -(JFFDidFinishAsyncOperationHandler)onceDidFinishBlock
