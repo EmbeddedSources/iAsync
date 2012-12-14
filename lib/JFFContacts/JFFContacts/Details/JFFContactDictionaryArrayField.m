@@ -4,25 +4,25 @@
 #import "NSArray+ContactsDataFilters.h"
 
 //STODO remove duplicates
-static ABMutableMultiValueRef createMutableMultiValueWithArray( NSArray* elements_
+static ABMutableMultiValueRef createMutableMultiValueWithArray( NSArray* elements
                                                                , NSArray* labels_ )
 {
-    ABMutableMultiValueRef result = ABMultiValueCreateMutable( kABMultiDictionaryPropertyType );
-
-    NSUInteger index_ = 0;
-    for ( NSDictionary* element_ in elements_ )
+    ABMutableMultiValueRef result = ABMultiValueCreateMutable(kABMultiDictionaryPropertyType);
+    
+    NSUInteger index = 0;
+    for (NSDictionary *element in elements)
     {
-        id label_ = [ labels_ noThrowObjectAtIndex: index_ ];
+        id label_ = [ labels_ noThrowObjectAtIndex: index ];
         if ( ![ label_ isKindOfClass: [ NSDictionary class ] ] )
             label_ = nil;
-
+        
         ABMultiValueAddValueAndLabel( result
-                                     , (__bridge CFTypeRef)element_
+                                     , (__bridge CFTypeRef)element
                                      , (__bridge CFTypeRef)label_
                                      , NULL );
-        ++index_;
+        ++index;
     }
-
+    
     return result;
 }
 
