@@ -14,7 +14,7 @@ JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)
         
         if (jsonError) {
             if (outError) {
-                NSLog(@"!!!ERROR!!! jsonError: %@", [data toString]);
+                [JFFLogger logErrorWithFormat:@"jsonError: %@", [data toString]];
                 JFFParseJsonError *error = [JFFParseJsonError new];
                 error.nativeError = jsonError;
                 error.data        = data;
