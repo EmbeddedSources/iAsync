@@ -9,4 +9,6 @@
 
 - (JFFAsyncOperation)balancedLoaderWithLoader:(JFFAsyncOperation)loader;
 
+- (JFFAsyncOperation)barrierBalancedLoaderWithLoader:(JFFAsyncOperation)loader;
+
 @end

@@ -2,28 +2,28 @@
 
 #include <objc/runtime.h>
 
-static char resultOwnershipsKey_;
+static char resultOwnershipsKey;
 
 @implementation NSError (ResultOwnerships)
 
 //should not autorelease returned value
 - (NSMutableArray *)resultOwnerships
 {
-    return objc_getAssociatedObject(self, &resultOwnershipsKey_);
+    return objc_getAssociatedObject(self, &resultOwnershipsKey);
 }
 
 - (NSMutableArray *)lazyResultOwnerships
 {
-    if (!objc_getAssociatedObject(self, &resultOwnershipsKey_)) {
+    if (!objc_getAssociatedObject(self, &resultOwnershipsKey)) {
         self.resultOwnerships = [ NSMutableArray new ];
     }
-    return objc_getAssociatedObject(self, &resultOwnershipsKey_);
+    return objc_getAssociatedObject(self, &resultOwnershipsKey);
 }
 
 - (void)setResultOwnerships:(NSMutableArray *)resultOwnerships
 {
     objc_setAssociatedObject(self,
-                             &resultOwnershipsKey_,
+                             &resultOwnershipsKey,
                              resultOwnerships,
                              OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
