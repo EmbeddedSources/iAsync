@@ -21,7 +21,7 @@
     
     if (NULL != error) {
         NSError *nsError = (__bridge NSError*)error;
-        NSLog(@"[!!!ERROR!!!] - ABAddressBookCreateWithOptions : %@", nsError);
+        [JFFLogger logErrorWithFormat:@"ABAddressBookCreateWithOptions : %@", nsError];
         if (result)
             CFRelease(result);
         if (callback)
