@@ -2,7 +2,6 @@
 
 #import <Foundation/Foundation.h>
 
-//TODO add NSCopying methods id neads
 @protocol JFFRestKitCachedData <NSObject, NSCopying>
 
 @required
@@ -20,4 +19,3 @@
 - (JFFAsyncOperation)cachedDataLoaderForKey:(NSString *)key;
 
 @end
-
