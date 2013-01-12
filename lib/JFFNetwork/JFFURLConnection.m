@@ -25,9 +25,9 @@
 
 @end
 
-static void readStreamCallback( CFReadStreamRef stream_
-                               , CFStreamEventType event_
-                               , void* selfContext_ )
+static void readStreamCallback(CFReadStreamRef stream,
+                               CFStreamEventType event_,
+                               void* selfContext_ )
 {
     __unsafe_unretained JFFURLConnection* weakSelf = (__bridge JFFURLConnection*)selfContext_;
     switch( event_ ) {
@@ -41,10 +41,10 @@ static void readStreamCallback( CFReadStreamRef stream_
         }
         case kCFStreamEventHasBytesAvailable:
         {
-            [ weakSelf handleResponseForReadStream: stream_ ];
+            [ weakSelf handleResponseForReadStream: stream ];
 
             UInt8 buffer[ kJNMaxBufferSize ];
-            CFIndex bytesRead = CFReadStreamRead( stream_, buffer, kJNMaxBufferSize );
+            CFIndex bytesRead = CFReadStreamRead( stream, buffer, kJNMaxBufferSize );
             if ( bytesRead > 0 )
             {
                 [weakSelf handleData:buffer
@@ -58,19 +58,19 @@ static void readStreamCallback( CFReadStreamRef stream_
         }
         case kCFStreamEventErrorOccurred:
         {
-            [ weakSelf handleResponseForReadStream: stream_ ];
+            [weakSelf handleResponseForReadStream:stream];
             
-            CFStreamError error = CFReadStreamGetError( stream_ );
-            NSString* errorDescription_ = [[NSString alloc] initWithFormat:@"CFStreamError domain: %ld", error.domain];
+            CFStreamError error = CFReadStreamGetError(stream);
+            NSString *errorDescription = [[NSString alloc] initWithFormat:@"CFStreamError domain: %ld", error.domain];
             
             //TODO create separate error class
-            [weakSelf handleFinish:[JFFError newErrorWithDescription:errorDescription_
+            [weakSelf handleFinish:[JFFError newErrorWithDescription:errorDescription
                                                                 code:error.error]];
             break;
         }
         case kCFStreamEventEndEncountered:
         {
-            [ weakSelf handleResponseForReadStream: stream_ ];
+            [ weakSelf handleResponseForReadStream: stream ];
             
             [ weakSelf handleFinish: nil ];
             break;

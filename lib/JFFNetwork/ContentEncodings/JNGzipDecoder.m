@@ -37,7 +37,7 @@ NSString* kGzipErrorDomain = @"gzip.error";
     //!! dodikk -- WTF Magic
     if ( inflateInit2( &strm, (15+32) ) != Z_OK ) 
     {
-        NSLog( @"[!!! ERROR !!!] : JNGzipDecoder -- inflateInit2 failed" );
+        [JFFLogger logErrorWithFormat:@"JNGzipDecoder -- inflateInit2 failed"];
 
         *outError = [ NSError errorWithDomain: kGzipErrorDomain
                                        code: kJNGzipInitFailed
