@@ -103,6 +103,7 @@
         id opResult;
         @try {
             JFFAsyncOperationProgressHandler progressCallback = ^(id info) {
+                //TODO to garante that finish will called after progress
                 dispatch_async(_currentQueue, ^ {
                     [self progressWithInfo:info];
                 });

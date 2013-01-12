@@ -23,14 +23,14 @@
 @end
 
 //JTODO test
-JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanceBuilder factory)
+JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanceBuilder objectFactory)
 {
-    factory = [factory copy];
+    objectFactory = [objectFactory copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
         
-        id< JFFAsyncOperationInterface > asyncObject = factory();
+        id< JFFAsyncOperationInterface > asyncObject = objectFactory();
         __unsafe_unretained id< JFFAsyncOperationInterface > unretaintedAsyncObject = asyncObject;
         
         doneCallback = [doneCallback copy];
@@ -56,11 +56,14 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
             [JFFSingleThreadProxy singleThreadProxyWithTargetFactory:factory
                                                        dispatchQueue:dispatch_get_current_queue()];
         
+        __block JFFCancelAsyncOperationHandler cancelCallbackHolder = [cancelCallback copy];
+        
         void (^completionHandlerWrapper)(id, NSError *) = [^(id result, NSError *error) {
             
             JFFComplitionHandlerNotifier* proxyOwner = proxy;
             proxy = nil;
             progressHandler = nil;
+            cancelCallbackHolder = nil;//TODO what about other thread?
             [proxyOwner notifyCallbackWithResult:result error:error];
         } copy];
         
@@ -72,10 +75,10 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
         [asyncObject asyncOperationWithResultHandler:completionHandlerWrapper
                                      progressHandler:progressHandlerWrapper];
         
-        __block JFFCancelAsyncOperationHandler cancelCallbackHolder = [cancelCallback copy];
         return ^(BOOL canceled) {
-            if (!proxy.completionHandler)
+            if (!proxy.completionHandler) {
                 return;
+            }
             
             [unretaintedAsyncObject cancel:canceled];
             

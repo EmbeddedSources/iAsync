@@ -60,27 +60,26 @@
 
 - (JFFActiveLoaderData*)activeLoaderDataForNativeLoader:(JFFAsyncOperation)nativeLoader
 {
-    return [self.activeLoadersData firstMatch: ^BOOL(id object_) {
-        JFFActiveLoaderData* loader_data_ = object_;
-        return loader_data_.nativeLoader == nativeLoader;
+    return [self.activeLoadersData firstMatch:^BOOL(id object) {
+        JFFActiveLoaderData *loaderData = object;
+        return loaderData.nativeLoader == nativeLoader;
     }];
 }
 
--(void)cancelActiveNativeLoader:( JFFAsyncOperation )native_loader_ cancel:( BOOL )canceled_
+- (void)cancelActiveNativeLoader:(JFFAsyncOperation)nativeLoader cancel:( BOOL )canceled_
 {
-    JFFActiveLoaderData* data_ = [ self activeLoaderDataForNativeLoader: native_loader_ ];
-
+    JFFActiveLoaderData* data_ = [self activeLoaderDataForNativeLoader:nativeLoader];
+    
     if ( data_ )
         data_.wrappedCancel( canceled_ );
 }
 
-- (BOOL)removeActiveNativeLoader:( JFFAsyncOperation )native_loader_
+- (BOOL)removeActiveNativeLoader:(JFFAsyncOperation)nativeLoader
 {
-    JFFActiveLoaderData* data_ = [ self activeLoaderDataForNativeLoader: native_loader_ ];
-
-    if ( data_ )
-    {
-        [ self.activeLoadersData removeObject: data_ ];
+    JFFActiveLoaderData *data = [self activeLoaderDataForNativeLoader:nativeLoader];
+    
+    if ( data ) {
+        [ self.activeLoadersData removeObject: data ];
         return YES;
     }
 

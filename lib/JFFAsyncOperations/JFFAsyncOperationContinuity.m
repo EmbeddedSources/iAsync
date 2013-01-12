@@ -18,6 +18,7 @@ static JFFAsyncOperationBinder MergeBinders(MergeTwoBindersPtr merger, NSArray *
     JFFAsyncOperationBinder firstBinder = blocks[0];
     
     for (NSUInteger index = 1; index < [blocks count]; ++index) {
+        
         JFFAsyncOperationBinder secondBinder = blocks[index];
         firstBinder = merger(firstBinder, secondBinder);
     }
@@ -69,10 +70,11 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
                 cancelBlockHolder = firstCancel;
             
             return ^(BOOL canceled) {
-                if (!cancelBlockHolder)
+                JFFCancelAsyncOperation cancel = cancelBlockHolder;
+                if (!cancel)
                     return;
-                cancelBlockHolder(canceled);
                 cancelBlockHolder = nil;
+                cancel(canceled);
             };
         };
     };
@@ -277,7 +279,7 @@ JFFAsyncOperation bindTrySequenceOfAsyncOperations(JFFAsyncOperation firstLoader
     
     va_list args;
     va_start(args, secondLoaderBinder);
-    for ( JFFAsyncOperationBinder secondBlockBinder = secondLoaderBinder;
+    for (JFFAsyncOperationBinder secondBlockBinder = secondLoaderBinder;
          secondBlockBinder != nil;
          secondBlockBinder = va_arg(args, JFFAsyncOperationBinder)) {
         
@@ -497,7 +499,7 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOper
         __block JFFCancelAsyncOperationHandler cancelCallbackHolder = [^(BOOL canceled) {
             if (cancelCallback)
                 cancelCallback(canceled);
-        }copy];// "cancelCallbackHolder" used as flag for done
+        } copy];// "cancelCallbackHolder" used as flag for done
         
         NSMutableArray *complexResult = [@[[NSNull null], [NSNull null]] mutableCopy];
         
@@ -634,6 +636,7 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         progressCallback = [progressCallback copy];
         cancelCallback   = [cancelCallback   copy];
         doneCallback     = [doneCallback     copy];

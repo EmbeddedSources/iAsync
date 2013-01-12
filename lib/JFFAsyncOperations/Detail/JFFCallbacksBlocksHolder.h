@@ -4,12 +4,12 @@
 
 @interface JFFCallbacksBlocksHolder : NSObject
 
-@property ( nonatomic, copy ) JFFAsyncOperationProgressHandler onProgressBlock;
-@property ( nonatomic, copy ) JFFCancelAsyncOperationHandler onCancelBlock;
-@property ( nonatomic, copy ) JFFDidFinishAsyncOperationHandler didLoadDataBlock;
+@property (nonatomic, copy) JFFAsyncOperationProgressHandler onProgressBlock;
+@property (nonatomic, copy) JFFCancelAsyncOperationHandler onCancelBlock;
+@property (nonatomic, copy) JFFDidFinishAsyncOperationHandler didLoadDataBlock;
 
--(id)initWithOnProgressBlock:( JFFAsyncOperationProgressHandler )on_progress_block_
-               onCancelBlock:( JFFCancelAsyncOperationHandler )on_cancel_block_
-            didLoadDataBlock:( JFFDidFinishAsyncOperationHandler )did_load_data_block_;
+- (id)initWithOnProgressBlock:(JFFAsyncOperationProgressHandler)onProgressBlock
+                onCancelBlock:(JFFCancelAsyncOperationHandler)onCancelBlock
+             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock;
 
 @end

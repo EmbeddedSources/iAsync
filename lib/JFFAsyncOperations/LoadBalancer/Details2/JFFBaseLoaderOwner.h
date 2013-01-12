@@ -6,6 +6,8 @@
 
 @interface JFFBaseLoaderOwner : NSObject
 
+@property (nonatomic) BOOL barrier;
+
 @property (nonatomic, copy) JFFAsyncOperation loader;
 @property (nonatomic, weak) JFFLimitedLoadersQueue *queue;
 

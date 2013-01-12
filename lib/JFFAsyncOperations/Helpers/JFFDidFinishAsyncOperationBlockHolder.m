@@ -2,20 +2,20 @@
 
 @implementation JFFDidFinishAsyncOperationBlockHolder
 
--(void)performDidFinishBlockOnceWithResult:( id )result_ error:(NSError *)error
+- (void)performDidFinishBlockOnceWithResult:(id)result error:(NSError *)error
 {
     if (!self.didFinishBlock)
         return;
-
+    
     JFFDidFinishAsyncOperationHandler block = self.didFinishBlock;
     self.didFinishBlock = nil;
-    block(result_, error);
+    block(result, error);
 }
 
--(JFFDidFinishAsyncOperationHandler)onceDidFinishBlock
+- (JFFDidFinishAsyncOperationHandler)onceDidFinishBlock
 {
-    return ^(id result_, NSError *error) {
-        [ self performDidFinishBlockOnceWithResult: result_ error:error];
+    return ^(id result, NSError *error) {
+        [self performDidFinishBlockOnceWithResult:result error:error];
     };
 }
 
