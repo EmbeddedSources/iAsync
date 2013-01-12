@@ -6,25 +6,19 @@
 
 - (void)showAlertWithTitle:(NSString *)title
 {
-    [self writeErrorToNSLog];
+    [self writeErrorWithJFFLogger];
     [JFFAlertView showAlertWithTitle:title description:[self localizedDescription]];
 }
 
 - (void)showErrorAlert
 {
-    [self writeErrorToNSLog];
+    [self writeErrorWithJFFLogger];
     [JFFAlertView showErrorWithDescription:[self localizedDescription]];
-}
-
-- (void)writeErrorToNSLog
-{
-    NSLog(@"NSError : %@, domain : %@ code : %d", [self localizedDescription], [self domain], [self code]);
 }
 
 - (void)showExclusiveErrorAlert
 {
-    [self writeErrorToNSLog];
-    
+    [self writeErrorWithJFFLogger];
     [JFFAlertView showExclusiveErrorWithDescription:[self localizedDescription]];
 }
 
