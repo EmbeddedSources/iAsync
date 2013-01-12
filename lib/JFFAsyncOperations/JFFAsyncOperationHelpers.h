@@ -58,6 +58,8 @@ JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay);
 JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader);
 JFFAsyncOperationBinder ignorePregressBinder(JFFAsyncOperationBinder binder);
 
+    JFFAsyncOperation loaderWithAdditionalParalelLoaders(JFFAsyncOperation original, JFFAsyncOperation additionalLoader, ...);
+    
 ///////////////////////////////////// SEQUENCE /////////////////////////////////////
 
 JFFAnalyzer analyzerAsSequenceOfAnalyzers(JFFAnalyzer firstAnalyzer, ...) NS_REQUIRES_NIL_TERMINATION;

@@ -44,6 +44,7 @@
 
 JFFAsyncOperation asyncOperationWithResult(id result)
 {
+    assert(result);
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
@@ -277,6 +278,32 @@ JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay)
         return asyncObject;
     };
     return buildAsyncOperationWithAdapterFactory(factory);
+}
+
+JFFAsyncOperation loaderWithAdditionalParalelLoaders(JFFAsyncOperation original, JFFAsyncOperation additionalLoader, ...)
+{
+    assert(original);
+    
+    NSMutableArray *loaders = [[NSMutableArray alloc] initWithObjects:original, nil];
+    
+    va_list args;
+    va_start(args, additionalLoader);
+    for (JFFAsyncOperation nextLoader = additionalLoader;
+         nextLoader != nil;
+         nextLoader = va_arg(args, JFFAsyncOperation)) {
+        
+        [loaders addObject:nextLoader];
+    }
+    va_end(args);
+    
+    JFFAsyncOperation groupLoader = groupOfAsyncOperationsArray(loaders);
+    
+    JFFAsyncOperationBinder getResult = ^JFFAsyncOperation(NSArray *results) {
+        
+        return asyncOperationWithResult(results[0]);
+    };
+    
+    return bindSequenceOfAsyncOperations(groupLoader, getResult, nil);
 }
 
 JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstBinder,
