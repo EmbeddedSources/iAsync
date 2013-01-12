@@ -79,14 +79,16 @@
 		8D996F1F139F61200075A325 /* NSObject+JFFAlertButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D996F1D139F61200075A325 /* NSObject+JFFAlertButton.m */; };
 		AA747D9F0F9514B9006C5449 /* JFFUI_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFUI_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		CE5EF36A167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CE5EF368167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.h */; };
+		CE5EF36B167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5EF369167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.m */; };
+		CE5EF36F167CE536009BD15D /* UIViewController+PerformSegueWithCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = CE5EF36D167CE536009BD15D /* UIViewController+PerformSegueWithCallback.h */; };
+		CE5EF370167CE536009BD15D /* UIViewController+PerformSegueWithCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5EF36E167CE536009BD15D /* UIViewController+PerformSegueWithCallback.m */; };
 		CE9A9153165671D200EFE858 /* JFFUIError.h in Headers */ = {isa = PBXBuildFile; fileRef = CE9A9151165671D200EFE858 /* JFFUIError.h */; };
 		CE9A9154165671D200EFE858 /* JFFUIError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A9152165671D200EFE858 /* JFFUIError.m */; };
 		CE9A91571656722900EFE858 /* JFFOpenApplicationError.h in Headers */ = {isa = PBXBuildFile; fileRef = CE9A91551656722900EFE858 /* JFFOpenApplicationError.h */; };
 		CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */; };
 		CEA097C615FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */; };
 		CEA097C715FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */; };
-		CEC9CA87166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC9CA85166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.h */; };
-		CEC9CA88166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CA86166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.m */; };
 		CEE235EA1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */; };
 		CEE235EB1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */; };
 /* End PBXBuildFile section */
@@ -134,14 +136,16 @@
 		8D996F1D139F61200075A325 /* NSObject+JFFAlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JFFAlertButton.m"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* JFFUI_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFUI_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE5EF368167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ForceRemoveFromParentViewController.h"; sourceTree = "<group>"; };
+		CE5EF369167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ForceRemoveFromParentViewController.m"; sourceTree = "<group>"; };
+		CE5EF36D167CE536009BD15D /* UIViewController+PerformSegueWithCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PerformSegueWithCallback.h"; sourceTree = "<group>"; };
+		CE5EF36E167CE536009BD15D /* UIViewController+PerformSegueWithCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PerformSegueWithCallback.m"; sourceTree = "<group>"; };
 		CE9A9151165671D200EFE858 /* JFFUIError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFUIError.h; sourceTree = "<group>"; };
 		CE9A9152165671D200EFE858 /* JFFUIError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFUIError.m; sourceTree = "<group>"; };
 		CE9A91551656722900EFE858 /* JFFOpenApplicationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFOpenApplicationError.h; sourceTree = "<group>"; };
 		CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFOpenApplicationError.m; sourceTree = "<group>"; };
 		CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+OpenApplicationAsyncOp.h"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.h"; sourceTree = SOURCE_ROOT; };
 		CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+OpenApplicationAsyncOp.m"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.m"; sourceTree = SOURCE_ROOT; };
-		CEC9CA85166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+PerformSegueWithCallback.h"; path = "Extensions/UIViewController+PerformSegueWithCallback.h"; sourceTree = SOURCE_ROOT; };
-		CEC9CA86166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+PerformSegueWithCallback.m"; path = "Extensions/UIViewController+PerformSegueWithCallback.m"; sourceTree = SOURCE_ROOT; };
 		CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+CachedAsyncImageLoader.h"; path = "Extensions/UIImageView+CachedAsyncImageLoader.h"; sourceTree = SOURCE_ROOT; };
 		CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+CachedAsyncImageLoader.m"; path = "Extensions/UIImageView+CachedAsyncImageLoader.m"; sourceTree = SOURCE_ROOT; };
 		D2AAC07E0554694100DB518D /* libJFFUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +231,10 @@
 			children = (
 				1B5E1AD014D0203A0075049A /* UIViewController+PresentTopViewController.h */,
 				1B5E1AD114D0203A0075049A /* UIViewController+PresentTopViewController.m */,
+				CE5EF36D167CE536009BD15D /* UIViewController+PerformSegueWithCallback.h */,
+				CE5EF36E167CE536009BD15D /* UIViewController+PerformSegueWithCallback.m */,
+				CE5EF368167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.h */,
+				CE5EF369167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.m */,
 			);
 			path = UIViewController;
 			sourceTree = "<group>";
@@ -240,8 +248,6 @@
 				CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */,
 				CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */,
 				CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */,
-				CEC9CA85166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.h */,
-				CEC9CA86166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.m */,
 			);
 			name = Extensions;
 			path = ./JFFUI/Extensions;
@@ -387,7 +393,8 @@
 				CEE235EA1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h in Headers */,
 				CE9A9153165671D200EFE858 /* JFFUIError.h in Headers */,
 				CE9A91571656722900EFE858 /* JFFOpenApplicationError.h in Headers */,
-				CEC9CA87166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.h in Headers */,
+				CE5EF36A167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.h in Headers */,
+				CE5EF36F167CE536009BD15D /* UIViewController+PerformSegueWithCallback.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,7 +513,8 @@
 				CEE235EB1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m in Sources */,
 				CE9A9154165671D200EFE858 /* JFFUIError.m in Sources */,
 				CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */,
-				CEC9CA88166E2CCA007BD855 /* UIViewController+PerformSegueWithCallback.m in Sources */,
+				CE5EF36B167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.m in Sources */,
+				CE5EF370167CE536009BD15D /* UIViewController+PerformSegueWithCallback.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +537,7 @@
 				HEADER_SEARCH_PATHS = ../;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = JFFUI;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -545,6 +554,7 @@
 				HEADER_SEARCH_PATHS = ../;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = JFFUI;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
