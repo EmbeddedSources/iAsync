@@ -152,9 +152,12 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     if (!_db) {
         _db = [[JFFSQLiteDB alloc] initWithDBName:_cacheName];
         
-        dispatch_barrier_async(_db.queue, ^ {
-            [_db execQuery:createRecords];
-        });
+        NSParameterAssert(_db);
+        if (_db) {
+            dispatch_barrier_async(_db.queue, ^ {
+                [_db execQuery:createRecords];
+            });
+        }
     }
     return _db;
 }
