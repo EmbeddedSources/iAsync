@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CE025685162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CE025684162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m */; };
-		CE45A58E164BFCC80054700D /* NSManagedObject+UpdateManagedObjectFromContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CE45A58D164BFCC80054700D /* NSManagedObject+UpdateManagedObjectFromContext.m */; };
+		CE11ADEF168C806C00D35C5C /* NSManagedObject+SaveAsyncOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE11ADEE168C806C00D35C5C /* NSManagedObject+SaveAsyncOperation.m */; };
+		CE8C6D151696D6A900B06045 /* JFFCoreDataError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8C6D141696D6A900B06045 /* JFFCoreDataError.m */; };
+		CE8C6D181696D6ED00B06045 /* JFFNoManagedObjectError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8C6D171696D6ED00B06045 /* JFFNoManagedObjectError.m */; };
 		CEA097ED16216ED1005820FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA097EC16216ED1005820FA /* Foundation.framework */; };
 		CEA097F216216ED1005820FA /* JFFCoreData.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEA097F116216ED1005820FA /* JFFCoreData.h */; };
 		CEA097FC16216ED1005820FA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA097FB16216ED1005820FA /* SenTestingKit.framework */; };
@@ -18,11 +20,11 @@
 		CEA0980816216ED1005820FA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEA0980616216ED1005820FA /* InfoPlist.strings */; };
 		CEA0980B16216ED1005820FA /* JFFCoreDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0980A16216ED1005820FA /* JFFCoreDataTests.m */; };
 		CEA0981616216EE7005820FA /* JFFCoreDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0981516216EE7005820FA /* JFFCoreDataProvider.m */; };
-		CEA098191621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA098181621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m */; };
 		CEA0982E16217259005820FA /* JFFCoreDataAsyncOperationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0982D16217259005820FA /* JFFCoreDataAsyncOperationAdapter.m */; };
 		CECEFBE416217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE316217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m */; };
 		CECEFBE716217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE616217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m */; };
 		CECEFBEA16218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CECEFBE916218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m */; };
+		CEF5A018168DA81200393AC0 /* JFFCoreDataAsyncOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5A017168DA81200393AC0 /* JFFCoreDataAsyncOperation.m */; };
 		CEF9F26516662A7A008310DA /* NSManagedObject+JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF9F26416662A7A008310DA /* NSManagedObject+JSONParser.m */; };
 /* End PBXBuildFile section */
 
@@ -108,8 +110,12 @@
 /* Begin PBXFileReference section */
 		CE025683162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOrderedSet+ObjectInManagedObjectContext.h"; sourceTree = "<group>"; };
 		CE025684162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOrderedSet+ObjectInManagedObjectContext.m"; sourceTree = "<group>"; };
-		CE45A58C164BFCC80054700D /* NSManagedObject+UpdateManagedObjectFromContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+UpdateManagedObjectFromContext.h"; sourceTree = "<group>"; };
-		CE45A58D164BFCC80054700D /* NSManagedObject+UpdateManagedObjectFromContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+UpdateManagedObjectFromContext.m"; sourceTree = "<group>"; };
+		CE11ADED168C806C00D35C5C /* NSManagedObject+SaveAsyncOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+SaveAsyncOperation.h"; sourceTree = "<group>"; };
+		CE11ADEE168C806C00D35C5C /* NSManagedObject+SaveAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+SaveAsyncOperation.m"; sourceTree = "<group>"; };
+		CE8C6D131696D6A900B06045 /* JFFCoreDataError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCoreDataError.h; sourceTree = "<group>"; };
+		CE8C6D141696D6A900B06045 /* JFFCoreDataError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataError.m; sourceTree = "<group>"; };
+		CE8C6D161696D6ED00B06045 /* JFFNoManagedObjectError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFNoManagedObjectError.h; sourceTree = "<group>"; };
+		CE8C6D171696D6ED00B06045 /* JFFNoManagedObjectError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFNoManagedObjectError.m; sourceTree = "<group>"; };
 		CEA097E916216ED1005820FA /* libJFFCoreData.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFCoreData.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA097EC16216ED1005820FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CEA097F016216ED1005820FA /* JFFCoreData-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFCoreData-Prefix.pch"; sourceTree = "<group>"; };
@@ -123,8 +129,6 @@
 		CEA0980A16216ED1005820FA /* JFFCoreDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataTests.m; sourceTree = "<group>"; };
 		CEA0981416216EE7005820FA /* JFFCoreDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCoreDataProvider.h; sourceTree = "<group>"; };
 		CEA0981516216EE7005820FA /* JFFCoreDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataProvider.m; sourceTree = "<group>"; };
-		CEA098171621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+SaveAsyncOperation.h"; sourceTree = "<group>"; };
-		CEA098181621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+SaveAsyncOperation.m"; sourceTree = "<group>"; };
 		CEA0982C16217259005820FA /* JFFCoreDataAsyncOperationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCoreDataAsyncOperationAdapter.h; sourceTree = "<group>"; };
 		CEA0982D16217259005820FA /* JFFCoreDataAsyncOperationAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataAsyncOperationAdapter.m; sourceTree = "<group>"; };
 		CEA0983416217632005820FA /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
@@ -135,7 +139,11 @@
 		CECEFBE616217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ObjectInManagedObjectContext.m"; sourceTree = "<group>"; };
 		CECEFBE816218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+ObjectInManagedObjectContext.h"; sourceTree = "<group>"; };
 		CECEFBE916218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+ObjectInManagedObjectContext.m"; sourceTree = "<group>"; };
-		CECEFBEB16218094007A61C9 /* JFFObjectInManagedObjectContextProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFObjectInManagedObjectContextProtocol.h; sourceTree = "<group>"; };
+		CECEFBEB16218094007A61C9 /* JFFObjectInManagedObjectContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFObjectInManagedObjectContext.h; sourceTree = "<group>"; };
+		CEF5A013168DA6FB00393AC0 /* JFFCDReadWriteLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFCDReadWriteLock.h; sourceTree = "<group>"; };
+		CEF5A015168DA79400393AC0 /* JFFCoreDataAsyncBlocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFCoreDataAsyncBlocks.h; sourceTree = "<group>"; };
+		CEF5A016168DA81200393AC0 /* JFFCoreDataAsyncOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCoreDataAsyncOperation.h; sourceTree = "<group>"; };
+		CEF5A017168DA81200393AC0 /* JFFCoreDataAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCoreDataAsyncOperation.m; sourceTree = "<group>"; };
 		CEF9F26316662A7A008310DA /* NSManagedObject+JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+JSONParser.h"; sourceTree = "<group>"; };
 		CEF9F26416662A7A008310DA /* NSManagedObject+JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+JSONParser.m"; sourceTree = "<group>"; };
 		CEF9F26616662D5F008310DA /* JSONParserDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONParserDefinitions.h; sourceTree = "<group>"; };
@@ -164,6 +172,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE11ADEC168C805500D35C5C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE11ADED168C806C00D35C5C /* NSManagedObject+SaveAsyncOperation.h */,
+				CE11ADEE168C806C00D35C5C /* NSManagedObject+SaveAsyncOperation.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CE8C6D091696D67C00B06045 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				CE8C6D131696D6A900B06045 /* JFFCoreDataError.h */,
+				CE8C6D141696D6A900B06045 /* JFFCoreDataError.m */,
+				CE8C6D161696D6ED00B06045 /* JFFNoManagedObjectError.h */,
+				CE8C6D171696D6ED00B06045 /* JFFNoManagedObjectError.m */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		CEA097DE16216ED1005820FA = {
 			isa = PBXGroup;
 			children = (
@@ -197,13 +225,14 @@
 		CEA097EE16216ED1005820FA /* JFFCoreData */ = {
 			isa = PBXGroup;
 			children = (
+				CE8C6D091696D67C00B06045 /* Errors */,
+				CEF5A009168DA6C400393AC0 /* AsyncCoreData */,
+				CE11ADEC168C805500D35C5C /* Extensions */,
 				CEF9F26216662A7A008310DA /* JSONParser */,
 				CECEFBE116217FA7007A61C9 /* ObjectInManagedObjectContext */,
 				CEA097EF16216ED1005820FA /* Supporting Files */,
 				CEA0981416216EE7005820FA /* JFFCoreDataProvider.h */,
 				CEA0981516216EE7005820FA /* JFFCoreDataProvider.m */,
-				CEA098171621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.h */,
-				CEA098181621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m */,
 				CEA0982C16217259005820FA /* JFFCoreDataAsyncOperationAdapter.h */,
 				CEA0982D16217259005820FA /* JFFCoreDataAsyncOperationAdapter.m */,
 				CEA097F116216ED1005820FA /* JFFCoreData.h */,
@@ -272,7 +301,7 @@
 		CECEFBE116217FA7007A61C9 /* ObjectInManagedObjectContext */ = {
 			isa = PBXGroup;
 			children = (
-				CECEFBEB16218094007A61C9 /* JFFObjectInManagedObjectContextProtocol.h */,
+				CECEFBEB16218094007A61C9 /* JFFObjectInManagedObjectContext.h */,
 				CECEFBE216217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.h */,
 				CECEFBE316217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m */,
 				CECEFBE516217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.h */,
@@ -281,10 +310,19 @@
 				CE025684162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m */,
 				CECEFBE816218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.h */,
 				CECEFBE916218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m */,
-				CE45A58C164BFCC80054700D /* NSManagedObject+UpdateManagedObjectFromContext.h */,
-				CE45A58D164BFCC80054700D /* NSManagedObject+UpdateManagedObjectFromContext.m */,
 			);
 			path = ObjectInManagedObjectContext;
+			sourceTree = "<group>";
+		};
+		CEF5A009168DA6C400393AC0 /* AsyncCoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CEF5A013168DA6FB00393AC0 /* JFFCDReadWriteLock.h */,
+				CEF5A015168DA79400393AC0 /* JFFCoreDataAsyncBlocks.h */,
+				CEF5A016168DA81200393AC0 /* JFFCoreDataAsyncOperation.h */,
+				CEF5A017168DA81200393AC0 /* JFFCoreDataAsyncOperation.m */,
+			);
+			path = AsyncCoreData;
 			sourceTree = "<group>";
 		};
 		CEF9F26216662A7A008310DA /* JSONParser */ = {
@@ -465,14 +503,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA0981616216EE7005820FA /* JFFCoreDataProvider.m in Sources */,
-				CEA098191621706E005820FA /* NSManagedObjectContext+SaveAsyncOperation.m in Sources */,
 				CEA0982E16217259005820FA /* JFFCoreDataAsyncOperationAdapter.m in Sources */,
 				CECEFBE416217FB0007A61C9 /* NSArray+ObjectInManagedObjectContext.m in Sources */,
 				CECEFBE716217FC7007A61C9 /* NSDictionary+ObjectInManagedObjectContext.m in Sources */,
 				CECEFBEA16218008007A61C9 /* NSManagedObject+ObjectInManagedObjectContext.m in Sources */,
 				CE025685162B08E100481461 /* NSOrderedSet+ObjectInManagedObjectContext.m in Sources */,
-				CE45A58E164BFCC80054700D /* NSManagedObject+UpdateManagedObjectFromContext.m in Sources */,
 				CEF9F26516662A7A008310DA /* NSManagedObject+JSONParser.m in Sources */,
+				CE11ADEF168C806C00D35C5C /* NSManagedObject+SaveAsyncOperation.m in Sources */,
+				CEF5A018168DA81200393AC0 /* JFFCoreDataAsyncOperation.m in Sources */,
+				CE8C6D151696D6A900B06045 /* JFFCoreDataError.m in Sources */,
+				CE8C6D181696D6ED00B06045 /* JFFNoManagedObjectError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +574,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -557,6 +598,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

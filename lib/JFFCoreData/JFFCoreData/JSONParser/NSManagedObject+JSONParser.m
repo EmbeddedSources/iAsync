@@ -59,10 +59,9 @@
                               parser:(JFFCoreDataModelParser)parser
                                error:(NSError *__autoreleasing *)outError
 {
+    NSParameterAssert(context);
     NSParameterAssert(parser);
     NSParameterAssert([arrayData isKindOfClass:[NSArray class]]);
-    
-    context = context?:[[JFFCoreDataProvider sharedCoreDataProvider] contextForCurrentThread];
     
     NSArray *cachedObjectsResult = [self cachedManagedObjectsInContext:context
                                                              arrayData:arrayData
@@ -94,9 +93,7 @@
     if (!objects)
         return nil;
     
-    BOOL result = [context save:outError];
-    
-    return result?objects:nil;
+    return objects;
 }
 
 @end

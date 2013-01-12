@@ -9,13 +9,12 @@
 
 @protocol JFFObjectInManagedObjectContext;
 
-@interface JFFCoreDataAsyncOperationAdapter : NSObject
+@interface JFFCoreDataAsyncOperation : NSObject
 
-//TODO1 remove
-+ (JFFAsyncOperation)operationWithBlock:(JFFCoreDataSyncOperationFactory)block
-                              readWrite:(JFFCDReadWriteLock)readWrite;
++ (JFFAsyncOperation)operationWithBlock2:(JFFCoreDataSyncOperationFactory)block
+                               readWrite:(JFFCDReadWriteLock)readWrite;
 
-+ (JFFAsyncOperation)operationWithRootObject:(NSManagedObject *)managedObject
++ (JFFAsyncOperation)operationWithRootObject2:(NSManagedObject *)managedObject
                                        block:(JFFCoreDataSyncOperationWithObjectFactory)block
                                    readWrite:(JFFCDReadWriteLock)readWrite;
 

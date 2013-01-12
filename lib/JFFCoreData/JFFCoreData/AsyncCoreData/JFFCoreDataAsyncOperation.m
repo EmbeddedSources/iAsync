@@ -1,4 +1,4 @@
-#import "JFFCoreDataAsyncOperationAdapter.h"
+#import "JFFCoreDataAsyncOperation.h"
 
 #import "JFFCoreDataProvider.h"
 #import "JFFObjectInManagedObjectContext.h"
@@ -6,7 +6,7 @@
 
 #import <JFFAsyncOperations/JFFAsyncOperations.h>
 
-@interface JFFCoreDataAsyncOperationAdapter () <JFFAsyncOperationInterface>
+@interface JFFCoreDataAsyncOperation () <JFFAsyncOperationInterface>
 
 @property (copy, nonatomic) JFFCoreDataSyncOperation operationBlock;
 @property (nonatomic) JFFCDReadWriteLock readWrite;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation JFFCoreDataAsyncOperationAdapter
+@implementation JFFCoreDataAsyncOperation
 
 + (dispatch_queue_t)coreDataQueue
 {
@@ -49,36 +49,18 @@
     //TODO1 may be use the performBlock: here, test realy it concurrent on reading
     dispatchAsyncMethod([[self class] coreDataQueue], ^{
         
-        NSError *error;
+        NSError *error = nil;
         id<JFFObjectInManagedObjectContext> result = operationBlock(&error);
         NSParameterAssert((result || error) && !(result && error));
         
         if (_readWrite == JFFCDWriteLock) {
             result = [context save:&error]?result:nil;
             [[JFFCoreDataProvider sharedCoreDataProvider] saveRootContext];
-            
-            BOOL obtained = [result obtainPermanentIDsIfNeedsWithError:&error];
-            result = obtained?result:nil;
         }
         
         dispatch_async(dispatch_get_main_queue(), ^() {
             
-            if (error) {
-                
-                handler(nil, error);
-                return;
-            }
-            
             id resultInMainContext = [result objectInManagedObjectContext:mainContext];
-            
-            NSError *error;
-            BOOL obtained = [resultInMainContext obtainPermanentIDsIfNeedsWithError:&error];
-            if (!obtained) {
-                
-                handler(nil, error);
-                return;
-            }
-            
             //TODO try to avoid this call
             [resultInMainContext updateManagedObjectFromContext];
             handler(resultInMainContext, error);
@@ -90,8 +72,8 @@
 {
 }
 
-+ (JFFAsyncOperation)operationWithBlock:(JFFCoreDataSyncOperationFactory)block
-                              readWrite:(JFFCDReadWriteLock)readWrite
++ (JFFAsyncOperation)operationWithBlock2:(JFFCoreDataSyncOperationFactory)block
+                               readWrite:(JFFCDReadWriteLock)readWrite
 {
     NSParameterAssert(block);
     
@@ -99,7 +81,7 @@
     
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         
-        JFFCoreDataAsyncOperationAdapter *adapter = [self new];
+        JFFCoreDataAsyncOperation *adapter = [self new];
         
         NSManagedObjectContext *context = [[JFFCoreDataProvider sharedCoreDataProvider] newPrivateQueueConcurrentContext];
         
@@ -113,25 +95,24 @@
     return buildAsyncOperationWithAdapterFactory(factory);
 }
 
-+ (JFFAsyncOperation)operationWithRootObject:(NSManagedObject *)managedObject
-                                       block:(JFFCoreDataSyncOperationWithObjectFactory)block
-                                   readWrite:(JFFCDReadWriteLock)readWrite
++ (JFFAsyncOperation)operationWithRootObject2:(NSManagedObject *)managedObject
+                                        block:(JFFCoreDataSyncOperationWithObjectFactory)block
+                                    readWrite:(JFFCDReadWriteLock)readWrite
 {
     block = [block copy];
     
-    NSManagedObjectID *objectID = managedObject.objectID;
-    NSParameterAssert(objectID && ![objectID isTemporaryID]);
-    
     JFFCoreDataSyncOperationFactory tmpBlock = ^(NSManagedObjectContext *context) {
-    
-        return ^id<JFFObjectInManagedObjectContext>(NSError *__autoreleasing *outError) {
         
+        NSManagedObjectID *objectID = [managedObject objectID];
+        
+        return ^id<JFFObjectInManagedObjectContext>(NSError *__autoreleasing *outError) {
+            
             NSError *error;
             NSManagedObject *currManagedObject = [context existingObjectWithID:objectID error:&error];
             
             [error writeErrorWithJFFLogger];
             if (!currManagedObject) {
-            
+                
                 if (outError) {
                     *outError = [JFFNoManagedObjectError new];
                 }
@@ -142,7 +123,7 @@
         };
     };
     
-    return [self operationWithBlock:tmpBlock readWrite:readWrite];
+    return [self operationWithBlock2:tmpBlock readWrite:readWrite];
 }
 
 @end

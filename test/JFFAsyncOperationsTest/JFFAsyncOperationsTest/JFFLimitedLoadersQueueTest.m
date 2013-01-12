@@ -109,6 +109,51 @@
     GHAssertTrue(initialSchedulerInstancesCount == [JFFBaseLoaderOwner instancesCount], @"OK");
 }
 
+- (void)testBarrierLoader
+{
+    const NSUInteger initialSchedulerInstancesCount = [JFFBaseLoaderOwner instancesCount];
+    
+    @autoreleasepool
+    {
+        JFFLimitedLoadersQueue *queue = [JFFLimitedLoadersQueue new];
+        queue.limitCount = 3;
+        
+        JFFAsyncOperationManager *loader1 = [JFFAsyncOperationManager new];
+        JFFAsyncOperationManager *loader2 = [JFFAsyncOperationManager new];
+        JFFAsyncOperationManager *loader3 = [JFFAsyncOperationManager new];
+        
+        JFFAsyncOperation balancedLoader1 = [queue balancedLoaderWithLoader:loader1.loader];
+        JFFAsyncOperation balancedLoader2 = [queue barrierBalancedLoaderWithLoader:loader2.loader];
+        JFFAsyncOperation balancedLoader3 = [queue balancedLoaderWithLoader:loader3.loader];
+        
+        //1. perform all blocks
+        balancedLoader1(nil, nil, nil);
+        balancedLoader2(nil, nil, nil);
+        balancedLoader3(nil, nil, nil);
+        
+        //2. Check that only first one runned
+        GHAssertTrue(loader1.loadingCount == 1, nil);
+        GHAssertTrue(loader2.loadingCount == 0, nil);
+        GHAssertTrue(loader3.loadingCount == 0, nil);
+        
+        //3. Finish first, check that 2-th was runned
+        loader1.loaderFinishBlock.didFinishBlock([NSNull new], nil);
+        GHAssertTrue(loader1.finished, nil);
+        GHAssertTrue(loader2.loadingCount == 1, nil);
+        GHAssertTrue(loader3.loadingCount == 0, nil);
+        
+        //4. Finish second and check that 3-th was runned
+        loader2.loaderFinishBlock.didFinishBlock([NSNull new], nil);
+        GHAssertTrue(loader2.finished == 1, nil);
+        GHAssertTrue(loader3.loadingCount == 1, nil);
+        
+        loader3.loaderFinishBlock.didFinishBlock([NSNull new], nil);
+        GHAssertTrue(loader3.finished == 1, nil);
+    }
+    
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFBaseLoaderOwner instancesCount], @"OK");
+}
+
 //TODO test when (active)native loader was canced
 //TODO test usibscribe balanced
 

@@ -1,6 +1,6 @@
-#import <JFFCoreData/ObjectInManagedObjectContext/JFFObjectInManagedObjectContextProtocol.h>
+#import <JFFCoreData/ObjectInManagedObjectContext/JFFObjectInManagedObjectContext.h>
 
 #import <Foundation/Foundation.h>
 
-@interface NSOrderedSet (ObjectInManagedObjectContext) <JFFObjectInManagedObjectContextProtocol>
+@interface NSOrderedSet (ObjectInManagedObjectContext) <JFFObjectInManagedObjectContext>
 @end

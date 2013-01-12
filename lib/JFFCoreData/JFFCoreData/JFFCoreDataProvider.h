@@ -4,7 +4,9 @@
 
 @interface JFFCoreDataProvider : NSObject
 
-- (NSManagedObjectContext *)contextForCurrentThread;
+- (NSManagedObjectContext *)contextForMainThread;
+- (NSManagedObjectContext *)newPrivateQueueConcurrentContext;
+- (NSManagedObjectContext *)mediateRootContext;
 
 - (void)resetMainThreadContext;
 

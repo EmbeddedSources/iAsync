@@ -39,6 +39,7 @@
 
 #import <JFFUtils/UIImage/UIImage+ScaleToSize.h>
 #import <JFFUtils/UIImage/UIImage+FixOrientation.h>
+#import <JFFUtils/UIImage/UIImage+WriteToTmpFile.h>
 
 #import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
@@ -51,6 +52,7 @@
 #import <JFFUtils/Extensions/NSError+setToPointer.h>
 #import <JFFUtils/Extensions/NSThread+AssertMainThread.h>
 #import <JFFUtils/Extensions/NSDecimalNumber+Increment.h>
+#import <JFFUtils/Extensions/NSError+WriteErrorToNSLog.h>
 #import <JFFUtils/Extensions/NSDateFormatter+MultiThreading.h>
 
 #import <JFFUtils/Dictionary/NSDictionary+ValueWithType.h>
@@ -70,3 +72,5 @@
 #import <JFFUtils/JFFMutableAssignDictionary.h>
 
 #import <JFFUtils/NSLocale/NSLocale+CurrentInterfaceLanguageCode.h>
+
+#import <JFFUtils/Logger/JFFLogger.h>

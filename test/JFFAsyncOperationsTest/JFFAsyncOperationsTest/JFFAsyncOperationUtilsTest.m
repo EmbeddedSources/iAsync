@@ -8,37 +8,38 @@
 {
     NSObject *resultObject = [NSObject new];
     
-    JFFSyncOperation loadDataBlock_ = ^id( NSError** error_ ) {
+    JFFSyncOperation loadDataBlock = ^id(NSError **error) {
         return resultObject;
     };
     
-    JFFAsyncOperation loader_ = asyncOperationWithSyncOperationAndQueue( loadDataBlock_, "com.test" );
+    JFFAsyncOperation loader = asyncOperationWithSyncOperationAndQueue(loadDataBlock, "com.test");
     
-    __block BOOL resultCalled_ = NO;
+    __block BOOL resultCalled = NO;
     
     JFFDidFinishAsyncOperationHandler doneCallback_ = ^(id result, NSError *error) {
-        resultCalled_ = YES;
+        resultCalled = YES;
         [ self notify: kGHUnitWaitStatusSuccess forSelector: _cmd ];
     };
     
     __block BOOL progressCalled_ = NO;
-    __block NSUInteger progressCallsCount_ = 0;
-    __block BOOL progressCalledBeforeResult_ = NO;
+    __block NSUInteger progressCallsCount   = 0;
+    __block BOOL progressCalledBeforeResult = NO;
     
-    JFFAsyncOperationProgressHandler progressCallback_ = ^(id info_) {
-        progressCalled_ = ( info_ == resultObject );
-        ++progressCallsCount_;
-        progressCalledBeforeResult_ = !resultCalled_;
+    JFFAsyncOperationProgressHandler progressCallback_ = ^(id info) {
+        progressCalled_ = (info == resultObject);
+        ++progressCallsCount;
+        progressCalledBeforeResult = !resultCalled;
     };
+
+    loader(progressCallback_, nil, doneCallback_);
     
-    loader_( progressCallback_, nil, doneCallback_ );
-    
-    [ self prepare ];
-    [ self waitForStatus: kGHUnitWaitStatusSuccess timeout: 1. ];
-    
+    //TODO sometimes fails - fix !!!
+    [self prepare];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.];
+
     GHAssertTrue( progressCalled_, @"ok" );
-    GHAssertTrue( progressCallsCount_ == 1, @"ok" );
-    GHAssertTrue( progressCalledBeforeResult_, @"ok" );
+    GHAssertTrue( progressCallsCount == 1, @"ok" );
+    GHAssertTrue( progressCalledBeforeResult, @"ok" );
 }
 
 @end

@@ -1,7 +1,5 @@
 #import "JFFCoreDataProvider.h"
 
-#import "NSManagedObjectContext+SaveAsyncOperation.h"
-
 @interface JFFCoreDataProvider ()
 
 @property (nonatomic) NSManagedObjectContext *mediateRootContext;
@@ -29,20 +27,12 @@
 @synthesize managedObjectModel         = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-- (NSManagedObjectContext *)contextForCurrentThread
+- (NSManagedObjectContext *)newPrivateQueueConcurrentContext
 {
-    if ([NSThread isMainThread]) {
-        return [self contextForMainThread];
-    }
-    
-    return [self contextForBackgroundThread];
-}
-
-- (NSManagedObjectContext *)contextForBackgroundThread
-{
-    NSManagedObjectContext *contextForCurrentThread = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    contextForCurrentThread.parentContext = self.mediateRootContext;
-    return contextForCurrentThread;
+    //TODO1 may be use NSConfinementConcurrencyType
+    NSManagedObjectContext *result = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    result.parentContext = self.mediateRootContext;
+    return result;
 }
 
 - (NSManagedObjectContext *)contextForMainThread
@@ -151,7 +141,7 @@
     }
     
     _contextForMainThread = nil;
-    _mediateRootContext = nil;
+    _mediateRootContext   = nil;
     _persistentStoreCoordinator = nil;
     
     return result;
@@ -207,8 +197,9 @@
 
 - (void)saveRootContext
 {
-    [self.mediateRootContext performBlock: ^{
-        NSError *error = nil;
+    //TODO may be performBlockAndWait should used
+    [self.mediateRootContext performBlock:^{
+        NSError *error;
         [self.mediateRootContext save:&error];
         
         if (error) {

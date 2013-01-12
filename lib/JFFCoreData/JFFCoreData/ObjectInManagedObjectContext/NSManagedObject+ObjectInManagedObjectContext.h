@@ -1,6 +1,6 @@
-#import <JFFCoreData/ObjectInManagedObjectContext/JFFObjectInManagedObjectContextProtocol.h>
+#import <JFFCoreData/ObjectInManagedObjectContext/JFFObjectInManagedObjectContext.h>
 
 #import <CoreData/CoreData.h>
 
-@interface NSManagedObject (ObjectInManagedObjectContext) <JFFObjectInManagedObjectContextProtocol>
+@interface NSManagedObject (ObjectInManagedObjectContext) <JFFObjectInManagedObjectContext>
 @end

@@ -451,6 +451,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFScheduler;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -465,6 +466,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFScheduler;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};

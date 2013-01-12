@@ -67,4 +67,19 @@
     }];
 }
 
+- (NSDictionary*)select:(JFFDictPredicateBlock)predicate
+{
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
+    
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        
+        if (predicate(key, obj)) {
+            
+            result[key] = obj;
+        }
+    }];
+    
+    return [result copy];
+}
+
 @end

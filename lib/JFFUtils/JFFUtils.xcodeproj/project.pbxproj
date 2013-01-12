@@ -370,6 +370,8 @@
 		CEA097A515FF2C860080DEF7 /* JFFDelegateProxyClassMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097A315FF2C850080DEF7 /* JFFDelegateProxyClassMethods.m */; };
 		CEA097A815FF2E3E0080DEF7 /* JFFProxyDelegatesDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA097A615FF2E3D0080DEF7 /* JFFProxyDelegatesDispatcher.h */; };
 		CEA097A915FF2E3E0080DEF7 /* JFFProxyDelegatesDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097A715FF2E3E0080DEF7 /* JFFProxyDelegatesDispatcher.m */; };
+		CEB2D7691689A177004067F9 /* NSError+WriteErrorToNSLog.h in Headers */ = {isa = PBXBuildFile; fileRef = CEB2D7671689A177004067F9 /* NSError+WriteErrorToNSLog.h */; };
+		CEB2D76A1689A177004067F9 /* NSError+WriteErrorToNSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2D7681689A177004067F9 /* NSError+WriteErrorToNSLog.m */; };
 		CEB90821160C708300EFC230 /* NSArray+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE0AC1390496200DD6890 /* NSArray+BlocksAdditions.m */; };
 		CEB90823160C709D00EFC230 /* NSObject+DelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C20E615FE5A4000022B11 /* NSObject+DelegateProxy.m */; };
 		CEB90824160C70A300EFC230 /* DelegateProxyUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0979B15FF2ADE0080DEF7 /* DelegateProxyUtils.m */; };
@@ -380,6 +382,10 @@
 		CEB90829160C73DE00EFC230 /* NSObject+Ownerships.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE138139107EA00DD6890 /* NSObject+Ownerships.m */; };
 		CEB9082A160C73EC00EFC230 /* NSObject+OnDeallocBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1CC1391A36800DD6890 /* NSObject+OnDeallocBlock.m */; };
 		CEB9082B160C740300EFC230 /* JFFOnDeallocBlockOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1C21391A25500DD6890 /* JFFOnDeallocBlockOwner.m */; };
+		CEC544891699D28A0019511A /* UIImage+WriteToTmpFile.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC544871699D28A0019511A /* UIImage+WriteToTmpFile.h */; };
+		CEC5448A1699D28A0019511A /* UIImage+WriteToTmpFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC544881699D28A0019511A /* UIImage+WriteToTmpFile.m */; };
+		CEC70F13169DBA8B006D63DE /* JFFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC70F0F169DBA8B006D63DE /* JFFLogger.h */; };
+		CEC70F14169DBA8B006D63DE /* JFFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC70F10169DBA8B006D63DE /* JFFLogger.m */; };
 		CEC851AC15F4E20E0022F479 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC851AB15F4E20E0022F479 /* UIKit.framework */; };
 		CED85A95161C23A200F28EBC /* JFFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648BE013924326001E163C /* JFFError.m */; };
 		CEDB80ED1601F08F007577B2 /* NSData+ToString.h in Headers */ = {isa = PBXBuildFile; fileRef = CEDB80EB1601F08F007577B2 /* NSData+ToString.h */; };
@@ -600,6 +606,12 @@
 		CEA097A315FF2C850080DEF7 /* JFFDelegateProxyClassMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDelegateProxyClassMethods.m; sourceTree = "<group>"; };
 		CEA097A615FF2E3D0080DEF7 /* JFFProxyDelegatesDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFProxyDelegatesDispatcher.h; sourceTree = "<group>"; };
 		CEA097A715FF2E3E0080DEF7 /* JFFProxyDelegatesDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFProxyDelegatesDispatcher.m; sourceTree = "<group>"; };
+		CEB2D7671689A177004067F9 /* NSError+WriteErrorToNSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+WriteErrorToNSLog.h"; sourceTree = "<group>"; };
+		CEB2D7681689A177004067F9 /* NSError+WriteErrorToNSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+WriteErrorToNSLog.m"; sourceTree = "<group>"; };
+		CEC544871699D28A0019511A /* UIImage+WriteToTmpFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WriteToTmpFile.h"; sourceTree = "<group>"; };
+		CEC544881699D28A0019511A /* UIImage+WriteToTmpFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WriteToTmpFile.m"; sourceTree = "<group>"; };
+		CEC70F0F169DBA8B006D63DE /* JFFLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFLogger.h; sourceTree = "<group>"; };
+		CEC70F10169DBA8B006D63DE /* JFFLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFLogger.m; sourceTree = "<group>"; };
 		CEC851AB15F4E20E0022F479 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEDB80EB1601F08F007577B2 /* NSData+ToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ToString.h"; sourceTree = "<group>"; };
 		CEDB80EC1601F08F007577B2 /* NSData+ToString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ToString.m"; sourceTree = "<group>"; };
@@ -775,6 +787,8 @@
 				CE7CF54F161EBC4D008557D2 /* NSNumber+FSStorable.m */,
 				CE0B00431626D9C1003802A0 /* NSDateFormatter+MultiThreading.h */,
 				CE0B00441626D9C1003802A0 /* NSDateFormatter+MultiThreading.m */,
+				CEB2D7671689A177004067F9 /* NSError+WriteErrorToNSLog.h */,
+				CEB2D7681689A177004067F9 /* NSError+WriteErrorToNSLog.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -877,6 +891,7 @@
 		651BE0BF1390496700DD6890 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CEC70F0E169DBA8B006D63DE /* Logger */,
 				CEEAAD0D167A0E3400DD8A16 /* UIImage */,
 				3780558E164D42F100459BA7 /* NSLocale */,
 				CE57FBB41611EFE100124D90 /* NSSet */,
@@ -1101,6 +1116,15 @@
 			path = DelegateProxy;
 			sourceTree = "<group>";
 		};
+		CEC70F0E169DBA8B006D63DE /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				CEC70F0F169DBA8B006D63DE /* JFFLogger.h */,
+				CEC70F10169DBA8B006D63DE /* JFFLogger.m */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
 		CEEAAD0D167A0E3400DD8A16 /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1108,6 +1132,8 @@
 				CEEAAD10167A0E4A00DD8A16 /* UIImage+ScaleToSize.m */,
 				CEEAAD13167A0E8D00DD8A16 /* UIImage+FixOrientation.h */,
 				CEEAAD14167A0E8D00DD8A16 /* UIImage+FixOrientation.m */,
+				CEC544871699D28A0019511A /* UIImage+WriteToTmpFile.h */,
+				CEC544881699D28A0019511A /* UIImage+WriteToTmpFile.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -1301,6 +1327,9 @@
 				37805592164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.h in Headers */,
 				CEEAAD11167A0E4A00DD8A16 /* UIImage+ScaleToSize.h in Headers */,
 				CEEAAD15167A0E8D00DD8A16 /* UIImage+FixOrientation.h in Headers */,
+				CEB2D7691689A177004067F9 /* NSError+WriteErrorToNSLog.h in Headers */,
+				CEC544891699D28A0019511A /* UIImage+WriteToTmpFile.h in Headers */,
+				CEC70F13169DBA8B006D63DE /* JFFLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1781,6 +1810,9 @@
 				37805593164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.m in Sources */,
 				CEEAAD12167A0E4A00DD8A16 /* UIImage+ScaleToSize.m in Sources */,
 				CEEAAD16167A0E8D00DD8A16 /* UIImage+FixOrientation.m in Sources */,
+				CEB2D76A1689A177004067F9 /* NSError+WriteErrorToNSLog.m in Sources */,
+				CEC5448A1699D28A0019511A /* UIImage+WriteToTmpFile.m in Sources */,
+				CEC70F14169DBA8B006D63DE /* JFFLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1832,6 +1864,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFUtils;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -1849,6 +1882,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = JFFUtils;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
