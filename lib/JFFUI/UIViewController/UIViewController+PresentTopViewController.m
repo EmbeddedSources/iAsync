@@ -2,21 +2,21 @@
 
 @implementation UIViewController (PresentTopViewController)
 
--(void)presentTopViewController:( UIViewController* )viewControllerToPresent_
-                       animated:( BOOL )flag_
-                     completion:( void (^)(void) )completion_
+- (void)presentTopViewController:(UIViewController *)viewControllerToPresent
+                        animated:(BOOL)flag
+                      completion:(void (^)(void))completion
 {
-    UIViewController* presentingController_ = self.presentedViewController ?: self;
-    [ presentingController_ presentViewController: viewControllerToPresent_
-                                         animated: flag_
-                                       completion: completion_ ];
+    UIViewController *presentingController = self.presentedViewController ?: self;
+    [presentingController presentViewController:viewControllerToPresent
+                                       animated:flag
+                                     completion:completion];
 }
 
--(void)presentTopViewController:( UIViewController* )viewControllerToPresent_
+- (void)presentTopViewController:(UIViewController *)viewControllerToPresent
 {
-    [ self presentTopViewController: viewControllerToPresent_
-                           animated: YES
-                         completion: nil ];
+    [self presentTopViewController:viewControllerToPresent
+                          animated:YES
+                        completion:nil];
 }
 
 @end

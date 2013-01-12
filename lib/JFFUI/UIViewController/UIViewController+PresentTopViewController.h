@@ -2,10 +2,10 @@
 
 @interface UIViewController (PresentTopViewController)
 
--(void)presentTopViewController:( UIViewController* )viewControllerToPresent_;
+- (void)presentTopViewController:(UIViewController *)viewControllerToPresent;
 
--(void)presentTopViewController:( UIViewController* )viewControllerToPresent_
-                       animated:( BOOL )flag_
-                     completion:( void (^)(void) )completion_;
+- (void)presentTopViewController:(UIViewController *)viewControllerToPresent
+                        animated:(BOOL)flag
+                      completion:(void (^)(void))completion;
 
 @end
