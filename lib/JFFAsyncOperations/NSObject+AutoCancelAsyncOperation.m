@@ -11,13 +11,22 @@
 {
     NSParameterAssert(nativeAsyncOp);
     
+    __weak id weakSelf = self;
+    
     nativeAsyncOp = [nativeAsyncOp copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback)
     {
+        if (weakSelf == nil) {
+            
+            if (cancelCallback) {
+                cancelCallback(cancelNativeAsyncOp);
+            }
+            return JFFStubCancelAsyncOperationBlock;
+        }
+        
         __block BOOL finished = NO;
-        __unsafe_unretained id weakSelf = self;
         
         JFFSimpleBlockHolder *ondeallocBlockHolder = [JFFSimpleBlockHolder new];
         
@@ -55,23 +64,26 @@
         if (finished) {
             return JFFStubCancelAsyncOperationBlock;
         }
-        
+
+        //TODO remove using of ondealloc block holder class
         ondeallocBlockHolder.simpleBlock = ^void(void) {
+            
             cancel(cancelNativeAsyncOp);
         };
         
         //try assert retain count
-        [self addOnDeallocBlock:ondeallocBlockHolder.simpleBlock];
+        [weakSelf addOnDeallocBlock:ondeallocBlockHolder.onceSimpleBlock];
         
         __block JFFCancelAsyncOperation cancelBlockHolder = [^void(BOOL canceled) {
             cancel(canceled);
-        }copy];
+        } copy];
         
         return ^(BOOL canceled) {
-            if (!cancelBlockHolder)
+            JFFCancelAsyncOperation cancel = cancelBlockHolder;
+            if (!cancel)
                 return;
-            cancelBlockHolder(canceled);
             cancelBlockHolder = nil;
+            cancel(canceled);
         };
     };
 }
