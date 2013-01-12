@@ -248,7 +248,8 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
                                         cancelButtonTitle:cancelButton.title
                                    otherButtonTitlesArray:otherAlertStringTitles];
     
-    alertView->_alertButtons = otherAlertButtons;
+    if (alertView)
+        alertView->_alertButtons = otherAlertButtons;
     
     return alertView;
 }

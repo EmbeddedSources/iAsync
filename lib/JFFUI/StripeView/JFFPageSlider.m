@@ -60,10 +60,10 @@
     if ( self.delegate )
         [ self reloadData ];
 
-    [ [ NSNotificationCenter defaultCenter ] addObserver: self
-                                                selector: @selector( didReceiveMemoryWarning: )
-                                                    name: UIApplicationDidReceiveMemoryWarningNotification
-                                                  object: nil ];
+    [[ NSNotificationCenter defaultCenter] addObserver:self
+                                              selector:@selector(didReceiveMemoryWarning:)
+                                                  name:UIApplicationDidReceiveMemoryWarningNotification
+                                                object:nil];
 }
 
 -(void)awakeFromNib
@@ -92,54 +92,53 @@
 
 -(void)removeAllElements
 {
-    [ self->_viewByIndex enumerateKeysAndObjectsUsingBlock: ^( id key, UIView* view_, BOOL* stop )
-    {
-        [ view_ removeFromSuperview ];
-    } ];
-    [ self->_viewByIndex removeAllObjects ];
+    [_viewByIndex enumerateKeysAndObjectsUsingBlock:^(id key, UIView *view, BOOL *stop) {
+        [view removeFromSuperview];
+    }];
+    [_viewByIndex removeAllObjects];
 }
 
 -(void)updateScrollViewContentSize
 {
     //calls layoutSubviews
-    self->_scrollView.contentSize = CGSizeMake( self.bounds.size.width * _cachedNumberOfElements,
-                                        self.bounds.size.height );
+    _scrollView.contentSize = CGSizeMake(self.bounds.size.width * _cachedNumberOfElements,
+                                         self.bounds.size.height);
 }
 
--(UIView*)viewAtIndex:( NSInteger )index_
+- (UIView *)viewAtIndex:(NSInteger)index
 {
-    return self->_viewByIndex[ @( index_ ) ];
+    return self->_viewByIndex[@(index)];
 }
 
--(void)cacheAndPositionView:( UIView* )view_
-                    toIndex:( NSInteger )index_
+- (void)cacheAndPositionView:(UIView *)view
+                     toIndex:(NSInteger)index
 {
-    self->_viewByIndex[ @( index_ ) ] = view_;
-    view_.frame = [ self elementFrameForIndex: index_ ];
+    _viewByIndex[@(index)] = view;
+    view.frame = [self elementFrameForIndex:index];
 }
 
--(void)addViewForIndex:( NSInteger )index_
+- (void)addViewForIndex:(NSInteger)index
 {
-    UIView* view_ = [ self.delegate stripeView: self
-                                elementAtIndex: index_ ];
-
-    [ self->_scrollView addSubview: view_ ];
-
-    [ self cacheAndPositionView: view_
-                        toIndex: index_ ];
+    UIView *view = [self.delegate stripeView:self
+                              elementAtIndex:index];
+    
+    [_scrollView addSubview:view];
+    
+    [self cacheAndPositionView:view
+                       toIndex:index];
 }
 
--(void)reloadData
+- (void)reloadData
 {
-    [ self removeAllElements ];
-
-    self->_cachedNumberOfElements = [ self->_delegate numberOfElementsInStripeView: self ];
-    if ( 0 == _cachedNumberOfElements )
+    [self removeAllElements];
+    
+    self->_cachedNumberOfElements = [self->_delegate numberOfElementsInStripeView:self];
+    if (0 == _cachedNumberOfElements)
     {
         self->_scrollView.contentSize = CGSizeZero;
         return;
     }
-
+    
     self.activeIndex = fmin( self->_activeIndex, self.lastIndex );
 
     [ self addViewForIndex: self->_activeIndex ];

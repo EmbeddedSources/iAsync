@@ -7,6 +7,4 @@
 - (void)showErrorAlert;
 - (void)showExclusiveErrorAlert;
 
-- (void)writeErrorToNSLog;
-
 @end

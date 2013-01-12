@@ -6,9 +6,10 @@
 #import <JFFUI/Extensions/UINib+FirstObject.h>
 #import <JFFUI/Extensions/UIApplication+OpenApplicationAsyncOp.h>
 #import <JFFUI/Extensions/UIImageView+CachedAsyncImageLoader.h>
-#import <JFFUI/Extensions/UIViewController+PerformSegueWithCallback.h>
 
 #import <JFFUI/UIViewController/UIViewController+PresentTopViewController.h>
+#import <JFFUI/UIViewController/UIViewController+PerformSegueWithCallback.h>
+#import <JFFUI/UIViewController/UIViewController+ForceRemoveFromParentViewController.h>
 
 #import <JFFUI/UIView/UIView+AnimationWithBlocks.h>
 #import <JFFUI/UIView/UIView+AddSubviewAndScale.h>
