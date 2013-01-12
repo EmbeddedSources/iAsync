@@ -165,11 +165,14 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
     JFFDidFinishAsyncOperationHandler doneCallback = doneCallbackBlock(propertyExtractor);
     
     JFFCancelAsyncOperationHandler cancelCallback = ^void(BOOL canceled) {
-        JFFCancelAsyncOperationHandler cancelCallback = callbacks.onCancelBlock;
-        clearDataForPropertyExtractor(propertyExtractor);
         
-        if (cancelCallback)
-            cancelCallback(canceled);
+        [propertyExtractor.delegates each:^void(id obj) {
+            JFFCallbacksBlocksHolder *objCallback = obj;
+            if (objCallback.onCancelBlock)
+                objCallback.onCancelBlock(canceled);
+        }];
+        
+        clearDataForPropertyExtractor(propertyExtractor);
     };
     
     propertyExtractor.cancelBlock = propertyExtractor.asyncLoader(progressCallback,
