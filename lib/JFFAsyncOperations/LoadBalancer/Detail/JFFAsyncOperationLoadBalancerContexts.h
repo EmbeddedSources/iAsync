@@ -12,7 +12,9 @@
 
 +(id)sharedBalancer;
 
--(JFFContextLoaders*)activeContextLoaders;
--(JFFContextLoaders*)currentContextLoaders;
+- (JFFContextLoaders *)activeContextLoaders;
+- (JFFContextLoaders *)currentContextLoaders;
+
+- (JFFContextLoaders *)contextLoadersForName:(NSString *)name;
 
 @end
