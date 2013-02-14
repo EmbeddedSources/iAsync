@@ -14,6 +14,10 @@
 		65A0BD6B15301D890007A3B5 /* JFFSmartUrlDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A0BD6915301D890007A3B5 /* JFFSmartUrlDataLoader.m */; };
 		65E307BC1531E9B200E0B781 /* JFFRestKitError.h in Headers */ = {isa = PBXBuildFile; fileRef = 65E307BA1531E9B200E0B781 /* JFFRestKitError.h */; };
 		65E307BD1531E9B200E0B781 /* JFFRestKitError.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E307BB1531E9B200E0B781 /* JFFRestKitError.m */; };
+		CE19F62716AED02D005B15B4 /* JFFCacheAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = CE19F62516AED02D005B15B4 /* JFFCacheAdapter.h */; };
+		CE19F62816AED02D005B15B4 /* JFFCacheAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19F62616AED02D005B15B4 /* JFFCacheAdapter.m */; };
+		CE19F67316AED9E5005B15B4 /* JFFResponseDataWithUpdateData.h in Headers */ = {isa = PBXBuildFile; fileRef = CE19F67116AED9E5005B15B4 /* JFFResponseDataWithUpdateData.h */; };
+		CE19F67416AED9E5005B15B4 /* JFFResponseDataWithUpdateData.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19F67216AED9E5005B15B4 /* JFFResponseDataWithUpdateData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		65E307BA1531E9B200E0B781 /* JFFRestKitError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRestKitError.h; sourceTree = "<group>"; };
 		65E307BB1531E9B200E0B781 /* JFFRestKitError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRestKitError.m; sourceTree = "<group>"; };
 		65E307BE1531EC3B00E0B781 /* JFFRestKitCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFRestKitCache.h; sourceTree = "<group>"; };
+		CE19F62516AED02D005B15B4 /* JFFCacheAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheAdapter.h; sourceTree = "<group>"; };
+		CE19F62616AED02D005B15B4 /* JFFCacheAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCacheAdapter.m; sourceTree = "<group>"; };
+		CE19F67116AED9E5005B15B4 /* JFFResponseDataWithUpdateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFResponseDataWithUpdateData.h; sourceTree = "<group>"; };
+		CE19F67216AED9E5005B15B4 /* JFFResponseDataWithUpdateData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFResponseDataWithUpdateData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +78,8 @@
 		1B7ABA86152D973A005DD4CA /* JFFRestKit */ = {
 			isa = PBXGroup;
 			children = (
+				CE19F66F16AED9D5005B15B4 /* Details */,
+				CE19F62316AED018005B15B4 /* CacheAdapter */,
 				65E307BE1531EC3B00E0B781 /* JFFRestKitCache.h */,
 				65E307BA1531E9B200E0B781 /* JFFRestKitError.h */,
 				65E307BB1531E9B200E0B781 /* JFFRestKitError.m */,
@@ -91,6 +101,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CE19F62316AED018005B15B4 /* CacheAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				CE19F62516AED02D005B15B4 /* JFFCacheAdapter.h */,
+				CE19F62616AED02D005B15B4 /* JFFCacheAdapter.m */,
+			);
+			path = CacheAdapter;
+			sourceTree = "<group>";
+		};
+		CE19F66F16AED9D5005B15B4 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				CE19F67116AED9E5005B15B4 /* JFFResponseDataWithUpdateData.h */,
+				CE19F67216AED9E5005B15B4 /* JFFResponseDataWithUpdateData.m */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -101,6 +129,8 @@
 				65A0BD6A15301D890007A3B5 /* JFFSmartUrlDataLoader.h in Headers */,
 				65E307BC1531E9B200E0B781 /* JFFRestKitError.h in Headers */,
 				1B32850E153FFDD000BE99CC /* JFFDataLoadersTools.h in Headers */,
+				CE19F62716AED02D005B15B4 /* JFFCacheAdapter.h in Headers */,
+				CE19F67316AED9E5005B15B4 /* JFFResponseDataWithUpdateData.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +187,8 @@
 				65A0BD6B15301D890007A3B5 /* JFFSmartUrlDataLoader.m in Sources */,
 				65E307BD1531E9B200E0B781 /* JFFRestKitError.m in Sources */,
 				1B32850F153FFDD000BE99CC /* JFFDataLoadersTools.m in Sources */,
+				CE19F62816AED02D005B15B4 /* JFFCacheAdapter.m in Sources */,
+				CE19F67416AED9E5005B15B4 /* JFFResponseDataWithUpdateData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,7 +253,7 @@
 				DSTROOT = /tmp/JFFRestKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFRestKit/JFFRestKit-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -234,7 +266,7 @@
 				DSTROOT = /tmp/JFFRestKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFRestKit/JFFRestKit-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

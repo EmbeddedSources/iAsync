@@ -1,6 +1,7 @@
 #import "JFFSmartUrlDataLoader.h"
 
 #import "JFFRestKitError.h"
+#import "JFFResponseDataWithUpdateData.h"
 
 #include <assert.h>
 
@@ -24,22 +25,6 @@
 @end
 
 @implementation JFFSmartUrlDataLoaderFields
-@end
-
-@implementation JFFResponseDataWithUpdateData
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    JFFResponseDataWithUpdateData *copy = [[[self class] allocWithZone:zone] init];
-    
-    if (copy) {
-        copy->_data       = [self->_data       copyWithZone:zone];
-        copy->_updateDate = [self->_updateDate copyWithZone:zone];
-    }
-    
-    return copy;
-}
-
 @end
 
 @interface JFFErrorNoFreshData : JFFError
@@ -74,10 +59,10 @@
 @end
 
 static JFFAsyncOperationBinder dataLoaderWithCachedResultBinder(BOOL doesNotIgnoreFreshDataLoadFail,
-                                                                JFFAsyncOperationBinder dataLoaderForURL,
-                                                                NSURL *url)
+                                                                JFFAsyncOperationBinder dataLoaderForIdentifier,
+                                                                id<NSCopying> loadDataIdentifier)
 {
-    dataLoaderForURL = [dataLoaderForURL copy];
+    dataLoaderForIdentifier = [dataLoaderForIdentifier copy];
     return ^JFFAsyncOperation(NSError *bindError) {
     
         JFFDidFinishAsyncOperationHook finishCallbackHook = ^(NSData* srvResponse,
@@ -108,7 +93,7 @@ static JFFAsyncOperationBinder dataLoaderWithCachedResultBinder(BOOL doesNotIgno
             
             doneCallback(nil, error);
         };
-        return asyncOperationWithFinishHookBlock(dataLoaderForURL(url),
+        return asyncOperationWithFinishHookBlock(dataLoaderForIdentifier(loadDataIdentifier),
                                                  finishCallbackHook);
     };
 };
@@ -116,7 +101,7 @@ static JFFAsyncOperationBinder dataLoaderWithCachedResultBinder(BOOL doesNotIgno
 static JFFAsyncOperation loadFreshCachedDataWithUpdateDate(id key,
                                                            JFFAsyncOperation cahcedDataLoader,
                                                            JFFCacheLastUpdateDateForKey lastUpdateDateForKey,
-                                                           NSTimeInterval cacheDataLifeTime)
+                                                           NSTimeInterval cacheDataLifeTimeInSeconds)
 {
     JFFAsyncOperationBinder changeCachedDateBinder = ^JFFAsyncOperation(id<JFFRestKitCachedData> cachedData) {
         
@@ -136,7 +121,7 @@ static JFFAsyncOperation loadFreshCachedDataWithUpdateDate(id key,
     
     JFFAsyncOperationBinder validateByDateResultBinder = ^JFFAsyncOperation(id<JFFRestKitCachedData> cachedData) {
         
-        NSDate *newDate = [cachedData.updateDate dateByAddingTimeInterval:cacheDataLifeTime];
+        NSDate *newDate = [cachedData.updateDate dateByAddingTimeInterval:cacheDataLifeTimeInSeconds];
         if ([newDate compare:[NSDate new]] == NSOrderedDescending) {
             return asyncOperationWithResult(cachedData);
         }
@@ -154,17 +139,17 @@ static JFFAsyncOperation loadFreshCachedDataWithUpdateDate(id key,
 
 JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args)
 {
-    JFFURLBuilderBinder urlBuilder                    = args.urlBuilder;
-    JFFAsyncOperationBinder dataLoaderForURL          = args.dataLoaderForURL;
-    JFFAsyncBinderForURL analyzerForData              = args.analyzerForData;
+    id loadDataIdentifier                             = args.loadDataIdentifier;
+    JFFAsyncOperationBinder dataLoaderForIdentifier   = args.dataLoaderForIdentifier;
+    JFFAsyncBinderForIdentifier analyzerForData       = args.analyzerForData;
     id< JFFRestKitCache > cache                       = args.cache;
-    JFFCacheKeyForURLBuilder cacheKeyForURL           = args.cacheKeyForURL;
+    JFFCacheKeyForIdentifier cacheKeyForIdentifier    = args.cacheKeyForIdentifier;
     JFFCacheLastUpdateDateForKey lastUpdateDateForKey = args.lastUpdateDateForKey;
-    NSTimeInterval cacheDataLifeTime                  = args.cacheDataLifeTime;
+    NSTimeInterval cacheDataLifeTimeInSeconds         = args.cacheDataLifeTimeInSeconds;
     BOOL doesNotIgnoreFreshDataLoadFail               = args.doesNotIgnoreFreshDataLoadFail;
     
-    assert(urlBuilder      );//should not be nil
-    assert(dataLoaderForURL);//should not be nil
+    assert(loadDataIdentifier     );
+    assert(dataLoaderForIdentifier);
     
     if (!analyzerForData) {
         analyzerForData = ^JFFAsyncOperationBinder(NSURL *url) {
@@ -175,40 +160,43 @@ JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args)
         };
     }
     
-    NSURL *url = urlBuilder();
-    
-    if (!url) {
-        return asyncOperationWithError([JFFRestKitNoURLError new]);
-    }
-    
     id key;
     if (cache) {
-        key = cacheKeyForURL
-            ? cacheKeyForURL(url)
-            : [url description];
+        key = cacheKeyForIdentifier
+            ? cacheKeyForIdentifier(loadDataIdentifier)
+            : [loadDataIdentifier description];
     }
     
-    JFFAsyncOperation urlLoader = asyncOperationWithResult(url);
-    
-    JFFAsyncOperationBinder cachedDataLoaderForURL = ^JFFAsyncOperation(NSURL *url) {
+    JFFAsyncOperation cachedDataLoader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                                                  JFFCancelAsyncOperationHandler cancelCallback,
+                                                                  JFFDidFinishAsyncOperationHandler doneCallback) {
         
         JFFAsyncOperationBinder dataLoaderBinder = dataLoaderWithCachedResultBinder(doesNotIgnoreFreshDataLoadFail,
-                                                                                    dataLoaderForURL,
-                                                                                    url);
-        if (!cache) {
-            return dataLoaderBinder(nil);
-        }
-        JFFAsyncOperation loadChachedData = loadFreshCachedDataWithUpdateDate(key,
-                                                                              [cache cachedDataLoaderForKey:key],
-                                                                              lastUpdateDateForKey,
-                                                                              cacheDataLifeTime);
+                                                                                    dataLoaderForIdentifier,
+                                                                                    loadDataIdentifier);
         
-        return bindTrySequenceOfAsyncOperations(loadChachedData, dataLoaderBinder, nil);
+        JFFAsyncOperation loader;
+        
+        if (!cache) {
+            loader = dataLoaderBinder(nil);
+        } else {
+        
+            JFFAsyncOperation loadChachedData = loadFreshCachedDataWithUpdateDate(key,
+                                                                                  [cache cachedDataLoaderForKey:key],
+                                                                                  lastUpdateDateForKey,
+                                                                                  cacheDataLifeTimeInSeconds);
+            
+            loader = bindTrySequenceOfAsyncOperations(loadChachedData, dataLoaderBinder, nil);
+        }
+        
+        return loader(progressCallback,
+                      cancelCallback,
+                      doneCallback);
     };
     
-    JFFAsyncOperationBinder analizer = ^JFFAsyncOperation(JFFResponseDataWithUpdateData *response) {
+    JFFAsyncOperationBinder analyzer = ^JFFAsyncOperation(JFFResponseDataWithUpdateData *response) {
         
-        JFFAsyncOperationBinder binder = analyzerForData(url);
+        JFFAsyncOperationBinder binder = analyzerForData(loadDataIdentifier);
         JFFAsyncOperation analyzer = binder(response.data);
         
         JFFAsyncOperationBinder cacheBinder = ^JFFAsyncOperation(id analizedData) {
@@ -227,20 +215,19 @@ JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args)
                                              nil);
     };
     
-    return bindSequenceOfAsyncOperations(urlLoader,
-                                         cachedDataLoaderForURL,
-                                         analizer,
+    return bindSequenceOfAsyncOperations(cachedDataLoader,
+                                         analyzer,
                                          nil);
 }
 
-JFFAsyncOperation jSmartDataLoader(NSURL*(^urlBuilder)(void),
-                                   JFFAsyncOperationBinder dataLoaderForURL,
-                                   JFFAsyncBinderForURL analyzerForData)
+JFFAsyncOperation jSmartDataLoader(id<NSCopying> loadDataIdentifier,
+                                   JFFAsyncOperationBinder dataLoaderForIdentifier,
+                                   JFFAsyncBinderForIdentifier analyzerForData)
 {
     JFFSmartUrlDataLoaderFields *args = [JFFSmartUrlDataLoaderFields new];
-    args.urlBuilder       = urlBuilder;
-    args.dataLoaderForURL = dataLoaderForURL;
-    args.analyzerForData  = analyzerForData;
+    args.loadDataIdentifier      = loadDataIdentifier;
+    args.dataLoaderForIdentifier = dataLoaderForIdentifier;
+    args.analyzerForData         = analyzerForData;
     
     return jSmartDataLoaderWithCache(args);
 }

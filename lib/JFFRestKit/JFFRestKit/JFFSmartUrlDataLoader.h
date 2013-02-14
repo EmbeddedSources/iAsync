@@ -5,29 +5,20 @@
 
 @protocol JFFRestKitCache;
 
-typedef id(^JFFURLBuilderBinder)(void);
-typedef JFFAsyncOperationBinder(^JFFAsyncBinderForURL)(NSURL *);
-typedef id (^JFFCacheKeyForURLBuilder)(NSURL *);
+typedef JFFAsyncOperationBinder(^JFFAsyncBinderForIdentifier)(id<NSCopying> loadDataIdentifier);
+typedef id (^JFFCacheKeyForIdentifier)(id<NSCopying> loadDataIdentifier);
 typedef JFFAsyncOperation(^JFFCacheLastUpdateDateForKey)(id key);
 
 @interface JFFSmartUrlDataLoaderFields : NSObject
 
-@property (nonatomic, copy) JFFURLBuilderBinder urlBuilder;
-@property (nonatomic, copy) JFFAsyncOperationBinder dataLoaderForURL;
-@property (nonatomic, copy) JFFAsyncBinderForURL analyzerForData;
-@property (nonatomic, copy) JFFCacheKeyForURLBuilder cacheKeyForURL;
+@property (nonatomic, copy) id<NSCopying> loadDataIdentifier;
+@property (nonatomic, copy) JFFAsyncOperationBinder dataLoaderForIdentifier;
+@property (nonatomic, copy) JFFAsyncBinderForIdentifier analyzerForData;
+@property (nonatomic, copy) JFFCacheKeyForIdentifier cacheKeyForIdentifier;
 @property (nonatomic, copy) JFFCacheLastUpdateDateForKey lastUpdateDateForKey;
 @property (nonatomic) BOOL doesNotIgnoreFreshDataLoadFail;
 @property (nonatomic) id< JFFRestKitCache > cache;
-@property (nonatomic) NSTimeInterval cacheDataLifeTime;
-
-@end
-
-//TODO move to JFFRestKitCache.h file
-@interface JFFResponseDataWithUpdateData : NSObject <JFFRestKitCachedData>
-
-@property (nonatomic) NSData *data;
-@property (nonatomic) NSDate *updateDate;
+@property (nonatomic) NSTimeInterval cacheDataLifeTimeInSeconds;
 
 @end
 
@@ -37,9 +28,9 @@ extern "C" {
 
     JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args);
     
-    JFFAsyncOperation jSmartDataLoader(NSURL*(^urlBuilder)(void),
-                                       JFFAsyncOperationBinder dataLoaderForURL,
-                                       JFFAsyncBinderForURL analyzerForData);
+    JFFAsyncOperation jSmartDataLoader(id<NSCopying> loadDataIdentifier,
+                                       JFFAsyncOperationBinder dataLoaderForIdentifier,
+                                       JFFAsyncBinderForIdentifier analyzerForData);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

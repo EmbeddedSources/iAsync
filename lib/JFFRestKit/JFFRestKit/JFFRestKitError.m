@@ -14,15 +14,6 @@
 
 @end
 
-@implementation JFFRestKitNoURLError
-
-- (id)init
-{
-    return [super initWithDescription:NSLocalizedString(@"REST_KIT_NO_URL_ERROR", nil)];
-}
-
-@end
-
 @implementation JFFRestKitEmptyFileResponseError
 
 - (id)init
