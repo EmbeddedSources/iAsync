@@ -13,4 +13,6 @@
                               scaledToSize:(CGSize)scaleSize
                                contentMode:(UIViewContentMode)contentMode;
 
+- (void)resetCache;
+
 @end
