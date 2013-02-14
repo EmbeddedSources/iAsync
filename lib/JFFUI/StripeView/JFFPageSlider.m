@@ -25,7 +25,7 @@
 {
     self.scrollView.delegate = nil;
 
-    [ [ NSNotificationCenter defaultCenter ] removeObserver: self ];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -33,7 +33,7 @@
 {
     self = [super initWithFrame:frame];
     
-    if ( self ) {
+    if (self) {
         self.delegate = delegate;
         [self initialize];
     }
@@ -50,28 +50,28 @@
     self->_scrollView.delegate      = self;
     self->_scrollView.clipsToBounds = YES;
     self->_scrollView.pagingEnabled = YES;
-    self->_scrollView.bounces       = NO;
-    self->_scrollView.scrollEnabled = NO;
-    [ self addSubviewAndScale: self->_scrollView ];
-
+    self->_scrollView.bounces       = YES;
+    self->_scrollView.scrollEnabled = YES;
+    [self addSubviewAndScale:self->_scrollView];
+    
     NSRange range_ = { 0, 1 };
     self->_previousVisiableIndexesRange = range_;
 
-    if ( self.delegate )
-        [ self reloadData ];
-
-    [[ NSNotificationCenter defaultCenter] addObserver:self
-                                              selector:@selector(didReceiveMemoryWarning:)
-                                                  name:UIApplicationDidReceiveMemoryWarningNotification
-                                                object:nil];
+    if (self.delegate)
+        [self reloadData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveMemoryWarning:)
+                                                 name:UIApplicationDidReceiveMemoryWarningNotification
+                                               object:nil];
 }
 
--(void)awakeFromNib
+- (void)awakeFromNib
 {
-    [ self initialize ];
+    [self initialize];
 }
 
--(void)didReceiveMemoryWarning:( NSNotification* )notification_
+- (void)didReceiveMemoryWarning:(NSNotification *)notification
 {
     for ( NSInteger index_ = self->_firstIndex; index_ <= self.lastIndex; ++index_ )
     {
@@ -133,17 +133,16 @@
     [self removeAllElements];
     
     self->_cachedNumberOfElements = [self->_delegate numberOfElementsInStripeView:self];
-    if (0 == _cachedNumberOfElements)
-    {
+    if (0 == _cachedNumberOfElements) {
         self->_scrollView.contentSize = CGSizeZero;
         return;
     }
     
-    self.activeIndex = fmin( self->_activeIndex, self.lastIndex );
-
-    [ self addViewForIndex: self->_activeIndex ];
-
-    [ self updateScrollViewContentSize ];
+    self.activeIndex = fmin(_activeIndex, self.lastIndex);
+    
+    [self addViewForIndex:_activeIndex];
+    
+    [self updateScrollViewContentSize];
 }
 
 -(CGPoint)offsetForIndex:( NSInteger )index_
@@ -153,39 +152,38 @@
     return result_;
 }
 
--(void)layoutSubviews
+- (void)layoutSubviews
 {
-    [ super layoutSubviews ];
-
-    [ self->_viewByIndex enumerateKeysAndObjectsUsingBlock: ^( NSNumber* index_, UIView* view_, BOOL* stop_ )
-    {
-        view_.frame = [ self elementFrameForIndex: [ index_ integerValue ] ];
-    } ];
-
-    [ self updateScrollViewContentSize ];
-    CGPoint offset_ = [ self offsetForIndex: self->_activeIndex ];
-    [ self->_scrollView setContentOffset: offset_ animated: NO ];
+    [super layoutSubviews];
+    
+    [self->_viewByIndex enumerateKeysAndObjectsUsingBlock:^(NSNumber *index, UIView *view, BOOL *stop) {
+        view.frame = [self elementFrameForIndex:[index integerValue]];
+    }];
+    
+    [self updateScrollViewContentSize];
+    CGPoint offset = [self offsetForIndex:_activeIndex];
+    [_scrollView setContentOffset:offset animated:NO];
 }
 
--(UIView*)elementAtIndex:( NSInteger )index_
+- (UIView *)elementAtIndex:(NSInteger)index
 {
-    return self->_viewByIndex[ @( index_ ) ];
+    return self->_viewByIndex[@(index)];
 }
 
--(NSArray*)visibleElements
+- (NSArray *)visibleElements
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
 -(void)slideForward
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
 }
 
--(void)slideBackward
+- (void)slideBackward
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
 }
 
 -(void)slideToIndex:( NSInteger )index_ animated:( BOOL )animated_
@@ -240,6 +238,8 @@
     NSInteger last_index_ = ceilf( self->_scrollView.contentOffset.x / self->_scrollView.bounds.size.width ) + self->_firstIndex;
     last_index_ = fmin( last_index_, self.lastIndex );
 
+    first_index_ = first_index_ > 0 ?: 0;
+
     NSRange range_ = { first_index_, last_index_ - first_index_ + 1 };
     self->_previousVisiableIndexesRange = range_;
     return self->_previousVisiableIndexesRange;
@@ -250,12 +250,12 @@
     return self->_firstIndex + _cachedNumberOfElements - 1;
 }
 
--(void)shiftRightElementsFromIndex:( NSInteger )shift_from_index_
+-(void)shiftRightElementsFromIndex:( NSInteger )shiftFromIndex
                            toIndex:( NSInteger )to_index_
 {
-    for ( NSInteger index_ = to_index_; index_ >= shift_from_index_; --index_ )
-    {
-        UIView* view_ = [ self elementAtIndex: index_ ];
+    for (NSInteger index_ = to_index_; index_ >= shiftFromIndex; --index_) {
+        
+        UIView *view_ = [ self elementAtIndex: index_ ];
         if ( !view_ )
             continue;
 

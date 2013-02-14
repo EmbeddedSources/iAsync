@@ -38,24 +38,13 @@ static char imageURLKey;
     
     JFFDidFinishAsyncOperationHandler doneCallback = ^(UIImage *result, NSError *error) {
         
+        [error writeErrorWithJFFLogger];
         [weakSelf jffSetImage:result URL:url];
     };
     
     JFFThumbnailStorage *storage = [JFFThumbnailStorage sharedStorage];
     
-    //TODO use own view contentMode
-    UIViewContentMode contentMode = UIViewContentModeScaleAspectFill;
-    
-    if (self.contentMode == UIViewContentModeScaleAspectFill
-        || self.contentMode == UIViewContentModeScaleAspectFit
-        || self.contentMode == UIViewContentModeScaleToFill) {
-    
-        [storage thumbnailLoaderForUrl:url
-                          scaledToSize:self.bounds.size
-                           contentMode:contentMode](nil, nil, doneCallback);
-    } else {
-        [storage thumbnailLoaderForUrl:url](nil, nil, doneCallback);
-    }
+    [storage thumbnailLoaderForUrl:url](nil, nil, doneCallback);
 }
 
 @end

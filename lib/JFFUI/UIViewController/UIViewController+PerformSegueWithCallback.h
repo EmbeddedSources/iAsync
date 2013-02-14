@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-typedef void(^JFFPerformSegueCallback)(UIStoryboardSegue *);
+typedef void(^JFFPerformSegueCallback)(UIStoryboardSegue *segue);
 
 @interface UIViewController (PerformSegueWithCallback)
 
