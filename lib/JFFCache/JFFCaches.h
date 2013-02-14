@@ -11,6 +11,8 @@
 
 - (id)initWithDBInfoDictionary:(NSDictionary *)cachesInfo;
 
++ (id< JFFCacheDB >)createCacheForName:(NSString *)name;
+
 - (id< JFFCacheDB >)cacheByName:(NSString *)name;
 
 - (id< JFFCacheDB >)thumbnailDB;

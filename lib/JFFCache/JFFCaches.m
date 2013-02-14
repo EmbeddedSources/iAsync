@@ -46,6 +46,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
             NSDate *fromDate = [[NSDate new] dateByAddingTimeInterval:-removeRarelyAccessDataDelay];
             
             JFFSyncOperation loadDataBlock = ^id(NSError *__autoreleasing *outError) {
+                
                 JFFInternalCacheDB *cacheDB = [[self alloc] initWithCacheDBWithName:dbPropertyName
                                                                              dbInfo:dbInfo];
                 
@@ -56,7 +57,10 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
             static const char *const queueName = "com.embedded_sources.dbcache.thread_to_remove_old_data";
             JFFAsyncOperation loader = asyncOperationWithSyncOperationAndQueue(loadDataBlock, queueName);
             
-            loader(nil, nil, nil);
+            loader(nil, nil, ^(id result, NSError *error) {
+                
+                [error writeErrorWithJFFLogger];
+            });
         };
         block(nil);
         

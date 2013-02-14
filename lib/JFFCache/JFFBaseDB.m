@@ -328,13 +328,13 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
                                      fieldName,
                                      [date timeIntervalSince1970]];
             
-            sqlite3_stmt *statement_ = 0;
-            if ( [ self prepareQuery: removeQuery statement: &statement_ ] ) {
-                if( sqlite3_step( statement_ ) != SQLITE_DONE ) {
+            sqlite3_stmt *statement = 0;
+            if ([self prepareQuery:removeQuery statement:&statement]) {
+                if(sqlite3_step( statement ) != SQLITE_DONE ) {
                     NSLog(@"%@ - %@", removeQuery, [self errorMessage]);
                 }
                 
-                sqlite3_finalize( statement_ );
+                sqlite3_finalize(statement);
             }
         }
     });
