@@ -7,7 +7,7 @@
     id jsonPattern = @{
     @"meta" :
     @{
-        @"code"                      : [NSNumber numberWithInteger:200],
+        @"code"                      : @(200),
         jOptionalKey(@"errorDetail") : [NSString class],
         jOptionalKey(@"errorType"  ) : [NSString class],
     },

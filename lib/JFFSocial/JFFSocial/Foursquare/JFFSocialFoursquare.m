@@ -21,7 +21,7 @@
 
 #pragma mark - Common
 
-+ (JFFAsyncOperationBinder)serverResponseAnalizer
++ (JFFAsyncOperationBinder)serverResponseAnalyzer
 {
     return ^JFFAsyncOperation (NSDictionary *response)
     {
@@ -79,7 +79,7 @@
     {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoader(fqLoadFriendsURL, @"GET", accessToken, nil),
                                              asyncOperationBinderJsonDataParser(),
-                                             [self serverResponseAnalizer],
+                                             [self serverResponseAnalyzer],
                                              nil);
     };
 
@@ -115,7 +115,7 @@
     {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoader(fqLoadCheckinsURL, @"GET", accessToken, params),
                                              asyncOperationBinderJsonDataParser(),
-                                             [self serverResponseAnalizer],
+                                             [self serverResponseAnalyzer],
                                              nil);
     };
     
@@ -151,7 +151,7 @@
     {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoader(addPostURL, @"POST", accessToken, params),
                                              asyncOperationBinderJsonDataParser(),
-                                             [self serverResponseAnalizer],
+                                             [self serverResponseAnalyzer],
                                              nil);
     };
     
@@ -184,7 +184,7 @@
     {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoader(addPostURL, @"POST", accessToken, params),
                                              asyncOperationBinderJsonDataParser(),
-                                             [self serverResponseAnalizer],
+                                             [self serverResponseAnalyzer],
                                              nil);
     };
     
@@ -233,7 +233,7 @@
     JFFAsyncOperationBinder postLoaderBinder = ^JFFAsyncOperation(NSString *accessToken) {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoaderWithHTTPBody(addPhotoURL, httpBody, accessToken),
                                              asyncOperationBinderJsonDataParser(),
-                                             [self serverResponseAnalizer],
+                                             [self serverResponseAnalyzer],
                                              nil);
     };
     

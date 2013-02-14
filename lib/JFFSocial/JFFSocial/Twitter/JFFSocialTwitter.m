@@ -107,7 +107,7 @@ static JFFAsyncOperation twitterAccountsLoader()
 + (JFFAsyncOperation)generalTwitterApiDataLoaderWithURLString:(NSString *)urlString
                                                    parameters:(NSDictionary *)parameters
                                                 requestMethod:(TWRequestMethod)requestMethod
-                                                 ayncAnalizer:(JFFAsyncOperationBinder)ayncAnalizer
+                                                 ayncAnalyzer:(JFFAsyncOperationBinder)ayncAnalyzer
 {
     JFFAsyncOperationBinder requestBinder = ^JFFAsyncOperation(NSArray *accountStroreAndAccounts) {
         
@@ -129,7 +129,7 @@ static JFFAsyncOperation twitterAccountsLoader()
     return bindSequenceOfAsyncOperations(loaderOperation,
                                          twitterResponseToNSData(),
                                          asyncOperationBinderJsonDataParser(),
-                                         ayncAnalizer,
+                                         ayncAnalyzer,
                                          nil);
 }
 
@@ -148,7 +148,7 @@ static JFFAsyncOperation twitterAccountsLoader()
     return [self generalTwitterApiDataLoaderWithURLString:@"https://api.twitter.com/1.1/search/tweets.json"
                                                parameters:params
                                             requestMethod:TWRequestMethodGET
-                                             ayncAnalizer:asyncJSONObjectToTwitterTweets()];
+                                             ayncAnalyzer:asyncJSONObjectToTwitterTweets()];
 }
 
 + (JFFAsyncOperation)followersLoader
@@ -157,7 +157,7 @@ static JFFAsyncOperation twitterAccountsLoader()
     JFFAsyncOperation followersIds = [self generalTwitterApiDataLoaderWithURLString:urlString
                                                                          parameters:nil
                                                                       requestMethod:TWRequestMethodGET
-                                                                       ayncAnalizer:jsonObjectToTwitterUsersIds()];
+                                                                       ayncAnalyzer:jsonObjectToTwitterUsersIds()];
     
     JFFAsyncOperationBinder usersForIds = ^JFFAsyncOperation(NSArray *ids) {
         
@@ -172,7 +172,7 @@ static JFFAsyncOperation twitterAccountsLoader()
         JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:@"https://api.twitter.com/1.1/users/lookup.json"
                                                                        parameters:params
                                                                     requestMethod:TWRequestMethodGET
-                                                                     ayncAnalizer:asyncJSONObjectToTwitterUsers()];
+                                                                     ayncAnalyzer:asyncJSONObjectToTwitterUsers()];
         return result;
     };
 
@@ -191,7 +191,7 @@ static JFFAsyncOperation twitterAccountsLoader()
     JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:urlString
                                                                    parameters:params
                                                                 requestMethod:TWRequestMethodPOST
-                                                                 ayncAnalizer:asyncJSONObjectToDirectTweet()];
+                                                                 ayncAnalyzer:asyncJSONObjectToDirectTweet()];
     return result;
 }
 
@@ -204,7 +204,7 @@ static JFFAsyncOperation twitterAccountsLoader()
     JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:@"http://api.twitter.com/1/statuses/update.json"
                                                                    parameters:params
                                                                 requestMethod:TWRequestMethodPOST
-                                                                 ayncAnalizer:asyncJSONObjectToDirectTweet()];
+                                                                 ayncAnalyzer:asyncJSONObjectToDirectTweet()];
     return result;
 }
 

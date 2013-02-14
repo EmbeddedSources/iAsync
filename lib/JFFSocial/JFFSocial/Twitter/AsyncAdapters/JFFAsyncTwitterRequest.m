@@ -23,12 +23,11 @@
         if (!handler)
             return;
 
-        if (error)
-        {
+        if (error) {
+            
             handler(nil, error);
-        }
-        else
-        {
+        } else {
+            
             JFFTwitterResponse *result = [JFFTwitterResponse new];
             result.responseData = responseData;
             result.urlResponse  = urlResponse;

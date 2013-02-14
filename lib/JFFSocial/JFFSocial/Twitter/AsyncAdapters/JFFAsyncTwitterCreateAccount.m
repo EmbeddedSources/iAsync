@@ -36,7 +36,7 @@
         }
         else
         {
-            NSParameterAssert( NO );
+            assert(NO);
         }
     };
 

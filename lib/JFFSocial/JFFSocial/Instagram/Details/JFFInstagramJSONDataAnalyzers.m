@@ -202,7 +202,7 @@ static NSError *validateJSONAuthedAccountObjectOnError(NSDictionary *jsonObject)
 static BOOL validJeneralJSONObject(NSDictionary *jsonObject, NSError *__autoreleasing *outError)
 {
     id jsonPattern = @{
-    @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+    @"meta" : @{@"code" : @(200)},
     @"data" : [NSObject class],
     };
     
@@ -211,7 +211,7 @@ static BOOL validJeneralJSONObject(NSDictionary *jsonObject, NSError *__autorele
                                                 error:outError];
 }
 
-static JFFAsyncOperationBinder generalJsonDataBinderWithAnalizer(JFFAnalyzer analyzer)
+static JFFAsyncOperationBinder generalJsonDataBinderWithAnalyzer(JFFAnalyzer analyzer)
 {
     assert(analyzer);
     analyzer = [analyzer copy];
@@ -237,7 +237,7 @@ static JFFAsyncOperationBinder generalJsonDataBinderWithAnalizer(JFFAnalyzer ana
 
 JFFAsyncOperationBinder jsonDataToAuthedAccountBinder()
 {
-    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError) {
+    return generalJsonDataBinderWithAnalyzer(^id(NSDictionary *jsonObject, NSError **outError) {
         NSError *error = validateJSONAuthedAccountObjectOnError(jsonObject);
         
         if (error) {
@@ -256,7 +256,7 @@ JFFAsyncOperationBinder jsonDataToAuthedAccountBinder()
 
 JFFAsyncOperationBinder jsonDataToOneAccountBinder()
 {
-    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError) {
+    return generalJsonDataBinderWithAnalyzer(^id(NSDictionary *jsonObject, NSError **outError) {
         if (!validJeneralJSONObject(jsonObject, outError)) {
             return nil;
         }
@@ -272,7 +272,7 @@ JFFAsyncOperationBinder jsonDataToOneAccountBinder()
 
 JFFAsyncOperationBinder jsonDataToAccountsBinder()
 {
-    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError) {
+    return generalJsonDataBinderWithAnalyzer(^id(NSDictionary *jsonObject, NSError **outError) {
         if (!validJeneralJSONObject(jsonObject, outError)) {
             return nil;
         }
@@ -290,7 +290,7 @@ JFFAsyncOperationBinder jsonDataToAccountsBinder()
 
 JFFAsyncOperationBinder jsonDataToMediaItems()
 {
-    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError) {
+    return generalJsonDataBinderWithAnalyzer(^id(NSDictionary *jsonObject, NSError **outError) {
         if (!validJeneralJSONObject(jsonObject, outError)) {
             return nil;
         }
@@ -308,7 +308,7 @@ JFFAsyncOperationBinder jsonDataToMediaItems()
 
 JFFAsyncOperationBinder jsonDataToComment()
 {
-    return generalJsonDataBinderWithAnalizer(^id(NSDictionary *jsonObject, NSError **outError) {
+    return generalJsonDataBinderWithAnalyzer(^id(NSDictionary *jsonObject, NSError **outError) {
         if (!validJeneralJSONObject(jsonObject, outError)) {
             return nil;
         }
