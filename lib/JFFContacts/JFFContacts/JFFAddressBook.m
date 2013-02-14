@@ -7,8 +7,6 @@
     ABAddressBookRef _rawBook;
 }
 
-@synthesize rawBook = _rawBook;
-
 - (void)dealloc
 {
     CFRelease( self->_rawBook );
