@@ -7,6 +7,8 @@ extern "C" {
 #endif
 
     JFFAsyncOperation asyncOperationJsonDataParser(NSData *data);
+    JFFAsyncOperation asyncOperationJsonDataParserWithContext(NSData *data, id context);
+    
     JFFAsyncOperationBinder asyncOperationBinderJsonDataParser();
 
 #ifdef __cplusplus

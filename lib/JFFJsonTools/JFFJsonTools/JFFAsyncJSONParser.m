@@ -2,7 +2,7 @@
 
 #import "JFFParseJsonError.h"
 
-JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)
+JFFAsyncOperation asyncOperationJsonDataParserWithContext(NSData *data, id context)
 {
     assert([data isKindOfClass:[NSData class]]);
     
@@ -14,7 +14,11 @@ JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)
         
         if (jsonError) {
             if (outError) {
-                [JFFLogger logErrorWithFormat:@"jsonError: %@", [data toString]];
+                if (context) {
+                    [JFFLogger logErrorWithFormat:@"Context: %@ jsonError: '%@'", context, [data toString]];
+                } else {
+                    [JFFLogger logErrorWithFormat:@"jsonError: '%@'", [data toString]];
+                }
                 JFFParseJsonError *error = [JFFParseJsonError new];
                 error.nativeError = jsonError;
                 error.data        = data;
@@ -27,6 +31,11 @@ JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)
     };
     
     return asyncOperationWithSyncOperation(loadDataBlock);
+}
+
+JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)
+{
+    return asyncOperationJsonDataParserWithContext(data, nil);
 }
 
 JFFAsyncOperationBinder asyncOperationBinderJsonDataParser()
