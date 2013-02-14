@@ -23,4 +23,9 @@
     return [context obtainPermanentIDsForObjects:@[self] error:outError];
 }
 
+- (NSManagedObject *)managedObjectForObject
+{
+    return self;
+}
+
 @end

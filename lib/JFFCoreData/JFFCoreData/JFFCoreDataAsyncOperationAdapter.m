@@ -53,12 +53,16 @@
         id<JFFObjectInManagedObjectContext> result = operationBlock(&error);
         NSParameterAssert((result || error) && !(result && error));
         
+        float osVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
+        
         if (_readWrite == JFFCDWriteLock) {
             result = [context save:&error]?result:nil;
             [[JFFCoreDataProvider sharedCoreDataProvider] saveRootContext];
-            
-            BOOL obtained = [result obtainPermanentIDsIfNeedsWithError:&error];
-            result = obtained?result:nil;
+
+            if (osVersion >= 6.0) {
+                BOOL obtained = [result obtainPermanentIDsIfNeedsWithError:&error];
+                result = obtained?result:nil;
+            }
         }
         
         dispatch_async(dispatch_get_main_queue(), ^() {
@@ -71,12 +75,14 @@
             
             id resultInMainContext = [result objectInManagedObjectContext:mainContext];
             
-            NSError *error;
-            BOOL obtained = [resultInMainContext obtainPermanentIDsIfNeedsWithError:&error];
-            if (!obtained) {
+            if (osVersion >= 6.0) {
+                NSError *error;
+                BOOL obtained = [resultInMainContext obtainPermanentIDsIfNeedsWithError:&error];
+                if (!obtained) {
                 
-                handler(nil, error);
-                return;
+                    handler(nil, error);
+                    return;
+                }
             }
             
             //TODO try to avoid this call

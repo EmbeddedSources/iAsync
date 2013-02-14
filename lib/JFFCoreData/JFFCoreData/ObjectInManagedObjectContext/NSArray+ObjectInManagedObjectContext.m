@@ -18,10 +18,21 @@
     }];
 }
 
+- (NSManagedObject *)managedObjectForObject
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 - (BOOL)obtainPermanentIDsIfNeedsWithError:(NSError **)outError
 {
-    NSArray *toObtain = [self select:^BOOL(NSManagedObject *object) {
-        return object.objectID.isTemporaryID;
+    NSArray *managedObjects = [self map:^id(id object) {
+        
+        return [object managedObjectForObject];
+    }];
+    
+    NSArray *toObtain = [managedObjects select:^BOOL(NSManagedObject *object) {
+        return [object.objectID isTemporaryID];
     }];
     
     if ([toObtain count] == 0)
