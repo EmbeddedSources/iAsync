@@ -88,15 +88,15 @@
     };
 }
 
-- (JFFAsyncOperation)autoUnsubsribeOnDeallocAsyncOperation:(JFFAsyncOperation)nativeAsyncOp
+- (JFFAsyncOperation)autoUnsubsribeOnDeallocAsyncOperation:(JFFAsyncOperation)nativeLoader
 {
-    return [self autoUnsibscribeOrCancelAsyncOperation:nativeAsyncOp
+    return [self autoUnsibscribeOrCancelAsyncOperation:nativeLoader
                                                  cancel:NO];
 }
 
-- (JFFAsyncOperation)autoCancelOnDeallocAsyncOperation:( JFFAsyncOperation )nativeAsyncOp
+- (JFFAsyncOperation)autoCancelOnDeallocAsyncOperation:(JFFAsyncOperation)nativeLoader
 {
-    return [self autoUnsibscribeOrCancelAsyncOperation:nativeAsyncOp
+    return [self autoUnsibscribeOrCancelAsyncOperation:nativeLoader
                                                 cancel:YES];
 }
 
