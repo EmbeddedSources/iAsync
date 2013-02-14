@@ -20,4 +20,9 @@
     return copy;
 }
 
+- (void)writeErrorWithJFFLogger
+{
+    [JFFLogger logErrorWithFormat:@"%@ jsonObject:%@ jsonPattern:%@ message:%@", [self localizedDescription], _jsonObject, _jsonPattern, _message];
+}
+
 @end

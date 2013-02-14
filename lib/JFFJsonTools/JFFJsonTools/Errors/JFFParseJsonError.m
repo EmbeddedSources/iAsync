@@ -19,4 +19,9 @@
     return copy;
 }
 
+- (void)writeErrorWithJFFLogger
+{
+    [JFFLogger logErrorWithFormat:@"%@ data: %@", [self localizedDescription], [self.data toString]];
+}
+
 @end

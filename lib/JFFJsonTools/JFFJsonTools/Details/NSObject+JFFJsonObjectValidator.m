@@ -186,14 +186,14 @@ static BOOL isClass(id object)
     __block BOOL result = YES;
     __block NSError *tmpError;
     
-    [jsonPattern enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    [jsonPattern enumerateKeysAndObjectsUsingBlock:^(id keyPattern, id objPattern, BOOL *stop) {
         
-        id patternKey = key;
+        id patternKey = keyPattern;
         
-        BOOL isOptionalObjectField = [key isKindOfClass:[JFFOptionalObjectFieldKey class]];
+        BOOL isOptionalObjectField = [keyPattern isKindOfClass:[JFFOptionalObjectFieldKey class]];
         
         if (isOptionalObjectField) {
-            patternKey = [key fieldKey];
+            patternKey = [keyPattern fieldKey];
         }
         
         id subElement = self[patternKey];
@@ -202,14 +202,16 @@ static BOOL isClass(id object)
             return;
         }
         
-        if ([obj isKindOfClass:[JFFOptionalObjectFieldValue class]]) {
+        if ([objPattern isKindOfClass:[JFFOptionalObjectFieldValue class]]) {
+            
             if ([subElement isKindOfClass:[NSNull class]])
                 return;
             
-            obj = [obj fieldValue];
+            objPattern = [objPattern fieldValue];
         }
         
         if (!subElement) {
+            
             //set error
             {
                 JFFJsonValidationError *error = [JFFJsonValidationError new];
@@ -229,7 +231,7 @@ static BOOL isClass(id object)
             *stop = YES;
         }
         
-        if (![subElement validateWithJsonPattern:obj
+        if (![subElement validateWithJsonPattern:objPattern
                                   rootJsonObject:rootJsonObject
                                  rootJsonPattern:rootJsonPattern
                                            error:&tmpError]) {
