@@ -9,36 +9,37 @@
 
 - (JFFMutableAssignArray *)delegates
 {
-    if (!self->_delegates) {
-        self->_delegates = [JFFMutableAssignArray new];
+    if (!_delegates) {
+        _delegates = [JFFMutableAssignArray new];
     }
-    return self->_delegates;
+    return _delegates;
 }
 
 - (void)addDelegate:(id)delegate
 {
-    if (![self.delegates containsObject:delegate]) {
+    if (![_delegates containsObject:delegate]) {
         [self.delegates addObject:delegate];
     }
 }
 
 - (void)removeDelegate:(id)delegate
 {
-    [self->_delegates removeObject:delegate];
+    [_delegates removeObject:delegate];
 }
 
 - (void)removeAllDelegates
 {
-    [self->_delegates removeAllObjects];
+    [_delegates removeAllObjects];
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation
 {
     SEL selector = [invocation selector];
     
-    [self->_delegates enumerateObjectsUsingBlock:^void(id delegate,
-                                                       NSUInteger idx,
-                                                       BOOL *stop) {
+    [_delegates enumerateObjectsUsingBlock:^void(id delegate,
+                                                 NSUInteger idx,
+                                                 BOOL *stop) {
+        
         if ([delegate respondsToSelector:selector]) {
             [invocation invokeWithTarget:delegate];
         }
@@ -48,9 +49,10 @@
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
     __block NSMethodSignature *result;
-    [self->_delegates enumerateObjectsUsingBlock:^void(id delegate,
-                                                       NSUInteger idx,
-                                                       BOOL *stop) {
+    [_delegates enumerateObjectsUsingBlock:^void(id delegate,
+                                                 NSUInteger idx,
+                                                 BOOL *stop) {
+        
         result = [delegate methodSignatureForSelector:selector];
         if (result)
             *stop = YES;

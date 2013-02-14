@@ -362,6 +362,8 @@
 		CE914E60160C4B1900C89F37 /* JFFDelegateProxyClassMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097A315FF2C850080DEF7 /* JFFDelegateProxyClassMethods.m */; };
 		CE998C481626B988002D39FD /* NSOrderedSet+BlocksAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = CE998C461626B988002D39FD /* NSOrderedSet+BlocksAdditions.h */; };
 		CE998C491626B988002D39FD /* NSOrderedSet+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE998C471626B988002D39FD /* NSOrderedSet+BlocksAdditions.m */; };
+		CE9C273916AFDF3D0062C91E /* UIDevice+PlatformName.h in Headers */ = {isa = PBXBuildFile; fileRef = CE9C273716AFDF3D0062C91E /* UIDevice+PlatformName.h */; };
+		CE9C273A16AFDF3D0062C91E /* UIDevice+PlatformName.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9C273816AFDF3D0062C91E /* UIDevice+PlatformName.m */; };
 		CEA0979C15FF2ADE0080DEF7 /* DelegateProxyUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA0979A15FF2ADE0080DEF7 /* DelegateProxyUtils.h */; };
 		CEA0979D15FF2ADE0080DEF7 /* DelegateProxyUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA0979B15FF2ADE0080DEF7 /* DelegateProxyUtils.m */; };
 		CEA097A015FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA0979E15FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.h */; };
@@ -386,6 +388,8 @@
 		CEC5448A1699D28A0019511A /* UIImage+WriteToTmpFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC544881699D28A0019511A /* UIImage+WriteToTmpFile.m */; };
 		CEC70F13169DBA8B006D63DE /* JFFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC70F0F169DBA8B006D63DE /* JFFLogger.h */; };
 		CEC70F14169DBA8B006D63DE /* JFFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC70F10169DBA8B006D63DE /* JFFLogger.m */; };
+		CEC8479616A98A6C00065745 /* NSObject+NsNullAsNil.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC8479416A98A6C00065745 /* NSObject+NsNullAsNil.h */; };
+		CEC8479716A98A6C00065745 /* NSObject+NsNullAsNil.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC8479516A98A6C00065745 /* NSObject+NsNullAsNil.m */; };
 		CEC851AC15F4E20E0022F479 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC851AB15F4E20E0022F479 /* UIKit.framework */; };
 		CED85A95161C23A200F28EBC /* JFFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648BE013924326001E163C /* JFFError.m */; };
 		CEDB80ED1601F08F007577B2 /* NSData+ToString.h in Headers */ = {isa = PBXBuildFile; fileRef = CEDB80EB1601F08F007577B2 /* NSData+ToString.h */; };
@@ -598,6 +602,8 @@
 		CE998C461626B988002D39FD /* NSOrderedSet+BlocksAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOrderedSet+BlocksAdditions.h"; sourceTree = "<group>"; };
 		CE998C471626B988002D39FD /* NSOrderedSet+BlocksAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOrderedSet+BlocksAdditions.m"; sourceTree = "<group>"; };
 		CE998C4B1626B9EB002D39FD /* JUContainersHelperBlocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUContainersHelperBlocks.h; sourceTree = "<group>"; };
+		CE9C273716AFDF3D0062C91E /* UIDevice+PlatformName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlatformName.h"; sourceTree = "<group>"; };
+		CE9C273816AFDF3D0062C91E /* UIDevice+PlatformName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+PlatformName.m"; sourceTree = "<group>"; };
 		CEA0979A15FF2ADE0080DEF7 /* DelegateProxyUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateProxyUtils.h; sourceTree = "<group>"; };
 		CEA0979B15FF2ADE0080DEF7 /* DelegateProxyUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateProxyUtils.m; sourceTree = "<group>"; };
 		CEA0979E15FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DelegateProxySelectorsNames.h"; sourceTree = "<group>"; };
@@ -612,6 +618,8 @@
 		CEC544881699D28A0019511A /* UIImage+WriteToTmpFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WriteToTmpFile.m"; sourceTree = "<group>"; };
 		CEC70F0F169DBA8B006D63DE /* JFFLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFLogger.h; sourceTree = "<group>"; };
 		CEC70F10169DBA8B006D63DE /* JFFLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFLogger.m; sourceTree = "<group>"; };
+		CEC8479416A98A6C00065745 /* NSObject+NsNullAsNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+NsNullAsNil.h"; sourceTree = "<group>"; };
+		CEC8479516A98A6C00065745 /* NSObject+NsNullAsNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+NsNullAsNil.m"; sourceTree = "<group>"; };
 		CEC851AB15F4E20E0022F479 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEDB80EB1601F08F007577B2 /* NSData+ToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ToString.h"; sourceTree = "<group>"; };
 		CEDB80EC1601F08F007577B2 /* NSData+ToString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ToString.m"; sourceTree = "<group>"; };
@@ -789,6 +797,8 @@
 				CE0B00441626D9C1003802A0 /* NSDateFormatter+MultiThreading.m */,
 				CEB2D7671689A177004067F9 /* NSError+WriteErrorToNSLog.h */,
 				CEB2D7681689A177004067F9 /* NSError+WriteErrorToNSLog.m */,
+				CE9C273716AFDF3D0062C91E /* UIDevice+PlatformName.h */,
+				CE9C273816AFDF3D0062C91E /* UIDevice+PlatformName.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -884,6 +894,8 @@
 				655C20E615FE5A4000022B11 /* NSObject+DelegateProxy.m */,
 				CE444A1216085D5A00DD85B0 /* NSObject+JFFMeaningClass.h */,
 				CE444A1316085D5A00DD85B0 /* NSObject+JFFMeaningClass.m */,
+				CEC8479416A98A6C00065745 /* NSObject+NsNullAsNil.h */,
+				CEC8479516A98A6C00065745 /* NSObject+NsNullAsNil.m */,
 			);
 			path = NSObject;
 			sourceTree = "<group>";
@@ -1330,6 +1342,8 @@
 				CEB2D7691689A177004067F9 /* NSError+WriteErrorToNSLog.h in Headers */,
 				CEC544891699D28A0019511A /* UIImage+WriteToTmpFile.h in Headers */,
 				CEC70F13169DBA8B006D63DE /* JFFLogger.h in Headers */,
+				CEC8479616A98A6C00065745 /* NSObject+NsNullAsNil.h in Headers */,
+				CE9C273916AFDF3D0062C91E /* UIDevice+PlatformName.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1813,6 +1827,8 @@
 				CEB2D76A1689A177004067F9 /* NSError+WriteErrorToNSLog.m in Sources */,
 				CEC5448A1699D28A0019511A /* UIImage+WriteToTmpFile.m in Sources */,
 				CEC70F14169DBA8B006D63DE /* JFFLogger.m in Sources */,
+				CEC8479716A98A6C00065745 /* NSObject+NsNullAsNil.m in Sources */,
+				CE9C273A16AFDF3D0062C91E /* UIDevice+PlatformName.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1861,7 +1877,7 @@
 				GCC_PREFIX_HEADER = JFFUtils_Prefix.pch;
 				HEADER_SEARCH_PATHS = ../;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = JFFUtils;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1879,7 +1895,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFUtils_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = JFFUtils;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1896,7 +1912,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 			};
@@ -1911,7 +1927,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 			};

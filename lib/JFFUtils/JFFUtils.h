@@ -7,6 +7,7 @@
 #import <JFFUtils/NSObject/NSObject+JFFMeaningClass.h>
 #import <JFFUtils/NSObject/NSObject+RuntimeExtensions.h>
 #import <JFFUtils/NSObject/NSObject+IsEqualTwoObjects.h>
+#import <JFFUtils/NSObject/NSObject+NsNullAsNil.h>
 
 #import <JFFUtils/NSArray/NSArray+IsEmpty.h>
 #import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>
@@ -50,6 +51,7 @@
 #import <JFFUtils/Extensions/UIColor+ColorForHex.h>
 #import <JFFUtils/Extensions/NSNumber+FSStorable.h>
 #import <JFFUtils/Extensions/NSError+setToPointer.h>
+#import <JFFUtils/Extensions/UIDevice+PlatformName.h>
 #import <JFFUtils/Extensions/NSThread+AssertMainThread.h>
 #import <JFFUtils/Extensions/NSDecimalNumber+Increment.h>
 #import <JFFUtils/Extensions/NSError+WriteErrorToNSLog.h>
