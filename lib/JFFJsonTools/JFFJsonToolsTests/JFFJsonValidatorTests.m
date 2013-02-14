@@ -53,7 +53,7 @@
 {
     JFFJsonValidationError *error;
 
-    BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNumber numberWithBool:NO]
+    BOOL result = [JFFJsonObjectValidator validateJsonObject:@NO
                                              withJsonPattern:[NSString class]
                                                        error:&error];
 
@@ -382,13 +382,13 @@
         
         id object =
         @{
-        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        @"meta" : @{@"code" : @(200)},
         @"data" : @{},
         };
         
         id pattern =
         @{
-        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        @"meta" : @{@"code" : @(200)},
         };
         
         BOOL result = [JFFJsonObjectValidator validateJsonObject:object
@@ -403,13 +403,13 @@
         
         id object =
         @{
-        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        @"meta" : @{@"code" : @(200)},
         @"data" : @{},
         };
         
         id pattern =
         @{
-        @"meta" : @{@"code" : [NSNumber numberWithInteger:201]},
+        @"meta" : @{@"code" : @(201)},
         };
         
         BOOL result = [JFFJsonObjectValidator validateJsonObject:object
@@ -428,12 +428,12 @@
         
         id object =
         @{
-        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        @"meta" : @{@"code" : @(200)},
         };
         
         id pattern =
         @{
-        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        @"meta" : @{@"code" : @(200)},
         jOptionalKey(@"data") : [NSDictionary class],
         };
         
@@ -449,12 +449,12 @@
         
         id object =
         @{
-        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        @"meta" : @{@"code" : @(200)},
         };
         
         id pattern =
         @{
-        @"meta" : @{@"code" : [NSNumber numberWithInteger:200]},
+        @"meta" : @{@"code" : @(200)},
         @"data" : [NSDictionary class],
         };
         
@@ -777,6 +777,29 @@
         @{
         @"region" : jOptionalValue(@{@"a" : [NSString class]}),
         };
+        
+        BOOL result = [JFFJsonObjectValidator validateJsonObject:object
+                                                 withJsonPattern:pattern
+                                                           error:&error];
+        
+        STAssertNil(error, @"error should be nil");
+        STAssertTrue(result, @"ivalid result value");
+    }
+    
+    {
+        JFFJsonValidationError *error;
+        
+        id object =
+        @{
+          @"balance" : @6700,
+          @"bonuses" : [NSNull new],
+          };
+        
+        id pattern =
+        @{
+          jOptionalKey(@"balance") : [NSNumber class],
+          @"bonuses" : jOptionalValue(@{@"credits" : [NSNumber class], @"type" : [NSString class]})
+          };
         
         BOOL result = [JFFJsonObjectValidator validateJsonObject:object
                                                  withJsonPattern:pattern
