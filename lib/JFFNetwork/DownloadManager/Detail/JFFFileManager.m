@@ -7,38 +7,38 @@
 
 @implementation JFFFileManager
 
-+(FILE*)createFileForPath:( NSString* )path_
++ (FILE *)createFileForPath:(NSString *)path
 {
-    [ [ NSFileManager defaultManager ] createDirectoryAtPath: [ path_ stringByDeletingLastPathComponent ]
-                                 withIntermediateDirectories: YES
-                                                  attributes: nil
-                                                       error: nil ];
-    return fopen( [ path_ cStringUsingEncoding: NSASCIIStringEncoding ], "a" );
+    [[NSFileManager defaultManager ] createDirectoryAtPath:[path stringByDeletingLastPathComponent]
+                               withIntermediateDirectories:YES
+                                                attributes:nil
+                                                     error:nil];
+    return fopen([path cStringUsingEncoding:NSASCIIStringEncoding], "a");
 }
 
-+(void)removeAllEmptyFolders:( NSString* )dir_path_
++ (void)removeAllEmptyFolders:(NSString *)dirPath
 {
-    NSArray* filenames_ = [ [ NSFileManager defaultManager ] contentsOfDirectoryAtPath: dir_path_ error: nil ];
-    if ( [ filenames_ count ] == 0 )
-    {
-        if ( ![ [ NSFileManager defaultManager ] removeItemAtPath: dir_path_ error: nil ] )
+    NSArray *filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dirPath error:nil];
+    if ([filenames count] == 0) {
+       
+        if (![[NSFileManager defaultManager] removeItemAtPath:dirPath error:nil])
             return;
-        [ self removeAllEmptyFolders: [ dir_path_ stringByDeletingLastPathComponent ] ];
+        [self removeAllEmptyFolders:[dirPath stringByDeletingLastPathComponent]];
     }
 }
 
-+(BOOL)removeFileForPath:( NSString* )path_
++ (BOOL)removeFileForPath:(NSString *)path
 {
-    if ( !path_ )
+    if (!path)
         return NO;
-
-    BOOL result_ = [ [ NSFileManager defaultManager ] removeItemAtPath: path_ error: nil ];
-    if ( result_ )
-    {
-        [ self removeAllEmptyFolders: [ path_ stringByDeletingLastPathComponent ] ];
+    
+    BOOL result = [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    if (result) {
+        
+        [self removeAllEmptyFolders:[path stringByDeletingLastPathComponent]];
     }
-
-    return result_;
+    
+    return result;
 }
 
 @end

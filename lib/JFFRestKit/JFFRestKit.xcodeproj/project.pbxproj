@@ -218,6 +218,7 @@
 					../../../TouchXML/,
 					"$(SDKROOT)/usr/include/libxml2/**",
 					../TouchXmlHelper,
+					../JFFCache,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -240,6 +241,7 @@
 					../../../TouchXML/,
 					"$(SDKROOT)/usr/include/libxml2/**",
 					../TouchXmlHelper,
+					../JFFCache,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
