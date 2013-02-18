@@ -6,6 +6,6 @@
 
 @property ( nonatomic, copy ) JFFAsyncOperationProgressHandler progressBlock;
 
--(void)performProgressBlockWithArgument:( id )progress_info_;
+- (void)performProgressBlockWithArgument:(id)progressInfo;
 
 @end

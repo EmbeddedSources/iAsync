@@ -54,7 +54,6 @@ JFFAsyncOperationBinder binderAsSequenceOfBindersArray(NSArray *binders);
 /////////////////////////////////////// GROUP //////////////////////////////////////
 
 //calls finish callback when all loaders finished
-//result of group is undefined for success result
     JFFAsyncOperation groupOfAsyncOperations(JFFAsyncOperation firstLoader, ...) NS_REQUIRES_NIL_TERMINATION;
 
     JFFAsyncOperation groupOfAsyncOperationsArray(NSArray *loaders);
@@ -62,7 +61,6 @@ JFFAsyncOperationBinder binderAsSequenceOfBindersArray(NSArray *binders);
 ///////////////////////////// FAIL ON FIRST ERROR GROUP ////////////////////////////
 
 //calls finish callback when all loaders success finished or when any of them is failed
-//result of group is undefined for success result
     JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperations(JFFAsyncOperation firstLoader, ...) NS_REQUIRES_NIL_TERMINATION;
 
     JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsArray(NSArray *loaders);

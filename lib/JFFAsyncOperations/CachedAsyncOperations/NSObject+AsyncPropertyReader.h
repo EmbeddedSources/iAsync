@@ -9,6 +9,8 @@ typedef JFFPropertyExtractor *(^JFFPropertyExtractorFactoryBlock)(void);
 
 @interface NSObject (AsyncPropertyReader)
 
+//TODO20 test immediately cancel
+//TODO20 test cancel calback for each observer
 - (JFFAsyncOperation)asyncOperationForPropertyWithName:(NSString *)propertyName
                                         asyncOperation:(JFFAsyncOperation)asyncOperation;
 

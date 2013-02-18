@@ -4,8 +4,8 @@
 
 @interface NSArray (AsyncMap)
 
--(JFFAsyncOperation)asyncMap:( JFFAsyncOperationBinder )block_;
+- (JFFAsyncOperation)asyncMap:(JFFAsyncOperationBinder)block;
 
--(JFFAsyncOperation)tolerantFaultAsyncMap:( JFFAsyncOperationBinder )block_;
+- (JFFAsyncOperation)tolerantFaultAsyncMap:(JFFAsyncOperationBinder)block;
 
 @end

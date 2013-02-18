@@ -4,6 +4,7 @@
 
 @interface NSObject (WeakAsyncOperation)
 
+//TODO20 immediately cancel callback
 - (JFFAsyncOperation)autoUnsubsribeOnDeallocAsyncOperation:(JFFAsyncOperation)asyncOp;
 
 - (JFFAsyncOperation)autoCancelOnDeallocAsyncOperation:(JFFAsyncOperation)asyncOp;

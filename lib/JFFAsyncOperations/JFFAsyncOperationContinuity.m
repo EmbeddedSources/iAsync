@@ -66,6 +66,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
                                                      doneCallback);
                 }
             });
+            
             if (!cancelBlockHolder)
                 cancelBlockHolder = firstCancel;
             
@@ -114,7 +115,7 @@ JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders)
         return ^JFFAsyncOperation(id result) {
             return loader;
         };
-    } ];
+    }];
     return MergeBinders(bindSequenceOfBindersPair, loaders)(nil);
 }
 
@@ -217,7 +218,7 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBin
                     if (doneCallback)
                         doneCallback(result, nil);
                 }
-            } );
+            });
             if (!cancelBlockHolder)
                 cancelBlockHolder = firstCancel;
             
@@ -346,8 +347,10 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
         doneCallback = [doneCallback copy];
         
         JFFDidFinishAsyncOperationHandler (^makeResultHandler)(NSUInteger) =
-            ^JFFDidFinishAsyncOperationHandler(NSUInteger index) {
+        ^JFFDidFinishAsyncOperationHandler(NSUInteger index) {
+            
             return ^void(id result, NSError *error) {
+                
                 if (result)
                     complexResult[index] = result;
                 
@@ -398,18 +401,35 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
                 handler(result, error );
             };
         };
-
+        
         JFFCancelAsyncOperationBlockHolder *cancelHolder1 = [JFFCancelAsyncOperationBlockHolder new];
         JFFCancelAsyncOperationBlockHolder *cancelHolder2 = [JFFCancelAsyncOperationBlockHolder new];
         
+        JFFCancelAsyncOperationHandler cancelCallbackOfFirstLoader = makeCancelHandler(cancelHolder2);
+        
+        __block NSNumber *firstLoaderCancelFlag = NO;
+        JFFCancelAsyncOperationHandler cancelCallbackOfFirstLoaderWrapper = ^void(BOOL canceled) {
+            
+            firstLoaderCancelFlag = @(canceled);
+            cancelCallbackOfFirstLoader(canceled);
+        };
+        
         cancelHolder1.cancelBlock = firstLoader(progressCallback,
-                                                makeCancelHandler(cancelHolder2),
+                                                cancelCallbackOfFirstLoaderWrapper,
                                                 makeFinishHandler(cancelHolder1, 0));
+        
         cancelHolder2.cancelBlock = secondLoader(progressCallback,
                                                  makeCancelHandler(cancelHolder1),
                                                  makeFinishHandler(cancelHolder2, 1));
         
+        if (firstLoaderCancelFlag) {
+            
+            cancelHolder2.cancelBlock([firstLoaderCancelFlag boolValue]);
+            return JFFStubCancelAsyncOperationBlock;
+        }
+        
         return ^void(BOOL cancel) {
+            
             if (!blockCanceled) {
                 blockCanceled = YES;
                 cancelHolder1.onceCancelBlock(cancel);
@@ -538,21 +558,30 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOper
             };
         };
         
-        JFFCancelAsyncOperation cancel1 = firstLoader(progressCallback,
-                                                      makeCancelCallback(cancelHolder2),
-                                                      cancelSafeResultBlock(makeResultHandler(0),
-                                                                            cancelHolder1));
+        JFFCancelAsyncOperationHandler cancelCallbackOfFirstLoader = makeCancelCallback(cancelHolder2);
         
-        cancelHolder1.cancelBlock = !cancelCallbackHolder?JFFStubCancelAsyncOperationBlock:cancel1;
+        __block NSNumber *firstLoaderCancelFlag = NO;
+        JFFCancelAsyncOperationHandler cancelCallbackOfFirstLoaderWrapper = ^void(BOOL canceled) {
+            
+            firstLoaderCancelFlag = @(canceled);
+            cancelCallbackOfFirstLoader(canceled);
+        };
         
-        JFFCancelAsyncOperation cancel2 = cancelCallbackHolder == nil
-            ? JFFStubCancelAsyncOperationBlock
-            : secondLoader(progressCallback,
-                           makeCancelCallback(cancelHolder1),
-                           cancelSafeResultBlock(makeResultHandler(1),
-                                                 cancelHolder2));
+        cancelHolder1.cancelBlock = firstLoader(progressCallback,
+                                                cancelCallbackOfFirstLoaderWrapper,
+                                                cancelSafeResultBlock(makeResultHandler(0),
+                                                                      cancelHolder1));
         
-        cancelHolder2.cancelBlock = !cancelCallbackHolder?JFFStubCancelAsyncOperationBlock:cancel2;
+        cancelHolder2.cancelBlock = secondLoader(progressCallback,
+                                                 makeCancelCallback(cancelHolder1),
+                                                 cancelSafeResultBlock(makeResultHandler(1),
+                                                                       cancelHolder2));
+        
+        if (firstLoaderCancelFlag) {
+            
+            cancelHolder2.cancelBlock([firstLoaderCancelFlag boolValue]);
+            return JFFStubCancelAsyncOperationBlock;
+        }
         
         return ^void(BOOL cancel) {
             if (cancelCallbackHolder) {

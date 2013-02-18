@@ -5,13 +5,12 @@
 
 @implementation NSArray (AsyncMap)
 
--(JFFAsyncOperation)asyncMap:( JFFAsyncOperationBinder )block_
+- (JFFAsyncOperation)asyncMap:(JFFAsyncOperationBinder)block
 {
-    NSArray* asyncOperations_ = [ self map: ^id( id object_ )
-    {
-        return block_( object_ );
+    NSArray *asyncOperations = [self map:^id(id object) {
+        return block(object);
     } ];
-    return failOnFirstErrorGroupOfAsyncOperationsArray( asyncOperations_ );
+    return failOnFirstErrorGroupOfAsyncOperationsArray(asyncOperations);
 }
 
 - (JFFAsyncOperation)tolerantFaultAsyncMap:(JFFAsyncOperationBinder)block
@@ -19,9 +18,10 @@
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
     NSArray *asyncOperations = [self map:^id(id object) {
+        
         JFFAsyncOperation loader = block(object);
-        JFFDidFinishAsyncOperationHandler finishCallbackBlock = ^void(id localResult, NSError *error)
-        {
+        JFFDidFinishAsyncOperationHandler finishCallbackBlock = ^void(id localResult, NSError *error) {
+            
             if (localResult)
                 [result addObject:localResult];
         };

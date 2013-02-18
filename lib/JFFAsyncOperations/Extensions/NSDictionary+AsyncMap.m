@@ -12,14 +12,16 @@
     NSMutableDictionary *finalResult = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
     
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
+        
         JFFAsyncOperation loader = block(key, object);
         
         JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
                                                               NSError *error,
-                                                              JFFDidFinishAsyncOperationHandler doneCallback)
-        {
+                                                              JFFDidFinishAsyncOperationHandler doneCallback) {
+            
             if (result)
                 finalResult[key] = result;
+            
             if (doneCallback)
                 doneCallback(result, error);
         };
@@ -28,14 +30,14 @@
         [asyncOperations addObject:loader];
     } ];
     
-    JFFAsyncOperation loader_ = failOnFirstErrorGroupOfAsyncOperationsArray(asyncOperations);
-    JFFChangedResultBuilder resultBuilder_ = ^id(id localResult)
-    {
+    JFFAsyncOperation loader = failOnFirstErrorGroupOfAsyncOperationsArray(asyncOperations);
+    JFFChangedResultBuilder resultBuilder = ^id(id localResult) {
+        
         return [finalResult copy];
     };
-    loader_ = asyncOperationWithChangedResult( loader_, resultBuilder_ );
+    loader = asyncOperationWithChangedResult(loader, resultBuilder);
 
-    return loader_;
+    return loader;
 }
 
 @end

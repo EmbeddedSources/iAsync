@@ -130,6 +130,7 @@ JFFAsyncOperation asyncOperationWithStartAndFinishBlocks(JFFAsyncOperation loade
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         if (startBlock)
             startBlock();
         
@@ -148,8 +149,11 @@ JFFAsyncOperation asyncOperationWithStartAndDoneBlocks(JFFAsyncOperation loader,
                                                        JFFSimpleBlock startBlock,
                                                        JFFSimpleBlock doneBlock)
 {
+    assert(loader);
     startBlock = [startBlock copy];
     doneBlock  = [doneBlock  copy];
+    
+    loader = [loader copy];
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,

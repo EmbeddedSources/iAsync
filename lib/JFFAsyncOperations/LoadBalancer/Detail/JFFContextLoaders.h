@@ -12,12 +12,12 @@
 
 @property ( nonatomic, readonly ) NSUInteger activeLoadersNumber;
 
--(void)addActiveNativeLoader:( JFFAsyncOperation )native_loader_
+- (void)addActiveNativeLoader:(JFFAsyncOperation)nativeLoader
                wrappedCancel:( JFFCancelAsyncOperation )cancel_;
 
--(BOOL)removeActiveNativeLoader:( JFFAsyncOperation )native_loader_;
+- (BOOL)removeActiveNativeLoader:( JFFAsyncOperation )nativeLoader;
 
--(void)cancelActiveNativeLoader:( JFFAsyncOperation )native_loader_ cancel:( BOOL )canceled_;
+- (void)cancelActiveNativeLoader:( JFFAsyncOperation )nativeLoader cancel:( BOOL )canceled;
 
 @end
 
@@ -29,15 +29,15 @@
 
 -(JFFPedingLoaderData*)popPendingLoaderData;
 
--(void)addPendingNativeLoader:( JFFAsyncOperation )native_loader_
-             progressCallback:( JFFAsyncOperationProgressHandler )progress_callback_
-               cancelCallback:( JFFCancelAsyncOperationHandler )cancel_callback_
-                 doneCallback:( JFFDidFinishAsyncOperationHandler )done_callback_;
+- (void)addPendingNativeLoader:(JFFAsyncOperation)nativeLoader
+              progressCallback:(JFFAsyncOperationProgressHandler)progressCallback
+                cancelCallback:(JFFCancelAsyncOperationHandler)cancelCallback
+                  doneCallback:(JFFDidFinishAsyncOperationHandler)doneCallback;
 
--(BOOL)containsPendingNativeLoader:( JFFAsyncOperation )native_loader_;
+- (BOOL)containsPendingNativeLoader:(JFFAsyncOperation)nativeLoader;
 
--(void)removePendingNativeLoader:( JFFAsyncOperation )native_loader_;
+- (void)removePendingNativeLoader:(JFFAsyncOperation)nativeLoader;
 
--(void)unsubscribePendingNativeLoader:( JFFAsyncOperation )native_loader_;
+- (void)unsubscribePendingNativeLoader:(JFFAsyncOperation)nativeLoader;
 
 @end

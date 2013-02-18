@@ -31,6 +31,7 @@ JFFAsyncOperation asyncOperationWithStartAndFinishBlocks(JFFAsyncOperation loade
                                                          JFFSimpleBlock startBlock,
                                                          JFFDidFinishAsyncOperationHandler finishCallback);
 
+    //TODO20 immediately cancel callback
     JFFAsyncOperation asyncOperationWithStartAndDoneBlocks(JFFAsyncOperation loader,
                                                            JFFSimpleBlock startBlock,
                                                            JFFSimpleBlock doneBlock);
