@@ -204,15 +204,15 @@
                 sequence_loader_finished_ = YES;
             }
         } );
-
+        
         GHAssertFalse( sequence_loader_finished_, @"sequence not finished" );
-
+        
         first_loader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
-
+        
         GHAssertTrue( sequence_loader_finished_, @"sequence finished" );
 
     }
-
+    
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"All object of this class should be deallocated" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"All object of this class should be deallocated" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"All object of this class should be deallocated" );
@@ -236,6 +236,92 @@
     GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
+}
+
+- (void)testImmediatelyCancelCallbackOfFirstLoader
+{
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager *firstLoader  = [JFFAsyncOperationManager new];
+        JFFAsyncOperationManager *secondLoader = [JFFAsyncOperationManager new];
+        
+        firstLoader.cancelAtLoading = JFFCancelAsyncOperationManagerWithYesFlag;
+        
+        JFFAsyncOperation loader = trySequenceOfAsyncOperations(firstLoader.loader, secondLoader.loader, nil);
+        
+        __block BOOL progressCallbackCalled = NO;
+        JFFAsyncOperationProgressHandler progressCallback = ^(id progressInfo) {
+            
+            progressCallbackCalled = YES;
+        };
+        
+        __block NSNumber *cancelCallbackCallFlag = NO;
+        JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
+            
+            cancelCallbackCallFlag = @(canceled);
+        };
+        
+        __block BOOL doneCallbackCalled = NO;
+        JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
+            
+            doneCallbackCalled = YES;
+        };
+        
+        loader(progressCallback, cancelCallback, doneCallback);
+        
+        GHAssertFalse(progressCallbackCalled, nil);
+        GHAssertEqualObjects(@YES, cancelCallbackCallFlag, nil);
+        GHAssertFalse(doneCallbackCalled, nil);
+        
+        GHAssertEquals((NSUInteger)0, secondLoader.loadingCount, nil);
+    }
+    
+    GHAssertTrue(0 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFAsyncOperationManager              instancesCount], @"OK");
+}
+
+- (void)testImmediatelyCancelCallbackOfSecondLoader
+{
+    @autoreleasepool
+    {
+        JFFAsyncOperationManager *firstLoader  = [JFFAsyncOperationManager new];
+        JFFAsyncOperationManager *secondLoader = [JFFAsyncOperationManager new];
+        
+        secondLoader.cancelAtLoading = JFFCancelAsyncOperationManagerWithYesFlag;
+        
+        JFFAsyncOperation loader = trySequenceOfAsyncOperations(firstLoader.loader, secondLoader.loader, nil);
+        
+        __block BOOL progressCallbackCalled = NO;
+        JFFAsyncOperationProgressHandler progressCallback = ^(id progressInfo) {
+            
+            progressCallbackCalled = YES;
+        };
+        
+        __block NSNumber *cancelCallbackCallFlag = NO;
+        JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
+            
+            cancelCallbackCallFlag = @(canceled);
+        };
+        
+        __block BOOL doneCallbackCalled = NO;
+        JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
+            
+            doneCallbackCalled = YES;
+        };
+        
+        loader(progressCallback, cancelCallback, doneCallback);
+        
+        firstLoader.loaderFinishBlock.didFinishBlock(nil, [JFFError newErrorWithDescription:@"test"]);
+        
+        GHAssertFalse(progressCallbackCalled, nil);
+        GHAssertEqualObjects(@YES, cancelCallbackCallFlag, nil);
+        GHAssertFalse(doneCallbackCalled, nil);
+    }
+    
+    GHAssertTrue(0 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFAsyncOperationManager              instancesCount], @"OK");
 }
 
 @end

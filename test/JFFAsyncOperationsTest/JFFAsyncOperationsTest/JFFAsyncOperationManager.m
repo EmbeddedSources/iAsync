@@ -17,9 +17,9 @@
 
 @implementation JFFAsyncOperationManager
 
--(id)init
+- (id)init
 {
-    self = [ super init ];
+    self = [super init];
     
     if (self) {
         self->_loaderFinishBlock = [JFFDidFinishAsyncOperationBlockHolder new];
@@ -29,32 +29,44 @@
     return self;
 }
 
--(void)clear
+- (void)clear
 {
     self.loaderFinishBlock = nil;
     self.loaderCancelBlock = nil;
     self.finished = NO;
 }
 
--(JFFAsyncOperation)loader
+- (JFFAsyncOperation)loader
 {
-    return [ ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progress_callback,
+    __weak JFFAsyncOperationManager *weakSelf = self;
+    
+    return [^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progress_callback,
                                       JFFCancelAsyncOperationHandler cancelCallback,
                                       JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         self.loadingCount += 1;
+        
+        if (self.cancelAtLoading > JFFDoNotCancelAsyncOperationManager) {
+            
+            self.canceled   = YES;
+            if (cancelCallback)
+                cancelCallback(JFFCancelAsyncOperationManagerWithYesFlag == self.cancelAtLoading);
+            return JFFStubCancelAsyncOperationBlock;
+        }
         
         doneCallback = [doneCallback copy];
         
-        self.loaderFinishBlock.didFinishBlock = ^( id result_, NSError* error_ ) {
-            self.loaderFinishBlock.didFinishBlock = nil;
-            self.loaderCancelBlock.cancelBlock = nil;
-            self.finished = YES;
+        self.loaderFinishBlock.didFinishBlock = ^(id result, NSError *error) {
+            
+            weakSelf.loaderFinishBlock.didFinishBlock = nil;
+            weakSelf.loaderCancelBlock.cancelBlock = nil;
+            weakSelf.finished = YES;
             if (doneCallback)
-                doneCallback( result_, error_ );
+                doneCallback(result, error);
         };
         
         if (self.finishAtLoading || self.failAtLoading) {
-            if ( self.finishAtLoading )
+            if (self.finishAtLoading)
                 self.loaderFinishBlock.didFinishBlock([NSNull null], nil);
             else
                 self.loaderFinishBlock.didFinishBlock(nil, [JFFError newErrorWithDescription:@"some error"]);
@@ -63,9 +75,9 @@
         
         cancelCallback = [cancelCallback copy];
         self.loaderCancelBlock.cancelBlock = ^(BOOL canceled) {
-            self.loaderFinishBlock.didFinishBlock = nil;
-            self.canceled   = YES;
-            self.cancelFlag = canceled;
+            weakSelf.loaderFinishBlock.didFinishBlock = nil;
+            weakSelf.canceled   = YES;
+            weakSelf.cancelFlag = canceled;
             if (cancelCallback)
                 cancelCallback(canceled);
         };
