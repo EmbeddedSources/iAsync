@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
     JFFAsyncOperation asyncOperationJsonDataParser(NSData *data);
-    JFFAsyncOperation asyncOperationJsonDataParserWithContext(NSData *data, id context);
+    JFFAsyncOperation asyncOperationJsonDataParserWithContext(NSData *data, id<NSCopying> context);
     
     JFFAsyncOperationBinder asyncOperationBinderJsonDataParser();
 

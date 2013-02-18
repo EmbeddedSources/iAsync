@@ -2,7 +2,7 @@
 
 #import "JFFParseJsonError.h"
 
-JFFAsyncOperation asyncOperationJsonDataParserWithContext(NSData *data, id context)
+JFFAsyncOperation asyncOperationJsonDataParserWithContext(NSData *data, id<NSCopying> context)
 {
     assert([data isKindOfClass:[NSData class]]);
     
@@ -14,14 +14,10 @@ JFFAsyncOperation asyncOperationJsonDataParserWithContext(NSData *data, id conte
         
         if (jsonError) {
             if (outError) {
-                if (context) {
-                    [JFFLogger logErrorWithFormat:@"Context: %@ jsonError: '%@'", context, [data toString]];
-                } else {
-                    [JFFLogger logErrorWithFormat:@"jsonError: '%@'", [data toString]];
-                }
                 JFFParseJsonError *error = [JFFParseJsonError new];
                 error.nativeError = jsonError;
                 error.data        = data;
+                error.context     = context;
                 *outError = error;
             }
             return nil;
