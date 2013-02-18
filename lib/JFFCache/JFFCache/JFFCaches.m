@@ -23,8 +23,32 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
 
 @implementation JFFInternalCacheDB
 
++ (void)removeOldDataWithAutoremoveProperties:(NSDictionary *)autoremoveProperties
+                               dbPropertyName:(NSString *)dbPropertyName
+                                       dbInfo:(JFFDBInfo *)dbInfo
+{
+    NSTimeInterval removeRarelyAccessDataDelay = [autoremoveProperties autoRemoveByLastAccessDate];
+    
+    JFFInternalCacheDB *cacheDB = [[self alloc] initWithCacheDBWithName:dbPropertyName
+                                                                 dbInfo:dbInfo];
+    
+    if (removeRarelyAccessDataDelay > 0.) {
+        
+        NSDate *fromDate = [[NSDate new] dateByAddingTimeInterval:-removeRarelyAccessDataDelay];
+        
+        [cacheDB removeRecordsToAccessDate:fromDate];
+    }
+    
+    unsigned long long bytes = [autoremoveProperties autoRemoveByMaxSizeInMB] * 1024 * 1024;
+    
+    if (bytes > 0) {
+        
+        [cacheDB removeRecordsWhileTotalSizeMoreThenBytes:bytes];
+    }
+}
+
 + (void)runAutoremoveDataSchedulerWithName:(NSString *)dbPropertyName
-               removeRarelyAccessDataDelay:(NSTimeInterval)removeRarelyAccessDataDelay
+                      autoremoveProperties:(NSDictionary *)autoremoveProperties
                                     dbInfo:(JFFDBInfo *)dbInfo
 {
     @synchronized(lockObject) {
@@ -43,14 +67,12 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
         
         JFFScheduledBlock block = ^void(JFFCancelScheduledBlock cancel) {
             
-            NSDate *fromDate = [[NSDate new] dateByAddingTimeInterval:-removeRarelyAccessDataDelay];
-            
             JFFSyncOperation loadDataBlock = ^id(NSError *__autoreleasing *outError) {
                 
-                JFFInternalCacheDB *cacheDB = [[self alloc] initWithCacheDBWithName:dbPropertyName
-                                                                             dbInfo:dbInfo];
+                [self removeOldDataWithAutoremoveProperties:autoremoveProperties
+                                             dbPropertyName:dbPropertyName
+                                                     dbInfo:dbInfo];
                 
-                [cacheDB removeRecordsToAccessDate:fromDate];
                 return [NSNull new];
             };
             
@@ -71,14 +93,14 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
 + (void)runAutoremoveDataSchedulerIfNeedsWithName:(NSString *)dbPropertyName
                                            dbInfo:(JFFDBInfo *)dbInfo
 {
-    NSDictionary *dbInfoDict = [dbInfo dbInfo];
-    NSTimeInterval removeRarelyAccessDataDelay =
-    [dbInfoDict autoRemoveByLastAccessDateForDBWithName:dbPropertyName];
+    NSDictionary *dbInfoDict = [dbInfo currentDbInfo];
+    NSDictionary *autoremoveProperties =
+    [dbInfoDict autoRemoveProperiesForDBWithName:dbPropertyName];
     
-    if (removeRarelyAccessDataDelay != 0) {
+    if (autoremoveProperties) {
         
         [self runAutoremoveDataSchedulerWithName:dbPropertyName
-                     removeRarelyAccessDataDelay:removeRarelyAccessDataDelay
+                            autoremoveProperties:autoremoveProperties
                                           dbInfo:dbInfo];
     }
 }
@@ -86,7 +108,9 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
 - (id)initWithCacheDBWithName:(NSString *)dbPropertyName
                        dbInfo:(JFFDBInfo *)dbInfo
 {
-    self = [super initWithCacheFileName:dbPropertyName];
+    NSString *filePath = [[dbInfo dbInfo] fileNameForDBWithName:dbPropertyName];
+    
+    self = [super initWithCacheFileName:filePath];
     
     if (self) {
         _configPropertyName = dbPropertyName;
@@ -115,7 +139,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
 
 - (NSNumber*)timeToLiveInHours
 {
-    NSDictionary *dbInfo = [[JFFDBInfo sharedDBInfo] dbInfo];
+    NSDictionary *dbInfo = [[JFFDBInfo sharedDBInfo] currentDbInfo];
     NSNumber *result = [dbInfo timeToLiveInHoursForDBWithName:_configPropertyName];
     return result;
 }

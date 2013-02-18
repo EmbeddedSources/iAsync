@@ -31,6 +31,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 }
 
 @property (nonatomic, readonly) dispatch_queue_t queue;
+@property (nonatomic, readonly) NSString *folder;
 
 - (id)initWithDBName:(NSString *)dbName;
 
@@ -60,10 +61,20 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
         _dispatchQueue = getOrCreateDispatchQueueForFile(dbName);
         dispatch_retain(_dispatchQueue);
         
+        NSString *const dbPath = [NSString documentsPathByAppendingPathComponent:dbName];
+        
+        _folder = [dbPath stringByDeletingLastPathComponent];
+        
         __block BOOL ok = NO;
         
-        safe_dispatch_barrier_sync(self.queue, ^ {
-            NSString *const dbPath = [NSString documentsPathByAppendingPathComponent:dbName];
+        safe_dispatch_barrier_sync(self.queue, ^{
+            
+            BOOL created = [[NSFileManager defaultManager] createDirectoryAtPath:_folder
+                                                     withIntermediateDirectories:YES
+                                                                      attributes:nil
+                                                                           error:nil];
+            
+            NSParameterAssert(created);
             
             if (sqlite3_open([dbPath UTF8String], &_db) != SQLITE_OK) {
                 NSLog(@"open - %@ path: %@", [self errorMessage], dbPath);
@@ -132,16 +143,19 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 
 @implementation JFFBaseDB
 {
-    NSString *_cacheName;
+    NSString *_cacheFileName;
+    NSString *_cachePath;
     JFFSQLiteDB *_db;
 }
 
 - (id)initWithCacheFileName:(NSString *)cacheName
 {
+    NSParameterAssert(cacheName);
+    
     self = [super init];
     
     if (self) {
-        _cacheName = cacheName;
+        _cacheFileName = cacheName;
     }
     
     return self;
@@ -150,7 +164,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 - (JFFSQLiteDB *)db
 {
     if (!_db) {
-        _db = [[JFFSQLiteDB alloc] initWithDBName:_cacheName];
+        _db = [[JFFSQLiteDB alloc] initWithDBName:_cacheFileName];
         
         NSParameterAssert(_db);
         if (_db) {
@@ -194,7 +208,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 
 - (NSString *)fileLinkForRecordId:(NSString *)recordId
 {
-    NSString *query = [[NSString alloc] initWithFormat: @"SELECT file_link FROM records WHERE record_id='%@';",
+    NSString *query = [[NSString alloc] initWithFormat:@"SELECT file_link FROM records WHERE record_id='%@';",
                        recordId];
     
     __block NSString *result;
@@ -228,7 +242,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 - (void)removeRecordsForRecordId:(id)recordId
                         fileLink:(NSString *)fileLink
 {
-    [fileLink cacheDBFileLinkRemoveFile];
+    [fileLink cacheDBFileLinkRemoveFileWithFolder:self.db.folder];
     
     NSString *removeQuery = [[NSString alloc] initWithFormat:@"DELETE FROM records WHERE record_id LIKE '%@';",
                              recordId];
@@ -250,7 +264,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
          forRecord:(NSString *)recordId
           fileLink:(NSString *)fileLink
 {
-    [fileLink cacheDBFileLinkSaveData:data];
+    [fileLink cacheDBFileLinkSaveData:data folder:self.db.folder];
     
     NSString *updateQuery = [[NSString alloc] initWithFormat:@"UPDATE records SET update_time='%f', access_time='%f' WHERE record_id='%@';",
                              [self currentTime],
@@ -286,7 +300,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
         
         if ([self prepareQuery:addQuery statement:&statement]) {
             if (sqlite3_step(statement) == SQLITE_DONE) {
-                [fileLink cacheDBFileLinkSaveData: data];
+                [fileLink cacheDBFileLinkSaveData:data folder:self.db.folder];
             } else {
                 NSLog(@"%@ - %@", addQuery, [self errorMessage]);
             }
@@ -313,10 +327,14 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
         
         if ([self.db prepareQuery:query statement:&statement]) {
             while (sqlite3_step(statement) == SQLITE_ROW) {
-                const unsigned char *str = sqlite3_column_text(statement, 0);
-                NSString *fileLink = @((const char *)str);
                 
-                [fileLink cacheDBFileLinkRemoveFile];
+                @autoreleasepool {
+                    
+                    const unsigned char *str = sqlite3_column_text(statement, 0);
+                    NSString *fileLink = @((const char *)str);
+                    
+                    [fileLink cacheDBFileLinkRemoveFileWithFolder:self.db.folder];
+                }
             }
             sqlite3_finalize(statement);
         }
@@ -350,6 +368,92 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     [self removeRecordsToDate:date dateFieldName:@"access_time"];
 }
 
+- (unsigned long long int)folderSize
+{
+    NSString *folderPath = self.db.folder;
+    NSArray *filesArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:folderPath error:nil];
+    NSEnumerator *filesEnumerator = [filesArray objectEnumerator];
+    NSString *fileName;
+    unsigned long long int fileSize = 0;
+    
+    while (fileName = [filesEnumerator nextObject]) {
+        
+        @autoreleasepool {
+            
+            NSString *path = [folderPath stringByAppendingPathComponent:fileName];
+            NSDictionary *fileDictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
+            fileSize += [fileDictionary fileSize];
+        }
+    }
+    
+    return fileSize;
+}
+
+- (void)removeRecordsWhileTotalSizeMoreThenBytes:(unsigned long long)sizeInBytes
+{
+    NSString *selectQuery = [[NSString alloc] initWithFormat:@"SELECT file_link FROM records ORDER BY access_time"]; //ORDER BY ASC is default
+    
+    dispatch_barrier_async([self db].queue, ^ {
+        
+        unsigned long long int totalSize = [self folderSize];
+        unsigned long long int filesRemoved = 0;
+        unsigned long long int sizeToRemove = totalSize - sizeInBytes;
+        
+        {
+            sqlite3_stmt* statement = 0;
+            
+            NSString *selectQuery2 = [[NSString alloc] initWithFormat:@"%@;", selectQuery]; //ORDER BY ASC is default
+            if ([self.db prepareQuery:selectQuery2 statement:&statement]) {
+                
+                while (sqlite3_step(statement) == SQLITE_ROW && sizeToRemove > 0) {
+                    
+                    @autoreleasepool {
+                    
+                        const unsigned char *str = sqlite3_column_text(statement, 0);
+                        NSString *fileLink = @((const char *)str);
+                        
+                        //remove file
+                        {
+                            NSString *filePath = [fileLink cacheDBFileLinkPathWithFolder:self.db.folder];
+                            NSDictionary *fileDictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+                            unsigned long long int fileSize = [fileDictionary fileSize];
+                            
+                            ++filesRemoved;
+                            if (sizeToRemove > fileSize) {
+                                
+                                sizeToRemove -= fileSize;
+                            } else {
+                                
+                                sizeToRemove = 0;
+                            }
+                            
+                            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+                            
+                        }
+                    }
+                }
+                sqlite3_finalize(statement);
+            }
+        }
+        
+        //////////
+        
+        if (filesRemoved > 0) {
+            
+            NSString *removeQuery = [[NSString alloc] initWithFormat:@"DELETE FROM records WHERE file_link IN (%@ LIMIT %llu);", selectQuery, filesRemoved];
+            
+            sqlite3_stmt *statement = 0;
+            if ([self prepareQuery:removeQuery statement:&statement]) {
+                if(sqlite3_step( statement ) != SQLITE_DONE ) {
+                    NSLog(@"%@ - %@", removeQuery, [self errorMessage]);
+                }
+                
+                sqlite3_finalize(statement);
+            }
+        }
+    });
+}
+
 - (NSData *)dataForKey:(id)key
 {
     return [self dataForKey:key lastUpdateTime:nil];
@@ -374,7 +478,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
             if (sqlite3_step(statement) == SQLITE_ROW) {
                 const unsigned char *str = sqlite3_column_text(statement, linkIndex);
                 NSString *fileLink = @((const char *)str);
-                recordData = [fileLink cacheDBFileLinkData];
+                recordData = [fileLink cacheDBFileLinkDataWithFolder:self.db.folder];
                 
                 if (date && recordData) {
                     NSTimeInterval dateInetrval = sqlite3_column_double(statement, dateIndex);
@@ -429,11 +533,15 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
         sqlite3_stmt *statement = 0;
         if ([self.db prepareQuery:query statement:&statement]) {
             while (sqlite3_step(statement) == SQLITE_ROW) {
-                const unsigned char *str = sqlite3_column_text(statement, 0);
-                NSString *fileLink = @((const char *)str);
                 
-                //JTODO remove files in separate tread, do nont wait it
-                [fileLink cacheDBFileLinkRemoveFile];
+                @autoreleasepool {
+                    
+                    const unsigned char *str = sqlite3_column_text(statement, 0);
+                    NSString *fileLink = @((const char *)str);
+                    
+                    //JTODO remove files in separate tread, do nont wait it
+                    [fileLink cacheDBFileLinkRemoveFileWithFolder:self.db.folder];
+                }
             }
             sqlite3_finalize(statement);
         }
@@ -459,7 +567,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 {
     NSString *recordId = [key toCompositeKey];
     
-    NSString* fileLink = [self fileLinkForRecordId: recordId];
+    NSString* fileLink = [self fileLinkForRecordId:recordId];
     
     if (!data && [fileLink length] != 0) {
         [self removeRecordsForRecordId:recordId

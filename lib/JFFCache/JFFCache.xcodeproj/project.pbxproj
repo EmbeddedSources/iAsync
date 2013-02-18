@@ -7,57 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B2A4AA815EF6921004ABB2E /* NSString+CacheFSManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2A4AA615EF6921004ABB2E /* NSString+CacheFSManager.h */; };
-		1B2A4AA915EF6921004ABB2E /* NSString+CacheFSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A4AA715EF6921004ABB2E /* NSString+CacheFSManager.m */; };
-		1BDA4D5E1450044700DCEDDE /* NSObject+CompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D4D1450044700DCEDDE /* NSObject+CompositeKey.h */; };
-		1BDA4D5F1450044700DCEDDE /* NSObject+CompositeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D4E1450044700DCEDDE /* NSObject+CompositeKey.m */; };
-		1BDA4D601450044700DCEDDE /* NSString+CompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D4F1450044700DCEDDE /* NSString+CompositeKey.h */; };
-		1BDA4D611450044700DCEDDE /* NSString+CompositeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D501450044700DCEDDE /* NSString+CompositeKey.m */; };
-		1BDA4D621450044700DCEDDE /* JFFBaseDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D511450044700DCEDDE /* JFFBaseDB.h */; };
-		1BDA4D631450044700DCEDDE /* JFFBaseDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D521450044700DCEDDE /* JFFBaseDB.m */; };
-		1BDA4D641450044700DCEDDE /* JFFCacheDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D531450044700DCEDDE /* JFFCacheDB.h */; };
-		1BDA4D651450044700DCEDDE /* JFFCaches.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D541450044700DCEDDE /* JFFCaches.h */; };
-		1BDA4D661450044700DCEDDE /* JFFCaches.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D551450044700DCEDDE /* JFFCaches.m */; };
-		1BDA4D671450044700DCEDDE /* JFFDBCompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D561450044700DCEDDE /* JFFDBCompositeKey.h */; };
-		1BDA4D681450044700DCEDDE /* JFFDBCompositeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D571450044700DCEDDE /* JFFDBCompositeKey.m */; };
-		1BDA4D691450044700DCEDDE /* JFFDBInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D581450044700DCEDDE /* JFFDBInfo.h */; };
-		1BDA4D6A1450044700DCEDDE /* JFFDBInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D591450044700DCEDDE /* JFFDBInfo.m */; };
-		1BDA4D6B1450044700DCEDDE /* JFFDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D5A1450044700DCEDDE /* JFFDBManager.h */; };
-		1BDA4D6C1450044700DCEDDE /* JFFDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D5B1450044700DCEDDE /* JFFDBManager.m */; };
-		1BDA4D6D1450044700DCEDDE /* JFFThumbnailStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BDA4D5C1450044700DCEDDE /* JFFThumbnailStorage.h */; };
-		1BDA4D6E1450044700DCEDDE /* JFFThumbnailStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDA4D5D1450044700DCEDDE /* JFFThumbnailStorage.m */; };
+		4CA0CAA816CE864C0007A85D /* JFFCacheError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAA616CE864C0007A85D /* JFFCacheError.h */; };
+		4CA0CAA916CE864C0007A85D /* JFFCacheError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAA716CE864C0007A85D /* JFFCacheError.m */; };
+		4CA0CAC116CE86B90007A85D /* NSDictionary+DBInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAAB16CE86B80007A85D /* NSDictionary+DBInfo.h */; };
+		4CA0CAC216CE86B90007A85D /* NSDictionary+DBInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAAC16CE86B80007A85D /* NSDictionary+DBInfo.m */; };
+		4CA0CAC316CE86B90007A85D /* NSObject+CompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAAD16CE86B80007A85D /* NSObject+CompositeKey.h */; };
+		4CA0CAC416CE86B90007A85D /* NSObject+CompositeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAAE16CE86B80007A85D /* NSObject+CompositeKey.m */; };
+		4CA0CAC516CE86B90007A85D /* NSString+CacheFSManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAAF16CE86B80007A85D /* NSString+CacheFSManager.h */; };
+		4CA0CAC616CE86B90007A85D /* NSString+CacheFSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAB016CE86B80007A85D /* NSString+CacheFSManager.m */; };
+		4CA0CAC716CE86B90007A85D /* NSString+CompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAB116CE86B80007A85D /* NSString+CompositeKey.h */; };
+		4CA0CAC816CE86B90007A85D /* NSString+CompositeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAB216CE86B80007A85D /* NSString+CompositeKey.m */; };
+		4CA0CAC916CE86B90007A85D /* JFFBaseDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAB316CE86B80007A85D /* JFFBaseDB.h */; };
+		4CA0CACA16CE86B90007A85D /* JFFBaseDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAB416CE86B80007A85D /* JFFBaseDB.m */; };
+		4CA0CACB16CE86B90007A85D /* JFFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAB516CE86B80007A85D /* JFFCache.h */; };
+		4CA0CACC16CE86B90007A85D /* JFFCacheDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAB616CE86B80007A85D /* JFFCacheDB.h */; };
+		4CA0CACD16CE86B90007A85D /* JFFCaches.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAB716CE86B80007A85D /* JFFCaches.h */; };
+		4CA0CACE16CE86B90007A85D /* JFFCaches.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAB816CE86B80007A85D /* JFFCaches.m */; };
+		4CA0CACF16CE86B90007A85D /* JFFDBCompositeKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAB916CE86B80007A85D /* JFFDBCompositeKey.h */; };
+		4CA0CAD016CE86B90007A85D /* JFFDBCompositeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CABA16CE86B90007A85D /* JFFDBCompositeKey.m */; };
+		4CA0CAD116CE86B90007A85D /* JFFDBInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CABB16CE86B90007A85D /* JFFDBInfo.h */; };
+		4CA0CAD216CE86B90007A85D /* JFFDBInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CABC16CE86B90007A85D /* JFFDBInfo.m */; };
+		4CA0CAD316CE86B90007A85D /* JFFDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CABD16CE86B90007A85D /* JFFDBManager.h */; };
+		4CA0CAD416CE86B90007A85D /* JFFDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CABE16CE86B90007A85D /* JFFDBManager.m */; };
+		4CA0CAD516CE86B90007A85D /* JFFThumbnailStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CABF16CE86B90007A85D /* JFFThumbnailStorage.h */; };
+		4CA0CAD616CE86B90007A85D /* JFFThumbnailStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAC016CE86B90007A85D /* JFFThumbnailStorage.m */; };
+		4CA0CAD916CE86F70007A85D /* JFFCacheNoURLError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAD716CE86F70007A85D /* JFFCacheNoURLError.h */; };
+		4CA0CADA16CE86F70007A85D /* JFFCacheNoURLError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAD816CE86F70007A85D /* JFFCacheNoURLError.m */; };
 		6516847B144F4ECD0014670E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6516847A144F4ECD0014670E /* Foundation.framework */; };
-		CEDB12CD1621BCF000A13DCD /* NSDictionary+DBInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = CEDB12CB1621BCF000A13DCD /* NSDictionary+DBInfo.h */; };
-		CEDB12CE1621BCF000A13DCD /* NSDictionary+DBInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB12CC1621BCF000A13DCD /* NSDictionary+DBInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1B1C0B88152D8EB700ECF555 /* JFFCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFCache.h; sourceTree = SOURCE_ROOT; };
-		1B2A4AA615EF6921004ABB2E /* NSString+CacheFSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CacheFSManager.h"; sourceTree = "<group>"; };
-		1B2A4AA715EF6921004ABB2E /* NSString+CacheFSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CacheFSManager.m"; sourceTree = "<group>"; };
-		1BDA4D4D1450044700DCEDDE /* NSObject+CompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CompositeKey.h"; sourceTree = "<group>"; };
-		1BDA4D4E1450044700DCEDDE /* NSObject+CompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CompositeKey.m"; sourceTree = "<group>"; };
-		1BDA4D4F1450044700DCEDDE /* NSString+CompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CompositeKey.h"; sourceTree = "<group>"; };
-		1BDA4D501450044700DCEDDE /* NSString+CompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CompositeKey.m"; sourceTree = "<group>"; };
-		1BDA4D511450044700DCEDDE /* JFFBaseDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFBaseDB.h; sourceTree = SOURCE_ROOT; };
-		1BDA4D521450044700DCEDDE /* JFFBaseDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFBaseDB.m; sourceTree = SOURCE_ROOT; };
-		1BDA4D531450044700DCEDDE /* JFFCacheDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheDB.h; sourceTree = SOURCE_ROOT; };
-		1BDA4D541450044700DCEDDE /* JFFCaches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCaches.h; sourceTree = SOURCE_ROOT; };
-		1BDA4D551450044700DCEDDE /* JFFCaches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCaches.m; sourceTree = SOURCE_ROOT; };
-		1BDA4D561450044700DCEDDE /* JFFDBCompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDBCompositeKey.h; sourceTree = SOURCE_ROOT; };
-		1BDA4D571450044700DCEDDE /* JFFDBCompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDBCompositeKey.m; sourceTree = SOURCE_ROOT; };
-		1BDA4D581450044700DCEDDE /* JFFDBInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDBInfo.h; sourceTree = SOURCE_ROOT; };
-		1BDA4D591450044700DCEDDE /* JFFDBInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDBInfo.m; sourceTree = SOURCE_ROOT; };
-		1BDA4D5A1450044700DCEDDE /* JFFDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDBManager.h; sourceTree = SOURCE_ROOT; };
-		1BDA4D5B1450044700DCEDDE /* JFFDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDBManager.m; sourceTree = SOURCE_ROOT; };
-		1BDA4D5C1450044700DCEDDE /* JFFThumbnailStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFThumbnailStorage.h; sourceTree = SOURCE_ROOT; };
-		1BDA4D5D1450044700DCEDDE /* JFFThumbnailStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFThumbnailStorage.m; sourceTree = SOURCE_ROOT; };
+		4CA0CAA616CE864C0007A85D /* JFFCacheError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheError.h; sourceTree = "<group>"; };
+		4CA0CAA716CE864C0007A85D /* JFFCacheError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCacheError.m; sourceTree = "<group>"; };
+		4CA0CAAB16CE86B80007A85D /* NSDictionary+DBInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DBInfo.h"; sourceTree = "<group>"; };
+		4CA0CAAC16CE86B80007A85D /* NSDictionary+DBInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DBInfo.m"; sourceTree = "<group>"; };
+		4CA0CAAD16CE86B80007A85D /* NSObject+CompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CompositeKey.h"; sourceTree = "<group>"; };
+		4CA0CAAE16CE86B80007A85D /* NSObject+CompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CompositeKey.m"; sourceTree = "<group>"; };
+		4CA0CAAF16CE86B80007A85D /* NSString+CacheFSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CacheFSManager.h"; sourceTree = "<group>"; };
+		4CA0CAB016CE86B80007A85D /* NSString+CacheFSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CacheFSManager.m"; sourceTree = "<group>"; };
+		4CA0CAB116CE86B80007A85D /* NSString+CompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CompositeKey.h"; sourceTree = "<group>"; };
+		4CA0CAB216CE86B80007A85D /* NSString+CompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CompositeKey.m"; sourceTree = "<group>"; };
+		4CA0CAB316CE86B80007A85D /* JFFBaseDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFBaseDB.h; sourceTree = "<group>"; };
+		4CA0CAB416CE86B80007A85D /* JFFBaseDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFBaseDB.m; sourceTree = "<group>"; };
+		4CA0CAB516CE86B80007A85D /* JFFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCache.h; sourceTree = "<group>"; };
+		4CA0CAB616CE86B80007A85D /* JFFCacheDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheDB.h; sourceTree = "<group>"; };
+		4CA0CAB716CE86B80007A85D /* JFFCaches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCaches.h; sourceTree = "<group>"; };
+		4CA0CAB816CE86B80007A85D /* JFFCaches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCaches.m; sourceTree = "<group>"; };
+		4CA0CAB916CE86B80007A85D /* JFFDBCompositeKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDBCompositeKey.h; sourceTree = "<group>"; };
+		4CA0CABA16CE86B90007A85D /* JFFDBCompositeKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDBCompositeKey.m; sourceTree = "<group>"; };
+		4CA0CABB16CE86B90007A85D /* JFFDBInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDBInfo.h; sourceTree = "<group>"; };
+		4CA0CABC16CE86B90007A85D /* JFFDBInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDBInfo.m; sourceTree = "<group>"; };
+		4CA0CABD16CE86B90007A85D /* JFFDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDBManager.h; sourceTree = "<group>"; };
+		4CA0CABE16CE86B90007A85D /* JFFDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDBManager.m; sourceTree = "<group>"; };
+		4CA0CABF16CE86B90007A85D /* JFFThumbnailStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFThumbnailStorage.h; sourceTree = "<group>"; };
+		4CA0CAC016CE86B90007A85D /* JFFThumbnailStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFThumbnailStorage.m; sourceTree = "<group>"; };
+		4CA0CAD716CE86F70007A85D /* JFFCacheNoURLError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheNoURLError.h; sourceTree = "<group>"; };
+		4CA0CAD816CE86F70007A85D /* JFFCacheNoURLError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCacheNoURLError.m; sourceTree = "<group>"; };
 		65168477144F4ECD0014670E /* libJFFCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFCache.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6516847A144F4ECD0014670E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6516847E144F4ECD0014670E /* JFFCache-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFCache-Prefix.pch"; sourceTree = "<group>"; };
 		CE84AD46160327A600019CAF /* JFFCacheDBInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JFFCacheDBInfo.plist; sourceTree = "<group>"; };
-		CEDB12CB1621BCF000A13DCD /* NSDictionary+DBInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DBInfo.h"; sourceTree = "<group>"; };
-		CEDB12CC1621BCF000A13DCD /* NSDictionary+DBInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DBInfo.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,20 +81,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1BDA4D4C1450044700DCEDDE /* Details */ = {
+		4CA0CAA516CE86320007A85D /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				1BDA4D4D1450044700DCEDDE /* NSObject+CompositeKey.h */,
-				1BDA4D4E1450044700DCEDDE /* NSObject+CompositeKey.m */,
-				1BDA4D4F1450044700DCEDDE /* NSString+CompositeKey.h */,
-				1BDA4D501450044700DCEDDE /* NSString+CompositeKey.m */,
-				1B2A4AA615EF6921004ABB2E /* NSString+CacheFSManager.h */,
-				1B2A4AA715EF6921004ABB2E /* NSString+CacheFSManager.m */,
-				CEDB12CB1621BCF000A13DCD /* NSDictionary+DBInfo.h */,
-				CEDB12CC1621BCF000A13DCD /* NSDictionary+DBInfo.m */,
+				4CA0CAA616CE864C0007A85D /* JFFCacheError.h */,
+				4CA0CAA716CE864C0007A85D /* JFFCacheError.m */,
+				4CA0CAD716CE86F70007A85D /* JFFCacheNoURLError.h */,
+				4CA0CAD816CE86F70007A85D /* JFFCacheNoURLError.m */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		4CA0CAAA16CE86B80007A85D /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				4CA0CAAB16CE86B80007A85D /* NSDictionary+DBInfo.h */,
+				4CA0CAAC16CE86B80007A85D /* NSDictionary+DBInfo.m */,
+				4CA0CAAD16CE86B80007A85D /* NSObject+CompositeKey.h */,
+				4CA0CAAE16CE86B80007A85D /* NSObject+CompositeKey.m */,
+				4CA0CAAF16CE86B80007A85D /* NSString+CacheFSManager.h */,
+				4CA0CAB016CE86B80007A85D /* NSString+CacheFSManager.m */,
+				4CA0CAB116CE86B80007A85D /* NSString+CompositeKey.h */,
+				4CA0CAB216CE86B80007A85D /* NSString+CompositeKey.m */,
 			);
 			path = Details;
-			sourceTree = SOURCE_ROOT;
+			sourceTree = "<group>";
 		};
 		6516846C144F4ECD0014670E = {
 			isa = PBXGroup;
@@ -115,22 +135,23 @@
 		6516847C144F4ECD0014670E /* JFFCache */ = {
 			isa = PBXGroup;
 			children = (
+				4CA0CAA516CE86320007A85D /* Errors */,
+				4CA0CAAA16CE86B80007A85D /* Details */,
+				4CA0CAB316CE86B80007A85D /* JFFBaseDB.h */,
+				4CA0CAB416CE86B80007A85D /* JFFBaseDB.m */,
+				4CA0CAB616CE86B80007A85D /* JFFCacheDB.h */,
+				4CA0CAB716CE86B80007A85D /* JFFCaches.h */,
+				4CA0CAB816CE86B80007A85D /* JFFCaches.m */,
+				4CA0CAB916CE86B80007A85D /* JFFDBCompositeKey.h */,
+				4CA0CABA16CE86B90007A85D /* JFFDBCompositeKey.m */,
+				4CA0CABB16CE86B90007A85D /* JFFDBInfo.h */,
+				4CA0CABC16CE86B90007A85D /* JFFDBInfo.m */,
+				4CA0CABD16CE86B90007A85D /* JFFDBManager.h */,
+				4CA0CABE16CE86B90007A85D /* JFFDBManager.m */,
+				4CA0CABF16CE86B90007A85D /* JFFThumbnailStorage.h */,
+				4CA0CAC016CE86B90007A85D /* JFFThumbnailStorage.m */,
+				4CA0CAB516CE86B80007A85D /* JFFCache.h */,
 				CE84AD441603279200019CAF /* Resources */,
-				1BDA4D4C1450044700DCEDDE /* Details */,
-				1BDA4D511450044700DCEDDE /* JFFBaseDB.h */,
-				1BDA4D521450044700DCEDDE /* JFFBaseDB.m */,
-				1BDA4D531450044700DCEDDE /* JFFCacheDB.h */,
-				1BDA4D541450044700DCEDDE /* JFFCaches.h */,
-				1BDA4D551450044700DCEDDE /* JFFCaches.m */,
-				1BDA4D561450044700DCEDDE /* JFFDBCompositeKey.h */,
-				1BDA4D571450044700DCEDDE /* JFFDBCompositeKey.m */,
-				1BDA4D581450044700DCEDDE /* JFFDBInfo.h */,
-				1BDA4D591450044700DCEDDE /* JFFDBInfo.m */,
-				1BDA4D5A1450044700DCEDDE /* JFFDBManager.h */,
-				1BDA4D5B1450044700DCEDDE /* JFFDBManager.m */,
-				1BDA4D5C1450044700DCEDDE /* JFFThumbnailStorage.h */,
-				1BDA4D5D1450044700DCEDDE /* JFFThumbnailStorage.m */,
-				1B1C0B88152D8EB700ECF555 /* JFFCache.h */,
 				6516847D144F4ECD0014670E /* Supporting Files */,
 			);
 			path = JFFCache;
@@ -159,17 +180,20 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BDA4D5E1450044700DCEDDE /* NSObject+CompositeKey.h in Headers */,
-				1BDA4D601450044700DCEDDE /* NSString+CompositeKey.h in Headers */,
-				1BDA4D621450044700DCEDDE /* JFFBaseDB.h in Headers */,
-				1BDA4D641450044700DCEDDE /* JFFCacheDB.h in Headers */,
-				1BDA4D651450044700DCEDDE /* JFFCaches.h in Headers */,
-				1BDA4D671450044700DCEDDE /* JFFDBCompositeKey.h in Headers */,
-				1BDA4D691450044700DCEDDE /* JFFDBInfo.h in Headers */,
-				1BDA4D6B1450044700DCEDDE /* JFFDBManager.h in Headers */,
-				1BDA4D6D1450044700DCEDDE /* JFFThumbnailStorage.h in Headers */,
-				1B2A4AA815EF6921004ABB2E /* NSString+CacheFSManager.h in Headers */,
-				CEDB12CD1621BCF000A13DCD /* NSDictionary+DBInfo.h in Headers */,
+				4CA0CAA816CE864C0007A85D /* JFFCacheError.h in Headers */,
+				4CA0CAC116CE86B90007A85D /* NSDictionary+DBInfo.h in Headers */,
+				4CA0CAC316CE86B90007A85D /* NSObject+CompositeKey.h in Headers */,
+				4CA0CAC516CE86B90007A85D /* NSString+CacheFSManager.h in Headers */,
+				4CA0CAC716CE86B90007A85D /* NSString+CompositeKey.h in Headers */,
+				4CA0CAC916CE86B90007A85D /* JFFBaseDB.h in Headers */,
+				4CA0CACB16CE86B90007A85D /* JFFCache.h in Headers */,
+				4CA0CACC16CE86B90007A85D /* JFFCacheDB.h in Headers */,
+				4CA0CACD16CE86B90007A85D /* JFFCaches.h in Headers */,
+				4CA0CACF16CE86B90007A85D /* JFFDBCompositeKey.h in Headers */,
+				4CA0CAD116CE86B90007A85D /* JFFDBInfo.h in Headers */,
+				4CA0CAD316CE86B90007A85D /* JFFDBManager.h in Headers */,
+				4CA0CAD516CE86B90007A85D /* JFFThumbnailStorage.h in Headers */,
+				4CA0CAD916CE86F70007A85D /* JFFCacheNoURLError.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,16 +247,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BDA4D5F1450044700DCEDDE /* NSObject+CompositeKey.m in Sources */,
-				1BDA4D611450044700DCEDDE /* NSString+CompositeKey.m in Sources */,
-				1BDA4D631450044700DCEDDE /* JFFBaseDB.m in Sources */,
-				1BDA4D661450044700DCEDDE /* JFFCaches.m in Sources */,
-				1BDA4D681450044700DCEDDE /* JFFDBCompositeKey.m in Sources */,
-				1BDA4D6A1450044700DCEDDE /* JFFDBInfo.m in Sources */,
-				1BDA4D6C1450044700DCEDDE /* JFFDBManager.m in Sources */,
-				1BDA4D6E1450044700DCEDDE /* JFFThumbnailStorage.m in Sources */,
-				1B2A4AA915EF6921004ABB2E /* NSString+CacheFSManager.m in Sources */,
-				CEDB12CE1621BCF000A13DCD /* NSDictionary+DBInfo.m in Sources */,
+				4CA0CAA916CE864C0007A85D /* JFFCacheError.m in Sources */,
+				4CA0CAC216CE86B90007A85D /* NSDictionary+DBInfo.m in Sources */,
+				4CA0CAC416CE86B90007A85D /* NSObject+CompositeKey.m in Sources */,
+				4CA0CAC616CE86B90007A85D /* NSString+CacheFSManager.m in Sources */,
+				4CA0CAC816CE86B90007A85D /* NSString+CompositeKey.m in Sources */,
+				4CA0CACA16CE86B90007A85D /* JFFBaseDB.m in Sources */,
+				4CA0CACE16CE86B90007A85D /* JFFCaches.m in Sources */,
+				4CA0CAD016CE86B90007A85D /* JFFDBCompositeKey.m in Sources */,
+				4CA0CAD216CE86B90007A85D /* JFFDBInfo.m in Sources */,
+				4CA0CAD416CE86B90007A85D /* JFFDBManager.m in Sources */,
+				4CA0CAD616CE86B90007A85D /* JFFThumbnailStorage.m in Sources */,
+				4CA0CADA16CE86F70007A85D /* JFFCacheNoURLError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +282,11 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../;
+				HEADER_SEARCH_PATHS = (
+					../,
+					../JFFRestKit,
+					.,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 			};
@@ -272,7 +302,11 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../;
+				HEADER_SEARCH_PATHS = (
+					../,
+					../JFFRestKit,
+					.,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -286,10 +320,6 @@
 				DSTROOT = /tmp/JFFCache.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFCache/JFFCache-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					../,
-					../JFFRestKit,
-				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -303,10 +333,6 @@
 				DSTROOT = /tmp/JFFCache.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFCache/JFFCache-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					../,
-					../JFFRestKit,
-				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

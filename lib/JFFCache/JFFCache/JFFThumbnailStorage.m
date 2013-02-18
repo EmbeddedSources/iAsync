@@ -3,12 +3,31 @@
 #import "JFFCacheDB.h"
 #import "JFFCaches.h"
 
+#import "JFFCacheNoURLError.h"
+
 #import <JFFRestKit/JFFRestKit.h>
 #import <JFFNetwork/JFFNetworkBlocksFunctions.h>
 
 #import <UIKit/UIKit.h>
 
 static NSString *const cacheQueueName = @"com.embedded_sources.jffcache.thumbnail_storage.cache";
+
+@interface JFFCanNotCreateImageError : JFFError
+
+@end
+
+@implementation JFFCanNotCreateImageError
+
+- (id)init
+{
+    return [self initWithDescription:@"can not create image with given data"];
+}
+
+- (void)writeErrorWithJFFLogger
+{
+}
+
+@end
 
 //TODO try to use NSURLCache
 static JFFAsyncBinderForIdentifier imageDataToUIImageBinder()
@@ -22,8 +41,7 @@ static JFFAsyncBinderForIdentifier imageDataToUIImageBinder()
             if (image)
                 return asyncOperationWithResult(image);
             
-            static NSString *const errorDescription = @"can not create image with given data";
-            return asyncOperationWithError([JFFError newErrorWithDescription:errorDescription]);
+            return asyncOperationWithError([JFFCanNotCreateImageError new]);
         };
         // TODO: Test perfomance
 //        return ^JFFAsyncOperation(NSData *imageData) {
@@ -31,8 +49,7 @@ static JFFAsyncBinderForIdentifier imageDataToUIImageBinder()
 //                UIImage *image = [UIImage imageWithData:imageData];
 //                
 //                if (!image) {
-//                    static NSString *const errorDescription = @"can not create image with given data";
-//                    *outError = [JFFError newErrorWithDescription:errorDescription];
+//                    *outError = [JFFCanNotCreateImageError new];
 //                }
 //                return image;
 //            });
@@ -187,10 +204,10 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
                                                 CGSize scaleSize,
                                                 UIViewContentMode contentMode)
 {
-    return  [[NSString alloc] initWithFormat:@"resized_image_key:%@<->%@<->%d",
-             url,
-             NSStringFromCGSize(scaleSize),
-             contentMode];
+    return [[NSString alloc] initWithFormat:@"resized_image_key:%@<->%@<->%d",
+            url,
+            NSStringFromCGSize(scaleSize),
+            contentMode];
 }
 
 - (JFFAsyncOperation)cachedScaleImageForSize:(CGSize)scaleSize
@@ -255,7 +272,7 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
     if (url) {
         assert([url isKindOfClass:[NSURL class]]);
     } else {
-        return asyncOperationWithError([JFFError newErrorWithDescription:@"can not load image: no url"]);
+        return asyncOperationWithError([JFFCacheNoURLError new]);
     }
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
@@ -286,7 +303,7 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
     if (url) {
         assert([url isKindOfClass:[NSURL class]]);
     } else {
-        return asyncOperationWithError([JFFError newErrorWithDescription:@"can not load image: no url"]);
+        return asyncOperationWithError([JFFCacheNoURLError new]);
     }
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
@@ -304,7 +321,7 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
         id key = cacheKeyForURLScaleSizeAndContentMode(url, scaleSize, contentMode);
         
         //TODO: also check the last update date here
-        JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc] initWithName:@"imagesByUrl"
+        JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:@"imagesByUrl"
                                                                           key:key];
         
         loader = [self asyncOperationForPropertyWithPath:propertyPath

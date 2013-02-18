@@ -2,6 +2,6 @@
 
 @interface JFFDBManager : NSObject
 
--(void)synchronizeDB;
++ (void)synchronizeDB;
 
 @end

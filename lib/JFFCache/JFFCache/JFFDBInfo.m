@@ -57,7 +57,7 @@ static JFFDBInfo* sharedInfo = nil;
 
 + (JFFDBInfo *)newDbInfo
 {
-    NSString *defaultPath = [[NSBundle mainBundle]pathForResource:@"JFFCacheDBInfo" ofType:@"plist"];
+    NSString *defaultPath = [[NSBundle mainBundle] pathForResource:@"JFFCacheDBInfo" ofType:@"plist"];
     return [[self alloc] initWithInfoPath:defaultPath];
 }
 
@@ -83,34 +83,34 @@ static JFFDBInfo* sharedInfo = nil;
 
 - (NSDictionary *)currentDbInfo
 {
-    if (self->_currentDbInfo)
-        return self->_currentDbInfo;
+    if (_currentDbInfo)
+        return _currentDbInfo;
     
     @synchronized(self) {
-        if (self->_currentDbInfo)
-            return self->_currentDbInfo;
+        if (_currentDbInfo)
+            return _currentDbInfo;
         
         NSString *path = [[self class] currentDBInfoFilePath];
-        self->_currentDbInfo = [[NSDictionary alloc] initWithContentsOfFile:path];
-        self->_currentDbInfo = self->_currentDbInfo?:@{};
+        NSDictionary *currentDbInfo = [[NSDictionary alloc] initWithContentsOfFile:path];
+        self.currentDbInfo = currentDbInfo?:@{};
     }
     
-    return self->_currentDbInfo;
+    return _currentDbInfo;
 }
 
 - (void)setCurrentDbInfo:(NSDictionary *)currentDbInfo
 {
-    if (self->_currentDbInfo == currentDbInfo)
+    if (_currentDbInfo == currentDbInfo)
         return;
     
     @synchronized(self) {
-        if (self->_currentDbInfo == currentDbInfo)
+        if (_currentDbInfo == currentDbInfo)
             return;
         
-        self->_currentDbInfo = currentDbInfo?:@{};
+        _currentDbInfo = currentDbInfo?:@{};
         
         NSString *path = [[self class] currentDBInfoFilePath];
-        [self->_currentDbInfo writeToFile:path atomically:YES];
+        [_currentDbInfo writeToFile:path atomically:YES];
         [path addSkipBackupAttribute];
     }
 }

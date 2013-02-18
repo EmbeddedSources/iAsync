@@ -17,6 +17,8 @@
 
 - (void)removeRecordsForKey:(id)key;
 
+- (void)removeRecordsWhileTotalSizeMoreThenBytes:(unsigned long long)sizeInBytes;
+
 - (void)removeAllRecords;
 
 @end
