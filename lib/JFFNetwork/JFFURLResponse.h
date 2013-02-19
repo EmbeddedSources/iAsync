@@ -7,6 +7,6 @@
 @property ( nonatomic ) NSDictionary* allHeaderFields;
 @property ( nonatomic ) NSURL* url;
 
-@property ( nonatomic, readonly ) long long expectedContentLength;
+@property (nonatomic, readonly) unsigned long long expectedContentLength;
 
 @end

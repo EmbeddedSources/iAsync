@@ -9,10 +9,10 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFInvalidInstagramResponseURLError *copy = [[[self class] allocWithZone:zone] init];
+    JFFInvalidInstagramResponseURLError *copy = [super copyWithZone:zone];
     
     if (copy) {
-        copy->_url = [self->_url copyWithZone:zone];
+        copy->_url = [_url copyWithZone:zone];
     }
     
     return copy;

@@ -9,12 +9,12 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFJsonValidationError *copy = [[[self class] allocWithZone:zone] init];
+    JFFJsonValidationError *copy = [super copyWithZone:zone];
     
     if (copy) {
-        copy->_jsonObject  = [self->_jsonObject  copyWithZone:zone];
-        copy->_jsonPattern = [self->_jsonPattern copyWithZone:zone];
-        copy->_message     = [self->_message     copyWithZone:zone];
+        copy->_jsonObject  = [_jsonObject  copyWithZone:zone];
+        copy->_jsonPattern = [_jsonPattern copyWithZone:zone];
+        copy->_message     = [_message     copyWithZone:zone];
     }
     
     return copy;

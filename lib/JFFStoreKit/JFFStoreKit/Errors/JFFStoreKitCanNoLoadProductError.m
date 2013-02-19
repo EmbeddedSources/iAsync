@@ -9,10 +9,10 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFStoreKitCanNoLoadProductError *copy = [[[self class] allocWithZone:zone] init];
+    JFFStoreKitCanNoLoadProductError *copy = [super copyWithZone:zone];
     
     if (copy) {
-        copy->_productIdentifier = [self->_productIdentifier copyWithZone:zone];
+        copy->_productIdentifier = [_productIdentifier copyWithZone:zone];
     }
     
     return copy;

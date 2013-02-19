@@ -47,10 +47,10 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFErrorNoFreshData *copy = [[[self class] allocWithZone:zone] init];
+    JFFErrorNoFreshData *copy = [super copyWithZone:zone];
     
     if (copy) {
-        copy->_cachedData = [self->_cachedData copyWithZone:zone];
+        copy->_cachedData = [_cachedData copyWithZone:zone];
     }
     
     return copy;

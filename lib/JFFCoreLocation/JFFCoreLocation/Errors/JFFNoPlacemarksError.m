@@ -9,10 +9,10 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFNoPlacemarksError *copy = [[[self class] allocWithZone:zone] init];
+    JFFNoPlacemarksError *copy = [super copyWithZone:zone];
     
     if (copy) {
-        copy->_location = [self->_location copyWithZone:zone];
+        copy->_location = [_location copyWithZone:zone];
     }
     
     return copy;

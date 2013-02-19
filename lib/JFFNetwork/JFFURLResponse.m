@@ -6,9 +6,9 @@
 
 @dynamic expectedContentLength;
 
-- (long long)expectedContentLength
+- (unsigned long long)expectedContentLength
 {
-    return [self->_allHeaderFields[@"Content-Length"] longLongValue];
+    return [self->_allHeaderFields[@"Content-Length"] unsignedLongLongValue];
 }
 
 #pragma mark -

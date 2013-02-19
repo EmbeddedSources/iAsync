@@ -7,16 +7,16 @@
     JFFURLConnectionParams *copy = [[[self class] allocWithZone:zone] init];
     
     if (copy) {
-        copy->_url                 = [self->_url      copyWithZone:zone];
-        copy->_httpBody            = [self->_httpBody copyWithZone:zone];
-        copy->_headers             = [self->_headers  copyWithZone:zone];
-        copy->_httpBodyStream      = self->_httpBodyStream;
-        copy->_useLiveConnection   = self->_useLiveConnection;
-        copy->_certificateCallback = self->_certificateCallback;
+        copy->_url                 = [_url      copyWithZone:zone];
+        copy->_httpBody            = [_httpBody copyWithZone:zone];
+        copy->_headers             = [_headers  copyWithZone:zone];
+        copy->_httpBodyStream      = _httpBodyStream;
+        copy->_useLiveConnection   = _useLiveConnection;
+        copy->_certificateCallback = _certificateCallback;
         
         //cookie storage is common object for different connections
         //do not copy it
-        copy->_cookiesStorage      = self->_cookiesStorage;
+        copy->_cookiesStorage      = _cookiesStorage;
     }
     
     return copy;

@@ -16,4 +16,20 @@
                                 code:statusCode];
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    JHttpError *copy = [super copyWithZone:zone];
+    
+    if (copy) {
+        copy->_context = [_context copyWithZone:zone];
+    }
+    
+    return copy;
+}
+
+- (void)writeErrorWithJFFLogger
+{
+    [JFFLogger logErrorWithFormat:@"%@ Http code:%d cantext:%@", [self localizedDescription], self.code, _context];
+}
+
 @end

@@ -7,6 +7,6 @@
 
 @property (nonatomic) NSInteger statusCode;
 @property (nonatomic) NSDictionary *allHeaderFields;
-@property (nonatomic, readonly) long long expectedContentLength;
+@property (nonatomic, readonly) unsigned long long expectedContentLength;
 
 @end

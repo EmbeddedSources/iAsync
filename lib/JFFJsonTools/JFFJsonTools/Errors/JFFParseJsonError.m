@@ -9,12 +9,12 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFParseJsonError *copy = [[[self class] allocWithZone:zone] init];
+    JFFParseJsonError *copy = [super copyWithZone:zone];
     
     if (copy) {
-        copy->_nativeError = [self->_nativeError copyWithZone:zone];
-        copy->_data        = [self->_data        copyWithZone:zone];
-        copy->_context     = [self->_context     copyWithZone:zone];
+        copy->_nativeError = [_nativeError copyWithZone:zone];
+        copy->_data        = [_data        copyWithZone:zone];
+        copy->_context     = [_context     copyWithZone:zone];
     }
     
     return copy;

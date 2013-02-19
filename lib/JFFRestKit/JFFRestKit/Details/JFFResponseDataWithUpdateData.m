@@ -7,8 +7,8 @@
     JFFResponseDataWithUpdateData *copy = [[[self class] allocWithZone:zone] init];
     
     if (copy) {
-        copy->_data       = [self->_data       copyWithZone:zone];
-        copy->_updateDate = [self->_updateDate copyWithZone:zone];
+        copy->_data       = [_data       copyWithZone:zone];
+        copy->_updateDate = [_updateDate copyWithZone:zone];
     }
     
     return copy;

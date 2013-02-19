@@ -4,7 +4,7 @@
 
 @interface JFFDBCompositeKey ()
 
-@property ( nonatomic ) NSMutableArray* keys;
+@property (nonatomic) NSMutableArray *keys;
 
 @end
 
@@ -15,7 +15,7 @@
     JFFDBCompositeKey *copy = [[[self class] allocWithZone:zone] init];
     
     if (copy) {
-        copy->_keys = [self->_keys copyWithZone:zone];
+        copy->_keys = [_keys copyWithZone:zone];
     }
     
     return copy;
@@ -23,7 +23,7 @@
 
 - (NSUInteger)hash
 {
-    return [ self.keys hash ];
+    return [self.keys hash];
 }
 
 - (BOOL)isEqual:(id)object
@@ -34,6 +34,8 @@
 
 - (id)initWithKeys:(NSArray *)keys
 {
+    NSParameterAssert([keys isKindOfClass:[NSArray class]]);
+    
     self = [super init];
     
     if (self) {

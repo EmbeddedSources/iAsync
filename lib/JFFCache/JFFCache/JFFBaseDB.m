@@ -395,7 +395,6 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     
     dispatch_barrier_async([self db].queue, ^ {
         
-        ///TODO22 it removes to lot of files
         unsigned long long int totalSize = [self folderSize];
         unsigned long long int filesRemoved = 0;
         

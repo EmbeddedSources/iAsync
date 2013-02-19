@@ -9,11 +9,11 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFStoreKitTransactionStateFailedError *copy = [[[self class] allocWithZone:zone] init];
+    JFFStoreKitTransactionStateFailedError *copy = [super copyWithZone:zone];
     
     if (copy) {
         
-        copy->_originalError = [self->_originalError copyWithZone:zone];
+        copy->_originalError = [_originalError copyWithZone:zone];
     }
     
     return copy;

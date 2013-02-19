@@ -9,10 +9,10 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    JFFAddressBookAccessError *copy = [[[self class] allocWithZone:zone] init];
+    JFFAddressBookAccessError *copy = [super copyWithZone:zone];
     
     if (copy) {
-        copy->_nativeError = [self->_nativeError copyWithZone:zone];
+        copy->_nativeError = [_nativeError copyWithZone:zone];
     }
     
     return copy;

@@ -10,7 +10,7 @@
 
 #import "NSURL+Cookies.h"
 
-static JFFAnalyzer downloadErrorFlagResponseAnalyzer()
+static JFFAnalyzer downloadErrorFlagResponseAnalyzer(id<NSCopying> context)
 {
     return ^id(id< JNUrlResponse > response, NSError **outError) {
         NSInteger statusCode = [response statusCode];
@@ -18,6 +18,7 @@ static JFFAnalyzer downloadErrorFlagResponseAnalyzer()
         if ([JHttpFlagChecker isDownloadErrorFlag:statusCode]) {
             if (outError) {
                 JHttpError *httpError = [[JHttpError alloc]initWithHttpCode:statusCode];
+                httpError.context = context;
                 *outError = httpError;
             }
             return nil;
@@ -104,7 +105,7 @@ JFFAsyncOperation chunkedURLResponseLoader(
     params.url      = url;
     params.httpBody = postData;
     params.headers  = headers;
-    return privateGenericChunkedURLResponseLoader(params, downloadErrorFlagResponseAnalyzer());
+    return privateGenericChunkedURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params));
 }
 
 JFFAsyncOperation dataURLResponseLoader(NSURL *url,
@@ -115,7 +116,7 @@ JFFAsyncOperation dataURLResponseLoader(NSURL *url,
     params.url      = url;
     params.httpBody = postData;
     params.headers  = headers;
-    return privateGenericDataURLResponseLoader(params, downloadErrorFlagResponseAnalyzer());
+    return privateGenericDataURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params));
 }
 
 JFFAsyncOperation liveChunkedURLResponseLoader(NSURL *url,
@@ -127,19 +128,19 @@ JFFAsyncOperation liveChunkedURLResponseLoader(NSURL *url,
     params.httpBody = postData;
     params.headers  = headers;
     params.useLiveConnection = YES;
-    return privateGenericChunkedURLResponseLoader(params, downloadErrorFlagResponseAnalyzer());
+    return privateGenericChunkedURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params));
 }
 
 JFFAsyncOperation liveDataURLResponseLoader(NSURL* url,
                                             NSData* postData,
                                             NSDictionary* headers)
 {
-    JFFURLConnectionParams *params_ = [JFFURLConnectionParams new];
-    params_.url      = url;
-    params_.httpBody = postData;
-    params_.headers  = headers;
-    params_.useLiveConnection = YES;
-    return privateGenericDataURLResponseLoader(params_, downloadErrorFlagResponseAnalyzer());
+    JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+    params.url      = url;
+    params.httpBody = postData;
+    params.headers  = headers;
+    params.useLiveConnection = YES;
+    return privateGenericDataURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params));
 }
 
 JFFAsyncOperation perkyDataURLResponseLoader(NSURL *url,
