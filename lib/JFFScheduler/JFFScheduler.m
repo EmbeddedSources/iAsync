@@ -45,7 +45,7 @@ char jffSchedulerKey;
 {
     [self cancelAllScheduledOperations];
     
-    dispatch_release(self->_queue);
+    dispatch_release(_queue);
 }
 
 - (id)init
@@ -53,9 +53,9 @@ char jffSchedulerKey;
     self = [super init];
     
     if (self) {
-        self->_queue = dispatch_get_current_queue();
-        dispatch_retain(self->_queue);
-        self->_cancelBlocks = [NSMutableArray new];
+        _queue = dispatch_get_current_queue();
+        dispatch_retain(_queue);
+        _cancelBlocks = [NSMutableArray new];
     }
     
     return self;
@@ -74,7 +74,7 @@ char jffSchedulerKey;
     if (!actionBlock)
         return ^(){ /* do nothing */ };
     
-    __block dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self->_queue);
+    __block dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
     
     int64_t delta = duration * NSEC_PER_SEC;
     dispatch_source_set_timer(timer,
@@ -97,7 +97,7 @@ char jffSchedulerKey;
         [unretainedSelf->_cancelBlocks removeObject:unretainedCancelTimerBlockHolder.simpleBlock];
     };
     
-    [self->_cancelBlocks addObject:cancelTimerBlockHolder.simpleBlock];
+    [_cancelBlocks addObject:cancelTimerBlockHolder.simpleBlock];
     
     actionBlock = [actionBlock copy];
     dispatch_block_t eventHandlerBlock = [^void(void) {
@@ -113,8 +113,8 @@ char jffSchedulerKey;
 
 - (void)cancelAllScheduledOperations
 {
-    NSSet *cancelBlocks = [self->_cancelBlocks copy];
-    self->_cancelBlocks = nil;
+    NSSet *cancelBlocks = [_cancelBlocks copy];
+    _cancelBlocks = nil;
     for (JFFCancelScheduledBlock cancel in cancelBlocks)
         cancel();
 }

@@ -29,7 +29,7 @@
 {
     return asyncOperationWithSyncOperationAndQueue(^id(NSError *__autoreleasing *outError) {
         
-        [self->_cacheFactory() setData:data forKey:key];
+        [_cacheFactory() setData:data forKey:key];
         return [NSNull new];
     }, [_cacheQueueName cStringUsingEncoding:NSUTF8StringEncoding]);
 }
@@ -39,7 +39,7 @@
     return asyncOperationWithSyncOperationAndQueue(^id(NSError *__autoreleasing *outError) {
         
         NSDate *date;
-        NSData *data = [self->_cacheFactory() dataForKey:key lastUpdateTime:&date];
+        NSData *data = [_cacheFactory() dataForKey:key lastUpdateTime:&date];
         
         if (data) {
             JFFResponseDataWithUpdateData *result = [JFFResponseDataWithUpdateData new];

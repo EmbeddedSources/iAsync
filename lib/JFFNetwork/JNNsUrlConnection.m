@@ -30,10 +30,10 @@
     self = [super init];
     
     if (self) {
-        self->_params = params;
+        _params = params;
         
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
-        if (![self->_params.url isFileURL])
+        if (![_params.url isFileURL])
 #endif
         {
             NSMutableURLRequest *request = [NSMutableURLRequest mutableURLRequestWithParams:params];
@@ -45,11 +45,11 @@
             //mm: Create runloop if need. Neccessary for call NSURLConnectionDelegate
             NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
             if (runLoop != [NSRunLoop mainRunLoop]) {
-                self->_connectRunLoop = runLoop;
+                _connectRunLoop = runLoop;
                 [nativeConnection scheduleInRunLoop:runLoop forMode: NSDefaultRunLoopMode];
             }
             
-            self->_nativeConnection = nativeConnection;
+            _nativeConnection = nativeConnection;
         }
     }
     
@@ -67,21 +67,21 @@
                                                     error:&error];
     
     if (error) {
-        [self connection:self->_nativeConnection
+        [self connection:_nativeConnection
         didFailWithError:error];
     } else {
         NSHTTPURLResponse *response =
-        [[NSHTTPURLResponse alloc] initWithURL:self->_params.url
+        [[NSHTTPURLResponse alloc] initWithURL:_params.url
                                     statusCode:200
                                    HTTPVersion:@"HTTP/1.1"
                                   headerFields:nil];
-        [self connection:self->_nativeConnection
+        [self connection:_nativeConnection
       didReceiveResponse:response];
         
-        [self connection:self->_nativeConnection
+        [self connection:_nativeConnection
           didReceiveData:data_];
         
-        [self connectionDidFinishLoading:self->_nativeConnection];
+        [self connectionDidFinishLoading:_nativeConnection];
     }
 }
 #endif
@@ -91,32 +91,32 @@
 - (void)start
 {
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
-    if ( [ self->_params.url isFileURL ] ) {
-        NSString* path_ = [ self->_params.url path ];
+    if ( [ _params.url isFileURL ] ) {
+        NSString* path_ = [ _params.url path ];
         [ self processLocalFileWithPath: path_ ];
         return;
     }
 #endif
-    [self->_nativeConnection start];
+    [_nativeConnection start];
     
-    if (self->_nativeConnection) {
-        [self->_connectRunLoop run];
+    if (_nativeConnection) {
+        [_connectRunLoop run];
     }
 }
 
 - (void)cancel
 {
     [self clearCallbacks];
-    [self->_nativeConnection cancel];
-    self->_nativeConnection = nil;
+    [_nativeConnection cancel];
+    _nativeConnection = nil;
 }
 
 - (void)clearCallbacks
 {
     [super clearCallbacks];
 
-    if (self->_connectRunLoop) {
-        [self->_nativeConnection unscheduleFromRunLoop:self->_connectRunLoop
+    if (_connectRunLoop) {
+        [_nativeConnection unscheduleFromRunLoop:_connectRunLoop
                                                forMode:NSDefaultRunLoopMode];
     }
 }

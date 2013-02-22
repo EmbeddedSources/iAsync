@@ -20,13 +20,13 @@
 - (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
     NSParameterAssert(params.url);
-
-    self = [ super init ];
-
+    
+    self = [super init];
+    
     if (self) {
-        self->_params = params;
+        _params = params;
     }
-
+    
     return self;
 }
 
@@ -34,12 +34,12 @@
 #pragma mark Factory
 -(id< JNUrlConnection >)createFastConnection
 {
-    return [ [ JFFURLConnection alloc] initWithURLConnectionParams: self->_params ];
+    return [[JFFURLConnection alloc] initWithURLConnectionParams:_params];
 }
 
 -(id< JNUrlConnection >)createStandardConnection
 {
-    return [ [ JNNsUrlConnection alloc ] initWithURLConnectionParams: self->_params ];
+    return [[JNNsUrlConnection alloc] initWithURLConnectionParams:_params];
 }
 
 @end

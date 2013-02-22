@@ -8,7 +8,7 @@
 
 - (unsigned long long)expectedContentLength
 {
-    return [self->_allHeaderFields[@"Content-Length"] unsignedLongLongValue];
+    return [_allHeaderFields[@"Content-Length"] unsignedLongLongValue];
 }
 
 #pragma mark -

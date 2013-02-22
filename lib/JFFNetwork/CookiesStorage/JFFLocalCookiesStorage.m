@@ -13,7 +13,7 @@
 
     if ( self )
     {
-        self->_allCookies = [ NSMutableSet new ];
+        _allCookies = [ NSMutableSet new ];
     }
 
     return self;
@@ -21,12 +21,12 @@
 
 -(void)setCookie:( NSHTTPCookie* )cookie_
 {
-    [ self->_allCookies addObject: cookie_ ];
+    [ _allCookies addObject: cookie_ ];
 }
 
 -(NSArray*)cookiesForURL:( NSURL* )url_
 {
-    NSArray* result_ = [ self->_allCookies selectArray: ^BOOL( NSHTTPCookie* cookie_ )
+    NSArray* result_ = [ _allCookies selectArray: ^BOOL( NSHTTPCookie* cookie_ )
     {
         BOOL result_ = [ cookie_ matchesURL: url_ ];
 

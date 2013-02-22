@@ -19,8 +19,8 @@
 
     if ( self )
     {
-        self->_date       = [ NSDate new ];
-        self->_bytesCount = bytesCount_;
+        _date       = [ NSDate new ];
+        _bytesCount = bytesCount_;
     }
 
     return self;
@@ -92,16 +92,16 @@
 
 -(void)stop
 {
-    self->_scheduler = nil;
+    _scheduler = nil;
 
-    self->_downloadingSpeedInfo = [ NSMutableArray new ];
+    _downloadingSpeedInfo = [ NSMutableArray new ];
     [ self calculateDownloadSpeed ];
 }
 
 -(void)bytesReceived:( NSUInteger )bytesCount_
 {
     JFFDownloadedBytesPerDate* item_ = [ [ JFFDownloadedBytesPerDate alloc ] initWithBytesCount: bytesCount_ ];
-    [ self->_downloadingSpeedInfo insertObject: item_ atIndex: 0 ];
+    [ _downloadingSpeedInfo insertObject: item_ atIndex: 0 ];
 
     [ self removeOldItemsFromDownloadingSpeedInfo ];
 }
@@ -116,8 +116,8 @@
         [ self_ calculateDownloadSpeed ];
     };
 
-    self->_scheduler = [ JFFScheduler new ];
-    [ self->_scheduler addBlock: block_ duration: calculateSpeedInterval_ ];
+    _scheduler = [ JFFScheduler new ];
+    [ _scheduler addBlock: block_ duration: calculateSpeedInterval_ ];
 }
 
 @end
