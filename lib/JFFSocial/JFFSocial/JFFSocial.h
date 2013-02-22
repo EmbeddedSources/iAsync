@@ -38,3 +38,5 @@
 #import <JFFSocial/Foursquare/Errors/ParserErrors/JFFFoursquaerAPIInvalidResponseError.h>
 #import <JFFSocial/Foursquare/Errors/JFFFoursquareNotFoundUsersCheckinsError.h>
 
+//Facebook
+#import <JFFSocial/Facebook/Model/JFFSocialFacebookUser.h>
