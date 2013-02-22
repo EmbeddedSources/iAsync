@@ -18,4 +18,8 @@
     return copy;
 }
 
+- (void)writeErrorWithJFFLogger
+{
+}
+
 @end

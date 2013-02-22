@@ -1,3 +1,5 @@
+#import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
+
 #import <Foundation/Foundation.h>
 
 @protocol JFFCacheDB < NSObject >
@@ -11,7 +13,7 @@
 - (void)setData:(NSData *)data forKey:(id)key;
 
 - (void)removeRecordsForKey:(id)key;
-- (void)removeAllRecords;
+- (void)removeAllRecordsWithCallback:(JFFSimpleBlock)callback;
 
 - (void)migrateDB;
 

@@ -128,12 +128,12 @@ static JFFThumbnailStorage *glStorageInstance = nil;
 }
 
 - (NSCache *)imagesByUrl {
-    if (!self->_imagesByUrl) {
-        self->_imagesByUrl = [NSCache new];
-        [self->_imagesByUrl setCountLimit:200];
+    if (!_imagesByUrl) {
+        _imagesByUrl = [NSCache new];
+        [_imagesByUrl setCountLimit:200];
     }
     
-    return self->_imagesByUrl;
+    return _imagesByUrl;
 }
 
 + (JFFThumbnailStorage *)sharedStorage

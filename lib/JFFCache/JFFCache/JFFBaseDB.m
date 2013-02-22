@@ -524,9 +524,9 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     return result;
 }
 
-//JTODO test
-- (void)removeAllRecords
+- (void)removeAllRecordsWithCallback:(JFFSimpleBlock)callback
 {
+    callback = [callback copy];
     ///First remove all files
     NSString *query = @"SELECT file_link FROM records;";
     
@@ -561,6 +561,9 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
                 sqlite3_finalize( statement );
             }
         }
+        
+        if (callback)
+            callback();
     });
 }
 

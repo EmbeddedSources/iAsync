@@ -23,7 +23,7 @@
     @"nested_ar"  : @[@[[NSNumber class]], @[@1, @"2"], @[@1, @2, [NSString class]]],
     };
     
-    self->_jsonObjectPatter =
+    _jsonObjectPatter =
     @{
     @"some_num"   : [NSNumber class],
     @"num_2"      : @2,
@@ -40,11 +40,11 @@
 - (void)testStringTypeMatch
 {
     JFFJsonValidationError *error;
-
+    
     BOOL result = [JFFJsonObjectValidator validateJsonObject:@"test"
                                              withJsonPattern:[NSString class]
                                                        error:&error];
-
+    
     STAssertNil(error, @"error should be nil");
     STAssertTrue(result, @"ivalid result value");
 }
@@ -343,7 +343,7 @@
         };
 
         BOOL result = [JFFJsonObjectValidator validateJsonObject:object
-                                                 withJsonPattern:self->_jsonObjectPatter
+                                                 withJsonPattern:_jsonObjectPatter
                                                            error:&error];
 
         STAssertNil(error, @"error should be nil");
@@ -520,7 +520,7 @@
         };
 
         BOOL result = [JFFJsonObjectValidator validateJsonObject:object
-                                                 withJsonPattern:self->_jsonObjectPatter
+                                                 withJsonPattern:_jsonObjectPatter
                                                            error:&error];
 
         STAssertNotNil(error, @"error should be nil");
@@ -555,7 +555,7 @@
         };
 
         BOOL result = [JFFJsonObjectValidator validateJsonObject:object
-                                                 withJsonPattern:self->_jsonObjectPatter
+                                                 withJsonPattern:_jsonObjectPatter
                                                            error:&error];
 
         STAssertNotNil(error, @"error should be nil");

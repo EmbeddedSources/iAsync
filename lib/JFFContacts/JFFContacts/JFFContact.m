@@ -62,10 +62,10 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
 -(id)forwardingTargetForSelector:( SEL )selector_
 {
     NSString* selectorName_ = NSStringFromSelector( selector_ );
-    JFFContactField* field_ = self->_fieldByName[ selectorName_ ];
+    JFFContactField* field_ = _fieldByName[ selectorName_ ];
     if ( !field_ )
     {
-        field_ = self->_fieldByName[ [ selectorName_ propertyGetNameFromPropertyName ] ];
+        field_ = _fieldByName[ [ selectorName_ propertyGetNameFromPropertyName ] ];
     }
     return field_ ?: self;
 }
@@ -77,12 +77,12 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
 
 -(void)addField:( JFFContactField* )field_
 {
-    self->_fieldByName[ field_.name ] = field_;
+    _fieldByName[ field_.name ] = field_;
 }
 
 -(void)initializeDynamicFields
 {
-    self->_fieldByName = [ NSMutableDictionary new ];
+    _fieldByName = [ NSMutableDictionary new ];
 
     NSDictionary* fieldNameByPropertyId_ = @{
     @(kABPersonFirstNameProperty)    : JFFContactFirstName,
@@ -153,13 +153,13 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
 
     NSParameterAssert(person_);
     NSParameterAssert(nil!=addressBook_);
-    self->_addressBookWrapper = addressBook_;
+    _addressBookWrapper = addressBook_;
     
     [ self initializeDynamicFields ];
 
-    self->_contactInternalId = ABRecordGetRecordID( person_ );
+    _contactInternalId = ABRecordGetRecordID( person_ );
 
-    [ self->_fieldByName enumerateKeysAndObjectsUsingBlock: ^( id key, JFFContactField* field_, BOOL* stop )
+    [ _fieldByName enumerateKeysAndObjectsUsingBlock: ^( id key, JFFContactField* field_, BOOL* stop )
     {
         [ field_ readPropertyFromRecord: person_ ];
     } ];
@@ -181,18 +181,18 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
         return nil;
     }
 
-    self->_addressBookWrapper = addressBook_;
+    _addressBookWrapper = addressBook_;
 
     [ self initializeDynamicFields ];
 
     NSString* contactInternalId_ = args_[ @"contactInternalId" ];
-    self->_contactInternalId = [ contactInternalId_ longLongValue ];
+    _contactInternalId = [ contactInternalId_ longLongValue ];
     self.newContact = contactInternalId_ == nil;
 
     ABRecordRef person_ = self.person;
     [ args_ enumerateKeysAndObjectsUsingBlock: ^( id fieldName_, id value_, BOOL* stop )
     {
-        JFFContactField* field_ = self->_fieldByName[ fieldName_ ];
+        JFFContactField* field_ = _fieldByName[ fieldName_ ];
         if ( !field_ )
         {
             NSLog( @"!!!WARNING!!! unsupported field name: %@", fieldName_ );
@@ -206,39 +206,39 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
 
 -(ABAddressBookRef)addressBook
 {
-    return self->_addressBookWrapper.rawBook;
+    return _addressBookWrapper.rawBook;
 }
 
 -(ABRecordRef)person
 {
-    if ( !self->_person )
+    if ( !_person )
     {
-        self->_person = createOrGetContactPerson( self.contactInternalId, self.addressBook );
+        _person = createOrGetContactPerson( self.contactInternalId, self.addressBook );
     }
-    return self->_person;
+    return _person;
 }
 
 -(ABRecordRef)rawPerson
 {
-    return self->_person;
+    return _person;
 }
 
 -(void)setRawPerson:( ABRecordRef )person_
 {
-    if ( person_ == self->_person )
+    if ( person_ == _person )
     {
         return;
     }
 
-    if ( NULL != self->_person )
+    if ( NULL != _person )
     {
-        CFRelease( self->_person );
+        CFRelease( _person );
     }
-    self->_person = NULL;
+    _person = NULL;
 
     if ( NULL != person_ )
     {
-        self->_person = CFRetain( person_ );
+        _person = CFRetain( person_ );
     }
 }
 
@@ -264,14 +264,14 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
         return NO;
     }
 
-    self->_contactInternalId = ABRecordGetRecordID( self.person );
+    _contactInternalId = ABRecordGetRecordID( self.person );
 
     return YES;
 }
 
 -(BOOL)remove
 {
-    if ( 0 == self->_contactInternalId || NULL == self.rawPerson )
+    if ( 0 == _contactInternalId || NULL == self.rawPerson )
     {
         NSLog( @"record has no id" );
         return NO;

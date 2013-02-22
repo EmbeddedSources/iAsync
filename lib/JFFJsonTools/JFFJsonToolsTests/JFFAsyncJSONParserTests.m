@@ -9,22 +9,22 @@
 
 - (void)setUp
 {
-    self->_semaphore = dispatch_semaphore_create(0) ;
+    _semaphore = dispatch_semaphore_create(0);
 }
 
 - (void)tearDown
 {
-    dispatch_release(self->_semaphore);
+    dispatch_release(_semaphore);
 }
 
--(void)endAsync
+- (void)endAsync
 {
-    dispatch_semaphore_signal(self->_semaphore);
+    dispatch_semaphore_signal(_semaphore);
 }
 
--(void)endTest
+- (void)endTest
 {
-    while (dispatch_semaphore_wait(self->_semaphore, DISPATCH_TIME_NOW)) {
+    while (dispatch_semaphore_wait(_semaphore, DISPATCH_TIME_NOW)) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
     }
 }

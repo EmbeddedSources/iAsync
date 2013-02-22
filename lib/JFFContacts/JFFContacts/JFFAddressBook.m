@@ -9,12 +9,12 @@
 
 - (void)dealloc
 {
-    CFRelease( self->_rawBook );
+    CFRelease(_rawBook);
 }
 
 - (id)init
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
@@ -27,7 +27,7 @@
         return nil;
     }
     
-    self->_rawBook = rawBook_;
+    _rawBook = rawBook_;
     
     return self;
 }

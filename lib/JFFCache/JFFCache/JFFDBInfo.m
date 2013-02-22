@@ -19,7 +19,7 @@ static JFFDBInfo* sharedInfo = nil;
     self = [super init];
     
     if (self) {
-        self->_dbInfoPath = infoPath;
+        _dbInfoPath = infoPath;
     }
     
     return self;
@@ -30,7 +30,7 @@ static JFFDBInfo* sharedInfo = nil;
     self = [super init];
     
     if (self) {
-        self->_currentDbInfo = infoDictionry;
+        _currentDbInfo = infoDictionry;
     }
     
     return self;
@@ -38,21 +38,21 @@ static JFFDBInfo* sharedInfo = nil;
 
 - (NSDictionary *)createDBInfo
 {
-    return self->_currentDbInfo?:[NSDictionary dictionaryWithContentsOfFile:self->_dbInfoPath];
+    return _currentDbInfo?:[NSDictionary dictionaryWithContentsOfFile:_dbInfoPath];
 }
 
 - (NSDictionary *)dbInfo
 {
-    if (self->_dbInfo)
-        return self->_dbInfo;
+    if (_dbInfo)
+        return _dbInfo;
     
     @synchronized(self) {
-        if (self->_dbInfo)
-            return self->_dbInfo;
+        if (_dbInfo)
+            return _dbInfo;
         
-        self->_dbInfo = [self createDBInfo];
+        _dbInfo = [self createDBInfo];
     }
-    return self->_dbInfo;
+    return _dbInfo;
 }
 
 + (JFFDBInfo *)newDbInfo

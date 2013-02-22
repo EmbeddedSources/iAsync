@@ -19,6 +19,6 @@
 
 - (void)removeRecordsWhileTotalSizeMoreThenBytes:(unsigned long long)sizeInBytes;
 
-- (void)removeAllRecords;
+- (void)removeAllRecordsWithCallback:(JFFSimpleBlock)callback;
 
 @end

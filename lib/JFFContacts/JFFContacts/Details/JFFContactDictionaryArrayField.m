@@ -70,7 +70,7 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray( NSArray* element
     self.value = value_;
 
     CFErrorRef error = NULL;
-    ABMutableMultiValueRef values_ = createMutableMultiValueWithArray( value_, self->_labels );
+    ABMutableMultiValueRef values_ = createMutableMultiValueWithArray( value_, _labels );
     BOOL didSet = ABRecordSetValue( record_
                                    , self.propertyID
                                    , values_

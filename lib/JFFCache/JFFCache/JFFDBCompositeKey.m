@@ -39,7 +39,7 @@
     self = [super init];
     
     if (self) {
-        self->_keys = [keys copy];
+        _keys = [keys copy];
     }
     
     return self;

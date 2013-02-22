@@ -133,7 +133,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
     NSInteger currentVersion = [currentDbInfo versionForDBWithName:_configPropertyName];
     
     if (lastVersion > currentVersion) {
-        [self removeAllRecords];
+        [self removeAllRecordsWithCallback:nil];
     }
 }
 
@@ -213,11 +213,11 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
 
 - (NSMutableDictionary *)mutableCacheDbByName
 {
-    if (!self->_mutableCacheDbByName) {
-        self->_mutableCacheDbByName = [NSMutableDictionary new];
+    if (!_mutableCacheDbByName) {
+        _mutableCacheDbByName = [NSMutableDictionary new];
     }
     
-    return self->_mutableCacheDbByName;
+    return _mutableCacheDbByName;
 }
 
 - (NSDictionary *)cacheDbByName
