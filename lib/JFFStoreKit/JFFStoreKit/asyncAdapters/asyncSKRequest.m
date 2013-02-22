@@ -28,25 +28,25 @@ SKRequestDelegate
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    self->_handler = [handler copy];
+    _handler = [handler copy];
 }
 
 - (void)cancel:(BOOL)canceled
 {
     if (canceled)
-        [self->_request cancel];
+        [_request cancel];
 }
 
 #pragma mark SKRequestDelegate
 
 - (void)requestDidFinish:(SKRequest *)request
 {
-    self->_handler(request, nil);
+    _handler(request, nil);
 }
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error
 {
-    self->_handler(nil, error);
+    _handler(nil, error);
 }
 
 @end
