@@ -7,17 +7,17 @@
 
 - (void)setUp
 {
-    if (!self->_formatter)
+    if (!_formatter)
     {
-        self->_formatter = [NSDateFormatter new];
-        [self->_formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        _formatter = [NSDateFormatter new];
+        [_formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     }
 }
 
 - (void)testEqulatDateDifferenceDatesThrowsException
 {
-    NSDate *date     = [self->_formatter dateFromString: @"2012-12-01 12:00:00"];
-    NSDate *fromDate = [self->_formatter dateFromString: @"2012-12-01 12:00:00"];
+    NSDate *date     = [_formatter dateFromString: @"2012-12-01 12:00:00"];
+    NSDate *fromDate = [_formatter dateFromString: @"2012-12-01 12:00:00"];
     
     STAssertThrows
     (
@@ -28,8 +28,8 @@
 
 - (void)testInvalidFromDateThrowsException
 {
-    NSDate *date     = [self->_formatter dateFromString: @"2012-12-01 12:00:00"];
-    NSDate *fromDate = [self->_formatter dateFromString: @"2012-12-01 12:00:01"];
+    NSDate *date     = [_formatter dateFromString: @"2012-12-01 12:00:00"];
+    NSDate *fromDate = [_formatter dateFromString: @"2012-12-01 12:00:01"];
     
     STAssertThrows
     (
@@ -40,8 +40,8 @@
 
 - (void)testOneSecondDifference
 {
-    NSDate *date     = [self->_formatter dateFromString: @"2012-12-01 12:00:01"];
-    NSDate *fromDate = [self->_formatter dateFromString: @"2012-12-01 12:00:00"];
+    NSDate *date     = [_formatter dateFromString: @"2012-12-01 12:00:01"];
+    NSDate *fromDate = [_formatter dateFromString: @"2012-12-01 12:00:00"];
     
     NSString *result = [date dateDifferenceStringFromDate: fromDate];
     
@@ -50,8 +50,8 @@
 
 - (void)testSeveralSecondDifference
 {
-    NSDate *date     = [self->_formatter dateFromString: @"2012-12-01 12:00:22"];
-    NSDate *fromDate = [self->_formatter dateFromString: @"2012-12-01 12:00:00"];
+    NSDate *date     = [_formatter dateFromString: @"2012-12-01 12:00:22"];
+    NSDate *fromDate = [_formatter dateFromString: @"2012-12-01 12:00:00"];
     
     NSString *result = [date dateDifferenceStringFromDate: fromDate];
     
@@ -60,8 +60,8 @@
 
 - (void)testOneMinuteDifference
 {
-    NSDate *date     = [self->_formatter dateFromString: @"2012-12-01 12:01:01"];
-    NSDate *fromDate = [self->_formatter dateFromString: @"2012-12-01 12:00:00"];
+    NSDate *date     = [_formatter dateFromString: @"2012-12-01 12:01:01"];
+    NSDate *fromDate = [_formatter dateFromString: @"2012-12-01 12:00:00"];
     
     NSString *result = [date dateDifferenceStringFromDate: fromDate];
     

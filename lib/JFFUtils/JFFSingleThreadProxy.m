@@ -30,15 +30,15 @@
 - (id)initWithTargetFactory:(JFFObjectFactory)factory
               dispatchQueue:(dispatch_queue_t)dispatchQueue
 {
-    self->_dispatchQueue = dispatchQueue;
-    dispatch_retain(self->_dispatchQueue);
+    _dispatchQueue = dispatchQueue;
+    dispatch_retain(_dispatchQueue);
     
     factory = [factory copy];
     void (^releaseListener)(void) = ^ {
-        self->_container = [JFFProxyObjectContainer new];
-        self->_container.target = factory();
+        _container = [JFFProxyObjectContainer new];
+        _container.target = factory();
     };
-    safe_dispatch_sync(self->_dispatchQueue, releaseListener);
+    safe_dispatch_sync(_dispatchQueue, releaseListener);
     
     return self;
 }
@@ -46,28 +46,28 @@
 + (id)singleThreadProxyWithTargetFactory:(JFFObjectFactory)factory
                            dispatchQueue:(dispatch_queue_t)dispatchQueue
 {
-    return [[self alloc]initWithTargetFactory:factory
-                                dispatchQueue:dispatchQueue];
+    return [[self alloc] initWithTargetFactory:factory
+                                 dispatchQueue:dispatchQueue];
 }
 
--(void)forwardInvocation:( NSInvocation* )invocation
+- (void)forwardInvocation:(NSInvocation *)invocation
 {
     SEL selector = [invocation selector];
     
     void (^forwardInvocation)(void) = ^ {
-        if ([self->_container.target respondsToSelector:selector])
-            [invocation invokeWithTarget:self->_container.target];
+        if ([_container.target respondsToSelector:selector])
+            [invocation invokeWithTarget:_container.target];
     };
-    safe_dispatch_sync(self->_dispatchQueue, forwardInvocation);
+    safe_dispatch_sync(_dispatchQueue, forwardInvocation);
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
     __block id resut;
     void (^methodSignature)(void) = ^ {
-        resut = [self->_container.target methodSignatureForSelector:selector];
+        resut = [_container.target methodSignatureForSelector:selector];
     };
-    safe_dispatch_sync(self->_dispatchQueue, methodSignature);
+    safe_dispatch_sync(_dispatchQueue, methodSignature);
     return resut;
 }
 

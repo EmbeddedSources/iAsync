@@ -4,22 +4,22 @@
 
 - (id)initWithTarget:(id)target
 {
-    self->_target = target;
-
+    _target = target;
+    
     return self;
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation
 {
     SEL selector = [invocation selector];
-
-    if ([self->_target respondsToSelector:selector])
-        [invocation invokeWithTarget:self->_target];
+    
+    if ([_target respondsToSelector:selector])
+        [invocation invokeWithTarget:_target];
 }
 
 - (NSMethodSignature*)methodSignatureForSelector:(SEL)selector
 {
-   return [self->_target methodSignatureForSelector:selector];
+   return [_target methodSignatureForSelector:selector];
 }
 
 @end

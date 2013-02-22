@@ -4,11 +4,11 @@
 
 - (void)performBlockOnce
 {
-    if (!self->_simpleBlock)
+    if (!_simpleBlock)
         return;
     
     JFFSimpleBlock block = self.simpleBlock;
-    self->_simpleBlock = nil;
+    _simpleBlock = nil;
     block();
 }
 

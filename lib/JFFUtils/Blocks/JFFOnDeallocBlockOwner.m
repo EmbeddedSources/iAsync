@@ -8,7 +8,7 @@
     
     if (self) {
         NSParameterAssert(block);
-        self->_block = [block copy];
+        _block = [block copy];
     }
     
     return self;
@@ -16,8 +16,8 @@
 
 - (void)dealloc
 {
-    if (self->_block)
-        self->_block();
+    if (_block)
+        _block();
 }
 
 @end

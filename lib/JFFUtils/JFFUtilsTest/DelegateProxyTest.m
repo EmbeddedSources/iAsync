@@ -33,7 +33,7 @@
 
 -(void)someDelegateMethod:(id)object
 {
-    self->_methodCallArgument = object;
+    _methodCallArgument = object;
 }
 
 @end
@@ -50,7 +50,7 @@
 
 -(void)someDelegateMethod:(id)object
 {
-    self->_methodCallArgument = object;
+    _methodCallArgument = object;
 }
 
 @end
