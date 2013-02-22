@@ -25,26 +25,26 @@ JFFAsyncOperationInterface
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    [self->_application addDelegateProxy:self delegateName:delegateName];
+    [_application addDelegateProxy:self delegateName:delegateName];
     
-    self->_handler = [handler copy];
+    _handler = [handler copy];
     
-    [self->_application openURL:self->_url];
+    [_application openURL:_url];
 }
 
 - (void)cancel:(BOOL)canceled
 {
-    [self->_application removeDelegateProxy:self delegateName:delegateName];
+    [_application removeDelegateProxy:self delegateName:delegateName];
 }
 
 - (BOOL)finishWithURL:(NSURL *)url
 {
-    [self->_application removeDelegateProxy:self delegateName:delegateName];
+    [_application removeDelegateProxy:self delegateName:delegateName];
     
     if (url) {
-        self->_handler(url, nil);
+        _handler(url, nil);
     } else {
-        self->_handler(nil, [JFFOpenApplicationError new]);
+        _handler(nil, [JFFOpenApplicationError new]);
     }
     
     return YES;

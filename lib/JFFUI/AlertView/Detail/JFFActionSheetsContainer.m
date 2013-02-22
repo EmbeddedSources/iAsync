@@ -20,33 +20,33 @@
 
 -(void)addActionSheet:( JFFActionSheet* )actionSheet_ withView:( UIView* )view_
 {
-    if ( !self->_activeActionSheets )
+    if ( !_activeActionSheets )
     {
-        self->_activeActionSheets = [ [ NSMutableArray alloc ] initWithCapacity: 1 ];
+        _activeActionSheets = [ [ NSMutableArray alloc ] initWithCapacity: 1 ];
     }
 
     JFFPendingActionSheet* pendingActionSheet_ = [ [ JFFPendingActionSheet alloc ] initWithActionSheet: actionSheet_
                                                                                                   view: view_ ];
 
-    [ self->_activeActionSheets addObject: pendingActionSheet_ ];
+    [ _activeActionSheets addObject: pendingActionSheet_ ];
 }
 
 -(void)removeActionSheet:( JFFActionSheet* )actionSheet_
 {
-    if ( !self->_activeActionSheets )
+    if ( !_activeActionSheets )
         return;
 
-    [ self->_activeActionSheets removeObject: [ self objectToRemove: actionSheet_ ] ];
+    [ _activeActionSheets removeObject: [ self objectToRemove: actionSheet_ ] ];
 
-    if ( ![ self->_activeActionSheets count ] )
+    if ( ![ _activeActionSheets count ] )
     {
-        self->_activeActionSheets = nil;
+        _activeActionSheets = nil;
     }
 }
 
 - (BOOL)containsActionSheet:(JFFActionSheet *)actionSheet
 {
-    return [self->_activeActionSheets any:^BOOL(JFFPendingActionSheet *pendingActionSheet)
+    return [_activeActionSheets any:^BOOL(JFFPendingActionSheet *pendingActionSheet)
     {
         return pendingActionSheet.actionSheet == actionSheet;
     }];
@@ -54,17 +54,17 @@
 
 -(JFFPendingActionSheet*)firstPendingActionSheet
 {
-    return [ self->_activeActionSheets noThrowObjectAtIndex: 0 ];
+    return [ _activeActionSheets noThrowObjectAtIndex: 0 ];
 }
 
 -(NSUInteger)count
 {
-    return [ self->_activeActionSheets count ];
+    return [ _activeActionSheets count ];
 }
 
 -(JFFPendingActionSheet*)objectToRemove:( JFFActionSheet* )actionSheet_
 {
-    return [self->_activeActionSheets firstMatch:^BOOL(JFFPendingActionSheet *pendingActionSheet_)
+    return [_activeActionSheets firstMatch:^BOOL(JFFPendingActionSheet *pendingActionSheet_)
     {
         return pendingActionSheet_.actionSheet ==  actionSheet_;
     }];
@@ -80,7 +80,7 @@
 
 -(void)removeAllActionSheets
 {
-    self->_activeActionSheets = nil;
+    _activeActionSheets = nil;
 }
 
 @end

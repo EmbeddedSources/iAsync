@@ -29,13 +29,13 @@
 {
     [NSThread assertMainThread];
     
-    self->_alertView.delegate = nil;
+    _alertView.delegate = nil;
     [self stopMonitoringBackgroundEvents];
 }
 
 - (UIAlertView *)alertView
 {
-    return self->_alertView;
+    return _alertView;
 }
 
 + (void)activeAlertsAddAlert:(JFFAlertView *)alertView
@@ -57,16 +57,16 @@
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated
 {
-    self->_alertView.delegate = nil;
-    [self->_alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
-    [self alertView:self->_alertView didDismissWithButtonIndex:buttonIndex];
+    _alertView.delegate = nil;
+    [_alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
+    [self alertView:_alertView didDismissWithButtonIndex:buttonIndex];
 }
 
 - (void)forceDismiss
 {
-    if (!self->_ignoreDismiss)
+    if (!_ignoreDismiss)
     {
-        NSUInteger index = [self->_alertView cancelButtonIndex];
+        NSUInteger index = [_alertView cancelButtonIndex];
         [self dismissWithClickedButtonIndex:index animated:NO];
     }
 }
@@ -88,7 +88,7 @@
     JFFAlertView *alert = [JFFAlertView alertWithTitle:title
                                                message:description
                                      cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                     otherButtonTitles:nil ];
+                                     otherButtonTitles:nil ];   
     
     [alert show];
 }
@@ -167,13 +167,13 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
         return nil;
     }
     
-    self->_alertView = [[UIAlertView alloc] initWithTitle:title
+    _alertView = [[UIAlertView alloc] initWithTitle:title
                                                   message:message
                                                  delegate:self
                                         cancelButtonTitle:cancelButtonTitle
                                         otherButtonTitles:nil];
 
-    if (nil == self->_alertView)
+    if (nil == _alertView)
     {
         return nil;
     }
@@ -188,15 +188,15 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 {
     for (NSString *buttonTitle in otherButtonTitles)
     {
-        [self->_alertView addButtonWithTitle:buttonTitle];
+        [_alertView addButtonWithTitle:buttonTitle];
     }
 }
 
 - (NSInteger)addAlertButtonWithIndex:(id)alertButtonId
 {
     JFFAlertButton *alertButton = [alertButtonId toAlertButton];
-    NSInteger index = [self->_alertView addButtonWithTitle:alertButton.title];
-    [self->_alertButtons insertObject:alertButton atIndex:index];
+    NSInteger index = [_alertView addButtonWithTitle:alertButton.title];
+    [_alertButtons insertObject:alertButton atIndex:index];
     return index;
 }
 
@@ -207,7 +207,7 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 
 - (void)addAlertButtonWithTitle:(NSString *)title action:(JFFSimpleBlock)action
 {
-    [self addAlertButton:[JFFAlertButton alertButton:title action:action]];
+    [self addAlertButton:[JFFAlertButton newAlertButton:title action:action]];
 }
 
 - (NSInteger)addButtonWithTitle:(NSString *)title
@@ -258,8 +258,8 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 {
     JFFAlertViewsContainer *container = [JFFAlertViewsContainer sharedAlertViewsContainer];
     
-    if ([container count] == 0)
-    {
+    if ([container count] == 0) {
+        
         [self forceShow];
     }
     
@@ -268,7 +268,7 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 
 - (void)exclusiveShow
 {
-    self->_exclusive = YES;
+    _exclusive = YES;
     
     JFFAlertViewsContainer *container = [JFFAlertViewsContainer sharedAlertViewsContainer];
     
@@ -291,27 +291,27 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 
 - (void)forceShow
 {
-    [self->_alertView show];
+    [_alertView show];
 }
 
 #pragma mark UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    JFFAlertButton *alertButton = self->_alertButtons[buttonIndex];
+    JFFAlertButton *alertButton = _alertButtons[buttonIndex];
     
     if (alertButton)
     {
-        self->_ignoreDismiss = YES;
+        _ignoreDismiss = YES;
         alertButton.action();
-        self->_ignoreDismiss = NO;
+        _ignoreDismiss = NO;
     }
 }
 
 - (void)didPresentAlertView:(UIAlertView *)alertView
 {
-    if (self->_didPresentHandler)
-        self->_didPresentHandler();
+    if (_didPresentHandler)
+        _didPresentHandler();
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -324,7 +324,7 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 
 - (BOOL)isOnScreen
 {
-    return self->_alertView.visible;
+    return _alertView.visible;
 }
 
 #pragma mark -

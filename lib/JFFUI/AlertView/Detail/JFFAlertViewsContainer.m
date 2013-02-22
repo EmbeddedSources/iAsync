@@ -19,48 +19,48 @@
 
 - (void)addAlertView:(JFFAlertView *)alertView
 {
-    if (!self->_activeAlertViews)
+    if (!_activeAlertViews)
     {
-        self->_activeAlertViews = [[NSMutableArray alloc] initWithCapacity:1];
+        _activeAlertViews = [[NSMutableArray alloc] initWithCapacity:1];
     }
     
-    [self->_activeAlertViews addObject:alertView];
+    [_activeAlertViews addObject:alertView];
 }
 
 - (void)removeAlertView:(JFFAlertView *)alertView
 {
-    if ( !self->_activeAlertViews )
+    if ( !_activeAlertViews )
         return;
     
-    [self->_activeAlertViews removeObject:alertView];
+    [_activeAlertViews removeObject:alertView];
     
-    if (![self->_activeAlertViews count])
+    if (![_activeAlertViews count])
     {
-        self->_activeAlertViews = nil;
+        _activeAlertViews = nil;
     }
 }
 
 - (BOOL)containsAlertView:(JFFAlertView *)alertView
 {
-    return [self->_activeAlertViews containsObject:alertView];
+    return [_activeAlertViews containsObject:alertView];
 }
 
 - (JFFAlertView*)firstAlertView
 {
-    return [self->_activeAlertViews noThrowObjectAtIndex:0];
+    return [_activeAlertViews noThrowObjectAtIndex:0];
 }
 
 - (NSUInteger)count
 {
-    return [self->_activeAlertViews count];
+    return [_activeAlertViews count];
 }
 
 - (void)each:(void(^)(JFFAlertView *alertView))block
 {
-    if (!block || !self->_activeAlertViews)
+    if (!block || !_activeAlertViews)
         return;
     
-    NSArray *tmpArray = [self->_activeAlertViews copy];
+    NSArray *tmpArray = [_activeAlertViews copy];
     for (JFFAlertView *alertView in tmpArray) {
         block(alertView);
     }
@@ -68,12 +68,12 @@
 
 - (id)firstMatch:(JFFPredicateBlock)predicate
 {
-    return [self->_activeAlertViews firstMatch:predicate];
+    return [_activeAlertViews firstMatch:predicate];
 }
 
 - (void)removeAllAlertViews
 {
-    self->_activeAlertViews = nil;
+    _activeAlertViews = nil;
 }
 
 @end

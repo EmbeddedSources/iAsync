@@ -4,9 +4,9 @@
 
 @implementation NSObject (JFFAlertButton)
 
--(JFFAlertButton*)toAlertButton
+- (JFFAlertButton *)toAlertButton
 {
-   [ self doesNotRecognizeSelector: _cmd ];
+   [self doesNotRecognizeSelector:_cmd];
    return nil;
 }
 
@@ -14,16 +14,16 @@
 
 @implementation NSString (JFFAlertButton)
 
--(JFFAlertButton*)toAlertButton
+- (JFFAlertButton *)toAlertButton
 {
-   return [ JFFAlertButton alertButton: self action: ^void( void ){} ];
+   return [JFFAlertButton newAlertButton:self action:^void(void){}];
 }
 
 @end
 
 @implementation JFFAlertButton (JFFAlertButton)
 
--(JFFAlertButton*)toAlertButton
+- (JFFAlertButton *)toAlertButton
 {
    return self;
 }
