@@ -72,10 +72,28 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
                 progressHandler(data);
         } copy];
         
+        JFFAsyncOperationInterfaceCancelHandler cancelHandlerWrapper = ^(BOOL canceled) {
+            
+            if (!proxy.completionHandler) {
+                return;
+            }
+            
+            proxy           = nil;
+            progressHandler = nil;
+            
+            if (cancelCallbackHolder) {
+                JFFCancelAsyncOperationHandler tmpCallback = cancelCallbackHolder;
+                cancelCallbackHolder = nil;
+                tmpCallback(canceled);
+            }
+        };
+        
         [asyncObject asyncOperationWithResultHandler:completionHandlerWrapper
+                                       cancelHandler:cancelHandlerWrapper
                                      progressHandler:progressHandlerWrapper];
         
         return ^(BOOL canceled) {
+            
             if (!proxy.completionHandler) {
                 return;
             }

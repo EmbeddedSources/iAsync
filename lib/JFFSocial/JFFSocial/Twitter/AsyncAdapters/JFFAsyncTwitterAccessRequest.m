@@ -10,8 +10,9 @@
 
 @implementation JFFAsyncTwitterAccessRequest
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
-                        progressHandler:(void(^)(id))progress
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     handler  = [handler copy];
     progress = [progress copy];
@@ -21,6 +22,7 @@
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
     [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+        
         if (!handler)
             return;
         

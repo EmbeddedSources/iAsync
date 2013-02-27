@@ -2,6 +2,18 @@
 
 #import "JFFAddressBook.h"
 
+#import "JFFAddressBookWrapperError.h"
+
+static NSError *convertErrorType(NSError *error)
+{
+    if (!error)
+        return nil;
+    
+    JFFAddressBookWrapperError *result = [JFFAddressBookWrapperError newAddressBookWrapperErrorWithNativeError:error];
+    result.nativeError = error;
+    return result;
+}
+
 @implementation JFFAddressBookFactory
 
 + (void)asyncAddressBookWithOnCreatedBlock:(JFFAddressBookOnCreated)callback
@@ -20,12 +32,13 @@
     ABAddressBookRef result = ABAddressBookCreateWithOptions(0, &error);
     
     if (NULL != error) {
-        NSError *nsError = (__bridge NSError*)error;
-        [JFFLogger logErrorWithFormat:@"ABAddressBookCreateWithOptions : %@", nsError];
+        NSError *retError = (__bridge NSError*)error;
         if (result)
             CFRelease(result);
-        if (callback)
-            callback(nil, kABAuthorizationStatusNotDetermined, nsError);
+        if (callback) {
+            
+            callback(nil, kABAuthorizationStatusNotDetermined, convertErrorType(retError));
+        }
         return;
     }
     
@@ -36,7 +49,7 @@
             NSError *retError = (__bridge NSError *)(blockError);
             
             JFFAddressBook *bookWrapper = [[JFFAddressBook alloc] initWithRawBook:result];
-            callback(bookWrapper, ::ABAddressBookGetAuthorizationStatus(), retError);
+            callback(bookWrapper, ::ABAddressBookGetAuthorizationStatus(), convertErrorType(retError));
         };
     
     ABAddressBookRequestAccessWithCompletion(result, onAddressBookAccess);

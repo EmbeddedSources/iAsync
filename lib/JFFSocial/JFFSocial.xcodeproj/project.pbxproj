@@ -22,6 +22,7 @@
 		37497DB21601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB11601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m */; };
 		37497DB51601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB41601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m */; };
 		37497DB81601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB71601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m */; };
+		4C3F01DE16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3F01DD16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m */; };
 		4C70273616D683A00078A2F2 /* JFFSocialFacebookUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273516D683A00078A2F2 /* JFFSocialFacebookUser.m */; };
 		4C70273916D684290078A2F2 /* JFFSocialFacebookUser+Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273816D684290078A2F2 /* JFFSocialFacebookUser+Parser.m */; };
 		4C70273C16D6870A0078A2F2 /* JFFAsyncFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273B16D6870A0078A2F2 /* JFFAsyncFacebook.m */; };
@@ -33,6 +34,7 @@
 		4C75C74616D3ED3D003B0C43 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C75C74516D3ED3D003B0C43 /* FacebookSDK.framework */; };
 		4C75C74916D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C75C74816D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m */; };
 		4C75C74C16D3F10F003B0C43 /* JFFSocialFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C75C74B16D3F10E003B0C43 /* JFFSocialFacebook.m */; };
+		4CDFCF7A16DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFCF7916DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m */; };
 		4CFC62B816D61E3800D084F7 /* JFFFacebookSDKErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFC62B716D61E3800D084F7 /* JFFFacebookSDKErrors.m */; };
 		4CFC62BB16D61E7E00D084F7 /* JFFFacebookLoginFailedCanceledError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFC62BA16D61E7E00D084F7 /* JFFFacebookLoginFailedCanceledError.m */; };
 		502AFF7816029E09009BCEEF /* JFFFoursquareNotFoundUsersCheckinsError.m in Sources */ = {isa = PBXBuildFile; fileRef = 502AFF7716029E09009BCEEF /* JFFFoursquareNotFoundUsersCheckinsError.m */; };
@@ -242,6 +244,8 @@
 		37497DB41601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+FqCheckinsAPIParser.m"; sourceTree = "<group>"; };
 		37497DB61601DD2400AF0C29 /* NSDictionary+FqAPIResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FqAPIResponseParser.h"; sourceTree = "<group>"; };
 		37497DB71601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FqAPIResponseParser.m"; sourceTree = "<group>"; };
+		4C3F01DC16DD0C9D00558DE6 /* JFFFacebookLoginFailedAccessForbidden.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookLoginFailedAccessForbidden.h; sourceTree = "<group>"; };
+		4C3F01DD16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFacebookLoginFailedAccessForbidden.m; sourceTree = "<group>"; };
 		4C70273416D683A00078A2F2 /* JFFSocialFacebookUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialFacebookUser.h; sourceTree = "<group>"; };
 		4C70273516D683A00078A2F2 /* JFFSocialFacebookUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialFacebookUser.m; sourceTree = "<group>"; };
 		4C70273716D684290078A2F2 /* JFFSocialFacebookUser+Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFSocialFacebookUser+Parser.h"; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 		4C75C74816D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncFacebookLogout.m; sourceTree = "<group>"; };
 		4C75C74A16D3F10E003B0C43 /* JFFSocialFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialFacebook.h; sourceTree = "<group>"; };
 		4C75C74B16D3F10E003B0C43 /* JFFSocialFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialFacebook.m; sourceTree = "<group>"; };
+		4CDFCF7816DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookLoginFailedPasswordWasChanged.h; sourceTree = "<group>"; };
+		4CDFCF7916DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFacebookLoginFailedPasswordWasChanged.m; sourceTree = "<group>"; };
 		4CFC62B616D61E3800D084F7 /* JFFFacebookSDKErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookSDKErrors.h; sourceTree = "<group>"; };
 		4CFC62B716D61E3800D084F7 /* JFFFacebookSDKErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFacebookSDKErrors.m; sourceTree = "<group>"; };
 		4CFC62B916D61E7E00D084F7 /* JFFFacebookLoginFailedCanceledError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookLoginFailedCanceledError.h; sourceTree = "<group>"; };
@@ -522,6 +528,10 @@
 				4CFC62B716D61E3800D084F7 /* JFFFacebookSDKErrors.m */,
 				4CFC62B916D61E7E00D084F7 /* JFFFacebookLoginFailedCanceledError.h */,
 				4CFC62BA16D61E7E00D084F7 /* JFFFacebookLoginFailedCanceledError.m */,
+				4C3F01DC16DD0C9D00558DE6 /* JFFFacebookLoginFailedAccessForbidden.h */,
+				4C3F01DD16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m */,
+				4CDFCF7816DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.h */,
+				4CDFCF7916DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m */,
 			);
 			path = SDKErrors;
 			sourceTree = "<group>";
@@ -1061,6 +1071,8 @@
 				4C70273616D683A00078A2F2 /* JFFSocialFacebookUser.m in Sources */,
 				4C70273916D684290078A2F2 /* JFFSocialFacebookUser+Parser.m in Sources */,
 				4C70273C16D6870A0078A2F2 /* JFFAsyncFacebook.m in Sources */,
+				4C3F01DE16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m in Sources */,
+				4CDFCF7A16DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

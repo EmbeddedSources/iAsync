@@ -10,7 +10,7 @@ SKRequestDelegate
 @implementation JFFAsyncSKRequestAdapter
 {
     SKRequest *_request;
-    JFFAsyncOperationInterfaceHandler _handler;
+    JFFAsyncOperationInterfaceResultHandler _handler;
 }
 
 + (id)newAsyncSKRequestAdapterWithRequest:(SKRequest *)request
@@ -25,7 +25,8 @@ SKRequestDelegate
     return result;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     _handler = [handler copy];

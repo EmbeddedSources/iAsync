@@ -12,8 +12,12 @@ void enumerateAllClassesWithBlock(void(^block)(Class))
     numClasses = objc_getClassList(classes, numClasses);
     
     for (int index = 0; index < numClasses; ++index) {
-        Class class = classes[index];
-        if (class_getClassMethod(class, @selector(conformsToProtocol:)))
-            block(class);
+        
+        @autoreleasepool {
+            
+            Class class = classes[index];
+            if (class_getClassMethod(class, @selector(conformsToProtocol:)))
+                block(class);
+        }
     }
 }

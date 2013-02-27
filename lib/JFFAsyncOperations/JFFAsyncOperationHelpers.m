@@ -22,7 +22,8 @@
 }
 
 - (void)asyncOperationWithResultHandler:(void(^)(id, NSError *))handler
-                        progressHandler:(void(^)(id))progress
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     handler  = [handler  copy];
     progress = [progress copy];

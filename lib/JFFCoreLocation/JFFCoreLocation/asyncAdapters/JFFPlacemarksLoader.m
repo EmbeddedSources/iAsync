@@ -48,7 +48,8 @@ JFFAsyncOperationInterface
     return [[self alloc] initWithLocation:location];
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     handler = [handler copy];

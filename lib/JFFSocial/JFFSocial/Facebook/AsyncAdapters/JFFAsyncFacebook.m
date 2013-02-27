@@ -4,7 +4,7 @@
 
 @interface JFFFacebookGeneralRequestLoader : NSObject < JFFAsyncOperationInterface >
 
-@property ( nonatomic, copy ) JFFAsyncOperationInterfaceHandler handler;
+@property (nonatomic, copy) JFFAsyncOperationInterfaceResultHandler handler;
 @property ( nonatomic ) FBSession* facebookSession;
 @property ( nonatomic ) NSString *graphPath;
 @property ( nonatomic ) NSString *HTTPMethod;
@@ -17,8 +17,9 @@
 
 @implementation JFFFacebookGeneralRequestLoader
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
-                        progressHandler:(void (^)(id))progress
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     self.handler = handler;
     

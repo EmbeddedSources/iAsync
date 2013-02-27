@@ -13,13 +13,14 @@
 
 @implementation JFFAsyncTwitterRequest
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
-                        progressHandler:(void(^)(id))progress
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     handler = [ handler copy ];
 
-    [self.request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
-    {
+    [self.request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        
         if (!handler)
             return;
 

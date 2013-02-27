@@ -17,7 +17,7 @@ JFFLocationObserver
 {
     JFFLocationLoaderSupervisor *_supervisor;
     CLLocationAccuracy _accuracy;
-    JFFAsyncOperationInterfaceHandler _handler;
+    JFFAsyncOperationInterfaceResultHandler _handler;
     
     JFFScheduler *_scheduler;
 }
@@ -38,7 +38,8 @@ JFFLocationObserver
     return [[self alloc] initWithAccuracy:accuracyInMeters];
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     handler = [handler copy];
@@ -73,7 +74,7 @@ JFFLocationObserver
     } duration:1.];
 }
 
-- (void)onSchedulerWithHandler:(JFFAsyncOperationInterfaceHandler)handler
+- (void)onSchedulerWithHandler:(JFFAsyncOperationInterfaceResultHandler)handler
 {
     if (_supervisor.location) {
         [self forceProcessLocation:_supervisor.location];

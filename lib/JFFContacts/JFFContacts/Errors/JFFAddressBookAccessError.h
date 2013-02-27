@@ -1,7 +1,5 @@
-#import <JFFContacts/Errors/JFFAddressBookError.h>
+#import <JFFContacts/Errors/JFFAddressBookWrapperError.h>
 
-@interface JFFAddressBookAccessError : JFFAddressBookError
-
-@property (nonatomic) NSError *nativeError;
+@interface JFFAddressBookAccessError : JFFAddressBookWrapperError
 
 @end

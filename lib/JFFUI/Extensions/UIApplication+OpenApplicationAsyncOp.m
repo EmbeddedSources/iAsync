@@ -19,10 +19,11 @@ JFFAsyncOperationInterface
 
 @implementation JFFOpenApplicationWithURLDelegateProxy
 {
-    JFFAsyncOperationInterfaceHandler _handler;
+    JFFAsyncOperationInterfaceResultHandler _handler;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     [_application addDelegateProxy:self delegateName:delegateName];

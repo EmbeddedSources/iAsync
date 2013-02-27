@@ -32,8 +32,9 @@
 
 #pragma mark - JFFAsyncOperationInterface
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
-                        progressHandler:(void (^)(id))progress
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     handler = [handler copy];
     

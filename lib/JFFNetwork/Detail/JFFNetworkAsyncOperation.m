@@ -11,8 +11,9 @@
 
 @implementation JFFNetworkAsyncOperation
 
-- (void)asyncOperationWithResultHandler:(void(^)(id, NSError *))handler
-                        progressHandler:(void(^)(id))progress
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     NSParameterAssert(handler );
     NSParameterAssert(progress);

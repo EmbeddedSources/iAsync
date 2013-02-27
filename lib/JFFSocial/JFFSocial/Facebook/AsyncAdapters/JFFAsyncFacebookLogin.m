@@ -1,5 +1,6 @@
 #import "JFFAsyncFacebookLogin.h"
 
+#import "JFFFacebookSDKErrors.h"
 #import "JFFFacebookAuthorizeError.h"
 
 #import <JFFScheduler/JFFScheduler.h>
@@ -19,8 +20,9 @@
 
 #pragma mark - JFFAsyncOperationInterface
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
-                        progressHandler:(void (^)(id))progress
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     handler = [handler copy];
     
@@ -50,10 +52,13 @@
     
     FBSessionStateHandler fbHandler = ^(FBSession *session, FBSessionState status, NSError *error) {
         
+        NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;
+        
         JFFScheduler *scheduler = [JFFScheduler sharedByThreadScheduler];
         [scheduler addBlock:^(JFFCancelScheduledBlock cancel) {
             
-            [self handleLoginWithSession:session error:error status:status handler:handler];
+            cancel();
+            [self handleLoginWithSession:session error:libError status:status handler:handler];
         } duration:0.2];
     };
     
@@ -67,14 +72,14 @@
 - (void)handleLoginWithSession:(FBSession *)session
                          error:(NSError *)error
                         status:(FBSessionState)status
-                       handler:(JFFAsyncOperationInterfaceHandler)handler
+                       handler:(JFFAsyncOperationInterfaceResultHandler)handler
 {
     if (!error && status != FBSessionStateOpen && status != FBSessionStateOpenTokenExtended) {
         error = [JFFFacebookAuthorizeError new];
     }
     
     if (handler) {
-        handler(error?nil:session.accessToken, error);
+        handler(error?nil:session.accessTokenData.accessToken, error);
     }
 }
 

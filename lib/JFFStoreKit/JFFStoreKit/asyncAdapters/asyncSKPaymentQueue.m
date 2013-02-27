@@ -13,7 +13,7 @@ JFFAsyncOperationInterface
     SKPaymentQueue *_queue;
     SKPayment *_payment;
     BOOL _addedToObservers;
-    JFFAsyncOperationInterfaceHandler _handler;
+    JFFAsyncOperationInterfaceResultHandler _handler;
 }
 
 - (void)dealloc
@@ -48,7 +48,8 @@ JFFAsyncOperationInterface
     return result;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     if (![SKPaymentQueue canMakePayments]) {

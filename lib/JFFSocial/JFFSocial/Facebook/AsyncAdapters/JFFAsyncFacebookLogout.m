@@ -5,20 +5,21 @@
 @interface JFFAsyncFacebookLogout : NSObject <JFFAsyncOperationInterface>
 
 @property (nonatomic) FBSession *facebookSession;
-@property (nonatomic, copy) JFFAsyncOperationInterfaceHandler handler;
+@property (nonatomic, copy) JFFAsyncOperationInterfaceResultHandler handler;
 
 @end
 
 
 @implementation JFFAsyncFacebookLogout
 {
-    JFFAsyncOperationInterfaceHandler _handler;
+    JFFAsyncOperationInterfaceResultHandler _handler;
 }
 
 #pragma mark - JFFAsyncOperationInterface
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
-                        progressHandler:(void (^)(id))progress
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     [self.facebookSession closeAndClearTokenInformation];
     

@@ -18,23 +18,27 @@
 
 #pragma mark - JFFAsyncOperationInterface
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
-                        progressHandler:(void (^)(id))progress
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     handler = [handler copy];
     
     //    if ([FBSession activeSession].isOpen) {
+    //TODO pass session, do not use [FBSession activeSession]
     
-    [[FBSession activeSession] reauthorizeWithPublishPermissions:self.permissions
-                                                 defaultAudience:(FBSessionDefaultAudienceFriends)
-                                               completionHandler:^(FBSession *session, NSError *error) {
+    FBSessionRequestPermissionResultHandler fbHandler = ^(FBSession *session, NSError *error) {
                                                    
-                                                   NSError *libError = [JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error];
+        NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;
                                                    
                                                    [self handleLoginWithSession:[FBSession activeSession]
                                                                           error:libError
                                                                         handler:handler];
-                                               }];
+    };
+    
+    [[FBSession activeSession] requestNewPublishPermissions:self.permissions
+                                            defaultAudience:(FBSessionDefaultAudienceFriends)
+                                          completionHandler:fbHandler];
     
     
     //        return;
@@ -63,13 +67,13 @@
 
 - (void)handleLoginWithSession:(FBSession *)session
                          error:(NSError *)error
-                       handler:(JFFAsyncOperationInterfaceHandler)handler
+                       handler:(JFFAsyncOperationInterfaceResultHandler)handler
 {
     if (session.state != FBSessionStateOpen && session.state != FBSessionStateOpenTokenExtended) {
         error = [JFFFacebookRequestPublishingAccessError new];
     }
     if (handler) {
-        handler(error?nil:session.accessToken, error);
+        handler(error?nil:session.accessTokenData.accessToken, error);
     }
 }
 

@@ -4,8 +4,9 @@
 
 @implementation JFFAsyncOperationAdapter
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
-                        progressHandler:(void (^)(id))progress
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
+                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     self.operation = [JFFBlockOperation performOperationWithQueueName:self.queueName.c_str()
                                                         loadDataBlock:self.loadDataBlock

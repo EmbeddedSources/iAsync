@@ -13,7 +13,7 @@ SKProductsRequestDelegate
 @implementation JFFAsyncSKProductsRequestAdapter
 {
     SKProductsRequest                *_request;
-    JFFAsyncOperationInterfaceHandler _handler;
+    JFFAsyncOperationInterfaceResultHandler _handler;
     SKProductsResponse               *_response;
     NSString                         *_productIdentifier;
 }
@@ -34,7 +34,8 @@ SKProductsRequestDelegate
     return self;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceHandler)handler
+- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     _handler = [handler copy];

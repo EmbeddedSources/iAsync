@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CA36A7116DB683D001F79B6 /* JFFAddressBookAccessError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA36A7016DB683D001F79B6 /* JFFAddressBookAccessError.m */; };
+		4CA36A7916DB6852001F79B6 /* JFFAddressBookWrapperError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA36A7816DB6852001F79B6 /* JFFAddressBookWrapperError.m */; };
 		CE29B80C15F60083000A05B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80B15F60083000A05B8 /* Foundation.framework */; };
 		CE29B81115F60083000A05B8 /* JFFContacts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE29B81015F60083000A05B8 /* JFFContacts.h */; };
 		CE29B81B15F60084000A05B8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B81A15F60084000A05B8 /* SenTestingKit.framework */; };
@@ -30,7 +32,6 @@
 		CE91AA0715F64ABF002B220B /* NSArray+ContactsDataFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91AA0615F64ABE002B220B /* NSArray+ContactsDataFilters.m */; };
 		CE91AA0B15F64C55002B220B /* JFFAsyncContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91AA0A15F64C55002B220B /* JFFAsyncContacts.m */; };
 		CE9A914B1656691400EFE858 /* JFFAddressBookError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A914A1656691400EFE858 /* JFFAddressBookError.m */; };
-		CE9A914E1656694C00EFE858 /* JFFAddressBookAccessError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A914D1656694C00EFE858 /* JFFAddressBookAccessError.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4CA36A6F16DB683C001F79B6 /* JFFAddressBookAccessError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBookAccessError.h; sourceTree = "<group>"; };
+		4CA36A7016DB683D001F79B6 /* JFFAddressBookAccessError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAddressBookAccessError.m; sourceTree = "<group>"; };
+		4CA36A7716DB6852001F79B6 /* JFFAddressBookWrapperError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBookWrapperError.h; sourceTree = "<group>"; };
+		4CA36A7816DB6852001F79B6 /* JFFAddressBookWrapperError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAddressBookWrapperError.m; sourceTree = "<group>"; };
 		CE29B80815F60083000A05B8 /* libJFFContacts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFContacts.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE29B80B15F60083000A05B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CE29B80F15F60083000A05B8 /* JFFContacts-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFContacts-Prefix.pch"; sourceTree = "<group>"; };
@@ -134,8 +139,6 @@
 		CE91AA0A15F64C55002B220B /* JFFAsyncContacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncContacts.m; sourceTree = "<group>"; };
 		CE9A91491656691400EFE858 /* JFFAddressBookError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBookError.h; sourceTree = "<group>"; };
 		CE9A914A1656691400EFE858 /* JFFAddressBookError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAddressBookError.m; sourceTree = "<group>"; };
-		CE9A914C1656694C00EFE858 /* JFFAddressBookAccessError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBookAccessError.h; sourceTree = "<group>"; };
-		CE9A914D1656694C00EFE858 /* JFFAddressBookAccessError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAddressBookAccessError.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,8 +292,10 @@
 			children = (
 				CE9A91491656691400EFE858 /* JFFAddressBookError.h */,
 				CE9A914A1656691400EFE858 /* JFFAddressBookError.m */,
-				CE9A914C1656694C00EFE858 /* JFFAddressBookAccessError.h */,
-				CE9A914D1656694C00EFE858 /* JFFAddressBookAccessError.m */,
+				4CA36A7716DB6852001F79B6 /* JFFAddressBookWrapperError.h */,
+				4CA36A7816DB6852001F79B6 /* JFFAddressBookWrapperError.m */,
+				4CA36A6F16DB683C001F79B6 /* JFFAddressBookAccessError.h */,
+				4CA36A7016DB683D001F79B6 /* JFFAddressBookAccessError.m */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -452,7 +457,8 @@
 				CE91AA0715F64ABF002B220B /* NSArray+ContactsDataFilters.m in Sources */,
 				CE91AA0B15F64C55002B220B /* JFFAsyncContacts.m in Sources */,
 				CE9A914B1656691400EFE858 /* JFFAddressBookError.m in Sources */,
-				CE9A914E1656694C00EFE858 /* JFFAddressBookAccessError.m in Sources */,
+				4CA36A7116DB683D001F79B6 /* JFFAddressBookAccessError.m in Sources */,
+				4CA36A7916DB6852001F79B6 /* JFFAddressBookWrapperError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
