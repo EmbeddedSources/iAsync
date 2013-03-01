@@ -1,5 +1,8 @@
 #import "asyncXMLParsers.h"
 
+#import "jRestKitXMLTools.h"
+#import <JFFAsyncOperations/JFFAsyncOperationsPredefinedBlocks.h>
+
 //JTODO test
 JFFAsyncOperationBinder xmlDocumentWithDataAsyncBinder( void )
 {
