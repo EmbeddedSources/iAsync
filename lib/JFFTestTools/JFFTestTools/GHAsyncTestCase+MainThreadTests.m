@@ -6,39 +6,60 @@
 
 @implementation NSObject (MainThreadTests)
 
-- (void)performAsyncRequestOnMainThreadWithBlock:(TestAsyncRequestBlock)block
-                                        selector:(SEL)selector
+-(void)performAsyncRequestOnMainThreadWithBlock:( TestAsyncRequestBlock )block_
+                                       selector:( SEL )selector_
 {
-    block = [block copy];
-    void (^autoreleaseBlock)() = ^void() {
-        @autoreleasepool {
-            void (^didFinishCallback)(void) = ^void() {
-                objc_msgSend(self,
-                             @selector(notify:forSelector:),
-                             kGHUnitWaitStatusSuccess,
-                             selector);
-            };
-            
-            block([didFinishCallback copy]);
-        }
-    };
-    
-    objc_msgSend(self, @selector(prepare), nil);
-    
-    dispatch_async(dispatch_get_main_queue(), autoreleaseBlock);
-    
-    objc_msgSend(self,
-                 @selector(waitForStatus:timeout:),
-                 kGHUnitWaitStatusSuccess,
-                 30000.);
+    [ self performAsyncRequestOnMainThreadWithBlock: block_
+                                           selector: selector_
+                                            timeout: 30000. ];
 }
 
-+ (void)load
+-(void)waitForeverForAsyncRequestOnMainThreadWithBlock:( void (^)(JFFSimpleBlock) )block_
+                                              selector:( SEL )selector_
 {
-    Class class = NSClassFromString(@"GHAsyncTestCase");
-    if (class) {
-        [self addInstanceMethodIfNeedWithSelector:@selector(performAsyncRequestOnMainThreadWithBlock:selector:)
-                                          toClass:class];
+    [ self performAsyncRequestOnMainThreadWithBlock: block_
+                                           selector: selector_
+                                            timeout: INFINITY ];
+}
+
+-(void)performAsyncRequestOnMainThreadWithBlock:( void (^)(JFFSimpleBlock) )block_
+                                       selector:( SEL )selector_
+                                        timeout:( NSTimeInterval )timeout_;
+{
+    block_ = [ block_ copy ];
+    void (^autoreleaseBlock_)() = ^void()
+    {
+        @autoreleasepool
+        {
+            void (^didFinishCallback_)(void) = ^void()
+            {
+                objc_msgSend( self
+                             , @selector( notify:forSelector: )
+                             , kGHUnitWaitStatusSuccess
+                             , selector_ );
+            };
+
+            block_( [ didFinishCallback_ copy ] );
+        }
+    };
+
+    objc_msgSend( self, @selector( prepare ), nil );
+
+    dispatch_async( dispatch_get_main_queue(), autoreleaseBlock_ );
+
+    objc_msgSend( self
+                 , @selector( waitForStatus:timeout: )
+                 , kGHUnitWaitStatusSuccess
+                 , timeout_ );
+}
+
++(void)load
+{
+    Class class_ = NSClassFromString( @"GHAsyncTestCase" );
+    if ( class_ )
+    {
+        [ self addInstanceMethodIfNeedWithSelector: @selector( performAsyncRequestOnMainThreadWithBlock:selector: )
+                                           toClass: class_ ];
     }
 }
 
