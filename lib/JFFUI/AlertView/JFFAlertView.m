@@ -93,6 +93,24 @@
     [alert show];
 }
 
++ (void)showAlertWithTitle:(NSString *)title
+               description:(NSString *)description
+                 exclusive:(BOOL)isExclusive
+{
+    JFFAlertView *alert = [JFFAlertView alertWithTitle:title
+                                               message:description
+                                     cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                     otherButtonTitles:nil];
+
+    if (isExclusive) {
+        
+        [alert exclusiveShow];
+    } else {
+        
+        [alert show];
+    }
+}
+
 + (void)showExclusiveAlertWithTitle:(NSString *)title
                         description:(NSString *)description
 {

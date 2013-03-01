@@ -29,6 +29,10 @@
 + (void)showAlertWithTitle:(NSString *)title
                description:(NSString *)description;
 
++ (void)showAlertWithTitle:(NSString *)title
+               description:(NSString *)description
+                 exclusive:(BOOL)isExclusive;
+
 + (void)showExclusiveAlertWithTitle:(NSString *)title
                         description:(NSString *)description;
 
