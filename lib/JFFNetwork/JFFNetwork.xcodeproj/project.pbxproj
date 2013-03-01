@@ -171,6 +171,30 @@
 		7E54F3CE15FA298E006F386A /* JHttpError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E54F3C815FA298E006F386A /* JHttpError.m */; };
 		7E54F3CF15FA298E006F386A /* JHttpError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E54F3C815FA298E006F386A /* JHttpError.m */; };
 		7E54F3D015FA298E006F386A /* JHttpError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E54F3C815FA298E006F386A /* JHttpError.m */; };
+		7E56B60216E1102B002960EE /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E56B60016E1102B002960EE /* NSUrlLocationValidator.h */; };
+		7E56B60316E1102B002960EE /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E56B60016E1102B002960EE /* NSUrlLocationValidator.h */; };
+		7E56B60416E1102B002960EE /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E56B60016E1102B002960EE /* NSUrlLocationValidator.h */; };
+		7E56B60516E1102B002960EE /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E56B60016E1102B002960EE /* NSUrlLocationValidator.h */; };
+		7E56B60616E1102B002960EE /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E56B60116E1102B002960EE /* NSUrlLocationValidator.m */; };
+		7E56B60716E1102B002960EE /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E56B60116E1102B002960EE /* NSUrlLocationValidator.m */; };
+		7E56B60816E1102B002960EE /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E56B60116E1102B002960EE /* NSUrlLocationValidator.m */; };
+		7E56B60916E1102B002960EE /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E56B60116E1102B002960EE /* NSUrlLocationValidator.m */; };
+		7E5787EF16E0DE8E006A1FDB /* JNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5787EB16E0DE8E006A1FDB /* JNetworkError.h */; };
+		7E5787F016E0DE8E006A1FDB /* JNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5787EB16E0DE8E006A1FDB /* JNetworkError.h */; };
+		7E5787F116E0DE8E006A1FDB /* JNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5787EB16E0DE8E006A1FDB /* JNetworkError.h */; };
+		7E5787F216E0DE8E006A1FDB /* JNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5787EB16E0DE8E006A1FDB /* JNetworkError.h */; };
+		7E5787F316E0DE8E006A1FDB /* JNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5787EC16E0DE8E006A1FDB /* JNetworkError.m */; };
+		7E5787F416E0DE8E006A1FDB /* JNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5787EC16E0DE8E006A1FDB /* JNetworkError.m */; };
+		7E5787F516E0DE8E006A1FDB /* JNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5787EC16E0DE8E006A1FDB /* JNetworkError.m */; };
+		7E5787F616E0DE8E006A1FDB /* JNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5787EC16E0DE8E006A1FDB /* JNetworkError.m */; };
+		7E5787F716E0DE8E006A1FDB /* JStreamError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5787ED16E0DE8E006A1FDB /* JStreamError.h */; };
+		7E5787F816E0DE8E006A1FDB /* JStreamError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5787ED16E0DE8E006A1FDB /* JStreamError.h */; };
+		7E5787F916E0DE8E006A1FDB /* JStreamError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5787ED16E0DE8E006A1FDB /* JStreamError.h */; };
+		7E5787FA16E0DE8E006A1FDB /* JStreamError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E5787ED16E0DE8E006A1FDB /* JStreamError.h */; };
+		7E5787FB16E0DE8E006A1FDB /* JStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5787EE16E0DE8E006A1FDB /* JStreamError.m */; };
+		7E5787FC16E0DE8E006A1FDB /* JStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5787EE16E0DE8E006A1FDB /* JStreamError.m */; };
+		7E5787FD16E0DE8E006A1FDB /* JStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5787EE16E0DE8E006A1FDB /* JStreamError.m */; };
+		7E5787FE16E0DE8E006A1FDB /* JStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5787EE16E0DE8E006A1FDB /* JStreamError.m */; };
 		7E8F204414F9494300588C7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5AE6DE13F3E6C600EB6143 /* Foundation.framework */; };
 		7E8F204A14F9494300588C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E8F204814F9494300588C7D /* InfoPlist.strings */; };
 		7E8F205014F949A000588C7D /* JNConnectionsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF9414449AF5005D745F /* JNConnectionsFactory.m */; };
@@ -324,6 +348,12 @@
 		7E54F3BB15FA25C6006F386A /* JHttpFlagChecker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JHttpFlagChecker.mm; sourceTree = "<group>"; };
 		7E54F3C715FA298E006F386A /* JHttpError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHttpError.h; sourceTree = "<group>"; };
 		7E54F3C815FA298E006F386A /* JHttpError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHttpError.m; sourceTree = "<group>"; };
+		7E56B60016E1102B002960EE /* NSUrlLocationValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUrlLocationValidator.h; sourceTree = "<group>"; };
+		7E56B60116E1102B002960EE /* NSUrlLocationValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUrlLocationValidator.m; sourceTree = "<group>"; };
+		7E5787EB16E0DE8E006A1FDB /* JNetworkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNetworkError.h; sourceTree = "<group>"; };
+		7E5787EC16E0DE8E006A1FDB /* JNetworkError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNetworkError.m; sourceTree = "<group>"; };
+		7E5787ED16E0DE8E006A1FDB /* JStreamError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JStreamError.h; sourceTree = "<group>"; };
+		7E5787EE16E0DE8E006A1FDB /* JStreamError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JStreamError.m; sourceTree = "<group>"; };
 		7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DDUrlBuilder.xcodeproj; path = "../../../davedelong-Demos/DDURLBuilder/DDUrlBuilder/DDUrlBuilder.xcodeproj"; sourceTree = "<group>"; };
 		7E8F204314F9494300588C7D /* JFFNetworkFW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = JFFNetworkFW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8F204714F9494300588C7D /* JFFNetworkFW-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFNetworkFW-Info.plist"; sourceTree = "<group>"; };
@@ -423,6 +453,8 @@
 		534BEF1C14448DAD005D745F /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				7E56B60016E1102B002960EE /* NSUrlLocationValidator.h */,
+				7E56B60116E1102B002960EE /* NSUrlLocationValidator.m */,
 				1B15CCB11535CAF4005F2B56 /* JFFNetworkAsyncOperation.h */,
 				1B15CCB21535CAF4005F2B56 /* JFFNetworkAsyncOperation.m */,
 				CE29B5E015F5E821000A05B8 /* NSURL+URLWithLocation.h */,
@@ -513,6 +545,17 @@
 			path = XQueryComponents;
 			sourceTree = "<group>";
 		};
+		7E5787EA16E0DE8E006A1FDB /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				7E5787EB16E0DE8E006A1FDB /* JNetworkError.h */,
+				7E5787EC16E0DE8E006A1FDB /* JNetworkError.m */,
+				7E5787ED16E0DE8E006A1FDB /* JStreamError.h */,
+				7E5787EE16E0DE8E006A1FDB /* JStreamError.m */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		7E894BBC158239BD00557C36 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -587,6 +630,7 @@
 		8D5AE6EF13F3E7EE00EB6143 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7E5787EA16E0DE8E006A1FDB /* Errors */,
 				CEF162DC16760E9E00B0B6E4 /* Callbacks */,
 				1B166C8F1546E59800475B6A /* CookiesStorage */,
 				65F47AC61539A36D00D8C865 /* XQueryComponents */,
@@ -699,6 +743,9 @@
 				7E54F3BE15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
 				7E54F3CB15FA298E006F386A /* JHttpError.h in Headers */,
 				374980A51602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
+				7E5787F116E0DE8E006A1FDB /* JNetworkError.h in Headers */,
+				7E5787F916E0DE8E006A1FDB /* JStreamError.h in Headers */,
+				7E56B60416E1102B002960EE /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +783,9 @@
 				7E54F3BD15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
 				7E54F3CA15FA298E006F386A /* JHttpError.h in Headers */,
 				374980A41602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
+				7E5787F016E0DE8E006A1FDB /* JNetworkError.h in Headers */,
+				7E5787F816E0DE8E006A1FDB /* JStreamError.h in Headers */,
+				7E56B60316E1102B002960EE /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,6 +818,9 @@
 				7E54F3BF15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
 				7E54F3CC15FA298E006F386A /* JHttpError.h in Headers */,
 				374980A61602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
+				7E5787F216E0DE8E006A1FDB /* JNetworkError.h in Headers */,
+				7E5787FA16E0DE8E006A1FDB /* JStreamError.h in Headers */,
+				7E56B60516E1102B002960EE /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,6 +872,9 @@
 				CEF162DF16760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.h in Headers */,
 				CEF162E316760EF100B0B6E4 /* JFFNetworkResponseDataCallback.h in Headers */,
 				CEF162E716760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.h in Headers */,
+				7E5787EF16E0DE8E006A1FDB /* JNetworkError.h in Headers */,
+				7E5787F716E0DE8E006A1FDB /* JStreamError.h in Headers */,
+				7E56B60216E1102B002960EE /* NSUrlLocationValidator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1031,6 +1087,9 @@
 				7E54F3C215FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
 				7E54F3CF15FA298E006F386A /* JHttpError.m in Sources */,
 				374980A91602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
+				7E5787F516E0DE8E006A1FDB /* JNetworkError.m in Sources */,
+				7E5787FD16E0DE8E006A1FDB /* JStreamError.m in Sources */,
+				7E56B60816E1102B002960EE /* NSUrlLocationValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1119,9 @@
 				7E54F3C115FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
 				7E54F3CE15FA298E006F386A /* JHttpError.m in Sources */,
 				374980A81602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
+				7E5787F416E0DE8E006A1FDB /* JNetworkError.m in Sources */,
+				7E5787FC16E0DE8E006A1FDB /* JStreamError.m in Sources */,
+				7E56B60716E1102B002960EE /* NSUrlLocationValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1089,6 +1151,9 @@
 				7E54F3C315FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
 				7E54F3D015FA298E006F386A /* JHttpError.m in Sources */,
 				374980AA1602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
+				7E5787F616E0DE8E006A1FDB /* JNetworkError.m in Sources */,
+				7E5787FE16E0DE8E006A1FDB /* JStreamError.m in Sources */,
+				7E56B60916E1102B002960EE /* NSUrlLocationValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1131,6 +1196,9 @@
 				CEF162E016760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.m in Sources */,
 				CEF162E416760EF100B0B6E4 /* JFFNetworkResponseDataCallback.m in Sources */,
 				CEF162E816760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.m in Sources */,
+				7E5787F316E0DE8E006A1FDB /* JNetworkError.m in Sources */,
+				7E5787FB16E0DE8E006A1FDB /* JStreamError.m in Sources */,
+				7E56B60616E1102B002960EE /* NSUrlLocationValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,6 +1343,7 @@
 					../,
 					"../../../davedelong-Demos/",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				USER_HEADER_SEARCH_PATHS = ../;
 			};
 			name = Debug;
@@ -1293,6 +1362,7 @@
 					../,
 					"../../../davedelong-Demos/",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				USER_HEADER_SEARCH_PATHS = ../;
 				VALIDATE_PRODUCT = YES;
 			};
