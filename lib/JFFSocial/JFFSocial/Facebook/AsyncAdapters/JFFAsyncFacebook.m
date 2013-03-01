@@ -4,14 +4,12 @@
 
 @interface JFFFacebookGeneralRequestLoader : NSObject < JFFAsyncOperationInterface >
 
-@property (nonatomic, copy) JFFAsyncOperationInterfaceResultHandler handler;
-@property ( nonatomic ) FBSession* facebookSession;
-@property ( nonatomic ) NSString *graphPath;
-@property ( nonatomic ) NSString *HTTPMethod;
-@property ( nonatomic ) NSDictionary *parameters;
+@property (nonatomic) FBSession    *facebookSession;
+@property (nonatomic) NSString     *graphPath;
+@property (nonatomic) NSString     *HTTPMethod;
+@property (nonatomic) NSDictionary *parameters;
 
-@property (nonatomic) FBRequest *fbRequest;
-@property (weak, nonatomic) FBRequestConnection *requestConnection;
+@property (nonatomic) FBRequestConnection *requestConnection;
 
 @end
 
@@ -21,19 +19,19 @@
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    self.handler = handler;
+    handler = [handler copy];
     
-    self.fbRequest = [FBRequest requestForGraphPath:self.graphPath];
-    self.fbRequest.session    = self.facebookSession;
-    self.fbRequest.HTTPMethod = self.HTTPMethod;
-    [self.fbRequest.parameters addEntriesFromDictionary:self.parameters];
+    FBRequest *fbRequest = [FBRequest requestForGraphPath:self.graphPath];
+    fbRequest.session    = self.facebookSession;
+    fbRequest.HTTPMethod = self.HTTPMethod;
+    [fbRequest.parameters addEntriesFromDictionary:self.parameters];
     
-    self.requestConnection = [self.fbRequest startWithCompletionHandler:^(FBRequestConnection *connection,
-                                                                          FBGraphObject *graphObject,
-                                                                          NSError *error) {
+    self.requestConnection = [fbRequest startWithCompletionHandler:^(FBRequestConnection *connection,
+                                                                     FBGraphObject *graphObject,
+                                                                     NSError *error) {
         
-        if ( self.handler )
-            self.handler([graphObject copy], error);
+        if (handler)
+            handler([graphObject copy], error);
     }];
 }
 

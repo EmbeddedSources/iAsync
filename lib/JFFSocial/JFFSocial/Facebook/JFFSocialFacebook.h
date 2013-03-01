@@ -5,16 +5,19 @@
 typedef void(^JFFFacebookDidLoginCallback)(NSString *login);
 typedef void(^JFFFacebookDidLogoutCallback)(NSString *login);
 
-@class FBSession;
-
 @interface JFFSocialFacebook : NSObject
 
-+ (FBSession *)facebookSession;
++ (BOOL)isActiveFacebookSession;
 
 + (JFFAsyncOperation)logoutLoader;
-+ (JFFAsyncOperation)authLoader;
+
++ (JFFAsyncOperation)authTokenLoader;
 
 + (JFFAsyncOperation)userInfoLoader;
+
++ (JFFAsyncOperation)requestFacebookDialogWithParameters:(NSDictionary *)parameters
+                                                 message:(NSString *)message
+                                                   title:(NSString *)title;
 
 #pragma mark callbacks
 

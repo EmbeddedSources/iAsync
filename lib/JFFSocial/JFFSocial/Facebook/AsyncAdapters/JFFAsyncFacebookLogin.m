@@ -27,28 +27,13 @@
     handler = [handler copy];
     
     if (self.facebookSession.isOpen) {
+        
         [self handleLoginWithSession:self.facebookSession
                                error:nil
                               status:self.facebookSession.state
                              handler:handler];
         return;
     }
-    
-    //For debug
-    //    ACAccountStore *accountStore = [ACAccountStore new];
-    //
-    //    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    //
-    //    NSDictionary *options =
-    //    @{ACFacebookAppIdKey : [[FBSession activeSession] appID],
-    //    ACFacebookPermissionsKey: [[FBSession activeSession] permissions],
-    //    ACFacebookAudienceKey : ACFacebookAudienceOnlyMe};
-    //
-    //    [accountStore requestAccessToAccountsWithType:accountType options:options completion:
-    //     ^(BOOL granted, NSError *error)
-    //     {
-    //
-    //     }];
     
     FBSessionStateHandler fbHandler = ^(FBSession *session, FBSessionState status, NSError *error) {
         
@@ -62,8 +47,6 @@
         } duration:0.2];
     };
     
-    //[[FBSession activeSession] openWithBehavior:(FBSessionLoginBehaviorUseSystemAccountIfPresent)
-    //                          completionHandler:fbHandler];
     [FBSession openActiveSessionWithReadPermissions:self.permissions
                                        allowLoginUI:YES
                                   completionHandler:fbHandler];
@@ -79,7 +62,7 @@
     }
     
     if (handler) {
-        handler(error?nil:session.accessTokenData.accessToken, error);
+        handler(error?nil:session, error);
     }
 }
 

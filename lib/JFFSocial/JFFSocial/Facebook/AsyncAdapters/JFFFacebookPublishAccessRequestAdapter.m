@@ -24,7 +24,6 @@
 {
     handler = [handler copy];
     
-    //    if ([FBSession activeSession].isOpen) {
     //TODO pass session, do not use [FBSession activeSession]
     
     FBSessionRequestPermissionResultHandler fbHandler = ^(FBSession *session, NSError *error) {
@@ -39,30 +38,6 @@
     [[FBSession activeSession] requestNewPublishPermissions:self.permissions
                                             defaultAudience:(FBSessionDefaultAudienceFriends)
                                           completionHandler:fbHandler];
-    
-    
-    //        return;
-    //    }
-    //
-    
-    //    ACAccountStore *accountStore = [ACAccountStore new];
-    //
-    //    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    //
-    //    NSDictionary *options =
-    //    @{ACFacebookAppIdKey : [[FBSession activeSession] appID],
-    //    ACFacebookPermissionsKey: [[FBSession activeSession] permissions],
-    //    ACFacebookAudienceKey : ACFacebookAudienceOnlyMe};
-    //
-    //    [accountStore requestAccessToAccountsWithType:accountType options:options completion:
-    //     ^(BOOL granted, NSError *error)
-    //     {
-    //
-    //     }];
-    
-    // TODO: Request access for publishing separate from reading
-    
-    
 }
 
 - (void)handleLoginWithSession:(FBSession *)session

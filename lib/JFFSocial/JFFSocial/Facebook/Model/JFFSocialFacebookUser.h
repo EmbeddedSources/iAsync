@@ -5,7 +5,10 @@
 @property (nonatomic) NSString *facebookID;
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *gender;
-@property (nonatomic) NSURL *avatarURL;
-@property (nonatomic) NSURL *smallAvatarURL;
+@property (nonatomic) NSString *biography;
+
+@property (nonatomic, readonly) NSURL *largeImageURL;
+
+- (NSURL *)imageURLForSize:(CGSize)size;
 
 @end

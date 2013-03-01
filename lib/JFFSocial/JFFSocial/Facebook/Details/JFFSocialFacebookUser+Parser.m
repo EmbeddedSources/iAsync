@@ -4,13 +4,15 @@
 
 @implementation JFFSocialFacebookUser (Parser)
 
-+ (id)newSocialFacebookUserWithJsonObject:(NSDictionary *)jsonObject error:(NSError **)outError
++ (id)newSocialFacebookUserWithJsonObject:(NSDictionary *)jsonObject
+                                    error:(NSError **)outError
 {
     id jsonPattern =
     @{
-      @"id"        : [NSString class],
-      @"name"      : [NSString class],
-      @"gender"    : [NSString class],
+      @"id"     : [NSString class],
+      @"name"   : [NSString class],
+      @"gender" : [NSString class],
+      @"bio"    : [NSString class],
       };
     
     if (![JFFJsonObjectValidator validateJsonObject:jsonObject
@@ -24,13 +26,10 @@
     
     if (result) {
         
-        result.facebookID = jsonObject[@"id"];
-        
-        result.name   = jsonObject[@"name"  ];
-        result.gender = jsonObject[@"gender"];
-        
-        result.avatarURL      = [jsonObject[@"pic_big"  ] toURL];
-        result.smallAvatarURL = [jsonObject[@"pic_small"] toURL];
+        result.facebookID = jsonObject[@"id"    ];
+        result.name       = jsonObject[@"name"  ];
+        result.gender     = jsonObject[@"gender"];
+        result.biography  = jsonObject[@"bio"   ];
     }
     
     return result;

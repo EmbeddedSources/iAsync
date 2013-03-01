@@ -3,6 +3,7 @@
 #import "JFFAsyncFacebook.h"
 #import "JFFAsyncFacebookLogin.h"
 #import "JFFAsyncFacebookLogout.h"
+#import "JFFAsyncFacebookDialog.h"
 
 #import "JFFSocialFacebookUser+Parser.h"
 
@@ -22,7 +23,6 @@ static JFFFacebookDidLogoutCallback globalDidLogoutCallback;
                         @"friends_photos",
                         @"friends_about_me",
                         @"user_about_me",
-                        @"user_photos",
                         @"read_friendlists",
                         @"user_relationships",
                         /*
@@ -51,6 +51,11 @@ static JFFFacebookDidLogoutCallback globalDidLogoutCallback;
     return facebookSession;
 }
 
++ (BOOL)isActiveFacebookSession
+{
+    return [[self facebookSession] isOpen];
+}
+
 + (JFFAsyncOperation)logoutLoader
 {
     FBSession *facebookSession = [FBSession activeSession];
@@ -68,23 +73,45 @@ static JFFFacebookDidLogoutCallback globalDidLogoutCallback;
     return logoutLoader;
 }
 
-+ (JFFAsyncOperation)authLoader
++ (JFFAsyncOperation)authFacebookSessionLoader
 {
-    JFFAsyncOperation authLoader = jffFacebookLogin([self facebookSession], [self authPermissions]);
-    
-    authLoader = asyncOperationWithFinishCallbackBlock(authLoader, ^(id result, NSError *error) {
+    JFFAsyncOperation loader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                                        JFFCancelAsyncOperationHandler cancelCallback,
+                                                        JFFDidFinishAsyncOperationHandler doneCallback) {
         
-        if (result && globalDidLoginCallback) {
-            globalDidLoginCallback(nil);
+        FBSession *session = [self facebookSession];
+        
+        JFFAsyncOperation loader = jffFacebookLogin(session, [self authPermissions]);
+        
+        if (!session.isOpen) {
+            
+            loader = asyncOperationWithFinishCallbackBlock(loader, ^(id result, NSError *error) {
+                
+                if (result && globalDidLoginCallback) {
+                    globalDidLoginCallback(nil);
+                }
+            });
         }
-    });
+        
+        return loader(progressCallback, cancelCallback, doneCallback);
+    };
     
     id mergeObject =
     @{
       @"methodName" : NSStringFromSelector(_cmd),
       @"className"  : [self description]
       };
-    return [self asyncOperationMergeLoaders:authLoader withArgument:mergeObject];
+    return [self asyncOperationMergeLoaders:loader withArgument:mergeObject];
+}
+
++ (JFFAsyncOperation)authTokenLoader
+{
+    JFFAsyncOperationBinder binder = ^JFFAsyncOperation(FBSession *session) {
+        
+        return asyncOperationWithResult(session.accessTokenData.accessToken);
+    };
+    
+    return bindSequenceOfAsyncOperations([self authFacebookSessionLoader], binder, nil);
 }
 
 #pragma mark callbacks
@@ -113,32 +140,99 @@ static JFFFacebookDidLogoutCallback globalDidLogoutCallback;
 
 + (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
 {
-    return [self graphLoaderWithPath:graphPath httpMethod:@"GET" parameters:nil];
+    return bindSequenceOfAsyncOperations([self authFacebookSessionLoader], ^JFFAsyncOperation(FBSession *session) {
+        
+        return [self graphLoaderWithPath:graphPath
+                                 session:session];
+    }, nil);
 }
 
 + (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
                               httpMethod:(NSString *)HTTPMethod
                               parameters:(NSDictionary *)parameters
 {
+    return bindSequenceOfAsyncOperations([self authFacebookSessionLoader], ^JFFAsyncOperation(FBSession *session) {
+        
+        return [self graphLoaderWithPath:graphPath
+                              httpMethod:HTTPMethod
+                              parameters:parameters
+                                 session:session];
+    }, nil);
+}
+
++ (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
+                                 session:(FBSession *)session
+{
+    return [self graphLoaderWithPath:graphPath parameters:nil session:session];
+}
+
++ (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
+                              parameters:(NSDictionary *)parameters
+                                 session:(FBSession *)session
+{
+    return [self graphLoaderWithPath:graphPath httpMethod:@"GET"
+                          parameters:parameters
+                             session:session];
+}
+
++ (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
+                              httpMethod:(NSString *)HTTPMethod
+                              parameters:(NSDictionary *)parameters
+                                 session:(FBSession *)session
+{
     graphPath = [graphPath stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    JFFAsyncOperation graphLoader = jffGenericFacebookGraphRequestLoader([JFFSocialFacebook facebookSession], graphPath, HTTPMethod, parameters);
+    JFFAsyncOperation graphLoader = jffGenericFacebookGraphRequestLoader(session, graphPath, HTTPMethod, parameters);
     
     return graphLoader;
 }
 
-+ (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath andRequestTag:(NSString *)requestTag
-{
-    return [self graphLoaderWithPath:graphPath httpMethod:@"GET" parameters:nil];
-}
-
 + (JFFAsyncOperation)userInfoLoader
 {
-    JFFAsyncOperation selfUserLoader = [self graphLoaderWithPath:@"me" andRequestTag:@"selfUser"];
+    static NSArray *fields;
+    fields = fields?:@[@"id", @"name", @"gender", @"picture", @"bio"];
     
-    JFFAsyncOperationBinder userParser = [self userParser];
+    return [self userInfoLoaderWithFields:fields];
+}
+
++ (JFFAsyncOperation)userInfoLoaderWithFields:(NSArray *)fields
+{
+    JFFAsyncOperationBinder userLoader = ^JFFAsyncOperation(FBSession *session) {
+        
+        NSDictionary *parameters;
+        
+        if ([fields count] > 0) {
+            
+            parameters = @{@"fields" : [fields componentsJoinedByString:@","]};
+        }
+        
+        JFFAsyncOperation selfUserLoader = [self graphLoaderWithPath:@"me"
+                                                          parameters:parameters
+                                                             session:session];
+        
+        JFFAsyncOperationBinder userParser = [self userParser];
+        
+        JFFAsyncOperation userLoader = bindSequenceOfAsyncOperations(selfUserLoader,
+                                                                     userParser,
+                                                                     nil);
+        
+        return userLoader;
+    };
     
-    return bindSequenceOfAsyncOperations(selfUserLoader,
-                                         userParser,
+    return bindSequenceOfAsyncOperations([self authFacebookSessionLoader], userLoader, nil);
+}
+
++ (JFFAsyncOperation)requestFacebookDialogWithParameters:(NSDictionary *)parameters
+                                                 message:(NSString *)message
+                                                   title:(NSString *)title
+{
+    JFFAsyncOperationBinder binder = ^JFFAsyncOperation(FBSession *session) {
+        
+        NSParameterAssert(session);
+        return jffRequestFacebookDialog([JFFSocialFacebook facebookSession], parameters, message, title);
+    };
+    
+    return bindSequenceOfAsyncOperations([self authFacebookSessionLoader],
+                                         binder,
                                          nil);
 }
 

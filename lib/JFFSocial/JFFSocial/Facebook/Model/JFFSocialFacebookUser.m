@@ -1,6 +1,12 @@
 #import "JFFSocialFacebookUser.h"
 
+//Image urls docs
+// http://developers.facebook.com/docs/reference/api/using-pictures/
+
 @implementation JFFSocialFacebookUser
+{
+    NSURL *_largeImageURL;
+}
 
 - (id)copyWithZone:(NSZone *)zone
 {
@@ -10,11 +16,61 @@
         copy->_facebookID     = [_facebookID     copyWithZone:zone];
         copy->_name           = [_name           copyWithZone:zone];
         copy->_gender         = [_gender         copyWithZone:zone];
-        copy->_avatarURL      = [_avatarURL      copyWithZone:zone];
-        copy->_smallAvatarURL = [_smallAvatarURL copyWithZone:zone];
+        copy->_biography  = [_biography  copyWithZone:zone];
     }
     
     return copy;
+}
+
+- (BOOL)isEqual:(JFFSocialFacebookUser *)object
+{
+    if (self == object)
+        return YES;
+    
+    if (![object isKindOfClass:[self class]])
+        return NO;
+    
+    return
+       [NSObject object:_facebookID isEqualTo:object->_facebookID]
+    && [NSObject object:_name       isEqualTo:object->_name      ]
+    && [NSObject object:_gender     isEqualTo:object->_gender    ]
+    && [NSObject object:_biography  isEqualTo:object->_biography ]
+    ;
+}
+
+- (NSUInteger)hash
+{
+    return
+      [_facebookID hash]
+    + [_name       hash]
+    + [_gender     hash]
+    + [_biography  hash]
+    ;
+}
+
+//http://graph.facebook.com/shaverm/picture?type=large
+- (NSURL *)largeImageURL
+{
+    if (!_largeImageURL) {
+        
+        NSString *strURL = [[NSString alloc] initWithFormat:@"http://graph.facebook.com/%@/picture?type=large", _facebookID];
+        _largeImageURL = [strURL toURL];
+    }
+    
+    return _largeImageURL;
+}
+
+// http://graph.facebook.com/shaverm/picture?width=40&height=60
+- (NSURL *)imageURLForSize:(CGSize)size
+{
+    NSString *strURL = [[NSString alloc] initWithFormat:@"http://graph.facebook.com/%@/picture?width=%d&height=%d",
+                        _facebookID,
+                        (NSUInteger)roundf(size.width ),
+                        (NSUInteger)roundf(size.height)
+                        ];
+    NSURL *result = [strURL toURL];
+    
+    return result;
 }
 
 @end

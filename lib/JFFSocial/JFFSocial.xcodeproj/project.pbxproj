@@ -34,6 +34,7 @@
 		4C75C74616D3ED3D003B0C43 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C75C74516D3ED3D003B0C43 /* FacebookSDK.framework */; };
 		4C75C74916D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C75C74816D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m */; };
 		4C75C74C16D3F10F003B0C43 /* JFFSocialFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C75C74B16D3F10E003B0C43 /* JFFSocialFacebook.m */; };
+		4CB52D6016DF93C9001E64F0 /* JFFAsyncFacebookDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB52D5F16DF93C9001E64F0 /* JFFAsyncFacebookDialog.m */; };
 		4CDFCF7A16DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFCF7916DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m */; };
 		4CFC62B816D61E3800D084F7 /* JFFFacebookSDKErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFC62B716D61E3800D084F7 /* JFFFacebookSDKErrors.m */; };
 		4CFC62BB16D61E7E00D084F7 /* JFFFacebookLoginFailedCanceledError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFC62BA16D61E7E00D084F7 /* JFFFacebookLoginFailedCanceledError.m */; };
@@ -267,6 +268,8 @@
 		4C75C74816D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncFacebookLogout.m; sourceTree = "<group>"; };
 		4C75C74A16D3F10E003B0C43 /* JFFSocialFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialFacebook.h; sourceTree = "<group>"; };
 		4C75C74B16D3F10E003B0C43 /* JFFSocialFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialFacebook.m; sourceTree = "<group>"; };
+		4CB52D5E16DF93C9001E64F0 /* JFFAsyncFacebookDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncFacebookDialog.h; sourceTree = "<group>"; };
+		4CB52D5F16DF93C9001E64F0 /* JFFAsyncFacebookDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncFacebookDialog.m; sourceTree = "<group>"; };
 		4CDFCF7816DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookLoginFailedPasswordWasChanged.h; sourceTree = "<group>"; };
 		4CDFCF7916DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFacebookLoginFailedPasswordWasChanged.m; sourceTree = "<group>"; };
 		4CFC62B616D61E3800D084F7 /* JFFFacebookSDKErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookSDKErrors.h; sourceTree = "<group>"; };
@@ -517,6 +520,8 @@
 				4C75C74816D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m */,
 				4C70273A16D6870A0078A2F2 /* JFFAsyncFacebook.h */,
 				4C70273B16D6870A0078A2F2 /* JFFAsyncFacebook.m */,
+				4CB52D5E16DF93C9001E64F0 /* JFFAsyncFacebookDialog.h */,
+				4CB52D5F16DF93C9001E64F0 /* JFFAsyncFacebookDialog.m */,
 			);
 			path = AsyncAdapters;
 			sourceTree = "<group>";
@@ -1073,6 +1078,7 @@
 				4C70273C16D6870A0078A2F2 /* JFFAsyncFacebook.m in Sources */,
 				4C3F01DE16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m in Sources */,
 				4CDFCF7A16DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m in Sources */,
+				4CB52D6016DF93C9001E64F0 /* JFFAsyncFacebookDialog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
