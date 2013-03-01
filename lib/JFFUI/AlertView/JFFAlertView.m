@@ -344,4 +344,23 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
++(void)showAlertWithTitle:( NSString* )title_
+              description:( NSString* )description_
+                exclusive:( BOOL )isExclusive_
+{
+    JFFAlertView* alert_ = [ JFFAlertView alertWithTitle: title_
+                                                 message: description_
+                                       cancelButtonTitle: NSLocalizedString( @"OK", nil )
+                                       otherButtonTitles: nil ];
+    
+    if ( isExclusive_ )
+    {
+        [ alert_ exclusiveShow ];
+    }
+    else
+    {
+        [ alert_ show ];
+    }
+}
+
 @end
