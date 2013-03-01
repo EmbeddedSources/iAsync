@@ -31,4 +31,9 @@
                                   arguments:argumentList];
 }
 
+-(NSString*)singleQuotedString
+{
+    return [ NSString stringWithFormat: @"'%@'", self ];
+}
+
 @end

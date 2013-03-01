@@ -3,5 +3,6 @@
 @interface NSString (IsEmpty)
 
 -(BOOL)hasSymbols;
+-(BOOL)hasNonWhitespaceSymbols;
 
 @end
