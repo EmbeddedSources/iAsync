@@ -8,7 +8,8 @@
                       loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
                    didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
                       progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
-                            barrier:(BOOL)barrier;
+                            barrier:(BOOL)barrier
+                 serialOrConcurrent:( dispatch_queue_attr_t )serialOrConcurrent_;
 
 + (id)performOperationWithQueueName:(const char*)queueName
                       loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock

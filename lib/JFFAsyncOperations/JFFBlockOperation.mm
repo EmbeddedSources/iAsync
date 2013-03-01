@@ -133,6 +133,7 @@
                    didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
                       progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
                             barrier:(BOOL)barrier
+                 serialOrConcurrent:( dispatch_queue_attr_t )serialOrConcurrent_;
 {
     NSParameterAssert(loadDataBlock   );
     NSParameterAssert(didLoadDataBlock);
@@ -142,7 +143,7 @@
     dispatch_queue_t queue = NULL;
     if (queueName != NULL && strlen(queueName) != 0) {
         queue = dispatch_queue_get_or_create(queueName,
-                                             DISPATCH_QUEUE_CONCURRENT);
+                                             serialOrConcurrent_);
     } else {
         queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     }
@@ -169,7 +170,8 @@
                                  loadDataBlock:loadDataBlock
                               didLoadDataBlock:didLoadDataBlock
                                  progressBlock:nil
-                                       barrier:NO];
+                                       barrier:NO
+                            serialOrConcurrent:DISPATCH_QUEUE_CONCURRENT ];
 }
 
 @end
