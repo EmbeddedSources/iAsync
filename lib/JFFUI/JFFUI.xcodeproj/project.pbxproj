@@ -35,6 +35,8 @@
 		1BD3616C1455A2F80036F786 /* JFFPageSliderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD3616B1455A2F80036F786 /* JFFPageSliderDelegate.h */; };
 		1BE053B715480F4400270B58 /* JFFActionSheetsContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE053B515480F4400270B58 /* JFFActionSheetsContainer.h */; };
 		1BE053B815480F4400270B58 /* JFFActionSheetsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053B615480F4400270B58 /* JFFActionSheetsContainer.m */; };
+		4CC3865116DE68630079F968 /* UIViewController+Dialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC3864F16DE68630079F968 /* UIViewController+Dialog.h */; };
+		4CC3865216DE68630079F968 /* UIViewController+Dialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC3865016DE68630079F968 /* UIViewController+Dialog.m */; };
 		539103CA14A88BE1007315A3 /* JFFUI_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFUI_Prefix.pch */; };
 		539103CB14A88BE1007315A3 /* JFFAlertButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 655E9DB21392E8C00074BD61 /* JFFAlertButton.h */; };
 		539103CC14A88BE1007315A3 /* JFFAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 655E9DB41392E8C00074BD61 /* JFFAlertView.h */; };
@@ -122,6 +124,9 @@
 		1BD3616B1455A2F80036F786 /* JFFPageSliderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPageSliderDelegate.h; sourceTree = "<group>"; };
 		1BE053B515480F4400270B58 /* JFFActionSheetsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFActionSheetsContainer.h; sourceTree = "<group>"; };
 		1BE053B615480F4400270B58 /* JFFActionSheetsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFActionSheetsContainer.m; sourceTree = "<group>"; };
+		4CC3864E16DE67B60079F968 /* JFFDialogProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFDialogProtocol.h; sourceTree = "<group>"; };
+		4CC3864F16DE68630079F968 /* UIViewController+Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Dialog.h"; sourceTree = "<group>"; };
+		4CC3865016DE68630079F968 /* UIViewController+Dialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Dialog.m"; sourceTree = "<group>"; };
 		539103F014A88BE1007315A3 /* libJFFUI copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFUI copy.a"; path = "libJFFUI-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		655E9DB21392E8C00074BD61 /* JFFAlertButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAlertButton.h; sourceTree = "<group>"; };
 		655E9DB31392E8C00074BD61 /* JFFAlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAlertButton.m; sourceTree = "<group>"; };
@@ -210,6 +215,7 @@
 				1B7F583B1435BDC000FF06EC /* UIWebView */,
 				1B793977142B76FD00B43DC8 /* Extensions */,
 				655E9DB11392E8C00074BD61 /* AlertView */,
+				4CC3864E16DE67B60079F968 /* JFFDialogProtocol.h */,
 				655E9E4A1392ED360074BD61 /* JFFUI.h */,
 			);
 			name = Classes;
@@ -235,6 +241,8 @@
 				CE5EF36E167CE536009BD15D /* UIViewController+PerformSegueWithCallback.m */,
 				CE5EF368167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.h */,
 				CE5EF369167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.m */,
+				4CC3864F16DE68630079F968 /* UIViewController+Dialog.h */,
+				4CC3865016DE68630079F968 /* UIViewController+Dialog.m */,
 			);
 			path = UIViewController;
 			sourceTree = "<group>";
@@ -395,6 +403,7 @@
 				CE9A91571656722900EFE858 /* JFFOpenApplicationError.h in Headers */,
 				CE5EF36A167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.h in Headers */,
 				CE5EF36F167CE536009BD15D /* UIViewController+PerformSegueWithCallback.h in Headers */,
+				4CC3865116DE68630079F968 /* UIViewController+Dialog.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +524,7 @@
 				CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */,
 				CE5EF36B167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.m in Sources */,
 				CE5EF370167CE536009BD15D /* UIViewController+PerformSegueWithCallback.m in Sources */,
+				4CC3865216DE68630079F968 /* UIViewController+Dialog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

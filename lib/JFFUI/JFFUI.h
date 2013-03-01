@@ -10,6 +10,7 @@
 #import <JFFUI/UIViewController/UIViewController+PresentTopViewController.h>
 #import <JFFUI/UIViewController/UIViewController+PerformSegueWithCallback.h>
 #import <JFFUI/UIViewController/UIViewController+ForceRemoveFromParentViewController.h>
+#import <JFFUI/UIViewController/UIViewController+Dialog.h>
 
 #import <JFFUI/UIView/UIView+AnimationWithBlocks.h>
 #import <JFFUI/UIView/UIView+AddSubviewAndScale.h>
@@ -25,3 +26,5 @@
 #import <JFFUI/StripeView/JFFPageSliderDelegate.h>
 
 #import <JFFUI/Errors/JFFOpenApplicationError.h>
+
+#import <JFFUI/JFFDialogProtocol.h>
