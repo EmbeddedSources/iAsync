@@ -16,4 +16,7 @@
 @property ( nonatomic ) std::string queueName;
 @property ( nonatomic ) BOOL barrier;
 
+//DISPATCH_QUEUE_CONCURRENT by default
+@property (nonatomic) dispatch_queue_attr_t queueAttributes;
+
 @end

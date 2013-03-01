@@ -9,6 +9,8 @@ extern "C" {
     JFFAsyncOperation asyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
                                                               const char *queueName);
 
+    JFFAsyncOperation asyncOperationWithSyncOperationAndConfigurableQueue(JFFSyncOperation loadDataBlock, const char* queueName, BOOL isSerialQueue);
+    
     JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
                                                                      const char *queueName);
 

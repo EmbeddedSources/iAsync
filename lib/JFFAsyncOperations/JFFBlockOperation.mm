@@ -32,6 +32,7 @@
               progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
                currentQueue:(dispatch_queue_t)currentQueue
                     barrier:(BOOL)barrier
+         serialOrConcurrent:( dispatch_queue_attr_t )serialOrConcurrent
 {
     self = [super init];
     
@@ -133,6 +134,7 @@
                    didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
                       progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
                             barrier:(BOOL)barrier
+                 serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent
 {
     NSParameterAssert(loadDataBlock   );
     NSParameterAssert(didLoadDataBlock);
@@ -141,8 +143,7 @@
     
     dispatch_queue_t queue = NULL;
     if (queueName != NULL && strlen(queueName) != 0) {
-        queue = dispatch_queue_get_or_create(queueName,
-                                             DISPATCH_QUEUE_CONCURRENT);
+        queue = dispatch_queue_get_or_create(queueName, serialOrConcurrent);
     } else {
         queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     }
@@ -153,7 +154,8 @@
                                                    didLoadDataBlock:didLoadDataBlock
                                                       progressBlock:progressBlock
                                                        currentQueue:currentQueue
-                                                            barrier:barrier];
+                                                            barrier:barrier
+                                                 serialOrConcurrent:serialOrConcurrent];
     
     [result performBackgroundOperationInQueue:queue
                                 loadDataBlock:loadDataBlock];
@@ -169,7 +171,8 @@
                                  loadDataBlock:loadDataBlock
                               didLoadDataBlock:didLoadDataBlock
                                  progressBlock:nil
-                                       barrier:NO];
+                                       barrier:NO
+                            serialOrConcurrent:DISPATCH_QUEUE_CONCURRENT];
 }
 
 @end

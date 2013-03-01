@@ -7,7 +7,8 @@
 
 static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueue(JFFSyncOperationWithProgress progressLoadDataBlock,
                                                                                   const char *queueName,
-                                                                                  BOOL barrier)
+                                                                                  BOOL barrier,
+                                                                                  dispatch_queue_attr_t attr)
 {
     progressLoadDataBlock = [progressLoadDataBlock copy];
     NSString *str = @(queueName?:"");
@@ -17,6 +18,7 @@ static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueu
         asyncObject.loadDataBlock = progressLoadDataBlock;
         asyncObject.queueName     = [str cStringUsingEncoding:NSUTF8StringEncoding];
         asyncObject.barrier       = barrier;
+        asyncObject.queueAttributes = attr;
         return asyncObject;
     };
     return buildAsyncOperationWithAdapterFactory(factory);
@@ -24,7 +26,8 @@ static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueu
 
 static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
                                                                         const char *queueName,
-                                                                        BOOL barrier )
+                                                                        BOOL barrier,
+                                                                        dispatch_queue_attr_t attr)
 {
     loadDataBlock = [loadDataBlock copy];
     JFFSyncOperationWithProgress progressLoadDataBlock= ^id(NSError *__autoreleasing *error,
@@ -37,14 +40,16 @@ static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue(JFFSyncO
     
     return asyncOperationWithSyncOperationWithProgressBlockAndQueue(progressLoadDataBlock,
                                                                     queueName,
-                                                                    barrier);
+                                                                    barrier,
+                                                                    attr);
 }
 
 JFFAsyncOperation asyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock, const char *queueName)
 {
     return privateAsyncOperationWithSyncOperationAndQueue(loadDataBlock,
                                                           queueName,
-                                                          NO);
+                                                          NO,
+                                                          DISPATCH_QUEUE_CONCURRENT);
 }
 
 JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
@@ -52,7 +57,15 @@ JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue(JFFSyncOperatio
 {
     return privateAsyncOperationWithSyncOperationAndQueue(loadDataBlock,
                                                           queueName,
-                                                          YES);
+                                                          YES,
+                                                          DISPATCH_QUEUE_CONCURRENT);
+}
+
+JFFAsyncOperation asyncOperationWithSyncOperationAndConfigurableQueue( JFFSyncOperation loadDataBlock_, const char* queueName_, BOOL isSerialQueue_ )
+{
+    dispatch_queue_attr_t attr_ = isSerialQueue_ ? DISPATCH_QUEUE_SERIAL : DISPATCH_QUEUE_CONCURRENT;
+    
+    return privateAsyncOperationWithSyncOperationAndQueue( loadDataBlock_, queueName_, NO, attr_ );
 }
 
 //TODO check using of all asyncOperationWithSyncOperation (without queue name) or remove asyncOperationWithSyncOperation at all
@@ -65,5 +78,6 @@ JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock(JFFSyncOperat
 {
     return asyncOperationWithSyncOperationWithProgressBlockAndQueue(progressLoadDataBlock,
                                                                     nil,
-                                                                    NO);
+                                                                    NO,
+                                                                    DISPATCH_QUEUE_CONCURRENT);
 }

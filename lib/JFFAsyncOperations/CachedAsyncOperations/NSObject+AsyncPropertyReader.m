@@ -331,7 +331,7 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
 + (JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
                                    withArgument:(id< NSCopying, NSObject >)argument
 {
-    id object = [[NSThread currentThread] lazyLoaderMergeObject];
+    id object = [[NSThread currentThread] lazyLoaderMergeObject];//TODO remove this, just call merge on self
     return [object asyncOperationMergeLoaders:asyncOperation
                                  withArgument:argument];
 }
