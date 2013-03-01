@@ -31,8 +31,8 @@
 //Invokes block once for each element of self.
 //Creates a new NSArray containing the values returned by the block.
 //or return nil if error happens
-- (NSArray*)map:(JFFMappingWithErrorBlock)block
-          error:(NSError *__autoreleasing *)outError;
+-(NSArray*)map:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_;
+-(NSArray*)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_;
 
 //Invokes block once for each element of self.
 //Creates a new NSArray containing the values returned by the block. Passes index of element in block as argument.
