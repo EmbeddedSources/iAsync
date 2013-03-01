@@ -4,4 +4,6 @@
 
 + (id)stringWithFormatCheckNill:(NSString *)format, ...;
 
+- (NSString *)singleQuotedString;
+
 @end
