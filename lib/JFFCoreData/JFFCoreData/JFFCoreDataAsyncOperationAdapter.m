@@ -127,7 +127,10 @@
     block = [block copy];
     
     NSManagedObjectID *objectID = managedObject.objectID;
-    NSParameterAssert(objectID && ![objectID isTemporaryID]);
+    float osVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (osVersion >= 6.0) {
+        NSParameterAssert(objectID && ![objectID isTemporaryID]);
+    }
     
     JFFCoreDataSyncOperationFactory tmpBlock = ^(NSManagedObjectContext *context) {
     
