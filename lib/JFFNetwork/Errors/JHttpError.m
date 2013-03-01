@@ -2,6 +2,20 @@
 
 @implementation JHttpError
 
+- (id)init
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
+- (id)initWithDescription:(NSString *)description
+                   domain:(NSString *)domain
+                     code:(NSInteger)code
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 - (id)initWithDescription:(NSString *)description
                      code:(NSInteger)code
 {
@@ -30,6 +44,21 @@
 - (void)writeErrorWithJFFLogger
 {
     [JFFLogger logErrorWithFormat:@"%@ Http code:%d cantext:%@", [self localizedDescription], self.code, _context];
+}
+
+- (BOOL)isHttpNotChangedError
+{
+    return ( self.code == 304 );
+}
+
+- (BOOL)isServiceUnavailableError
+{
+    return ( self.code == 503 );
+}
+
+- (BOOL)isInternalServerError
+{
+    return ( self.code == 500 );
 }
 
 @end

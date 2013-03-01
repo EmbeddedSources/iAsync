@@ -37,4 +37,4 @@
 #import <JFFNetwork/Callbacks/JFFNetworkResponseDataCallback.h>
 #import <JFFNetwork/Callbacks/JFFNetworkUploadProgressCallback.h>
 
-#import <JFFNetwork/JHttpError.h>
+#import <JFFNetwork/Errors/JHttpError.h>

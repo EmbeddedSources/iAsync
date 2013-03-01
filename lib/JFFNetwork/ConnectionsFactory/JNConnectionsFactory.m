@@ -11,7 +11,7 @@
 
 #pragma mark -
 #pragma mark Constructor
--(id)init
+- (id)init
 {
     [ self doesNotRecognizeSelector: _cmd ];
     return nil;
@@ -40,6 +40,23 @@
 -(id< JNUrlConnection >)createStandardConnection
 {
     return [[JNNsUrlConnection alloc] initWithURLConnectionParams:_params];
+}
+
+
+-(id< JNUrlConnection >)createConnection
+{
+    if (nil == _params) {
+
+        return nil;
+    }
+    else if (_params.useLiveConnection) {
+
+        return [self createFastConnection];
+    }
+    else {
+        
+        return [self createStandardConnection];
+    }
 }
 
 @end

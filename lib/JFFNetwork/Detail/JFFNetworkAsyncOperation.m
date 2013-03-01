@@ -22,9 +22,7 @@
         JNConnectionsFactory *factory =
         [[JNConnectionsFactory alloc]initWithURLConnectionParams:self.params];
         
-        self.connection = self.params.useLiveConnection
-        ?[factory createFastConnection    ]
-        :[factory createStandardConnection];
+        self.connection = [factory createConnection];
     }
     
     self.connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
@@ -54,6 +52,7 @@
         handler(error?nil:resultHolder, error);
     } copy];
     
+    finish = [finish copy];
     self.connection.didFinishLoadingBlock = finish;
     
     self.connection.didReceiveResponseBlock = ^void(id<JNUrlResponse> response)

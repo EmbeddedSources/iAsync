@@ -17,13 +17,13 @@
     return [ result_ copy ];
 }
 
-+(NSString*)dumpHttpHeaderFields:( NSDictionary* )allHeaderFields_
++(NSString*)dumpHttpHeaderFields:( NSDictionary* )allHeaderFields
 {   
     NSMutableString* result_ = [ NSMutableString new ];
 
     [ result_ appendString: @"Headers : \n" ];
 
-    [ allHeaderFields_ enumerateKeysAndObjectsUsingBlock: ^(id key_, id obj_, BOOL* stop_)
+    [allHeaderFields enumerateKeysAndObjectsUsingBlock: ^(id key_, id obj_, BOOL* stop_)
     {
         [ result_ appendFormat: @"\t%@ = %@ \n", key_, obj_ ];
     } ];

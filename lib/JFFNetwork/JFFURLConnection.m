@@ -12,6 +12,8 @@
 #import "NSURL+URLWithLocation.h"
 
 #import "JHttpError.h"
+#import "JStreamError.h"
+
 #import "JHttpFlagChecker.h"
 
 //#define SHOW_DEBUG_LOGS
@@ -61,11 +63,9 @@ static void readStreamCallback(CFReadStreamRef stream,
             [weakSelf handleResponseForReadStream:stream];
             
             CFStreamError error = CFReadStreamGetError(stream);
-            NSString *errorDescription = [[NSString alloc] initWithFormat:@"CFStreamError domain: %ld", error.domain];
             
-            //TODO create separate error class
-            [weakSelf handleFinish:[JFFError newErrorWithDescription:errorDescription
-                                                                code:error.error]];
+            JFFError *wrappedError = [[JStreamError alloc] initWithStreamError:error];
+            [weakSelf handleFinish:wrappedError];
             break;
         }
         case kCFStreamEventEndEncountered:
@@ -148,8 +148,8 @@ static void readStreamCallback(CFReadStreamRef stream,
         CFHTTPMessageSetBody ( httpRequest_, (__bridge CFDataRef)data_ );
     }
 
-    [ headers_ enumerateKeysAndObjectsUsingBlock: ^( id header_, id headerValue_, BOOL *stop )
-    {
+    [headers_ enumerateKeysAndObjectsUsingBlock: ^( id header_, id headerValue_, BOOL *stop ) {
+        
         CFHTTPMessageSetHeaderFieldValue( httpRequest_
                                          , (__bridge CFStringRef)header_
                                          , (__bridge CFStringRef)headerValue_ );
@@ -187,7 +187,11 @@ static void readStreamCallback(CFReadStreamRef stream,
         CFReadStreamScheduleWithRunLoop( _readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
     }
 
-    CFReadStreamOpen( _readStream );
+    Boolean openResult = CFReadStreamOpen(_readStream);
+    if (!openResult)
+    {
+        NSLog( @"Error opening a socket" );
+    }
 }
 
 -(void)closeReadStream
