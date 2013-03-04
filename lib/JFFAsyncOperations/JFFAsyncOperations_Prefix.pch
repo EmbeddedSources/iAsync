@@ -1,5 +1,9 @@
 #ifdef __OBJC__
-   #import <JFFUtils/JFFUtils.h>
+    #import <JFFUtils/JFFUtils.h>
 
-   #import <Foundation/Foundation.h>
+    #import <Foundation/Foundation.h>
+    #include <objc/objc.h>
 #endif
+
+#include <assert.h>
+

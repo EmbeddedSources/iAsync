@@ -1,7 +1,8 @@
 #import <JFFAsyncOperations/JFFAsyncOperationsBlockDefinitions.h>
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 
-#include <objc/objc.h>
+#import <Foundation/Foundation.h>
+
 
 @class NSArray;
 
