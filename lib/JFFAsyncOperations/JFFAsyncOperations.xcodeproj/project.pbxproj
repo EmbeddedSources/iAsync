@@ -78,6 +78,36 @@
 		6572C43B14A75CE1008CFCFD /* JFFObjectRelatedPropertyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D61CD2B13F2BC8A0003AC4A /* JFFObjectRelatedPropertyData.m */; };
 		6572C43C14A75CE3008CFCFD /* NSObject+PropertyExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D61CD3013F2BCE40003AC4A /* NSObject+PropertyExtractor.m */; };
 		65BA0A4E14A7821200EB2AAB /* JFFAsyncOperationsPredefinedBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B835B32142CBA2200FC004C /* JFFAsyncOperationsPredefinedBlocks.m */; };
+		7E79064D16E4981700CFC696 /* JFFStrategyFifo.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79064B16E4981700CFC696 /* JFFStrategyFifo.h */; };
+		7E79064E16E4981700CFC696 /* JFFStrategyFifo.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79064B16E4981700CFC696 /* JFFStrategyFifo.h */; };
+		7E79064F16E4981700CFC696 /* JFFStrategyFifo.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79064B16E4981700CFC696 /* JFFStrategyFifo.h */; };
+		7E79065016E4981700CFC696 /* JFFStrategyFifo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79064C16E4981700CFC696 /* JFFStrategyFifo.m */; };
+		7E79065116E4981700CFC696 /* JFFStrategyFifo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79064C16E4981700CFC696 /* JFFStrategyFifo.m */; };
+		7E79065216E4981700CFC696 /* JFFStrategyFifo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79064C16E4981700CFC696 /* JFFStrategyFifo.m */; };
+		7E79065516E4984400CFC696 /* JFFQueueState.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79065316E4984400CFC696 /* JFFQueueState.h */; };
+		7E79065616E4984400CFC696 /* JFFQueueState.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79065316E4984400CFC696 /* JFFQueueState.h */; };
+		7E79065716E4984400CFC696 /* JFFQueueState.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79065316E4984400CFC696 /* JFFQueueState.h */; };
+		7E79065816E4984400CFC696 /* JFFQueueState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79065416E4984400CFC696 /* JFFQueueState.m */; };
+		7E79065916E4984400CFC696 /* JFFQueueState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79065416E4984400CFC696 /* JFFQueueState.m */; };
+		7E79065A16E4984400CFC696 /* JFFQueueState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79065416E4984400CFC696 /* JFFQueueState.m */; };
+		7E79065D16E49DD900CFC696 /* JFFQueueStrategyFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79065B16E49DD900CFC696 /* JFFQueueStrategyFactory.h */; };
+		7E79065E16E49DD900CFC696 /* JFFQueueStrategyFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79065B16E49DD900CFC696 /* JFFQueueStrategyFactory.h */; };
+		7E79065F16E49DD900CFC696 /* JFFQueueStrategyFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79065B16E49DD900CFC696 /* JFFQueueStrategyFactory.h */; };
+		7E79066016E49DD900CFC696 /* JFFQueueStrategyFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79065C16E49DD900CFC696 /* JFFQueueStrategyFactory.m */; };
+		7E79066116E49DD900CFC696 /* JFFQueueStrategyFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79065C16E49DD900CFC696 /* JFFQueueStrategyFactory.m */; };
+		7E79066216E49DD900CFC696 /* JFFQueueStrategyFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79065C16E49DD900CFC696 /* JFFQueueStrategyFactory.m */; };
+		7E79066516E49F8000CFC696 /* JFFStrategyStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79066316E49F8000CFC696 /* JFFStrategyStack.h */; };
+		7E79066616E49F8000CFC696 /* JFFStrategyStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79066316E49F8000CFC696 /* JFFStrategyStack.h */; };
+		7E79066716E49F8000CFC696 /* JFFStrategyStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79066316E49F8000CFC696 /* JFFStrategyStack.h */; };
+		7E79066816E49F8000CFC696 /* JFFStrategyStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79066416E49F8000CFC696 /* JFFStrategyStack.m */; };
+		7E79066916E49F8000CFC696 /* JFFStrategyStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79066416E49F8000CFC696 /* JFFStrategyStack.m */; };
+		7E79066A16E49F8000CFC696 /* JFFStrategyStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E79066416E49F8000CFC696 /* JFFStrategyStack.m */; };
+		7E79066D16E4A49B00CFC696 /* JFFStrategyRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79066B16E4A49B00CFC696 /* JFFStrategyRandom.h */; };
+		7E79066E16E4A49B00CFC696 /* JFFStrategyRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79066B16E4A49B00CFC696 /* JFFStrategyRandom.h */; };
+		7E79066F16E4A49B00CFC696 /* JFFStrategyRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E79066B16E4A49B00CFC696 /* JFFStrategyRandom.h */; };
+		7E79067016E4A49B00CFC696 /* JFFStrategyRandom.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7E79066C16E4A49B00CFC696 /* JFFStrategyRandom.mm */; };
+		7E79067116E4A49B00CFC696 /* JFFStrategyRandom.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7E79066C16E4A49B00CFC696 /* JFFStrategyRandom.mm */; };
+		7E79067216E4A49B00CFC696 /* JFFStrategyRandom.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7E79066C16E4A49B00CFC696 /* JFFStrategyRandom.mm */; };
 		7E8F20CA14F94BDF00588C7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		7E8F20D014F94BDF00588C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E8F20CE14F94BDF00588C7D /* InfoPlist.strings */; };
 		7E8F20DB14F94C3100588C7D /* JFFPropertyPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9827F813F2B9D5009DD73B /* JFFPropertyPath.m */; };
@@ -195,6 +225,18 @@
 		65648C381392490F001E163C /* JFFAsyncOperationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationUtils.h; sourceTree = "<group>"; };
 		65648C391392490F001E163C /* JFFAsyncOperationUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFAsyncOperationUtils.mm; sourceTree = "<group>"; };
 		65648C5013924A77001E163C /* JFFAsyncOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperations.h; sourceTree = "<group>"; };
+		7E79064816E4951500CFC696 /* JFFQueueExecutionOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFQueueExecutionOrder.h; sourceTree = "<group>"; };
+		7E79064A16E4977F00CFC696 /* JFFQueueStrategy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFQueueStrategy.h; sourceTree = "<group>"; };
+		7E79064B16E4981700CFC696 /* JFFStrategyFifo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStrategyFifo.h; sourceTree = "<group>"; };
+		7E79064C16E4981700CFC696 /* JFFStrategyFifo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStrategyFifo.m; sourceTree = "<group>"; };
+		7E79065316E4984400CFC696 /* JFFQueueState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFQueueState.h; sourceTree = "<group>"; };
+		7E79065416E4984400CFC696 /* JFFQueueState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFQueueState.m; sourceTree = "<group>"; };
+		7E79065B16E49DD900CFC696 /* JFFQueueStrategyFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFQueueStrategyFactory.h; sourceTree = "<group>"; };
+		7E79065C16E49DD900CFC696 /* JFFQueueStrategyFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFQueueStrategyFactory.m; sourceTree = "<group>"; };
+		7E79066316E49F8000CFC696 /* JFFStrategyStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStrategyStack.h; sourceTree = "<group>"; };
+		7E79066416E49F8000CFC696 /* JFFStrategyStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStrategyStack.m; sourceTree = "<group>"; };
+		7E79066B16E4A49B00CFC696 /* JFFStrategyRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStrategyRandom.h; sourceTree = "<group>"; };
+		7E79066C16E4A49B00CFC696 /* JFFStrategyRandom.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFStrategyRandom.mm; sourceTree = "<group>"; };
 		7E8F20C914F94BDF00588C7D /* JFFAsyncOperationsFW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = JFFAsyncOperationsFW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8F20CD14F94BDF00588C7D /* JFFAsyncOperationsFW-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFAsyncOperationsFW-Info.plist"; sourceTree = "<group>"; };
 		7E8F20CF14F94BDF00588C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -373,12 +415,14 @@
 		65347F8013B7F04A0002CF73 /* LoadBalancer */ = {
 			isa = PBXGroup;
 			children = (
+				7E79064916E4975D00CFC696 /* QueueStrategies */,
 				CE7787E4163D2D8F009473A1 /* Details2 */,
 				65347FEC13B8141F0002CF73 /* Detail */,
 				65347F9413B7F0BD0002CF73 /* JFFAsyncOperationLoadBalancer.h */,
 				65347F9513B7F0BD0002CF73 /* JFFAsyncOperationLoadBalancer.m */,
 				CE4031CA163D266A00FE6427 /* JFFLimitedLoadersQueue.h */,
 				CE4031CB163D266B00FE6427 /* JFFLimitedLoadersQueue.m */,
+				7E79064816E4951500CFC696 /* JFFQueueExecutionOrder.h */,
 			);
 			path = LoadBalancer;
 			sourceTree = "<group>";
@@ -409,6 +453,24 @@
 				1B0E83A81563954B00825E3C /* JFFAsyncOperationAdapter.mm */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		7E79064916E4975D00CFC696 /* QueueStrategies */ = {
+			isa = PBXGroup;
+			children = (
+				7E79064A16E4977F00CFC696 /* JFFQueueStrategy.h */,
+				7E79065316E4984400CFC696 /* JFFQueueState.h */,
+				7E79065416E4984400CFC696 /* JFFQueueState.m */,
+				7E79065B16E49DD900CFC696 /* JFFQueueStrategyFactory.h */,
+				7E79065C16E49DD900CFC696 /* JFFQueueStrategyFactory.m */,
+				7E79064B16E4981700CFC696 /* JFFStrategyFifo.h */,
+				7E79064C16E4981700CFC696 /* JFFStrategyFifo.m */,
+				7E79066316E49F8000CFC696 /* JFFStrategyStack.h */,
+				7E79066416E49F8000CFC696 /* JFFStrategyStack.m */,
+				7E79066B16E4A49B00CFC696 /* JFFStrategyRandom.h */,
+				7E79066C16E4A49B00CFC696 /* JFFStrategyRandom.mm */,
+			);
+			path = QueueStrategies;
 			sourceTree = "<group>";
 		};
 		7E8F20CB14F94BDF00588C7D /* JFFAsyncOperationsFW */ = {
@@ -494,6 +556,11 @@
 				5391036B14A88BB5007315A3 /* JFFObjectRelatedPropertyData.h in Headers */,
 				5391036C14A88BB5007315A3 /* NSObject+PropertyExtractor.h in Headers */,
 				6532667C14C1EB27004E90B0 /* JFFAsyncOperationsPredefinedBlocks.h in Headers */,
+				7E79064E16E4981700CFC696 /* JFFStrategyFifo.h in Headers */,
+				7E79065616E4984400CFC696 /* JFFQueueState.h in Headers */,
+				7E79065E16E49DD900CFC696 /* JFFQueueStrategyFactory.h in Headers */,
+				7E79066616E49F8000CFC696 /* JFFStrategyStack.h in Headers */,
+				7E79066E16E4A49B00CFC696 /* JFFStrategyRandom.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +589,11 @@
 				7E8F212114F94C6100588C7D /* JFFAsyncOperationUtils.h in Headers */,
 				7E8F212314F94C6100588C7D /* JFFAsyncOperationContinuity.h in Headers */,
 				7E8F212514F94C6100588C7D /* JFFAsyncOperations.h in Headers */,
+				7E79064F16E4981700CFC696 /* JFFStrategyFifo.h in Headers */,
+				7E79065716E4984400CFC696 /* JFFQueueState.h in Headers */,
+				7E79065F16E49DD900CFC696 /* JFFQueueStrategyFactory.h in Headers */,
+				7E79066716E49F8000CFC696 /* JFFStrategyStack.h in Headers */,
+				7E79066F16E4A49B00CFC696 /* JFFStrategyRandom.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +632,11 @@
 				CE90A694162C346C00428011 /* NSThread+AsyncPropertyReader.h in Headers */,
 				CE4031CC163D266B00FE6427 /* JFFLimitedLoadersQueue.h in Headers */,
 				CE7787E8163D2DBE009473A1 /* JFFBaseLoaderOwner.h in Headers */,
+				7E79064D16E4981700CFC696 /* JFFStrategyFifo.h in Headers */,
+				7E79065516E4984400CFC696 /* JFFQueueState.h in Headers */,
+				7E79065D16E49DD900CFC696 /* JFFQueueStrategyFactory.h in Headers */,
+				7E79066516E49F8000CFC696 /* JFFStrategyStack.h in Headers */,
+				7E79066D16E4A49B00CFC696 /* JFFStrategyRandom.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +814,11 @@
 				5391037214A88BB5007315A3 /* JFFAsyncOperationProgressBlockHolder.m in Sources */,
 				5391037314A88BB5007315A3 /* JFFAsyncOperationContinuity.m in Sources */,
 				5391037414A88BB5007315A3 /* JFFCallbacksBlocksHolder.m in Sources */,
+				7E79065116E4981700CFC696 /* JFFStrategyFifo.m in Sources */,
+				7E79065916E4984400CFC696 /* JFFQueueState.m in Sources */,
+				7E79066116E49DD900CFC696 /* JFFQueueStrategyFactory.m in Sources */,
+				7E79066916E49F8000CFC696 /* JFFStrategyStack.m in Sources */,
+				7E79067116E4A49B00CFC696 /* JFFStrategyRandom.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +837,11 @@
 				7E8F20F614F94C3100588C7D /* JFFBlockOperation.mm in Sources */,
 				7E8F20F814F94C3100588C7D /* NSObject+AutoCancelAsyncOperation.m in Sources */,
 				7E8F20FC14F94C3100588C7D /* JFFAsyncOperationContinuity.m in Sources */,
+				7E79065216E4981700CFC696 /* JFFStrategyFifo.m in Sources */,
+				7E79065A16E4984400CFC696 /* JFFQueueState.m in Sources */,
+				7E79066216E49DD900CFC696 /* JFFQueueStrategyFactory.m in Sources */,
+				7E79066A16E49F8000CFC696 /* JFFStrategyStack.m in Sources */,
+				7E79067216E4A49B00CFC696 /* JFFStrategyRandom.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,6 +872,11 @@
 				CE90A695162C346C00428011 /* NSThread+AsyncPropertyReader.m in Sources */,
 				CE4031CD163D266B00FE6427 /* JFFLimitedLoadersQueue.m in Sources */,
 				CE7787E9163D2DBE009473A1 /* JFFBaseLoaderOwner.m in Sources */,
+				7E79065016E4981700CFC696 /* JFFStrategyFifo.m in Sources */,
+				7E79065816E4984400CFC696 /* JFFQueueState.m in Sources */,
+				7E79066016E49DD900CFC696 /* JFFQueueStrategyFactory.m in Sources */,
+				7E79066816E49F8000CFC696 /* JFFStrategyStack.m in Sources */,
+				7E79067016E4A49B00CFC696 /* JFFStrategyRandom.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
