@@ -2,6 +2,6 @@
 
 @interface JFFNetworkResponseDataCallback : JFFNetworkAsyncOperationCallback
 
-@property (nonatomic) NSData *dataChunk;
+@property (nonatomic, strong) NSData *dataChunk;
 
 @end

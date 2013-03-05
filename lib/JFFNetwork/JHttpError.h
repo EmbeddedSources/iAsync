@@ -2,7 +2,7 @@
 
 @interface JHttpError : JFFError
 
-@property (nonatomic) id<NSCopying> context;
+@property (nonatomic, strong) id<NSCopying> context;
 
 - (id)initWithHttpCode:(CFIndex)statusCode;
 
