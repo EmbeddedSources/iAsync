@@ -17,7 +17,7 @@
 //#define SHOW_DEBUG_LOGS
 #import <JFFLibrary/JDebugLog.h>
 
-#define USE_DD_URL_BUILDER
+//#define USE_DD_URL_BUILDER
 
 #ifdef USE_DD_URL_BUILDER
     #import <DDURLBuilder/DDURLBuilder.h>
