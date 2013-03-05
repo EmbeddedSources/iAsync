@@ -19,9 +19,7 @@
     {
         @autoreleasepool
         {
-            [ self prepare ];
-
-            NSURL* dataUrl_ = [ NSURL URLWithString: @"http://vkusnoe.info/uploads/taginator/Feb-2012/test.jpg" ];
+            NSURL* dataUrl_ = [ NSURL URLWithString: @"http://www.ietf.org/rfc/rfc4180.txt" ];
 
             JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
             params_.url = dataUrl_;
@@ -39,31 +37,33 @@
             wealConnection_ = connection_;
             connection_.didReceiveResponseBlock = ^( id response_ )
             {
-                //IDLE
+                NSLog( @"[JFFURLConnectionTest] didReceiveResponseBlock: %@ ", response_ );
             };
             connection_.didReceiveDataBlock = ^( NSData* data_chunk_ )
             {
+                NSLog( @"[JFFURLConnectionTest] didReceiveDataBlock: %d ", [ data_chunk_ length ] );
                 [ totalData_ appendData: data_chunk_ ];
             };
 
-            connection_.didFinishLoadingBlock = ^( NSError* error_ )
+            
+            TestAsyncRequestBlock starterBlock_ = ^void( JFFSimpleBlock stopTest_ )
             {
-                if ( nil != error_ )
+                connection_.didFinishLoadingBlock = ^( NSError* error_ )
                 {
-                    [ self notify: kGHUnitWaitStatusFailure
-                      forSelector: _cmd ];
-                    return;
-                }
-
-                GHAssertTrue( [ expectedData_ isEqualToData: totalData_ ], @"packet mismatch" );
-                [ self notify: kGHUnitWaitStatusSuccess 
-                  forSelector: _cmd ];
+                    NSLog( @"[JFFURLConnectionTest] didFinishLoadingBlock: %@ ", error_ );
+                    
+                    stopTest_();
+                    GHAssertTrue( [ expectedData_ isEqualToData: totalData_ ], @"packet mismatch" );
+                };
+                
+                [ connection_ start ];
+                
             };
-
-            [ connection_ start ];
+            
+            [ self performAsyncRequestOnMainThreadWithBlock: starterBlock_
+                                                   selector: _cmd
+                                                    timeout: 61.0 ];
         }
-        [ self waitForStatus: kGHUnitWaitStatusSuccess
-                     timeout: 61. ];
     }
 
     GHAssertTrue( wealConnection_ == nil, @"OK" );

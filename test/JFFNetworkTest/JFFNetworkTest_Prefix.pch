@@ -1,6 +1,9 @@
 
 #ifdef __OBJC__
+    #import <JFFTestTools/JFFTestTools.h>
+    #import <JFFTestTools/GHAsyncTestCase+MainThreadTests.h>
     #import <JFFTestTools/NSObject+InstancesCount.h>
+
     #import <JFFNetwork/JFFNetwork.h>
     #import <JFFUtils/JFFUtils.h>
     #import "JNTestBundleManager.h"

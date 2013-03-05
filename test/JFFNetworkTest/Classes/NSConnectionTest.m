@@ -65,12 +65,15 @@
 {
     const NSUInteger initialCount_ = [ JNNsUrlConnection instancesCount ];
     __block BOOL dataReceived_ = NO;
-
+    __block BOOL isDownloadExecuted = NO;
+    
+    
+    
     @autoreleasepool
     {
         [self prepare];
 
-        NSURL* dataUrl_ = [ [ NSURL alloc ] initWithString: @"http://www.google.com" ];
+        NSURL* dataUrl_ = [ [ NSURL alloc ] initWithString: @"http://www.ietf.org/rfc/rfc4180.txt" ];
 
         JFFURLConnectionParams *params = [JFFURLConnectionParams new];
         params.url = dataUrl_;
@@ -79,27 +82,29 @@
         id< JNUrlConnection > connection = [factory createStandardConnection];
         
         connection.didReceiveResponseBlock = ^(id response) {
-            //IDLE
+            NSLog( @"[testValidDownloadCompletesCorrectly] - didReceiveResponseBlock : %@", response );
         };
         
         connection.didReceiveDataBlock = ^(NSData *dataChunk) {
             dataReceived_ = YES;
         };
         
-        connection.didFinishLoadingBlock = ^(NSError *error) {
-            if (nil != error) {
-                [self notify:kGHUnitWaitStatusFailure
-                 forSelector:_cmd];
-                return;
-            }
+        TestAsyncRequestBlock starterBlock_ = ^void(JFFSimpleBlock stopTest_)
+        {
+            connection.didFinishLoadingBlock = ^(NSError *error) {
+                
+                NSLog( @"[testValidDownloadCompletesCorrectly] - connectionDidFinishLoading" );
+                isDownloadExecuted = YES;
+                
+                stopTest_();                
+            };
             
-            [self notify:kGHUnitWaitStatusSuccess
-             forSelector:_cmd];
+            [connection start];
         };
         
-        [connection start];
-        [self waitForStatus:kGHUnitWaitStatusSuccess
-                    timeout:61.];
+        [ self performAsyncRequestOnMainThreadWithBlock: starterBlock_
+                                               selector: _cmd
+                                                timeout: 61.0 ];        
     }
     
     GHAssertTrue( dataReceived_, @"packet mismatch" );

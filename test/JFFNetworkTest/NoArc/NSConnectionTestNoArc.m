@@ -13,6 +13,9 @@
 {
     const NSUInteger initialCount = [JNNsUrlConnection instancesCount];
     id< JNUrlConnection > connection;
+    __block BOOL executed = NO;
+    __block BOOL isDownloadSuccessfull = NO;
+    __unsafe_unretained id< JNUrlConnection > unretainedConnection = connection;
     
     NSAutoreleasePool *pool = [NSAutoreleasePool new];
     [self prepare];
@@ -31,7 +34,7 @@
         
         connection.didReceiveResponseBlock = ^(id response)
         {
-            //IDLE
+            NSLog( @"[testValidDownloadCompletesCorrectly] - didReceiveResponseBlock : %@", response );
         };
         connection.didReceiveDataBlock = ^(NSData *dataChunk)
         {
@@ -39,6 +42,8 @@
         };
         
         connection.didFinishLoadingBlock = ^(NSError *error) {
+            executed = YES;
+            
             if (nil != error) {
                 [self notify:kGHUnitWaitStatusFailure
                  forSelector:_cmd];
@@ -46,15 +51,24 @@
             }
             
             GHAssertTrue([expectedData isEqualToData:totalData], @"packet mismatch");
+            isDownloadSuccessfull = YES;
+            
             [self notify:kGHUnitWaitStatusSuccess
              forSelector:_cmd];
+            
+            [ unretainedConnection cancel ];
         };
         
         [connection start];
     }
-    [self waitForStatus:kGHUnitWaitStatusSuccess
-                timeout:61.];
+    if ( !executed )
+    {
+        [self waitForStatus:kGHUnitWaitStatusSuccess
+                    timeout:61.];
+    }
     [pool drain];
+
+    GHAssertTrue( isDownloadSuccessfull, @"Unexpected download failure" );
     
     NSUInteger currentCount = [JNNsUrlConnection instancesCount];
     GHAssertTrue(initialCount == currentCount, @"packet mismatch");

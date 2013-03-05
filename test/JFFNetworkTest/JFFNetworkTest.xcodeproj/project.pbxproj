@@ -30,6 +30,8 @@
 		53A33F2F141F69EB00469DAA /* 1.1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 53A33F2D141F69EB00469DAA /* 1.1.zip */; };
 		53A33F4A141F9AA000469DAA /* 1-Incomplete.zip in Resources */ = {isa = PBXBuildFile; fileRef = 53A33F49141F9A9F00469DAA /* 1-Incomplete.zip */; };
 		7E6AF9A0157E105600CA8ED4 /* BadHeadersMockNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF99F157E105600CA8ED4 /* BadHeadersMockNetwork.m */; };
+		7EA172C316E5E3FD00EAA035 /* libDDUrlBuilder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA1729B16E5E3DA00EAA035 /* libDDUrlBuilder.a */; };
+		7EBCDA6316E5E76E0095EE39 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBCDA6216E5E76E0095EE39 /* Default-568h@2x.png */; };
 		CE29B5E915F5E984000A05B8 /* URLWithLocationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B5E815F5E983000A05B8 /* URLWithLocationTest.m */; };
 		CE29B5EA15F5ED47000A05B8 /* ConnectionsFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 539A55A51445BC3800FC2770 /* ConnectionsFactoryTest.m */; };
 		CE29B5EB15F5ED47000A05B8 /* EncodingsFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A33F3D141F809E00469DAA /* EncodingsFactoryTest.m */; };
@@ -205,6 +207,27 @@
 			remoteGlobalIDString = 7E57F42414F93738002D139B;
 			remoteInfo = JFFUtilsFW;
 		};
+		7EA1729A16E5E3DA00EAA035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EA1729516E5E3DA00EAA035 /* DDUrlBuilder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E54C1D8157F8687007D89F1;
+			remoteInfo = DDUrlBuilder;
+		};
+		7EA1729C16E5E3DA00EAA035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EA1729516E5E3DA00EAA035 /* DDUrlBuilder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E54C1F1157F889A007D89F1;
+			remoteInfo = DDUrlBuilderTest;
+		};
+		7EA172B316E5E3F700EAA035 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EA1729516E5E3DA00EAA035 /* DDUrlBuilder.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E54C1D7157F8687007D89F1;
+			remoteInfo = DDUrlBuilder;
+		};
 		CE433772160A1A5800C2279F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5310BA8D141F51AD00A3E2B1 /* JFFUtils.xcodeproj */;
@@ -260,6 +283,8 @@
 		7E6AF99B157E0BF100CA8ED4 /* InvalidPathForJConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvalidPathForJConnectionTest.m; sourceTree = "<group>"; };
 		7E6AF99E157E105600CA8ED4 /* BadHeadersMockNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadHeadersMockNetwork.h; sourceTree = "<group>"; };
 		7E6AF99F157E105600CA8ED4 /* BadHeadersMockNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadHeadersMockNetwork.m; sourceTree = "<group>"; };
+		7EA1729516E5E3DA00EAA035 /* DDUrlBuilder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DDUrlBuilder.xcodeproj; path = "../../../davedelong-Demos/DDURLBuilder/DDUrlBuilder/DDUrlBuilder.xcodeproj"; sourceTree = "<group>"; };
+		7EBCDA6216E5E76E0095EE39 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* JFFNetworkTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JFFNetworkTest-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		CE29B5E815F5E983000A05B8 /* URLWithLocationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLWithLocationTest.m; sourceTree = "<group>"; };
 		CE433776160A1A7300C2279F /* NSConnectionTestNoArc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSConnectionTestNoArc.m; sourceTree = "<group>"; };
@@ -270,6 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EA172C316E5E3FD00EAA035 /* libDDUrlBuilder.a in Frameworks */,
 				1BEC485C156A27270099DA6D /* libstdc++.dylib in Frameworks */,
 				1B0E89961563FAC800825E3C /* libc++.dylib in Frameworks */,
 				1B2669E615623FBD0054E183 /* libJFFTestTools.a in Frameworks */,
@@ -354,6 +380,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				7EBCDA6216E5E76E0095EE39 /* Default-568h@2x.png */,
+				7EA1729516E5E3DA00EAA035 /* DDUrlBuilder.xcodeproj */,
 				1B2669DB15623FA80054E183 /* JFFTestTools.xcodeproj */,
 				5310BA84141F51AD00A3E2B1 /* JFFAsyncOperations.xcodeproj */,
 				5310BA87141F51AD00A3E2B1 /* JFFNetwork.xcodeproj */,
@@ -467,6 +495,15 @@
 			path = Mock;
 			sourceTree = "<group>";
 		};
+		7EA1729616E5E3DA00EAA035 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7EA1729B16E5E3DA00EAA035 /* libDDUrlBuilder.a */,
+				7EA1729D16E5E3DA00EAA035 /* DDUrlBuilderTest.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CE433775160A1A7300C2279F /* NoArc */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +527,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7EA172B416E5E3F700EAA035 /* PBXTargetDependency */,
 				1B2669E515623FB90054E183 /* PBXTargetDependency */,
 				5310BB0C141F52CB00A3E2B1 /* PBXTargetDependency */,
 				5310BB0E141F52CB00A3E2B1 /* PBXTargetDependency */,
@@ -540,6 +578,10 @@
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 7EA1729616E5E3DA00EAA035 /* Products */;
+					ProjectRef = 7EA1729516E5E3DA00EAA035 /* DDUrlBuilder.xcodeproj */;
+				},
 				{
 					ProductGroup = 5310BA85141F51AD00A3E2B1 /* Products */;
 					ProjectRef = 5310BA84141F51AD00A3E2B1 /* JFFAsyncOperations.xcodeproj */;
@@ -682,6 +724,20 @@
 			remoteRef = 65B1F949151A8B74000A1736 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		7EA1729B16E5E3DA00EAA035 /* libDDUrlBuilder.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDDUrlBuilder.a;
+			remoteRef = 7EA1729A16E5E3DA00EAA035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7EA1729D16E5E3DA00EAA035 /* DDUrlBuilderTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DDUrlBuilderTest.octest;
+			remoteRef = 7EA1729C16E5E3DA00EAA035 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CE433773160A1A5800C2279F /* JFFUtilsTest.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -697,6 +753,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5310BB4E141F575F00A3E2B1 /* JFFNetworkTestData.bundle in Resources */,
+				7EBCDA6316E5E76E0095EE39 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,6 +858,11 @@
 			isa = PBXTargetDependency;
 			target = 5310BB45141F574300A3E2B1 /* JFFNetworkTestData */;
 			targetProxy = 5310BB4B141F574E00A3E2B1 /* PBXContainerItemProxy */;
+		};
+		7EA172B416E5E3F700EAA035 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DDUrlBuilder;
+			targetProxy = 7EA172B316E5E3F700EAA035 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
