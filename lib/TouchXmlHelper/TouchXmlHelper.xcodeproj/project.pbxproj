@@ -273,7 +273,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../../TouchXML,
 					.,
-					"/usr/include/libxml2/**",
+					"$SDKROOT/usr/include/libxml2/**",
 					..,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -295,7 +295,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../../TouchXML,
 					.,
-					"/usr/include/libxml2/**",
+					"$SDKROOT/usr/include/libxml2/**",
 					..,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
