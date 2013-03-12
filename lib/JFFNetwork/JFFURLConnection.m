@@ -12,6 +12,7 @@
 #import "NSURL+URLWithLocation.h"
 
 #import "JHttpError.h"
+#import "JStreamError.h"
 #import "JHttpFlagChecker.h"
 
 //#define SHOW_DEBUG_LOGS
@@ -68,11 +69,9 @@ static void readStreamCallback(CFReadStreamRef stream,
             [weakSelf handleResponseForReadStream:stream];
             
             CFStreamError error = CFReadStreamGetError(stream);
-            NSString *errorDescription = [[NSString alloc] initWithFormat:@"CFStreamError domain: %ld", error.domain];
+            JStreamError* errorObject = [ [ JStreamError alloc ] initWithStreamError: error ];
             
-            //TODO create separate error class
-            [weakSelf handleFinish:[JFFError newErrorWithDescription:errorDescription
-                                                                code:error.error]];
+            [weakSelf handleFinish: errorObject];
             break;
         }
         case kCFStreamEventEndEncountered:
