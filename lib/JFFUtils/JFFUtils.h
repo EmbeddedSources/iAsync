@@ -30,6 +30,7 @@
 #import <JFFUtils/NSString/NSString+FileAttributes.h>
 #import <JFFUtils/NSString/NSString+StringWithCutPrefix.h>
 #import <JFFUtils/NSString/NSString+HTML.h>
+#import <JFFUtils/NSString/NSString+JSEscape.h>
 
 #import <JFFUtils/NSSet/NSSet+BlocksAdditions.h>
 #import <JFFUtils/NSSet/NSMutableSet+StorableSet.h>
@@ -58,6 +59,7 @@
 #import <JFFUtils/Extensions/NSThread+AssertMainThread.h>
 #import <JFFUtils/Extensions/NSDecimalNumber+Increment.h>
 #import <JFFUtils/Extensions/NSError+WriteErrorToNSLog.h>
+#import <JFFUtils/Extensions/NSError+JSON.h>
 #import <JFFUtils/Extensions/NSDateFormatter+MultiThreading.h>
 
 #import <JFFUtils/Dictionary/NSDictionary+ValueWithType.h>
