@@ -45,7 +45,7 @@ static JFFAsyncOperation privateGenericChunkedURLResponseLoader(JFFURLConnection
 
 JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams* params)
 {
-    return privateGenericChunkedURLResponseLoader(params, nil);
+    return privateGenericChunkedURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params));
 }
 
 static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionParams *params,
@@ -90,7 +90,7 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
 
 JFFAsyncOperation genericDataURLResponseLoader(JFFURLConnectionParams *params)
 {
-    return privateGenericDataURLResponseLoader(params, nil);
+    return privateGenericDataURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params) );
 }
 
 #pragma mark -
