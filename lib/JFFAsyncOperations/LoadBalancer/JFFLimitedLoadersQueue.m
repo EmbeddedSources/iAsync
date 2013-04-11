@@ -1,24 +1,42 @@
 #import "JFFLimitedLoadersQueue.h"
 
 #import "JFFBaseLoaderOwner.h"
+#import "JFFQueueStrategy.h"
+#import "JFFQueueStrategyFactory.h"
+#import "JFFQueueState.h"
+
 
 @implementation JFFLimitedLoadersQueue
 {
     NSMutableArray *_activeLoaders;
     NSMutableArray *_pendingLoaders;
+    
+    id<JFFQueueStrategy> _orderStrategy;
 }
 
-- (id)init
+-(id)initWithExecutionOrder:( JFFQueueExecutionOrder )orderStrategyId
 {
     self = [super init];
     
     if (self) {
-        _limitCount     = 10;
-        _activeLoaders  = [NSMutableArray new];
-        _pendingLoaders = [NSMutableArray new];
+        self->_limitCount     = 10;
+        self->_activeLoaders  = [NSMutableArray new];
+        self->_pendingLoaders = [NSMutableArray new];
+        
+        JFFQueueState* state = [ JFFQueueState new ];
+        state.activeLoaders = self->_activeLoaders;
+        state.pendingLoaders = self->_pendingLoaders;
+        
+        self->_orderStrategy = [ JFFQueueStrategyFactory queueStrategyWithId: orderStrategyId
+                                                                  queueState: state ];
     }
-    
+
     return self;
+}
+
+-(id)init
+{
+    return [ self initWithExecutionOrder: JQOrderFifo ];
 }
 
 - (BOOL)hasLoadersReadyToStart
@@ -46,14 +64,8 @@
 
 - (void)performPendingLoaders
 {
-    while ([self hasLoadersReadyToStart]) {
-        
-        JFFBaseLoaderOwner *pendingLoader = _pendingLoaders[0];
-        [_pendingLoaders removeObjectAtIndex:0];
-        
-        [_activeLoaders addObject:pendingLoader];
-        
-        [pendingLoader performLoader];
+    while ([self hasLoadersReadyToStart]) {        
+        [self->_orderStrategy executePendingLoader];
     }
 }
 

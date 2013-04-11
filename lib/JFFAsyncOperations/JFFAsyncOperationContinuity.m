@@ -4,8 +4,6 @@
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 #import "NSError+ResultOwnerships.h"
 
-#include <assert.h>
-
 #import "JFFAsyncOperationHelpers.h"
 
 typedef JFFAsyncOperationBinder (*MergeTwoBindersPtr)( JFFAsyncOperationBinder, JFFAsyncOperationBinder );
