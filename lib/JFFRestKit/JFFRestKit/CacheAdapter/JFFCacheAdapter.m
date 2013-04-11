@@ -19,6 +19,7 @@
     
     if (result) {
         
+        result->_cacheQueueName = cacheQueueName;
         result->_cacheFactory = [cacheFactory copy];
     }
     
