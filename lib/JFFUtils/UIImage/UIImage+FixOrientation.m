@@ -4,6 +4,8 @@
 
 //source: http://stackoverflow.com/questions/5427656/ios-uiimagepickercontroller-result-image-orientation-after-upload
 
+//TODO move to JFFUI because it's UI
+
 - (UIImage *)fixOrientation {
     
     // No-op if the orientation is already correct

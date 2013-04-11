@@ -2,7 +2,33 @@
 
 #import "NSArray+BlocksAdditions.h"
 
+@implementation NSMutableSet (BlocksAdditions)
+
++ (id)converToCurrentTypeMutableSet:(NSMutableSet *)set
+{
+    return set;
+}
+
+@end
+
 @implementation NSSet (BlocksAdditions)
+
++ (id)converToCurrentTypeMutableSet:(NSMutableSet *)set
+{
+    return [set copy];
+}
+
++ (id)setWithSize:(NSUInteger)size
+         producer:(JFFProducerBlock)block
+{
+    NSMutableSet *result = [[NSMutableSet alloc] initWithCapacity:size];
+    
+    for (NSUInteger index = 0; index < size; ++index) {
+        [result addObject:block(index)];
+    }
+    
+    return [self converToCurrentTypeMutableSet:result];
+}
 
 - (NSSet *)map:(JFFMappingBlock)block
 {
