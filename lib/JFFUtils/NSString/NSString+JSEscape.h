@@ -2,6 +2,6 @@
 
 @interface NSString (JSEscape)
 
--(NSString *)stringByReplacingJSEscapes:(NSString *)sourceString;
+-(NSString *)stringByReplacingJSEscapes;
 
 @end
