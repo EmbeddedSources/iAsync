@@ -54,12 +54,11 @@ JFFAsyncOperationInterface
 {
     if (![SKPaymentQueue canMakePayments]) {
         //TODO create separate error
-        //!!!! remove after ios 6.0
         handler(nil, [JFFError newErrorWithDescription:@"Warn the user that purchases are disabled."]);
         return;
     }
     
-    _handler = [handler  copy];
+    _handler = [handler copy];
     
     SKPaymentTransaction *transaction = [self ownPurchasedTransaction];
     

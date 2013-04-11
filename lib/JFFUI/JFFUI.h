@@ -5,7 +5,6 @@
 
 #import <JFFUI/Extensions/UINib+FirstObject.h>
 #import <JFFUI/Extensions/UIApplication+OpenApplicationAsyncOp.h>
-#import <JFFUI/Extensions/UIImageView+CachedAsyncImageLoader.h>
 
 #import <JFFUI/UIViewController/UIViewController+PresentTopViewController.h>
 #import <JFFUI/UIViewController/UIViewController+PerformSegueWithCallback.h>
@@ -22,6 +21,11 @@
 #import <JFFUI/UITableView/UITableView+WithinUpdates.h>
 
 #import <JFFUI/Preview/NSURL+QLPreviewControllerDataSource.h>
+
+//Stripe views
+#import <JFFUI/StripeView/JFFStripeView.h>
+#import <JFFUI/StripeView/JFFStripeViewDelegate.h>
+
 #import <JFFUI/StripeView/JFFPageSlider.h>
 #import <JFFUI/StripeView/JFFPageSliderDelegate.h>
 

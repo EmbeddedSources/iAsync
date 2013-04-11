@@ -35,6 +35,10 @@
 		1BD3616C1455A2F80036F786 /* JFFPageSliderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD3616B1455A2F80036F786 /* JFFPageSliderDelegate.h */; };
 		1BE053B715480F4400270B58 /* JFFActionSheetsContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE053B515480F4400270B58 /* JFFActionSheetsContainer.h */; };
 		1BE053B815480F4400270B58 /* JFFActionSheetsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053B615480F4400270B58 /* JFFActionSheetsContainer.m */; };
+		4C21FA7D16EF4F59005C4E57 /* JFFStripeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C21FA7916EF4F59005C4E57 /* JFFStripeView.h */; };
+		4C21FA7E16EF4F59005C4E57 /* JFFStripeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C21FA7A16EF4F59005C4E57 /* JFFStripeView.m */; };
+		4C21FA7F16EF4F59005C4E57 /* JFFStripeViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C21FA7B16EF4F59005C4E57 /* JFFStripeViewDelegate.h */; };
+		4C21FA8016EF4F59005C4E57 /* JFFStripeViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C21FA7C16EF4F59005C4E57 /* JFFStripeViewDelegate.m */; };
 		4CC3865116DE68630079F968 /* UIViewController+Dialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC3864F16DE68630079F968 /* UIViewController+Dialog.h */; };
 		4CC3865216DE68630079F968 /* UIViewController+Dialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC3865016DE68630079F968 /* UIViewController+Dialog.m */; };
 		539103CA14A88BE1007315A3 /* JFFUI_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFUI_Prefix.pch */; };
@@ -91,8 +95,6 @@
 		CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */; };
 		CEA097C615FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */; };
 		CEA097C715FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */; };
-		CEE235EA1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */; };
-		CEE235EB1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +126,10 @@
 		1BD3616B1455A2F80036F786 /* JFFPageSliderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPageSliderDelegate.h; sourceTree = "<group>"; };
 		1BE053B515480F4400270B58 /* JFFActionSheetsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFActionSheetsContainer.h; sourceTree = "<group>"; };
 		1BE053B615480F4400270B58 /* JFFActionSheetsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFActionSheetsContainer.m; sourceTree = "<group>"; };
+		4C21FA7916EF4F59005C4E57 /* JFFStripeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStripeView.h; sourceTree = "<group>"; };
+		4C21FA7A16EF4F59005C4E57 /* JFFStripeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStripeView.m; sourceTree = "<group>"; };
+		4C21FA7B16EF4F59005C4E57 /* JFFStripeViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStripeViewDelegate.h; sourceTree = "<group>"; };
+		4C21FA7C16EF4F59005C4E57 /* JFFStripeViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStripeViewDelegate.m; sourceTree = "<group>"; };
 		4CC3864E16DE67B60079F968 /* JFFDialogProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFDialogProtocol.h; sourceTree = "<group>"; };
 		4CC3864F16DE68630079F968 /* UIViewController+Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Dialog.h"; sourceTree = "<group>"; };
 		4CC3865016DE68630079F968 /* UIViewController+Dialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Dialog.m"; sourceTree = "<group>"; };
@@ -151,8 +157,6 @@
 		CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFOpenApplicationError.m; sourceTree = "<group>"; };
 		CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+OpenApplicationAsyncOp.h"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.h"; sourceTree = SOURCE_ROOT; };
 		CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+OpenApplicationAsyncOp.m"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.m"; sourceTree = SOURCE_ROOT; };
-		CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+CachedAsyncImageLoader.h"; path = "Extensions/UIImageView+CachedAsyncImageLoader.h"; sourceTree = SOURCE_ROOT; };
-		CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+CachedAsyncImageLoader.m"; path = "Extensions/UIImageView+CachedAsyncImageLoader.m"; sourceTree = SOURCE_ROOT; };
 		D2AAC07E0554694100DB518D /* libJFFUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -254,8 +258,6 @@
 				1B81FAEE14330E4400997278 /* UINib+FirstObject.m */,
 				CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */,
 				CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */,
-				CEE235E81608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h */,
-				CEE235E91608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m */,
 			);
 			name = Extensions;
 			path = ./JFFUI/Extensions;
@@ -287,6 +289,10 @@
 		1BD361651455A04B0036F786 /* StripeView */ = {
 			isa = PBXGroup;
 			children = (
+				4C21FA7916EF4F59005C4E57 /* JFFStripeView.h */,
+				4C21FA7A16EF4F59005C4E57 /* JFFStripeView.m */,
+				4C21FA7B16EF4F59005C4E57 /* JFFStripeViewDelegate.h */,
+				4C21FA7C16EF4F59005C4E57 /* JFFStripeViewDelegate.m */,
 				1BD361671455A0630036F786 /* JFFPageSlider.h */,
 				1BD361681455A0630036F786 /* JFFPageSlider.m */,
 				1BD3616B1455A2F80036F786 /* JFFPageSliderDelegate.h */,
@@ -398,12 +404,13 @@
 				1B260343156546D900316C7C /* JFFAlertViewsContainer.h in Headers */,
 				1B2812EA1578C1F400BC70D9 /* JFFWaitAlertView.h in Headers */,
 				CEA097C615FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h in Headers */,
-				CEE235EA1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.h in Headers */,
 				CE9A9153165671D200EFE858 /* JFFUIError.h in Headers */,
 				CE9A91571656722900EFE858 /* JFFOpenApplicationError.h in Headers */,
 				CE5EF36A167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.h in Headers */,
 				CE5EF36F167CE536009BD15D /* UIViewController+PerformSegueWithCallback.h in Headers */,
 				4CC3865116DE68630079F968 /* UIViewController+Dialog.h in Headers */,
+				4C21FA7D16EF4F59005C4E57 /* JFFStripeView.h in Headers */,
+				4C21FA7F16EF4F59005C4E57 /* JFFStripeViewDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,12 +526,13 @@
 				1B260344156546D900316C7C /* JFFAlertViewsContainer.m in Sources */,
 				1B2812EB1578C1F400BC70D9 /* JFFWaitAlertView.mm in Sources */,
 				CEA097C715FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m in Sources */,
-				CEE235EB1608893B00B34AD8 /* UIImageView+CachedAsyncImageLoader.m in Sources */,
 				CE9A9154165671D200EFE858 /* JFFUIError.m in Sources */,
 				CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */,
 				CE5EF36B167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.m in Sources */,
 				CE5EF370167CE536009BD15D /* UIViewController+PerformSegueWithCallback.m in Sources */,
 				4CC3865216DE68630079F968 /* UIViewController+Dialog.m in Sources */,
+				4C21FA7E16EF4F59005C4E57 /* JFFStripeView.m in Sources */,
+				4C21FA8016EF4F59005C4E57 /* JFFStripeViewDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,10 +583,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					../JFFCache,
-					../,
-				);
+				HEADER_SEARCH_PATHS = ../;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -593,10 +598,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					../JFFCache,
-					../,
-				);
+				HEADER_SEARCH_PATHS = ../;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
