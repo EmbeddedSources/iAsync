@@ -13,7 +13,7 @@
 @property (nonatomic, readonly) NSInteger lastIndex;
 @property (nonatomic, readonly) NSMutableDictionary *viewByIndex;
 
-@property (nonatomic, weak) IBOutlet id< JFFPageSliderDelegate > delegate;
+@property (weak, nonatomic) IBOutlet id<JFFPageSliderDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame
            delegate:(id< JFFPageSliderDelegate >)delegate;

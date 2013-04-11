@@ -56,9 +56,6 @@
     
     NSRange range_ = { 0, 1 };
     _previousVisiableIndexesRange = range_;
-
-    if (self.delegate)
-        [self reloadData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveMemoryWarning:)
