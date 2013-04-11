@@ -19,6 +19,13 @@
 //#define SHOW_DEBUG_LOGS
 #import <JFFLibrary/JDebugLog.h>
 
+//#define USE_DD_URL_BUILDER
+
+#ifdef USE_DD_URL_BUILDER
+    #import <DDURLBuilder/DDURLBuilder.h>
+    #import "NSUrlLocationValidator.h"
+#endif
+
 @interface JFFURLConnection ()
 
 @property (nonatomic) JFFURLConnectionParams *params;
@@ -299,6 +306,24 @@ static void readStreamCallback(CFReadStreamRef stream,
         NSDebugLog( @"JConnection - creating URL..." );
         NSDebugLog( @"%@", _params.url );
         NSString* location_ = allHeadersDict_[ @"Location" ];
+
+#ifdef USE_DD_URL_BUILDER
+        if ( ![ NSUrlLocationValidator isValidLocation: location_ ] )
+        {
+            NSLog( @"[!!!WARNING!!!] JConnection : path for URL is invalid. Ignoring..." );
+            location_ = @"/";
+        }
+        
+        DDURLBuilder* urlBuilder_ = [ DDURLBuilder URLBuilderWithURL: self->_params.url ];
+        urlBuilder_.shouldSkipPathPercentEncoding = YES;
+        urlBuilder_.path = location_;
+        
+        self->_params.url = [ urlBuilder_ URL ];
+        
+        // To avoid HTTP 500
+        self->_params.httpMethod = @"GET";
+        self->_params.httpBody = nil;
+#else
         if ( [ location_ hasPrefix: @"/" ] )
         {
             _params.url = [ _params.url URLWithLocation: location_ ];
@@ -313,6 +338,7 @@ static void readStreamCallback(CFReadStreamRef stream,
 
         _params.httpMethod = @"GET";
         _params.httpBody = nil;
+#endif
 
         NSDebugLog( @"%@", _params.url );
         NSDebugLog( @"Done." );

@@ -39,6 +39,11 @@
 		4CA0B39416F0960300A20C25 /* JNSNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0B39216F0960300A20C25 /* JNSNetworkError.m */; };
 		4CA0B39716F0965700A20C25 /* JNSNoInternetNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0B39516F0965700A20C25 /* JNSNoInternetNetworkError.h */; };
 		4CA0B39816F0965700A20C25 /* JNSNoInternetNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0B39616F0965700A20C25 /* JNSNoInternetNetworkError.m */; };
+		4CBBDBE317173AF3004D670D /* NSUrlLocationValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBBDBE117173AF3004D670D /* NSUrlLocationValidator.h */; };
+		4CBBDBE417173AF3004D670D /* NSUrlLocationValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBBDBE217173AF3004D670D /* NSUrlLocationValidator.m */; };
+		4CBBDBF317173BE4004D670D /* JNConnectionMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBBDBF017173BE4004D670D /* JNConnectionMock.h */; };
+		4CBBDBF417173BE4004D670D /* JNConnectionMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBBDBF117173BE4004D670D /* JNConnectionMock.m */; };
+		4CBBDBF517173BE4004D670D /* JNMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBBDBF217173BE4004D670D /* JNMock.h */; };
 		5310B9F1141F489200A3E2B1 /* JNConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5310B9EF141F489200A3E2B1 /* JNConstants.h */; };
 		5316F433141E151C00C3D9A9 /* JFFUrlResponseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5316F431141E151C00C3D9A9 /* JFFUrlResponseLogger.h */; };
 		5316F434141E151C00C3D9A9 /* JFFUrlResponseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316F432141E151C00C3D9A9 /* JFFUrlResponseLogger.m */; };
@@ -292,6 +297,11 @@
 		4CA0B39216F0960300A20C25 /* JNSNetworkError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNSNetworkError.m; sourceTree = "<group>"; };
 		4CA0B39516F0965700A20C25 /* JNSNoInternetNetworkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNSNoInternetNetworkError.h; sourceTree = "<group>"; };
 		4CA0B39616F0965700A20C25 /* JNSNoInternetNetworkError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNSNoInternetNetworkError.m; sourceTree = "<group>"; };
+		4CBBDBE117173AF3004D670D /* NSUrlLocationValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUrlLocationValidator.h; sourceTree = "<group>"; };
+		4CBBDBE217173AF3004D670D /* NSUrlLocationValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUrlLocationValidator.m; sourceTree = "<group>"; };
+		4CBBDBF017173BE4004D670D /* JNConnectionMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNConnectionMock.h; sourceTree = "<group>"; };
+		4CBBDBF117173BE4004D670D /* JNConnectionMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNConnectionMock.m; sourceTree = "<group>"; };
+		4CBBDBF217173BE4004D670D /* JNMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNMock.h; sourceTree = "<group>"; };
 		5310B9EF141F489200A3E2B1 /* JNConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNConstants.h; sourceTree = "<group>"; };
 		5316F431141E151C00C3D9A9 /* JFFUrlResponseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFUrlResponseLogger.h; sourceTree = "<group>"; };
 		5316F432141E151C00C3D9A9 /* JFFUrlResponseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFUrlResponseLogger.m; sourceTree = "<group>"; };
@@ -455,6 +465,16 @@
 			path = NSNetworkErrors;
 			sourceTree = "<group>";
 		};
+		4CBBDBEF17173BE4004D670D /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				4CBBDBF017173BE4004D670D /* JNConnectionMock.h */,
+				4CBBDBF117173BE4004D670D /* JNConnectionMock.m */,
+				4CBBDBF217173BE4004D670D /* JNMock.h */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		534BEF1C14448DAD005D745F /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +482,8 @@
 				1B15CCB21535CAF4005F2B56 /* JFFNetworkAsyncOperation.m */,
 				CE29B5E015F5E821000A05B8 /* NSURL+URLWithLocation.h */,
 				CE29B5E115F5E821000A05B8 /* NSURL+URLWithLocation.m */,
+				4CBBDBE117173AF3004D670D /* NSUrlLocationValidator.h */,
+				4CBBDBE217173AF3004D670D /* NSUrlLocationValidator.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -622,6 +644,7 @@
 		8D5AE6EF13F3E7EE00EB6143 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4CBBDBEF17173BE4004D670D /* Mock */,
 				4C98FAC316E0ACB300B6EFD8 /* Errors */,
 				CEF162DC16760E9E00B0B6E4 /* Callbacks */,
 				1B166C8F1546E59800475B6A /* CookiesStorage */,
@@ -854,6 +877,9 @@
 				4C98FACE16E0AE7500B6EFD8 /* JHttpError.h in Headers */,
 				4CA0B39316F0960300A20C25 /* JNSNetworkError.h in Headers */,
 				4CA0B39716F0965700A20C25 /* JNSNoInternetNetworkError.h in Headers */,
+				4CBBDBE317173AF3004D670D /* NSUrlLocationValidator.h in Headers */,
+				4CBBDBF317173BE4004D670D /* JNConnectionMock.h in Headers */,
+				4CBBDBF517173BE4004D670D /* JNMock.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1167,6 +1193,8 @@
 				4C98FACF16E0AE7500B6EFD8 /* JHttpError.m in Sources */,
 				4CA0B39416F0960300A20C25 /* JNSNetworkError.m in Sources */,
 				4CA0B39816F0965700A20C25 /* JNSNoInternetNetworkError.m in Sources */,
+				4CBBDBE417173AF3004D670D /* NSUrlLocationValidator.m in Sources */,
+				4CBBDBF417173BE4004D670D /* JNConnectionMock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
