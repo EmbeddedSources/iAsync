@@ -12,7 +12,7 @@
       @"id"     : [NSString class],
       @"name"   : [NSString class],
       @"gender" : [NSString class],
-      @"bio"    : [NSString class],
+      jOptionalKey(@"bio") : [NSString class],
       };
     
     if (![JFFJsonObjectValidator validateJsonObject:jsonObject
@@ -29,7 +29,7 @@
         result.facebookID = jsonObject[@"id"    ];
         result.name       = jsonObject[@"name"  ];
         result.gender     = jsonObject[@"gender"];
-        result.biography  = jsonObject[@"bio"   ];
+        result.biography  = jsonObject[@"bio"   ]?:@"";
     }
     
     return result;

@@ -9,9 +9,6 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 
-static JFFFacebookDidLoginCallback  globalDidLoginCallback;
-static JFFFacebookDidLogoutCallback globalDidLogoutCallback;
-
 @implementation JFFSocialFacebook
 
 + (NSArray *)authPermissions
@@ -64,11 +61,6 @@ static JFFFacebookDidLogoutCallback globalDidLogoutCallback;
     }
     
     JFFAsyncOperation logoutLoader = jffFacebookLogout(facebookSession);
-    logoutLoader = asyncOperationWithFinishCallbackBlock(logoutLoader, ^(id result, NSError *error) {
-        
-        if (result && globalDidLogoutCallback)
-            globalDidLogoutCallback(nil);
-    });
     
     return logoutLoader;
 }
@@ -83,23 +75,12 @@ static JFFFacebookDidLogoutCallback globalDidLogoutCallback;
         
         JFFAsyncOperation loader = jffFacebookLogin(session, [self authPermissions]);
         
-        if (!session.isOpen) {
-            
-            loader = asyncOperationWithFinishCallbackBlock(loader, ^(id result, NSError *error) {
-                
-                if (result && globalDidLoginCallback) {
-                    globalDidLoginCallback(nil);
-                }
-            });
-        }
-        
         return loader(progressCallback, cancelCallback, doneCallback);
     };
     
     id mergeObject =
     @{
       @"methodName" : NSStringFromSelector(_cmd),
-      @"className"  : [self description]
       };
     return [self asyncOperationMergeLoaders:loader withArgument:mergeObject];
 }
@@ -112,18 +93,6 @@ static JFFFacebookDidLogoutCallback globalDidLogoutCallback;
     };
     
     return bindSequenceOfAsyncOperations([self authFacebookSessionLoader], binder, nil);
-}
-
-#pragma mark callbacks
-
-+ (void)setDidLoginCallback:(JFFFacebookDidLoginCallback)didLoginCallback
-{
-    globalDidLoginCallback = [didLoginCallback copy];
-}
-
-+ (void)setDidLogoutCallback:(JFFFacebookDidLogoutCallback)didLogoutCallback
-{
-    globalDidLogoutCallback = [didLogoutCallback copy];
 }
 
 + (JFFAsyncOperationBinder)userParser

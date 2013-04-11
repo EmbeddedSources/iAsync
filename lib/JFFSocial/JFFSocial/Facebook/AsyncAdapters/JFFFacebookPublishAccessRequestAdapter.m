@@ -10,6 +10,7 @@
 
 @interface JFFFacebookPublishAccessRequestAdapter : NSObject <JFFAsyncOperationInterface>
 
+@property (nonatomic) FBSession *session;
 @property (nonatomic) NSArray *permissions;
 
 @end
@@ -24,20 +25,18 @@
 {
     handler = [handler copy];
     
-    //TODO pass session, do not use [FBSession activeSession]
-    
     FBSessionRequestPermissionResultHandler fbHandler = ^(FBSession *session, NSError *error) {
-                                                   
+        
         NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;
-                                                   
-                                                   [self handleLoginWithSession:[FBSession activeSession]
-                                                                          error:libError
-                                                                        handler:handler];
+        
+        [self handleLoginWithSession:session
+                               error:libError
+                             handler:handler];
     };
     
-    [[FBSession activeSession] requestNewPublishPermissions:self.permissions
-                                            defaultAudience:(FBSessionDefaultAudienceFriends)
-                                          completionHandler:fbHandler];
+    [self.session requestNewPublishPermissions:self.permissions
+                               defaultAudience:(FBSessionDefaultAudienceFriends)
+                             completionHandler:fbHandler];
 }
 
 - (void)handleLoginWithSession:(FBSession *)session
@@ -58,11 +57,13 @@
 
 @end
 
-JFFAsyncOperation jffFacebookPublishAccessRequest(NSArray *permissions)
+JFFAsyncOperation jffFacebookPublishAccessRequest(FBSession *session, NSArray *permissions)
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+        
         JFFFacebookPublishAccessRequestAdapter *object = [JFFFacebookPublishAccessRequestAdapter new];
         
+        object.session     = session;
         object.permissions = permissions;
         
         return object;
@@ -73,8 +74,8 @@ JFFAsyncOperation jffFacebookPublishAccessRequest(NSArray *permissions)
     NSDictionary *mergeParams =
     @{
       @"method"      : @"jffFacebookPublishAccessRequest",
-      @"permissions" : permissions,
-      @"class"       : @"JFFFacebookPublishAccessRequestAdapter"
+      @"permissions" : [[NSSet alloc] initWithArray:permissions],
+      @"class"       : NSStringFromClass([JFFFacebookPublishAccessRequestAdapter class])
       };
     
     return [JFFFacebookPublishAccessRequestAdapter asyncOperationMergeLoaders:loader withArgument:mergeParams];

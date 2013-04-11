@@ -39,7 +39,6 @@
 
 @end
 
-//TODO check if used
 JFFAsyncOperation jffFacebookLogout(FBSession *facebook)
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {

@@ -2,11 +2,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class FBSession;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
     
-    JFFAsyncOperation jffFacebookPublishAccessRequest(NSArray *permissions);
+    JFFAsyncOperation jffFacebookPublishAccessRequest(FBSession *session, NSArray *permissions);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

@@ -185,20 +185,6 @@
 			remoteGlobalIDString = CE444A1C1608609100DD85B0;
 			remoteInfo = JFFUtilsTest;
 		};
-		CEB2366B15FF6E3A005E5CF5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = JFFUI;
-		};
-		CEB2366D15FF6E3A005E5CF5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 539103F014A88BE1007315A3;
-			remoteInfo = "JFFUI-clang";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -325,7 +311,6 @@
 		CEAAC3C3160B41F90058F88A /* JFFSocialMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialMediaItem.m; sourceTree = "<group>"; };
 		CEB2350415FF6840005E5CF5 /* JFFSocialInstagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialInstagram.h; sourceTree = "<group>"; };
 		CEB2350515FF6840005E5CF5 /* JFFSocialInstagram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialInstagram.m; sourceTree = "<group>"; };
-		CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUI.xcodeproj; path = "/Users/user/Sources/paparam.ru/HumanCloud/lib-third-party/iAsync/test/JFFSocialTest/../../lib/JFFUI/JFFUI.xcodeproj"; sourceTree = "<absolute>"; };
 		CEB2367515FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInvalidInstagramResponseURLError.h; sourceTree = "<group>"; };
 		CEB2367615FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInvalidInstagramResponseURLError.m; sourceTree = "<group>"; };
 		CEB2367D15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramAuthedAccount.h; sourceTree = "<group>"; };
@@ -586,11 +571,11 @@
 				CEB234F315FF67EC005E5CF5 /* Instagram */,
 				37063AA015FA3E0C00B4B059 /* Foursquare */,
 				CE4F609515F8BA4300271035 /* Errors */,
-				CE4F601015F8B2BB00271035 /* JFFSocial.h */,
 				CE4F606C15F8B63F00271035 /* JFFSocialAccount.h */,
 				CE4F606D15F8B63F00271035 /* JFFSocialAccount.m */,
 				CEAAC3C2160B41F90058F88A /* JFFSocialMediaItem.h */,
 				CEAAC3C3160B41F90058F88A /* JFFSocialMediaItem.m */,
+				CE4F601015F8B2BB00271035 /* JFFSocial.h */,
 				CE4F600E15F8B2BB00271035 /* Supporting Files */,
 			);
 			path = JFFSocial;
@@ -620,7 +605,6 @@
 		CE4F601D15F8B55300271035 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */,
 				CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */,
 				CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */,
 				CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */,
@@ -752,15 +736,6 @@
 			path = Instagram;
 			sourceTree = "<group>";
 		};
-		CEB2365C15FF6E39005E5CF5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CEB2366C15FF6E3A005E5CF5 /* libJFFUI.a */,
-				CEB2366E15FF6E3A005E5CF5 /* libJFFUI copy.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		CEB2367415FF760F005E5CF5 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,10 +841,6 @@
 				{
 					ProductGroup = CE4F602215F8B56300271035 /* Products */;
 					ProjectRef = CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */;
-				},
-				{
-					ProductGroup = CEB2365C15FF6E39005E5CF5 /* Products */;
-					ProjectRef = CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */;
 				},
 				{
 					ProductGroup = CE4F601F15F8B56300271035 /* Products */;
@@ -995,21 +966,6 @@
 			fileType = wrapper.cfbundle;
 			path = JFFUtilsTest.octest;
 			remoteRef = CEAAC3D7160B41F90058F88A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CEB2366C15FF6E3A005E5CF5 /* libJFFUI.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libJFFUI.a;
-			remoteRef = CEB2366B15FF6E3A005E5CF5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CEB2366E15FF6E3A005E5CF5 /* libJFFUI copy.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			name = "libJFFUI copy.a";
-			path = "libJFFUI-clang.a";
-			remoteRef = CEB2366D15FF6E3A005E5CF5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

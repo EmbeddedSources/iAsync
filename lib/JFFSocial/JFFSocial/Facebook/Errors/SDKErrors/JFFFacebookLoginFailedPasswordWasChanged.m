@@ -8,11 +8,12 @@
 
 - (id)init
 {
-    return [self initWithDescription:NSLocalizedString(@"FACEBOOK_LOGIN_ERROR_PASSWORD_WAS_CHANGED", nil)];
+    return [self initWithDescription:NSLocalizedString(@"FACEBOOK_LOGIN_ERROR_USER_DENIED_PERMISSION", nil)];
 }
 
 - (void)writeErrorWithJFFLogger
 {
+    [self writeErrorToNSLog];
 }
 
 + (BOOL)isMineFacebookNativeError:(NSError *)nativeError

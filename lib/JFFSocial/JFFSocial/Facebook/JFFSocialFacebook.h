@@ -2,9 +2,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^JFFFacebookDidLoginCallback)(NSString *login);
-typedef void(^JFFFacebookDidLogoutCallback)(NSString *login);
-
 @interface JFFSocialFacebook : NSObject
 
 + (BOOL)isActiveFacebookSession;
@@ -12,6 +9,7 @@ typedef void(^JFFFacebookDidLogoutCallback)(NSString *login);
 + (JFFAsyncOperation)logoutLoader;
 
 + (JFFAsyncOperation)authTokenLoader;
++ (JFFAsyncOperation)authFacebookSessionLoader;
 
 + (JFFAsyncOperation)userInfoLoader;
 
@@ -21,10 +19,6 @@ typedef void(^JFFFacebookDidLogoutCallback)(NSString *login);
 
 #pragma mark callbacks
 
-+ (void)setDidLoginCallback:(JFFFacebookDidLoginCallback)didLoginCallback;
-+ (void)setDidLogoutCallback:(JFFFacebookDidLogoutCallback)didLogoutCallback;
-
-//TODO hide this methods
 + (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath;
 
 + (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath

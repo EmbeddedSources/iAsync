@@ -208,9 +208,4 @@ static JFFAsyncOperation twitterAccountsLoader()
     return result;
 }
 
-+ (void)setDidLoginCallback:(JFFSocialTwitterDidLoginCallback)didLoginCallback
-{
-    globalDidLoginCallback = [didLoginCallback copy];
-}
-
 @end
