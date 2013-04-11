@@ -1,6 +1,10 @@
-TEMP_DIR=$(/usr/bin/getconf DARWIN_USER_TEMP_DIR)
-TEST_DIR_NAME=test-results
+## TEMP_DIR=$(/usr/bin/getconf DARWIN_USER_TEMP_DIR)
+## TEST_DIR_NAME=test-results
 
-TEST_RESULTS_DIR=$TEMP_DIR$TEST_DIR_NAME
+## TEST_RESULTS_DIR=$TEMP_DIR$TEST_DIR_NAME
 
-rm -r -f "$TEST_RESULTS_DIR"
+## rm -r -f "$TEST_RESULTS_DIR"
+
+cd ~/Library/Application\ Support/iPhone\ Simulator/6.1/
+rm -rf Applications
+mkdir -p Applications

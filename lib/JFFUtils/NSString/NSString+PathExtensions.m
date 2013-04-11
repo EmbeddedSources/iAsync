@@ -2,24 +2,36 @@
 
 @implementation NSString (PathExtensions)
 
-+ (NSString *)pathWithDirectory:(NSSearchPathDirectory)directory
-         appendingPathComponent:(NSString *)str
++(NSString*)pathForDirectory:(NSSearchPathDirectory)directory
 {
     NSArray  *pathes = NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [pathes lastObject];
-    return [documentDirectory stringByAppendingPathComponent:str];
+    return [pathes lastObject];
 }
 
 + (NSString *)documentsPathByAppendingPathComponent:(NSString *)str
 {
-    return [self pathWithDirectory:NSDocumentDirectory
-            appendingPathComponent:str];
+    static NSString *documentsDirectory = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,
+    ^{
+        documentsDirectory = [ self pathForDirectory: NSDocumentDirectory ];
+    });
+    
+    return [ documentsDirectory stringByAppendingPathComponent: str ];
 }
 
 + (NSString *)cachesPathByAppendingPathComponent:(NSString *)str
 {
-    return [self pathWithDirectory:NSCachesDirectory
-            appendingPathComponent:str];
+    static NSString *cachesDirectory = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,
+    ^{
+       cachesDirectory = [ self pathForDirectory: NSCachesDirectory ];
+    });
+    
+    return [ cachesDirectory stringByAppendingPathComponent: str ];
 }
 
 @end

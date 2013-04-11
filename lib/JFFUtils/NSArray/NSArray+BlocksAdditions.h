@@ -33,6 +33,7 @@
 //or return nil if error happens
 - (NSArray*)map:(JFFMappingWithErrorBlock)block
           error:(NSError *__autoreleasing *)outError;
+-(NSArray*)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_;//TODO check why was removed. ask alexandr
 
 //Invokes block once for each element of self.
 //Creates a new NSArray containing the values returned by the block. Passes index of element in block as argument.

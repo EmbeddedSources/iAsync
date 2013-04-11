@@ -30,10 +30,13 @@
 #import <JFFUtils/NSString/NSString+FileAttributes.h>
 #import <JFFUtils/NSString/NSString+StringWithCutPrefix.h>
 #import <JFFUtils/NSString/NSString+HTML.h>
+#import <JFFUtils/NSString/NSString+JSEscape.h>
 
 #import <JFFUtils/NSSet/NSSet+BlocksAdditions.h>
 #import <JFFUtils/NSSet/NSMutableSet+StorableSet.h>
 
+
+#import <JFFUtils/NSDate/NSDate+Now.h>
 #import <JFFUtils/NSDate/NSDate+DateDifference.h>
 
 #import <JFFUtils/ToURL/NSURL+ToURL.h>

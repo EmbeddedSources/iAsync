@@ -1,6 +1,7 @@
 #import "JFFDataLoadersTools.h"
 
 #import "JFFRestKitError.h"
+#import <JFFNetwork/Callbacks/JFFNetworkResponseDataCallback.h>
 
 JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedDataLoader )
 {
@@ -25,7 +26,7 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
         };
         
         progressCallback = [progressCallback copy];
-        JFFAsyncOperationProgressHandler progressWrapperCallback = ^(id progressInfo) {
+        JFFAsyncOperationProgressHandler progressWrapperCallback = ^(JFFNetworkResponseDataCallback* progressInfo) {
             if ( !handle ) {
                 filePath = [NSString createUuid];
                 filePath = [NSString cachesPathByAppendingPathComponent:filePath];
@@ -36,7 +37,7 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
             }
 
             //STODO write in separate thread only ( dispatch_io_create_with_path )
-            [handle writeData:progressInfo];
+            [handle writeData:progressInfo.dataChunk];
             
             if (progressCallback)
                 progressCallback(progressInfo);
