@@ -66,6 +66,17 @@ JFFAsyncOperation asyncOperationWithError(NSError *error)
     };
 }
 
+JFFAsyncOperation asyncOperationWithCancelFlag(BOOL canceled)
+{
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        if (cancelCallback)
+            cancelCallback(canceled);
+        return JFFStubCancelAsyncOperationBlock;
+    };
+}
+
 JFFAsyncOperation asyncOperationWithSyncOperationInCurrentQueue(JFFSyncOperation block)
 {
     assert(block);
@@ -143,6 +154,44 @@ JFFAsyncOperation asyncOperationWithStartAndFinishBlocks(JFFAsyncOperation loade
                 doneCallback(result, error);
         };
         return loader(progressCallback, cancelCallback, wrappedDoneCallback);
+    };
+}
+
+JFFAsyncOperation asyncOperationWithOptionalStartAndFinishBlocks(JFFAsyncOperation loader,
+                                                                 JFFSimpleBlock startBlock,
+                                                                 JFFDidFinishAsyncOperationHandler finishCallback)
+{
+    startBlock     = [startBlock     copy];
+    finishCallback = [finishCallback copy];
+    
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        
+        __block BOOL loading = YES;
+        
+        doneCallback = [doneCallback copy];
+        JFFDidFinishAsyncOperationHandler wrappedDoneCallback = ^(id result, NSError *error) {
+            
+            loading = NO;//TODO stop loading also on cancel
+            
+            if (finishCallback)
+                finishCallback(result, error);
+            if (doneCallback)
+                doneCallback(result, error);
+        };
+        
+        JFFCancelAsyncOperation cancel = loader(progressCallback, cancelCallback, wrappedDoneCallback);
+        
+        if (loading) {
+            
+            if (startBlock)
+                startBlock();
+            
+            return cancel;
+        }
+        
+        return JFFStubCancelAsyncOperationBlock;
     };
 }
 

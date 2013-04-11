@@ -607,6 +607,7 @@ JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperations(JFFAsyncOperation first
     for (JFFAsyncOperation nextBlock = firstLoader;
          nextBlock != nil;
          nextBlock = va_arg(args, JFFAsyncOperation)) {
+        
         [loaders addObject:[nextBlock copy]];
     }
     va_end(args);

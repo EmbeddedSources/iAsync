@@ -6,9 +6,9 @@
 
 @interface JFFAsyncOperationLoadBalancerContexts : NSObject
 
-@property ( nonatomic, retain ) NSString* currentContextName;
-@property ( nonatomic, retain ) NSString* activeContextName;
-@property ( nonatomic, retain, readonly ) NSMutableDictionary* contextLoadersByName;
+@property (nonatomic) NSString *currentContextName;
+@property (nonatomic) NSString *activeContextName;
+@property (nonatomic, readonly) NSMutableDictionary *contextLoadersByName;
 
 +(id)sharedBalancer;
 

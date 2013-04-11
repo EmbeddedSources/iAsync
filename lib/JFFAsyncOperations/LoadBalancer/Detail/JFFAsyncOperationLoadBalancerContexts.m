@@ -7,18 +7,9 @@
     NSMutableDictionary* _contextLoadersByName;
 }
 
--(void)dealloc
-{
-    [_currentContextName   release];
-    [_activeContextName    release];
-    [_contextLoadersByName release];
-    
-    [super dealloc];
-}
-
 + (id)sharedBalancer
 {
-    [NSThread assertMainThread];
+    NSParameterAssert([NSThread isMainThread]);
     static JFFAsyncOperationLoadBalancerContexts *instance;
     
     if (!instance) {
@@ -31,7 +22,7 @@
 -(NSString*)currentContextName
 {
     if (!_currentContextName) {
-        _currentContextName = [self.activeContextName retain];
+        _currentContextName = self.activeContextName;
     }
     return _currentContextName;
 }
@@ -39,7 +30,7 @@
 -(NSString*)activeContextName
 {
     if (!_activeContextName ) {
-        _activeContextName = [@"default" retain];
+        _activeContextName = @"default";
     }
     return _activeContextName;
 }
@@ -54,14 +45,12 @@
 
 - (JFFContextLoaders *)contextLoadersForName:(NSString *)name
 {
-    JFFContextLoaders* contextLoaders = self.contextLoadersByName[name];
+    JFFContextLoaders *contextLoaders = _contextLoadersByName[name];
     if (!contextLoaders) {
         contextLoaders = [JFFContextLoaders new];
         contextLoaders.name = name;
         
         self.contextLoadersByName[name] = contextLoaders;
-        
-        [contextLoaders release];
     }
     return contextLoaders;
 }
