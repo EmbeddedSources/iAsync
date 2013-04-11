@@ -168,6 +168,20 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
         [ actionSheetsStruct_.actionSheet->_actionSheet showInView: actionSheetsStruct_.view ];
 }
 
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet
+{
+    NSArray *buttons = [actionSheet.subviews select:^BOOL(UIView* view) {
+        return [view isKindOfClass:[UIButton class]];
+    }];
+    
+    [_alertButtons enumerateObjectsUsingBlock:^(JFFAlertButton *button, NSUInteger idx, BOOL *stop) {
+    
+        if (button.backgroundImage) {
+            [buttons[idx] setBackgroundImage:button.backgroundImage forState:UIControlStateNormal];
+        }
+    }];
+}
+
 #pragma mark -
 #pragma mark forward ActionSeet methods
 

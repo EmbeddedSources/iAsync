@@ -1,6 +1,6 @@
 #import "UIWebView+HideWhenLoading.h"
 
-static char property_key_;
+static char propertyKey;
 
 @class JUIWebViewDelegateProxy;
 
@@ -42,14 +42,14 @@ static char property_key_;
 
 @implementation UIWebView (HideWhenLoading)
 
--(JUIWebViewDelegateProxy*)proxy
+- (JUIWebViewDelegateProxy *)proxy
 {
-    return ( JUIWebViewDelegateProxy* )objc_getAssociatedObject( self, &property_key_ );
+    return (JUIWebViewDelegateProxy *)objc_getAssociatedObject(self, &propertyKey);
 }
 
 - (void)setProxy:(JUIWebViewDelegateProxy *)proxy
 {
-    objc_setAssociatedObject(self, &property_key_, proxy, OBJC_ASSOCIATION_RETAIN_NONATOMIC) ;
+    objc_setAssociatedObject(self, &propertyKey, proxy, OBJC_ASSOCIATION_RETAIN_NONATOMIC) ;
 }
 
 -(void)hideWhenLoadingHTMLString:( NSString* )html_string_

@@ -27,7 +27,7 @@
 
 - (void)dealloc
 {
-    [NSThread assertMainThread];
+    NSParameterAssert([NSThread isMainThread]);
     
     _alertView.delegate = nil;
     [self stopMonitoringBackgroundEvents];
@@ -130,7 +130,7 @@
 
 + (void)showInformationWithDescription:(NSString *)description
 {
-    [self showAlertWithTitle:NSLocalizedString(@"INFORMATION", nil)
+    [self showAlertWithTitle:NSLocalizedString(@"JFF_ALERT_INFORMATION", nil)
                  description:description];
 }
 
@@ -238,7 +238,7 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
    cancelButtonTitle:(id)cancelButtonTitle
    otherButtonTitles:(id)otherButtonTitles, ...
 {
-    [NSThread assertMainThread];
+    NSParameterAssert([NSThread isMainThread]);
     
     NSMutableArray *otherAlertButtons      = [NSMutableArray new];
     NSMutableArray *otherAlertStringTitles = [NSMutableArray new];
@@ -253,11 +253,11 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
         [otherAlertButtons addObject:alertButton];
         [otherAlertStringTitles addObject:alertButton.title];
     }
-    va_end( args );
+    va_end(args);
     
     JFFAlertButton *cancelButton = [cancelButtonTitle toAlertButton];
-    if (cancelButton)
-    {
+    if (cancelButton) {
+        
         [otherAlertButtons insertObject:cancelButton atIndex:0];
     }
     

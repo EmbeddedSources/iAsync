@@ -2,9 +2,9 @@
 
 @interface UIView (AnimationWithBlocks)
 
-+(void)animateWithAnimations:( void (^)( void ) )animations_;
++ (void)animateWithAnimations:(JFFSimpleBlock)animations;
 
-+(void)animateWithOptions:( UIViewAnimationOptions )options_
-               animations:( void (^)( void ) )animations_;
++ (void)animateWithOptions:(UIViewAnimationOptions )options
+                animations:(JFFSimpleBlock)animations;
 
 @end
