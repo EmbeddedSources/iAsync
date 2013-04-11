@@ -7,9 +7,6 @@
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 
 #import "NSObject+PropertyExtractor.h"
-#import "NSThread+AsyncPropertyReader.h"
-
-#include <assert.h>
 
 @interface JFFCachePropertyExtractor : JFFPropertyExtractor
 @end
@@ -98,7 +95,7 @@ static JFFCancelAsyncOperation cancelBlock(JFFPropertyExtractor *propertyExtract
         cancel = [cancel copy];
         
         if (cancelOperation) {
-            cancel( YES );
+            cancel(YES);
             clearDataForPropertyExtractor(propertyExtractor);
         } else {
             [propertyExtractor.delegates removeObject:callbacks];
@@ -159,7 +156,7 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
             JFFCallbacksBlocksHolder *objCallback = obj;
             if (objCallback.onProgressBlock)
                 objCallback.onProgressBlock(progressInfo);
-        } ];
+        }];
     };
     
     JFFDidFinishAsyncOperationHandler doneCallback = doneCallbackBlock(propertyExtractor);
@@ -274,12 +271,12 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
                                    didFinishLoadDataBlock:didFinishOperation];
 }
 
--(JFFAsyncOperation)asyncOperationForPropertyWithName:( NSString* )property_name_
-                                       asyncOperation:( JFFAsyncOperation )asyncOperation_
+- (JFFAsyncOperation)asyncOperationForPropertyWithName:(NSString *)propertyName
+                                        asyncOperation:(JFFAsyncOperation)asyncOperation
 {
-    return [ self asyncOperationForPropertyWithName: property_name_
-                                     asyncOperation: asyncOperation_
-                             didFinishLoadDataBlock: nil ];
+    return [self asyncOperationForPropertyWithName:propertyName
+                                    asyncOperation:asyncOperation
+                            didFinishLoadDataBlock:nil];
 }
 
 - (JFFAsyncOperation)asyncOperationForPropertyWithName:(NSString *)propertyName
@@ -312,8 +309,8 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
                                    didFinishLoadDataBlock:didFinishOperation];
 }
 
--(JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
-                                  withArgument:(id< NSCopying, NSObject >)argument
+-(JFFAsyncOperation)privateAsyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
+                                         withArgument:(id< NSCopying, NSObject >)argument
 {
     static NSString *const name = @".__JFF_MERGE_LOADERS_BY_ARGUMENTS__.";
     JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:name
@@ -328,12 +325,18 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
                             didFinishLoadDataBlock:nil];
 }
 
-+ (JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
-                                   withArgument:(id< NSCopying, NSObject >)argument
+-(JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
+                                  withArgument:(id< NSCopying, NSObject >)argument
 {
-    id object = [[NSThread currentThread] lazyLoaderMergeObject];//TODO remove this, just call merge on self
-    return [object asyncOperationMergeLoaders:asyncOperation
-                                 withArgument:argument];
+    return [self privateAsyncOperationMergeLoaders:asyncOperation
+                                      withArgument:argument];
+}
+
++ (JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
+                                   withArgument:(id<NSCopying, NSObject>)argument
+{
+    return [self privateAsyncOperationMergeLoaders:asyncOperation
+                                      withArgument:argument];
 }
 
 @end
