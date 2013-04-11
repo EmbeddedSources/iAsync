@@ -26,7 +26,7 @@ JFFAsyncOperation asyncOperationJsonDataParserWithContext(NSData *data, id<NSCop
         return result;
     };
     
-    return asyncOperationWithSyncOperation(loadDataBlock);
+    return asyncOperationWithSyncOperationAndQueue(loadDataBlock, "com.jff.json_tool_library.parse_json");
 }
 
 JFFAsyncOperation asyncOperationJsonDataParser(NSData *data)

@@ -76,24 +76,10 @@ static BOOL isClass(id object)
                              rootJsonObject:rootJsonObject
                             rootJsonPattern:rootJsonPattern
                                       error:outError]) {
+        
         return NO;
     }
 
-    return [self validateWithJsonPatternValue:jsonPattern
-                               rootJsonObject:rootJsonObject
-                              rootJsonPattern:rootJsonPattern
-                                        error:outError];
-}
-
-@end
-
-@implementation NSNull (JFFJsonObjectValidator)
-
-- (BOOL)validateWithJsonPattern:(id)jsonPattern
-                 rootJsonObject:(id)rootJsonObject
-                rootJsonPattern:(id)rootJsonPattern
-                          error:(NSError *__autoreleasing *)outError
-{
     return [self validateWithJsonPatternValue:jsonPattern
                                rootJsonObject:rootJsonObject
                               rootJsonPattern:rootJsonPattern

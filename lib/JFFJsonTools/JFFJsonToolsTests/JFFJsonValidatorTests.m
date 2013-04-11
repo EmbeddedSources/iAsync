@@ -19,7 +19,7 @@
     @"num_2"      : @2,
     @"some_str"   : [NSString class],
     @"str_22"     : @"22",
-    @"some_null"  : [NSString class],
+    @"some_null"  : [NSNull class],
     @"nested_ar"  : @[@[[NSNumber class]], @[@1, @"2"], @[@1, @2, [NSString class]]],
     };
     
@@ -29,7 +29,7 @@
     @"num_2"      : @2,
     @"some_str"   : [NSString class],
     @"str_22"     : @"22",
-    @"some_null"  : [NSString class],
+    @"some_null"  : [NSNull class],
     @"nested_ar"  : @[@[[NSNumber class]], @[@1, @"2"], @[@1, @2, [NSString class]]],
     @"nested_obj" : nestedPattern,
     };
@@ -130,11 +130,11 @@
 - (void)testNumberValueMismatch
 {
     JFFJsonValidationError *error;
-
+    
     BOOL result = [JFFJsonObjectValidator validateJsonObject:@(3)
                                              withJsonPattern:@(2)
                                                        error:&error];
-
+    
     STAssertNotNil(error, @"error should be nil");
     STAssertFalse(result, @"ivalid result value");
 }
@@ -150,18 +150,18 @@
                                                  withJsonPattern:[NSNumber class]
                                                            error:&error];
 
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
     }
     {
         JFFJsonValidationError *error;
-
+        
         BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNull null]
                                                  withJsonPattern:[NSString class]
                                                            error:&error];
-
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        
+        STAssertNotNil(error, @"error should be nil");
+        STAssertFalse(result, @"ivalid result value");
     }
 }
 
