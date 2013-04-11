@@ -5,6 +5,7 @@
 {
 @private
     CFStreamError _rawError;
+    id<NSCopying> _context;
 }
 
 - (id)init
@@ -21,20 +22,22 @@
     return nil;
 }
 
--(id)initWithStreamError:(CFStreamError)rawError_
+-(id)initWithStreamError:(CFStreamError)rawError
+                 context:(id<NSCopying>)context
 {
-    NSString *domain_ = [[NSString alloc] initWithFormat: @"com.just_for_fun.library.network.CFError(%ld)", rawError_.domain];
+    NSString *domain_ = [[NSString alloc] initWithFormat: @"com.just_for_fun.library.network.CFError(%ld)", rawError.domain];
     
     self = [super initWithDescription:NSLocalizedString(@"JNETWORK_CF_STREAM_ERROR", nil)
                                domain:domain_
-                                 code:rawError_.error];
+                                 code:rawError.error];
     
     if (nil == self) {
         
         return nil;
     }
     
-    _rawError = rawError_;
+    _rawError = rawError;
+    _context  = context;
     
     return self;
 }
@@ -46,9 +49,15 @@
     if (copy) {
         
         copy->_rawError = _rawError;
+        copy->_context  = [_context copyWithZone:zone];
     }
     
     return copy;
+}
+
+- (void)writeErrorWithJFFLogger
+{
+    [JFFLogger logErrorWithFormat:@"%@ nativeError domain:%ld error_code:%ld context:%@", [self localizedDescription], _rawError.domain, _rawError.error, _context];
 }
 
 @end

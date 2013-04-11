@@ -19,9 +19,9 @@
 - (id)initWithDescription:(NSString *)description
                      code:(NSInteger)code
 {
-    return [self initWithDescription:description
-                              domain:@"com.just_for_fun.library.http"
-                                code:code];
+    return [super initWithDescription:description
+                               domain:@"com.just_for_fun.library.http"
+                                 code:code];
 }
 
 - (id)initWithHttpCode:(CFIndex)statusCode

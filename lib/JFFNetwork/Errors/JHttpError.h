@@ -1,5 +1,7 @@
 #import <JFFNetwork/Errors/JNetworkError.h>
 
+#import <Foundation/Foundation.h>
+
 @interface JHttpError : JNetworkError
 
 @property (nonatomic) id<NSCopying> context;

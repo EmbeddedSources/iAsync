@@ -21,18 +21,21 @@
 
 @interface JFFURLConnection ()
 
--(void)handleResponseForReadStream:( CFReadStreamRef )stream_;
--(void)handleData:( void* )buffer_ length:( NSUInteger )length_;
--(void)handleFinish:( NSError* )error;
+@property (nonatomic) JFFURLConnectionParams *params;
+
+- (void)handleResponseForReadStream:(CFReadStreamRef)stream;
+- (void)handleData:(void *)buffer length:(NSUInteger)length;
+- (void)handleFinish:(NSError *)error;
 
 @end
 
 static void readStreamCallback(CFReadStreamRef stream,
-                               CFStreamEventType event_,
-                               void* selfContext_ )
+                               CFStreamEventType event,
+                               void* selfContext)
 {
-    __unsafe_unretained JFFURLConnection* weakSelf = (__bridge JFFURLConnection*)selfContext_;
-    switch( event_ ) {
+    __unsafe_unretained JFFURLConnection* weakSelf = (__bridge JFFURLConnection*)selfContext;
+    switch(event) {
+            
         case kCFStreamEventNone:
         {
             break;
@@ -64,7 +67,7 @@ static void readStreamCallback(CFReadStreamRef stream,
             
             CFStreamError error = CFReadStreamGetError(stream);
             
-            JFFError *wrappedError = [[JStreamError alloc] initWithStreamError:error];
+            JFFError *wrappedError = [[JStreamError alloc] initWithStreamError:error context:weakSelf.params];
             [weakSelf handleFinish:wrappedError];
             break;
         }
@@ -81,112 +84,111 @@ static void readStreamCallback(CFReadStreamRef stream,
 @implementation JFFURLConnection
 {
     CFReadStreamRef _readStream;
-    JFFURLConnectionParams* _params;
     id _cookiesStorage;
     BOOL _responseHandled;
     JFFURLResponse* _urlResponse;
 };
 
--(void)dealloc
+- (void)dealloc
 {
-    [ self cancel ];
+    [self cancel];
 }
 
--(id)initWithURLConnectionParams:( JFFURLConnectionParams* )params_
+- (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
     self = [ super init ];
-
-    if ( self )
-    {
-        _params = params_;
+    
+    if (self) {
+        
+        _params = params;
         _cookiesStorage = _params.cookiesStorage ?: [ NSHTTPCookieStorage sharedHTTPCookieStorage ];
     }
-
+    
     return self;
 }
 
--(void)start
+- (void)start
 {
     [self startConnectionWithPostData:_params.httpBody
                               headers:_params.headers];
 }
 
--(void)applyCookiesForHTTPRequest:( CFHTTPMessageRef )httpRequest_
+- (void)applyCookiesForHTTPRequest:(CFHTTPMessageRef)httpRequest
 {
-    NSArray *availableCookies_ = [ _cookiesStorage cookiesForURL: _params.url ];
-
-    NSDictionary *headers = [ NSHTTPCookie requestHeaderFieldsWithCookies: availableCookies_ ];
-
-    [headers enumerateKeysAndObjectsUsingBlock: ^( id key_, id value_, BOOL *stop )
-    {
-        CFHTTPMessageSetHeaderFieldValue ( httpRequest_
-                                          , (__bridge CFStringRef)key_
-                                          , (__bridge CFStringRef)value_ );
-    } ];
+    NSArray *availableCookies = [_cookiesStorage cookiesForURL:_params.url];
+    
+    NSDictionary *headers = [NSHTTPCookie requestHeaderFieldsWithCookies:availableCookies];
+    
+    [headers enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+        
+        CFHTTPMessageSetHeaderFieldValue(httpRequest,
+                                         (__bridge CFStringRef)key,
+                                         (__bridge CFStringRef)value);
+    }];
 }
 
 //JTODO add timeout and test
 //JTODO test invalid url
 //JTODO test no internet connection
--(void)startConnectionWithPostData:( NSData* )data_
-                           headers:( NSDictionary* )headers_
+- (void)startConnectionWithPostData:(NSData *)data
+                            headers:(NSDictionary *)headers
 {
     CFStringRef method = (__bridge CFStringRef)(_params.httpMethod?:@"GET");
-    if ( !_params.httpMethod && data_ ) {
+    if (!_params.httpMethod && data) {
         method = (__bridge  CFStringRef)@"POST";
     }
     
-    CFHTTPMessageRef httpRequest_ = CFHTTPMessageCreateRequest(NULL,
+    CFHTTPMessageRef httpRequest = CFHTTPMessageCreateRequest(NULL,
                                                                method,
                                                                (__bridge CFURLRef)_params.url,
                                                                kCFHTTPVersion1_1);
 
-    [ self applyCookiesForHTTPRequest: httpRequest_ ];
+    [self applyCookiesForHTTPRequest:httpRequest];
 
-    if ( data_ )
-    {
-        CFHTTPMessageSetBody ( httpRequest_, (__bridge CFDataRef)data_ );
-    }
-
-    [headers_ enumerateKeysAndObjectsUsingBlock: ^( id header_, id headerValue_, BOOL *stop ) {
+    if (data) {
         
-        CFHTTPMessageSetHeaderFieldValue( httpRequest_
-                                         , (__bridge CFStringRef)header_
-                                         , (__bridge CFStringRef)headerValue_ );
-    } ];
-
-    [ self closeReadStream ];
+        CFHTTPMessageSetBody(httpRequest, (__bridge CFDataRef)data);
+    }
+    
+    [headers enumerateKeysAndObjectsUsingBlock:^(id header, id headerValue, BOOL *stop) {
+        
+        CFHTTPMessageSetHeaderFieldValue( httpRequest
+                                         , (__bridge CFStringRef)header
+                                         , (__bridge CFStringRef)headerValue );
+    }];
+    
+    [self closeReadStream];
     //   CFReadStreamCreateForStreamedHTTPRequest( CFAllocatorRef alloc,
     //                                             CFHTTPMessageRef requestHeaders,
     //                                             CFReadStreamRef	requestBody )
-    _readStream = CFReadStreamCreateForHTTPRequest( NULL, httpRequest_ );
-    CFRelease( httpRequest_ );
+    _readStream = CFReadStreamCreateForHTTPRequest(NULL, httpRequest);
+    CFRelease(httpRequest);
 
     //Prefer using keep-alive packages
-    Boolean keepAliveSetResult_ = CFReadStreamSetProperty( _readStream
-                                                          , kCFStreamPropertyHTTPAttemptPersistentConnection
-                                                          , kCFBooleanTrue );
-    if ( FALSE == keepAliveSetResult_ )
-    {
-        NSLog( @"JFFURLConnection->start : unable to setup keep-alive packages" );
+    Boolean keepAliveSetResult = CFReadStreamSetProperty(_readStream,
+                                                          kCFStreamPropertyHTTPAttemptPersistentConnection,
+                                                          kCFBooleanTrue);
+    if (FALSE == keepAliveSetResult) {
+        
+        NSLog(@"JFFURLConnection->start : unable to setup keep-alive packages");
     }
-
-    typedef void* (*retain)( void* info_ );
-    typedef void (*release)( void* info_ );
+    
+    typedef void* (*retain)(void *info);
+    typedef void (*release)(void *info);
     CFStreamClientContext streamContext_ = {
         0
         , (__bridge void*)(self)
         , (retain)CFRetain
         , (release)CFRelease
         , NULL };
-
+    
     CFOptionFlags registered_events_ = kCFStreamEventHasBytesAvailable
         | kCFStreamEventErrorOccurred | kCFStreamEventEndEncountered;
     if ( CFReadStreamSetClient( _readStream, registered_events_, readStreamCallback, &streamContext_ ) )
     {
         CFReadStreamScheduleWithRunLoop( _readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
     }
-
+    
     Boolean openResult = CFReadStreamOpen(_readStream);
     if (!openResult)
     {
@@ -196,30 +198,30 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 -(void)closeReadStream
 {
-    if ( _readStream )
-    {
-        CFReadStreamUnscheduleFromRunLoop( _readStream
-                                          , CFRunLoopGetCurrent()
-                                          , kCFRunLoopCommonModes );
-        CFReadStreamClose( _readStream );
-        CFRelease( _readStream );
+    if (_readStream) {
+        
+        CFReadStreamUnscheduleFromRunLoop(_readStream,
+                                          CFRunLoopGetCurrent(),
+                                          kCFRunLoopCommonModes);
+        CFReadStreamClose(_readStream);
+        CFRelease(_readStream);
         _readStream = nil;
     }
 }
 
--(void)closeStreams
+- (void)closeStreams
 {
-    [ self closeReadStream ];
+    [self closeReadStream];
 }
 
--(void)cancel
+- (void)cancel
 {
-    [ self closeStreams ];
-    [ self clearCallbacks ];
+    [self closeStreams];
+    [self clearCallbacks];
 }
 
--(void)handleData:( void* )buffer_ 
-           length:( NSUInteger )length_
+- (void)handleData:(void *)buffer
+            length:(NSUInteger)length
 {
     if (!self.didReceiveDataBlock) {
         return;
@@ -230,8 +232,8 @@ static void readStreamCallback(CFReadStreamRef stream,
     
     NSError *decoderError;
     
-    NSData *rawNsData = [ [ NSData alloc ] initWithBytes: buffer_
-                                                   length: length_ ];
+    NSData *rawNsData = [[NSData alloc] initWithBytes:buffer
+                                               length:length];
     
     NSData *decodedData = [decoder decodeData:rawNsData
                                         error:&decoderError];
@@ -246,10 +248,10 @@ static void readStreamCallback(CFReadStreamRef stream,
     }
 }
 
--(void)handleFinish:( NSError* )error
+- (void)handleFinish:(NSError *)error
 {
     [ self closeReadStream ];
-
+    
     if ( self.didFinishLoadingBlock )
     {
         self.didFinishLoadingBlock( error );

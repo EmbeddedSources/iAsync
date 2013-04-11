@@ -19,7 +19,6 @@ static JFFMutableAssignArray* downloadItems_ = nil;
 
 long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
-//TODO move library to separate repository
 @interface JFFDownloadItem () <JFFTrafficCalculatorDelegate>
 
 @property (nonatomic) NSURL* url;

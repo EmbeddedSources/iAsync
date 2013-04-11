@@ -42,7 +42,6 @@
     return [[JNNsUrlConnection alloc] initWithURLConnectionParams:_params];
 }
 
-
 -(id< JNUrlConnection >)createConnection
 {
     if (nil == _params) {

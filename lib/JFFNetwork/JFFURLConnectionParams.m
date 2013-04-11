@@ -9,7 +9,10 @@
     if (copy) {
         copy->_url                 = [_url      copyWithZone:zone];
         copy->_httpBody            = [_httpBody copyWithZone:zone];
+        copy->_httpMethod          = [_httpMethod copyWithZone:zone];
         copy->_headers             = [_headers  copyWithZone:zone];
+        
+        //TODO make a factory for a stream
         copy->_httpBodyStream      = _httpBodyStream;
         copy->_useLiveConnection   = _useLiveConnection;
         copy->_certificateCallback = _certificateCallback;

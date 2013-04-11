@@ -4,15 +4,15 @@
 
 @implementation NSMutableDictionary (DownloadingFileInfo)
 
-+(NSString*)storePathForDownloadFilesInfo
++ (NSString *)storePathForDownloadFilesInfo
 {
-    return [ NSString documentsPathByAppendingPathComponent: @"JFFDownloadFilesInfo.data" ];
+    return [NSString documentsPathByAppendingPathComponent:@"JFFDownloadFilesInfo.data"];
 }
 
 +(NSMutableDictionary*)dictionaryWithDownloadFilesInfo
 {
-    NSMutableDictionary* result_ = [ NSMutableDictionary dictionaryWithContentsOfFile: [ self storePathForDownloadFilesInfo ] ];
-    return result_ ?: [ NSMutableDictionary new ];
+    NSMutableDictionary *result_ = [ NSMutableDictionary dictionaryWithContentsOfFile: [ self storePathForDownloadFilesInfo ] ];
+    return result_ ?: [NSMutableDictionary new];
 }
 
 -(void)writeToFileDownloadFilesInfo
@@ -20,20 +20,20 @@
     [ self writeToFile: [ [ self class ] storePathForDownloadFilesInfo ] atomically: NO ];
 }
 
-+(unsigned long long)fileLengthForDestinationURL:( NSURL* )url_
++ (unsigned long long)fileLengthForDestinationURL:(NSURL *)url_
 {
-    NSMutableDictionary* dict_ = [ self dictionaryWithDownloadFilesInfo ];
-
-    NSNumber* fileLength_ = dict_[ [ url_ absoluteString ] ];
-    if ( fileLength_ )
+    NSMutableDictionary *dict_ = [ self dictionaryWithDownloadFilesInfo ];
+    
+    NSNumber *fileLength = dict_[ [ url_ absoluteString ] ];
+    if ( fileLength )
     {
-        return [ fileLength_ unsignedLongLongValue ];
+        return [ fileLength unsignedLongLongValue ];
     }
     return NSURLResponseUnknownLength;
 }
 
-+(void)setFileLength:( unsigned long long )fileLength_
-   forDestinationURL:( NSURL* )url_
++ (void)setFileLength:( unsigned long long )fileLength_
+    forDestinationURL:( NSURL* )url_
 {
     NSMutableDictionary* dict_ = [ self dictionaryWithDownloadFilesInfo ];
 

@@ -6,6 +6,7 @@
 
 @property (nonatomic, readonly) CFStreamError rawError;
 
-- (id)initWithStreamError:(CFStreamError)rawError;
+- (id)initWithStreamError:(CFStreamError)rawError
+                  context:(id<NSCopying>)context;
 
 @end

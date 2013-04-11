@@ -47,16 +47,26 @@
     
     __block id resultHolder;
     
+    JFFNetworkErrorTransformer errorTransformer = _errorTransformer;
+    
     handler = [handler copy];
     JFFDidFinishLoadingHandler finish = [^(NSError *error) {
-        handler(error?nil:resultHolder, error);
+        
+        if (error) {
+            
+            handler(nil, errorTransformer?errorTransformer(error):error);
+            return;
+        }
+        
+        handler(resultHolder, nil);
+        
     } copy];
     
     finish = [finish copy];
     self.connection.didFinishLoadingBlock = finish;
     
-    self.connection.didReceiveResponseBlock = ^void(id<JNUrlResponse> response)
-    {
+    self.connection.didReceiveResponseBlock = ^void(id<JNUrlResponse> response) {
+        
         if (!unretainedSelf->_responseAnalyzer) {
             resultHolder = response;
             return;
