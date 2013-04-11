@@ -1,6 +1,32 @@
 #import "NSOrderedSet+BlocksAdditions.h"
 
+@implementation NSMutableOrderedSet (BlocksAdditions)
+
++ (id)converToCurrentTypeMutableOrderedSet:(NSMutableOrderedSet *)set
+{
+    return set;
+}
+
+@end
+
 @implementation NSOrderedSet (BlocksAdditions)
+
++ (id)converToCurrentTypeMutableOrderedSet:(NSMutableOrderedSet *)set
+{
+    return [set copy];
+}
+
++ (id)setWithSize:(NSUInteger)size
+         producer:(JFFProducerBlock)block
+{
+    NSMutableOrderedSet *result = [[NSMutableOrderedSet alloc] initWithCapacity:size];
+    
+    for (NSUInteger index = 0; index < size; ++index) {
+        [result addObject:block(index)];
+    }
+    
+    return [self converToCurrentTypeMutableOrderedSet:result];
+}
 
 //TODO test
 //TODO remove code duplicate

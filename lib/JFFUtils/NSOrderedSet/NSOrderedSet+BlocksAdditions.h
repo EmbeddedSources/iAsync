@@ -4,6 +4,11 @@
 
 @interface NSOrderedSet (BlocksAdditions)
 
+//Calls block once for number from 0(zero) to (size_ - 1)
+//Creates a new NSOrderedSet containing the values returned by the block.
++ (id)setWithSize:(NSUInteger)size
+         producer:(JFFProducerBlock)block;
+
 //Invokes block once for each element of self.
 //Creates a new NSOrderedSet containing the values returned by the block.
 - (NSOrderedSet*)map:(JFFMappingBlock)block;
