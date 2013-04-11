@@ -83,7 +83,7 @@ static JFFAsyncOperationBinder dataLoaderWithCachedResultBinder(BOOL doesNotIgno
             //TODO test [bindError isKindOfClass:[JFFErrorNoFreshData class]] issue, here it van got - not data in cache error !!!
             JFFErrorNoFreshData *noFreshDataError =
             (JFFErrorNoFreshData *)([bindError isKindOfClass:[JFFErrorNoFreshData class]]?bindError:nil);
-            if (noFreshDataError.cachedData && !doesNotIgnoreFreshDataLoadFail) {
+            if ([noFreshDataError.cachedData data] && !doesNotIgnoreFreshDataLoadFail) {
                 JFFResponseDataWithUpdateData *newResult = [JFFResponseDataWithUpdateData new];
                 newResult.updateDate = [noFreshDataError.cachedData updateDate];
                 newResult.data       = [noFreshDataError.cachedData data];

@@ -19,7 +19,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     NSString *queueName = [[NSString alloc] initWithFormat:@"com.jff.embedded_sources.dynamic.%@", file];
     const char *queueNameCStr = [queueName cStringUsingEncoding:NSUTF8StringEncoding];
     dispatch_queue_t result = dispatch_queue_get_or_create(queueNameCStr,
-                                                           DISPATCH_QUEUE_CONCURRENT);
+                                                           DISPATCH_QUEUE_SERIAL);
     
     return result;
 }
@@ -76,7 +76,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
             
             NSParameterAssert(created);
             
-            if (sqlite3_open([dbPath UTF8String], &_db) != SQLITE_OK) {
+            if (sqlite3_open([dbPath UTF8String], &self->_db) != SQLITE_OK) {
                 NSLog(@"open - %@ path: %@", [self errorMessage], dbPath);
                 return;
             };
@@ -85,10 +85,10 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
             
             const char *cacheSizePragma = "PRAGMA cache_size = 1000";
             
-            if (sqlite3_exec(_db, cacheSizePragma, 0, 0, 0) != SQLITE_OK) {
+            if (sqlite3_exec(self->_db, cacheSizePragma, 0, 0, 0) != SQLITE_OK) {
                 NSAssert1(0,
                           @"Error: failed to execute pragma statement with message '%s'.",
-                          sqlite3_errmsg(_db));
+                          sqlite3_errmsg(self->_db));
             }
             ok = YES;
         });
@@ -108,7 +108,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 - (BOOL)prepareQuery:(NSString *)sql
            statement:(sqlite3_stmt **)statement
 {
-    return sqlite3_prepare_v2(_db,
+    return sqlite3_prepare_v2(self->_db,
                               [sql UTF8String],
                               -1,
                               statement,
@@ -118,7 +118,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 - (BOOL)execQuery:(NSString *)sql
 {
     char *errorMessage = 0;
-    if (sqlite3_exec(_db, [sql UTF8String], 0, 0, &errorMessage) != SQLITE_OK) {
+    if (sqlite3_exec(self->_db, [sql UTF8String], 0, 0, &errorMessage) != SQLITE_OK) {
         NSLog(@"%@ error: %s", sql, errorMessage);
         
         sqlite3_free(errorMessage);
@@ -130,7 +130,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 
 - (NSString *)errorMessage
 {
-    return @(sqlite3_errmsg(_db));
+    return @(sqlite3_errmsg(self->_db));
 }
 
 @end
