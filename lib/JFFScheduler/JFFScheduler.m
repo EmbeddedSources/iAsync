@@ -1,6 +1,5 @@
 #import "JFFScheduler.h"
 
-#import <JFFUtils/Extensions/NSThread+AssertMainThread.h>
 #import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
 
 #include <objc/runtime.h>
