@@ -141,7 +141,6 @@ JFFLocationObserver
     id key = @{
     @"accuracy" : @(accuracy),
     @"method"   : NSStringFromSelector(_cmd),
-    @"class"    : [self description],
     };
     return [self asyncOperationMergeLoaders:loader withArgument:key];
 }
