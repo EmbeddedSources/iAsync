@@ -28,7 +28,7 @@
     [self.target addOnDeallocBlock:self.onDeallocBlock];
 }
 
-- (void)onRemoveFromMutableAssignDictionary:(JFFMutableAssignDictionary *)array
+- (void)onRemoveFromMutableAssignDictionary:(JFFMutableAssignDictionary *)dict
 {
     [self.target removeOnDeallocBlock:self.onDeallocBlock];
     self.onDeallocBlock = nil;
@@ -36,13 +36,10 @@
 
 @end
 
-@interface JFFMutableAssignDictionary ()
-
-@property (nonatomic) NSMutableDictionary *mutableDictionary;
-
-@end
-
 @implementation JFFMutableAssignDictionary
+{
+    NSMutableDictionary *_mutableDictionary;
+}
 
 - (void)dealloc
 {
@@ -52,11 +49,12 @@
 - (void)removeAllObjects
 {
     [_mutableDictionary enumerateKeysAndObjectsUsingBlock:^(id key,
-                                                                  JFFAutoRemoveFromDictAssignProxy *proxy,
-                                                                  BOOL *stop) {
+                                                            JFFAutoRemoveFromDictAssignProxy *proxy,
+                                                            BOOL *stop) {
+        
         [proxy onRemoveFromMutableAssignDictionary:self];
     }];
-    [_mutableDictionary removeAllObjects];
+    _mutableDictionary = nil;
 }
 
 - (NSMutableDictionary *)mutableDictionary
@@ -74,13 +72,13 @@
 
 - (id)objectForKey:(id)key
 {
-    JFFAutoRemoveFromDictAssignProxy *proxy = _mutableDictionary[key];
-    return proxy.target;
+    return [self objectForKeyedSubscript:key];
 }
 
 - (id)objectForKeyedSubscript:(id)key
 {
-    return [self objectForKey:key];
+    JFFAutoRemoveFromDictAssignProxy *proxy = _mutableDictionary[key];
+    return proxy.target;
 }
 
 - (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block
@@ -92,11 +90,12 @@
     }];
 }
 
-- (NSDictionary*)map:(JFFDictMappingBlock)block
+- (NSDictionary *)map:(JFFDictMappingBlock)block
 {
     return [_mutableDictionary map:^id(id key, JFFAutoRemoveFromDictAssignProxy *proxy) {
+        
         return block(key, proxy.target);
-    }];
+    }]?:@{};
 }
 
 - (void)removeObjectForKey:(id)key
@@ -106,25 +105,25 @@
     [_mutableDictionary removeObjectForKey:key];
 }
 
-- (void)setObject:(id)object forKey:(id)key
+- (void)setObject:(id)newValue forKey:(id)key
+{
+    [self setObject:newValue forKeyedSubscript:key];
+}
+
+- (void)setObject:(id)newValue forKeyedSubscript:(id)key
 {
     id previousObject = self[key];
     if (previousObject)
         [self removeObjectForKey:key];
     
-    JFFAutoRemoveFromDictAssignProxy *proxy = [[JFFAutoRemoveFromDictAssignProxy alloc] initWithTarget:object];
+    JFFAutoRemoveFromDictAssignProxy *proxy = [[JFFAutoRemoveFromDictAssignProxy alloc] initWithTarget:newValue];
     self.mutableDictionary[key] = proxy;
     [proxy onAddToMutableAssignDictionary:self key:key];
 }
 
-- (void)setObject:(id)newValue forKeyedSubscript:(id)key
-{
-    [self setObject:newValue forKey:key];
-}
-
 - (NSString *)description
 {
-    return [_mutableDictionary description];
+    return [_mutableDictionary?:@{} description];
 }
 
 @end

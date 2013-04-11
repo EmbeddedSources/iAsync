@@ -2,9 +2,10 @@
 
 @implementation JFFMutableAssignDictionaryTest
 
--(void)testMutableAssignDictionaryAssignIssue
+- (void)testMutableAssignDictionaryAssignIssue
 {
-    JFFMutableAssignDictionary *dict;
+    JFFMutableAssignDictionary *dict1;
+    JFFMutableAssignDictionary *dict2;
     __block BOOL targetDeallocated = NO;
     
     {
@@ -12,33 +13,54 @@
         
         [target addOnDeallocBlock:^void(void) {
             targetDeallocated = YES;
-        } ];
+        }];
         
-        dict = [JFFMutableAssignDictionary new];
-        [dict setObject:target forKey:@"1"];
+        dict1 = [JFFMutableAssignDictionary new];
+        [dict1 setObject:target forKey:@"1"];
         
-        STAssertTrue(1 == [dict count], @"Contains 1 object");
+        dict2 = [JFFMutableAssignDictionary new];
+        [dict2 setObject:target forKey:@"1"];
+        [dict2 setObject:target forKey:@"2"];
+        
+        STAssertTrue(1 == [dict1 count], @"Contains 1 object");
+        STAssertTrue(2 == [dict2 count], @"Contains 1 object");
     }
     
     STAssertTrue(targetDeallocated, @"Target should be dealloced");
-    STAssertTrue(0 == [dict count], @"Empty array");
+    STAssertTrue(0 == [dict1 count], @"Empty array");
+    STAssertTrue(0 == [dict2 count], @"Empty array");
 }
 
--(void)testMutableAssignDictionaryFirstRelease
+- (void)testMutableAssignDictionaryFirstRelease
 {
-    __block BOOL dict_deallocated_ = NO;
     {
-        JFFMutableAssignDictionary* dict_ = [ JFFMutableAssignDictionary new ];
+        __block BOOL dictDeallocated1 = NO;
+        __block BOOL dictDeallocated2 = NO;
+        NSObject *target = [NSObject new];
         
-        [dict_ addOnDeallocBlock:^void(void) {
-            dict_deallocated_ = YES;
-        }];
+        {
+            JFFMutableAssignDictionary *dict1 = [JFFMutableAssignDictionary new];
+            
+            [dict1 addOnDeallocBlock:^void(void) {
+                dictDeallocated1 = YES;
+            }];
+            
+            dict1[@"1"] = target;
+            
+            //
+            
+            JFFMutableAssignDictionary *dict2 = [JFFMutableAssignDictionary new];
+            
+            [dict2 addOnDeallocBlock:^void(void) {
+                dictDeallocated2 = YES;
+            }];
+            
+            dict2[@"2"] = target;
+        }
         
-        NSObject *target_ = [NSObject new];
-        [ dict_ setObject: target_ forKey: @"1" ];
+        STAssertTrue(dictDeallocated1, @"Target should be dealloced");
+        STAssertTrue(dictDeallocated2, @"Target should be dealloced");
     }
-    
-    STAssertTrue( dict_deallocated_, @"Target should be dealloced" );
 }
 
 -(void)testObjectForKey
@@ -62,21 +84,21 @@
             STAssertTrue(dict[@"2" ] == object2, @"Dict contains object_");
             STAssertTrue(dict[@"3" ] == nil, @"Dict no contains object for key \"2\"");
             
-            __block NSUInteger count_ = 0;
+            __block NSUInteger count = 0;
             
             [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                 if ( [ key isEqualToString: @"1" ] ) {
+                 if ([ key isEqualToString:@"1"]) {
                      STAssertTrue(obj == object1, nil);
-                     ++count_;
+                     ++count;
                  } else if ([key isEqualToString:@"2"]) {
                      STAssertTrue(obj == object2, nil);
-                     ++count_;
+                     ++count;
                  } else {
                      STFail( @"should not be reached" );
                  }
              } ];
             
-            STAssertTrue( count_ == 2, @"Dict no contains object for key \"2\"" );
+            STAssertTrue( count == 2, @"Dict no contains object for key \"2\"" );
         }
         
         STAssertTrue(target_deallocated, @"Target should be dealloced");
