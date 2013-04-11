@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface NSError (setToPointer)
+@interface NSError (SetToPointer)
 
 - (BOOL)setToPointer:(NSError *__autoreleasing *)outError;
 

@@ -7,7 +7,7 @@ static NSString *__platformName;
 
 @implementation UIDevice (PlatformName)
 
-// http://stackoverflow.com/questions/448162/determine-device-iphone-ipod-touch-with-iphone-sdk 
+// http://stackoverflow.com/questions/448162/determine-device-iphone-ipod-touch-with-iphone-sdk
 + (NSString *)platformName
 {
     if (!__platformName) {

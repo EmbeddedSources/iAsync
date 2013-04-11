@@ -47,23 +47,21 @@
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 #import <JFFUtils/Blocks/JUContainersHelperBlocks.h>
 
-#import <JFFUtils/Extensions/NSData+ToString.h>
-#import <JFFUtils/Extensions/UIWebView+UserAgent.h>
-#import <JFFUtils/Extensions/UIColor+ColorForHex.h>
-#import <JFFUtils/Extensions/NSNumber+FSStorable.h>
-#import <JFFUtils/Extensions/NSError+setToPointer.h>
-#import <JFFUtils/Extensions/UIDevice+PlatformName.h>
-#import <JFFUtils/Extensions/NSThread+AssertMainThread.h>
-#import <JFFUtils/Extensions/NSDecimalNumber+Increment.h>
-#import <JFFUtils/Extensions/NSError+WriteErrorToNSLog.h>
-#import <JFFUtils/Extensions/NSDateFormatter+MultiThreading.h>
+#import <JFFUtils/Categories/NSData+ToString.h>
+#import <JFFUtils/Categories/UIWebView+UserAgent.h>
+#import <JFFUtils/Categories/UIColor+ColorForHex.h>
+#import <JFFUtils/Categories/NSNumber+FSStorable.h>
+#import <JFFUtils/Categories/NSError+SetToPointer.h>
+#import <JFFUtils/Categories/UIDevice+PlatformName.h>
+#import <JFFUtils/Categories/NSDecimalNumber+Increment.h>
+#import <JFFUtils/Categories/NSError+WriteErrorToNSLog.h>
+#import <JFFUtils/Categories/NSDateFormatter+MultiThreading.h>
 
 #import <JFFUtils/Dictionary/NSDictionary+ValueWithType.h>
 #import <JFFUtils/Dictionary/NSDictionary+BlocksAdditions.h>
 #import <JFFUtils/Dictionary/NSDictionary+JFFExtendedDictionary.h>
-#import <JFFUtils/Dictionary/NSMutableDictionary+IgnoringAddNilValue.h>
 
-#import <JFFUtils/Runtime/JFFRuntime.h>
+#import <JFFUtils/Runtime/JFFRuntimeAddiotions.h>
 
 #import <JFFUtils/JFFError.h>
 #import <JFFUtils/JSignedRange.h>
@@ -73,6 +71,7 @@
 #import <JFFUtils/JFFSingleThreadProxy.h>
 #import <JFFUtils/JFFMutableAssignArray.h>
 #import <JFFUtils/JFFMutableAssignDictionary.h>
+#import <JFFUtils/JFFMutableAssignKeyDictionary.h>
 
 #import <JFFUtils/NSLocale/NSLocale+CurrentInterfaceLanguageCode.h>
 

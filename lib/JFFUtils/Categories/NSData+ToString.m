@@ -4,7 +4,7 @@
 
 - (NSString *)toString
 {
-    return [[NSString alloc]initWithData:self encoding:NSUTF8StringEncoding];
+    return [[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding];
 }
 
 @end

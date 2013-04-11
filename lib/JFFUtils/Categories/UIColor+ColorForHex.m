@@ -35,8 +35,8 @@
     range.location = 4;
     NSString *bString = [hexColor substringWithRange:range];
     
-    // Scan values  
-    unsigned int r, g, b;  
+    // Scan values
+    unsigned int r, g, b;
     [[NSScanner scannerWithString:rString] scanHexInt:&r];
     [[NSScanner scannerWithString:gString] scanHexInt:&g];
     [[NSScanner scannerWithString:bString] scanHexInt:&b];

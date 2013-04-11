@@ -1,6 +1,6 @@
-#import "NSError+setToPointer.h"
+#import "NSError+SetToPointer.h"
 
-@implementation NSError (setToPointer)
+@implementation NSError (SetToPointer)
 
 - (BOOL)setToPointer:(NSError *__autoreleasing *)outError
 {

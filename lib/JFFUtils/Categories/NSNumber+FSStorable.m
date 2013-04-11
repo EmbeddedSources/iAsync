@@ -14,12 +14,30 @@
                                                        encoding:NSUTF8StringEncoding
                                                           error:NULL];
     
+    double scannedNumber = 0;
+    if (string) {
+        NSScanner *scanner = [NSScanner scannerWithString:string];
+        [scanner scanDouble:&scannedNumber];
+    }
+    NSNumber *result = @(scannedNumber);
+    return result;
+}
+
++ (id)newDoubleWithContentsOfFile:(NSString *)fileName
+{
+    NSParameterAssert(fileName);
+    
+    fileName = [NSString documentsPathByAppendingPathComponent:fileName];
+    NSString *string = [[NSString alloc] initWithContentsOfFile:fileName
+                                                       encoding:NSUTF8StringEncoding
+                                                          error:NULL];
+    
     long long scannedNumber = 0;
     if (string) {
         NSScanner *scanner = [NSScanner scannerWithString:string];
         [scanner scanLongLong:&scannedNumber];
     }
-    NSNumber *result = [[NSNumber alloc] initWithLongLong:scannedNumber];
+    NSNumber *result = @(scannedNumber);
     return result;
 }
 
