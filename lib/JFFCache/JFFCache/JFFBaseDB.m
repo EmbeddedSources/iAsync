@@ -119,6 +119,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 {
     char *errorMessage = 0;
     if (sqlite3_exec(_db, [sql UTF8String], 0, 0, &errorMessage) != SQLITE_OK) {
+        
         NSLog(@"%@ error: %s", sql, errorMessage);
         
         sqlite3_free(errorMessage);

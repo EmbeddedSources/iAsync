@@ -8,4 +8,6 @@
 //Errors
 #import <JFFCache/Errors/JFFCacheNoURLError.h>
 
+#import <JFFCache/Categories/UIImageView+CachedAsyncImageLoader.h>
+
 #endif //JFF_CACHE_HEADER_FILE_INCLUDED
