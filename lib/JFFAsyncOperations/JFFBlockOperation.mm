@@ -32,7 +32,7 @@
               progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
                currentQueue:(dispatch_queue_t)currentQueue
                     barrier:(BOOL)barrier
-         serialOrConcurrent:( dispatch_queue_attr_t )serialOrConcurrent
+         serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent
 {
     self = [super init];
     
@@ -65,7 +65,7 @@
     if (self.finishedOrCanceled)
         return;
     
-    self.didLoadDataBlock(result, error);
+    _didLoadDataBlock(result, error);
     
     [self finalizeOperations];
 }

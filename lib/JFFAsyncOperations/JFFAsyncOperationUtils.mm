@@ -10,8 +10,9 @@ static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueu
                                                                                   BOOL barrier,
                                                                                   dispatch_queue_attr_t attr)
 {
+    assert(queueName != NULL);
+    NSString *str = @(queueName);
     progressLoadDataBlock = [progressLoadDataBlock copy];
-    NSString *str = @(queueName?:"");
     
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncOperationAdapter *asyncObject = [JFFAsyncOperationAdapter new];
@@ -61,17 +62,16 @@ JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue(JFFSyncOperatio
                                                           DISPATCH_QUEUE_CONCURRENT);
 }
 
-JFFAsyncOperation asyncOperationWithSyncOperationAndConfigurableQueue( JFFSyncOperation loadDataBlock_, const char* queueName_, BOOL isSerialQueue_ )
+JFFAsyncOperation asyncOperationWithSyncOperationAndConfigurableQueue(JFFSyncOperation loadDataBlock, const char *queueName, BOOL isSerialQueue)
 {
-    dispatch_queue_attr_t attr_ = isSerialQueue_ ? DISPATCH_QUEUE_SERIAL : DISPATCH_QUEUE_CONCURRENT;
+    dispatch_queue_attr_t attr = isSerialQueue ? DISPATCH_QUEUE_SERIAL : DISPATCH_QUEUE_CONCURRENT;
     
-    return privateAsyncOperationWithSyncOperationAndQueue( loadDataBlock_, queueName_, NO, attr_ );
+    return privateAsyncOperationWithSyncOperationAndQueue(loadDataBlock, queueName, NO, attr);
 }
 
-//TODO check using of all asyncOperationWithSyncOperation (without queue name) or remove asyncOperationWithSyncOperation at all
 JFFAsyncOperation asyncOperationWithSyncOperation(JFFSyncOperation loadDataBlock)
 {
-    return asyncOperationWithSyncOperationAndQueue(loadDataBlock, nil);
+    return asyncOperationWithSyncOperationAndQueue(loadDataBlock, "com.jff.async_operations_library.general_queue");
 }
 
 JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock(JFFSyncOperationWithProgress progressLoadDataBlock)
