@@ -144,10 +144,6 @@ typedef BOOL (^JFFPredicate)();
     if (!method)
         return NO;
     
-    //TODO ?
-//    if (![self superclass])
-//        return NO;
-    
     Method superMethod = methodGetter([self superclass]);
     return method != superMethod;
 }
