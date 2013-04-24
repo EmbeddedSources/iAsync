@@ -75,6 +75,14 @@
 
 - (void)writeErrorWithJFFLogger
 {
+    if ([_nativeError.domain isEqualToString:NSURLErrorDomain]) {
+        
+        if (_nativeError.code == kCFURLErrorNetworkConnectionLost) {
+            
+            [self writeErrorToNSLog];
+            return;
+        }
+    }
     [JFFLogger logErrorWithFormat:@"%@ nativeError:%@ context:%@", [self localizedDescription], _nativeError, _context];
 }
 
