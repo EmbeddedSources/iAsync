@@ -170,10 +170,19 @@ JFFAsyncOperation asyncOperationWithOptionalStartAndFinishBlocks(JFFAsyncOperati
         
         __block BOOL loading = YES;
         
+        cancelCallback = [cancelCallback copy];
+        JFFCancelAsyncOperationHandler wrappedCancelCallback = ^(BOOL canceled) {
+            
+            loading = NO;
+            
+            if (cancelCallback)
+                cancelCallback(canceled);
+        };
+        
         doneCallback = [doneCallback copy];
         JFFDidFinishAsyncOperationHandler wrappedDoneCallback = ^(id result, NSError *error) {
             
-            loading = NO;//TODO stop loading also on cancel
+            loading = NO;
             
             if (finishCallback)
                 finishCallback(result, error);
@@ -181,7 +190,7 @@ JFFAsyncOperation asyncOperationWithOptionalStartAndFinishBlocks(JFFAsyncOperati
                 doneCallback(result, error);
         };
         
-        JFFCancelAsyncOperation cancel = loader(progressCallback, cancelCallback, wrappedDoneCallback);
+        JFFCancelAsyncOperation cancel = loader(progressCallback, wrappedCancelCallback, wrappedDoneCallback);
         
         if (loading) {
             
