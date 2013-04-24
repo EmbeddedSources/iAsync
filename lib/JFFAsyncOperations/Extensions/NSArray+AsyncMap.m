@@ -13,6 +13,14 @@
     return failOnFirstErrorGroupOfAsyncOperationsArray(asyncOperations);
 }
 
+- (JFFAsyncOperation)asyncWaitAllMap:(JFFAsyncOperationBinder)block
+{
+    NSArray *asyncOperations = [self map:^id(id object) {
+        return block(object);
+    }];
+    return groupOfAsyncOperationsArray(asyncOperations);
+}
+
 - (JFFAsyncOperation)tolerantFaultAsyncMap:(JFFAsyncOperationBinder)block
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
