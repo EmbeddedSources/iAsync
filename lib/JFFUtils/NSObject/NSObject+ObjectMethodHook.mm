@@ -26,19 +26,9 @@ static id lastBlockObserver(id _self, SEL selector)
     return [methodObservers lastObject];
 }
 
-inline static BOOL isObjectPointerReturnType(NSMethodSignature *sig)
-{
-    return *sig.methodReturnType == '@';
-}
-
-inline static BOOL isNSUIntegerReturnType(NSMethodSignature *sig)
-{
-    return *sig.methodReturnType == 'I';
-}
-
 inline static BOOL isVoidReturnType(NSMethodSignature *sig)
 {
-    return *sig.methodReturnType == 'v';
+    return *sig.methodReturnType == @encode(void)[0];
 }
 
 static SEL originalMethodHolderSelector(SEL selectorToHook)
@@ -60,7 +50,6 @@ static void self_invokeMethosBlockWithArgsAndReturnValue(id targetObjectOrBlock,
                                                          void *returnValuePtr,
                                                          SEL originalSelector)
 {
-    //TODO call original method if no target
     BOOL isBlockCall = selectorOrNullForBlock == NULL;
     
     if (isBlockCall && !targetObjectOrBlock) {
@@ -81,7 +70,6 @@ static void self_invokeMethosBlockWithArgsAndReturnValue(id targetObjectOrBlock,
             return;
         }
         
-        //TODO test
         [*selfArgumentPtr doesNotRecognizeSelector:originalMethodHolder];
         return;
     }
@@ -94,6 +82,74 @@ static void self_invokeMethosBlockWithArgsAndReturnValue(id targetObjectOrBlock,
                                             returnValuePtr);
 }
 
+template <typename T>
+id generalHookBlock(const char *methodReturnType,
+                    SEL originalSelector,
+                    id(^targetGetter)(id _self, const char**, SEL*)
+                    )
+{
+    if (strcmp(@encode(T), methodReturnType) != 0)
+        return nil;
+    
+    targetGetter = [targetGetter copy];
+    
+    return ^T(id _self, ...) {
+        
+        const char *signature = NULL;
+        SEL selector = NULL;
+        id target = targetGetter(_self, &signature, &selector);
+        
+        va_list args;
+        va_start(args, _self);
+        
+        T retValue;
+        
+        self_invokeMethosBlockWithArgsAndReturnValue(target,
+                                                     signature,
+                                                     selector,
+                                                     args,
+                                                     &_self,
+                                                     &retValue,
+                                                     originalSelector);
+        
+        va_end(args);
+        
+        return retValue;
+    };
+}
+
+template <>
+id generalHookBlock<void>(const char *methodReturnType,
+                          SEL originalSelector,
+                          id(^targetGetter)(id _self, const char**, SEL*)
+                          )
+{
+    if (strcmp(@encode(void), methodReturnType) != 0)
+        return nil;
+    
+    targetGetter = [targetGetter copy];
+    
+    return ^void(id _self, ...) {
+        
+        const char *signature = NULL;
+        SEL selector = NULL;
+        id target = targetGetter(_self, &signature, &selector);
+        
+        va_list args;
+        va_start(args, _self);
+        
+        self_invokeMethosBlockWithArgsAndReturnValue(target,
+                                                     signature,
+                                                     selector,
+                                                     args,
+                                                     &_self,
+                                                     NULL,
+                                                     originalSelector);
+        
+        va_end(args);
+    };
+}
+
 static id generalHookBlockForSignature(const char *prototypeSinature,
                                        SEL originalSelector,
                                        id(^targetGetter)(id _self, const char**, SEL*)
@@ -101,93 +157,23 @@ static id generalHookBlockForSignature(const char *prototypeSinature,
 {
     id resultBlock;
     
-    NSMethodSignature *sig = [NSMethodSignature signatureWithObjCTypes:prototypeSinature];
+    assert(strlen(prototypeSinature) != 0);
+    char returnType[strlen(prototypeSinature) + 1];
+    const char *typeSignatureScanFormat = "%[@^vcI]";//check it for new added types
+    sscanf(prototypeSinature, typeSignatureScanFormat, returnType);
     
-    if (isObjectPointerReturnType(sig)) {
+    const char *methodReturnType = returnType;
+    if (strcmp(@encode(id), returnType) == 0)
+        methodReturnType = @encode(void *);
+    
+    resultBlock = resultBlock?:generalHookBlock<void *    >(methodReturnType, originalSelector, targetGetter);
+    resultBlock = resultBlock?:generalHookBlock<NSUInteger>(methodReturnType, originalSelector, targetGetter);
+    resultBlock = resultBlock?:generalHookBlock<BOOL      >(methodReturnType, originalSelector, targetGetter);
+    resultBlock = resultBlock?:generalHookBlock<void      >(methodReturnType, originalSelector, targetGetter);
+    
+    if (!resultBlock) {
         
-        resultBlock = ^id(id _self, ...) {
-            
-            const char *signature = NULL;
-            SEL selector = NULL;
-            id target = targetGetter(_self, &signature, &selector);
-            
-            //assert(target && signature);
-            
-            va_list args;
-            va_start(args, _self);
-            
-            NSObject *retValue;
-            
-            self_invokeMethosBlockWithArgsAndReturnValue(target,
-                                                         signature,
-                                                         selector,
-                                                         args,
-                                                         &_self,
-                                                         &retValue,
-                                                         originalSelector);
-            
-            va_end(args);
-            
-            if ([retValue isKindOfClass:[NSNumber class]]) {
-                //NSNumber unsuported yet
-                //TODO (__bridge NSObject *)(CFRetain((__bridge_retained CFTypeRef)retValue));
-                assert(0);
-            }
-            
-            return retValue;
-        };
-    } else if (isNSUIntegerReturnType(sig)) {
-        
-        resultBlock = ^NSUInteger(id _self, ...) {
-            
-            const char *signature = NULL;
-            SEL selector = NULL;
-            id target = targetGetter(_self, &signature, &selector);
-            
-            //assert(target && signature);
-            
-            va_list args;
-            va_start(args, _self);
-            
-            NSUInteger retValue;
-            
-            self_invokeMethosBlockWithArgsAndReturnValue(target,
-                                                         signature,
-                                                         selector,
-                                                         args,
-                                                         &_self,
-                                                         &retValue,
-                                                         originalSelector);
-            
-            va_end(args);
-            
-            return retValue;
-        };
-    } else if (isVoidReturnType(sig)) {
-        
-        resultBlock = ^void(id _self, ...) {
-            
-            const char *signature = NULL;
-            SEL selector = NULL;
-            id target = targetGetter(_self, &signature, &selector);
-            
-            //assert(target && signature);
-            
-            va_list args;
-            va_start(args, _self);
-            
-            self_invokeMethosBlockWithArgsAndReturnValue(target,
-                                                         signature,
-                                                         selector,
-                                                         args,
-                                                         &_self,
-                                                         NULL,
-                                                         originalSelector);
-            
-            va_end(args);
-        };
-    } else {
-        
+        //typeSignatureScanFormat - check it for new added types
         assert(0);
     }
     
@@ -207,6 +193,7 @@ static NSMutableDictionary *lazyHookedClassesAndMethod()
     return result;
 }
 
+//TODO do not use ARC for this class
 //returns a block with original implementation
 static void hookMehodWithGeneralBlock(const char *prototypeSinature, SEL selectorToHook, Class classToHook)
 {
@@ -239,7 +226,6 @@ static void hookMehodWithGeneralBlock(const char *prototypeSinature, SEL selecto
         
     } else {
         
-        //TODO test this case
         BOOL added = class_addMethod(classToHook,
                                      selectorToHook,
                                      imp_implementationWithBlock(generalHook),
@@ -344,6 +330,7 @@ static Class findClassForHookIfNotHooked(SEL selectorToHook, id _self)
     return result;
 }
 
+//TODO try to hook retain method
 - (void)addMethodHook:(JFFMethodObserverBlock)observer
              selector:(SEL)selectorToHook
 {

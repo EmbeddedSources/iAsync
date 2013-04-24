@@ -19,6 +19,9 @@
 
 @property (nonatomic) NSUInteger state;
 
+@property (nonatomic) CGPoint point;
+@property (nonatomic) UIEvent *event;
+
 @end
 
 @implementation TestClassToTestHooks
@@ -29,16 +32,16 @@
     return [@(arg * _state) stringValue];
 }
 
-- (NSString *)returnObjectForIntegerPoint:(NSRange)point
+- (NSNumber *)returnObjectForIntegerPoint:(NSRange)point
                                       arg:(NSUInteger)arg
 {
-    return [@(arg * _state) stringValue];
+    return @(arg * _state);
 }
 
-- (NSString *)returnObjectForIntegerPoint:(NSRange)point
+- (NSNumber *)returnObjectForIntegerPoint:(NSRange)point
                                     point:(NSRange)point2
 {
-    return [@(point.length) stringValue];
+    return @(point.length);
 }
 
 - (NSString *)returnObjectForArg1:(NSRange)arg1
@@ -52,6 +55,13 @@
             arg3,
             arg4
             ];
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    _point = point;
+    _event = event;
+    return YES;
 }
 
 @end
@@ -288,6 +298,70 @@
 
 @implementation MethodObserverTest
 
+//test method- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+- (void)testPointInsideWithEventMethod
+{
+    UIEvent *originalEvent = [UIEvent new];
+    CGPoint originalPoint = CGPointMake(2.f, 3.f);
+    __block __weak TestClassToTestHooks *weakTestObject;
+    
+    //test observing existing method
+    @autoreleasepool
+    {
+        __block BOOL hookWasCalled = NO;
+        
+        typedef BOOL(^BlockObserver)(id _self, CGPoint point, UIEvent *event);
+        
+        id observer = ^BlockObserver(BlockObserver(^previousImplementationGetter)(void)) {
+            
+            return ^BOOL(id _self, CGPoint point, UIEvent *event) {
+                
+                STAssertEqualObjects(NSStringFromCGPoint(originalPoint), NSStringFromCGPoint(point), nil);
+                STAssertTrue(originalEvent == event, nil);
+                
+                hookWasCalled = YES;
+                
+                BlockObserver previousImplementation = previousImplementationGetter();
+                
+                BOOL previousResult = previousImplementation(_self, point, event);
+                
+                STAssertEqualObjects(NSStringFromCGPoint(originalPoint), NSStringFromCGPoint(weakTestObject.point), nil);
+                STAssertTrue(originalEvent == weakTestObject.event, nil);
+                
+                STAssertTrue(previousResult, nil);
+                
+                return NO;
+            };
+        };
+        
+        TestClassToTestHooks *testObject = [TestClassToTestHooks new];
+        weakTestObject = testObject;
+        
+        [testObject addMethodHook:observer
+                         selector:@selector(pointInside:withEvent:)];
+        
+        BOOL result = [testObject pointInside:originalPoint withEvent:originalEvent];
+        
+        STAssertFalse(result, nil);
+        
+        STAssertTrue(hookWasCalled, nil);
+    }
+    
+    //test normal call
+    {
+        @autoreleasepool
+        {
+            TestClassToTestHooks *testObject = [TestClassToTestHooks new];
+            weakTestObject = testObject;
+            
+            BOOL result = [testObject pointInside:originalPoint withEvent:originalEvent];
+            
+            STAssertTrue(result, nil);
+        }
+        STAssertNil(weakTestObject, nil);
+    }
+}
+
 - (void)testVoidReturnTypeCall
 {
     //test observing existing method
@@ -344,7 +418,7 @@
             
             id result = [testObject returnObjectForIntegerPoint:NSMakeRange(2, 3) arg:originalArg];
             
-            STAssertEqualObjects([@(originalArg * originalState) stringValue], result, nil);
+            STAssertEqualObjects(@(originalArg * originalState), result, nil);
         }
         STAssertNil(weakTestObject, nil);
     }
@@ -397,17 +471,17 @@
         NSUInteger originalArg   = 10;
         NSUInteger originalState = 3;
         
-        __weak TestClassToTestHooks *weakTestObject;
+        __weak id weakTestObject;
         @autoreleasepool
         {
-            TestClassToTestHooks *testObject = [TestClassToTestHooks new];
+            SimpleHookExampleClass *testObject = [SimpleHookExampleClass new];
             weakTestObject = testObject;
             
             testObject.state = originalState;
             
-            id result = [testObject returnObjectForIntegerPoint:NSMakeRange(2, 3) arg:originalArg];
+            NSUInteger result = [testObject mutStateOnArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg * originalState) stringValue], result, nil);
+            STAssertEquals((NSUInteger)30, result, nil);
         }
         STAssertNil(weakTestObject, nil);
     }
@@ -568,11 +642,11 @@
                 {
                     id previousResult = previousBlock(_self, point, arg);
                     
-                    STAssertEqualObjects([@(originalArg * originalState) stringValue], previousResult, nil);
+                    STAssertEqualObjects(@(originalArg * originalState), previousResult, nil);
                 }
                 
                 STAssertEquals(originalArg, arg, nil);
-                return [@(originalArg) stringValue];
+                return @(originalArg);
             };
         };
         
@@ -589,7 +663,7 @@
             
             id result = [testObject returnObjectForIntegerPoint:NSMakeRange(2, 3) arg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            STAssertEqualObjects(@(originalArg), result, nil);
         }
         
         STAssertNil(weakTestObject, nil);
@@ -610,7 +684,7 @@
             
             id result = [testObject returnObjectForIntegerPoint:NSMakeRange(2, 3) arg:originalArg];
             
-            STAssertEqualObjects([@(originalArg * originalState) stringValue], result, nil);
+            STAssertEqualObjects(@(originalArg * originalState), result, nil);
         }
         STAssertNil(weakTestObject, nil);
     }
