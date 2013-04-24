@@ -36,5 +36,5 @@
 - (UIView *)viewAtIndex:(NSInteger)index;
 
 - (void)removeViewsInRange:(JSignedRange)range;
-
+- (void)syncContentOffsetWithActiveElement;
 @end

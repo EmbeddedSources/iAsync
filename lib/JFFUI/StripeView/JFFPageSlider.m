@@ -87,6 +87,9 @@
 {
     CGFloat x_ = self.bounds.size.width * ( index_ - _firstIndex );
     CGRect frame_ = { { x_, 0.f }, { self.bounds.size.width, self.bounds.size.height } };
+    
+    
+    
     return frame_;
 }
 
@@ -234,8 +237,13 @@
 
 -(NSRange)visiableIndexesRange
 {
+    NSAssert(_scrollView.bounds.size.width != 0, @"division by zero");
+    
     NSInteger first_index_ = floorf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
     NSInteger last_index_ = ceilf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
+    
+    
+    
     last_index_ = fmin( last_index_, self.lastIndex );
 
     first_index_ = first_index_ > 0 ?: 0;
@@ -257,7 +265,9 @@
         
         UIView *view_ = [ self elementAtIndex: index_ ];
         if ( !view_ )
+        {
             continue;
+        }
 
         [ self cacheAndPositionView: view_ toIndex: index_ ];
     }
@@ -275,13 +285,14 @@
 
     self.firstIndex = fmin( _firstIndex, index_ );
     if ( index_ <= prevLastIndex_ )
+    {
         [ self shiftRightElementsFromIndex: index_ toIndex: prevLastIndex_ ];
+    }
 
     [ self addViewForIndex: index_ ];
 
     [ self updateScrollViewContentSize ];
 
-    [ self slideToIndex: _activeIndex ];
 }
 
 -(void)pushFrontElement
@@ -302,13 +313,17 @@
     NSRange index_range_ = [ self visiableIndexesRange ];
 
     if ( NSEqualRanges( previuosRange_, index_range_ ) )
+    {
         return;
+    }
 
     NSInteger to_index_ = index_range_.location + index_range_.length;
     for ( NSInteger index_ = index_range_.location; index_ < to_index_; ++index_ )
     {
         if ( [ self elementAtIndex: index_ ] )
+        {
             continue;
+        }
 
         [ self addViewForIndex: index_ ];
     }
@@ -316,9 +331,14 @@
 
 -(void)syncContentOffsetWithActiveElement
 {
-//    self.previousIndex = self.activeIndex;
+    if (_scrollView.bounds.size.width == 0)
+    {
+        NSLog(@"[!!!ERROR!!!] division by zero");
+        return;
+    }
+    
     self.activeIndex = floor( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
-
+    
     [ self updateScrollViewContentSize ];
     CGPoint offset_ = [ self offsetForIndex: _activeIndex ];
     [ _scrollView setContentOffset: offset_ animated: NO ];
@@ -326,16 +346,6 @@
     [ self.delegate pageSlider: self
     didChangeActiveElementFrom: _previousIndex
                             to: self.activeIndex ];
-}
-
--(void)scrollViewDidEndDecelerating:( UIScrollView* )scrollView_
-{
-    [ self syncContentOffsetWithActiveElement ];
-}
-
--(void)scrollViewDidEndScrollingAnimation:( UIScrollView* )scrollView_
-{
-    [ self syncContentOffsetWithActiveElement ];
 }
 
 @end
