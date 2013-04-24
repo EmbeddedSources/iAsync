@@ -12,7 +12,7 @@
                      code:(NSInteger)code
 {
     NSDictionary *userInfo = @{NSLocalizedDescriptionKey : description};
-
+    
     return [super initWithDomain:domain
                             code:code
                         userInfo:userInfo];
