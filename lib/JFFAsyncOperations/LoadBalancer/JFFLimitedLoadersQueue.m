@@ -5,7 +5,6 @@
 #import "JFFQueueStrategyFactory.h"
 #import "JFFQueueState.h"
 
-
 @implementation JFFLimitedLoadersQueue
 {
     NSMutableArray *_activeLoaders;
@@ -14,29 +13,30 @@
     id<JFFQueueStrategy> _orderStrategy;
 }
 
--(id)initWithExecutionOrder:( JFFQueueExecutionOrder )orderStrategyId
+- (id)initWithExecutionOrder:(JFFQueueExecutionOrder)orderStrategyId
 {
     self = [super init];
     
     if (self) {
-        self->_limitCount     = 10;
-        self->_activeLoaders  = [NSMutableArray new];
-        self->_pendingLoaders = [NSMutableArray new];
         
-        JFFQueueState* state = [ JFFQueueState new ];
-        state.activeLoaders = self->_activeLoaders;
-        state.pendingLoaders = self->_pendingLoaders;
+        _limitCount     = 10;
+        _activeLoaders  = [NSMutableArray new];
+        _pendingLoaders = [NSMutableArray new];
         
-        self->_orderStrategy = [ JFFQueueStrategyFactory queueStrategyWithId: orderStrategyId
-                                                                  queueState: state ];
+        JFFQueueState *state = [JFFQueueState new];
+        state->_activeLoaders  = _activeLoaders ;
+        state->_pendingLoaders = _pendingLoaders;
+        
+        _orderStrategy = [JFFQueueStrategyFactory queueStrategyWithId:orderStrategyId
+                                                           queueState:state];
     }
-
+    
     return self;
 }
 
--(id)init
+- (id)init
 {
-    return [ self initWithExecutionOrder: JQOrderFifo ];
+    return [self initWithExecutionOrder:JQOrderFifo];
 }
 
 - (BOOL)hasLoadersReadyToStart

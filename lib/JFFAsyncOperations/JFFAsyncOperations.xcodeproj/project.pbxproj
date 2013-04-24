@@ -27,9 +27,29 @@
 		1B9528FC1500E67900C9B979 /* NSError+ResultOwnerships.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B9528FA1500E67900C9B979 /* NSError+ResultOwnerships.h */; };
 		1B9528FD1500E67900C9B979 /* NSError+ResultOwnerships.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9528FB1500E67900C9B979 /* NSError+ResultOwnerships.m */; };
 		1BA2551C1443109B00C9B2BE /* JFFAsyncOperationContinuity.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1661391928400DD6890 /* JFFAsyncOperationContinuity.m */; };
+		4C6DFB0E1718446600D86975 /* JFFBaseStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6DFB0C1718446500D86975 /* JFFBaseStrategy.h */; };
+		4C6DFB0F1718446600D86975 /* JFFBaseStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DFB0D1718446600D86975 /* JFFBaseStrategy.m */; };
 		4CBBDBEC17173B36004D670D /* JFFBaseLoaderOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB316FDB6FE00DAE2BB /* JFFBaseLoaderOwner.m */; };
 		4CBBDBED17173B36004D670D /* JFFBaseLoaderOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB316FDB6FE00DAE2BB /* JFFBaseLoaderOwner.m */; };
 		4CBBDBEE17173B37004D670D /* JFFBaseLoaderOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB316FDB6FE00DAE2BB /* JFFBaseLoaderOwner.m */; };
+		4CBBDCBF171741C8004D670D /* JFFAsyncOperationLoadBalancer.m in Sources */ = {isa = PBXBuildFile; fileRef = 65347F9513B7F0BD0002CF73 /* JFFAsyncOperationLoadBalancer.m */; };
+		4CBBDCC0171741DB004D670D /* JFFAsyncOperationLoadBalancerContexts.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CF62FB016FDB6FE00DAE2BB /* JFFAsyncOperationLoadBalancerContexts.h */; };
+		4CBBDCC1171741DC004D670D /* JFFAsyncOperationLoadBalancerContexts.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CF62FB016FDB6FE00DAE2BB /* JFFAsyncOperationLoadBalancerContexts.h */; };
+		4CBBDCC2171741DC004D670D /* JFFAsyncOperationLoadBalancerContexts.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CF62FB016FDB6FE00DAE2BB /* JFFAsyncOperationLoadBalancerContexts.h */; };
+		4CBBDCC317174217004D670D /* JFFLimitedLoadersQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4031CB163D266B00FE6427 /* JFFLimitedLoadersQueue.m */; };
+		4CBBDCC417174217004D670D /* JFFLimitedLoadersQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4031CB163D266B00FE6427 /* JFFLimitedLoadersQueue.m */; };
+		4CBBDCC517174222004D670D /* JFFActiveLoaderData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FAF16FDB6FE00DAE2BB /* JFFActiveLoaderData.m */; };
+		4CBBDCC617174222004D670D /* JFFActiveLoaderData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FAF16FDB6FE00DAE2BB /* JFFActiveLoaderData.m */; };
+		4CBBDCC717174223004D670D /* JFFActiveLoaderData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FAF16FDB6FE00DAE2BB /* JFFActiveLoaderData.m */; };
+		4CBBDCC817174226004D670D /* JFFAsyncOperationLoadBalancerContexts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB116FDB6FE00DAE2BB /* JFFAsyncOperationLoadBalancerContexts.m */; };
+		4CBBDCC917174226004D670D /* JFFAsyncOperationLoadBalancerContexts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB116FDB6FE00DAE2BB /* JFFAsyncOperationLoadBalancerContexts.m */; };
+		4CBBDCCA17174227004D670D /* JFFAsyncOperationLoadBalancerContexts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB116FDB6FE00DAE2BB /* JFFAsyncOperationLoadBalancerContexts.m */; };
+		4CBBDCCB17174229004D670D /* JFFContextLoaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB516FDB6FE00DAE2BB /* JFFContextLoaders.m */; };
+		4CBBDCCC1717422A004D670D /* JFFContextLoaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB516FDB6FE00DAE2BB /* JFFContextLoaders.m */; };
+		4CBBDCCD1717422A004D670D /* JFFContextLoaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB516FDB6FE00DAE2BB /* JFFContextLoaders.m */; };
+		4CBBDCCE1717422D004D670D /* JFFPedingLoaderData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB716FDB6FE00DAE2BB /* JFFPedingLoaderData.m */; };
+		4CBBDCCF1717422E004D670D /* JFFPedingLoaderData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB716FDB6FE00DAE2BB /* JFFPedingLoaderData.m */; };
+		4CBBDCD01717422E004D670D /* JFFPedingLoaderData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF62FB716FDB6FE00DAE2BB /* JFFPedingLoaderData.m */; };
 		4CF62FCD16FDBA3800DAE2BB /* JFFAsyncOperationLoadBalancer.m in Sources */ = {isa = PBXBuildFile; fileRef = 65347F9513B7F0BD0002CF73 /* JFFAsyncOperationLoadBalancer.m */; };
 		4CF62FCE16FDBA3800DAE2BB /* JFFAsyncOperationLoadBalancer.m in Sources */ = {isa = PBXBuildFile; fileRef = 65347F9513B7F0BD0002CF73 /* JFFAsyncOperationLoadBalancer.m */; };
 		5391035714A88BB5007315A3 /* JFFAsyncOperations_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFAsyncOperations_Prefix.pch */; };
@@ -162,6 +182,8 @@
 		1B9368DF156504D800F8A394 /* JFFAsyncOperationInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationInterface.h; sourceTree = "<group>"; };
 		1B9528FA1500E67900C9B979 /* NSError+ResultOwnerships.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+ResultOwnerships.h"; sourceTree = "<group>"; };
 		1B9528FB1500E67900C9B979 /* NSError+ResultOwnerships.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+ResultOwnerships.m"; sourceTree = "<group>"; };
+		4C6DFB0C1718446500D86975 /* JFFBaseStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFBaseStrategy.h; sourceTree = "<group>"; };
+		4C6DFB0D1718446600D86975 /* JFFBaseStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFBaseStrategy.m; sourceTree = "<group>"; };
 		4CF62FAE16FDB6FE00DAE2BB /* JFFActiveLoaderData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFActiveLoaderData.h; sourceTree = "<group>"; };
 		4CF62FAF16FDB6FE00DAE2BB /* JFFActiveLoaderData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFActiveLoaderData.m; sourceTree = "<group>"; };
 		4CF62FB016FDB6FE00DAE2BB /* JFFAsyncOperationLoadBalancerContexts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationLoadBalancerContexts.h; sourceTree = "<group>"; };
@@ -413,6 +435,8 @@
 				7E79065416E4984400CFC696 /* JFFQueueState.m */,
 				7E79065B16E49DD900CFC696 /* JFFQueueStrategyFactory.h */,
 				7E79065C16E49DD900CFC696 /* JFFQueueStrategyFactory.m */,
+				4C6DFB0C1718446500D86975 /* JFFBaseStrategy.h */,
+				4C6DFB0D1718446600D86975 /* JFFBaseStrategy.m */,
 				7E79064B16E4981700CFC696 /* JFFStrategyFifo.h */,
 				7E79064C16E4981700CFC696 /* JFFStrategyFifo.m */,
 				7E79066316E49F8000CFC696 /* JFFStrategyStack.h */,
@@ -496,6 +520,7 @@
 				7E79065E16E49DD900CFC696 /* JFFQueueStrategyFactory.h in Headers */,
 				7E79066616E49F8000CFC696 /* JFFStrategyStack.h in Headers */,
 				7E79066E16E4A49B00CFC696 /* JFFStrategyRandom.h in Headers */,
+				4CBBDCC1171741DC004D670D /* JFFAsyncOperationLoadBalancerContexts.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +550,7 @@
 				7E79065F16E49DD900CFC696 /* JFFQueueStrategyFactory.h in Headers */,
 				7E79066716E49F8000CFC696 /* JFFStrategyStack.h in Headers */,
 				7E79066F16E4A49B00CFC696 /* JFFStrategyRandom.h in Headers */,
+				4CBBDCC2171741DC004D670D /* JFFAsyncOperationLoadBalancerContexts.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,6 +588,8 @@
 				7E79065D16E49DD900CFC696 /* JFFQueueStrategyFactory.h in Headers */,
 				7E79066516E49F8000CFC696 /* JFFStrategyStack.h in Headers */,
 				7E79066D16E4A49B00CFC696 /* JFFStrategyRandom.h in Headers */,
+				4CBBDCC0171741DB004D670D /* JFFAsyncOperationLoadBalancerContexts.h in Headers */,
+				4C6DFB0E1718446600D86975 /* JFFBaseStrategy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,6 +756,11 @@
 				7E79066916E49F8000CFC696 /* JFFStrategyStack.m in Sources */,
 				7E79067116E4A49B00CFC696 /* JFFStrategyRandom.mm in Sources */,
 				4CBBDBED17173B36004D670D /* JFFBaseLoaderOwner.m in Sources */,
+				4CBBDCC317174217004D670D /* JFFLimitedLoadersQueue.m in Sources */,
+				4CBBDCC617174222004D670D /* JFFActiveLoaderData.m in Sources */,
+				4CBBDCC917174226004D670D /* JFFAsyncOperationLoadBalancerContexts.m in Sources */,
+				4CBBDCCC1717422A004D670D /* JFFContextLoaders.m in Sources */,
+				4CBBDCCF1717422E004D670D /* JFFPedingLoaderData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,6 +786,11 @@
 				7E79066A16E49F8000CFC696 /* JFFStrategyStack.m in Sources */,
 				7E79067216E4A49B00CFC696 /* JFFStrategyRandom.mm in Sources */,
 				4CBBDBEE17173B37004D670D /* JFFBaseLoaderOwner.m in Sources */,
+				4CBBDCC417174217004D670D /* JFFLimitedLoadersQueue.m in Sources */,
+				4CBBDCC717174223004D670D /* JFFActiveLoaderData.m in Sources */,
+				4CBBDCCA17174227004D670D /* JFFAsyncOperationLoadBalancerContexts.m in Sources */,
+				4CBBDCCD1717422A004D670D /* JFFContextLoaders.m in Sources */,
+				4CBBDCD01717422E004D670D /* JFFPedingLoaderData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,6 +825,12 @@
 				7E79066816E49F8000CFC696 /* JFFStrategyStack.m in Sources */,
 				7E79067016E4A49B00CFC696 /* JFFStrategyRandom.mm in Sources */,
 				4CBBDBEC17173B36004D670D /* JFFBaseLoaderOwner.m in Sources */,
+				4CBBDCBF171741C8004D670D /* JFFAsyncOperationLoadBalancer.m in Sources */,
+				4CBBDCC517174222004D670D /* JFFActiveLoaderData.m in Sources */,
+				4CBBDCC817174226004D670D /* JFFAsyncOperationLoadBalancerContexts.m in Sources */,
+				4CBBDCCB17174229004D670D /* JFFContextLoaders.m in Sources */,
+				4CBBDCCE1717422D004D670D /* JFFPedingLoaderData.m in Sources */,
+				4C6DFB0F1718446600D86975 /* JFFBaseStrategy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

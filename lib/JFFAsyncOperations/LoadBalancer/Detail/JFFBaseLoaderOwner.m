@@ -17,8 +17,8 @@
     JFFBaseLoaderOwner *result = [self new];
     
     if (result) {
-        result.loader = loader;
-        result.queue  = queue;
+        result->_loader = [loader copy];
+        result->_queue  = queue;
     }
     
     return result;
