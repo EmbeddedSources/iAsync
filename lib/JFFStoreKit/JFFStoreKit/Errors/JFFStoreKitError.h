@@ -1,4 +1,4 @@
-#import <JFFUtils/JFFError.h>
+#import <JFFUtils/Errors/JFFError.h>
 
 @interface JFFStoreKitError : JFFError
 

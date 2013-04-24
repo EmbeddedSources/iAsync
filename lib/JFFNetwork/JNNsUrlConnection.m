@@ -17,7 +17,6 @@
     NSRunLoop *_connectRunLoop;
 }
 
-//TODO: Test Connection with runloops!
 -(void)dealloc
 {
     [self cancel];

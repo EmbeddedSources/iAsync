@@ -38,13 +38,13 @@
 }
 
 - (void)stripeView:(JFFStripeView *)stripeView
-willChangeActiveElementFrom:( NSUInteger )active_element_
+willChangeActiveElementFrom:(NSUInteger)active_element_
 {
 }
 
 - (void)stripeView:(JFFStripeView *)stripeView
-didChangeActiveElementFrom:( NSUInteger )old_active_element_
-                        to:( NSUInteger )new_active_element_
+didChangeActiveElementFrom:(NSUInteger)oldActiveElement
+                        to:(NSUInteger)newActiveElement
 {
 }
 

@@ -80,7 +80,7 @@ static JFFAsyncOperationBinder dataLoaderWithCachedResultBinder(BOOL doesNotIgno
                 return;
             }
             
-            //TODO test [bindError isKindOfClass:[JFFErrorNoFreshData class]] issue, here it van got - not data in cache error !!!
+            //TODO test [bindError isKindOfClass:[JFFErrorNoFreshData class]] issue, here it can got - not data in cache error !!!
             JFFErrorNoFreshData *noFreshDataError =
             (JFFErrorNoFreshData *)([bindError isKindOfClass:[JFFErrorNoFreshData class]]?bindError:nil);
             if ([noFreshDataError.cachedData data] && !doesNotIgnoreFreshDataLoadFail) {

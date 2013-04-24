@@ -338,22 +338,24 @@ didChangeActiveElementFrom:previousActiveElement
 {
     NSUInteger pageIndex = elementIndex / [_delegate elementsPerPageInStripeView:self];
     
-    CGFloat stripe_width_ = self.scrollView.frame.size.width;
+    UIScrollView *scrollView = self.scrollView;
     
-    NSUInteger page_count_ = [ self pageCount ];
+    CGFloat stripeWidth = scrollView.frame.size.width;
     
-    CGFloat content_width_ = page_count_ * stripe_width_;
-    CGFloat content_offset_x_ = pageIndex * stripe_width_;
+    NSUInteger pageCount = [self pageCount];
     
-    self.scrollView.contentSize = CGSizeMake( content_width_, self.scrollView.frame.size.height );
-    self.scrollView.contentOffset = CGPointMake( content_offset_x_, 0.f );
+    CGFloat contentWidth   = pageCount * stripeWidth;
+    CGFloat contentOffsetX = pageIndex * stripeWidth;
+    
+    scrollView.contentSize   = CGSizeMake(contentWidth, self.scrollView.frame.size.height);
+    scrollView.contentOffset = CGPointMake(contentOffsetX, 0.f);
     
     if ([_delegate isCyclicStripeView:self]) {
         
-        self.scrollView.contentInset = UIEdgeInsetsMake( 0.f, stripe_width_, 0.f, stripe_width_ );
+        scrollView.contentInset = UIEdgeInsetsMake(0.f, stripeWidth, 0.f, stripeWidth);
     } else {
         
-        self.scrollView.contentInset = UIEdgeInsetsZero;
+        scrollView.contentInset = UIEdgeInsetsZero;
     }
     
     [_delegate stripeView:self
@@ -655,7 +657,7 @@ didChangeActiveElementFrom:previousActiveElement
     {
         activeElement = ( activeElement + elementsCount ) % elementsCount;
         
-        [ self adjustContentSizeAndSetElementIndex: activeElement ];
+        [self adjustContentSizeAndSetElementIndex:activeElement];
     }
     
     self.activeElement = activeElement;

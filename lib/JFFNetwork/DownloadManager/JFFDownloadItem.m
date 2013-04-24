@@ -33,10 +33,10 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 @implementation JFFDownloadItem
 {
-    JFFTrafficCalculator* _trafficCalculator;
-    FILE* _file;
+    JFFTrafficCalculator *_trafficCalculator;
+    FILE *_file;
     float _previousProgress;
-    JFFMulticastDelegate< JFFDownloadItemDelegate >* _multicastDelegate;
+    JFFMulticastDelegate< JFFDownloadItemDelegate > *_multicastDelegate;
 }
 
 @dynamic downloadedFlag;
@@ -126,7 +126,6 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     
     if (!result && outError) {
         
-        //TODO use NSLocalizedString here
         static NSString *const errorDescription = @"Invalid arguments. This \"local path\" used for another url";
         *outError = [JFFError newErrorWithDescription:errorDescription];
     }
@@ -302,7 +301,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
         JFFURLConnectionParams* params = [ JFFURLConnectionParams new ];
         params.url     = self.url;
         params.headers = headers_;
-        JFFURLConnection* connection = [[JFFURLConnection alloc] initWithURLConnectionParams:params];
+        JFFURLConnection *connection = [[JFFURLConnection alloc] initWithURLConnectionParams:params];
         
         progressCallback = [ progressCallback copy ];
         connection.didReceiveDataBlock = ^(NSData *data) {
