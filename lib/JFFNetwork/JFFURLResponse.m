@@ -11,8 +11,7 @@
     id contentLengthObj_ = _allHeaderFields[@"Content-Length"];
     
     SEL ulongSelector_ = @selector(unsignedLongLongValue);
-    if ( [ contentLengthObj_ respondsToSelector: ulongSelector_ ] )
-    {
+    if ( [ contentLengthObj_ respondsToSelector: ulongSelector_ ] ) {
         return [ contentLengthObj_ unsignedLongLongValue ];
     }
 
