@@ -211,9 +211,9 @@ didChangeActiveElementFrom:previousActiveElement
     return result;
 }
 
-- (NSUInteger)lastVisibleIndex
+- (NSInteger)lastVisibleIndexWithFirstVisibleIndex:(NSInteger)firstVisibleIndex
 {
-    CGFloat x = self.scrollView.contentOffset.x - _rightInset - [_delegate elementOffsetInStripeView:self];
+    CGFloat x = self.scrollView.contentOffset.x + self.scrollView.frame.size.width - _rightInset - [_delegate elementOffsetInStripeView:self];
     
     /*if ( self.superview.clipsToBounds
      && CGRectGetMaxX( self.frame ) > CGRectGetMaxX( self.superview.bounds ) )
@@ -222,9 +222,10 @@ didChangeActiveElementFrom:previousActiveElement
      }*/
     
     NSInteger maxIndex = [self maxInternalIndex];
-    NSInteger positionBasedIndex = ceilf(x / ( [_delegate elementOffsetInStripeView:self] + self.elementWidth));
+    NSInteger positionBasedIndex = ceilf(x / ( [_delegate elementOffsetInStripeView:self] + self.elementWidth)) - 1;
     
     NSInteger result = fmin(maxIndex, positionBasedIndex);
+    result = fmax(result, firstVisibleIndex);
     return result;
 }
 
@@ -233,7 +234,9 @@ didChangeActiveElementFrom:previousActiveElement
     if ([_delegate numberOfElementsInStripeView:self] == 0)
         return JSignedRangeMake(0, 0);
     
-    return JSignedRangeMake([self firstVisibleIndex], [self lastVisibleIndex] - [self firstVisibleIndex] + 1);
+    NSUInteger firstVisibleIndex = [self firstVisibleIndex];
+    NSUInteger lastVisibleIndex  = [self lastVisibleIndexWithFirstVisibleIndex:firstVisibleIndex];
+    return JSignedRangeMake(firstVisibleIndex, lastVisibleIndex - firstVisibleIndex + 1);
 }
 
 - (NSMutableOrderedSet*)mutableVisibleIndexes
@@ -495,7 +498,7 @@ didChangeActiveElementFrom:previousActiveElement
                     insertAction:(BOOL)yes
 {
     NSUInteger currentIndex = yes
-    ? fmin([self lastVisibleIndex], [_delegate numberOfElementsInStripeView:self] - 1)
+    ? fmin([self lastVisibleIndexWithFirstVisibleIndex:[self firstVisibleIndex]], [_delegate numberOfElementsInStripeView:self] - 1)
     : index;
     
     UIView* element_ = [self elementAtIndex:yes?--currentIndex:++currentIndex];
@@ -521,9 +524,10 @@ didChangeActiveElementFrom:previousActiveElement
 - (void)prepareNewVisibleElementAtInsertAction:(BOOL)yes
                                    actionIndex:(NSUInteger)actIndex
 {
+    NSUInteger firstVisibleIndex = [self firstVisibleIndex];
+    
     if (yes) {
         
-        NSUInteger firstVisibleIndex = [self firstVisibleIndex];
         UIView* elementView = _elementsByIndex[@(firstVisibleIndex)];
         if ( !elementView
             && firstVisibleIndex >= 1
@@ -536,7 +540,7 @@ didChangeActiveElementFrom:previousActiveElement
         return;
     }
     
-    NSUInteger lastVisibleIndex = [self lastVisibleIndex] - 1;
+    NSUInteger lastVisibleIndex = [self lastVisibleIndexWithFirstVisibleIndex:firstVisibleIndex];
     UIView *elementView = _elementsByIndex[@(lastVisibleIndex)];
     if ( !elementView
         && lastVisibleIndex < [_delegate numberOfElementsInStripeView:self]
