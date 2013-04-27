@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CC52F2A1729786900BB7637 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CC52F291729786900BB7637 /* Default-568h@2x.png */; };
 		CE91A8E315F61233002B220B /* libJFFContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDBB8FA15F60E8E0093FE95 /* libJFFContacts.a */; };
 		CE91A8E415F61233002B220B /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDBB8E015F60E7C0093FE95 /* libJFFTestTools.a */; };
 		CE91A8E515F61233002B220B /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDBB8E915F60E840093FE95 /* libJFFUtils.a */; };
@@ -169,6 +170,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4CC52F291729786900BB7637 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CE91A8E615F61292002B220B /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CE91A8EA15F612B4002B220B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CE91A8EC15F612D1002B220B /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -245,6 +247,7 @@
 		CEDBB8AB15F60E2F0093FE95 = {
 			isa = PBXGroup;
 			children = (
+				4CC52F291729786900BB7637 /* Default-568h@2x.png */,
 				CEDBB8C015F60E300093FE95 /* JFFContactsTest */,
 				CEDBB8B915F60E300093FE95 /* Frameworks */,
 				CEDBB8B715F60E300093FE95 /* Products */,
@@ -367,7 +370,7 @@
 		CEDBB8AD15F60E2F0093FE95 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = EmbeddedSources;
 			};
 			buildConfigurationList = CEDBB8B015F60E2F0093FE95 /* Build configuration list for PBXProject "JFFContactsTest" */;
@@ -524,6 +527,7 @@
 			files = (
 				CEDBB8C515F60E300093FE95 /* InfoPlist.strings in Resources */,
 				CE91AA0415F63390002B220B /* avator.png in Resources */,
+				4CC52F2A1729786900BB7637 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +592,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -621,6 +628,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
