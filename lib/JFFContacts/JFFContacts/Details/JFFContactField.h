@@ -4,16 +4,16 @@
 
 @interface JFFContactField : NSObject
 
-@property ( nonatomic, readonly ) NSString* name;
-@property ( nonatomic, readonly ) ABPropertyID propertyID;
+@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) ABPropertyID propertyID;
+@property (nonatomic, readonly) ABRecordRef record;
 
-@property ( nonatomic ) id value;
+@property (nonatomic) id value;
 
-+(id)contactFieldWithName:( NSString* )name_
-               propertyID:( ABPropertyID )propertyID_;
++ (id)newContactFieldWithName:(NSString *)name
+                   propertyID:(ABPropertyID)propertyID
+                       record:(ABRecordRef)record;
 
--(void)readPropertyFromRecord:( ABRecordRef )record_;
--(void)setPropertyFromValue:( id )value_
-                   toRecord:( ABRecordRef )record_;
+- (void)setPropertyFromValue:(id)value;
 
 @end

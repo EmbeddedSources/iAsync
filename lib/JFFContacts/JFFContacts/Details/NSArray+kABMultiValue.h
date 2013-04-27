@@ -4,6 +4,6 @@
 
 @interface NSArray (kABMultiValue)
 
-+(id)arrayWithMultyValue:( ABMutableMultiValueRef )multyValue_;
++ (id)arrayWithMultyValue:(ABMutableMultiValueRef)multyValue;
 
 @end

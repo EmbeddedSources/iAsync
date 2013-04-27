@@ -2,6 +2,7 @@
 
 @interface JFFContactPhotoField : JFFContactField
 
-+(id)contactFieldWithName:( NSString* )name_;
++ (id)newContactFieldWithName:(NSString *)name
+                       record:(ABRecordRef)record;
 
 @end

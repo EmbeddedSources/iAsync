@@ -2,24 +2,24 @@
 
 @implementation NSArray (kABMultiValue)
 
-+(id)arrayWithMultyValue:( ABMutableMultiValueRef )multyValue_
++ (id)arrayWithMultyValue:(ABMutableMultiValueRef)multyValue
 {
-    CFIndex count_ = multyValue_
-        ? ABMultiValueGetCount( multyValue_ )
+    CFIndex count = multyValue
+        ? ABMultiValueGetCount(multyValue)
         : 0;
-
-    if ( 0 == count_ )
+    
+    if (0 == count)
         return nil;
 
-    NSArray* result_ = [ NSArray arrayWithCapacity: count_
-                              ignoringNilsProducer: ^id( NSUInteger index_ )
-    {
-        CFTypeRef value_ = ABMultiValueCopyValueAtIndex( multyValue_, index_ );
+    NSArray *result = [NSArray arrayWithCapacity:count
+                            ignoringNilsProducer:^id(NSUInteger index) {
+    
+        CFTypeRef value = ABMultiValueCopyValueAtIndex(multyValue, index);
 
-        return ( __bridge_transfer NSString* )value_;
-    } ];
-
-    return result_;
+        return (__bridge_transfer NSString *)value;
+    }];
+    
+    return result;
 }
 
 @end

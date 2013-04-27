@@ -39,7 +39,7 @@
 
 @end
 
-JFFAsyncOperation asyncAllContactsLoader( void )
+JFFAsyncOperation asyncAllContactsLoader()
 {
     JFFAsyncOperationBinder contacts = ^JFFAsyncOperation(JFFAddressBook *book) {
         

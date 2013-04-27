@@ -4,59 +4,65 @@
 
 @interface JFFContactField ()
 
-@property ( nonatomic ) NSString* name;
-@property ( nonatomic ) ABPropertyID propertyID;
+@property (nonatomic) NSString *name;
+@property (nonatomic) ABPropertyID propertyID;
 
 @end
 
 @implementation JFFContactField
 
--(id)init
+- (id)init
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return self;
 }
 
--(id)initWithName:( NSString* )name_
-       propertyID:( ABPropertyID )propertyID_
+- (id)initWithName:(NSString *)name
+        propertyID:(ABPropertyID)propertyID
+            record:(ABRecordRef)record
 {
-    self = [ super init ];
-
-    if ( !self )
-    {
+    self = [super init];
+    
+    if (!self) {
+        
         return nil;
     }
-
-    NSParameterAssert( [ name_ length ] > 0 );
-    self.name       = name_;
-    self.propertyID = propertyID_;
-
-    [ [ self class ] addInstanceMethodIfNeedWithSelector: @selector( value )
-                                                 toClass: [ self class ]
-                                       newMethodSelector: NSSelectorFromString( self.name ) ];
-    [ [ self class ] addInstanceMethodIfNeedWithSelector: @selector( setValue: )
-                                                 toClass: [ self class ]
-                                       newMethodSelector: NSSelectorFromString( [ self.name propertySetNameForPropertyName ] ) ];
-
+    
+    NSParameterAssert([name length] > 0);
+    NSParameterAssert(record != NULL);
+    
+    _name       = name;
+    _propertyID = propertyID;
+    _record     = record;
+    
+    [[self class] addInstanceMethodIfNeedWithSelector:@selector(readProperty)
+                                              toClass:[self class]
+                                    newMethodSelector:NSSelectorFromString(self.name)];
+    [[self class] addInstanceMethodIfNeedWithSelector:@selector(setPropertyFromValue:)
+                                              toClass:[self class]
+                                    newMethodSelector:NSSelectorFromString([self.name propertySetNameForPropertyName])];
+    
     return self;
 }
 
-+(id)contactFieldWithName:( NSString* )name_
-               propertyID:( ABPropertyID )propertyID_
++ (id)newContactFieldWithName:(NSString *)name
+                   propertyID:(ABPropertyID)propertyID
+                       record:(ABRecordRef)record
 {
-    return [ [ self alloc ] initWithName: name_
-                              propertyID: propertyID_ ];
+    return [[self alloc] initWithName:name
+                           propertyID:propertyID
+                               record:record];
 }
 
--(void)readPropertyFromRecord:( ABRecordRef )record_
+- (id)readProperty
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
--(void)setPropertyFromValue:( id )value_
-                   toRecord:( ABRecordRef )record_
+- (void)setPropertyFromValue:(id)value
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
 }
 
 @end

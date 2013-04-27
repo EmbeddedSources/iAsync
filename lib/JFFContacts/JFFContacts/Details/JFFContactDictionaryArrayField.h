@@ -2,8 +2,9 @@
 
 @interface JFFContactDictionaryArrayField : JFFContactField
 
-+(id)contactFieldWithName:( NSString* )name_
-               propertyID:( ABPropertyID )propertyID_
-                   labels:( NSArray* )labels_;
++ (id)newContactFieldWithName:(NSString *)name
+                   propertyID:(ABPropertyID)propertyID
+                       labels:(NSArray *)labels
+                       record:(ABRecordRef)record;
 
 @end
