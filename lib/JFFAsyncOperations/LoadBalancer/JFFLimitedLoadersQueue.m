@@ -39,15 +39,11 @@
     return [self initWithExecutionOrder:JQOrderFifo];
 }
 
-- (BOOL)hasLoadersReadyToStart
+- (BOOL)hasLoadersReadyToStartForPendingLoader:(JFFBaseLoaderOwner *)pendingLoader
 {
-    if ([_pendingLoaders count] > 0) {
+    if (pendingLoader.barrier) {
         
-        JFFBaseLoaderOwner *pendingLoader = _pendingLoaders[0];
-        if (pendingLoader.barrier) {
-            
-            return [_activeLoaders count] == 0;
-        }
+        return [_activeLoaders count] == 0;
     }
     
     BOOL result = _limitCount > [_activeLoaders count] && [_pendingLoaders count] > 0;
@@ -64,8 +60,12 @@
 
 - (void)performPendingLoaders
 {
-    while ([self hasLoadersReadyToStart]) {        
-        [self->_orderStrategy executePendingLoader];
+    JFFBaseLoaderOwner *pendingLoader = ([_pendingLoaders count] > 0)
+    ?[_orderStrategy firstPendingLoader]
+    :nil;
+    
+    while ([self hasLoadersReadyToStartForPendingLoader:pendingLoader]) {
+        [self->_orderStrategy executePendingLoader:pendingLoader];
     }
 }
 
@@ -105,8 +105,10 @@
                 JFFCancelAsyncOperationHandler cancelCallback = weakLoaderHolder.cancelCallback;
                 
                 if (canceled) {
-                    if (!weakLoaderHolder.cancelLoader)
+                    if (!weakLoaderHolder.cancelLoader) {
+                        //TODO self owning here fix?
                         [_pendingLoaders removeObject:weakLoaderHolder];
+                    }
                 } else {
                     weakLoaderHolder.progressCallback = nil;
                     weakLoaderHolder.cancelCallback   = nil;

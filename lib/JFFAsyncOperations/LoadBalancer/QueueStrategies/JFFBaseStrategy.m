@@ -1,5 +1,6 @@
 #import "JFFBaseStrategy.h"
 
+#import "JFFQueueState.h"
 #import "JFFBaseLoaderOwner.h"
 
 @implementation JFFBaseStrategy
@@ -23,6 +24,9 @@
 
 - (void)executePendingLoader:(JFFBaseLoaderOwner *)pendingLoader
 {
+    [_queueState->_pendingLoaders removeObject:pendingLoader];
+    [_queueState->_activeLoaders addObject:pendingLoader];
+    
 #ifdef DEBUG
     NSUInteger pendingLoadersCount = [_queueState.pendingLoaders count];
     NSUInteger activeLoadersCount  = [_queueState.activeLoaders  count];

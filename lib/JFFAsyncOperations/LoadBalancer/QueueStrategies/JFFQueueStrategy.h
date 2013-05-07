@@ -1,7 +1,10 @@
 #import <Foundation/Foundation.h>
 
+@class JFFBaseLoaderOwner;
+
 @protocol JFFQueueStrategy <NSObject>
 
-- (void)executePendingLoader;
+- (JFFBaseLoaderOwner *)firstPendingLoader;
+- (void)executePendingLoader:(JFFBaseLoaderOwner *)pendingLoader;
 
 @end

@@ -5,13 +5,10 @@
 
 @implementation JFFStrategyStack
 
--(void)executePendingLoader
+- (JFFBaseLoaderOwner *)firstPendingLoader
 {
-    JFFBaseLoaderOwner *pendingLoader = [_queueState->_pendingLoaders lastObject];
-    [_queueState->_pendingLoaders removeLastObject];
-    [_queueState->_activeLoaders  addObject:pendingLoader];
-    
-    [self executePendingLoader:pendingLoader];
+    JFFBaseLoaderOwner *result = [_queueState->_pendingLoaders lastObject];
+    return result;
 }
 
 @end

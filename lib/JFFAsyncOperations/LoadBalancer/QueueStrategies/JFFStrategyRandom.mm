@@ -5,16 +5,13 @@
 
 @implementation JFFStrategyRandom
 
-- (void)executePendingLoader
+- (JFFBaseLoaderOwner *)firstPendingLoader
 {
     int index = rand() % [_queueState->_pendingLoaders count];
     NSUInteger castedIndex = static_cast<NSUInteger>(index);
     
-    JFFBaseLoaderOwner *pendingLoader = _queueState->_pendingLoaders[castedIndex];
-    [_queueState->_pendingLoaders removeObjectAtIndex:castedIndex];
-    [_queueState->_activeLoaders addObject:pendingLoader];
-    
-    [self executePendingLoader:pendingLoader];
+    JFFBaseLoaderOwner *result = _queueState->_pendingLoaders[castedIndex];
+    return result;
 }
 
 @end
