@@ -22,7 +22,7 @@
     self = [super init];
     
     if (self) {
-        _accuracy = accuracy;
+        _accuracy  = accuracy;
         _observers = [JFFMutableAssignArray new];
         
         __weak JFFLocationLoaderSupervisor *weakSelf = self;
@@ -36,7 +36,7 @@
 
 + (id)sharedLocationLoaderSupervisorWithAccuracy:(CLLocationAccuracy)accuracy
 {
-    NSParameterAssert(accuracy == kCLLocationAccuracyHundredMeters);
+    NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     
     __weak static id instance;
     

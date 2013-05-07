@@ -76,7 +76,7 @@ JFFAsyncOperationInterface
 
 + (JFFAsyncOperation)placemarksLoaderForCurrentLocationWithAccuracy:(CLLocationAccuracy)accuracy
 {
-    NSParameterAssert(accuracy == kCLLocationAccuracyHundredMeters);
+    NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     
     JFFAsyncOperation locationLoader = [JFFLocationLoader locationLoaderWithAccuracy:accuracy];
     
@@ -88,7 +88,7 @@ JFFAsyncOperationInterface
 
 + (JFFAsyncOperation)placemarkLoaderForCurrentLocationWithAccuracy:(CLLocationAccuracy)accuracy
 {
-    NSParameterAssert(accuracy == kCLLocationAccuracyHundredMeters);
+    NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     
     JFFAsyncOperation locationLoader = [JFFLocationLoader locationLoaderWithAccuracy:accuracy];
     

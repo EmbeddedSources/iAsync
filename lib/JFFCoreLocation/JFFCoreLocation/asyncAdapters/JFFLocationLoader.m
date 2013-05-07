@@ -71,7 +71,7 @@ JFFLocationObserver
         cancel();
         
         [weakSelf onSchedulerWithHandler:handler];
-    } duration:1.];
+    } duration:3.];
 }
 
 - (void)onSchedulerWithHandler:(JFFAsyncOperationInterfaceResultHandler)handler
@@ -108,8 +108,8 @@ JFFLocationObserver
     if (!location)
         return NO;
     
-    if (location.horizontalAccuracy <= 200.
-        && location.verticalAccuracy <= 200.) {
+    if (location.horizontalAccuracy <= 2000.
+        && location.verticalAccuracy <= 2000.) {
         
         [self forceProcessLocation:location];
         return YES;
@@ -131,7 +131,7 @@ JFFLocationObserver
 
 + (JFFAsyncOperation)locationLoaderWithAccuracy:(CLLocationAccuracy)accuracy
 {
-    NSParameterAssert(accuracy == kCLLocationAccuracyHundredMeters);
+    NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         return [JFFCoreLocationAsyncAdapter newCoreLocationAsyncAdapterWithAccuracy:accuracy];
