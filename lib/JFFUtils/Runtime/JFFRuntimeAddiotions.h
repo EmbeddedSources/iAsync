@@ -4,7 +4,9 @@
 #include <stdarg.h>
 #include <objc/objc.h>
 
-@class NSArray;
+@class
+NSArray,
+NSString;
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,6 +23,7 @@ extern "C" {
                                                  id *selfArgumentPtr,
                                                  void *returnValuePtr);
     
+    void jClass_implementProperty(Class cls, NSString *propertyName);
     
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

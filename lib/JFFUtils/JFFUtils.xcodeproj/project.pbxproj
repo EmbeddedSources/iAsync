@@ -95,6 +95,7 @@
 		4C98FBA116E0B38D00B6EFD8 /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FB9F16E0B38D00B6EFD8 /* NSString+HTML.h */; };
 		4C98FBA216E0B38D00B6EFD8 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FBA016E0B38D00B6EFD8 /* NSString+HTML.m */; };
 		4C98FBAC16E0B56D00B6EFD8 /* NSArray+Templates.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FBAB16E0B56D00B6EFD8 /* NSArray+Templates.hpp */; };
+		4CAB2A571730097A001EB552 /* JFFRuntimeAddiotionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAB2A561730097A001EB552 /* JFFRuntimeAddiotionsTest.m */; };
 		4CC643BE1717009B000BF15A /* NSObject+ObjectMethodHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC643BC1717009B000BF15A /* NSObject+ObjectMethodHook.h */; };
 		4CC643BF1717009B000BF15A /* NSObject+ObjectMethodHook.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC643BD1717009B000BF15A /* NSObject+ObjectMethodHook.mm */; };
 		4CC643C0171700BA000BF15A /* NSObject+ObjectMethodHook.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC643BD1717009B000BF15A /* NSObject+ObjectMethodHook.mm */; };
@@ -497,6 +498,8 @@
 		4C98FB9F16E0B38D00B6EFD8 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		4C98FBA016E0B38D00B6EFD8 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		4C98FBAB16E0B56D00B6EFD8 /* NSArray+Templates.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "NSArray+Templates.hpp"; sourceTree = "<group>"; };
+		4CAB2A551730097A001EB552 /* JFFRuntimeAddiotionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRuntimeAddiotionsTest.h; sourceTree = "<group>"; };
+		4CAB2A561730097A001EB552 /* JFFRuntimeAddiotionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRuntimeAddiotionsTest.m; sourceTree = "<group>"; };
 		4CC643BC1717009B000BF15A /* NSObject+ObjectMethodHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ObjectMethodHook.h"; sourceTree = "<group>"; };
 		4CC643BD1717009B000BF15A /* NSObject+ObjectMethodHook.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSObject+ObjectMethodHook.mm"; sourceTree = "<group>"; };
 		4CC6BBE617058CFF00BD49E8 /* UIWebView+UserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UserAgent.h"; sourceTree = "<group>"; };
@@ -841,6 +844,13 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
+		4CAB2A5417300931001EB552 /* Developing */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Developing;
+			sourceTree = "<group>";
+		};
 		4CC6BBE517058CDE00BD49E8 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1037,6 +1047,9 @@
 		CE444A211608609100DD85B0 /* JFFUtilsTest */ = {
 			isa = PBXGroup;
 			children = (
+				4CAB2A551730097A001EB552 /* JFFRuntimeAddiotionsTest.h */,
+				4CAB2A561730097A001EB552 /* JFFRuntimeAddiotionsTest.m */,
+				4CAB2A5417300931001EB552 /* Developing */,
 				CE57FBDA1611F8E900124D90 /* mock */,
 				CE444A221608609100DD85B0 /* Supporting Files */,
 				4C712E1717046A0300346F5E /* MethodObserverTest.h */,
@@ -1772,6 +1785,7 @@
 				4CF0FFE11706038300282900 /* JFFRuntimeAddiotions.m in Sources */,
 				4CC643C3171700CB000BF15A /* NSObject+ObjectMethodHook.mm in Sources */,
 				4C50BF59171D85B300251A16 /* JFFError.m in Sources */,
+				4CAB2A571730097A001EB552 /* JFFRuntimeAddiotionsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

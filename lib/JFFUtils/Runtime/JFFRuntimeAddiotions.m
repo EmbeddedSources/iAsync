@@ -132,3 +132,200 @@ void invokeMethosBlockWithArgsAndReturnValue(id targetObjectOrBlock,
     if (returnValuePtr != NULL)
         [invocation getReturnValue:returnValuePtr];
 }
+
+@interface JFFWeakGetterProxy : NSObject
+
+@property (weak, nonatomic) id targetObject;
+
+@end
+
+@implementation JFFWeakGetterProxy
+@end
+
+typedef enum {
+    MemoryManagementAssign,
+    MemoryManagementCopy,
+    MemoryManagementRetain,
+    MemoryManagementWeak
+} MemoryManagement;
+
+typedef id(^WeakGetterBlock)(id self_);
+
+inline static IMP getGetterImplementation(const MemoryManagement memoryManagement, SEL getter)
+{
+    if (memoryManagement == MemoryManagementWeak) {
+        
+        return imp_implementationWithBlock(^id(id self_) {
+            
+            JFFWeakGetterProxy *proxy = objc_getAssociatedObject(self_, getter);
+            
+            id result = proxy.targetObject;
+            
+            if (result)
+                return result;
+            
+            if (proxy)
+                objc_setAssociatedObject(self_, getter, nil, OBJC_ASSOCIATION_RETAIN);
+            
+            return nil;
+        });
+    }
+    
+    return imp_implementationWithBlock(^id(id self_) {
+        return objc_getAssociatedObject(self_, getter);
+    });
+}
+
+inline static IMP getSetterImplementation(const MemoryManagement memoryManagement,
+                                          SEL getter,
+                                          objc_AssociationPolicy associationPolicy)
+{
+    if (memoryManagement == MemoryManagementWeak) {
+        
+        return imp_implementationWithBlock(^(id self_, id object) {
+            
+            JFFWeakGetterProxy *proxy = objc_getAssociatedObject(self_, getter);
+            
+            if (!object) {
+                
+                if (proxy)
+                    objc_setAssociatedObject(self_, getter, nil, OBJC_ASSOCIATION_RETAIN);
+                return;
+            }
+            
+            if (!proxy) {
+                
+                proxy = [JFFWeakGetterProxy new];
+                objc_setAssociatedObject(self_, getter, proxy, OBJC_ASSOCIATION_RETAIN);
+            }
+            
+            proxy.targetObject = object;
+        });
+    }
+    
+    return imp_implementationWithBlock(^(id self_, id object) {
+        
+        objc_setAssociatedObject(self_, getter, object, associationPolicy);
+    });
+}
+
+//based on https://github.com/ebf/CTObjectiveCRuntimeAdditions/blob/master/CTObjectiveCRuntimeAdditions/CTObjectiveCRuntimeAdditions/CTObjectiveCRuntimeAdditions.m
+
+void jClass_implementProperty(Class cls, NSString *propertyName)
+{
+    NSCAssert(cls != Nil, @"class is required");
+    NSCAssert(propertyName != nil, @"propertyName is required");
+    
+    objc_property_t property = class_getProperty(cls, propertyName.UTF8String);
+    
+    unsigned int count = 0;
+    objc_property_attribute_t *attributes = property_copyAttributeList(property, &count);
+    
+    MemoryManagement memoryManagement = MemoryManagementAssign;
+    BOOL isNonatomic = NO;
+    
+    NSString *getterName = nil;
+    NSString *setterName = nil;
+    NSString *encoding   = nil;
+    
+    for (int i = 0; i < count; i++) {
+        objc_property_attribute_t attribute = attributes[i];
+        
+        switch (attribute.name[0]) {
+            case 'N':
+                isNonatomic = YES;
+                break;
+            case '&':
+                memoryManagement = MemoryManagementRetain;
+                break;
+            case 'C':
+                memoryManagement = MemoryManagementCopy;
+                break;
+            case 'G':
+                getterName = [[NSString alloc] initWithFormat:@"%s", attribute.value];
+                break;
+            case 'S':
+                setterName = [[NSString alloc] initWithFormat:@"%s", attribute.value];
+                break;
+            case 'T':
+                encoding = [[NSString alloc] initWithFormat:@"%s", attribute.value];
+                break;
+            case 'W':
+                memoryManagement = MemoryManagementWeak;
+                break;
+            default:
+                break;
+        }
+    }
+    
+    if (!getterName) {
+        getterName = propertyName;
+    }
+    
+    if (!setterName) {
+        NSString *firstLetter = [propertyName substringToIndex:1];
+        setterName = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[NSString stringWithFormat:@"set%@", firstLetter.uppercaseString]];
+        setterName = [setterName stringByAppendingString:@":"];
+    }
+    
+    NSCAssert([encoding characterAtIndex:0] != '{', @"structs are not supported");
+    NSCAssert([encoding characterAtIndex:0] != '(', @"unions are not supported");
+    
+    SEL getter = NSSelectorFromString(getterName);
+    SEL setter = NSSelectorFromString(setterName);
+    
+    if (encoding.UTF8String[0] == @encode(id)[0]) {
+        
+        IMP getterImplementation = getGetterImplementation(memoryManagement, getter);
+        
+        objc_AssociationPolicy associationPolicy = 0;
+        
+        if (memoryManagement == MemoryManagementCopy) {
+            associationPolicy = isNonatomic ? OBJC_ASSOCIATION_COPY_NONATOMIC : OBJC_ASSOCIATION_COPY;
+        } else {
+            associationPolicy = isNonatomic ? OBJC_ASSOCIATION_RETAIN_NONATOMIC : OBJC_ASSOCIATION_RETAIN;
+        }
+        
+        IMP setterImplementation = getSetterImplementation(memoryManagement, getter, associationPolicy);
+        
+        class_addMethod(cls, getter, getterImplementation, "@@:");
+        class_addMethod(cls, setter, setterImplementation, "v@:@");
+        
+        return;
+    }
+    
+    objc_AssociationPolicy associationPolicy = isNonatomic ? OBJC_ASSOCIATION_RETAIN_NONATOMIC : OBJC_ASSOCIATION_RETAIN;
+    
+#define CASE(type, selectorpart) if (encoding.UTF8String[0] == @encode(type)[0]) {\
+IMP getterImplementation = imp_implementationWithBlock(^type(id self) {\
+return [objc_getAssociatedObject(self, getter) selectorpart##Value];\
+});\
+\
+IMP setterImplementation = imp_implementationWithBlock(^(id self, type object) {\
+objc_setAssociatedObject(self, getter, @(object), associationPolicy);\
+});\
+\
+class_addMethod(cls, getter, getterImplementation, "@@:");\
+class_addMethod(cls, setter, setterImplementation, "v@:@");\
+\
+return;\
+}
+    
+    CASE(char, char);
+    CASE(unsigned char, unsignedChar);
+    CASE(short, short);
+    CASE(unsigned short, unsignedShort);
+    CASE(int, int);
+    CASE(unsigned int, unsignedInt);
+    CASE(long, long);
+    CASE(unsigned long, unsignedLong);
+    CASE(long long, longLong);
+    CASE(unsigned long long, unsignedLongLong);
+    CASE(float, float);
+    CASE(double, double);
+    CASE(BOOL, bool);
+    
+#undef CASE
+    
+    NSCAssert(NO, @"encoding %@ in not supported", encoding);
+}
