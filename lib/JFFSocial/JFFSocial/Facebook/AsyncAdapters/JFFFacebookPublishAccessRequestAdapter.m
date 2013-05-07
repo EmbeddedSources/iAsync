@@ -25,6 +25,19 @@
 {
     handler = [handler copy];
     
+    BOOL hasAllPermissions = [_permissions all:^BOOL(NSString *permission) {
+        
+        return [_session.permissions containsObject:permission];
+    }];
+    
+    if (hasAllPermissions) {
+        
+        [self handleLoginWithSession:_session
+                               error:nil
+                             handler:handler];
+        return;
+    }
+    
     FBSessionRequestPermissionResultHandler fbHandler = ^(FBSession *session, NSError *error) {
         
         NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;

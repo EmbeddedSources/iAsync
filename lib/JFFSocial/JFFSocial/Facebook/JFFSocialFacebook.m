@@ -7,6 +7,8 @@
 
 #import "JFFSocialFacebookUser+Parser.h"
 
+#import "JFFFacebookPublishAccessRequestAdapter.h"
+
 #import <FacebookSDK/FacebookSDK.h>
 
 @implementation JFFSocialFacebook
@@ -83,6 +85,19 @@
       @"methodName" : NSStringFromSelector(_cmd),
       };
     return [self asyncOperationMergeLoaders:loader withArgument:mergeObject];
+}
+
++ (JFFAsyncOperation)publishStreamAccessLoader
+{
+    JFFAsyncOperation authLoader = [self authFacebookSessionLoader];
+    
+    JFFAsyncOperationBinder binder = ^JFFAsyncOperation(FBSession *session) {
+        
+        NSArray *permissions = @[@"publish_stream"];
+        return jffFacebookPublishAccessRequest(session, permissions);
+    };
+    
+    return bindSequenceOfAsyncOperations(authLoader, binder, nil);
 }
 
 + (JFFAsyncOperation)authTokenLoader
@@ -203,6 +218,27 @@
     return bindSequenceOfAsyncOperations([self authFacebookSessionLoader],
                                          binder,
                                          nil);
+}
+
++ (JFFAsyncOperation)postPhoto:(UIImage *)photo
+                   withMessage:(NSString *)message
+                    postOnWall:(BOOL)postOnWall
+{
+    NSDictionary *parameters =
+    @{
+      @"message" : message?:@"",
+      @"image"   : UIImageJPEGRepresentation(photo, 1.)
+      };
+    
+    JFFAsyncOperation loader = [JFFSocialFacebook graphLoaderWithPath:@"me/photos"
+                                                           httpMethod:@"POST"
+                                                           parameters:parameters];
+    
+    JFFAsyncOperation getAccessLoader = postOnWall
+    ?[JFFSocialFacebook publishStreamAccessLoader]
+    :asyncOperationWithResult(@YES);
+    
+    return sequenceOfAsyncOperations(getAccessLoader, loader, nil);
 }
 
 @end

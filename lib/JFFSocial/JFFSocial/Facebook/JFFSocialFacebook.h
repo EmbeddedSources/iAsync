@@ -11,6 +11,8 @@
 + (JFFAsyncOperation)authTokenLoader;
 + (JFFAsyncOperation)authFacebookSessionLoader;
 
++ (JFFAsyncOperation)publishStreamAccessLoader;
+
 + (JFFAsyncOperation)userInfoLoader;
 
 + (JFFAsyncOperation)requestFacebookDialogWithParameters:(NSDictionary *)parameters
@@ -24,5 +26,9 @@
 + (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
                               httpMethod:(NSString *)HTTPMethod
                               parameters:(NSDictionary *)parameters;
+
++ (JFFAsyncOperation)postPhoto:(UIImage *)photo
+                   withMessage:(NSString *)message
+                    postOnWall:(BOOL)postOnWall;
 
 @end
