@@ -40,7 +40,7 @@ static void readStreamCallback(CFReadStreamRef stream,
                                CFStreamEventType event,
                                void* selfContext)
 {
-    __unsafe_unretained JFFURLConnection* weakSelf = (__bridge JFFURLConnection*)selfContext;
+    __unsafe_unretained JFFURLConnection *weakSelf = (__bridge JFFURLConnection*)selfContext;
     switch(event) {
             
         case kCFStreamEventNone:
@@ -53,12 +53,12 @@ static void readStreamCallback(CFReadStreamRef stream,
         }
         case kCFStreamEventHasBytesAvailable:
         {
-            [ weakSelf handleResponseForReadStream: stream ];
+            [weakSelf handleResponseForReadStream:stream];
 
             UInt8 buffer[ kJNMaxBufferSize ];
-            CFIndex bytesRead = CFReadStreamRead( stream, buffer, kJNMaxBufferSize );
-            if ( bytesRead > 0 )
-            {
+            CFIndex bytesRead = CFReadStreamRead(stream, buffer, kJNMaxBufferSize);
+            if ( bytesRead > 0 ) {
+                
                 [weakSelf handleData:buffer
                               length:bytesRead];
             }
@@ -93,7 +93,7 @@ static void readStreamCallback(CFReadStreamRef stream,
     CFReadStreamRef _readStream;
     id _cookiesStorage;
     BOOL _responseHandled;
-    JFFURLResponse* _urlResponse;
+    JFFURLResponse *_urlResponse;
 };
 
 - (void)dealloc
@@ -103,12 +103,12 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 - (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
-    self = [ super init ];
+    self = [super init];
     
     if (self) {
         
         _params = params;
-        _cookiesStorage = _params.cookiesStorage ?: [ NSHTTPCookieStorage sharedHTTPCookieStorage ];
+        _cookiesStorage = _params.cookiesStorage?:[NSHTTPCookieStorage sharedHTTPCookieStorage];
     }
     
     return self;
@@ -142,16 +142,16 @@ static void readStreamCallback(CFReadStreamRef stream,
 {
     CFStringRef method = (__bridge CFStringRef)(_params.httpMethod?:@"GET");
     if (!_params.httpMethod && data) {
-        method = (__bridge  CFStringRef)@"POST";
+        method = (__bridge CFStringRef)@"POST";
     }
     
     CFHTTPMessageRef httpRequest = CFHTTPMessageCreateRequest(NULL,
                                                                method,
                                                                (__bridge CFURLRef)_params.url,
                                                                kCFHTTPVersion1_1);
-
+    
     [self applyCookiesForHTTPRequest:httpRequest];
-
+    
     if (data) {
         
         CFHTTPMessageSetBody(httpRequest, (__bridge CFDataRef)data);
@@ -159,9 +159,9 @@ static void readStreamCallback(CFReadStreamRef stream,
     
     [headers enumerateKeysAndObjectsUsingBlock:^(id header, id headerValue, BOOL *stop) {
         
-        CFHTTPMessageSetHeaderFieldValue( httpRequest
-                                         , (__bridge CFStringRef)header
-                                         , (__bridge CFStringRef)headerValue );
+        CFHTTPMessageSetHeaderFieldValue(httpRequest,
+                                         (__bridge CFStringRef)header,
+                                         (__bridge CFStringRef)headerValue);
     }];
     
     [self closeReadStream];
@@ -170,7 +170,7 @@ static void readStreamCallback(CFReadStreamRef stream,
     //                                             CFReadStreamRef	requestBody )
     _readStream = CFReadStreamCreateForHTTPRequest(NULL, httpRequest);
     CFRelease(httpRequest);
-
+    
     //Prefer using keep-alive packages
     Boolean keepAliveSetResult = CFReadStreamSetProperty(_readStream,
                                                           kCFStreamPropertyHTTPAttemptPersistentConnection,
@@ -183,11 +183,11 @@ static void readStreamCallback(CFReadStreamRef stream,
     typedef void* (*retain)(void *info);
     typedef void (*release)(void *info);
     CFStreamClientContext streamContext_ = {
-        0
-        , (__bridge void*)(self)
-        , (retain)CFRetain
-        , (release)CFRelease
-        , NULL };
+        0,
+        (__bridge void*)(self),
+        (retain)CFRetain,
+        (release)CFRelease,
+        NULL};
     
     CFOptionFlags registered_events_ = kCFStreamEventHasBytesAvailable
         | kCFStreamEventErrorOccurred | kCFStreamEventEndEncountered;
@@ -245,122 +245,119 @@ static void readStreamCallback(CFReadStreamRef stream,
     NSData *decodedData = [decoder decodeData:rawNsData
                                         error:&decoderError];
     
-    if ( nil == decodedData )
-    {
-        [ self handleFinish: decoderError ];
-    }
-    else 
-    {
+    if (nil == decodedData) {
+        
+        [self handleFinish:decoderError];
+    } else {
+        
         self.didReceiveDataBlock(decodedData);
     }
 }
 
 - (void)handleFinish:(NSError *)error
 {
-    [ self closeReadStream ];
+    [self closeReadStream];
     
-    if ( self.didFinishLoadingBlock )
-    {
-        self.didFinishLoadingBlock( error );
+    if (self.didFinishLoadingBlock) {
+        
+        self.didFinishLoadingBlock(error);
     }
-    [ self clearCallbacks ];
+    [self clearCallbacks];
 }
 
--(void)acceptCookiesForHeaders:( NSDictionary* )headers_
+- (void)acceptCookiesForHeaders:(NSDictionary *)headers
 {
-    NSArray* cookies_ = [ NSHTTPCookie cookiesWithResponseHeaderFields: headers_
-                                                                forURL: _params.url ];
-
-    for ( NSHTTPCookie* cookie_ in cookies_ )
-    {
-        [ _cookiesStorage setCookie: cookie_ ];
+    NSArray *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:headers
+                                                              forURL:_params.url];
+    
+    for (NSHTTPCookie *cookie in cookies) {
+        
+        [_cookiesStorage setCookie:cookie];
     }
 }
 
--(void)handleResponseForReadStream:( CFReadStreamRef )stream_
+- (void)handleResponseForReadStream:(CFReadStreamRef)stream
 {
-    if ( _responseHandled )
-    {
+    if (_responseHandled) {
         return;
     }
-
-    NSDictionary* allHeadersDict_;
+    
+    NSDictionary* allHeadersDict;
     CFIndex statusCode;
-
+    
     {
-        CFHTTPMessageRef response_ = (CFHTTPMessageRef)CFReadStreamCopyProperty( stream_, kCFStreamPropertyHTTPResponseHeader );
-
-        if ( !response_ )
+        CFHTTPMessageRef response = (CFHTTPMessageRef)CFReadStreamCopyProperty(stream, kCFStreamPropertyHTTPResponseHeader);
+        
+        if (!response)
             return;
-
-        allHeadersDict_ = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields( response_ );
-        statusCode = CFHTTPMessageGetResponseStatusCode( response_ );
-
-        CFRelease(response_);
+        
+        allHeadersDict = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields( response );
+        statusCode = CFHTTPMessageGetResponseStatusCode( response );
+        
+        CFRelease(response);
     }
-
-    [ self acceptCookiesForHeaders: allHeadersDict_ ];
-
+    
+    [self acceptCookiesForHeaders:allHeadersDict];
+    
     //JTODO test redirects (cyclic for example)
     if ([JHttpFlagChecker isRedirectFlag:statusCode]) {
         NSDebugLog( @"JConnection - creating URL..." );
         NSDebugLog( @"%@", _params.url );
-        NSString* location_ = allHeadersDict_[ @"Location" ];
-
+        NSString *location = allHeadersDict[@"Location"];
+        
 #ifdef USE_DD_URL_BUILDER
-        if ( ![ NSUrlLocationValidator isValidLocation: location_ ] )
-        {
-            NSLog( @"[!!!WARNING!!!] JConnection : path for URL is invalid. Ignoring..." );
-            location_ = @"/";
+        if (![ NSUrlLocationValidator isValidLocation:location]) {
+            
+            NSLog(@"[!!!WARNING!!!] JConnection : path for URL is invalid. Ignoring...");
+            location = @"/";
         }
         
-        DDURLBuilder* urlBuilder_ = [ DDURLBuilder URLBuilderWithURL: self->_params.url ];
-        urlBuilder_.shouldSkipPathPercentEncoding = YES;
-        urlBuilder_.path = location_;
+        DDURLBuilder *urlBuilder = [DDURLBuilder URLBuilderWithURL:_params.url];
+        urlBuilder.shouldSkipPathPercentEncoding = YES;
+        urlBuilder.path = location;
         
-        self->_params.url = [ urlBuilder_ URL ];
+        _params.url = [urlBuilder URL];
         
         // To avoid HTTP 500
-        self->_params.httpMethod = @"GET";
-        self->_params.httpBody = nil;
+        _params.httpMethod = @"GET";
+        _params.httpBody = nil;
 #else
-        if ( [ location_ hasPrefix: @"/" ] )
-        {
-            _params.url = [ _params.url URLWithLocation: location_ ];
+        if ([location hasPrefix:@"/"]) {
+            
+            _params.url = [_params.url URLWithLocation:location];
+        } else {
+            
+            _params.url = [location toURL];
         }
-        else
-        {
-            _params.url = [location_ toURL];
-        }
-
-        if ( !_params.url )
-            _params.url = [ _params.url URLWithLocation: @"/" ];
-
+        
+        if (!_params.url)
+            _params.url = [_params.url URLWithLocation:@"/"];
+        
         _params.httpMethod = @"GET";
         _params.httpBody = nil;
 #endif
-
-        NSDebugLog( @"%@", _params.url );
-        NSDebugLog( @"Done." );
-
-        [ self start ];
+        
+        NSDebugLog(@"%@", _params.url);
+        NSDebugLog(@"Done.");
+        
+        [self start];
     }
     else
     {
         _responseHandled = YES;
 
-        if ( self.didReceiveResponseBlock )
-        {
-            JFFURLResponse* urlResponse_ = [JFFURLResponse new];
+        if (self.didReceiveResponseBlock) {
             
-            urlResponse_.statusCode      = statusCode;
-            urlResponse_.allHeaderFields = allHeadersDict_;
-            urlResponse_.url             = _params.url;
+            JFFURLResponse *urlResponse = [JFFURLResponse new];
             
-            self.didReceiveResponseBlock( urlResponse_ );
+            urlResponse.statusCode      = statusCode;
+            urlResponse.allHeaderFields = allHeadersDict;
+            urlResponse.url             = _params.url;
+            
+            self.didReceiveResponseBlock(urlResponse);
             self.didReceiveResponseBlock = nil;
             
-            _urlResponse = urlResponse_;
+            _urlResponse = urlResponse;
         }
     }
 }

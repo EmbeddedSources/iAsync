@@ -6,33 +6,34 @@
 JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedDataLoader )
 {
     chunkedDataLoader = [chunkedDataLoader copy];
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback
-                                    , JFFCancelAsyncOperationHandler cancelCallback
-                                    , JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         __block NSString *filePath;
         __block NSFileHandle *handle;
         
         __block void (^closeFile)() = ^{
-            [ handle closeFile ];
+            [handle closeFile];
             handle = nil;
         };
         
         __block void (^closeAndRemoveFile)() = ^{
             closeFile();
 
-            if ( filePath )
-                [ [ NSFileManager defaultManager ] removeItemAtPath: filePath
-                                                              error: nil ];
+            if (filePath)
+                [[NSFileManager defaultManager] removeItemAtPath:filePath
+                                                           error:nil];
         };
         
         progressCallback = [progressCallback copy];
-        JFFAsyncOperationProgressHandler progressWrapperCallback = ^(JFFNetworkResponseDataCallback* progressInfo) {
+        JFFAsyncOperationProgressHandler progressWrapperCallback = ^(JFFNetworkResponseDataCallback *progressInfo) {
             if ( !handle ) {
                 filePath = [NSString createUuid];
                 filePath = [NSString cachesPathByAppendingPathComponent:filePath];
-                [ [ NSFileManager defaultManager ] createFileAtPath:filePath
-                                                           contents:nil
-                                                         attributes:nil ];
+                [[NSFileManager defaultManager] createFileAtPath:filePath
+                                                        contents:nil
+                                                      attributes:nil];
                 handle = [NSFileHandle fileHandleForWritingAtPath:filePath];
             }
 
@@ -60,7 +61,7 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
             }
             
             if (doneCallback) {
-                if ( result == nil && error == nil ) {
+                if (result == nil && error == nil) {
                     error = [JFFRestKitEmptyFileResponseError new];
                 }
                 doneCallback(result, error);

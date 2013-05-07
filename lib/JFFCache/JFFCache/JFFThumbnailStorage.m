@@ -167,9 +167,9 @@ static JFFThumbnailStorage *glStorageInstance = nil;
 {
     return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
         
-        NSData *imageData = [NSData dataWithContentsOfURL:url
-                                                  options:NSDataReadingUncached
-                                                    error:outError];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:url
+                                                          options:NSDataReadingUncached
+                                                            error:outError];
         return imageData;
     });
 }

@@ -5,7 +5,7 @@
 
 #import <JFFAsyncOperations/JFFAsyncOperations.h>
 
-@interface JFFAsyncRequestAccessToContactsLoader : NSObject < JFFAsyncOperationInterface >
+@interface JFFAsyncRequestAccessToContactsLoader : NSObject <JFFAsyncOperationInterface>
 @end
 
 @implementation JFFAsyncRequestAccessToContactsLoader
@@ -15,7 +15,7 @@
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     NSParameterAssert(handler);
-    handler = [handler  copy];
+    handler = [handler copy];
     
     JFFAddressBookSuccessCallback onSuccess = ^(JFFAddressBook *book) {
         
@@ -23,10 +23,8 @@
     };
     
     JFFAddressBookErrorCallback onFailure = ^(ABAuthorizationStatus status, NSError *error) {
-        if (handler) {
-            
-            handler(nil, error);
-        }
+        
+        handler(nil, error);
     };
     
     [JFFAddressBookFactory asyncAddressBookWithSuccessBlock:onSuccess
