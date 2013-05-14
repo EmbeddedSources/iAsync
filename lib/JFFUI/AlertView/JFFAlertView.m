@@ -180,19 +180,17 @@
 otherButtonTitlesArray:(NSArray *)otherButtonTitles
 {
     self = [super init];
-    if (nil == self)
-    {
+    if (nil == self) {
         return nil;
     }
     
     _alertView = [[UIAlertView alloc] initWithTitle:title
-                                                  message:message
-                                                 delegate:self
-                                        cancelButtonTitle:cancelButtonTitle
-                                        otherButtonTitles:nil];
-
-    if (nil == _alertView)
-    {
+                                            message:message
+                                           delegate:self
+                                  cancelButtonTitle:cancelButtonTitle
+                                  otherButtonTitles:nil];
+    
+    if (nil == _alertView) {
         return nil;
     }
     

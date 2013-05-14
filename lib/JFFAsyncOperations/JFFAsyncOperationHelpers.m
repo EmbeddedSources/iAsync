@@ -79,7 +79,7 @@ JFFAsyncOperation asyncOperationWithCancelFlag(BOOL canceled)
 
 JFFAsyncOperation asyncOperationWithSyncOperationInCurrentQueue(JFFSyncOperation block)
 {
-    assert(block);
+    assert(block && "block is undefined");
     block = [block copy];
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,

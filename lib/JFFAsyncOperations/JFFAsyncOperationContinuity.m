@@ -11,7 +11,7 @@ typedef JFFAsyncOperation (*MergeTwoLoadersPtr)( JFFAsyncOperation, JFFAsyncOper
 
 static JFFAsyncOperationBinder MergeBinders(MergeTwoBindersPtr merger, NSArray *blocks)
 {
-    assert([blocks lastObject]);// should not be empty
+    assert([blocks lastObject] && "blocks array should not be empty");
     
     JFFAsyncOperationBinder firstBinder = blocks[0];
     
@@ -30,7 +30,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
 JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstBinder,
                                                   JFFAsyncOperationBinder secondBinder)
 {
-    assert(firstBinder); // should not be nil;
+    assert(firstBinder && "firstBinder should not be nil");
     
     firstBinder  = [firstBinder  copy];
     secondBinder = [secondBinder copy];
@@ -40,7 +40,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
     
     return ^JFFAsyncOperation(id bindResult) {
         JFFAsyncOperation firstLoader = firstBinder(bindResult);
-        assert(firstLoader);//expected loader
+        assert(firstLoader && "firstLoader should not be nil");
         return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                         JFFCancelAsyncOperationHandler cancelCallback,
                                         JFFDidFinishAsyncOperationHandler doneCallback) {

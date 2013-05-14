@@ -4,10 +4,10 @@
 
 void enumerateAllClassesWithBlock(void(^block)(Class))
 {
-    assert(block);
+    assert(block && "block is undefined");
     
     int numClasses = objc_getClassList(NULL, 0);
-    Class classes[sizeof(Class) * numClasses];
+    Class classes[numClasses];
     
     numClasses = objc_getClassList(classes, numClasses);
     
