@@ -2,6 +2,6 @@
 
 @interface UIImage (ImageWithColor)
 
-+ (UIImage *)mewImageWithColor:(UIColor *)color andSize:(CGSize)size;
++ (UIImage *)newImageWithColor:(UIColor *)color andSize:(CGSize)size;
 
 @end
