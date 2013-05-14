@@ -7,29 +7,27 @@
 + (id)newSocialFacebookUserWithJsonObject:(NSDictionary *)jsonObject
                                     error:(NSError **)outError
 {
-    id jsonPattern =
-    @{
-      @"id"     : [NSString class],
-      @"name"   : [NSString class],
-      @"gender" : [NSString class],
-      jOptionalKey(@"bio") : [NSString class],
-      };
-    
-    if (![JFFJsonObjectValidator validateJsonObject:jsonObject
-                                    withJsonPattern:jsonPattern
-                                              error:outError]) {
-        
-        return nil;
-    }
-    
     JFFSocialFacebookUser *result = [self new];
     
     if (result) {
         
         result.facebookID = jsonObject[@"id"    ];
-        result.name       = jsonObject[@"name"  ];
-        result.gender     = jsonObject[@"gender"];
+        result.email      = jsonObject[@"email" ]?:@"";
+        result.name       = jsonObject[@"name"  ]?:@"";
+        result.gender     = jsonObject[@"gender"]?:@"";
         result.biography  = jsonObject[@"bio"   ]?:@"";
+        
+        NSString *birthdayStr = jsonObject[@"birthday"];
+        if (birthdayStr) {
+            
+            NSDateFormatter *formatter = [NSDateFormatter new];
+            
+            formatter.dateFormat = @"MM/dd/yyyy";
+            formatter.locale   = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+            formatter.timeZone = [[NSTimeZone alloc] initWithName:@"GMT"];
+            
+            result.birthday = [formatter dateFromString:birthdayStr];
+        }
     }
     
     return result;

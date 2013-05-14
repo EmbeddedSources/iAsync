@@ -13,9 +13,11 @@
     JFFSocialFacebookUser *copy = [[[self class] allocWithZone:zone] init];
     
     if (copy) {
-        copy->_facebookID     = [_facebookID     copyWithZone:zone];
-        copy->_name           = [_name           copyWithZone:zone];
-        copy->_gender         = [_gender         copyWithZone:zone];
+        copy->_facebookID = [_facebookID copyWithZone:zone];
+        copy->_email      = [_email      copyWithZone:zone];
+        copy->_name       = [_name       copyWithZone:zone];
+        copy->_gender     = [_gender     copyWithZone:zone];
+        copy->_birthday   = [_birthday   copyWithZone:zone];
         copy->_biography  = [_biography  copyWithZone:zone];
     }
     
@@ -32,8 +34,10 @@
     
     return
        [NSObject object:_facebookID isEqualTo:object->_facebookID]
+    && [NSObject object:_email      isEqualTo:object->_email     ]
     && [NSObject object:_name       isEqualTo:object->_name      ]
     && [NSObject object:_gender     isEqualTo:object->_gender    ]
+    && [NSObject object:_birthday   isEqualTo:object->_birthday  ]
     && [NSObject object:_biography  isEqualTo:object->_biography ]
     ;
 }
@@ -42,8 +46,10 @@
 {
     return
       [_facebookID hash]
+    + [_email      hash]
     + [_name       hash]
     + [_gender     hash]
+    + [_birthday   hash]
     + [_biography  hash]
     ;
 }

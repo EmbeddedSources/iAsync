@@ -173,7 +173,7 @@
 + (JFFAsyncOperation)userInfoLoader
 {
     static NSArray *fields;
-    fields = fields?:@[@"id", @"name", @"gender", @"picture", @"bio"];
+    fields = fields?:@[@"id", @"email", @"name", @"gender", @"birthday", @"picture", @"bio"];
     
     return [self userInfoLoaderWithFields:fields];
 }
