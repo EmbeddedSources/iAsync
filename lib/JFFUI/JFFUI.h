@@ -1,8 +1,3 @@
-#import <JFFUI/AlertView/JFFAlertButton.h>
-#import <JFFUI/AlertView/JFFAlertView.h>
-#import <JFFUI/AlertView/JFFActionSheet.h>
-#import <JFFUI/AlertView/NSError+Alert.h>
-
 #import <JFFUI/Extensions/UINib+FirstObject.h>
 #import <JFFUI/Extensions/UIApplication+OpenApplicationAsyncOp.h>
 
@@ -22,6 +17,16 @@
 
 #import <JFFUI/Preview/NSURL+QLPreviewControllerDataSource.h>
 
+#import <JFFUI/Errors/JFFOpenApplicationError.h>
+
+#import <JFFUI/JFFDialogProtocol.h>
+
+//Alert View
+#import <JFFUI/AlertView/JFFAlertButton.h>
+#import <JFFUI/AlertView/JFFAlertView.h>
+#import <JFFUI/AlertView/JFFActionSheet.h>
+#import <JFFUI/AlertView/NSError+Alert.h>
+
 //Stripe views
 #import <JFFUI/StripeView/JFFStripeView.h>
 #import <JFFUI/StripeView/JFFStripeViewDelegate.h>
@@ -29,6 +34,6 @@
 #import <JFFUI/StripeView/JFFPageSlider.h>
 #import <JFFUI/StripeView/JFFPageSliderDelegate.h>
 
-#import <JFFUI/Errors/JFFOpenApplicationError.h>
-
-#import <JFFUI/JFFDialogProtocol.h>
+//Grid View
+#import <JFFUI/GridView/JFFGridView.h>
+#import <JFFUI/GridView/JFFGridViewDelegate.h>
