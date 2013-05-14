@@ -96,6 +96,8 @@
 		4C98FBA216E0B38D00B6EFD8 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FBA016E0B38D00B6EFD8 /* NSString+HTML.m */; };
 		4C98FBAC16E0B56D00B6EFD8 /* NSArray+Templates.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FBAB16E0B56D00B6EFD8 /* NSArray+Templates.hpp */; };
 		4CAB2A571730097A001EB552 /* JFFRuntimeAddiotionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAB2A561730097A001EB552 /* JFFRuntimeAddiotionsTest.m */; };
+		4CBA462F173A3D52006AE67D /* UIImage+ImageWithColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBA462D173A3D52006AE67D /* UIImage+ImageWithColor.h */; };
+		4CBA4630173A3D52006AE67D /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBA462E173A3D52006AE67D /* UIImage+ImageWithColor.m */; };
 		4CC643BE1717009B000BF15A /* NSObject+ObjectMethodHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC643BC1717009B000BF15A /* NSObject+ObjectMethodHook.h */; };
 		4CC643BF1717009B000BF15A /* NSObject+ObjectMethodHook.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC643BD1717009B000BF15A /* NSObject+ObjectMethodHook.mm */; };
 		4CC643C0171700BA000BF15A /* NSObject+ObjectMethodHook.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC643BD1717009B000BF15A /* NSObject+ObjectMethodHook.mm */; };
@@ -500,6 +502,8 @@
 		4C98FBAB16E0B56D00B6EFD8 /* NSArray+Templates.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "NSArray+Templates.hpp"; sourceTree = "<group>"; };
 		4CAB2A551730097A001EB552 /* JFFRuntimeAddiotionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRuntimeAddiotionsTest.h; sourceTree = "<group>"; };
 		4CAB2A561730097A001EB552 /* JFFRuntimeAddiotionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRuntimeAddiotionsTest.m; sourceTree = "<group>"; };
+		4CBA462D173A3D52006AE67D /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
+		4CBA462E173A3D52006AE67D /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
 		4CC643BC1717009B000BF15A /* NSObject+ObjectMethodHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ObjectMethodHook.h"; sourceTree = "<group>"; };
 		4CC643BD1717009B000BF15A /* NSObject+ObjectMethodHook.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSObject+ObjectMethodHook.mm"; sourceTree = "<group>"; };
 		4CC6BBE617058CFF00BD49E8 /* UIWebView+UserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UserAgent.h"; sourceTree = "<group>"; };
@@ -1185,6 +1189,8 @@
 				CEEAAD14167A0E8D00DD8A16 /* UIImage+FixOrientation.m */,
 				CEC544871699D28A0019511A /* UIImage+WriteToTmpFile.h */,
 				CEC544881699D28A0019511A /* UIImage+WriteToTmpFile.m */,
+				4CBA462D173A3D52006AE67D /* UIImage+ImageWithColor.h */,
+				4CBA462E173A3D52006AE67D /* UIImage+ImageWithColor.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -1374,6 +1380,7 @@
 				4CC643BE1717009B000BF15A /* NSObject+ObjectMethodHook.h in Headers */,
 				4C6DFB13171849D800D86975 /* JFFError.h in Headers */,
 				4C6DFB1717184A0600D86975 /* JFFSilentError.h in Headers */,
+				4CBA462F173A3D52006AE67D /* UIImage+ImageWithColor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1865,6 +1872,7 @@
 				4CC643BF1717009B000BF15A /* NSObject+ObjectMethodHook.mm in Sources */,
 				4C6DFB14171849D800D86975 /* JFFError.m in Sources */,
 				4C6DFB1817184A0600D86975 /* JFFSilentError.m in Sources */,
+				4CBA4630173A3D52006AE67D /* UIImage+ImageWithColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
