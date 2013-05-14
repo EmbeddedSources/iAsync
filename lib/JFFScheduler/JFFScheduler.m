@@ -1,28 +1,29 @@
 #import "JFFScheduler.h"
 
 #import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
+#import <JFFUtils/Runtime/JFFRuntimeAddiotions.h>
 
-#include <objc/runtime.h>
+@interface NSThread (JFFScheduler_Internal)
 
-char jffSchedulerKey;
-
-@interface NSThread (JFFScheduler)
-
-@property (nonatomic, readonly) JFFScheduler *jffScheduler;
+@property (nonatomic) JFFScheduler *jffScheduler;
 
 @end
 
-@implementation NSThread (JFFScheduler)
+@implementation NSThread (JFFScheduler_Internal)
 
-- (JFFScheduler *)jffScheduler
+@dynamic jffScheduler;
+
++ (void)load
 {
-    id result = objc_getAssociatedObject(self, &jffSchedulerKey);
+    jClass_implementProperty(self, @"jffScheduler");
+}
+
+- (JFFScheduler *)lazyJffScheduler
+{
+    id result = self.jffScheduler;
     if (!result) {
         result = [JFFScheduler new];
-        objc_setAssociatedObject(self,
-                                 &jffSchedulerKey,
-                                 result,
-                                 OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        self.jffScheduler = result;
     }
     return result;
 }
@@ -63,7 +64,7 @@ char jffSchedulerKey;
 + (id)sharedByThreadScheduler
 {
     NSThread *thread = [NSThread currentThread];
-    return thread.jffScheduler;
+    return thread.lazyJffScheduler;
 }
 
 - (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)actionBlock

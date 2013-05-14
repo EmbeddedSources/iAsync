@@ -2,10 +2,6 @@
 
 #import "JFFPropertyPath.h"
 
-#include <objc/runtime.h>
-
-static char propertyDataPropertyKey;
-
 @interface NSObject (PropertyExtractorPrivate)
 
 @property (nonatomic) NSMutableDictionary *propertyDataByPropertyName;
@@ -13,6 +9,13 @@ static char propertyDataPropertyKey;
 @end
 
 @implementation NSObject (PropertyExtractor)
+
+@dynamic propertyDataByPropertyName;
+
++ (void)load
+{
+    jClass_implementProperty(self, @"propertyDataByPropertyName");
+}
 
 - (JFFObjectRelatedPropertyData *)propertyDataForPropertPath:(JFFPropertyPath *)propertyPath
 {
@@ -66,16 +69,6 @@ static char propertyDataPropertyKey;
     }
     
     self.propertyDataByPropertyName[propertyPath.name] = property;
-}
-
-- (NSMutableDictionary *)propertyDataByPropertyName
-{
-    return objc_getAssociatedObject(self, &propertyDataPropertyKey);
-}
-
-- (void)setPropertyDataByPropertyName:( NSMutableDictionary* )dictionary
-{
-    objc_setAssociatedObject(self, &propertyDataPropertyKey, dictionary, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

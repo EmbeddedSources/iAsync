@@ -2,24 +2,24 @@
 
 #import "JFFThumbnailStorage.h"
 
-#include <objc/runtime.h>
+@interface UIImageView (CachedAsyncImageLoaderInternal)
 
-static char imageURLKey;
+@property (nonatomic) NSURL *jffAsycImageURL;
+
+@end
+
+@implementation UIImageView (CachedAsyncImageLoaderInternal)
+
+@dynamic jffAsycImageURL;
+
++ (void)load
+{
+    jClass_implementProperty(self, @"jffAsycImageURL");
+}
+
+@end
 
 @implementation UIImageView (CachedAsyncImageLoader)
-
-- (NSURL *)jffAsycImageURL
-{
-    return objc_getAssociatedObject(self, &imageURLKey);
-}
-
-- (void)setJffAsycImageURL:(NSURL *)url
-{
-    objc_setAssociatedObject(self,
-                             &imageURLKey,
-                             url,
-                             OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
 
 - (void)jffSetImage:(UIImage *)image URL:(NSURL *)url
 {

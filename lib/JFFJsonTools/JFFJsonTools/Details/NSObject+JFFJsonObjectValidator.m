@@ -4,7 +4,6 @@
 #import "JFFOptionalObjectFieldKey.h"
 #import "JFFOptionalObjectFieldValue.h"
 
-#include <objc/runtime.h>
 #include <objc/message.h>
 
 static BOOL isClass(id object)
