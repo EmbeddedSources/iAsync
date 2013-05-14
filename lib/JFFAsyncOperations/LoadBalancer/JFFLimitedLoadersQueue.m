@@ -144,7 +144,7 @@
     return [self balancedLoaderWithLoader:loader barrier:YES];
 }
 
-- (void)didFinishedActiveLoader:(JFFBaseLoaderOwner *)activeLoader
+- (void)didFinishActiveLoader:(JFFBaseLoaderOwner *)activeLoader
 {
     [_activeLoaders removeObject:activeLoader];
     [self performPendingLoaders];
