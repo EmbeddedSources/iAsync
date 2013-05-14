@@ -28,15 +28,15 @@
     [_queueState->_activeLoaders addObject:pendingLoader];
     
 #ifdef DEBUG
-    NSUInteger pendingLoadersCount = [_queueState.pendingLoaders count];
-    NSUInteger activeLoadersCount  = [_queueState.activeLoaders  count];
+    NSUInteger pendingLoadersCount = [_queueState->_pendingLoaders count];
+    NSUInteger activeLoadersCount  = [_queueState->_activeLoaders  count];
 #endif //DEBUG
     
     [pendingLoader performLoader];
     
 #ifdef DEBUG
-    NSParameterAssert(pendingLoadersCount >= [_queueState.pendingLoaders count]);
-    NSParameterAssert(activeLoadersCount  >= [_queueState.activeLoaders  count]);
+    NSParameterAssert(pendingLoadersCount >= [_queueState->_pendingLoaders count]);
+    NSParameterAssert(activeLoadersCount  >= [_queueState->_activeLoaders  count]);
 #endif //DEBUG
 }
 

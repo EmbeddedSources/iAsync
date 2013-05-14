@@ -58,14 +58,23 @@
     return result;
 }
 
-- (void)performPendingLoaders
+- (JFFBaseLoaderOwner *)nextPendingLoader
 {
-    JFFBaseLoaderOwner *pendingLoader = ([_pendingLoaders count] > 0)
+    JFFBaseLoaderOwner *result = ([_pendingLoaders count] > 0)
     ?[_orderStrategy firstPendingLoader]
     :nil;
     
-    while ([self hasLoadersReadyToStartForPendingLoader:pendingLoader]) {
+    return result;
+}
+
+- (void)performPendingLoaders
+{
+    JFFBaseLoaderOwner *pendingLoader = [self nextPendingLoader];
+    
+    while (pendingLoader && [self hasLoadersReadyToStartForPendingLoader:pendingLoader]) {
+        
         [self->_orderStrategy executePendingLoader:pendingLoader];
+        pendingLoader = [self nextPendingLoader];
     }
 }
 

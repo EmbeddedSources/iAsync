@@ -5,7 +5,7 @@
 @interface JFFLimitedLoadersQueue (JFFBaseLoaderOwner)
 
 - (void)performPendingLoaders;
-- (void)didFinishedActiveLoader:(JFFBaseLoaderOwner *)activeLoader;
+- (void)didFinishActiveLoader:(JFFBaseLoaderOwner *)activeLoader;
 
 @end
 
@@ -47,7 +47,7 @@
     JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
         
         if (canceled) {
-            [_queue didFinishedActiveLoader:self];
+            [_queue didFinishActiveLoader:self];
         }
         
         if (_cancelCallback) {
@@ -61,7 +61,7 @@
     
     JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
         
-        [_queue didFinishedActiveLoader:self];
+        [_queue didFinishActiveLoader:self];
         
         if (_doneCallback)
             _doneCallback(result, error);
