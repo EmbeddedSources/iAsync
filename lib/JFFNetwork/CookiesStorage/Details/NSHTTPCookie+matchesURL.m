@@ -4,10 +4,10 @@
 
 @implementation NSHTTPCookie (matchesURL)
 
--(BOOL)matchesURL:( NSURL* )url_
+- (BOOL)matchesURL:(NSURL *)url
 {
-    return [ url_.host domainMatchesCookiesDomain: self.domain ]
-        && [ url_.path pathMatchesCookiesPath    : self.path   ];
+    return [url.host domainMatchesCookiesDomain:self.domain]
+        && [url.path pathMatchesCookiesPath    :self.path  ];
 }
 
 @end

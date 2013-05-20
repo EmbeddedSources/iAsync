@@ -2,6 +2,6 @@
 
 @interface NSHTTPCookie (matchesURL)
 
--(BOOL)matchesURL:( NSURL* )url_;
+- (BOOL)matchesURL:(NSURL *)url;
 
 @end

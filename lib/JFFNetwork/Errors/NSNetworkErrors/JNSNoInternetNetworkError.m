@@ -4,13 +4,17 @@
 
 + (BOOL)isMineNSNetworkError:(NSError *)error
 {
-    BOOL hasNSURLDomain = [[error domain] isEqualToString:NSURLErrorDomain];
-    return hasNSURLDomain && [error code] == kCFURLErrorNotConnectedToInternet;
+    return [error isNetworkError];
 }
 
 - (id)init
 {
     return [self initWithDescription:NSLocalizedString(@"JNETWORK_NO_INTERNET_ERROR", nil)];
+}
+
+- (void)writeErrorWithJFFLogger
+{
+    [self writeErrorToNSLog];
 }
 
 @end
