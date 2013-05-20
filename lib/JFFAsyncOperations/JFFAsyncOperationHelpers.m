@@ -284,6 +284,30 @@ JFFAsyncOperation asyncOperationWithChangedResult(JFFAsyncOperation loader,
     return bindSequenceOfAsyncOperations(loader, secondLoaderBinder, nil);
 }
 
+JFFAsyncOperation asyncOperationWithChangedProgress(JFFAsyncOperation loader,
+                                                    JFFChangedResultBuilder resultBuilder)
+{
+    if (!resultBuilder)
+        return loader;
+    
+    loader        = [loader        copy];
+    resultBuilder = [resultBuilder copy];
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+        
+        JFFAsyncOperationProgressHandler progressCallbackWrapper = ^(id info) {
+            
+            if (progressCallback) {
+                info = resultBuilder(info);
+                progressCallback(info);
+            }
+        };
+        
+        return loader(progressCallbackWrapper, cancelCallback, doneCallback);
+    };
+}
+
 JFFAsyncOperation asyncOperationResultAsProgress(JFFAsyncOperation loader)
 {
     loader = [loader copy];

@@ -47,6 +47,8 @@ extern "C" {
     typedef id (^JFFChangedResultBuilder)(id result);
     JFFAsyncOperation asyncOperationWithChangedResult(JFFAsyncOperation loader,
                                                       JFFChangedResultBuilder resultBuilder);
+    JFFAsyncOperation asyncOperationWithChangedProgress(JFFAsyncOperation loader,
+                                                        JFFChangedResultBuilder resultBuilder);
     
     JFFAsyncOperation asyncOperationResultAsProgress(JFFAsyncOperation loader);
     

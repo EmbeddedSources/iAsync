@@ -5,6 +5,8 @@
 
 #import "JFFAsyncOperationAdapter.h"
 
+static const char *const defaultQueueName = "com.jff.async_operations_library.general_queue";
+
 static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueue(JFFSyncOperationWithProgress progressLoadDataBlock,
                                                                                   const char *queueName,
                                                                                   BOOL barrier,
@@ -71,13 +73,13 @@ JFFAsyncOperation asyncOperationWithSyncOperationAndConfigurableQueue(JFFSyncOpe
 
 JFFAsyncOperation asyncOperationWithSyncOperation(JFFSyncOperation loadDataBlock)
 {
-    return asyncOperationWithSyncOperationAndQueue(loadDataBlock, "com.jff.async_operations_library.general_queue");
+    return asyncOperationWithSyncOperationAndQueue(loadDataBlock, defaultQueueName);
 }
 
 JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock(JFFSyncOperationWithProgress progressLoadDataBlock)
 {
     return asyncOperationWithSyncOperationWithProgressBlockAndQueue(progressLoadDataBlock,
-                                                                    nil,
+                                                                    defaultQueueName,
                                                                     NO,
                                                                     DISPATCH_QUEUE_CONCURRENT);
 }
