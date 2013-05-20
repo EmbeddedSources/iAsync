@@ -9,16 +9,16 @@
 
 -(void)setUp
 {
-    [ JFFBlockOperation enableInstancesCounting ];
+    [JFFBlockOperation enableInstancesCounting];
 }
 
 -(void)testParalelTask
 {
     const NSUInteger initialSchedulerInstancesCount = [JFFBlockOperation instancesCount];
-
+    
     __block BOOL theSameThread_ = NO;
     __block BOOL theProgressOk_ = NO;
-
+    
     @autoreleasepool
     {
         dispatch_queue_t currentQueue_ = dispatch_get_current_queue();
@@ -61,16 +61,16 @@
         loader_( progressCallback_, nil, doneCallback_ );
     }
 
-    [ self prepare ];
-    [ self waitForStatus: kGHUnitWaitStatusSuccess timeout: 1. ];
-
+    [self prepare];
+    [self waitForStatus: kGHUnitWaitStatusSuccess timeout:1.];
+    
     GHAssertTrue(initialSchedulerInstancesCount == [JFFBlockOperation instancesCount], @"OK");
-
+    
     GHAssertTrue( theSameThread_, @"OK" );
     GHAssertTrue( theProgressOk_, @"OK" );
 }
 
--(void)testCancelParalelTask
+- (void)testCancelParalelTask
 {
     const NSUInteger initialSchedulerInstancesCount_ = [ JFFBlockOperation instancesCount ];
 
@@ -80,14 +80,14 @@
     {
         dispatch_queue_t currentQueue_ = dispatch_get_current_queue();
 
-        JFFSyncOperationWithProgress progressLoadDataBlock_ = ^id( NSError** error_
+        JFFSyncOperationWithProgress progressLoadDataBlock = ^id( NSError** error_
                                                                   , JFFAsyncOperationProgressHandler progressCallback_ )
         {
-            progressCallback_( [ NSNull null ] );
+            progressCallback_([ NSNull null]);
             return [ NSNull null ];
         };
-        JFFAsyncOperation loader_ = asyncOperationWithSyncOperationWithProgressBlock( progressLoadDataBlock_ );
-
+        JFFAsyncOperation loader = asyncOperationWithSyncOperationWithProgressBlock(progressLoadDataBlock);
+        
         JFFCancelAsyncOperationHandler cancelCallback_ = ^( BOOL canceled_ )
         {
             theSameThread_ = ( currentQueue_ == dispatch_get_current_queue() );
@@ -114,18 +114,18 @@
 
         asyncOperationWithDelay( 0.1 )( nil, nil, ^( id result_, NSError* error_ )
         {
-            loader_( progressCallback_
+            loader( progressCallback_
                     , cancelCallback_
                     , doneCallback_ )( YES );
         } );
     }
-
-    [ self prepare ];
-    [ self waitForStatus: kGHUnitWaitStatusSuccess timeout: 1. ];
     
-    GHAssertTrue( initialSchedulerInstancesCount_ == [ JFFBlockOperation instancesCount ], @"OK" );
+    [self prepare];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.];
     
-    GHAssertTrue( theSameThread_, @"OK" );
+    GHAssertTrue(initialSchedulerInstancesCount_ == [JFFBlockOperation instancesCount], @"OK");
+    
+    GHAssertTrue(theSameThread_, @"OK");
 }
 
 @end
