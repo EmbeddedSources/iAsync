@@ -49,6 +49,9 @@
 
 #import <JFFUtils/Errors/JFFError.h>
 #import <JFFUtils/Errors/JFFSilentError.h>
+#import <JFFUtils/Errors/NSError+SetToPointer.h>
+#import <JFFUtils/Errors/NSError+IsNetworkError.h>
+#import <JFFUtils/Errors/NSError+WriteErrorToNSLog.h>
 
 #import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
@@ -58,10 +61,8 @@
 #import <JFFUtils/Categories/UIWebView+UserAgent.h>
 #import <JFFUtils/Categories/UIColor+ColorForHex.h>
 #import <JFFUtils/Categories/NSNumber+FSStorable.h>
-#import <JFFUtils/Categories/NSError+SetToPointer.h>
 #import <JFFUtils/Categories/UIDevice+PlatformName.h>
 #import <JFFUtils/Categories/NSDecimalNumber+Increment.h>
-#import <JFFUtils/Categories/NSError+WriteErrorToNSLog.h>
 #import <JFFUtils/Categories/NSDateFormatter+MultiThreading.h>
 
 #import <JFFUtils/Dictionary/NSDictionary+ValueWithType.h>

@@ -98,6 +98,12 @@
 		4CAB2A571730097A001EB552 /* JFFRuntimeAddiotionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAB2A561730097A001EB552 /* JFFRuntimeAddiotionsTest.m */; };
 		4CBA462F173A3D52006AE67D /* UIImage+ImageWithColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBA462D173A3D52006AE67D /* UIImage+ImageWithColor.h */; };
 		4CBA4630173A3D52006AE67D /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBA462E173A3D52006AE67D /* UIImage+ImageWithColor.m */; };
+		4CC01A921743836C003F1C88 /* NSError+WriteErrorToNSLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC01A901743836C003F1C88 /* NSError+WriteErrorToNSLog.h */; };
+		4CC01A931743836C003F1C88 /* NSError+WriteErrorToNSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC01A911743836C003F1C88 /* NSError+WriteErrorToNSLog.m */; };
+		4CC01A9617438408003F1C88 /* NSError+IsNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC01A9417438408003F1C88 /* NSError+IsNetworkError.h */; };
+		4CC01A9717438408003F1C88 /* NSError+IsNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC01A9517438408003F1C88 /* NSError+IsNetworkError.m */; };
+		4CC01A9A17438582003F1C88 /* NSError+SetToPointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC01A9817438582003F1C88 /* NSError+SetToPointer.h */; };
+		4CC01A9B17438582003F1C88 /* NSError+SetToPointer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC01A9917438582003F1C88 /* NSError+SetToPointer.m */; };
 		4CC643BE1717009B000BF15A /* NSObject+ObjectMethodHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC643BC1717009B000BF15A /* NSObject+ObjectMethodHook.h */; };
 		4CC643BF1717009B000BF15A /* NSObject+ObjectMethodHook.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC643BD1717009B000BF15A /* NSObject+ObjectMethodHook.mm */; };
 		4CC643C0171700BA000BF15A /* NSObject+ObjectMethodHook.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC643BD1717009B000BF15A /* NSObject+ObjectMethodHook.mm */; };
@@ -110,16 +116,12 @@
 		4CC6BBED17058D4200BD49E8 /* NSDecimalNumber+Increment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC6BBEB17058D4200BD49E8 /* NSDecimalNumber+Increment.m */; };
 		4CC6BBF017058D5F00BD49E8 /* UIColor+ColorForHex.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC6BBEE17058D5F00BD49E8 /* UIColor+ColorForHex.h */; };
 		4CC6BBF117058D5F00BD49E8 /* UIColor+ColorForHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC6BBEF17058D5F00BD49E8 /* UIColor+ColorForHex.m */; };
-		4CC6BBF417058D8900BD49E8 /* NSError+SetToPointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC6BBF217058D8800BD49E8 /* NSError+SetToPointer.h */; };
-		4CC6BBF517058D8900BD49E8 /* NSError+SetToPointer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC6BBF317058D8800BD49E8 /* NSError+SetToPointer.m */; };
 		4CC6BBF817058DB100BD49E8 /* NSData+ToString.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC6BBF617058DB100BD49E8 /* NSData+ToString.h */; };
 		4CC6BBF917058DB100BD49E8 /* NSData+ToString.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC6BBF717058DB100BD49E8 /* NSData+ToString.m */; };
 		4CC6BBFC17058DD000BD49E8 /* NSNumber+FSStorable.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC6BBFA17058DCF00BD49E8 /* NSNumber+FSStorable.h */; };
 		4CC6BBFD17058DD000BD49E8 /* NSNumber+FSStorable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC6BBFB17058DCF00BD49E8 /* NSNumber+FSStorable.m */; };
 		4CC6BC0017058DFF00BD49E8 /* NSDateFormatter+MultiThreading.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC6BBFE17058DFE00BD49E8 /* NSDateFormatter+MultiThreading.h */; };
 		4CC6BC0117058DFF00BD49E8 /* NSDateFormatter+MultiThreading.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC6BBFF17058DFE00BD49E8 /* NSDateFormatter+MultiThreading.m */; };
-		4CC6BC0417058E1C00BD49E8 /* NSError+WriteErrorToNSLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC6BC0217058E1B00BD49E8 /* NSError+WriteErrorToNSLog.h */; };
-		4CC6BC0517058E1C00BD49E8 /* NSError+WriteErrorToNSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC6BC0317058E1B00BD49E8 /* NSError+WriteErrorToNSLog.m */; };
 		4CC6BC0817058E3900BD49E8 /* UIDevice+PlatformName.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC6BC0617058E3700BD49E8 /* UIDevice+PlatformName.h */; };
 		4CC6BC0917058E3900BD49E8 /* UIDevice+PlatformName.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC6BC0717058E3800BD49E8 /* UIDevice+PlatformName.m */; };
 		4CEED6BB1701E236004CFCB3 /* JFFMutableAssignKeyDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEED6B51701E0F5004CFCB3 /* JFFMutableAssignKeyDictionaryTest.m */; };
@@ -504,6 +506,12 @@
 		4CAB2A561730097A001EB552 /* JFFRuntimeAddiotionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRuntimeAddiotionsTest.m; sourceTree = "<group>"; };
 		4CBA462D173A3D52006AE67D /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
 		4CBA462E173A3D52006AE67D /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
+		4CC01A901743836C003F1C88 /* NSError+WriteErrorToNSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+WriteErrorToNSLog.h"; sourceTree = "<group>"; };
+		4CC01A911743836C003F1C88 /* NSError+WriteErrorToNSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+WriteErrorToNSLog.m"; sourceTree = "<group>"; };
+		4CC01A9417438408003F1C88 /* NSError+IsNetworkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+IsNetworkError.h"; sourceTree = "<group>"; };
+		4CC01A9517438408003F1C88 /* NSError+IsNetworkError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+IsNetworkError.m"; sourceTree = "<group>"; };
+		4CC01A9817438582003F1C88 /* NSError+SetToPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+SetToPointer.h"; sourceTree = "<group>"; };
+		4CC01A9917438582003F1C88 /* NSError+SetToPointer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+SetToPointer.m"; sourceTree = "<group>"; };
 		4CC643BC1717009B000BF15A /* NSObject+ObjectMethodHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ObjectMethodHook.h"; sourceTree = "<group>"; };
 		4CC643BD1717009B000BF15A /* NSObject+ObjectMethodHook.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSObject+ObjectMethodHook.mm"; sourceTree = "<group>"; };
 		4CC6BBE617058CFF00BD49E8 /* UIWebView+UserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UserAgent.h"; sourceTree = "<group>"; };
@@ -512,16 +520,12 @@
 		4CC6BBEB17058D4200BD49E8 /* NSDecimalNumber+Increment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDecimalNumber+Increment.m"; sourceTree = "<group>"; };
 		4CC6BBEE17058D5F00BD49E8 /* UIColor+ColorForHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorForHex.h"; sourceTree = "<group>"; };
 		4CC6BBEF17058D5F00BD49E8 /* UIColor+ColorForHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorForHex.m"; sourceTree = "<group>"; };
-		4CC6BBF217058D8800BD49E8 /* NSError+SetToPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+SetToPointer.h"; sourceTree = "<group>"; };
-		4CC6BBF317058D8800BD49E8 /* NSError+SetToPointer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+SetToPointer.m"; sourceTree = "<group>"; };
 		4CC6BBF617058DB100BD49E8 /* NSData+ToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ToString.h"; sourceTree = "<group>"; };
 		4CC6BBF717058DB100BD49E8 /* NSData+ToString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ToString.m"; sourceTree = "<group>"; };
 		4CC6BBFA17058DCF00BD49E8 /* NSNumber+FSStorable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+FSStorable.h"; sourceTree = "<group>"; };
 		4CC6BBFB17058DCF00BD49E8 /* NSNumber+FSStorable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+FSStorable.m"; sourceTree = "<group>"; };
 		4CC6BBFE17058DFE00BD49E8 /* NSDateFormatter+MultiThreading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+MultiThreading.h"; sourceTree = "<group>"; };
 		4CC6BBFF17058DFE00BD49E8 /* NSDateFormatter+MultiThreading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+MultiThreading.m"; sourceTree = "<group>"; };
-		4CC6BC0217058E1B00BD49E8 /* NSError+WriteErrorToNSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+WriteErrorToNSLog.h"; sourceTree = "<group>"; };
-		4CC6BC0317058E1B00BD49E8 /* NSError+WriteErrorToNSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+WriteErrorToNSLog.m"; sourceTree = "<group>"; };
 		4CC6BC0617058E3700BD49E8 /* UIDevice+PlatformName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlatformName.h"; sourceTree = "<group>"; };
 		4CC6BC0717058E3800BD49E8 /* UIDevice+PlatformName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+PlatformName.m"; sourceTree = "<group>"; };
 		4CEED6B41701E0F5004CFCB3 /* JFFMutableAssignKeyDictionaryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFMutableAssignKeyDictionaryTest.h; sourceTree = "<group>"; };
@@ -844,6 +848,12 @@
 				4C6DFB12171849D800D86975 /* JFFError.m */,
 				4C6DFB1517184A0600D86975 /* JFFSilentError.h */,
 				4C6DFB1617184A0600D86975 /* JFFSilentError.m */,
+				4CC01A9817438582003F1C88 /* NSError+SetToPointer.h */,
+				4CC01A9917438582003F1C88 /* NSError+SetToPointer.m */,
+				4CC01A901743836C003F1C88 /* NSError+WriteErrorToNSLog.h */,
+				4CC01A911743836C003F1C88 /* NSError+WriteErrorToNSLog.m */,
+				4CC01A9417438408003F1C88 /* NSError+IsNetworkError.h */,
+				4CC01A9517438408003F1C88 /* NSError+IsNetworkError.m */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -864,16 +874,12 @@
 				4CC6BBEB17058D4200BD49E8 /* NSDecimalNumber+Increment.m */,
 				4CC6BBEE17058D5F00BD49E8 /* UIColor+ColorForHex.h */,
 				4CC6BBEF17058D5F00BD49E8 /* UIColor+ColorForHex.m */,
-				4CC6BBF217058D8800BD49E8 /* NSError+SetToPointer.h */,
-				4CC6BBF317058D8800BD49E8 /* NSError+SetToPointer.m */,
 				4CC6BBF617058DB100BD49E8 /* NSData+ToString.h */,
 				4CC6BBF717058DB100BD49E8 /* NSData+ToString.m */,
 				4CC6BBFA17058DCF00BD49E8 /* NSNumber+FSStorable.h */,
 				4CC6BBFB17058DCF00BD49E8 /* NSNumber+FSStorable.m */,
 				4CC6BBFE17058DFE00BD49E8 /* NSDateFormatter+MultiThreading.h */,
 				4CC6BBFF17058DFE00BD49E8 /* NSDateFormatter+MultiThreading.m */,
-				4CC6BC0217058E1B00BD49E8 /* NSError+WriteErrorToNSLog.h */,
-				4CC6BC0317058E1B00BD49E8 /* NSError+WriteErrorToNSLog.m */,
 				4CC6BC0617058E3700BD49E8 /* UIDevice+PlatformName.h */,
 				4CC6BC0717058E3800BD49E8 /* UIDevice+PlatformName.m */,
 			);
@@ -1370,17 +1376,18 @@
 				4CC6BBE817058CFF00BD49E8 /* UIWebView+UserAgent.h in Headers */,
 				4CC6BBEC17058D4200BD49E8 /* NSDecimalNumber+Increment.h in Headers */,
 				4CC6BBF017058D5F00BD49E8 /* UIColor+ColorForHex.h in Headers */,
-				4CC6BBF417058D8900BD49E8 /* NSError+SetToPointer.h in Headers */,
 				4CC6BBF817058DB100BD49E8 /* NSData+ToString.h in Headers */,
 				4CC6BBFC17058DD000BD49E8 /* NSNumber+FSStorable.h in Headers */,
 				4CC6BC0017058DFF00BD49E8 /* NSDateFormatter+MultiThreading.h in Headers */,
-				4CC6BC0417058E1C00BD49E8 /* NSError+WriteErrorToNSLog.h in Headers */,
 				4CC6BC0817058E3900BD49E8 /* UIDevice+PlatformName.h in Headers */,
 				4CF0FFDC170602CC00282900 /* JFFRuntimeAddiotions.h in Headers */,
 				4CC643BE1717009B000BF15A /* NSObject+ObjectMethodHook.h in Headers */,
 				4C6DFB13171849D800D86975 /* JFFError.h in Headers */,
 				4C6DFB1717184A0600D86975 /* JFFSilentError.h in Headers */,
 				4CBA462F173A3D52006AE67D /* UIImage+ImageWithColor.h in Headers */,
+				4CC01A921743836C003F1C88 /* NSError+WriteErrorToNSLog.h in Headers */,
+				4CC01A9617438408003F1C88 /* NSError+IsNetworkError.h in Headers */,
+				4CC01A9A17438582003F1C88 /* NSError+SetToPointer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1862,17 +1869,18 @@
 				4CC6BBE917058CFF00BD49E8 /* UIWebView+UserAgent.m in Sources */,
 				4CC6BBED17058D4200BD49E8 /* NSDecimalNumber+Increment.m in Sources */,
 				4CC6BBF117058D5F00BD49E8 /* UIColor+ColorForHex.m in Sources */,
-				4CC6BBF517058D8900BD49E8 /* NSError+SetToPointer.m in Sources */,
 				4CC6BBF917058DB100BD49E8 /* NSData+ToString.m in Sources */,
 				4CC6BBFD17058DD000BD49E8 /* NSNumber+FSStorable.m in Sources */,
 				4CC6BC0117058DFF00BD49E8 /* NSDateFormatter+MultiThreading.m in Sources */,
-				4CC6BC0517058E1C00BD49E8 /* NSError+WriteErrorToNSLog.m in Sources */,
 				4CC6BC0917058E3900BD49E8 /* UIDevice+PlatformName.m in Sources */,
 				4CF0FFDD170602CC00282900 /* JFFRuntimeAddiotions.m in Sources */,
 				4CC643BF1717009B000BF15A /* NSObject+ObjectMethodHook.mm in Sources */,
 				4C6DFB14171849D800D86975 /* JFFError.m in Sources */,
 				4C6DFB1817184A0600D86975 /* JFFSilentError.m in Sources */,
 				4CBA4630173A3D52006AE67D /* UIImage+ImageWithColor.m in Sources */,
+				4CC01A931743836C003F1C88 /* NSError+WriteErrorToNSLog.m in Sources */,
+				4CC01A9717438408003F1C88 /* NSError+IsNetworkError.m in Sources */,
+				4CC01A9B17438582003F1C88 /* NSError+SetToPointer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
