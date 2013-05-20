@@ -316,8 +316,8 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 {
     JFFAlertButton *alertButton = _alertButtons[buttonIndex];
     
-    if (alertButton)
-    {
+    if (alertButton) {
+        
         _ignoreDismiss = YES;
         alertButton.action();
         _ignoreDismiss = NO;
@@ -336,6 +336,9 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
     
     JFFAlertViewsContainer *container = [JFFAlertViewsContainer sharedAlertViewsContainer];
     [[container firstAlertView] forceShow];
+    
+    if (_didDismissHandler)
+        _didDismissHandler();
 }
 
 - (BOOL)isOnScreen

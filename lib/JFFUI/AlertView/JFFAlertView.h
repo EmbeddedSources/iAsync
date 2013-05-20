@@ -6,6 +6,7 @@
 
 @property (nonatomic) BOOL dismissBeforeEnterBackground;
 @property (nonatomic, copy) JFFSimpleBlock didPresentHandler;
+@property (nonatomic, copy) JFFSimpleBlock didDismissHandler;
 @property (nonatomic, readonly) BOOL isOnScreen;
 
 
