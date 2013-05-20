@@ -27,13 +27,13 @@ typedef enum
 - (void)reloadData;
 - (void)reloadDataWithRange:(NSRange)range;
 
--(void)scrollToIndex:( NSInteger )index_;
+- (void)scrollToIndex:(NSInteger)index;
 
 - (id)dequeueReusableElementWithIdentifier:(NSString *)identifier;
 
--(void)removeElementWithIndex:( NSUInteger )index_ animated:( BOOL )animated_;
--(NSMutableSet*)visibleIndexes;
--(UIView*)elementByIndex:( NSUInteger )index_;
--(CGRect)rectForElementWithIndex:( NSUInteger )index_;
+- (void)removeElementWithIndex:(NSUInteger)index animated:(BOOL)animated;
+- (NSMutableSet *)visibleIndexes;
+- (id)elementByIndex:(NSUInteger)index;
+- (CGRect)rectForElementWithIndex:(NSUInteger)index;
 
 @end
