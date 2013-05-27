@@ -2,6 +2,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *JFFNoImageDataURLString;
+
 @interface JFFThumbnailStorage : NSObject
 
 + (JFFThumbnailStorage *)sharedStorage;
@@ -12,6 +14,8 @@
 - (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url
                               scaledToSize:(CGSize)scaleSize
                                contentMode:(UIViewContentMode)contentMode;
+
+- (JFFAsyncOperation)tryThumbnailLoaderForUrls:(NSArray *)urls;
 
 - (void)resetCache;
 

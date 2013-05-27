@@ -12,6 +12,17 @@
 
 static NSString *const cacheQueueName = @"com.embedded_sources.jffcache.thumbnail_storage.cache";
 
+NSString *JFFNoImageDataURLString = @"nodata://jff.cache.com";
+
+@implementation NSURL (IsURLToIMageData)
+
+- (BOOL)isURLToIMageData
+{
+    return ![[self description] isEqualToString:JFFNoImageDataURLString];
+}
+
+@end
+
 @interface JFFCanNotCreateImageError : JFFError
 
 @end
@@ -269,9 +280,9 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
 //TODO add load balancer here
 - (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url
 {
-    if (url) {
-        assert([url isKindOfClass:[NSURL class]]);
-    } else {
+    NSParameterAssert(!url || [url isKindOfClass:[NSURL class]]);
+    
+    if (![url isURLToIMageData]) {
         return asyncOperationWithError([JFFCacheNoURLError new]);
     }
     
@@ -300,9 +311,9 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
                               scaledToSize:(CGSize)scaleSize
                                contentMode:(UIViewContentMode)contentMode
 {
-    if (url) {
-        assert([url isKindOfClass:[NSURL class]]);
-    } else {
+    NSParameterAssert(!url || [url isKindOfClass:[NSURL class]]);
+    
+    if (![url isURLToIMageData]) {
         return asyncOperationWithError([JFFCacheNoURLError new]);
     }
     
@@ -331,6 +342,21 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
                       cancelCallback,
                       doneCallback);
     };
+}
+
+- (JFFAsyncOperation)tryThumbnailLoaderForUrls:(NSArray *)urls
+{
+    urls = [urls toURLsSkippingNils];
+    
+    if ([urls count] == 0)
+        return asyncOperationWithError([JFFCacheNoURLError new]);
+    
+    NSArray *loaders = [urls map:^id(NSURL *url) {
+        
+        return [self thumbnailLoaderForUrl:url];
+    }];
+    
+    return trySequenceOfAsyncOperationsArray(loaders);
 }
 
 #pragma Memory warning
