@@ -5,6 +5,20 @@
 + (id)newDirectTweetMessageWithTwitterJSONObject:(NSDictionary *)jsonObject
                                            error:(NSError **)outError
 {
+    NSArray *errors = jsonObject[@"errors"];
+    
+    if ([errors count] > 0) {
+        
+        if (outError) {
+            
+            NSDictionary *firstError = errors[0];
+            *outError = [[JFFError alloc] initWithDescription:firstError[@"message"]
+                                                       domain:@"parse.message.tweet"
+                                                         code:[firstError[@"code"] integerValue]];
+        }
+        return nil;
+    }
+    
     id jsonPattern = @{
     @"text" : [NSString class],
     };
