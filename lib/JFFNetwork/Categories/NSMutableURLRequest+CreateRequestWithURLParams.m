@@ -23,8 +23,8 @@
     if (params.httpBody)
         [request setHTTPBody:params.httpBody];
     
-    [request setAllHTTPHeaderFields:params.headers       ];
-    [request setHTTPMethod         :httpMethod           ];
+    [request setAllHTTPHeaderFields:params.headers];
+    [request setHTTPMethod         :httpMethod    ];
     
     return request;
 }

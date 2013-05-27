@@ -13,6 +13,7 @@
 #import <JFFUtils/NSArray/NSArray+IsEmpty.h>
 #import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>
 #import <JFFUtils/NSArray/NSArray+RemoveDuplicates.h>
+#import <JFFUtils/NSArray/NSArray+ToURLsSkippingNils.h>
 #import <JFFUtils/NSArray/NSMutableArray+ChangeCount.h>
 #import <JFFUtils/NSArray/NSArray+NoThrowObjectAtIndex.h>
 

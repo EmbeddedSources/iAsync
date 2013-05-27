@@ -2,7 +2,7 @@
 
 @interface NSURL (Cookies)
 
--(void)logCookies;
--(void)removeCookies;
+- (void)logCookies;
+- (void)removeCookies;
 
 @end

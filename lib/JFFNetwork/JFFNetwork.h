@@ -30,9 +30,10 @@
 #import <JFFNetwork/XQueryComponents/NSURL+XQueryComponents.h>
 #import <JFFNetwork/XQueryComponents/NSDictionary+XQueryComponents.h>
 
-#import <JFFNetwork/Extensions/NSURL+Cookies.h>
-#import <JFFNetwork/Extensions/NSDictionary+JHTTPHeaders.h>
-#import <JFFNetwork/Extensions/NSData+DataForHTTPPost.h>
+#import <JFFNetwork/Categories/NSURL+Cookies.h>
+#import <JFFNetwork/Categories/NSDictionary+JHTTPHeaders.h>
+#import <JFFNetwork/Categories/NSData+DataForHTTPPost.h>
+#import <JFFNetwork/Categories/NSHTTPCookie+matchesURL.h>
 
 #import <JFFNetwork/Callbacks/JFFNetworkResponseDataCallback.h>
 #import <JFFNetwork/Callbacks/JFFNetworkUploadProgressCallback.h>

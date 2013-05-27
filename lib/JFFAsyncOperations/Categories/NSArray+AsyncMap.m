@@ -9,7 +9,7 @@
 {
     NSArray *asyncOperations = [self map:^id(id object) {
         return block(object);
-    } ];
+    }];
     return failOnFirstErrorGroupOfAsyncOperationsArray(asyncOperations);
 }
 

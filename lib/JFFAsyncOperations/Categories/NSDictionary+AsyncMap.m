@@ -28,7 +28,7 @@
         loader = asyncOperationWithFinishHookBlock(loader, finishCallbackHook);
         
         [asyncOperations addObject:loader];
-    } ];
+    }];
     
     JFFAsyncOperation loader = failOnFirstErrorGroupOfAsyncOperationsArray(asyncOperations);
     JFFChangedResultBuilder resultBuilder = ^id(id localResult) {
@@ -36,7 +36,7 @@
         return [finalResult copy];
     };
     loader = asyncOperationWithChangedResult(loader, resultBuilder);
-
+    
     return loader;
 }
 
