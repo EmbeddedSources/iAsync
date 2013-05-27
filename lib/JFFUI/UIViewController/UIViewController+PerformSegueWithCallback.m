@@ -1,7 +1,5 @@
 #import "UIViewController+PerformSegueWithCallback.h"
 
-static char performSegueCallbackKey;
-
 @interface UIViewControllerPrepareForSegueHook : NSObject
 @end
 
@@ -38,17 +36,24 @@ static char performSegueCallbackKey;
 
 @end
 
+@interface UIViewController (PerformSegueWithCallback_Properties)
+
+@property (copy, nonatomic) JFFPerformSegueCallback performSegueCallback;
+
+@end
+
+@implementation UIViewController (PerformSegueWithCallback_Properties)
+
+@dynamic performSegueCallback;
+
++ (void)load
+{
+    jClass_implementProperty(self, @"performSegueCallback");
+}
+
+@end
+
 @implementation UIViewController (PerformSegueWithCallback)
-
-- (JFFPerformSegueCallback)performSegueCallback
-{
-    return objc_getAssociatedObject(self, &performSegueCallbackKey);
-}
-
-- (void)setPerformSegueCallback:(JFFPerformSegueCallback)callback
-{
-    objc_setAssociatedObject(self, &performSegueCallbackKey, callback, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
 
 - (void)performSegueWithIdentifier:(NSString *)identifier
                             sender:(id)sender

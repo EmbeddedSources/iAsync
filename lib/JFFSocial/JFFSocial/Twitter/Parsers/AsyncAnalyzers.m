@@ -54,6 +54,7 @@ JFFAsyncOperationBinder asyncJSONObjectToDirectTweet()
 {
     JFFAsyncOperationBinder parser = ^JFFAsyncOperation(NSDictionary *jsonObject) {
         JFFSyncOperation loadDataBlock = ^id(NSError **error) {
+            
             id accounts =  [JFFDirectTweetMessage newDirectTweetMessageWithTwitterJSONObject:jsonObject
                                                                                        error:error];
             return accounts;

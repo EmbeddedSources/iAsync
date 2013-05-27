@@ -11,30 +11,26 @@
 		1B15CCB41535CAF4005F2B56 /* JFFNetworkAsyncOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B15CCB21535CAF4005F2B56 /* JFFNetworkAsyncOperation.m */; };
 		1B15CCB81535CB39005F2B56 /* JFFURLConnectionParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B15CCB61535CB39005F2B56 /* JFFURLConnectionParams.h */; };
 		1B15CCB91535CB39005F2B56 /* JFFURLConnectionParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B15CCB71535CB39005F2B56 /* JFFURLConnectionParams.m */; };
-		1B15CCBC1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B15CCBA1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.h */; };
-		1B15CCBD1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B15CCBB1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.m */; };
 		1B166C931546E5AD00475B6A /* JFFLocalCookiesStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B166C911546E5AD00475B6A /* JFFLocalCookiesStorage.h */; };
 		1B166C941546E5AD00475B6A /* JFFLocalCookiesStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B166C921546E5AD00475B6A /* JFFLocalCookiesStorage.m */; };
 		1B166C981546E65C00475B6A /* NSString+RFC_2965.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B166C961546E65C00475B6A /* NSString+RFC_2965.h */; };
 		1B166C991546E65C00475B6A /* NSString+RFC_2965.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B166C971546E65C00475B6A /* NSString+RFC_2965.m */; };
-		1BB02E411546A29600439B66 /* NSDictionary+JHTTPHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BB02E3F1546A29600439B66 /* NSDictionary+JHTTPHeaders.h */; };
-		1BB02E421546A29600439B66 /* NSDictionary+JHTTPHeaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB02E401546A29600439B66 /* NSDictionary+JHTTPHeaders.m */; };
-		1BE052FF1547DF5600270B58 /* NSHTTPCookie+matchesURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE052FD1547DF5600270B58 /* NSHTTPCookie+matchesURL.h */; };
-		1BE053001547DF5600270B58 /* NSHTTPCookie+matchesURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE052FE1547DF5600270B58 /* NSHTTPCookie+matchesURL.m */; };
-		374980A31602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */; };
-		374980A41602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */; };
-		374980A51602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */; };
-		374980A61602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */; };
-		374980A71602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */; };
-		374980A81602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */; };
-		374980A91602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */; };
-		374980AA1602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */; };
 		4C98FAC616E0ACC500B6EFD8 /* JStreamError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FAC416E0ACC500B6EFD8 /* JStreamError.h */; };
 		4C98FAC716E0ACC500B6EFD8 /* JStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FAC516E0ACC500B6EFD8 /* JStreamError.m */; };
 		4C98FACA16E0ACE400B6EFD8 /* JNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FAC816E0ACE400B6EFD8 /* JNetworkError.h */; };
 		4C98FACB16E0ACE400B6EFD8 /* JNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FAC916E0ACE400B6EFD8 /* JNetworkError.m */; };
 		4C98FACE16E0AE7500B6EFD8 /* JHttpError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FACC16E0AE7500B6EFD8 /* JHttpError.h */; };
 		4C98FACF16E0AE7500B6EFD8 /* JHttpError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FACD16E0AE7500B6EFD8 /* JHttpError.m */; };
+		4CA09900174A3BFB002BEA0F /* NSHTTPCookie+MatchesURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA098FE174A3BFB002BEA0F /* NSHTTPCookie+MatchesURL.h */; };
+		4CA09901174A3BFB002BEA0F /* NSHTTPCookie+MatchesURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA098FF174A3BFB002BEA0F /* NSHTTPCookie+MatchesURL.m */; };
+		4CA09904174A3C3F002BEA0F /* NSData+DataForHTTPPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA09902174A3C3F002BEA0F /* NSData+DataForHTTPPost.h */; };
+		4CA09905174A3C3F002BEA0F /* NSData+DataForHTTPPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA09903174A3C3F002BEA0F /* NSData+DataForHTTPPost.m */; };
+		4CA09908174A3C64002BEA0F /* NSURL+Cookies.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA09906174A3C63002BEA0F /* NSURL+Cookies.h */; };
+		4CA09909174A3C64002BEA0F /* NSURL+Cookies.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA09907174A3C64002BEA0F /* NSURL+Cookies.m */; };
+		4CA09918174A3E24002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA09916174A3E23002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.h */; };
+		4CA09919174A3E24002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA09917174A3E24002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.m */; };
+		4CA0991C174A3E28002BEA0F /* NSDictionary+JHTTPHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0991A174A3E27002BEA0F /* NSDictionary+JHTTPHeaders.h */; };
+		4CA0991D174A3E28002BEA0F /* NSDictionary+JHTTPHeaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0991B174A3E28002BEA0F /* NSDictionary+JHTTPHeaders.m */; };
 		4CA0B39316F0960300A20C25 /* JNSNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0B39116F0960300A20C25 /* JNSNetworkError.h */; };
 		4CA0B39416F0960300A20C25 /* JNSNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0B39216F0960300A20C25 /* JNSNetworkError.m */; };
 		4CA0B39716F0965700A20C25 /* JNSNoInternetNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0B39516F0965700A20C25 /* JNSNoInternetNetworkError.h */; };
@@ -81,7 +77,6 @@
 		5391038D14A88BCA007315A3 /* JNNsUrlConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF1514448BBA005D745F /* JNNsUrlConnection.m */; };
 		5391038E14A88BCA007315A3 /* JNAbstractConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF1914448D44005D745F /* JNAbstractConnection.m */; };
 		5391039014A88BCA007315A3 /* JNConnectionsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF9414449AF5005D745F /* JNConnectionsFactory.m */; };
-		5391039214A88BCA007315A3 /* NSURL+Cookies.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E074BD144EFBA000CB146F /* NSURL+Cookies.m */; };
 		5391039414A88BCA007315A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5AE6DE13F3E6C600EB6143 /* Foundation.framework */; };
 		5391039514A88BCA007315A3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5383421A141E6A3B00473CF2 /* libz.dylib */; };
 		5391039714A88BCA007315A3 /* JFFURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D5AE6F013F3E80B00EB6143 /* JFFURLConnection.h */; };
@@ -110,14 +105,11 @@
 		539103AE14A88BCA007315A3 /* JNNsUrlConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEF1414448BBA005D745F /* JNNsUrlConnection.h */; };
 		539103AF14A88BCA007315A3 /* JNAbstractConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEF1814448D44005D745F /* JNAbstractConnection.h */; };
 		539103B114A88BCA007315A3 /* JNConnectionsFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEF9314449AF5005D745F /* JNConnectionsFactory.h */; };
-		539103B314A88BCA007315A3 /* NSURL+Cookies.h in Headers */ = {isa = PBXBuildFile; fileRef = 53E074BC144EFBA000CB146F /* NSURL+Cookies.h */; };
 		53A33F26141F631500469DAA /* JNZipDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A33F24141F631500469DAA /* JNZipDecoder.h */; };
 		53A33F27141F631500469DAA /* JNZipDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A33F25141F631500469DAA /* JNZipDecoder.m */; };
 		53A33F34141F7C2C00469DAA /* JNGzipCustomErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A33F33141F7C2B00469DAA /* JNGzipCustomErrors.h */; };
 		53A33F37141F7E1D00469DAA /* JNGzipErrorsLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A33F35141F7E1D00469DAA /* JNGzipErrorsLogger.h */; };
 		53A33F38141F7E1D00469DAA /* JNGzipErrorsLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A33F36141F7E1D00469DAA /* JNGzipErrorsLogger.m */; };
-		53E074BE144EFBA000CB146F /* NSURL+Cookies.h in Headers */ = {isa = PBXBuildFile; fileRef = 53E074BC144EFBA000CB146F /* NSURL+Cookies.h */; };
-		53E074BF144EFBA000CB146F /* NSURL+Cookies.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E074BD144EFBA000CB146F /* NSURL+Cookies.m */; };
 		65802B24148BFC230040A93A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65802B23148BFC230040A93A /* Cocoa.framework */; };
 		65802B32148BFC2C0040A93A /* JFFUrlResponseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316F432141E151C00C3D9A9 /* JFFUrlResponseLogger.m */; };
 		65802B33148BFC2F0040A93A /* JNConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5310B9EF141F489200A3E2B1 /* JNConstants.h */; };
@@ -135,8 +127,6 @@
 		65802B40148BFC4B0040A93A /* JNNsUrlConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF1514448BBA005D745F /* JNNsUrlConnection.m */; };
 		65802B41148BFC4B0040A93A /* JFFNetworkBlocksFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD565FE13F3EC1100A4538D /* JFFNetworkBlocksFunctions.h */; };
 		65802B42148BFC4B0040A93A /* JFFNetworkBlocksFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD565FF13F3EC1100A4538D /* JFFNetworkBlocksFunctions.m */; };
-		65802B45148BFC5D0040A93A /* NSURL+Cookies.h in Headers */ = {isa = PBXBuildFile; fileRef = 53E074BC144EFBA000CB146F /* NSURL+Cookies.h */; };
-		65802B46148BFC5D0040A93A /* NSURL+Cookies.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E074BD144EFBA000CB146F /* NSURL+Cookies.m */; };
 		65802B47148BFC6E0040A93A /* JFFDownloadItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CB513F52FBA007268DF /* JFFDownloadItem.h */; };
 		65802B48148BFC6E0040A93A /* JFFDownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD71E9813F54AE7004C90A9 /* JFFDownloadItem.m */; };
 		65802B49148BFC6E0040A93A /* JFFDownloadItemDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CB913F52FE2007268DF /* JFFDownloadItemDelegate.h */; };
@@ -191,7 +181,6 @@
 		7E8F206414F949A000588C7D /* JFFTrafficCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD71E9113F5492C004C90A9 /* JFFTrafficCalculator.m */; };
 		7E8F206714F949A000588C7D /* NSMutableDictionary+DownloadingFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD71E9B13F55505004C90A9 /* NSMutableDictionary+DownloadingFileInfo.m */; };
 		7E8F206914F949A000588C7D /* JFFDownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD71E9813F54AE7004C90A9 /* JFFDownloadItem.m */; };
-		7E8F206C14F949A000588C7D /* NSURL+Cookies.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E074BD144EFBA000CB146F /* NSURL+Cookies.m */; };
 		7E8F207114F949A000588C7D /* JFFURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AE6F813F3E93000EB6143 /* JFFURLResponse.m */; };
 		7E8F207414F949A000588C7D /* JFFURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AE6F113F3E80B00EB6143 /* JFFURLConnection.m */; };
 		7E8F207614F949A000588C7D /* JNAbstractConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BEF1914448D44005D745F /* JNAbstractConnection.m */; };
@@ -208,7 +197,6 @@
 		7E8F208C14F949DD00588C7D /* JNGzipErrorsLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A33F35141F7E1D00469DAA /* JNGzipErrorsLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8F209914F949DD00588C7D /* JFFDownloadItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CB513F52FBA007268DF /* JFFDownloadItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8F209B14F949DD00588C7D /* JFFDownloadItemDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CB913F52FE2007268DF /* JFFDownloadItemDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E8F209C14F949DD00588C7D /* NSURL+Cookies.h in Headers */ = {isa = PBXBuildFile; fileRef = 53E074BC144EFBA000CB146F /* NSURL+Cookies.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8F20A014F949DD00588C7D /* JNUrlResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEEDA14448782005D745F /* JNUrlResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8F20A114F949DD00588C7D /* JFFURLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D5AE6F713F3E93000EB6143 /* JFFURLResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8F20A314F949DD00588C7D /* JNUrlConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 534BEED0144485A6005D745F /* JNUrlConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -275,24 +263,26 @@
 		1B15CCB21535CAF4005F2B56 /* JFFNetworkAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFNetworkAsyncOperation.m; sourceTree = "<group>"; };
 		1B15CCB61535CB39005F2B56 /* JFFURLConnectionParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFURLConnectionParams.h; sourceTree = "<group>"; };
 		1B15CCB71535CB39005F2B56 /* JFFURLConnectionParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFURLConnectionParams.m; sourceTree = "<group>"; };
-		1B15CCBA1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+CreateRequestWithURLParams.h"; sourceTree = "<group>"; };
-		1B15CCBB1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+CreateRequestWithURLParams.m"; sourceTree = "<group>"; };
 		1B166C911546E5AD00475B6A /* JFFLocalCookiesStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFLocalCookiesStorage.h; sourceTree = "<group>"; };
 		1B166C921546E5AD00475B6A /* JFFLocalCookiesStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFLocalCookiesStorage.m; sourceTree = "<group>"; };
 		1B166C961546E65C00475B6A /* NSString+RFC_2965.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RFC_2965.h"; sourceTree = "<group>"; };
 		1B166C971546E65C00475B6A /* NSString+RFC_2965.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RFC_2965.m"; sourceTree = "<group>"; };
-		1BB02E3F1546A29600439B66 /* NSDictionary+JHTTPHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JHTTPHeaders.h"; sourceTree = "<group>"; };
-		1BB02E401546A29600439B66 /* NSDictionary+JHTTPHeaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JHTTPHeaders.m"; sourceTree = "<group>"; };
-		1BE052FD1547DF5600270B58 /* NSHTTPCookie+matchesURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSHTTPCookie+matchesURL.h"; sourceTree = "<group>"; };
-		1BE052FE1547DF5600270B58 /* NSHTTPCookie+matchesURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSHTTPCookie+matchesURL.m"; sourceTree = "<group>"; };
-		374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DataForHTTPPost.h"; sourceTree = "<group>"; };
-		374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DataForHTTPPost.m"; sourceTree = "<group>"; };
 		4C98FAC416E0ACC500B6EFD8 /* JStreamError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JStreamError.h; sourceTree = "<group>"; };
 		4C98FAC516E0ACC500B6EFD8 /* JStreamError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JStreamError.m; sourceTree = "<group>"; };
 		4C98FAC816E0ACE400B6EFD8 /* JNetworkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNetworkError.h; sourceTree = "<group>"; };
 		4C98FAC916E0ACE400B6EFD8 /* JNetworkError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNetworkError.m; sourceTree = "<group>"; };
 		4C98FACC16E0AE7500B6EFD8 /* JHttpError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHttpError.h; sourceTree = "<group>"; };
 		4C98FACD16E0AE7500B6EFD8 /* JHttpError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHttpError.m; sourceTree = "<group>"; };
+		4CA098FE174A3BFB002BEA0F /* NSHTTPCookie+MatchesURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSHTTPCookie+MatchesURL.h"; sourceTree = "<group>"; };
+		4CA098FF174A3BFB002BEA0F /* NSHTTPCookie+MatchesURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSHTTPCookie+MatchesURL.m"; sourceTree = "<group>"; };
+		4CA09902174A3C3F002BEA0F /* NSData+DataForHTTPPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DataForHTTPPost.h"; sourceTree = "<group>"; };
+		4CA09903174A3C3F002BEA0F /* NSData+DataForHTTPPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DataForHTTPPost.m"; sourceTree = "<group>"; };
+		4CA09906174A3C63002BEA0F /* NSURL+Cookies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Cookies.h"; sourceTree = "<group>"; };
+		4CA09907174A3C64002BEA0F /* NSURL+Cookies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Cookies.m"; sourceTree = "<group>"; };
+		4CA09916174A3E23002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+CreateRequestWithURLParams.h"; sourceTree = "<group>"; };
+		4CA09917174A3E24002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+CreateRequestWithURLParams.m"; sourceTree = "<group>"; };
+		4CA0991A174A3E27002BEA0F /* NSDictionary+JHTTPHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JHTTPHeaders.h"; sourceTree = "<group>"; };
+		4CA0991B174A3E28002BEA0F /* NSDictionary+JHTTPHeaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JHTTPHeaders.m"; sourceTree = "<group>"; };
 		4CA0B39116F0960300A20C25 /* JNSNetworkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNSNetworkError.h; sourceTree = "<group>"; };
 		4CA0B39216F0960300A20C25 /* JNSNetworkError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNSNetworkError.m; sourceTree = "<group>"; };
 		4CA0B39516F0965700A20C25 /* JNSNoInternetNetworkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNSNoInternetNetworkError.h; sourceTree = "<group>"; };
@@ -328,8 +318,6 @@
 		53A33F33141F7C2B00469DAA /* JNGzipCustomErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNGzipCustomErrors.h; sourceTree = "<group>"; };
 		53A33F35141F7E1D00469DAA /* JNGzipErrorsLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNGzipErrorsLogger.h; sourceTree = "<group>"; };
 		53A33F36141F7E1D00469DAA /* JNGzipErrorsLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNGzipErrorsLogger.m; sourceTree = "<group>"; };
-		53E074BC144EFBA000CB146F /* NSURL+Cookies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Cookies.h"; sourceTree = "<group>"; };
-		53E074BD144EFBA000CB146F /* NSURL+Cookies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Cookies.m"; sourceTree = "<group>"; };
 		65802B22148BFC230040A93A /* libJFFNetworkMacOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFNetworkMacOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		65802B23148BFC230040A93A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		65802B26148BFC230040A93A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -434,8 +422,6 @@
 			children = (
 				1B166C961546E65C00475B6A /* NSString+RFC_2965.h */,
 				1B166C971546E65C00475B6A /* NSString+RFC_2965.m */,
-				1BE052FD1547DF5600270B58 /* NSHTTPCookie+matchesURL.h */,
-				1BE052FE1547DF5600270B58 /* NSHTTPCookie+matchesURL.m */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -452,6 +438,23 @@
 				4C98FACD16E0AE7500B6EFD8 /* JHttpError.m */,
 			);
 			path = Errors;
+			sourceTree = "<group>";
+		};
+		4CA098FD174A3BD0002BEA0F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4CA098FE174A3BFB002BEA0F /* NSHTTPCookie+MatchesURL.h */,
+				4CA098FF174A3BFB002BEA0F /* NSHTTPCookie+MatchesURL.m */,
+				4CA09902174A3C3F002BEA0F /* NSData+DataForHTTPPost.h */,
+				4CA09903174A3C3F002BEA0F /* NSData+DataForHTTPPost.m */,
+				4CA09906174A3C63002BEA0F /* NSURL+Cookies.h */,
+				4CA09916174A3E23002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.h */,
+				4CA09917174A3E24002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.m */,
+				4CA0991A174A3E27002BEA0F /* NSDictionary+JHTTPHeaders.h */,
+				4CA0991B174A3E28002BEA0F /* NSDictionary+JHTTPHeaders.m */,
+				4CA09907174A3C64002BEA0F /* NSURL+Cookies.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		4CA0B39016F095F600A20C25 /* NSNetworkErrors */ = {
@@ -514,21 +517,6 @@
 				53A33F36141F7E1D00469DAA /* JNGzipErrorsLogger.m */,
 			);
 			path = ContentEncodings;
-			sourceTree = "<group>";
-		};
-		53E074BB144EFB3500CB146F /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				374980A11602123E00AF0C29 /* NSData+DataForHTTPPost.h */,
-				374980A21602123E00AF0C29 /* NSData+DataForHTTPPost.m */,
-				53E074BC144EFBA000CB146F /* NSURL+Cookies.h */,
-				53E074BD144EFBA000CB146F /* NSURL+Cookies.m */,
-				1B15CCBA1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.h */,
-				1B15CCBB1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.m */,
-				1BB02E3F1546A29600439B66 /* NSDictionary+JHTTPHeaders.h */,
-				1BB02E401546A29600439B66 /* NSDictionary+JHTTPHeaders.m */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		65802B25148BFC230040A93A /* Other Frameworks */ = {
@@ -644,6 +632,7 @@
 		8D5AE6EF13F3E7EE00EB6143 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4CA098FD174A3BD0002BEA0F /* Categories */,
 				4CBBDBEF17173BE4004D670D /* Mock */,
 				4C98FAC316E0ACB300B6EFD8 /* Errors */,
 				CEF162DC16760E9E00B0B6E4 /* Callbacks */,
@@ -653,7 +642,6 @@
 				53834209141E684F00473CF2 /* ContentEncodings */,
 				534BEF1C14448DAD005D745F /* Detail */,
 				8D713CB413F52FBA007268DF /* DownloadManager */,
-				53E074BB144EFB3500CB146F /* Extensions */,
 				534BEEDA14448782005D745F /* JNUrlResponse.h */,
 				8D5AE6F713F3E93000EB6143 /* JFFURLResponse.h */,
 				8D5AE6F813F3E93000EB6143 /* JFFURLResponse.m */,
@@ -752,9 +740,7 @@
 				539103AE14A88BCA007315A3 /* JNNsUrlConnection.h in Headers */,
 				539103AF14A88BCA007315A3 /* JNAbstractConnection.h in Headers */,
 				539103B114A88BCA007315A3 /* JNConnectionsFactory.h in Headers */,
-				539103B314A88BCA007315A3 /* NSURL+Cookies.h in Headers */,
 				7E54F3BE15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
-				374980A51602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,7 +758,6 @@
 				65802B3D148BFC4B0040A93A /* JNAbstractConnection.h in Headers */,
 				65802B3F148BFC4B0040A93A /* JNNsUrlConnection.h in Headers */,
 				65802B41148BFC4B0040A93A /* JFFNetworkBlocksFunctions.h in Headers */,
-				65802B45148BFC5D0040A93A /* NSURL+Cookies.h in Headers */,
 				65802B47148BFC6E0040A93A /* JFFDownloadItem.h in Headers */,
 				65802B49148BFC6E0040A93A /* JFFDownloadItemDelegate.h in Headers */,
 				65802B4A148BFC790040A93A /* JFFFileManager.h in Headers */,
@@ -790,7 +775,6 @@
 				65802B61148BFC930040A93A /* JNConnectionsFactory.h in Headers */,
 				65802B63148BFCB20040A93A /* JNUrlResponse.h in Headers */,
 				7E54F3BD15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
-				374980A41602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,7 +792,6 @@
 				7E8F208C14F949DD00588C7D /* JNGzipErrorsLogger.h in Headers */,
 				7E8F209914F949DD00588C7D /* JFFDownloadItem.h in Headers */,
 				7E8F209B14F949DD00588C7D /* JFFDownloadItemDelegate.h in Headers */,
-				7E8F209C14F949DD00588C7D /* NSURL+Cookies.h in Headers */,
 				7E8F20A014F949DD00588C7D /* JNUrlResponse.h in Headers */,
 				7E8F20A114F949DD00588C7D /* JFFURLResponse.h in Headers */,
 				7E8F20A314F949DD00588C7D /* JNUrlConnection.h in Headers */,
@@ -821,7 +804,6 @@
 				7E8F20AF14F949DD00588C7D /* JNUrlConnectionCallbacks.h in Headers */,
 				7E8F20B014F949DD00588C7D /* JFFNetwork.h in Headers */,
 				7E54F3BF15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
-				374980A61602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,20 +837,15 @@
 				534BEF1614448BBA005D745F /* JNNsUrlConnection.h in Headers */,
 				534BEF1A14448D44005D745F /* JNAbstractConnection.h in Headers */,
 				534BEF9514449AF5005D745F /* JNConnectionsFactory.h in Headers */,
-				53E074BE144EFBA000CB146F /* NSURL+Cookies.h in Headers */,
 				1B15CCB31535CAF4005F2B56 /* JFFNetworkAsyncOperation.h in Headers */,
 				1B15CCB81535CB39005F2B56 /* JFFURLConnectionParams.h in Headers */,
-				1B15CCBC1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.h in Headers */,
 				65F47ACA1539A38000D8C865 /* NSString+XQueryComponents.h in Headers */,
 				65F47ACF1539A3BE00D8C865 /* NSURL+XQueryComponents.h in Headers */,
 				65F47AD31539A3FF00D8C865 /* NSDictionary+XQueryComponents.h in Headers */,
-				1BB02E411546A29600439B66 /* NSDictionary+JHTTPHeaders.h in Headers */,
 				1B166C931546E5AD00475B6A /* JFFLocalCookiesStorage.h in Headers */,
 				1B166C981546E65C00475B6A /* NSString+RFC_2965.h in Headers */,
-				1BE052FF1547DF5600270B58 /* NSHTTPCookie+matchesURL.h in Headers */,
 				CE29B5E215F5E821000A05B8 /* NSURL+URLWithLocation.h in Headers */,
 				7E54F3BC15FA25C6006F386A /* JHttpFlagChecker.h in Headers */,
-				374980A31602123E00AF0C29 /* NSData+DataForHTTPPost.h in Headers */,
 				CEF162DF16760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.h in Headers */,
 				CEF162E316760EF100B0B6E4 /* JFFNetworkResponseDataCallback.h in Headers */,
 				CEF162E716760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.h in Headers */,
@@ -880,6 +857,11 @@
 				4CBBDBE317173AF3004D670D /* NSUrlLocationValidator.h in Headers */,
 				4CBBDBF317173BE4004D670D /* JNConnectionMock.h in Headers */,
 				4CBBDBF517173BE4004D670D /* JNMock.h in Headers */,
+				4CA09900174A3BFB002BEA0F /* NSHTTPCookie+MatchesURL.h in Headers */,
+				4CA09904174A3C3F002BEA0F /* NSData+DataForHTTPPost.h in Headers */,
+				4CA09908174A3C64002BEA0F /* NSURL+Cookies.h in Headers */,
+				4CA09918174A3E24002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.h in Headers */,
+				4CA0991C174A3E28002BEA0F /* NSDictionary+JHTTPHeaders.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,10 +1069,8 @@
 				5391038D14A88BCA007315A3 /* JNNsUrlConnection.m in Sources */,
 				5391038E14A88BCA007315A3 /* JNAbstractConnection.m in Sources */,
 				5391039014A88BCA007315A3 /* JNConnectionsFactory.m in Sources */,
-				5391039214A88BCA007315A3 /* NSURL+Cookies.m in Sources */,
 				CE29B5E515F5E823000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 				7E54F3C215FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
-				374980A91602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1104,7 +1084,6 @@
 				65802B3E148BFC4B0040A93A /* JNAbstractConnection.m in Sources */,
 				65802B40148BFC4B0040A93A /* JNNsUrlConnection.m in Sources */,
 				65802B42148BFC4B0040A93A /* JFFNetworkBlocksFunctions.m in Sources */,
-				65802B46148BFC5D0040A93A /* NSURL+Cookies.m in Sources */,
 				65802B48148BFC6E0040A93A /* JFFDownloadItem.m in Sources */,
 				65802B4B148BFC790040A93A /* JFFFileManager.m in Sources */,
 				65802B4D148BFC790040A93A /* NSMutableSet+DownloadManager.m in Sources */,
@@ -1118,7 +1097,6 @@
 				65802B62148BFC930040A93A /* JNConnectionsFactory.m in Sources */,
 				CE29B5E415F5E823000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 				7E54F3C115FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
-				374980A81602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1137,7 +1115,6 @@
 				7E8F206414F949A000588C7D /* JFFTrafficCalculator.m in Sources */,
 				7E8F206714F949A000588C7D /* NSMutableDictionary+DownloadingFileInfo.m in Sources */,
 				7E8F206914F949A000588C7D /* JFFDownloadItem.m in Sources */,
-				7E8F206C14F949A000588C7D /* NSURL+Cookies.m in Sources */,
 				7E8F207114F949A000588C7D /* JFFURLResponse.m in Sources */,
 				7E8F207414F949A000588C7D /* JFFURLConnection.m in Sources */,
 				7E8F207614F949A000588C7D /* JNAbstractConnection.m in Sources */,
@@ -1146,7 +1123,6 @@
 				7E8F207C14F949A000588C7D /* JFFUrlResponseLogger.m in Sources */,
 				CE29B5E615F5E824000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 				7E54F3C315FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
-				374980AA1602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,20 +1147,15 @@
 				534BEF1714448BBA005D745F /* JNNsUrlConnection.m in Sources */,
 				534BEF1B14448D44005D745F /* JNAbstractConnection.m in Sources */,
 				534BEF9614449AF5005D745F /* JNConnectionsFactory.m in Sources */,
-				53E074BF144EFBA000CB146F /* NSURL+Cookies.m in Sources */,
 				1B15CCB41535CAF4005F2B56 /* JFFNetworkAsyncOperation.m in Sources */,
 				1B15CCB91535CB39005F2B56 /* JFFURLConnectionParams.m in Sources */,
-				1B15CCBD1535D55C005F2B56 /* NSMutableURLRequest+CreateRequestWithURLParams.m in Sources */,
 				65F47ACB1539A38000D8C865 /* NSString+XQueryComponents.m in Sources */,
 				65F47AD01539A3BE00D8C865 /* NSURL+XQueryComponents.m in Sources */,
 				65F47AD41539A3FF00D8C865 /* NSDictionary+XQueryComponents.m in Sources */,
-				1BB02E421546A29600439B66 /* NSDictionary+JHTTPHeaders.m in Sources */,
 				1B166C941546E5AD00475B6A /* JFFLocalCookiesStorage.m in Sources */,
 				1B166C991546E65C00475B6A /* NSString+RFC_2965.m in Sources */,
-				1BE053001547DF5600270B58 /* NSHTTPCookie+matchesURL.m in Sources */,
 				CE29B5E315F5E821000A05B8 /* NSURL+URLWithLocation.m in Sources */,
 				7E54F3C015FA25C6006F386A /* JHttpFlagChecker.mm in Sources */,
-				374980A71602123E00AF0C29 /* NSData+DataForHTTPPost.m in Sources */,
 				CEF162E016760ECD00B0B6E4 /* JFFNetworkAsyncOperationCallback.m in Sources */,
 				CEF162E416760EF100B0B6E4 /* JFFNetworkResponseDataCallback.m in Sources */,
 				CEF162E816760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.m in Sources */,
@@ -1195,6 +1166,11 @@
 				4CA0B39816F0965700A20C25 /* JNSNoInternetNetworkError.m in Sources */,
 				4CBBDBE417173AF3004D670D /* NSUrlLocationValidator.m in Sources */,
 				4CBBDBF417173BE4004D670D /* JNConnectionMock.m in Sources */,
+				4CA09901174A3BFB002BEA0F /* NSHTTPCookie+MatchesURL.m in Sources */,
+				4CA09905174A3C3F002BEA0F /* NSData+DataForHTTPPost.m in Sources */,
+				4CA09909174A3C64002BEA0F /* NSURL+Cookies.m in Sources */,
+				4CA09919174A3E24002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.m in Sources */,
+				4CA0991D174A3E28002BEA0F /* NSDictionary+JHTTPHeaders.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

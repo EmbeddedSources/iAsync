@@ -1,19 +1,12 @@
 #import "UIViewController+Dialog.h"
 
-#import <objc/runtime.h>
-
-static char __onCompleteDialogBlock;
-
 @implementation UIViewController (Dialog)
 
-- (void)setOnCompleteDialogBlock:(JFFCompleteDialogCallbackBlock)onCompleteDialogBlock
-{
-    objc_setAssociatedObject(self, &__onCompleteDialogBlock, onCompleteDialogBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
+@dynamic onCompleteDialogBlock;
 
-- (JFFCompleteDialogCallbackBlock)onCompleteDialogBlock
++ (void)load
 {
-    return objc_getAssociatedObject(self, &__onCompleteDialogBlock);
+    jClass_implementProperty(self, @"onCompleteDialogBlock");
 }
 
 #pragma mark -

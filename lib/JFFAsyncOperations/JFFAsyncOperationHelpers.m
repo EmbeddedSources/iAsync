@@ -161,6 +161,7 @@ JFFAsyncOperation asyncOperationWithOptionalStartAndFinishBlocks(JFFAsyncOperati
                                                                  JFFSimpleBlock startBlock,
                                                                  JFFDidFinishAsyncOperationHandler finishCallback)
 {
+    loader         = [loader         copy];
     startBlock     = [startBlock     copy];
     finishCallback = [finishCallback copy];
     

@@ -28,11 +28,19 @@
     
     if (self.facebookSession.isOpen) {
         
-        [self handleLoginWithSession:self.facebookSession
-                               error:nil
-                              status:self.facebookSession.state
-                             handler:handler];
-        return;
+        BOOL hasAllPermissions = [_permissions all:^BOOL(NSString *permission) {
+            
+            return [self.facebookSession.permissions containsObject:permission];
+        }];
+        
+        if (hasAllPermissions) {
+            
+            [self handleLoginWithSession:self.facebookSession
+                                   error:nil
+                                  status:self.facebookSession.state
+                                 handler:handler];
+            return;
+        }
     }
     
     FBSessionStateHandler fbHandler = ^(FBSession *session, FBSessionState status, NSError *error) {

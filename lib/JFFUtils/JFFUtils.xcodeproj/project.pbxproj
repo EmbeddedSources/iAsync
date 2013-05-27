@@ -96,6 +96,8 @@
 		4C98FBA216E0B38D00B6EFD8 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FBA016E0B38D00B6EFD8 /* NSString+HTML.m */; };
 		4C98FBAC16E0B56D00B6EFD8 /* NSArray+Templates.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FBAB16E0B56D00B6EFD8 /* NSArray+Templates.hpp */; };
 		4CAB2A571730097A001EB552 /* JFFRuntimeAddiotionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAB2A561730097A001EB552 /* JFFRuntimeAddiotionsTest.m */; };
+		4CB5CDEF174F55CB00F2B600 /* NSArray+ToURLsSkippingNils.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB5CDED174F55CA00F2B600 /* NSArray+ToURLsSkippingNils.h */; };
+		4CB5CDF0174F55CB00F2B600 /* NSArray+ToURLsSkippingNils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5CDEE174F55CA00F2B600 /* NSArray+ToURLsSkippingNils.m */; };
 		4CBA462F173A3D52006AE67D /* UIImage+ImageWithColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBA462D173A3D52006AE67D /* UIImage+ImageWithColor.h */; };
 		4CBA4630173A3D52006AE67D /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBA462E173A3D52006AE67D /* UIImage+ImageWithColor.m */; };
 		4CC01A921743836C003F1C88 /* NSError+WriteErrorToNSLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC01A901743836C003F1C88 /* NSError+WriteErrorToNSLog.h */; };
@@ -504,6 +506,8 @@
 		4C98FBAB16E0B56D00B6EFD8 /* NSArray+Templates.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "NSArray+Templates.hpp"; sourceTree = "<group>"; };
 		4CAB2A551730097A001EB552 /* JFFRuntimeAddiotionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRuntimeAddiotionsTest.h; sourceTree = "<group>"; };
 		4CAB2A561730097A001EB552 /* JFFRuntimeAddiotionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRuntimeAddiotionsTest.m; sourceTree = "<group>"; };
+		4CB5CDED174F55CA00F2B600 /* NSArray+ToURLsSkippingNils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ToURLsSkippingNils.h"; sourceTree = "<group>"; };
+		4CB5CDEE174F55CA00F2B600 /* NSArray+ToURLsSkippingNils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ToURLsSkippingNils.m"; sourceTree = "<group>"; };
 		4CBA462D173A3D52006AE67D /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
 		4CBA462E173A3D52006AE67D /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
 		4CC01A901743836C003F1C88 /* NSError+WriteErrorToNSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+WriteErrorToNSLog.h"; sourceTree = "<group>"; };
@@ -913,6 +917,8 @@
 				1B3CDDE31445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h */,
 				1B3CDDE41445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m */,
 				4C98FBAB16E0B56D00B6EFD8 /* NSArray+Templates.hpp */,
+				4CB5CDED174F55CA00F2B600 /* NSArray+ToURLsSkippingNils.h */,
+				4CB5CDEE174F55CA00F2B600 /* NSArray+ToURLsSkippingNils.m */,
 			);
 			path = NSArray;
 			sourceTree = "<group>";
@@ -1388,6 +1394,7 @@
 				4CC01A921743836C003F1C88 /* NSError+WriteErrorToNSLog.h in Headers */,
 				4CC01A9617438408003F1C88 /* NSError+IsNetworkError.h in Headers */,
 				4CC01A9A17438582003F1C88 /* NSError+SetToPointer.h in Headers */,
+				4CB5CDEF174F55CB00F2B600 /* NSArray+ToURLsSkippingNils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1881,6 +1888,7 @@
 				4CC01A931743836C003F1C88 /* NSError+WriteErrorToNSLog.m in Sources */,
 				4CC01A9717438408003F1C88 /* NSError+IsNetworkError.m in Sources */,
 				4CC01A9B17438582003F1C88 /* NSError+SetToPointer.m in Sources */,
+				4CB5CDF0174F55CB00F2B600 /* NSArray+ToURLsSkippingNils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

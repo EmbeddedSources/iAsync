@@ -3,23 +3,26 @@
 #import "NSString+PathExtensions.h"
 #import "NSString+FileAttributes.h"
 
-#include <objc/runtime.h>
+#include "JFFRuntimeAddiotions.h"
 
-static char propertyKey;
+@interface NSMutableSet (StorableSet_Internal)
+
+@property (nonatomic) NSString *storeFilePath;
+
+@end
+
+@implementation NSMutableSet (StorableSet_Internal)
+
+@dynamic storeFilePath;
+
++ (void)load
+{
+    jClass_implementProperty(self, @"storeFilePath");
+}
+
+@end
 
 @implementation NSMutableSet (StorableSet)
-
-- (void)setStoreFilePath:(NSString *)path
-{
-    objc_setAssociatedObject(self, &propertyKey, path, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSString *)storeFilePath
-{
-    NSString *result = objc_getAssociatedObject(self, &propertyKey);
-    
-    return result;
-}
 
 + (id)newStorableSetWithContentsOfFile:(NSString *)fileName
 {

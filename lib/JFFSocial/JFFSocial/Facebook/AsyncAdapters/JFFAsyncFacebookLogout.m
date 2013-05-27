@@ -4,7 +4,7 @@
 
 @interface JFFAsyncFacebookLogout : NSObject <JFFAsyncOperationInterface>
 
-@property (nonatomic) FBSession *facebookSession;
+@property (nonatomic) FBSession *session;
 @property (nonatomic, copy) JFFAsyncOperationInterfaceResultHandler handler;
 
 @end
@@ -21,7 +21,7 @@
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    [self.facebookSession closeAndClearTokenInformation];
+    [self.session closeAndClearTokenInformation];
     
     _handler = [handler copy];
     //TODO try to fix smart without delay each time
@@ -39,12 +39,12 @@
 
 @end
 
-JFFAsyncOperation jffFacebookLogout(FBSession *facebook)
+JFFAsyncOperation jffFacebookLogout(FBSession *session)
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncFacebookLogout *object = [JFFAsyncFacebookLogout new];
         
-        object.facebookSession = facebook;
+        object.session = session;
         return object;
     };
     

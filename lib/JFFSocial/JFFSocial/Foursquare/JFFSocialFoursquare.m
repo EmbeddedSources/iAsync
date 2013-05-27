@@ -146,7 +146,6 @@
     
     NSDictionary *params = @{ @"text" : text };
    
-    
     JFFAsyncOperationBinder postLoaderBinder = ^JFFAsyncOperation (NSString *accessToken)
     {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoader(addPostURL, @"POST", accessToken, params),

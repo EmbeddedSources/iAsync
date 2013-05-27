@@ -1,12 +1,9 @@
 #import "JFFMutableAssignKeyDictionary.h"
 
 #import "NSObject+OnDeallocBlock.h"
-
-#include <objc/runtime.h>
+#include "JFFRuntimeAddiotions.h"
 
 #include <map>
-
-static char propertyKey;
 
 @class JFFMutableAssignDictionaryKeyWrapper;
 
@@ -23,18 +20,19 @@ typedef std::map<__unsafe_unretained id, JFFSimpleBlock> BlockByPtr;
 @implementation JFFCPPMapONDeallocBlockByArrayPtrHolder
 @end
 
+@interface NSObject (JFFMutableAssignKeyDictionary)
+
+@property (nonatomic) JFFCPPMapONDeallocBlockByArrayPtrHolder *mutableAssignKeyDictionaryOnDeallocBlock;
+
+@end
+
 @implementation NSObject (JFFMutableAssignKeyDictionary)
 
-- (void)setMutableAssignKeyDictionaryOnDeallocBlock:(JFFCPPMapONDeallocBlockByArrayPtrHolder *)holder
-{
-    objc_setAssociatedObject(self, &propertyKey, holder, OBJC_ASSOCIATION_RETAIN);
-}
+@dynamic mutableAssignKeyDictionaryOnDeallocBlock;
 
-- (JFFCPPMapONDeallocBlockByArrayPtrHolder *)mutableAssignKeyDictionaryOnDeallocBlock
++ (void)load
 {
-    JFFCPPMapONDeallocBlockByArrayPtrHolder *result = objc_getAssociatedObject(self, &propertyKey);
-    
-    return result;
+    jClass_implementProperty(self, @"mutableAssignKeyDictionaryOnDeallocBlock");
 }
 
 - (JFFCPPMapONDeallocBlockByArrayPtrHolder *)lazyMutableAssignKeyDictionaryOnDeallocBlock

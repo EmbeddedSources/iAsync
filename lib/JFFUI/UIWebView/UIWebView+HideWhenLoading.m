@@ -1,18 +1,27 @@
 #import "UIWebView+HideWhenLoading.h"
 
-static char propertyKey;
-
 @class JUIWebViewDelegateProxy;
 
 @interface UIWebView (HideWhenLoadingInternal)
 
-@property ( nonatomic ) JUIWebViewDelegateProxy* proxy;
+@property (nonatomic) JUIWebViewDelegateProxy *proxy;
+
+@end
+
+@implementation UIWebView (HideWhenLoadingInternal)
+
+@dynamic proxy;
+
++ (void)load
+{
+    jClass_implementProperty(self, @"proxy");
+}
 
 @end
 
 @interface JUIWebViewDelegateProxy : NSObject < UIWebViewDelegate >
 
-@property ( nonatomic ) UIWebView* webView;
+@property (nonatomic) UIWebView *webView;
 
 @end
 
@@ -20,20 +29,20 @@ static char propertyKey;
 
 #pragma mark UIWebViewDelegate
 
--(void)didFinishLoading
+- (void)didFinishLoading
 {
     self.webView.hidden = NO;
-
+    
     self.webView.delegate = nil;
     self.webView.proxy = nil;
 }
 
--(void)webViewDidFinishLoad:( UIWebView* )web_view_
+- (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [ self didFinishLoading ];
+    [self didFinishLoading];
 }
 
--(void)webView:( UIWebView* )web_view_ didFailLoadWithError:( NSError* )error
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [self didFinishLoading];
 }
@@ -42,17 +51,7 @@ static char propertyKey;
 
 @implementation UIWebView (HideWhenLoading)
 
-- (JUIWebViewDelegateProxy *)proxy
-{
-    return (JUIWebViewDelegateProxy *)objc_getAssociatedObject(self, &propertyKey);
-}
-
-- (void)setProxy:(JUIWebViewDelegateProxy *)proxy
-{
-    objc_setAssociatedObject(self, &propertyKey, proxy, OBJC_ASSOCIATION_RETAIN_NONATOMIC) ;
-}
-
--(void)hideWhenLoadingHTMLString:( NSString* )html_string_
+- (void)hideWhenLoadingHTMLString:( NSString* )htmlString
 {
     if (!self.proxy) {
         self.proxy = [JUIWebViewDelegateProxy new];
@@ -60,7 +59,7 @@ static char propertyKey;
     }
     self.delegate = self.proxy;
     self.hidden = YES;
-    [self loadHTMLString:html_string_ baseURL:nil];
+    [self loadHTMLString:htmlString baseURL:nil];
 }
 
 @end
