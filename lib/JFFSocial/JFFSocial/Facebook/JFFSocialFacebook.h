@@ -2,6 +2,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class FBSession;
+
 @interface JFFSocialFacebook : NSObject
 
 + (BOOL)isActiveFacebookSession;
@@ -9,7 +11,9 @@
 + (JFFAsyncOperation)logoutLoader;
 
 + (JFFAsyncOperation)authTokenLoader;
++ (JFFAsyncOperation)authTokenLoaderWithPermissions:(NSArray *)permissions;
 + (JFFAsyncOperation)authFacebookSessionLoader;
++ (JFFAsyncOperation)authFacebookSessionLoaderWithPermissions:(NSArray *)permissions;
 
 + (JFFAsyncOperation)publishStreamAccessLoader;
 
@@ -21,11 +25,13 @@
 
 #pragma mark callbacks
 
-+ (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath;
++ (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
+                                 session:(FBSession *)session;
 
 + (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
                               httpMethod:(NSString *)HTTPMethod
-                              parameters:(NSDictionary *)parameters;
+                              parameters:(NSDictionary *)parameters
+                                 session:(FBSession *)session;
 
 + (JFFAsyncOperation)postPhoto:(UIImage *)photo
                    withMessage:(NSString *)message
