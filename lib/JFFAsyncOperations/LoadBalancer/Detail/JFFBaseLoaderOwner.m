@@ -51,9 +51,10 @@
         }
         
         if (_cancelCallback) {
-            JFFCancelAsyncOperationHandler cancelCallback = _cancelLoader;
-            _cancelLoader = nil;
-            cancelCallback(canceled);
+            JFFCancelAsyncOperationHandler cancelCallback = _cancelCallback;
+            _cancelCallback = nil;
+            if (cancelCallback)
+                cancelCallback(canceled);
         }
         
         [self clear];
