@@ -144,17 +144,15 @@ static NSInteger const MinColumnCount = 2;
     if ([self isVerticalGrid]) {
         
         fromIndex = floor(self.scrollView.contentOffset.y / self.rowHeight) * self.colCount;
-    }
-    else
-    {
+    } else {
         fromIndex = floor( self.scrollView.contentOffset.x / self.colWidth );
     }
     
-    NSUInteger number_of_elements_ = [ self.delegate numberOfElementsInGridView: self ];
+    NSUInteger numberOfElements = [self.delegate numberOfElementsInGridView:self];
     
-    self.currentlyUsedIndex = fmin( number_of_elements_, fmax( 0, fromIndex ) );
+    self.currentlyUsedIndex = fmin(numberOfElements, fmax( 0, fromIndex ) );
     
-    return fmin( number_of_elements_, fmax( 0, fromIndex ) );
+    return fmin( numberOfElements, fmax( 0, fromIndex ) );
 }
 
 - (NSUInteger)lastVisibleIndex

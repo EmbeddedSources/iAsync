@@ -1,5 +1,3 @@
-#import <JFFUI/Extensions/UINib+FirstObject.h>
-#import <JFFUI/Extensions/UIApplication+OpenApplicationAsyncOp.h>
 
 #import <JFFUI/UIViewController/UIViewController+PresentTopViewController.h>
 #import <JFFUI/UIViewController/UIViewController+PerformSegueWithCallback.h>
@@ -37,3 +35,8 @@
 //Grid View
 #import <JFFUI/GridView/JFFGridView.h>
 #import <JFFUI/GridView/JFFGridViewDelegate.h>
+
+//Categories
+#import <JFFUI/Categories/UINib+FirstObject.h>
+#import <JFFUI/Categories/JFFAlertView+Async.h>
+#import <JFFUI/Categories/UIApplication+OpenApplicationAsyncOp.h>

@@ -26,8 +26,6 @@
 		1B7F58981435D53300FF06EC /* UIView+AddSubviewAndScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F58961435D53300FF06EC /* UIView+AddSubviewAndScale.m */; };
 		1B7F589B1435D58000FF06EC /* UIView+AnimationWithBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B7F58991435D58000FF06EC /* UIView+AnimationWithBlocks.h */; };
 		1B7F589C1435D58000FF06EC /* UIView+AnimationWithBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F589A1435D58000FF06EC /* UIView+AnimationWithBlocks.m */; };
-		1B81FAEF14330E4400997278 /* UINib+FirstObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B81FAED14330E4400997278 /* UINib+FirstObject.h */; };
-		1B81FAF014330E4400997278 /* UINib+FirstObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B81FAEE14330E4400997278 /* UINib+FirstObject.m */; };
 		1BB414DE154835340032B7D5 /* JFFPendingActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BB414DC154835340032B7D5 /* JFFPendingActionSheet.h */; };
 		1BB414DF154835340032B7D5 /* JFFPendingActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB414DD154835340032B7D5 /* JFFPendingActionSheet.m */; };
 		1BD361691455A0630036F786 /* JFFPageSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD361671455A0630036F786 /* JFFPageSlider.h */; };
@@ -39,6 +37,12 @@
 		4C21FA7E16EF4F59005C4E57 /* JFFStripeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C21FA7A16EF4F59005C4E57 /* JFFStripeView.m */; };
 		4C21FA7F16EF4F59005C4E57 /* JFFStripeViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C21FA7B16EF4F59005C4E57 /* JFFStripeViewDelegate.h */; };
 		4C21FA8016EF4F59005C4E57 /* JFFStripeViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C21FA7C16EF4F59005C4E57 /* JFFStripeViewDelegate.m */; };
+		4C2CFD951754A29F00E87F22 /* JFFAlertView+Async.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C2CFD931754A29E00E87F22 /* JFFAlertView+Async.h */; };
+		4C2CFD961754A29F00E87F22 /* JFFAlertView+Async.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2CFD941754A29E00E87F22 /* JFFAlertView+Async.m */; };
+		4C2CFD991754A4CD00E87F22 /* UINib+FirstObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C2CFD971754A4CD00E87F22 /* UINib+FirstObject.h */; };
+		4C2CFD9A1754A4CD00E87F22 /* UINib+FirstObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2CFD981754A4CD00E87F22 /* UINib+FirstObject.m */; };
+		4C2CFD9D1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C2CFD9B1754A4F900E87F22 /* UIApplication+OpenApplicationAsyncOp.h */; };
+		4C2CFD9E1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2CFD9C1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m */; };
 		4C696BEC1742769A00C7D53D /* JFFGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE51742769A00C7D53D /* JFFGridView.h */; };
 		4C696BED1742769A00C7D53D /* JFFGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C696BE61742769A00C7D53D /* JFFGridView.m */; };
 		4C696BEE1742769A00C7D53D /* JFFGridViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE71742769A00C7D53D /* JFFGridViewDelegate.h */; };
@@ -55,7 +59,6 @@
 		539103CE14A88BE1007315A3 /* JFFUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 655E9E4A1392ED360074BD61 /* JFFUI.h */; };
 		539103CF14A88BE1007315A3 /* JFFActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D996F16139F5D370075A325 /* JFFActionSheet.h */; };
 		539103D014A88BE1007315A3 /* NSObject+JFFAlertButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D996F1C139F61200075A325 /* NSObject+JFFAlertButton.h */; };
-		539103D214A88BE1007315A3 /* UINib+FirstObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B81FAED14330E4400997278 /* UINib+FirstObject.h */; };
 		539103D314A88BE1007315A3 /* UIWebView+HideWhenLoading.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B7F583E1435BDC000FF06EC /* UIWebView+HideWhenLoading.h */; };
 		539103D414A88BE1007315A3 /* UIView+AddSubviewAndScale.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B7F58951435D53300FF06EC /* UIView+AddSubviewAndScale.h */; };
 		539103D514A88BE1007315A3 /* UIView+AnimationWithBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B7F58991435D58000FF06EC /* UIView+AnimationWithBlocks.h */; };
@@ -69,7 +72,6 @@
 		539103DE14A88BE1007315A3 /* NSError+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 655E9DB71392E8C00074BD61 /* NSError+Alert.m */; };
 		539103DF14A88BE1007315A3 /* JFFActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D996F17139F5D370075A325 /* JFFActionSheet.m */; };
 		539103E014A88BE1007315A3 /* NSObject+JFFAlertButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D996F1D139F61200075A325 /* NSObject+JFFAlertButton.m */; };
-		539103E214A88BE1007315A3 /* UINib+FirstObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B81FAEE14330E4400997278 /* UINib+FirstObject.m */; };
 		539103E314A88BE1007315A3 /* UIWebView+HideWhenLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F583F1435BDC000FF06EC /* UIWebView+HideWhenLoading.m */; };
 		539103E414A88BE1007315A3 /* UIView+AddSubviewAndScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F58961435D53300FF06EC /* UIView+AddSubviewAndScale.m */; };
 		539103E514A88BE1007315A3 /* UIView+AnimationWithBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F589A1435D58000FF06EC /* UIView+AnimationWithBlocks.m */; };
@@ -100,8 +102,6 @@
 		CE9A9154165671D200EFE858 /* JFFUIError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A9152165671D200EFE858 /* JFFUIError.m */; };
 		CE9A91571656722900EFE858 /* JFFOpenApplicationError.h in Headers */ = {isa = PBXBuildFile; fileRef = CE9A91551656722900EFE858 /* JFFOpenApplicationError.h */; };
 		CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */; };
-		CEA097C615FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */; };
-		CEA097C715FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,8 +124,6 @@
 		1B7F58961435D53300FF06EC /* UIView+AddSubviewAndScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AddSubviewAndScale.m"; sourceTree = "<group>"; };
 		1B7F58991435D58000FF06EC /* UIView+AnimationWithBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationWithBlocks.h"; sourceTree = "<group>"; };
 		1B7F589A1435D58000FF06EC /* UIView+AnimationWithBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationWithBlocks.m"; sourceTree = "<group>"; };
-		1B81FAED14330E4400997278 /* UINib+FirstObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINib+FirstObject.h"; path = "Extensions/UINib+FirstObject.h"; sourceTree = SOURCE_ROOT; };
-		1B81FAEE14330E4400997278 /* UINib+FirstObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINib+FirstObject.m"; path = "Extensions/UINib+FirstObject.m"; sourceTree = SOURCE_ROOT; };
 		1BB414DC154835340032B7D5 /* JFFPendingActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPendingActionSheet.h; sourceTree = "<group>"; };
 		1BB414DD154835340032B7D5 /* JFFPendingActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFPendingActionSheet.m; sourceTree = "<group>"; };
 		1BD361671455A0630036F786 /* JFFPageSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPageSlider.h; sourceTree = "<group>"; };
@@ -137,6 +135,12 @@
 		4C21FA7A16EF4F59005C4E57 /* JFFStripeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStripeView.m; sourceTree = "<group>"; };
 		4C21FA7B16EF4F59005C4E57 /* JFFStripeViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStripeViewDelegate.h; sourceTree = "<group>"; };
 		4C21FA7C16EF4F59005C4E57 /* JFFStripeViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStripeViewDelegate.m; sourceTree = "<group>"; };
+		4C2CFD931754A29E00E87F22 /* JFFAlertView+Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFAlertView+Async.h"; sourceTree = "<group>"; };
+		4C2CFD941754A29E00E87F22 /* JFFAlertView+Async.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFFAlertView+Async.m"; sourceTree = "<group>"; };
+		4C2CFD971754A4CD00E87F22 /* UINib+FirstObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINib+FirstObject.h"; sourceTree = "<group>"; };
+		4C2CFD981754A4CD00E87F22 /* UINib+FirstObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINib+FirstObject.m"; sourceTree = "<group>"; };
+		4C2CFD9B1754A4F900E87F22 /* UIApplication+OpenApplicationAsyncOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+OpenApplicationAsyncOp.h"; sourceTree = "<group>"; };
+		4C2CFD9C1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+OpenApplicationAsyncOp.m"; sourceTree = "<group>"; };
 		4C696BE51742769A00C7D53D /* JFFGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFGridView.h; sourceTree = "<group>"; };
 		4C696BE61742769A00C7D53D /* JFFGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFGridView.m; sourceTree = "<group>"; };
 		4C696BE71742769A00C7D53D /* JFFGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFGridViewDelegate.h; sourceTree = "<group>"; };
@@ -169,8 +173,6 @@
 		CE9A9152165671D200EFE858 /* JFFUIError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFUIError.m; sourceTree = "<group>"; };
 		CE9A91551656722900EFE858 /* JFFOpenApplicationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFOpenApplicationError.h; sourceTree = "<group>"; };
 		CE9A91561656722900EFE858 /* JFFOpenApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFOpenApplicationError.m; sourceTree = "<group>"; };
-		CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+OpenApplicationAsyncOp.h"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.h"; sourceTree = SOURCE_ROOT; };
-		CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+OpenApplicationAsyncOp.m"; path = "Extensions/UIApplication+OpenApplicationAsyncOp.m"; sourceTree = SOURCE_ROOT; };
 		D2AAC07E0554694100DB518D /* libJFFUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -225,6 +227,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4C2CFD921754A28F00E87F22 /* Categories */,
 				4C696BE41742769A00C7D53D /* GridView */,
 				CE9A914F165671C000EFE858 /* Errors */,
 				1B5E1ACA14D01F900075049A /* UIViewController */,
@@ -232,7 +235,6 @@
 				1B295556143DCB0500532BD7 /* UITableView */,
 				1B7F58941435D50F00FF06EC /* UIView */,
 				1B7F583B1435BDC000FF06EC /* UIWebView */,
-				1B793977142B76FD00B43DC8 /* Extensions */,
 				655E9DB11392E8C00074BD61 /* AlertView */,
 				4CC3864E16DE67B60079F968 /* JFFDialogProtocol.h */,
 				655E9E4A1392ED360074BD61 /* JFFUI.h */,
@@ -264,18 +266,6 @@
 				4CC3865016DE68630079F968 /* UIViewController+Dialog.m */,
 			);
 			path = UIViewController;
-			sourceTree = "<group>";
-		};
-		1B793977142B76FD00B43DC8 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				1B81FAED14330E4400997278 /* UINib+FirstObject.h */,
-				1B81FAEE14330E4400997278 /* UINib+FirstObject.m */,
-				CEA097C415FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h */,
-				CEA097C515FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m */,
-			);
-			name = Extensions;
-			path = ./JFFUI/Extensions;
 			sourceTree = "<group>";
 		};
 		1B7F583B1435BDC000FF06EC /* UIWebView */ = {
@@ -321,6 +311,19 @@
 				AA747D9E0F9514B9006C5449 /* JFFUI_Prefix.pch */,
 			);
 			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		4C2CFD921754A28F00E87F22 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4C2CFD931754A29E00E87F22 /* JFFAlertView+Async.h */,
+				4C2CFD941754A29E00E87F22 /* JFFAlertView+Async.m */,
+				4C2CFD971754A4CD00E87F22 /* UINib+FirstObject.h */,
+				4C2CFD981754A4CD00E87F22 /* UINib+FirstObject.m */,
+				4C2CFD9B1754A4F900E87F22 /* UIApplication+OpenApplicationAsyncOp.h */,
+				4C2CFD9C1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		4C696BE41742769A00C7D53D /* GridView */ = {
@@ -395,7 +398,6 @@
 				539103CE14A88BE1007315A3 /* JFFUI.h in Headers */,
 				539103CF14A88BE1007315A3 /* JFFActionSheet.h in Headers */,
 				539103D014A88BE1007315A3 /* NSObject+JFFAlertButton.h in Headers */,
-				539103D214A88BE1007315A3 /* UINib+FirstObject.h in Headers */,
 				539103D314A88BE1007315A3 /* UIWebView+HideWhenLoading.h in Headers */,
 				539103D414A88BE1007315A3 /* UIView+AddSubviewAndScale.h in Headers */,
 				539103D514A88BE1007315A3 /* UIView+AnimationWithBlocks.h in Headers */,
@@ -418,7 +420,6 @@
 				655E9E4B1392ED360074BD61 /* JFFUI.h in Headers */,
 				8D996F18139F5D370075A325 /* JFFActionSheet.h in Headers */,
 				8D996F1E139F61200075A325 /* NSObject+JFFAlertButton.h in Headers */,
-				1B81FAEF14330E4400997278 /* UINib+FirstObject.h in Headers */,
 				1B7F58421435BDC000FF06EC /* UIWebView+HideWhenLoading.h in Headers */,
 				1B7F58971435D53300FF06EC /* UIView+AddSubviewAndScale.h in Headers */,
 				1B7F589B1435D58000FF06EC /* UIView+AnimationWithBlocks.h in Headers */,
@@ -432,7 +433,6 @@
 				1BB414DE154835340032B7D5 /* JFFPendingActionSheet.h in Headers */,
 				1B260343156546D900316C7C /* JFFAlertViewsContainer.h in Headers */,
 				1B2812EA1578C1F400BC70D9 /* JFFWaitAlertView.h in Headers */,
-				CEA097C615FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.h in Headers */,
 				CE9A9153165671D200EFE858 /* JFFUIError.h in Headers */,
 				CE9A91571656722900EFE858 /* JFFOpenApplicationError.h in Headers */,
 				CE5EF36A167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.h in Headers */,
@@ -444,6 +444,9 @@
 				4C696BEE1742769A00C7D53D /* JFFGridViewDelegate.h in Headers */,
 				4C696BF01742769A00C7D53D /* JFFRemoveButton.h in Headers */,
 				4C696BF21742769A00C7D53D /* JFFRemoveButtonDelegate.h in Headers */,
+				4C2CFD951754A29F00E87F22 /* JFFAlertView+Async.h in Headers */,
+				4C2CFD991754A4CD00E87F22 /* UINib+FirstObject.h in Headers */,
+				4C2CFD9D1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,7 +526,6 @@
 				539103DE14A88BE1007315A3 /* NSError+Alert.m in Sources */,
 				539103DF14A88BE1007315A3 /* JFFActionSheet.m in Sources */,
 				539103E014A88BE1007315A3 /* NSObject+JFFAlertButton.m in Sources */,
-				539103E214A88BE1007315A3 /* UINib+FirstObject.m in Sources */,
 				539103E314A88BE1007315A3 /* UIWebView+HideWhenLoading.m in Sources */,
 				539103E414A88BE1007315A3 /* UIView+AddSubviewAndScale.m in Sources */,
 				539103E514A88BE1007315A3 /* UIView+AnimationWithBlocks.m in Sources */,
@@ -544,7 +546,6 @@
 				655E9DBD1392E8C00074BD61 /* NSError+Alert.m in Sources */,
 				8D996F19139F5D370075A325 /* JFFActionSheet.m in Sources */,
 				8D996F1F139F61200075A325 /* NSObject+JFFAlertButton.m in Sources */,
-				1B81FAF014330E4400997278 /* UINib+FirstObject.m in Sources */,
 				1B7F58431435BDC000FF06EC /* UIWebView+HideWhenLoading.m in Sources */,
 				1B7F58981435D53300FF06EC /* UIView+AddSubviewAndScale.m in Sources */,
 				1B7F589C1435D58000FF06EC /* UIView+AnimationWithBlocks.m in Sources */,
@@ -558,7 +559,6 @@
 				1BB414DF154835340032B7D5 /* JFFPendingActionSheet.m in Sources */,
 				1B260344156546D900316C7C /* JFFAlertViewsContainer.m in Sources */,
 				1B2812EB1578C1F400BC70D9 /* JFFWaitAlertView.mm in Sources */,
-				CEA097C715FF4EE90080DEF7 /* UIApplication+OpenApplicationAsyncOp.m in Sources */,
 				CE9A9154165671D200EFE858 /* JFFUIError.m in Sources */,
 				CE9A91581656722900EFE858 /* JFFOpenApplicationError.m in Sources */,
 				CE5EF36B167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.m in Sources */,
@@ -569,6 +569,9 @@
 				4C696BED1742769A00C7D53D /* JFFGridView.m in Sources */,
 				4C696BEF1742769A00C7D53D /* JFFGridViewDelegate.m in Sources */,
 				4C696BF11742769A00C7D53D /* JFFRemoveButton.m in Sources */,
+				4C2CFD961754A29F00E87F22 /* JFFAlertView+Async.m in Sources */,
+				4C2CFD9A1754A4CD00E87F22 /* UINib+FirstObject.m in Sources */,
+				4C2CFD9E1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

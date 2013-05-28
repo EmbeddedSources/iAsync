@@ -1,5 +1,7 @@
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 
+#import <Foundation/Foundation.h>
+
 @class JFFAlertButton;
 
 @interface JFFAlertView : NSObject

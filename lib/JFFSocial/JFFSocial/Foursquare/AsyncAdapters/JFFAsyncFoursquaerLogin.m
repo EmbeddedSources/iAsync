@@ -1,6 +1,6 @@
 #import "JFFAsyncFoursquaerLogin.h"
 
-#import <JFFUI/Extensions/UIApplication+OpenApplicationAsyncOp.h>
+#import <JFFUI/Categories/UIApplication+OpenApplicationAsyncOp.h>
 
 #import "JFFFoursquareSessionStorage.h"
 

@@ -1,6 +1,6 @@
 #import "JFFSocialInstagramApi.h"
 
-#import <JFFUI/Extensions/UIApplication+OpenApplicationAsyncOp.h>
+#import <JFFUI/Categories/UIApplication+OpenApplicationAsyncOp.h>
 
 JFFAsyncOperation codeURLLoader(NSString *redirectURI,
                                 NSString *clientId

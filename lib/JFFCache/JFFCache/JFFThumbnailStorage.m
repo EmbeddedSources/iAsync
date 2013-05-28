@@ -16,7 +16,7 @@ NSString *JFFNoImageDataURLString = @"nodata://jff.cache.com";
 
 @implementation NSURL (IsURLToIMageData)
 
-- (BOOL)isURLToIMageData
+- (BOOL)isURLToImageData
 {
     return ![[self description] isEqualToString:JFFNoImageDataURLString];
 }
@@ -282,7 +282,7 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
 {
     NSParameterAssert(!url || [url isKindOfClass:[NSURL class]]);
     
-    if (![url isURLToIMageData]) {
+    if (![url isURLToImageData]) {
         return asyncOperationWithError([JFFCacheNoURLError new]);
     }
     
@@ -313,7 +313,7 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
 {
     NSParameterAssert(!url || [url isKindOfClass:[NSURL class]]);
     
-    if (![url isURLToIMageData]) {
+    if (![url isURLToImageData]) {
         return asyncOperationWithError([JFFCacheNoURLError new]);
     }
     
