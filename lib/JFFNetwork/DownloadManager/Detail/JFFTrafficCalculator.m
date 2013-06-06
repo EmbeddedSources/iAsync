@@ -83,8 +83,11 @@
         NSDate* lastDate_ = ( [ arrayExcludeLast_ count ] == 1 ) ? [ NSDate new ] : firstItem_.date;
 
         JFFDownloadedBytesPerDate* lastItem_ = [ arrayExcludeLast_ lastObject ];
-        speed_ = (float) donloadedBytes_ /
-            ( [ lastDate_ timeIntervalSince1970 ] - [ lastItem_.date timeIntervalSince1970 ] );
+        
+        NSTimeInterval timeDiff = ( [ lastDate_ timeIntervalSince1970 ] - [ lastItem_.date timeIntervalSince1970 ] );
+        NSTimeInterval result = donloadedBytes_ / timeDiff;
+
+        speed_ = (float)result;
     }
 
     [ _delegate trafficCalculator: self didChangeDownloadSpeed: speed_ ];

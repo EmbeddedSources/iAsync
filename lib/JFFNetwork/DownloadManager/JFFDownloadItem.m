@@ -112,7 +112,26 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 -(float)progress
 {
-   return ( self.fileLength == NSURLResponseUnknownLength ) ? 0.f : (float) self.downloadedFileLength / self.fileLength;
+    unsigned long long fileLength = self.fileLength;
+    static const unsigned long long castecUnknownLength = (unsigned long long)NSURLResponseUnknownLength;
+    
+    BOOL isUnknownLength = ( fileLength == castecUnknownLength );
+    BOOL isZeroLength = ( 0.f == fileLength );
+    
+    if ( isUnknownLength )
+    {
+        return 0.f;
+    }
+    else if (  isZeroLength )
+    {
+        return 1.f;
+    }
+    
+    float fFileLength = (float)self.fileLength;
+    float fDownloadedFileLength = (float)self.downloadedFileLength;
+    
+    float result = fDownloadedFileLength / fFileLength;
+    return result;
 }
 
 + (BOOL)checkNotAlreadyUsedLocalPath:(NSString *)localFilePath

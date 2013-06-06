@@ -236,13 +236,15 @@
 }
 
 -(NSRange)visiableIndexesRange
-{
-    NSAssert(_scrollView.bounds.size.width != 0, @"division by zero");
+{    
+    if ( _scrollView.bounds.size.width == 0 )
+    {
+        NSLog(@"[!!!ERROR!!!] division by zero");
+        return _previousVisiableIndexesRange;
+    }
     
     NSInteger first_index_ = floorf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
     NSInteger last_index_ = ceilf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
-    
-    
     
     last_index_ = fmin( last_index_, self.lastIndex );
 

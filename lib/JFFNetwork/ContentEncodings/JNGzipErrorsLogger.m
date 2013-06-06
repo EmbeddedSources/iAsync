@@ -14,8 +14,9 @@
       , @"Z_ERRNO"
    };
 
-   NSUInteger error_index_     = errorCode + abs( Z_VERSION_ERROR );
-   NSUInteger max_error_index_ = Z_ERRNO   + abs( Z_VERSION_ERROR );
+    
+   int error_index_     = errorCode + abs( Z_VERSION_ERROR );
+   int max_error_index_ = Z_ERRNO   + abs( Z_VERSION_ERROR );
 
    if ( error_index_ > max_error_index_ )
    {
