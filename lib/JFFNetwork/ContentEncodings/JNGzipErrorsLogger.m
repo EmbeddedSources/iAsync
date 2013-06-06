@@ -18,7 +18,7 @@
    int error_index_     = errorCode + abs( Z_VERSION_ERROR );
    int max_error_index_ = Z_ERRNO   + abs( Z_VERSION_ERROR );
 
-   if ( error_index_ > max_error_index_ )
+   if ( error_index_ > max_error_index_ || error_index_ < 0 )
    {
       return @"Z_UnknownError";
    }

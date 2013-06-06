@@ -144,7 +144,9 @@ NSString* kGzipErrorDomain = @"gzip.error";
                                                   userInfo: nil ];
             [ gzipError setToPointer: outError ];
             
-            break;
+            inflateEnd(&self->_strm);
+            
+            return nil;
         }
     }
 
