@@ -2,7 +2,9 @@
 
 @protocol JNHttpDecoder < NSObject >
 
--(NSData*)decodeData:( NSData* )encoded_data_
+-(NSData*)decodeData:( NSData* )encodedData
                error:(NSError ** )outError;
+
+-(BOOL)closeWithError:( NSError ** )outError;
 
 @end
