@@ -38,7 +38,8 @@ static void readStreamCallback(CFReadStreamRef stream,
                                void* selfContext_ )
 {
     __unsafe_unretained JFFURLConnection* weakSelf = (__bridge JFFURLConnection*)selfContext_;
-    switch( event_ ) {
+    switch( event_ )
+    {
         case kCFStreamEventNone:
         {
             break;
@@ -55,8 +56,8 @@ static void readStreamCallback(CFReadStreamRef stream,
             CFIndex bytesRead = CFReadStreamRead( stream, buffer, kJNMaxBufferSize );
             if ( bytesRead > 0 )
             {
-                [weakSelf handleData:buffer
-                              length:bytesRead];
+                [ weakSelf handleData: buffer
+                               length: (NSUInteger)bytesRead ];
             }
             break;
         }
@@ -91,6 +92,11 @@ static void readStreamCallback(CFReadStreamRef stream,
     id _cookiesStorage;
     BOOL _responseHandled;
     JFFURLResponse* _urlResponse;
+
+//    NSString* _previousContentEncoding;
+    id< JNHttpDecoder > _decoder;
+    unsigned long long _downloadedBytesCount;
+    unsigned long long _totalBytesCount;
 };
 
 -(void)dealloc
@@ -113,8 +119,8 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 -(void)start
 {
-    [self startConnectionWithPostData:_params.httpBody
-                              headers:_params.headers];
+    [ self startConnectionWithPostData:_params.httpBody
+                               headers:_params.headers ];
 }
 
 -(void)applyCookiesForHTTPRequest:( CFHTTPMessageRef )httpRequest_
@@ -137,8 +143,9 @@ static void readStreamCallback(CFReadStreamRef stream,
 -(void)startConnectionWithPostData:( NSData* )data_
                            headers:( NSDictionary* )headers_
 {
-    CFStringRef method = (__bridge CFStringRef)(_params.httpMethod?:@"GET");
-    if ( !_params.httpMethod && data_ ) {
+    CFStringRef method = (__bridge CFStringRef)(self->_params.httpMethod?:@"GET");
+    if ( !self->_params.httpMethod && data_ )
+    {
         method = (__bridge  CFStringRef)@"POST";
     }
     
@@ -165,11 +172,11 @@ static void readStreamCallback(CFReadStreamRef stream,
     //   CFReadStreamCreateForStreamedHTTPRequest( CFAllocatorRef alloc,
     //                                             CFHTTPMessageRef requestHeaders,
     //                                             CFReadStreamRef	requestBody )
-    _readStream = CFReadStreamCreateForHTTPRequest( NULL, httpRequest_ );
+    self->_readStream = CFReadStreamCreateForHTTPRequest( NULL, httpRequest_ );
     CFRelease( httpRequest_ );
 
     //Prefer using keep-alive packages
-    Boolean keepAliveSetResult_ = CFReadStreamSetProperty( _readStream
+    Boolean keepAliveSetResult_ = CFReadStreamSetProperty( self->_readStream
                                                           , kCFStreamPropertyHTTPAttemptPersistentConnection
                                                           , kCFBooleanTrue );
     if ( FALSE == keepAliveSetResult_ )
@@ -179,33 +186,35 @@ static void readStreamCallback(CFReadStreamRef stream,
 
     typedef void* (*retain)( void* info_ );
     typedef void (*release)( void* info_ );
-    CFStreamClientContext streamContext_ = {
+    CFStreamClientContext streamContext_ =
+    {
         0
         , (__bridge void*)(self)
         , (retain)CFRetain
         , (release)CFRelease
-        , NULL };
+        , NULL
+    };
 
     CFOptionFlags registered_events_ = kCFStreamEventHasBytesAvailable
         | kCFStreamEventErrorOccurred | kCFStreamEventEndEncountered;
-    if ( CFReadStreamSetClient( _readStream, registered_events_, readStreamCallback, &streamContext_ ) )
+    if ( CFReadStreamSetClient( self->_readStream, registered_events_, readStreamCallback, &streamContext_ ) )
     {
-        CFReadStreamScheduleWithRunLoop( _readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
+        CFReadStreamScheduleWithRunLoop( self->_readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
     }
 
-    CFReadStreamOpen( _readStream );
+    CFReadStreamOpen( self->_readStream );
 }
 
 -(void)closeReadStream
 {
-    if ( _readStream )
+    if ( self->_readStream )
     {
-        CFReadStreamUnscheduleFromRunLoop( _readStream
+        CFReadStreamUnscheduleFromRunLoop( self->_readStream
                                           , CFRunLoopGetCurrent()
                                           , kCFRunLoopCommonModes );
-        CFReadStreamClose( _readStream );
-        CFRelease( _readStream );
-        _readStream = nil;
+        CFReadStreamClose( self->_readStream );
+        CFRelease( self->_readStream );
+        self->_readStream = nil;
     }
 }
 
@@ -220,26 +229,56 @@ static void readStreamCallback(CFReadStreamRef stream,
     [ self clearCallbacks ];
 }
 
--(void)handleData:( void* )buffer_ 
+-(id<JNHttpDecoder>)getDecoder
+{
+    NSString* contentEncoding = self->_urlResponse.contentEncoding;
+//    NSString* previousEncoding = self->_previousContentEncoding;
+
+
+    BOOL isDecoderMissing = ( nil == self->_decoder );
+    
+    if ( isDecoderMissing )
+    {
+        JNHttpEncodingsFactory* factory = [ [ JNHttpEncodingsFactory alloc ] initWithContentLength: self->_totalBytesCount ];
+        
+        id< JNHttpDecoder > decoder = [ factory decoderForHeaderString: contentEncoding ];
+        self->_decoder = decoder;
+    }
+
+//    [ @"http://ws-alr1.dk.sitecore.net:66/sitecore/shell/ClientBin/Dashboard/Integration.ashx?action=loadPreFilterParams" isEqualToString: (NSString*)[ ((NSURL*)[ self->_urlResponse url ]) absoluteString ] ]
+    
+    return self->_decoder;
+}
+
+-(void)handleData:( void* )buffer_
            length:( NSUInteger )length_
 {
-    if (!self.didReceiveDataBlock) {
+    if (!self.didReceiveDataBlock)
+    {
         return;
     }
     
-    NSString *contentEncoding = _urlResponse.allHeaderFields[@"Content-Encoding"];
-    id< JNHttpDecoder > decoder = [ JNHttpEncodingsFactory decoderForHeaderString: contentEncoding ];
+    id< JNHttpDecoder > decoder = [ self getDecoder ];
     
-    NSError *decoderError;
-    
+    NSError *decoderError = nil;
     NSData *rawNsData = [ [ NSData alloc ] initWithBytes: buffer_
                                                    length: length_ ];
     
-    NSData *decodedData = [decoder decodeData:rawNsData
-                                        error:&decoderError];
+    NSData *decodedData = [ decoder decodeData: rawNsData
+                                         error: &decoderError ];
     
-    if ( nil == decodedData )
+    // @adk - maybe we should use [decodedData length]
+    self->_downloadedBytesCount += length_;
+    BOOL isDownloadCompleted = ( self->_totalBytesCount == self->_downloadedBytesCount );
+    
+    if ( nil == decodedData || isDownloadCompleted )
     {
+        NSError* decoderCloseError = nil;
+        [ decoder closeWithError: &decoderCloseError ];
+        [ decoderCloseError writeErrorToNSLog ];
+        
+        
+        self.didReceiveDataBlock(decodedData);
         [ self handleFinish: decoderError ];
     }
     else 
@@ -272,7 +311,7 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 -(void)handleResponseForReadStream:( CFReadStreamRef )stream_
 {
-    if ( _responseHandled )
+    if ( self->_responseHandled )
     {
         return;
     }
@@ -284,7 +323,9 @@ static void readStreamCallback(CFReadStreamRef stream,
         CFHTTPMessageRef response_ = (CFHTTPMessageRef)CFReadStreamCopyProperty( stream_, kCFStreamPropertyHTTPResponseHeader );
 
         if ( !response_ )
+        {
             return;
+        }
 
         allHeadersDict_ = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields( response_ );
         statusCode = CFHTTPMessageGetResponseStatusCode( response_ );
@@ -295,9 +336,10 @@ static void readStreamCallback(CFReadStreamRef stream,
     [ self acceptCookiesForHeaders: allHeadersDict_ ];
 
     //JTODO test redirects (cyclic for example)
-    if ([JHttpFlagChecker isRedirectFlag:statusCode]) {
+    if ([JHttpFlagChecker isRedirectFlag:statusCode])
+    {
         NSDebugLog( @"JConnection - creating URL..." );
-        NSDebugLog( @"%@", _params.url );
+        NSDebugLog( @"%@", self->_params.url );
         NSString* location_ = allHeadersDict_[ @"Location" ];
 
 #ifdef USE_DD_URL_BUILDER
@@ -319,18 +361,20 @@ static void readStreamCallback(CFReadStreamRef stream,
 #else
         if ( [ location_ hasPrefix: @"/" ] )
         {
-            _params.url = [ _params.url URLWithLocation: location_ ];
+            self->_params.url = [ self->_params.url URLWithLocation: location_ ];
         }
         else
         {
-            _params.url = [location_ toURL];
+            self->_params.url = [location_ toURL];
         }
 
-        if ( !_params.url )
-            _params.url = [ _params.url URLWithLocation: @"/" ];
+        if ( !self->_params.url )
+        {
+            self->_params.url = [ self->_params.url URLWithLocation: @"/" ];
+        }
 
-        _params.httpMethod = @"GET";
-        _params.httpBody = nil;
+        self->_params.httpMethod = @"GET";
+        self->_params.httpBody = nil;
 #endif
 
         NSDebugLog( @"%@", _params.url );
@@ -340,20 +384,25 @@ static void readStreamCallback(CFReadStreamRef stream,
     }
     else
     {
-        _responseHandled = YES;
+        self->_responseHandled = YES;
 
         if ( self.didReceiveResponseBlock )
         {
-            JFFURLResponse* urlResponse_ = [JFFURLResponse new];
+            JFFURLResponse* urlResponse_ = [ JFFURLResponse new ];
             
             urlResponse_.statusCode      = statusCode;
             urlResponse_.allHeaderFields = allHeadersDict_;
-            urlResponse_.url             = _params.url;
+            urlResponse_.url             = self->_params.url;
             
             self.didReceiveResponseBlock( urlResponse_ );
             self.didReceiveResponseBlock = nil;
+
+//            self->_previousContentEncoding = self->_urlResponse.contentEncoding;
+            self->_decoder = nil;
             
-            _urlResponse = urlResponse_;
+            self->_urlResponse = urlResponse_;
+            
+            self->_totalBytesCount = urlResponse_.expectedContentLength;
         }
     }
 }
