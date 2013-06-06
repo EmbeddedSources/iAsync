@@ -3,20 +3,28 @@
 @end
 
 @implementation EncodingsFactoryTest
+{
+    JNHttpEncodingsFactory* _factory;
+}
+
+-(void)setUp
+{
+    self->_factory = [ [ JNHttpEncodingsFactory alloc ] initWithContentLength: 0 ];
+}
 
 -(void)testFactoryProducesValidDecoders
 {
    id<JNHttpDecoder> decoder_ = nil;
 
    {
-      decoder_ = [ JNHttpEncodingsFactory gzipDecoder ];
+      decoder_ = [ self->_factory gzipDecoder ];
       GHAssertNotNil( decoder_, @"NOT nil data Expected" );
       GHAssertTrue( [ decoder_ conformsToProtocol: @protocol(JNHttpDecoder) ], @"This class should conform protocol" );
       GHAssertTrue( [ decoder_ isMemberOfClass   : [ JNGzipDecoder class ]  ], @"This should be JNGzipDecoder class" );
    }
 
    {
-      decoder_ = [ JNHttpEncodingsFactory decoderForHeaderString: @"gzip" ];
+      decoder_ = [ self->_factory decoderForHeaderString: @"gzip" ];
       GHAssertNotNil( decoder_, @"NOT nil data Expected" );
       GHAssertTrue( [ decoder_ conformsToProtocol: @protocol(JNHttpDecoder) ], @"This class should conform protocol" );
       GHAssertTrue( [ decoder_ isMemberOfClass   : [ JNGzipDecoder class ]  ], @"This should be JNGzipDecoder class" );
@@ -28,14 +36,14 @@
    id<JNHttpDecoder> decoder_ = nil;
 
    {
-      decoder_ = [ JNHttpEncodingsFactory stubDecoder ];
+      decoder_ = [ self->_factory stubDecoder ];
       GHAssertNotNil( decoder_, @"NOT nil data Expected" );
       GHAssertTrue( [ decoder_ conformsToProtocol: @protocol(JNHttpDecoder) ], @"This class should conform protocol" );
       GHAssertTrue( [ decoder_ isMemberOfClass   : [ JNStubDecoder class ]  ], @"This should be JNGzipDecoder class" );
    }   
 
    {
-      decoder_ = [ JNHttpEncodingsFactory decoderForHeaderString: @"" ];
+      decoder_ = [ self->_factory decoderForHeaderString: @"" ];
 
       GHAssertNotNil( decoder_, @"NOT nil data Expected" );
       GHAssertTrue( [ decoder_ conformsToProtocol: @protocol(JNHttpDecoder) ], @"This class should conform protocol" );
@@ -43,14 +51,14 @@
    }
 
    {
-      decoder_ = [ JNHttpEncodingsFactory decoderForHeaderString: nil ];
+      decoder_ = [ self->_factory decoderForHeaderString: nil ];
       GHAssertNotNil( decoder_, @"NOT nil data Expected" );
       GHAssertTrue( [ decoder_ conformsToProtocol: @protocol(JNHttpDecoder) ], @"This class should conform protocol" );
       GHAssertTrue( [ decoder_ isMemberOfClass   : [ JNStubDecoder class ]  ], @"This should be JNStubDecoder class" );
    }
 
    {
-      decoder_ = [ JNHttpEncodingsFactory decoderForHeaderString: @"abrakadabra" ];
+      decoder_ = [ self->_factory decoderForHeaderString: @"abrakadabra" ];
       GHAssertNotNil( decoder_, @"NOT nil data Expected" );
       GHAssertTrue( [ decoder_ conformsToProtocol: @protocol(JNHttpDecoder) ], @"This class should conform protocol" );
       GHAssertTrue( [ decoder_ isMemberOfClass   : [ JNStubDecoder class ]  ], @"This should be JNStubDecoder class" );
