@@ -5,10 +5,11 @@
 @implementation JFFURLResponse
 
 @dynamic expectedContentLength;
+@dynamic contentEncoding;
 
 - (unsigned long long)expectedContentLength
 {
-    id contentLengthObj_ = _allHeaderFields[@"Content-Length"];
+    id contentLengthObj_ = self->_allHeaderFields[@"Content-Length"];
     
     SEL ulongSelector_ = @selector(unsignedLongLongValue);
     if ( [ contentLengthObj_ respondsToSelector: ulongSelector_ ] )
@@ -25,6 +26,11 @@
 {
     NSString *custom = [JFFUrlResponseLogger descriptionStringForUrlResponse:self];
     return [[NSString alloc] initWithFormat:@"%@ \n   %@", [super description], custom];
+}
+
+-(NSString*)contentEncoding
+{
+    return self->_allHeaderFields[@"Content-Encoding"];
 }
 
 @end

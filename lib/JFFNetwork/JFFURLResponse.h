@@ -9,4 +9,6 @@
 
 @property (nonatomic, readonly) unsigned long long expectedContentLength;
 
+@property ( nonatomic, readonly ) NSString* contentEncoding;
+
 @end
