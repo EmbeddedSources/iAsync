@@ -2,7 +2,7 @@
 
 @implementation JFFFoursquareAuthURLError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"FOUTSQUARE_BAD_AUTH_URL", nil)];
 }

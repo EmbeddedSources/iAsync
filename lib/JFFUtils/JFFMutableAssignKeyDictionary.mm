@@ -107,7 +107,7 @@ typedef std::map<__unsafe_unretained id, JFFSimpleBlock> BlockByPtr;
     return (NSUInteger)((__bridge void*)_dictKeyObject);
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFMutableAssignDictionaryKeyWrapper *copy = [[[self class] allocWithZone:zone] init];
     
@@ -118,7 +118,7 @@ typedef std::map<__unsafe_unretained id, JFFSimpleBlock> BlockByPtr;
     return copy;
 }
 
-- (id)initWithDictKeyObject:(__unsafe_unretained id)object
+- (instancetype)initWithDictKeyObject:(__unsafe_unretained id)object
 {
     self = [super init];
     

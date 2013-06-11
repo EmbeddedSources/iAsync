@@ -137,7 +137,7 @@
     return self;
 }
 
-- (id)jffMeaningClass
+- (Class)jffMeaningClass
 {
     return [[self class] jffMeaningClass];
 }

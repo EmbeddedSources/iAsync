@@ -16,6 +16,6 @@
 
 + (NSString *)redirectURI;
 
-+ (id)shared;
++ (instancetype)shared;
 
 @end

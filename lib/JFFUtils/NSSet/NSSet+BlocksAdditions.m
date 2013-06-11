@@ -4,7 +4,7 @@
 
 @implementation NSMutableSet (BlocksAdditions)
 
-+ (id)converToCurrentTypeMutableSet:(NSMutableSet *)set
++ (instancetype)converToCurrentTypeMutableSet:(NSMutableSet *)set
 {
     return set;
 }
@@ -13,13 +13,13 @@
 
 @implementation NSSet (BlocksAdditions)
 
-+ (id)converToCurrentTypeMutableSet:(NSMutableSet *)set
++ (instancetype)converToCurrentTypeMutableSet:(NSMutableSet *)set
 {
     return [set copy];
 }
 
-+ (id)setWithSize:(NSUInteger)size
-         producer:(JFFProducerBlock)block
++ (instancetype)setWithSize:(NSUInteger)size
+                   producer:(JFFProducerBlock)block
 {
     NSMutableSet *result = [[NSMutableSet alloc] initWithCapacity:size];
     
@@ -30,19 +30,19 @@
     return [self converToCurrentTypeMutableSet:result];
 }
 
-- (NSSet *)map:(JFFMappingBlock)block
+- (instancetype)map:(JFFMappingBlock)block
 {
     NSArray *arrray = [[self allObjects] map:block];
     return [NSSet setWithArray:arrray];
 }
 
-- (NSSet *)forceMap:(JFFMappingBlock)block
+- (instancetype)forceMap:(JFFMappingBlock)block
 {
     NSArray *arrray = [[self allObjects] forceMap:block];
     return [NSSet setWithArray:arrray];
 }
 
-- (NSSet *)select:(JFFPredicateBlock)predicate
+- (instancetype)select:(JFFPredicateBlock)predicate
 {
     return [self objectsPassingTest:^BOOL(id obj, BOOL *stop) {
         return predicate(obj);

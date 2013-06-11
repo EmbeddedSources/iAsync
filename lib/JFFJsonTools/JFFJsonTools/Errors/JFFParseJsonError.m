@@ -2,12 +2,12 @@
 
 @implementation JFFParseJsonError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"PARSE_JSON_ERROR", nil)];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFParseJsonError *copy = [super copyWithZone:zone];
     

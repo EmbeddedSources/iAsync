@@ -5,5 +5,4 @@
 @property (nonatomic) NSString *checkinID;
 @property (nonatomic) NSString *type;
 
-
 @end

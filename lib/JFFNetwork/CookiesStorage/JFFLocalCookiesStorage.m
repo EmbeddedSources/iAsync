@@ -7,7 +7,7 @@
     NSMutableSet *_allCookies;
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     

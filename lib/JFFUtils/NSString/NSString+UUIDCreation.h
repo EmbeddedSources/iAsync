@@ -2,6 +2,6 @@
 
 @interface NSString (UUIDCreation)
 
-+(NSString*)createUuid;
++ (instancetype)createUuid;
 
 @end

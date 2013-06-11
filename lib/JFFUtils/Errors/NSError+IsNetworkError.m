@@ -9,7 +9,8 @@
     
     NSInteger code = [self code];
     return code == kCFURLErrorNotConnectedToInternet
-    || code == kCFURLErrorTimedOut;
+    || code == kCFURLErrorTimedOut
+    || code == kCFURLErrorCannotConnectToHost;
 }
 
 @end

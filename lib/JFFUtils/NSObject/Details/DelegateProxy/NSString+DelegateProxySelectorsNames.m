@@ -2,7 +2,7 @@
 
 @implementation NSString (DelegateProxySelectorsNames)
 
-- (NSString*)hookedGetterMethodNameForClass:(Class)targetClass
+- (instancetype)hookedGetterMethodNameForClass:(Class)targetClass
 {
     NSString *result = [[NSString alloc]initWithFormat:@"hookedDelegateGetterName_%@_%@",
                         targetClass,

@@ -2,6 +2,6 @@
 
 @interface NSString (IsEmailValid)
 
--(BOOL)isEmailValid;
+- (BOOL)isEmailValid;
 
 @end

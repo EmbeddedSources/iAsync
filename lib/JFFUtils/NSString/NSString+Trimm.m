@@ -2,7 +2,7 @@
 
 @implementation NSString (Trimm)
 
--(NSRange)rangeForQuotesRemoval
+- (NSRange)rangeForQuotesRemoval
 {
     NSString *quotedString = self;
     
@@ -14,19 +14,19 @@
     return result;
 }
 
-- (NSString *)stringByTrimmingWhitespaces
+- (instancetype)stringByTrimmingWhitespaces
 {
     NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     return [self stringByTrimmingCharactersInSet:set];
 }
 
-- (NSString *)stringByTrimmingPunctuation
+- (instancetype)stringByTrimmingPunctuation
 {
     NSCharacterSet *set = [NSCharacterSet punctuationCharacterSet];
     return [self stringByTrimmingCharactersInSet:set];
 }
 
-- (NSString *)stringByTrimmingQuotes
+- (instancetype)stringByTrimmingQuotes
 {
     NSRange rangeWithoutQuotes = [self rangeForQuotesRemoval];
     NSString *result = [self substringWithRange:rangeWithoutQuotes];

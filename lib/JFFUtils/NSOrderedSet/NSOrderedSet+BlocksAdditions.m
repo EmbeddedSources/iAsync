@@ -2,7 +2,7 @@
 
 @implementation NSMutableOrderedSet (BlocksAdditions)
 
-+ (id)converToCurrentTypeMutableOrderedSet:(NSMutableOrderedSet *)set
++ (instancetype)converToCurrentTypeMutableOrderedSet:(NSMutableOrderedSet *)set
 {
     return set;
 }
@@ -11,13 +11,13 @@
 
 @implementation NSOrderedSet (BlocksAdditions)
 
-+ (id)converToCurrentTypeMutableOrderedSet:(NSMutableOrderedSet *)set
++ (instancetype)converToCurrentTypeMutableOrderedSet:(NSMutableOrderedSet *)set
 {
     return [set copy];
 }
 
-+ (id)setWithSize:(NSUInteger)size
-         producer:(JFFProducerBlock)block
++ (instancetype)setWithSize:(NSUInteger)size
+                   producer:(JFFProducerBlock)block
 {
     NSMutableOrderedSet *result = [[NSMutableOrderedSet alloc] initWithCapacity:size];
     
@@ -30,7 +30,7 @@
 
 //TODO test
 //TODO remove code duplicate
-- (NSOrderedSet *)map:(JFFMappingBlock)block
+- (instancetype)map:(JFFMappingBlock)block
 {
     NSMutableOrderedSet *result = [[NSMutableOrderedSet alloc] initWithCapacity:[self count]];
     
@@ -43,7 +43,7 @@
     return [result copy];
 }
 
-- (NSOrderedSet *)forceMap:(JFFMappingBlock)block
+- (instancetype)forceMap:(JFFMappingBlock)block
 {
     NSMutableOrderedSet *result = [[NSMutableOrderedSet alloc] initWithCapacity:[self count]];
     
@@ -80,7 +80,7 @@
     return ![self any:notPredicate];
 }
 
-- (NSOrderedSet *)select:(JFFPredicateBlock)predicate
+- (instancetype)select:(JFFPredicateBlock)predicate
 {
     NSIndexSet *indexes = [self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         

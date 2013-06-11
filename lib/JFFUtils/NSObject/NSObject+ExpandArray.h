@@ -2,6 +2,6 @@
 
 @interface NSArray (ExpandArray)
 
-- (id)expandArray;
+- (instancetype)expandArray;
 
 @end

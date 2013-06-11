@@ -2,7 +2,7 @@
 
 @implementation JFFFoursquaerAPIInvalidresponseError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"FOUTSQUARE_INVALID_API_RESPONSE", nil)];
 }

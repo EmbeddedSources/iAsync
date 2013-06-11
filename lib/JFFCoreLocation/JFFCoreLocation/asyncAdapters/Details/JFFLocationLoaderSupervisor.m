@@ -17,7 +17,7 @@
     _locationManager = nil;
 }
 
-- (id)initWithAccuracy:(CLLocationAccuracy)accuracy
+- (instancetype)initWithAccuracy:(CLLocationAccuracy)accuracy
 {
     self = [super init];
     
@@ -34,7 +34,7 @@
     return self;
 }
 
-+ (id)sharedLocationLoaderSupervisorWithAccuracy:(CLLocationAccuracy)accuracy
++ (instancetype)sharedLocationLoaderSupervisorWithAccuracy:(CLLocationAccuracy)accuracy
 {
     NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     

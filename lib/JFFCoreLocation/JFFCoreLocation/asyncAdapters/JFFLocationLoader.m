@@ -22,7 +22,7 @@ JFFLocationObserver
     JFFScheduler *_scheduler;
 }
 
-- (id)initWithAccuracy:(CLLocationAccuracy)accuracy
+- (instancetype)initWithAccuracy:(CLLocationAccuracy)accuracy
 {
     self = [super init];
     
@@ -33,7 +33,7 @@ JFFLocationObserver
     return self;
 }
 
-+ (id)newCoreLocationAsyncAdapterWithAccuracy:(double)accuracyInMeters
++ (instancetype)newCoreLocationAsyncAdapterWithAccuracy:(double)accuracyInMeters
 {
     return [[self alloc] initWithAccuracy:accuracyInMeters];
 }

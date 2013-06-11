@@ -2,6 +2,6 @@
 
 @interface NSString (HTML)
 
-- (NSString *)stringByTrimmingHTMLTags;
+- (instancetype)stringByTrimmingHTMLTags;
 
 @end

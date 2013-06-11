@@ -2,7 +2,7 @@
 
 @implementation NSString (Format)
 
-+ (id)stringWithFormatCheckNill:(NSString *)format, ...
++ (instancetype)stringWithFormatCheckNill:(NSString *)format, ...
 {
     if ([format length] == 0) {
         return nil;

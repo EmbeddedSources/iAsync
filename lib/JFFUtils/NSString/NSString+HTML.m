@@ -2,7 +2,7 @@
 
 @implementation NSString (HTML)
 
-- (NSString*)convertEntities
+- (instancetype)convertEntities
 {
     NSString *returnStr_ = self;
     

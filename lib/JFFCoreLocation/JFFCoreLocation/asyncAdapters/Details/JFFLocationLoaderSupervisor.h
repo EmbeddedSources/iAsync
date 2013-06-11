@@ -13,7 +13,7 @@
 
 @property(readonly, nonatomic) CLLocation *location;
 
-+ (id)sharedLocationLoaderSupervisorWithAccuracy:(CLLocationAccuracy)accuracy;
++ (instancetype)sharedLocationLoaderSupervisorWithAccuracy:(CLLocationAccuracy)accuracy;
 
 - (void)addLocationObserver:(id<JFFLocationObserver>)observer;
 - (void)removeLocationObserver:(id<JFFLocationObserver>)observer;

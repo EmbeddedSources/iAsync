@@ -20,7 +20,7 @@
     
     {
         JNConnectionsFactory *factory =
-        [[JNConnectionsFactory alloc]initWithURLConnectionParams:self.params];
+        [[JNConnectionsFactory alloc] initWithURLConnectionParams:self.params];
         
         self.connection = [factory createConnection];
     }
@@ -84,7 +84,7 @@
     [self.connection start];
 }
 
--(void)forceCancel
+- (void)forceCancel
 {
     [self cancel:YES];
 }

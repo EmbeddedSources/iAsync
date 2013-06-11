@@ -111,7 +111,7 @@
     return [_mutableArray count];
 }
 
-- (id)initWithObject:( id )anObject
+- (instancetype)initWithObject:( id )anObject
 {
     self = [super init];
     

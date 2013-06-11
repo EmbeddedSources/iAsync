@@ -2,9 +2,9 @@
 
 @implementation NSString (IsEmpty)
 
--(BOOL)hasSymbols
+- (BOOL)hasSymbols
 {
-    return ![ self isEqualToString: @"" ];
+    return ![self isEqualToString:@""];
 }
 
 - (BOOL)hasNonWhitespaceSymbols

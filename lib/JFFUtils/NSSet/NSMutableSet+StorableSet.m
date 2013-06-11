@@ -24,7 +24,7 @@
 
 @implementation NSMutableSet (StorableSet)
 
-+ (id)newStorableSetWithContentsOfFile:(NSString *)fileName
++ (instancetype)newStorableSetWithContentsOfFile:(NSString *)fileName
 {
     NSParameterAssert(fileName);
     

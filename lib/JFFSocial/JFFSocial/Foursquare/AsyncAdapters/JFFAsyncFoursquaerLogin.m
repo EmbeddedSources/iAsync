@@ -23,7 +23,7 @@
     JFFAsyncOperation loader = [application asyncOperationWithApplicationURL:url];
     
     loader(nil, nil, ^(id result, NSError *error) {
-        handler (result, error);
+        handler(result, error);
     });
 }
 

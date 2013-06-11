@@ -2,14 +2,14 @@
 
 @interface JFFError : NSError
 
-- (id)initWithDescription:(NSString *)description
-                   domain:(NSString *)domain
-                     code:(NSInteger)code;
+- (instancetype)initWithDescription:(NSString *)description
+                             domain:(NSString *)domain
+                               code:(NSInteger)code;
 
-- (id)initWithDescription:(NSString *)description;
-+ (id)newErrorWithDescription:(NSString *)description;
+- (instancetype)initWithDescription:(NSString *)description;
++ (instancetype)newErrorWithDescription:(NSString *)description;
 
-+ (id)newErrorWithDescription:(NSString *)description
-                         code:(NSInteger)code;
++ (instancetype)newErrorWithDescription:(NSString *)description
+                                   code:(NSInteger)code;
 
 @end

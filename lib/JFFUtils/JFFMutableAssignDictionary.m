@@ -84,8 +84,8 @@
 - (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block
 {
     [_mutableDictionary enumerateKeysAndObjectsUsingBlock:^(id key,
-                                                                  JFFAutoRemoveFromDictAssignProxy *proxy,
-                                                                  BOOL *stop) {
+                                                            JFFAutoRemoveFromDictAssignProxy *proxy,
+                                                            BOOL *stop) {
         block(key, proxy.target, stop);
     }];
 }

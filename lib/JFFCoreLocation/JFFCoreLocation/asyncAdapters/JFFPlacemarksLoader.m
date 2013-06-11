@@ -30,7 +30,7 @@ JFFAsyncOperationInterface
     CLGeocoder *_geocoder;
 }
 
-- (id)initWithLocation:(CLLocation *)location
+- (instancetype)initWithLocation:(CLLocation *)location
 {
     NSParameterAssert(location);
     
@@ -43,7 +43,7 @@ JFFAsyncOperationInterface
     return self;
 }
 
-+ (id)newPlacemarksAsyncAdapterWithLocation:(CLLocation *)location
++ (instancetype)newPlacemarksAsyncAdapterWithLocation:(CLLocation *)location
 {
     return [[self alloc] initWithLocation:location];
 }

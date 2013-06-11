@@ -2,8 +2,8 @@
 
 @implementation JFFPropertyPath
 
-- (id)initWithName:(NSString *)name
-               key:(id< NSCopying, NSObject >)key
+- (instancetype)initWithName:(NSString *)name
+                         key:(id<NSCopying, NSObject>)key
 {
     self = [super init];
     

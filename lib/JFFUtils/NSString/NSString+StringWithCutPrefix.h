@@ -2,6 +2,6 @@
 
 @interface NSString (StringWithCutPrefix)
 
--(id)stringWithCutPrefix:( NSString* )prefix_;
+- (instancetype)stringWithCutPrefix:(NSString *)prefix;
 
 @end
