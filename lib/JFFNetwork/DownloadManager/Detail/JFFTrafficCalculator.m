@@ -13,13 +13,13 @@
 
 @implementation JFFDownloadedBytesPerDate
 
--(id)initWithBytesCount:( NSUInteger )bytesCount_
+- (instancetype)initWithBytesCount:( NSUInteger )bytesCount_
 {
-    self = [ super init ];
-
-    if ( self )
-    {
-        _date       = [ NSDate new ];
+    self = [super init];
+    
+    if (self) {
+        
+        _date       = [NSDate new];
         _bytesCount = bytesCount_;
     }
 
@@ -36,7 +36,7 @@
     JFFScheduler* _scheduler;
 }
 
--(id)initWithDelegate:( id< JFFTrafficCalculatorDelegate > )delegate_
+- (instancetype)initWithDelegate:(id<JFFTrafficCalculatorDelegate>)delegate_
 {
     self = [ super init ];
 
@@ -49,7 +49,7 @@
     return self;
 }
 
--(void)removeOldItemsFromDownloadingSpeedInfo
+- (void)removeOldItemsFromDownloadingSpeedInfo
 {
     static NSTimeInterval average_speed_duration_ = 3.0;
 
@@ -62,7 +62,7 @@
     }
 }
 
--(void)calculateDownloadSpeed
+- (void)calculateDownloadSpeed
 {
     [ self removeOldItemsFromDownloadingSpeedInfo ];
 
@@ -116,7 +116,7 @@
         [weakSelf calculateDownloadSpeed];
     };
     
-    _scheduler = [ JFFScheduler new ];
+    _scheduler = [JFFScheduler new];
     [_scheduler addBlock:block duration:calculateSpeedInterval];
 }
 

@@ -12,13 +12,13 @@
     CFRelease(_rawBook);
 }
 
-- (id)init
+- (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
-- (id)initWithRawBook:(ABAddressBookRef)rawBook_
+- (instancetype)initWithRawBook:(ABAddressBookRef)rawBook_
 {
     NSParameterAssert(NULL != rawBook_);
     

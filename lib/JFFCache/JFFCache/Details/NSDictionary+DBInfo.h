@@ -3,7 +3,7 @@
 @interface NSDictionary (DBInfo)
 
 - (NSNumber *)timeToLiveInHoursForDBWithName:(NSString *)name;
-- (NSDictionary *)autoRemoveProperiesForDBWithName:(NSString *)name;
+- (instancetype)autoRemoveProperiesForDBWithName:(NSString *)name;
 
 - (NSString *)fileNameForDBWithName:(NSString *)name;
 - (NSUInteger)versionForDBWithName:(NSString *)name;

@@ -13,7 +13,7 @@
     id<JFFQueueStrategy> _orderStrategy;
 }
 
-- (id)initWithExecutionOrder:(JFFQueueExecutionOrder)orderStrategyId
+- (instancetype)initWithExecutionOrder:(JFFQueueExecutionOrder)orderStrategyId
 {
     self = [super init];
     
@@ -34,7 +34,7 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithExecutionOrder:JQOrderFifo];
 }

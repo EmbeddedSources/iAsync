@@ -7,7 +7,7 @@
 - (BOOL)matchesURL:(NSURL *)url
 {
     return [url.host domainMatchesCookiesDomain:self.domain]
-    && [url.path pathMatchesCookiesPath    :self.path  ];
+    && [url.path pathMatchesCookiesPath:self.path];
 }
 
 @end

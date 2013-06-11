@@ -10,24 +10,24 @@
 
 @implementation JFFRuntimeInitializer
 
--(void)deallocRemoveAssociatedObjectsHook
+- (void)deallocRemoveAssociatedObjectsHook
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
 }
 
--(void)deallocRemoveAssociatedObjectsPrototype
+- (void)deallocRemoveAssociatedObjectsPrototype
 {
-    objc_removeAssociatedObjects( self );
-
-    [ self deallocRemoveAssociatedObjectsHook ];
+    objc_removeAssociatedObjects(self);
+    
+    [self deallocRemoveAssociatedObjectsHook];
 }
 
-+(void)load
++ (void)load
 {
-    [ self hookInstanceMethodForClass: [ NSObject class ]
-                         withSelector: @selector( dealloc )
-              prototypeMethodSelector: @selector( deallocRemoveAssociatedObjectsPrototype )
-                   hookMethodSelector: @selector( deallocRemoveAssociatedObjectsHook ) ];
+    [self hookInstanceMethodForClass:[NSObject class]
+                        withSelector:@selector(dealloc)
+             prototypeMethodSelector:@selector(deallocRemoveAssociatedObjectsPrototype)
+                  hookMethodSelector:@selector(deallocRemoveAssociatedObjectsHook)];
 }
 
 @end

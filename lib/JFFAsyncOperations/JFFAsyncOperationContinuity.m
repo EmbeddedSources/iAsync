@@ -108,7 +108,7 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
 JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders)
 {
     assert(loaders.lastObject); //should not be empty
-    loaders = [loaders map: ^id(id object) {
+    loaders = [loaders map:^id(id object) {
         JFFAsyncOperation loader = [object copy];
         return ^JFFAsyncOperation(id result) {
             return loader;
@@ -263,7 +263,7 @@ JFFAsyncOperation trySequenceOfAsyncOperationsArray(NSArray *loaders)
         return ^JFFAsyncOperation(id data) {
             return loader;
         };
-    } ];
+    }];
     
     return MergeBinders(bindTrySequenceOfBindersPair, binders)(nil);
 }

@@ -233,8 +233,8 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext(JFFAsyncOperation nati
         
         // JTODO check native loader no within balancer !!!
         JFFCancelAsyncOperation cancelBlock = nativeLoader(wrappedProgressCallback,
-                                                            wrappedCancelCallback,
-                                                            wrappedDoneCallback);
+                                                           wrappedCancelCallback,
+                                                           wrappedDoneCallback);
         
         if (done) {
             return JFFStubCancelAsyncOperationBlock;
@@ -244,7 +244,7 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext(JFFAsyncOperation nati
         
         JFFCancelAsyncOperation wrappedCancelBlock = [^void(BOOL canceled) {
             if (canceled) {
-                cancelBlock( YES );
+                cancelBlock(YES);
             } else {
                 cancelCallbackBlockHolder.onceCancelBlock(NO);
                 

@@ -9,13 +9,13 @@
     return [NSString documentsPathByAppendingPathComponent:@"JFFDownloadFilesInfo.data"];
 }
 
-+(NSMutableDictionary*)dictionaryWithDownloadFilesInfo
++ (NSMutableDictionary *)dictionaryWithDownloadFilesInfo
 {
     NSMutableDictionary *result_ = [ NSMutableDictionary dictionaryWithContentsOfFile: [ self storePathForDownloadFilesInfo ] ];
     return result_ ?: [NSMutableDictionary new];
 }
 
--(void)writeToFileDownloadFilesInfo
+- (void)writeToFileDownloadFilesInfo
 {
     [ self writeToFile: [ [ self class ] storePathForDownloadFilesInfo ] atomically: NO ];
 }

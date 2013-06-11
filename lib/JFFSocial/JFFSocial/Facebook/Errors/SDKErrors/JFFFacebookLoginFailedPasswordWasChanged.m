@@ -6,7 +6,7 @@
 
 @implementation JFFFacebookLoginFailedPasswordWasChanged
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"FACEBOOK_LOGIN_ERROR_USER_DENIED_PERMISSION", nil)];
 }

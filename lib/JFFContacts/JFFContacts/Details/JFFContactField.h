@@ -10,9 +10,9 @@
 
 @property (nonatomic) id value;
 
-+ (id)newContactFieldWithName:(NSString *)name
-                   propertyID:(ABPropertyID)propertyID
-                       record:(ABRecordRef)record;
++ (instancetype)newContactFieldWithName:(NSString *)name
+                             propertyID:(ABPropertyID)propertyID
+                                 record:(ABRecordRef)record;
 
 - (void)setPropertyFromValue:(id)value;
 

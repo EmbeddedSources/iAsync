@@ -5,9 +5,11 @@
 
 @implementation NSMutableURLRequest (CreateRequestWithURLParams)
 
-+ (id)mutableURLRequestWithParams:(JFFURLConnectionParams *)params
++ (instancetype)mutableURLRequestWithParams:(JFFURLConnectionParams *)params
 {
-    NSParameterAssert((!params.httpBody && !params.httpBodyStream) || !(params.httpBody && params.httpBodyStream));
+    NSInputStream *inputStream = params.httpBodyStreamBuilder?params.httpBodyStreamBuilder():nil;
+    
+    NSParameterAssert((!params.httpBody && !inputStream) || !(params.httpBody && inputStream));
     
     static const NSTimeInterval timeout = 60.;
     NSMutableURLRequest *request = [self requestWithURL:params.url
@@ -15,11 +17,11 @@
                                         timeoutInterval:timeout];
     
     NSString *httpMethod = params.httpMethod ?: @"GET";
-    if (!params.httpMethod && (params.httpBody || params.httpBodyStream)) {
+    if (!params.httpMethod && (params.httpBody || inputStream)) {
         httpMethod = @"POST";
     }
     
-    [request setHTTPBodyStream:params.httpBodyStream];
+    [request setHTTPBodyStream:inputStream];
     if (params.httpBody)
         [request setHTTPBody:params.httpBody];
     

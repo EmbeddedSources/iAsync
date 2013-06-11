@@ -23,7 +23,7 @@ static NSString *loginAndPasswordComponentStr(NSString *login, NSString *passwor
 
 @implementation NSURL (URLWithLocation)
 
-- (id)URLWithLocation:(NSString *)location
+- (instancetype)URLWithLocation:(NSString *)location
 {
     NSParameterAssert([location hasPrefix:@"/"]);
     

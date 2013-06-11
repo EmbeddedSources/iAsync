@@ -2,7 +2,7 @@
 
 @interface UIImage (ScaleToSize)
 
-- (UIImage *)imageScaledToSize:(CGSize)targetSize
-                   contentMode:(UIViewContentMode)contentMode;
+- (instancetype)imageScaledToSize:(CGSize)targetSize
+                      contentMode:(UIViewContentMode)contentMode;
 
 @end

@@ -22,12 +22,12 @@ extern "C" {
 //calls binders while success
     JFFAsyncOperationBinder binderAsSequenceOfBinders(JFFAsyncOperationBinder firstBinder, ...) NS_REQUIRES_NIL_TERMINATION;
 
-JFFAsyncOperationBinder binderAsSequenceOfBindersArray(NSArray *binders);
+    JFFAsyncOperationBinder binderAsSequenceOfBindersArray(NSArray *binders);
 
 //calls binders while success
     JFFAsyncOperation bindSequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
                                                     JFFAsyncOperationBinder secondLoaderBinder_, ...) NS_REQUIRES_NIL_TERMINATION;
-
+    
     JFFAsyncOperation bindSequenceOfAsyncOperationsArray(JFFAsyncOperation firstLoader,
                                                          NSArray *loadersBinders);
 
@@ -36,7 +36,7 @@ JFFAsyncOperationBinder binderAsSequenceOfBindersArray(NSArray *binders);
 //calls loaders untill success
     JFFAsyncOperation trySequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
                                                    JFFAsyncOperation secondLoader, ...) NS_REQUIRES_NIL_TERMINATION;
-
+    
     JFFAsyncOperation trySequenceOfAsyncOperationsArray(NSArray *loaders);
 
 /////////////////////////////// TRY SEQUENCE WITH BINDING ///////////////////////////////
@@ -55,9 +55,9 @@ JFFAsyncOperationBinder binderAsSequenceOfBindersArray(NSArray *binders);
 
 //calls finish callback when all loaders finished
     JFFAsyncOperation groupOfAsyncOperations(JFFAsyncOperation firstLoader, ...) NS_REQUIRES_NIL_TERMINATION;
-
+    
     JFFAsyncOperation groupOfAsyncOperationsArray(NSArray *loaders);
-
+    
 ///////////////////////////// FAIL ON FIRST ERROR GROUP ////////////////////////////
 
 //calls finish callback when all loaders success finished or when any of them is failed

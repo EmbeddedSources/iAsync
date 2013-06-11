@@ -16,6 +16,7 @@
 #import <JFFUtils/NSArray/NSArray+ToURLsSkippingNils.h>
 #import <JFFUtils/NSArray/NSMutableArray+ChangeCount.h>
 #import <JFFUtils/NSArray/NSArray+NoThrowObjectAtIndex.h>
+#import <JFFUtils/NSArray/NSArray+ArrayByRemovingObject.h>
 
 #import <JFFUtils/NSOrderedSet/NSOrderedSet+BlocksAdditions.h>
 #import <JFFUtils/NSOrderedSet/NSOrderedSet+NoThrowObjectAtIndex.h>
@@ -59,7 +60,6 @@
 #import <JFFUtils/Blocks/JUContainersHelperBlocks.h>
 
 #import <JFFUtils/Categories/NSData+ToString.h>
-#import <JFFUtils/Categories/UIWebView+UserAgent.h>
 #import <JFFUtils/Categories/UIColor+ColorForHex.h>
 #import <JFFUtils/Categories/NSNumber+FSStorable.h>
 #import <JFFUtils/Categories/UIDevice+PlatformName.h>

@@ -55,19 +55,19 @@
 }
 
 //http://jigsaw.w3.org/HTTP/300/Go_301
--(void)testRedirectOnHttp301Code
+- (void)testRedirectOnHttp301Code
 {
     NSUInteger initialInstancesCount_ = [JFFURLConnection instancesCount];
-
-    [ self prepare ];
-
-    __block NSError* didFinishLoadingBlockError_;
-
+    
+    [self prepare];
+    
+    __block NSError *didFinishLoadingBlockError_;
+    
     NSURL* dataUrl_ = [ NSURL URLWithString: @"http://jigsaw.w3.org/HTTP/300/301.html" ];
     NSData* expectedData_ = [[NSData alloc] initWithContentsOfURL:dataUrl_];
-
+    
     NSMutableData* totalData_ = [ NSMutableData new ];
-
+    
     @autoreleasepool
     {
         JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
@@ -85,7 +85,7 @@
         {
             [ totalData_ appendData: dataChunk_ ];
         };
-
+        
         connection_.didFinishLoadingBlock = ^( NSError* error_ )
         {
             didFinishLoadingBlockError_ = error_;

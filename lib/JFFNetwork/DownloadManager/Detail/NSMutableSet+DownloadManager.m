@@ -4,7 +4,7 @@
 
 @implementation NSMutableSet (DownloadManager)
 
-+(NSString*)storePathForDownloadedFiles
++ (NSString *)storePathForDownloadedFiles
 {
     return [ NSString documentsPathByAppendingPathComponent: @"JFFDownloadedFiles.data" ];
 }
@@ -35,7 +35,7 @@
     [self writeToFileDownloadedFiles];
 }
 
--(BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
+- (BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
 {
     BOOL result_ = [ self containsObject: filePath_ ];
     if ( result_ && ![ [ NSFileManager defaultManager ] fileExistsAtPath: filePath_ ] )
@@ -46,17 +46,17 @@
     return result_;
 }
 
-+(void)addDownloadedFileWithPath:( NSString* )filePath_
++ (void)addDownloadedFileWithPath:( NSString* )filePath_
 {
     [ [ self setWithDownloadedFiles ] addDownloadedFileWithPath: filePath_ ];
 }
 
-+(BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
++ (BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
 {
     return [ [ self setWithDownloadedFiles ] containsDownloadedFileWithPath: filePath_ ];
 }
 
-+(void)removeDownloadedFileWithPath:( NSString* )filePath_
++ (void)removeDownloadedFileWithPath:( NSString* )filePath_
 {
     [ [ self setWithDownloadedFiles ] removeDownloadedFileWithPath: filePath_ ];
 }

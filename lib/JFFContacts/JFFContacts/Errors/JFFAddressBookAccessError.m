@@ -2,7 +2,7 @@
 
 @implementation JFFAddressBookAccessError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"ADDRESS_BOOK_ACCESS_ERROR", nil)];
 }

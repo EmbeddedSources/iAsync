@@ -12,6 +12,6 @@ JFFBaseLoaderOwner;
 
 - (void)executePendingLoader:(JFFBaseLoaderOwner *)pendingLoader;
 
-- (id)initWithQueueState:(JFFQueueState *)queueState;
+- (instancetype)initWithQueueState:(JFFQueueState *)queueState;
 
 @end

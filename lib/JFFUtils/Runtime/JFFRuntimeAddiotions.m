@@ -258,6 +258,8 @@ void jClass_implementProperty(Class cls, NSString *propertyName)
         }
     }
     
+    NSCAssert([encoding length] != 0, @"encoding is required");
+    
     if (!getterName) {
         getterName = propertyName;
     }

@@ -16,8 +16,8 @@
 @property (nonatomic, copy) JFFCancelAsyncOperationHandler cancelCallback;
 @property (nonatomic, copy) JFFDidFinishAsyncOperationHandler doneCallback;
 
-+ (id)newLoaderOwnerWithLoader:(JFFAsyncOperation)loader
-                         queue:(JFFLimitedLoadersQueue *)queue;
++ (instancetype)newLoaderOwnerWithLoader:(JFFAsyncOperation)loader
+                                   queue:(JFFLimitedLoadersQueue *)queue;
 
 - (void)performLoader;
 

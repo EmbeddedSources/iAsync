@@ -17,7 +17,7 @@
     dispatch_queue_t _dispatchQueue;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     JFFProxyObjectContainer *container = _container;
     void (^releaseListener)(void) = ^void(void) {
@@ -27,8 +27,8 @@
     dispatch_release(_dispatchQueue);
 }
 
-- (id)initWithTargetFactory:(JFFObjectFactory)factory
-              dispatchQueue:(dispatch_queue_t)dispatchQueue
+- (instancetype)initWithTargetFactory:(JFFObjectFactory)factory
+                        dispatchQueue:(dispatch_queue_t)dispatchQueue
 {
     _dispatchQueue = dispatchQueue;
     dispatch_retain(_dispatchQueue);
@@ -43,8 +43,8 @@
     return self;
 }
 
-+ (id)singleThreadProxyWithTargetFactory:(JFFObjectFactory)factory
-                           dispatchQueue:(dispatch_queue_t)dispatchQueue
++ (instancetype)singleThreadProxyWithTargetFactory:(JFFObjectFactory)factory
+                                     dispatchQueue:(dispatch_queue_t)dispatchQueue
 {
     return [[self alloc] initWithTargetFactory:factory
                                  dispatchQueue:dispatchQueue];

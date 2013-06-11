@@ -2,12 +2,12 @@
 
 @implementation JFFJsonValidationError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"JSON_VALIDATION_ERROR", nil)];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFJsonValidationError *copy = [super copyWithZone:zone];
     

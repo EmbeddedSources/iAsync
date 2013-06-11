@@ -7,6 +7,7 @@
 
 - (NSString *)writeToTmpFile
 {
+    //TODO refactor to use less memory
     NSData *data = UIImagePNGRepresentation(self);
     
     NSString *filePath = [NSString createUuid];

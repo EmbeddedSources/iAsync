@@ -5,13 +5,13 @@
 
 @implementation JFFBaseStrategy
 
-- (id)init
+- (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
-- (id)initWithQueueState:(JFFQueueState *)queueState
+- (instancetype)initWithQueueState:(JFFQueueState *)queueState
 {
     self = [super init];
     
@@ -25,7 +25,7 @@
 - (void)executePendingLoader:(JFFBaseLoaderOwner *)pendingLoader
 {
     [_queueState->_pendingLoaders removeObject:pendingLoader];
-    [_queueState->_activeLoaders addObject:pendingLoader];
+    [_queueState->_activeLoaders  addObject:pendingLoader];
     
 #ifdef DEBUG
     NSUInteger pendingLoadersCount = [_queueState->_pendingLoaders count];

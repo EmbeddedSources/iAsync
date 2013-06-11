@@ -40,7 +40,7 @@
     }
     
     //clear property
-    if ( [ self.propertyDataByPropertyName count ] == 0 ) {
+    if ([self.propertyDataByPropertyName count] == 0) {
         self.propertyDataByPropertyName = nil;
     }
 }

@@ -2,17 +2,16 @@
 
 @interface NSData (DataForHTTPPost)
 
-+ (NSData *)dataForHTTPPostWithData:(NSData *)data
-                        andFileName:(NSString *)fileName
-                   andParameterName:(NSString *)parameter
-                           boundary:(NSString *)boundary;
++ (instancetype)dataForHTTPPostWithData:(NSData *)data
+                            andFileName:(NSString *)fileName
+                       andParameterName:(NSString *)parameter
+                               boundary:(NSString *)boundary;
 
-+ (NSData *)mutableDataForHTTPPostWithData:(NSData *)data
-                               andFileName:(NSString *)fileName
-                          andParameterName:(NSString *)parameter
-                                  boundary:(NSString *)boundary;
+@end
 
-- (NSData *)dataForHTTPPostByAppendingParameters:(NSDictionary *)parameters
-                                        boundary:(NSString *)boundary;
+@interface NSMutableData (DataForHTTPPost)
+
+- (void)appendHTTPParameters:(NSDictionary *)parameters
+                    boundary:(NSString *)boundary;
 
 @end

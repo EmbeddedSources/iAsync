@@ -2,7 +2,7 @@
 
 @implementation NSObject (CompositeKey)
 
--(NSString*)toCompositeKey
+- (NSString *)toCompositeKey
 {
     NSAssert(NO, @"Don't support this method.\n");
     return nil;

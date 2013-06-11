@@ -6,6 +6,6 @@
 
 @property (nonatomic) NSError *nativeError;
 
-+ (id)newFacebookSDKErrorsWithNativeError:(NSError *)nativeError;
++ (instancetype)newFacebookSDKErrorsWithNativeError:(NSError *)nativeError;
 
 @end

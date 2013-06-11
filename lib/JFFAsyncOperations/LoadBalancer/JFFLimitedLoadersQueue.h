@@ -5,7 +5,7 @@
 
 @interface JFFLimitedLoadersQueue : NSObject
 
--(id)initWithExecutionOrder:( JFFQueueExecutionOrder )orderStrategyId;
+- (instancetype)initWithExecutionOrder:(JFFQueueExecutionOrder)orderStrategyId;
 
 //default value is 10
 @property (nonatomic) NSUInteger limitCount;

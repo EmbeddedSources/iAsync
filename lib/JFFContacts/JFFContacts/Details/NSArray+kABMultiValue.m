@@ -2,7 +2,7 @@
 
 @implementation NSArray (kABMultiValue)
 
-+ (id)arrayWithMultyValue:(ABMutableMultiValueRef)multyValue
++ (instancetype)arrayWithMultyValue:(ABMutableMultiValueRef)multyValue
 {
     CFIndex count = multyValue
         ? ABMultiValueGetCount(multyValue)

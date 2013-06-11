@@ -4,10 +4,10 @@
 
 @implementation JFFAsyncOperationLoadBalancerContexts
 {
-    NSMutableDictionary* _contextLoadersByName;
+    NSMutableDictionary *_contextLoadersByName;
 }
 
-+ (id)sharedBalancer
++ (instancetype)sharedBalancer
 {
     NSParameterAssert([NSThread isMainThread]);
     static JFFAsyncOperationLoadBalancerContexts *instance;
@@ -19,7 +19,7 @@
     return instance;
 }
 
--(NSString*)currentContextName
+- (NSString *)currentContextName
 {
     if (!_currentContextName) {
         _currentContextName = self.activeContextName;
@@ -27,7 +27,7 @@
     return _currentContextName;
 }
 
--(NSString*)activeContextName
+- (NSString *)activeContextName
 {
     if (!_activeContextName ) {
         _activeContextName = @"default";
@@ -35,7 +35,7 @@
     return _activeContextName;
 }
 
--(NSMutableDictionary*)contextLoadersByName
+- (NSMutableDictionary *)contextLoadersByName
 {
     if (!_contextLoadersByName) {
         _contextLoadersByName = [NSMutableDictionary new];

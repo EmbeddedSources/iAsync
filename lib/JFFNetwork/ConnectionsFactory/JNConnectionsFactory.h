@@ -6,7 +6,7 @@
 
 @interface JNConnectionsFactory : NSObject 
 
-- (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params;
+- (instancetype)initWithURLConnectionParams:(JFFURLConnectionParams *)params;
 
 - (id< JNUrlConnection >)createFastConnection;
 - (id< JNUrlConnection >)createStandardConnection;

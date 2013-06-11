@@ -29,7 +29,7 @@ NSString *JFFNoImageDataURLString = @"nodata://jff.cache.com";
 
 @implementation JFFCanNotCreateImageError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:@"can not create image with given data"];
 }
@@ -89,7 +89,7 @@ static JFFAsyncOperation balanced(JFFAsyncOperation loader)
 
 @implementation JFFImageCacheAdapter
 
-+ (id)new
++ (instancetype)new
 {
     return [self newCacheAdapterWithCacheFactory:^id{return [JFFCaches createThumbnailDB];}
                                   cacheQueueName:cacheQueueName];
@@ -124,7 +124,7 @@ static JFFThumbnailStorage *glStorageInstance = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     
@@ -147,7 +147,7 @@ static JFFThumbnailStorage *glStorageInstance = nil;
     return _imagesByUrl;
 }
 
-+ (JFFThumbnailStorage *)sharedStorage
++ (instancetype)sharedStorage
 {
     if (!glStorageInstance) {
         glStorageInstance = [self new];

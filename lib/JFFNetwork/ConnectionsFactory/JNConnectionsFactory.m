@@ -11,13 +11,13 @@
 
 #pragma mark -
 #pragma mark Constructor
-- (id)init
+- (instancetype)init
 {
     [ self doesNotRecognizeSelector: _cmd ];
     return nil;
 }
 
-- (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params
+- (instancetype)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
     NSParameterAssert(params.url);
     
@@ -32,17 +32,17 @@
 
 #pragma mark -
 #pragma mark Factory
--(id< JNUrlConnection >)createFastConnection
+- (id< JNUrlConnection >)createFastConnection
 {
     return [[JFFURLConnection alloc] initWithURLConnectionParams:_params];
 }
 
--(id< JNUrlConnection >)createStandardConnection
+- (id< JNUrlConnection >)createStandardConnection
 {
     return [[JNNsUrlConnection alloc] initWithURLConnectionParams:_params];
 }
 
--(id< JNUrlConnection >)createConnection
+- (id< JNUrlConnection >)createConnection
 {
     if (nil == _params) {
 

@@ -6,7 +6,7 @@ typedef void (^JFFAsyncOperationInterfaceResultHandler)(id, NSError *);
 typedef void (^JFFAsyncOperationInterfaceCancelHandler)(BOOL canceled);
 typedef void (^JFFAsyncOperationInterfaceProgressHandler)(id);
 
-@protocol JFFAsyncOperationInterface < NSObject >
+@protocol JFFAsyncOperationInterface <NSObject>
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler

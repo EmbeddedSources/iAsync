@@ -4,7 +4,7 @@
 
 @implementation JFFAsyncOperationAdapter
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (nil == self) {

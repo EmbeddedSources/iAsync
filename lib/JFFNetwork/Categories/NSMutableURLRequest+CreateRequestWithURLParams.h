@@ -4,6 +4,6 @@
 
 @interface NSMutableURLRequest (CreateRequestWithURLParams)
 
-+ (id)mutableURLRequestWithParams:(JFFURLConnectionParams *)params;
++ (instancetype)mutableURLRequestWithParams:(JFFURLConnectionParams *)params;
 
 @end

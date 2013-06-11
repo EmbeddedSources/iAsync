@@ -10,7 +10,7 @@
 @property (nonatomic) NSString *activeContextName;
 @property (nonatomic, readonly) NSMutableDictionary *contextLoadersByName;
 
-+(id)sharedBalancer;
++ (instancetype)sharedBalancer;
 
 - (JFFContextLoaders *)activeContextLoaders;
 - (JFFContextLoaders *)currentContextLoaders;

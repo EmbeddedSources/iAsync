@@ -3,7 +3,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol JFFAsyncOperationInterface;
-typedef id< JFFAsyncOperationInterface >(^JFFAsyncOperationInstanceBuilder)(void);
+typedef id<JFFAsyncOperationInterface> (^JFFAsyncOperationInstanceBuilder)(void);
 
 #ifdef __cplusplus
 extern "C" {

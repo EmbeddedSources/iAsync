@@ -33,10 +33,10 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray(NSArray *elements
     NSArray* _labels;
 }
 
-+ (id)newContactFieldWithName:(NSString *)name
-                   propertyID:(ABPropertyID)propertyID
-                       labels:(NSArray *)labels
-                       record:(ABRecordRef)record
++ (instancetype)newContactFieldWithName:(NSString *)name
+                             propertyID:(ABPropertyID)propertyID
+                                 labels:(NSArray *)labels
+                                 record:(ABRecordRef)record
 {
     JFFContactDictionaryArrayField *result = [self newContactFieldWithName:name
                                                                 propertyID:propertyID

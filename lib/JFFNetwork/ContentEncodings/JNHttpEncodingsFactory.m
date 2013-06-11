@@ -5,7 +5,7 @@
 
 @implementation JNHttpEncodingsFactory
 
-+(id<JNHttpDecoder>)decoderForHeaderString:( NSString* )headerString_
++ (id<JNHttpDecoder>)decoderForHeaderString:( NSString* )headerString_
 {
     NSDictionary* decoderClasses_ = @{@"gzip": [ JNGzipDecoder class ]};
 
@@ -17,15 +17,14 @@
     return [decoderClass_ new];
 }
 
-+(id<JNHttpDecoder>)gzipDecoder
++ (id<JNHttpDecoder>)gzipDecoder
 {
-    return [ JNGzipDecoder new ];
+    return [JNGzipDecoder new];
 }
 
-
-+(id<JNHttpDecoder>)stubDecoder
++ (id<JNHttpDecoder>)stubDecoder
 {
-    return [ JNStubDecoder new ];
+    return [JNStubDecoder new];
 }
 
 @end

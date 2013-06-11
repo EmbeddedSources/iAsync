@@ -33,7 +33,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 @property (nonatomic, readonly) dispatch_queue_t queue;
 @property (nonatomic, readonly) NSString *folder;
 
-- (id)initWithDBName:(NSString *)dbName;
+- (instancetype)initWithDBName:(NSString *)dbName;
 
 - (BOOL)prepareQuery:(NSString *)sql
            statement:(sqlite3_stmt **)statement;
@@ -52,7 +52,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     dispatch_release(_dispatchQueue);
 }
 
-- (id)initWithDBName:(NSString *)dbName
+- (instancetype)initWithDBName:(NSString *)dbName
 {
     self = [super init];
     
@@ -149,7 +149,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     JFFSQLiteDB *_db;
 }
 
-- (id)initWithCacheFileName:(NSString *)cacheName
+- (instancetype)initWithCacheFileName:(NSString *)cacheName
 {
     NSParameterAssert(cacheName);
     

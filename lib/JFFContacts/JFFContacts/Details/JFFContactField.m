@@ -11,15 +11,15 @@
 
 @implementation JFFContactField
 
-- (id)init
+- (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
     return self;
 }
 
-- (id)initWithName:(NSString *)name
-        propertyID:(ABPropertyID)propertyID
-            record:(ABRecordRef)record
+- (instancetype)initWithName:(NSString *)name
+                  propertyID:(ABPropertyID)propertyID
+                      record:(ABRecordRef)record
 {
     self = [super init];
     
@@ -45,9 +45,9 @@
     return self;
 }
 
-+ (id)newContactFieldWithName:(NSString *)name
-                   propertyID:(ABPropertyID)propertyID
-                       record:(ABRecordRef)record
++ (instancetype)newContactFieldWithName:(NSString *)name
+                             propertyID:(ABPropertyID)propertyID
+                                 record:(ABRecordRef)record
 {
     return [[self alloc] initWithName:name
                            propertyID:propertyID

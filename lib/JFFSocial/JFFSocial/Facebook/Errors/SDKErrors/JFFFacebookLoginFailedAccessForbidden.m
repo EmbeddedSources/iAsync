@@ -6,7 +6,7 @@
 
 @implementation JFFFacebookLoginFailedAccessForbidden
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"FACEBOOK_LOGIN_ERROR_ACCESS_FORBIDDEN", nil)];
 }

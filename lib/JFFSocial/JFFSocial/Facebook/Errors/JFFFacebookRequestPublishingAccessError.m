@@ -2,7 +2,7 @@
 
 @implementation JFFFacebookRequestPublishingAccessError
 
-- (id)init
+- (instancetype)init
 {
     return [super initWithDescription:NSLocalizedString(@"FACEBOOK_GET_PUBLISH_PERMISSON_ERROR", nil)];
 }

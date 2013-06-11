@@ -30,8 +30,8 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
         
-        id< JFFAsyncOperationInterface > asyncObject = objectFactory();
-        __unsafe_unretained id< JFFAsyncOperationInterface > unretaintedAsyncObject = asyncObject;
+        id<JFFAsyncOperationInterface> asyncObject = objectFactory();
+        __unsafe_unretained id<JFFAsyncOperationInterface> unretaintedAsyncObject = asyncObject;
         
         doneCallback = [doneCallback copy];
         void (^completionHandler)(id, NSError*) = [^(id result, NSError *error) {
@@ -52,7 +52,7 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
             return result;
         };
         
-        __block JFFComplitionHandlerNotifier* proxy = (JFFComplitionHandlerNotifier*)
+        __block JFFComplitionHandlerNotifier *proxy = (JFFComplitionHandlerNotifier*)
             [JFFSingleThreadProxy singleThreadProxyWithTargetFactory:factory
                                                        dispatchQueue:dispatch_get_current_queue()];
         
@@ -60,9 +60,9 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
         
         void (^completionHandlerWrapper)(id, NSError *) = [^(id result, NSError *error) {
             
-            JFFComplitionHandlerNotifier* proxyOwner = proxy;
-            proxy = nil;
-            progressHandler = nil;
+            JFFComplitionHandlerNotifier *proxyOwner = proxy;
+            proxy                = nil;
+            progressHandler      = nil;
             cancelCallbackHolder = nil;//TODO what about other thread?
             [proxyOwner notifyCallbackWithResult:result error:error];
         } copy];

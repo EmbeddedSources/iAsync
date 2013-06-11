@@ -4,7 +4,7 @@
 
 @interface JFFBaseDB : NSObject
 
-- (id)initWithCacheFileName:(NSString *)cacheName;
+- (instancetype)initWithCacheFileName:(NSString *)cacheName;
 
 - (NSData *)dataForKey:(id)key;
 - (NSData *)dataForKey:(id)key lastUpdateTime:(NSDate **)date;

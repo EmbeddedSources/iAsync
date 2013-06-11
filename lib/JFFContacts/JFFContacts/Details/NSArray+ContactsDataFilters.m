@@ -2,24 +2,24 @@
 
 @implementation NSArray (ContactsDataFilters)
 
-- (id)jffContactsSelectNotEmptyStrings
+- (instancetype)jffContactsSelectNotEmptyStrings
 {
     NSArray *result = [self map:^id(NSString *str) {
         return [str stringByTrimmingWhitespaces];
     }];
     
     result = [result select:^BOOL(NSString *str) {
-        return [str length ] != 0;
+        return [str length] != 0;
     }];
     
     return result;
 }
 
-- (id)jffContactsSelectWithEmailOnly
+- (instancetype)jffContactsSelectWithEmailOnly
 {
     NSArray *result = [self map:^id(NSString *str) {
         return [str stringByTrimmingWhitespaces];
-    } ];
+    }];
     
     result = [result select:^BOOL(NSString *str) {
         return [str isEmailValid];

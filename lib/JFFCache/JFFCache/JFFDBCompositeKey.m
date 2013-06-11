@@ -10,7 +10,7 @@
 
 @implementation JFFDBCompositeKey
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFDBCompositeKey *copy = [[[self class] allocWithZone:zone] init];
     
@@ -32,7 +32,7 @@
     return [otherObject.keys isEqual:self.keys];
 }
 
-- (id)initWithKeys:(NSArray *)keys
+- (instancetype)initWithKeys:(NSArray *)keys
 {
     NSParameterAssert([keys isKindOfClass:[NSArray class]]);
     
@@ -45,7 +45,7 @@
     return self;
 }
 
-+ (id)compositeKeyWithKeys:(NSString *)key, ...
++ (instancetype)compositeKeyWithKeys:(NSString *)key, ...
 {
     NSMutableArray *keys = [NSMutableArray new];
     va_list args;
@@ -58,7 +58,7 @@
     return [[self alloc] initWithKeys:keys];
 }
 
-+ (id)compositeKeyWithKey:(JFFDBCompositeKey *)compositeKey forIndexes:(NSIndexSet *)indexes
++ (instancetype)compositeKeyWithKey:(JFFDBCompositeKey *)compositeKey forIndexes:(NSIndexSet *)indexes
 {
     NSUInteger size = [compositeKey.keys count];
     NSArray *newKeys = [NSArray arrayWithSize:size producer:^id(NSUInteger index) {

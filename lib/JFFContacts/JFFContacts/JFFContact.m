@@ -58,7 +58,7 @@ birthday,
 photo,
 addresses;
 
-- (id)init
+- (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
@@ -156,8 +156,8 @@ addresses;
                                                                     record:person]];
 }
 
-- (id)initWithPerson:(ABRecordRef)person
-         addressBook:(JFFAddressBook *)addressBook
+- (instancetype)initWithPerson:(ABRecordRef)person
+                   addressBook:(JFFAddressBook *)addressBook
 {
     self = [super init];
     
@@ -176,8 +176,8 @@ addresses;
     return self;
 }
 
-- (id)initWithFieldsDict:(NSDictionary *)args
-             addressBook:(JFFAddressBook *)addressBook
+- (instancetype)initWithFieldsDict:(NSDictionary *)args
+                       addressBook:(JFFAddressBook *)addressBook
 {
     self = [super init];
     
@@ -244,7 +244,7 @@ addresses;
     }
 }
 
--(BOOL)save
+- (BOOL)save
 {
     CFErrorRef error = NULL;
     
@@ -258,27 +258,27 @@ addresses;
             return NO;
         }
     }
-
+    
     result_ = ABAddressBookSave( self.addressBook, &error );
     if ( !result_ )
     {
         NSLog( @"can not save Person" );
         return NO;
     }
-
+    
     _contactInternalId = ABRecordGetRecordID( self.person );
-
+    
     return YES;
 }
 
--(BOOL)remove
+- (BOOL)remove
 {
     if ( 0 == _contactInternalId || NULL == self.rawPerson )
     {
         NSLog( @"record has no id" );
         return NO;
     }
-
+    
     CFErrorRef error = NULL;
     bool result = ABAddressBookRemoveRecord( self.addressBook, self.rawPerson, &error );
     if (!result) {

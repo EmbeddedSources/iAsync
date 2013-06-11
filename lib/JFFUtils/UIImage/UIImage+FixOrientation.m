@@ -6,7 +6,7 @@
 
 //TODO move to JFFUI because it's UI
 
-- (UIImage *)fixOrientation {
+- (instancetype)fixOrientation {
     
     // No-op if the orientation is already correct
     if (self.imageOrientation == UIImageOrientationUp) return self;

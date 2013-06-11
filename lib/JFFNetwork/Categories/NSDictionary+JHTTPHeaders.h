@@ -2,10 +2,10 @@
 
 @interface NSDictionary (JHTTPHeaders)
 
-- (id)initWithContentType:(NSString *)contentType;
-+ (id)headersDictionadyWithUploadContentType;
+- (instancetype)initWithContentType:(NSString *)contentType;
++ (instancetype)headersDictionadyWithUploadContentType;
 
 + (NSString *)utf8XmlContentType;
-+ (id)headersDictionadyWithUtf8XmlContentType;
++ (instancetype)headersDictionadyWithUtf8XmlContentType;
 
 @end

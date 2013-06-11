@@ -3,5 +3,5 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JFFStrategyFifo : JFFBaseStrategy< JFFQueueStrategy >
+@interface JFFStrategyFifo : JFFBaseStrategy <JFFQueueStrategy>
 @end

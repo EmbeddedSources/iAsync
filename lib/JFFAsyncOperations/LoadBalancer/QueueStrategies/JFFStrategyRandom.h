@@ -3,5 +3,5 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JFFStrategyRandom : JFFBaseStrategy< JFFQueueStrategy >
+@interface JFFStrategyRandom : JFFBaseStrategy <JFFQueueStrategy>
 @end

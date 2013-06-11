@@ -78,7 +78,7 @@ static BOOL isClass(id object)
         
         return NO;
     }
-
+    
     return [self validateWithJsonPatternValue:jsonPattern
                                rootJsonObject:rootJsonObject
                               rootJsonPattern:rootJsonPattern

@@ -6,7 +6,7 @@ extern NSString *JFFNoImageDataURLString;
 
 @interface JFFThumbnailStorage : NSObject
 
-+ (JFFThumbnailStorage *)sharedStorage;
++ (instancetype)sharedStorage;
 + (void)setSharedStorage:(JFFThumbnailStorage *)storage;
 
 - (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url;

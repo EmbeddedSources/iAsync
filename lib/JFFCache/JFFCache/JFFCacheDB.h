@@ -2,7 +2,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol JFFCacheDB < NSObject >
+@protocol JFFCacheDB <NSObject>
 
 @required
 
@@ -17,6 +17,6 @@
 
 - (void)migrateDB;
 
-- (NSNumber*)timeToLiveInHours;
+- (NSNumber *)timeToLiveInHours;
 
 @end

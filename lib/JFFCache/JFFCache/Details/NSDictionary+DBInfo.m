@@ -13,7 +13,7 @@
     return result;
 }
 
-- (NSDictionary *)autoRemoveProperiesForDBWithName:(NSString *)name
+- (instancetype)autoRemoveProperiesForDBWithName:(NSString *)name
 {
     return self[name][@"autoRemove"];
 }

@@ -27,12 +27,12 @@
     _currentQueue = NULL;
 }
 
-- (id)initWithLoadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-           didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
-              progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
-               currentQueue:(dispatch_queue_t)currentQueue
-                    barrier:(BOOL)barrier
-         serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent
+- (instancetype)initWithLoadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
+                     didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
+                        progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
+                         currentQueue:(dispatch_queue_t)currentQueue
+                              barrier:(BOOL)barrier
+                   serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent
 {
     self = [super init];
     
@@ -50,7 +50,7 @@
     return self;
 }
 
--(void)finalizeOperations
+- (void)finalizeOperations
 {
     _finishedOrCanceled = YES;
 
@@ -129,12 +129,12 @@
     });
 }
 
-+ (id)performOperationWithQueueName:(const char*)queueName
-                      loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                   didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
-                      progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
-                            barrier:(BOOL)barrier
-                 serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent
++ (instancetype)performOperationWithQueueName:(const char*)queueName
+                                loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
+                             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
+                                progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
+                                      barrier:(BOOL)barrier
+                           serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent
 {
     NSParameterAssert(loadDataBlock   );
     NSParameterAssert(didLoadDataBlock);
@@ -163,9 +163,9 @@
     return result;
 }
 
-+ (id)performOperationWithQueueName:(const char *)queueName
-                      loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                   didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
++ (instancetype)performOperationWithQueueName:(const char *)queueName
+                                loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
+                             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
 {
     return [self performOperationWithQueueName:queueName
                                  loadDataBlock:loadDataBlock

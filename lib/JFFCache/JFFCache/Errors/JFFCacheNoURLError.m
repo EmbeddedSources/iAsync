@@ -2,7 +2,7 @@
 
 @implementation JFFCacheNoURLError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"JFF_CACHE_NO_URL_ERROR", nil)];
 }

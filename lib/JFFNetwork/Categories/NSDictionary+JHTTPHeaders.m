@@ -2,7 +2,7 @@
 
 @implementation NSDictionary (JHTTPHeaders)
 
-- (id)initWithContentType:( NSString* )contentType
+- (instancetype)initWithContentType:( NSString* )contentType
 {
     NSParameterAssert(contentType);
     
@@ -12,7 +12,7 @@
     return [self initWithObjects:objects forKeys:keys count:1];
 }
 
-+ (id)headersDictionadyWithUploadContentType
++ (instancetype)headersDictionadyWithUploadContentType
 {
     return [[self alloc] initWithContentType:@"application/x-www-form-urlencoded"];
 }
@@ -24,7 +24,7 @@
     return @"application/xml;charset=utf-8";
 }
 
-+ (id)headersDictionadyWithUtf8XmlContentType
++ (instancetype)headersDictionadyWithUtf8XmlContentType
 {
     return [[self alloc] initWithContentType:[self utf8XmlContentType]];
 }

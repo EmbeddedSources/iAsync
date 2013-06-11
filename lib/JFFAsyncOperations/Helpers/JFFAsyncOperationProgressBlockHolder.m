@@ -4,7 +4,7 @@
 
 - (void)performProgressBlockWithArgument:(id)progressInfo
 {
-    if ( self.progressBlock )
+    if (self.progressBlock)
         self.progressBlock(progressInfo);
 }
 

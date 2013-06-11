@@ -3,9 +3,9 @@
 
 @implementation NSURL (CPlusPlus)
 
--(std::string)toStlString
+- (std::string)toStlString
 {
-    return [ [ self absoluteString ] toStlString ];
+    return [[self absoluteString] toStlString];
 }
 
 @end

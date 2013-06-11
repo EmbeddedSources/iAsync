@@ -4,7 +4,7 @@
 
 @interface JFFCancelAsyncOperationBlockHolder : NSObject
 
-@property ( nonatomic, copy ) JFFCancelAsyncOperation cancelBlock;
-@property ( nonatomic, copy, readonly ) JFFCancelAsyncOperation onceCancelBlock;
+@property (nonatomic, copy) JFFCancelAsyncOperation cancelBlock;
+@property (nonatomic, copy, readonly) JFFCancelAsyncOperation onceCancelBlock;
 
 @end

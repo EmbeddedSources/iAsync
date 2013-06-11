@@ -8,7 +8,7 @@
     NSURL *_largeImageURL;
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFSocialFacebookUser *copy = [[[self class] allocWithZone:zone] init];
     

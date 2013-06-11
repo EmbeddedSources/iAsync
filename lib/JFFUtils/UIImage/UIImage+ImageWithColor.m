@@ -2,7 +2,7 @@
 
 @implementation UIImage (ImageWithColor)
 
-+ (UIImage *)newImageWithColor:(UIColor *)color andSize:(CGSize)size
++ (instancetype)newImageWithColor:(UIColor *)color andSize:(CGSize)size
 {
     UIImage *img;
     

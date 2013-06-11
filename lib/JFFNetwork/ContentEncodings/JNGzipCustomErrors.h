@@ -3,7 +3,7 @@
 
 @class NSString;
 
-extern NSString* kGzipErrorDomain;
+extern NSString *kGzipErrorDomain;
 
 enum JNCustomGzipErrorsEnum
 {

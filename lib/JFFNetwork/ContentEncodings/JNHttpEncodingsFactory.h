@@ -4,8 +4,8 @@
 
 @interface JNHttpEncodingsFactory : NSObject 
 
-+(id<JNHttpDecoder>)decoderForHeaderString:( NSString* )header_string_;
-+(id<JNHttpDecoder>)gzipDecoder;
-+(id<JNHttpDecoder>)stubDecoder;
++ (id<JNHttpDecoder>)decoderForHeaderString:(NSString *)headerString;
++ (id<JNHttpDecoder>)gzipDecoder;
++ (id<JNHttpDecoder>)stubDecoder;
 
 @end

@@ -11,7 +11,7 @@
 
 @interface JFFPropertyExtractor ()
 
-@property ( nonatomic ) JFFObjectRelatedPropertyData* objectPropertyData;
+@property (nonatomic) JFFObjectRelatedPropertyData* objectPropertyData;
 
 @end
 
@@ -21,21 +21,22 @@
     SEL _propertySetSelector;
 }
 
-@dynamic delegates
-, asyncLoader
-, didFinishBlock
-, cancelBlock;
+@dynamic
+delegates,
+asyncLoader,
+didFinishBlock,
+cancelBlock;
 
--(void)clearData
+- (void)clearData
 {
     self.objectPropertyData = nil;
-
+    
     jff_retainAutorelease(_object);
     _object = nil;
     //self.propertyPath = nil;
 }
 
--(SEL)propertyGetSelector
+- (SEL)propertyGetSelector
 {
     if (!_propertyGetSelector) {
         _propertyGetSelector = NSSelectorFromString(self.propertyPath.name);
@@ -43,7 +44,7 @@
     return _propertyGetSelector;
 }
 
--(SEL)propertySetSelector
+- (SEL)propertySetSelector
 {
     if (!_propertySetSelector) {
         NSString *setPropertyName = [self.propertyPath.name propertySetNameForPropertyName];
@@ -64,7 +65,7 @@
         objc_msgSend(self.object, self.propertySetSelector, property);
         return;
     }
-
+    
     NSMutableDictionary* dict = objc_msgSend(self.object, self.propertyGetSelector);
     
     if (!dict) {

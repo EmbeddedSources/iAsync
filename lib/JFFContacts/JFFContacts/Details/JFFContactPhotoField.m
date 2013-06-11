@@ -2,8 +2,8 @@
 
 @implementation JFFContactPhotoField
 
-+ (id)newContactFieldWithName:(NSString *)name
-                       record:(ABRecordRef)record
++ (instancetype)newContactFieldWithName:(NSString *)name
+                                 record:(ABRecordRef)record
 {
     return [self newContactFieldWithName:name
                               propertyID:0

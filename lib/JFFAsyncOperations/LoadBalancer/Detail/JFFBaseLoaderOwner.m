@@ -11,8 +11,8 @@
 
 @implementation JFFBaseLoaderOwner
 
-+ (id)newLoaderOwnerWithLoader:(JFFAsyncOperation)loader
-                         queue:(JFFLimitedLoadersQueue *)queue
++ (instancetype)newLoaderOwnerWithLoader:(JFFAsyncOperation)loader
+                                   queue:(JFFLimitedLoadersQueue *)queue
 {
     JFFBaseLoaderOwner *result = [self new];
     
@@ -53,8 +53,7 @@
         if (_cancelCallback) {
             JFFCancelAsyncOperationHandler cancelCallback = _cancelCallback;
             _cancelCallback = nil;
-            if (cancelCallback)
-                cancelCallback(canceled);
+            cancelCallback(canceled);
         }
         
         [self clear];
