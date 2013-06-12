@@ -5,17 +5,17 @@
 //source: http://iphonedevelopertips.com/general/using-nsscanner-to-convert-hex-to-rgb-color.html
 @implementation UIColor (ColorForHex)
 
-+ (UIColor *)colorForHex:(NSString *)hexColor
++ (instancetype)colorForHex:(NSString *)hexColor
 {
-	hexColor = [[hexColor stringByTrimmingWhitespaces] uppercaseString];
+    hexColor = [[hexColor stringByTrimmingWhitespaces] uppercaseString];
     
     // String should be 6 or 7 characters if it includes '#'
     if ([hexColor length] < 6)
-		return [UIColor blackColor];
+        return [UIColor blackColor];
     
     // strip # if it appears
     if ([hexColor hasPrefix:@"#"])
-		hexColor = [hexColor substringFromIndex:1];
+        hexColor = [hexColor substringFromIndex:1];
     
     // if the value isn't 6 characters at this point return
     // the color black

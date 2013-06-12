@@ -18,7 +18,7 @@ SKProductsRequestDelegate
     NSString                         *_productIdentifier;
 }
 
-- (id)initWithProductIdentifier:(NSString *)productIdentifier
+- (instancetype)initWithProductIdentifier:(NSString *)productIdentifier
 {
     self = [super init];
     

@@ -2,7 +2,7 @@
 
 @implementation SKProduct (LocalizedPriceString)
 
--(NSString *)localizedPriceString
+- (NSString *)localizedPriceString
 {
     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
     [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];

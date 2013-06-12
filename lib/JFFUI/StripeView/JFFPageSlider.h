@@ -15,8 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet id<JFFPageSliderDelegate> delegate;
 
-- (id)initWithFrame:(CGRect)frame
-           delegate:(id< JFFPageSliderDelegate >)delegate;
+- (instancetype)initWithFrame:(CGRect)frame
+                     delegate:(id< JFFPageSliderDelegate >)delegate;
 
 - (void)reloadData;
 

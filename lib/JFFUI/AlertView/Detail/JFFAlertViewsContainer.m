@@ -7,7 +7,7 @@
     NSMutableArray *_activeAlertViews;
 }
 
-+ (id)sharedAlertViewsContainer
++ (instancetype)sharedAlertViewsContainer
 {
     static id instance = nil;
     if (!instance)
@@ -19,8 +19,7 @@
 
 - (void)addAlertView:(JFFAlertView *)alertView
 {
-    if (!_activeAlertViews)
-    {
+    if (!_activeAlertViews) {
         _activeAlertViews = [[NSMutableArray alloc] initWithCapacity:1];
     }
     
@@ -45,7 +44,7 @@
     return [_activeAlertViews containsObject:alertView];
 }
 
-- (JFFAlertView*)firstAlertView
+- (JFFAlertView *)firstAlertView
 {
     return [_activeAlertViews noThrowObjectAtIndex:0];
 }

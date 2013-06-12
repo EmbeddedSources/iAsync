@@ -2,6 +2,6 @@
 
 @interface NSArray (TweetsJSONParser)
 
-+ (id)newTweetsWithJSONObject:(NSDictionary *)jsonObject error:(NSError **)error;
++ (instancetype)newTweetsWithJSONObject:(NSDictionary *)jsonObject error:(NSError **)error;
 
 @end

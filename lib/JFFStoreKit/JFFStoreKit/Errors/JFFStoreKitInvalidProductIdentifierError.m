@@ -2,7 +2,7 @@
 
 @implementation JFFStoreKitInvalidProductIdentifierError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"STORE_KIT_INVALID_PRODUCT_IDENTIFIER", nil)];
 }

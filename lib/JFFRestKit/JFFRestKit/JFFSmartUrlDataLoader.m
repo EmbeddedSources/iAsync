@@ -40,12 +40,12 @@
     return @"com.just_for_fun.rest_kit_internal.library";
 }
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:@"internal logic error (no fresh data)"];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFErrorNoFreshData *copy = [super copyWithZone:zone];
     

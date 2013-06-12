@@ -4,8 +4,8 @@
 
 @implementation JFFTweet (TwitterJSONApiParser)
 
-+ (id)newTweetWithTwitterJSONApiDictionary:(NSDictionary *)jsonObject
-                                     error:(NSError **)outError
++ (instancetype)newTweetWithTwitterJSONApiDictionary:(NSDictionary *)jsonObject
+                                               error:(NSError **)outError
 {
     id jsonPattern = @{
     @"user"   : [NSDictionary class],

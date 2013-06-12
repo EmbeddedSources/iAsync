@@ -6,7 +6,7 @@ typedef void (^JFFScheduledBlock) (JFFCancelScheduledBlock cancel);
 @interface JFFScheduler : NSObject
 
 //returns the shared scheduler
-+ (id)sharedByThreadScheduler;
++ (instancetype)sharedByThreadScheduler;
 
 //Add new block to scheduler which will be invoked on the current thread using the default mode after a delay,
 //returning the block for canceling this invocation

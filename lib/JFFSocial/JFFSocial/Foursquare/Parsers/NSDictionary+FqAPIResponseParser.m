@@ -2,7 +2,7 @@
 
 @implementation NSDictionary (FqAPIresponseParser)
 
-+ (id)fqApiresponseDictWithDict:(NSDictionary *)jsonObject error:(NSError **)outError
++ (instancetype)fqApiresponseDictWithDict:(NSDictionary *)jsonObject error:(NSError **)outError
 {
     id jsonPattern = @{
     @"meta" :

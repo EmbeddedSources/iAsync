@@ -2,6 +2,6 @@
 
 @interface UIColor (ColorForHex)
 
-+ (UIColor *)colorForHex:(NSString *)hexColor;
++ (instancetype)colorForHex:(NSString *)hexColor;
 
 @end

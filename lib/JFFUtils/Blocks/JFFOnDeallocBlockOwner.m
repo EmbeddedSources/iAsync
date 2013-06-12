@@ -2,7 +2,7 @@
 
 @implementation JFFOnDeallocBlockOwner
 
-- (id)initWithBlock:(JFFSimpleBlock)block
+- (instancetype)initWithBlock:(JFFSimpleBlock)block
 {
     self = [super init];
     

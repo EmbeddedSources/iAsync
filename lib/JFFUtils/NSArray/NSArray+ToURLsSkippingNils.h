@@ -2,6 +2,6 @@
 
 @interface NSArray (ToURLsSkippingNils)
 
-- (NSArray *)toURLsSkippingNils;
+- (instancetype)toURLsSkippingNils;
 
 @end

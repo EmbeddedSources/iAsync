@@ -2,6 +2,6 @@
 
 @interface FoursquareCheckinsModel (APIParser)
 
-+ (id)fqCheckinModelWithDict:(NSDictionary *)dict error:(NSError **)outError;
++ (instancetype)fqCheckinModelWithDict:(NSDictionary *)dict error:(NSError **)outError;
 
 @end

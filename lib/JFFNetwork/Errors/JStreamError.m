@@ -1,29 +1,28 @@
 #import "JStreamError.h"
 
 @implementation JStreamError
-
 {
 @private
     CFStreamError _rawError;
     id<NSCopying> _context;
 }
 
-- (id)init
+- (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
-- (id)initWithDescription:(NSString *)description
-                  domain:(NSString *)domain
-                    code:(NSInteger)code
+- (instancetype)initWithDescription:(NSString *)description
+                             domain:(NSString *)domain
+                               code:(NSInteger)code
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
--(id)initWithStreamError:(CFStreamError)rawError
-                 context:(id<NSCopying>)context
+- (instancetype)initWithStreamError:(CFStreamError)rawError
+                            context:(id<NSCopying>)context
 {
     NSString *domain_ = [[NSString alloc] initWithFormat: @"com.just_for_fun.library.network.CFError(%ld)", rawError.domain];
     
@@ -42,7 +41,7 @@
     return self;
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JStreamError *copy = [super copyWithZone:zone];
     

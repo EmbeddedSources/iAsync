@@ -5,7 +5,7 @@
 
 @implementation NSNumber (FSStorable)
 
-+ (id)newLongLongNumberWithContentsOfFile:(NSString *)fileName
++ (instancetype)newLongLongNumberWithContentsOfFile:(NSString *)fileName
 {
     NSParameterAssert(fileName);
     
@@ -23,7 +23,7 @@
     return result;
 }
 
-+ (id)newDoubleWithContentsOfFile:(NSString *)fileName
++ (instancetype)newDoubleWithContentsOfFile:(NSString *)fileName
 {
     NSParameterAssert(fileName);
     

@@ -6,7 +6,7 @@
 
 @implementation NSArray (ToURLsSkippingNils)
 
-- (NSArray *)toURLsSkippingNils
+- (instancetype)toURLsSkippingNils
 {
     return [self forceMap:^id(id object) {
         

@@ -6,17 +6,17 @@
 
 @implementation NSArray( RemoveDuplicates )
 
-- (NSArray *)arrayByRemovingDuplicates
+- (instancetype)arrayByRemovingDuplicates
 {
     return [self unique];
 }
 
-- (NSArray *)arrayByRemovingDuplicatesUsingIsEqualBlock:(JFFEqualityCheckerBlock)predicate
+- (instancetype)arrayByRemovingDuplicatesUsingIsEqualBlock:(JFFEqualityCheckerBlock)predicate
 {
     return [self uniqueBy:predicate];
 }
 
-- (NSArray *)unique
+- (instancetype)unique
 {
     NSUInteger itemsCount = [self count];
     
@@ -34,7 +34,7 @@
     return [result copy];
 }
 
-- (NSArray *)uniqueBy:(JFFEqualityCheckerBlock)predicate
+- (instancetype)uniqueBy:(JFFEqualityCheckerBlock)predicate
 {
     NSMutableArray *myCopy = [self mutableCopy];
     
@@ -49,14 +49,14 @@
         searchPredicate = ^BOOL(id itemObject) {
             return predicate(firstItem, itemObject);
         };
-        filtered = [myCopy select: searchPredicate];
+        filtered = [myCopy select:searchPredicate];
         
         [result addObject:firstItem];
         [myCopy removeObjectsInArray:filtered];
     }
     
     //Shrink the capacity
-    return [result copy ];
+    return [result copy];
 }
 
 @end

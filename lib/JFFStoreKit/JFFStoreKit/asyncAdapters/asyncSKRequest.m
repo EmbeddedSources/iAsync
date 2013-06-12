@@ -13,7 +13,7 @@ SKRequestDelegate
     JFFAsyncOperationInterfaceResultHandler _handler;
 }
 
-+ (id)newAsyncSKRequestAdapterWithRequest:(SKRequest *)request
++ (instancetype)newAsyncSKRequestAdapterWithRequest:(SKRequest *)request
 {
     JFFAsyncSKRequestAdapter *result = [self new];
     

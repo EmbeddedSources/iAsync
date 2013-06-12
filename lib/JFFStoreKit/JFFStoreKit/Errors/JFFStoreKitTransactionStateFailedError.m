@@ -2,12 +2,12 @@
 
 @implementation JFFStoreKitTransactionStateFailedError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"STORE_KIT_TRANSACTION_STATE_FAILED", nil)];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFStoreKitTransactionStateFailedError *copy = [super copyWithZone:zone];
     

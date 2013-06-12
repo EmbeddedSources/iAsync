@@ -11,7 +11,7 @@
 - (NSNumber *)numberWithBoolForKey:(NSString *)key;
 - (NSNumber *)numberWithDoubleForKey:(NSString *)key;
 
-- (NSDictionary *)dictionaryForKey:(NSString *)key;
+- (instancetype)dictionaryForKey:(NSString *)key;
 
 - (NSArray *)arrayForKey:(NSString *)key;
 

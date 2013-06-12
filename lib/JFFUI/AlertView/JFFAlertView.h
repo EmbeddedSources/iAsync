@@ -13,10 +13,10 @@
 
 
 //cancelButtonTitle, otherButtonTitles - pass NSString(button title) or JFFAlertButton
-+ (id)alertWithTitle:(NSString *)title
-             message:(NSString *)message
-   cancelButtonTitle:(id)cancelButtonTitle
-   otherButtonTitles:(id)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
++ (instancetype)alertWithTitle:(NSString *)title
+                       message:(NSString *)message
+             cancelButtonTitle:(id)cancelButtonTitle
+             otherButtonTitles:(id)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 //pass NSString(button title) or JFFAlertButton
 - (void)addAlertButton:(id)alertButton;

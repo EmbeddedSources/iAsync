@@ -40,3 +40,6 @@
 #import <JFFUI/Categories/UINib+FirstObject.h>
 #import <JFFUI/Categories/JFFAlertView+Async.h>
 #import <JFFUI/Categories/UIApplication+OpenApplicationAsyncOp.h>
+#import <JFFUI/Categories/UIWebView+UserAgent.h>
+#import <JFFUI/Categories/UITableView+BlocksAdditions.h>
+#import <JFFUI/Categories/UITableView+CellsSelections.h>

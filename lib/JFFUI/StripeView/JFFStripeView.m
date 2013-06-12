@@ -29,7 +29,7 @@
     NSUInteger _activeElement;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     _scrollView.delegate = nil;
 }
@@ -96,8 +96,8 @@ didChangeActiveElementFrom:previousActiveElement
     return self.scrollView.frame.size.width / elementsPerPage - offset;
 }
 
-- (id)initWithFrame:(CGRect)frame
-           delegate:(id<JFFStripeViewDelegate>)delegate
+- (instancetype)initWithFrame:(CGRect)frame
+                     delegate:(id<JFFStripeViewDelegate>)delegate
 {
     self = [super initWithFrame:frame];
     
@@ -110,13 +110,13 @@ didChangeActiveElementFrom:previousActiveElement
     return self;
 }
 
-- (id)init:(CGRect)frame
+- (instancetype)init:(CGRect)frame
 {
     NSAssert(NO, @"Unsupported initializer. Use 'initWithFrame:delegate:' instead" );
     return nil;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     NSAssert( NO, @"Unsupported initializer. Use 'initWithFrame:delegate:' instead" );
     return nil;
@@ -239,7 +239,7 @@ didChangeActiveElementFrom:previousActiveElement
     return JSignedRangeMake(firstVisibleIndex, lastVisibleIndex - firstVisibleIndex + 1);
 }
 
-- (NSMutableOrderedSet*)mutableVisibleIndexes
+- (NSMutableOrderedSet *)mutableVisibleIndexes
 {
     JSignedRange signedRange = [self visibleIndexesRange];
     
@@ -254,7 +254,7 @@ didChangeActiveElementFrom:previousActiveElement
     return result;
 }
 
-- (NSOrderedSet*)visibleIndexes
+- (NSOrderedSet *)visibleIndexes
 {
     return [[self mutableVisibleIndexes] copy];
 }
@@ -402,7 +402,7 @@ didChangeActiveElementFrom:previousActiveElement
     return fmin(_activeElement, [_delegate numberOfElementsInStripeView:self] - 1);
 }
 
--(UIView*)activeElementView
+-(UIView *)activeElementView
 {
     NSUInteger activeElementIndex = self.activeElement;
     return [self elementAtIndex:activeElementIndex];
@@ -644,7 +644,7 @@ didChangeActiveElementFrom:previousActiveElement
         [_delegate stripeViewDidScroll:self];
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate_
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [_delegate stripeViewWasDragged:self];
 }

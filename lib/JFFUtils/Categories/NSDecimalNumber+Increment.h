@@ -2,9 +2,9 @@
 
 @interface NSDecimalNumber( Increment )
 
-- (NSDecimalNumber *)increment;
-- (NSDecimalNumber *)decrement;
+- (instancetype)increment;
+- (instancetype)decrement;
 
-- (NSDecimalNumber *)instanceOne;
+- (instancetype)instanceOne;
 
 @end

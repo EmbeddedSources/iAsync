@@ -17,13 +17,11 @@
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    handler = [ handler copy ];
-
     [self.request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         
         if (!handler)
             return;
-
+        
         if (error) {
             
             handler(nil, error);
@@ -32,13 +30,13 @@
             JFFTwitterResponse *result = [JFFTwitterResponse new];
             result.responseData = responseData;
             result.urlResponse  = urlResponse;
-
+            
             handler(result, nil);
         }
     }];
 }
 
-- (void)cancel:( BOOL )canceled_
+- (void)cancel:(BOOL)canceled
 {
 }
 

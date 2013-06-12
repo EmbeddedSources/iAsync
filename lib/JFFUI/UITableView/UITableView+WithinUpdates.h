@@ -2,6 +2,6 @@
 
 @interface UITableView (WithinUpdates)
 
--(void)withinUpdates:( void (^)( void ) )block_;
+- (void)withinUpdates:(void (^)(void))block;
 
 @end

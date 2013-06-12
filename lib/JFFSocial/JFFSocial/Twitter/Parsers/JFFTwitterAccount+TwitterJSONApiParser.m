@@ -2,8 +2,8 @@
 
 @implementation JFFTwitterAccount (TwitterJSONApiParser)
 
-+ (id)newTwitterAccountWithTwitterJSONApiDictionary:(NSDictionary *)jsonObject
-                                              error:(NSError **)outError
++ (instancetype)newTwitterAccountWithTwitterJSONApiDictionary:(NSDictionary *)jsonObject
+                                                        error:(NSError **)outError
 {
     id jsonPattern = @{
     @"id_str"            : [NSString class],

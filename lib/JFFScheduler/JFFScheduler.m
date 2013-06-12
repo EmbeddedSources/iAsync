@@ -41,14 +41,14 @@
     NSMutableArray *_cancelBlocks;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     [self cancelAllScheduledOperations];
     
     dispatch_release(_queue);
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     
@@ -61,7 +61,7 @@
     return self;
 }
 
-+ (id)sharedByThreadScheduler
++ (instancetype)sharedByThreadScheduler
 {
     NSThread *thread = [NSThread currentThread];
     return thread.lazyJffScheduler;

@@ -14,7 +14,7 @@
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    handler  = [handler copy];
+    handler  = [handler  copy];
     progress = [progress copy];
     
     ACAccountStore *accountStore = [ACAccountStore new];

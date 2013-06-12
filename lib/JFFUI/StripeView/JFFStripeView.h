@@ -11,8 +11,8 @@
 
 @property (weak, nonatomic) IBOutlet id<JFFStripeViewDelegate> delegate;
 
-- (id)initWithFrame:(CGRect)frame
-           delegate:(id<JFFStripeViewDelegate>)delegate;
+- (instancetype)initWithFrame:(CGRect)frame
+                     delegate:(id<JFFStripeViewDelegate>)delegate;
 
 - (void)reloadData;
 

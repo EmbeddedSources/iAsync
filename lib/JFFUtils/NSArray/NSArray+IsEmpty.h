@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
-@interface NSArray ( IsEmpty )
+@interface NSArray (IsEmpty)
 
--(BOOL)hasElements;
+- (BOOL)hasElements;
 
 @end

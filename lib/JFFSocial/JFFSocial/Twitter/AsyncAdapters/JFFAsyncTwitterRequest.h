@@ -11,4 +11,4 @@
 
 @end
 
-JFFAsyncOperation jffTwitterRequest(TWRequest *request_);
+JFFAsyncOperation jffTwitterRequest(TWRequest *request);

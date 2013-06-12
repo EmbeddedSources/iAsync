@@ -11,7 +11,7 @@
 
 #include <math.h>
 
-static NSString* const JFFElementIndex = @"JFFElementIndex";
+static NSString *const JFFElementIndex = @"JFFElementIndex";
 static NSInteger const MinColumnCount = 2;
 
 @implementation UIView (ReuseIdentifier)
@@ -67,7 +67,7 @@ static NSInteger const MinColumnCount = 2;
     [self addSubviewAndScale:self.scrollView];
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     
@@ -76,7 +76,7 @@ static NSInteger const MinColumnCount = 2;
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     
@@ -157,80 +157,79 @@ static NSInteger const MinColumnCount = 2;
 
 - (NSUInteger)lastVisibleIndex
 {
-    NSInteger to_index_ = 0;
-    if ( [ self isVerticalGrid ] )
-    {
-        CGFloat verical_offset_ = [ self.delegate verticalOffsetInGridView: self ];
-        CGFloat bottom_scroll_offset_ = self.scrollView.contentOffset.y - verical_offset_ + self.frame.size.height;
-        to_index_ = ceil( ( bottom_scroll_offset_ ) / self.rowHeight ) * self.colCount;
-    }
-    else
-    {
-        CGFloat horizontal_offset_ = [ self.delegate horizontalOffsetInGridView: self ];
-        CGFloat right_scroll_offset_ = self.scrollView.contentOffset.x - horizontal_offset_ + self.frame.size.width;
-        to_index_ = ceil( ( right_scroll_offset_ ) / self.colWidth );
+    NSInteger toIndex = 0;
+    if ([self isVerticalGrid]) {
+        
+        CGFloat vericalOffset = [self.delegate verticalOffsetInGridView:self];
+        CGFloat bottomScrollOffset = self.scrollView.contentOffset.y - vericalOffset + self.frame.size.height;
+        toIndex = ceil((bottomScrollOffset) / self.rowHeight) * self.colCount;
+    } else {
+        
+        CGFloat horizontalOffset = [self.delegate horizontalOffsetInGridView:self];
+        CGFloat rightScrollOffset = self.scrollView.contentOffset.x - horizontalOffset + self.frame.size.width;
+        toIndex = ceil((rightScrollOffset) / self.colWidth);
     }
     
-    NSUInteger number_of_elements_ = [ self.delegate numberOfElementsInGridView: self ];
-    return fmin( number_of_elements_, fmax( 0, to_index_ ) );
+    NSUInteger numberOfElements = [self.delegate numberOfElementsInGridView:self];
+    return fmin( numberOfElements, fmax(0, toIndex));
 }
 
--(NSRange)visibleIndexesRange
+- (NSRange)visibleIndexesRange
 {
-    NSInteger from_index_ = [ self firstVisibleIndex ];
-    NSInteger to_index_ = [ self lastVisibleIndex ];
+    NSInteger fromIndex = [self firstVisibleIndex];
+    NSInteger toIndex = [self lastVisibleIndex];
     
-    return NSMakeRange( from_index_, to_index_ - from_index_ );
+    return NSMakeRange(fromIndex, toIndex - fromIndex);
 }
 
 - (CGRect)rectForElementWithIndex:(NSUInteger)index
 {
-    NSUInteger col_ = [ self isVerticalGrid ] ? index % self.colCount : index;
-    NSUInteger row_ = [ self isVerticalGrid ] ? index / self.colCount : 0;
+    NSUInteger col = [self isVerticalGrid] ? index % self.colCount : index;
+    NSUInteger row = [self isVerticalGrid] ? index / self.colCount : 0;
     
     CGFloat horizontalOffset = [self.delegate horizontalOffsetInGridView:self];
     CGFloat vericalOffset    = [self.delegate verticalOffsetInGridView:self];
     
-    return CGRectMake(col_ * self.colWidth  + horizontalOffset,
-                      row_ * self.rowHeight + vericalOffset,
+    return CGRectMake(col * self.colWidth  + horizontalOffset,
+                      row * self.rowHeight + vericalOffset,
                       self.colWidth         - horizontalOffset,
                       self.rowHeight        - vericalOffset );
 }
 
 - (void)expandContentSize
 {
-    NSUInteger rowCount = [ self isVerticalGrid ] ? ceil( [ self.delegate numberOfElementsInGridView: self ] / ( CGFloat )self.colCount ) : 1;
-    NSUInteger colCount = [ self isVerticalGrid ] ? self.colCount : [ self.delegate numberOfElementsInGridView: self ];
+    NSUInteger rowCount = [self isVerticalGrid] ? ceil([self.delegate numberOfElementsInGridView:self] / (CGFloat)self.colCount ) : 1;
+    NSUInteger colCount = [self isVerticalGrid] ? self.colCount : [self.delegate numberOfElementsInGridView:self];
     
-    self.scrollView.contentSize = CGSizeMake(self.colWidth * colCount + [ self.delegate horizontalOffsetInGridView: self ],
-                                             self.rowHeight * rowCount + [ self.delegate verticalOffsetInGridView: self ] );
+    self.scrollView.contentSize = CGSizeMake(self.colWidth * colCount + [self.delegate horizontalOffsetInGridView:self],
+                                             self.rowHeight * rowCount + [self.delegate verticalOffsetInGridView:self]);
 }
 
 - (NSMutableSet *)visibleIndexes
 {
-    NSRange range_ = [ self visibleIndexesRange ];
-    NSMutableSet* result_ = [ NSMutableSet setWithCapacity: range_.length ];
-    for ( NSUInteger index_ = range_.location; index_ < range_.location + range_.length; ++index_ )
-    {
-        [result_ addObject:@(index_)];
+    NSRange range = [self visibleIndexesRange];
+    NSMutableSet *result = [NSMutableSet setWithCapacity:range.length];
+    for (NSUInteger index = range.location; index < range.location + range.length; ++index) {
+        
+        [result addObject:@(index)];
     }
-    return result_;
+    return result;
 }
 
 - (NSSet *)indexesToUpdate
 {
-    NSMutableSet* elementsIndexes = [ NSMutableSet setWithArray: [ self.elementContextByIndex allKeys ] ];
-    NSMutableSet* result_ = [ self visibleIndexes ];
-    [ result_ minusSet: elementsIndexes ];
-    return result_;
+    NSMutableSet *elementsIndexes = [NSMutableSet setWithArray:[self.elementContextByIndex allKeys]];
+    NSMutableSet *result = [self visibleIndexes];
+    [result minusSet:elementsIndexes];
+    return result;
 }
 
 - (NSMutableSet *)unvisibleElementsIndexes
 {
-    NSMutableSet* result_ = [ NSMutableSet setWithArray: [ self.elementContextByIndex allKeys ] ];
-    NSMutableSet* visible_indexes_ = [ self visibleIndexes ];
-    [ result_ minusSet: visible_indexes_ ];
-    return result_;
+    NSMutableSet *result = [NSMutableSet setWithArray:[self.elementContextByIndex allKeys]];
+    NSMutableSet *visibleIndexes = [self visibleIndexes];
+    [result minusSet:visibleIndexes];
+    return result;
 }
 
 - (id)elementByIndex:(NSUInteger)index
@@ -246,51 +245,50 @@ static NSInteger const MinColumnCount = 2;
         
         reusableElements = [NSMutableArray arrayWithObject:view];
         self.reusableElementsByIdentifier[[view jffGridViewReuseIdentifier]] = reusableElements;
-    }
-    else
-    {
+    } else {
+        
         [reusableElements addObject:view];
     }
 }
 
 - (void)removeUnvisibleElements
 {
-    NSMutableSet* unvisible_elements_indexes_ = [self unvisibleElementsIndexes];
+    NSMutableSet *unvisibleElementsIndexes = [self unvisibleElementsIndexes];
     
-    for ( NSNumber* index_ in unvisible_elements_indexes_ )
-    {
-        UIView *view_ = [ self elementByIndex: [ index_ unsignedIntValue ] ];
-        [ self makeReusableElement: view_ ];
-        [ self.elementContextByIndex removeObjectForKey: index_ ];
+    for (NSNumber *index in unvisibleElementsIndexes) {
         
-        [ view_ removeFromSuperview ];
+        UIView *view = [self elementByIndex:[index unsignedIntValue]];
+        [self makeReusableElement:view];
+        [self.elementContextByIndex removeObjectForKey:index];
+        
+        [view removeFromSuperview];
     }
 }
 
--(void)updateElementAtIndex:( NSNumber* )index_
-                   position:( NSUInteger )position_
+- (void)updateElementAtIndex:(NSNumber *)index
+                    position:(NSUInteger)position
 {
     JFFGridViewContext *context = [JFFGridViewContext new];
     context.view = [self.delegate gridView:self
-                            elementAtIndex:[index_ unsignedIntValue]];
+                            elementAtIndex:[index unsignedIntValue]];
     
-    NSAssert( context.view, @"View cannot be nil " );
-    if ( [ self.delegate gridView: self canRemoveElementAtIndex: [ index_ unsignedIntValue ] ] )
-    {
-        NSDictionary *removeInfo = @{ JFFElementIndex : index_ };
+    NSAssert(context.view, @"View cannot be nil ");
+    if ([self.delegate gridView: self canRemoveElementAtIndex:[index unsignedIntValue]]) {
+        
+        NSDictionary *removeInfo = @{ JFFElementIndex : index };
         context.removeButton = [JFFRemoveButton removeButtonWithUserInfo:removeInfo];
         context.removeButton.delegate = self;
         
         [context.view addSubview:context.removeButton];
     }
     
-    context.view.frame = [self rectForElementWithIndex:position_];
+    context.view.frame = [self rectForElementWithIndex:position];
     context.view.autoresizingMask = UIViewAutoresizingNone;
     
     [self.scrollView addSubview:context.view];
     [self.scrollView sendSubviewToBack:context.view];
     
-    self.elementContextByIndex[index_] = context;
+    self.elementContextByIndex[index] = context;
 }
 
 - (void)updateElementAtIndex:(NSNumber *)index
@@ -335,8 +333,8 @@ static NSInteger const MinColumnCount = 2;
     UIView *elementView = context_.view;
     if ( !elementView
         && lastVisibleIndex < [ self.delegate numberOfElementsInGridView: self ]
-        && actIndex <= lastVisibleIndex )
-    {
+        && actIndex <= lastVisibleIndex ) {
+        
         [self updateElementAtIndex:@(lastVisibleIndex)
                           position:lastVisibleIndex + 1];
     }
@@ -353,123 +351,118 @@ static NSInteger const MinColumnCount = 2;
     [self relayoutElementsAnimated:animated];
 }
 
-- (void)removeElementsWithRange:( NSRange )range_
+- (void)removeElementsWithRange:(NSRange)range
 {
-    for ( NSUInteger index_ = range_.location; index_ < range_.location + range_.length; ++index_ )
-    {
-        [ self removeElementAtIndex: index_ ];
+    for (NSUInteger index = range.location; index < range.location + range.length; ++index) {
+        
+        [self removeElementAtIndex:index];
     }
     
-    [ self relayoutElementsAnimated: NO ];
+    [self relayoutElementsAnimated:NO];
 }
 
 - (void)updateElements
 {
-    NSArray* indexes_to_update_ = [ [ self indexesToUpdate ] allObjects ];
+    NSArray *indexesToUpdate = [[self indexesToUpdate] allObjects];
     
-    [ self removeUnvisibleElements ];
+    [self removeUnvisibleElements];
     
-    for ( NSNumber* index_ in indexes_to_update_ )
-    {
-        [ self updateElementAtIndex: index_ ];
+    for (NSNumber *index in indexesToUpdate) {
+        
+        [self updateElementAtIndex:index];
     }
 }
 
--(void)reloadDataWithRange:( NSRange )range_
+- (void)reloadDataWithRange:(NSRange)range
 {
-    [ self removeElementsWithRange: range_ ];
+    [self removeElementsWithRange:range];
     
-    [ self updateElements ];
+    [self updateElements];
     
-    [ self expandContentSize ];
+    [self expandContentSize];
 }
 
 - (NSRange)activeIndexesRange
 {
-    NSArray* active_indexes_ = [_elementContextByIndex allKeys];
-    if ( [ _elementContextByIndex count ] == 0 )
-        return NSMakeRange( 0, 0 );
+    NSArray *activeIndexes = [_elementContextByIndex allKeys];
+    if ( [_elementContextByIndex count] == 0)
+        return NSMakeRange(0, 0);
     
-    active_indexes_ = [ active_indexes_ sortedArrayUsingComparator: ^NSComparisonResult( id obj1_, id obj2_ ) {
-        return [ obj1_ compare: obj2_ ];
-    } ];
+    activeIndexes = [activeIndexes sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2];
+    }];
     
-    NSInteger from_index_ = [ [ active_indexes_ objectAtIndex: 0 ] integerValue ];
-    NSInteger to_index_   = [ [ active_indexes_ lastObject ] integerValue ] + 1;
+    NSInteger fromIndex = [[activeIndexes objectAtIndex:0] integerValue];
+    NSInteger toIndex   = [[activeIndexes lastObject] integerValue] + 1;
     
-    return NSMakeRange( from_index_, to_index_ - from_index_ );
+    return NSMakeRange(fromIndex, toIndex - fromIndex);
 }
 
--(void)reloadData
+- (void)reloadData
 {
-    [ self reloadDataWithRange: [ self activeIndexesRange ] ];
+    [self reloadDataWithRange:[self activeIndexesRange]];
 }
 
--(void)scrollToIndex:( NSInteger )index_
+- (void)scrollToIndex:(NSInteger)index_
 {
     if ( self.colCount < MinColumnCount )
         return;
     
-    if ( [ self isVerticalGrid ] )
-    {
-        self.scrollView.contentOffset = CGPointMake( self.scrollView.contentOffset.x, index_ * self.rowHeight / self.colCount ) ;
-    }
-    else
-    {
-        self.scrollView.contentOffset = CGPointMake( index_ * self.colWidth, self.scrollView.contentOffset.y );
+    if ([self isVerticalGrid]) {
         
+        self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, index_ * self.rowHeight / self.colCount) ;
+    } else {
+        
+        self.scrollView.contentOffset = CGPointMake(index_ * self.colWidth, self.scrollView.contentOffset.y);
     }
 }
 
 - (void)reloadScrollView
 {
-    if ( self.colCount < 2 ) /// Temp solution to avoid core during Teasers View Init
+    if (self.colCount < 2) /// Temp solution to avoid core during Teasers View Init
         return;
     
-    if ([self isVerticalGrid] && (self.prevOrientation != JFFGridOrientationVertical))
-    {
+    if ([self isVerticalGrid] && (self.prevOrientation != JFFGridOrientationVertical)) {
+        
         self.scrollView.contentOffset = CGPointMake( self.scrollView.contentOffset.x, self.currentlyUsedIndex * self.rowHeight / self.colCount ) ;
         
         self.prevOrientation = JFFGridOrientationVertical;
-    }
-    else if ( ![ self isVerticalGrid ] && ( self.prevOrientation != JFFGridOrientationGorizontal ) )
-    {
-        self.scrollView.contentOffset = CGPointMake( self.currentlyUsedIndex * self.colWidth, self.scrollView.contentOffset.y );
+    } else if (![self isVerticalGrid] && (self.prevOrientation != JFFGridOrientationGorizontal)) {
         
+        self.scrollView.contentOffset = CGPointMake( self.currentlyUsedIndex * self.colWidth, self.scrollView.contentOffset.y );
         self.prevOrientation = JFFGridOrientationGorizontal;
     }
 }
 
--(void)relayoutElementsAnimated:( BOOL )animated_
+- (void)relayoutElementsAnimated:( BOOL )animated
 {
-    void (^animations_)( void ) = ^
+    void (^animations)( void ) = ^
     {
-        for ( NSNumber* index_ in [ self.elementContextByIndex allKeys ] )
+        for (NSNumber *index in [self.elementContextByIndex allKeys])
         {
-            UIView* view_ = [ self elementByIndex: [ index_ unsignedIntValue ] ];
-            view_.frame = [ self rectForElementWithIndex: [ index_ unsignedIntValue ] ];
+            UIView *view = [self elementByIndex:[index unsignedIntValue]];
+            view.frame = [self rectForElementWithIndex:[index unsignedIntValue]];
         }
         
-        [ self updateElements ];
-        [ self expandContentSize ];
+        [self updateElements];
+        [self expandContentSize];
     };
     
-    if ( animated_ )
-        [ UIView animateWithOptions: UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
-                         animations: animations_ ];
+    if (animated)
+        [UIView animateWithOptions:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
+                        animations:animations];
     else
-        animations_();
+        animations();
 }
 
--(void)relayoutElements
+- (void)relayoutElements
 {
-    [ self relayoutElementsAnimated: NO ];
+    [self relayoutElementsAnimated:NO];
 }
 
--(void)layoutSubviews
+- (void)layoutSubviews
 {
-    if ( self.forceRelayout || !CGRectEqualToRect( self.frame, self.previousFrame ) )
-    {
+    if (self.forceRelayout || !CGRectEqualToRect(self.frame, self.previousFrame)) {
         [self reloadScrollView];
         [self relayoutElements];
     }
@@ -478,7 +471,7 @@ static NSInteger const MinColumnCount = 2;
     self.forceRelayout = NO;
 }
 
--(NSMutableDictionary*)reusableElementsByIdentifier
+- (NSMutableDictionary *)reusableElementsByIdentifier
 {
     if (!_reusableElementsByIdentifier) {
         
@@ -501,17 +494,17 @@ static NSInteger const MinColumnCount = 2;
 
 #pragma mark UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scroll_view_
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [self updateElements];
 }
 
 #pragma mark JFFRemoveButtonDelegate
 
-- (void)didTapRemoveButton:(JFFRemoveButton *)button_
-              withUserInfo:( NSDictionary* )user_info_
+- (void)didTapRemoveButton:(JFFRemoveButton *)button
+              withUserInfo:(NSDictionary *)userInfo
 {
-    NSUInteger index = [user_info_[JFFElementIndex] unsignedIntValue];
+    NSUInteger index = [userInfo[JFFElementIndex] unsignedIntValue];
     [self.delegate gridView:self removeElementAtIndex:index];
 }
 

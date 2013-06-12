@@ -2,9 +2,9 @@
 
 typedef enum
 {
-   JFFGridOrientationUndefined
-   , JFFGridOrientationVertical
-   , JFFGridOrientationGorizontal
+   JFFGridOrientationUndefined,
+   JFFGridOrientationVertical,
+   JFFGridOrientationGorizontal
 } JFFGridOrientation;
 
 @class JFFRemoveButton;

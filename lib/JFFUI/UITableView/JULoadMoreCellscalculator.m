@@ -118,11 +118,11 @@ static const NSUInteger RIPagingDisabled         = 0;
 
     static const NSUInteger loadMorePlaceholderSize_ = 1;
     NSUInteger restOfTheItems_ = self.totalElementsCount - self.currentCount;
-
+    
     float items_count_for_index_path_ = 1 + index_;
     NSUInteger pages_expected_ = ceilf( items_count_for_index_path_ / self.pageSize );
     NSUInteger elements_expected_ = pages_expected_ * self.pageSize;
-
+    
     //check if paging disabled
     BOOL isOverflow_ = ( elements_expected_ >= self.totalElementsCount );
     if ( isOverflow_ )

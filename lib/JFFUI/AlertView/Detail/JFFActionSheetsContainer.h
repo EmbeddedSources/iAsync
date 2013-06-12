@@ -5,17 +5,17 @@
 
 @interface JFFActionSheetsContainer : NSObject
 
-+(id)sharedActionSheetsContainer;
++ (instancetype)sharedActionSheetsContainer;
 
--(NSUInteger)count;
+- (NSUInteger)count;
 
--(void)addActionSheet:( JFFActionSheet* )actionSheet_ withView:( UIView* )view_;
--(void)removeActionSheet:( JFFActionSheet* )actionSheet_;
--(BOOL)containsActionSheet:( JFFActionSheet* )actionSheet_;
+- (void)addActionSheet:(JFFActionSheet *)actionSheet_ withView:(UIView *)view;
+- (void)removeActionSheet:(JFFActionSheet *)actionSheet_;
+- (BOOL)containsActionSheet:(JFFActionSheet *)actionSheet_;
 
--(JFFPendingActionSheet*)firstPendingActionSheet;
+- (JFFPendingActionSheet *)firstPendingActionSheet;
 
--(NSArray*)allActionSheets;
--(void)removeAllActionSheets;
+- (NSArray *)allActionSheets;
+- (void)removeAllActionSheets;
 
 @end

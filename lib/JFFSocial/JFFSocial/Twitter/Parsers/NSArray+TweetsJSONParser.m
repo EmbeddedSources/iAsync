@@ -4,7 +4,7 @@
 
 @implementation NSArray (TweetsJSONParser)
 
-+ (id)newTweetsWithJSONObject:(NSDictionary *)jsonObject error:(NSError **)outError
++ (instancetype)newTweetsWithJSONObject:(NSDictionary *)jsonObject error:(NSError **)outError
 {
     id jsonPattern = @{
     @"statuses" : [NSArray class],

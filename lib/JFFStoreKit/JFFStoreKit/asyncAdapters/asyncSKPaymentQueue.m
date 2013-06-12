@@ -33,7 +33,7 @@ JFFAsyncOperationInterface
         [_queue removeTransactionObserver:self];
 }
 
-+ (id)newAsyncSKPaymentAdapterWithRequest:(SKPayment *)payment
++ (instancetype)newAsyncSKPaymentAdapterWithRequest:(SKPayment *)payment
 {
     JFFAsyncSKPaymentAdapter *result = [self new];
     

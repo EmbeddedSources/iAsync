@@ -7,7 +7,7 @@
 
 #import "JFFWaitAlertView.h"
 
-@interface JFFAlertView () < UIAlertViewDelegate >
+@interface JFFAlertView () <UIAlertViewDelegate>
 
 + (void)activeAlertsAddAlert:(JFFAlertView *)alertView;
 - (void)forceShow;
@@ -19,7 +19,7 @@
     BOOL _exclusive;
     NSMutableArray * _alertButtons;
     UIAlertView    * _alertView   ;
-
+    
     BOOL _ignoreDismiss;
 }
 
@@ -147,8 +147,8 @@
                           description:description];
 }
 
-+ (id)waitAlertWithTitle:(NSString *)title
-            cancelButton:(JFFAlertButton *)button
++ (instancetype)waitAlertWithTitle:(NSString *)title
+                      cancelButton:(JFFAlertButton *)button
 {
     button = button ?: [NSLocalizedString(@"CANCEL", nil) toAlertButton];
     
@@ -164,20 +164,20 @@
     return alertView;
 }
 
-- (id)initWithTitle:(NSString *)title
-            message:(NSString *)message
-           delegate:(id /*<UIAlertViewDelegate>*/)delegate
-  cancelButtonTitle:(NSString *)cancelButtonTitle
-  otherButtonTitles:(NSString *)otherButtonTitles, ...
+- (instancetype)initWithTitle:(NSString *)title
+                      message:(NSString *)message
+                     delegate:(id /*<UIAlertViewDelegate>*/)delegate
+            cancelButtonTitle:(NSString *)cancelButtonTitle
+            otherButtonTitles:(NSString *)otherButtonTitles, ...
 {
     NSAssert(NO, @"dont use this constructor of JFFAlertView");
     return nil;
 }
 
-- (id)initWithTitle:(NSString *)title
-            message:(NSString *)message
-  cancelButtonTitle:(NSString *)cancelButtonTitle
-otherButtonTitlesArray:(NSArray *)otherButtonTitles
+- (instancetype)initWithTitle:(NSString *)title
+                      message:(NSString *)message
+            cancelButtonTitle:(NSString *)cancelButtonTitle
+       otherButtonTitlesArray:(NSArray *)otherButtonTitles
 {
     self = [super init];
     if (nil == self) {
@@ -332,13 +332,15 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    JFFSimpleBlock didDismissHandler = _didDismissHandler;
+    
     [[self class] activeAlertsRemoveAlert:self];
     
     JFFAlertViewsContainer *container = [JFFAlertViewsContainer sharedAlertViewsContainer];
     [[container firstAlertView] forceShow];
     
-    if (_didDismissHandler)
-        _didDismissHandler();
+    if (didDismissHandler)
+        didDismissHandler();
 }
 
 - (BOOL)isOnScreen

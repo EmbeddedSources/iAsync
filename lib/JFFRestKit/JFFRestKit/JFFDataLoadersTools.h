@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedDataLoader_ );
+    JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader(JFFAsyncOperation chunkedDataLoader);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

@@ -2,15 +2,15 @@
 
 @implementation JFFPendingActionSheet
 
--(id)initWithActionSheet:( JFFActionSheet* )actionSheet_
-                    view:( UIView* )view_
+- (instancetype)initWithActionSheet:(JFFActionSheet *)actionSheet
+                               view:(UIView *)view
 {
-    self = [ super init ];
+    self = [super init];
     
-    if ( self )
-    {
-        self.actionSheet = actionSheet_;
-        self.view        = view_;
+    if (self) {
+        
+        self.actionSheet = actionSheet;
+        self.view        = view;
     }
     
     return self;

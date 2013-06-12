@@ -2,6 +2,6 @@
 
 @interface JFFStoreKitTransactionStateFailedError : JFFStoreKitError
 
-@property (nonatomic, strong) NSError *originalError;
+@property (nonatomic) NSError *originalError;
 
 @end

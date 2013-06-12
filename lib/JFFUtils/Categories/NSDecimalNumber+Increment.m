@@ -2,17 +2,17 @@
 
 @implementation NSDecimalNumber (Increment)
 
-- (NSDecimalNumber *)instanceOne
+- (instancetype)instanceOne
 {
     return [[self class] one];
 }
 
-- (NSDecimalNumber *)increment
+- (instancetype)increment
 {
     return [self decimalNumberByAdding:[self instanceOne]];
 }
 
-- (NSDecimalNumber *)decrement
+- (instancetype)decrement
 {
     return [self decimalNumberBySubtracting:[self instanceOne]];
 }

@@ -10,6 +10,6 @@
 @property (nonatomic) UIImage  *backgroundImage;
 @property (nonatomic, copy) JFFSimpleBlock action;
 
-+ (id)newAlertButton:(NSString *)title action:(JFFSimpleBlock)action;
++ (instancetype)newAlertButton:(NSString *)title action:(JFFSimpleBlock)action;
 
 @end

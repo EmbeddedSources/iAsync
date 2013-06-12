@@ -9,8 +9,8 @@
 
 @implementation JFFInstagramAccount (JFFInstagramJSONDataAnalyzers)
 
-+ (id)newInstagramAccountWithJSONObject:(NSDictionary *)userJsonObject
-                                  error:(NSError **)outError
++ (instancetype)newInstagramAccountWithJSONObject:(NSDictionary *)userJsonObject
+                                            error:(NSError **)outError
 {
     id jsonPattern = @{
     @"username"        : [NSString class],
@@ -37,8 +37,8 @@
 
 @implementation JFFInstagramAuthedAccount (JFFInstagramJSONDataAnalyzers)
 
-+ (id)newInstagramAuthedAccountWithJSONObject:(NSDictionary *)jsonObject
-                                        error:(NSError **)outError
++ (instancetype)newInstagramAuthedAccountWithJSONObject:(NSDictionary *)jsonObject
+                                                  error:(NSError **)outError
 {
     id jsonPattern = @{
     @"user"         : [NSDictionary class],
@@ -66,8 +66,8 @@
 
 @implementation JFFInstagramMediaItemImage (JFFInstagramJSONDataAnalyzers)
 
-+ (id)newInstagramMediaItemImageWithJsonObject:(NSDictionary *)jsonObject
-                                         error:(NSError **)outError
++ (instancetype)newInstagramMediaItemImageWithJsonObject:(NSDictionary *)jsonObject
+                                                   error:(NSError **)outError
 {
     id jsonPattern =
     @{
@@ -97,8 +97,8 @@
 
 @implementation JFFInstagramMediaItem (JFFInstagramJSONDataAnalyzers)
 
-+ (id)newInstagramMediaItemWithJSONObject:(NSDictionary *)jsonObject
-                                    error:(NSError **)outError
++ (instancetype)newInstagramMediaItemWithJSONObject:(NSDictionary *)jsonObject
+                                              error:(NSError **)outError
 {
     id jsonPattern = @{
     @"user"   : [NSDictionary class],
@@ -151,8 +151,8 @@
 
 @implementation JFFInstagramComment (JFFInstagramJSONDataAnalyzers)
 
-+ (id)newInstagramCommentWithJSONObject:(NSDictionary *)jsonObject
-                                  error:(NSError **)outError
++ (instancetype)newInstagramCommentWithJSONObject:(NSDictionary *)jsonObject
+                                            error:(NSError **)outError
 {
     id jsonPattern = @{
     @"from" : [NSDictionary class],

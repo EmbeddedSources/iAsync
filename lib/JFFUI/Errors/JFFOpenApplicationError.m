@@ -2,7 +2,7 @@
 
 @implementation JFFOpenApplicationError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"JFFUI_OPEN_APPLICATION_ERROR", nil)];
 }

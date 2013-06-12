@@ -8,7 +8,7 @@
 
 @interface JFFNSObjectInstancesCounter : NSObject
 
-@property ( nonatomic, retain ) NSMutableDictionary* instancesNumberByClassName;
+@property (nonatomic, retain) NSMutableDictionary* instancesNumberByClassName;
 
 @end
 
@@ -16,12 +16,12 @@
 
 - (void)dealloc
 {
-    [self->_instancesNumberByClassName release];
+    [_instancesNumberByClassName release];
     
     [super dealloc];
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [ super init ];
     
@@ -32,7 +32,7 @@
     return self;
 }
 
-+ (id)sharedObjectInstancesCounter
++ (instancetype)sharedObjectInstancesCounter
 {
     static dispatch_once_t once;
     static id instance;
@@ -121,7 +121,7 @@
                 BOOL methodAdded_ = [ [ self class ] addClassMethodIfNeedWithSelector:@selector(alloCWithZoneToAdding:)
                                                                               toClass:class_
                                                                     newMethodSelector:@selector(allocWithZone:)];
-
+                
                 if (!methodAdded_) {
                     // create name allocWithZoneHook dynamicaly and allocWithZonePrototype use block instead
                     [[self class] hookClassMethodForClass:class_

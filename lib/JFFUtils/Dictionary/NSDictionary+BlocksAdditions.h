@@ -4,10 +4,10 @@
 
 @interface NSDictionary (BlocksAdditions)
 
-- (NSDictionary*)map:(JFFDictMappingBlock)block;
-- (NSDictionary*)mapKey:(JFFDictMappingBlock)block;
+- (instancetype)map:(JFFDictMappingBlock)block;
+- (instancetype)mapKey:(JFFDictMappingBlock)block;
 
-- (NSDictionary *)map:(JFFDictMappingWithErrorBlock)block error:(NSError **)outError;
+- (instancetype)map:(JFFDictMappingWithErrorBlock)block error:(NSError **)outError;
 
 - (NSUInteger)count:(JFFDictPredicateBlock)predicate;
 
@@ -16,6 +16,6 @@
 
 //Invokes the block passing in successive elements from self,
 //Creates a new NSDictionary containing those elements for which the block returns a YES value
-- (NSDictionary*)select:(JFFDictPredicateBlock)predicate;
+- (instancetype)select:(JFFDictPredicateBlock)predicate;
 
 @end

@@ -126,10 +126,30 @@ static JFFAsyncOperation twitterAccountsLoader()
                                                                       requestBinder,
                                                                       nil);
     
+    ayncAnalyzer = [ayncAnalyzer copy];
+    
+    JFFAsyncOperationBinder analyzer = ^JFFAsyncOperation(NSData *data) {
+        
+        JFFAsyncOperation jsonBuilder = asyncOperationBinderJsonDataParser()(data);
+        
+        JFFAsyncOperationBinder analyzer = ^JFFAsyncOperation(id jsonObject) {
+            
+            id context =
+            @{
+              @"url"           : urlString,
+              @"params"        : parameters,
+              @"requestMethod" : @(requestMethod),
+              };
+            
+            return ayncAnalyzer(@[jsonObject, context]);
+        };
+        
+        return bindSequenceOfAsyncOperations(jsonBuilder, analyzer, nil);
+    };
+    
     return bindSequenceOfAsyncOperations(loaderOperation,
                                          twitterResponseToNSData(),
-                                         asyncOperationBinderJsonDataParser(),
-                                         ayncAnalyzer,
+                                         analyzer,
                                          nil);
 }
 

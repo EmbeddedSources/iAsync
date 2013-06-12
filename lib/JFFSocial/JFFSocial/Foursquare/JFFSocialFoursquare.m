@@ -238,11 +238,12 @@
     
     NSString *boundary = [NSString createUuid];
     
-    NSData *imageData = [NSData dataForHTTPPostWithData:UIImageJPEGRepresentation(image, 1.0)
-                                            andFileName:@"name"
-                                       andParameterName:@"photo"
-                                               boundary:boundary];
-    NSData *httpBody = [imageData dataForHTTPPostByAppendingParameters:params boundary:boundary];
+    NSMutableData *httpBody = [NSMutableData dataForHTTPPostWithData:UIImageJPEGRepresentation(image, 1.0)
+                                                         andFileName:@"name"
+                                                    andParameterName:@"photo"
+                                                            boundary:boundary];
+    
+    [httpBody appendHTTPParameters:params boundary:boundary];
     
     JFFAsyncOperationBinder postLoaderBinder = ^JFFAsyncOperation(NSString *accessToken) {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoaderWithHTTPBody(addPhotoURL, httpBody, accessToken),

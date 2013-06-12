@@ -2,8 +2,8 @@
 
 @interface NSNumber (FSStorable)
 
-+ (id)newLongLongNumberWithContentsOfFile:(NSString *)fileName;
-+ (id)newDoubleWithContentsOfFile:(NSString *)fileName;
++ (instancetype)newLongLongNumberWithContentsOfFile:(NSString *)fileName;
++ (instancetype)newDoubleWithContentsOfFile:(NSString *)fileName;
 
 - (BOOL)saveNumberToFile:(NSString *)fileName;
 
