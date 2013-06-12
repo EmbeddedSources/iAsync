@@ -2,24 +2,23 @@
 
 @implementation UIView (AllSubviews)
 
--(UIView*)findSubviewOfClass:( Class )class_
+- (instancetype)findSubviewOfClass:(Class)cls
 {
-    if ( [ self isKindOfClass: class_ ] )
+    if ([self isKindOfClass:cls])
         return self;
-
-    for ( UIView* subview_ in self.subviews )
-    {
-        UIView* overlay_view_ = [ subview_ findSubviewOfClass: class_ ];
-        if ( overlay_view_ )
-        {
-            return overlay_view_;
+    
+    for (UIView *subview in self.subviews) {
+        
+        UIView *overlayView = [subview findSubviewOfClass:cls];
+        if (overlayView) {
+            return overlayView;
         }
     }
 
     return nil;
 }
 
--(void)logAllSubviewsWithLevel:( NSUInteger )level_
+- (void)logAllSubviewsWithLevel:( NSUInteger )level_
 {
     NSLog( @"level: %d view: %@", level_++, self );
 
@@ -29,12 +28,12 @@
     }
 }
 
--(void)logAllSubviews
+- (void)logAllSubviews
 {
     [ self logAllSubviewsWithLevel: 0 ];
 }
 
--(void)removeAllSubviews
+- (void)removeAllSubviews
 {
     [ self.subviews makeObjectsPerformSelector: @selector( removeFromSuperview ) ];
 }

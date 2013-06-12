@@ -11,14 +11,23 @@ static NSTimeInterval defaultAnimationDelay = 0.0;
                    animations:animations];
 }
 
-+ (void)animateWithOptions:(UIViewAnimationOptions )options
++ (void)animateWithOptions:(UIViewAnimationOptions)options
                 animations:(JFFSimpleBlock)animations
+{
+    [self animateWithOptions:options
+                  animations:animations
+                  completion:nil];
+}
+
++ (void)animateWithOptions:(UIViewAnimationOptions)options
+                animations:(JFFSimpleBlock)animations
+                completion:(JFFCompletionBlock)completion
 {
     [self animateWithDuration:defaultAnimationDuration
                         delay:defaultAnimationDelay
                       options:options
                    animations:animations
-                   completion:nil];
+                   completion:completion];
 }
 
 @end
