@@ -1,6 +1,6 @@
 #import "UIWebView+UserAgent.h"
 
-#include "JGCDAdditions.h"
+#import <JFFUtils/JGCDAdditions.h>
 
 static NSString* globalUserAgent;
 
