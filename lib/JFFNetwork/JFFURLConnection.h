@@ -8,7 +8,7 @@
 //all callbacks cleared after cancel or finish action
 @interface JFFURLConnection : JNAbstractConnection
 
-- (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params;
+- (instancetype)initWithURLConnectionParams:(JFFURLConnectionParams *)params;
 
 - (void)start;
 - (void)cancel;

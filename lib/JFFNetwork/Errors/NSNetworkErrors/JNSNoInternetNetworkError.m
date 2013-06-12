@@ -7,7 +7,7 @@
     return [error isNetworkError];
 }
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"JNETWORK_NO_INTERNET_ERROR", nil)];
 }

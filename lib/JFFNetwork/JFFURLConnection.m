@@ -101,7 +101,7 @@ static void readStreamCallback(CFReadStreamRef stream,
     [self cancel];
 }
 
-- (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params
+- (instancetype)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
     self = [super init];
     
@@ -203,7 +203,7 @@ static void readStreamCallback(CFReadStreamRef stream,
     }
 }
 
--(void)closeReadStream
+- (void)closeReadStream
 {
     if (_readStream) {
         

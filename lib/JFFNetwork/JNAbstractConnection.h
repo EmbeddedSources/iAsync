@@ -9,6 +9,6 @@
 @property (nonatomic, copy) JFFDidUploadDataHandler      didUploadDataBlock     ;
 @property (nonatomic, copy) JFFShouldAcceptCertificateForHost shouldAcceptCertificateBlock;
 
--(void)clearCallbacks;
+- (void)clearCallbacks;
 
 @end

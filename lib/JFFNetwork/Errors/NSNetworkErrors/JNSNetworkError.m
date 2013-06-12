@@ -8,14 +8,14 @@
     NSError *_nativeError;
 }
 
-- (id)init
+- (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
-- (id)initWithContext:(id<NSCopying>)context
-          nativeError:(NSError *)nativeError
+- (instancetype)initWithContext:(id<NSCopying>)context
+                    nativeError:(NSError *)nativeError
 {
     self = [self initWithDescription:NSLocalizedString(@"JNETWORK_GENERIC_ERROR", nil)];
     
@@ -32,8 +32,8 @@
     return NO;
 }
 
-+ (id)newJNSNetworkErrorWithContext:(id<NSCopying>)context
-                        nativeError:(NSError *)nativeError
++ (instancetype)newJNSNetworkErrorWithContext:(id<NSCopying>)context
+                                  nativeError:(NSError *)nativeError
 {
     Class class = Nil;
     
@@ -60,7 +60,7 @@
     return result;
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JNSNetworkError *copy = [super copyWithZone:zone];
     

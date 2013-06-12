@@ -7,7 +7,7 @@
 @property (nonatomic, readonly) id<NSCopying> context;
 @property (nonatomic, readonly) NSError *nativeError;
 
-+ (id)newJNSNetworkErrorWithContext:(id<NSCopying>)context
-                        nativeError:(NSError *)nativeError;
++ (instancetype)newJNSNetworkErrorWithContext:(id<NSCopying>)context
+                                  nativeError:(NSError *)nativeError;
 
 @end

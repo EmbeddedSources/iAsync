@@ -2,35 +2,35 @@
 
 @implementation JHttpError
 
-- (id)init
+- (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
-- (id)initWithDescription:(NSString *)description
-                   domain:(NSString *)domain
-                     code:(NSInteger)code
+- (instancetype)initWithDescription:(NSString *)description
+                             domain:(NSString *)domain
+                               code:(NSInteger)code
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
-- (id)initWithDescription:(NSString *)description
-                     code:(NSInteger)code
+- (instancetype)initWithDescription:(NSString *)description
+                               code:(NSInteger)code
 {
     return [super initWithDescription:description
                                domain:@"com.just_for_fun.library.http"
                                  code:code];
 }
 
-- (id)initWithHttpCode:(CFIndex)statusCode
+- (instancetype)initWithHttpCode:(CFIndex)statusCode
 {
     return [self initWithDescription:NSLocalizedString(@"JFF_HTTP_ERROR", nil)
                                 code:statusCode];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JHttpError *copy = [super copyWithZone:zone];
     

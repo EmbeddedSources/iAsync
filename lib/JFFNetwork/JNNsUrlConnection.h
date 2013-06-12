@@ -5,7 +5,7 @@
 
 @interface JNNsUrlConnection : JNAbstractConnection
 
-- (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params;
+- (instancetype)initWithURLConnectionParams:(JFFURLConnectionParams *)params;
 
 - (void)start;
 - (void)cancel;

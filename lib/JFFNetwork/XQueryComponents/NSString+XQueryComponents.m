@@ -2,12 +2,12 @@
 
 @implementation NSString (XQueryComponents)
 
-- (NSString *)stringByDecodingURLFormat
+- (instancetype)stringByDecodingURLFormat
 {
     return [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (NSString *)stringByEncodingURLFormat
+- (instancetype)stringByEncodingURLFormat
 {
     static NSString *unsafe = @" <>#%'\";?:@&=+$/,{}|\\^~[]`-*!()";
     CFStringRef resultRef = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
@@ -20,17 +20,17 @@
 
 - (NSDictionary *)dictionaryFromQueryComponents
 {
-    NSMutableDictionary *queryComponents = [ NSMutableDictionary new ];
+    NSMutableDictionary *queryComponents = [NSMutableDictionary new];
     for (NSString *keyValuePairString in [self componentsSeparatedByString:@"&"])
     {
         NSArray *keyValuePairArray = [keyValuePairString componentsSeparatedByString:@"="];
         
         // Verify that there is at least one key, and at least one value.  Ignore extra = signs
-        if ( [ keyValuePairArray count ] < 2 )
+        if ([keyValuePairArray count] < 2)
             continue;
         
-        NSString* key   = [keyValuePairArray[0]stringByDecodingURLFormat];
-        NSString* value = [keyValuePairArray[1]stringByDecodingURLFormat];
+        NSString *key   = [keyValuePairArray[0]stringByDecodingURLFormat];
+        NSString *value = [keyValuePairArray[1]stringByDecodingURLFormat];
         NSMutableArray* results_ = queryComponents[ key ]; // URL spec says that multiple values are allowed per key
         // First object
         if( !results_ ) {

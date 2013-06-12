@@ -12,17 +12,17 @@
 
 @implementation JNNsUrlConnection
 {
-    NSURLConnection* _nativeConnection;
-    JFFURLConnectionParams* _params;
-    NSRunLoop *_connectRunLoop;
+    NSURLConnection        *_nativeConnection;
+    JFFURLConnectionParams *_params;
+    NSRunLoop              *_connectRunLoop;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     [self cancel];
 }
 
-- (id)initWithURLConnectionParams:(JFFURLConnectionParams *)params
+- (instancetype)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
     NSParameterAssert(params);
     
@@ -230,11 +230,21 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
  totalBytesWritten:(NSInteger)totalBytesWritten
 totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
-    if (self.didUploadDataBlock) {
+    if (!self.didUploadDataBlock)
+        return;
+    
+    totalBytesExpectedToWrite = (totalBytesExpectedToWrite == -1)
+    ?_params.totalBytesExpectedToWrite
+    :totalBytesExpectedToWrite;
+    
+    if (totalBytesExpectedToWrite <= 0) {
         
-        NSNumber *progress = @((float)totalBytesWritten/totalBytesExpectedToWrite);
-        self.didUploadDataBlock(progress);
+        self.didUploadDataBlock(@0);
+        return;
     }
+    
+    NSNumber *progress = @((float)totalBytesWritten/totalBytesExpectedToWrite);
+    self.didUploadDataBlock(progress);
 }
 
 @end

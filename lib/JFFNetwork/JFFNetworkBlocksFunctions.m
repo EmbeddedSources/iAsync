@@ -20,7 +20,7 @@ static JFFAnalyzer downloadStatusCodeResponseAnalyzer(id<NSCopying> context)
         
         if ([JHttpFlagChecker isDownloadErrorFlag:statusCode]) {
             if (outError) {
-                JHttpError *httpError = [[JHttpError alloc]initWithHttpCode:statusCode];
+                JHttpError *httpError = [[JHttpError alloc] initWithHttpCode:statusCode];
                 httpError.context = context;
                 *outError = httpError;
             }

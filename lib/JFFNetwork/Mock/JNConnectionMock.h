@@ -3,9 +3,9 @@
 
 @interface JNConnectionMock : NSObject< JNMock >
 
-- (id)initWithConnectionClass:(Class )connectionClass
-                       action:(void (^)(void))action //JFFSimpleBlock
-          executeOriginalImpl:(BOOL)yesNo;
+- (instancetype)initWithConnectionClass:(Class )connectionClass
+                                 action:(void (^)(void))action //JFFSimpleBlock
+                    executeOriginalImpl:(BOOL)yesNo;
 
 @property (nonatomic, readonly) BOOL isMockEnabled;
 

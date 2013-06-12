@@ -2,8 +2,8 @@
 
 @interface NSString (XQueryComponents)
 
--(NSString*)stringByDecodingURLFormat;
--(NSString*)stringByEncodingURLFormat;
--(NSDictionary*)dictionaryFromQueryComponents;
+- (instancetype)stringByDecodingURLFormat;
+- (instancetype)stringByEncodingURLFormat;
+- (NSDictionary *)dictionaryFromQueryComponents;
 
 @end

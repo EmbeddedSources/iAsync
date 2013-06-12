@@ -20,7 +20,7 @@
 
 #pragma mark -
 #pragma mark NSObject
--(NSString*)description
+- (NSString *)description
 {
     NSString *custom = [JFFUrlResponseLogger descriptionStringForUrlResponse:self];
     return [[NSString alloc] initWithFormat:@"%@ \n   %@", [super description], custom];

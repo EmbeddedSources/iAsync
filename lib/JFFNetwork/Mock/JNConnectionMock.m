@@ -20,63 +20,61 @@ typedef void (^NSImplBlock)( id self );
     SEL _realSel;
 }
 
--(void)dealloc
+- (void)dealloc
 {
-    [ self disableMock];
+    [self disableMock];
     
-    self->_connectionClass = Nil;
-    self->_realImpl = NULL;
-    self->_mockImpl = NULL;
-    self->_realMethod = NULL;
+    _connectionClass = Nil;
+    _realImpl   = NULL;
+    _mockImpl   = NULL;
+    _realMethod = NULL;
     
 }
 
--(id)init
+- (instancetype)init
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
--(id)initWithConnectionClass:( Class )connectionClass
-                      action:( JFFSimpleBlock )action
-         executeOriginalImpl:( BOOL )executeOriginalImpl
+- (instancetype)initWithConnectionClass:(Class)connectionClass
+                                 action:(JFFSimpleBlock)action
+                    executeOriginalImpl:(BOOL)executeOriginalImpl
 {
-    self = [ super init ];
-    if ( nil == self )
-    {
+    self = [super init];
+    if (nil == self) {
+        
         return nil;
     }
     
- 
-    NSParameterAssert( [ connectionClass conformsToProtocol: @protocol(JNUrlConnection) ] );
-    NSParameterAssert( nil != action );
+    NSParameterAssert([connectionClass conformsToProtocol:@protocol(JNUrlConnection)]);
+    NSParameterAssert(nil != action);
     
-    action = [ action copy ];
+    action = [action copy];
     
     //save args
     {
-        self->_shouldInvokeOriginalMethod = executeOriginalImpl;
-        self->_connectionClass = connectionClass;
+        _shouldInvokeOriginalMethod = executeOriginalImpl;
+        _connectionClass = connectionClass;
     }
-    
     
     //save "real" methods
     {
-        self->_realSel    = @selector(start);
-        self->_realMethod = class_getInstanceMethod( connectionClass, self->_realSel );
-        self->_realImpl   = method_getImplementation( self->_realMethod );
+        _realSel    = @selector(start);
+        _realMethod = class_getInstanceMethod(connectionClass, _realSel);
+        _realImpl   = method_getImplementation(_realMethod);
     }
-
+    
     //create a mock
     {
-        SEL start_ = self->_realSel;
+        SEL start = _realSel;
         NSImplBlock newAction = nil;
-        if ( executeOriginalImpl )
+        if (executeOriginalImpl)
         {
-            newAction = ^void( id connectionSelf )
+            newAction = ^void(id connectionSelf)
             {
                 action();
-                self->_realImpl( connectionSelf, start_ );
+                self->_realImpl(connectionSelf, start);
             };
         }
         else
@@ -89,15 +87,13 @@ typedef void (^NSImplBlock)( id self );
         self->_mockImpl = imp_implementationWithBlock( newAction );
         NSParameterAssert( NULL != self->_mockImpl );
     }
-
-
+    
     return self;
 }
 
--(void)enableMock
+- (void)enableMock
 {
-    if ( self->_isMockEnabled )
-    {
+    if (_isMockEnabled) {
         return;
     }
     
@@ -105,13 +101,12 @@ typedef void (^NSImplBlock)( id self );
     self->_isMockEnabled = YES;
 }
 
--(void)disableMock
+- (void)disableMock
 {
-    if ( !self->_isMockEnabled )
-    {
+    if (!_isMockEnabled) {
         return;
     }
-
+    
     method_setImplementation( self->_realMethod, self->_realImpl );
     self->_isMockEnabled = NO;
 }
