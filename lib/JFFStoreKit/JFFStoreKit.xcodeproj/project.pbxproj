@@ -343,7 +343,7 @@
 		CED002251619A33E00368E7D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = EmbeddedSources;
 			};
 			buildConfigurationList = CED002281619A33E00368E7D /* Build configuration list for PBXProject "JFFStoreKit" */;

@@ -238,7 +238,7 @@
 		6516846E144F4ECD0014670E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 65168471144F4ECD0014670E /* Build configuration list for PBXProject "JFFCache" */;
 			compatibilityVersion = "Xcode 3.2";

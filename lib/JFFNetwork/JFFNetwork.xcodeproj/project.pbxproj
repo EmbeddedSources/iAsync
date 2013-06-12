@@ -15,6 +15,8 @@
 		1B166C941546E5AD00475B6A /* JFFLocalCookiesStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B166C921546E5AD00475B6A /* JFFLocalCookiesStorage.m */; };
 		1B166C981546E65C00475B6A /* NSString+RFC_2965.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B166C961546E65C00475B6A /* NSString+RFC_2965.h */; };
 		1B166C991546E65C00475B6A /* NSString+RFC_2965.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B166C971546E65C00475B6A /* NSString+RFC_2965.m */; };
+		4C377B1D175BD8E100F1B993 /* JHttpBodyBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C377B1B175BD8E000F1B993 /* JHttpBodyBuilder.h */; };
+		4C377B1E175BD8E100F1B993 /* JHttpBodyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C377B1C175BD8E100F1B993 /* JHttpBodyBuilder.m */; };
 		4C98FAC616E0ACC500B6EFD8 /* JStreamError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FAC416E0ACC500B6EFD8 /* JStreamError.h */; };
 		4C98FAC716E0ACC500B6EFD8 /* JStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FAC516E0ACC500B6EFD8 /* JStreamError.m */; };
 		4C98FACA16E0ACE400B6EFD8 /* JNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FAC816E0ACE400B6EFD8 /* JNetworkError.h */; };
@@ -267,6 +269,8 @@
 		1B166C921546E5AD00475B6A /* JFFLocalCookiesStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFLocalCookiesStorage.m; sourceTree = "<group>"; };
 		1B166C961546E65C00475B6A /* NSString+RFC_2965.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RFC_2965.h"; sourceTree = "<group>"; };
 		1B166C971546E65C00475B6A /* NSString+RFC_2965.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RFC_2965.m"; sourceTree = "<group>"; };
+		4C377B1B175BD8E000F1B993 /* JHttpBodyBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHttpBodyBuilder.h; sourceTree = "<group>"; };
+		4C377B1C175BD8E100F1B993 /* JHttpBodyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHttpBodyBuilder.m; sourceTree = "<group>"; };
 		4C98FAC416E0ACC500B6EFD8 /* JStreamError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JStreamError.h; sourceTree = "<group>"; };
 		4C98FAC516E0ACC500B6EFD8 /* JStreamError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JStreamError.m; sourceTree = "<group>"; };
 		4C98FAC816E0ACE400B6EFD8 /* JNetworkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNetworkError.h; sourceTree = "<group>"; };
@@ -448,11 +452,11 @@
 				4CA09902174A3C3F002BEA0F /* NSData+DataForHTTPPost.h */,
 				4CA09903174A3C3F002BEA0F /* NSData+DataForHTTPPost.m */,
 				4CA09906174A3C63002BEA0F /* NSURL+Cookies.h */,
+				4CA09907174A3C64002BEA0F /* NSURL+Cookies.m */,
 				4CA09916174A3E23002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.h */,
 				4CA09917174A3E24002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.m */,
 				4CA0991A174A3E27002BEA0F /* NSDictionary+JHTTPHeaders.h */,
 				4CA0991B174A3E28002BEA0F /* NSDictionary+JHTTPHeaders.m */,
-				4CA09907174A3C64002BEA0F /* NSURL+Cookies.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -476,6 +480,15 @@
 				4CBBDBF217173BE4004D670D /* JNMock.h */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		4CBEB64F175BD83400C3D132 /* HttpBodyBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				4C377B1B175BD8E000F1B993 /* JHttpBodyBuilder.h */,
+				4C377B1C175BD8E100F1B993 /* JHttpBodyBuilder.m */,
+			);
+			path = HttpBodyBuilder;
 			sourceTree = "<group>";
 		};
 		534BEF1C14448DAD005D745F /* Detail */ = {
@@ -632,6 +645,7 @@
 		8D5AE6EF13F3E7EE00EB6143 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4CBEB64F175BD83400C3D132 /* HttpBodyBuilder */,
 				4CA098FD174A3BD0002BEA0F /* Categories */,
 				4CBBDBEF17173BE4004D670D /* Mock */,
 				4C98FAC316E0ACB300B6EFD8 /* Errors */,
@@ -862,6 +876,7 @@
 				4CA09908174A3C64002BEA0F /* NSURL+Cookies.h in Headers */,
 				4CA09918174A3E24002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.h in Headers */,
 				4CA0991C174A3E28002BEA0F /* NSDictionary+JHTTPHeaders.h in Headers */,
+				4C377B1D175BD8E100F1B993 /* JHttpBodyBuilder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -946,7 +961,7 @@
 		8D5AE6D213F3E6C500EB6143 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 8D5AE6D513F3E6C500EB6143 /* Build configuration list for PBXProject "JFFNetwork" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1171,6 +1186,7 @@
 				4CA09909174A3C64002BEA0F /* NSURL+Cookies.m in Sources */,
 				4CA09919174A3E24002BEA0F /* NSMutableURLRequest+CreateRequestWithURLParams.m in Sources */,
 				4CA0991D174A3E28002BEA0F /* NSDictionary+JHTTPHeaders.m in Sources */,
+				4C377B1E175BD8E100F1B993 /* JHttpBodyBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

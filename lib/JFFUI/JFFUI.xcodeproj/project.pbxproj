@@ -50,6 +50,16 @@
 		4C696BF01742769A00C7D53D /* JFFRemoveButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE91742769A00C7D53D /* JFFRemoveButton.h */; };
 		4C696BF11742769A00C7D53D /* JFFRemoveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C696BEA1742769A00C7D53D /* JFFRemoveButton.m */; };
 		4C696BF21742769A00C7D53D /* JFFRemoveButtonDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BEB1742769A00C7D53D /* JFFRemoveButtonDelegate.h */; };
+		4C89738F1761F31300E24F7B /* UITableView+BlocksAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C89738D1761F31300E24F7B /* UITableView+BlocksAdditions.h */; };
+		4C8973901761F31300E24F7B /* UITableView+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C89738E1761F31300E24F7B /* UITableView+BlocksAdditions.m */; };
+		4C8973931761F33C00E24F7B /* UIWebView+UserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */; };
+		4C8973941761F33C00E24F7B /* UIWebView+UserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8973921761F33C00E24F7B /* UIWebView+UserAgent.m */; };
+		4C8973971761F3FC00E24F7B /* UITableView+CellsSelections.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C8973951761F3FC00E24F7B /* UITableView+CellsSelections.h */; };
+		4C8973981761F3FC00E24F7B /* UITableView+CellsSelections.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8973961761F3FC00E24F7B /* UITableView+CellsSelections.m */; };
+		4CBBA1A917662275007317E6 /* JFFCameraFlashModeType.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBBA1A517662275007317E6 /* JFFCameraFlashModeType.h */; };
+		4CBBA1AA17662275007317E6 /* JFFPhotoCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBBA1A617662275007317E6 /* JFFPhotoCamera.h */; };
+		4CBBA1AB17662275007317E6 /* JFFPhotoCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBBA1A717662275007317E6 /* JFFPhotoCamera.m */; };
+		4CBBA1AC17662275007317E6 /* JFFPhotoCameraType.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBBA1A817662275007317E6 /* JFFPhotoCameraType.h */; };
 		4CC3865116DE68630079F968 /* UIViewController+Dialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CC3864F16DE68630079F968 /* UIViewController+Dialog.h */; };
 		4CC3865216DE68630079F968 /* UIViewController+Dialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC3865016DE68630079F968 /* UIViewController+Dialog.m */; };
 		539103CA14A88BE1007315A3 /* JFFUI_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFUI_Prefix.pch */; };
@@ -148,10 +158,20 @@
 		4C696BE91742769A00C7D53D /* JFFRemoveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRemoveButton.h; sourceTree = "<group>"; };
 		4C696BEA1742769A00C7D53D /* JFFRemoveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRemoveButton.m; sourceTree = "<group>"; };
 		4C696BEB1742769A00C7D53D /* JFFRemoveButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRemoveButtonDelegate.h; sourceTree = "<group>"; };
+		4C89738D1761F31300E24F7B /* UITableView+BlocksAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+BlocksAdditions.h"; sourceTree = "<group>"; };
+		4C89738E1761F31300E24F7B /* UITableView+BlocksAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+BlocksAdditions.m"; sourceTree = "<group>"; };
+		4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UserAgent.h"; sourceTree = "<group>"; };
+		4C8973921761F33C00E24F7B /* UIWebView+UserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+UserAgent.m"; sourceTree = "<group>"; };
+		4C8973951761F3FC00E24F7B /* UITableView+CellsSelections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CellsSelections.h"; sourceTree = "<group>"; };
+		4C8973961761F3FC00E24F7B /* UITableView+CellsSelections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CellsSelections.m"; sourceTree = "<group>"; };
+		4CBBA1A517662275007317E6 /* JFFCameraFlashModeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCameraFlashModeType.h; sourceTree = "<group>"; };
+		4CBBA1A617662275007317E6 /* JFFPhotoCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPhotoCamera.h; sourceTree = "<group>"; };
+		4CBBA1A717662275007317E6 /* JFFPhotoCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFPhotoCamera.m; sourceTree = "<group>"; };
+		4CBBA1A817662275007317E6 /* JFFPhotoCameraType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPhotoCameraType.h; sourceTree = "<group>"; };
 		4CC3864E16DE67B60079F968 /* JFFDialogProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFDialogProtocol.h; sourceTree = "<group>"; };
 		4CC3864F16DE68630079F968 /* UIViewController+Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Dialog.h"; sourceTree = "<group>"; };
 		4CC3865016DE68630079F968 /* UIViewController+Dialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Dialog.m"; sourceTree = "<group>"; };
-		539103F014A88BE1007315A3 /* libJFFUI copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFUI copy.a"; path = "libJFFUI-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		539103F014A88BE1007315A3 /* libJFFUI-clang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libJFFUI-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		655E9DB21392E8C00074BD61 /* JFFAlertButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAlertButton.h; sourceTree = "<group>"; };
 		655E9DB31392E8C00074BD61 /* JFFAlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAlertButton.m; sourceTree = "<group>"; };
 		655E9DB41392E8C00074BD61 /* JFFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAlertView.h; sourceTree = "<group>"; };
@@ -200,7 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC07E0554694100DB518D /* libJFFUI.a */,
-				539103F014A88BE1007315A3 /* libJFFUI copy.a */,
+				539103F014A88BE1007315A3 /* libJFFUI-clang.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +247,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4CBBA16F1766130A007317E6 /* PhotoCamera */,
 				4C2CFD921754A28F00E87F22 /* Categories */,
 				4C696BE41742769A00C7D53D /* GridView */,
 				CE9A914F165671C000EFE858 /* Errors */,
@@ -322,6 +343,12 @@
 				4C2CFD981754A4CD00E87F22 /* UINib+FirstObject.m */,
 				4C2CFD9B1754A4F900E87F22 /* UIApplication+OpenApplicationAsyncOp.h */,
 				4C2CFD9C1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m */,
+				4C89738D1761F31300E24F7B /* UITableView+BlocksAdditions.h */,
+				4C89738E1761F31300E24F7B /* UITableView+BlocksAdditions.m */,
+				4C8973951761F3FC00E24F7B /* UITableView+CellsSelections.h */,
+				4C8973961761F3FC00E24F7B /* UITableView+CellsSelections.m */,
+				4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */,
+				4C8973921761F33C00E24F7B /* UIWebView+UserAgent.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -338,6 +365,17 @@
 				4C696BEB1742769A00C7D53D /* JFFRemoveButtonDelegate.h */,
 			);
 			path = GridView;
+			sourceTree = "<group>";
+		};
+		4CBBA16F1766130A007317E6 /* PhotoCamera */ = {
+			isa = PBXGroup;
+			children = (
+				4CBBA1A517662275007317E6 /* JFFCameraFlashModeType.h */,
+				4CBBA1A617662275007317E6 /* JFFPhotoCamera.h */,
+				4CBBA1A717662275007317E6 /* JFFPhotoCamera.m */,
+				4CBBA1A817662275007317E6 /* JFFPhotoCameraType.h */,
+			);
+			path = PhotoCamera;
 			sourceTree = "<group>";
 		};
 		655E9DB11392E8C00074BD61 /* AlertView */ = {
@@ -447,6 +485,12 @@
 				4C2CFD951754A29F00E87F22 /* JFFAlertView+Async.h in Headers */,
 				4C2CFD991754A4CD00E87F22 /* UINib+FirstObject.h in Headers */,
 				4C2CFD9D1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.h in Headers */,
+				4C89738F1761F31300E24F7B /* UITableView+BlocksAdditions.h in Headers */,
+				4C8973931761F33C00E24F7B /* UIWebView+UserAgent.h in Headers */,
+				4C8973971761F3FC00E24F7B /* UITableView+CellsSelections.h in Headers */,
+				4CBBA1A917662275007317E6 /* JFFCameraFlashModeType.h in Headers */,
+				4CBBA1AA17662275007317E6 /* JFFPhotoCamera.h in Headers */,
+				4CBBA1AC17662275007317E6 /* JFFPhotoCameraType.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +511,7 @@
 			);
 			name = "JFFUI-clang";
 			productName = JFFUI;
-			productReference = 539103F014A88BE1007315A3 /* libJFFUI copy.a */;
+			productReference = 539103F014A88BE1007315A3 /* libJFFUI-clang.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		D2AAC07D0554694100DB518D /* JFFUI */ = {
@@ -493,7 +537,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "JFFUI" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -572,6 +616,10 @@
 				4C2CFD961754A29F00E87F22 /* JFFAlertView+Async.m in Sources */,
 				4C2CFD9A1754A4CD00E87F22 /* UINib+FirstObject.m in Sources */,
 				4C2CFD9E1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m in Sources */,
+				4C8973901761F31300E24F7B /* UITableView+BlocksAdditions.m in Sources */,
+				4C8973941761F33C00E24F7B /* UIWebView+UserAgent.m in Sources */,
+				4C8973981761F3FC00E24F7B /* UITableView+CellsSelections.m in Sources */,
+				4CBBA1AB17662275007317E6 /* JFFPhotoCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -160,7 +160,7 @@
 		1B7ABA78152D9739005DD4CA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 1B7ABA7B152D9739005DD4CA /* Build configuration list for PBXProject "JFFRestKit" */;
 			compatibilityVersion = "Xcode 3.2";

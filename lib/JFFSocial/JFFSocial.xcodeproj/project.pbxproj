@@ -23,6 +23,8 @@
 		37497DB51601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB41601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m */; };
 		37497DB81601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB71601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m */; };
 		4C3F01DE16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3F01DD16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m */; };
+		4C4A3AA21767458800C158B0 /* JFFTwitterResponseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3AA11767458700C158B0 /* JFFTwitterResponseError.m */; };
+		4C4A3AB5176745ED00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3AB4176745EC00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m */; };
 		4C70273616D683A00078A2F2 /* JFFSocialFacebookUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273516D683A00078A2F2 /* JFFSocialFacebookUser.m */; };
 		4C70273916D684290078A2F2 /* JFFSocialFacebookUser+Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273816D684290078A2F2 /* JFFSocialFacebookUser+Parser.m */; };
 		4C70273C16D6870A0078A2F2 /* JFFAsyncFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273B16D6870A0078A2F2 /* JFFAsyncFacebook.m */; };
@@ -233,6 +235,10 @@
 		37497DB71601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FqAPIResponseParser.m"; sourceTree = "<group>"; };
 		4C3F01DC16DD0C9D00558DE6 /* JFFFacebookLoginFailedAccessForbidden.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookLoginFailedAccessForbidden.h; sourceTree = "<group>"; };
 		4C3F01DD16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFacebookLoginFailedAccessForbidden.m; sourceTree = "<group>"; };
+		4C4A3AA01767458600C158B0 /* JFFTwitterResponseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterResponseError.h; sourceTree = "<group>"; };
+		4C4A3AA11767458700C158B0 /* JFFTwitterResponseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterResponseError.m; sourceTree = "<group>"; };
+		4C4A3AB3176745EB00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFTwitterResponseError+TweetsJSONParser.h"; sourceTree = "<group>"; };
+		4C4A3AB4176745EC00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFFTwitterResponseError+TweetsJSONParser.m"; sourceTree = "<group>"; };
 		4C70273416D683A00078A2F2 /* JFFSocialFacebookUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialFacebookUser.h; sourceTree = "<group>"; };
 		4C70273516D683A00078A2F2 /* JFFSocialFacebookUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialFacebookUser.m; sourceTree = "<group>"; };
 		4C70273716D684290078A2F2 /* JFFSocialFacebookUser+Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFSocialFacebookUser+Parser.h"; sourceTree = "<group>"; };
@@ -662,6 +668,8 @@
 		CE4F604915F8B5DC00271035 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				4C4A3AB3176745EB00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.h */,
+				4C4A3AB4176745EC00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m */,
 				CE5A034215F9FFEF005CC01A /* NSArray+TweetsJSONParser.h */,
 				CE5A034315F9FFEF005CC01A /* NSArray+TweetsJSONParser.m */,
 				CE5A034515FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.h */,
@@ -694,6 +702,8 @@
 				CE4F621215F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m */,
 				CE4F623C15F9D34800271035 /* JFFNoTwitterAccountsError.h */,
 				CE4F623D15F9D34800271035 /* JFFNoTwitterAccountsError.m */,
+				4C4A3AA01767458600C158B0 /* JFFTwitterResponseError.h */,
+				4C4A3AA11767458700C158B0 /* JFFTwitterResponseError.m */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -816,7 +826,7 @@
 		CE4F5FFF15F8B2BB00271035 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = EmbeddedSources;
 			};
 			buildConfigurationList = CE4F600215F8B2BB00271035 /* Build configuration list for PBXProject "JFFSocial" */;
@@ -1035,6 +1045,8 @@
 				4C3F01DE16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m in Sources */,
 				4CDFCF7A16DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m in Sources */,
 				4CB52D6016DF93C9001E64F0 /* JFFAsyncFacebookDialog.m in Sources */,
+				4C4A3AA21767458800C158B0 /* JFFTwitterResponseError.m in Sources */,
+				4C4A3AB5176745ED00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1055,7 +1067,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1070,7 +1084,9 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../,
@@ -1089,7 +1105,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1097,7 +1115,9 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../,
