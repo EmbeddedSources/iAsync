@@ -1,0 +1,237 @@
+#import "JFFPhotoCamera.h"
+
+#import <AVFoundation/AVFoundation.h>
+
+@implementation JFFPhotoCamera
+{
+    AVCaptureSession          *_captureSession;
+    AVCaptureDeviceInput      *_frontCamInput;
+    AVCaptureDeviceInput      *_backCamInput;
+    AVCaptureStillImageOutput *_camImageOutput;
+    AVCaptureDevice *_frontCameraDevice;
+    AVCaptureDevice *_backCameraDevice;
+    
+    AVCaptureVideoPreviewLayer *_internalCaptureVideoPreviewLayer;
+    
+    AVCaptureFlashMode _flashMode;
+}
+
+@synthesize photoCameraType = _photoCameraType;
+
+@dynamic captureVideoPreviewLayer;
+
+- (instancetype)init
+{
+    return [self initPhotoCameraType:JFFPhotoCameraBack];
+}
+
+- (instancetype)initPhotoCameraType:(JFFPhotoCameraType)photoCameraType
+{
+    self = [super init];
+    
+    if (self) {
+        
+        _photoCameraType = photoCameraType;
+        
+        [self initCaptureSessions];
+        [self setupCaptureInputs];
+        [self setupImageOutput];
+    }
+    
+    return self;
+}
+
+- (void)initCaptureSessions
+{
+    _captureSession = [AVCaptureSession new];
+}
+
+- (void)setupCaptureInputs
+{
+    NSArray *videoDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    
+    for (AVCaptureDevice *device in videoDevices) {
+        
+        if (device.position == AVCaptureDevicePositionFront) {
+            _frontCameraDevice = device;
+            break;
+        }
+    }
+    
+    NSError *error;
+    _frontCamInput = [AVCaptureDeviceInput deviceInputWithDevice:_frontCameraDevice error:&error];
+    
+    NSAssert(!error, @"frontCamInput not intialized");
+    
+    _backCameraDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    _backCamInput = [AVCaptureDeviceInput deviceInputWithDevice:_backCameraDevice error:&error];
+    
+    NSAssert(!error, @"frontCamInput not intialized");
+    
+    [_captureSession addInput:(_photoCameraType == JFFPhotoCameraFront)?_frontCamInput:_backCamInput];
+}
+
+- (CALayer *)captureVideoPreviewLayer
+{
+    if (!_internalCaptureVideoPreviewLayer) {
+        
+        _internalCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
+        [_internalCaptureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    }
+    
+    return _internalCaptureVideoPreviewLayer;
+}
+
+- (void)setupImageOutput
+{
+    _camImageOutput  = [AVCaptureStillImageOutput new];
+    
+    NSDictionary *outputSettings = @{ AVVideoCodecKey : AVVideoCodecJPEG };
+    
+    [_camImageOutput setOutputSettings:outputSettings];
+    
+    [_captureSession addOutput:_camImageOutput];
+}
+
+#pragma mark - Properties
+
+- (NSString *)sessionPreset
+{
+    return _captureSession.sessionPreset;
+}
+
+- (void)setSessionPreset:(NSString *)sessionPreset
+{
+    _captureSession.sessionPreset = sessionPreset;
+}
+
+- (JFFAVCaptureVideoOrientation)videoOrientation
+{
+    AVCaptureConnection *videoConnection = [self videoConnectionFromImageOutput:_camImageOutput];
+    return videoConnection.videoOrientation;
+}
+
+- (void)setVideoOrientation:(JFFAVCaptureVideoOrientation)videoOrientation
+{
+    AVCaptureConnection *videoConnection = [self videoConnectionFromImageOutput:_camImageOutput];
+    videoConnection.videoOrientation = videoOrientation;
+}
+
+- (JFFCameraFlashModeType)flashMode
+{
+    //TODO check is front camera
+    return _backCameraDevice.flashMode == AVCaptureFlashModeAuto
+    ? JFFCameraFlashModeAuto
+    : _backCameraDevice.flashMode == AVCaptureFlashModeOn
+    ? JFFCameraFlashModeOn
+    : JFFCameraFlashModeOff;
+}
+
+- (void)setFlashMode:(JFFCameraFlashModeType)flashMode
+{
+    AVCaptureFlashMode deviceFlashMode = flashMode == JFFCameraFlashModeAuto
+    ? AVCaptureFlashModeAuto
+    : flashMode == JFFCameraFlashModeOn
+    ? AVCaptureFlashModeOn
+    : AVCaptureFlashModeOff;
+    
+    NSError *error;
+    [_backCameraDevice lockForConfiguration:&error];
+    [error writeErrorWithJFFLogger];
+    
+    _backCameraDevice.flashMode = deviceFlashMode;
+    
+    [_backCameraDevice unlockForConfiguration];
+}
+
+- (JFFPhotoCameraType)photoCameraType
+{
+    return _photoCameraType;
+}
+
+- (void)setPhotoCameraType:(JFFPhotoCameraType)photoCameraType
+{
+    if (_photoCameraType == photoCameraType)
+        return;
+    
+    BOOL frontCameraWasActive = (_photoCameraType == JFFPhotoCameraFront);
+    
+    _photoCameraType = photoCameraType;
+    
+    BOOL isRunning = _captureSession.isRunning;
+    
+    if (isRunning)
+        [_captureSession stopRunning];
+    
+    [_captureSession beginConfiguration];
+    
+    [_captureSession removeInput: frontCameraWasActive?_frontCamInput:_backCamInput];
+    [_captureSession addInput:    frontCameraWasActive?_backCamInput :_frontCamInput];
+    
+    [_captureSession commitConfiguration];
+    
+    if (isRunning)
+        [_captureSession startRunning];
+}
+
+- (void)startRunning
+{
+    NSParameterAssert(_captureSession);
+    [_captureSession startRunning];
+}
+
+- (void)stopRunning
+{
+    NSParameterAssert(_captureSession);
+    [_captureSession stopRunning];
+}
+
+- (AVCaptureConnection *)videoConnectionFromImageOutput:(AVCaptureStillImageOutput *)imageOutput
+{
+    AVCaptureConnection *videoConnection;
+    
+    for (AVCaptureConnection *connection in imageOutput.connections) {
+        for (AVCaptureInputPort *port in [connection inputPorts]) {
+            if ([[port mediaType] isEqual:AVMediaTypeVideo]) {
+                videoConnection = connection;
+                break;
+            }
+        }
+        if (videoConnection) {
+            break;
+        }
+    }
+    return videoConnection;
+}
+
+- (void)makePhotoWithCallback:(PhotoCameraMakePhotoResult)callback
+{
+    NSParameterAssert(callback);
+    
+    AVCaptureStillImageOutput *cameraImageOutput = _camImageOutput;
+    
+    AVCaptureConnection *videoConnection = [self videoConnectionFromImageOutput:cameraImageOutput];
+    
+    callback = [callback copy];
+    
+    BOOL fixOrientation = self.fixOrientation;
+    
+    [cameraImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
+        
+        if (error) {
+            callback(nil, error);
+            return;
+        }
+        
+        NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
+        UIImage *photoImage = [[UIImage alloc] initWithData:imageData];//TODO101 pas jpegData file pass
+        
+        if (fixOrientation)
+            photoImage = [photoImage fixOrientation];
+        
+        callback(photoImage, nil);
+    }];
+}
+
+@end
