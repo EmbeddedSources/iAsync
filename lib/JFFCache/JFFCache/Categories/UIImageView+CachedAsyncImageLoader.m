@@ -5,16 +5,20 @@
 @interface UIImageView (CachedAsyncImageLoaderInternal)
 
 @property (nonatomic) NSURL *jffAsycImageURL;
+@property (nonatomic) NSURL *jffAsycLoadedImageURL;
 
 @end
 
 @implementation UIImageView (CachedAsyncImageLoaderInternal)
 
-@dynamic jffAsycImageURL;
+@dynamic
+jffAsycImageURL,
+jffAsycLoadedImageURL;
 
 + (void)load
 {
     jClass_implementProperty(self, @"jffAsycImageURL");
+    jClass_implementProperty(self, @"jffAsycLoadedImageURL");
 }
 
 @end
@@ -26,11 +30,15 @@
     if (!image || self.jffAsycImageURL != url)
         return;
     
+    self.jffAsycLoadedImageURL = url;
     self.image = image;
 }
 
 - (void)setImageWithURL:(NSURL *)url andPlaceholder:(UIImage *)placeholder
 {
+    if ([self.jffAsycLoadedImageURL isEqual:url])
+        return;
+    
     self.image           = placeholder;
     self.jffAsycImageURL = url;
     
