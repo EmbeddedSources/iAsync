@@ -60,7 +60,7 @@
         error = [JFFFacebookRequestPublishingAccessError new];
     }
     if (handler) {
-        handler(error?nil:session.accessTokenData.accessToken, error);
+        handler(error?nil:session, error);
     }
 }
 

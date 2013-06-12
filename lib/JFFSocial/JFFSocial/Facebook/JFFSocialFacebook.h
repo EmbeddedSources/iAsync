@@ -15,7 +15,7 @@
 + (JFFAsyncOperation)authFacebookSessionLoader;
 + (JFFAsyncOperation)authFacebookSessionLoaderWithPermissions:(NSArray *)permissions;
 
-+ (JFFAsyncOperation)publishStreamAccessLoader;
++ (JFFAsyncOperation)publishStreamAccessSessionLoader;
 
 + (JFFAsyncOperation)userInfoLoader;
 
@@ -33,7 +33,7 @@
                               parameters:(NSDictionary *)parameters
                                  session:(FBSession *)session;
 
-+ (JFFAsyncOperation)postPhoto:(UIImage *)photo
++ (JFFAsyncOperation)postImage:(UIImage *)photo
                    withMessage:(NSString *)message
                     postOnWall:(BOOL)postOnWall;
 

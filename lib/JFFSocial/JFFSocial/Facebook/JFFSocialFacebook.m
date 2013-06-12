@@ -92,7 +92,7 @@
     return [self authFacebookSessionLoaderWithPermissions:[self authPermissions]];
 }
 
-+ (JFFAsyncOperation)publishStreamAccessLoader
++ (JFFAsyncOperation)publishStreamAccessSessionLoader
 {
     JFFAsyncOperation authLoader = [self authFacebookSessionLoader];
     
@@ -190,7 +190,12 @@
         return userLoader;
     };
     
-    return bindSequenceOfAsyncOperations([self authFacebookSessionLoader], userLoader, nil);
+    JFFAsyncOperation loader = bindSequenceOfAsyncOperations([self authFacebookSessionLoader], userLoader, nil);
+    
+    JFFAsyncOperation reloadSession = sequenceOfAsyncOperations([self logoutLoader], [self authFacebookSessionLoader], nil);
+    JFFAsyncOperation reloadUser = bindSequenceOfAsyncOperations(reloadSession, userLoader, nil);
+    
+    return trySequenceOfAsyncOperations(loader, reloadUser, nil);
 }
 
 + (JFFAsyncOperation)requestFacebookDialogWithParameters:(NSDictionary *)parameters
@@ -208,7 +213,7 @@
                                          nil);
 }
 
-+ (JFFAsyncOperation)postPhoto:(UIImage *)photo
++ (JFFAsyncOperation)postImage:(UIImage *)photo
                    withMessage:(NSString *)message
                     postOnWall:(BOOL)postOnWall
 {
@@ -227,8 +232,8 @@
     };
     
     JFFAsyncOperation getAccessLoader = postOnWall
-    ?[JFFSocialFacebook publishStreamAccessLoader]
-    :asyncOperationWithResult(@YES);
+    ?[self publishStreamAccessSessionLoader]
+    :[self authFacebookSessionLoader];
     
     return bindSequenceOfAsyncOperations(getAccessLoader, binder, nil);
 }
