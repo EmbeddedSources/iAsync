@@ -38,6 +38,8 @@
 #import <JFFNetwork/Callbacks/JFFNetworkResponseDataCallback.h>
 #import <JFFNetwork/Callbacks/JFFNetworkUploadProgressCallback.h>
 
+#import <JFFNetwork/HttpBodyBuilder/JHttpBodyBuilder.h>
+
 //Errors
 #import <JFFNetwork/Errors/JHttpError.h>
 #import <JFFNetwork/Errors/NSNetworkErrors/JNSNetworkError.h>
