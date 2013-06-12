@@ -15,20 +15,7 @@
 
 + (NSArray *)authPermissions
 {
-    NSArray *result = @[@"email",
-                        @"user_birthday",
-//                        @"friends_location",
-//                        @"friends_photos",
-//                        @"friends_about_me",
-//                        @"read_friendlists",
-//                        @"user_relationships",
-//                        @"user_checkins",
-//                        @"friends_checkins",
-//                        @"user_likes",
-//                        @"friends_likes",
-//                        @"user_events",
-//                        @"friends_events"
-                        ];
+    NSArray *result = @[@"email", @"user_birthday"];
     
     return result;
 }
@@ -44,6 +31,11 @@
     return facebookSession;
 }
 
++ (void)setFacebookSession:(FBSession *)facebookSession
+{
+    [FBSession setActiveSession:facebookSession];
+}
+
 + (BOOL)isActiveFacebookSession
 {
     return [[self facebookSession] isOpen];
@@ -56,13 +48,26 @@
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
         
         FBSession *session = [FBSession activeSession];
-        JFFAsyncOperation loader = [session isOpen]
+        
+        BOOL isOpen = [session isOpen];
+        
+        JFFAsyncOperation loader = isOpen
         ?jffFacebookLogout(session)
         :asyncOperationWithResult([NSNull new]);
         
+        doneCallback = [doneCallback copy];
+        JFFDidFinishAsyncOperationHandler doneCallbackWrapper = ^(id result, NSError *error) {
+            
+            if (result && isOpen)
+                [self setFacebookSession:nil];
+            
+            if (doneCallback)
+                doneCallback(result, error);
+        };
+        
         return loader(progressCallback,
                       cancelCallback,
-                      doneCallback);
+                      doneCallbackWrapper);
     };
 }
 
@@ -72,11 +77,27 @@
                                                         JFFCancelAsyncOperationHandler cancelCallback,
                                                         JFFDidFinishAsyncOperationHandler doneCallback) {
         
+        //TODO split perrmissions, first login for "email" "birthday"
+        //tthen for other ones
+        
         FBSession *session = [self facebookSession];
+        
+        NSMutableSet *currPermissions = [[NSMutableSet alloc] initWithArray:session.permissions];
+        [currPermissions unionSet:[[NSSet alloc] initWithArray:permissions]];
         
         JFFAsyncOperation loader = jffFacebookLogin(session, permissions);
         
-        return loader(progressCallback, cancelCallback, doneCallback);
+        doneCallback = [doneCallback copy];
+        JFFDidFinishAsyncOperationHandler doneCallbackWrapper = ^(FBSession *session, NSError *error) {
+            
+            if (session)
+                [self setFacebookSession:session];
+            
+            if (doneCallback)
+                doneCallback(session, error);
+        };
+        
+        return loader(progressCallback, cancelCallback, doneCallbackWrapper);
     };
     
     id mergeObject =

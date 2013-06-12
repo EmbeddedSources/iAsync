@@ -26,12 +26,12 @@
 {
     handler = [handler copy];
     
+    NSMutableSet *requstPermissions = [[NSMutableSet alloc] initWithArray:_permissions];
+    NSSet *currPermissions = [[NSSet alloc] initWithArray:self.facebookSession.permissions];
+    
     if (self.facebookSession.isOpen) {
         
-        BOOL hasAllPermissions = [_permissions all:^BOOL(NSString *permission) {
-            
-            return [self.facebookSession.permissions containsObject:permission];
-        }];
+        BOOL hasAllPermissions = [requstPermissions isSubsetOfSet:currPermissions];
         
         if (hasAllPermissions) {
             
@@ -42,6 +42,8 @@
             return;
         }
     }
+    
+    [requstPermissions unionSet:currPermissions];
     
     FBSessionStateHandler fbHandler = ^(FBSession *session, FBSessionState status, NSError *error) {
         
@@ -55,7 +57,7 @@
         } duration:0.2];
     };
     
-    [FBSession openActiveSessionWithReadPermissions:self.permissions
+    [FBSession openActiveSessionWithReadPermissions:[requstPermissions allObjects]
                                        allowLoginUI:YES
                                   completionHandler:fbHandler];
 }
