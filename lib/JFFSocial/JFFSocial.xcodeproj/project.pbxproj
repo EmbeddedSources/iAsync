@@ -22,8 +22,9 @@
 		37497DB21601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB11601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m */; };
 		37497DB51601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB41601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m */; };
 		37497DB81601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB71601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m */; };
+		4C34A5311768840A00162C13 /* JFFTwitterResponseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34A5301768840A00162C13 /* JFFTwitterResponseError.m */; };
+		4C34A5341768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34A5331768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.m */; };
 		4C3F01DE16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3F01DD16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m */; };
-		4C4A3AA21767458800C158B0 /* JFFTwitterResponseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3AA11767458700C158B0 /* JFFTwitterResponseError.m */; };
 		4C4A3AB5176745ED00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3AB4176745EC00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m */; };
 		4C70273616D683A00078A2F2 /* JFFSocialFacebookUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273516D683A00078A2F2 /* JFFSocialFacebookUser.m */; };
 		4C70273916D684290078A2F2 /* JFFSocialFacebookUser+Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273816D684290078A2F2 /* JFFSocialFacebookUser+Parser.m */; };
@@ -233,10 +234,12 @@
 		37497DB41601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+FqCheckinsAPIParser.m"; sourceTree = "<group>"; };
 		37497DB61601DD2400AF0C29 /* NSDictionary+FqAPIResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FqAPIResponseParser.h"; sourceTree = "<group>"; };
 		37497DB71601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FqAPIResponseParser.m"; sourceTree = "<group>"; };
+		4C34A52F1768840A00162C13 /* JFFTwitterResponseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterResponseError.h; sourceTree = "<group>"; };
+		4C34A5301768840A00162C13 /* JFFTwitterResponseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterResponseError.m; sourceTree = "<group>"; };
+		4C34A5321768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterDirectMessageAlreadySentError.h; sourceTree = "<group>"; };
+		4C34A5331768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterDirectMessageAlreadySentError.m; sourceTree = "<group>"; };
 		4C3F01DC16DD0C9D00558DE6 /* JFFFacebookLoginFailedAccessForbidden.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookLoginFailedAccessForbidden.h; sourceTree = "<group>"; };
 		4C3F01DD16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFacebookLoginFailedAccessForbidden.m; sourceTree = "<group>"; };
-		4C4A3AA01767458600C158B0 /* JFFTwitterResponseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterResponseError.h; sourceTree = "<group>"; };
-		4C4A3AA11767458700C158B0 /* JFFTwitterResponseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterResponseError.m; sourceTree = "<group>"; };
 		4C4A3AB3176745EB00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFTwitterResponseError+TweetsJSONParser.h"; sourceTree = "<group>"; };
 		4C4A3AB4176745EC00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFFTwitterResponseError+TweetsJSONParser.m"; sourceTree = "<group>"; };
 		4C70273416D683A00078A2F2 /* JFFSocialFacebookUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialFacebookUser.h; sourceTree = "<group>"; };
@@ -453,6 +456,17 @@
 				37497CC51600A84E00AF0C29 /* JFFFoursquaerAPIInvalidResponseError.m */,
 			);
 			path = ParserErrors;
+			sourceTree = "<group>";
+		};
+		4C34A51E1768827600162C13 /* ResponseError */ = {
+			isa = PBXGroup;
+			children = (
+				4C34A52F1768840A00162C13 /* JFFTwitterResponseError.h */,
+				4C34A5301768840A00162C13 /* JFFTwitterResponseError.m */,
+				4C34A5321768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.h */,
+				4C34A5331768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.m */,
+			);
+			path = ResponseError;
 			sourceTree = "<group>";
 		};
 		4C70272216D6837A0078A2F2 /* Model */ = {
@@ -696,14 +710,13 @@
 		CE4F609915F8BB0B00271035 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				4C34A51E1768827600162C13 /* ResponseError */,
 				CE4F61FF15F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.h */,
 				CE4F620015F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m */,
 				CE4F621115F8F76100271035 /* JFFTwitterAccountCanceledCreationError.h */,
 				CE4F621215F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m */,
 				CE4F623C15F9D34800271035 /* JFFNoTwitterAccountsError.h */,
 				CE4F623D15F9D34800271035 /* JFFNoTwitterAccountsError.m */,
-				4C4A3AA01767458600C158B0 /* JFFTwitterResponseError.h */,
-				4C4A3AA11767458700C158B0 /* JFFTwitterResponseError.m */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -1045,8 +1058,9 @@
 				4C3F01DE16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m in Sources */,
 				4CDFCF7A16DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m in Sources */,
 				4CB52D6016DF93C9001E64F0 /* JFFAsyncFacebookDialog.m in Sources */,
-				4C4A3AA21767458800C158B0 /* JFFTwitterResponseError.m in Sources */,
 				4C4A3AB5176745ED00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m in Sources */,
+				4C34A5311768840A00162C13 /* JFFTwitterResponseError.m in Sources */,
+				4C34A5341768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

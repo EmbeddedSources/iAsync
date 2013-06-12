@@ -25,7 +25,7 @@
         result.name             = jsonObject[@"name"  ];
         
         {
-            NSString* avatarUrlString = jsonObject[@"profile_image_url"];
+            NSString *avatarUrlString = jsonObject[@"profile_image_url"];
             result.avatarURL = [avatarUrlString toURL];
         }
     }

@@ -7,6 +7,8 @@
 #import "JFFNoTwitterAccountsError.h"
 #import "AsyncAnalyzers.h"
 
+#import "JFFTwitterDirectMessageAlreadySentError.h"
+
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
 
@@ -137,7 +139,7 @@ static JFFAsyncOperation twitterAccountsLoader()
             id context =
             @{
               @"url"           : urlString,
-              @"params"        : parameters,
+              @"params"        : parameters?:@{},
               @"requestMethod" : @(requestMethod),
               };
             
@@ -208,11 +210,26 @@ static JFFAsyncOperation twitterAccountsLoader()
     };
     
     NSString *urlString = @"https://api.twitter.com/1.1/direct_messages/new.json";
-    JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:urlString
+    JFFAsyncOperation loader = [self generalTwitterApiDataLoaderWithURLString:urlString
                                                                    parameters:params
                                                                 requestMethod:TWRequestMethodPOST
                                                                  ayncAnalyzer:asyncJSONObjectToDirectTweet()];
-    return result;
+    
+    loader = asyncOperationWithFinishHookBlock(loader, ^(id result, NSError *error, JFFDidFinishAsyncOperationHandler doneCallback) {
+        
+        if (!doneCallback)
+            return;
+            
+        if ([error isKindOfClass:[JFFTwitterDirectMessageAlreadySentError class]]) {
+            
+            result = [NSNull new];
+            error  = nil;
+        }
+        
+        doneCallback(result, error);
+    });
+    
+    return loader;
 }
 
 + (JFFAsyncOperation)sendTweetMessage:(NSString *)message

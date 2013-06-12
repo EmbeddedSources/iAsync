@@ -26,9 +26,12 @@
     
     JFFInstagramAccount *result = [self new];
     
-    result.name               =  userJsonObject[@"username"];
-    result.avatarURL          = [userJsonObject[@"profile_picture"]toURL];
-    result.instagramAccountId =  userJsonObject[@"id"];
+    if (result) {
+        
+        result.name               =  userJsonObject[@"username"];
+        result.avatarURL          = [userJsonObject[@"profile_picture"] toURL];
+        result.instagramAccountId =  userJsonObject[@"id"];
+    }
     
     return result;
 }

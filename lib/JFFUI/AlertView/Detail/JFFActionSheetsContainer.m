@@ -61,10 +61,10 @@
     return [ _activeActionSheets count ];
 }
 
-- (JFFPendingActionSheet*)objectToRemove:( JFFActionSheet* )actionSheet_
+- (JFFPendingActionSheet *)objectToRemove:(JFFActionSheet *)actionSheet_
 {
-    return [_activeActionSheets firstMatch:^BOOL(JFFPendingActionSheet *pendingActionSheet_)
-    {
+    return [_activeActionSheets firstMatch:^BOOL(JFFPendingActionSheet *pendingActionSheet_) {
+        
         return pendingActionSheet_.actionSheet ==  actionSheet_;
     }];
 }
