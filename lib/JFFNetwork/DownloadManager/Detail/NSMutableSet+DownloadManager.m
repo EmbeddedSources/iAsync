@@ -35,15 +35,14 @@
     [self writeToFileDownloadedFiles];
 }
 
-- (BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
+- (BOOL)containsDownloadedFileWithPath:(NSString *)filePath
 {
-    BOOL result_ = [ self containsObject: filePath_ ];
-    if ( result_ && ![ [ NSFileManager defaultManager ] fileExistsAtPath: filePath_ ] )
-    {
-        [ self removeDownloadedFileWithPath: filePath_ ];
+    BOOL result = [self containsObject:filePath];
+    if (result && ![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        [self removeDownloadedFileWithPath:filePath];
         return NO;
     }
-    return result_;
+    return result;
 }
 
 + (void)addDownloadedFileWithPath:( NSString* )filePath_

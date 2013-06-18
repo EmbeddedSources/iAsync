@@ -2,8 +2,8 @@
 
 @interface JFFFileManager : NSObject
 
-+ (FILE *)createFileForPath:(NSString *)path_;
++ (FILE *)createFileForPath:(NSString *)path;
 
-+ (BOOL)removeFileForPath:(NSString *)path_;
++ (BOOL)removeFileForPath:(NSString *)path;
 
 @end

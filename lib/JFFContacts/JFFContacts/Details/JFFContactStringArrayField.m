@@ -7,10 +7,10 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray(NSArray *elements
                                                                NSArray *labels)
 {
     ABMutableMultiValueRef result = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-
+    
     NSUInteger index = 0;
-    for (NSString *element in elements)
-    {
+    for (NSString *element in elements) {
+        
         id label = [labels noThrowObjectAtIndex:index];
         if (![label isKindOfClass:[NSString class]])
             label = nil;

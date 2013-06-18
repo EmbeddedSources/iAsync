@@ -12,13 +12,13 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray(NSArray *elements
     for (NSDictionary *element in elements) {
         
         id label = [labels noThrowObjectAtIndex:index];
-        if ( ![label isKindOfClass: [ NSDictionary class ] ] )
+        if (![label isKindOfClass:[NSDictionary class]])
             label = nil;
         
-        ABMultiValueAddValueAndLabel( result
-                                     , (__bridge CFTypeRef)element
-                                     , (__bridge CFTypeRef)label
-                                     , NULL );
+        ABMultiValueAddValueAndLabel(result,
+                                     (__bridge CFTypeRef)element,
+                                     (__bridge CFTypeRef)label,
+                                     NULL);
         ++index;
     }
     

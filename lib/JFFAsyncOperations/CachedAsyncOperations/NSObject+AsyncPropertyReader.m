@@ -309,8 +309,8 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
                                    didFinishLoadDataBlock:didFinishOperation];
 }
 
--(JFFAsyncOperation)privateAsyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
-                                         withArgument:(id< NSCopying, NSObject >)argument
+- (JFFAsyncOperation)privateAsyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
+                                          withArgument:(id< NSCopying, NSObject >)argument
 {
     static NSString *const name = @".__JFF_MERGE_LOADERS_BY_ARGUMENTS__.";
     JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:name
@@ -325,8 +325,8 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
                             didFinishLoadDataBlock:nil];
 }
 
--(JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
-                                  withArgument:(id< NSCopying, NSObject >)argument
+- (JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
+                                   withArgument:(id< NSCopying, NSObject >)argument
 {
     return [self privateAsyncOperationMergeLoaders:asyncOperation
                                       withArgument:argument];
