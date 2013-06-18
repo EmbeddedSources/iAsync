@@ -1,5 +1,5 @@
 
-#import <JFFNetwork/CookiesStorage/Details/NSHTTPCookie+matchesURL.h>
+#import <JFFNetwork/Categories/NSHTTPCookie+MatchesURL.h>
 
 #import "NSHTTPCookie+HTTPCookieWithHeader.h"
 
