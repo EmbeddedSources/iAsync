@@ -4,4 +4,6 @@
 
 - (id)noThrowObjectAtIndex:(NSUInteger)index;
 
+- (id)firstObject;
+
 @end

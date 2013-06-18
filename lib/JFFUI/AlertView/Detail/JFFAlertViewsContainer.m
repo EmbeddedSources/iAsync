@@ -46,7 +46,7 @@
 
 - (JFFAlertView *)firstAlertView
 {
-    return [_activeAlertViews noThrowObjectAtIndex:0];
+    return [_activeAlertViews firstObject];
 }
 
 - (NSUInteger)count

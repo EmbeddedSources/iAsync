@@ -45,15 +45,14 @@
 
 - (BOOL)containsActionSheet:(JFFActionSheet *)actionSheet
 {
-    return [_activeActionSheets any:^BOOL(JFFPendingActionSheet *pendingActionSheet)
-    {
+    return [_activeActionSheets any:^BOOL(JFFPendingActionSheet *pendingActionSheet) {
         return pendingActionSheet.actionSheet == actionSheet;
     }];
 }
 
-- (JFFPendingActionSheet*)firstPendingActionSheet
+- (JFFPendingActionSheet *)firstPendingActionSheet
 {
-    return [_activeActionSheets noThrowObjectAtIndex:0];
+    return [_activeActionSheets firstObject];
 }
 
 - (NSUInteger)count

@@ -57,7 +57,7 @@ static NSString* const queryComponentSeparator = @"&";
 
 - (NSString *)firstValueIfExsistsForKey:(NSString *)key
 {
-    return [self[key]noThrowObjectAtIndex:0];
+    return [self[key] firstObject];
 }
 
 @end
