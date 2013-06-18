@@ -231,13 +231,18 @@
 
 - (NSRange)visiableIndexesRange
 {
-    NSInteger first_index_ = floorf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
-    NSInteger last_index_ = ceilf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
-    last_index_ = fmin( last_index_, self.lastIndex );
+    if (_scrollView.bounds.size.width == 0) {
+        NSLog(@"[!!!ERROR!!!] division by zero");
+        return _previousVisiableIndexesRange;
+    }
+    
+    NSInteger firstIndex = floorf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
+    NSInteger lastIndex  = ceilf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
+    lastIndex = fmin( lastIndex, self.lastIndex );
+    
+    firstIndex = firstIndex > 0 ?: 0;
 
-    first_index_ = first_index_ > 0 ?: 0;
-
-    NSRange range_ = { first_index_, last_index_ - first_index_ + 1 };
+    NSRange range_ = { firstIndex, lastIndex - firstIndex + 1 };
     _previousVisiableIndexesRange = range_;
     return _previousVisiableIndexesRange;
 }
@@ -247,16 +252,16 @@
     return _firstIndex + _cachedNumberOfElements - 1;
 }
 
-- (void)shiftRightElementsFromIndex:( NSInteger )shiftFromIndex
-                            toIndex:( NSInteger )to_index_
+- (void)shiftRightElementsFromIndex:(NSInteger)shiftFromIndex
+                            toIndex:(NSInteger)toIndex
 {
-    for (NSInteger index_ = to_index_; index_ >= shiftFromIndex; --index_) {
+    for (NSInteger index = toIndex; index >= shiftFromIndex; --index) {
         
-        UIView *view_ = [ self elementAtIndex: index_ ];
-        if ( !view_ )
+        UIView *view = [self elementAtIndex:index];
+        if (!view)
             continue;
-
-        [ self cacheAndPositionView: view_ toIndex: index_ ];
+        
+        [self cacheAndPositionView:view toIndex:index];
     }
 }
 
@@ -313,9 +318,14 @@
 
 - (void)syncContentOffsetWithActiveElement
 {
-//    self.previousIndex = self.activeIndex;
+    if (_scrollView.bounds.size.width == 0)
+    {
+        NSLog(@"[!!!ERROR!!!] division by zero");
+        return;
+    }
+    
     self.activeIndex = floor( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
-
+    
     [ self updateScrollViewContentSize ];
     CGPoint offset_ = [ self offsetForIndex: _activeIndex ];
     [ _scrollView setContentOffset: offset_ animated: NO ];
