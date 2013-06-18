@@ -45,6 +45,26 @@
     
     [requstPermissions unionSet:currPermissions];
     
+    //exclude publich pemissions
+    {
+        static NSSet *publishPermissions;
+        
+        //    "share_item",
+        //    "photo_upload",
+        //    "video_upload",
+        //    "installed",
+        //    "status_update",
+        //    "email",
+        //    "user_birthday",
+        //    "create_note",
+        if (!publishPermissions) {
+            
+            publishPermissions = [[NSSet alloc] initWithArray:@[@"publish_actions", @"publish_stream"]];
+        }
+        
+        [requstPermissions minusSet:publishPermissions];
+    }
+    
     FBSessionStateHandler fbHandler = ^(FBSession *session, FBSessionState status, NSError *error) {
         
         NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;

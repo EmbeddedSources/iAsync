@@ -392,7 +392,7 @@ static NSInteger const MinColumnCount = 2;
         return [obj1 compare:obj2];
     }];
     
-    NSInteger fromIndex = [[activeIndexes objectAtIndex:0] integerValue];
+    NSInteger fromIndex = [activeIndexes[0] integerValue];
     NSInteger toIndex   = [[activeIndexes lastObject] integerValue] + 1;
     
     return NSMakeRange(fromIndex, toIndex - fromIndex);
