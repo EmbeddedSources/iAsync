@@ -1,12 +1,10 @@
 #import "UIImage+JpegPackImage.h"
 
-//#import "UIImage+ScaleToSize.h"
-
 #include <libturbojpeg/jpeglib.h>
 
 #include <sys/mman.h>
 
-// https://code.google.com/p/sumatrapdf/source/browse/trunk/ext/libjpeg-turbo/example.c?r=2397
+//based on example: https://code.google.com/p/sumatrapdf/source/browse/trunk/ext/libjpeg-turbo/example.c?r=2397
 
 /*
  * Sample routine for JPEG compression.  We assume that the target file name
@@ -300,20 +298,6 @@ static void UIImageJPEGRepresentationFilePath(UIImage *image, CGFloat compressio
 }
 
 @implementation UIImage (JpegPackImage)
-
-- (NSData *)jffJpegPackerImageData
-{
-    NSString *filePath = [NSString createUuid];
-    filePath = [NSString cachesPathByAppendingPathComponent:filePath];
-    
-    [self jffJpegPackImageToDataFilePath:filePath compression:1.f];
-    
-    NSData *result = [[NSData alloc] initWithContentsOfFile:filePath];
-    
-    [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
-    
-    return result;
-}
 
 - (void)jffJpegPackImageToDataFilePath:(NSString *)filePath
                            compression:(CGFloat)compression
