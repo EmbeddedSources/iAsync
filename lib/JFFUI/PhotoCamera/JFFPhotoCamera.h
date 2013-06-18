@@ -21,7 +21,7 @@ typedef NSInteger JFFAVCaptureVideoOrientation;
 @property (nonatomic, copy) NSString *sessionPreset;
 @property (nonatomic) JFFCameraFlashModeType flashMode;
 @property (nonatomic) JFFPhotoCameraType photoCameraType;
-@property (nonatomic) BOOL fixOrientation;
+@property (nonatomic) BOOL fixOrientation; //default is YES
 
 @property (nonatomic) JFFAVCaptureVideoOrientation videoOrientation;
 

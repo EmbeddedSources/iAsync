@@ -1,5 +1,8 @@
 #import "JFFPhotoCamera.h"
 
+#import "UIImage+MirrorImage.h"
+#import "UIImage+FixOrientation.h"
+
 #import <AVFoundation/AVFoundation.h>
 
 @implementation JFFPhotoCamera
@@ -31,6 +34,7 @@
     
     if (self) {
         
+        _fixOrientation = YES;
         _photoCameraType = photoCameraType;
         
         [self initCaptureSessions];
@@ -205,6 +209,26 @@
     return videoConnection;
 }
 
+#define dDeviceOrientation [[UIDevice currentDevice] orientation]
+#define isPortrait  UIDeviceOrientationIsPortrait (dDeviceOrientation)
+#define isLandscape UIDeviceOrientationIsLandscape(dDeviceOrientation)
+
+- (UIImage *)fixOrientationForImage:(UIImage *)image
+                     fixOrientation:(BOOL)fixOrientation
+                    photoCameraType:(JFFPhotoCameraType)photoCameraType
+{
+    if (fixOrientation)
+        image = [image fixOrientation];
+    
+    if (isLandscape) {
+        
+        const CGFloat radians = M_PI_2 * ((photoCameraType == JFFPhotoCameraFront)?1:-1);
+        image = [image mirroredImageWithRadians:radians];
+    }
+    
+    return image;
+}
+
 - (void)makePhotoWithCallback:(PhotoCameraMakePhotoResult)callback
 {
     NSParameterAssert(callback);
@@ -217,6 +241,10 @@
     
     BOOL fixOrientation = self.fixOrientation;
     
+    JFFPhotoCameraType photoCameraType = _photoCameraType;
+    
+    __weak JFFPhotoCamera *weakSelf = self;
+    
     [cameraImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
         
         if (error) {
@@ -227,8 +255,9 @@
         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
         UIImage *photoImage = [[UIImage alloc] initWithData:imageData];//TODO101 pas jpegData file pass
         
-        if (fixOrientation)
-            photoImage = [photoImage fixOrientation];
+        photoImage = [weakSelf fixOrientationForImage:photoImage
+                                       fixOrientation:fixOrientation
+                                      photoCameraType:photoCameraType];
         
         callback(photoImage, nil);
     }];
