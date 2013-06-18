@@ -43,3 +43,9 @@
 #import <JFFUI/Categories/UIWebView+UserAgent.h>
 #import <JFFUI/Categories/UITableView+BlocksAdditions.h>
 #import <JFFUI/Categories/UITableView+CellsSelections.h>
+
+#import <JFFUI/UIImage/UIImage+ScaleToSize.h>
+#import <JFFUI/UIImage/UIImage+FixOrientation.h>
+#import <JFFUI/UIImage/UIImage+ImageWithColor.h>
+#import <JFFUI/UIImage/UIImage+DrawImageInImage.h>
+#import <JFFUI/UIImage/UIImage+JpegPackImage.h>

@@ -44,11 +44,6 @@
 #import <JFFUtils/ToURL/NSURL+ToURL.h>
 #import <JFFUtils/ToURL/NSString+ToURL.h>
 
-#import <JFFUtils/UIImage/UIImage+ScaleToSize.h>
-#import <JFFUtils/UIImage/UIImage+FixOrientation.h>
-#import <JFFUtils/UIImage/UIImage+WriteToTmpFile.h>
-#import <JFFUtils/UIImage/UIImage+ImageWithColor.h>
-
 #import <JFFUtils/Errors/JFFError.h>
 #import <JFFUtils/Errors/JFFSilentError.h>
 #import <JFFUtils/Errors/NSError+SetToPointer.h>

@@ -50,12 +50,23 @@
 		4C696BF01742769A00C7D53D /* JFFRemoveButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE91742769A00C7D53D /* JFFRemoveButton.h */; };
 		4C696BF11742769A00C7D53D /* JFFRemoveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C696BEA1742769A00C7D53D /* JFFRemoveButton.m */; };
 		4C696BF21742769A00C7D53D /* JFFRemoveButtonDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BEB1742769A00C7D53D /* JFFRemoveButtonDelegate.h */; };
+		4C729990176895B90042DBFE /* UIImage+MirrorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72998F176894090042DBFE /* UIImage+MirrorImage.m */; };
 		4C89738F1761F31300E24F7B /* UITableView+BlocksAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C89738D1761F31300E24F7B /* UITableView+BlocksAdditions.h */; };
 		4C8973901761F31300E24F7B /* UITableView+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C89738E1761F31300E24F7B /* UITableView+BlocksAdditions.m */; };
 		4C8973931761F33C00E24F7B /* UIWebView+UserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */; };
 		4C8973941761F33C00E24F7B /* UIWebView+UserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8973921761F33C00E24F7B /* UIWebView+UserAgent.m */; };
 		4C8973971761F3FC00E24F7B /* UITableView+CellsSelections.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C8973951761F3FC00E24F7B /* UITableView+CellsSelections.h */; };
 		4C8973981761F3FC00E24F7B /* UITableView+CellsSelections.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8973961761F3FC00E24F7B /* UITableView+CellsSelections.m */; };
+		4CB4C1A31770530C00F275BC /* UIImage+ScaleToSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB4C1A11770530C00F275BC /* UIImage+ScaleToSize.h */; };
+		4CB4C1A41770530C00F275BC /* UIImage+ScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4C1A21770530C00F275BC /* UIImage+ScaleToSize.m */; };
+		4CB4C1A71770535700F275BC /* UIImage+FixOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB4C1A51770535700F275BC /* UIImage+FixOrientation.h */; };
+		4CB4C1A81770535700F275BC /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4C1A61770535700F275BC /* UIImage+FixOrientation.m */; };
+		4CB4C1AF1770539900F275BC /* UIImage+ImageWithColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB4C1AD1770539900F275BC /* UIImage+ImageWithColor.h */; };
+		4CB4C1B01770539900F275BC /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4C1AE1770539900F275BC /* UIImage+ImageWithColor.m */; };
+		4CB4C1B31770592B00F275BC /* UIImage+DrawImageInImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB4C1B11770592B00F275BC /* UIImage+DrawImageInImage.h */; };
+		4CB4C1B41770592B00F275BC /* UIImage+DrawImageInImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4C1B21770592B00F275BC /* UIImage+DrawImageInImage.m */; };
+		4CB4C1B71770667E00F275BC /* UIImage+JpegPackImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB4C1B51770667E00F275BC /* UIImage+JpegPackImage.h */; };
+		4CB4C1B81770667E00F275BC /* UIImage+JpegPackImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4C1B61770667E00F275BC /* UIImage+JpegPackImage.m */; };
 		4CBBA1A917662275007317E6 /* JFFCameraFlashModeType.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBBA1A517662275007317E6 /* JFFCameraFlashModeType.h */; };
 		4CBBA1AA17662275007317E6 /* JFFPhotoCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBBA1A617662275007317E6 /* JFFPhotoCamera.h */; };
 		4CBBA1AB17662275007317E6 /* JFFPhotoCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBBA1A717662275007317E6 /* JFFPhotoCamera.m */; };
@@ -158,12 +169,24 @@
 		4C696BE91742769A00C7D53D /* JFFRemoveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRemoveButton.h; sourceTree = "<group>"; };
 		4C696BEA1742769A00C7D53D /* JFFRemoveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRemoveButton.m; sourceTree = "<group>"; };
 		4C696BEB1742769A00C7D53D /* JFFRemoveButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRemoveButtonDelegate.h; sourceTree = "<group>"; };
+		4C72998E176894090042DBFE /* UIImage+MirrorImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+MirrorImage.h"; sourceTree = "<group>"; };
+		4C72998F176894090042DBFE /* UIImage+MirrorImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MirrorImage.m"; sourceTree = "<group>"; };
 		4C89738D1761F31300E24F7B /* UITableView+BlocksAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+BlocksAdditions.h"; sourceTree = "<group>"; };
 		4C89738E1761F31300E24F7B /* UITableView+BlocksAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+BlocksAdditions.m"; sourceTree = "<group>"; };
 		4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UserAgent.h"; sourceTree = "<group>"; };
 		4C8973921761F33C00E24F7B /* UIWebView+UserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+UserAgent.m"; sourceTree = "<group>"; };
 		4C8973951761F3FC00E24F7B /* UITableView+CellsSelections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CellsSelections.h"; sourceTree = "<group>"; };
 		4C8973961761F3FC00E24F7B /* UITableView+CellsSelections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CellsSelections.m"; sourceTree = "<group>"; };
+		4CB4C1A11770530C00F275BC /* UIImage+ScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScaleToSize.h"; sourceTree = "<group>"; };
+		4CB4C1A21770530C00F275BC /* UIImage+ScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScaleToSize.m"; sourceTree = "<group>"; };
+		4CB4C1A51770535700F275BC /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
+		4CB4C1A61770535700F275BC /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
+		4CB4C1AD1770539900F275BC /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
+		4CB4C1AE1770539900F275BC /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
+		4CB4C1B11770592B00F275BC /* UIImage+DrawImageInImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DrawImageInImage.h"; sourceTree = "<group>"; };
+		4CB4C1B21770592B00F275BC /* UIImage+DrawImageInImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+DrawImageInImage.m"; sourceTree = "<group>"; };
+		4CB4C1B51770667E00F275BC /* UIImage+JpegPackImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JpegPackImage.h"; sourceTree = "<group>"; };
+		4CB4C1B61770667E00F275BC /* UIImage+JpegPackImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JpegPackImage.m"; sourceTree = "<group>"; };
 		4CBBA1A517662275007317E6 /* JFFCameraFlashModeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCameraFlashModeType.h; sourceTree = "<group>"; };
 		4CBBA1A617662275007317E6 /* JFFPhotoCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPhotoCamera.h; sourceTree = "<group>"; };
 		4CBBA1A717662275007317E6 /* JFFPhotoCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFPhotoCamera.m; sourceTree = "<group>"; };
@@ -247,6 +270,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4CB4C1A0177052F800F275BC /* UIImage */,
 				4CBBA16F1766130A007317E6 /* PhotoCamera */,
 				4C2CFD921754A28F00E87F22 /* Categories */,
 				4C696BE41742769A00C7D53D /* GridView */,
@@ -367,9 +391,36 @@
 			path = GridView;
 			sourceTree = "<group>";
 		};
+		4C72998D176893EF0042DBFE /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				4C72998E176894090042DBFE /* UIImage+MirrorImage.h */,
+				4C72998F176894090042DBFE /* UIImage+MirrorImage.m */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		4CB4C1A0177052F800F275BC /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				4CB4C1A11770530C00F275BC /* UIImage+ScaleToSize.h */,
+				4CB4C1A21770530C00F275BC /* UIImage+ScaleToSize.m */,
+				4CB4C1A51770535700F275BC /* UIImage+FixOrientation.h */,
+				4CB4C1A61770535700F275BC /* UIImage+FixOrientation.m */,
+				4CB4C1AD1770539900F275BC /* UIImage+ImageWithColor.h */,
+				4CB4C1AE1770539900F275BC /* UIImage+ImageWithColor.m */,
+				4CB4C1B11770592B00F275BC /* UIImage+DrawImageInImage.h */,
+				4CB4C1B21770592B00F275BC /* UIImage+DrawImageInImage.m */,
+				4CB4C1B51770667E00F275BC /* UIImage+JpegPackImage.h */,
+				4CB4C1B61770667E00F275BC /* UIImage+JpegPackImage.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
 		4CBBA16F1766130A007317E6 /* PhotoCamera */ = {
 			isa = PBXGroup;
 			children = (
+				4C72998D176893EF0042DBFE /* Details */,
 				4CBBA1A517662275007317E6 /* JFFCameraFlashModeType.h */,
 				4CBBA1A617662275007317E6 /* JFFPhotoCamera.h */,
 				4CBBA1A717662275007317E6 /* JFFPhotoCamera.m */,
@@ -491,6 +542,11 @@
 				4CBBA1A917662275007317E6 /* JFFCameraFlashModeType.h in Headers */,
 				4CBBA1AA17662275007317E6 /* JFFPhotoCamera.h in Headers */,
 				4CBBA1AC17662275007317E6 /* JFFPhotoCameraType.h in Headers */,
+				4CB4C1A31770530C00F275BC /* UIImage+ScaleToSize.h in Headers */,
+				4CB4C1A71770535700F275BC /* UIImage+FixOrientation.h in Headers */,
+				4CB4C1AF1770539900F275BC /* UIImage+ImageWithColor.h in Headers */,
+				4CB4C1B31770592B00F275BC /* UIImage+DrawImageInImage.h in Headers */,
+				4CB4C1B71770667E00F275BC /* UIImage+JpegPackImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +651,7 @@
 				1B7F589C1435D58000FF06EC /* UIView+AnimationWithBlocks.m in Sources */,
 				1B49CFA8143C6D3500E8AACE /* UIWebViewNewFeaturesRuntime.m in Sources */,
 				1B29555B143DCB3A00532BD7 /* JULoadMoreCellscalculator.m in Sources */,
+				4C729990176895B90042DBFE /* UIImage+MirrorImage.m in Sources */,
 				1B295560143DCB7300532BD7 /* UITableView+WithinUpdates.m in Sources */,
 				1BD3616A1455A0630036F786 /* JFFPageSlider.m in Sources */,
 				1B3A3855147683E9007D8C10 /* UIView+AllSubviews.m in Sources */,
@@ -620,6 +677,11 @@
 				4C8973941761F33C00E24F7B /* UIWebView+UserAgent.m in Sources */,
 				4C8973981761F3FC00E24F7B /* UITableView+CellsSelections.m in Sources */,
 				4CBBA1AB17662275007317E6 /* JFFPhotoCamera.m in Sources */,
+				4CB4C1A41770530C00F275BC /* UIImage+ScaleToSize.m in Sources */,
+				4CB4C1A81770535700F275BC /* UIImage+FixOrientation.m in Sources */,
+				4CB4C1B01770539900F275BC /* UIImage+ImageWithColor.m in Sources */,
+				4CB4C1B41770592B00F275BC /* UIImage+DrawImageInImage.m in Sources */,
+				4CB4C1B81770667E00F275BC /* UIImage+JpegPackImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,12 +727,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../;
+				HEADER_SEARCH_PATHS = (
+					../,
+					"../../lib-third-party/libturbojpeg-ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -681,11 +745,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../;
+				HEADER_SEARCH_PATHS = (
+					../,
+					"../../lib-third-party/libturbojpeg-ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
