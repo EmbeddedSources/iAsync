@@ -8,8 +8,6 @@
 #import <JFFRestKit/JFFRestKit.h>
 #import <JFFNetwork/JFFNetworkBlocksFunctions.h>
 
-#import <UIKit/UIKit.h>
-
 static NSString *const cacheQueueName = @"com.embedded_sources.jffcache.thumbnail_storage.cache";
 
 NSString *JFFNoImageDataURLString = @"nodata://jff.cache.com";
@@ -211,72 +209,6 @@ static JFFThumbnailStorage *glStorageInstance = nil;
     return loader;
 }
 
-static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
-                                                CGSize scaleSize,
-                                                UIViewContentMode contentMode)
-{
-    return [[NSString alloc] initWithFormat:@"resized_image_key:%@<->%@<->%d",
-            url,
-            NSStringFromCGSize(scaleSize),
-            contentMode];
-}
-
-- (JFFAsyncOperation)cachedScaleImageForSize:(CGSize)scaleSize
-                                 contentMode:(UIViewContentMode)contentMode
-                                         url:(NSURL *)url
-                          dataToResizeLoader:(JFFAsyncOperation)dataToResizeLoader
-{
-    dataToResizeLoader = [dataToResizeLoader copy];
-    
-    JFFSmartUrlDataLoaderFields *args = [JFFSmartUrlDataLoaderFields new];
-    args.loadDataIdentifier = ^id() { return url; };
-    args.cacheDataLifeTimeInSeconds = [[self class] cacheDataLifeTimeInSeconds];
-    args.cache = [self imageCacheAdapter];
-    
-    args.dataLoaderForIdentifier = ^JFFAsyncOperation(NSURL *url) {
-        JFFAsyncOperationBinder scaledImageBinder = ^JFFAsyncOperation(UIImage *image) {
-            JFFSyncOperation loadDataBlock = ^(NSError *__autoreleasing *outError) {
-                //TODO check error if can not resize
-                //TODO try to reuse created here resized image for result
-                UIImage *scaledImage = [image imageScaledToSize:scaleSize
-                                                    contentMode:contentMode];
-                
-                NSData *result = UIImagePNGRepresentation(scaledImage);
-                return result;
-            };
-            
-            return asyncOperationWithSyncOperationAndQueue(loadDataBlock,
-                                                           "com.embedded_sources.jffcache.thumbnail_storage.cache.resize");
-        };
-        
-        return bindSequenceOfAsyncOperations(dataToResizeLoader,
-                                             scaledImageBinder,
-                                             nil);
-    };
-    //Do not cache invalid data here (may be no needs)
-    args.analyzerForData = imageDataToUIImageBinder();
-    
-    args.cacheKeyForIdentifier = ^id(NSURL *url) {
-        return cacheKeyForURLScaleSizeAndContentMode(url, scaleSize, contentMode);
-    };
-    
-    args.lastUpdateDateForKey = ^JFFAsyncOperation(NSURL *url) {
-        JFFAsyncOperation loader = asyncOperationWithSyncOperationAndQueue(^id(NSError *__autoreleasing *outError) {
-            
-            id< JFFCacheDB > thumbnailDB = [JFFCaches createThumbnailDB];
-            NSDate *result = [thumbnailDB lastUpdateTimeForKey:[url description]];
-            //TODO wich date pass when no date, maybe 1907 year????
-            return result;
-        }, [cacheQueueName cStringUsingEncoding:NSUTF8StringEncoding]);
-        
-        return balanced(loader);
-    };
-    
-    JFFAsyncOperation loader = jSmartDataLoaderWithCache(args);
-    
-    return loader;
-}
-
 //TODO add load balancer here
 - (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url
 {
@@ -296,44 +228,6 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
         //TODO: also check the last update date here
         JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc] initWithName:@"imagesByUrl"
                                                                           key:url];
-        
-        loader = [self asyncOperationForPropertyWithPath:propertyPath
-                                          asyncOperation:loader];
-        
-        return loader(progressCallback,
-                      cancelCallback,
-                      doneCallback);
-    };
-}
-
-//It is slow, at least add 1 sec to wait
-- (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url
-                              scaledToSize:(CGSize)scaleSize
-                               contentMode:(UIViewContentMode)contentMode
-{
-    NSParameterAssert(!url || [url isKindOfClass:[NSURL class]]);
-    
-    if (![url isURLToImageData]) {
-        return asyncOperationWithError([JFFCacheNoURLError new]);
-    }
-    
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
-        
-        JFFAsyncOperation loader = [self cachedInDBImageDataLoaderForUrl:url
-                                                 ignoreFreshDataLoadFail:NO];
-        
-        loader = [self cachedScaleImageForSize:scaleSize
-                                   contentMode:contentMode
-                                           url:url
-                            dataToResizeLoader:loader];
-        
-        id key = cacheKeyForURLScaleSizeAndContentMode(url, scaleSize, contentMode);
-        
-        //TODO: also check the last update date here
-        JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:@"imagesByUrl"
-                                                                          key:key];
         
         loader = [self asyncOperationForPropertyWithPath:propertyPath
                                           asyncOperation:loader];

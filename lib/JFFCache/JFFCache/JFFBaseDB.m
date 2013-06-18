@@ -499,32 +499,6 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     return recordData;
 }
 
-- (NSDate *)lastUpdateTimeForKey:(id)key
-{
-    NSString *recordId = [key toCompositeKey];
-    
-    static const NSUInteger dateIndex = 0;
-    
-    static NSString *const queryFormat = @"SELECT update_time FROM records WHERE record_id='%@';";
-    NSString *query = [[NSString alloc]initWithFormat:queryFormat, recordId];
-    
-    __block NSDate *result;
-    
-    safe_dispatch_sync([self db].queue, ^ {
-    
-        sqlite3_stmt *statement = 0;
-        if ([self.db prepareQuery:query statement:&statement]) {
-            if (sqlite3_step(statement) == SQLITE_ROW) {
-                NSTimeInterval dateInetrval = sqlite3_column_double(statement, dateIndex);
-                result = [[NSDate alloc] initWithTimeIntervalSince1970:dateInetrval];
-            }
-            sqlite3_finalize(statement);
-        }
-    });
-    
-    return result;
-}
-
 - (void)removeAllRecordsWithCallback:(JFFSimpleBlock)callback
 {
     callback = [callback copy];

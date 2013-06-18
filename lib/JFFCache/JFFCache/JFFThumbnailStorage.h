@@ -11,10 +11,6 @@ extern NSString *JFFNoImageDataURLString;
 
 - (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url;
 
-- (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url
-                              scaledToSize:(CGSize)scaleSize
-                               contentMode:(UIViewContentMode)contentMode;
-
 - (JFFAsyncOperation)tryThumbnailLoaderForUrls:(NSArray *)urls;
 
 - (void)resetCache;
