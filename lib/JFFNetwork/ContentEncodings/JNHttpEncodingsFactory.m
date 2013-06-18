@@ -3,28 +3,43 @@
 #import "JNGzipDecoder.h"
 #import "JNStubDecoder.h"
 
+@interface JNHttpEncodingsFactory()
+
+@property (nonatomic) unsigned long long contentLength;
+
+@end
+
 @implementation JNHttpEncodingsFactory
 
-+ (id<JNHttpDecoder>)decoderForHeaderString:( NSString* )headerString_
+- (instancetype)initWithContentLength:( unsigned long long )contentLength
 {
-    NSDictionary* decoderClasses_ = @{@"gzip": [ JNGzipDecoder class ]};
+    self = [ super init ];
+    self.contentLength = contentLength;
+    
+    return self;
+}
 
-    Class decoderClass_ = decoderClasses_[ headerString_ ];
-    if ( Nil == decoderClass_ ) {
+- (id<JNHttpDecoder>)decoderForHeaderString:(NSString *)headerString
+{
+    NSDictionary* decoderClasses_ = @{ @"gzip": [ JNGzipDecoder class ] };
+
+    Class decoderClass_ = decoderClasses_[headerString];
+    if ( Nil == decoderClass_ )
+    {
         return [ self stubDecoder ];
     }
     
-    return [decoderClass_ new];
+    return [ [ decoderClass_ alloc ] initWithContentLength: self.contentLength ];
 }
 
-+ (id<JNHttpDecoder>)gzipDecoder
+- (id<JNHttpDecoder>)gzipDecoder
 {
-    return [JNGzipDecoder new];
+    return [ [ JNGzipDecoder alloc ] initWithContentLength: self.contentLength ];
 }
 
-+ (id<JNHttpDecoder>)stubDecoder
+- (id<JNHttpDecoder>)stubDecoder
 {
-    return [JNStubDecoder new];
+    return [ JNStubDecoder new ];
 }
 
 @end

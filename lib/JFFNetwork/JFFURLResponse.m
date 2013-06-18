@@ -5,6 +5,7 @@
 @implementation JFFURLResponse
 
 @dynamic expectedContentLength;
+@dynamic contentEncoding;
 
 - (unsigned long long)expectedContentLength
 {
@@ -24,6 +25,11 @@
 {
     NSString *custom = [JFFUrlResponseLogger descriptionStringForUrlResponse:self];
     return [[NSString alloc] initWithFormat:@"%@ \n   %@", [super description], custom];
+}
+
+- (NSString *)contentEncoding
+{
+    return _allHeaderFields[@"Content-Encoding"];
 }
 
 @end

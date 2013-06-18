@@ -13,8 +13,9 @@
 
 #import "JHttpError.h"
 #import "JStreamError.h"
-
 #import "JHttpFlagChecker.h"
+
+#import <JFFUtils/JFFUtils.h>
 
 //#define SHOW_DEBUG_LOGS
 #import <JFFLibrary/JDebugLog.h>
@@ -94,6 +95,11 @@ static void readStreamCallback(CFReadStreamRef stream,
     id _cookiesStorage;
     BOOL _responseHandled;
     JFFURLResponse *_urlResponse;
+
+//    NSString* _previousContentEncoding;
+    id< JNHttpDecoder > _decoder;
+    unsigned long long _downloadedBytesCount;
+    unsigned long long _totalBytesCount;
 };
 
 - (void)dealloc
@@ -227,6 +233,27 @@ static void readStreamCallback(CFReadStreamRef stream,
     [self clearCallbacks];
 }
 
+-(id<JNHttpDecoder>)getDecoder
+{
+    NSString* contentEncoding = self->_urlResponse.contentEncoding;
+//    NSString* previousEncoding = self->_previousContentEncoding;
+
+
+    BOOL isDecoderMissing = ( nil == self->_decoder );
+    
+    if ( isDecoderMissing )
+    {
+        JNHttpEncodingsFactory* factory = [ [ JNHttpEncodingsFactory alloc ] initWithContentLength: self->_totalBytesCount ];
+        
+        id< JNHttpDecoder > decoder = [ factory decoderForHeaderString: contentEncoding ];
+        self->_decoder = decoder;
+    }
+
+//    [ @"http://ws-alr1.dk.sitecore.net:66/sitecore/shell/ClientBin/Dashboard/Integration.ashx?action=loadPreFilterParams" isEqualToString: (NSString*)[ ((NSURL*)[ self->_urlResponse url ]) absoluteString ] ]
+    
+    return self->_decoder;
+}
+
 - (void)handleData:(void *)buffer
             length:(NSUInteger)length
 {
@@ -234,22 +261,29 @@ static void readStreamCallback(CFReadStreamRef stream,
         return;
     }
     
-    NSString *contentEncoding = _urlResponse.allHeaderFields[@"Content-Encoding"];
-    id< JNHttpDecoder > decoder = [ JNHttpEncodingsFactory decoderForHeaderString: contentEncoding ];
+    id< JNHttpDecoder > decoder = [self getDecoder];
     
-    NSError *decoderError;
-    
+    NSError *decoderError = nil;
     NSData *rawNsData = [[NSData alloc] initWithBytes:buffer
                                                length:length];
     
     NSData *decodedData = [decoder decodeData:rawNsData
                                         error:&decoderError];
     
-    if (nil == decodedData) {
+    // @adk - maybe we should use [decodedData length]
+    _downloadedBytesCount += length;
+    BOOL isDownloadCompleted = ( self->_totalBytesCount == self->_downloadedBytesCount );
+    
+    if ( nil == decodedData || isDownloadCompleted ) {
+        NSError* decoderCloseError = nil;
+        [ decoder closeWithError: &decoderCloseError ];
+        [ decoderCloseError writeErrorToNSLog ];
         
-        [self handleFinish:decoderError];
-    } else {
         
+        self.didReceiveDataBlock(decodedData);
+        [ self handleFinish: decoderError ];
+    }
+    else {
         self.didReceiveDataBlock(decodedData);
     }
 }
@@ -330,9 +364,6 @@ static void readStreamCallback(CFReadStreamRef stream,
             _params.url = [location toURL];
         }
         
-        if (!_params.url)
-            _params.url = [_params.url URLWithLocation:@"/"];
-        
         _params.httpMethod = @"GET";
         _params.httpBody = nil;
 #endif
@@ -357,7 +388,12 @@ static void readStreamCallback(CFReadStreamRef stream,
             self.didReceiveResponseBlock(urlResponse);
             self.didReceiveResponseBlock = nil;
             
+//            _previousContentEncoding = _urlResponse.contentEncoding;
+            _decoder = nil;
+            
             _urlResponse = urlResponse;
+            
+            _totalBytesCount = urlResponse.expectedContentLength;
         }
     }
 }

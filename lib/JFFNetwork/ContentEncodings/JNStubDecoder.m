@@ -11,4 +11,9 @@
     return encodedData;
 }
 
+- (BOOL)closeWithError:(NSError **)outError
+{
+    return YES;
+}
+
 @end

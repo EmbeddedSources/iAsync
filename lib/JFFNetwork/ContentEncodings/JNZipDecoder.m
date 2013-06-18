@@ -41,4 +41,9 @@
     return result;
 }
 
+- (BOOL)closeWithError:(NSError **)error
+{
+    return YES;
+}
+
 @end
