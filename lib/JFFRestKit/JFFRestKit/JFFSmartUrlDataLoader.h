@@ -7,7 +7,6 @@
 
 typedef JFFAsyncOperationBinder(^JFFAsyncBinderForIdentifier)(id<NSCopying> loadDataIdentifier);
 typedef id (^JFFCacheKeyForIdentifier)(id<NSCopying> loadDataIdentifier);
-typedef JFFAsyncOperation(^JFFCacheLastUpdateDateForKey)(id key);
 
 @interface JFFSmartUrlDataLoaderFields : NSObject
 
@@ -15,9 +14,8 @@ typedef JFFAsyncOperation(^JFFCacheLastUpdateDateForKey)(id key);
 @property (nonatomic, copy) JFFAsyncOperationBinder dataLoaderForIdentifier;
 @property (nonatomic, copy) JFFAsyncBinderForIdentifier analyzerForData;
 @property (nonatomic, copy) JFFCacheKeyForIdentifier cacheKeyForIdentifier;
-@property (nonatomic, copy) JFFCacheLastUpdateDateForKey lastUpdateDateForKey;
 @property (nonatomic) BOOL doesNotIgnoreFreshDataLoadFail;
-@property (nonatomic) id< JFFRestKitCache > cache;
+@property (nonatomic) id<JFFRestKitCache> cache;
 @property (nonatomic) NSTimeInterval cacheDataLifeTimeInSeconds;
 
 @end
