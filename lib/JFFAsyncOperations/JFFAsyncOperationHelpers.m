@@ -26,7 +26,6 @@
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     handler  = [handler  copy];
-    progress = [progress copy];
     
     _scheduler = [JFFScheduler new];
     [_scheduler addBlock:^(JFFCancelScheduledBlock cancel){
