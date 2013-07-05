@@ -122,7 +122,7 @@
 		1BD3616B1455A2F80036F786 /* JFFPageSliderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPageSliderDelegate.h; sourceTree = "<group>"; };
 		1BE053B515480F4400270B58 /* JFFActionSheetsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFActionSheetsContainer.h; sourceTree = "<group>"; };
 		1BE053B615480F4400270B58 /* JFFActionSheetsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFActionSheetsContainer.m; sourceTree = "<group>"; };
-		539103F014A88BE1007315A3 /* libJFFUI copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libJFFUI copy.a"; path = "libJFFUI-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		539103F014A88BE1007315A3 /* libJFFUI-clang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libJFFUI-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		655E9DB21392E8C00074BD61 /* JFFAlertButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAlertButton.h; sourceTree = "<group>"; };
 		655E9DB31392E8C00074BD61 /* JFFAlertButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAlertButton.m; sourceTree = "<group>"; };
 		655E9DB41392E8C00074BD61 /* JFFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAlertView.h; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC07E0554694100DB518D /* libJFFUI.a */,
-				539103F014A88BE1007315A3 /* libJFFUI copy.a */,
+				539103F014A88BE1007315A3 /* libJFFUI-clang.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -415,7 +415,7 @@
 			);
 			name = "JFFUI-clang";
 			productName = JFFUI;
-			productReference = 539103F014A88BE1007315A3 /* libJFFUI copy.a */;
+			productReference = 539103F014A88BE1007315A3 /* libJFFUI-clang.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		D2AAC07D0554694100DB518D /* JFFUI */ = {
