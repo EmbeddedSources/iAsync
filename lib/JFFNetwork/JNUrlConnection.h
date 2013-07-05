@@ -8,6 +8,11 @@
    -(void)cancel;
 
 @required
+    -(unsigned long long)downloadedBytesCount;
+    -(unsigned long long)totalBytesCount;
+
+
+@required
    //callbacks cleared after finish of loading
    @property ( nonatomic, copy ) JFFDidReceiveResponseHandler didReceiveResponseBlock;
    @property ( nonatomic, copy ) JFFDidReceiveDataHandler     didReceiveDataBlock    ;

@@ -9,6 +9,9 @@
 @property (nonatomic, copy) JFFDidUploadDataHandler      didUploadDataBlock     ;
 @property (nonatomic, copy) JFFShouldAcceptCertificateForHost shouldAcceptCertificateBlock;
 
+-(unsigned long long)downloadedBytesCount;
+-(unsigned long long)totalBytesCount;
+
 -(void)clearCallbacks;
 
 @end
