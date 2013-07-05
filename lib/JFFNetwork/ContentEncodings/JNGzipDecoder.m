@@ -64,9 +64,22 @@ NSString* kGzipErrorDomain = @"gzip.error";
     return YES;
 }
 
-//http://www.cocoadev.com/index.pl?NSDataCategory
+
+
 - (NSData*)decodeData:(NSData *)encodedData_
                 error:(NSError **)outError
+{
+    @synchronized( self )
+    {
+        return [ self threadUnsafeDecodeData: encodedData_
+                                       error: outError ];
+    }
+}
+
+
+//http://www.cocoadev.com/index.pl?NSDataCategory
+- (NSData*)threadUnsafeDecodeData:(NSData *)encodedData_
+                            error:(NSError **)outError
 {
     NSParameterAssert(outError);
     *outError = nil;
