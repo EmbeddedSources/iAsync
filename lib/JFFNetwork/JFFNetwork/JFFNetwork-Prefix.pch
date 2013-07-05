@@ -1,5 +1,6 @@
 #ifdef __OBJC__
     #import <JFFUtils/JFFUtils.h>
+    #import <JFFAsyncOperations/JFFAsyncOperations.h>
 
     #import <Foundation/Foundation.h>
     #include <CFNetwork/CFNetwork.h>
