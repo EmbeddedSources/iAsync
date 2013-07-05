@@ -14,7 +14,7 @@
                                             timeout: 30000. ];
 }
 
--(void)waitForeverForAsyncRequestOnMainThreadWithBlock:( void (^)(JFFSimpleBlock) )block_
+-(void)waitForeverForAsyncRequestOnMainThreadWithBlock:( TestAsyncRequestBlock )block_
                                               selector:( SEL )selector_
 {
     [ self performAsyncRequestOnMainThreadWithBlock: block_
@@ -22,7 +22,7 @@
                                             timeout: INFINITY ];
 }
 
--(void)performAsyncRequestOnMainThreadWithBlock:( void (^)(JFFSimpleBlock) )block_
+-(void)performAsyncRequestOnMainThreadWithBlock:( TestAsyncRequestBlock )block_
                                        selector:( SEL )selector_
                                         timeout:( NSTimeInterval )timeout_;
 {

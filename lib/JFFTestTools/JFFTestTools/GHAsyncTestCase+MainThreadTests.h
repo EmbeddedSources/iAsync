@@ -6,13 +6,13 @@ typedef void (^TestAsyncRequestBlock)(JFFSimpleBlock);
 //GHAsyncTestCase category
 @interface NSObject (MainThreadTests)
 
-- (void)performAsyncRequestOnMainThreadWithBlock:(void(^)(JFFSimpleBlock))block
+- (void)performAsyncRequestOnMainThreadWithBlock:(TestAsyncRequestBlock)block
                                         selector:(SEL)selector;
 
--(void)waitForeverForAsyncRequestOnMainThreadWithBlock:( void (^)(JFFSimpleBlock) )block_
+-(void)waitForeverForAsyncRequestOnMainThreadWithBlock:( TestAsyncRequestBlock )block_
                                               selector:( SEL )selector_;
 
--(void)performAsyncRequestOnMainThreadWithBlock:( void (^)(JFFSimpleBlock) )block_
+-(void)performAsyncRequestOnMainThreadWithBlock:( TestAsyncRequestBlock )block_
                                        selector:( SEL )selector_
                                         timeout:( NSTimeInterval )timeout_;
 
