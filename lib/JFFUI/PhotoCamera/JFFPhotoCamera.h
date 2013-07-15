@@ -22,6 +22,7 @@ typedef NSInteger JFFAVCaptureVideoOrientation;
 @property (nonatomic) JFFCameraFlashModeType flashMode;
 @property (nonatomic) JFFPhotoCameraType photoCameraType;
 @property (nonatomic) BOOL fixOrientation; //default is YES
+@property (nonatomic) BOOL rotateImage; //default is YES
 
 @property (nonatomic) JFFAVCaptureVideoOrientation videoOrientation;
 
