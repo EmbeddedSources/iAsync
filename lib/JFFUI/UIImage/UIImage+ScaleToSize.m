@@ -27,4 +27,21 @@
     return newImage;
 }
 
+- (instancetype)imageScale:(CGFloat)scale
+{
+    UIGraphicsBeginImageContext(self.size);
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    
+    CGContextTranslateCTM(currentContext, self.size.width/2.f, self.size.height/2.f);
+    
+    CGContextScaleCTM(currentContext, scale, -scale);
+    
+    CGRect drawRect = CGRectMake(-self.size.width/2.f, -self.size.height/2.f, self.size.width, self.size.height);
+    CGContextDrawImage(currentContext, drawRect, self.CGImage);
+    UIImage *cropped = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return cropped;
+}
+
 @end
