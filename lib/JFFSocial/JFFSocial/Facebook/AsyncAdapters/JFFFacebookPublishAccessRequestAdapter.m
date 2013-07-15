@@ -1,21 +1,21 @@
 #import "JFFFacebookPublishAccessRequestAdapter.h"
 
+#import "JFFFacebookSDKErrors.h"
 #import "JFFFacebookRequestPublishingAccessError.h"
-
-#import <JFFSocial/Facebook/Errors/SDKErrors/JFFFacebookSDKErrors.h>
 
 #import <FacebookSDK/FacebookSDK.h>
 
 #import <Accounts/Accounts.h>
 
 @interface JFFFacebookPublishAccessRequestAdapter : NSObject <JFFAsyncOperationInterface>
-
-@property (nonatomic) FBSession *session;
-@property (nonatomic) NSArray *permissions;
-
 @end
 
 @implementation JFFFacebookPublishAccessRequestAdapter
+{
+@public
+    FBSession *_session;
+    NSArray   *_permissions;
+}
 
 #pragma mark - JFFAsyncOperationInterface
 
@@ -30,7 +30,7 @@
         return [_session.permissions containsObject:permission];
     }];
     
-    if (hasAllPermissions) {
+    if (hasAllPermissions && _session.isOpen) {
         
         [self handleLoginWithSession:_session
                                error:nil
@@ -38,25 +38,53 @@
         return;
     }
     
-    FBSessionRequestPermissionResultHandler fbHandler = ^(FBSession *session, NSError *error) {
+    FBSessionDefaultAudience defaultAudience = FBSessionDefaultAudienceEveryone;
+    
+    if (_session.isOpen) {
+        FBSessionRequestPermissionResultHandler fbHandler = ^(FBSession *session, NSError *error) {
+            
+            NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;
+            
+            [self handleLoginWithSession:session
+                                   error:libError
+                                 handler:handler];
+        };
+        
+        [_session requestNewPublishPermissions:_permissions
+                               defaultAudience:(defaultAudience)
+                             completionHandler:fbHandler];
+        
+        return;
+    }
+    
+    __block BOOL finished = NO;
+    __weak JFFFacebookPublishAccessRequestAdapter *weakSelf = self;
+    
+    FBSessionStateHandler fbHandler = ^(FBSession *session, FBSessionState status, NSError *error) {
+        
+        if (finished)
+            return;
+        
+        finished = YES;
         
         NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;
         
-        [self handleLoginWithSession:session
-                               error:libError
-                             handler:handler];
+        [weakSelf handleLoginWithSession:session
+                                   error:libError
+                                 handler:handler];
     };
     
-    [self.session requestNewPublishPermissions:self.permissions
-                               defaultAudience:(FBSessionDefaultAudienceFriends)
-                             completionHandler:fbHandler];
+    [FBSession openActiveSessionWithPublishPermissions:_permissions
+                                       defaultAudience:(defaultAudience)
+                                          allowLoginUI:YES
+                                     completionHandler:fbHandler];
 }
 
 - (void)handleLoginWithSession:(FBSession *)session
                          error:(NSError *)error
                        handler:(JFFAsyncOperationInterfaceResultHandler)handler
 {
-    if (session.state != FBSessionStateOpen && session.state != FBSessionStateOpenTokenExtended) {
+    if (!error && !session.isOpen) {
         error = [JFFFacebookRequestPublishingAccessError new];
     }
     if (handler) {
@@ -76,8 +104,8 @@ JFFAsyncOperation jffFacebookPublishAccessRequest(FBSession *session, NSArray *p
         
         JFFFacebookPublishAccessRequestAdapter *object = [JFFFacebookPublishAccessRequestAdapter new];
         
-        object.session     = session;
-        object.permissions = permissions;
+        object->_session     = session;
+        object->_permissions = permissions;
         
         return object;
     };
