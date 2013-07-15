@@ -86,12 +86,16 @@
 		4C50BF5A171D85B400251A16 /* JFFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DFB12171849D800D86975 /* JFFError.m */; };
 		4C50BF5B171D85B400251A16 /* JFFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DFB12171849D800D86975 /* JFFError.m */; };
 		4C50BF5C171D85B500251A16 /* JFFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DFB12171849D800D86975 /* JFFError.m */; };
+		4C6AFDFD177AD544009D09C3 /* NSString+MD5.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6AFDFB177AD544009D09C3 /* NSString+MD5.h */; };
+		4C6AFDFE177AD544009D09C3 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6AFDFC177AD544009D09C3 /* NSString+MD5.m */; };
 		4C6DFB13171849D800D86975 /* JFFError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6DFB11171849D800D86975 /* JFFError.h */; };
 		4C6DFB14171849D800D86975 /* JFFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DFB12171849D800D86975 /* JFFError.m */; };
 		4C6DFB1717184A0600D86975 /* JFFSilentError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6DFB1517184A0600D86975 /* JFFSilentError.h */; };
 		4C6DFB1817184A0600D86975 /* JFFSilentError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DFB1617184A0600D86975 /* JFFSilentError.m */; };
 		4C712E1917046A0300346F5E /* MethodObserverTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C712E1817046A0300346F5E /* MethodObserverTest.m */; };
 		4C8A22791705913B000539D2 /* TypeSignatureTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A22781705913B000539D2 /* TypeSignatureTest.m */; };
+		4C8D176917870ED900DE7624 /* NSString+LocalizedPrice.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C8D176717870ED900DE7624 /* NSString+LocalizedPrice.h */; };
+		4C8D176A17870ED900DE7624 /* NSString+LocalizedPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D176817870ED900DE7624 /* NSString+LocalizedPrice.m */; };
 		4C98FBA116E0B38D00B6EFD8 /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FB9F16E0B38D00B6EFD8 /* NSString+HTML.h */; };
 		4C98FBA216E0B38D00B6EFD8 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FBA016E0B38D00B6EFD8 /* NSString+HTML.m */; };
 		4C98FBAC16E0B56D00B6EFD8 /* NSArray+Templates.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C98FBAB16E0B56D00B6EFD8 /* NSArray+Templates.hpp */; };
@@ -485,6 +489,8 @@
 		4C27EDA91701C47300185768 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		4C3B63A01701C84700D5A8FD /* JFFMutableAssignKeyDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFMutableAssignKeyDictionary.h; sourceTree = "<group>"; };
 		4C3B63A11701C84700D5A8FD /* JFFMutableAssignKeyDictionary.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFMutableAssignKeyDictionary.mm; sourceTree = "<group>"; };
+		4C6AFDFB177AD544009D09C3 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		4C6AFDFC177AD544009D09C3 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		4C6DFB11171849D800D86975 /* JFFError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFError.h; sourceTree = "<group>"; };
 		4C6DFB12171849D800D86975 /* JFFError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFError.m; sourceTree = "<group>"; };
 		4C6DFB1517184A0600D86975 /* JFFSilentError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSilentError.h; sourceTree = "<group>"; };
@@ -493,6 +499,8 @@
 		4C712E1817046A0300346F5E /* MethodObserverTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodObserverTest.m; sourceTree = "<group>"; };
 		4C8A22771705913B000539D2 /* TypeSignatureTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeSignatureTest.h; sourceTree = "<group>"; };
 		4C8A22781705913B000539D2 /* TypeSignatureTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeSignatureTest.m; sourceTree = "<group>"; };
+		4C8D176717870ED900DE7624 /* NSString+LocalizedPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LocalizedPrice.h"; sourceTree = "<group>"; };
+		4C8D176817870ED900DE7624 /* NSString+LocalizedPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LocalizedPrice.m"; sourceTree = "<group>"; };
 		4C98FB9F16E0B38D00B6EFD8 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		4C98FBA016E0B38D00B6EFD8 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		4C98FBAB16E0B56D00B6EFD8 /* NSArray+Templates.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "NSArray+Templates.hpp"; sourceTree = "<group>"; };
@@ -1005,6 +1013,10 @@
 				1B2A4A9D15EF62A3004ABB2E /* NSString+FileAttributes.m */,
 				4C98FB9F16E0B38D00B6EFD8 /* NSString+HTML.h */,
 				4C98FBA016E0B38D00B6EFD8 /* NSString+HTML.m */,
+				4C6AFDFB177AD544009D09C3 /* NSString+MD5.h */,
+				4C6AFDFC177AD544009D09C3 /* NSString+MD5.m */,
+				4C8D176717870ED900DE7624 /* NSString+LocalizedPrice.h */,
+				4C8D176817870ED900DE7624 /* NSString+LocalizedPrice.m */,
 			);
 			path = NSString;
 			sourceTree = "<group>";
@@ -1359,6 +1371,8 @@
 				4CC01A9A17438582003F1C88 /* NSError+SetToPointer.h in Headers */,
 				4CB5CDEF174F55CB00F2B600 /* NSArray+ToURLsSkippingNils.h in Headers */,
 				4CBBA1A317661FA5007317E6 /* NSArray+ArrayByRemovingObject.h in Headers */,
+				4C6AFDFD177AD544009D09C3 /* NSString+MD5.h in Headers */,
+				4C8D176917870ED900DE7624 /* NSString+LocalizedPrice.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1849,6 +1863,8 @@
 				4CC01A9B17438582003F1C88 /* NSError+SetToPointer.m in Sources */,
 				4CB5CDF0174F55CB00F2B600 /* NSArray+ToURLsSkippingNils.m in Sources */,
 				4CBBA1A417661FA5007317E6 /* NSArray+ArrayByRemovingObject.m in Sources */,
+				4C6AFDFE177AD544009D09C3 /* NSString+MD5.m in Sources */,
+				4C8D176A17870ED900DE7624 /* NSString+LocalizedPrice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

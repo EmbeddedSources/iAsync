@@ -43,14 +43,12 @@
 		4C2CFD9A1754A4CD00E87F22 /* UINib+FirstObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2CFD981754A4CD00E87F22 /* UINib+FirstObject.m */; };
 		4C2CFD9D1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C2CFD9B1754A4F900E87F22 /* UIApplication+OpenApplicationAsyncOp.h */; };
 		4C2CFD9E1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2CFD9C1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m */; };
+		4C3D54311772033600EE1C73 /* UIImage+RotateImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C3D542F1772033600EE1C73 /* UIImage+RotateImage.h */; };
+		4C3D54321772033600EE1C73 /* UIImage+RotateImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D54301772033600EE1C73 /* UIImage+RotateImage.m */; };
 		4C696BEC1742769A00C7D53D /* JFFGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE51742769A00C7D53D /* JFFGridView.h */; };
 		4C696BED1742769A00C7D53D /* JFFGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C696BE61742769A00C7D53D /* JFFGridView.m */; };
 		4C696BEE1742769A00C7D53D /* JFFGridViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE71742769A00C7D53D /* JFFGridViewDelegate.h */; };
 		4C696BEF1742769A00C7D53D /* JFFGridViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C696BE81742769A00C7D53D /* JFFGridViewDelegate.m */; };
-		4C696BF01742769A00C7D53D /* JFFRemoveButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE91742769A00C7D53D /* JFFRemoveButton.h */; };
-		4C696BF11742769A00C7D53D /* JFFRemoveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C696BEA1742769A00C7D53D /* JFFRemoveButton.m */; };
-		4C696BF21742769A00C7D53D /* JFFRemoveButtonDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BEB1742769A00C7D53D /* JFFRemoveButtonDelegate.h */; };
-		4C729990176895B90042DBFE /* UIImage+MirrorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72998F176894090042DBFE /* UIImage+MirrorImage.m */; };
 		4C89738F1761F31300E24F7B /* UITableView+BlocksAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C89738D1761F31300E24F7B /* UITableView+BlocksAdditions.h */; };
 		4C8973901761F31300E24F7B /* UITableView+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C89738E1761F31300E24F7B /* UITableView+BlocksAdditions.m */; };
 		4C8973931761F33C00E24F7B /* UIWebView+UserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */; };
@@ -162,15 +160,12 @@
 		4C2CFD981754A4CD00E87F22 /* UINib+FirstObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINib+FirstObject.m"; sourceTree = "<group>"; };
 		4C2CFD9B1754A4F900E87F22 /* UIApplication+OpenApplicationAsyncOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+OpenApplicationAsyncOp.h"; sourceTree = "<group>"; };
 		4C2CFD9C1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+OpenApplicationAsyncOp.m"; sourceTree = "<group>"; };
+		4C3D542F1772033600EE1C73 /* UIImage+RotateImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RotateImage.h"; sourceTree = "<group>"; };
+		4C3D54301772033600EE1C73 /* UIImage+RotateImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RotateImage.m"; sourceTree = "<group>"; };
 		4C696BE51742769A00C7D53D /* JFFGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFGridView.h; sourceTree = "<group>"; };
 		4C696BE61742769A00C7D53D /* JFFGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFGridView.m; sourceTree = "<group>"; };
 		4C696BE71742769A00C7D53D /* JFFGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFGridViewDelegate.h; sourceTree = "<group>"; };
 		4C696BE81742769A00C7D53D /* JFFGridViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFGridViewDelegate.m; sourceTree = "<group>"; };
-		4C696BE91742769A00C7D53D /* JFFRemoveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRemoveButton.h; sourceTree = "<group>"; };
-		4C696BEA1742769A00C7D53D /* JFFRemoveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRemoveButton.m; sourceTree = "<group>"; };
-		4C696BEB1742769A00C7D53D /* JFFRemoveButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRemoveButtonDelegate.h; sourceTree = "<group>"; };
-		4C72998E176894090042DBFE /* UIImage+MirrorImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+MirrorImage.h"; sourceTree = "<group>"; };
-		4C72998F176894090042DBFE /* UIImage+MirrorImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MirrorImage.m"; sourceTree = "<group>"; };
 		4C89738D1761F31300E24F7B /* UITableView+BlocksAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+BlocksAdditions.h"; sourceTree = "<group>"; };
 		4C89738E1761F31300E24F7B /* UITableView+BlocksAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+BlocksAdditions.m"; sourceTree = "<group>"; };
 		4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UserAgent.h"; sourceTree = "<group>"; };
@@ -384,9 +379,6 @@
 				4C696BE61742769A00C7D53D /* JFFGridView.m */,
 				4C696BE71742769A00C7D53D /* JFFGridViewDelegate.h */,
 				4C696BE81742769A00C7D53D /* JFFGridViewDelegate.m */,
-				4C696BE91742769A00C7D53D /* JFFRemoveButton.h */,
-				4C696BEA1742769A00C7D53D /* JFFRemoveButton.m */,
-				4C696BEB1742769A00C7D53D /* JFFRemoveButtonDelegate.h */,
 			);
 			path = GridView;
 			sourceTree = "<group>";
@@ -394,8 +386,8 @@
 		4C72998D176893EF0042DBFE /* Details */ = {
 			isa = PBXGroup;
 			children = (
-				4C72998E176894090042DBFE /* UIImage+MirrorImage.h */,
-				4C72998F176894090042DBFE /* UIImage+MirrorImage.m */,
+				4C3D542F1772033600EE1C73 /* UIImage+RotateImage.h */,
+				4C3D54301772033600EE1C73 /* UIImage+RotateImage.m */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -531,8 +523,6 @@
 				4C21FA7F16EF4F59005C4E57 /* JFFStripeViewDelegate.h in Headers */,
 				4C696BEC1742769A00C7D53D /* JFFGridView.h in Headers */,
 				4C696BEE1742769A00C7D53D /* JFFGridViewDelegate.h in Headers */,
-				4C696BF01742769A00C7D53D /* JFFRemoveButton.h in Headers */,
-				4C696BF21742769A00C7D53D /* JFFRemoveButtonDelegate.h in Headers */,
 				4C2CFD951754A29F00E87F22 /* JFFAlertView+Async.h in Headers */,
 				4C2CFD991754A4CD00E87F22 /* UINib+FirstObject.h in Headers */,
 				4C2CFD9D1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.h in Headers */,
@@ -547,6 +537,7 @@
 				4CB4C1AF1770539900F275BC /* UIImage+ImageWithColor.h in Headers */,
 				4CB4C1B31770592B00F275BC /* UIImage+DrawImageInImage.h in Headers */,
 				4CB4C1B71770667E00F275BC /* UIImage+JpegPackImage.h in Headers */,
+				4C3D54311772033600EE1C73 /* UIImage+RotateImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,7 +642,6 @@
 				1B7F589C1435D58000FF06EC /* UIView+AnimationWithBlocks.m in Sources */,
 				1B49CFA8143C6D3500E8AACE /* UIWebViewNewFeaturesRuntime.m in Sources */,
 				1B29555B143DCB3A00532BD7 /* JULoadMoreCellscalculator.m in Sources */,
-				4C729990176895B90042DBFE /* UIImage+MirrorImage.m in Sources */,
 				1B295560143DCB7300532BD7 /* UITableView+WithinUpdates.m in Sources */,
 				1BD3616A1455A0630036F786 /* JFFPageSlider.m in Sources */,
 				1B3A3855147683E9007D8C10 /* UIView+AllSubviews.m in Sources */,
@@ -669,7 +659,6 @@
 				4C21FA8016EF4F59005C4E57 /* JFFStripeViewDelegate.m in Sources */,
 				4C696BED1742769A00C7D53D /* JFFGridView.m in Sources */,
 				4C696BEF1742769A00C7D53D /* JFFGridViewDelegate.m in Sources */,
-				4C696BF11742769A00C7D53D /* JFFRemoveButton.m in Sources */,
 				4C2CFD961754A29F00E87F22 /* JFFAlertView+Async.m in Sources */,
 				4C2CFD9A1754A4CD00E87F22 /* UINib+FirstObject.m in Sources */,
 				4C2CFD9E1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m in Sources */,
@@ -682,6 +671,7 @@
 				4CB4C1B01770539900F275BC /* UIImage+ImageWithColor.m in Sources */,
 				4CB4C1B41770592B00F275BC /* UIImage+DrawImageInImage.m in Sources */,
 				4CB4C1B81770667E00F275BC /* UIImage+JpegPackImage.m in Sources */,
+				4C3D54321772033600EE1C73 /* UIImage+RotateImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
