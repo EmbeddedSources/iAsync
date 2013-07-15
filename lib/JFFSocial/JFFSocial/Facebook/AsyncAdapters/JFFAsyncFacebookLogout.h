@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-    JFFAsyncOperation jffFacebookLogout(FBSession *facebook);
+    JFFAsyncOperation jffFacebookLogout(FBSession *facebook, BOOL renewSystemAuthorization);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */
