@@ -43,9 +43,21 @@
     && [[subError domain] isEqualToString:ACErrorDomain];
 }
 
++ (BOOL)isMineFacebookNativeError_whenForbidWebLogin:(NSError *)nativeError
+{
+    NSInteger code = [nativeError code];
+    NSDictionary *userInfo = [nativeError userInfo];
+    
+    return code == FBErrorLoginFailedOrCancelled
+    && [userInfo[FBErrorLoginFailedReason] isEqualToString:FBErrorLoginFailedReasonUserCancelledValue]
+    && [[nativeError domain] isEqualToString:FacebookSDKDomain];
+}
+
 + (BOOL)isMineFacebookNativeError:(NSError *)nativeError
 {
-    BOOL result = [self isMineFacebookNativeError_whenInvalidSettings:nativeError];
+    BOOL result =
+       [self isMineFacebookNativeError_whenInvalidSettings:nativeError]
+    || [self isMineFacebookNativeError_whenForbidWebLogin:nativeError];
     
     if (result)
         return YES;
