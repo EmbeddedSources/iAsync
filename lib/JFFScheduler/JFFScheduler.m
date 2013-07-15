@@ -69,6 +69,7 @@
 
 - (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)actionBlock
                            duration:(NSTimeInterval)duration
+                             leeway:(NSTimeInterval)leeway
 {
     NSParameterAssert(actionBlock);
     if (!actionBlock)
@@ -80,7 +81,7 @@
     dispatch_source_set_timer(timer,
                               dispatch_time(DISPATCH_TIME_NOW, delta),
                               delta,
-                              0 );
+                              leeway * NSEC_PER_SEC);
     
     __unsafe_unretained JFFScheduler *unretainedSelf = self;
     

@@ -86,7 +86,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
         };
         block(nil);
         
-        [scheduler addBlock:block duration:3600.];
+        [scheduler addBlock:block duration:3600. leeway:1800.];
     }
 }
 

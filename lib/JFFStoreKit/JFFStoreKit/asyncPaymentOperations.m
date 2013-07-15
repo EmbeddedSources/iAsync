@@ -28,6 +28,7 @@
     JFFAsyncOperation paymentloader = asyncOperationWithSKPayment(payment);
     
     JFFAsyncOperationBinder srvPaymentBinder = ^JFFAsyncOperation(SKPaymentTransaction *transaction) {
+        
         JFFAsyncOperation srvLoader = srvCallback(transaction);
         
         JFFAsyncOperationBinder removeTransaction = ^JFFAsyncOperation(id srvResult) {
