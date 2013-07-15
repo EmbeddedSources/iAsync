@@ -19,9 +19,12 @@
     return result;
 }
 
-- (void)writeErrorWithJFFLogger
+- (NSString *)errorLogDescription
 {
-    [JFFLogger logErrorWithFormat:@"%@ context:%@ response:%@", [self localizedDescription], _context, _response];
+    return [[NSString alloc] initWithFormat:@"%@ context:%@ response:%@",
+            [self localizedDescription],
+            _context,
+            _response];
 }
 
 @end

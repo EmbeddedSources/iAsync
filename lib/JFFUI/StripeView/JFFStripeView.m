@@ -411,9 +411,9 @@ didChangeActiveElementFrom:previousActiveElement
 - (void)relayoutElementsAnimated:(BOOL)animated
                   updateElements:(BOOL)updateElements
 {
-    if ( animated )
-    {
-        [ UIView beginAnimations: @"StripeViewRelayout" context: nil ];
+    if (animated) {
+        
+        [UIView beginAnimations:@"StripeViewRelayout" context:nil];
         
         CGFloat animationDuration = [_delegate animationDurationOnStripeViewRelayout:self];
         if (animationDuration >= 0.f) {

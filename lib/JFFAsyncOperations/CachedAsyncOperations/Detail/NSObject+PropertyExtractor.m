@@ -23,7 +23,7 @@
     if (propertyPath.key == nil) {
         return data;
     }
-    return [data objectForKey: propertyPath.key];
+    return [data objectForKey:propertyPath.key];
 }
 
 //JTODO test

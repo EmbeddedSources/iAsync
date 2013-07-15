@@ -4,14 +4,14 @@
 
 @implementation NSArray (ArrayByRemovingObject)
 
-- (id)arrayByRemovingObjectAtIndex:(NSUInteger)index
+- (instancetype)arrayByRemovingObjectAtIndex:(NSUInteger)index
 {
     id objectToRemove = self[index];
     
     return [self arrayByRemovingObject:objectToRemove];
 }
 
-- (id)arrayByRemovingObject:(id)objectToRemove
+- (instancetype)arrayByRemovingObject:(id)objectToRemove
 {
     return [self select:^BOOL(id object) {
         

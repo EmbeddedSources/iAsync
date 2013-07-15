@@ -109,26 +109,28 @@
         __weak JFFBaseLoaderOwner *weakLoaderHolder = loaderHolder;
         
         return ^(BOOL canceled) {
-            if (weakLoaderHolder) {
-                
-                JFFCancelAsyncOperationHandler cancelCallback = weakLoaderHolder.cancelCallback;
-                
-                if (canceled) {
-                    if (!weakLoaderHolder.cancelLoader) {
-                        //TODO self owning here fix?
-                        [_pendingLoaders removeObject:weakLoaderHolder];
-                    }
-                } else {
-                    weakLoaderHolder.progressCallback = nil;
-                    weakLoaderHolder.cancelCallback   = nil;
-                    weakLoaderHolder.doneCallback     = nil;
+            
+            JFFBaseLoaderOwner *loaderHolder = weakLoaderHolder;
+            if (!loaderHolder)
+                return;
+            
+            JFFCancelAsyncOperationHandler cancelCallback = loaderHolder.cancelCallback;
+            
+            if (canceled) {
+                if (!loaderHolder.cancelLoader) {
+                    //TODO self owning here fix?
+                    [_pendingLoaders removeObject:loaderHolder];
                 }
-                
-                if (weakLoaderHolder.cancelLoader) {
-                    weakLoaderHolder.cancelLoader(YES);
-                } else if (cancelCallback) {
-                    cancelCallback(canceled);
-                }
+            } else {
+                loaderHolder.progressCallback = nil;
+                loaderHolder.cancelCallback   = nil;
+                loaderHolder.doneCallback     = nil;
+            }
+            
+            if (loaderHolder.cancelLoader) {
+                loaderHolder.cancelLoader(YES);
+            } else if (cancelCallback) {
+                cancelCallback(canceled);
             }
         };
     };

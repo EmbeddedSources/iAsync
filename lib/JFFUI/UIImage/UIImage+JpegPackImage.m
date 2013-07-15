@@ -4,6 +4,8 @@
 
 #include <sys/mman.h>
 
+//1. TODO - Move to separate library
+
 //based on example: https://code.google.com/p/sumatrapdf/source/browse/trunk/ext/libjpeg-turbo/example.c?r=2397
 
 /*
@@ -69,7 +71,7 @@ write_JPEG_file(JpegCompressInfoArg *args)
      */
     if ((outfile = fopen(args->filename, "wb")) == NULL) {
         fprintf(stderr, "can't open %s\n", args->filename);
-        exit(1);
+        exit(1);//TODO create outError when error
     }
     jpeg_stdio_dest(&cinfo, outfile);
     

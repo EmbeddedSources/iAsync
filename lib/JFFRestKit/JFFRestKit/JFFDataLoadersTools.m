@@ -3,7 +3,7 @@
 #import "JFFRestKitError.h"
 #import <JFFNetwork/Callbacks/JFFNetworkResponseDataCallback.h>
 
-JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedDataLoader )
+JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader(JFFAsyncOperation chunkedDataLoader)
 {
     chunkedDataLoader = [chunkedDataLoader copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,

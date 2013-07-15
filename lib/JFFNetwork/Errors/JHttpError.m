@@ -41,24 +41,27 @@
     return copy;
 }
 
-- (void)writeErrorWithJFFLogger
+- (NSString *)errorLogDescription
 {
-    [JFFLogger logErrorWithFormat:@"%@ Http code:%d cantext:%@", [self localizedDescription], self.code, _context];
+    return [[NSString alloc] initWithFormat:@"%@ Http code:%d cantext:%@",
+            [self localizedDescription],
+            self.code,
+            _context];
 }
 
 - (BOOL)isHttpNotChangedError
 {
-    return ( self.code == 304 );
+    return (self.code == 304);
 }
 
 - (BOOL)isServiceUnavailableError
 {
-    return ( self.code == 503 );
+    return (self.code == 503);
 }
 
 - (BOOL)isInternalServerError
 {
-    return ( self.code == 500 );
+    return (self.code == 500);
 }
 
 @end

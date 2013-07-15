@@ -3,17 +3,17 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface JFFFacebookGeneralRequestLoader : NSObject < JFFAsyncOperationInterface >
-
-@property (nonatomic) FBSession    *facebookSession;
-@property (nonatomic) NSString     *graphPath;
-@property (nonatomic) NSString     *HTTPMethod;
-@property (nonatomic) NSDictionary *parameters;
-
-@property (nonatomic) FBRequestConnection *requestConnection;
-
 @end
 
 @implementation JFFFacebookGeneralRequestLoader
+{
+    FBRequestConnection *_requestConnection;
+@public
+    FBSession    *_facebookSession;
+    NSString     *_graphPath;
+    NSString     *_HTTPMethod;
+    NSDictionary *_parameters;
+}
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
@@ -21,14 +21,14 @@
 {
     handler = [handler copy];
     
-    FBRequest *fbRequest = [FBRequest requestForGraphPath:self.graphPath];
-    fbRequest.session    = self.facebookSession;
-    fbRequest.HTTPMethod = self.HTTPMethod;
-    [fbRequest.parameters addEntriesFromDictionary:self.parameters];
+    FBRequest *fbRequest = [FBRequest requestForGraphPath:_graphPath];
+    fbRequest.session    = _facebookSession;
+    fbRequest.HTTPMethod = _HTTPMethod;
+    [fbRequest.parameters addEntriesFromDictionary:_parameters];
     
-    self.requestConnection = [fbRequest startWithCompletionHandler:^(FBRequestConnection *connection,
-                                                                     FBGraphObject *graphObject,
-                                                                     NSError *error) {
+    _requestConnection = [fbRequest startWithCompletionHandler:^(FBRequestConnection *connection,
+                                                                 FBGraphObject *graphObject,
+                                                                 NSError *error) {
         
         if (handler)
             handler([graphObject copy], error);
@@ -37,7 +37,7 @@
 
 - (void)cancel:(BOOL)canceled
 {
-    [self.requestConnection cancel];
+    [_requestConnection cancel];
 }
 
 @end
@@ -49,10 +49,10 @@ JFFAsyncOperation jffGenericFacebookGraphRequestLoader(FBSession *facebook,
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFFacebookGeneralRequestLoader *object = [JFFFacebookGeneralRequestLoader new];
-        object.facebookSession = facebook;
-        object.graphPath  = graphPath;
-        object.HTTPMethod = HTTPMethod;
-        object.parameters = parameters;
+        object->_facebookSession = facebook;
+        object->_graphPath  = graphPath;
+        object->_HTTPMethod = HTTPMethod;
+        object->_parameters = parameters;
         return object;
     };
     

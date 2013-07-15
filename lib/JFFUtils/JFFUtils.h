@@ -21,19 +21,21 @@
 #import <JFFUtils/NSOrderedSet/NSOrderedSet+BlocksAdditions.h>
 #import <JFFUtils/NSOrderedSet/NSOrderedSet+NoThrowObjectAtIndex.h>
 
+#import <JFFUtils/NSString/NSString+MD5.h>
+#import <JFFUtils/NSString/NSString+HTML.h>
+#import <JFFUtils/NSString/NSString+Trimm.h>
 #import <JFFUtils/NSString/NSString+Format.h>
 #import <JFFUtils/NSString/NSString+Search.h>
-#import <JFFUtils/NSString/NSString+Trimm.h>
 #import <JFFUtils/NSString/NSString+Base64.h>
 #import <JFFUtils/NSString/NSString+IsEmpty.h>
+#import <JFFUtils/NSString/NSString+JSEscape.h>
 #import <JFFUtils/NSString/NSString+IsEmailValid.h>
 #import <JFFUtils/NSString/NSString+UUIDCreation.h>
 #import <JFFUtils/NSString/NSString+PropertyName.h>
 #import <JFFUtils/NSString/NSString+PathExtensions.h>
 #import <JFFUtils/NSString/NSString+FileAttributes.h>
+#import <JFFUtils/NSString/NSString+LocalizedPrice.h>
 #import <JFFUtils/NSString/NSString+StringWithCutPrefix.h>
-#import <JFFUtils/NSString/NSString+HTML.h>
-#import <JFFUtils/NSString/NSString+JSEscape.h>
 
 #import <JFFUtils/NSSet/NSSet+BlocksAdditions.h>
 #import <JFFUtils/NSSet/NSMutableSet+StorableSet.h>

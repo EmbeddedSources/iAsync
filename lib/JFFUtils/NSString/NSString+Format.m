@@ -31,7 +31,7 @@
                                   arguments:argumentList];
 }
 
-- (NSString *)singleQuotedString
+- (instancetype)singleQuotedString
 {
     return [[NSString alloc] initWithFormat:@"'%@'", self];
 }

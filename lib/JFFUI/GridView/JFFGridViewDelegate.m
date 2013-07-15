@@ -2,20 +2,14 @@
 
 @implementation NSObject (JFFGridViewDelegate)
 
-- (BOOL)gridView:(JFFGridView *)gridView
-canRemoveElementAtIndex:( NSUInteger )index_
-{
-    return NO;
-}
-
 - (void)gridView:(JFFGridView *)gridView
-removeElementAtIndex:( NSUInteger )index_
+removeElementAtIndex:(NSUInteger)index
 {
 }
 
 - (void)gridView:(JFFGridView *)gridView
-  didMoveElement:( UIView* )view_
-         toIndex:( NSUInteger )index_
+  didMoveElement:(UIView *)view
+         toIndex:(NSUInteger)index
 {
 }
 

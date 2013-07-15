@@ -14,8 +14,7 @@
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    handler  = [handler  copy];
-    progress = [progress copy];
+    handler = [handler copy];
     
     ACAccountStore *accountStore = [ACAccountStore new];
     
@@ -30,7 +29,7 @@
             handler(nil, error);
         } else {
             if (granted) {
-                handler([NSNull null], nil);
+                handler([NSNull new], nil);
             } else {
                 handler(nil, [JFFTwitterAccountAccessNotGrantedError new]);
             }

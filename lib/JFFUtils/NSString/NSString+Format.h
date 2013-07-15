@@ -4,6 +4,6 @@
 
 + (instancetype)stringWithFormatCheckNill:(NSString *)format, ... NS_FORMAT_FUNCTION(1, 2);
 
-- (NSString *)singleQuotedString;
+- (instancetype)singleQuotedString;
 
 @end

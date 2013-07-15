@@ -20,9 +20,13 @@
     return copy;
 }
 
-- (void)writeErrorWithJFFLogger
+- (NSString *)errorLogDescription
 {
-    [JFFLogger logErrorWithFormat:@"%@ jsonObject:%@ jsonPattern:%@ message:%@", [self localizedDescription], _jsonObject, _jsonPattern, _message];
+    return [[NSString alloc] initWithFormat:@"%@ jsonObject:%@ jsonPattern:%@ message:%@",
+            [self localizedDescription],
+            _jsonObject,
+            _jsonPattern,
+            _message];
 }
 
 @end

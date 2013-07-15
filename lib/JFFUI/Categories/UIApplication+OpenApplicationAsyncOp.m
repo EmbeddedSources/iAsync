@@ -12,14 +12,14 @@ UIApplicationDelegate,
 JFFAsyncOperationInterface
 >
 
-@property (nonatomic) NSURL         *url;
-@property (nonatomic) UIApplication *application;
-
 @end
 
 @implementation JFFOpenApplicationWithURLDelegateProxy
 {
     JFFAsyncOperationInterfaceResultHandler _handler;
+@public
+    NSURL         *_url;
+    UIApplication *_application;
 }
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
@@ -68,6 +68,7 @@ JFFAsyncOperationInterface
 {
     [self performSelector:@selector(finishWithURL:)
              timeInterval:.5
+                   leeway:.1
                  userInfo:nil
                   repeats:NO];
 }
@@ -83,8 +84,8 @@ JFFAsyncOperationInterface
         JFFOpenApplicationWithURLDelegateProxy *proxy =
         [JFFOpenApplicationWithURLDelegateProxy new];
         
-        proxy.url = url;
-        proxy.application = self;
+        proxy->_url = url;
+        proxy->_application = self;
         
         return proxy;
     };

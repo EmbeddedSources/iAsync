@@ -71,7 +71,7 @@ JFFLocationObserver
         cancel();
         
         [weakSelf onSchedulerWithHandler:handler];
-    } duration:3.];
+    } duration:3. leeway:.5];
 }
 
 - (void)onSchedulerWithHandler:(JFFAsyncOperationInterfaceResultHandler)handler

@@ -98,7 +98,7 @@ NSString* kGzipErrorDomain = @"gzip.error";
     uLong oldTotalOut = _strm.total_out;
     uLong totalCountDiff = 0;
     
-    while ( 0 != _strm.avail_in ) {
+    while (0 != _strm.avail_in) {
         
         // Make sure we have enough room and reset the lengths.
         NSUInteger decompressedDataLength = [decompressed length];
@@ -117,13 +117,13 @@ NSString* kGzipErrorDomain = @"gzip.error";
         oldTotalOut = _strm.total_out;
         decompressedThisTime += totalCountDiff;
         
-        if (status == Z_STREAM_END) 
-        {
+        if (status == Z_STREAM_END)  {
+            
             _done = YES;
             break;
         }
-        else if (status != Z_OK)
-        {
+        else if (status != Z_OK) {
+            
             NSLog(@"[!!! WARNING !!!] JNZipDecoder -- unzip action has failed.\n Zip error code -- %d\n Zip error -- %@",
                   status,
                   [JNGzipErrorsLogger zipErrorMessageFromCode:status]);
@@ -141,6 +141,7 @@ NSString* kGzipErrorDomain = @"gzip.error";
     }
     
     BOOL isEndingSignatureAvailable = (_strm.avail_in > 0);
+    
     if (_done) {
         
         if ( isEndingSignatureAvailable ) {
@@ -151,7 +152,7 @@ NSString* kGzipErrorDomain = @"gzip.error";
     
     // Set real length.
     [decompressed setLength:decompressedThisTime];
-    return [NSData dataWithData:decompressed];
+    return [[NSData alloc] initWithData:decompressed];
 }
 
 - (BOOL)closeWithError:(NSError **)outError
@@ -165,16 +166,16 @@ NSString* kGzipErrorDomain = @"gzip.error";
         return YES;
     }
     
-    int inflateEndResultCode_ = inflateEnd(&_strm);
+    int inflateEndResultCode = inflateEnd(&_strm);
     _isOpen = NO;
     
-    if (inflateEndResultCode_ != Z_OK) {
+    if (inflateEndResultCode != Z_OK) {
         NSLog( @"[!!! WARNING !!!] JNZipDecoder -- unexpected EOF" );
         
         NSError *gzipError =
-        [NSError errorWithDomain:kGzipErrorDomain
-                            code:kJNGzipUnexpectedEOF
-                        userInfo:nil];
+        [[NSError alloc] initWithDomain:kGzipErrorDomain
+                                   code:kJNGzipUnexpectedEOF
+                               userInfo:nil];
         
         [gzipError setToPointer:outError];
         

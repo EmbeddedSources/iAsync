@@ -10,30 +10,29 @@
 @implementation JFFAsyncTimerResult : NSObject
 @end
 
-@interface JFFAsyncOperationScheduler : NSObject < JFFAsyncOperationInterface >
-
-@property (nonatomic) NSTimeInterval duration;
-
+@interface JFFAsyncOperationScheduler : NSObject <JFFAsyncOperationInterface>
 @end
 
 @implementation JFFAsyncOperationScheduler
 {
     JFFScheduler *_scheduler;
+@public
+    NSTimeInterval _duration;
+    NSTimeInterval _leeway;
 }
 
 - (void)asyncOperationWithResultHandler:(void(^)(id, NSError *))handler
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    handler  = [handler  copy];
-    progress = [progress copy];
+    handler = [handler copy];
     
     _scheduler = [JFFScheduler new];
     [_scheduler addBlock:^(JFFCancelScheduledBlock cancel){
         cancel();
         if (handler)
             handler([JFFAsyncTimerResult new], nil);
-    } duration:self.duration];
+    } duration:_duration leeway:_leeway];
 }
 
 - (void)cancel:(BOOL)canceled
@@ -358,11 +357,12 @@ JFFAsyncOperation asyncOperationWithResultOrError(JFFAsyncOperation loader,
     });
 }
 
-JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay)
+JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay, NSTimeInterval leeway)
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncOperationScheduler *asyncObject = [JFFAsyncOperationScheduler new];
-        asyncObject.duration = delay;
+        asyncObject->_duration = delay;
+        asyncObject->_leeway   = leeway;
         return asyncObject;
     };
     return buildAsyncOperationWithAdapterFactory(factory);

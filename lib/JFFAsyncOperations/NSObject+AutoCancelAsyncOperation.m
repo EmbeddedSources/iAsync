@@ -18,7 +18,9 @@
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        if (weakSelf == nil) {
+        id self_ = weakSelf;
+        
+        if (self_ == nil) {
             
             if (cancelCallback) {
                 cancelCallback(cancelNativeAsyncOp);
@@ -72,7 +74,7 @@
         };
         
         //try assert retain count
-        [weakSelf addOnDeallocBlock:ondeallocBlockHolder.onceSimpleBlock];
+        [self_ addOnDeallocBlock:ondeallocBlockHolder.onceSimpleBlock];
         
         __block JFFCancelAsyncOperation cancelBlockHolder = [^void(BOOL canceled) {
             cancel(canceled);

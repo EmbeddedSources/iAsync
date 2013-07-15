@@ -19,9 +19,6 @@
 - (CGFloat)verticalOffsetInGridView:(JFFGridView *)gridView;
 
 @optional
-- (BOOL)gridView:(JFFGridView *)gridView
-canRemoveElementAtIndex:(NSUInteger)index;
-
 - (void)gridView:(JFFGridView *)gridView
 removeElementAtIndex:(NSUInteger)index;
 

@@ -45,19 +45,19 @@
     return result;
 }
 
-+ (void)addDownloadedFileWithPath:( NSString* )filePath_
++ (void)addDownloadedFileWithPath:(NSString *)filePath
 {
-    [ [ self setWithDownloadedFiles ] addDownloadedFileWithPath: filePath_ ];
+    [[self setWithDownloadedFiles] addDownloadedFileWithPath:filePath];
 }
 
-+ (BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
++ (BOOL)containsDownloadedFileWithPath:(NSString *)filePath
 {
-    return [ [ self setWithDownloadedFiles ] containsDownloadedFileWithPath: filePath_ ];
+    return [[self setWithDownloadedFiles] containsDownloadedFileWithPath:filePath];
 }
 
-+ (void)removeDownloadedFileWithPath:( NSString* )filePath_
++ (void)removeDownloadedFileWithPath:(NSString *)filePath
 {
-    [ [ self setWithDownloadedFiles ] removeDownloadedFileWithPath: filePath_ ];
+    [[self setWithDownloadedFiles] removeDownloadedFileWithPath:filePath];
 }
 
 @end

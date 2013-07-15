@@ -4,9 +4,9 @@
 
 - (instancetype)convertEntities
 {
-    NSString *returnStr_ = self;
+    __block NSString *result = self;
     
-    NSDictionary *listOfReplaces_ =
+    NSDictionary *listOfReplaces =
     @{
       @"&amp;"   : @"&",
       @"&quot;"  : @"\"",
@@ -20,26 +20,25 @@
       @"&nbsp;"  : @" ",
       };
     
-    for (NSString *elem_ in [listOfReplaces_ allKeys])
-    {
-        NSString *correctString = [ listOfReplaces_ objectForKey:elem_ ];
-        returnStr_ = [ returnStr_ stringByReplacingOccurrencesOfString:elem_ withString:correctString ];
-    }
+    [listOfReplaces enumerateKeysAndObjectsUsingBlock:^(NSString *elem, NSString *correctString, BOOL *stop) {
+        
+        result = [result stringByReplacingOccurrencesOfString:elem withString:correctString];
+    }];
     
-    return returnStr_;
+    return result;
 }
 
--(NSString *)stringByTrimmingHTMLTags
+- (instancetype)stringByTrimmingHTMLTags
 {
-    NSRange r;
-    NSString *result_ = self;
+    NSRange range;
+    NSString *result = self;
     
-    while ((r = [result_ rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-        result_ = [result_ stringByReplacingCharactersInRange:r withString:@""];
+    while ((range = [result rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        result = [result stringByReplacingCharactersInRange:range withString:@""];
     
-    result_ = [result_ convertEntities];
+    result = [result convertEntities];
     
-    return result_;
+    return result;
 }
 
 @end

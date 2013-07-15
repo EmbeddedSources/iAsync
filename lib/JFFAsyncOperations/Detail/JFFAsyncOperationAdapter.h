@@ -9,7 +9,7 @@
 
 @class JFFBlockOperation;
 
-@interface JFFAsyncOperationAdapter : NSObject < JFFAsyncOperationInterface >
+@interface JFFAsyncOperationAdapter : NSObject <JFFAsyncOperationInterface>
 
 @property (nonatomic, copy) JFFSyncOperationWithProgress loadDataBlock;
 @property (nonatomic) JFFBlockOperation *operation;

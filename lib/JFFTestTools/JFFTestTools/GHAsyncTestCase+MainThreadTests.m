@@ -22,17 +22,17 @@
                                            timeout:INFINITY];
 }
 
--(void)performAsyncRequestOnMainThreadWithBlock:(void (^)(JFFSimpleBlock))block
-                                       selector:(SEL)selector
-                                        timeout:(NSTimeInterval)timeout;
+- (void)performAsyncRequestOnMainThreadWithBlock:(void (^)(JFFSimpleBlock))block
+                                        selector:(SEL)selector
+                                         timeout:(NSTimeInterval)timeout
 {
     block = [block copy];
-    void (^autoreleaseBlock)() = ^void()
-    {
-        @autoreleasepool
-        {
-            void (^didFinishCallback)(void) = ^void()
-            {
+    void (^autoreleaseBlock)() = ^void() {
+        
+        @autoreleasepool {
+            
+            void (^didFinishCallback)(void) = ^void() {
+                
                 objc_msgSend(self,
                              @selector(notify:forSelector:),
                              kGHUnitWaitStatusSuccess,
@@ -43,14 +43,14 @@
         }
     };
     
-    objc_msgSend( self, @selector( prepare ), nil );
+    objc_msgSend(self, @selector(prepare), nil);
     
-    dispatch_async( dispatch_get_main_queue(), autoreleaseBlock );
+    dispatch_async(dispatch_get_main_queue(), autoreleaseBlock);
     
     objc_msgSend(self,
                  @selector(waitForStatus:timeout:),
                  kGHUnitWaitStatusSuccess,
-                 timeout );
+                 timeout);
 }
 
 + (void)load

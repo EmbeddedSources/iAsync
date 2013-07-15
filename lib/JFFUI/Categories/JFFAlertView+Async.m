@@ -3,12 +3,13 @@
 #import <JFFAsyncOperations/JFFAsyncOperations.h>
 
 @interface JFFShowAlerLoader : NSObject <JFFAsyncOperationInterface>
-
-@property (weak, nonatomic) JFFAlertView *alertView;
-
 @end
 
 @implementation JFFShowAlerLoader
+{
+@public
+    __weak JFFAlertView *_alertView;
+}
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
@@ -50,7 +51,7 @@
         
         JFFShowAlerLoader *loader = [JFFShowAlerLoader new];
         
-        loader.alertView = alertView;
+        loader->_alertView = alertView;
         
         return loader;
     };

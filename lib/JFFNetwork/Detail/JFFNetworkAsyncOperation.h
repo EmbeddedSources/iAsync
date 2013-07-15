@@ -12,7 +12,7 @@ typedef NSError *(^JFFNetworkErrorTransformer)(NSError *error);
 @interface JFFNetworkAsyncOperation : NSObject <JFFAsyncOperationInterface>
 
 @property (nonatomic) JFFURLConnectionParams *params;
-@property (nonatomic) id< JNUrlConnection > connection;
+@property (nonatomic) id<JNUrlConnection> connection;
 @property (nonatomic, copy) JFFAnalyzer responseAnalyzer;
 @property (nonatomic, copy) JFFNetworkErrorTransformer errorTransformer;
 

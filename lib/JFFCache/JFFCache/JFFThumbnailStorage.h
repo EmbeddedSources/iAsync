@@ -1,6 +1,6 @@
 #import <JFFAsyncOperations/JFFAsyncOperationsBlockDefinitions.h>
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 extern NSString *JFFNoImageDataURLString;
 

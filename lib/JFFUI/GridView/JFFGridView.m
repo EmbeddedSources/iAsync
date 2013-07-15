@@ -1,9 +1,6 @@
 #import "JFFGridView.h"
 
-#import "JFFRemoveButton.h"
-
 #import "JFFGridViewDelegate.h"
-#import "JFFRemoveButtonDelegate.h"
 
 #import "UIView+AddSubviewAndScale.h"
 
@@ -31,7 +28,7 @@ static NSInteger const MinColumnCount = 2;
 @implementation JFFGridViewContext
 @end
 
-@interface JFFGridView () < UIScrollViewDelegate, JFFRemoveButtonDelegate >
+@interface JFFGridView () <UIScrollViewDelegate>
 
 @property (nonatomic) UIScrollView* scrollView;
 @property (nonatomic) CGRect previousFrame;
@@ -273,14 +270,6 @@ static NSInteger const MinColumnCount = 2;
                             elementAtIndex:[index unsignedIntValue]];
     
     NSAssert(context.view, @"View cannot be nil ");
-    if ([self.delegate gridView: self canRemoveElementAtIndex:[index unsignedIntValue]]) {
-        
-        NSDictionary *removeInfo = @{ JFFElementIndex : index };
-        context.removeButton = [JFFRemoveButton removeButtonWithUserInfo:removeInfo];
-        context.removeButton.delegate = self;
-        
-        [context.view addSubview:context.removeButton];
-    }
     
     context.view.frame = [self rectForElementWithIndex:position];
     context.view.autoresizingMask = UIViewAutoresizingNone;
@@ -307,22 +296,21 @@ static NSInteger const MinColumnCount = 2;
     [self.elementContextByIndex removeObjectForKey:indexKey];
 }
 
-- (void)reindexElementsFromIndex:(NSUInteger)index_
+- (void)reindexElementsFromIndex:(NSUInteger)index
 {
-    JFFGridViewContext *context = self.elementContextByIndex[@(++index_)];
+    JFFGridViewContext *context = self.elementContextByIndex[@(++index)];
     while (context) {
         
-        NSNumber *newIndex = @(index_ - 1);
-        context.removeButton.userInfo = @{ JFFElementIndex : newIndex };
+        NSNumber *newIndex = @(index - 1);
         
         self.elementContextByIndex[newIndex] = context;
-        [self.elementContextByIndex removeObjectForKey:@(index_)];
+        [self.elementContextByIndex removeObjectForKey:@(index)];
         
         [self.delegate gridView:self
                  didMoveElement:context.view
-                        toIndex:index_ - 1];
+                        toIndex:index - 1];
         
-        context = self.elementContextByIndex[@(++index_)];
+        context = self.elementContextByIndex[@(++index)];
     }
 }
 
@@ -497,15 +485,6 @@ static NSInteger const MinColumnCount = 2;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [self updateElements];
-}
-
-#pragma mark JFFRemoveButtonDelegate
-
-- (void)didTapRemoveButton:(JFFRemoveButton *)button
-              withUserInfo:(NSDictionary *)userInfo
-{
-    NSUInteger index = [userInfo[JFFElementIndex] unsignedIntValue];
-    [self.delegate gridView:self removeElementAtIndex:index];
 }
 
 @end

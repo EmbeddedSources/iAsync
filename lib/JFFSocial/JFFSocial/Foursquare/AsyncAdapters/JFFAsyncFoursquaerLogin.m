@@ -4,6 +4,7 @@
 
 #import "JFFFoursquareSessionStorage.h"
 
+//TODO remove this class
 @interface JFFAsyncFoursquaerLogin : NSObject <JFFAsyncOperationInterface>
 
 @property (copy, nonatomic) JFFCancelAsyncOperation cancelOperation;
@@ -11,6 +12,9 @@
 @end
 
 @implementation JFFAsyncFoursquaerLogin
+{
+    JFFCancelAsyncOperation _cancelOperation;
+}
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
@@ -22,15 +26,15 @@
     NSURL *url = [[JFFFoursquareSessionStorage authURLString] toURL];
     JFFAsyncOperation loader = [application asyncOperationWithApplicationURL:url];
     
-    loader(nil, nil, ^(id result, NSError *error) {
+    _cancelOperation = loader(nil, nil, ^(id result, NSError *error) {
         handler(result, error);
     });
 }
 
 - (void)cancel:(BOOL)canceled
 {
-    if (self.cancelOperation) {
-        self.cancelOperation (canceled);
+    if (_cancelOperation) {
+        _cancelOperation(canceled);
     }
 }
 

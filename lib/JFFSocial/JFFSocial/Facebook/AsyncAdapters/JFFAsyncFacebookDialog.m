@@ -3,15 +3,16 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface JFFAsyncFacebookDialog : NSObject <JFFAsyncOperationInterface>
-
-@property (nonatomic) FBSession    *session;
-@property (nonatomic) NSDictionary *parameters;
-@property (nonatomic) NSString     *message;
-@property (nonatomic) NSString     *title;
-
 @end
 
 @implementation JFFAsyncFacebookDialog
+{
+@public
+    FBSession    *_session;
+    NSDictionary *_parameters;
+    NSString     *_message;
+    NSString     *_title;
+}
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
@@ -33,10 +34,10 @@
         }
     };
     
-    [FBWebDialogs presentRequestsDialogModallyWithSession:self.session
-                                                  message:self.message
-                                                    title:self.title
-                                               parameters:self.parameters
+    [FBWebDialogs presentRequestsDialogModallyWithSession:_session
+                                                  message:_message
+                                                    title:_title
+                                               parameters:_parameters
                                                   handler:fbHandler];
 }
 
@@ -57,10 +58,10 @@ JFFAsyncOperation jffRequestFacebookDialog(FBSession *session,
         
         JFFAsyncFacebookDialog *dialog = [JFFAsyncFacebookDialog new];
         
-        dialog.session    = session;
-        dialog.parameters = parameters;
-        dialog.message    = message;
-        dialog.title      = title;
+        dialog->_session    = session;
+        dialog->_parameters = parameters;
+        dialog->_message    = message;
+        dialog->_title      = title;
         
         return dialog;
     };

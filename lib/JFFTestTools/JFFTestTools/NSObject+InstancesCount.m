@@ -89,25 +89,25 @@
     return nil;
 }
 
-+(id)alloCWithZonePrototype:( NSZone* )zone_
-{
-    return [ JFFNSObjectInstancesCounter instancesCounterAllocatorForClass: [ self class ]
-                                                             nativeAllocor: ^id( void )
-    {
-        return [ self allocWithZoneHook: zone_ ];
-    } ];
-}
-
-+(id)alloCWithZoneToAdding:( NSZone* )zone_
++ (id)alloCWithZonePrototype:(NSZone *)zone
 {
     return [JFFNSObjectInstancesCounter instancesCounterAllocatorForClass:[self class]
                                                             nativeAllocor:^id(void)
     {
+        return [self allocWithZoneHook:zone];
+    }];
+}
+
++ (id)alloCWithZoneToAdding:( NSZone* )zone_
+{
+    return [JFFNSObjectInstancesCounter instancesCounterAllocatorForClass:[self class]
+                                                            nativeAllocor:^id(void) {
+
         return [super allocWithZone:zone_];
     }];
 }
 
--(void)enableInstancesCountingForClass:( Class )class_
+- (void)enableInstancesCountingForClass:(Class)class_
 {
     @synchronized( self )
     {
@@ -134,11 +134,11 @@
     }
 }
 
--(NSUInteger)instancesCountForClass:( Class )class_
+- (NSUInteger)instancesCountForClass:(Class)class
 {
     @synchronized( self )
     {
-        NSString* className_ = NSStringFromClass( class_ );
+        NSString* className_ = NSStringFromClass(class);
         NSNumber* number_ = self->_instancesNumberByClassName[ className_ ];
         return [ number_ unsignedIntValue ];
     }
@@ -148,7 +148,7 @@
 
 @implementation JFFOnDeallocBlockOwner (InstancesCount)
 
-+(void)enableInstancesCounting
++ (void)enableInstancesCounting
 {
     NSAssert(NO, @"Can not enable enstances counting for this class");
 }
@@ -157,14 +157,14 @@
 
 @implementation NSObject (InstancesCount)
 
-+(void)enableInstancesCounting
++ (void)enableInstancesCounting
 {
-    [ [ JFFNSObjectInstancesCounter sharedObjectInstancesCounter ] enableInstancesCountingForClass: [ self class ] ];
+    [[JFFNSObjectInstancesCounter sharedObjectInstancesCounter] enableInstancesCountingForClass:[self class]];
 }
 
-+(NSUInteger)instancesCount
++ (NSUInteger)instancesCount
 {
-    return [ [ JFFNSObjectInstancesCounter sharedObjectInstancesCounter ] instancesCountForClass: [ self class ] ];
+    return [[JFFNSObjectInstancesCounter sharedObjectInstancesCounter] instancesCountForClass:[self class]];
 }
 
 @end

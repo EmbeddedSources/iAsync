@@ -2,8 +2,8 @@
 
 @interface NSArray (ArrayByRemovingObject)
 
-- (id)arrayByRemovingObjectAtIndex:(NSUInteger)index;
+- (instancetype)arrayByRemovingObjectAtIndex:(NSUInteger)index;
 
-- (id)arrayByRemovingObject:(id)objectToRemove;
+- (instancetype)arrayByRemovingObject:(id)objectToRemove;
 
 @end

@@ -33,14 +33,14 @@
 + (instancetype)arrayWithCapacity:(NSUInteger)capacity
              ignoringNilsProducer:(JFFProducerBlock)block
 {
-    NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:capacity];
-
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:capacity];
+    
     for (NSUInteger index = 0; index < capacity; ++index) {
         id object = block(index);
         if (object)
             [result addObject:object];
     }
-
+    
     return [self converToCurrentTypeMutableArray:result];
 }
 

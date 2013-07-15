@@ -6,18 +6,19 @@
 @end
 
 @interface JFFAsyncTwitterRequest : NSObject <JFFAsyncOperationInterface>
-
-@property (nonatomic) TWRequest *request;
-
 @end
 
 @implementation JFFAsyncTwitterRequest
+{
+@public
+    TWRequest *_request;
+}
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    [self.request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [_request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         
         if (!handler)
             return;
@@ -46,7 +47,7 @@ JFFAsyncOperation jffTwitterRequest(TWRequest *request)
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncTwitterRequest *object = [JFFAsyncTwitterRequest new];
-        object.request = request;
+        object->_request = request;
         return object;
     };
     

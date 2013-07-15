@@ -1,3 +1,5 @@
+#import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
+
 #import <UIKit/UIView.h>
 
 typedef void(^JFFCompletionBlock)(BOOL finished);

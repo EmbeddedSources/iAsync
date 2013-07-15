@@ -81,9 +81,9 @@ static void readStreamCallback(CFReadStreamRef stream,
         }
         case kCFStreamEventEndEncountered:
         {
-            [ weakSelf handleResponseForReadStream: stream ];
+            [weakSelf handleResponseForReadStream:stream];
             
-            [ weakSelf handleFinish: nil ];
+            [weakSelf handleFinish:nil];
             break;
         }
     }
@@ -152,9 +152,9 @@ static void readStreamCallback(CFReadStreamRef stream,
     }
     
     CFHTTPMessageRef httpRequest = CFHTTPMessageCreateRequest(NULL,
-                                                               method,
-                                                               (__bridge CFURLRef)_params.url,
-                                                               kCFHTTPVersion1_1);
+                                                              method,
+                                                              (__bridge CFURLRef)_params.url,
+                                                              kCFHTTPVersion1_1);
     
     [self applyCookiesForHTTPRequest:httpRequest];
     
@@ -179,8 +179,8 @@ static void readStreamCallback(CFReadStreamRef stream,
     
     //Prefer using keep-alive packages
     Boolean keepAliveSetResult = CFReadStreamSetProperty(_readStream,
-                                                          kCFStreamPropertyHTTPAttemptPersistentConnection,
-                                                          kCFBooleanTrue);
+                                                         kCFStreamPropertyHTTPAttemptPersistentConnection,
+                                                         kCFBooleanTrue);
     if (FALSE == keepAliveSetResult) {
         
         NSLog(@"JFFURLConnection->start : unable to setup keep-alive packages");
@@ -188,24 +188,24 @@ static void readStreamCallback(CFReadStreamRef stream,
     
     typedef void* (*retain)(void *info);
     typedef void (*release)(void *info);
-    CFStreamClientContext streamContext_ = {
+    CFStreamClientContext streamContext = {
         0,
         (__bridge void*)(self),
         (retain)CFRetain,
         (release)CFRelease,
         NULL};
     
-    CFOptionFlags registered_events_ = kCFStreamEventHasBytesAvailable
+    CFOptionFlags registeredEvents = kCFStreamEventHasBytesAvailable
         | kCFStreamEventErrorOccurred | kCFStreamEventEndEncountered;
-    if ( CFReadStreamSetClient( _readStream, registered_events_, readStreamCallback, &streamContext_ ) )
-    {
-        CFReadStreamScheduleWithRunLoop( _readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes );
+    if (CFReadStreamSetClient(_readStream, registeredEvents, readStreamCallback, &streamContext)) {
+        
+        CFReadStreamScheduleWithRunLoop(_readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes);
     }
     
     Boolean openResult = CFReadStreamOpen(_readStream);
-    if (!openResult)
-    {
-        NSLog( @"Error opening a socket" );
+    if (!openResult) {
+        
+        NSLog(@"Error opening a socket");
     }
 }
 
@@ -241,9 +241,8 @@ static void readStreamCallback(CFReadStreamRef stream,
 
     BOOL isDecoderMissing = ( nil == self->_decoder );
     
-    if ( isDecoderMissing )
-    {
-        JNHttpEncodingsFactory* factory = [ [ JNHttpEncodingsFactory alloc ] initWithContentLength: self->_totalBytesCount ];
+    if (isDecoderMissing) {
+        JNHttpEncodingsFactory *factory = [[JNHttpEncodingsFactory alloc] initWithContentLength:self->_totalBytesCount];
         
         id< JNHttpDecoder > decoder = [ factory decoderForHeaderString: contentEncoding ];
         self->_decoder = decoder;
@@ -274,14 +273,13 @@ static void readStreamCallback(CFReadStreamRef stream,
     _downloadedBytesCount += length;
     BOOL isDownloadCompleted = ( self->_totalBytesCount == self->_downloadedBytesCount );
     
-    if ( nil == decodedData || isDownloadCompleted ) {
-        NSError* decoderCloseError = nil;
-        [ decoder closeWithError: &decoderCloseError ];
-        [ decoderCloseError writeErrorToNSLog ];
-        
+    if (nil == decodedData || isDownloadCompleted) {
+        NSError *decoderCloseError = nil;
+        [decoder closeWithError:&decoderCloseError];
+        [decoderCloseError writeErrorToNSLog];
         
         self.didReceiveDataBlock(decodedData);
-        [ self handleFinish: decoderError ];
+        [self handleFinish:decoderError];
     }
     else {
         self.didReceiveDataBlock(decodedData);
@@ -335,8 +333,8 @@ static void readStreamCallback(CFReadStreamRef stream,
     
     //JTODO test redirects (cyclic for example)
     if ([JHttpFlagChecker isRedirectFlag:statusCode]) {
-        NSDebugLog( @"JConnection - creating URL..." );
-        NSDebugLog( @"%@", _params.url );
+        NSDebugLog(@"JConnection - creating URL...");
+        NSDebugLog(@"%@", _params.url);
         NSString *location = allHeadersDict[@"Location"];
         
 #ifdef USE_DD_URL_BUILDER
@@ -371,7 +369,7 @@ static void readStreamCallback(CFReadStreamRef stream,
         NSDebugLog(@"%@", _params.url);
         NSDebugLog(@"Done.");
         
-        [self start];
+        [self start];//TODO start it later
     }
     else
     {

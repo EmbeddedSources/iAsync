@@ -59,9 +59,9 @@ extern "C" {
     JFFAsyncOperation asyncOperationWithResultOrError(JFFAsyncOperation loader,
                                                       id result,
                                                       NSError *error);
-
-    JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay);
-
+    
+    JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay, NSTimeInterval leeway);
+    
     JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader);
     JFFAsyncOperationBinder ignorePregressBinder(JFFAsyncOperationBinder binder);
 

@@ -653,6 +653,7 @@ JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
 JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
                                        JFFContinueLoaderWithResult continueLoaderBuilder,
                                        NSTimeInterval delay,
+                                       NSTimeInterval leeway,
                                        NSInteger maxRepeatCount)
 {
     assert(nativeLoader         );// can not be nil
@@ -691,7 +692,7 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
                 
                 JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(newLoader,
                                                                              finishHookHolder);
-                loader = asyncOperationAfterDelay(delay, loader);
+                loader = asyncOperationAfterDelay(delay, leeway, loader);
                 
                 cancelBlockHolder = loader(progressCallback, cancelCallback, doneCallback);
             }
@@ -716,9 +717,10 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
 }
 
 JFFAsyncOperation asyncOperationAfterDelay(NSTimeInterval delay,
+                                           NSTimeInterval leeway,
                                            JFFAsyncOperation loader)
 {
-    return sequenceOfAsyncOperations(asyncOperationWithDelay(delay),
+    return sequenceOfAsyncOperations(asyncOperationWithDelay(delay, leeway),
                                      loader,
                                      nil);
 }

@@ -6,12 +6,12 @@
 {
     NSParameterAssert(block);
     
-    NSUInteger numberOfSections = [self.dataSource numberOfSectionsInTableView:self];
+    NSUInteger numberOfSections = [self numberOfSections];
     
     for (NSUInteger section = 0; section < numberOfSections; ++section) {
         
         @autoreleasepool {
-            NSUInteger numberOfRows = [self.dataSource tableView:self numberOfRowsInSection:section];
+            NSUInteger numberOfRows = [self numberOfRowsInSection:section];
             for (NSUInteger row = 0; row < numberOfRows; ++row) {
                 
                 @autoreleasepool {

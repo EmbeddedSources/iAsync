@@ -16,7 +16,8 @@ static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueu
     NSString *str = @(queueName);
     progressLoadDataBlock = [progressLoadDataBlock copy];
     
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>() {
+        
         JFFAsyncOperationAdapter *asyncObject = [JFFAsyncOperationAdapter new];
         asyncObject.loadDataBlock = progressLoadDataBlock;
         asyncObject.queueName     = [str cStringUsingEncoding:NSUTF8StringEncoding];

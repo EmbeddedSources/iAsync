@@ -108,8 +108,6 @@
 
 - (void)startLoading
 {
-    static NSTimeInterval calculateSpeedInterval = 1.0;
-    
     __unsafe_unretained JFFTrafficCalculator* weakSelf = self;
     JFFScheduledBlock block = ^void(JFFCancelScheduledBlock cancel) {
         
@@ -117,7 +115,7 @@
     };
     
     _scheduler = [JFFScheduler new];
-    [_scheduler addBlock:block duration:calculateSpeedInterval];
+    [_scheduler addBlock:block duration:1. leeway:.2];
 }
 
 @end

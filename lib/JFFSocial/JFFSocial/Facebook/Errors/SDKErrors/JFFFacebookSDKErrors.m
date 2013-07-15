@@ -66,9 +66,11 @@
     return copy;
 }
 
-- (void)writeErrorWithJFFLogger
+- (NSString *)errorLogDescription
 {
-    [JFFLogger logErrorWithFormat:@"%@ nativeError:%@", [self localizedDescription], _nativeError];
+    return [[NSString alloc] initWithFormat:@"%@ nativeError:%@",
+            [self localizedDescription],
+            _nativeError];
 }
 
 @end
