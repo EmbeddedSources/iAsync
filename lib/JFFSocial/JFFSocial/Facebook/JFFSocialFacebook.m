@@ -4,6 +4,7 @@
 #import "JFFAsyncFacebookLogin.h"
 #import "JFFAsyncFacebookLogout.h"
 #import "JFFAsyncFacebookDialog.h"
+#import "JFFAsyncFacebookLoginWithPublishPermissions.h"
 
 #import "JFFSocialFacebookUser+Parser.h"
 
@@ -24,7 +25,7 @@
 {
     FBSession *facebookSession = [FBSession activeSession];
     
-    if (!facebookSession || ![facebookSession isOpen]) {
+    if (!facebookSession || !facebookSession.isOpen) {
         facebookSession = [[FBSession alloc] initWithPermissions:[self authPermissions]];
         [FBSession setActiveSession:facebookSession];
     }
@@ -41,7 +42,7 @@
     return [[self facebookSession] isOpen];
 }
 
-+ (JFFAsyncOperation)logoutLoader
++ (JFFAsyncOperation)logoutLoaderWithRenewSystemAuthorization:(BOOL)renewSystemAuthorization
 {
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
@@ -49,16 +50,14 @@
         
         FBSession *session = [FBSession activeSession];
         
-        BOOL isOpen = [session isOpen];
-        
-        JFFAsyncOperation loader = isOpen
-        ?jffFacebookLogout(session)
+        JFFAsyncOperation loader = session
+        ?jffFacebookLogout(session, renewSystemAuthorization)
         :asyncOperationWithResult([NSNull new]);
         
         doneCallback = [doneCallback copy];
         JFFDidFinishAsyncOperationHandler doneCallbackWrapper = ^(id result, NSError *error) {
             
-            if (result && isOpen)
+            if (result)
                 [self setFacebookSession:nil];
             
             if (doneCallback)
@@ -103,7 +102,41 @@
     id mergeObject =
     @{
       @"methodName"  : NSStringFromSelector(_cmd),
-      @"permissions" : permissions
+      @"permissions" : [[NSSet alloc] initWithArray:permissions]
+      };
+    return [self asyncOperationMergeLoaders:loader withArgument:mergeObject];
+}
+
++ (JFFAsyncOperation)authFacebookSessionWithPublishPermissions:(NSArray *)permissions
+{
+    JFFAsyncOperation loader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                                        JFFCancelAsyncOperationHandler cancelCallback,
+                                                        JFFDidFinishAsyncOperationHandler doneCallback) {
+        
+        FBSession *session = [self facebookSession];
+        
+        NSMutableSet *currPermissions = [[NSMutableSet alloc] initWithArray:session.permissions];
+        [currPermissions unionSet:[[NSSet alloc] initWithArray:permissions]];
+        
+        JFFAsyncOperation loader = jffFacebookLoginWithPublishPermissions(session, [currPermissions allObjects]);
+        
+        doneCallback = [doneCallback copy];
+        JFFDidFinishAsyncOperationHandler doneCallbackWrapper = ^(FBSession *session, NSError *error) {
+            
+            if (session)
+                [self setFacebookSession:session];
+            
+            if (doneCallback)
+                doneCallback(session, error);
+        };
+        
+        return loader(progressCallback, cancelCallback, doneCallbackWrapper);
+    };
+    
+    id mergeObject =
+    @{
+      @"methodName"  : NSStringFromSelector(_cmd),
+      @"permissions" : [[NSSet alloc] initWithArray:permissions]
       };
     return [self asyncOperationMergeLoaders:loader withArgument:mergeObject];
 }
@@ -119,7 +152,7 @@
     
     JFFAsyncOperationBinder binder = ^JFFAsyncOperation(FBSession *session) {
         
-        NSArray *permissions = @[@"publish_stream"];
+        NSArray *permissions = @[@"publish_stream", @"user_birthday", @"email"];
         return jffFacebookPublishAccessRequest(session, permissions);
     };
     
@@ -163,9 +196,11 @@
                               parameters:(NSDictionary *)parameters
                                  session:(FBSession *)session
 {
-    return [self graphLoaderWithPath:graphPath httpMethod:@"GET"
+    return [self graphLoaderWithPath:graphPath
+                          httpMethod:@"GET"
                           parameters:parameters
-                             session:session];
+                             session:session
+            ];
 }
 
 + (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
@@ -188,6 +223,7 @@
 }
 
 + (JFFAsyncOperation)userInfoLoaderWithFields:(NSArray *)fields
+                                sessionLoader:(JFFAsyncOperation)sessionLoader
 {
     JFFAsyncOperationBinder userLoader = ^JFFAsyncOperation(FBSession *session) {
         
@@ -211,12 +247,18 @@
         return userLoader;
     };
     
-    JFFAsyncOperation loader = bindSequenceOfAsyncOperations([self authFacebookSessionLoader], userLoader, nil);
+    JFFAsyncOperation loader = bindSequenceOfAsyncOperations(sessionLoader, userLoader, nil);
     
-    JFFAsyncOperation reloadSession = sequenceOfAsyncOperations([self logoutLoader], [self authFacebookSessionLoader], nil);
+    JFFAsyncOperation reloadSession = sequenceOfAsyncOperations([self logoutLoaderWithRenewSystemAuthorization:YES], sessionLoader, nil);
     JFFAsyncOperation reloadUser = bindSequenceOfAsyncOperations(reloadSession, userLoader, nil);
     
     return trySequenceOfAsyncOperations(loader, reloadUser, nil);
+}
+
++ (JFFAsyncOperation)userInfoLoaderWithFields:(NSArray *)fields
+{
+    return [self userInfoLoaderWithFields:fields
+                            sessionLoader:[self authFacebookSessionLoader]];
 }
 
 + (JFFAsyncOperation)requestFacebookDialogWithParameters:(NSDictionary *)parameters
@@ -234,14 +276,13 @@
                                          nil);
 }
 
-+ (JFFAsyncOperation)postImage:(UIImage *)photo
++ (JFFAsyncOperation)postImage:(UIImage *)image
                    withMessage:(NSString *)message
-                    postOnWall:(BOOL)postOnWall
 {
     NSDictionary *parameters =
     @{
       @"message" : message?:@"",
-      @"image"   : UIImageJPEGRepresentation(photo, 1.)
+      @"image"   : UIImageJPEGRepresentation(image, 1.)
       };
     
     JFFAsyncOperationBinder binder = ^(FBSession *session) {
@@ -252,9 +293,7 @@
                                               session:session];
     };
     
-    JFFAsyncOperation getAccessLoader = postOnWall
-    ?[self publishStreamAccessSessionLoader]
-    :[self authFacebookSessionLoader];
+    JFFAsyncOperation getAccessLoader = [self publishStreamAccessSessionLoader];
     
     return bindSequenceOfAsyncOperations(getAccessLoader, binder, nil);
 }
