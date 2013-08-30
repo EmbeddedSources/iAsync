@@ -79,10 +79,6 @@
     }
 }
 
-- (void)cancel:(BOOL)canceled
-{
-}
-
 @end
 
 JFFAsyncOperation jffFacebookLoginWithPublishPermissions(FBSession *facebook, NSArray *permissions)

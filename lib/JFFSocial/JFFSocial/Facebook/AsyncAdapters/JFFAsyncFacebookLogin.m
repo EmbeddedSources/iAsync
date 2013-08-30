@@ -98,10 +98,6 @@
     }
 }
 
-- (void)cancel:(BOOL)canceled
-{
-}
-
 @end
 
 JFFAsyncOperation jffFacebookLogin(FBSession *facebook, NSArray *permissions)

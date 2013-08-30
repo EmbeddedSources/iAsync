@@ -49,10 +49,6 @@
     _handler(@YES, nil);
 }
 
-- (void)cancel:(BOOL)canceled
-{
-}
-
 @end
 
 JFFAsyncOperation jffFacebookLogout(FBSession *session, BOOL renewSystemAuthorization)
