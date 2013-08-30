@@ -9,12 +9,12 @@
 void jff_validateSeteDelegateProxyMethodArguments(id proxy, NSString *delegateName, id targetObject)
 {
     //JDOTO assert that property is weak or unsafe_unretained
-    assert([delegateName length]>0);
-    assert(proxy);
-    assert(targetObject);
+    NSCParameterAssert([delegateName length]>0);
+    NSCParameterAssert(proxy);
+    NSCParameterAssert(targetObject);
     
     //should has a property getter
-    assert([[targetObject class] hasInstanceMethodWithSelector:NSSelectorFromString(delegateName)]);
+    NSCParameterAssert([[targetObject class] hasInstanceMethodWithSelector:NSSelectorFromString(delegateName)]);
 }
 
 void hookDelegateSetterAndGetterMethodsForProxyDelegate(NSString *delegateName,

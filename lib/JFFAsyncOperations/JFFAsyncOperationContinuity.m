@@ -11,7 +11,7 @@ typedef JFFAsyncOperation (*MergeTwoLoadersPtr)( JFFAsyncOperation, JFFAsyncOper
 
 static JFFAsyncOperationBinder MergeBinders(MergeTwoBindersPtr merger, NSArray *blocks)
 {
-    assert([blocks lastObject] && "blocks array should not be empty");
+    NSCParameterAssert([blocks lastObject]);
     
     JFFAsyncOperationBinder firstBinder = blocks[0];
     
@@ -30,7 +30,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
 JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstBinder,
                                                   JFFAsyncOperationBinder secondBinder)
 {
-    assert(firstBinder && "firstBinder should not be nil");
+    NSCParameterAssert(firstBinder);
     
     firstBinder  = [firstBinder  copy];
     secondBinder = [secondBinder copy];
@@ -39,8 +39,9 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
         return firstBinder;
     
     return ^JFFAsyncOperation(id bindResult) {
+        
         JFFAsyncOperation firstLoader = firstBinder(bindResult);
-        assert(firstLoader && "firstLoader should not be nil");
+        NSCAssert(firstLoader, @"firstLoader should not be nil");
         return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                         JFFCancelAsyncOperationHandler cancelCallback,
                                         JFFDidFinishAsyncOperationHandler doneCallback) {
@@ -58,7 +59,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
                         doneCallback(nil, error);
                 } else {
                     JFFAsyncOperation secondLoader = secondBinder(result);
-                    assert(secondLoader);//result loader should not be nil
+                    NSCAssert(secondLoader, @"secondLoader should not be nil");//result loader should not be nil
                     cancelBlockHolder = secondLoader(progressCallback,
                                                      cancelCallback,
                                                      doneCallback);
@@ -83,7 +84,7 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
                                             JFFAsyncOperation secondLoader,
                                             ...)
 {
-    assert(firstLoader);
+    NSCParameterAssert(firstLoader);
     firstLoader = [firstLoader copy];
     JFFAsyncOperationBinder firstBlock = ^JFFAsyncOperation(id result) {
         return firstLoader;
@@ -107,7 +108,7 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
 
 JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders)
 {
-    assert(loaders.lastObject); //should not be empty
+    NSCParameterAssert(loaders.lastObject);
     loaders = [loaders map:^id(id object) {
         JFFAsyncOperation loader = [object copy];
         return ^JFFAsyncOperation(id result) {
@@ -142,7 +143,7 @@ JFFAsyncOperationBinder binderAsSequenceOfBindersArray(NSArray *binders)
 JFFAsyncOperation bindSequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
                                                 JFFAsyncOperationBinder secondLoaderBinder, ... )
 {
-    assert(firstLoader);
+    NSCParameterAssert(firstLoader);
     NSMutableArray *binders = [NSMutableArray new];
     
     firstLoader = [firstLoader copy];
@@ -186,7 +187,7 @@ JFFAsyncOperation bindSequenceOfAsyncOperationsArray(JFFAsyncOperation firstLoad
 static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBinder firstBinder,
                                                             JFFAsyncOperationBinder secondBinder)
 {
-    assert(firstBinder); // firstLoader_ should not be nil
+    NSCParameterAssert(firstBinder);
     
     firstBinder  = [firstBinder  copy];
     secondBinder = [secondBinder copy];
@@ -196,7 +197,7 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBin
     
     return ^JFFAsyncOperation(id data) {
         JFFAsyncOperation firstLoader = firstBinder(data);
-        assert(firstLoader);//expected loader
+        NSCAssert(firstLoader, @"expected loader");
         
         return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                         JFFCancelAsyncOperationHandler cancelCallback,
@@ -256,7 +257,7 @@ JFFAsyncOperation trySequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
 
 JFFAsyncOperation trySequenceOfAsyncOperationsArray(NSArray *loaders)
 {
-    assert([loaders hasElements]);
+    NSCParameterAssert([loaders hasElements]);
     
     NSArray *binders = [loaders map:^id(id loader) {
         loader = [loader copy];
@@ -326,7 +327,7 @@ static void notifyGroupResult(JFFDidFinishAsyncOperationHandler doneCallback,
 static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoader,
                                                     JFFAsyncOperation secondLoader)
 {
-    assert(firstLoader);//do not pass nil
+    NSCParameterAssert(firstLoader);//do not pass nil
     
     firstLoader  = [firstLoader  copy];
     secondLoader = [secondLoader copy];
@@ -497,7 +498,7 @@ static JFFDidFinishAsyncOperationHandler cancelSafeResultBlock(JFFDidFinishAsync
 static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOperation firstLoader,
                                                                     JFFAsyncOperation secondLoader)
 {
-    assert(firstLoader);//do not pass nil
+    NSCParameterAssert(firstLoader);//do not pass nil
     
     firstLoader  = [firstLoader  copy];
     secondLoader = [secondLoader copy];
@@ -656,8 +657,8 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
                                        NSTimeInterval leeway,
                                        NSInteger maxRepeatCount)
 {
-    assert(nativeLoader         );// can not be nil
-    assert(continueLoaderBuilder);// can not be nil
+    NSCParameterAssert(nativeLoader         );// can not be nil
+    NSCParameterAssert(continueLoaderBuilder);// can not be nil
     
     nativeLoader          = [nativeLoader          copy];
     continueLoaderBuilder = [continueLoaderBuilder copy];

@@ -13,8 +13,6 @@ static const NSUInteger totalMaxBackgroundCount = 2;
 
 static NSUInteger totalActiveNumber = 0;
 
-//JTODO test this
-
 static JFFAsyncOperationLoadBalancerContexts *sharedBalancer()
 {
     return [JFFAsyncOperationLoadBalancerContexts sharedBalancer];
@@ -148,7 +146,7 @@ static JFFCancelAsyncOperationHandler cancelCallbackWrapper(JFFCancelAsyncOperat
     return ^void(BOOL canceled) {
         
         if (!canceled) {
-            assert(NO);// @"balanced loaders should not be unsubscribed from native loader not supported yet"
+            NSCAssert(NO, @"balanced loaders should not be unsubscribed from native loader not supported yet");
             return;
         }
         
@@ -189,7 +187,7 @@ static JFFDidFinishAsyncOperationHandler doneCallbackWrapper(JFFDidFinishAsyncOp
 static JFFAsyncOperation wrappedAsyncOperationWithContext(JFFAsyncOperation nativeLoader,
                                                           JFFContextLoaders *contextLoaders)
 {
-    assert(nativeLoader);
+    NSCParameterAssert(nativeLoader);
     nativeLoader = [nativeLoader copy];
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler nativeProgressCallback,
@@ -285,7 +283,7 @@ JFFAsyncOperation balancedAsyncOperation(JFFAsyncOperation nativeLoader)
 
 JFFAsyncOperation balancedAsyncOperationInContext(JFFAsyncOperation nativeLoader, NSString *contextName)
 {
-    assert(nativeLoader);
+    NSCParameterAssert(nativeLoader);
     nativeLoader = [nativeLoader copy];
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,

@@ -113,11 +113,13 @@ static JFFCancelAsyncOperation cancelBlock(JFFPropertyExtractor *propertyExtract
 static JFFDidFinishAsyncOperationHandler doneCallbackBlock(JFFPropertyExtractor *propertyExtractor)
 {
     return ^void(id result, NSError *error) {
-        if (!result && !error) {
-            NSLog(@"Assert propertyPath object: %@ propertyPath: %@",
-                  propertyExtractor.object,
-                  propertyExtractor.propertyPath);
-            assert(0);//"should be result or error"
+        if (!((result != nil) ^ (error != nil))) {
+            
+            NSString *errorDescription = [[NSString alloc] initWithFormat:@"Assert propertyPath object: %@ propertyPath: %@",
+                                          propertyExtractor.object,
+                                          propertyExtractor.propertyPath];
+            
+            NSCAssert(0, errorDescription);
         }
         
         NSArray *copyDelegates = [propertyExtractor.delegates map:^id(id obj) {
@@ -208,6 +210,7 @@ static JFFCancelAsyncOperation performNativeLoader(JFFPropertyExtractor *propert
         propertyExtractor.propertyPath = propertyPath;
         
         id result = propertyExtractor.property;
+        
         if (result) {
             if (doneCallback)
                 doneCallback(result, nil);

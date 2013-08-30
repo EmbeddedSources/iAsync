@@ -349,7 +349,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
             if (canceled)
                 [connection cancel];
             else
-                assert(NO);// pass canceled as YES only
+                NSCAssert(NO, @"pass canceled as YES only");
             
             cancelCallbackBlockHolder.onceCancelBlock(canceled);
         };

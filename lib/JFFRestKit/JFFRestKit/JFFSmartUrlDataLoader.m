@@ -129,8 +129,8 @@ JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args)
     NSTimeInterval cacheDataLifeTimeInSeconds       = args.cacheDataLifeTimeInSeconds;
     BOOL doesNotIgnoreFreshDataLoadFail             = args.doesNotIgnoreFreshDataLoadFail;
     
-    assert(loadDataIdentifier     );
-    assert(dataLoaderForIdentifier);
+    NSCParameterAssert(loadDataIdentifier     );
+    NSCParameterAssert(dataLoaderForIdentifier);
     
     if (!analyzerForData) {
         analyzerForData = ^JFFAsyncOperationBinder(NSURL *url) {

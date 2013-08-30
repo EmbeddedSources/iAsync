@@ -4,7 +4,7 @@
 
 JFFAsyncOperation asyncOperationJsonDataParserWithContext(NSData *data, id<NSCopying> context)
 {
-    assert([data isKindOfClass:[NSData class]]);
+    NSCParameterAssert([data isKindOfClass:[NSData class]]);
     
     JFFSyncOperation loadDataBlock = ^id(NSError **outError) {
         NSError *jsonError;

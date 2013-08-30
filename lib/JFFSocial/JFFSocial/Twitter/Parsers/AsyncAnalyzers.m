@@ -122,7 +122,8 @@ JFFAsyncOperationBinder jsonObjectToTwitterUsersIds()
 JFFAsyncOperationBinder twitterResponseToNSData()
 {
     JFFAsyncOperationBinder result = ^JFFAsyncOperation(JFFTwitterResponse *response) {
-        assert(response);
+        
+        NSCAssert(response, @"response can not be nil");
         //TODO process JFFTwitterResponse fields if valid
         return asyncOperationWithResult(response.responseData);
     };

@@ -16,7 +16,7 @@ static JFFAsyncOperation generalFoursquareRequestLoader(NSString *requestURL,
                                                         NSString *accessToken,
                                                         NSDictionary *parameters)
 {
-    assert(accessToken);
+    NSCParameterAssert(accessToken);
     
     JFFURLConnectionParams *params = [JFFURLConnectionParams new];
     

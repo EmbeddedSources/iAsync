@@ -6,7 +6,7 @@
 
 static NSArray *typeEncodingOffsets(const char *signature)
 {
-    assert(signature != NULL);
+    NSCParameterAssert(signature != NULL);
     
     NSMutableArray *result = [NSMutableArray new];
     
@@ -97,15 +97,15 @@ static NSArray *typeEncodingOffsets(const char *signature)
         
         const char *sinature  = "I20@?0@4I8{CGPoint=ff}12";
         
-        NSLog(@"sinature: %s", sinature);
+//        NSLog(@"sinature: %s", sinature);
         
         NSMethodSignature *sig = [NSMethodSignature signatureWithObjCTypes:sinature];
         
         char returnType[strlen(sinature) + 1];
         sscanf(sinature, typeSignatureScanFormat, returnType);
         
-        NSLog(@"ret1: %s", returnType);
-        NSLog(@"ret2: %s", sig.methodReturnType);
+//        NSLog(@"ret1: %s", returnType);
+//        NSLog(@"ret2: %s", sig.methodReturnType);
         
         STAssertTrue(strcmp(returnType, sig.methodReturnType) == 0, nil);
     }

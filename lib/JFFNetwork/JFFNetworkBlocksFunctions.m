@@ -69,7 +69,7 @@ JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams* params
 static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionParams *params,
                                                              JFFAnalyzer responseAnalyzer)
 {
-    assert([params.url isKindOfClass:[NSURL class]]);
+    NSCParameterAssert([params.url isKindOfClass:[NSURL class]]);
     params = [params copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,

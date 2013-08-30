@@ -41,10 +41,6 @@
                                                   handler:fbHandler];
 }
 
-- (void)cancel:(BOOL)canceled
-{
-}
-
 @end
 
 JFFAsyncOperation jffRequestFacebookDialog(FBSession *session,
@@ -52,7 +48,7 @@ JFFAsyncOperation jffRequestFacebookDialog(FBSession *session,
                                            NSString *message,
                                            NSString *title)
 {
-    assert(session);
+    NSCParameterAssert(session);
     
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         

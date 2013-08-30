@@ -157,7 +157,7 @@ static id generalHookBlockForSignature(const char *prototypeSinature,
 {
     id resultBlock;
     
-    assert(strlen(prototypeSinature) != 0);
+    NSCParameterAssert(strlen(prototypeSinature) != 0);
     char returnType[strlen(prototypeSinature) + 1];
     const char *typeSignatureScanFormat = "%[@^vcI]";//check it for new added types
     sscanf(prototypeSinature, typeSignatureScanFormat, returnType);
@@ -173,8 +173,7 @@ static id generalHookBlockForSignature(const char *prototypeSinature,
     
     if (!resultBlock) {
         
-        //typeSignatureScanFormat - check it for new added types
-        assert(0);
+        NSCAssert(0, @"typeSignatureScanFormat - check it for new added types");
     }
     
     //originalBlock = resultBlock;
@@ -218,7 +217,10 @@ static void hookMehodWithGeneralBlock(const char *prototypeSinature, SEL selecto
                                      imp_implementationWithBlock(generalHook),
                                      prototypeSinature);
         
-        assert(added);
+        {
+            NSString *errorDescription = [[NSString alloc] initWithFormat:@"camn not add method: %@", NSStringFromSelector(originalMethodHolder)];
+            NSCAssert(added, errorDescription);
+        }
         
         Method hookHolderMethod = class_getInstanceMethod(classToHook, originalMethodHolder);
         
@@ -231,7 +233,10 @@ static void hookMehodWithGeneralBlock(const char *prototypeSinature, SEL selecto
                                      imp_implementationWithBlock(generalHook),
                                      prototypeSinature);
         
-        assert(added);
+        {
+            NSString *errorDescription = [[NSString alloc] initWithFormat:@"camn not add method: %@", NSStringFromSelector(selectorToHook)];
+            NSCAssert(added, errorDescription);
+        }
     }
     
     //save flag that method hooked

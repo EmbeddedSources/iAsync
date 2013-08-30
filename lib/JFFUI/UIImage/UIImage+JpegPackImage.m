@@ -140,7 +140,7 @@ static inline J_COLOR_SPACE glibColorspace(CGImageRef imageRef,
 {
     CGColorSpaceModel model = CGColorSpaceGetModel(colorSpace);
     
-    assert(model == kCGColorSpaceModelRGB);
+    NSCParameterAssert(model == kCGColorSpaceModelRGB);
     
     CGImageAlphaInfo alphaInfo = CGImageGetAlphaInfo(imageRef);
     
@@ -162,7 +162,7 @@ static inline J_COLOR_SPACE glibColorspace(CGImageRef imageRef,
             if (supportedAlphaInfo[index] == alphaInfo)
                 break;
         }
-        assert(index != size && "unsupported alpha type");
+        NSCAssert(index != size, @"unsupported alpha type");
     }
 #endif //DEBUG
     
@@ -197,7 +197,7 @@ static inline J_COLOR_SPACE glibColorspace(CGImageRef imageRef,
     
     J_COLOR_SPACE result = alphaInfoToJCS[alphaInfo][reverseOrder?1:0];
     
-    assert(result != JCS_UNKNOWN && "unsupported colorspace -> todo implement");
+    NSCAssert(result != JCS_UNKNOWN, @"unsupported colorspace -> todo implement");
     
     *numberOfComponents = 4;
     

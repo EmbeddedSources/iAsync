@@ -4,7 +4,7 @@
 
 void enumerateAllClassesWithBlock(void(^block)(Class))
 {
-    assert(block && "block is undefined");
+    NSCParameterAssert(block && "block is undefined");
     
     int numClasses = objc_getClassList(NULL, 0);
     Class classes[numClasses];
@@ -44,13 +44,14 @@ const char *block_getTypeEncoding(id block)
         // imported variables
     };
     
-    typedef enum {
+    typedef NS_OPTIONS(uint32_t, CTBlockDescriptionFlags)
+    {
         CTBlockDescriptionFlagsHasCopyDispose = (1 << 25),
         CTBlockDescriptionFlagsHasCtor = (1 << 26), // helpers have C++ code
         CTBlockDescriptionFlagsIsGlobal = (1 << 28),
         CTBlockDescriptionFlagsHasStret = (1 << 29), // IFF BLOCK_HAS_SIGNATURE
         CTBlockDescriptionFlagsHasSignature = (1 << 30)
-    } CTBlockDescriptionFlags;
+    };
     
     struct JFF_Block_literal_1 *blockRef = (__bridge struct JFF_Block_literal_1 *)block;
     
@@ -101,7 +102,10 @@ void invokeMethosBlockWithArgsAndReturnValue(id targetObjectOrBlock,
     signaturePtr = NSGetSizeAndAlignment(signaturePtr, NULL, NULL);
     signaturePtr = NSGetSizeAndAlignment(signaturePtr, NULL, NULL);
     
-    assert(strlen(signaturePtr) != 0);
+    {
+        NSString *errorDescription = [[NSString alloc] initWithFormat:@"invalid signature: %s", signature];
+        NSCAssert(strlen(signaturePtr) != 0, errorDescription);
+    }
     long long value;
     sscanf(signaturePtr, "%lld", &value);
     
@@ -117,7 +121,10 @@ void invokeMethosBlockWithArgsAndReturnValue(id targetObjectOrBlock,
         
         signaturePtr = NSGetSizeAndAlignment(signaturePtr, NULL, NULL);
         
-        assert(strlen(signaturePtr) != 0);
+        {
+            NSString *errorDescription = [[NSString alloc] initWithFormat:@"invalid signature: %s", signaturePtr];
+            NSCAssert(strlen(signaturePtr) != 0, errorDescription);
+        }
         long long value;
         sscanf(signaturePtr, "%lld", &value);
         
@@ -142,12 +149,13 @@ void invokeMethosBlockWithArgsAndReturnValue(id targetObjectOrBlock,
 @implementation JFFWeakGetterProxy
 @end
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, MemoryManagement)
+{
     MemoryManagementAssign,
     MemoryManagementCopy,
     MemoryManagementRetain,
     MemoryManagementWeak
-} MemoryManagement;
+};
 
 typedef id(^WeakGetterBlock)(id self_);
 
@@ -283,15 +291,17 @@ void jClass_implementProperty(Class cls, NSString *propertyName)
         objc_AssociationPolicy associationPolicy = 0;
         
         if (memoryManagement == MemoryManagementCopy) {
-            associationPolicy = isNonatomic ? OBJC_ASSOCIATION_COPY_NONATOMIC : OBJC_ASSOCIATION_COPY;
+            associationPolicy = isNonatomic?OBJC_ASSOCIATION_COPY_NONATOMIC:OBJC_ASSOCIATION_COPY;
         } else {
-            associationPolicy = isNonatomic ? OBJC_ASSOCIATION_RETAIN_NONATOMIC : OBJC_ASSOCIATION_RETAIN;
+            associationPolicy = isNonatomic?OBJC_ASSOCIATION_RETAIN_NONATOMIC:OBJC_ASSOCIATION_RETAIN;
         }
         
         IMP setterImplementation = getSetterImplementation(memoryManagement, getter, associationPolicy);
         
-        class_addMethod(cls, getter, getterImplementation, "@@:");
-        class_addMethod(cls, setter, setterImplementation, "v@:@");
+        BOOL added1 = class_addMethod(cls, getter, getterImplementation, "@8@0:4");//was "@@:"
+        BOOL added2 = class_addMethod(cls, setter, setterImplementation, "v@:@");
+        
+        NSCAssert(added1 && added2, @"encoding is required");
         
         return;
     }

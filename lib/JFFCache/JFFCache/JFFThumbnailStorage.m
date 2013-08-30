@@ -193,7 +193,11 @@ static JFFThumbnailStorage *glStorageInstance = nil;
     args.cache = [self imageCacheAdapter];
     
     args.dataLoaderForIdentifier = ^JFFAsyncOperation(id identifier) {
-        assert([identifier isKindOfClass:[NSURL class]]);
+        
+        {
+            NSString *errorDescription = [[NSString alloc] initWithFormat:@"identifier:%@ is not a NSURL", identifier];
+            NSCAssert([identifier isKindOfClass:[NSURL class]], errorDescription);
+        }
         JFFAsyncOperation dataLoader =
         //liveDataURLResponseLoader(identifier, nil, nil);
         dataURLResponseLoader(identifier, nil, nil);

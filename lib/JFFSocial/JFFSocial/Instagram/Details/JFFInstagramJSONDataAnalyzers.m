@@ -216,7 +216,7 @@ static BOOL validJeneralJSONObject(NSDictionary *jsonObject, NSError *__autorele
 
 static JFFAsyncOperationBinder generalJsonDataBinderWithAnalyzer(JFFAnalyzer analyzer)
 {
-    assert(analyzer);
+    NSCParameterAssert(analyzer);
     analyzer = [analyzer copy];
     
     return ^JFFAsyncOperation(NSData *data) {
