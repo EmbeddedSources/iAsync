@@ -3,6 +3,8 @@
 #import "JFFStoreKitCanNoLoadProductError.h"
 #import "JFFStoreKitInvalidProductIdentifierError.h"
 
+#import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>
+
 @interface JFFAsyncSKProductsRequestAdapter : NSObject <
 JFFAsyncOperationInterface,
 SKProductsRequestDelegate
@@ -55,14 +57,26 @@ SKProductsRequestDelegate
 {
     NSArray *products = _response.products;
     if ([products hasElements]) {
-        _handler([products lastObject], nil);
+        
+        SKProduct *product = [products firstMatch:^BOOL(SKProduct *product) {
+            
+            return [product.productIdentifier isEqualToString:_productIdentifier];
+        }];
+        
+        if (!product) {
+            
+            [JFFLogger logErrorWithFormat:@"requestDidFinish products does not contains product with id: %@", _productIdentifier];
+            product = [products lastObject];
+        }
+        
+        _handler(product, nil);
     } else {
         
         NSString *invalidIdentifier = [_response.invalidProductIdentifiers lastObject];
         
         JFFStoreKitCanNoLoadProductError *error = ([invalidIdentifier isEqualToString:_productIdentifier])
-        ? [JFFStoreKitInvalidProductIdentifierError new]
-        : [JFFStoreKitCanNoLoadProductError new];
+        ?[JFFStoreKitInvalidProductIdentifierError new]
+        :[JFFStoreKitCanNoLoadProductError new];
         
         error.productIdentifier = _productIdentifier;
         _handler(nil, error);
@@ -71,6 +85,7 @@ SKProductsRequestDelegate
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error
 {
+    error = error?:[[JFFSilentError alloc] initWithDescription:@"SKRequest no inet connection"];
     _handler(nil, error);
 }
 
