@@ -150,7 +150,7 @@
 + (instancetype)waitAlertWithTitle:(NSString *)title
                       cancelButton:(JFFAlertButton *)button
 {
-    button = button ?: [NSLocalizedString(@"CANCEL", nil) toAlertButton];
+    button = button ?: [NSLocalizedString(@"CANCEL_ACTION", nil) toAlertButton];
     
     title = [title ?: @"" stringByAppendingString:@"\n\n"];
     
@@ -231,10 +231,10 @@
     return [self addAlertButtonWithIndex:title];
 }
 
-+ (id)alertWithTitle:(NSString *)title
-             message:(NSString *)message
-   cancelButtonTitle:(id)cancelButtonTitle
-   otherButtonTitles:(id)otherButtonTitles, ...
++ (instancetype)alertWithTitle:(NSString *)title
+                       message:(NSString *)message
+             cancelButtonTitle:(id)cancelButtonTitle
+             otherButtonTitles:(id)otherButtonTitles, ...
 {
     NSParameterAssert([NSThread isMainThread]);
     
@@ -299,8 +299,7 @@
 
 - (void)applicationDidEnterBackground:(id)sender
 {
-    if (self.dismissBeforeEnterBackground)
-    {
+    if (_dismissBeforeEnterBackground) {
         [self forceDismiss];
     }
 }
