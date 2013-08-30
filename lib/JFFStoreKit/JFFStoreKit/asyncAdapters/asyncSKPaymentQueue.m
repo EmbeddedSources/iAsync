@@ -1,5 +1,6 @@
 #import "asyncSKPaymentQueue.h"
 
+#import "JFFStoreKitDisabledError.h"
 #import "JFFStoreKitTransactionStateFailedError.h"
 
 @interface JFFAsyncSKPaymentAdapter : NSObject <
@@ -24,7 +25,6 @@ JFFAsyncOperationInterface
 
 - (void)doNothing:(id)objetc
 {
-    
 }
 
 - (void)unsubscribeFromObservervation
@@ -53,8 +53,7 @@ JFFAsyncOperationInterface
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     if (![SKPaymentQueue canMakePayments]) {
-        //TODO create separate error
-        handler(nil, [JFFError newErrorWithDescription:@"Warn the user that purchases are disabled."]);
+        handler(nil, [JFFStoreKitDisabledError new]);
         return;
     }
     
@@ -70,10 +69,6 @@ JFFAsyncOperationInterface
         _handler(transaction, nil);
         [self unsubscribeFromObservervation];
     }
-}
-
-- (void)cancel:(BOOL)canceled
-{
 }
 
 - (SKPaymentTransaction *)ownPurchasedTransaction
@@ -137,6 +132,9 @@ JFFAsyncOperationInterface
         case SKPaymentTransactionStateFailed:
         {
             [_queue finishTransaction:transaction];
+            if (transaction.error.code != SKErrorPaymentCancelled) {
+                // Optionally, display an error here.
+            }
             JFFStoreKitTransactionStateFailedError *error = [JFFStoreKitTransactionStateFailedError new];
             _handler(nil, error);
             [self unsubscribeFromObservervation];
