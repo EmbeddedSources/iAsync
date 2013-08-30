@@ -17,6 +17,7 @@ extern "C" {
     JFFAsyncOperation asyncOperationWithResult(id result);
     JFFAsyncOperation asyncOperationWithError(NSError *error);
     JFFAsyncOperation asyncOperationWithCancelFlag(BOOL canceled);
+    JFFAsyncOperation neverFinishAsyncOperation(void);
     
     JFFAsyncOperation asyncOperationWithSyncOperationInCurrentQueue(JFFSyncOperation block);
     
