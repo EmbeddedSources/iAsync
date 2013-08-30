@@ -11,7 +11,7 @@
 
 @interface JFFPropertyExtractor ()
 
-@property (nonatomic) JFFObjectRelatedPropertyData* objectPropertyData;
+@property (nonatomic) JFFObjectRelatedPropertyData *objectPropertyData;
 
 @end
 

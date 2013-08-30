@@ -248,33 +248,29 @@ addresses;
 {
     CFErrorRef error = NULL;
     
-    bool result_ = false;
-    if (self.newContact)
-    {
-        result_ = ABAddressBookAddRecord(self.addressBook, self.person, &error);
-        if ( !result_ )
-        {
-            NSLog( @"can not add Person" );
+    bool result = false;
+    if (self.newContact) {
+        result = ABAddressBookAddRecord(self.addressBook, self.person, &error);
+        if (!result) {
+            NSLog(@"can not add Person");
             return NO;
         }
     }
     
-    result_ = ABAddressBookSave( self.addressBook, &error );
-    if ( !result_ )
-    {
-        NSLog( @"can not save Person" );
+    result = ABAddressBookSave(self.addressBook, &error);
+    if (!result) {
+        NSLog(@"can not save Person");
         return NO;
     }
     
-    _contactInternalId = ABRecordGetRecordID( self.person );
+    _contactInternalId = ABRecordGetRecordID(self.person);
     
     return YES;
 }
 
 - (BOOL)remove
 {
-    if ( 0 == _contactInternalId || NULL == self.rawPerson )
-    {
+    if (0 == _contactInternalId || NULL == self.rawPerson) {
         NSLog( @"record has no id" );
         return NO;
     }
@@ -298,8 +294,8 @@ addresses;
     return YES;
 }
 
-+ (id)findContactWithContactInternalId:(ABRecordID)contactInternalId
-                           addressBook:(JFFAddressBook *)addressBook
++ (instancetype)findContactWithContactInternalId:(ABRecordID)contactInternalId
+                                     addressBook:(JFFAddressBook *)addressBook
 {
     ABAddressBookRef addressBookRef = addressBook.rawBook;
     
@@ -314,11 +310,11 @@ addresses;
                             addressBook:addressBook];
 }
 
-+ (id)allContactsAddressBook:(JFFAddressBook *)addressBook
++ (NSArray *)allContactsAddressBook:(JFFAddressBook *)addressBook
 {
     ABAddressBookRef addressBookRef = addressBook.rawBook;
     
-    NSArray *result = (__bridge_transfer NSArray*)ABAddressBookCopyArrayOfAllPeople(addressBookRef);
+    NSArray *result = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookRef);
     
     result = [result map:^id(id object) {
         ABRecordRef person = (__bridge ABRecordRef)object;

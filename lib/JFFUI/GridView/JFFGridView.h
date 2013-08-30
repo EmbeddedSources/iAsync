@@ -1,11 +1,11 @@
 #import <UIKit/UIKit.h>
 
-typedef enum
+typedef NS_ENUM(NSUInteger, JFFGridOrientation)
 {
    JFFGridOrientationUndefined,
    JFFGridOrientationVertical,
    JFFGridOrientationGorizontal
-} JFFGridOrientation;
+};
 
 @class JFFRemoveButton;
 

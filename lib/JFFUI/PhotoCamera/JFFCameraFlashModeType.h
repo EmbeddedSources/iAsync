@@ -1,11 +1,11 @@
 #ifndef JFFUI_JFFCameraFlashModeType_h
 #define JFFUI_JFFCameraFlashModeType_h
 
-typedef enum
+typedef NS_ENUM(NSUInteger, JFFCameraFlashModeType)
 {
     JFFCameraFlashModeAuto,
     JFFCameraFlashModeOn,
     JFFCameraFlashModeOff
-} JFFCameraFlashModeType;
+};
 
 #endif //JFFUI_JFFCameraFlashModeType_h

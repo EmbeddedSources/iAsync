@@ -80,11 +80,11 @@
     }
 }
 
-- (CGRect)elementFrameForIndex:( NSInteger )index_
+- (CGRect)elementFrameForIndex:(NSInteger)index
 {
-    CGFloat x_ = self.bounds.size.width * ( index_ - _firstIndex );
-    CGRect frame_ = { { x_, 0.f }, { self.bounds.size.width, self.bounds.size.height } };
-    return frame_;
+    CGFloat x = self.bounds.size.width * (index - _firstIndex);
+    CGRect frame = CGRectMake(x, 0.f, self.bounds.size.width, self.bounds.size.height);
+    return frame;
 }
 
 - (void)removeAllElements

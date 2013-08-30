@@ -40,8 +40,7 @@
 
 @end
 
-
-JFFAsyncOperation jffFoursquareLoginLoader ()
+JFFAsyncOperation jffFoursquareLoginLoader(void)
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         return [JFFAsyncFoursquaerLogin new];

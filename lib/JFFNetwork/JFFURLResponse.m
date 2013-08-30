@@ -9,14 +9,14 @@
 
 - (unsigned long long)expectedContentLength
 {
-    id contentLengthObj_ = _allHeaderFields[@"Content-Length"];
+    id contentLengthObj = _allHeaderFields[@"Content-Length"];
     
-    SEL ulongSelector_ = @selector(unsignedLongLongValue);
-    if ( [ contentLengthObj_ respondsToSelector: ulongSelector_ ] ) {
-        return [ contentLengthObj_ unsignedLongLongValue ];
+    SEL ulongSelector = @selector(unsignedLongLongValue);
+    if ([contentLengthObj respondsToSelector:ulongSelector]) {
+        return [contentLengthObj unsignedLongLongValue];
     }
-
-    return (unsigned long long)[ contentLengthObj_ longLongValue ];
+    
+    return (unsigned long long)[contentLengthObj longLongValue];
 }
 
 #pragma mark -

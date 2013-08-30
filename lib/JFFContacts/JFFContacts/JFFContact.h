@@ -32,9 +32,9 @@
 - (BOOL)save;
 - (BOOL)remove;
 
-+ (id)findContactWithContactInternalId:(ABRecordID)contactInternalId
-                           addressBook:(JFFAddressBook *)addressBook;
++ (instancetype)findContactWithContactInternalId:(ABRecordID)contactInternalId
+                                     addressBook:(JFFAddressBook *)addressBook;
 
-+ (id)allContactsAddressBook:(JFFAddressBook *)addressBook;
++ (NSArray *)allContactsAddressBook:(JFFAddressBook *)addressBook;
 
 @end

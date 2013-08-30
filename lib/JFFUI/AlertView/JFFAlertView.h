@@ -24,8 +24,8 @@
 - (void)addAlertButtonWithTitle:(NSString *)title
                          action:(JFFSimpleBlock)action;
 
-+ (id)waitAlertWithTitle:(NSString *)title
-            cancelButton:(JFFAlertButton *)button;
++ (instancetype)waitAlertWithTitle:(NSString *)title
+                      cancelButton:(JFFAlertButton *)button;
 
 + (void)dismissAllAlertViews;
 

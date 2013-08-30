@@ -5,7 +5,7 @@
 
 extern NSString *kGzipErrorDomain;
 
-enum JNCustomGzipErrorsEnum
+typedef NS_ENUM(NSInteger, JNCustomGzipErrorsEnum)
 {
     kJNGzipInitFailed    = -100,
     kJNGzipUnexpectedEOF = -101

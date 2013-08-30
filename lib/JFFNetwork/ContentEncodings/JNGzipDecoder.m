@@ -15,48 +15,46 @@ NSString* kGzipErrorDomain = @"gzip.error";
     unsigned long long _contentLength;
 }
 
--(id)init
+- (instancetype)init
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
--(id)initWithContentLength:( unsigned long long )contentLength_
+- (instancetype)initWithContentLength:(unsigned long long)contentLength
 {
-    self = [ super init ];
-    if ( nil == self )
-    {
+    self = [super init];
+    if (nil == self) {
         return nil;
     }
     
-    self->_contentLength = contentLength_;
+    _contentLength = contentLength;
     
     return self;
 }
 
--(BOOL)openZipStreamWithError:( NSError** )outError
+- (BOOL)openZipStreamWithError:(NSError **)outError
 {
-    if ( self->_isOpen )
-    {
+    if (_isOpen) {
+        
         return YES;
     }
-
-    self->_strm.total_out = 0;
-    self->_strm.zalloc    = Z_NULL;
-    self->_strm.zfree     = Z_NULL;
-
-
+    
+    _strm.total_out = 0;
+    _strm.zalloc    = Z_NULL;
+    _strm.zfree     = Z_NULL;
+    
     //!! dodikk -- WTF Magic
-    int initResult = inflateInit2( &self->_strm, (15+32) );
-    BOOL result = ( Z_OK == initResult );
-
-    if ( !result )
-    {
-        [ JFFLogger logErrorWithFormat:@"JNGzipDecoder -- inflateInit2 failed" ];
-        NSError* gzipError = [ NSError errorWithDomain: kGzipErrorDomain
-                                                  code: kJNGzipInitFailed
-                                              userInfo: nil ];
-        [ gzipError setToPointer: outError ];
+    int initResult = inflateInit2(&self->_strm, (15+32));
+    BOOL result = (Z_OK == initResult);
+    
+    if (!result) {
+        
+        [JFFLogger logErrorWithFormat:@"JNGzipDecoder -- inflateInit2 failed"];
+        NSError *gzipError = [NSError errorWithDomain:kGzipErrorDomain
+                                                 code:kJNGzipInitFailed
+                                             userInfo:nil];
+        [gzipError setToPointer:outError];
         
         return NO;
     }

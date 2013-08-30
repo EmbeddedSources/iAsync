@@ -36,7 +36,7 @@
             [self.propertyDataByPropertyName removeObjectForKey:propertyPath.name];
         }
     } else {
-        [ self.propertyDataByPropertyName removeObjectForKey:propertyPath.name ];
+        [self.propertyDataByPropertyName removeObjectForKey:propertyPath.name];
     }
     
     //clear property

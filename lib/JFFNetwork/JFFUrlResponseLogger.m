@@ -2,19 +2,19 @@
 
 @implementation JFFUrlResponseLogger
 
-+ (NSString *)descriptionStringForUrlResponse:(id)url_response_
++ (NSString *)descriptionStringForUrlResponse:(id)urlResponse
 {
-    NSAssert([url_response_ respondsToSelector: @selector( statusCode            ) ], @"[!!! ERROR !!!] statusCode not supported"            );
-    NSAssert([url_response_ respondsToSelector: @selector( expectedContentLength ) ], @"[!!! ERROR !!!] expectedContentLength not supported" );
-    NSAssert([url_response_ respondsToSelector: @selector( allHeaderFields       ) ], @"[!!! ERROR !!!] allHeaderFields not supported"       );
+    NSAssert([urlResponse respondsToSelector:@selector(statusCode           )], @"[!!! ERROR !!!] statusCode not supported"           );
+    NSAssert([urlResponse respondsToSelector:@selector(expectedContentLength)], @"[!!! ERROR !!!] expectedContentLength not supported");
+    NSAssert([urlResponse respondsToSelector:@selector(allHeaderFields      )], @"[!!! ERROR !!!] allHeaderFields not supported"      );
     
-    NSMutableString* result_ = [ [ NSMutableString alloc ] initWithFormat: @"<<< UrlResponse. HttpStatusCode = %d \n", [ url_response_ statusCode ] ] ;
-    [ result_ appendFormat: @"Result length = %lld \n", [ url_response_ expectedContentLength ] ];
-
-    NSString* headerFields_ = [ self dumpHttpHeaderFields: [ url_response_ allHeaderFields ] ];
-    [ result_ appendString: headerFields_ ];
-
-    return [ result_ copy ];
+    NSMutableString *result = [[NSMutableString alloc] initWithFormat:@"<<< UrlResponse. HttpStatusCode = %d \n", [ urlResponse statusCode ] ] ;
+    [result appendFormat: @"Result length = %lld \n", [urlResponse expectedContentLength]];
+    
+    NSString *headerFields = [self dumpHttpHeaderFields:[urlResponse allHeaderFields]];
+    [result appendString:headerFields];
+    
+    return [result copy];
 }
 
 + (NSString *)dumpHttpHeaderFields:(NSDictionary *)allHeaderFields

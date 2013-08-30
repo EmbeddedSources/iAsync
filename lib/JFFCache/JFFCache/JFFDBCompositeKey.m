@@ -23,13 +23,13 @@
 
 - (NSUInteger)hash
 {
-    return [self.keys hash];
+    return [_keys hash];
 }
 
 - (BOOL)isEqual:(id)object
 {
     JFFDBCompositeKey *otherObject = object;
-    return [otherObject.keys isEqual:self.keys];
+    return [otherObject.keys isEqual:_keys];
 }
 
 - (instancetype)initWithKeys:(NSArray *)keys
@@ -72,7 +72,7 @@
 
 - (NSString *)toCompositeKey
 {
-    return [self.keys componentsJoinedByString:@"_"];
+    return [_keys componentsJoinedByString:@"_"];
 }
 
 @end

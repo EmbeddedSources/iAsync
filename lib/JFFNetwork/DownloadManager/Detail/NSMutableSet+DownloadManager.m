@@ -9,7 +9,7 @@
     return [ NSString documentsPathByAppendingPathComponent: @"JFFDownloadedFiles.data" ];
 }
 
-+ (id)setWithDownloadedFiles
++ (instancetype)setWithDownloadedFiles
 {
     NSString *storePathForDownloadedFiles = [self storePathForDownloadedFiles];
     NSArray  *downloadedItems = [[NSArray alloc] initWithContentsOfFile:storePathForDownloadedFiles];

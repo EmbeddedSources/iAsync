@@ -22,22 +22,22 @@
         JNConnectionsFactory *factory =
         [[JNConnectionsFactory alloc] initWithURLConnectionParams:self.params];
         
-        self.connection = [factory createConnection];
+        _connection = [factory createConnection];
     }
     
-    self.connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
+    _connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
     
     __unsafe_unretained JFFNetworkAsyncOperation *unretainedSelf = self;
     
     progress = [progress copy];
-    self.connection.didReceiveDataBlock = ^(NSData *dataChunk) {
+    _connection.didReceiveDataBlock = ^(NSData *dataChunk) {
         
         JFFNetworkResponseDataCallback *progressData = [JFFNetworkResponseDataCallback new];
         progressData.dataChunk = dataChunk;
         progress(progressData);
     };
     
-    self.connection.didUploadDataBlock = ^(NSNumber *progressNum) {
+    _connection.didUploadDataBlock = ^(NSNumber *progressNum) {
         
         JFFNetworkUploadProgressCallback *uploadProgress = [JFFNetworkUploadProgressCallback new];
         uploadProgress.progress = progressNum;
@@ -45,7 +45,7 @@
         progress(uploadProgress);
     };
     
-    __block id resultHolder;
+    __block id resultHolder = nil;
     
     JFFNetworkErrorTransformer errorTransformer = _errorTransformer;
     
@@ -63,9 +63,9 @@
     } copy];
     
     finish = [finish copy];
-    self.connection.didFinishLoadingBlock = finish;
+    _connection.didFinishLoadingBlock = finish;
     
-    self.connection.didReceiveResponseBlock = ^void(id<JNUrlResponse> response) {
+    _connection.didReceiveResponseBlock = ^void(id<JNUrlResponse> response) {
         
         if (!unretainedSelf->_responseAnalyzer) {
             resultHolder = response;
@@ -81,7 +81,7 @@
         }
     };
     
-    [self.connection start];
+    [_connection start];
 }
 
 - (void)forceCancel
@@ -91,16 +91,16 @@
 
 - (void)cancel:(BOOL)canceled
 {
-    self.connection.didReceiveDataBlock          = nil;
-    self.connection.didFinishLoadingBlock        = nil;
-    self.connection.didReceiveResponseBlock      = nil;
-    self.connection.didUploadDataBlock           = nil;
-    self.connection.shouldAcceptCertificateBlock = nil;
+    _connection.didReceiveDataBlock          = nil;
+    _connection.didFinishLoadingBlock        = nil;
+    _connection.didReceiveResponseBlock      = nil;
+    _connection.didUploadDataBlock           = nil;
+    _connection.shouldAcceptCertificateBlock = nil;
     
     //TODO maybe always cancel?
     if (canceled) {
-        [self.connection cancel];
-        self.connection = nil;
+        [_connection cancel];
+        _connection = nil;
     }
 }
 
