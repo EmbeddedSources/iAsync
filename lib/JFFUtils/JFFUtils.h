@@ -36,6 +36,7 @@
 #import <JFFUtils/NSString/NSString+FileAttributes.h>
 #import <JFFUtils/NSString/NSString+LocalizedPrice.h>
 #import <JFFUtils/NSString/NSString+StringWithCutPrefix.h>
+#import <JFFUtils/NSString/NSString+StringFromTemplateString.h>
 
 #import <JFFUtils/NSSet/NSSet+BlocksAdditions.h>
 #import <JFFUtils/NSSet/NSMutableSet+StorableSet.h>
@@ -73,7 +74,6 @@
 #import <JFFUtils/JGCDAdditions.h>
 #import <JFFUtils/JFFClangLiterals.h>
 #import <JFFUtils/JFFMulticastDelegate.h>
-#import <JFFUtils/JFFSingleThreadProxy.h>
 #import <JFFUtils/JFFMutableAssignArray.h>
 #import <JFFUtils/JFFMutableAssignDictionary.h>
 #import <JFFUtils/JFFMutableAssignKeyDictionary.h>
