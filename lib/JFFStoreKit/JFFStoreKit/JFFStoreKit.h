@@ -6,6 +6,8 @@
 #import <JFFStoreKit/asyncAdapters/asyncSKPaymentQueue.h>
 #import <JFFStoreKit/asyncAdapters/asyncSKProductRequest.h>
 
+//Errors
+#import <JFFStoreKit/Errors/JFFStoreKitDisabledError.h>
 #import <JFFStoreKit/Errors/JFFStoreKitCanNoLoadProductError.h>
 #import <JFFStoreKit/Errors/JFFStoreKitInvalidProductIdentifierError.h>
 
