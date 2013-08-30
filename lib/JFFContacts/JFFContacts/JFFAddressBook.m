@@ -18,40 +18,39 @@
     return nil;
 }
 
-- (instancetype)initWithRawBook:(ABAddressBookRef)rawBook_
+- (instancetype)initWithRawBook:(ABAddressBookRef)rawBook
 {
-    NSParameterAssert(NULL != rawBook_);
+    NSParameterAssert(NULL != rawBook);
     
     self = [super init];
     if (nil == self) {
         return nil;
     }
     
-    _rawBook = rawBook_;
+    _rawBook = rawBook;
     
     return self;
 }
 
 - (BOOL)removeAllContactsWithError:(NSError **)error
 {
-    ABAddressBookRef rawBook_ = self.rawBook;
-    CFErrorRef rawError_ = NULL;
-    NSArray* contacts_ = (__bridge_transfer NSArray*)ABAddressBookCopyArrayOfAllPeople(rawBook_);
+    ABAddressBookRef rawBook = self.rawBook;
+    CFErrorRef rawError = NULL;
+    NSArray *contacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(rawBook);
     
-    for ( id record_ in contacts_ )
+    for (id record in contacts)
     {
-        ABRecordRef rawRecord_ = (__bridge ABRecordRef)record_;
-        ABAddressBookRemoveRecord( rawBook_, rawRecord_, &rawError_ );
-        if ( NULL != rawError_ )
-        {
-            [ (__bridge NSError*)rawError_ setToPointer:error];
+        ABRecordRef rawRecord = (__bridge ABRecordRef)record;
+        ABAddressBookRemoveRecord(rawBook, rawRecord, &rawError);
+        if (NULL != rawError) {
+            [(__bridge NSError *)rawError setToPointer:error];
             return NO;
         }
     }
     
-    ABAddressBookSave( rawBook_, &rawError_ );
-    if ( NULL != rawError_ ) {
-        [ (__bridge NSError*)rawError_ setToPointer:error];
+    ABAddressBookSave( rawBook, &rawError );
+    if (NULL != rawError) {
+        [(__bridge NSError *)rawError setToPointer:error];
         return NO;
     }
     
