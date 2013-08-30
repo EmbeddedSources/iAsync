@@ -22,7 +22,7 @@ static NSString *__platformName;
         machine = malloc(len);
         sysctl(mib, 2, machine, &len, NULL, 0);
         
-        NSString *platform = [NSString stringWithCString:machine encoding:NSASCIIStringEncoding];
+        NSString *platform = @(machine);
         free(machine);
         __platformName = platform;
     }
