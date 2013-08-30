@@ -5,40 +5,51 @@
 
 @implementation NSNumber (FSStorable)
 
-+ (instancetype)newLongLongNumberWithContentsOfFile:(NSString *)fileName
++ (instancetype)newNumberWithDocumentContentsOfFile:(NSString *)fileName
+                                            scanner:(NSNumber *(^)(NSString *))scanner
 {
-    NSParameterAssert(fileName);
+    NSParameterAssert(fileName && scanner);
     
-    fileName = [NSString documentsPathByAppendingPathComponent:fileName];
-    NSString *string = [[NSString alloc] initWithContentsOfFile:fileName
+    NSString *path = [NSString documentsPathByAppendingPathComponent:fileName];
+    
+    NSString *string = [[NSString alloc] initWithContentsOfFile:path
                                                        encoding:NSUTF8StringEncoding
                                                           error:NULL];
     
-    double scannedNumber = 0;
-    if (string) {
+    if (!string)
+        return nil;
+    
+    return scanner(string);
+}
+
++ (instancetype)newLongLongNumberWithContentsOfFile:(NSString *)fileName
+{
+    NSNumber *(^scanner)(NSString *) = ^NSNumber *(NSString *string) {
+        
+        double scannedNumber = 0;
         NSScanner *scanner = [NSScanner scannerWithString:string];
         [scanner scanDouble:&scannedNumber];
-    }
-    NSNumber *result = @(scannedNumber);
-    return result;
+        NSNumber *result = @(scannedNumber);
+        return result;
+    };
+    
+    return [self newNumberWithDocumentContentsOfFile:fileName
+                                             scanner:scanner];
 }
 
 + (instancetype)newDoubleWithContentsOfFile:(NSString *)fileName
 {
-    NSParameterAssert(fileName);
-    
-    fileName = [NSString documentsPathByAppendingPathComponent:fileName];
-    NSString *string = [[NSString alloc] initWithContentsOfFile:fileName
-                                                       encoding:NSUTF8StringEncoding
-                                                          error:NULL];
-    
-    long long scannedNumber = 0;
-    if (string) {
+    NSNumber *(^scanner)(NSString *) = ^NSNumber *(NSString *string) {
+        
+        long long scannedNumber = 0;
         NSScanner *scanner = [NSScanner scannerWithString:string];
         [scanner scanLongLong:&scannedNumber];
-    }
-    NSNumber *result = @(scannedNumber);
-    return result;
+        NSNumber *result = @(scannedNumber);
+        return result;
+    };
+    
+    return [self newNumberWithDocumentContentsOfFile:fileName
+                                             scanner:scanner];
 }
 
 - (BOOL)saveNumberToFile:(NSString *)fileName
