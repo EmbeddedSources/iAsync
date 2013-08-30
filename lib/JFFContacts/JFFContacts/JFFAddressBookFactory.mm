@@ -20,19 +20,11 @@ static NSError *convertErrorType(NSError *error)
 {
     NSParameterAssert(nil!=callback);
     
-#ifdef kCFCoreFoundationVersionNumber_iOS_5_1
-    if (kCFCoreFoundationVersionNumber <= kCFCoreFoundationVersionNumber_iOS_5_1) {
-#endif
-        [self asyncLegacyAddressBookWithOnCreatedBlock:callback];
-        return;
-#ifdef kCFCoreFoundationVersionNumber_iOS_5_1
-    }
-    
     CFErrorRef error = NULL;
     ABAddressBookRef result = ABAddressBookCreateWithOptions(0, &error);
     
     if (NULL != error) {
-        NSError *retError = (__bridge NSError*)error;
+        NSError *retError = (__bridge NSError *)error;
         if (result)
             CFRelease(result);
         if (callback) {
@@ -53,17 +45,6 @@ static NSError *convertErrorType(NSError *error)
         };
     
     ABAddressBookRequestAccessWithCompletion(result, onAddressBookAccess);
-#endif
-}
-
-+ (void)asyncLegacyAddressBookWithOnCreatedBlock:(JFFAddressBookOnCreated)callback
-{
-    NSParameterAssert(nil!=callback);
-    
-    ABAddressBookRef result = ::ABAddressBookCreate();
-    JFFAddressBook *bookWrapper = [[JFFAddressBook alloc] initWithRawBook:result];
-    
-    callback(bookWrapper, kABAuthorizationStatusAuthorized, nil);
 }
 
 + (NSString *)bookStatusToString:(ABAuthorizationStatus)status

@@ -1,18 +1,6 @@
 #import <Foundation/Foundation.h>
 #include <AddressBook/ABAddressBook.h>
 
-#ifndef __IPHONE_6_0
-    enum ABAuthorizationStatusEnum
-    {
-        kABAuthorizationStatusNotDetermined = 0,
-        kABAuthorizationStatusRestricted,
-        kABAuthorizationStatusDenied,
-        kABAuthorizationStatusAuthorized
-    };
-    typedef CFIndex ABAuthorizationStatus;
-#endif //__IPHONE_6_
-
-
 @protocol JFFAddressBookOwner;
 @class JFFAddressBook;
 
