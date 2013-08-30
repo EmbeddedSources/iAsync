@@ -8,10 +8,14 @@ typedef void (^JFFAsyncOperationInterfaceProgressHandler)(id);
 
 @protocol JFFAsyncOperationInterface <NSObject>
 
+@required
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress;
 
+@optional
 - (void)cancel:(BOOL)canceled;
+
+- (BOOL)isForeignThreadResultCallback;
 
 @end
