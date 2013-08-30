@@ -5,19 +5,19 @@
 
 typedef void(^PhotoCameraMakePhotoResult)(UIImage *image, NSError *error);
 
-enum {
+typedef NS_ENUM(NSUInteger, JFFAVCaptureVideoOrientation)
+{
     JFFAVCaptureVideoOrientationPortrait           = 1,
     JFFAVCaptureVideoOrientationPortraitUpsideDown = 2,
     JFFAVCaptureVideoOrientationLandscapeRight     = 3,
     JFFAVCaptureVideoOrientationLandscapeLeft      = 4,
 };
-typedef NSInteger JFFAVCaptureVideoOrientation;
 
 @class AVCaptureVideoPreviewLayer;
 
 @interface JFFPhotoCamera : NSObject
 
-@property (nonatomic, readonly) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;//TODO create it lazy
+@property (nonatomic, readonly) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 @property (nonatomic, copy) NSString *sessionPreset;
 @property (nonatomic) JFFCameraFlashModeType flashMode;
 @property (nonatomic) JFFPhotoCameraType photoCameraType;
@@ -28,8 +28,12 @@ typedef NSInteger JFFAVCaptureVideoOrientation;
 
 - (instancetype)initPhotoCameraType:(JFFPhotoCameraType)photoCameraType;
 
++ (NSArray *)allActiveCameras;
+
 - (void)startRunning;
 - (void)stopRunning;
+
+- (BOOL)isRunning;
 
 - (void)makePhotoWithCallback:(PhotoCameraMakePhotoResult)callback;
 

@@ -5,6 +5,8 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+static JFFMutableAssignArray *__allActiveCameras;
+
 #define dDeviceOrientation [[UIDevice currentDevice] orientation]
 #define isPortrait  UIDeviceOrientationIsPortrait (dDeviceOrientation)
 #define isLandscape UIDeviceOrientationIsLandscape(dDeviceOrientation)
@@ -57,6 +59,20 @@
 
 @dynamic captureVideoPreviewLayer;
 
++ (instancetype)allocWithZone:(NSZone *)zone
+{
+    JFFPhotoCamera *result = [super allocWithZone:zone];
+    
+    if (result) {
+        
+        if (!__allActiveCameras)
+            __allActiveCameras = [JFFMutableAssignArray new];
+        [__allActiveCameras addObject:result];
+    }
+    
+    return result;
+}
+
 - (instancetype)init
 {
     return [self initPhotoCameraType:JFFPhotoCameraBack];
@@ -73,11 +89,16 @@
         _photoCameraType = photoCameraType;
         
         [self initCaptureSessions];
-        [self setupCaptureInputs];
-        [self setupImageOutput];
+        [self setupCaptureInputs ];
+        [self setupImageOutput   ];
     }
     
     return self;
+}
+
++ (NSArray *)allActiveCameras
+{
+    return [__allActiveCameras array];
 }
 
 - (void)initCaptureSessions
@@ -170,10 +191,10 @@
 - (void)setFlashMode:(JFFCameraFlashModeType)flashMode
 {
     AVCaptureFlashMode deviceFlashMode = flashMode == JFFCameraFlashModeAuto
-    ? AVCaptureFlashModeAuto
-    : flashMode == JFFCameraFlashModeOn
-    ? AVCaptureFlashModeOn
-    : AVCaptureFlashModeOff;
+    ?AVCaptureFlashModeAuto
+    :flashMode == JFFCameraFlashModeOn
+    ?AVCaptureFlashModeOn
+    :AVCaptureFlashModeOff;
     
     NSError *error;
     [_backCameraDevice lockForConfiguration:&error];
@@ -224,6 +245,11 @@
 {
     NSParameterAssert(_captureSession);
     [_captureSession stopRunning];
+}
+
+- (BOOL)isRunning
+{
+    return _captureSession.isRunning;
 }
 
 - (AVCaptureConnection *)videoConnectionFromImageOutput:(AVCaptureStillImageOutput *)imageOutput
