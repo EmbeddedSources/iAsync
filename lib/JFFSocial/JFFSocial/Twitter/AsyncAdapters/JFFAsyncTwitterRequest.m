@@ -1,6 +1,6 @@
 #import "JFFAsyncTwitterRequest.h"
 
-#import <Twitter/Twitter.h>
+#import <Social/Social.h>
 
 @implementation JFFTwitterResponse
 @end
@@ -11,7 +11,7 @@
 @implementation JFFAsyncTwitterRequest
 {
 @public
-    TWRequest *_request;
+    SLRequest *_request;
 }
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
@@ -37,13 +37,14 @@
     }];
 }
 
-- (void)cancel:(BOOL)canceled
+- (BOOL)isForeignThreadResultCallback
 {
+    return YES;
 }
 
 @end
 
-JFFAsyncOperation jffTwitterRequest(TWRequest *request)
+JFFAsyncOperation jffTwitterRequest(SLRequest *request)
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncTwitterRequest *object = [JFFAsyncTwitterRequest new];

@@ -10,7 +10,10 @@ extern "C" {
 #endif
 
     JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanceBuilder factory);
-
+    
+    JFFAsyncOperation buildAsyncOperationWithAdapterFactoryWithDispatchQueue(JFFAsyncOperationInstanceBuilder factory,
+                                                                             dispatch_queue_t callbacksQueue);
+    
 #ifdef __cplusplus
 } /* closing brace for extern "C" */
 #endif

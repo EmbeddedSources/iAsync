@@ -23,21 +23,29 @@
 @end
 
 //JTODO test
-JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanceBuilder objectFactory)
+JFFAsyncOperation buildAsyncOperationWithAdapterFactoryWithDispatchQueue(JFFAsyncOperationInstanceBuilder objectFactory,
+                                                                         dispatch_queue_t callbacksQueue)
 {
     objectFactory = [objectFactory copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
         
-        id<JFFAsyncOperationInterface> asyncObject = objectFactory();
+        __block id<JFFAsyncOperationInterface> asyncObject = objectFactory();
         __unsafe_unretained id<JFFAsyncOperationInterface> unretaintedAsyncObject = asyncObject;
         
         doneCallback = [doneCallback copy];
         void (^completionHandler)(id, NSError*) = [^(id result, NSError *error) {
             //use asyncObject in if to own it while waiting result
-            if (doneCallback && asyncObject)
+            
+            if (!asyncObject)
+                return;
+            
+            if (doneCallback) {
                 doneCallback(result, error);
+            }
+            
+            asyncObject = nil;
         } copy];
         progressCallback = [progressCallback copy];
         __block void (^progressHandler)(id) = [^(id data) {
@@ -46,25 +54,39 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
         } copy];
         
         completionHandler = [completionHandler copy];
-        JFFObjectFactory factory = ^id() {
-            JFFComplitionHandlerNotifier *result = [JFFComplitionHandlerNotifier new];
-            result.completionHandler = completionHandler;
-            return result;
-        };
         
-        __block JFFComplitionHandlerNotifier *proxy = (JFFComplitionHandlerNotifier*)
-            [JFFSingleThreadProxy singleThreadProxyWithTargetFactory:factory
-                                                       dispatchQueue:dispatch_get_current_queue()];
+        __block JFFComplitionHandlerNotifier *proxy = [JFFComplitionHandlerNotifier new];
+        proxy.completionHandler = completionHandler;
         
         __block JFFCancelAsyncOperationHandler cancelCallbackHolder = [cancelCallback copy];
         
+        NSThread *currntThread = [NSThread currentThread];
+        
         void (^completionHandlerWrapper)(id, NSError *) = [^(id result, NSError *error) {
             
-            JFFComplitionHandlerNotifier *proxyOwner = proxy;
-            proxy                = nil;
-            progressHandler      = nil;
-            cancelCallbackHolder = nil;//TODO what about other thread?
-            [proxyOwner notifyCallbackWithResult:result error:error];
+            if (!asyncObject)
+                return;
+            
+            void (^completionHandler)(id, NSError *) = ^(id result, NSError *error) {
+                JFFComplitionHandlerNotifier *proxyOwner = proxy;
+                proxy                = nil;
+                progressHandler      = nil;
+                cancelCallbackHolder = nil;
+                [proxyOwner notifyCallbackWithResult:result error:error];
+            };
+            
+            if ([asyncObject respondsToSelector:@selector(isForeignThreadResultCallback)]
+                && [asyncObject isForeignThreadResultCallback]) {
+                
+                dispatch_async(callbacksQueue, ^() {
+                    
+                    completionHandler(result, error);
+                });
+            } else {
+                
+                NSCAssert(currntThread == [NSThread currentThread], @"the same thread expected");
+                completionHandler(result, error);
+            }
         } copy];
         
         void (^progressHandlerWrapper)(id) = [^(id data) {
@@ -98,7 +120,9 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
                 return;
             }
             
-            [unretaintedAsyncObject cancel:canceled];
+            if ([unretaintedAsyncObject respondsToSelector:@selector(cancel:)]) {
+                [unretaintedAsyncObject cancel:canceled];
+            }
             
             proxy           = nil;
             progressHandler = nil;
@@ -110,4 +134,10 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanc
             }
         };
     };
+}
+
+JFFAsyncOperation buildAsyncOperationWithAdapterFactory(JFFAsyncOperationInstanceBuilder factory)
+{
+    NSCAssert([NSThread isMainThread], @"main thread expected");
+    return buildAsyncOperationWithAdapterFactoryWithDispatchQueue(factory, dispatch_get_main_queue());
 }

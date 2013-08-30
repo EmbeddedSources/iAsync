@@ -49,7 +49,6 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 - (void)dealloc
 {
     sqlite3_close(_db);
-    dispatch_release(_dispatchQueue);
 }
 
 - (instancetype)initWithDBName:(NSString *)dbName
@@ -59,7 +58,6 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     if (self) {
         
         _dispatchQueue = getOrCreateDispatchQueueForFile(dbName);
-        dispatch_retain(_dispatchQueue);
         
         NSString *const dbPath = [NSString documentsPathByAppendingPathComponent:dbName];
         
@@ -67,7 +65,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
         
         __block BOOL ok = NO;
         
-        safe_dispatch_barrier_sync(self.queue, ^{
+        dispatch_barrier_sync(self.queue, ^{
             
             BOOL created = [[NSFileManager defaultManager] createDirectoryAtPath:_folder
                                                      withIntermediateDirectories:YES
@@ -214,7 +212,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     
     __block NSString *result;
     
-    safe_dispatch_sync([self db].queue, ^{
+    dispatch_sync([self db].queue, ^{
         
         sqlite3_stmt *statement = 0;
         if ([[self db] prepareQuery:query statement:&statement]) {
@@ -474,7 +472,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     
     __block NSData *recordData;
     
-    safe_dispatch_sync([self db].queue, ^ {
+    dispatch_sync([self db].queue, ^ {
     
         sqlite3_stmt *statement = 0;
         if ([self.db prepareQuery:query statement:&statement]) {

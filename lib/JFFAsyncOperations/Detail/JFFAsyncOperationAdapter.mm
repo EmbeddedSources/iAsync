@@ -25,6 +25,7 @@
                                                      didLoadDataBlock:handler
                                                         progressBlock:progress
                                                               barrier:_barrier
+                                                         currentQueue:_currentQueue
                                                    serialOrConcurrent:_queueAttributes];
 }
 

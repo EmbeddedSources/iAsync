@@ -17,6 +17,7 @@
 @property (nonatomic) BOOL barrier;
 
 //DISPATCH_QUEUE_CONCURRENT by default
+@property (nonatomic) dispatch_queue_t currentQueue;
 @property (nonatomic) dispatch_queue_attr_t queueAttributes;
 
 @end

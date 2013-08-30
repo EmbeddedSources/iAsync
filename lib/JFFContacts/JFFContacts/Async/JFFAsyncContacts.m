@@ -9,30 +9,43 @@
 @end
 
 @implementation JFFAsyncRequestAccessToContactsLoader
+{
+    JFFAsyncOperationInterfaceResultHandler _handler;
+}
+
+- (void)notifyHandlerWithResult:(id)result error:(NSError *)error
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        _handler(result, error);
+    });
+}
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     NSParameterAssert(handler);
-    handler = [handler copy];
+    _handler = handler;
+    
+    __weak JFFAsyncRequestAccessToContactsLoader *weakSelf = self;
     
     JFFAddressBookSuccessCallback onSuccess = ^(JFFAddressBook *book) {
         
-        handler(book, nil);
+        [weakSelf notifyHandlerWithResult:book error:nil];
     };
     
     JFFAddressBookErrorCallback onFailure = ^(ABAuthorizationStatus status, NSError *error) {
         
-        handler(nil, error);
+        [weakSelf notifyHandlerWithResult:nil error:error];
     };
     
     [JFFAddressBookFactory asyncAddressBookWithSuccessBlock:onSuccess
                                               errorCallback:onFailure];
 }
 
-- (void)cancel:(BOOL)canceled
+- (BOOL)isForeignThreadResultCallback
 {
+    return YES;
 }
 
 @end
@@ -51,7 +64,7 @@ JFFAsyncOperation asyncAllContactsLoader()
 
 JFFAsyncOperation requestAccessToContactsLoader()
 {
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>() {
         return [JFFAsyncRequestAccessToContactsLoader new];
     };
     return buildAsyncOperationWithAdapterFactory(factory);

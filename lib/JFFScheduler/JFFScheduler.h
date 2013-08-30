@@ -15,6 +15,11 @@ typedef void (^JFFScheduledBlock) (JFFCancelScheduledBlock cancel);
                            duration:(NSTimeInterval)duration
                              leeway:(NSTimeInterval)leeway;
 
+- (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)block
+                           duration:(NSTimeInterval)duration
+                             leeway:(NSTimeInterval)leeway
+                      dispatchQueue:(dispatch_queue_t)dispatchQueue;
+
 //cancel all delayed invocations for self
 - (void)cancelAllScheduledOperations;
 

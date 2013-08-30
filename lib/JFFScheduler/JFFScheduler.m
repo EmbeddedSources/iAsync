@@ -30,12 +30,6 @@
 
 @end
 
-@interface JFFScheduler ()
-
-@property (nonatomic) dispatch_queue_t queue;
-
-@end
-
 @implementation JFFScheduler
 {
     NSMutableArray *_cancelBlocks;
@@ -44,8 +38,6 @@
 - (void)dealloc
 {
     [self cancelAllScheduledOperations];
-    
-    dispatch_release(_queue);
 }
 
 - (instancetype)init
@@ -53,8 +45,6 @@
     self = [super init];
     
     if (self) {
-        _queue = dispatch_get_current_queue();
-        dispatch_retain(_queue);
         _cancelBlocks = [NSMutableArray new];
     }
     
@@ -70,12 +60,13 @@
 - (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)actionBlock
                            duration:(NSTimeInterval)duration
                              leeway:(NSTimeInterval)leeway
+                      dispatchQueue:(dispatch_queue_t)dispatchQueue
 {
     NSParameterAssert(actionBlock);
     if (!actionBlock)
         return ^(){ /* do nothing */ };
     
-    __block dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
+    __block dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatchQueue);
     
     int64_t delta = duration * NSEC_PER_SEC;
     dispatch_source_set_timer(timer,
@@ -92,8 +83,7 @@
             return;
         
         dispatch_source_cancel(timer);
-        dispatch_release(timer);
-        timer = NULL;
+        timer = nil;
         
         [unretainedSelf->_cancelBlocks removeObject:unretainedCancelTimerBlockHolder.simpleBlock];
     };
@@ -103,13 +93,23 @@
     actionBlock = [actionBlock copy];
     dispatch_block_t eventHandlerBlock = [^void(void) {
         actionBlock(cancelTimerBlockHolder.onceSimpleBlock);
-    }copy];
+    } copy];
     
     dispatch_source_set_event_handler(timer, eventHandlerBlock);
     
     dispatch_resume(timer);
     
     return cancelTimerBlockHolder.onceSimpleBlock;
+}
+
+- (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)actionBlock
+                           duration:(NSTimeInterval)duration
+                             leeway:(NSTimeInterval)leeway
+{
+    return [self addBlock:actionBlock
+                 duration:duration
+                   leeway:leeway
+            dispatchQueue:dispatch_get_main_queue()];
 }
 
 - (void)cancelAllScheduledOperations
