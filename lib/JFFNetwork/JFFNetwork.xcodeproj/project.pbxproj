@@ -1315,7 +1315,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1331,6 +1333,7 @@
 					../,
 					"../../../davedelong-Demos/",
 				);
+				LLVM_VECTORIZE_LOOPS = YES;
 				USER_HEADER_SEARCH_PATHS = ../;
 			};
 			name = Debug;
@@ -1340,7 +1343,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1349,6 +1354,7 @@
 					../,
 					"../../../davedelong-Demos/",
 				);
+				LLVM_VECTORIZE_LOOPS = YES;
 				USER_HEADER_SEARCH_PATHS = ../;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1360,7 +1366,7 @@
 				DSTROOT = /tmp/JFFNetwork.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFNetwork/JFFNetwork-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1374,7 +1380,7 @@
 				DSTROOT = /tmp/JFFNetwork.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFNetwork/JFFNetwork-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

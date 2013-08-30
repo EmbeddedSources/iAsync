@@ -12,7 +12,6 @@
 		CE29B80C15F60083000A05B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80B15F60083000A05B8 /* Foundation.framework */; };
 		CE29B81115F60083000A05B8 /* JFFContacts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE29B81015F60083000A05B8 /* JFFContacts.h */; };
 		CE29B81B15F60084000A05B8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B81A15F60084000A05B8 /* SenTestingKit.framework */; };
-		CE29B81D15F60084000A05B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B81C15F60084000A05B8 /* UIKit.framework */; };
 		CE29B81E15F60084000A05B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80B15F60083000A05B8 /* Foundation.framework */; };
 		CE29B82115F60084000A05B8 /* libJFFContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80815F60083000A05B8 /* libJFFContacts.a */; };
 		CE29B82715F60084000A05B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE29B82515F60084000A05B8 /* InfoPlist.strings */; };
@@ -103,7 +102,6 @@
 		CE29B81015F60083000A05B8 /* JFFContacts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFContacts.h; sourceTree = "<group>"; };
 		CE29B81915F60084000A05B8 /* JFFContactsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFContactsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE29B81A15F60084000A05B8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		CE29B81C15F60084000A05B8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		CE29B82415F60084000A05B8 /* JFFContactsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFContactsTests-Info.plist"; sourceTree = "<group>"; };
 		CE29B82615F60084000A05B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE29B82815F60084000A05B8 /* JFFContactsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFContactsTests.h; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE29B81B15F60084000A05B8 /* SenTestingKit.framework in Frameworks */,
-				CE29B81D15F60084000A05B8 /* UIKit.framework in Frameworks */,
 				CE29B81E15F60084000A05B8 /* Foundation.framework in Frameworks */,
 				CE29B82115F60084000A05B8 /* libJFFContacts.a in Frameworks */,
 			);
@@ -189,7 +186,6 @@
 				CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */,
 				CE29B80B15F60083000A05B8 /* Foundation.framework */,
 				CE29B81A15F60084000A05B8 /* SenTestingKit.framework */,
-				CE29B81C15F60084000A05B8 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -497,6 +493,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -504,6 +501,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -512,7 +510,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -523,6 +521,7 @@
 					.,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -532,6 +531,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -539,8 +539,9 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -551,6 +552,7 @@
 					.,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -562,6 +564,7 @@
 				DSTROOT = /tmp/JFFContacts.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFContacts/JFFContacts-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -574,6 +577,7 @@
 				DSTROOT = /tmp/JFFContacts.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFContacts/JFFContacts-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

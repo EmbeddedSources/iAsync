@@ -2,7 +2,6 @@
 
 #import "JFFTwitterAccountAccessNotGrantedError.h"
 
-#import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
 
 @interface JFFAsyncTwitterAccessRequest : NSObject <JFFAsyncOperationInterface>
@@ -20,7 +19,9 @@
     
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
-    [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+    [accountStore requestAccessToAccountsWithType:accountType
+                                          options:nil
+                                       completion:^(BOOL granted, NSError *error) {
         
         if (!handler)
             return;
@@ -37,8 +38,9 @@
     }];
 }
 
-- (void)cancel:(BOOL)canceled
+- (BOOL)isForeignThreadResultCallback
 {
+    return YES;
 }
 
 @end

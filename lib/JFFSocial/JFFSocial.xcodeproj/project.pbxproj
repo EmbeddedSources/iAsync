@@ -51,7 +51,6 @@
 		CE4F609415F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F609315F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m */; };
 		CE4F609815F8BA5700271035 /* JFFSocialError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F609715F8BA5700271035 /* JFFSocialError.m */; };
 		CE4F620115F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F620015F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m */; };
-		CE4F621015F8F57100271035 /* JFFAsyncTwitterCreateAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F620F15F8F57000271035 /* JFFAsyncTwitterCreateAccount.m */; };
 		CE4F621315F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F621215F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m */; };
 		CE4F623E15F9D34800271035 /* JFFNoTwitterAccountsError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F623D15F9D34800271035 /* JFFNoTwitterAccountsError.m */; };
 		CE5A033E15F9FE74005CC01A /* JFFTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A033D15F9FE74005CC01A /* JFFTweet.m */; };
@@ -261,8 +260,6 @@
 		CE4F609715F8BA5700271035 /* JFFSocialError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialError.m; sourceTree = "<group>"; };
 		CE4F61FF15F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterAccountAccessNotGrantedError.h; sourceTree = "<group>"; };
 		CE4F620015F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterAccountAccessNotGrantedError.m; sourceTree = "<group>"; };
-		CE4F620E15F8F56F00271035 /* JFFAsyncTwitterCreateAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncTwitterCreateAccount.h; sourceTree = "<group>"; };
-		CE4F620F15F8F57000271035 /* JFFAsyncTwitterCreateAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncTwitterCreateAccount.m; sourceTree = "<group>"; };
 		CE4F621115F8F76100271035 /* JFFTwitterAccountCanceledCreationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterAccountCanceledCreationError.h; sourceTree = "<group>"; };
 		CE4F621215F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterAccountCanceledCreationError.m; sourceTree = "<group>"; };
 		CE4F623C15F9D34800271035 /* JFFNoTwitterAccountsError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFNoTwitterAccountsError.h; sourceTree = "<group>"; };
@@ -629,8 +626,6 @@
 				CE4F609015F8B85300271035 /* JFFAsyncTwitterRequest.m */,
 				CE4F609215F8B87B00271035 /* JFFAsyncTwitterAccessRequest.h */,
 				CE4F609315F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m */,
-				CE4F620E15F8F56F00271035 /* JFFAsyncTwitterCreateAccount.h */,
-				CE4F620F15F8F57000271035 /* JFFAsyncTwitterCreateAccount.m */,
 			);
 			path = AsyncAdapters;
 			sourceTree = "<group>";
@@ -921,7 +916,6 @@
 				CE4F609415F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m in Sources */,
 				CE4F609815F8BA5700271035 /* JFFSocialError.m in Sources */,
 				CE4F620115F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m in Sources */,
-				CE4F621015F8F57100271035 /* JFFAsyncTwitterCreateAccount.m in Sources */,
 				CE4F621315F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m in Sources */,
 				CE4F623E15F9D34800271035 /* JFFNoTwitterAccountsError.m in Sources */,
 				CE5A033E15F9FE74005CC01A /* JFFTweet.m in Sources */,
@@ -997,6 +991,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1004,6 +999,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1012,7 +1008,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -1025,6 +1021,7 @@
 					../JFFRestKit,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1034,6 +1031,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1041,8 +1039,9 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -1055,6 +1054,7 @@
 					../JFFRestKit,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1070,6 +1070,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFSocial/JFFSocial-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1086,6 +1087,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFSocial/JFFSocial-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -3,7 +3,6 @@
 #import "JFFAsyncTwitterRequest.h"
 #import "JFFAsyncTwitterAccessRequest.h"
 
-#import "JFFAsyncTwitterCreateAccount.h"
 #import "JFFNoTwitterAccountsError.h"
 #import "AsyncAnalyzers.h"
 
@@ -12,12 +11,10 @@
 #import <JFFRestKit/JFFRestKit.h>
 #import <JFFRestKit/Details/JFFResponseDataWithUpdateData.h>
 
-#import <Twitter/Twitter.h>
+#import <Social/Social.h>
 #import <Accounts/Accounts.h>
 
 #define DEFAULT_SEARCH_RADIUS 100.0f
-
-static JFFSocialTwitterDidLoginCallback globalDidLoginCallback;
 
 @interface JFFTwitterReponsesCache : NSObject <JFFRestKitCache>
 @end
@@ -94,47 +91,15 @@ static JFFSyncOperation twitterAccountsGetter()
     };
 }
 
-static JFFAsyncOperation twitterAccountsLoaderIOS5()
+static BOOL isAuthorized()
 {
-    JFFAsyncOperation accountsLoader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                                                JFFCancelAsyncOperationHandler cancelCallback,
-                                                                JFFDidFinishAsyncOperationHandler doneCallback) {
-        
-        JFFSyncOperation twitterAccounts = twitterAccountsGetter();
-        
-        NSArray *accounts = twitterAccounts(NULL);
-        
-        JFFAsyncOperation loader;
-        
-        if ([accounts count] > 0) {
-            loader = asyncOperationWithResult(accounts);
-        } else {
-            loader = sequenceOfAsyncOperations(jffCreateTwitterAccountLoader(),
-                                               asyncOperationWithSyncOperationInCurrentQueue(twitterAccounts),
-                                               nil);
-        }
-        
-        doneCallback = [doneCallback copy];
-        JFFDidFinishAsyncOperationHandler doneCallbackWp = ^(id result, NSError *error) {
-            if (doneCallback)
-                doneCallback(result, error);
-            
-            if (globalDidLoginCallback && result)
-                globalDidLoginCallback(nil);
-        };
-        
-        return loader(progressCallback, cancelCallback, doneCallbackWp);
-    };
-    
-    return sequenceOfAsyncOperations(jffTwitterAccessRequestLoader(),
-                                     accountsLoader,
-                                     nil
-                                     );
+    return [SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter];
 }
 
-static JFFAsyncOperation twitterAccountsLoaderIOS6()
+static JFFAsyncOperation twitterAccountsLoader()
 {
-    if (![TWTweetComposeViewController canSendTweet]) {
+    if (!isAuthorized()) {
+        
         return asyncOperationWithError([JFFNoTwitterAccountsError new]);
     }
     
@@ -144,20 +109,11 @@ static JFFAsyncOperation twitterAccountsLoaderIOS6()
                                      );
 }
 
-static JFFAsyncOperation twitterAccountsLoader()
-{
-    if ([[[UIDevice currentDevice] systemVersion] compare:@"6.0"] >= NSOrderedSame) {
-        return twitterAccountsLoaderIOS6();
-    }
-    
-    return twitterAccountsLoaderIOS5();
-}
-
 @implementation JFFSocialTwitter
 
 + (BOOL)isAuthorized
 {
-    return [TWTweetComposeViewController canSendTweet];
+    return isAuthorized();
 }
 
 + (JFFAsyncOperation)authorizationLoader
@@ -171,13 +127,14 @@ static JFFAsyncOperation twitterAccountsLoader()
     
         NSString *urlString           = loadDataIdentifier[@"urlString"];
         NSDictionary *parameters      = loadDataIdentifier[@"parameters"];
-        TWRequestMethod requestMethod = [loadDataIdentifier[@"requestMethod"] integerValue];
+        SLRequestMethod requestMethod = [loadDataIdentifier[@"requestMethod"] integerValue];
         
         JFFAsyncOperationBinder requestBinder = ^JFFAsyncOperation(NSArray *accountStroreAndAccounts) {
             
-            TWRequest *request = [[TWRequest alloc] initWithURL:[urlString toURL]
-                                                     parameters:parameters
-                                                  requestMethod:requestMethod];
+            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                    requestMethod:requestMethod
+                                                              URL:[urlString toURL]
+                                                       parameters:parameters];
             
             request.account = accountStroreAndAccounts[1][0];
             
@@ -240,7 +197,7 @@ static JFFAsyncOperation twitterAccountsLoader()
 
 + (JFFAsyncOperation)generalTwitterApiDataLoaderWithURLString:(NSString *)urlString
                                                    parameters:(NSDictionary *)parameters
-                                                requestMethod:(TWRequestMethod)requestMethod
+                                                requestMethod:(SLRequestMethod)requestMethod
                                                  ayncAnalyzer:(JFFAsyncOperationBinder)ayncAnalyzer
                                    cacheDataLifeTimeInSeconds:(NSTimeInterval)cacheDataLifeTimeInSeconds
 {
@@ -286,7 +243,7 @@ static JFFAsyncOperation twitterAccountsLoader()
 
 + (JFFAsyncOperation)generalTwitterApiDataLoaderWithURLString:(NSString *)urlString
                                                    parameters:(NSDictionary *)parameters
-                                                requestMethod:(TWRequestMethod)requestMethod
+                                                requestMethod:(SLRequestMethod)requestMethod
                                                  ayncAnalyzer:(JFFAsyncOperationBinder)ayncAnalyzer
 {
     return [self generalTwitterApiDataLoaderWithURLString:urlString
@@ -310,7 +267,7 @@ static JFFAsyncOperation twitterAccountsLoader()
     
     return [self generalTwitterApiDataLoaderWithURLString:@"https://api.twitter.com/1.1/search/tweets.json"
                                                parameters:params
-                                            requestMethod:TWRequestMethodGET
+                                            requestMethod:SLRequestMethodGET
                                              ayncAnalyzer:asyncJSONObjectToTwitterTweets()];
 }
 
@@ -320,7 +277,7 @@ static JFFAsyncOperation twitterAccountsLoader()
     
     JFFAsyncOperation followersIds = [self generalTwitterApiDataLoaderWithURLString:urlString
                                                                          parameters:nil
-                                                                      requestMethod:TWRequestMethodGET
+                                                                      requestMethod:SLRequestMethodGET
                                                                        ayncAnalyzer:jsonObjectToTwitterUsersIds()
                                                          cacheDataLifeTimeInSeconds:10.*60.];
     
@@ -341,7 +298,7 @@ static JFFAsyncOperation twitterAccountsLoader()
         
         JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:@"https://api.twitter.com/1.1/users/lookup.json"
                                                                        parameters:params
-                                                                    requestMethod:TWRequestMethodGET
+                                                                    requestMethod:SLRequestMethodGET
                                                                      ayncAnalyzer:asyncJSONObjectToTwitterUsers()
                                                        cacheDataLifeTimeInSeconds:10.*60.];
         return result;
@@ -361,7 +318,7 @@ static JFFAsyncOperation twitterAccountsLoader()
     NSString *urlString = @"https://api.twitter.com/1.1/direct_messages/new.json";
     JFFAsyncOperation loader = [self generalTwitterApiDataLoaderWithURLString:urlString
                                                                    parameters:params
-                                                                requestMethod:TWRequestMethodPOST
+                                                                requestMethod:SLRequestMethodPOST
                                                                  ayncAnalyzer:asyncJSONObjectToDirectTweet()];
     
     loader = asyncOperationWithFinishHookBlock(loader, ^(id result, NSError *error, JFFDidFinishAsyncOperationHandler doneCallback) {
@@ -389,7 +346,7 @@ static JFFAsyncOperation twitterAccountsLoader()
     
     JFFAsyncOperation result = [self generalTwitterApiDataLoaderWithURLString:@"http://api.twitter.com/1/statuses/update.json"
                                                                    parameters:params
-                                                                requestMethod:TWRequestMethodPOST
+                                                                requestMethod:SLRequestMethodPOST
                                                                  ayncAnalyzer:asyncJSONObjectToDirectTweet()];
     return result;
 }

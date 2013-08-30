@@ -692,6 +692,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFUI_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = JFFUI;
 				SKIP_INSTALL = YES;
 			};
@@ -708,6 +709,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFUI_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = JFFUI;
 				SKIP_INSTALL = YES;
 			};
@@ -717,6 +719,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -726,6 +730,7 @@
 					"../../lib-third-party/libturbojpeg-ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LLVM_VECTORIZE_LOOPS = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 			};
@@ -735,6 +740,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -743,6 +750,7 @@
 					"../../lib-third-party/libturbojpeg-ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LLVM_VECTORIZE_LOOPS = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 			};
