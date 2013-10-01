@@ -17,6 +17,7 @@ extern "C" {
                                                 JFFAsyncOperation secondLoader, ...) NS_REQUIRES_NIL_TERMINATION;
 
     JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders);
+    JFFAsyncOperation sequenceOfAsyncOperationsWithAllResults(NSArray *blocks);
 
 /////////////////////////////// SEQUENCE WITH BINDING ///////////////////////////////
 

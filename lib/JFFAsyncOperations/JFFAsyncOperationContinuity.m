@@ -107,7 +107,7 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
 
 JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders)
 {
-    assert(loaders.lastObject); //should not be empty
+    NSCParameterAssert( nil != loaders.lastObject ); //should not be empty
     loaders = [loaders map: ^id(id object) {
         JFFAsyncOperation loader = [object copy];
         return ^JFFAsyncOperation(id result) {
@@ -332,7 +332,9 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
     secondLoader = [secondLoader copy];
     
     if (secondLoader == nil)
+    {
         return firstLoader;
+    }
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
@@ -451,16 +453,51 @@ static JFFAsyncOperation resultToArrayForLoader(JFFAsyncOperation loader)
 static JFFAsyncOperation MergeGroupLoaders(MergeTwoLoadersPtr merger, NSArray *blocks)
 {
     if (![blocks lastObject])
+    {
         return asyncOperationWithResult(@[]);
+    }
     
     JFFAsyncOperation firstBlock = blocks[0];
     JFFAsyncOperation arrayFirstBlock = resultToArrayForLoader(firstBlock);
     
-    for (NSUInteger index = 1; index < [blocks count]; ++index) {
-        arrayFirstBlock = merger(arrayFirstBlock, blocks[index]);
+    NSUInteger blocksCount = [blocks count];
+    for (NSUInteger index = 1; index < blocksCount; ++index)
+    {
+        arrayFirstBlock = merger( arrayFirstBlock, blocks[index] );
     }
     
     return arrayFirstBlock;
+}
+
+JFFAsyncOperation sequenceOfAsyncOperationsWithAllResults( NSArray *blocks )
+{
+    __block NSMutableArray* complexResult = [ NSMutableArray new ];
+    
+    JFFDidFinishAsyncOperationHook finishHook =
+    ^void( id blockResult, NSError* blockError, JFFDidFinishAsyncOperationHandler doneCallback )
+    {
+        if ( nil != blockResult )
+        {
+            [ complexResult addObject: blockResult ];
+        }
+        
+        doneCallback( blockResult, blockError );
+    };
+    
+    JFFMappingBlock doHookCompletion = ^id(JFFAsyncOperation block)
+    {
+        return asyncOperationWithFinishHookBlock( block, finishHook );
+    };
+    NSArray* hookedCompletionBlocks = [ blocks map:doHookCompletion ];
+    JFFAsyncOperation sequence = sequenceOfAsyncOperationsArray( hookedCompletionBlocks );
+    
+    JFFChangedResultBuilder complexResultBuilder = ^NSArray*(id sequenceResult)
+    {
+        return [ NSArray arrayWithArray: complexResult ];
+    };
+    JFFAsyncOperation resultOp = asyncOperationWithChangedResult( sequence, complexResultBuilder );
+
+    return resultOp;
 }
 
 JFFAsyncOperation groupOfAsyncOperationsArray(NSArray *blocks)
