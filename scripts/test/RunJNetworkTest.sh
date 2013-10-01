@@ -4,6 +4,7 @@
 #####################
 
 
+echo "===============BEGIN JFFNetworkTest==============="
 
 IOS_VERSION=$1
 CONFIGURATION=$2
@@ -29,10 +30,14 @@ if [ "$?" -ne "0" ]; then
 fi
 
 
+echo "-----Start Simulator-----"
 BUILT_PRODUCTS_DIR=$( cat /tmp/${APP_NAME}Build/PRODUCT_DIR.txt )
 cd "$BUILT_PRODUCTS_DIR/$CONFIGURATION-iphonesimulator"
 /bin/bash "$LAUNCH_DIR/KillSimulator.sh"
     iphonesim launch "$PWD/$APP_NAME.app" $IOS_VERSION 
 /bin/bash "$LAUNCH_DIR/KillSimulator.sh"
+echo "-----Stopped Simulator-----"
 
 cd "$LAUNCH_DIR"
+
+echo "===============END JFFNetworkTest==============="
