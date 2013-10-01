@@ -321,11 +321,11 @@
         
         loader(progressCallback, cancelCallback, doneCallback);
         
-        GHAssertFalse(progressCallbackCalled, nil);
-        GHAssertEqualObjects(@YES, cancelCallbackCallFlag, nil);
-        GHAssertFalse(doneCallbackCalled, nil);
+        GHAssertFalse(progressCallbackCalled, @"progressCallback mismatch");
+        GHAssertEqualObjects(@YES, cancelCallbackCallFlag, @"cancelCallback mismatch");
+        GHAssertFalse(doneCallbackCalled, @"doneCallback mismatch");
         
-        GHAssertEquals((NSUInteger)0, secondLoader.loadingCount, nil);
+        GHAssertEquals((NSUInteger)0, secondLoader.loadingCount, @"unwanted invocation - second loader");
     }
     
     GHAssertTrue(0 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"OK");
