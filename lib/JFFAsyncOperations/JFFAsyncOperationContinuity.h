@@ -18,7 +18,7 @@ extern "C" {
 
     JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders);
     JFFAsyncOperation sequenceOfAsyncOperationsWithAllResults(NSArray *blocks);
-
+    JFFAsyncOperation sequenceOfAsyncOperationsWithSuccessfullResults(NSArray *blocks);
 /////////////////////////////// SEQUENCE WITH BINDING ///////////////////////////////
 
 //calls binders while success

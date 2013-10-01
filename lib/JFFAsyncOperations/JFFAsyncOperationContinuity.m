@@ -469,6 +469,49 @@ static JFFAsyncOperation MergeGroupLoaders(MergeTwoLoadersPtr merger, NSArray *b
     return arrayFirstBlock;
 }
 
+static JFFAsyncOperation accumulatSequenceResultToArrayUsingFinishHook( NSArray *blocks, NSMutableArray* result, JFFDidFinishAsyncOperationHook finishHook )
+{
+    __block NSMutableArray* complexResult = result;
+    
+    JFFMappingBlock doHookCompletion = ^id(JFFAsyncOperation block)
+    {
+        return asyncOperationWithFinishHookBlock( block, finishHook );
+    };
+    NSArray* hookedCompletionBlocks = [ blocks map:doHookCompletion ];
+    JFFAsyncOperation sequence = sequenceOfAsyncOperationsArray( hookedCompletionBlocks );
+    
+    JFFChangedResultBuilder complexResultBuilder = ^NSArray*(id sequenceResult)
+    {
+        return [ NSArray arrayWithArray: complexResult ];
+    };
+    JFFAsyncOperation resultOp = asyncOperationWithChangedResult( sequence, complexResultBuilder );
+    
+    return resultOp;
+}
+
+JFFAsyncOperation sequenceOfAsyncOperationsWithSuccessfullResults( NSArray *blocks )
+{
+    __block NSMutableArray* complexResult = [ NSMutableArray new ];
+    
+    JFFDidFinishAsyncOperationHook finishHook =
+    ^void( id blockResult, NSError* blockError, JFFDidFinishAsyncOperationHandler doneCallback )
+    {
+        if ( nil != blockResult )
+        {
+            [ complexResult addObject: blockResult ];
+        }
+        else
+        {
+            NSLog( @"sequenceOfAsyncOperationsWithSuccessfullResults() - error occured : %@", blockError );
+            blockResult = [ NSNull null ];
+        }
+        
+        doneCallback( blockResult, nil );
+    };
+    
+    return accumulatSequenceResultToArrayUsingFinishHook( blocks, complexResult, finishHook );
+}
+
 JFFAsyncOperation sequenceOfAsyncOperationsWithAllResults( NSArray *blocks )
 {
     __block NSMutableArray* complexResult = [ NSMutableArray new ];
@@ -484,20 +527,7 @@ JFFAsyncOperation sequenceOfAsyncOperationsWithAllResults( NSArray *blocks )
         doneCallback( blockResult, blockError );
     };
     
-    JFFMappingBlock doHookCompletion = ^id(JFFAsyncOperation block)
-    {
-        return asyncOperationWithFinishHookBlock( block, finishHook );
-    };
-    NSArray* hookedCompletionBlocks = [ blocks map:doHookCompletion ];
-    JFFAsyncOperation sequence = sequenceOfAsyncOperationsArray( hookedCompletionBlocks );
-    
-    JFFChangedResultBuilder complexResultBuilder = ^NSArray*(id sequenceResult)
-    {
-        return [ NSArray arrayWithArray: complexResult ];
-    };
-    JFFAsyncOperation resultOp = asyncOperationWithChangedResult( sequence, complexResultBuilder );
-
-    return resultOp;
+    return accumulatSequenceResultToArrayUsingFinishHook( blocks, complexResult, finishHook );
 }
 
 JFFAsyncOperation groupOfAsyncOperationsArray(NSArray *blocks)

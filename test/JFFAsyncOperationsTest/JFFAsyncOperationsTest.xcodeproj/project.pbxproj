@@ -27,6 +27,7 @@
 		1BEE3B0015EFA9D40024D249 /* AsyncOperationBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7A10A314C036D900F37C95 /* AsyncOperationBinder.m */; };
 		1BEE3B0115EFA9D40024D249 /* AsyncOperationWithDelayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65359B4D151A6DB90099D6FE /* AsyncOperationWithDelayTest.m */; };
 		7E12F4B817FAA43C00ABE54E /* SequenceWithAllResultTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E12F4B717FAA43C00ABE54E /* SequenceWithAllResultTest.m */; };
+		7E95E46317FB11B2001961B4 /* SequenceWithSuccessfullResultTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E95E46217FB11B2001961B4 /* SequenceWithSuccessfullResultTest.m */; };
 		8D29EF8D13BE066900041B6A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D29EF8C13BE066900041B6A /* UIKit.framework */; };
 		8D29EF8F13BE066900041B6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D29EF8E13BE066900041B6A /* Foundation.framework */; };
 		8D29EF9113BE066900041B6A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D29EF9013BE066900041B6A /* CoreGraphics.framework */; };
@@ -188,6 +189,7 @@
 		65359BD5151A81C40099D6FE /* ParalelBlockTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParalelBlockTest.m; sourceTree = "<group>"; };
 		65977F8014A6731000AB83AE /* CachedAsyncOperationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CachedAsyncOperationsTest.m; sourceTree = "<group>"; };
 		7E12F4B717FAA43C00ABE54E /* SequenceWithAllResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequenceWithAllResultTest.m; sourceTree = "<group>"; };
+		7E95E46217FB11B2001961B4 /* SequenceWithSuccessfullResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequenceWithSuccessfullResultTest.m; sourceTree = "<group>"; };
 		8D29EF8813BE066900041B6A /* JFFAsyncOperationsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFAsyncOperationsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D29EF8C13BE066900041B6A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8D29EF8E13BE066900041B6A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -318,6 +320,7 @@
 				1B793B32142C851C00B43DC8 /* WeakAsyncOperationTest.m */,
 				1BA2551F1443114300C9B2BE /* SequenceOfAsyncOperationsTest.m */,
 				7E12F4B717FAA43C00ABE54E /* SequenceWithAllResultTest.m */,
+				7E95E46217FB11B2001961B4 /* SequenceWithSuccessfullResultTest.m */,
 				1BA27738144D9B1B00774C8E /* TrySequenceOfAsyncOperationsTest.m */,
 				1BED04FF144EBF2800B8DC2A /* GroupOfAsyncOperationsTest.m */,
 				1B0857D014516076001DDE0A /* FailOnFirstErrorGroupOfAsyncOperationsTest.m */,
@@ -548,6 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E95E46317FB11B2001961B4 /* SequenceWithSuccessfullResultTest.m in Sources */,
 				8D29EF9913BE066900041B6A /* main.m in Sources */,
 				1B12CB3B144D5C5900DFE2B1 /* JFFAsyncOperationManager.m in Sources */,
 				1BEE3AF115EFA9850024D249 /* TrySequenceOfAsyncOperationsTest.m in Sources */,
