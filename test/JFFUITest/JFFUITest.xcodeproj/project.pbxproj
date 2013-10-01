@@ -23,7 +23,6 @@
 		7E79474316E5DCF500219958 /* libJFFNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E79473416E5DCEE00219958 /* libJFFNetwork.a */; };
 		7E79474716E5DD0200219958 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E79474616E5DD0200219958 /* CFNetwork.framework */; };
 		7E79474916E5DD0600219958 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E79474816E5DD0600219958 /* libz.dylib */; };
-		7E79475516E5DD3400219958 /* libDDUrlBuilder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E79475016E5DD2900219958 /* libDDUrlBuilder.a */; };
 		CEA097F715FF52010080DEF7 /* libJFFAsyncOperations.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA097EF15FF51F20080DEF7 /* libJFFAsyncOperations.a */; };
 		CEA097FA15FF540C0080DEF7 /* OpenApplicationAsyncOpTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA097F915FF540C0080DEF7 /* OpenApplicationAsyncOpTest.m */; };
 		CEA0980F15FF55950080DEF7 /* libJFFScheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA0980615FF55840080DEF7 /* libJFFScheduler.a */; };
@@ -138,26 +137,12 @@
 			remoteGlobalIDString = 8D5AE6DA13F3E6C600EB6143;
 			remoteInfo = JFFNetwork;
 		};
-		7E79474F16E5DD2900219958 /* PBXContainerItemProxy */ = {
+		7ED1F4B017DF65940003CDD4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7E79474A16E5DD2800219958 /* DDUrlBuilder.xcodeproj */;
+			containerPortal = 1B295564143DCCAE00532BD7 /* JFFUtils.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 7E54C1D8157F8687007D89F1;
-			remoteInfo = DDUrlBuilder;
-		};
-		7E79475116E5DD2900219958 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E79474A16E5DD2800219958 /* DDUrlBuilder.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7E54C1F1157F889A007D89F1;
-			remoteInfo = DDUrlBuilderTest;
-		};
-		7E79475316E5DD3000219958 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E79474A16E5DD2800219958 /* DDUrlBuilder.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 7E54C1D7157F8687007D89F1;
-			remoteInfo = DDUrlBuilder;
+			remoteGlobalIDString = 7ED3CB1516E6387B00E5A00F;
+			remoteInfo = "JFFUtilsTest-CI";
 		};
 		CEA097EE15FF51F20080DEF7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -279,7 +264,6 @@
 		7E79472916E5DCED00219958 /* JFFNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFNetwork.xcodeproj; path = ../../lib/JFFNetwork/JFFNetwork.xcodeproj; sourceTree = "<group>"; };
 		7E79474616E5DD0200219958 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7E79474816E5DD0600219958 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		7E79474A16E5DD2800219958 /* DDUrlBuilder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DDUrlBuilder.xcodeproj; path = "../../../davedelong-Demos/DDURLBuilder/DDUrlBuilder/DDUrlBuilder.xcodeproj"; sourceTree = "<group>"; };
 		CEA097E115FF51F20080DEF7 /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../../lib/JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
 		CEA097F915FF540C0080DEF7 /* OpenApplicationAsyncOpTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenApplicationAsyncOpTest.m; sourceTree = "<group>"; };
 		CEA097FB15FF55840080DEF7 /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../../lib/JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
@@ -293,7 +277,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E79475516E5DD3400219958 /* libDDUrlBuilder.a in Frameworks */,
 				7E79474916E5DD0600219958 /* libz.dylib in Frameworks */,
 				7E79474716E5DD0200219958 /* CFNetwork.framework in Frameworks */,
 				7E79474316E5DCF500219958 /* libJFFNetwork.a in Frameworks */,
@@ -398,6 +381,7 @@
 				538C140E14A9F3200097645A /* libJFFUtils-clang.a */,
 				1BE054D01548298A00270B58 /* JFFUtilsFW.framework */,
 				CED00076161989F000368E7D /* JFFUtilsTest.octest */,
+				7ED1F4B117DF65940003CDD4 /* JFFUtilsTest-CI.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -405,7 +389,6 @@
 		1BE054D2154829AA00270B58 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				7E79474A16E5DD2800219958 /* DDUrlBuilder.xcodeproj */,
 				7E79472916E5DCED00219958 /* JFFNetwork.xcodeproj */,
 				CED0008416198A7300368E7D /* JFFRestKit.xcodeproj */,
 				CED0007816198A4D00368E7D /* JFFCache.xcodeproj */,
@@ -433,15 +416,6 @@
 				7E79473616E5DCEE00219958 /* libJFFNetworkMacOS.a */,
 				7E79473816E5DCEE00219958 /* libJFFNetwork-clang.a */,
 				7E79473A16E5DCEE00219958 /* JFFNetworkFW.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		7E79474B16E5DD2800219958 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7E79475016E5DD2900219958 /* libDDUrlBuilder.a */,
-				7E79475216E5DD2900219958 /* DDUrlBuilderTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -498,7 +472,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				7E79475416E5DD3000219958 /* PBXTargetDependency */,
 				7E79474516E5DCFD00219958 /* PBXTargetDependency */,
 				CED0009516198A8700368E7D /* PBXTargetDependency */,
 				CED0008216198A5700368E7D /* PBXTargetDependency */,
@@ -532,10 +505,6 @@
 			productRefGroup = 1B29551B143DC94B00532BD7 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 7E79474B16E5DD2800219958 /* Products */;
-					ProjectRef = 7E79474A16E5DD2800219958 /* DDUrlBuilder.xcodeproj */;
-				},
 				{
 					ProductGroup = CEA097E215FF51F20080DEF7 /* Products */;
 					ProjectRef = CEA097E115FF51F20080DEF7 /* JFFAsyncOperations.xcodeproj */;
@@ -608,7 +577,6 @@
 		538C140814A9F3200097645A /* libJFFUI copy.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "libJFFUI copy.a";
 			path = "libJFFUI-clang.a";
 			remoteRef = 538C140714A9F3200097645A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -655,18 +623,11 @@
 			remoteRef = 7E79473916E5DCEE00219958 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7E79475016E5DD2900219958 /* libDDUrlBuilder.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libDDUrlBuilder.a;
-			remoteRef = 7E79474F16E5DD2900219958 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E79475216E5DD2900219958 /* DDUrlBuilderTest.octest */ = {
+		7ED1F4B117DF65940003CDD4 /* JFFUtilsTest-CI.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = DDUrlBuilderTest.octest;
-			remoteRef = 7E79475116E5DD2900219958 /* PBXContainerItemProxy */;
+			path = "JFFUtilsTest-CI.octest";
+			remoteRef = 7ED1F4B017DF65940003CDD4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CEA097EF15FF51F20080DEF7 /* libJFFAsyncOperations.a */ = {
@@ -804,11 +765,6 @@
 			isa = PBXTargetDependency;
 			name = JFFNetwork;
 			targetProxy = 7E79474416E5DCFD00219958 /* PBXContainerItemProxy */;
-		};
-		7E79475416E5DD3000219958 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = DDUrlBuilder;
-			targetProxy = 7E79475316E5DD3000219958 /* PBXContainerItemProxy */;
 		};
 		CEA097F615FF51FC0080DEF7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

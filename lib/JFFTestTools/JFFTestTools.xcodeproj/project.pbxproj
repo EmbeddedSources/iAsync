@@ -15,6 +15,7 @@
 		1BE054441548273000270B58 /* GHAsyncTestCase+MainThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE054421548273000270B58 /* GHAsyncTestCase+MainThreadTests.m */; };
 		1BE054B0154828F000270B58 /* NSObject+InstancesCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE054AE154828EF00270B58 /* NSObject+InstancesCount.h */; };
 		1BE054B1154828F000270B58 /* NSObject+InstancesCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE054AF154828EF00270B58 /* NSObject+InstancesCount.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7ED1F49417DF5BD20003CDD4 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ED1F49317DF5BD20003CDD4 /* GHUnitIOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		1BE054421548273000270B58 /* GHAsyncTestCase+MainThreadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GHAsyncTestCase+MainThreadTests.m"; sourceTree = "<group>"; };
 		1BE054AE154828EF00270B58 /* NSObject+InstancesCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+InstancesCount.h"; sourceTree = "<group>"; };
 		1BE054AF154828EF00270B58 /* NSObject+InstancesCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+InstancesCount.m"; sourceTree = "<group>"; };
+		7ED1F49317DF5BD20003CDD4 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../../frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE0542F154826DA00270B58 /* Foundation.framework in Frameworks */,
+				7ED1F49417DF5BD20003CDD4 /* GHUnitIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +65,7 @@
 		1BE0542D154826DA00270B58 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7ED1F49317DF5BD20003CDD4 /* GHUnitIOS.framework */,
 				1BE0542E154826DA00270B58 /* Foundation.framework */,
 			);
 			name = Frameworks;
