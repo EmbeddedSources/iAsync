@@ -291,24 +291,33 @@ static void readStreamCallback(CFReadStreamRef stream,
     // @adk - using "strong" since this code may be called from "dealloc".
     // No retain cycles here
     __strong JFFURLConnection* weakSelf = self;
-
-    safe_dispatch_sync( self->_queueForCallbacks,
+    
+    dispatch_block_t cleanupBlock =
     ^{
         dispatch_queue_t zipQueue = [ weakSelf zipQueue ];
         if ( NULL != zipQueue )
         {
             dispatch_release( zipQueue );
         }
-
+        
         weakSelf.zipQueue = NULL;
-    } );
+    };
+    
+    if ( nil == self->_queueForCallbacks )
+    {
+        cleanupBlock();
+        return;
+    }
+    else
+    {
+        safe_dispatch_sync( self->_queueForCallbacks, cleanupBlock );
+        return;
+    }
 }
 
 -(id<JNHttpDecoder>)getDecoder
 {
     NSString* contentEncoding = self->_urlResponse.contentEncoding;
-//    NSString* previousEncoding = self->_previousContentEncoding;
-
 
     BOOL isDecoderMissing = ( nil == self->_decoder );
     
@@ -320,7 +329,6 @@ static void readStreamCallback(CFReadStreamRef stream,
         self->_decoder = decoder;
     }
 
-//    [ @"http://ws-alr1.dk.sitecore.net:66/sitecore/shell/ClientBin/Dashboard/Integration.ashx?action=loadPreFilterParams" isEqualToString: (NSString*)[ ((NSURL*)[ self->_urlResponse url ]) absoluteString ] ]
     
     return self->_decoder;
 }
