@@ -261,16 +261,23 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 -(void)closeReadStream
 {
-    if ( self->_readStream )
+    if ( NULL != self->_readStream )
     {
         CFRunLoopRef streamRunLoop = [ self runLoopForReadStream ];
         
         CFReadStreamUnscheduleFromRunLoop( self->_readStream
                                           , streamRunLoop
                                           , kCFRunLoopCommonModes );
-        CFReadStreamClose( self->_readStream );
-        CFRelease( self->_readStream );
-        self->_readStream = nil;
+        
+        @synchronized( self )
+        {
+            if ( NULL != self->_readStream )
+            {
+                CFReadStreamClose( self->_readStream );
+                CFRelease( self->_readStream );
+                self->_readStream = nil;
+            }
+        }
     }
 }
 
