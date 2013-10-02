@@ -16,6 +16,7 @@
 		1BE99A3015459AB40028F395 /* JFFSecureStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE99A2F15459AB40028F395 /* JFFSecureStorageTest.m */; };
 		1BE99A4015459BCC0028F395 /* libJFFSecureStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE99A3B15459BC20028F395 /* libJFFSecureStorage.a */; };
 		1BE99A4215459BDB0028F395 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE99A4115459BDB0028F395 /* Security.framework */; };
+		7E38859017FBEFAB00399329 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E38858F17FBEFAB00399329 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		1BE99A2F15459AB40028F395 /* JFFSecureStorageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSecureStorageTest.m; sourceTree = "<group>"; };
 		1BE99A3215459BC20028F395 /* JFFSecureStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFSecureStorage.xcodeproj; path = ../../lib/JFFSecureStorage/JFFSecureStorage.xcodeproj; sourceTree = "<group>"; };
 		1BE99A4115459BDB0028F395 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7E38858F17FBEFAB00399329 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E38859017FBEFAB00399329 /* QuartzCore.framework in Frameworks */,
 				1BE99A4215459BDB0028F395 /* Security.framework in Frameworks */,
 				1BE99A4015459BCC0028F395 /* libJFFSecureStorage.a in Frameworks */,
 				1BE99A04154599490028F395 /* UIKit.framework in Frameworks */,
@@ -95,6 +98,7 @@
 		1BE99A02154599490028F395 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E38858F17FBEFAB00399329 /* QuartzCore.framework */,
 				1BE99A4115459BDB0028F395 /* Security.framework */,
 				1BE99A2C154599CD0028F395 /* GHUnitIOS.framework */,
 				1BE99A03154599490028F395 /* UIKit.framework */,

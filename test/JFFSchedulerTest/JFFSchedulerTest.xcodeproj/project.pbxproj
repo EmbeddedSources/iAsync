@@ -20,6 +20,7 @@
 		1B41AD65151CD1EE00566B1B /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41AD5C151CD1E000566B1B /* libJFFUtils.a */; };
 		1BEC47F7156A26B80099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEC47F6156A26B80099DA6D /* libstdc++.dylib */; };
 		1BEE3D2615EFB43E0024D249 /* PerformSelectorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE3D2515EFB43E0024D249 /* PerformSelectorTest.m */; };
+		7E38858317FBEF9C00399329 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E38858217FBEF9C00399329 /* QuartzCore.framework */; };
 		CE1BC2DB161B2E81007DEC95 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BC2DA161B2E81007DEC95 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,13 @@
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = JFFUtils;
 		};
+		7E38858C17FBEF9D00399329 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B41AD51151CD1E000566B1B /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7ED3CB1516E6387B00E5A00F;
+			remoteInfo = "JFFUtilsTest-CI";
+		};
 		CED0011616198BE900368E7D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1B41AD51151CD1E000566B1B /* JFFUtils.xcodeproj */;
@@ -134,6 +142,7 @@
 		1B41AD51151CD1E000566B1B /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
 		1BEC47F6156A26B80099DA6D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		1BEE3D2515EFB43E0024D249 /* PerformSelectorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerformSelectorTest.m; sourceTree = "<group>"; };
+		7E38858217FBEF9C00399329 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE1BC2DA161B2E81007DEC95 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E38858317FBEF9C00399329 /* QuartzCore.framework in Frameworks */,
 				1BEC47F7156A26B80099DA6D /* libstdc++.dylib in Frameworks */,
 				1B0E89441563FA7900825E3C /* libc++.dylib in Frameworks */,
 				1B266A2E156245360054E183 /* libJFFTestTools.a in Frameworks */,
@@ -187,6 +197,7 @@
 		1B41ACF8151CCF7100566B1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E38858217FBEF9C00399329 /* QuartzCore.framework */,
 				1B0E89431563FA7900825E3C /* libc++.dylib */,
 				1BEC47F6156A26B80099DA6D /* libstdc++.dylib */,
 				1B41AD19151CCF9300566B1B /* GHUnitIOS.framework */,
@@ -247,6 +258,7 @@
 				1B41AD60151CD1E000566B1B /* libJFFUtils-clang.a */,
 				1B41AD62151CD1E000566B1B /* JFFUtilsFW.framework */,
 				CED0011716198BE900368E7D /* JFFUtilsTest.octest */,
+				7E38858D17FBEF9D00399329 /* JFFUtilsTest-CI.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -375,6 +387,13 @@
 			fileType = wrapper.framework.static;
 			path = JFFUtilsFW.framework;
 			remoteRef = 1B41AD61151CD1E000566B1B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E38858D17FBEF9D00399329 /* JFFUtilsTest-CI.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "JFFUtilsTest-CI.octest";
+			remoteRef = 7E38858C17FBEF9D00399329 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CED0011716198BE900368E7D /* JFFUtilsTest.octest */ = {

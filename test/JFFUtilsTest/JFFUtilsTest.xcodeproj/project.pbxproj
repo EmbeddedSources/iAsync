@@ -11,6 +11,7 @@
 		1B2D8B6C154BF37C00360296 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2D8B69154BF36C00360296 /* libJFFTestTools.a */; };
 		534CDFDE14A8CAAC0068F4DF /* JMStringHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */; };
 		7E7225DE1588891400210CBE /* DevNullTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7225DD1588891400210CBE /* DevNullTest.m */; };
+		7E72CA1717FBEFF80081F306 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E72CA1617FBEFF80081F306 /* QuartzCore.framework */; };
 		B69483EC1429C88400B8247E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69483EB1429C88400B8247E /* UIKit.framework */; };
 		B69483EE1429C88400B8247E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69483ED1429C88400B8247E /* Foundation.framework */; };
 		B69483F01429C88400B8247E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69483EF1429C88400B8247E /* CoreGraphics.framework */; };
@@ -61,6 +62,13 @@
 			remoteGlobalIDString = 7E57F42414F93738002D139B;
 			remoteInfo = JFFUtilsFW;
 		};
+		7E72CA1D17FBEFF80081F306 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7ED3CB1516E6387B00E5A00F;
+			remoteInfo = "JFFUtilsTest-CI";
+		};
 		B69484641429E24B00B8247E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */;
@@ -91,6 +99,7 @@
 		534CDFDC14A8CAAC0068F4DF /* JMStringHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStringHolder.h; sourceTree = "<group>"; };
 		534CDFDD14A8CAAC0068F4DF /* JMStringHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStringHolder.m; sourceTree = "<group>"; };
 		7E7225DD1588891400210CBE /* DevNullTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevNullTest.m; sourceTree = "<group>"; };
+		7E72CA1617FBEFF80081F306 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B69483E71429C88400B8247E /* JFFUtilsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFUtilsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B69483EB1429C88400B8247E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B69483ED1429C88400B8247E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -112,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E72CA1717FBEFF80081F306 /* QuartzCore.framework in Frameworks */,
 				CE57FBE11611FA0900124D90 /* libstdc++.dylib in Frameworks */,
 				1B0E89211563FA5200825E3C /* libc++.dylib in Frameworks */,
 				1B2D8B6C154BF37C00360296 /* libJFFTestTools.a in Frameworks */,
@@ -174,6 +184,7 @@
 		B69483EA1429C88400B8247E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E72CA1617FBEFF80081F306 /* QuartzCore.framework */,
 				1B0E89201563FA5200825E3C /* libc++.dylib */,
 				534CDFD914A8CA290068F4DF /* libstdc++.dylib */,
 				B69484021429D3D300B8247E /* GHUnitIOS.framework */,
@@ -224,6 +235,7 @@
 				534CDFD414A8C7E00068F4DF /* libJFFUtils-clang.a */,
 				6515B960152B726E00518996 /* JFFUtilsFW.framework */,
 				CE444A3F160860B500DD85B0 /* JFFUtilsTest.octest */,
+				7E72CA1E17FBEFF80081F306 /* JFFUtilsTest-CI.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -313,6 +325,13 @@
 			fileType = wrapper.framework.static;
 			path = JFFUtilsFW.framework;
 			remoteRef = 6515B95F152B726E00518996 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E72CA1E17FBEFF80081F306 /* JFFUtilsTest-CI.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "JFFUtilsTest-CI.octest";
+			remoteRef = 7E72CA1D17FBEFF80081F306 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B69484651429E24B00B8247E /* libJFFUtils.a */ = {

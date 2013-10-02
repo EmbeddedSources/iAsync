@@ -20,6 +20,7 @@
 		1BE054DE154829FB00270B58 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE054DB154829F000270B58 /* libJFFTestTools.a */; };
 		1BE054E115482A5400270B58 /* JFFActionSheetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE054E015482A5400270B58 /* JFFActionSheetTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1BEC47D4156A26950099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 538C141014A9F33B0097645A /* libstdc++.dylib */; };
+		7E72CA0317FBEFEA0081F306 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E72CA0217FBEFEA0081F306 /* QuartzCore.framework */; };
 		7E79474316E5DCF500219958 /* libJFFNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E79473416E5DCEE00219958 /* libJFFNetwork.a */; };
 		7E79474716E5DD0200219958 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E79474616E5DD0200219958 /* CFNetwork.framework */; };
 		7E79474916E5DD0600219958 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E79474816E5DD0600219958 /* libz.dylib */; };
@@ -261,6 +262,7 @@
 		1BE054D3154829F000270B58 /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		1BE054E015482A5400270B58 /* JFFActionSheetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFActionSheetTest.m; sourceTree = "<group>"; };
 		538C141014A9F33B0097645A /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		7E72CA0217FBEFEA0081F306 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7E79472916E5DCED00219958 /* JFFNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFNetwork.xcodeproj; path = ../../lib/JFFNetwork/JFFNetwork.xcodeproj; sourceTree = "<group>"; };
 		7E79474616E5DD0200219958 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7E79474816E5DD0600219958 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -277,6 +279,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E72CA0317FBEFEA0081F306 /* QuartzCore.framework in Frameworks */,
 				7E79474916E5DD0600219958 /* libz.dylib in Frameworks */,
 				7E79474716E5DD0200219958 /* CFNetwork.framework in Frameworks */,
 				7E79474316E5DCF500219958 /* libJFFNetwork.a in Frameworks */,
@@ -321,6 +324,7 @@
 		1B29551D143DC94B00532BD7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E72CA0217FBEFEA0081F306 /* QuartzCore.framework */,
 				7E79474816E5DD0600219958 /* libz.dylib */,
 				7E79474616E5DD0200219958 /* CFNetwork.framework */,
 				CED0009716198AA200368E7D /* libsqlite3.dylib */,
@@ -368,7 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				1B295555143DCA8300532BD7 /* libJFFUI.a */,
-				538C140814A9F3200097645A /* libJFFUI copy.a */,
+				538C140814A9F3200097645A /* libJFFUI-clang.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -574,7 +578,7 @@
 			remoteRef = 1BE054DA154829F000270B58 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		538C140814A9F3200097645A /* libJFFUI copy.a */ = {
+		538C140814A9F3200097645A /* libJFFUI-clang.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libJFFUI-clang.a";
