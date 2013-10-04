@@ -82,16 +82,18 @@
 
 - (void)removeObject:(id)object
 {
-    NSUInteger index = [_mutableArray firstIndexOfObjectMatch:^BOOL(id element) {
-        JFFAutoRemoveAssignProxy *proxy = element;
-        return proxy.target == object;
-    }];
+    NSUInteger index = [self indexOfObject:object];
     
     if (index != NSNotFound) {
-        JFFAutoRemoveAssignProxy *proxy = _mutableArray[index];
-        [proxy onRemoveFromMutableAssignArray:self];
-        [_mutableArray removeObjectAtIndex:index];
+        [self removeObjectAtIndex:index];
     }
+}
+
+- (void)removeObjectAtIndex:(NSUInteger)index
+{
+    JFFAutoRemoveAssignProxy *proxy = _mutableArray[index];
+    [proxy onRemoveFromMutableAssignArray:self];
+    [_mutableArray removeObjectAtIndex:index];
     
     if (_onRemoveObject) {
         _onRemoveObject();
@@ -104,6 +106,16 @@
         [proxy onRemoveFromMutableAssignArray:self];
     }
     [_mutableArray removeAllObjects];
+}
+
+- (NSUInteger)indexOfObject:(id)object
+{
+    NSUInteger index = [_mutableArray firstIndexOfObjectMatch:^BOOL(id element) {
+        JFFAutoRemoveAssignProxy *proxy = element;
+        return proxy.target == object;
+    }];
+    
+    return index;
 }
 
 - (NSUInteger)count
