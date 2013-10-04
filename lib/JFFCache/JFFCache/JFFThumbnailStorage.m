@@ -4,6 +4,7 @@
 #import "JFFCaches.h"
 
 #import "JFFCacheNoURLError.h"
+#import "JFFCacheLoadImageError.h"
 
 #import <JFFRestKit/JFFRestKit.h>
 #import <JFFNetwork/JFFNetworkBlocksFunctions.h>
@@ -210,6 +211,14 @@ static JFFThumbnailStorage *glStorageInstance = nil;
     
     JFFAsyncOperation loader = jSmartDataLoaderWithCache(args);
     
+    loader = bindTrySequenceOfAsyncOperations(loader, ^JFFAsyncOperation(NSError *error) {
+        
+        JFFCacheLoadImageError *resultError = [JFFCacheLoadImageError new];
+        resultError.nativeError = error;
+        
+        return asyncOperationWithError(resultError);
+    }, nil);
+    
     return loader;
 }
 
@@ -230,7 +239,7 @@ static JFFThumbnailStorage *glStorageInstance = nil;
                                                  ignoreFreshDataLoadFail:YES];
         
         //TODO: also check the last update date here
-        JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc] initWithName:@"imagesByUrl"
+        JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc] initWithName:NSStringFromSelector(@selector(imagesByUrl))
                                                                           key:url];
         
         loader = [self asyncOperationForPropertyWithPath:propertyPath
