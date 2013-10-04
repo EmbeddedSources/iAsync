@@ -236,7 +236,7 @@
     
     params[@"post*"] = @"1";
     
-    NSString *boundary = [NSString createUuid];
+    NSString *boundary = [[NSUUID new] UUIDString];
     
     NSMutableData *httpBody = [NSMutableData dataForHTTPPostWithData:UIImageJPEGRepresentation(image, 1.0)
                                                          andFileName:@"name"

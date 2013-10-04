@@ -285,7 +285,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 
 - (void)addData:(NSData *)data forRecord:(NSString *)recordId
 {
-    NSString *fileLink = [NSString createUuid];
+    NSString *fileLink = [[NSUUID new] UUIDString];
     
     static NSString *const addQueryFormat = @"INSERT INTO records (record_id, file_link, update_time, access_time) VALUES ('%@', '%@', '%f', '%f');";
     NSString *addQuery = [[NSString alloc] initWithFormat:addQueryFormat,

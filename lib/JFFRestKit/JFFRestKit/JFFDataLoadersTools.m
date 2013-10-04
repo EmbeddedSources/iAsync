@@ -28,8 +28,8 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader(JFFAsyncOperation chunkedD
         
         progressCallback = [progressCallback copy];
         JFFAsyncOperationProgressHandler progressWrapperCallback = ^(JFFNetworkResponseDataCallback *progressInfo) {
-            if ( !handle ) {
-                filePath = [NSString createUuid];
+            if (!handle) {
+                filePath = [[NSUUID new] UUIDString];
                 filePath = [NSString cachesPathByAppendingPathComponent:filePath];
                 [[NSFileManager defaultManager] createFileAtPath:filePath
                                                         contents:nil

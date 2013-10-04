@@ -12,7 +12,7 @@
     
     @autoreleasepool {
         
-        filePath = [NSString createUuid];
+        filePath = [[NSUUID new] UUIDString];
         filePath = [NSString cachesPathByAppendingPathComponent:filePath];
         const char *filePathPtr = [filePath cStringUsingEncoding:NSUTF8StringEncoding];
         

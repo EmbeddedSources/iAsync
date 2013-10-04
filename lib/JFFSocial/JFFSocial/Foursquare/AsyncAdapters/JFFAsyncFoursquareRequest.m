@@ -30,7 +30,7 @@ static JFFAsyncOperation generalFoursquareRequestLoader(NSString *requestURL,
     if ([httpMethod isEqualToString:@"POST"]) {
         params.url = [requestURL toURL];
         if (httpBody) {
-            NSString *boundary = [NSString createUuid];
+            NSString *boundary = [[NSUUID new] UUIDString];
             [httpBody appendHTTPParameters:fullParams boundary:boundary];
             params.headers = @{ @"Content-Type" : @"multipart/form-data" };
         } else {
