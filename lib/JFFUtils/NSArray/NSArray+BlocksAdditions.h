@@ -62,6 +62,10 @@
 //returning the first element for which the block returns a YES value 
 - (id)firstMatch:(JFFPredicateBlock)predicate;
 
+//Invokes the block passing in successive elements from self,
+//returning the last element for which the block returns a YES value
+- (id)lastMatch:(JFFPredicateBlock)predicate;
+
 - (NSUInteger)firstIndexOfObjectMatch:(JFFPredicateBlock)predicate;
 
 //Invokes the block passing parallel in successive elements from self and other NSArray,

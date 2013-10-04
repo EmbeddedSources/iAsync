@@ -181,6 +181,17 @@
     return nil;
 }
 
+- (id)lastMatch:(JFFPredicateBlock)predicate
+{
+    NSEnumerator *enumerator = [self reverseObjectEnumerator];
+    for (id object in enumerator) {
+        
+        if (predicate(object))
+            return object;
+    }
+    return nil;
+}
+
 - (NSUInteger)firstIndexOfObjectMatch:(JFFPredicateBlock)predicate
 {
     NSUInteger result = 0;
