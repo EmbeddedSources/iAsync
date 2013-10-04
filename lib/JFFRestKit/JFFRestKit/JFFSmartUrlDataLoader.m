@@ -19,7 +19,7 @@
 - (void)logResponse
 {
     NSString *str = [[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding];
-    NSLog(@"jsResponse: %@ length: %d", str, self.length);
+    NSLog(@"jsResponse: %@ length: %lu", str, (unsigned long)self.length);
 }
 
 @end

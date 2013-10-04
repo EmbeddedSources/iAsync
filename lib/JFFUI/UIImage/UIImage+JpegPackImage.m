@@ -18,11 +18,11 @@ typedef struct
     const char *filename;
     int quality;
     JSAMPLE * imageBuffer;
-    int imageWidth;
-    int imageHeight;
+    unsigned int imageWidth;
+    unsigned int imageHeight;
     int bytesPerRow;
     J_COLOR_SPACE colorSpace;
-    NSUInteger inputComponents;
+    int inputComponents;
     
 } JpegCompressInfoArg;
 
@@ -136,7 +136,7 @@ write_JPEG_file(JpegCompressInfoArg *args)
 
 static inline J_COLOR_SPACE glibColorspace(CGImageRef imageRef,
                                            CGColorSpaceRef colorSpace,
-                                           NSUInteger *numberOfComponents)
+                                           int *numberOfComponents)
 {
     CGColorSpaceModel model = CGColorSpaceGetModel(colorSpace);
     
@@ -215,7 +215,7 @@ static NSString *filePathToRGBAImage(CGImageRef imageRef,
     
     *rawDataLength = bytesPerRow*CGImageGetHeight(imageRef);
     
-    NSString *filePath = [NSString createUuid];
+    NSString *filePath = [[NSUUID new] UUIDString];
     filePath = [NSString cachesPathByAppendingPathComponent:filePath];
     const char *filePathPtr = [filePath cStringUsingEncoding:NSUTF8StringEncoding];
     
@@ -275,8 +275,8 @@ static void UIImageJPEGRepresentationFilePath(UIImage *image, CGFloat compressio
     
     CGImageRef imageRef = image.CGImage;
     
-    args.imageWidth  = CGImageGetWidth (imageRef);
-    args.imageHeight = CGImageGetHeight(imageRef);
+    args.imageWidth  = (unsigned int)CGImageGetWidth (imageRef);
+    args.imageHeight = (unsigned int)CGImageGetHeight(imageRef);
     
     NSString *bitmapFile;
     void *rawData;
@@ -291,7 +291,7 @@ static void UIImageJPEGRepresentationFilePath(UIImage *image, CGFloat compressio
     args.colorSpace = glibColorspace(imageRef, colorSpaceRef, &args.inputComponents);
     
     args.quality     = (int)compressionQuality*100.f;
-    args.bytesPerRow = CGImageGetBytesPerRow(imageRef);
+    args.bytesPerRow = (int)CGImageGetBytesPerRow(imageRef);
     
     write_JPEG_file(&args);
     

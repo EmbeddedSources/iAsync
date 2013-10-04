@@ -65,7 +65,7 @@ extern "C" {
     
     JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader);
     JFFAsyncOperationBinder ignorePregressBinder(JFFAsyncOperationBinder binder);
-
+    
     JFFAsyncOperation loaderWithAdditionalParalelLoaders(JFFAsyncOperation original, JFFAsyncOperation additionalLoader, ...) NS_REQUIRES_NIL_TERMINATION;
     
     ///////////////////////////////////// SEQUENCE /////////////////////////////////////

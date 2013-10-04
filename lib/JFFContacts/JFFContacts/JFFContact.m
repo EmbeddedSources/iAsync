@@ -102,7 +102,7 @@ addresses;
     [fieldNameByPropertyId_ enumerateKeysAndObjectsUsingBlock:^(NSNumber *propertyID, id fieldName, BOOL *stop) {
         
         JFFContactStringField *field = [JFFContactStringField newContactFieldWithName:fieldName
-                                                                           propertyID:[propertyID longLongValue]
+                                                                           propertyID:(ABPropertyID)[propertyID longLongValue]
                                                                                record:person];
         
         [self addField:field];
@@ -190,7 +190,7 @@ addresses;
     _addressBookWrapper = addressBook;
     
     NSString *contactInternalId = args[@"contactInternalId"];
-    _contactInternalId = [contactInternalId longLongValue];
+    _contactInternalId = (ABRecordID)[contactInternalId longLongValue];
     self.newContact = contactInternalId == nil;
     
     [self initializeDynamicFields];

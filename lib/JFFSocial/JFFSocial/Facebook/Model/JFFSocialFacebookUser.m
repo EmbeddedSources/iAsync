@@ -69,10 +69,10 @@
 // http://graph.facebook.com/shaverm/picture?width=40&height=60
 - (NSURL *)imageURLForSize:(CGSize)size
 {
-    NSString *strURL = [[NSString alloc] initWithFormat:@"http://graph.facebook.com/%@/picture?width=%d&height=%d",
+    NSString *strURL = [[NSString alloc] initWithFormat:@"http://graph.facebook.com/%@/picture?width=%lu&height=%lu",
                         _facebookID,
-                        (NSUInteger)roundf(size.width ),
-                        (NSUInteger)roundf(size.height)
+                        (unsigned long)roundf(size.width ),
+                        (unsigned long)roundf(size.height)
                         ];
     NSURL *result = [strURL toURL];
     

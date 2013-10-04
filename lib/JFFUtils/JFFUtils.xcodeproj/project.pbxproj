@@ -21,8 +21,6 @@
 		1B14142315DBCD3F00EFB2B8 /* NSDate+DateDifference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B14141D15DBCD3F00EFB2B8 /* NSDate+DateDifference.m */; };
 		1B14142415DBCD3F00EFB2B8 /* NSDate+DateDifference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B14141D15DBCD3F00EFB2B8 /* NSDate+DateDifference.m */; };
 		1B14142515DBCD3F00EFB2B8 /* NSDate+DateDifference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B14141D15DBCD3F00EFB2B8 /* NSDate+DateDifference.m */; };
-		1B16830F146AD4C800832839 /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B16830D146AD4C800832839 /* NSString+UUIDCreation.h */; };
-		1B168310146AD4C800832839 /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */; };
 		1B1B280814D825A700FA5388 /* NSString+IsEmailValid.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1B280614D825A600FA5388 /* NSString+IsEmailValid.h */; };
 		1B1B280914D825A700FA5388 /* NSString+IsEmailValid.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B280714D825A600FA5388 /* NSString+IsEmailValid.m */; };
 		1B266C9D15627F7D0054E183 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B266C9C15627F7D0054E183 /* libc++.dylib */; };
@@ -169,7 +167,6 @@
 		5391041414A88C04007315A3 /* NSString+ToURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676CC144C474500B14D49 /* NSString+ToURL.h */; };
 		5391041514A88C04007315A3 /* NSURL+ToURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BA676D0144C476600B14D49 /* NSURL+ToURL.h */; };
 		5391041614A88C04007315A3 /* JFFMutableAssignDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD1820B1467D71B0033BEFF /* JFFMutableAssignDictionary.h */; };
-		5391041714A88C04007315A3 /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B16830D146AD4C800832839 /* NSString+UUIDCreation.h */; };
 		5391041814A88C04007315A3 /* JSignedRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B104D911483C85A0025FDDA /* JSignedRange.h */; };
 		5391041914A88C04007315A3 /* NSObject+ExpandArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3EE0341487D03A00BA6680 /* NSObject+ExpandArray.h */; };
 		5391041B14A88C04007315A3 /* JFFSimpleBlockHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE0A91390496200DD6890 /* JFFSimpleBlockHolder.m */; };
@@ -194,7 +191,6 @@
 		5391043814A88C04007315A3 /* NSString+ToURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676CD144C474500B14D49 /* NSString+ToURL.m */; };
 		5391043914A88C04007315A3 /* NSURL+ToURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA676D1144C476600B14D49 /* NSURL+ToURL.m */; };
 		5391043A14A88C04007315A3 /* JFFMutableAssignDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1820C1467D71B0033BEFF /* JFFMutableAssignDictionary.m */; };
-		5391043B14A88C04007315A3 /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */; };
 		5391043C14A88C04007315A3 /* JSignedRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B104D8D1483C8410025FDDA /* JSignedRange.m */; };
 		5391043D14A88C04007315A3 /* NSObject+ExpandArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EE0351487D03A00BA6680 /* NSObject+ExpandArray.m */; };
 		5391043F14A88C04007315A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
@@ -236,7 +232,6 @@
 		65802A9F148BF4890040A93A /* NSString+PropertyName.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648B7D13923EC4001E163C /* NSString+PropertyName.m */; };
 		65802AA0148BF48F0040A93A /* NSString+PathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D713CC613F539A5007268DF /* NSString+PathExtensions.m */; };
 		65802AA1148BF4920040A93A /* NSString+Trimm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6AAD8D1447039B00EA1D96 /* NSString+Trimm.m */; };
-		65802AA2148BF4960040A93A /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */; };
 		65802AA3148BF49B0040A93A /* NSMutableArray+ChangeCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCDF9E414320B3200CEB6E7 /* NSMutableArray+ChangeCount.m */; };
 		65802AA4148BF49D0040A93A /* NSArray+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE0AC1390496200DD6890 /* NSArray+BlocksAdditions.m */; };
 		65802AA5148BF4A00040A93A /* NSArray+RemoveDuplicates.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BCF8DF143239D100E896B3 /* NSArray+RemoveDuplicates.m */; };
@@ -273,7 +268,6 @@
 		7E57F44C14F937E0002D139B /* NSString+PropertyName.m in Sources */ = {isa = PBXBuildFile; fileRef = 65648B7D13923EC4001E163C /* NSString+PropertyName.m */; };
 		7E57F44E14F937E0002D139B /* NSString+PathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D713CC613F539A5007268DF /* NSString+PathExtensions.m */; };
 		7E57F45014F937E0002D139B /* NSString+Trimm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6AAD8D1447039B00EA1D96 /* NSString+Trimm.m */; };
-		7E57F45214F937E0002D139B /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */; };
 		7E57F45414F937E0002D139B /* NSString+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 53A3BB3E14DAB3CD008B71BE /* NSString+IsEmpty.m */; };
 		7E57F45914F937E0002D139B /* NSMutableArray+ChangeCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCDF9E414320B3200CEB6E7 /* NSMutableArray+ChangeCount.m */; };
 		7E57F45B14F937E0002D139B /* NSArray+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE0AC1390496200DD6890 /* NSArray+BlocksAdditions.m */; };
@@ -301,7 +295,6 @@
 		7E57F49E14F93840002D139B /* NSString+PropertyName.h in Headers */ = {isa = PBXBuildFile; fileRef = 65648B7C13923EC4001E163C /* NSString+PropertyName.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4A014F93840002D139B /* NSString+PathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713CC513F539A5007268DF /* NSString+PathExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4A214F93840002D139B /* NSString+Trimm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B6AAD8C1447039B00EA1D96 /* NSString+Trimm.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E57F4A414F93840002D139B /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B16830D146AD4C800832839 /* NSString+UUIDCreation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4A614F93840002D139B /* NSString+IsEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A3BB3D14DAB3CD008B71BE /* NSString+IsEmpty.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4AB14F93840002D139B /* NSMutableArray+ChangeCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BCDF9E314320B3200CEB6E7 /* NSMutableArray+ChangeCount.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4AD14F93840002D139B /* NSArray+BlocksAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE0AB1390496200DD6890 /* NSArray+BlocksAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -437,8 +430,6 @@
 		1B104D911483C85A0025FDDA /* JSignedRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSignedRange.h; sourceTree = "<group>"; };
 		1B14141C15DBCD3F00EFB2B8 /* NSDate+DateDifference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateDifference.h"; sourceTree = "<group>"; };
 		1B14141D15DBCD3F00EFB2B8 /* NSDate+DateDifference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateDifference.m"; sourceTree = "<group>"; };
-		1B16830D146AD4C800832839 /* NSString+UUIDCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UUIDCreation.h"; sourceTree = "<group>"; };
-		1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUIDCreation.m"; sourceTree = "<group>"; };
 		1B1B280614D825A600FA5388 /* NSString+IsEmailValid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+IsEmailValid.h"; sourceTree = "<group>"; };
 		1B1B280714D825A600FA5388 /* NSString+IsEmailValid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+IsEmailValid.m"; sourceTree = "<group>"; };
 		1B266C9C15627F7D0054E183 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -994,8 +985,6 @@
 				8D713CC613F539A5007268DF /* NSString+PathExtensions.m */,
 				1B6AAD8C1447039B00EA1D96 /* NSString+Trimm.h */,
 				1B6AAD8D1447039B00EA1D96 /* NSString+Trimm.m */,
-				1B16830D146AD4C800832839 /* NSString+UUIDCreation.h */,
-				1B16830E146AD4C800832839 /* NSString+UUIDCreation.m */,
 				1B5E1B9414D037EE0075049A /* NSString+StringWithCutPrefix.h */,
 				1B5E1B9514D037EE0075049A /* NSString+StringWithCutPrefix.m */,
 				53A3BB3D14DAB3CD008B71BE /* NSString+IsEmpty.h */,
@@ -1220,7 +1209,6 @@
 				5391041414A88C04007315A3 /* NSString+ToURL.h in Headers */,
 				5391041514A88C04007315A3 /* NSURL+ToURL.h in Headers */,
 				5391041614A88C04007315A3 /* JFFMutableAssignDictionary.h in Headers */,
-				5391041714A88C04007315A3 /* NSString+UUIDCreation.h in Headers */,
 				5391041814A88C04007315A3 /* JSignedRange.h in Headers */,
 				5391041914A88C04007315A3 /* NSObject+ExpandArray.h in Headers */,
 				534CDFC414A8C2930068F4DF /* JFFCastFunctions.hpp in Headers */,
@@ -1262,7 +1250,6 @@
 				7E57F49E14F93840002D139B /* NSString+PropertyName.h in Headers */,
 				7E57F4A014F93840002D139B /* NSString+PathExtensions.h in Headers */,
 				7E57F4A214F93840002D139B /* NSString+Trimm.h in Headers */,
-				7E57F4A414F93840002D139B /* NSString+UUIDCreation.h in Headers */,
 				7E57F4A614F93840002D139B /* NSString+IsEmpty.h in Headers */,
 				7E57F4AB14F93840002D139B /* NSMutableArray+ChangeCount.h in Headers */,
 				7E57F4AD14F93840002D139B /* NSArray+BlocksAdditions.h in Headers */,
@@ -1319,7 +1306,6 @@
 				1BA676CE144C474500B14D49 /* NSString+ToURL.h in Headers */,
 				1BA676D2144C476600B14D49 /* NSURL+ToURL.h in Headers */,
 				1BD1820D1467D71B0033BEFF /* JFFMutableAssignDictionary.h in Headers */,
-				1B16830F146AD4C800832839 /* NSString+UUIDCreation.h in Headers */,
 				1B104D921483C85A0025FDDA /* JSignedRange.h in Headers */,
 				1B3EE0361487D03A00BA6680 /* NSObject+ExpandArray.h in Headers */,
 				534CDFC214A8C2930068F4DF /* JFFCastFunctions.hpp in Headers */,
@@ -1622,7 +1608,6 @@
 				5391043814A88C04007315A3 /* NSString+ToURL.m in Sources */,
 				5391043914A88C04007315A3 /* NSURL+ToURL.m in Sources */,
 				5391043A14A88C04007315A3 /* JFFMutableAssignDictionary.m in Sources */,
-				5391043B14A88C04007315A3 /* NSString+UUIDCreation.m in Sources */,
 				5391043C14A88C04007315A3 /* JSignedRange.m in Sources */,
 				5391043D14A88C04007315A3 /* NSObject+ExpandArray.m in Sources */,
 				7E44D66C158F179400A2C11E /* NSURL+CPlusPlus.mm in Sources */,
@@ -1654,7 +1639,6 @@
 				65802A9F148BF4890040A93A /* NSString+PropertyName.m in Sources */,
 				65802AA0148BF48F0040A93A /* NSString+PathExtensions.m in Sources */,
 				65802AA1148BF4920040A93A /* NSString+Trimm.m in Sources */,
-				65802AA2148BF4960040A93A /* NSString+UUIDCreation.m in Sources */,
 				65802AA3148BF49B0040A93A /* NSMutableArray+ChangeCount.m in Sources */,
 				65802AA4148BF49D0040A93A /* NSArray+BlocksAdditions.m in Sources */,
 				65802AA5148BF4A00040A93A /* NSArray+RemoveDuplicates.m in Sources */,
@@ -1689,7 +1673,6 @@
 				7E57F44C14F937E0002D139B /* NSString+PropertyName.m in Sources */,
 				7E57F44E14F937E0002D139B /* NSString+PathExtensions.m in Sources */,
 				7E57F45014F937E0002D139B /* NSString+Trimm.m in Sources */,
-				7E57F45214F937E0002D139B /* NSString+UUIDCreation.m in Sources */,
 				7E57F45414F937E0002D139B /* NSString+IsEmpty.m in Sources */,
 				7E57F45914F937E0002D139B /* NSMutableArray+ChangeCount.m in Sources */,
 				7E57F45B14F937E0002D139B /* NSArray+BlocksAdditions.m in Sources */,
@@ -1812,7 +1795,6 @@
 				1BA676CF144C474500B14D49 /* NSString+ToURL.m in Sources */,
 				1BA676D3144C476600B14D49 /* NSURL+ToURL.m in Sources */,
 				1BD1820E1467D71B0033BEFF /* JFFMutableAssignDictionary.m in Sources */,
-				1B168310146AD4C800832839 /* NSString+UUIDCreation.m in Sources */,
 				1B104D8F1483C8410025FDDA /* JSignedRange.m in Sources */,
 				1B3EE0371487D03A00BA6680 /* NSObject+ExpandArray.m in Sources */,
 				53A3BB4214DAB3CD008B71BE /* NSString+IsEmpty.m in Sources */,
@@ -1900,7 +1882,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/JFFUtils.dst;
@@ -1922,7 +1903,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/JFFUtils.dst;
 				GCC_MODEL_TUNING = G5;
@@ -1939,12 +1919,12 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -1957,11 +1937,11 @@
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;

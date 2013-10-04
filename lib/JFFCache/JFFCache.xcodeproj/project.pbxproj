@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C0D56E617E70F4A001F0944 /* JFFCacheLoadImageError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C0D56E417E70F4A001F0944 /* JFFCacheLoadImageError.h */; };
+		4C0D56E717E70F4A001F0944 /* JFFCacheLoadImageError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0D56E517E70F4A001F0944 /* JFFCacheLoadImageError.m */; };
 		4CA0CAA816CE864C0007A85D /* JFFCacheError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAA616CE864C0007A85D /* JFFCacheError.h */; };
 		4CA0CAA916CE864C0007A85D /* JFFCacheError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAA716CE864C0007A85D /* JFFCacheError.m */; };
 		4CA0CAC116CE86B90007A85D /* NSDictionary+DBInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAAB16CE86B80007A85D /* NSDictionary+DBInfo.h */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C0D56E417E70F4A001F0944 /* JFFCacheLoadImageError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheLoadImageError.h; sourceTree = "<group>"; };
+		4C0D56E517E70F4A001F0944 /* JFFCacheLoadImageError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCacheLoadImageError.m; sourceTree = "<group>"; };
 		4CA0CAA616CE864C0007A85D /* JFFCacheError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheError.h; sourceTree = "<group>"; };
 		4CA0CAA716CE864C0007A85D /* JFFCacheError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCacheError.m; sourceTree = "<group>"; };
 		4CA0CAAB16CE86B80007A85D /* NSDictionary+DBInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DBInfo.h"; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 				4CA0CAA716CE864C0007A85D /* JFFCacheError.m */,
 				4CA0CAD716CE86F70007A85D /* JFFCacheNoURLError.h */,
 				4CA0CAD816CE86F70007A85D /* JFFCacheNoURLError.m */,
+				4C0D56E417E70F4A001F0944 /* JFFCacheLoadImageError.h */,
+				4C0D56E517E70F4A001F0944 /* JFFCacheLoadImageError.m */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -208,6 +214,7 @@
 				4CA0CAD316CE86B90007A85D /* JFFDBManager.h in Headers */,
 				4CA0CAD516CE86B90007A85D /* JFFThumbnailStorage.h in Headers */,
 				4CA0CAD916CE86F70007A85D /* JFFCacheNoURLError.h in Headers */,
+				4C0D56E617E70F4A001F0944 /* JFFCacheLoadImageError.h in Headers */,
 				4CB92AE516FA02E600471165 /* UIImageView+CachedAsyncImageLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +274,7 @@
 				4CA0CAC416CE86B90007A85D /* NSObject+CompositeKey.m in Sources */,
 				4CA0CAC616CE86B90007A85D /* NSString+CacheFSManager.m in Sources */,
 				4CA0CAC816CE86B90007A85D /* NSString+CompositeKey.m in Sources */,
+				4C0D56E717E70F4A001F0944 /* JFFCacheLoadImageError.m in Sources */,
 				4CA0CACA16CE86B90007A85D /* JFFBaseDB.m in Sources */,
 				4CA0CACE16CE86B90007A85D /* JFFCaches.m in Sources */,
 				4CA0CAD016CE86B90007A85D /* JFFDBCompositeKey.m in Sources */,
@@ -285,7 +293,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = NO;
@@ -298,6 +305,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../,
@@ -314,12 +322,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../,
