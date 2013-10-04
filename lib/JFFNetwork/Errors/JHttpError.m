@@ -43,9 +43,9 @@
 
 - (NSString *)errorLogDescription
 {
-    return [[NSString alloc] initWithFormat:@"%@ Http code:%d cantext:%@",
+    return [[NSString alloc] initWithFormat:@"%@ Http code:%ld cantext:%@",
             [self localizedDescription],
-            self.code,
+            (long)self.code,
             _context];
 }
 

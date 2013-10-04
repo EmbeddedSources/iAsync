@@ -56,10 +56,10 @@
 
 - (NSString *)errorLogDescription
 {
-    return [[NSString alloc] initWithFormat:@"%@ nativeError domain:%ld error_code:%ld context:%@",
+    return [[NSString alloc] initWithFormat:@"%@ nativeError domain:%ld error_code:%d context:%@",
             [self localizedDescription],
             _rawError.domain,
-            _rawError.error,
+            (int)_rawError.error,
             _context];
 }
 
