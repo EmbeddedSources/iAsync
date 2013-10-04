@@ -8,7 +8,7 @@
 @implementation JFFShowAlerLoader
 {
 @public
-    __weak JFFAlertView *_alertView;
+    JFFAlertView *_alertView;
 }
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
