@@ -9,8 +9,8 @@ typedef void (^TestAsyncRequestBlock)(JFFSimpleBlock);
 - (void)performAsyncRequestOnMainThreadWithBlock:(void(^)(JFFSimpleBlock))block
                                         selector:(SEL)selector;
 
-- (void)waitForeverForAsyncRequestOnMainThreadWithBlock:( void (^)(JFFSimpleBlock) )block_
-                                               selector:( SEL )selector_;
+- (void)waitForeverForAsyncRequestOnMainThreadWithBlock:(void (^)(JFFSimpleBlock))block
+                                               selector:(SEL)selector;
 
 - (void)performAsyncRequestOnMainThreadWithBlock:(void (^)(JFFSimpleBlock))block
                                         selector:(SEL)selector

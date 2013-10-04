@@ -69,7 +69,7 @@ extern "C" {
     JFFAsyncOperation loaderWithAdditionalParalelLoaders(JFFAsyncOperation original, JFFAsyncOperation additionalLoader, ...) NS_REQUIRES_NIL_TERMINATION;
     
     ///////////////////////////////////// SEQUENCE /////////////////////////////////////
-
+    
     JFFAnalyzer analyzerAsSequenceOfAnalyzers(JFFAnalyzer firstAnalyzer, ...) NS_REQUIRES_NIL_TERMINATION;
 
 #ifdef __cplusplus
