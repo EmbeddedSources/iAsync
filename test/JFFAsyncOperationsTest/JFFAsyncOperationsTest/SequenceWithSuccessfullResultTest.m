@@ -37,13 +37,13 @@
         JFFAsyncOperationManager *secondLoader = [JFFAsyncOperationManager new];
         JFFAsyncOperationManager *thirdLoader  = [JFFAsyncOperationManager new];
         
-        __weak JFFAsyncOperationManager* assign_first_loader_ = firstLoader;
-        JFFAsyncOperation loader2_ = asyncOperationWithDoneBlock( secondLoader.loader, ^() {
+        __weak JFFAsyncOperationManager *assignFirstLoader = firstLoader;
+        JFFAsyncOperation loader2 = asyncOperationWithDoneBlock(secondLoader.loader, ^() {
             
-            GHAssertTrue( assign_first_loader_.finished, @"First loader finished already" );
-        } );
+            GHAssertTrue( assignFirstLoader.finished, @"First loader finished already" );
+        });
         
-        JFFAsyncOperation loader_ = sequenceOfAsyncOperationsWithSuccessfullResults( @[ firstLoader.loader, loader2_, thirdLoader.loader ] );
+        JFFAsyncOperation loader = sequenceOfAsyncOperationsWithSuccessfullResults(@[firstLoader.loader, loader2, thirdLoader.loader]);
         
         __block id sequenceResult = nil;
         __block BOOL sequenceLoaderFinished = NO;
@@ -53,36 +53,40 @@
             sequenceResult = nil;
             sequenceLoaderFinished = NO;
             
-            loader_( nil, nil, ^( id result_, NSError* error_ ) {
+            [firstLoader  clear];
+            [secondLoader clear];
+            [thirdLoader  clear];
+            
+            loader( nil, nil, ^(id result, NSError *error) {
                 
-                if ( result_ && !error_ ) {
+                if (result && !error) {
                     
-                    sequenceResult = result_;
+                    sequenceResult = result;
                     sequenceLoaderFinished = YES;
                 }
-            } );
+            });
             
-            NSNumber* firstResult  = @(2.71);
-            NSNumber* secondResult = @(3.14);
-            NSString* thirdResult = @"E and Pi";
+            NSNumber *firstResult  = @(2.71);
+            NSNumber *secondResult = @(3.14);
+            NSString *thirdResult = @"E and Pi";
             
-            GHAssertFalse( firstLoader.finished, @"First loader not finished yet" );
-            GHAssertFalse( secondLoader.finished, @"Second loader not finished yet" );
-            GHAssertFalse( thirdLoader.finished, @"Third loader not finished yet" );
-            GHAssertFalse( sequenceLoaderFinished, @"Sequence loader not finished yet" );
+            GHAssertFalse(firstLoader.finished, @"First loader not finished yet" );
+            GHAssertFalse(secondLoader.finished, @"Second loader not finished yet" );
+            GHAssertFalse(thirdLoader.finished, @"Third loader not finished yet" );
+            GHAssertFalse(sequenceLoaderFinished, @"Sequence loader not finished yet" );
             
             firstLoader.loaderFinishBlock.didFinishBlock( firstResult, nil );
-            GHAssertTrue( firstLoader.finished, @"First loader finished already" );
-            GHAssertFalse( secondLoader.finished, @"Second loader not finished yet" );
-            GHAssertFalse( thirdLoader.finished, @"Third loader not finished yet" );
-            GHAssertFalse( sequenceLoaderFinished, @"Sequence loader finished already" );
+            GHAssertTrue(firstLoader.finished, @"First loader finished already" );
+            GHAssertFalse(secondLoader.finished, @"Second loader not finished yet" );
+            GHAssertFalse(thirdLoader.finished, @"Third loader not finished yet" );
+            GHAssertFalse(sequenceLoaderFinished, @"Sequence loader finished already" );
             
             
             secondLoader.loaderFinishBlock.didFinishBlock( secondResult, nil );
-            GHAssertTrue( firstLoader.finished, @"First loader finished already" );
-            GHAssertTrue( secondLoader.finished, @"Second loader not finished yet" );
-            GHAssertFalse( thirdLoader.finished, @"Third loader not finished yet" );
-            GHAssertFalse( sequenceLoaderFinished, @"Sequence loader finished already" );
+            GHAssertTrue(firstLoader.finished, @"First loader finished already" );
+            GHAssertTrue(secondLoader.finished, @"Second loader not finished yet" );
+            GHAssertFalse(thirdLoader.finished, @"Third loader not finished yet" );
+            GHAssertFalse(sequenceLoaderFinished, @"Sequence loader finished already" );
             
             thirdLoader.loaderFinishBlock.didFinishBlock( thirdResult, nil );
             GHAssertTrue( firstLoader.finished, @"First loader finished already" );
@@ -101,7 +105,7 @@
         test();
         
         //invoke th same loader again
-        //test();
+        test();
     }
     
     GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");

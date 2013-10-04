@@ -17,16 +17,24 @@
 
 @implementation JFFAsyncOperationManager
 
-- (id)init
+- (JFFDidFinishAsyncOperationBlockHolder *)loaderFinishBlock
 {
-    self = [super init];
-    
-    if (self) {
-        self->_loaderFinishBlock = [JFFDidFinishAsyncOperationBlockHolder new];
-        self->_loaderCancelBlock = [JFFCancelAsyncOperationBlockHolder    new];
+    if (!_loaderFinishBlock) {
+        
+        _loaderFinishBlock = [JFFDidFinishAsyncOperationBlockHolder new];
     }
     
-    return self;
+    return _loaderFinishBlock;
+}
+
+- (JFFCancelAsyncOperationBlockHolder *)loaderCancelBlock
+{
+    if (!_loaderCancelBlock) {
+        
+        _loaderCancelBlock = [JFFCancelAsyncOperationBlockHolder new];
+    }
+    
+    return _loaderCancelBlock;
 }
 
 - (void)clear
@@ -82,7 +90,7 @@
                 cancelCallback(canceled);
         };
         return self.loaderCancelBlock.onceCancelBlock;
-    } copy ];
+    } copy];
 }
 
 @end

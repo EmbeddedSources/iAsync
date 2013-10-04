@@ -53,6 +53,10 @@
             sequenceResult = nil;
             sequenceLoaderFinished = NO;
             
+            [firstLoader  clear];
+            [secondLoader clear];
+            [thirdLoader  clear];
+            
             loader(nil, nil, ^(id result, NSError *error) {
                 
                 if (result && !error) {
@@ -99,7 +103,7 @@
         test();
         
         //invoke th same loader again
-        //test();
+        test();
     }
     
     GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");
