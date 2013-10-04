@@ -6,7 +6,7 @@
 
 + (void)load
 {
-    jClass_implementProperty(self, @"onCompleteDialogBlock");
+    jClass_implementProperty(self, NSStringFromSelector(@selector(onCompleteDialogBlock)));
 }
 
 #pragma mark -

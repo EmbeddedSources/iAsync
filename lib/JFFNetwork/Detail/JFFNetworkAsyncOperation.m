@@ -45,7 +45,7 @@
         progress(uploadProgress);
     };
     
-    __block id resultHolder = nil;
+    __block id resultHolder;
     
     JFFNetworkErrorTransformer errorTransformer = _errorTransformer;
     

@@ -8,7 +8,7 @@
 
 @interface JFFNSObjectInstancesCounter : NSObject
 
-@property (nonatomic, retain) NSMutableDictionary* instancesNumberByClassName;
+@property (nonatomic, retain) NSMutableDictionary *instancesNumberByClassName;
 
 @end
 
@@ -23,10 +23,10 @@
 
 - (instancetype)init
 {
-    self = [ super init ];
+    self = [super init];
     
     if (self) {
-        self->_instancesNumberByClassName = [NSMutableDictionary new];
+        _instancesNumberByClassName = [NSMutableDictionary new];
     }
     
     return self;
@@ -44,10 +44,10 @@
 {
     @synchronized(self) {
         NSString *className = NSStringFromClass(class);
-        NSNumber *number    = self->_instancesNumberByClassName[className];
+        NSNumber *number    = _instancesNumberByClassName[className];
         NSUInteger instancesCount = [number unsignedIntValue];
         NSNumber* instancesCountNum = @(++instancesCount);
-        self->_instancesNumberByClassName[className] = instancesCountNum;
+        _instancesNumberByClassName[className] = instancesCountNum;
     }
 }
 
@@ -55,10 +55,10 @@
 {
     @synchronized(self) {
         NSString *className = NSStringFromClass(class);
-        NSNumber *number    = self->_instancesNumberByClassName[className];
+        NSNumber *number    = _instancesNumberByClassName[className];
         NSUInteger instancesCount   = [number unsignedIntValue];
         NSNumber* instancesCountNum = @(--instancesCount);
-        self->_instancesNumberByClassName[className] = instancesCountNum;
+        _instancesNumberByClassName[className] = instancesCountNum;
     }
 }
 
@@ -98,33 +98,33 @@
     }];
 }
 
-+ (id)alloCWithZoneToAdding:( NSZone* )zone_
++ (id)alloCWithZoneToAdding:(NSZone *)zone
 {
     return [JFFNSObjectInstancesCounter instancesCounterAllocatorForClass:[self class]
                                                             nativeAllocor:^id(void) {
 
-        return [super allocWithZone:zone_];
+        return [super allocWithZone:zone];
     }];
 }
 
-- (void)enableInstancesCountingForClass:(Class)class_
+- (void)enableInstancesCountingForClass:(Class)class
 {
-    @synchronized( self )
-    {
-        NSString* className_ = NSStringFromClass( class_ );
-        NSNumber* number_ = self->_instancesNumberByClassName[ className_ ];
-        if ( !number_ )
-        {
-            self->_instancesNumberByClassName[ className_ ] = @0;
-
+    @synchronized(self) {
+        
+        NSString *className = NSStringFromClass(class);
+        NSNumber *number = _instancesNumberByClassName[className];
+        if (!number) {
+            
+            _instancesNumberByClassName[className] = @0;
+            
             {
-                BOOL methodAdded_ = [ [ self class ] addClassMethodIfNeedWithSelector:@selector(alloCWithZoneToAdding:)
-                                                                              toClass:class_
-                                                                    newMethodSelector:@selector(allocWithZone:)];
+                BOOL methodAdded = [[self class] addClassMethodIfNeedWithSelector:@selector(alloCWithZoneToAdding:)
+                                                                          toClass:class
+                                                                newMethodSelector:@selector(allocWithZone:)];
                 
-                if (!methodAdded_) {
+                if (!methodAdded) {
                     // create name allocWithZoneHook dynamicaly and allocWithZonePrototype use block instead
-                    [[self class] hookClassMethodForClass:class_
+                    [[self class] hookClassMethodForClass:class
                                              withSelector:@selector(allocWithZone:)
                                   prototypeMethodSelector:@selector(alloCWithZonePrototype:)
                                        hookMethodSelector:@selector(allocWithZoneHook:)];
@@ -136,11 +136,11 @@
 
 - (NSUInteger)instancesCountForClass:(Class)class
 {
-    @synchronized( self )
+    @synchronized(self)
     {
-        NSString* className_ = NSStringFromClass(class);
-        NSNumber* number_ = self->_instancesNumberByClassName[ className_ ];
-        return [ number_ unsignedIntValue ];
+        NSString *className = NSStringFromClass(class);
+        NSNumber *number = _instancesNumberByClassName[className];
+        return [number unsignedIntValue];
     }
 }
 

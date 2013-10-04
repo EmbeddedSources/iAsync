@@ -30,6 +30,7 @@ void hookDelegateSetterAndGetterMethodsForProxyDelegate(NSString *delegateName,
     if ([prototypeClass addInstanceMethodIfNeedWithSelector:@selector(delegateGetterHookMethod)
                                                     toClass:prototypeClass
                                           newMethodSelector:NSSelectorFromString(prototypeMethodName)]) {
+        
         [prototypeClass hookInstanceMethodForClass:targetClass
                                       withSelector:NSSelectorFromString(delegateName)
                            prototypeMethodSelector:NSSelectorFromString(prototypeMethodName)

@@ -48,7 +48,7 @@
 
 + (void)load
 {
-    jClass_implementProperty(self, @"performSegueCallback");
+    jClass_implementProperty(self, NSStringFromSelector(@selector(performSegueCallback)));
 }
 
 @end

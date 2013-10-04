@@ -17,8 +17,8 @@ jffAsycLoadedImageURL;
 
 + (void)load
 {
-    jClass_implementProperty(self, @"jffAsycImageURL");
-    jClass_implementProperty(self, @"jffAsycLoadedImageURL");
+    jClass_implementProperty(self, NSStringFromSelector(@selector(jffAsycImageURL      )));
+    jClass_implementProperty(self, NSStringFromSelector(@selector(jffAsycLoadedImageURL)));
 }
 
 @end

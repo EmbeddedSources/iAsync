@@ -15,7 +15,7 @@
 
 + (void)load
 {
-    jClass_implementProperty([self class], @"dynamicWeakOwnedObject");
+    jClass_implementProperty([self class], NSStringFromSelector(@selector(dynamicWeakOwnedObject)));
 }
 
 @end

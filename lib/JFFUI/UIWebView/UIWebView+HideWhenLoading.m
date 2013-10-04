@@ -14,7 +14,7 @@
 
 + (void)load
 {
-    jClass_implementProperty(self, @"proxy");
+    jClass_implementProperty(self, NSStringFromSelector(@selector(proxy)));
 }
 
 @end

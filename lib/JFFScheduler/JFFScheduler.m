@@ -15,7 +15,7 @@
 
 + (void)load
 {
-    jClass_implementProperty(self, @"jffScheduler");
+    jClass_implementProperty(self, NSStringFromSelector(@selector(jffScheduler)));
 }
 
 - (JFFScheduler *)lazyJffScheduler

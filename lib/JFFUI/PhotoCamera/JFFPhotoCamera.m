@@ -293,7 +293,7 @@ static JFFMutableAssignArray *__allActiveCameras;
         }
         
         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
-        UIImage *photoImage = [[UIImage alloc] initWithData:imageData];//TODO101 pas jpegData file pass
+        UIImage *photoImage = [[UIImage alloc] initWithData:imageData];
         
         photoImage = [photoImage fixOrientationForPhotoCameraType:photoCameraType
                                                    fixOrientation:fixOrientation

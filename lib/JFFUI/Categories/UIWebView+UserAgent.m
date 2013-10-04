@@ -2,9 +2,9 @@
 
 #import <JFFUtils/JGCDAdditions.h>
 
-static NSString* globalUserAgent;
+static NSString *globalUserAgent;
 
-static NSString* userAgent()
+static NSString *userAgent()
 {
     NSString *js = @"navigator.userAgent";
     UIWebView *webView = [UIWebView new];
@@ -51,7 +51,7 @@ static NSString* userAgent()
                               webViewUserAgent,
                               userAgentAddition];
     
-    NSDictionary *dictionnary = @{@"UserAgent": newUserAgent};
+    NSDictionary *dictionnary = @{ @"UserAgent": newUserAgent };
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
 }
 

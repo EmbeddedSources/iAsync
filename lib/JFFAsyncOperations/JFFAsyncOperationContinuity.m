@@ -95,6 +95,7 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
     for (JFFAsyncOperation secondBlock = secondLoader;
          secondBlock != nil;
          secondBlock = va_arg(args, JFFAsyncOperation)) {
+        
         secondBlock = [secondBlock copy];
         JFFAsyncOperationBinder secondBlockBinder = ^JFFAsyncOperation(id result) {
             return secondBlock;
@@ -721,7 +722,5 @@ JFFAsyncOperation asyncOperationAfterDelay(NSTimeInterval delay,
                                            NSTimeInterval leeway,
                                            JFFAsyncOperation loader)
 {
-    return sequenceOfAsyncOperations(asyncOperationWithDelay(delay, leeway),
-                                     loader,
-                                     nil);
+    return sequenceOfAsyncOperations(asyncOperationWithDelay(delay, leeway), loader, nil);
 }

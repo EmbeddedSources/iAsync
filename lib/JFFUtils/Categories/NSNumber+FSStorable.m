@@ -16,10 +16,7 @@
                                                        encoding:NSUTF8StringEncoding
                                                           error:NULL];
     
-    if (!string)
-        return nil;
-    
-    return scanner(string);
+    return string?scanner(string):nil;
 }
 
 + (instancetype)newLongLongNumberWithContentsOfFile:(NSString *)fileName

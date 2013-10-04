@@ -20,7 +20,7 @@
     // if the value isn't 6 characters at this point return
     // the color black
     if ([hexColor length] != 6)
-		return [UIColor blackColor];
+        return [UIColor blackColor];
     
     // Separate into r, g, b substrings
     NSRange range;

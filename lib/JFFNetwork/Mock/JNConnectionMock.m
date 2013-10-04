@@ -74,7 +74,7 @@ typedef void (^NSImplBlock)( id self );
             newAction = ^void(id connectionSelf)
             {
                 action();
-                self->_realImpl(connectionSelf, start);
+                _realImpl(connectionSelf, start);
             };
         }
         else
@@ -84,8 +84,8 @@ typedef void (^NSImplBlock)( id self );
                 action();
             };
         }
-        self->_mockImpl = imp_implementationWithBlock( newAction );
-        NSParameterAssert( NULL != self->_mockImpl );
+        _mockImpl = imp_implementationWithBlock(newAction);
+        NSParameterAssert(NULL != _mockImpl);
     }
     
     return self;
@@ -97,8 +97,8 @@ typedef void (^NSImplBlock)( id self );
         return;
     }
     
-    method_setImplementation( self->_realMethod, self->_mockImpl );
-    self->_isMockEnabled = YES;
+    method_setImplementation(_realMethod, _mockImpl);
+    _isMockEnabled = YES;
 }
 
 - (void)disableMock
@@ -107,8 +107,8 @@ typedef void (^NSImplBlock)( id self );
         return;
     }
     
-    method_setImplementation( self->_realMethod, self->_realImpl );
-    self->_isMockEnabled = NO;
+    method_setImplementation(_realMethod, _realImpl);
+    _isMockEnabled = NO;
 }
 
 @end

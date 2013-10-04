@@ -30,7 +30,6 @@
 #import <JFFUtils/NSString/NSString+IsEmpty.h>
 #import <JFFUtils/NSString/NSString+JSEscape.h>
 #import <JFFUtils/NSString/NSString+IsEmailValid.h>
-#import <JFFUtils/NSString/NSString+UUIDCreation.h>
 #import <JFFUtils/NSString/NSString+PropertyName.h>
 #import <JFFUtils/NSString/NSString+PathExtensions.h>
 #import <JFFUtils/NSString/NSString+FileAttributes.h>

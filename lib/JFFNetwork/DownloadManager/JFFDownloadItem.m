@@ -356,7 +356,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
         return self.stopBlock;
     };
     
-    loader = [self asyncOperationForPropertyWithName:@"downloadedFlag"
+    loader = [self asyncOperationForPropertyWithName:NSStringFromSelector(@selector(downloadedFlag))
                                       asyncOperation:loader];
     
     JFFDidFinishAsyncOperationHandler didFinishOperation = ^void(id result, NSError *error) {

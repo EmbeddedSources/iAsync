@@ -203,15 +203,15 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
     [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
 
--(NSCachedURLResponse *)connection:(NSURLConnection *)connection
-                 willCacheResponse:(NSCachedURLResponse *)cachedResponse
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+                  willCacheResponse:(NSCachedURLResponse *)cachedResponse
 {
     return nil;
 }
 
 #pragma mark NSURLConnectionDataDelegate
 
--(void)connectionDidFinishLoading:(NSURLConnection *)connection
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     if (![self assertConnectionMismatch:connection]) {
         return;

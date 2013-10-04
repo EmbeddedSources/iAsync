@@ -17,7 +17,7 @@
 
 + (void)load
 {
-    jClass_implementProperty(self, @"storeFilePath");
+    jClass_implementProperty(self, NSStringFromSelector(@selector(storeFilePath)));
 }
 
 @end

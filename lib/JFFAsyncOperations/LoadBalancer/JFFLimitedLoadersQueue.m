@@ -73,7 +73,7 @@
     
     while (pendingLoader && [self hasLoadersReadyToStartForPendingLoader:pendingLoader]) {
         
-        [self->_orderStrategy executePendingLoader:pendingLoader];
+        [_orderStrategy executePendingLoader:pendingLoader];
         pendingLoader = [self nextPendingLoader];
     }
 }

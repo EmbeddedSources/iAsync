@@ -32,7 +32,7 @@ typedef std::map<__unsafe_unretained id, JFFSimpleBlock> BlockByPtr;
 
 + (void)load
 {
-    jClass_implementProperty(self, @"mutableAssignKeyDictionaryOnDeallocBlock");
+    jClass_implementProperty(self, NSStringFromSelector(@selector(mutableAssignKeyDictionaryOnDeallocBlock)));
 }
 
 - (JFFCPPMapONDeallocBlockByArrayPtrHolder *)lazyMutableAssignKeyDictionaryOnDeallocBlock

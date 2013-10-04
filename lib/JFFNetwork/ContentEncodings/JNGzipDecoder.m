@@ -45,7 +45,7 @@ NSString* kGzipErrorDomain = @"gzip.error";
     _strm.zfree     = Z_NULL;
     
     //!! dodikk -- WTF Magic
-    int initResult = inflateInit2(&self->_strm, (15+32));
+    int initResult = inflateInit2(&_strm, (15+32));
     BOOL result = (Z_OK == initResult);
     
     if (!result) {
@@ -101,7 +101,7 @@ NSString* kGzipErrorDomain = @"gzip.error";
         // Make sure we have enough room and reset the lengths.
         NSUInteger decompressedDataLength = [decompressed length];
         
-        if (self->_strm.total_out >= decompressedDataLength) {
+        if (_strm.total_out >= decompressedDataLength) {
             [ decompressed increaseLengthBy: decompressedDataLength ];
         }
         

@@ -173,7 +173,7 @@ static void readStreamCallback(CFReadStreamRef stream,
     [self closeReadStream];
     //   CFReadStreamCreateForStreamedHTTPRequest( CFAllocatorRef alloc,
     //                                             CFHTTPMessageRef requestHeaders,
-    //                                             CFReadStreamRef	requestBody )
+    //                                             CFReadStreamRef  requestBody )
     _readStream = CFReadStreamCreateForHTTPRequest(NULL, httpRequest);
     CFRelease(httpRequest);
     
@@ -235,22 +235,19 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 -(id<JNHttpDecoder>)getDecoder
 {
-    NSString* contentEncoding = self->_urlResponse.contentEncoding;
-//    NSString* previousEncoding = self->_previousContentEncoding;
-
-
-    BOOL isDecoderMissing = ( nil == self->_decoder );
+    NSString *contentEncoding = _urlResponse.contentEncoding;
+//    NSString *previousEncoding = _previousContentEncoding;
+    
+    BOOL isDecoderMissing = (nil == _decoder);
     
     if (isDecoderMissing) {
-        JNHttpEncodingsFactory *factory = [[JNHttpEncodingsFactory alloc] initWithContentLength:self->_totalBytesCount];
+        JNHttpEncodingsFactory *factory = [[JNHttpEncodingsFactory alloc] initWithContentLength:_totalBytesCount];
         
-        id< JNHttpDecoder > decoder = [ factory decoderForHeaderString: contentEncoding ];
-        self->_decoder = decoder;
+        id<JNHttpDecoder> decoder = [factory decoderForHeaderString:contentEncoding];
+        _decoder = decoder;
     }
-
-//    [ @"http://ws-alr1.dk.sitecore.net:66/sitecore/shell/ClientBin/Dashboard/Integration.ashx?action=loadPreFilterParams" isEqualToString: (NSString*)[ ((NSURL*)[ self->_urlResponse url ]) absoluteString ] ]
     
-    return self->_decoder;
+    return _decoder;
 }
 
 - (void)handleData:(void *)buffer
@@ -271,7 +268,7 @@ static void readStreamCallback(CFReadStreamRef stream,
     
     // @adk - maybe we should use [decodedData length]
     _downloadedBytesCount += length;
-    BOOL isDownloadCompleted = ( self->_totalBytesCount == self->_downloadedBytesCount );
+    BOOL isDownloadCompleted = (_totalBytesCount == _downloadedBytesCount);
     
     if (nil == decodedData || isDownloadCompleted) {
         NSError *decoderCloseError = nil;

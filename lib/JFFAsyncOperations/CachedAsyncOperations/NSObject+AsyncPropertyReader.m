@@ -115,9 +115,11 @@ static JFFDidFinishAsyncOperationHandler doneCallbackBlock(JFFPropertyExtractor 
     return ^void(id result, NSError *error) {
         if (!((result != nil) ^ (error != nil))) {
             
-            NSString *errorDescription = [[NSString alloc] initWithFormat:@"Assert propertyPath object: %@ propertyPath: %@",
+            NSString *errorDescription = [[NSString alloc] initWithFormat:@"Assert propertyPath object: %@ propertyPath: %@ result: %@ error: %@",
                                           propertyExtractor.object,
-                                          propertyExtractor.propertyPath];
+                                          propertyExtractor.propertyPath,
+                                          result,
+                                          error];
             
             NSCAssert(0, errorDescription);
         }

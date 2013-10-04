@@ -18,24 +18,24 @@
     return nil;
 }
 
-- (void)logAllSubviewsWithLevel:( NSUInteger )level_
+- (void)logAllSubviewsWithLevel:(NSUInteger)level
 {
-    NSLog( @"level: %d view: %@", level_++, self );
-
-    for ( UIView* sub_view_ in self.subviews )
+    NSLog( @"level: %lu view: %@", (unsigned long)level++, self );
+    
+    for (UIView *subView in self.subviews)
     {
-        [ sub_view_ logAllSubviewsWithLevel: level_ ];
+        [subView logAllSubviewsWithLevel:level];
     }
 }
 
 - (void)logAllSubviews
 {
-    [ self logAllSubviewsWithLevel: 0 ];
+    [self logAllSubviewsWithLevel:0];
 }
 
 - (void)removeAllSubviews
 {
-    [ self.subviews makeObjectsPerformSelector: @selector( removeFromSuperview ) ];
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
 @end

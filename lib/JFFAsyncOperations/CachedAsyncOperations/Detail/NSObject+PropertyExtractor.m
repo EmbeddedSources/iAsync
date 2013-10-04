@@ -14,7 +14,7 @@
 
 + (void)load
 {
-    jClass_implementProperty(self, @"propertyDataByPropertyName");
+    jClass_implementProperty(self, NSStringFromSelector(@selector(propertyDataByPropertyName)));
 }
 
 - (JFFObjectRelatedPropertyData *)propertyDataForPropertPath:(JFFPropertyPath *)propertyPath
