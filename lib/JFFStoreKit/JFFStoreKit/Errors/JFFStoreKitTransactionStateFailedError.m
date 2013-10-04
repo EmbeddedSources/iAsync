@@ -13,7 +13,7 @@
     
     if (copy) {
         
-        copy->_originalError = [_originalError copyWithZone:zone];
+        copy->_transaction = _transaction;
     }
     
     return copy;

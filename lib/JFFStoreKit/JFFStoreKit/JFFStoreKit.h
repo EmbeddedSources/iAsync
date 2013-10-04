@@ -5,6 +5,8 @@
 
 #import <JFFStoreKit/asyncAdapters/asyncSKPaymentQueue.h>
 #import <JFFStoreKit/asyncAdapters/asyncSKProductRequest.h>
+#import <JFFStoreKit/asyncAdapters/asyncSKFinishTransaction.h>
+#import <JFFStoreKit/asyncAdapters/asyncSKPendingTransactions.h>
 
 //Errors
 #import <JFFStoreKit/Errors/JFFStoreKitDisabledError.h>

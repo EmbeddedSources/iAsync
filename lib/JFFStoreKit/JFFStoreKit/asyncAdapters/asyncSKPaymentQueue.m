@@ -3,6 +3,8 @@
 #import "JFFStoreKitDisabledError.h"
 #import "JFFStoreKitTransactionStateFailedError.h"
 
+#import "asyncSKFinishTransaction.h"
+
 @interface JFFAsyncSKPaymentAdapter : NSObject <
 SKPaymentTransactionObserver,
 JFFAsyncOperationInterface
@@ -29,8 +31,10 @@ JFFAsyncOperationInterface
 
 - (void)unsubscribeFromObservervation
 {
-    if (_addedToObservers)
+    if (_addedToObservers) {
         [_queue removeTransactionObserver:self];
+        _addedToObservers = NO;
+    }
 }
 
 + (instancetype)newAsyncSKPaymentAdapterWithRequest:(SKPayment *)payment
@@ -61,13 +65,13 @@ JFFAsyncOperationInterface
     
     SKPaymentTransaction *transaction = [self ownPurchasedTransaction];
     
-    if (!transaction) {
+    if (transaction) {
         
-        [_queue addPayment:_payment];
+        [self unsubscribeFromObservervation];
+        _handler(transaction, nil);
     } else {
         
-        _handler(transaction, nil);
-        [self unsubscribeFromObservervation];
+        [_queue addPayment:_payment];
     }
 }
 
@@ -94,18 +98,6 @@ JFFAsyncOperationInterface
 
 #pragma mark SKPaymentTransactionObserver
 
-- (void)paymentQueue:(SKPaymentQueue *)queue removedTransactions:(NSArray *)transactions
-{
-}
-
-- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
-{
-}
-
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedDownloads:(NSArray *)downloads
-{
-}
-
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
     if (!_handler) {
@@ -125,36 +117,31 @@ JFFAsyncOperationInterface
     {
         case SKPaymentTransactionStatePurchased:
         {
-            _handler(transaction, nil);
             [self unsubscribeFromObservervation];
+            _handler(transaction, nil);
             break;
         }
         case SKPaymentTransactionStateFailed:
         {
-            [_queue finishTransaction:transaction];
             if (transaction.error.code != SKErrorPaymentCancelled) {
                 // Optionally, display an error here.
             }
             JFFStoreKitTransactionStateFailedError *error = [JFFStoreKitTransactionStateFailedError new];
-            _handler(nil, error);
+            error.transaction = transaction;
             [self unsubscribeFromObservervation];
+            _handler(nil, error);
             break;
         }
         case SKPaymentTransactionStateRestored:
         {
-            _handler(transaction, nil);
             [self unsubscribeFromObservervation];
+            _handler(transaction, nil);
             break;
         }
         default:
             break;
     }
     // TODO call progress with SKPaymentTransactionStatePurchasing
-}
-
-- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
-{
-    
 }
 
 @end
@@ -164,5 +151,19 @@ JFFAsyncOperation asyncOperationWithSKPayment(SKPayment *payment)
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         return [JFFAsyncSKPaymentAdapter newAsyncSKPaymentAdapterWithRequest:payment];
     };
-    return buildAsyncOperationWithAdapterFactory(factory);
+    JFFAsyncOperation loader = buildAsyncOperationWithAdapterFactory(factory);
+    
+    loader = bindTrySequenceOfAsyncOperations(loader, ^JFFAsyncOperation(JFFStoreKitTransactionStateFailedError *error) {
+        
+        if (![error isKindOfClass:[JFFStoreKitTransactionStateFailedError class]]) {
+            
+            return asyncOperationWithError(error);
+        }
+        
+        JFFAsyncOperation loader = trySequenceOfAsyncOperations(asyncOperationFinishTransaction(error.transaction), asyncOperationWithResult(@YES), nil);
+        
+        return sequenceOfAsyncOperations(loader, asyncOperationWithResult(error), nil);
+    }, nil);
+    
+    return loader;
 }

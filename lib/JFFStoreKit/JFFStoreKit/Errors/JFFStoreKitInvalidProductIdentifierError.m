@@ -10,7 +10,7 @@
 - (void)writeErrorWithJFFLogger
 {
 #ifndef DEBUG
-    [JFFLogger logErrorWithFormat:@"%@", [self errorLogDescription]];
+    [JFFLogger logErrorWithFormat:@"%@ : %@", [self class], [self errorLogDescription]];
 #endif //DEBUG
 }
 

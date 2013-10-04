@@ -10,6 +10,8 @@
 		37A360261642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A360251642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m */; };
 		37D865291643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D865281643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m */; };
 		4C6C1D8817AA54D30087127E /* JFFStoreKitDisabledError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6C1D8717AA54D30087127E /* JFFStoreKitDisabledError.m */; };
+		4C6DA35617E1AD5F00501F48 /* asyncSKFinishTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DA35517E1AD5F00501F48 /* asyncSKFinishTransaction.m */; };
+		4CF9DB8A17E05376007D769C /* asyncSKPendingTransactions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF9DB8917E05376007D769C /* asyncSKPendingTransactions.m */; };
 		CEBCBE011619A7D8007F805F /* SKProduct+LocalizedPriceString.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCBE001619A7D8007F805F /* SKProduct+LocalizedPriceString.m */; };
 		CEBCBE071619AB0A007F805F /* asyncSKPaymentQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCBE061619AB0A007F805F /* asyncSKPaymentQueue.m */; };
 		CEBCBE241619B1B2007F805F /* asyncPaymentOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCBE231619B1B2007F805F /* asyncPaymentOperations.m */; };
@@ -112,6 +114,10 @@
 		37D865281643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKPaymentTransaction+ReceiptInBase64.m"; sourceTree = "<group>"; };
 		4C6C1D8617AA54D30087127E /* JFFStoreKitDisabledError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStoreKitDisabledError.h; sourceTree = "<group>"; };
 		4C6C1D8717AA54D30087127E /* JFFStoreKitDisabledError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStoreKitDisabledError.m; sourceTree = "<group>"; };
+		4C6DA35417E1AD5E00501F48 /* asyncSKFinishTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asyncSKFinishTransaction.h; sourceTree = "<group>"; };
+		4C6DA35517E1AD5F00501F48 /* asyncSKFinishTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asyncSKFinishTransaction.m; sourceTree = "<group>"; };
+		4CF9DB8817E05376007D769C /* asyncSKPendingTransactions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asyncSKPendingTransactions.h; sourceTree = "<group>"; };
+		4CF9DB8917E05376007D769C /* asyncSKPendingTransactions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asyncSKPendingTransactions.m; sourceTree = "<group>"; };
 		CEBCBDEB1619A425007F805F /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
 		CEBCBDFF1619A7D8007F805F /* SKProduct+LocalizedPriceString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalizedPriceString.h"; sourceTree = "<group>"; };
 		CEBCBE001619A7D8007F805F /* SKProduct+LocalizedPriceString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+LocalizedPriceString.m"; sourceTree = "<group>"; };
@@ -273,6 +279,10 @@
 				CEBCBE261619B729007F805F /* asyncSKProductRequest.m */,
 				CEBCBE051619AB0A007F805F /* asyncSKPaymentQueue.h */,
 				CEBCBE061619AB0A007F805F /* asyncSKPaymentQueue.m */,
+				4C6DA35417E1AD5E00501F48 /* asyncSKFinishTransaction.h */,
+				4C6DA35517E1AD5F00501F48 /* asyncSKFinishTransaction.m */,
+				4CF9DB8817E05376007D769C /* asyncSKPendingTransactions.h */,
+				4CF9DB8917E05376007D769C /* asyncSKPendingTransactions.m */,
 			);
 			path = asyncAdapters;
 			sourceTree = "<group>";
@@ -471,6 +481,8 @@
 				37A360261642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m in Sources */,
 				37D865291643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m in Sources */,
 				4C6C1D8817AA54D30087127E /* JFFStoreKitDisabledError.m in Sources */,
+				4CF9DB8A17E05376007D769C /* asyncSKPendingTransactions.m in Sources */,
+				4C6DA35617E1AD5F00501F48 /* asyncSKFinishTransaction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +534,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -545,6 +558,7 @@
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
