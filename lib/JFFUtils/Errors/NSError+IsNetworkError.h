@@ -3,5 +3,6 @@
 @interface NSError (IsNetworkError)
 
 - (BOOL)isNetworkError;
+- (BOOL)isActiveCallError;
 
 @end

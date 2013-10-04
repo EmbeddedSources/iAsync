@@ -11,7 +11,16 @@
     return code == kCFURLErrorNotConnectedToInternet
     || code == kCFURLErrorTimedOut
     || code == kCFURLErrorCannotConnectToHost
-    || code == kCFURLErrorNetworkConnectionLost;
+    || code == kCFURLErrorNetworkConnectionLost
+    || code == kCFURLErrorCannotFindHost;
+}
+
+- (BOOL)isActiveCallError
+{
+    if (![[self domain] isEqualToString:NSURLErrorDomain])
+        return NO;
+    
+    return kCFURLErrorCallIsActive == [self code];
 }
 
 @end
