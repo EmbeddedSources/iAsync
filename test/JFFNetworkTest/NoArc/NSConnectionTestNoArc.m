@@ -12,10 +12,9 @@
 - (void)testValidDownloadCompletesCorrectly
 {
     const NSUInteger initialCount = [JNNsUrlConnection instancesCount];
-    id< JNUrlConnection > connection;
+    id< JNUrlConnection > connection = nil;
     __block BOOL executed = NO;
     __block BOOL isDownloadSuccessfull = NO;
-    __unsafe_unretained id< JNUrlConnection > unretainedConnection = connection;
     
     NSAutoreleasePool *pool = [NSAutoreleasePool new];
     [self prepare];
@@ -41,10 +40,12 @@
             [totalData appendData:dataChunk];
         };
         
-        connection.didFinishLoadingBlock = ^(NSError *error) {
+        connection.didFinishLoadingBlock = ^(NSError *error)
+        {
             executed = YES;
             
-            if (nil != error) {
+            if (nil != error)
+            {
                 [self notify:kGHUnitWaitStatusFailure
                  forSelector:_cmd];
                 return;
@@ -55,8 +56,6 @@
             
             [self notify:kGHUnitWaitStatusSuccess
              forSelector:_cmd];
-            
-            [ unretainedConnection cancel ];
         };
         
         [connection start];
