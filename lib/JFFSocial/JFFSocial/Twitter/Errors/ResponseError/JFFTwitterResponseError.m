@@ -21,7 +21,8 @@
 
 - (NSString *)errorLogDescription
 {
-    return [[NSString alloc] initWithFormat:@"%@ context:%@ response:%@",
+    return [[NSString alloc] initWithFormat:@"%@ : %@ context:%@ response:%@",
+            [self class],
             [self localizedDescription],
             _context,
             _response];

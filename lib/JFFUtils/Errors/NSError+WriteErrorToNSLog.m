@@ -6,10 +6,11 @@
 
 - (NSString *)errorLogDescription
 {
-    return [[NSString alloc] initWithFormat:@"NSError : %@, domain : %@ code : %d",
+    return [[NSString alloc] initWithFormat:@"%@ : %@, domain : %@ code : %ld",
+            [self class],
             [self localizedDescription],
             [self domain],
-            [self code]];
+            (long)[self code]];
 }
 
 - (void)writeErrorToNSLog
