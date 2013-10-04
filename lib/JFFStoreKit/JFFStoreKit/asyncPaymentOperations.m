@@ -2,6 +2,7 @@
 
 #import "asyncSKPaymentQueue.h"
 #import "asyncSKProductRequest.h"
+#import "asyncSKFinishTransaction.h"
 
 @implementation JFFPurchsing
 
@@ -24,28 +25,34 @@
 + (JFFAsyncOperation)purcheserWithProduct:(SKProduct *)product
                               srvCallback:(JFFAsyncOperationBinder)srvCallback
 {
-    SKPayment *payment = [SKPayment paymentWithProduct:product];
-    JFFAsyncOperation paymentloader = asyncOperationWithSKPayment(payment);
-    
-    JFFAsyncOperationBinder srvPaymentBinder = ^JFFAsyncOperation(SKPaymentTransaction *transaction) {
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         
-        JFFAsyncOperation srvLoader = srvCallback(transaction);
+        SKPayment *payment = [SKPayment paymentWithProduct:product];
+        JFFAsyncOperation paymentloader = asyncOperationWithSKPayment(payment);
         
-        JFFAsyncOperationBinder removeTransaction = ^JFFAsyncOperation(id srvResult) {
-            SKPaymentQueue *queue = [SKPaymentQueue defaultQueue];
-            [queue finishTransaction:transaction];
+        JFFAsyncOperationBinder srvPaymentBinder = ^JFFAsyncOperation(SKPaymentTransaction *transaction) {
             
-            return asyncOperationWithResult(srvResult);
+            JFFAsyncOperation srvLoader = srvCallback(transaction);
+            
+            JFFAsyncOperationBinder removeTransaction = ^JFFAsyncOperation(id srvResult) {
+                
+                JFFAsyncOperation finishTransaction = asyncOperationFinishTransaction(transaction);
+                return sequenceOfAsyncOperations(finishTransaction, asyncOperationWithResult(srvResult), nil);
+            };
+            
+            return bindSequenceOfAsyncOperations(srvLoader,
+                                                 removeTransaction,
+                                                 nil);
         };
         
-        return bindSequenceOfAsyncOperations(srvLoader,
-                                             removeTransaction,
-                                             nil);
+        JFFAsyncOperation loader = bindSequenceOfAsyncOperations(paymentloader,
+                                                                 srvPaymentBinder,
+                                                                 nil);
+        
+        return loader(progressCallback, cancelCallback, doneCallback);
     };
-    
-    return bindSequenceOfAsyncOperations(paymentloader,
-                                         srvPaymentBinder,
-                                         nil);
 }
 
 @end
