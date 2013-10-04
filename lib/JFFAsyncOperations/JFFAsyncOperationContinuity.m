@@ -119,6 +119,63 @@ JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders)
     return MergeBinders(bindSequenceOfBindersPair, loaders)(nil);
 }
 
+static JFFAsyncOperation accumulatSequenceResultToArrayUsingFinishHook(NSArray *blocks,
+                                                                       NSMutableArray *result,
+                                                                       JFFDidFinishAsyncOperationHook finishHook)
+{
+    JFFMappingBlock doHookCompletion = ^id(JFFAsyncOperation block) {
+        
+        return asyncOperationWithFinishHookBlock(block, finishHook);
+    };
+    NSArray *hookedCompletionBlocks = [blocks map:doHookCompletion];
+    
+    JFFAsyncOperation sequence = sequenceOfAsyncOperationsArray(hookedCompletionBlocks);
+    
+    JFFChangedResultBuilder complexResultBuilder = ^NSArray *(id sequenceResult) {
+        return [result copy];
+    };
+    JFFAsyncOperation resultOp = asyncOperationWithChangedResult(sequence, complexResultBuilder);
+    
+    return resultOp;
+}
+
+JFFAsyncOperation sequenceOfAsyncOperationsWithAllResults(NSArray *blocks)
+{
+    __block NSMutableArray *complexResult = [NSMutableArray new];
+    
+    JFFDidFinishAsyncOperationHook finishHook =
+    ^void(id blockResult, NSError *blockError, JFFDidFinishAsyncOperationHandler doneCallback)
+    {
+        if (nil != blockResult) {
+            [complexResult addObject:blockResult];
+        }
+        
+        doneCallback(blockResult, blockError);
+    };
+    
+    return accumulatSequenceResultToArrayUsingFinishHook(blocks, complexResult, finishHook);
+}
+
+JFFAsyncOperation sequenceOfAsyncOperationsWithSuccessfullResults(NSArray *blocks)
+{
+    __block NSMutableArray *complexResult = [NSMutableArray new];
+    
+    JFFDidFinishAsyncOperationHook finishHook =
+    ^void(id blockResult, NSError *blockError, JFFDidFinishAsyncOperationHandler doneCallback)
+    {
+        if (nil != blockResult) {
+            [complexResult addObject:blockResult];
+        } else {
+            NSLog(@"sequenceOfAsyncOperationsWithSuccessfullResults() - error occured : %@", blockError);
+            blockResult = [NSNull null];
+        }
+        
+        doneCallback(blockResult, nil);
+    };
+    
+    return accumulatSequenceResultToArrayUsingFinishHook(blocks, complexResult, finishHook);
+}
+
 JFFAsyncOperationBinder binderAsSequenceOfBinders(JFFAsyncOperationBinder firstBinder, ...)
 {
     va_list args;
