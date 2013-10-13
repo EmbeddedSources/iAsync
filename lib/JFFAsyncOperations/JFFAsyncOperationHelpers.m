@@ -143,9 +143,11 @@ JFFAsyncOperation asyncOperationWithFinishHookBlock(JFFAsyncOperation loader,
     NSCParameterAssert(finishCallbackHook);// should not be nil"
     finishCallbackHook = [finishCallbackHook copy];
     loader             = [loader             copy];
+    
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
+        
         doneCallback = [doneCallback copy];
         return loader(progressCallback, cancelCallback, ^void(id result, NSError *error) {
             finishCallbackHook(result, error, doneCallback);

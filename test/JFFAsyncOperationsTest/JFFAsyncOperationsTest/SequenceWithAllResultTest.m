@@ -209,7 +209,6 @@
             sequenceLoaderFinished = YES;
         } );
         
-        
         GHAssertFalse( firstLoader.finished, @"First loader not finished yet" );
         GHAssertFalse( secondLoader.finished, @"Second loader not finished yet" );
         GHAssertFalse( thirdLoader.finished, @"Third loader not finished yet" );
@@ -217,7 +216,6 @@
         
         NSNumber* firstResult  = @(2.71);
         firstLoader.loaderFinishBlock.didFinishBlock( firstResult, nil );
-        
         
         //        secondLoader.loaderFinishBlock.didFinishBlock( nil, secondError );
         GHAssertTrue( firstLoader.finished, @"First loader finished already" );

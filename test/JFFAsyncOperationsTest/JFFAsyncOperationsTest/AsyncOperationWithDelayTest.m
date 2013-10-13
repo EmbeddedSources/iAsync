@@ -70,7 +70,7 @@
     __block NSUInteger callsCount = 0;
     
     void (^block)(JFFSimpleBlock) = ^(JFFSimpleBlock complete) {
-
+        
         @autoreleasepool {
             JFFAsyncOperation loader = asyncOperationWithDelay(.2, .02);
             

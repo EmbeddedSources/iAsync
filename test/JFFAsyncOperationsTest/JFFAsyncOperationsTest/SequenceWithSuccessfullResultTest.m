@@ -79,8 +79,7 @@
             GHAssertTrue(firstLoader.finished, @"First loader finished already" );
             GHAssertFalse(secondLoader.finished, @"Second loader not finished yet" );
             GHAssertFalse(thirdLoader.finished, @"Third loader not finished yet" );
-            GHAssertFalse(sequenceLoaderFinished, @"Sequence loader finished already" );
-            
+            GHAssertFalse(sequenceLoaderFinished, @"Sequence loader finished already");
             
             secondLoader.loaderFinishBlock.didFinishBlock( secondResult, nil );
             GHAssertTrue(firstLoader.finished, @"First loader finished already" );
