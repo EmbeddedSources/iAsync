@@ -16,6 +16,15 @@ extern "C" {
                                                 JFFAsyncOperation secondLoader, ...) NS_REQUIRES_NIL_TERMINATION __attribute__((pure,const));
     
     JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders);
+    
+/////////////////////////////// SEQUENCE ACCUMULATOR ///////////////////////////////
+    
+    typedef id (^JFFSequenceResultAccumulator)(id waterfallResult,
+                                               id loaderResult,
+                                               NSError *loaderError);
+    
+    JFFAsyncOperation accumulateSequenceResult(NSArray *loaders, JFFSequenceResultAccumulator resultAccumulator);
+
     JFFAsyncOperation sequenceOfAsyncOperationsWithAllResults(NSArray *blocks);
     
     JFFAsyncOperation sequenceOfAsyncOperationsWithSuccessfullResults(NSArray *blocks);
@@ -29,7 +38,7 @@ extern "C" {
     
 //calls binders while success
     JFFAsyncOperation bindSequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
-                                                    JFFAsyncOperationBinder secondLoaderBinder_, ...) NS_REQUIRES_NIL_TERMINATION __attribute__((pure,const));
+                                                    JFFAsyncOperationBinder secondLoaderBinder, ...) NS_REQUIRES_NIL_TERMINATION __attribute__((pure,const));
     
     JFFAsyncOperation bindSequenceOfAsyncOperationsArray(JFFAsyncOperation firstLoader,
                                                          NSArray *loadersBinders) __attribute__((pure,const));

@@ -18,12 +18,6 @@
     [JFFAsyncOperationManager enableInstancesCounting];
 }
 
-- (void)tearDown
-{
-    // Put teardown code here; it will be run once, after the last test case.
-    [super tearDown];
-}
-
 - (void)testBlocksAreExecutedInTurn
 {
     NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
@@ -102,8 +96,7 @@
         
         test();
         
-        //invoke th same loader again
-        test();
+        test();//invoke th same loader again
     }
     
     GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");

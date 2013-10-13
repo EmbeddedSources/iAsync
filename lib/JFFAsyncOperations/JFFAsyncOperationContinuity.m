@@ -6,6 +6,25 @@
 
 #import "JFFAsyncOperationHelpers.h"
 
+@interface JFFWaterwallFirstObject : NSObject
+@end
+
+@implementation JFFWaterwallFirstObject
+
++ (instancetype)sharedWaterwallFirstObject
+{
+    static id instance;
+    
+    if (!instance) {
+        
+        instance = [JFFWaterwallFirstObject new];
+    }
+    
+    return instance;
+}
+
+@end
+
 typedef JFFAsyncOperationBinder (*MergeTwoBindersPtr)( JFFAsyncOperationBinder, JFFAsyncOperationBinder );
 typedef JFFAsyncOperation (*MergeTwoLoadersPtr)( JFFAsyncOperation, JFFAsyncOperation );
 
@@ -119,61 +138,62 @@ JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders)
     return MergeBinders(bindSequenceOfBindersPair, loaders)(nil);
 }
 
-static JFFAsyncOperation accumulatSequenceResultToArrayUsingFinishHook(NSArray *blocks,
-                                                                       NSMutableArray *result,
-                                                                       JFFDidFinishAsyncOperationHook finishHook)
+JFFAsyncOperation accumulateSequenceResult(NSArray *loaders, JFFSequenceResultAccumulator resultAccumulator)
 {
-    JFFMappingBlock doHookCompletion = ^id(JFFAsyncOperation block) {
+    NSCParameterAssert([loaders count] > 0);
+    
+    resultAccumulator = [resultAccumulator copy];
+    
+    NSMutableArray *binders = [[NSMutableArray alloc] initWithCapacity:[loaders count]];
+    
+    for (NSUInteger index = 0; index < [loaders count]; ++index) {
         
-        return asyncOperationWithFinishHookBlock(block, finishHook);
-    };
-    NSArray *hookedCompletionBlocks = [blocks map:doHookCompletion];
+        JFFAsyncOperationBinder binder = [^JFFAsyncOperation(id waterfallResult) {
+            
+            JFFAsyncOperation loader = loaders[index];
+            
+            return asyncOperationWithFinishHookBlock(loader, ^void(id result, NSError *error, JFFDidFinishAsyncOperationHandler doneCallback) {
+                
+                id currWaterfallResult = [waterfallResult isKindOfClass:[JFFWaterwallFirstObject class]]
+                ?nil
+                :waterfallResult;
+                
+                id newResult = resultAccumulator(currWaterfallResult, result, error);
+                
+                if (doneCallback)
+                    doneCallback(newResult, newResult?nil:error);
+            });
+        } copy];
+        
+        [binders addObject:binder];
+    }
     
-    JFFAsyncOperation sequence = sequenceOfAsyncOperationsArray(hookedCompletionBlocks);
-    
-    JFFChangedResultBuilder complexResultBuilder = ^NSArray *(id sequenceResult) {
-        return [result copy];
-    };
-    JFFAsyncOperation resultOp = asyncOperationWithChangedResult(sequence, complexResultBuilder);
-    
-    return resultOp;
+    JFFWaterwallFirstObject *instance = [JFFWaterwallFirstObject sharedWaterwallFirstObject];
+    return bindSequenceOfAsyncOperationsArray(asyncOperationWithResult(instance), binders);
 }
 
 JFFAsyncOperation sequenceOfAsyncOperationsWithAllResults(NSArray *blocks)
 {
-    __block NSMutableArray *complexResult = [NSMutableArray new];
-    
-    JFFDidFinishAsyncOperationHook finishHook =
-    ^void(id blockResult, NSError *blockError, JFFDidFinishAsyncOperationHandler doneCallback)
-    {
-        if (nil != blockResult) {
-            [complexResult addObject:blockResult];
-        }
+    return accumulateSequenceResult(blocks, ^id(id waterfallResult, id loaderResult, NSError *loaderError) {
         
-        doneCallback(blockResult, blockError);
-    };
-    
-    return accumulatSequenceResultToArrayUsingFinishHook(blocks, complexResult, finishHook);
+        waterfallResult = loaderResult
+        ?waterfallResult?:@[]
+        :nil;
+        
+        return [waterfallResult arrayByAddingObject:loaderResult];
+    });
 }
 
 JFFAsyncOperation sequenceOfAsyncOperationsWithSuccessfullResults(NSArray *blocks)
 {
-    __block NSMutableArray *complexResult = [NSMutableArray new];
-    
-    JFFDidFinishAsyncOperationHook finishHook =
-    ^void(id blockResult, NSError *blockError, JFFDidFinishAsyncOperationHandler doneCallback)
-    {
-        if (nil != blockResult) {
-            [complexResult addObject:blockResult];
-        } else {
-            NSLog(@"sequenceOfAsyncOperationsWithSuccessfullResults() - error occured : %@", blockError);
-            blockResult = [NSNull null];
-        }
+    return accumulateSequenceResult(blocks, ^id(id waterfallResult, id loaderResult, NSError *loaderError) {
         
-        doneCallback(blockResult, nil);
-    };
-    
-    return accumulatSequenceResultToArrayUsingFinishHook(blocks, complexResult, finishHook);
+        waterfallResult = waterfallResult?:@[];
+        
+        return loaderResult
+        ?[waterfallResult arrayByAddingObject:loaderResult]
+        :waterfallResult;
+    });
 }
 
 JFFAsyncOperationBinder binderAsSequenceOfBinders(JFFAsyncOperationBinder firstBinder, ...)
