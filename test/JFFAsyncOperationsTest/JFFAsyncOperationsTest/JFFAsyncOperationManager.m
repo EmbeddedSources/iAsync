@@ -39,18 +39,18 @@
 
 - (void)clear
 {
-    self.loaderFinishBlock = nil;
-    self.loaderCancelBlock = nil;
-    self.finished = NO;
+    _loaderFinishBlock = nil;
+    _loaderCancelBlock = nil;
+    _finished = NO;
 }
 
 - (JFFAsyncOperation)loader
 {
-    __weak JFFAsyncOperationManager *weakSelf = self;
-    
     return [^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progress_callback,
                                       JFFCancelAsyncOperationHandler cancelCallback,
                                       JFFDidFinishAsyncOperationHandler doneCallback) {
+        
+        __weak JFFAsyncOperationManager *weakSelf = self;
         
         self.loadingCount += 1;
         
