@@ -83,27 +83,27 @@
     return result;
 }
 
-+ (id)allocWithZoneHook:(NSZone *)zone
++ (id)allocWithZoneHook
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
-+ (id)alloCWithZonePrototype:(NSZone *)zone
-{
-    return [JFFNSObjectInstancesCounter instancesCounterAllocatorForClass:[self class]
-                                                            nativeAllocor:^id(void)
-    {
-        return [self allocWithZoneHook:zone];
-    }];
-}
-
-+ (id)alloCWithZoneToAdding:(NSZone *)zone
++ (id)alloCWithZonePrototype
 {
     return [JFFNSObjectInstancesCounter instancesCounterAllocatorForClass:[self class]
                                                             nativeAllocor:^id(void) {
+                                                                
+        return [self allocWithZoneHook];
+    }];
+}
 
-        return [super allocWithZone:zone];
++ (id)alloCWithZoneToAdding
+{
+    return [JFFNSObjectInstancesCounter instancesCounterAllocatorForClass:[self class]
+                                                            nativeAllocor:^id(void) {
+        
+        return [super alloc];
     }];
 }
 
@@ -118,16 +118,16 @@
             _instancesNumberByClassName[className] = @0;
             
             {
-                BOOL methodAdded = [[self class] addClassMethodIfNeedWithSelector:@selector(alloCWithZoneToAdding:)
+                BOOL methodAdded = [[self class] addClassMethodIfNeedWithSelector:@selector(alloCWithZoneToAdding)
                                                                           toClass:class
-                                                                newMethodSelector:@selector(allocWithZone:)];
+                                                                newMethodSelector:@selector(alloc)];
                 
                 if (!methodAdded) {
                     // create name allocWithZoneHook dynamicaly and allocWithZonePrototype use block instead
                     [[self class] hookClassMethodForClass:class
-                                             withSelector:@selector(allocWithZone:)
-                                  prototypeMethodSelector:@selector(alloCWithZonePrototype:)
-                                       hookMethodSelector:@selector(allocWithZoneHook:)];
+                                             withSelector:@selector(alloc)
+                                  prototypeMethodSelector:@selector(alloCWithZonePrototype)
+                                       hookMethodSelector:@selector(allocWithZoneHook)];
                 }
             }
         }
