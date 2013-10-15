@@ -162,7 +162,7 @@ JFFAsyncOperation asyncOperationWithSKPayment(SKPayment *payment)
         
         JFFAsyncOperation loader = trySequenceOfAsyncOperations(asyncOperationFinishTransaction(error.transaction), asyncOperationWithResult(@YES), nil);
         
-        return sequenceOfAsyncOperations(loader, asyncOperationWithResult(error), nil);
+        return sequenceOfAsyncOperations(loader, asyncOperationWithError(error), nil);
     }, nil);
     
     return loader;

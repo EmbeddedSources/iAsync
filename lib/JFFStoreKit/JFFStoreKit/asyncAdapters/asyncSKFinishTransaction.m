@@ -9,6 +9,7 @@ static NSString *const mergeObject = @"002fc0c2-07c3-41c4-8296-d6f4c038655a";
 SKPaymentTransactionObserver,
 JFFAsyncOperationInterface
 >
+
 @end
 
 @implementation JFFAsyncSKFinishTransaction
@@ -114,7 +115,9 @@ JFFAsyncOperationInterface
 JFFAsyncOperation asyncOperationFinishTransaction(SKPaymentTransaction *transaction)
 {
     NSCParameterAssert(transaction.transactionState == SKPaymentTransactionStatePurchased
-                       || transaction.transactionState == SKPaymentTransactionStateRestored);
+                       || transaction.transactionState == SKPaymentTransactionStateRestored
+                       || transaction.transactionState == SKPaymentTransactionStateFailed
+                       );
     
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         return [JFFAsyncSKFinishTransaction newFAsyncSKFinishTransactionWithTransaction:transaction];
