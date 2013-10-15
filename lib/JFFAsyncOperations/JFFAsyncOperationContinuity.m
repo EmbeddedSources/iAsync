@@ -6,12 +6,31 @@
 
 #import "JFFAsyncOperationHelpers.h"
 
+@interface JFFWaterwallFirstObject : NSObject
+@end
+
+@implementation JFFWaterwallFirstObject
+
++ (instancetype)sharedWaterwallFirstObject
+{
+    static id instance;
+    
+    if (!instance) {
+        
+        instance = [JFFWaterwallFirstObject new];
+    }
+    
+    return instance;
+}
+
+@end
+
 typedef JFFAsyncOperationBinder (*MergeTwoBindersPtr)( JFFAsyncOperationBinder, JFFAsyncOperationBinder );
 typedef JFFAsyncOperation (*MergeTwoLoadersPtr)( JFFAsyncOperation, JFFAsyncOperation );
 
 static JFFAsyncOperationBinder MergeBinders(MergeTwoBindersPtr merger, NSArray *blocks)
 {
-    assert([blocks lastObject]);// should not be empty
+    NSCParameterAssert([blocks lastObject]);
     
     JFFAsyncOperationBinder firstBinder = blocks[0];
     
@@ -30,7 +49,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
 JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstBinder,
                                                   JFFAsyncOperationBinder secondBinder)
 {
-    assert(firstBinder); // should not be nil;
+    NSCParameterAssert(firstBinder);
     
     firstBinder  = [firstBinder  copy];
     secondBinder = [secondBinder copy];
@@ -39,8 +58,9 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
         return firstBinder;
     
     return ^JFFAsyncOperation(id bindResult) {
+        
         JFFAsyncOperation firstLoader = firstBinder(bindResult);
-        assert(firstLoader);//expected loader
+        NSCAssert(firstLoader, @"firstLoader should not be nil");
         return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                         JFFCancelAsyncOperationHandler cancelCallback,
                                         JFFDidFinishAsyncOperationHandler doneCallback) {
@@ -58,7 +78,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
                         doneCallback(nil, error);
                 } else {
                     JFFAsyncOperation secondLoader = secondBinder(result);
-                    assert(secondLoader);//result loader should not be nil
+                    NSCAssert(secondLoader, @"secondLoader should not be nil");//result loader should not be nil
                     cancelBlockHolder = secondLoader(progressCallback,
                                                      cancelCallback,
                                                      doneCallback);
@@ -83,7 +103,7 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
                                             JFFAsyncOperation secondLoader,
                                             ...)
 {
-    assert(firstLoader);
+    NSCParameterAssert(firstLoader);
     firstLoader = [firstLoader copy];
     JFFAsyncOperationBinder firstBlock = ^JFFAsyncOperation(id result) {
         return firstLoader;
@@ -94,6 +114,7 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
     for (JFFAsyncOperation secondBlock = secondLoader;
          secondBlock != nil;
          secondBlock = va_arg(args, JFFAsyncOperation)) {
+        
         secondBlock = [secondBlock copy];
         JFFAsyncOperationBinder secondBlockBinder = ^JFFAsyncOperation(id result) {
             return secondBlock;
@@ -107,14 +128,72 @@ JFFAsyncOperation sequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
 
 JFFAsyncOperation sequenceOfAsyncOperationsArray(NSArray *loaders)
 {
-    NSCParameterAssert( nil != loaders.lastObject ); //should not be empty
-    loaders = [loaders map: ^id(id object) {
+    NSCParameterAssert(loaders.lastObject);
+    loaders = [loaders map:^id(id object) {
         JFFAsyncOperation loader = [object copy];
         return ^JFFAsyncOperation(id result) {
             return loader;
         };
     }];
     return MergeBinders(bindSequenceOfBindersPair, loaders)(nil);
+}
+
+JFFAsyncOperation accumulateSequenceResult(NSArray *loaders, JFFSequenceResultAccumulator resultAccumulator)
+{
+    NSCParameterAssert([loaders count] > 0);
+    
+    resultAccumulator = [resultAccumulator copy];
+    
+    NSMutableArray *binders = [[NSMutableArray alloc] initWithCapacity:[loaders count]];
+    
+    for (NSUInteger index = 0; index < [loaders count]; ++index) {
+        
+        JFFAsyncOperationBinder binder = [^JFFAsyncOperation(id waterfallResult) {
+            
+            JFFAsyncOperation loader = loaders[index];
+            
+            return asyncOperationWithFinishHookBlock(loader, ^void(id result, NSError *error, JFFDidFinishAsyncOperationHandler doneCallback) {
+                
+                id currWaterfallResult = [waterfallResult isKindOfClass:[JFFWaterwallFirstObject class]]
+                ?nil
+                :waterfallResult;
+                
+                id newResult = resultAccumulator(currWaterfallResult, result, error);
+                
+                if (doneCallback)
+                    doneCallback(newResult, newResult?nil:error);
+            });
+        } copy];
+        
+        [binders addObject:binder];
+    }
+    
+    JFFWaterwallFirstObject *instance = [JFFWaterwallFirstObject sharedWaterwallFirstObject];
+    return bindSequenceOfAsyncOperationsArray(asyncOperationWithResult(instance), binders);
+}
+
+JFFAsyncOperation sequenceOfAsyncOperationsWithAllResults(NSArray *blocks)
+{
+    return accumulateSequenceResult(blocks, ^id(id waterfallResult, id loaderResult, NSError *loaderError) {
+        
+        waterfallResult = loaderResult
+        ?waterfallResult?:@[]
+        :nil;
+        
+        return [waterfallResult arrayByAddingObject:loaderResult];
+    });
+}
+
+JFFAsyncOperation sequenceOfAsyncOperationsWithSuccessfullResults(NSArray *blocks)
+{
+    return accumulateSequenceResult(blocks, ^id(id waterfallResult, id loaderResult, NSError *loaderError) {
+        
+        waterfallResult = waterfallResult?:@[];
+        
+        return loaderResult
+        ?[waterfallResult arrayByAddingObject:loaderResult]
+        :waterfallResult;
+    });
 }
 
 JFFAsyncOperationBinder binderAsSequenceOfBinders(JFFAsyncOperationBinder firstBinder, ...)
@@ -142,7 +221,7 @@ JFFAsyncOperationBinder binderAsSequenceOfBindersArray(NSArray *binders)
 JFFAsyncOperation bindSequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
                                                 JFFAsyncOperationBinder secondLoaderBinder, ... )
 {
-    assert(firstLoader);
+    NSCParameterAssert(firstLoader);
     NSMutableArray *binders = [NSMutableArray new];
     
     firstLoader = [firstLoader copy];
@@ -186,7 +265,7 @@ JFFAsyncOperation bindSequenceOfAsyncOperationsArray(JFFAsyncOperation firstLoad
 static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBinder firstBinder,
                                                             JFFAsyncOperationBinder secondBinder)
 {
-    assert(firstBinder); // firstLoader_ should not be nil
+    NSCParameterAssert(firstBinder);
     
     firstBinder  = [firstBinder  copy];
     secondBinder = [secondBinder copy];
@@ -196,7 +275,7 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBin
     
     return ^JFFAsyncOperation(id data) {
         JFFAsyncOperation firstLoader = firstBinder(data);
-        assert(firstLoader);//expected loader
+        NSCAssert(firstLoader, @"expected loader");
         
         return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                         JFFCancelAsyncOperationHandler cancelCallback,
@@ -256,14 +335,14 @@ JFFAsyncOperation trySequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
 
 JFFAsyncOperation trySequenceOfAsyncOperationsArray(NSArray *loaders)
 {
-    assert([loaders hasElements]);
+    NSCParameterAssert([loaders hasElements]);
     
     NSArray *binders = [loaders map:^id(id loader) {
         loader = [loader copy];
         return ^JFFAsyncOperation(id data) {
             return loader;
         };
-    } ];
+    }];
     
     return MergeBinders(bindTrySequenceOfBindersPair, binders)(nil);
 }
@@ -326,15 +405,13 @@ static void notifyGroupResult(JFFDidFinishAsyncOperationHandler doneCallback,
 static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoader,
                                                     JFFAsyncOperation secondLoader)
 {
-    assert(firstLoader);//do not pass nil
+    NSCParameterAssert(firstLoader);//do not pass nil
     
     firstLoader  = [firstLoader  copy];
     secondLoader = [secondLoader copy];
     
     if (secondLoader == nil)
-    {
         return firstLoader;
-    }
     
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
@@ -453,81 +530,16 @@ static JFFAsyncOperation resultToArrayForLoader(JFFAsyncOperation loader)
 static JFFAsyncOperation MergeGroupLoaders(MergeTwoLoadersPtr merger, NSArray *blocks)
 {
     if (![blocks lastObject])
-    {
         return asyncOperationWithResult(@[]);
-    }
     
     JFFAsyncOperation firstBlock = blocks[0];
     JFFAsyncOperation arrayFirstBlock = resultToArrayForLoader(firstBlock);
     
-    NSUInteger blocksCount = [blocks count];
-    for (NSUInteger index = 1; index < blocksCount; ++index)
-    {
-        arrayFirstBlock = merger( arrayFirstBlock, blocks[index] );
+    for (NSUInteger index = 1; index < [blocks count]; ++index) {
+        arrayFirstBlock = merger(arrayFirstBlock, blocks[index]);
     }
     
     return arrayFirstBlock;
-}
-
-static JFFAsyncOperation accumulatSequenceResultToArrayUsingFinishHook( NSArray *blocks, NSMutableArray* result, JFFDidFinishAsyncOperationHook finishHook )
-{
-    __block NSMutableArray* complexResult = result;
-    
-    JFFMappingBlock doHookCompletion = ^id(JFFAsyncOperation block)
-    {
-        return asyncOperationWithFinishHookBlock( block, finishHook );
-    };
-    NSArray* hookedCompletionBlocks = [ blocks map:doHookCompletion ];
-    JFFAsyncOperation sequence = sequenceOfAsyncOperationsArray( hookedCompletionBlocks );
-    
-    JFFChangedResultBuilder complexResultBuilder = ^NSArray*(id sequenceResult)
-    {
-        return [ NSArray arrayWithArray: complexResult ];
-    };
-    JFFAsyncOperation resultOp = asyncOperationWithChangedResult( sequence, complexResultBuilder );
-    
-    return resultOp;
-}
-
-JFFAsyncOperation sequenceOfAsyncOperationsWithSuccessfullResults( NSArray *blocks )
-{
-    __block NSMutableArray* complexResult = [ NSMutableArray new ];
-    
-    JFFDidFinishAsyncOperationHook finishHook =
-    ^void( id blockResult, NSError* blockError, JFFDidFinishAsyncOperationHandler doneCallback )
-    {
-        if ( nil != blockResult )
-        {
-            [ complexResult addObject: blockResult ];
-        }
-        else
-        {
-            NSLog( @"sequenceOfAsyncOperationsWithSuccessfullResults() - error occured : %@", blockError );
-            blockResult = [ NSNull null ];
-        }
-        
-        doneCallback( blockResult, nil );
-    };
-    
-    return accumulatSequenceResultToArrayUsingFinishHook( blocks, complexResult, finishHook );
-}
-
-JFFAsyncOperation sequenceOfAsyncOperationsWithAllResults( NSArray *blocks )
-{
-    __block NSMutableArray* complexResult = [ NSMutableArray new ];
-    
-    JFFDidFinishAsyncOperationHook finishHook =
-    ^void( id blockResult, NSError* blockError, JFFDidFinishAsyncOperationHandler doneCallback )
-    {
-        if ( nil != blockResult )
-        {
-            [ complexResult addObject: blockResult ];
-        }
-        
-        doneCallback( blockResult, blockError );
-    };
-    
-    return accumulatSequenceResultToArrayUsingFinishHook( blocks, complexResult, finishHook );
 }
 
 JFFAsyncOperation groupOfAsyncOperationsArray(NSArray *blocks)
@@ -564,7 +576,7 @@ static JFFDidFinishAsyncOperationHandler cancelSafeResultBlock(JFFDidFinishAsync
 static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOperation firstLoader,
                                                                     JFFAsyncOperation secondLoader)
 {
-    assert(firstLoader);//do not pass nil
+    NSCParameterAssert(firstLoader);//do not pass nil
     
     firstLoader  = [firstLoader  copy];
     secondLoader = [secondLoader copy];
@@ -672,6 +684,7 @@ JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperations(JFFAsyncOperation first
     for (JFFAsyncOperation nextBlock = firstLoader;
          nextBlock != nil;
          nextBlock = va_arg(args, JFFAsyncOperation)) {
+        
         [loaders addObject:[nextBlock copy]];
     }
     va_end(args);
@@ -721,8 +734,8 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
                                        NSTimeInterval delay,
                                        NSInteger maxRepeatCount)
 {
-    assert(nativeLoader         );// can not be nil
-    assert(continueLoaderBuilder);// can not be nil
+    NSCParameterAssert(nativeLoader         );// can not be nil
+    NSCParameterAssert(continueLoaderBuilder);// can not be nil
     
     nativeLoader          = [nativeLoader          copy];
     continueLoaderBuilder = [continueLoaderBuilder copy];
@@ -784,7 +797,5 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
 JFFAsyncOperation asyncOperationAfterDelay(NSTimeInterval delay,
                                            JFFAsyncOperation loader)
 {
-    return sequenceOfAsyncOperations(asyncOperationWithDelay(delay),
-                                     loader,
-                                     nil);
+    return sequenceOfAsyncOperations(asyncOperationWithDelay(delay), loader, nil);
 }
