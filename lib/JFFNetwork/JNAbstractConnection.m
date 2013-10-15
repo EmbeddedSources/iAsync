@@ -20,10 +20,10 @@
 #pragma mark Callbacks management
 - (void)clearCallbacks
 {
-    self.didReceiveResponseBlock = nil;
-    self.didReceiveDataBlock     = nil;
-    self.didFinishLoadingBlock   = nil;
-    self.shouldAcceptCertificateBlock = nil;
+    _didReceiveResponseBlock = nil;
+    _didReceiveDataBlock     = nil;
+    _didFinishLoadingBlock   = nil;
+    _shouldAcceptCertificateBlock = nil;
 }
 
 @end

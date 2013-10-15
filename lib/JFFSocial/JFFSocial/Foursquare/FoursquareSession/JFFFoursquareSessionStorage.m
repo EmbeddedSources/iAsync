@@ -69,7 +69,7 @@
     }
     else
     {
-        self.authorizeHendler (nil, [JFFFoursquareAuthURLError new]);
+        self.authorizeHendler(nil, [JFFFoursquareAuthURLError new]);
     }
 }
 

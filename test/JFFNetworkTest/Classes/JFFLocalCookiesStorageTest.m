@@ -8,7 +8,7 @@
 
 @implementation JFFLocalCookiesStorageTest
 
--(void)setUp
+- (void)setUp
 {
     NSHTTPCookieStorage* storage_ = [ NSHTTPCookieStorage sharedHTTPCookieStorage ];
     NSArray* cookies_ = [ [ storage_ cookies ] copy ];
@@ -18,7 +18,7 @@
     }
 }
 
--(void)testHTTPCookieExparationDate
+- (void)testHTTPCookieExparationDate
 {
     NSString* header_ = @"ws-alr1.dk.sitecore.net80_sitecore_username=NOhnomXlt2B691wsxQMcKxsi6rXR2bqSc4mtScMHQWpeVVLhgvKrF91imx_37FEP0vWkKJ6X78VEl5Gx3gXPYA2; expires=Wed, 05-Aug-2012 07:21:54 GMT; path=/sitecore/login";
 
@@ -45,7 +45,7 @@
     }
 }
 
--(void)testHTTPCookiePathMatchWithSameDomain
+- (void)testHTTPCookiePathMatchWithSameDomain
 {
     NSDate* now_ = [NSDate distantFuture];
 
@@ -112,7 +112,7 @@
     }
 }
 
--(void)testHTTPCookieDotDomainMatch
+- (void)testHTTPCookieDotDomainMatch
 {
     NSDate *now = [NSDate distantFuture];
 
@@ -179,7 +179,7 @@
     }
 }
 
--(void)testHTTPCookieNoDotDomainMatch
+- (void)testHTTPCookieNoDotDomainMatch
 {
     NSDate* now_ = [NSDate distantFuture];
     
