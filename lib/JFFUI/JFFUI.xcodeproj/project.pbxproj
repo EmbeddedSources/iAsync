@@ -45,16 +45,16 @@
 		4C2CFD9E1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2CFD9C1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m */; };
 		4C3D54311772033600EE1C73 /* UIImage+RotateImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C3D542F1772033600EE1C73 /* UIImage+RotateImage.h */; };
 		4C3D54321772033600EE1C73 /* UIImage+RotateImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D54301772033600EE1C73 /* UIImage+RotateImage.m */; };
+		4C4E8EA6180BFA4B002D8A7B /* UITableView+CellsSelections.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4E8EA4180BFA4B002D8A7B /* UITableView+CellsSelections.h */; };
+		4C4E8EA7180BFA4B002D8A7B /* UITableView+CellsSelections.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E8EA5180BFA4B002D8A7B /* UITableView+CellsSelections.m */; };
+		4C4E8EAA180BFB1A002D8A7B /* UITableView+BlocksAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4E8EA8180BFB1A002D8A7B /* UITableView+BlocksAdditions.h */; };
+		4C4E8EAB180BFB1A002D8A7B /* UITableView+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E8EA9180BFB1A002D8A7B /* UITableView+BlocksAdditions.m */; };
 		4C696BEC1742769A00C7D53D /* JFFGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE51742769A00C7D53D /* JFFGridView.h */; };
 		4C696BED1742769A00C7D53D /* JFFGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C696BE61742769A00C7D53D /* JFFGridView.m */; };
 		4C696BEE1742769A00C7D53D /* JFFGridViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE71742769A00C7D53D /* JFFGridViewDelegate.h */; };
 		4C696BEF1742769A00C7D53D /* JFFGridViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C696BE81742769A00C7D53D /* JFFGridViewDelegate.m */; };
-		4C89738F1761F31300E24F7B /* UITableView+BlocksAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C89738D1761F31300E24F7B /* UITableView+BlocksAdditions.h */; };
-		4C8973901761F31300E24F7B /* UITableView+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C89738E1761F31300E24F7B /* UITableView+BlocksAdditions.m */; };
 		4C8973931761F33C00E24F7B /* UIWebView+UserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */; };
 		4C8973941761F33C00E24F7B /* UIWebView+UserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8973921761F33C00E24F7B /* UIWebView+UserAgent.m */; };
-		4C8973971761F3FC00E24F7B /* UITableView+CellsSelections.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C8973951761F3FC00E24F7B /* UITableView+CellsSelections.h */; };
-		4C8973981761F3FC00E24F7B /* UITableView+CellsSelections.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8973961761F3FC00E24F7B /* UITableView+CellsSelections.m */; };
 		4CB4C1A31770530C00F275BC /* UIImage+ScaleToSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB4C1A11770530C00F275BC /* UIImage+ScaleToSize.h */; };
 		4CB4C1A41770530C00F275BC /* UIImage+ScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4C1A21770530C00F275BC /* UIImage+ScaleToSize.m */; };
 		4CB4C1A71770535700F275BC /* UIImage+FixOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB4C1A51770535700F275BC /* UIImage+FixOrientation.h */; };
@@ -162,16 +162,16 @@
 		4C2CFD9C1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+OpenApplicationAsyncOp.m"; sourceTree = "<group>"; };
 		4C3D542F1772033600EE1C73 /* UIImage+RotateImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RotateImage.h"; sourceTree = "<group>"; };
 		4C3D54301772033600EE1C73 /* UIImage+RotateImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RotateImage.m"; sourceTree = "<group>"; };
+		4C4E8EA4180BFA4B002D8A7B /* UITableView+CellsSelections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CellsSelections.h"; sourceTree = "<group>"; };
+		4C4E8EA5180BFA4B002D8A7B /* UITableView+CellsSelections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CellsSelections.m"; sourceTree = "<group>"; };
+		4C4E8EA8180BFB1A002D8A7B /* UITableView+BlocksAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+BlocksAdditions.h"; sourceTree = "<group>"; };
+		4C4E8EA9180BFB1A002D8A7B /* UITableView+BlocksAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+BlocksAdditions.m"; sourceTree = "<group>"; };
 		4C696BE51742769A00C7D53D /* JFFGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFGridView.h; sourceTree = "<group>"; };
 		4C696BE61742769A00C7D53D /* JFFGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFGridView.m; sourceTree = "<group>"; };
 		4C696BE71742769A00C7D53D /* JFFGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFGridViewDelegate.h; sourceTree = "<group>"; };
 		4C696BE81742769A00C7D53D /* JFFGridViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFGridViewDelegate.m; sourceTree = "<group>"; };
-		4C89738D1761F31300E24F7B /* UITableView+BlocksAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+BlocksAdditions.h"; sourceTree = "<group>"; };
-		4C89738E1761F31300E24F7B /* UITableView+BlocksAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+BlocksAdditions.m"; sourceTree = "<group>"; };
 		4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UserAgent.h"; sourceTree = "<group>"; };
 		4C8973921761F33C00E24F7B /* UIWebView+UserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+UserAgent.m"; sourceTree = "<group>"; };
-		4C8973951761F3FC00E24F7B /* UITableView+CellsSelections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CellsSelections.h"; sourceTree = "<group>"; };
-		4C8973961761F3FC00E24F7B /* UITableView+CellsSelections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CellsSelections.m"; sourceTree = "<group>"; };
 		4CB4C1A11770530C00F275BC /* UIImage+ScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScaleToSize.h"; sourceTree = "<group>"; };
 		4CB4C1A21770530C00F275BC /* UIImage+ScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScaleToSize.m"; sourceTree = "<group>"; };
 		4CB4C1A51770535700F275BC /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
@@ -289,6 +289,10 @@
 				1B295559143DCB3A00532BD7 /* JULoadMoreCellscalculator.m */,
 				1B29555D143DCB7300532BD7 /* UITableView+WithinUpdates.h */,
 				1B29555E143DCB7300532BD7 /* UITableView+WithinUpdates.m */,
+				4C4E8EA4180BFA4B002D8A7B /* UITableView+CellsSelections.h */,
+				4C4E8EA5180BFA4B002D8A7B /* UITableView+CellsSelections.m */,
+				4C4E8EA8180BFB1A002D8A7B /* UITableView+BlocksAdditions.h */,
+				4C4E8EA9180BFB1A002D8A7B /* UITableView+BlocksAdditions.m */,
 			);
 			path = UITableView;
 			sourceTree = "<group>";
@@ -362,10 +366,6 @@
 				4C2CFD981754A4CD00E87F22 /* UINib+FirstObject.m */,
 				4C2CFD9B1754A4F900E87F22 /* UIApplication+OpenApplicationAsyncOp.h */,
 				4C2CFD9C1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m */,
-				4C89738D1761F31300E24F7B /* UITableView+BlocksAdditions.h */,
-				4C89738E1761F31300E24F7B /* UITableView+BlocksAdditions.m */,
-				4C8973951761F3FC00E24F7B /* UITableView+CellsSelections.h */,
-				4C8973961761F3FC00E24F7B /* UITableView+CellsSelections.m */,
 				4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */,
 				4C8973921761F33C00E24F7B /* UIWebView+UserAgent.m */,
 			);
@@ -524,11 +524,11 @@
 				4C696BEC1742769A00C7D53D /* JFFGridView.h in Headers */,
 				4C696BEE1742769A00C7D53D /* JFFGridViewDelegate.h in Headers */,
 				4C2CFD951754A29F00E87F22 /* JFFAlertView+Async.h in Headers */,
+				4C4E8EAA180BFB1A002D8A7B /* UITableView+BlocksAdditions.h in Headers */,
 				4C2CFD991754A4CD00E87F22 /* UINib+FirstObject.h in Headers */,
 				4C2CFD9D1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.h in Headers */,
-				4C89738F1761F31300E24F7B /* UITableView+BlocksAdditions.h in Headers */,
+				4C4E8EA6180BFA4B002D8A7B /* UITableView+CellsSelections.h in Headers */,
 				4C8973931761F33C00E24F7B /* UIWebView+UserAgent.h in Headers */,
-				4C8973971761F3FC00E24F7B /* UITableView+CellsSelections.h in Headers */,
 				4CBBA1A917662275007317E6 /* JFFCameraFlashModeType.h in Headers */,
 				4CBBA1AA17662275007317E6 /* JFFPhotoCamera.h in Headers */,
 				4CBBA1AC17662275007317E6 /* JFFPhotoCameraType.h in Headers */,
@@ -637,6 +637,7 @@
 				655E9DBD1392E8C00074BD61 /* NSError+Alert.m in Sources */,
 				8D996F19139F5D370075A325 /* JFFActionSheet.m in Sources */,
 				8D996F1F139F61200075A325 /* NSObject+JFFAlertButton.m in Sources */,
+				4C4E8EA7180BFA4B002D8A7B /* UITableView+CellsSelections.m in Sources */,
 				1B7F58431435BDC000FF06EC /* UIWebView+HideWhenLoading.m in Sources */,
 				1B7F58981435D53300FF06EC /* UIView+AddSubviewAndScale.m in Sources */,
 				1B7F589C1435D58000FF06EC /* UIView+AnimationWithBlocks.m in Sources */,
@@ -645,6 +646,7 @@
 				1B295560143DCB7300532BD7 /* UITableView+WithinUpdates.m in Sources */,
 				1BD3616A1455A0630036F786 /* JFFPageSlider.m in Sources */,
 				1B3A3855147683E9007D8C10 /* UIView+AllSubviews.m in Sources */,
+				4C4E8EAB180BFB1A002D8A7B /* UITableView+BlocksAdditions.m in Sources */,
 				1B5E1AD314D0203B0075049A /* UIViewController+PresentTopViewController.m in Sources */,
 				1BE053B815480F4400270B58 /* JFFActionSheetsContainer.m in Sources */,
 				1BB414DF154835340032B7D5 /* JFFPendingActionSheet.m in Sources */,
@@ -662,9 +664,7 @@
 				4C2CFD961754A29F00E87F22 /* JFFAlertView+Async.m in Sources */,
 				4C2CFD9A1754A4CD00E87F22 /* UINib+FirstObject.m in Sources */,
 				4C2CFD9E1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m in Sources */,
-				4C8973901761F31300E24F7B /* UITableView+BlocksAdditions.m in Sources */,
 				4C8973941761F33C00E24F7B /* UIWebView+UserAgent.m in Sources */,
-				4C8973981761F3FC00E24F7B /* UITableView+CellsSelections.m in Sources */,
 				4CBBA1AB17662275007317E6 /* JFFPhotoCamera.m in Sources */,
 				4CB4C1A41770530C00F275BC /* UIImage+ScaleToSize.m in Sources */,
 				4CB4C1A81770535700F275BC /* UIImage+FixOrientation.m in Sources */,

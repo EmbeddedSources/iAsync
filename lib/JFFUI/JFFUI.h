@@ -12,6 +12,8 @@
 
 #import <JFFUI/UITableView/JULoadMoreCellscalculator.h>
 #import <JFFUI/UITableView/UITableView+WithinUpdates.h>
+#import <JFFUI/UITableView/UITableView+CellsSelections.h>
+#import <JFFUI/UITableView/UITableView+BlocksAdditions.h>
 
 #import <JFFUI/Preview/NSURL+QLPreviewControllerDataSource.h>
 
@@ -41,8 +43,6 @@
 #import <JFFUI/Categories/JFFAlertView+Async.h>
 #import <JFFUI/Categories/UIApplication+OpenApplicationAsyncOp.h>
 #import <JFFUI/Categories/UIWebView+UserAgent.h>
-#import <JFFUI/Categories/UITableView+BlocksAdditions.h>
-#import <JFFUI/Categories/UITableView+CellsSelections.h>
 
 #import <JFFUI/UIImage/UIImage+ScaleToSize.h>
 #import <JFFUI/UIImage/UIImage+FixOrientation.h>

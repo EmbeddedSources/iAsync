@@ -4,19 +4,19 @@
 
 @implementation UITableView (CellsSelections)
 
-- (void)selectAllRows
+- (void)selectAllRowsAnimated:(BOOL)animated
 {
     [self enumerateAllIndexPaths:^(NSIndexPath *indexPath) {
         
-        [self selectRowAtIndexPath:indexPath animated:NO scrollPosition:(UITableViewScrollPositionNone)];
+        [self selectRowAtIndexPath:indexPath animated:animated scrollPosition:(UITableViewScrollPositionNone)];
     }];
 }
 
-- (void)deselectAllRows
+- (void)deselectAllRowsAnimated:(BOOL)animated
 {
     [self enumerateAllIndexPaths:^(NSIndexPath *indexPath) {
         
-        [self deselectRowAtIndexPath:indexPath animated:NO];
+        [self deselectRowAtIndexPath:indexPath animated:animated];
     }];
 }
 

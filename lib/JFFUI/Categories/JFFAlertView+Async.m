@@ -45,9 +45,12 @@
 {
     NSParameterAssert(builder);
     builder = [builder copy];
+    
     JFFAsyncOperationInstanceBuilder objectFactory = ^id<JFFAsyncOperationInterface>() {
         
         JFFAlertView *alertView = builder();
+        
+        NSParameterAssert([alertView isKindOfClass:[JFFAlertView class]]);
         
         JFFShowAlerLoader *loader = [JFFShowAlerLoader new];
         
