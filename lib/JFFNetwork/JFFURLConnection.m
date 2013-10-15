@@ -23,13 +23,23 @@
 //#define USE_DD_URL_BUILDER
 
 #ifdef USE_DD_URL_BUILDER
-    #import <DDURLBuilder/DDURLBuilder.h>
-    #import "NSUrlLocationValidator.h"
+#import <DDURLBuilder/DDURLBuilder.h>
+#import "NSUrlLocationValidator.h"
 #endif
+
+@interface JFFURLConnectionContext : NSObject
+
+@property (nonatomic) JFFURLConnectionParams *params;
+@property (nonatomic, weak) JFFURLConnection *connection;
+
+@end
+
+@implementation JFFURLConnectionContext
+@end
 
 @interface JFFURLConnection ()
 
-@property (nonatomic) JFFURLConnectionParams *params;
+@property (nonatomic) JFFURLConnectionContext *context;
 
 - (void)handleResponseForReadStream:(CFReadStreamRef)stream;
 - (void)handleData:(void *)buffer length:(NSUInteger)length;
@@ -39,9 +49,10 @@
 
 static void readStreamCallback(CFReadStreamRef stream,
                                CFStreamEventType event,
-                               void* selfContext)
+                               void *selfContext)
 {
-    __unsafe_unretained JFFURLConnection *weakSelf = (__bridge JFFURLConnection*)selfContext;
+    JFFURLConnectionContext *connectionContext = (__bridge JFFURLConnectionContext *)selfContext;
+    
     switch(event) {
             
         case kCFStreamEventNone:
@@ -54,14 +65,14 @@ static void readStreamCallback(CFReadStreamRef stream,
         }
         case kCFStreamEventHasBytesAvailable:
         {
-            [weakSelf handleResponseForReadStream:stream];
-
-            UInt8 buffer[ kJNMaxBufferSize ];
+            [connectionContext.connection handleResponseForReadStream:stream];
+            
+            UInt8 buffer[kJNMaxBufferSize];
             CFIndex bytesRead = CFReadStreamRead(stream, buffer, kJNMaxBufferSize);
-            if ( bytesRead > 0 ) {
+            if (bytesRead > 0) {
                 
-                [weakSelf handleData:buffer
-                              length:bytesRead];
+                [connectionContext.connection handleData:buffer
+                                                  length:bytesRead];
             }
             break;
         }
@@ -71,19 +82,18 @@ static void readStreamCallback(CFReadStreamRef stream,
         }
         case kCFStreamEventErrorOccurred:
         {
-            [weakSelf handleResponseForReadStream:stream];
+            [connectionContext.connection handleResponseForReadStream:stream];
             
             CFStreamError error = CFReadStreamGetError(stream);
             
-            JFFError *wrappedError = [[JStreamError alloc] initWithStreamError:error context:weakSelf.params];
-            [weakSelf handleFinish:wrappedError];
+            JFFError *wrappedError = [[JStreamError alloc] initWithStreamError:error context:connectionContext.params];
+            [connectionContext.connection handleFinish:wrappedError];
             break;
         }
         case kCFStreamEventEndEncountered:
         {
-            [weakSelf handleResponseForReadStream:stream];
-            
-            [weakSelf handleFinish:nil];
+            [connectionContext.connection handleResponseForReadStream:stream];
+            [connectionContext.connection handleFinish:nil];
             break;
         }
     }
@@ -95,11 +105,13 @@ static void readStreamCallback(CFReadStreamRef stream,
     id _cookiesStorage;
     BOOL _responseHandled;
     JFFURLResponse *_urlResponse;
-
-//    NSString* _previousContentEncoding;
-    id< JNHttpDecoder > _decoder;
+    
+    //    NSString* _previousContentEncoding;
+    id<JNHttpDecoder> _decoder;
     unsigned long long _downloadedBytesCount;
     unsigned long long _totalBytesCount;
+    
+    __strong id _selfHolder;
 };
 
 - (void)dealloc
@@ -113,8 +125,10 @@ static void readStreamCallback(CFReadStreamRef stream,
     
     if (self) {
         
-        _params = params;
-        _cookiesStorage = _params.cookiesStorage?:[NSHTTPCookieStorage sharedHTTPCookieStorage];
+        _context = [JFFURLConnectionContext new];
+        _context.connection = self;
+        _context.params     = params;
+        _cookiesStorage     = _context.params.cookiesStorage?:[NSHTTPCookieStorage sharedHTTPCookieStorage];
     }
     
     return self;
@@ -122,13 +136,15 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 - (void)start
 {
-    [self startConnectionWithPostData:_params.httpBody
-                              headers:_params.headers];
+    _selfHolder = self;
+    
+    [self startConnectionWithPostData:_context.params.httpBody
+                              headers:_context.params.headers];
 }
 
 - (void)applyCookiesForHTTPRequest:(CFHTTPMessageRef)httpRequest
 {
-    NSArray *availableCookies = [_cookiesStorage cookiesForURL:_params.url];
+    NSArray *availableCookies = [_cookiesStorage cookiesForURL:_context.params.url];
     
     NSDictionary *headers = [NSHTTPCookie requestHeaderFieldsWithCookies:availableCookies];
     
@@ -146,14 +162,14 @@ static void readStreamCallback(CFReadStreamRef stream,
 - (void)startConnectionWithPostData:(NSData *)data
                             headers:(NSDictionary *)headers
 {
-    CFStringRef method = (__bridge CFStringRef)(_params.httpMethod?:@"GET");
-    if (!_params.httpMethod && data) {
+    CFStringRef method = (__bridge CFStringRef)(_context.params.httpMethod?:@"GET");
+    if (!_context.params.httpMethod && data) {
         method = (__bridge CFStringRef)@"POST";
     }
     
     CFHTTPMessageRef httpRequest = CFHTTPMessageCreateRequest(NULL,
                                                               method,
-                                                              (__bridge CFURLRef)_params.url,
+                                                              (__bridge CFURLRef)_context.params.url,
                                                               kCFHTTPVersion1_1);
     
     [self applyCookiesForHTTPRequest:httpRequest];
@@ -190,13 +206,13 @@ static void readStreamCallback(CFReadStreamRef stream,
     typedef void (*release)(void *info);
     CFStreamClientContext streamContext = {
         0,
-        (__bridge void*)(self),
+        (__bridge void*)(_context),
         (retain)CFRetain,
         (release)CFRelease,
         NULL};
     
     CFOptionFlags registeredEvents = kCFStreamEventHasBytesAvailable
-        | kCFStreamEventErrorOccurred | kCFStreamEventEndEncountered;
+    | kCFStreamEventErrorOccurred | kCFStreamEventEndEncountered;
     if (CFReadStreamSetClient(_readStream, registeredEvents, readStreamCallback, &streamContext)) {
         
         CFReadStreamScheduleWithRunLoop(_readStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes);
@@ -229,14 +245,16 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 - (void)cancel
 {
-    [self closeStreams];
+    [self closeStreams  ];
     [self clearCallbacks];
+    
+    _selfHolder = nil;
 }
 
--(id<JNHttpDecoder>)getDecoder
+- (id<JNHttpDecoder>)getDecoder
 {
     NSString *contentEncoding = _urlResponse.contentEncoding;
-//    NSString *previousEncoding = _previousContentEncoding;
+    //    NSString *previousEncoding = _previousContentEncoding;
     
     BOOL isDecoderMissing = (nil == _decoder);
     
@@ -253,11 +271,10 @@ static void readStreamCallback(CFReadStreamRef stream,
 - (void)handleData:(void *)buffer
             length:(NSUInteger)length
 {
-    if (!self.didReceiveDataBlock) {
+    if (!self.didReceiveDataBlock)
         return;
-    }
     
-    id< JNHttpDecoder > decoder = [self getDecoder];
+    id<JNHttpDecoder> decoder = [self getDecoder];
     
     NSError *decoderError = nil;
     NSData *rawNsData = [[NSData alloc] initWithBytes:buffer
@@ -285,19 +302,18 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 - (void)handleFinish:(NSError *)error
 {
-    [self closeReadStream];
+    JFFDidFinishLoadingHandler didFinishLoadingBlock = self.didFinishLoadingBlock;
     
-    if (self.didFinishLoadingBlock) {
-        
-        self.didFinishLoadingBlock(error);
-    }
-    [self clearCallbacks];
+    [self cancel];
+    
+    if (didFinishLoadingBlock)
+        didFinishLoadingBlock(error);
 }
 
 - (void)acceptCookiesForHeaders:(NSDictionary *)headers
 {
     NSArray *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:headers
-                                                              forURL:_params.url];
+                                                              forURL:_context.params.url];
     
     for (NSHTTPCookie *cookie in cookies) {
         
@@ -320,8 +336,8 @@ static void readStreamCallback(CFReadStreamRef stream,
         if (!response)
             return;
         
-        allHeadersDict = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields( response );
-        statusCode = CFHTTPMessageGetResponseStatusCode( response );
+        allHeadersDict = (__bridge_transfer NSDictionary *)CFHTTPMessageCopyAllHeaderFields(response);
+        statusCode = CFHTTPMessageGetResponseStatusCode(response);
         
         CFRelease(response);
     }
@@ -341,29 +357,29 @@ static void readStreamCallback(CFReadStreamRef stream,
             location = @"/";
         }
         
-        DDURLBuilder *urlBuilder = [DDURLBuilder URLBuilderWithURL:_params.url];
+        DDURLBuilder *urlBuilder = [DDURLBuilder URLBuilderWithURL:_context.params.url];
         urlBuilder.shouldSkipPathPercentEncoding = YES;
         urlBuilder.path = location;
         
-        _params.url = [urlBuilder URL];
+        _context.params.url = [urlBuilder URL];
         
         // To avoid HTTP 500
-        _params.httpMethod = @"GET";
-        _params.httpBody = nil;
+        _context.params.httpMethod = @"GET";
+        _context.params.httpBody = nil;
 #else
         if ([location hasPrefix:@"/"]) {
             
-            _params.url = [_params.url URLWithLocation:location];
+            _context.params.url = [_context.params.url URLWithLocation:location];
         } else {
             
-            _params.url = [location toURL];
+            _context.params.url = [location toURL];
         }
         
-        _params.httpMethod = @"GET";
-        _params.httpBody = nil;
+        _context.params.httpMethod = @"GET";
+        _context.params.httpBody = nil;
 #endif
         
-        NSDebugLog(@"%@", _params.url);
+        NSDebugLog(@"%@", _context.params.url);
         NSDebugLog(@"Done.");
         
         [self start];//TODO start it later
@@ -371,24 +387,26 @@ static void readStreamCallback(CFReadStreamRef stream,
     else
     {
         _responseHandled = YES;
-
-        if (self.didReceiveResponseBlock) {
+        
+        JFFDidReceiveResponseHandler didReceiveResponseBlock = self.didReceiveResponseBlock;
+        self.didReceiveResponseBlock = nil;
+        
+        if (didReceiveResponseBlock) {
+            
+            __strong JFFURLConnection *self_ = self;
             
             JFFURLResponse *urlResponse = [JFFURLResponse new];
             
             urlResponse.statusCode      = statusCode;
             urlResponse.allHeaderFields = allHeadersDict;
-            urlResponse.url             = _params.url;
+            urlResponse.url             = self_->_context.params.url;
             
-            self.didReceiveResponseBlock(urlResponse);
-            self.didReceiveResponseBlock = nil;
+            didReceiveResponseBlock(urlResponse);//here in callback can be cancelled
             
-//            _previousContentEncoding = _urlResponse.contentEncoding;
-            _decoder = nil;
-            
-            _urlResponse = urlResponse;
-            
-            _totalBytesCount = urlResponse.expectedContentLength;
+            //            _previousContentEncoding = _urlResponse.contentEncoding;
+            self_->_decoder = nil;
+            self_->_urlResponse     = urlResponse;
+            self_->_totalBytesCount = urlResponse.expectedContentLength;
         }
     }
 }

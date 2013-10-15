@@ -4,116 +4,110 @@
 
 @implementation NSConnectionTest
 
--(void)setUp
+- (void)setUp
 {
-    [ JNNsUrlConnection enableInstancesCounting ];
+    [JNNsUrlConnection enableInstancesCounting];
 }
 
--(void)testValidDownloadCompletesLocalFileCorrectly
+- (void)testValidDownloadCompletesLocalFileCorrectly
 {
-    const NSUInteger initialCount_ = [ JNNsUrlConnection instancesCount ];
-
-    @autoreleasepool
-    {
-        [ self prepare ];
-
-        NSURL* dataUrl_ = [ [ JNTestBundleManager decodersDataBundle ] URLForResource: @"1" 
-                                                                        withExtension: @"txt" ];
-
-        JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
-        params_.url = dataUrl_;
-        JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
-
-        id< JNUrlConnection > connection_ = [ factory_ createStandardConnection ];
-
-        NSMutableData* totalData_ = [ NSMutableData new ];
-        NSData* expectedData_ = [ [ NSData alloc ] initWithContentsOfURL: dataUrl_ ];
-
-        connection_.didReceiveResponseBlock = ^( id response_ )
-        {
-            //IDLE
-        };
-        connection_.didReceiveDataBlock = ^( NSData* dataChunk_ )
-        {
-            [ totalData_ appendData: dataChunk_ ];
-        };
-
-        connection_.didFinishLoadingBlock = ^( NSError* error_ )
-        {
-            if ( nil != error_ )
-            {
-                [ self notify: kGHUnitWaitStatusFailure
-                  forSelector: _cmd ];
-                return;
-            }
-
-            GHAssertTrue( [ expectedData_ isEqualToData: totalData_ ], @"packet mismatch" );
-            [ self notify: kGHUnitWaitStatusSuccess 
-              forSelector: _cmd ];
-        };
-
-        [ connection_ start ];
-        [ self waitForStatus: kGHUnitWaitStatusSuccess
-                     timeout: 61. ];
-    }
-
-    NSUInteger currentCount_ = [ JNNsUrlConnection instancesCount ];
-    GHAssertTrue( initialCount_ == currentCount_, @"packet mismatch" );
-}
-
--(void)testValidDownloadCompletesCorrectly
-{
-    const NSUInteger initialCount_ = [ JNNsUrlConnection instancesCount ];
-    __block BOOL dataReceived_ = NO;
-    __block BOOL isDownloadExecuted = NO;
-    
-    
+    const NSUInteger initialCount = [JNNsUrlConnection instancesCount];
     
     @autoreleasepool
     {
         [self prepare];
-
-        NSURL* dataUrl_ = [ [ NSURL alloc ] initWithString: @"http://www.ietf.org/rfc/rfc4180.txt" ];
-
+        
+        NSURL *dataUrl = [[JNTestBundleManager decodersDataBundle] URLForResource:@"1"
+                                                                    withExtension:@"txt"];
+        
         JFFURLConnectionParams *params = [JFFURLConnectionParams new];
-        params.url = dataUrl_;
+        params.url = dataUrl;
         JNConnectionsFactory *factory = [[JNConnectionsFactory alloc] initWithURLConnectionParams:params];
         
         id< JNUrlConnection > connection = [factory createStandardConnection];
         
-        connection.didReceiveResponseBlock = ^(id response) {
-            NSLog( @"[testValidDownloadCompletesCorrectly] - didReceiveResponseBlock : %@", response );
-        };
+        NSMutableData* totalData_ = [ NSMutableData new ];
+        NSData* expectedData_ = [ [ NSData alloc ] initWithContentsOfURL:dataUrl];
         
-        connection.didReceiveDataBlock = ^(NSData *dataChunk) {
-            dataReceived_ = YES;
-        };
-        
-        TestAsyncRequestBlock starterBlock_ = ^void(JFFSimpleBlock stopTest_)
+        connection.didReceiveResponseBlock = ^( id response_ )
         {
+            //IDLE
+        };
+        connection.didReceiveDataBlock = ^( NSData* dataChunk_ )
+        {
+            [ totalData_ appendData: dataChunk_ ];
+        };
+
+        connection.didFinishLoadingBlock = ^(NSError *error)
+        {
+            if (nil != error) {
+                
+                [self notify:kGHUnitWaitStatusFailure
+                 forSelector:_cmd];
+                return;
+            }
+            
+            GHAssertTrue([expectedData_ isEqualToData:totalData_], @"packet mismatch");
+            [self notify:kGHUnitWaitStatusSuccess
+             forSelector:_cmd];
+        };
+        
+        [connection start];
+        [self waitForStatus:kGHUnitWaitStatusSuccess
+                    timeout:61.];
+    }
+    
+    GHAssertEquals(initialCount, [JNNsUrlConnection instancesCount], @"packet mismatch");
+}
+
+- (void)testValidDownloadCompletesCorrectly
+{
+    const NSUInteger initialCount = [JNNsUrlConnection instancesCount];
+    __block BOOL dataReceived_ = NO;
+    __block BOOL isDownloadExecuted = NO;
+    
+    @autoreleasepool
+    {
+        TestAsyncRequestBlock starterBlock = ^void(JFFSimpleBlock stopTest)
+        {
+            NSURL *dataUrl = [@"http://www.ietf.org/rfc/rfc4180.txt" toURL];
+            
+            JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+            params.url = dataUrl;
+            JNConnectionsFactory *factory = [[JNConnectionsFactory alloc] initWithURLConnectionParams:params];
+            
+            id< JNUrlConnection > connection = [factory createStandardConnection];
+            
+            connection.didReceiveResponseBlock = ^(id response) {
+                NSLog( @"[testValidDownloadCompletesCorrectly] - didReceiveResponseBlock : %@", response );
+            };
+            
+            connection.didReceiveDataBlock = ^(NSData *dataChunk) {
+                dataReceived_ = YES;
+            };
+            
             connection.didFinishLoadingBlock = ^(NSError *error) {
                 
                 NSLog( @"[testValidDownloadCompletesCorrectly] - connectionDidFinishLoading" );
                 isDownloadExecuted = YES;
                 
-                stopTest_();                
+                stopTest();                
             };
             
             [connection start];
         };
         
-        [ self performAsyncRequestOnMainThreadWithBlock: starterBlock_
-                                               selector: _cmd
-                                                timeout: 61.0 ];        
+        [self performAsyncRequestOnMainThreadWithBlock:starterBlock
+                                              selector:_cmd
+                                               timeout:61.0];
     }
     
-    GHAssertTrue( dataReceived_, @"packet mismatch" );
+    GHAssertTrue(dataReceived_, @"packet mismatch" );
     
-    NSUInteger currentCount = [JNNsUrlConnection instancesCount];
-    GHAssertTrue(initialCount_ == currentCount, @"packet mismatch");
+    GHAssertEquals(initialCount, [JNNsUrlConnection instancesCount], @"packet mismatch");
 }
 
--(void)RtestInValidDownloadCompletesWithError
+- (void)RtestInValidDownloadCompletesWithError
 {
     [self prepare];
     
@@ -121,18 +115,18 @@
     
     JFFURLConnectionParams *params = [JFFURLConnectionParams new];
     params.url = dataUrl;
-    JNConnectionsFactory *factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams:params];
+    JNConnectionsFactory *factory = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams:params];
     
-    id< JNUrlConnection > connection_ = [ factory_ createStandardConnection ];
-
-    connection_.didReceiveResponseBlock = ^( id response_ )
+    id< JNUrlConnection > connection = [ factory createStandardConnection ];
+    
+    connection.didReceiveResponseBlock = ^( id response_ )
     {
         //IDLE
     };
-    connection_.didReceiveDataBlock = ^( NSData* data_chunk_ )
+    connection.didReceiveDataBlock = ^( NSData* data_chunk_ )
     {
     };
-    connection_.didFinishLoadingBlock = ^( NSError* error_ )
+    connection.didFinishLoadingBlock = ^( NSError* error_ )
     {
         if ( nil != error_ )
         {
@@ -145,9 +139,9 @@
           forSelector: _cmd ];
     };
 
-    [ connection_ start ];
-    [ self waitForStatus: kGHUnitWaitStatusSuccess
-                 timeout: 61. ];
+    [connection start];
+    [self waitForStatus:kGHUnitWaitStatusSuccess
+                timeout:61.];
 }
 
 @end
