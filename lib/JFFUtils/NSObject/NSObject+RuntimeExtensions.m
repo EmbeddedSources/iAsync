@@ -95,11 +95,12 @@ typedef BOOL (^JFFPredicate)();
     NSParameterAssert(prototypeMethod);
     
     const char *typeEncoding = method_getTypeEncoding(prototypeMethod);
-    BOOL methodAdded = class_addMethod(targetClass,
-                                       hookSelector,
-                                       method_getImplementation(prototypeMethod),
-                                       typeEncoding);
-    NSAssert(methodAdded, @"should be added");
+//    BOOL methodAdded =
+    class_addMethod(targetClass,
+                    hookSelector,
+                    method_getImplementation(prototypeMethod),
+                    typeEncoding);
+    //NSAssert(methodAdded, @"should be added");
     Method hookMethod = methodGetter(class, hookSelector);
     
     method_exchangeImplementations(targetMethod, hookMethod);
@@ -165,5 +166,19 @@ typedef BOOL (^JFFPredicate)();
         return class_getClassMethod(class, methodSelector);
     }];
 }
+
+#pragma mark -
+#pragma mark Unhook
++ (void)unHookInstanceMethodForClass:(Class)targetClass
+                        withSelector:(SEL)targetSelector
+             prototypeMethodSelector:(SEL)prototypeSelector
+                  hookMethodSelector:(SEL)hookSelector
+{
+    [ self hookInstanceMethodForClass: targetClass
+                         withSelector: targetSelector
+              prototypeMethodSelector: hookSelector
+                   hookMethodSelector: prototypeSelector ];
+}
+
 
 @end
