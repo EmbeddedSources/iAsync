@@ -58,10 +58,10 @@
 
 -(void)testArrayShrinksCorrectly
 {
-    NSMutableArray* items_ = nil;
+    NSMutableArray* items = nil;
     
     {
-        items_ = [ @[ @"one"
+        items = [ @[ @"one"
                   , @"two"
                   , @"three"
                   , @"four"
@@ -69,18 +69,18 @@
                   , @"six"
                   , @"seven" ] mutableCopy ];
         
-        STAssertNotNil( items_               , @"Array should be valid"     );
-        STAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
+        STAssertNotNil( items               , @"Array should be valid"     );
+        STAssertTrue  ( 7 == [ items count ], @"Array should have 7 items" );
         
-        [ items_ shrinkToSize: 3 ];
-        STAssertNotNil( items_               , @"Array should be valid"     );
-        STAssertTrue  ( 3 == [ items_ count ], @"Array should have 3 items" );
+        [items shrinkToSize:3];
+        STAssertNotNil( items               , @"Array should be valid"     );
+        STAssertTrue  ( 3 == [ items count ], @"Array should have 3 items" );
         
-        STAssertTrue( [ [ items_ lastObject ] isEqualToString: @"three" ], @"Last item mismatch" );
+        STAssertTrue( [ [ items lastObject ] isEqualToString: @"three" ], @"Last item mismatch" );
     }
     
     {
-        items_ = [ @[ @"one"
+        items = [ @[ @"one"
                   , @"two"
                   , @"three"
                   , @"four"
@@ -88,14 +88,14 @@
                   , @"six"
                   , @"seven" ] mutableCopy ];
         
-        STAssertNotNil( items_               , @"Array should be valid"     );
-        STAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
+        STAssertNotNil( items               , @"Array should be valid"     );
+        STAssertTrue  ( 7 == [ items count ], @"Array should have 7 items" );
         
-        [ items_ shrinkToSize: 5 ];
-        STAssertNotNil( items_               , @"Array should be valid"     );
-        STAssertTrue  ( 5 == [ items_ count ], @"Array should have 5 items" );
+        [ items shrinkToSize: 5 ];
+        STAssertNotNil( items               , @"Array should be valid"     );
+        STAssertTrue  ( 5 == [ items count ], @"Array should have 5 items" );
         
-        STAssertTrue( [ [ items_ lastObject ] isEqualToString: @"five" ], @"Last item mismatch" );
+        STAssertTrue( [ [ items lastObject ] isEqualToString: @"five" ], @"Last item mismatch" );
     }
 }
 

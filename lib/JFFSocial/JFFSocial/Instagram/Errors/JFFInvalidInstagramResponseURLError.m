@@ -2,12 +2,12 @@
 
 @implementation JFFInvalidInstagramResponseURLError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"INVALID_INSTAGRAM_RESPONSE_URL", nil)];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFInvalidInstagramResponseURLError *copy = [super copyWithZone:zone];
     

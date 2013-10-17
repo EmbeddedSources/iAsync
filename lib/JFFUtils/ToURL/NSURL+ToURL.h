@@ -2,6 +2,6 @@
 
 @interface NSURL (ToURL)
 
--(NSURL*)toURL;
+- (NSURL *)toURL;
 
 @end

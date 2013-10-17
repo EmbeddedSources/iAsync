@@ -1,13 +1,13 @@
 #import "JFFSocialInstagramApi.h"
 
-#import <JFFUI/Extensions/UIApplication+OpenApplicationAsyncOp.h>
+#import <JFFUI/Categories/UIApplication+OpenApplicationAsyncOp.h>
 
 JFFAsyncOperation codeURLLoader(NSString *redirectURI,
                                 NSString *clientId
                                 )
 {
-    assert([clientId    length]>0);
-    assert([redirectURI length]>0);
+    NSCParameterAssert([clientId    length]>0);
+    NSCParameterAssert([redirectURI length]>0);
 
     UIApplication *application = [UIApplication sharedApplication];
 
@@ -34,10 +34,10 @@ JFFAsyncOperation authedUserDataLoader(NSString *redirectURI,
                                        NSString *code
                                        )
 {
-    assert([redirectURI  length]>0);
-    assert([clientId     length]>0);
-    assert([clientSecret length]>0);
-    assert([code         length]>0);
+    NSCParameterAssert([redirectURI  length]>0);
+    NSCParameterAssert([clientId     length]>0);
+    NSCParameterAssert([clientSecret length]>0);
+    NSCParameterAssert([code         length]>0);
     
     NSDictionary *params = @{
     @"client_id"     : clientId             ,
@@ -60,8 +60,8 @@ JFFAsyncOperation userDataLoader(NSString *userID,
                                  NSString *accessToken
                                  )
 {
-    assert([userID      length]>0);
-    assert([accessToken length]>0);
+    NSCParameterAssert([userID      length]>0);
+    NSCParameterAssert([accessToken length]>0);
     
     NSDictionary *params = @{
     @"access_token" : accessToken,
@@ -82,8 +82,8 @@ JFFAsyncOperation followersJSONDataLoader(NSString *userID,
                                           NSString *accessToken
                                           )
 {
-    assert([userID      length]>0);
-    assert([accessToken length]>0);
+    NSCParameterAssert([userID      length]>0);
+    NSCParameterAssert([accessToken length]>0);
     
     NSDictionary *params = @{
     @"access_token" : accessToken,
@@ -102,8 +102,8 @@ JFFAsyncOperation mediaItemsDataLoader(NSString *userID,
                                        NSString *accessToken
                                        )
 {
-    assert([userID      length]>0);
-    assert([accessToken length]>0);
+    NSCParameterAssert([userID      length]>0);
+    NSCParameterAssert([accessToken length]>0);
     
     NSDictionary *params = @{
     @"access_token" : accessToken,
@@ -123,9 +123,9 @@ JFFAsyncOperation commentMediaItemDataLoader(NSString *mediaItemId,
                                              NSString *comment,
                                              NSString *accessToken)
 {
-    assert([mediaItemId length]>0);
-    assert([comment     length]>0);
-    assert([accessToken length]>0);
+    NSCParameterAssert([mediaItemId length]>0);
+    NSCParameterAssert([comment     length]>0);
+    NSCParameterAssert([accessToken length]>0);
     
     NSDictionary *params = @{
     @"access_token" : accessToken,

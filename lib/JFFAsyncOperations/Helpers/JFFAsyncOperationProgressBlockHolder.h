@@ -4,7 +4,7 @@
 
 @interface JFFAsyncOperationProgressBlockHolder : NSObject
 
-@property ( nonatomic, copy ) JFFAsyncOperationProgressHandler progressBlock;
+@property (nonatomic, copy) JFFAsyncOperationProgressHandler progressBlock;
 
 - (void)performProgressBlockWithArgument:(id)progressInfo;
 

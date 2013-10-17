@@ -73,11 +73,11 @@
     
     JFFEqualityCheckerBlock predicate_ = ^( id left_, id right_ )
     {
-        NSComparisonResult result1_ = [ left_  caseInsensitiveCompare: right_ ];
-        NSComparisonResult result2_ = [ right_ caseInsensitiveCompare: left_  ];
+        NSComparisonResult result1 = [ left_  caseInsensitiveCompare: right_ ];
+        NSComparisonResult result2 = [ right_ caseInsensitiveCompare: left_  ];
         
-        BOOL resultEqual_ = ( result1_      == result2_ );
-        BOOL resultSame_  = ( NSOrderedSame == result2_ );
+        BOOL resultEqual_ = ( result1      == result2 );
+        BOOL resultSame_  = ( NSOrderedSame == result2 );
         
         return (BOOL)( resultSame_ && resultEqual_ );
     };

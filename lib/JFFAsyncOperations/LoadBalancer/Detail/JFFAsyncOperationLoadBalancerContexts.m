@@ -4,21 +4,12 @@
 
 @implementation JFFAsyncOperationLoadBalancerContexts
 {
-    NSMutableDictionary* _contextLoadersByName;
+    NSMutableDictionary *_contextLoadersByName;
 }
 
--(void)dealloc
++ (instancetype)sharedBalancer
 {
-    [_currentContextName   release];
-    [_activeContextName    release];
-    [_contextLoadersByName release];
-    
-    [super dealloc];
-}
-
-+ (id)sharedBalancer
-{
-    [NSThread assertMainThread];
+    NSParameterAssert([NSThread isMainThread]);
     static JFFAsyncOperationLoadBalancerContexts *instance;
     
     if (!instance) {
@@ -28,23 +19,23 @@
     return instance;
 }
 
--(NSString*)currentContextName
+- (NSString *)currentContextName
 {
     if (!_currentContextName) {
-        _currentContextName = [self.activeContextName retain];
+        _currentContextName = self.activeContextName;
     }
     return _currentContextName;
 }
 
--(NSString*)activeContextName
+- (NSString *)activeContextName
 {
     if (!_activeContextName ) {
-        _activeContextName = [@"default" retain];
+        _activeContextName = @"default";
     }
     return _activeContextName;
 }
 
--(NSMutableDictionary*)contextLoadersByName
+- (NSMutableDictionary *)contextLoadersByName
 {
     if (!_contextLoadersByName) {
         _contextLoadersByName = [NSMutableDictionary new];
@@ -54,14 +45,12 @@
 
 - (JFFContextLoaders *)contextLoadersForName:(NSString *)name
 {
-    JFFContextLoaders* contextLoaders = self.contextLoadersByName[name];
+    JFFContextLoaders *contextLoaders = _contextLoadersByName[name];
     if (!contextLoaders) {
         contextLoaders = [JFFContextLoaders new];
         contextLoaders.name = name;
         
         self.contextLoadersByName[name] = contextLoaders;
-        
-        [contextLoaders release];
     }
     return contextLoaders;
 }

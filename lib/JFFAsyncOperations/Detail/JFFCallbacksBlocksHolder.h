@@ -8,8 +8,8 @@
 @property (nonatomic, copy) JFFCancelAsyncOperationHandler onCancelBlock;
 @property (nonatomic, copy) JFFDidFinishAsyncOperationHandler didLoadDataBlock;
 
-- (id)initWithOnProgressBlock:(JFFAsyncOperationProgressHandler)onProgressBlock
-                onCancelBlock:(JFFCancelAsyncOperationHandler)onCancelBlock
-             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock;
+- (instancetype)initWithOnProgressBlock:(JFFAsyncOperationProgressHandler)onProgressBlock
+                          onCancelBlock:(JFFCancelAsyncOperationHandler)onCancelBlock
+                       didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock;
 
 @end

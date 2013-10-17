@@ -3,7 +3,6 @@
 #import "JFFRestKitError.h"
 #import <JFFNetwork/Callbacks/JFFNetworkResponseDataCallback.h>
 
-
 static NSString* queueNameForFileAtPath( NSString* filePath )
 {
     NSCParameterAssert( nil != filePath );
@@ -55,11 +54,9 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
         __block void (^closeAndRemoveFile)() = ^{
             closeFile();
 
-            if ( filePath )
-            {
-                [ [ NSFileManager defaultManager ] removeItemAtPath: filePath
-                                                              error: nil ];
-            }
+            if (filePath)
+                [[NSFileManager defaultManager] removeItemAtPath:filePath
+                                                           error:nil];
         };
         
         progressCallback = [progressCallback copy];
@@ -83,9 +80,7 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
             } );
             
             if (progressCallback)
-            {
                 progressCallback(progressInfo);
-            }
         };
         
         cancelCallback = [cancelCallback copy];
@@ -93,9 +88,7 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
             closeAndRemoveFile();
             
             if (cancelCallback)
-            {
                 cancelCallback(canceled);
-            }
         };
         
         JFFDidFinishAsyncOperationHandler doneWrapperCallback = ^(id response, NSError *error ) {
@@ -107,7 +100,7 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunked
             }
             
             if (doneCallback) {
-                if ( result == nil && error == nil ) {
+                if (result == nil && error == nil) {
                     error = [JFFRestKitEmptyFileResponseError new];
                 }
                 doneCallback(result, error);

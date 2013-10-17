@@ -3,20 +3,19 @@
 #import "JFFFacebookSDKErrors.h"
 #import "JFFFacebookAuthorizeError.h"
 
-#import <JFFScheduler/JFFScheduler.h>
-
 #import <FacebookSDK/FacebookSDK.h>
 
 #import <Accounts/Accounts.h>
 
 @interface JFFAsyncFacebookLogin : NSObject <JFFAsyncOperationInterface>
-
-@property (nonatomic) FBSession *facebookSession;
-@property (nonatomic) NSArray *permissions;
-
 @end
 
 @implementation JFFAsyncFacebookLogin
+{
+@public
+    FBSession *_facebookSession;
+    NSArray   *_permissions;
+}
 
 #pragma mark - JFFAsyncOperationInterface
 
@@ -26,45 +25,61 @@
 {
     handler = [handler copy];
     
-    if (self.facebookSession.isOpen) {
-        [self handleLoginWithSession:self.facebookSession
-                               error:nil
-                              status:self.facebookSession.state
-                             handler:handler];
-        return;
+    NSMutableSet *requstPermissions = [[NSMutableSet alloc] initWithArray:_permissions];
+    NSSet *currPermissions = [[NSSet alloc] initWithArray:_facebookSession.permissions];
+    
+    if (_facebookSession.isOpen) {
+        
+        BOOL hasAllPermissions = [requstPermissions isSubsetOfSet:currPermissions];
+        
+        if (hasAllPermissions) {
+            
+            [self handleLoginWithSession:_facebookSession
+                                   error:nil
+                                  status:_facebookSession.state
+                                 handler:handler];
+            return;
+        }
     }
     
-    //For debug
-    //    ACAccountStore *accountStore = [ACAccountStore new];
-    //
-    //    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    //
-    //    NSDictionary *options =
-    //    @{ACFacebookAppIdKey : [[FBSession activeSession] appID],
-    //    ACFacebookPermissionsKey: [[FBSession activeSession] permissions],
-    //    ACFacebookAudienceKey : ACFacebookAudienceOnlyMe};
-    //
-    //    [accountStore requestAccessToAccountsWithType:accountType options:options completion:
-    //     ^(BOOL granted, NSError *error)
-    //     {
-    //
-    //     }];
+    [requstPermissions unionSet:currPermissions];
+    
+    //exclude publich pemissions
+    {
+        static NSSet *publishPermissions;
+        
+        //    "share_item",
+        //    "photo_upload",
+        //    "video_upload",
+        //    "installed",
+        //    "status_update",
+        //    "email",
+        //    "user_birthday",
+        //    "create_note",
+        if (!publishPermissions) {
+            
+            publishPermissions = [[NSSet alloc] initWithArray:@[@"publish_actions", @"publish_stream"]];
+        }
+        
+        [requstPermissions minusSet:publishPermissions];
+    }
+    
+    __block BOOL finished = NO;
+    __weak JFFAsyncFacebookLogin *weakSelf = self;
     
     FBSessionStateHandler fbHandler = ^(FBSession *session, FBSessionState status, NSError *error) {
         
+        if (finished)
+            return;
+        
+        finished = YES;
+        
         NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;
         
-        JFFScheduler *scheduler = [JFFScheduler sharedByThreadScheduler];
-        [scheduler addBlock:^(JFFCancelScheduledBlock cancel) {
-            
-            cancel();
-            [self handleLoginWithSession:session error:libError status:status handler:handler];
-        } duration:0.2];
+        [weakSelf handleLoginWithSession:session error:libError status:status handler:handler];
     };
     
-    //[[FBSession activeSession] openWithBehavior:(FBSessionLoginBehaviorUseSystemAccountIfPresent)
-    //                          completionHandler:fbHandler];
-    [FBSession openActiveSessionWithReadPermissions:self.permissions
+    [FBSession openActiveSessionWithReadPermissions:[requstPermissions allObjects]
                                        allowLoginUI:YES
                                   completionHandler:fbHandler];
 }
@@ -74,17 +89,13 @@
                         status:(FBSessionState)status
                        handler:(JFFAsyncOperationInterfaceResultHandler)handler
 {
-    if (!error && status != FBSessionStateOpen && status != FBSessionStateOpenTokenExtended) {
+    if (!error && (!session.isOpen || !session.accessTokenData.accessToken)) {
         error = [JFFFacebookAuthorizeError new];
     }
     
     if (handler) {
-        handler(error?nil:session.accessTokenData.accessToken, error);
+        handler(error?nil:session, error);
     }
-}
-
-- (void)cancel:(BOOL)canceled
-{
 }
 
 @end
@@ -95,8 +106,8 @@ JFFAsyncOperation jffFacebookLogin(FBSession *facebook, NSArray *permissions)
         
         JFFAsyncFacebookLogin *object = [JFFAsyncFacebookLogin new];
         
-        object.facebookSession = facebook;
-        object.permissions     = permissions;
+        object->_facebookSession = facebook;
+        object->_permissions     = permissions;
         
         return object;
     };

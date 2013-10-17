@@ -4,6 +4,6 @@
 
 @interface NSURL (CPlusPlus)
 
--(std::string)toStlString;
+- (std::string)toStlString;
 
 @end

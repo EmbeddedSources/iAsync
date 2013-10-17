@@ -15,20 +15,17 @@
 #define FOURSQUARE_CLIENT_ID @"2FYZ0AMUZV42YOTVLDINVQF21HHBVTVKWEH3A0QMGUEXW1ZC"
 #define FOURSQUARE_REDIRECT_URI @"fqWishdates://authorize"
 
-
 @interface JFFFoursquareSessionStorage ()
 
 @property (copy, nonatomic) JFFDidFinishAsyncOperationHandler authorizeHendler;
 
 @end
 
-
-
 @implementation JFFFoursquareSessionStorage
 
 #pragma mark - Singletone
 
-+ (id)shared
++ (instancetype)shared
 {
     static JFFFoursquareSessionStorage *_sharedFoursquareSessionStorage = nil;
     static dispatch_once_t onceToken;
@@ -72,7 +69,7 @@
     }
     else
     {
-        self.authorizeHendler (nil, [JFFFoursquareAuthURLError new]);
+        self.authorizeHendler(nil, [JFFFoursquareAuthURLError new]);
     }
 }
 

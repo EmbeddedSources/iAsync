@@ -1,20 +1,21 @@
 #import "JFFFacebookPublishAccessRequestAdapter.h"
 
+#import "JFFFacebookSDKErrors.h"
 #import "JFFFacebookRequestPublishingAccessError.h"
-
-#import <JFFSocial/Facebook/Errors/SDKErrors/JFFFacebookSDKErrors.h>
 
 #import <FacebookSDK/FacebookSDK.h>
 
 #import <Accounts/Accounts.h>
 
 @interface JFFFacebookPublishAccessRequestAdapter : NSObject <JFFAsyncOperationInterface>
-
-@property (nonatomic) NSArray *permissions;
-
 @end
 
 @implementation JFFFacebookPublishAccessRequestAdapter
+{
+@public
+    FBSession *_session;
+    NSArray   *_permissions;
+}
 
 #pragma mark - JFFAsyncOperationInterface
 
@@ -24,71 +25,83 @@
 {
     handler = [handler copy];
     
-    //    if ([FBSession activeSession].isOpen) {
-    //TODO pass session, do not use [FBSession activeSession]
+    BOOL hasAllPermissions = [_permissions all:^BOOL(NSString *permission) {
+        
+        return [_session.permissions containsObject:permission];
+    }];
     
-    FBSessionRequestPermissionResultHandler fbHandler = ^(FBSession *session, NSError *error) {
-                                                   
+    if (hasAllPermissions && _session.isOpen) {
+        
+        [self handleLoginWithSession:_session
+                               error:nil
+                             handler:handler];
+        return;
+    }
+    
+    FBSessionDefaultAudience defaultAudience = FBSessionDefaultAudienceEveryone;
+    
+    if (_session.isOpen) {
+        FBSessionRequestPermissionResultHandler fbHandler = ^(FBSession *session, NSError *error) {
+            
+            NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;
+            
+            [self handleLoginWithSession:session
+                                   error:libError
+                                 handler:handler];
+        };
+        
+        [_session requestNewPublishPermissions:_permissions
+                               defaultAudience:(defaultAudience)
+                             completionHandler:fbHandler];
+        
+        return;
+    }
+    
+    __block BOOL finished = NO;
+    __weak JFFFacebookPublishAccessRequestAdapter *weakSelf = self;
+    
+    FBSessionStateHandler fbHandler = ^(FBSession *session, FBSessionState status, NSError *error) {
+        
+        if (finished)
+            return;
+        
+        finished = YES;
+        
         NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;
-                                                   
-                                                   [self handleLoginWithSession:[FBSession activeSession]
-                                                                          error:libError
-                                                                        handler:handler];
+        
+        [weakSelf handleLoginWithSession:session
+                                   error:libError
+                                 handler:handler];
     };
     
-    [[FBSession activeSession] requestNewPublishPermissions:self.permissions
-                                            defaultAudience:(FBSessionDefaultAudienceFriends)
-                                          completionHandler:fbHandler];
-    
-    
-    //        return;
-    //    }
-    //
-    
-    //    ACAccountStore *accountStore = [ACAccountStore new];
-    //
-    //    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    //
-    //    NSDictionary *options =
-    //    @{ACFacebookAppIdKey : [[FBSession activeSession] appID],
-    //    ACFacebookPermissionsKey: [[FBSession activeSession] permissions],
-    //    ACFacebookAudienceKey : ACFacebookAudienceOnlyMe};
-    //
-    //    [accountStore requestAccessToAccountsWithType:accountType options:options completion:
-    //     ^(BOOL granted, NSError *error)
-    //     {
-    //
-    //     }];
-    
-    // TODO: Request access for publishing separate from reading
-    
-    
+    [FBSession openActiveSessionWithPublishPermissions:_permissions
+                                       defaultAudience:(defaultAudience)
+                                          allowLoginUI:YES
+                                     completionHandler:fbHandler];
 }
 
 - (void)handleLoginWithSession:(FBSession *)session
                          error:(NSError *)error
                        handler:(JFFAsyncOperationInterfaceResultHandler)handler
 {
-    if (session.state != FBSessionStateOpen && session.state != FBSessionStateOpenTokenExtended) {
+    if (!error && !session.isOpen) {
         error = [JFFFacebookRequestPublishingAccessError new];
     }
     if (handler) {
-        handler(error?nil:session.accessTokenData.accessToken, error);
+        handler(error?nil:session, error);
     }
-}
-
-- (void)cancel:(BOOL)canceled
-{
 }
 
 @end
 
-JFFAsyncOperation jffFacebookPublishAccessRequest(NSArray *permissions)
+JFFAsyncOperation jffFacebookPublishAccessRequest(FBSession *session, NSArray *permissions)
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+        
         JFFFacebookPublishAccessRequestAdapter *object = [JFFFacebookPublishAccessRequestAdapter new];
         
-        object.permissions = permissions;
+        object->_session     = session;
+        object->_permissions = permissions;
         
         return object;
     };
@@ -98,8 +111,8 @@ JFFAsyncOperation jffFacebookPublishAccessRequest(NSArray *permissions)
     NSDictionary *mergeParams =
     @{
       @"method"      : @"jffFacebookPublishAccessRequest",
-      @"permissions" : permissions,
-      @"class"       : @"JFFFacebookPublishAccessRequestAdapter"
+      @"permissions" : [[NSSet alloc] initWithArray:permissions],
+      @"class"       : NSStringFromClass([JFFFacebookPublishAccessRequestAdapter class])
       };
     
     return [JFFFacebookPublishAccessRequestAdapter asyncOperationMergeLoaders:loader withArgument:mergeParams];

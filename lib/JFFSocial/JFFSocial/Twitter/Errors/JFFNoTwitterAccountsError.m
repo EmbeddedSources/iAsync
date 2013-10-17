@@ -2,9 +2,13 @@
 
 @implementation JFFNoTwitterAccountsError
 
--(id)init
+- (instancetype)init
 {
-    return [ self initWithDescription: NSLocalizedString( @"NO_TWITTER_ACCOUNTS_ERROR", nil ) ];
+    return [self initWithDescription:NSLocalizedString(@"NO_TWITTER_ACCOUNTS_ERROR", nil)];
+}
+
+- (void)writeErrorWithJFFLogger
+{
 }
 
 @end

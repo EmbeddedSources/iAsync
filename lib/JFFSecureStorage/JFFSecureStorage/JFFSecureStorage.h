@@ -8,12 +8,12 @@
 extern "C" {
 #endif
 
-void jffStoreSecureCredentials( NSString* login_
-                               , NSString* password_
-                               , NSURL* url_ );
-
-NSString* jffGetSecureCredentialsForURL( NSString** login_
-                                        , NSURL* url_ );
+    void jffStoreSecureCredentials(NSString *login,
+                                   NSString *password,
+                                   NSURL *url);
+    
+    NSString* jffGetSecureCredentialsForURL(NSString **login,
+                                            NSURL *url);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

@@ -13,8 +13,6 @@ static const NSUInteger totalMaxBackgroundCount = 2;
 
 static NSUInteger totalActiveNumber = 0;
 
-//JTODO test this
-
 static JFFAsyncOperationLoadBalancerContexts *sharedBalancer()
 {
     return [JFFAsyncOperationLoadBalancerContexts sharedBalancer];
@@ -115,8 +113,8 @@ static void logBalancerState(JFFContextLoaders* originContextLoaders)
     JFFAsyncOperationLoadBalancerContexts *balancer = sharedBalancer();
     JFFContextLoaders* activeLoaders = [balancer activeContextLoaders];
     NSLog(@"Active context name: %@", activeLoaders.name);
-    NSLog(@"pending count: %d", activeLoaders.pendingLoadersNumber);
-    NSLog(@"active  count: %d", activeLoaders.activeLoadersNumber);
+    NSLog(@"pending count: %lu", (unsigned long)activeLoaders.pendingLoadersNumber);
+    NSLog(@"active  count: %lu", (unsigned long)activeLoaders.activeLoadersNumber);
     
     [balancer.contextLoadersByName enumerateKeysAndObjectsUsingBlock:^(id name,
                                                                        JFFContextLoaders *contextLoaders,
@@ -124,8 +122,8 @@ static void logBalancerState(JFFContextLoaders* originContextLoaders)
         
         if (activeLoaders != contextLoaders) {
             NSLog(@"context name: %@", contextLoaders.name );
-            NSLog(@"pending count: %d", contextLoaders.pendingLoadersNumber );
-            NSLog(@"active  count: %d", contextLoaders.activeLoadersNumber );
+            NSLog(@"pending count: %lu", (unsigned long)contextLoaders.pendingLoadersNumber );
+            NSLog(@"active  count: %lu", (unsigned long)contextLoaders.activeLoadersNumber );
         }
     }];
     NSLog(@"|||||END LOG|||||");
@@ -141,20 +139,18 @@ static void finishExecuteOfNativeLoader( JFFAsyncOperation nativeLoader
 }
 
 static JFFCancelAsyncOperationHandler cancelCallbackWrapper(JFFCancelAsyncOperationHandler nativeCancelCallback,
-                                                            JFFAsyncOperation native_loader_,
+                                                            JFFAsyncOperation nativeLoader,
                                                             JFFContextLoaders *contextLoaders)
 {
-    nativeCancelCallback = [[nativeCancelCallback copy] autorelease];
-    return [[^void(BOOL canceled) {
+    nativeCancelCallback = [nativeCancelCallback copy];
+    return ^void(BOOL canceled) {
         
         if (!canceled) {
-            assert(NO);// @"balanced loaders should not be unsubscribed from native loader not supported yet"
+            NSCAssert(NO, @"balanced loaders should not be unsubscribed from native loader not supported yet");
             return;
         }
         
-        [[nativeCancelCallback copy] autorelease];
-        
-        finishExecuteOfNativeLoader(native_loader_, contextLoaders);
+        finishExecuteOfNativeLoader(nativeLoader, contextLoaders);
         
         if (nativeCancelCallback) {
             peformBlockWithinContext(^{
@@ -163,40 +159,43 @@ static JFFCancelAsyncOperationHandler cancelCallbackWrapper(JFFCancelAsyncOperat
         }
         
         findAndTryToPerformNextNativeLoader();
-   } copy] autorelease];
+   };
 }
 
-static JFFDidFinishAsyncOperationHandler doneCallbackWrapper( JFFDidFinishAsyncOperationHandler native_done_callback_
-                                                             , JFFAsyncOperation native_loader_
-                                                             , JFFContextLoaders* context_loaders_ )
+static JFFDidFinishAsyncOperationHandler doneCallbackWrapper(JFFDidFinishAsyncOperationHandler nativeDoneCallback,
+                                                             JFFAsyncOperation nativeLoader,
+                                                             JFFContextLoaders* contextLoaders)
 {
-    native_done_callback_ = [ [ native_done_callback_ copy ] autorelease ];
-    return [ [ ^void(id result, NSError *error) {
-        [ [ native_done_callback_ copy ] autorelease ];
+    nativeDoneCallback = [nativeDoneCallback copy];
+    
+    return ^void(id result, NSError *error) {
         
-        finishExecuteOfNativeLoader( native_loader_, context_loaders_ );
+        finishExecuteOfNativeLoader(nativeLoader, contextLoaders);
         
-        if ( native_done_callback_ )
-        {
-            peformBlockWithinContext( ^ {
-                native_done_callback_(result, error);
-            }, context_loaders_ );
+        if (nativeDoneCallback) {
+            
+            peformBlockWithinContext(^{
+                
+                nativeDoneCallback(result, error);
+            }, contextLoaders);
         }
-
+        
         findAndTryToPerformNextNativeLoader();
-    } copy ] autorelease ];
+    };
 }
 
-static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nativeLoader
-                                                          , JFFContextLoaders* contextLoaders )
+static JFFAsyncOperation wrappedAsyncOperationWithContext(JFFAsyncOperation nativeLoader,
+                                                          JFFContextLoaders *contextLoaders)
 {
-    nativeLoader = [[nativeLoader copy] autorelease];
-    return [[^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler nativeProgressCallback,
-                                      JFFCancelAsyncOperationHandler nativeCancelCallback,
-                                      JFFDidFinishAsyncOperationHandler nativeDoneCallback) {
+    NSCParameterAssert(nativeLoader);
+    nativeLoader = [nativeLoader copy];
+    
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler nativeProgressCallback,
+                                    JFFCancelAsyncOperationHandler nativeCancelCallback,
+                                    JFFDidFinishAsyncOperationHandler nativeDoneCallback) {
         
         //progress holder for unsubscribe
-        JFFAsyncOperationProgressBlockHolder *progressBlockHolder = [[JFFAsyncOperationProgressBlockHolder new] autorelease];
+        JFFAsyncOperationProgressBlockHolder *progressBlockHolder = [JFFAsyncOperationProgressBlockHolder new];
         progressBlockHolder.progressBlock = nativeProgressCallback;
         JFFAsyncOperationProgressHandler wrappedProgressCallback = ^void(id progressInfo) {
             peformBlockWithinContext( ^ {
@@ -207,7 +206,7 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
         __block BOOL done = NO;
         
         //cancel holder for unsubscribe
-        JFFCancelAsyncOperationBlockHolder *cancelCallbackBlockHolder = [[JFFCancelAsyncOperationBlockHolder new] autorelease];
+        JFFCancelAsyncOperationBlockHolder *cancelCallbackBlockHolder = [JFFCancelAsyncOperationBlockHolder new];
         cancelCallbackBlockHolder.cancelBlock = nativeCancelCallback;
         JFFCancelAsyncOperation wrappedCancelCallback = ^void(BOOL canceled) {
             done = YES;
@@ -215,7 +214,7 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
         };
         
         //finish holder for unsubscribe
-        JFFDidFinishAsyncOperationBlockHolder *finishBlockHolder = [[JFFDidFinishAsyncOperationBlockHolder new] autorelease];
+        JFFDidFinishAsyncOperationBlockHolder *finishBlockHolder = [JFFDidFinishAsyncOperationBlockHolder new];
         finishBlockHolder.didFinishBlock = nativeDoneCallback;
         JFFDidFinishAsyncOperationHandler wrappedDoneCallback = ^void(id result, NSError *error) {
             done = YES;
@@ -232,8 +231,8 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
         
         // JTODO check native loader no within balancer !!!
         JFFCancelAsyncOperation cancelBlock = nativeLoader(wrappedProgressCallback,
-                                                            wrappedCancelCallback,
-                                                            wrappedDoneCallback);
+                                                           wrappedCancelCallback,
+                                                           wrappedDoneCallback);
         
         if (done) {
             return JFFStubCancelAsyncOperationBlock;
@@ -241,23 +240,23 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext( JFFAsyncOperation nat
         
         ++totalActiveNumber;
         
-        JFFCancelAsyncOperation wrappedCancelBlock = [[^void(BOOL canceled) {
+        JFFCancelAsyncOperation wrappedCancelBlock = [^void(BOOL canceled) {
             if (canceled) {
-                cancelBlock( YES );
+                cancelBlock(YES);
             } else {
                 cancelCallbackBlockHolder.onceCancelBlock(NO);
                 
                 progressBlockHolder.progressBlock = nil;
                 finishBlockHolder.didFinishBlock  = nil;
             }
-        } copy] autorelease];
+        } copy];
         
         [contextLoaders addActiveNativeLoader:nativeLoader
                                 wrappedCancel:wrappedCancelBlock];
         logBalancerState(contextLoaders);
         
         return wrappedCancelBlock;
-    } copy] autorelease];
+    };
 }
 
 static BOOL canPeformAsyncOperationForContext(JFFContextLoaders *contextLoaders)
@@ -284,10 +283,12 @@ JFFAsyncOperation balancedAsyncOperation(JFFAsyncOperation nativeLoader)
 
 JFFAsyncOperation balancedAsyncOperationInContext(JFFAsyncOperation nativeLoader, NSString *contextName)
 {
-    nativeLoader = [[nativeLoader copy] autorelease];
-    return [[^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                      JFFCancelAsyncOperationHandler cancelCallback,
-                                      JFFDidFinishAsyncOperationHandler doneCallback) {
+    NSCParameterAssert(nativeLoader);
+    nativeLoader = [nativeLoader copy];
+    
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         
         JFFContextLoaders *contextLoaders = [sharedBalancer() contextLoadersForName:contextName];
         
@@ -298,7 +299,7 @@ JFFAsyncOperation balancedAsyncOperationInContext(JFFAsyncOperation nativeLoader
             return contextLoader(progressCallback, cancelCallback, doneCallback);
         }
         
-        cancelCallback = [[cancelCallback copy] autorelease];
+        cancelCallback = [cancelCallback copy];
         [contextLoaders addPendingNativeLoader:nativeLoader
                               progressCallback:progressCallback
                                 cancelCallback:cancelCallback
@@ -306,7 +307,8 @@ JFFAsyncOperation balancedAsyncOperationInContext(JFFAsyncOperation nativeLoader
         
         logBalancerState(contextLoaders);
         
-        JFFCancelAsyncOperation cancel = [[^void(BOOL canceled) {
+        JFFCancelAsyncOperation cancel = ^void(BOOL canceled) {
+            
             if (![contextLoaders containsPendingNativeLoader:nativeLoader]) {
                 //cancel only wrapped cancel block
                 [contextLoaders cancelActiveNativeLoader:nativeLoader cancel:canceled];
@@ -321,8 +323,8 @@ JFFAsyncOperation balancedAsyncOperationInContext(JFFAsyncOperation nativeLoader
                 
                 [contextLoaders unsubscribePendingNativeLoader:nativeLoader];
             }
-        }copy]autorelease];
+        };
         
         return cancel;
-    }copy]autorelease];
+    };
 }

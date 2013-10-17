@@ -2,7 +2,7 @@
 
 @implementation JFFResponseDataWithUpdateData
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFResponseDataWithUpdateData *copy = [[[self class] allocWithZone:zone] init];
     

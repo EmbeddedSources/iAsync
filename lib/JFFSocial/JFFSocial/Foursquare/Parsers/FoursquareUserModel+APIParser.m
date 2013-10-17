@@ -2,7 +2,7 @@
 
 @implementation FoursquareUserModel (APIParser)
 
-+ (id)fqUserModelWithDict:(NSDictionary *)dict error:(NSError **)outError
++ (instancetype)fqUserModelWithDict:(NSDictionary *)dict error:(NSError **)outError
 {
 //TODO use validator
 //    id jsonPattern = @{

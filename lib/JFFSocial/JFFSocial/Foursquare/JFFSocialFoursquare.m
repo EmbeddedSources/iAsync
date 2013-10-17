@@ -146,7 +146,6 @@
     
     NSDictionary *params = @{ @"text" : text };
    
-    
     JFFAsyncOperationBinder postLoaderBinder = ^JFFAsyncOperation (NSString *accessToken)
     {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoader(addPostURL, @"POST", accessToken, params),
@@ -174,9 +173,15 @@
     NSString *addPostURL = [NSString stringWithFormat:addPostURLFormat, checkinID];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
-    [params setObjectWithIgnoreNillValue:text forKey:@"text"];
-    [params setObjectWithIgnoreNillValue:url forKey:@"url"];
-    [params setObjectWithIgnoreNillValue:contentID forKey:@"contentId"];
+    
+    if (text)
+        params[@"text"] = text;
+
+    if (url)
+        params[@"url"] = url;
+    
+    if (contentID)
+        params[@"contentId"] = contentID;
     
     params = [params copy];
     
@@ -206,7 +211,7 @@
 
 
 #pragma mark Add photo
-//TODO: Post question to API developers
+
 + (JFFAsyncOperation)addPhoto:(UIImage *)image
                     toCheckin:(NSString *)checkinID
                          text:(NSString *)text
@@ -216,19 +221,29 @@
     static NSString *const addPhotoURL = @"https://api.foursquare.com/v2/photos/add";
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
-    [params setObjectWithIgnoreNillValue:text forKey:@"postText"];
-    [params setObjectWithIgnoreNillValue:url forKey:@"postUrl"];
-    [params setObjectWithIgnoreNillValue:contentID forKey:@"postContentId"];
-    [params setObjectWithIgnoreNillValue:checkinID forKey:@"checkinId"];
+    
+    if (text)
+        params[@"postText"] = text;
+    
+    if (url)
+        params[@"postUrl"] = url;
+    
+    if (contentID)
+        params[@"postContentId"] = contentID;
+    
+    if (checkinID)
+        params[@"checkinId"] = checkinID;
+    
     params[@"post*"] = @"1";
     
-    NSString *boundary = [NSString createUuid];
+    NSString *boundary = [[NSUUID new] UUIDString];
     
-    NSData *imageData = [NSData dataForHTTPPostWithData:UIImageJPEGRepresentation(image, 1.0)
-                                            andFileName:@"name"
-                                       andParameterName:@"photo"
-                                               boundary:boundary];
-    NSData *httpBody = [imageData dataForHTTPPostByAppendingParameters:params boundary:boundary];
+    NSMutableData *httpBody = [NSMutableData dataForHTTPPostWithData:UIImageJPEGRepresentation(image, 1.0)
+                                                         andFileName:@"name"
+                                                    andParameterName:@"photo"
+                                                            boundary:boundary];
+    
+    [httpBody appendHTTPParameters:params boundary:boundary];
     
     JFFAsyncOperationBinder postLoaderBinder = ^JFFAsyncOperation(NSString *accessToken) {
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoaderWithHTTPBody(addPhotoURL, httpBody, accessToken),

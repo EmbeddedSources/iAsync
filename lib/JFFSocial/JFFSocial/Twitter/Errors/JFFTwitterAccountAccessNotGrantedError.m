@@ -2,9 +2,9 @@
 
 @implementation JFFTwitterAccountAccessNotGrantedError
 
--(id)init
+- (instancetype)init
 {
-    return [ self initWithDescription: NSLocalizedString( @"ACCESS_TO_TWITTER_ACCOUNTS_NOT_GRANTED", nil ) ];
+    return [self initWithDescription:NSLocalizedString(@"ACCESS_TO_TWITTER_ACCOUNTS_NOT_GRANTED", nil)];
 }
 
 - (void)writeErrorWithJFFLogger

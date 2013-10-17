@@ -2,30 +2,43 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^JFFFacebookDidLoginCallback)(NSString *login);
-typedef void(^JFFFacebookDidLogoutCallback)(NSString *login);
-
 @class FBSession;
 
 @interface JFFSocialFacebook : NSObject
 
-+ (FBSession *)facebookSession;
++ (BOOL)isActiveFacebookSession;
 
-+ (JFFAsyncOperation)logoutLoader;
-+ (JFFAsyncOperation)authLoader;
++ (JFFAsyncOperation)logoutLoaderWithRenewSystemAuthorization:(BOOL)renewSystemAuthorization;
+
++ (JFFAsyncOperation)authTokenLoader;
++ (JFFAsyncOperation)authTokenLoaderWithPermissions:(NSArray *)permissions;
++ (JFFAsyncOperation)authFacebookSessionLoader;
++ (JFFAsyncOperation)authFacebookSessionLoaderWithPermissions:(NSArray *)permissions;
+
++ (JFFAsyncOperation)authFacebookSessionWithPublishPermissions:(NSArray *)permissions;
+
++ (JFFAsyncOperation)publishStreamAccessSessionLoader;
 
 + (JFFAsyncOperation)userInfoLoader;
 
++ (JFFAsyncOperation)userInfoLoaderWithFields:(NSArray *)fields
+                                sessionLoader:(JFFAsyncOperation)sessionLoader;
+
++ (JFFAsyncOperation)requestFacebookDialogWithParameters:(NSDictionary *)parameters
+                                                 message:(NSString *)message
+                                                   title:(NSString *)title;
+
 #pragma mark callbacks
 
-+ (void)setDidLoginCallback:(JFFFacebookDidLoginCallback)didLoginCallback;
-+ (void)setDidLogoutCallback:(JFFFacebookDidLogoutCallback)didLogoutCallback;
-
-//TODO hide this methods
-+ (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath;
++ (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
+                                 session:(FBSession *)session;
 
 + (JFFAsyncOperation)graphLoaderWithPath:(NSString *)graphPath
                               httpMethod:(NSString *)HTTPMethod
-                              parameters:(NSDictionary *)parameters;
+                              parameters:(NSDictionary *)parameters
+                                 session:(FBSession *)session;
+
++ (JFFAsyncOperation)postImage:(UIImage *)photo
+                   withMessage:(NSString *)message;
 
 @end

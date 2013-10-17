@@ -2,7 +2,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class TWRequest;
+@class SLRequest;
 
 @interface JFFTwitterResponse : NSObject
 
@@ -11,4 +11,4 @@
 
 @end
 
-JFFAsyncOperation jffTwitterRequest(TWRequest *request_);
+JFFAsyncOperation jffTwitterRequest(SLRequest *request);
