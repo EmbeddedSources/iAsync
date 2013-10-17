@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7E72C9E817FBEFDB0081F306 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E72C9E717FBEFDB0081F306 /* QuartzCore.framework */; };
 		CEBCBE6D1619C923007F805F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEBCBE6C1619C923007F805F /* UIKit.framework */; };
 		CEBCBE6F1619C923007F805F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEBCBE6E1619C923007F805F /* Foundation.framework */; };
 		CEBCBE711619C923007F805F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEBCBE701619C923007F805F /* CoreGraphics.framework */; };
@@ -28,13 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7E72C9F417FBEFDB0081F306 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CEBCBEA11619CC83007F805F /* JFFUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7ED3CB1516E6387B00E5A00F;
-			remoteInfo = "JFFUtilsTest-CI";
-		};
 		CEBCBE9F1619CC7D007F805F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEBCBE981619CC7D007F805F /* JFFTestTools.xcodeproj */;
@@ -178,7 +170,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7E72C9E717FBEFDB0081F306 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CEBCBE681619C923007F805F /* JFFStoreKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFStoreKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEBCBE6C1619C923007F805F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEBCBE6E1619C923007F805F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -206,7 +197,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E72C9E817FBEFDB0081F306 /* QuartzCore.framework in Frameworks */,
 				CEBCBEFD1619CF7A007F805F /* StoreKit.framework in Frameworks */,
 				CEBCBEFB1619CF6B007F805F /* libJFFStoreKit.a in Frameworks */,
 				CEBCBEEA1619CCC2007F805F /* libstdc++.dylib in Frameworks */,
@@ -245,7 +235,6 @@
 		CEBCBE6B1619C923007F805F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7E72C9E717FBEFDB0081F306 /* QuartzCore.framework */,
 				CEBCBEE91619CCC2007F805F /* libstdc++.dylib */,
 				CEBCBEFC1619CF7A007F805F /* StoreKit.framework */,
 				CEBCBE921619CB36007F805F /* GHUnitIOS.framework */,
@@ -307,7 +296,6 @@
 				CEBCBEB21619CC83007F805F /* libJFFUtils-clang.a */,
 				CEBCBEB41619CC83007F805F /* JFFUtilsFW.framework */,
 				CEBCBEB61619CC83007F805F /* JFFUtilsTest.octest */,
-				7E72C9F517FBEFDB0081F306 /* JFFUtilsTest-CI.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -416,13 +404,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		7E72C9F517FBEFDB0081F306 /* JFFUtilsTest-CI.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "JFFUtilsTest-CI.octest";
-			remoteRef = 7E72C9F417FBEFDB0081F306 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		CEBCBEA01619CC7D007F805F /* libJFFTestTools.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;

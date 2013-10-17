@@ -2,7 +2,7 @@
 
 @interface NSHTTPCookie (HTTPCookieWithHeader)
 
-+(id)HTTPCookieWithHeader:( NSString* )header_
-                      url:( NSURL* )url_;
++ (instancetype)HTTPCookieWithHeader:(NSString *)header
+                                 url:(NSURL *)url;
 
 @end

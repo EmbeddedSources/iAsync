@@ -17,32 +17,40 @@
 
 @implementation JFFAsyncOperationManager
 
-- (id)init
+- (JFFDidFinishAsyncOperationBlockHolder *)loaderFinishBlock
 {
-    self = [super init];
-    
-    if (self) {
-        self->_loaderFinishBlock = [JFFDidFinishAsyncOperationBlockHolder new];
-        self->_loaderCancelBlock = [JFFCancelAsyncOperationBlockHolder    new];
+    if (!_loaderFinishBlock) {
+        
+        _loaderFinishBlock = [JFFDidFinishAsyncOperationBlockHolder new];
     }
     
-    return self;
+    return _loaderFinishBlock;
+}
+
+- (JFFCancelAsyncOperationBlockHolder *)loaderCancelBlock
+{
+    if (!_loaderCancelBlock) {
+        
+        _loaderCancelBlock = [JFFCancelAsyncOperationBlockHolder new];
+    }
+    
+    return _loaderCancelBlock;
 }
 
 - (void)clear
 {
-    self.loaderFinishBlock = nil;
-    self.loaderCancelBlock = nil;
-    self.finished = NO;
+    _loaderFinishBlock = nil;
+    _loaderCancelBlock = nil;
+    _finished = NO;
 }
 
 - (JFFAsyncOperation)loader
 {
-    __weak JFFAsyncOperationManager *weakSelf = self;
-    
     return [^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progress_callback,
                                       JFFCancelAsyncOperationHandler cancelCallback,
                                       JFFDidFinishAsyncOperationHandler doneCallback) {
+        
+        __weak JFFAsyncOperationManager *weakSelf = self;
         
         self.loadingCount += 1;
         
@@ -82,7 +90,7 @@
                 cancelCallback(canceled);
         };
         return self.loaderCancelBlock.onceCancelBlock;
-    } copy ];
+    } copy];
 }
 
 @end

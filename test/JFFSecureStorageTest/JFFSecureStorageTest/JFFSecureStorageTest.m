@@ -20,7 +20,7 @@
         GHAssertTrue( [ login_    isEqualToString: outLogin_    ], @"OK" );
         GHAssertTrue( [ password_ isEqualToString: outPassword_ ], @"OK" );
     }
-
+    
     {
         NSString* login_    = @"llll2";
         NSString* password_ = @"ppp2";

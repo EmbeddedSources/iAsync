@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7E38851B17FBEE8700399329 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E38851A17FBEE8700399329 /* QuartzCore.framework */; };
+		4CC52F2A1729786900BB7637 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CC52F291729786900BB7637 /* Default-568h@2x.png */; };
 		CE91A8E315F61233002B220B /* libJFFContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDBB8FA15F60E8E0093FE95 /* libJFFContacts.a */; };
 		CE91A8E415F61233002B220B /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDBB8E015F60E7C0093FE95 /* libJFFTestTools.a */; };
 		CE91A8E515F61233002B220B /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDBB8E915F60E840093FE95 /* libJFFUtils.a */; };
@@ -27,13 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7E38852717FBEE8700399329 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CEDBB8E115F60E840093FE95 /* JFFUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7ED3CB1516E6387B00E5A00F;
-			remoteInfo = "JFFUtilsTest-CI";
-		};
 		CE91A8DD15F6122C002B220B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEDBB8E115F60E840093FE95 /* JFFUtils.xcodeproj */;
@@ -177,7 +170,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7E38851A17FBEE8700399329 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4CC52F291729786900BB7637 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CE91A8E615F61292002B220B /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CE91A8EA15F612B4002B220B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CE91A8EC15F612D1002B220B /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -204,7 +197,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E38851B17FBEE8700399329 /* QuartzCore.framework in Frameworks */,
 				CE91AA3715F64F7A002B220B /* libJFFScheduler.a in Frameworks */,
 				CE91AA2215F64F5A002B220B /* libJFFAsyncOperations.a in Frameworks */,
 				CE91A8ED15F612D1002B220B /* libstdc++.dylib in Frameworks */,
@@ -255,6 +247,7 @@
 		CEDBB8AB15F60E2F0093FE95 = {
 			isa = PBXGroup;
 			children = (
+				4CC52F291729786900BB7637 /* Default-568h@2x.png */,
 				CEDBB8C015F60E300093FE95 /* JFFContactsTest */,
 				CEDBB8B915F60E300093FE95 /* Frameworks */,
 				CEDBB8B715F60E300093FE95 /* Products */,
@@ -274,7 +267,6 @@
 		CEDBB8B915F60E300093FE95 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7E38851A17FBEE8700399329 /* QuartzCore.framework */,
 				CE91A8EC15F612D1002B220B /* libstdc++.dylib */,
 				CE91A8EA15F612B4002B220B /* libc++.dylib */,
 				CE91A8E615F61292002B220B /* AddressBook.framework */,
@@ -334,7 +326,6 @@
 				CEDBB8ED15F60E840093FE95 /* libJFFUtils-clang.a */,
 				CEDBB8EF15F60E840093FE95 /* JFFUtilsFW.framework */,
 				CED001A716198EAD00368E7D /* JFFUtilsTest.octest */,
-				7E38852817FBEE8700399329 /* JFFUtilsTest-CI.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -379,7 +370,7 @@
 		CEDBB8AD15F60E2F0093FE95 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = EmbeddedSources;
 			};
 			buildConfigurationList = CEDBB8B015F60E2F0093FE95 /* Build configuration list for PBXProject "JFFContactsTest" */;
@@ -422,13 +413,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		7E38852817FBEE8700399329 /* JFFUtilsTest-CI.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "JFFUtilsTest-CI.octest";
-			remoteRef = 7E38852717FBEE8700399329 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		CE91AA1A15F64C67002B220B /* libJFFAsyncOperations.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -543,6 +527,7 @@
 			files = (
 				CEDBB8C515F60E300093FE95 /* InfoPlist.strings in Resources */,
 				CE91AA0415F63390002B220B /* avator.png in Resources */,
+				4CC52F2A1729786900BB7637 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +592,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -640,6 +628,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;

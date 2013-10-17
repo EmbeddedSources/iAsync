@@ -4,75 +4,65 @@
 
 @implementation JFFURLConnectionTest
 
--(void)setUp
+- (void)setUp
 {
-    [ JFFURLConnection       enableInstancesCounting ];
-    [ JFFURLConnectionParams enableInstancesCounting ];
+    [JFFURLConnection       enableInstancesCounting];
+    [JFFURLConnectionParams enableInstancesCounting];
 }
 
--(void)testValidDownloadCompletesCorrectly
+- (void)testValidDownloadCompletesCorrectly
 {
-    const NSUInteger initialCount_ = [ JFFURLConnection instancesCount ];
+    const NSUInteger initialCount = [JFFURLConnection instancesCount];
+    const NSUInteger initialParamsCount = [JFFURLConnectionParams instancesCount];
 
-    __weak id< JNUrlConnection > wealConnection_ = nil;
+    __block __weak id< JNUrlConnection > wealConnection = nil;
+    
     @autoreleasepool
     {
-        @autoreleasepool
+        TestAsyncRequestBlock starterBlock = ^void(JFFSimpleBlock stopTest)
         {
-            NSURL* dataUrl_ = [ NSURL URLWithString: @"http://www.ietf.org/rfc/rfc4180.txt" ];
-
-            JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
-            params_.url = dataUrl_;
-            JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
-
-            NSObject< JNUrlConnection >* connection_ = [ factory_ createFastConnection ];
-
-            NSUInteger currentCount_ = [ JFFURLConnection instancesCount ];
-
-            currentCount_ = [ JFFURLConnectionParams instancesCount ];
-
-            NSMutableData* totalData_ = [ NSMutableData data ];
-            NSData* expectedData_ = [ NSData dataWithContentsOfURL: dataUrl_ ];
-
-            wealConnection_ = connection_;
-            connection_.didReceiveResponseBlock = ^( id response_ )
-            {
-                NSLog( @"[JFFURLConnectionTest] didReceiveResponseBlock: %@ ", response_ );
-            };
-            connection_.didReceiveDataBlock = ^( NSData* data_chunk_ )
-            {
-                NSLog( @"[JFFURLConnectionTest] didReceiveDataBlock: %d ", [ data_chunk_ length ] );
-                [ totalData_ appendData: data_chunk_ ];
-            };
-
+            NSURL *dataUrl = [@"http://www.ietf.org/rfc/rfc4180.txt" toURL];
             
-            TestAsyncRequestBlock starterBlock_ = ^void( JFFSimpleBlock stopTest_ )
+            JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+            params.url = dataUrl;
+            JNConnectionsFactory* factory = [[JNConnectionsFactory alloc] initWithURLConnectionParams:params];
+            
+            NSObject< JNUrlConnection > *connection = [factory createFastConnection];
+            
+            NSMutableData *totalData = [NSMutableData data];
+            NSData *expectedData = [NSData dataWithContentsOfURL:dataUrl];
+            
+            wealConnection = connection;
+            connection.didReceiveResponseBlock = ^(id response)
             {
-                connection_.didFinishLoadingBlock = ^( NSError* error_ )
-                {
-                    NSLog( @"[JFFURLConnectionTest] didFinishLoadingBlock: %@ ", error_ );
-                    
-                    stopTest_();
-                    GHAssertTrue( [ expectedData_ isEqualToData: totalData_ ], @"packet mismatch" );
-                };
-                
-                [ connection_ start ];
-                
+                NSLog(@"[JFFURLConnectionTest] didReceiveResponseBlock: %@ ", response);
+            };
+            connection.didReceiveDataBlock = ^(NSData *dataChunk)
+            {
+                NSLog(@"[JFFURLConnectionTest] didReceiveDataBlock: %d ", [dataChunk length]);
+                [totalData appendData: dataChunk];
             };
             
-            [ self performAsyncRequestOnMainThreadWithBlock: starterBlock_
-                                                   selector: _cmd
-                                                    timeout: 61.0 ];
-        }
+            connection.didFinishLoadingBlock = ^(NSError *error)
+            {
+                NSLog(@"[JFFURLConnectionTest] didFinishLoadingBlock: %@ ", error);
+                
+                stopTest();
+                GHAssertTrue([expectedData isEqualToData:totalData], @"packet mismatch" );
+            };
+            
+            [connection start];
+        };
+        
+        [self performAsyncRequestOnMainThreadWithBlock:starterBlock
+                                              selector:_cmd
+                                               timeout:61.0];
     }
-
-    GHAssertTrue( wealConnection_ == nil, @"OK" );
-
-    NSUInteger currentCount_ = [ JFFURLConnection instancesCount ];
-    GHAssertTrue( initialCount_ == currentCount_, @"packet mismatch" );
-
-    NSUInteger currentParamsCount_ = [ JFFURLConnectionParams instancesCount ];
-    GHAssertTrue( initialCount_ == currentParamsCount_, @"packet mismatch" );
+    
+    GHAssertTrue(wealConnection == nil, @"OK");
+    
+    GHAssertEquals(initialCount, [JFFURLConnection instancesCount], @"JFFURLConnection instancesCount mismatch");
+    GHAssertEquals(initialParamsCount, [JFFURLConnectionParams instancesCount], @"JFFURLConnectionParams instancesCount mismatch");
 }
 
 @end

@@ -26,9 +26,8 @@
 		1BEE3AFF15EFA9D40024D249 /* CachedAsyncOperationsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65977F8014A6731000AB83AE /* CachedAsyncOperationsTest.m */; };
 		1BEE3B0015EFA9D40024D249 /* AsyncOperationBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7A10A314C036D900F37C95 /* AsyncOperationBinder.m */; };
 		1BEE3B0115EFA9D40024D249 /* AsyncOperationWithDelayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65359B4D151A6DB90099D6FE /* AsyncOperationWithDelayTest.m */; };
-		7E12F4B817FAA43C00ABE54E /* SequenceWithAllResultTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E12F4B717FAA43C00ABE54E /* SequenceWithAllResultTest.m */; };
-		7E3884D017FBED8100399329 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E3884CF17FBED8100399329 /* QuartzCore.framework */; };
-		7E95E46317FB11B2001961B4 /* SequenceWithSuccessfullResultTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E95E46217FB11B2001961B4 /* SequenceWithSuccessfullResultTest.m */; };
+		4CCA7DFE17FEE7A300D85F5B /* SequenceWithAllResultTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCA7DFD17FEE7A300D85F5B /* SequenceWithAllResultTest.m */; };
+		4CCA7E0117FEEA6100D85F5B /* SequenceWithSuccessfullResultTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCA7E0017FEEA6100D85F5B /* SequenceWithSuccessfullResultTest.m */; };
 		8D29EF8D13BE066900041B6A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D29EF8C13BE066900041B6A /* UIKit.framework */; };
 		8D29EF8F13BE066900041B6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D29EF8E13BE066900041B6A /* Foundation.framework */; };
 		8D29EF9113BE066900041B6A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D29EF9013BE066900041B6A /* CoreGraphics.framework */; };
@@ -152,13 +151,6 @@
 			remoteGlobalIDString = 65802A5B148BF2930040A93A;
 			remoteInfo = JFFUtilsMacOS;
 		};
-		7E12F4C317FAA43D00ABE54E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1B835A0E142C8BAB00FC004C /* JFFUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7ED3CB1516E6387B00E5A00F;
-			remoteInfo = "JFFUtilsTest-CI";
-		};
 		CE28A105161793F40029BE05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1B835A0E142C8BAB00FC004C /* JFFUtils.xcodeproj */;
@@ -185,13 +177,12 @@
 		1BA2551F1443114300C9B2BE /* SequenceOfAsyncOperationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequenceOfAsyncOperationsTest.m; sourceTree = "<group>"; };
 		1BA27738144D9B1B00774C8E /* TrySequenceOfAsyncOperationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrySequenceOfAsyncOperationsTest.m; sourceTree = "<group>"; };
 		1BED04FF144EBF2800B8DC2A /* GroupOfAsyncOperationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupOfAsyncOperationsTest.m; sourceTree = "<group>"; };
+		4CCA7DFD17FEE7A300D85F5B /* SequenceWithAllResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequenceWithAllResultTest.m; sourceTree = "<group>"; };
+		4CCA7E0017FEEA6100D85F5B /* SequenceWithSuccessfullResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequenceWithSuccessfullResultTest.m; sourceTree = "<group>"; };
 		5357CDF914A9F5130046EA34 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		65359B4D151A6DB90099D6FE /* AsyncOperationWithDelayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncOperationWithDelayTest.m; sourceTree = "<group>"; };
 		65359BD5151A81C40099D6FE /* ParalelBlockTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParalelBlockTest.m; sourceTree = "<group>"; };
 		65977F8014A6731000AB83AE /* CachedAsyncOperationsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CachedAsyncOperationsTest.m; sourceTree = "<group>"; };
-		7E12F4B717FAA43C00ABE54E /* SequenceWithAllResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequenceWithAllResultTest.m; sourceTree = "<group>"; };
-		7E3884CF17FBED8100399329 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		7E95E46217FB11B2001961B4 /* SequenceWithSuccessfullResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequenceWithSuccessfullResultTest.m; sourceTree = "<group>"; };
 		8D29EF8813BE066900041B6A /* JFFAsyncOperationsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFAsyncOperationsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D29EF8C13BE066900041B6A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8D29EF8E13BE066900041B6A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -211,7 +202,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E3884D017FBED8100399329 /* QuartzCore.framework in Frameworks */,
 				1BEC48A4156A27660099DA6D /* libstdc++.dylib in Frameworks */,
 				1B0E89DF1563FB1100825E3C /* libc++.dylib in Frameworks */,
 				1B2D8C49154BFE7300360296 /* libJFFTestTools.a in Frameworks */,
@@ -255,7 +245,6 @@
 				5357CE0514A9F5130046EA34 /* libJFFUtils-clang.a */,
 				6500345C151A646D008F16E7 /* JFFUtilsFW.framework */,
 				CE28A106161793F40029BE05 /* JFFUtilsTest.octest */,
-				7E12F4C417FAA43D00ABE54E /* JFFUtilsTest-CI.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -303,7 +292,6 @@
 		8D29EF8B13BE066900041B6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7E3884CF17FBED8100399329 /* QuartzCore.framework */,
 				1B0E89DE1563FB1100825E3C /* libc++.dylib */,
 				5357CDF914A9F5130046EA34 /* libstdc++.dylib */,
 				8D29EFB213BE070F00041B6A /* GHUnitIOS.framework */,
@@ -323,8 +311,6 @@
 				1B2A680C143F514C00BC284F /* JFFCancelAyncOperationBlockHolderTest.m */,
 				1B793B32142C851C00B43DC8 /* WeakAsyncOperationTest.m */,
 				1BA2551F1443114300C9B2BE /* SequenceOfAsyncOperationsTest.m */,
-				7E12F4B717FAA43C00ABE54E /* SequenceWithAllResultTest.m */,
-				7E95E46217FB11B2001961B4 /* SequenceWithSuccessfullResultTest.m */,
 				1BA27738144D9B1B00774C8E /* TrySequenceOfAsyncOperationsTest.m */,
 				1BED04FF144EBF2800B8DC2A /* GroupOfAsyncOperationsTest.m */,
 				1B0857D014516076001DDE0A /* FailOnFirstErrorGroupOfAsyncOperationsTest.m */,
@@ -334,6 +320,8 @@
 				65359BD5151A81C40099D6FE /* ParalelBlockTest.m */,
 				1B93690515650A5A00F8A394 /* JFFAsyncOperationUtilsTest.m */,
 				CEBCFC1D163D42AB0009772F /* JFFLimitedLoadersQueueTest.m */,
+				4CCA7DFD17FEE7A300D85F5B /* SequenceWithAllResultTest.m */,
+				4CCA7E0017FEEA6100D85F5B /* SequenceWithSuccessfullResultTest.m */,
 			);
 			path = JFFAsyncOperationsTest;
 			sourceTree = "<group>";
@@ -382,7 +370,7 @@
 		8D29EF7F13BE066900041B6A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 8D29EF8213BE066900041B6A /* Build configuration list for PBXProject "JFFAsyncOperationsTest" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -504,13 +492,6 @@
 			remoteRef = 65D8B6C5148C025900C02FA4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7E12F4C417FAA43D00ABE54E /* JFFUtilsTest-CI.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "JFFUtilsTest-CI.octest";
-			remoteRef = 7E12F4C317FAA43D00ABE54E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		CE28A106161793F40029BE05 /* JFFUtilsTest.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -555,11 +536,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E95E46317FB11B2001961B4 /* SequenceWithSuccessfullResultTest.m in Sources */,
+				4CCA7E0117FEEA6100D85F5B /* SequenceWithSuccessfullResultTest.m in Sources */,
 				8D29EF9913BE066900041B6A /* main.m in Sources */,
 				1B12CB3B144D5C5900DFE2B1 /* JFFAsyncOperationManager.m in Sources */,
 				1BEE3AF115EFA9850024D249 /* TrySequenceOfAsyncOperationsTest.m in Sources */,
-				7E12F4B817FAA43C00ABE54E /* SequenceWithAllResultTest.m in Sources */,
+				4CCA7DFE17FEE7A300D85F5B /* SequenceWithAllResultTest.m in Sources */,
 				1BEE3AF715EFA9A40024D249 /* ParalelBlockTest.m in Sources */,
 				1BEE3AF815EFA9A40024D249 /* JFFAsyncOperationUtilsTest.m in Sources */,
 				1BEE3AF915EFA9D40024D249 /* JFFDidFinishAsyncOperationBlockHolderTest.m in Sources */,
@@ -616,9 +597,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -635,15 +617,19 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../../lib,
 					../../lib/JFFTestTools,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -658,9 +644,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -670,9 +657,12 @@
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../../lib,

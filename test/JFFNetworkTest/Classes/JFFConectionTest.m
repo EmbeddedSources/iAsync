@@ -1,173 +1,173 @@
 @interface JFFConectionTest : GHAsyncTestCase
-
 @end
 
 @implementation JFFConectionTest
 
 //TODO test leaks
 
--(void)setUp
+- (void)setUp
 {
-    [ JFFURLConnection enableInstancesCounting ];//JTODO test
+    [JFFURLConnection enableInstancesCounting];//JTODO test
 }
 
 //http://jigsaw.w3.org/HTTP/negbad
--(void)testHttp406NotAcceptableCode
+- (void)testHttp406NotAcceptableCode
 {
-    NSUInteger initialInstancesCount_ = [JFFURLConnection instancesCount];
-
-    [ self prepare ];
-
-    __block NSError* didFinishLoadingBlockError;
-
-    NSURL* dataUrl = [NSURL URLWithString: @"http://jigsaw.w3.org/HTTP/negbad"];
-    NSData* expectedData = [[NSData alloc] initWithContentsOfURL:dataUrl];
-
-    __block NSMutableData* totalData;
-
-    @autoreleasepool
-    {
-        JFFAsyncOperationProgressHandler progress = ^(NSData *dataChunk)
-        {
-            if (!totalData)
-                totalData = [NSMutableData new];
-            [totalData appendData:dataChunk];
+    NSUInteger initialInstancesCount = [JFFURLConnection instancesCount];
+    
+    @autoreleasepool {
+        __block NSError *didFinishLoadingBlockError;
+        
+        NSURL *dataUrl = [@"http://jigsaw.w3.org/HTTP/negbad" toURL];
+        NSData *expectedData = [[NSData alloc] initWithContentsOfURL:dataUrl];
+        
+        __block NSMutableData *totalData;
+        
+        void (^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishTest) {
+            
+            JFFAsyncOperationProgressHandler progress = ^(NSData *dataChunk)
+            {
+                if (!totalData)
+                    totalData = [NSMutableData new];
+                [totalData appendData:dataChunk];
+            };
+            
+            JFFDidFinishAsyncOperationHandler finish = ^(id result, NSError *error)
+            {
+                didFinishLoadingBlockError = error;
+                finishTest();
+            };
+            
+            JFFAsyncOperation loader = liveChunkedURLResponseLoader(dataUrl, nil, nil);
+            loader(progress, nil, finish);
         };
-
-        JFFDidFinishAsyncOperationHandler finish = ^(id result, NSError *error)
-        {
-            didFinishLoadingBlockError = error;
-            [ self notify: kGHUnitWaitStatusSuccess
-              forSelector: _cmd ];
-        };
-
-        liveChunkedURLResponseLoader(dataUrl, nil, nil)(progress, nil, finish);
-
-        [self waitForStatus: kGHUnitWaitStatusSuccess
-                    timeout: 61.];
+        
+        [self performAsyncRequestOnMainThreadWithBlock:testBlock
+                                              selector:_cmd
+                                               timeout:61.];
+        
+        GHAssertTrue([didFinishLoadingBlockError isKindOfClass:[JHttpError class]], @"Expected error with class - %@", [JHttpError class] );
+        GHAssertNil(expectedData, @"packet mismatch");
+        GHAssertNil(totalData   , @"packet mismatch");
     }
-
-    GHAssertTrue( [didFinishLoadingBlockError isKindOfClass:[JHttpError class]], @"Expected error with class - %@", [JHttpError class] );
-    GHAssertNil( expectedData, @"packet mismatch" );
-    GHAssertNil( totalData   , @"packet mismatch" );
-
-    GHAssertTrue( initialInstancesCount_ == [ JFFURLConnection instancesCount ], @"packet mismatch" );
+    
+    GHAssertEquals(initialInstancesCount, [JFFURLConnection instancesCount], @"packet mismatch");
 }
 
 //http://jigsaw.w3.org/HTTP/300/Go_301
--(void)testRedirectOnHttp301Code
+- (void)testRedirectOnHttp301Code
 {
-    NSUInteger initialInstancesCount_ = [JFFURLConnection instancesCount];
-
-    [ self prepare ];
-
-    __block NSError* didFinishLoadingBlockError_;
-
-    NSURL* dataUrl_ = [ NSURL URLWithString: @"http://jigsaw.w3.org/HTTP/300/301.html" ];
-    NSData* expectedData_ = [[NSData alloc] initWithContentsOfURL:dataUrl_];
-
-    NSMutableData* totalData_ = [ NSMutableData new ];
-
-    @autoreleasepool
-    {
-        JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
-        params_.url = dataUrl_;
-
-        JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
+    NSUInteger initialInstancesCount = [JFFURLConnection instancesCount];
+    
+    @autoreleasepool {
+    
+        __block NSError *didFinishLoadingBlockError;
         
-        id< JNUrlConnection > connection_ = [ factory_ createFastConnection ];
+        NSURL *dataUrl = [@"http://jigsaw.w3.org/HTTP/300/301.html" toURL];
+        NSData *expectedData = [[NSData alloc] initWithContentsOfURL:dataUrl];
         
-        connection_.didReceiveResponseBlock = ^( id response_ )
-        {
-            //IDLE
-        };
-        connection_.didReceiveDataBlock = ^( NSData* dataChunk_ )
-        {
-            [ totalData_ appendData: dataChunk_ ];
-        };
-
-        connection_.didFinishLoadingBlock = ^( NSError* error_ )
-        {
-            didFinishLoadingBlockError_ = error_;
-            [ self notify: kGHUnitWaitStatusSuccess
-              forSelector: _cmd ];
+        NSMutableData *totalData = [NSMutableData new];
+        
+        void (^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishTest) {
+            
+            JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+            params.url = dataUrl;
+            
+            JNConnectionsFactory *factory = [[JNConnectionsFactory alloc] initWithURLConnectionParams:params];
+            
+            id<JNUrlConnection> connection = [factory createFastConnection];
+            
+            connection.didReceiveResponseBlock = ^(id response)
+            {
+                //IDLE
+            };
+            connection.didReceiveDataBlock = ^(NSData *dataChunk)
+            {
+                [totalData appendData:dataChunk];
+            };
+            
+            connection.didFinishLoadingBlock = ^(NSError *error)
+            {
+                didFinishLoadingBlockError = error;
+                finishTest();
+            };
+            
+            [connection start];
         };
         
-        [ connection_ start ];
-        [ self waitForStatus: kGHUnitWaitStatusSuccess
-                     timeout: 61. ];
+        [self performAsyncRequestOnMainThreadWithBlock:testBlock
+                                              selector:_cmd
+                                               timeout:61.];
+        
+        GHAssertNil(didFinishLoadingBlockError, @"Unexpected error - %@", didFinishLoadingBlockError);
+        GHAssertTrue([expectedData length] == [totalData length], @"packet mismatch" );
     }
     
-    GHAssertNil( didFinishLoadingBlockError_, @"Unexpected error - %@", didFinishLoadingBlockError_ );
-    GHAssertTrue( [ expectedData_ length ] == [ totalData_ length ], @"packet mismatch" );
-    
-    GHAssertTrue( initialInstancesCount_ == [ JFFURLConnection instancesCount ], @"packet mismatch" );
+    GHAssertEquals(initialInstancesCount, [JFFURLConnection instancesCount], @"packet mismatch");
 }
 
 // http://jigsaw.w3.org/HTTP/300/Overview.html
--(void)testRedirectOnHttp302Code
+- (void)testRedirectOnHttp302Code
 {
-    NSUInteger initialInstancesCount_ = [ JFFURLConnection instancesCount ];
+    NSUInteger initialInstancesCount = [JFFURLConnection instancesCount];
+    
+    __block NSError *didFinishLoadingBlockError;
+    
+    NSURL* dataUrl = [@"http://jigsaw.w3.org/HTTP/300/302.html" toURL];
+    NSData* expectedData = [[NSData alloc] initWithContentsOfURL:dataUrl];
 
-    [ self prepare ];
+    NSMutableData* totalData = [NSMutableData new];
 
-    __block NSError* didFinishLoadingBlockError_;
-
-    NSURL* dataUrl_ = [ NSURL URLWithString: @"http://jigsaw.w3.org/HTTP/300/302.html" ];
-    NSData* expectedData_ = [ [ NSData alloc ] initWithContentsOfURL: dataUrl_ ];
-
-    NSMutableData* totalData_ = [ NSMutableData new ];
-
-    @autoreleasepool
-    {
-
-        JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
-        params_.url = dataUrl_;
-        JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
-
-        id< JNUrlConnection > connection_ = [ factory_ createFastConnection ];
-
-        connection_.didReceiveResponseBlock = ^( id response_ )
+    void (^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishTest) {
+        
+        JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+        params.url = dataUrl;
+        JNConnectionsFactory *factory = [[JNConnectionsFactory alloc] initWithURLConnectionParams:params];
+        
+        id<JNUrlConnection> connection = [factory createFastConnection];
+        
+        connection.didReceiveResponseBlock = ^(id response)
         {
             //IDLE
         };
-        connection_.didReceiveDataBlock = ^( NSData* dataChunk_ )
+        connection.didReceiveDataBlock = ^(NSData *dataChunk)
         {
-            [ totalData_ appendData: dataChunk_ ];
+            [totalData appendData:dataChunk];
         };
-
-        connection_.didFinishLoadingBlock = ^( NSError* error_ )
+        
+        connection.didFinishLoadingBlock = ^(NSError *error)
         {
-            didFinishLoadingBlockError_ = error_;
-            [ self notify: kGHUnitWaitStatusSuccess
-              forSelector: _cmd ];
+            didFinishLoadingBlockError = error;
+            finishTest();
         };
-
-        [ connection_ start ];
-        [ self waitForStatus: kGHUnitWaitStatusSuccess
-                     timeout: 61. ];
-    }
-
-    GHAssertNil( didFinishLoadingBlockError_, @"Unexpected error - %@", didFinishLoadingBlockError_ );
-    GHAssertTrue( [ expectedData_ length ] == [ totalData_ length ], @"packet mismatch" );
-
-    GHAssertTrue( initialInstancesCount_ == [ JFFURLConnection instancesCount ], @"packet mismatch" );
+        
+        [connection start];
+    };
+    
+    [self performAsyncRequestOnMainThreadWithBlock:testBlock
+                                          selector:_cmd
+                                           timeout:61.];
+    
+    GHAssertNil(didFinishLoadingBlockError, @"Unexpected error - %@", didFinishLoadingBlockError );
+    GHAssertTrue([expectedData length] == [totalData length], @"packet mismatch" );
+    
+    GHAssertEquals(initialInstancesCount, [JFFURLConnection instancesCount], @"packet mismatch");
 }
 
 //JTODO add file - http://10.28.9.57:9000/about/
--(void)RtestValidDownloadCompletesCorrectly
+- (void)RtestValidDownloadCompletesCorrectly
 {
-    [ self prepare ];
-
-    NSURL* dataUrl_ = [ NSURL URLWithString: @"http://10.28.9.57:9000/about/" ];
-
-    JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
-    params_.url = dataUrl_;
-    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
+    [self prepare];
+    
+    NSURL *dataUrl = [ NSURL URLWithString: @"http://10.28.9.57:9000/about/" ];
+    
+    JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+    params.url = dataUrl;
+    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params ];
    
     id< JNUrlConnection > connection_ = [ factory_ createFastConnection ];
     NSMutableData* totalData_ = [ NSMutableData new ];
-    NSData* expectedData_ = [ NSData dataWithContentsOfURL: dataUrl_ ];
+    NSData* expectedData_ = [ NSData dataWithContentsOfURL: dataUrl ];
 
     connection_.didReceiveResponseBlock = ^( id response_ )
     {
@@ -192,42 +192,41 @@
 }
 
 //now http://kdjsfhjkfhsdfjkdhfjkds.com redirected
--(void)RtestInValidDownloadCompletesWithError
+- (void)RtestInValidDownloadCompletesWithError
 {
-    [ self prepare ];
+    [self prepare];
+    
+    NSURL *dataUrl = [ NSURL URLWithString: @"http://kdjsfhjkfhsdfjkdhfjkds.com" ];
+    
+    JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+    params.url = dataUrl;
+    JNConnectionsFactory *factory = [[JNConnectionsFactory alloc] initWithURLConnectionParams:params];
+    
+    id< JNUrlConnection > connection_ = [factory createFastConnection];
 
-    NSURL* dataUrl_ = [ NSURL URLWithString: @"http://kdjsfhjkfhsdfjkdhfjkds.com" ];
-
-    JFFURLConnectionParams* params_ = [ JFFURLConnectionParams new ];
-    params_.url = dataUrl_;
-    JNConnectionsFactory* factory_ = [ [ JNConnectionsFactory alloc ] initWithURLConnectionParams: params_ ];
-
-    id< JNUrlConnection > connection_ = [ factory_ createFastConnection ];
-
-    connection_.didReceiveResponseBlock = ^( id response_ )
+    connection_.didReceiveResponseBlock = ^(id response)
     {
         //IDLE
     };
-    connection_.didReceiveDataBlock = ^( NSData* dataChunk_ )
+    connection_.didReceiveDataBlock = ^(NSData *dataChunk)
     {
     };
-    connection_.didFinishLoadingBlock = ^( NSError* error_ )
+    connection_.didFinishLoadingBlock = ^(NSError *error)
     {
-        if ( nil != error_ )
+        if (nil != error)
         {
-            [ self notify: kGHUnitWaitStatusSuccess 
-              forSelector: _cmd ];
+            [self notify:kGHUnitWaitStatusSuccess
+             forSelector:_cmd];
             return;
         }
-
-        [ self notify: kGHUnitWaitStatusFailure
-          forSelector: _cmd ];
+        
+        [self notify:kGHUnitWaitStatusFailure
+         forSelector:_cmd];
     };
-
-    [ connection_ start ];
-    [ self waitForStatus: kGHUnitWaitStatusSuccess
-                 timeout: 61. ];
+    
+    [connection_ start];
+    [self waitForStatus:kGHUnitWaitStatusSuccess
+                timeout:61.];
 }
-
 
 @end

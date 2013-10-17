@@ -9,49 +9,53 @@
 
 @implementation AsyncOperationWithDelayTest
 
--(void)setUp
+- (void)setUp
 {
     [JFFScheduler enableInstancesCounting];
 }
 
--(void)testCancelAsyncOperationWithDelay
+- (void)testCancelAsyncOperationWithDelay
 {
     const NSUInteger initialSchedulerInstancesCount = [JFFScheduler instancesCount];
     
     __block BOOL cancelBlockOk = NO;
     __block NSTimeInterval timeDifference = 0;
     
-    @autoreleasepool {
-        JFFAsyncOperation loader = asyncOperationWithDelay(.2);
+    void (^block)(JFFSimpleBlock) = ^(JFFSimpleBlock complete) {
         
-        JFFAsyncOperationProgressHandler progressCallback = ^(id data) {
-            [self notify:kGHUnitWaitStatusFailure forSelector:_cmd];
-        };
-        JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
-            cancelBlockOk = canceled;
-        };
-        JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
-            [self notify:kGHUnitWaitStatusFailure forSelector:_cmd];
-        };
-        
-        JFFCancelAsyncOperation cancel = loader(progressCallback,
-                                                cancelCallback,
-                                                doneCallback);
-        
-        cancel(YES);
-        
-        NSDate *startDate = [NSDate new];
-        
-        asyncOperationWithDelay(.3)(nil, nil, ^(id result, NSError *error) {
-            NSDate *finishDate = [NSDate new];
-            timeDifference = [finishDate timeIntervalSinceDate:startDate];
+        @autoreleasepool {
+            JFFAsyncOperation loader = asyncOperationWithDelay(.2, .02);
             
-            [self notify:kGHUnitWaitStatusSuccess forSelector:_cmd];
-        });
-    }
+            JFFAsyncOperationProgressHandler progressCallback = ^(id data) {
+                complete();
+            };
+            JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
+                cancelBlockOk = canceled;
+            };
+            JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
+                complete();
+            };
+            
+            JFFCancelAsyncOperation cancel = loader(progressCallback,
+                                                    cancelCallback,
+                                                    doneCallback);
+            
+            cancel(YES);
+            
+            NSDate *startDate = [NSDate new];
+            
+            asyncOperationWithDelay(.3, .03)(nil, nil, ^(id result, NSError *error) {
+                NSDate *finishDate = [NSDate new];
+                timeDifference = [finishDate timeIntervalSinceDate:startDate];
+                
+                complete();
+            });
+        }
+    };
     
-    [self prepare];
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.];
+    [self performAsyncRequestOnMainThreadWithBlock:block
+                                          selector:_cmd
+                                           timeout:1.];
     
     GHAssertTrue(initialSchedulerInstancesCount == [JFFScheduler instancesCount], @"OK");
     
@@ -59,33 +63,37 @@
     GHAssertTrue(timeDifference >= 0.3, @"OK");
 }
 
--(void)testAsyncOperationWithDelayTwiceCall
+- (void)testAsyncOperationWithDelayTwiceCall
 {
     const NSUInteger initialSchedulerInstancesCount = [JFFScheduler instancesCount];
     
     __block NSUInteger callsCount = 0;
     
-    @autoreleasepool {
-        JFFAsyncOperation loader = asyncOperationWithDelay(.2);
+    void (^block)(JFFSimpleBlock) = ^(JFFSimpleBlock complete) {
         
-        JFFAsyncOperationProgressHandler progressCallback = ^(id data) {
-            [self notify:kGHUnitWaitStatusFailure forSelector:_cmd];
-        };
-        JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
-            [self notify:kGHUnitWaitStatusFailure forSelector:_cmd];
-        };
-        JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
-            ++callsCount;
-            if (callsCount == 2)
-                [self notify:kGHUnitWaitStatusSuccess forSelector:_cmd];
-        };
-        
-        loader(progressCallback, cancelCallback, doneCallback);
-        loader(progressCallback, cancelCallback, doneCallback);
-    }
+        @autoreleasepool {
+            JFFAsyncOperation loader = asyncOperationWithDelay(.2, .02);
+            
+            JFFAsyncOperationProgressHandler progressCallback = ^(id data) {
+                complete();
+            };
+            JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
+                complete();
+            };
+            JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
+                ++callsCount;
+                if (callsCount == 2)
+                    complete();
+            };
+            
+            loader(progressCallback, cancelCallback, doneCallback);
+            loader(progressCallback, cancelCallback, doneCallback);
+        }
+    };
     
-    [self prepare];
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.];
+    [self performAsyncRequestOnMainThreadWithBlock:block
+                                          selector:_cmd
+                                           timeout:1.];
     
     GHAssertTrue(initialSchedulerInstancesCount == [JFFScheduler instancesCount], @"OK");
     

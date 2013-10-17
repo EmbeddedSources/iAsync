@@ -23,7 +23,6 @@
 		65E308B61531F1C000E0B781 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308B51531F1C000E0B781 /* CFNetwork.framework */; };
 		65E308B81531F1CD00E0B781 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308B71531F1CD00E0B781 /* libsqlite3.dylib */; };
 		65E308CD1531F1FA00E0B781 /* libJFFScheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308C41531F1E900E0B781 /* libJFFScheduler.a */; };
-		7E38856317FBEEC300399329 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E38856217FBEEC300399329 /* QuartzCore.framework */; };
 		CE19F66A16AED8A5005B15B4 /* libJFFNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19F66316AED89A005B15B4 /* libJFFNetwork.a */; };
 		CE19F66E16AED8C7005B15B4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19F66D16AED8C7005B15B4 /* libz.dylib */; };
 		CED0014C16198DDF00368E7D /* SmartDataLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E308671531EF0000E0B781 /* SmartDataLoaderTest.m */; };
@@ -157,13 +156,6 @@
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = JFFScheduler;
 		};
-		7E38857117FBEEC300399329 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65E3083F1531EEC500E0B781 /* JFFUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7ED3CB1516E6387B00E5A00F;
-			remoteInfo = "JFFUtilsTest-CI";
-		};
 		CE19F66216AED89A005B15B4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE19F65716AED89A005B15B4 /* JFFNetwork.xcodeproj */;
@@ -230,7 +222,6 @@
 		65E308B51531F1C000E0B781 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		65E308B71531F1CD00E0B781 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		65E308B91531F1E800E0B781 /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../../lib/JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
-		7E38856217FBEEC300399329 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE19F65716AED89A005B15B4 /* JFFNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFNetwork.xcodeproj; path = ../../lib/JFFNetwork/JFFNetwork.xcodeproj; sourceTree = "<group>"; };
 		CE19F66D16AED8C7005B15B4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		CED85DB3161C61F300F28EBC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -241,7 +232,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E38856317FBEEC300399329 /* QuartzCore.framework in Frameworks */,
 				CE19F66E16AED8C7005B15B4 /* libz.dylib in Frameworks */,
 				CE19F66A16AED8A5005B15B4 /* libJFFNetwork.a in Frameworks */,
 				1BEC4832156A27060099DA6D /* libstdc++.dylib in Frameworks */,
@@ -286,7 +276,6 @@
 		65E3081E1531EE1B00E0B781 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7E38856217FBEEC300399329 /* QuartzCore.framework */,
 				CE19F66D16AED8C7005B15B4 /* libz.dylib */,
 				1BEC4831156A27060099DA6D /* libstdc++.dylib */,
 				1B0E896B1563FA9C00825E3C /* libc++.dylib */,
@@ -343,7 +332,6 @@
 				65E3084B1531EEC500E0B781 /* libJFFUtils-clang.a */,
 				65E3084D1531EEC500E0B781 /* JFFUtilsFW.framework */,
 				CED0014A16198CE200368E7D /* JFFUtilsTest.octest */,
-				7E38857217FBEEC300399329 /* JFFUtilsTest-CI.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -563,13 +551,6 @@
 			fileType = wrapper.framework.static;
 			path = JFFSchedulerFW.framework;
 			remoteRef = 65E308C91531F1E900E0B781 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E38857217FBEEC300399329 /* JFFUtilsTest-CI.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "JFFUtilsTest-CI.octest";
-			remoteRef = 7E38857117FBEEC300399329 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CE19F66316AED89A005B15B4 /* libJFFNetwork.a */ = {
