@@ -6,6 +6,6 @@
 
 @property (nonatomic, copy) JFFSimpleBlock block;
 
-- (id)initWithBlock:(JFFSimpleBlock)block;
+- (instancetype)initWithBlock:(JFFSimpleBlock)block;
 
 @end

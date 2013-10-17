@@ -4,7 +4,7 @@
 
 @implementation NSDictionary (BlocksAdditions)
 
-- (NSDictionary *)map:(JFFDictMappingBlock)block
+- (instancetype)map:(JFFDictMappingBlock)block
 {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
@@ -15,7 +15,7 @@
     return [result copy];
 }
 
-- (NSDictionary *)map:(JFFDictMappingWithErrorBlock)block error:(NSError *__autoreleasing *)outError
+- (instancetype)map:(JFFDictMappingWithErrorBlock)block error:(NSError *__autoreleasing *)outError
 {
     __block NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
     
@@ -39,7 +39,7 @@
     return [result copy];
 }
 
--(NSDictionary*)mapKey:(JFFDictMappingBlock)block
+- (instancetype)mapKey:(JFFDictMappingBlock)block
 {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
@@ -67,7 +67,7 @@
     }];
 }
 
-- (NSDictionary*)select:(JFFDictPredicateBlock)predicate
+- (instancetype)select:(JFFDictPredicateBlock)predicate
 {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
     

@@ -4,7 +4,7 @@
 
 @interface JFFSimpleBlockHolder : NSObject
 
-@property ( nonatomic, copy ) JFFSimpleBlock simpleBlock;
-@property ( nonatomic, copy, readonly ) JFFSimpleBlock onceSimpleBlock;
+@property (nonatomic, copy) JFFSimpleBlock simpleBlock;
+@property (nonatomic, copy, readonly) JFFSimpleBlock onceSimpleBlock;
 
 @end

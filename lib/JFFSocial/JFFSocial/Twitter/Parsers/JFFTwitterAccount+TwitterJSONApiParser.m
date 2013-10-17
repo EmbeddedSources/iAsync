@@ -2,8 +2,8 @@
 
 @implementation JFFTwitterAccount (TwitterJSONApiParser)
 
-+ (id)newTwitterAccountWithTwitterJSONApiDictionary:(NSDictionary *)jsonObject
-                                              error:(NSError **)outError
++ (instancetype)newTwitterAccountWithTwitterJSONApiDictionary:(NSDictionary *)jsonObject
+                                                        error:(NSError **)outError
 {
     id jsonPattern = @{
     @"id_str"            : [NSString class],
@@ -25,7 +25,7 @@
         result.name             = jsonObject[@"name"  ];
         
         {
-            NSString* avatarUrlString = jsonObject[@"profile_image_url"];
+            NSString *avatarUrlString = jsonObject[@"profile_image_url"];
             result.avatarURL = [avatarUrlString toURL];
         }
     }

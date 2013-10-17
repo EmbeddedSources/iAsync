@@ -6,7 +6,7 @@
 
 @interface JFFAlertViewsContainer : NSObject
 
-+ (id)sharedAlertViewsContainer;
++ (instancetype)sharedAlertViewsContainer;
 
 - (NSUInteger)count;
 

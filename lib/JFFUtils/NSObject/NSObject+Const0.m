@@ -9,7 +9,7 @@
 {
 }
 
-- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
     return [[self class] instanceMethodSignatureForSelector:@selector(doNothing)];
 }
@@ -23,7 +23,7 @@
 
 @implementation NSObject (Const0)
 
-+(id)objectThatAlwaysReturnsZeroForAnyMethod
++ (id)objectThatAlwaysReturnsZeroForAnyMethod
 {
     static dispatch_once_t once;
     static id instance;

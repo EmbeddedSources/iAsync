@@ -2,8 +2,8 @@
 
 @interface NSString (PathExtensions)
 
-+ (NSString *)documentsPathByAppendingPathComponent:(NSString *)str;
++ (instancetype)documentsPathByAppendingPathComponent:(NSString *)str;
 
-+ (NSString *)cachesPathByAppendingPathComponent:(NSString *)str;
++ (instancetype)cachesPathByAppendingPathComponent:(NSString *)str;
 
 @end

@@ -95,7 +95,6 @@
     return [result copy];
 }
 
-
 -(NSArray*)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_
 {
     NSParameterAssert( NULL != outError_ );
@@ -117,7 +116,7 @@
     return [ result_ copy ];
 }
 
-- (NSArray *)forceMap:(JFFMappingBlock)block
+- (instancetype)forceMap:(JFFMappingBlock)block
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
@@ -131,7 +130,7 @@
     return [result copy];
 }
 
-- (NSArray *)mapWithIndex:(JFFMappingWithErrorAndIndexBlock)block error:(NSError **)outError
+- (instancetype)mapWithIndex:(JFFMappingWithErrorAndIndexBlock)block error:(NSError **)outError
 {
     __block NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
@@ -162,15 +161,15 @@
         id key;
         id value;
         block(object, &key, &value);
-        [keys   addObject: key  ];
-        [values addObject: value];
+        [keys   addObject:key  ];
+        [values addObject:value];
     }
     
-    return [[NSDictionary alloc] initWithObjects: values
-                                         forKeys: keys];
+    return [[NSDictionary alloc] initWithObjects:values
+                                         forKeys:keys];
 }
 
-- (NSArray *)flatten:(JFFFlattenBlock)block
+- (instancetype)flatten:(JFFFlattenBlock)block
 {
     NSMutableArray *result = [NSMutableArray new];
     
@@ -203,6 +202,17 @@
     return nil;
 }
 
+- (id)lastMatch:(JFFPredicateBlock)predicate
+{
+    NSEnumerator *enumerator = [self reverseObjectEnumerator];
+    for (id object in enumerator) {
+        
+        if (predicate(object))
+            return object;
+    }
+    return nil;
+}
+
 - (NSUInteger)firstIndexOfObjectMatch:(JFFPredicateBlock)predicate
 {
     NSUInteger result = 0;
@@ -225,8 +235,8 @@
     }
 }
 
-- (NSArray *)devideIntoArrayWithSize:(NSUInteger)size
-                   elementIndexBlock:(JFFElementIndexBlock)block
+- (instancetype)devideIntoArrayWithSize:(NSUInteger)size
+                      elementIndexBlock:(JFFElementIndexBlock)block
 {
     NSParameterAssert(size > 0);
     NSParameterAssert(block   );
@@ -236,12 +246,12 @@
         return [NSMutableArray new];
     }];
     
-    [self enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSUInteger inserIndex = block(obj);
         [mResult[inserIndex] addObject: obj];
     }];
     
-    NSArray *result = [mResult map: ^id(id object) {
+    NSArray *result = [mResult map:^id(id object) {
         return [object copy];
     }];
     

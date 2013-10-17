@@ -2,6 +2,6 @@
 
 @interface NSString (FileAttributes)
 
--(void)addSkipBackupAttribute;
+- (void)addSkipBackupAttribute;
 
 @end

@@ -2,6 +2,6 @@
 
 @interface NSDictionary (JFFExtendedDictionary)
 
-- (NSDictionary *)dictionaryByAddingObjectsFromDictionary:(NSDictionary *)dictionary;
+- (instancetype)dictionaryByAddingObjectsFromDictionary:(NSDictionary *)dictionary;
 
 @end

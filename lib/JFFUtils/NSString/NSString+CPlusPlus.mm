@@ -17,7 +17,7 @@
     return urlCppString;
 }
 
-+ (id)stringWithStlStringNoCopy:(const std::string&)stlString
++ (instancetype)stringWithStlStringNoCopy:(const std::string&)stlString
 {
     if (stlString.empty()) {
         return nil;

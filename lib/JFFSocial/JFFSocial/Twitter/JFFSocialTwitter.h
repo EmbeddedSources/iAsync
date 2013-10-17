@@ -19,8 +19,4 @@ typedef void(^JFFSocialTwitterDidLoginCallback)(NSString *login);
 
 + (JFFAsyncOperation)sendTweetMessage:(NSString *)message;
 
-#pragma mark callbacks
-
-+ (void)setDidLoginCallback:(JFFSocialTwitterDidLoginCallback)didLoginCallback;
-
 @end

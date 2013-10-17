@@ -5,17 +5,17 @@
 @protocol JFFPageSliderDelegate < NSObject >
 
 @required
--(NSInteger)numberOfElementsInStripeView:( JFFPageSlider* )pageSlider_;
+- (NSInteger)numberOfElementsInStripeView:( JFFPageSlider* )pageSlider_;
 
--(UIView*)stripeView:( JFFPageSlider* )pageSlider_
-      elementAtIndex:( NSInteger )index_;
+- (UIView *)stripeView:(JFFPageSlider *)pageSlider_
+        elementAtIndex:(NSInteger)index_;
 
--(void)pageSlider:( JFFPageSlider* )pageSlider_
-didChangeActiveElementFrom:( NSInteger )previousIndex_
-                        to:( NSInteger )activeIndex_;
+- (void)pageSlider:(JFFPageSlider *)pageSlider
+didChangeActiveElementFrom:(NSInteger)previousIndex
+                        to:(NSInteger)activeIndex;
 
 @optional
--(void)pageSlider:( JFFPageSlider* )pageSlider_
-handleMemoryWarningForElementAtIndex:( NSInteger )element_index_;
+- (void)pageSlider:(JFFPageSlider *)pageSlider
+handleMemoryWarningForElementAtIndex:(NSInteger)element_index_;
 
 @end

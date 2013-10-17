@@ -2,7 +2,7 @@
 
 @implementation JFFAssignProxy
 
-- (id)initWithTarget:(id)target
+- (instancetype)initWithTarget:(id)target
 {
     _target = target;
     
@@ -17,7 +17,7 @@
         [invocation invokeWithTarget:_target];
 }
 
-- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
    return [_target methodSignatureForSelector:selector];
 }

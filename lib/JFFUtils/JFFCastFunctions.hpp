@@ -25,7 +25,7 @@ DESTINATION* objc_kind_of_cast(id nsObject)
 
 
 template < class DESTINATION >
-DESTINATION* objc_member_of_cast( id nsObject )
+DESTINATION* objc_member_of_cast(id nsObject)
 {
     if (nil == nsObject) {
         return nil;

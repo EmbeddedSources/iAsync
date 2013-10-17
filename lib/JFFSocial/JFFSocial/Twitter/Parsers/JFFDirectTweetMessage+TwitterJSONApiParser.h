@@ -2,7 +2,7 @@
 
 @interface JFFDirectTweetMessage (TwitterJSONApiParser)
 
-+ (id)newDirectTweetMessageWithTwitterJSONObject:(NSDictionary *)dict
-                                           error:(NSError **)error;
++ (instancetype)newDirectTweetMessageWithTwitterJSONObject:(NSDictionary *)dict
+                                                     error:(NSError **)error;
 
 @end

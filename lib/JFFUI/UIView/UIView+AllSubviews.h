@@ -2,10 +2,10 @@
 
 @interface UIView (AllSubviews)
 
--(UIView*)findSubviewOfClass:( Class )class_;
+- (instancetype)findSubviewOfClass:(Class)cls;
 
--(void)logAllSubviews;
+- (void)logAllSubviews;
 
--(void)removeAllSubviews;
+- (void)removeAllSubviews;
 
 @end

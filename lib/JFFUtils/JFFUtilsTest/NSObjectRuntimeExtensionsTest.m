@@ -2,8 +2,8 @@
 
 #include <objc/message.h>
 
-static const NSUInteger testClassMethodResult_ = 34;//just rendomize number
-static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
+static const NSUInteger testClassMethodResult_   = 34;//just rendomize number
+static const NSUInteger testInstanceMethodResult = 35;//just rendomize number
 
 @interface NSTestClass : NSObject
 @end
@@ -27,7 +27,7 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
 
 - (NSUInteger)instanceMethodWithLongNameForUniquenessPurposes
 {
-    return testInstanceMethodResult_;
+    return testInstanceMethodResult;
 }
 
 @end
@@ -54,7 +54,7 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
 
 - (NSUInteger)instanceMethodWithLongNameForUniquenessPurposes
 {
-    return testInstanceMethodResult_;
+    return testInstanceMethodResult;
 }
 
 @end
@@ -145,7 +145,7 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
     
     NSTestClass* instance_ = [ NSTestClass new ];
     
-    STAssertEquals( testInstanceMethodResult_
+    STAssertEquals( testInstanceMethodResult
                    , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
                    , @"result mismatch" );
     
@@ -154,7 +154,7 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
                                     prototypeMethodSelector: @selector( prototypeMethod )
                                          hookMethodSelector: @selector( hookMethod ) ];
     
-    STAssertEquals( testInstanceMethodResult_ * 2
+    STAssertEquals( testInstanceMethodResult * 2
                    , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
                    , @"result mismatch" );
 }
@@ -245,26 +245,26 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
 
 -(void)testAddInstanceMethodIfNeedWithSelector
 {
-    static BOOL firstTestRun_ = YES;
+    static BOOL firstTestRun = YES;
     
-    if ( firstTestRun_ )
-    {
-        SEL newMethodSelector_ = @selector( instanceMethodWithLongNameForUniquenessPurposes2 );
-        SEL selector_ = @selector( instanceMethodWithLongNameForUniquenessPurposes );
-        BOOL result_ = [ NSTestClass addInstanceMethodIfNeedWithSelector: selector_
-                                                                 toClass: [ NSTestClass class ]
-                                                       newMethodSelector: newMethodSelector_ ];
+    if (firstTestRun) {
         
-        STAssertTrue( result_, @"method added" );
+        SEL newMethodSelector = @selector(instanceMethodWithLongNameForUniquenessPurposes2);
+        SEL selector = @selector(instanceMethodWithLongNameForUniquenessPurposes);
+        BOOL result = [NSTestClass addInstanceMethodIfNeedWithSelector:selector
+                                                               toClass:[NSTestClass class]
+                                                     newMethodSelector:newMethodSelector];
         
-        STAssertTrue( [ NSTestClass hasInstanceMethodWithSelector: newMethodSelector_ ]
+        STAssertTrue(result, @"method added");
+        
+        STAssertTrue( [ NSTestClass hasInstanceMethodWithSelector:newMethodSelector]
                      , @"NSTestClass has instanceMethodWithLongNameForUniquenessPurposes2 method" );
         
-        NSTestClass* instance_ = [ NSTestClass new ];
-        NSUInteger method_result_ = (NSUInteger)objc_msgSend( instance_, newMethodSelector_ );
-        STAssertTrue( testInstanceMethodResult_ == method_result_, @"check implementation of new method" );
+        NSTestClass *instance = [NSTestClass new];
+        NSUInteger methodResult = (NSUInteger)objc_msgSend(instance, newMethodSelector);
+        STAssertTrue(testInstanceMethodResult == methodResult, @"check implementation of new method" );
         
-        firstTestRun_ = NO;
+        firstTestRun = NO;
     }
 }
 
@@ -277,7 +277,7 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
     
     NSTwiceTestClass* instance_ = [ NSTwiceTestClass new ];
     
-    STAssertEquals( testInstanceMethodResult_
+    STAssertEquals( testInstanceMethodResult
                    , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
                    , @"result mismatch" );
     
@@ -286,16 +286,16 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
                                          prototypeMethodSelector: @selector( twicePrototypeMethod )
                                               hookMethodSelector: @selector( twiceHookMethod ) ];
     
-    STAssertEquals( testInstanceMethodResult_ * 2
+    STAssertEquals( testInstanceMethodResult * 2
                    , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
                    , @"result mismatch" );
     
     STAssertThrows( {
-                       [ [ TwiceHookMethodsClass class ] hookInstanceMethodForClass: [ NSTwiceTestClass class ]
-                                                                       withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
-                                                            prototypeMethodSelector: @selector( twicePrototypeMethod )
-                                                                 hookMethodSelector: @selector( twiceHookMethod ) ];
-                   }, @"twice hook forbidden" );
+        [ [ TwiceHookMethodsClass class ] hookInstanceMethodForClass: [ NSTwiceTestClass class ]
+                                                        withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
+                                             prototypeMethodSelector: @selector( twicePrototypeMethod )
+                                                  hookMethodSelector: @selector( twiceHookMethod ) ];
+    }, @"twice hook forbidden" );
 }
 
 -(void)testTwiceHookClassMethod

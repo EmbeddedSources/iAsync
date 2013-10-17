@@ -22,7 +22,10 @@
 		37497DB21601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB11601D9CF00AF0C29 /* FoursquareCheckinsModel+APIParser.m */; };
 		37497DB51601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB41601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m */; };
 		37497DB81601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37497DB71601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m */; };
+		4C34A5311768840A00162C13 /* JFFTwitterResponseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34A5301768840A00162C13 /* JFFTwitterResponseError.m */; };
+		4C34A5341768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34A5331768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.m */; };
 		4C3F01DE16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3F01DD16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m */; };
+		4C4A3AB5176745ED00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3AB4176745EC00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m */; };
 		4C70273616D683A00078A2F2 /* JFFSocialFacebookUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273516D683A00078A2F2 /* JFFSocialFacebookUser.m */; };
 		4C70273916D684290078A2F2 /* JFFSocialFacebookUser+Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273816D684290078A2F2 /* JFFSocialFacebookUser+Parser.m */; };
 		4C70273C16D6870A0078A2F2 /* JFFAsyncFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C70273B16D6870A0078A2F2 /* JFFAsyncFacebook.m */; };
@@ -34,6 +37,8 @@
 		4C75C74616D3ED3D003B0C43 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C75C74516D3ED3D003B0C43 /* FacebookSDK.framework */; };
 		4C75C74916D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C75C74816D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m */; };
 		4C75C74C16D3F10F003B0C43 /* JFFSocialFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C75C74B16D3F10E003B0C43 /* JFFSocialFacebook.m */; };
+		4CB4FE21177C929E00A45FC0 /* JFFAsyncFacebookLoginWithPublishPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4FE20177C929E00A45FC0 /* JFFAsyncFacebookLoginWithPublishPermissions.m */; };
+		4CB52D6016DF93C9001E64F0 /* JFFAsyncFacebookDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB52D5F16DF93C9001E64F0 /* JFFAsyncFacebookDialog.m */; };
 		4CDFCF7A16DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFCF7916DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m */; };
 		4CFC62B816D61E3800D084F7 /* JFFFacebookSDKErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFC62B716D61E3800D084F7 /* JFFFacebookSDKErrors.m */; };
 		4CFC62BB16D61E7E00D084F7 /* JFFFacebookLoginFailedCanceledError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFC62BA16D61E7E00D084F7 /* JFFFacebookLoginFailedCanceledError.m */; };
@@ -46,7 +51,6 @@
 		CE4F609415F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F609315F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m */; };
 		CE4F609815F8BA5700271035 /* JFFSocialError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F609715F8BA5700271035 /* JFFSocialError.m */; };
 		CE4F620115F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F620015F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m */; };
-		CE4F621015F8F57100271035 /* JFFAsyncTwitterCreateAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F620F15F8F57000271035 /* JFFAsyncTwitterCreateAccount.m */; };
 		CE4F621315F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F621215F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m */; };
 		CE4F623E15F9D34800271035 /* JFFNoTwitterAccountsError.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F623D15F9D34800271035 /* JFFNoTwitterAccountsError.m */; };
 		CE5A033E15F9FE74005CC01A /* JFFTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A033D15F9FE74005CC01A /* JFFTweet.m */; };
@@ -121,34 +125,6 @@
 			remoteGlobalIDString = 7E8F202A14F9484F00588C7D;
 			remoteInfo = JFFSchedulerFW;
 		};
-		CE4F604015F8B56300271035 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = JFFUtils;
-		};
-		CE4F604215F8B56300271035 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 65802A5B148BF2930040A93A;
-			remoteInfo = JFFUtilsMacOS;
-		};
-		CE4F604415F8B56300271035 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5391044314A88C04007315A3;
-			remoteInfo = "JFFUtils-clang";
-		};
-		CE4F604615F8B56300271035 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7E57F42414F93738002D139B;
-			remoteInfo = JFFUtilsFW;
-		};
 		CE5A018015F9EEC4005CC01A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */;
@@ -176,27 +152,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 7E8F204314F9494300588C7D;
 			remoteInfo = JFFNetworkFW;
-		};
-		CEAAC3D7160B41F90058F88A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CE444A1C1608609100DD85B0;
-			remoteInfo = JFFUtilsTest;
-		};
-		CEB2366B15FF6E3A005E5CF5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = JFFUI;
-		};
-		CEB2366D15FF6E3A005E5CF5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 539103F014A88BE1007315A3;
-			remoteInfo = "JFFUI-clang";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -244,8 +199,14 @@
 		37497DB41601DC3800AF0C29 /* NSArray+FqCheckinsAPIParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+FqCheckinsAPIParser.m"; sourceTree = "<group>"; };
 		37497DB61601DD2400AF0C29 /* NSDictionary+FqAPIResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FqAPIResponseParser.h"; sourceTree = "<group>"; };
 		37497DB71601DD2500AF0C29 /* NSDictionary+FqAPIResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FqAPIResponseParser.m"; sourceTree = "<group>"; };
+		4C34A52F1768840A00162C13 /* JFFTwitterResponseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterResponseError.h; sourceTree = "<group>"; };
+		4C34A5301768840A00162C13 /* JFFTwitterResponseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterResponseError.m; sourceTree = "<group>"; };
+		4C34A5321768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterDirectMessageAlreadySentError.h; sourceTree = "<group>"; };
+		4C34A5331768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterDirectMessageAlreadySentError.m; sourceTree = "<group>"; };
 		4C3F01DC16DD0C9D00558DE6 /* JFFFacebookLoginFailedAccessForbidden.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookLoginFailedAccessForbidden.h; sourceTree = "<group>"; };
 		4C3F01DD16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFacebookLoginFailedAccessForbidden.m; sourceTree = "<group>"; };
+		4C4A3AB3176745EB00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFTwitterResponseError+TweetsJSONParser.h"; sourceTree = "<group>"; };
+		4C4A3AB4176745EC00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFFTwitterResponseError+TweetsJSONParser.m"; sourceTree = "<group>"; };
 		4C70273416D683A00078A2F2 /* JFFSocialFacebookUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialFacebookUser.h; sourceTree = "<group>"; };
 		4C70273516D683A00078A2F2 /* JFFSocialFacebookUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialFacebookUser.m; sourceTree = "<group>"; };
 		4C70273716D684290078A2F2 /* JFFSocialFacebookUser+Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFSocialFacebookUser+Parser.h"; sourceTree = "<group>"; };
@@ -267,6 +228,10 @@
 		4C75C74816D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncFacebookLogout.m; sourceTree = "<group>"; };
 		4C75C74A16D3F10E003B0C43 /* JFFSocialFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialFacebook.h; sourceTree = "<group>"; };
 		4C75C74B16D3F10E003B0C43 /* JFFSocialFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialFacebook.m; sourceTree = "<group>"; };
+		4CB4FE1F177C929D00A45FC0 /* JFFAsyncFacebookLoginWithPublishPermissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncFacebookLoginWithPublishPermissions.h; sourceTree = "<group>"; };
+		4CB4FE20177C929E00A45FC0 /* JFFAsyncFacebookLoginWithPublishPermissions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncFacebookLoginWithPublishPermissions.m; sourceTree = "<group>"; };
+		4CB52D5E16DF93C9001E64F0 /* JFFAsyncFacebookDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncFacebookDialog.h; sourceTree = "<group>"; };
+		4CB52D5F16DF93C9001E64F0 /* JFFAsyncFacebookDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncFacebookDialog.m; sourceTree = "<group>"; };
 		4CDFCF7816DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookLoginFailedPasswordWasChanged.h; sourceTree = "<group>"; };
 		4CDFCF7916DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFFacebookLoginFailedPasswordWasChanged.m; sourceTree = "<group>"; };
 		4CFC62B616D61E3800D084F7 /* JFFFacebookSDKErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFFacebookSDKErrors.h; sourceTree = "<group>"; };
@@ -283,7 +248,6 @@
 		CE4F601015F8B2BB00271035 /* JFFSocial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFSocial.h; sourceTree = "<group>"; };
 		CE4F601A15F8B30C00271035 /* JFFSocialTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialTwitter.h; sourceTree = "<group>"; };
 		CE4F601B15F8B30C00271035 /* JFFSocialTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialTwitter.m; sourceTree = "<group>"; };
-		CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
 		CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
 		CE4F602415F8B56300271035 /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
 		CE4F606C15F8B63F00271035 /* JFFSocialAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialAccount.h; sourceTree = "<group>"; };
@@ -296,8 +260,6 @@
 		CE4F609715F8BA5700271035 /* JFFSocialError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialError.m; sourceTree = "<group>"; };
 		CE4F61FF15F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterAccountAccessNotGrantedError.h; sourceTree = "<group>"; };
 		CE4F620015F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterAccountAccessNotGrantedError.m; sourceTree = "<group>"; };
-		CE4F620E15F8F56F00271035 /* JFFAsyncTwitterCreateAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncTwitterCreateAccount.h; sourceTree = "<group>"; };
-		CE4F620F15F8F57000271035 /* JFFAsyncTwitterCreateAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncTwitterCreateAccount.m; sourceTree = "<group>"; };
 		CE4F621115F8F76100271035 /* JFFTwitterAccountCanceledCreationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTwitterAccountCanceledCreationError.h; sourceTree = "<group>"; };
 		CE4F621215F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTwitterAccountCanceledCreationError.m; sourceTree = "<group>"; };
 		CE4F623C15F9D34800271035 /* JFFNoTwitterAccountsError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFNoTwitterAccountsError.h; sourceTree = "<group>"; };
@@ -322,7 +284,6 @@
 		CEAAC3C3160B41F90058F88A /* JFFSocialMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialMediaItem.m; sourceTree = "<group>"; };
 		CEB2350415FF6840005E5CF5 /* JFFSocialInstagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSocialInstagram.h; sourceTree = "<group>"; };
 		CEB2350515FF6840005E5CF5 /* JFFSocialInstagram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSocialInstagram.m; sourceTree = "<group>"; };
-		CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUI.xcodeproj; path = "/Users/user/Sources/paparam.ru/HumanCloud/lib-third-party/iAsync/test/JFFSocialTest/../../lib/JFFUI/JFFUI.xcodeproj"; sourceTree = "<absolute>"; };
 		CEB2367515FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInvalidInstagramResponseURLError.h; sourceTree = "<group>"; };
 		CEB2367615FF7638005E5CF5 /* JFFInvalidInstagramResponseURLError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFInvalidInstagramResponseURLError.m; sourceTree = "<group>"; };
 		CEB2367D15FF7E80005E5CF5 /* JFFInstagramAuthedAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFInstagramAuthedAccount.h; sourceTree = "<group>"; };
@@ -461,6 +422,17 @@
 			path = ParserErrors;
 			sourceTree = "<group>";
 		};
+		4C34A51E1768827600162C13 /* ResponseError */ = {
+			isa = PBXGroup;
+			children = (
+				4C34A52F1768840A00162C13 /* JFFTwitterResponseError.h */,
+				4C34A5301768840A00162C13 /* JFFTwitterResponseError.m */,
+				4C34A5321768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.h */,
+				4C34A5331768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.m */,
+			);
+			path = ResponseError;
+			sourceTree = "<group>";
+		};
 		4C70272216D6837A0078A2F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,12 +483,16 @@
 			children = (
 				4C75C73F16D3EBD0003B0C43 /* JFFAsyncFacebookLogin.h */,
 				4C75C74016D3EBD0003B0C43 /* JFFAsyncFacebookLogin.m */,
+				4CB4FE1F177C929D00A45FC0 /* JFFAsyncFacebookLoginWithPublishPermissions.h */,
+				4CB4FE20177C929E00A45FC0 /* JFFAsyncFacebookLoginWithPublishPermissions.m */,
 				4C75C74216D3EC96003B0C43 /* JFFFacebookPublishAccessRequestAdapter.h */,
 				4C75C74316D3EC96003B0C43 /* JFFFacebookPublishAccessRequestAdapter.m */,
 				4C75C74716D3EEB4003B0C43 /* JFFAsyncFacebookLogout.h */,
 				4C75C74816D3EEB4003B0C43 /* JFFAsyncFacebookLogout.m */,
 				4C70273A16D6870A0078A2F2 /* JFFAsyncFacebook.h */,
 				4C70273B16D6870A0078A2F2 /* JFFAsyncFacebook.m */,
+				4CB52D5E16DF93C9001E64F0 /* JFFAsyncFacebookDialog.h */,
+				4CB52D5F16DF93C9001E64F0 /* JFFAsyncFacebookDialog.m */,
 			);
 			path = AsyncAdapters;
 			sourceTree = "<group>";
@@ -581,11 +557,11 @@
 				CEB234F315FF67EC005E5CF5 /* Instagram */,
 				37063AA015FA3E0C00B4B059 /* Foursquare */,
 				CE4F609515F8BA4300271035 /* Errors */,
-				CE4F601015F8B2BB00271035 /* JFFSocial.h */,
 				CE4F606C15F8B63F00271035 /* JFFSocialAccount.h */,
 				CE4F606D15F8B63F00271035 /* JFFSocialAccount.m */,
 				CEAAC3C2160B41F90058F88A /* JFFSocialMediaItem.h */,
 				CEAAC3C3160B41F90058F88A /* JFFSocialMediaItem.m */,
+				CE4F601015F8B2BB00271035 /* JFFSocial.h */,
 				CE4F600E15F8B2BB00271035 /* Supporting Files */,
 			);
 			path = JFFSocial;
@@ -615,25 +591,11 @@
 		CE4F601D15F8B55300271035 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */,
 				CE5A017515F9EEC4005CC01A /* JFFNetwork.xcodeproj */,
-				CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */,
 				CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */,
 				CE4F602415F8B56300271035 /* JFFAsyncOperations.xcodeproj */,
 			);
 			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		CE4F601F15F8B56300271035 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CE4F604115F8B56300271035 /* libJFFUtils.a */,
-				CE4F604315F8B56300271035 /* libJFFUtilsMacOS.a */,
-				CE4F604515F8B56300271035 /* libJFFUtils-clang.a */,
-				CE4F604715F8B56300271035 /* JFFUtilsFW.framework */,
-				CEAAC3D8160B41F90058F88A /* JFFUtilsTest.octest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		CE4F602215F8B56300271035 /* Products */ = {
@@ -664,8 +626,6 @@
 				CE4F609015F8B85300271035 /* JFFAsyncTwitterRequest.m */,
 				CE4F609215F8B87B00271035 /* JFFAsyncTwitterAccessRequest.h */,
 				CE4F609315F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m */,
-				CE4F620E15F8F56F00271035 /* JFFAsyncTwitterCreateAccount.h */,
-				CE4F620F15F8F57000271035 /* JFFAsyncTwitterCreateAccount.m */,
 			);
 			path = AsyncAdapters;
 			sourceTree = "<group>";
@@ -673,6 +633,8 @@
 		CE4F604915F8B5DC00271035 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				4C4A3AB3176745EB00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.h */,
+				4C4A3AB4176745EC00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m */,
 				CE5A034215F9FFEF005CC01A /* NSArray+TweetsJSONParser.h */,
 				CE5A034315F9FFEF005CC01A /* NSArray+TweetsJSONParser.m */,
 				CE5A034515FA0187005CC01A /* JFFTwitterAccount+TwitterJSONApiParser.h */,
@@ -699,6 +661,7 @@
 		CE4F609915F8BB0B00271035 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				4C34A51E1768827600162C13 /* ResponseError */,
 				CE4F61FF15F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.h */,
 				CE4F620015F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m */,
 				CE4F621115F8F76100271035 /* JFFTwitterAccountCanceledCreationError.h */,
@@ -745,15 +708,6 @@
 				CEB237F11600C8E8005E5CF5 /* JFFInstagramCredentials.m */,
 			);
 			path = Instagram;
-			sourceTree = "<group>";
-		};
-		CEB2365C15FF6E39005E5CF5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CEB2366C15FF6E3A005E5CF5 /* libJFFUI.a */,
-				CEB2366E15FF6E3A005E5CF5 /* libJFFUI copy.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		CEB2367415FF760F005E5CF5 /* Errors */ = {
@@ -836,7 +790,7 @@
 		CE4F5FFF15F8B2BB00271035 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = EmbeddedSources;
 			};
 			buildConfigurationList = CE4F600215F8B2BB00271035 /* Build configuration list for PBXProject "JFFSocial" */;
@@ -861,14 +815,6 @@
 				{
 					ProductGroup = CE4F602215F8B56300271035 /* Products */;
 					ProjectRef = CE4F602115F8B56300271035 /* JFFScheduler.xcodeproj */;
-				},
-				{
-					ProductGroup = CEB2365C15FF6E39005E5CF5 /* Products */;
-					ProjectRef = CEB2365B15FF6E39005E5CF5 /* JFFUI.xcodeproj */;
-				},
-				{
-					ProductGroup = CE4F601F15F8B56300271035 /* Products */;
-					ProjectRef = CE4F601E15F8B56300271035 /* JFFUtils.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -929,34 +875,6 @@
 			remoteRef = CE4F603A15F8B56300271035 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CE4F604115F8B56300271035 /* libJFFUtils.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libJFFUtils.a;
-			remoteRef = CE4F604015F8B56300271035 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CE4F604315F8B56300271035 /* libJFFUtilsMacOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libJFFUtilsMacOS.a;
-			remoteRef = CE4F604215F8B56300271035 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CE4F604515F8B56300271035 /* libJFFUtils-clang.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libJFFUtils-clang.a";
-			remoteRef = CE4F604415F8B56300271035 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CE4F604715F8B56300271035 /* JFFUtilsFW.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework.static;
-			path = JFFUtilsFW.framework;
-			remoteRef = CE4F604615F8B56300271035 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		CE5A018115F9EEC4005CC01A /* libJFFNetwork.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -985,28 +903,6 @@
 			remoteRef = CE5A018615F9EEC4005CC01A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CEAAC3D8160B41F90058F88A /* JFFUtilsTest.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = JFFUtilsTest.octest;
-			remoteRef = CEAAC3D7160B41F90058F88A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CEB2366C15FF6E3A005E5CF5 /* libJFFUI.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libJFFUI.a;
-			remoteRef = CEB2366B15FF6E3A005E5CF5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CEB2366E15FF6E3A005E5CF5 /* libJFFUI copy.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			name = "libJFFUI copy.a";
-			path = "libJFFUI-clang.a";
-			remoteRef = CEB2366D15FF6E3A005E5CF5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1020,7 +916,6 @@
 				CE4F609415F8B87B00271035 /* JFFAsyncTwitterAccessRequest.m in Sources */,
 				CE4F609815F8BA5700271035 /* JFFSocialError.m in Sources */,
 				CE4F620115F8F0D000271035 /* JFFTwitterAccountAccessNotGrantedError.m in Sources */,
-				CE4F621015F8F57100271035 /* JFFAsyncTwitterCreateAccount.m in Sources */,
 				CE4F621315F8F76100271035 /* JFFTwitterAccountCanceledCreationError.m in Sources */,
 				CE4F623E15F9D34800271035 /* JFFNoTwitterAccountsError.m in Sources */,
 				CE5A033E15F9FE74005CC01A /* JFFTweet.m in Sources */,
@@ -1073,6 +968,11 @@
 				4C70273C16D6870A0078A2F2 /* JFFAsyncFacebook.m in Sources */,
 				4C3F01DE16DD0C9E00558DE6 /* JFFFacebookLoginFailedAccessForbidden.m in Sources */,
 				4CDFCF7A16DD15BF00E978E0 /* JFFFacebookLoginFailedPasswordWasChanged.m in Sources */,
+				4CB52D6016DF93C9001E64F0 /* JFFAsyncFacebookDialog.m in Sources */,
+				4C4A3AB5176745ED00C158B0 /* JFFTwitterResponseError+TweetsJSONParser.m in Sources */,
+				4C34A5311768840A00162C13 /* JFFTwitterResponseError.m in Sources */,
+				4C34A5341768842600162C13 /* JFFTwitterDirectMessageAlreadySentError.m in Sources */,
+				4CB4FE21177C929E00A45FC0 /* JFFAsyncFacebookLoginWithPublishPermissions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1090,15 +990,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1106,16 +1007,20 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../,
 					.,
 					../JFFJsonTools,
+					../JFFRestKit,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1124,25 +1029,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../,
 					.,
 					../JFFJsonTools,
+					../JFFRestKit,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1158,6 +1068,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFSocial/JFFSocial-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1174,6 +1085,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFSocial/JFFSocial-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

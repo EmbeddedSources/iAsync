@@ -4,7 +4,7 @@
 
 @interface JFFProxyDelegatesDispatcher : NSObject
 
-+ (id)newProxyDelegatesDispatcherWithRealDelegate:(id)realDelegate
-                                        delegates:(JFFMutableAssignArray *)delegates;
++ (instancetype)newProxyDelegatesDispatcherWithRealDelegate:(id)realDelegate
+                                                  delegates:(JFFMutableAssignArray *)delegates;
 
 @end

@@ -2,21 +2,47 @@
 
 #import "NSArray+BlocksAdditions.h"
 
+@implementation NSMutableSet (BlocksAdditions)
+
++ (instancetype)converToCurrentTypeMutableSet:(NSMutableSet *)set
+{
+    return set;
+}
+
+@end
+
 @implementation NSSet (BlocksAdditions)
 
-- (NSSet *)map:(JFFMappingBlock)block
++ (instancetype)converToCurrentTypeMutableSet:(NSMutableSet *)set
+{
+    return [set copy];
+}
+
++ (instancetype)setWithSize:(NSUInteger)size
+                   producer:(JFFProducerBlock)block
+{
+    NSMutableSet *result = [[NSMutableSet alloc] initWithCapacity:size];
+    
+    for (NSUInteger index = 0; index < size; ++index) {
+        [result addObject:block(index)];
+    }
+    
+    return [self converToCurrentTypeMutableSet:result];
+}
+
+- (instancetype)map:(JFFMappingBlock)block
 {
     NSArray *arrray = [[self allObjects] map:block];
     return [NSSet setWithArray:arrray];
 }
 
-- (NSSet *)forceMap:(JFFMappingBlock)block
+- (instancetype)forceMap:(JFFMappingBlock)block
 {
     NSArray *arrray = [[self allObjects] forceMap:block];
     return [NSSet setWithArray:arrray];
 }
 
-- (NSSet *)select:(JFFPredicateBlock)predicate
+- (instancetype)select:(JFFPredicateBlock)predicate
 {
     return [self objectsPassingTest:^BOOL(id obj, BOOL *stop) {
         return predicate(obj);

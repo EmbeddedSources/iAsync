@@ -118,11 +118,11 @@ static const NSUInteger RIPagingDisabled         = 0;
 
     static const NSUInteger loadMorePlaceholderSize_ = 1;
     NSUInteger restOfTheItems_ = self.totalElementsCount - self.currentCount;
-
+    
     float items_count_for_index_path_ = 1 + index_;
-    NSUInteger pages_expected_ = ceil( items_count_for_index_path_ / self.pageSize );
+    NSUInteger pages_expected_ = ceilf( items_count_for_index_path_ / self.pageSize );
     NSUInteger elements_expected_ = pages_expected_ * self.pageSize;
-
+    
     //check if paging disabled
     BOOL isOverflow_ = ( elements_expected_ >= self.totalElementsCount );
     if ( isOverflow_ )
@@ -172,9 +172,9 @@ static const NSUInteger RIPagingDisabled         = 0;
 }
 
 
--(void)insertToTableView:( id<JUTableViewHolder> )tableViewHolder_
-             bottomCells:(NSUInteger)cells_count_
-         overflowOccured:( BOOL )is_overflow_
+- (void)insertToTableView:(id<JUTableViewHolder>)tableViewHolder
+              bottomCells:(NSUInteger)cells_count_
+          overflowOccured:(BOOL)is_overflow_
 {
     NSDebugLog( @"[BEGIN] : insertToBottomCells" ); 
     if ( 0 == cells_count_ )
@@ -184,32 +184,30 @@ static const NSUInteger RIPagingDisabled         = 0;
         return;
     }
    
-    NSArray* index_paths_ = [ self prepareIndexPathEntriesForBottomCells: cells_count_ ];
+    NSArray* indexPaths = [ self prepareIndexPathEntriesForBottomCells: cells_count_ ];
    
     NSDebugLog( @"index_path_[%d] : %@ .. %@", [ index_paths_ count ], index_paths_[ 0 ], [ index_paths_ lastObject ] );
     NSDebugLog( @"page size : %d", [ self pageSize ] );
 
-    [ tableViewHolder_.tableView withinUpdates: ^void( void )
+    [ tableViewHolder.tableView withinUpdates: ^void( void )
     {
         NSDebugLog( @"beginUpdates" );      
-        NSArray* load_more_path_array_ = @[ self.loadMoreIndexPath ];
-
-        [ [ tableViewHolder_ tableView ] reloadRowsAtIndexPaths: load_more_path_array_
-                                                 withRowAnimation: UITableViewRowAnimationNone ];
-
-
-        [ [ tableViewHolder_ tableView ] insertRowsAtIndexPaths: index_paths_ 
-                                                 withRowAnimation: UITableViewRowAnimationNone ];
-
-
+        NSArray* loadMorePathArray = @[ self.loadMoreIndexPath ];
+        
+        [[tableViewHolder tableView] reloadRowsAtIndexPaths:loadMorePathArray
+                                            withRowAnimation:UITableViewRowAnimationNone];
+        
+        [[tableViewHolder tableView] insertRowsAtIndexPaths:indexPaths
+                                            withRowAnimation:UITableViewRowAnimationNone];
+        
         NSDebugLog( @"Updating currentCount..." );
         self.currentCount += cells_count_;
         if ( is_overflow_ && ( self.currentCount < self.totalElementsCount ) )
         {
             ++self.currentCount;
         }
-        [ tableViewHolder_ setCurrentCount: self.currentCount ];
-
+        [tableViewHolder setCurrentCount:self.currentCount];
+        
         NSDebugLog( @"currentCount : %d", self.currentCount );
         NSDebugLog( @"endUpdates" );
     } ];

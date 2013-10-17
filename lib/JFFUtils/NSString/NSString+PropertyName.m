@@ -5,12 +5,12 @@ static NSString *const setterSuffix  = @":";
 
 @implementation NSString (PropertyName)
 
--(id)propertyGetNameFromPropertyName
+- (instancetype)propertyGetNameFromPropertyName
 {
     NSUInteger stringLength = [self length];
     if (stringLength <= 4
-        || [self characterAtIndex:stringLength - 1] != ':'
-        || ![self hasPrefix:setterPreffix] )
+        || ![self hasSuffix:setterSuffix]
+        || ![self hasPrefix:setterPreffix])
         return nil;
     
     NSRange range1 = {3, 1};
@@ -21,9 +21,9 @@ static NSString *const setterSuffix  = @":";
     return [[namePart1 lowercaseString] stringByAppendingString:namePart2];
 }
 
--(id)propertySetNameForPropertyName
+- (instancetype)propertySetNameForPropertyName
 {
-    if ([self hasSuffix: setterSuffix])
+    if ([self hasSuffix:setterSuffix])
         return nil;
     
     NSUInteger stringLength = [self length];

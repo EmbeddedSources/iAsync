@@ -4,7 +4,7 @@
 
 @implementation NSArray (ExpandArray)
 
-- (id)expandArray
+- (instancetype)expandArray
 {
     NSMutableArray *result = [NSMutableArray new];
     for (id object in self) {

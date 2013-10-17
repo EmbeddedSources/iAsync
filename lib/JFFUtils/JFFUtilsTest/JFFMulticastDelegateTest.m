@@ -3,7 +3,7 @@
 @protocol TestMulticastDelegateInterface < NSObject >
 
 @required
--(NSUInteger)justReturnFiveNumber;
+- (NSUInteger)justReturnFiveNumber;
 
 @end
 
@@ -17,7 +17,7 @@
 
 @synthesize initialState;
 
--(NSUInteger)justReturnFiveNumber
+- (NSUInteger)justReturnFiveNumber
 {
     return self.initialState++;
 }
@@ -26,7 +26,7 @@
 
 @implementation JFFMulticastDelegateTest
 
--(void)testMutableAssignArrayAssignIssue
+- (void)testMutableAssignArrayAssignIssue
 {
     __block BOOL delegateDeallocated = NO;
     
@@ -51,7 +51,7 @@
     STAssertTrue( 0 == [ multicast justReturnFiveNumber ], @"Empty array" );
 }
 
--(void)testMulticastDelegateFirstRelease
+- (void)testMulticastDelegateFirstRelease
 {
     __block BOOL multicast_deallocated_ = NO;
     {
@@ -69,7 +69,7 @@
     STAssertTrue( multicast_deallocated_, @"Target should be dealloced" );
 }
 
--(void)testAddDelegateTwice
+- (void)testAddDelegateTwice
 {
     JFFMulticastDelegate< TestMulticastDelegateInterface > *multicast =
     (JFFMulticastDelegate< TestMulticastDelegateInterface >*)[JFFMulticastDelegate new];

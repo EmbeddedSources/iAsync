@@ -1,10 +1,19 @@
+#import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
+
 #import <UIKit/UIView.h>
+
+typedef void(^JFFCompletionBlock)(BOOL finished);
 
 @interface UIView (AnimationWithBlocks)
 
-+(void)animateWithAnimations:( void (^)( void ) )animations_;
+//TODO add header for JFFSimpleBlocks
++ (void)animateWithAnimations:(JFFSimpleBlock)animations;
 
-+(void)animateWithOptions:( UIViewAnimationOptions )options_
-               animations:( void (^)( void ) )animations_;
++ (void)animateWithOptions:(UIViewAnimationOptions )options
+                animations:(JFFSimpleBlock)animations;
+
++ (void)animateWithOptions:(UIViewAnimationOptions )options
+                animations:(JFFSimpleBlock)animations
+                completion:(JFFCompletionBlock)completion;
 
 @end

@@ -2,8 +2,8 @@
 
 @interface NSObject (InstancesCount)
 
-+(void)enableInstancesCounting;
++ (void)enableInstancesCounting;
 
-+(NSUInteger)instancesCount;
++ (NSUInteger)instancesCount;
 
 @end

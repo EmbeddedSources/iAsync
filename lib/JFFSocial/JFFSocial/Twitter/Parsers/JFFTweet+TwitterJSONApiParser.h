@@ -2,7 +2,7 @@
 
 @interface JFFTweet (TwitterJSONApiParser)
 
-+ (id)newTweetWithTwitterJSONApiDictionary:(NSDictionary *)dict
-                                     error:(NSError **)error;
++ (instancetype)newTweetWithTwitterJSONApiDictionary:(NSDictionary *)dict
+                                               error:(NSError **)error;
 
 @end

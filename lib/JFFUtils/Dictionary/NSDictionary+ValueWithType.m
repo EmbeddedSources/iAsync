@@ -123,7 +123,7 @@
 
 #pragma mark - Dict vlue for key
 
-- (NSDictionary *)dictionaryForKey:(NSString *)key
+- (instancetype)dictionaryForKey:(NSString *)key
 {
     id value = self[key];
     

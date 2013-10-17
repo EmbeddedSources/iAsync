@@ -11,7 +11,10 @@
 - (void)addObject:(id)object;
 - (BOOL)containsObject:(id)object;
 - (void)removeObject:(id)object;
+- (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)removeAllObjects;
+
+- (NSUInteger)indexOfObject:(id)object;
 
 - (NSUInteger)count;
 
