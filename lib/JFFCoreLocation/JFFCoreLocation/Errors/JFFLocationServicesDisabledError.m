@@ -2,7 +2,7 @@
 
 @implementation JFFLocationServicesDisabledError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"JFF_LOCALIZATION_SERVICE_NOT_ENABLED", nil)];
 }

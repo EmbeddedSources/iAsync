@@ -2,12 +2,12 @@
 
 @implementation JFFParseJsonError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"PARSE_JSON_ERROR", nil)];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFParseJsonError *copy = [super copyWithZone:zone];
     
@@ -20,9 +20,12 @@
     return copy;
 }
 
-- (void)writeErrorWithJFFLogger
+- (NSString *)errorLogDescription
 {
-    [JFFLogger logErrorWithFormat:@"%@ context: %@ data: %@", [self localizedDescription], _context, [_data toString]];
+    return [[NSString alloc] initWithFormat:@"%@ context: %@ data: %@",
+            [self localizedDescription],
+            _context,
+            [_data toString]];
 }
 
 @end

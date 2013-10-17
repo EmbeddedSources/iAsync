@@ -30,7 +30,7 @@ JFFAsyncOperationInterface
     CLGeocoder *_geocoder;
 }
 
-- (id)initWithLocation:(CLLocation *)location
+- (instancetype)initWithLocation:(CLLocation *)location
 {
     NSParameterAssert(location);
     
@@ -43,7 +43,7 @@ JFFAsyncOperationInterface
     return self;
 }
 
-+ (id)newPlacemarksAsyncAdapterWithLocation:(CLLocation *)location
++ (instancetype)newPlacemarksAsyncAdapterWithLocation:(CLLocation *)location
 {
     return [[self alloc] initWithLocation:location];
 }
@@ -76,7 +76,7 @@ JFFAsyncOperationInterface
 
 + (JFFAsyncOperation)placemarksLoaderForCurrentLocationWithAccuracy:(CLLocationAccuracy)accuracy
 {
-    NSParameterAssert(accuracy == kCLLocationAccuracyHundredMeters);
+    NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     
     JFFAsyncOperation locationLoader = [JFFLocationLoader locationLoaderWithAccuracy:accuracy];
     
@@ -88,7 +88,7 @@ JFFAsyncOperationInterface
 
 + (JFFAsyncOperation)placemarkLoaderForCurrentLocationWithAccuracy:(CLLocationAccuracy)accuracy
 {
-    NSParameterAssert(accuracy == kCLLocationAccuracyHundredMeters);
+    NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     
     JFFAsyncOperation locationLoader = [JFFLocationLoader locationLoaderWithAccuracy:accuracy];
     
@@ -110,7 +110,6 @@ JFFAsyncOperationInterface
     id key = @{
     @"location" : [location uniqueLocationIdentificator],
     @"method"   : NSStringFromSelector(_cmd),
-    @"class"    : [self description],
     };
     return [self asyncOperationMergeLoaders:loader withArgument:key];
 }

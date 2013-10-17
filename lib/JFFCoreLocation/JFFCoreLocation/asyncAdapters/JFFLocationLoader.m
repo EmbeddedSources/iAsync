@@ -22,7 +22,7 @@ JFFLocationObserver
     JFFScheduler *_scheduler;
 }
 
-- (id)initWithAccuracy:(CLLocationAccuracy)accuracy
+- (instancetype)initWithAccuracy:(CLLocationAccuracy)accuracy
 {
     self = [super init];
     
@@ -33,7 +33,7 @@ JFFLocationObserver
     return self;
 }
 
-+ (id)newCoreLocationAsyncAdapterWithAccuracy:(double)accuracyInMeters
++ (instancetype)newCoreLocationAsyncAdapterWithAccuracy:(double)accuracyInMeters
 {
     return [[self alloc] initWithAccuracy:accuracyInMeters];
 }
@@ -71,7 +71,7 @@ JFFLocationObserver
         cancel();
         
         [weakSelf onSchedulerWithHandler:handler];
-    } duration:1.];
+    } duration:3. leeway:.5];
 }
 
 - (void)onSchedulerWithHandler:(JFFAsyncOperationInterfaceResultHandler)handler
@@ -108,8 +108,8 @@ JFFLocationObserver
     if (!location)
         return NO;
     
-    if (location.horizontalAccuracy <= 200.
-        && location.verticalAccuracy <= 200.) {
+    if (location.horizontalAccuracy <= 2000.
+        && location.verticalAccuracy <= 2000.) {
         
         [self forceProcessLocation:location];
         return YES;
@@ -131,7 +131,7 @@ JFFLocationObserver
 
 + (JFFAsyncOperation)locationLoaderWithAccuracy:(CLLocationAccuracy)accuracy
 {
-    NSParameterAssert(accuracy == kCLLocationAccuracyHundredMeters);
+    NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         return [JFFCoreLocationAsyncAdapter newCoreLocationAsyncAdapterWithAccuracy:accuracy];
@@ -141,7 +141,6 @@ JFFLocationObserver
     id key = @{
     @"accuracy" : @(accuracy),
     @"method"   : NSStringFromSelector(_cmd),
-    @"class"    : [self description],
     };
     return [self asyncOperationMergeLoaders:loader withArgument:key];
 }

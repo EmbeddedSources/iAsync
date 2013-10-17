@@ -2,7 +2,7 @@
 
 @interface NSString (CacheFSManager)
 
-- (NSString *)cacheDBFileLinkPathWithFolder:(NSString *)folder;
+- (instancetype)cacheDBFileLinkPathWithFolder:(NSString *)folder;
 
 - (void)cacheDBFileLinkRemoveFileWithFolder:(NSString *)folder;
 

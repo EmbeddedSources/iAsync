@@ -9,8 +9,16 @@
 {
     NSArray *asyncOperations = [self map:^id(id object) {
         return block(object);
-    } ];
+    }];
     return failOnFirstErrorGroupOfAsyncOperationsArray(asyncOperations);
+}
+
+- (JFFAsyncOperation)asyncWaitAllMap:(JFFAsyncOperationBinder)block
+{
+    NSArray *asyncOperations = [self map:^id(id object) {
+        return block(object);
+    }];
+    return groupOfAsyncOperationsArray(asyncOperations);
 }
 
 - (JFFAsyncOperation)tolerantFaultAsyncMap:(JFFAsyncOperationBinder)block
@@ -20,12 +28,10 @@
     NSArray *asyncOperations = [self map:^id(id object) {
         
         JFFAsyncOperation loader = block(object);
-        JFFDidFinishAsyncOperationHandler finishCallbackBlock = ^void(id localResult, NSError *error)
-        {
+        JFFDidFinishAsyncOperationHandler finishCallbackBlock = ^void(id localResult, NSError *error) {
+            
             if (localResult)
-            {
                 [result addObject:localResult];
-            }
         };
         return asyncOperationWithFinishCallbackBlock(loader, finishCallbackBlock);
     }];

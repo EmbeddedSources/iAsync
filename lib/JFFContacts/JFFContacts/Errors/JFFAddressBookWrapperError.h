@@ -4,6 +4,6 @@
 
 @property (nonatomic) NSError *nativeError;
 
-+ (id)newAddressBookWrapperErrorWithNativeError:(NSError *)nativeError;
++ (instancetype)newAddressBookWrapperErrorWithNativeError:(NSError *)nativeError;
 
 @end

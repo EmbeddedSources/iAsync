@@ -2,7 +2,7 @@
 
 @implementation NSString (CacheFSManager)
 
-- (NSString *)cacheDBFileLinkPathWithFolder:(NSString *)folder
+- (instancetype)cacheDBFileLinkPathWithFolder:(NSString *)folder
 {
     NSString *result = [folder stringByAppendingPathComponent:self];
     return result;

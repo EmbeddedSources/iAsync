@@ -15,7 +15,7 @@ static char resultOwnershipsKey;
 - (NSMutableArray *)lazyResultOwnerships
 {
     if (!objc_getAssociatedObject(self, &resultOwnershipsKey)) {
-        self.resultOwnerships = [ NSMutableArray new ];
+        self.resultOwnerships = [NSMutableArray new];
     }
     return objc_getAssociatedObject(self, &resultOwnershipsKey);
 }

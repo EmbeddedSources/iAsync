@@ -6,6 +6,8 @@
 
 - (JFFAsyncOperation)asyncMap:(JFFAsyncOperationBinder)block;
 
+- (JFFAsyncOperation)asyncWaitAllMap:(JFFAsyncOperationBinder)block;
+
 - (JFFAsyncOperation)tolerantFaultAsyncMap:(JFFAsyncOperationBinder)block;
 
 @end

@@ -1,9 +1,9 @@
 #import <Foundation/Foundation.h>
 
-@interface JFFDBCompositeKey : NSObject 
+@interface JFFDBCompositeKey : NSObject <NSCopying>
 
-+ (id)compositeKeyWithKeys:(NSString *)key, ...;
-+ (id)compositeKeyWithKey:(JFFDBCompositeKey *)compositeKey forIndexes:(NSIndexSet *)indexes;
++ (instancetype)compositeKeyWithKeys:(NSString *)key, ... NS_REQUIRES_NIL_TERMINATION;
++ (instancetype)compositeKeyWithKey:(JFFDBCompositeKey *)compositeKey forIndexes:(NSIndexSet *)indexes;
 
 - (NSString *)toCompositeKey;
 
