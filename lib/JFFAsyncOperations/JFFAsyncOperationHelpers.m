@@ -381,12 +381,11 @@ JFFAsyncOperation asyncOperationWithResultOrError(JFFAsyncOperation loader,
     });
 }
 
-JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay, NSTimeInterval leeway)
+JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay)
 {
     JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
         JFFAsyncOperationScheduler *asyncObject = [JFFAsyncOperationScheduler new];
         asyncObject->_duration = delay;
-        asyncObject->_leeway   = leeway;
         return asyncObject;
     };
     return buildAsyncOperationWithAdapterFactory(factory);
