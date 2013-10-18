@@ -1237,7 +1237,6 @@
 		65802B30148BFC230040A93A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1257,7 +1256,6 @@
 		65802B31148BFC230040A93A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1334,6 +1332,7 @@
 					"../../../davedelong-Demos/",
 				);
 				LLVM_VECTORIZE_LOOPS = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				USER_HEADER_SEARCH_PATHS = ../;
 			};
 			name = Debug;
@@ -1363,7 +1362,6 @@
 		8D5AE6E913F3E6C700EB6143 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/JFFNetwork.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFNetwork/JFFNetwork-Prefix.pch";
@@ -1378,7 +1376,6 @@
 		8D5AE6EA13F3E6C700EB6143 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/JFFNetwork.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFNetwork/JFFNetwork-Prefix.pch";
