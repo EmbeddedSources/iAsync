@@ -1,6 +1,5 @@
 #import "JFFNetworkBlocksFunctions.h"
 
-#import "JHttpError.h"
 #import "JNUrlResponse.h"
 #import "JHttpFlagChecker.h"
 #import "JFFURLConnectionParams.h"
@@ -8,16 +7,20 @@
 
 #import "JFFNetworkResponseDataCallback.h"
 
+//Errors
+#import "JHttpError.h"
+#import "JNSNetworkError.h"
+
 #import "NSURL+Cookies.h"
 
-static JFFAnalyzer downloadErrorFlagResponseAnalyzer(id<NSCopying> context)
+static JFFAnalyzer downloadStatusCodeResponseAnalyzer(id<NSCopying> context)
 {
     return ^id(id< JNUrlResponse > response, NSError **outError) {
         NSInteger statusCode = [response statusCode];
         
         if ([JHttpFlagChecker isDownloadErrorFlag:statusCode]) {
             if (outError) {
-                JHttpError *httpError = [[JHttpError alloc]initWithHttpCode:statusCode];
+                JHttpError *httpError = [[JHttpError alloc] initWithHttpCode:statusCode];
                 httpError.context = context;
                 *outError = httpError;
             }
@@ -25,6 +28,20 @@ static JFFAnalyzer downloadErrorFlagResponseAnalyzer(id<NSCopying> context)
         }
         
         return response;
+    };
+}
+
+static JFFNetworkErrorTransformer networkErrorAnalyzer(id<NSCopying> context)
+{
+    return ^NSError *(NSError *error) {
+
+        if ([error isKindOfClass:[JNetworkError class]])
+            return error;
+        
+        JNSNetworkError *resultError = [JNSNetworkError newJNSNetworkErrorWithContext:context
+                                                                          nativeError:error];
+        
+        return resultError;
     };
 }
 
@@ -37,6 +54,7 @@ static JFFAsyncOperation privateGenericChunkedURLResponseLoader(JFFURLConnection
         JFFNetworkAsyncOperation *asyncObj = [JFFNetworkAsyncOperation new];
         asyncObj.params           = params;
         asyncObj.responseAnalyzer = responseAnalyzer;
+        asyncObj.errorTransformer = networkErrorAnalyzer(params);
         return asyncObj;
     };
     
@@ -45,13 +63,13 @@ static JFFAsyncOperation privateGenericChunkedURLResponseLoader(JFFURLConnection
 
 JFFAsyncOperation genericChunkedURLResponseLoader(JFFURLConnectionParams* params)
 {
-    return privateGenericChunkedURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params));
+    return privateGenericChunkedURLResponseLoader(params, downloadStatusCodeResponseAnalyzer(params));
 }
 
 static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionParams *params,
                                                              JFFAnalyzer responseAnalyzer)
 {
-    assert([params.url isKindOfClass:[NSURL class]]);
+    NSCParameterAssert([params.url isKindOfClass:[NSURL class]]);
     params = [params copy];
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
@@ -90,7 +108,7 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
 
 JFFAsyncOperation genericDataURLResponseLoader(JFFURLConnectionParams *params)
 {
-    return privateGenericDataURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params) );
+    return privateGenericDataURLResponseLoader(params, downloadStatusCodeResponseAnalyzer(params) );
 }
 
 #pragma mark -
@@ -105,7 +123,7 @@ JFFAsyncOperation chunkedURLResponseLoader(
     params.url      = url;
     params.httpBody = postData;
     params.headers  = headers;
-    return privateGenericChunkedURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params));
+    return privateGenericChunkedURLResponseLoader(params, downloadStatusCodeResponseAnalyzer(params));
 }
 
 JFFAsyncOperation dataURLResponseLoader(NSURL *url,
@@ -116,7 +134,7 @@ JFFAsyncOperation dataURLResponseLoader(NSURL *url,
     params.url      = url;
     params.httpBody = postData;
     params.headers  = headers;
-    return privateGenericDataURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params));
+    return privateGenericDataURLResponseLoader(params, downloadStatusCodeResponseAnalyzer(params));
 }
 
 JFFAsyncOperation liveChunkedURLResponseLoader(NSURL *url,
@@ -128,7 +146,7 @@ JFFAsyncOperation liveChunkedURLResponseLoader(NSURL *url,
     params.httpBody = postData;
     params.headers  = headers;
     params.useLiveConnection = YES;
-    return privateGenericChunkedURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params));
+    return privateGenericChunkedURLResponseLoader(params, downloadStatusCodeResponseAnalyzer(params));
 }
 
 JFFAsyncOperation liveDataURLResponseLoader(NSURL* url,
@@ -140,7 +158,7 @@ JFFAsyncOperation liveDataURLResponseLoader(NSURL* url,
     params.httpBody = postData;
     params.headers  = headers;
     params.useLiveConnection = YES;
-    return privateGenericDataURLResponseLoader(params, downloadErrorFlagResponseAnalyzer(params));
+    return privateGenericDataURLResponseLoader(params, downloadStatusCodeResponseAnalyzer(params));
 }
 
 JFFAsyncOperation perkyDataURLResponseLoader(NSURL *url,

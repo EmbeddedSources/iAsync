@@ -10,7 +10,6 @@ typedef NSInputStream *(^JFFInputStreamBuilder)(void);
 
 @property (nonatomic) NSURL         *url;
 @property (nonatomic) NSData        *httpBody;
-@property (nonatomic, strong) NSInputStream *httpBodyStream;//TODO remove this property and use "httpBodyStreamBuilder" instead of
 @property (nonatomic) NSString      *httpMethod;
 @property (nonatomic) NSDictionary  *headers;
 @property (nonatomic) BOOL           useLiveConnection;

@@ -28,23 +28,22 @@
     _connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
     
     __unsafe_unretained JFFNetworkAsyncOperation *unretainedSelf = self;
-    id< JNUrlConnection > connection = self.connection;
-    
+    id<JNUrlConnection> connection = self.connection;
     
     progress = [progress copy];
-    self.connection.didReceiveDataBlock = ^(NSData *dataChunk) {
+    _connection.didReceiveDataBlock = ^(NSData *dataChunk) {
         
         JFFNetworkResponseDataCallback *progressData = [JFFNetworkResponseDataCallback new];
         {
             progressData.dataChunk            = dataChunk;
-            progressData.totalBytesCount      = [ connection totalBytesCount      ];
-            progressData.downloadedBytesCount = [ connection downloadedBytesCount ];
+            progressData.totalBytesCount      = [connection totalBytesCount     ];
+            progressData.downloadedBytesCount = [connection downloadedBytesCount];
         }
         
         progress(progressData);
     };
     
-    self.connection.didUploadDataBlock = ^(NSNumber *progressNum) {
+    _connection.didUploadDataBlock = ^(NSNumber *progressNum) {
         
         JFFNetworkUploadProgressCallback *uploadProgress = [JFFNetworkUploadProgressCallback new];
         uploadProgress.progress = progressNum;
@@ -54,15 +53,26 @@
     
     __block id resultHolder;
     
+    JFFNetworkErrorTransformer errorTransformer = _errorTransformer;
+    
     handler = [handler copy];
     JFFDidFinishLoadingHandler finish = [^(NSError *error) {
-        handler(error?nil:resultHolder, error);
+        
+        if (error) {
+            
+            handler(nil, errorTransformer?errorTransformer(error):error);
+            return;
+        }
+        
+        handler(resultHolder, nil);
+        
     } copy];
     
-    self.connection.didFinishLoadingBlock = finish;
+    finish = [finish copy];
+    _connection.didFinishLoadingBlock = finish;
     
-    self.connection.didReceiveResponseBlock = ^void(id<JNUrlResponse> response)
-    {
+    _connection.didReceiveResponseBlock = ^void(id<JNUrlResponse> response) {
+        
         if (!unretainedSelf->_responseAnalyzer) {
             resultHolder = response;
             return;

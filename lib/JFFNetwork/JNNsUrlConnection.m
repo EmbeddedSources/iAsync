@@ -9,8 +9,8 @@
 
 @interface JNNsUrlConnection () <NSURLConnectionDelegate>
 
-@property ( nonatomic, readonly ) unsigned long long downloadedBytesCount;
-@property ( nonatomic, readonly ) unsigned long long totalBytesCount;
+@property (nonatomic, readonly) unsigned long long downloadedBytesCount;
+@property (nonatomic, readonly) unsigned long long totalBytesCount;
 
 @end
 
@@ -148,8 +148,8 @@ didReceiveResponse:(NSHTTPURLResponse *)response
         return;
     }
     
-    NSString *strContentLength = response.allHeaderFields[ @"Content-Length" ];
-    _totalBytesCount = (unsigned long long)[ strContentLength longLongValue ];
+    NSString *strContentLength = response.allHeaderFields[@"Content-Length"];
+    _totalBytesCount = (unsigned long long)[strContentLength longLongValue];
     _downloadedBytesCount = 0;
     
     if (nil != self.didReceiveResponseBlock) {

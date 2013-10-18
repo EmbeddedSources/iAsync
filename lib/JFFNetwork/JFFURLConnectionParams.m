@@ -13,10 +13,6 @@
         copy->_headers               = [_headers               copyWithZone:zone];
         copy->_httpBodyStreamBuilder = [_httpBodyStreamBuilder copyWithZone:zone];
         copy->_certificateCallback   = [_certificateCallback   copyWithZone:zone];
-
-        // TODO : Make a deep copy of the stream
-        // @adk : Plain assignment pay lead to inproper resource management and inconsistency
-        copy->_httpBodyStream      = _httpBodyStream;
         
         copy->_totalBytesExpectedToWrite = _totalBytesExpectedToWrite;
         copy->_useLiveConnection         = _useLiveConnection;

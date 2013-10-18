@@ -12,8 +12,15 @@ typedef void (^JFFScheduledBlock) (JFFCancelScheduledBlock cancel);
 //returning the block for canceling this invocation
 //the invocation will be canceled at removing "scheduler" object from memory
 - (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)block
+                           duration:(NSTimeInterval)duration;
+
+- (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)block
                            duration:(NSTimeInterval)duration
                              leeway:(NSTimeInterval)leeway;
+
+- (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)block
+                           duration:(NSTimeInterval)duration
+                      dispatchQueue:(dispatch_queue_t)dispatchQueue;
 
 - (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)block
                            duration:(NSTimeInterval)duration

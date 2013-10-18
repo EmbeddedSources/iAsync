@@ -45,7 +45,7 @@ static const char* const ZIP_QUEUE_NAME = "org.EmbeddedSources.network.gzip";
 @property (nonatomic) JFFURLConnectionContext *context;
 @property (nonatomic) unsigned long long downloadedBytesCount;
 @property (nonatomic) unsigned long long totalBytesCount;
-@property (nonatomic, unsafe_unretained) dispatch_queue_t zipQueue;
+@property (nonatomic) dispatch_queue_t zipQueue;
 
 - (void)handleResponseForReadStream:(CFReadStreamRef)stream;
 - (void)handleData:(void *)buffer length:(NSUInteger)length;
@@ -63,8 +63,6 @@ static void readStreamCallback(CFReadStreamRef stream,
         NSLog(@"!!!!!! ERROR !!!!!!, readStreamCallback called after freeing JFFURLConnection instance");
         return;
     }
-    
-    dispatch_queue_t zipQueue = [connectionContext.connection zipQueue];
     
     switch(event) {
             
@@ -100,21 +98,13 @@ static void readStreamCallback(CFReadStreamRef stream,
             CFStreamError error = CFReadStreamGetError(stream);
             
             JFFError *wrappedError = [[JStreamError alloc] initWithStreamError:error context:connectionContext.params];
-            
-            dispatch_barrier_async(zipQueue,
-            ^{
-                [connectionContext.connection handleFinish: errorObject];
-            });
+            [connectionContext.connection handleFinish:wrappedError];
             break;
         }
         case kCFStreamEventEndEncountered:
         {
             [connectionContext.connection handleResponseForReadStream:stream];
-            
-            dispatch_barrier_async(zipQueue,
-            ^{
-                [connectionContext.connection handleFinish:nil];
-            });
+            [connectionContext.connection handleFinish:nil];
             break;
         }
     }
@@ -195,6 +185,9 @@ static void readStreamCallback(CFReadStreamRef stream,
 {
     _queueForCallbacks = dispatch_get_current_queue();
     
+    NSString *zipQueueName = [self zipQueueName];
+    _zipQueue = dispatch_queue_create([zipQueueName UTF8String], ZIP_QUEUE_MODE);
+    
     CFStringRef method = (__bridge CFStringRef)(_context.params.httpMethod?:@"GET");
     if (!_context.params.httpMethod && data) {
         method = (__bridge CFStringRef)@"POST";
@@ -248,8 +241,7 @@ static void readStreamCallback(CFReadStreamRef stream,
     | kCFStreamEventErrorOccurred | kCFStreamEventEndEncountered;
     if (CFReadStreamSetClient(_readStream, registeredEvents, readStreamCallback, &streamContext)) {
         
-        CFRunLoopRef streamRunLoop = [ self runLoopForReadStream ];
-        
+        CFRunLoopRef streamRunLoop = [self runLoopForReadStream];
         CFReadStreamScheduleWithRunLoop(_readStream, streamRunLoop, kCFRunLoopCommonModes);
     }
     
@@ -274,14 +266,13 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 - (void)closeReadStream
 {
-    if (NULL != self->_readStream) {
+    if (NULL != _readStream) {
         
         CFRunLoopRef streamRunLoop = [self runLoopForReadStream];
         
         CFReadStreamUnscheduleFromRunLoop(_readStream,
                                           streamRunLoop,
                                           kCFRunLoopCommonModes);
-                                          
         CFReadStreamClose(_readStream);
         CFRelease(_readStream);
         _readStream = nil;
@@ -291,35 +282,6 @@ static void readStreamCallback(CFReadStreamRef stream,
 - (void)closeStreams
 {
     [self closeReadStream];
-}
-
-- (void)disposeZipQueue
-{
-    // @adk - using "strong" since this code may be called from "dealloc".
-    // No retain cycles here
-    __strong JFFURLConnection *weakSelf = self;
-    
-    dispatch_block_t cleanupBlock =
-    ^{
-        dispatch_queue_t zipQueue = [weakSelf zipQueue];
-        if (NULL != zipQueue) {
-            
-            dispatch_release(zipQueue);
-        }
-        
-        weakSelf.zipQueue = NULL;
-    };
-    
-    if (nil == _queueForCallbacks)
-    {
-        cleanupBlock();
-        return;
-    }
-    else
-    {
-        safe_dispatch_sync( self->_queueForCallbacks, cleanupBlock );
-        return;
-    }
 }
 
 - (void)cancel
@@ -352,44 +314,68 @@ static void readStreamCallback(CFReadStreamRef stream,
     if (!self.didReceiveDataBlock)
         return;
     
-    __weak JFFURLConnection* weakSelf = self;
-    
-    id<JNHttpDecoder> decoder = [self getDecoder];
     NSData *rawNsData = [[NSData alloc] initWithBytes:buffer
                                                length:length];
-    dispatch_queue_t zipQueue = _zipQueue;
     
-    dispatch_async( zipQueue,
-    ^{
+    __weak JFFURLConnection *weakSelf = self;
+    
+    __block unsigned long long totalBytesCount      = self.totalBytesCount;
+    __block unsigned long long downloadedBytesCount = self.downloadedBytesCount;
+    
+    dispatch_queue_t queueForCallbacks = _queueForCallbacks;
+    
+    dispatch_barrier_async(_zipQueue, ^void(void) {
+        
+        id<JNHttpDecoder> decoder = [weakSelf getDecoder];
+        
         NSError *decoderError = nil;
         
         NSData *decodedData = [decoder decodeData:rawNsData
                                             error:&decoderError];
         
-        weakSelf.downloadedBytesCount += length;
-        BOOL isDownloadCompleted = (weakSelf.totalBytesCount == weakSelf.downloadedBytesCount);
+        downloadedBytesCount += length;
+        BOOL isDownloadCompleted = (totalBytesCount == downloadedBytesCount);
         
-        if (nil == decodedData || isDownloadCompleted) {
+        BOOL finished = (nil == decodedData || isDownloadCompleted);
+        
+        if (finished) {
+            
             NSError *decoderCloseError = nil;
             [decoder closeWithError:&decoderCloseError];
             [decoderCloseError writeErrorToNSLog];
+        }
+        
+        dispatch_sync(queueForCallbacks, ^void(void) {
             
-            weakSelf.didReceiveDataBlock(decodedData);//TODO!!! call it in main thread
-            [weakSelf handleFinish:decoderError];
-        }
-        else {
-            weakSelf invokeDataBlock:decodedData];
-        }
+            weakSelf.downloadedBytesCount = downloadedBytesCount;
+            if (weakSelf.didReceiveDataBlock)
+                weakSelf.didReceiveDataBlock(decodedData);
+            
+            if (finished) {
+                [weakSelf handleFinish:decoderError];
+            }
+        });
     });
 }
 
 - (void)handleFinish:(NSError *)error
 {
-    [ self closeReadStream ];
-    [ self invokeFinishBlock: error ];
-    [ self clearCallbacks ];
+    __weak JFFURLConnection *weakSelf = self;
     
-    [ self disposeZipQueue ];
+    dispatch_queue_t queueForCallbacks = _queueForCallbacks;
+    
+    dispatch_barrier_async(_zipQueue, ^void(void) {
+        
+        dispatch_sync(queueForCallbacks, ^void(void) {
+            
+            JFFDidFinishLoadingHandler didFinishLoadingBlock = weakSelf.didFinishLoadingBlock;
+            
+            [weakSelf cancel];
+            
+            if (didFinishLoadingBlock)
+                didFinishLoadingBlock(error);
+        });
+    });
 }
 
 - (void)acceptCookiesForHeaders:(NSDictionary *)headers
@@ -474,71 +460,32 @@ static void readStreamCallback(CFReadStreamRef stream,
     {
         _responseHandled = YES;
         
-        if ( self.didReceiveResponseBlock )
-        {
-            JFFURLResponse* urlResponse_ = [ JFFURLResponse new ];
+        JFFDidReceiveResponseHandler didReceiveResponseBlock = self.didReceiveResponseBlock;
+        self.didReceiveResponseBlock = nil;
+        
+        if (didReceiveResponseBlock) {
             
-            urlResponse_.statusCode      = statusCode;
-            urlResponse_.allHeaderFields = allHeadersDict_;
-            urlResponse_.url             = self->_params.url;
+            __strong JFFURLConnection *self_ = self;
             
-            [ self invokeResponseBlock: urlResponse_ ];
-            self.didReceiveResponseBlock = nil;
-
-//            self->_previousContentEncoding = self->_urlResponse.contentEncoding;
-            self->_decoder = nil;
+            JFFURLResponse *urlResponse = [JFFURLResponse new];
             
-            self->_urlResponse = urlResponse_;
+            urlResponse.statusCode      = statusCode;
+            urlResponse.allHeaderFields = allHeadersDict;
+            urlResponse.url             = self_->_context.params.url;
             
-            unsigned long long tmpContentLength = [ urlResponse_ expectedContentLength ];
-            if ( [ urlResponse_ hasContentLength ] )
-            {
-                self->_totalBytesCount = tmpContentLength;
+            didReceiveResponseBlock(urlResponse);//here in callback connection can be cancelled
+            
+            //            _previousContentEncoding = _urlResponse.contentEncoding;
+            self_->_decoder     = nil;
+            self_->_urlResponse = urlResponse;
+            
+            unsigned long long tmpContentLength = [urlResponse expectedContentLength];
+            if ([urlResponse hasContentLength]) {
+                
+                self_->_totalBytesCount = tmpContentLength;
             }
         }
     }
-}
-
-#pragma mark -
-#pragma mark Callbacks
-- (void)invokeResponseBlock:(id)response
-{
-    JFFDidReceiveResponseHandler block = self.didReceiveResponseBlock;//TODO!!!
-    if (nil == block) {
-        return;
-    }
-    
-    dispatch_async(self->_queueForCallbacks, ^{
-        block(response);
-    });
-}
-
-- (void)invokeDataBlock:(NSData *)data
-{
-    JFFDidReceiveDataHandler block = self.didReceiveDataBlock;//TODO!!!
-    if ( nil == block )
-    {
-        return;
-    }
-    
-    dispatch_async( self->_queueForCallbacks, ^{
-       block( data );
-    });
-}
-
--(void)invokeFinishBlock:( NSError* )error
-{
-    JFFDidFinishLoadingHandler block = self.didFinishLoadingBlock;//TODO!!!
-    if ( nil == block )
-    {
-        return;
-    }
-    
-    
-    dispatch_async( self->_queueForCallbacks,
-    ^{
-       block( error );
-    } );
 }
 
 @end

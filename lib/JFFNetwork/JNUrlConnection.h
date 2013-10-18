@@ -4,12 +4,12 @@
 @protocol JNUrlConnection < NSObject >
 
 @required
-   -(void)start;
-   -(void)cancel;
+   - (void)start;
+   - (void)cancel;
 
 @required
-    -(unsigned long long)downloadedBytesCount;
-    -(unsigned long long)totalBytesCount;
+    - (unsigned long long)downloadedBytesCount;
+    - (unsigned long long)totalBytesCount;
 
 
 @required

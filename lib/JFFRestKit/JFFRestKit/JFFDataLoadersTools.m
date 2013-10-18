@@ -3,22 +3,22 @@
 #import "JFFRestKitError.h"
 #import <JFFNetwork/Callbacks/JFFNetworkResponseDataCallback.h>
 
-static NSString* queueNameForFileAtPath( NSString* filePath )
+static NSString *queueNameForFileAtPath(NSString *filePath)
 {
-    NSCParameterAssert( nil != filePath );
-    return [ @"org.jRestKit.tmp-file-download/path=" stringByAppendingString: filePath ];
+    NSCParameterAssert(nil != filePath);
+    return [@"org.jRestKit.tmp-file-download/path=" stringByAppendingString:filePath];
 }
 
-static dispatch_queue_t queueForFileAtPath( NSString* filePath )
+static dispatch_queue_t queueForFileAtPath(NSString *filePath)
 {
-    NSString* queueName = queueNameForFileAtPath( filePath );
-    return dispatch_queue_get_or_create( [ queueName UTF8String ], DISPATCH_QUEUE_SERIAL );
+    NSString *queueName = queueNameForFileAtPath(filePath);
+    return dispatch_queue_get_or_create([queueName UTF8String], DISPATCH_QUEUE_SERIAL);
 }
 
-static void disposeQueueForFileAtPath( NSString* filePath )
+static void disposeQueueForFileAtPath(NSString *filePath)
 {
-    NSString* queueName = queueNameForFileAtPath( filePath );
-    dispatch_queue_release_by_label( [ queueName UTF8String ] );
+    NSString *queueName = queueNameForFileAtPath(filePath);
+    dispatch_queue_release_by_label([queueName UTF8String]);
 }
 
 JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader(JFFAsyncOperation chunkedDataLoader)
@@ -27,6 +27,7 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader(JFFAsyncOperation chunkedD
     return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
+                                    
         __block NSString     *fileName = nil;
         __block NSString     *filePath = nil;
         __block NSFileHandle *handle   = nil;
