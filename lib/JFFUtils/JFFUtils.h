@@ -61,6 +61,7 @@
 #import <JFFUtils/Categories/UIColor+ColorForHex.h>
 #import <JFFUtils/Categories/NSNumber+FSStorable.h>
 #import <JFFUtils/Categories/UIDevice+PlatformName.h>
+#import <JFFUtils/Categories/NSThread+AssertMainThread.h>
 #import <JFFUtils/Categories/NSDecimalNumber+Increment.h>
 #import <JFFUtils/Categories/NSDateFormatter+MultiThreading.h>
 
