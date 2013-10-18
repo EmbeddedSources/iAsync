@@ -319,8 +319,8 @@ static void readStreamCallback(CFReadStreamRef stream,
     
     __weak JFFURLConnection *weakSelf = self;
     
-    __block unsigned long long totalBytesCount      = self.totalBytesCount;
-    __block unsigned long long downloadedBytesCount = self.downloadedBytesCount;
+    self.downloadedBytesCount += length;
+    BOOL isDownloadCompleted = (self.totalBytesCount == self.downloadedBytesCount);
     
     dispatch_queue_t queueForCallbacks = _queueForCallbacks;
     
@@ -332,9 +332,6 @@ static void readStreamCallback(CFReadStreamRef stream,
         
         NSData *decodedData = [decoder decodeData:rawNsData
                                             error:&decoderError];
-        
-        downloadedBytesCount += length;
-        BOOL isDownloadCompleted = (totalBytesCount == downloadedBytesCount);
         
         BOOL finished = (nil == decodedData || isDownloadCompleted);
         
@@ -348,12 +345,15 @@ static void readStreamCallback(CFReadStreamRef stream,
         
         dispatch_sync(queueForCallbacks, ^void(void) {
             
-            weakSelf.downloadedBytesCount = downloadedBytesCount;
             if (weakSelf.didReceiveDataBlock)
                 weakSelf.didReceiveDataBlock(decodedData);
             
             if (finished) {
-                [weakSelf handleFinish:decoderError];
+                
+                NSError *error = decoderError
+                ?decoderError
+                :((nil == decodedData)?decoderError:nil);
+                [weakSelf handleFinish:error];
             }
         });
     });
