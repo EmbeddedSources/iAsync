@@ -2,9 +2,9 @@
 
 @protocol JNMock <NSObject>
 
--(void)enableMock;
--(void)disableMock;
+- (void)enableMock;
+- (void)disableMock;
 
--(BOOL)isMockEnabled;
+- (BOOL)isMockEnabled;
 
 @end

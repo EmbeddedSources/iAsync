@@ -5,12 +5,12 @@
 @protocol JFFDownloadItemDelegate <NSObject>
 
 @optional
--(void)didProgressChangeForDownloadItem:( JFFDownloadItem* )download_item_;
+- (void)didProgressChangeForDownloadItem:(JFFDownloadItem *)downloadItem;
 
--(void)didFailLoadingOfDownloadItem:( JFFDownloadItem* )download_item_ error:( NSError* )error;
+- (void)didFailLoadingOfDownloadItem:(JFFDownloadItem *)downloadItem error:(NSError *)error;
 
--(void)didFinishLoadingOfDownloadItem:( JFFDownloadItem* )download_item_;
+- (void)didFinishLoadingOfDownloadItem:(JFFDownloadItem *)downloadItem;
 
--(void)didCancelLoadingOfDownloadItem:( JFFDownloadItem* )download_item_;
+- (void)didCancelLoadingOfDownloadItem:(JFFDownloadItem *)downloadItem;
 
 @end

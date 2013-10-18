@@ -95,25 +95,22 @@
     return [result copy];
 }
 
--(NSArray*)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_
+- (instancetype)mapIgnoringNilError:(JFFMappingWithErrorBlock)block_ error:(NSError **)outError_
 {
-    NSParameterAssert( NULL != outError_ );
-    NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
-
-    for ( id object_ in self )
-    {
-        id newObject_ = block_( object_, outError_ );
-        if ( newObject_ )
-        {
-            [ result_ addObject: newObject_ ];
-        }
-        else if ( nil != *outError_ )
-        {
+    NSParameterAssert(NULL != outError_);
+    NSMutableArray *result_ = [[NSMutableArray alloc] initWithCapacity:[self count]];
+    
+    for (id object_ in self) {
+        
+        id newObject_ = block_(object_, outError_);
+        if (newObject_) {
+            [result_ addObject:newObject_];
+        } else if (nil != *outError_) {
             return nil;
         }
     }
-
-    return [ result_ copy ];
+    
+    return [result_ copy];
 }
 
 - (instancetype)forceMap:(JFFMappingBlock)block

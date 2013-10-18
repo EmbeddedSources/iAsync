@@ -2,16 +2,16 @@
 
 @protocol JFFTrafficCalculatorDelegate;
 
-typedef void (^RICancelCalculateSpeed) ( void );
+typedef void (^RICancelCalculateSpeed) (void);
 
 @interface JFFTrafficCalculator : NSObject
 
--(id)initWithDelegate:( id< JFFTrafficCalculatorDelegate > )delegate_;
+- (instancetype)initWithDelegate:(id<JFFTrafficCalculatorDelegate>)delegate;
 
--(void)startLoading;
+- (void)startLoading;
 
--(void)stop;
+- (void)stop;
 
--(void)bytesReceived:( NSUInteger )bytes_count_;
+- (void)bytesReceived:(NSUInteger)bytesCount;
 
 @end

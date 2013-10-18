@@ -4,7 +4,7 @@
 
 @implementation JHttpFlagChecker
 
-+(BOOL)isDownloadErrorFlag:( CFIndex )statusCode
++ (BOOL)isDownloadErrorFlag:( CFIndex )statusCode
 {
     BOOL result =
         ![self isSuccessFlag :statusCode] &&
@@ -13,7 +13,7 @@
     return result;
 }
 
-+(BOOL)isRedirectFlag:(CFIndex)statusCode
++ (BOOL)isRedirectFlag:(CFIndex)statusCode
 {
     std::set<CFIndex> redirectFlags;
     {
@@ -28,7 +28,7 @@
     return result_;
 }
 
-+(BOOL)isSuccessFlag:(CFIndex)statusCode
++ (BOOL)isSuccessFlag:(CFIndex)statusCode
 {
     return (200 == statusCode);
 }

@@ -7,36 +7,34 @@
 @dynamic expectedContentLength;
 @dynamic contentEncoding;
 
-
--(BOOL)hasContentLength
+- (BOOL)hasContentLength
 {
-    return [ self->_allHeaderFields.allKeys containsObject: @"Content-Length" ];
+    return [_allHeaderFields.allKeys containsObject:@"Content-Length"];
 }
 
 - (unsigned long long)expectedContentLength
 {
-    id contentLengthObj_ = self->_allHeaderFields[@"Content-Length"];
+    id contentLengthObj = _allHeaderFields[@"Content-Length"];
     
-    SEL ulongSelector_ = @selector(unsignedLongLongValue);
-    if ( [ contentLengthObj_ respondsToSelector: ulongSelector_ ] )
-    {
-        return [ contentLengthObj_ unsignedLongLongValue ];
+    SEL ulongSelector = @selector(unsignedLongLongValue);
+    if ([contentLengthObj respondsToSelector:ulongSelector]) {
+        return [contentLengthObj unsignedLongLongValue];
     }
-
-    return (unsigned long long)[ contentLengthObj_ longLongValue ];
+    
+    return (unsigned long long)[contentLengthObj longLongValue];
 }
 
 #pragma mark -
 #pragma mark NSObject
--(NSString*)description
+- (NSString *)description
 {
     NSString *custom = [JFFUrlResponseLogger descriptionStringForUrlResponse:self];
     return [[NSString alloc] initWithFormat:@"%@ \n   %@", [super description], custom];
 }
 
--(NSString*)contentEncoding
+- (NSString *)contentEncoding
 {
-    return self->_allHeaderFields[@"Content-Encoding"];
+    return _allHeaderFields[@"Content-Encoding"];
 }
 
 @end

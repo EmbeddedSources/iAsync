@@ -7,19 +7,19 @@ static NSString* const queryComponentSeparator = @"&";
 
 @interface NSObject (XQueryComponents)
 
-- (NSArray*)arrayOfQueryComponentsForKey:(NSString *)key;
+- (NSArray *)arrayOfQueryComponentsForKey:(NSString *)key;
 
 @end
 
 @implementation NSObject (XQueryComponents)
 
-- (NSString*)stringFromQueryComponentAndKey:(NSString *)key
+- (NSString *)stringFromQueryComponentAndKey:(NSString *)key
 {
-    NSString *value = [[self description]stringByEncodingURLFormat];
-    return [[NSString alloc]initWithFormat:queryComponentFormat, key, value];
+    NSString *value = [[self description] stringByEncodingURLFormat];
+    return [[NSString alloc] initWithFormat:queryComponentFormat, key, value];
 }
 
-- (NSArray*)arrayOfQueryComponentsForKey:(NSString *)key
+- (NSArray *)arrayOfQueryComponentsForKey:(NSString *)key
 {
     NSString *component = [self stringFromQueryComponentAndKey:key];
     return @[component];
@@ -29,7 +29,7 @@ static NSString* const queryComponentSeparator = @"&";
 
 @implementation NSArray (XQueryComponents)
 
-- (NSArray*)arrayOfQueryComponentsForKey:(NSString *)key
+- (instancetype)arrayOfQueryComponentsForKey:(NSString *)key
 {
     return [self map:^id(id value) {
         return [value stringFromQueryComponentAndKey:key];
@@ -57,7 +57,7 @@ static NSString* const queryComponentSeparator = @"&";
 
 - (NSString *)firstValueIfExsistsForKey:(NSString *)key
 {
-    return [self[key] noThrowObjectAtIndex:0];
+    return [self[key] firstObject];
 }
 
 @end

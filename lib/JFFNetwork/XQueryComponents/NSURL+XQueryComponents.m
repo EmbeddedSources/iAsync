@@ -4,9 +4,9 @@
 
 @implementation NSURL (XQueryComponents)
 
--(NSDictionary*)queryComponents
+- (NSDictionary *)queryComponents
 {
-    return [ [ self query ] dictionaryFromQueryComponents ];
+    return [[self query] dictionaryFromQueryComponents];
 }
 
 @end

@@ -86,7 +86,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
         };
         block(nil);
         
-        [scheduler addBlock:block duration:3600.];
+        [scheduler addBlock:block duration:3600. leeway:1800.];
     }
 }
 
@@ -105,8 +105,8 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
     }
 }
 
-- (id)initWithCacheDBWithName:(NSString *)dbPropertyName
-                       dbInfo:(JFFDBInfo *)dbInfo
+- (instancetype)initWithCacheDBWithName:(NSString *)dbPropertyName
+                                 dbInfo:(JFFDBInfo *)dbInfo
 {
     NSString *filePath = [[dbInfo dbInfo] fileNameForDBWithName:dbPropertyName];
     
@@ -137,7 +137,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
     }
 }
 
-- (NSNumber*)timeToLiveInHours
+- (NSNumber *)timeToLiveInHours
 {
     NSDictionary *dbInfo = [[JFFDBInfo sharedDBInfo] currentDbInfo];
     NSNumber *result = [dbInfo timeToLiveInHoursForDBWithName:_configPropertyName];
@@ -179,13 +179,13 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
     }];
 }
 
-- (id)initWithDBInfoDictionary:(NSDictionary *)cachesInfo
+- (instancetype)initWithDBInfoDictionary:(NSDictionary *)cachesInfo
 {
     JFFDBInfo *dbInfo = [[JFFDBInfo alloc]initWithInfoDictionary:cachesInfo];
     return [self initWithDBInfo:dbInfo];
 }
 
-- (id)initWithDBInfo:(JFFDBInfo *)dbInfo
+- (instancetype)initWithDBInfo:(JFFDBInfo *)dbInfo
 {
     self = [super init];
     

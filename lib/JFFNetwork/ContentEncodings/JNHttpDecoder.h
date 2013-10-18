@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 
-@protocol JNHttpDecoder < NSObject >
+@protocol JNHttpDecoder <NSObject>
 
--(NSData*)decodeData:( NSData* )encodedData
-               error:(NSError ** )outError;
+- (NSData *)decodeData:(NSData *)encodedData
+                 error:(NSError **)outError;
 
--(BOOL)closeWithError:( NSError ** )outError;
+- (BOOL)closeWithError:(NSError **)outError;
 
 @end

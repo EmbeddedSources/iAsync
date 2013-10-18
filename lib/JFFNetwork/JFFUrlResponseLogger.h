@@ -3,9 +3,9 @@
 @interface JFFUrlResponseLogger : NSObject 
 
 /**
- @param url_response_ -- conforms to the JNUrlResponse protocol. The protocol is omitted for the NSHTTPURLResponse compatibility.
+ @param urlResponse -- conforms to the JNUrlResponse protocol. The protocol is omitted for the NSHTTPURLResponse compatibility.
  */
-+(NSString*)descriptionStringForUrlResponse:(id /*< JNUrlResponse >*/)url_response_;
-+(NSString*)dumpHttpHeaderFields:(NSDictionary*)all_header_fields_;
++ (NSString *)descriptionStringForUrlResponse:(id /*< JNUrlResponse >*/)urlResponse;
++ (NSString *)dumpHttpHeaderFields:(NSDictionary *)allHeaderFields;
 
 @end

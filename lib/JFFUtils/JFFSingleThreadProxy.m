@@ -24,14 +24,12 @@
         container.target = nil;
     };
     dispatch_async(_dispatchQueue, releaseListener);
-    dispatch_release(_dispatchQueue);
 }
 
 - (id)initWithTargetFactory:(JFFObjectFactory)factory
               dispatchQueue:(dispatch_queue_t)dispatchQueue
 {
     _dispatchQueue = dispatchQueue;
-    dispatch_retain(_dispatchQueue);
     
     factory = [factory copy];
     void (^releaseListener)(void) = ^ {

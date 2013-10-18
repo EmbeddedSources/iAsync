@@ -4,7 +4,7 @@
 
 @interface JFFNetworkUploadProgressCallback : JFFNetworkAsyncOperationCallback
 
-@property (nonatomic, strong) NSNumber *progress;
-@property (nonatomic, strong) JFFURLConnectionParams *params;
+@property (nonatomic) NSNumber *progress;
+@property (nonatomic) JFFURLConnectionParams *params;
 
 @end

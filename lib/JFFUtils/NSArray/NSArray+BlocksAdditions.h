@@ -33,7 +33,7 @@
 //or return nil if error happens
 - (instancetype)map:(JFFMappingWithErrorBlock)block
               error:(NSError *__autoreleasing *)outError;
--(NSArray*)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_;
+- (instancetype)mapIgnoringNilError:(JFFMappingWithErrorBlock)block error:(NSError **)outError;
 
 //Invokes block once for each element of self.
 //Creates a new NSArray containing the values returned by the block. Passes index of element in block as argument.

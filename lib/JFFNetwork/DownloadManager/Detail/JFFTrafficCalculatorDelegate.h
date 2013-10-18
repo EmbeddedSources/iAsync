@@ -2,9 +2,9 @@
 
 @class JFFTrafficCalculator;
 
-@protocol JFFTrafficCalculatorDelegate < NSObject >
+@protocol JFFTrafficCalculatorDelegate <NSObject>
 
--(void)trafficCalculator:( JFFTrafficCalculator* )traffic_calculator_
-  didChangeDownloadSpeed:( float )speed_;
+- (void)trafficCalculator:(JFFTrafficCalculator *)trafficCalculator
+   didChangeDownloadSpeed:(float)speed;
 
 @end

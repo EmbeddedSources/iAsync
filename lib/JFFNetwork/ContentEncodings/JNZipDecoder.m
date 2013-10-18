@@ -8,40 +8,40 @@
 
 @implementation JNZipDecoder
 
--(NSData*)decodeData:( NSData*   )encoded_data_
-               error:( NSError** )outError
+- (NSData *)decodeData:(NSData *)encodedData
+                 error:(NSError **)outError
 {
     NSParameterAssert( outError );
     *outError = nil;
-    if (nil == encoded_data_) {
+    if (nil == encodedData) {
         return nil;
     }
     
-    Bytef decoded_buffer_[ kJNMaxBufferSize ] = {0};
-    uLongf decoded_size_ = kJNMaxBufferSize;
+    Bytef decodedBuffer[ kJNMaxBufferSize ] = {0};
+    uLongf decodedSize = kJNMaxBufferSize;
     
-    int uncompress_result_ = uncompress( decoded_buffer_    , &decoded_size_        ,
-                                         encoded_data_.bytes, encoded_data_.length );
+    int uncompressResult = uncompress(decodedBuffer    , &decodedSize        ,
+                                      encodedData.bytes, encodedData.length );
     
-    if ( Z_OK != uncompress_result_ ) {
-        NSLog( @"[!!! WARNING !!!] JNZipDecoder -- unzip action has failed.\n Zip error code -- %d\n Zip error -- %@"
-              , uncompress_result_
-              , [ JNGzipErrorsLogger zipErrorMessageFromCode: uncompress_result_ ] );
-
-        *outError = [NSError errorWithDomain:kGzipErrorDomain
-                                        code:uncompress_result_
-                                    userInfo:nil];
+    if (Z_OK != uncompressResult) {
+        NSLog(@"[!!! WARNING !!!] JNZipDecoder -- unzip action has failed.\n Zip error code -- %d\n Zip error -- %@",
+              uncompressResult,
+              [JNGzipErrorsLogger zipErrorMessageFromCode:uncompressResult]);
+        
+        *outError = [[NSError alloc] initWithDomain:kGzipErrorDomain
+                                               code:uncompressResult
+                                           userInfo:nil];
         
         return nil;
     }
-
-    NSData* result_ = [ NSData dataWithBytes: decoded_buffer_
-                                      length: decoded_size_ ];
-
-    return result_;
+    
+    NSData *result = [[NSData alloc] initWithBytes:decodedBuffer
+                                            length:decodedSize];
+    
+    return result;
 }
 
--(BOOL)closeWithError:( NSError** )error
+- (BOOL)closeWithError:(NSError **)error
 {
     return YES;
 }

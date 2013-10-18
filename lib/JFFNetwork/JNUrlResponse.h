@@ -3,11 +3,11 @@
 /**
  A protocol for JFFURLResponse and NSHTTPURLResponse
  */
-@protocol JNUrlResponse < NSObject >
+@protocol JNUrlResponse <NSObject>
 
--(NSInteger) statusCode;
--(NSDictionary*)allHeaderFields;
--(unsigned long long)expectedContentLength;
--(BOOL)hasContentLength;
+- (NSInteger)statusCode;
+- (NSDictionary *)allHeaderFields;
+- (unsigned long long)expectedContentLength;
+- (BOOL)hasContentLength;
 
 @end

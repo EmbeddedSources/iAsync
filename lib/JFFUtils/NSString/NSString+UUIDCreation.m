@@ -2,12 +2,12 @@
 
 @implementation NSString (UUIDCreation)
 
-+ (NSString *)createUuid
++ (instancetype)createUuid
 {
     CFUUIDRef uuid = CFUUIDCreate( NULL );
-    NSString* result = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, uuid);
-    CFRelease( uuid );
-
+    NSString *result = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, uuid);
+    CFRelease(uuid);
+    
     return result;
 }
 

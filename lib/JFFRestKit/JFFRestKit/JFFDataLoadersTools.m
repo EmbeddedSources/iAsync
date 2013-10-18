@@ -21,12 +21,12 @@ static void disposeQueueForFileAtPath( NSString* filePath )
     dispatch_queue_release_by_label( [ queueName UTF8String ] );
 }
 
-JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader( JFFAsyncOperation chunkedDataLoader )
+JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader(JFFAsyncOperation chunkedDataLoader)
 {
     chunkedDataLoader = [chunkedDataLoader copy];
-    return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback
-                                    , JFFCancelAsyncOperationHandler cancelCallback
-                                    , JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                    JFFCancelAsyncOperationHandler cancelCallback,
+                                    JFFDidFinishAsyncOperationHandler doneCallback) {
         __block NSString     *fileName = nil;
         __block NSString     *filePath = nil;
         __block NSFileHandle *handle   = nil;

@@ -9,6 +9,7 @@
 //invocation will be canceled at removing "receiver" object from memory
 - (void)performSelector:(SEL)selector
            timeInterval:(NSTimeInterval)timeInterval
+                 leeway:(NSTimeInterval)leeway
                userInfo:(id)userInfo
                 repeats:(BOOL)repeats;
 
@@ -17,6 +18,7 @@
 //invocation will be canceled at removing "receiver" or "scheduler" object from memory
 - (void)performSelector:(SEL)selector
            timeInterval:(NSTimeInterval)timeInterval
+                 leeway:(NSTimeInterval)leeway
                userInfo:(id)userInfo
                 repeats:(BOOL)repeats
               scheduler:(JFFScheduler *)scheduler;

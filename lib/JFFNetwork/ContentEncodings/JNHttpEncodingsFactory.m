@@ -11,7 +11,7 @@
 
 @implementation JNHttpEncodingsFactory
 
--(id)initWithContentLength:( unsigned long long )contentLength
+- (instancetype)initWithContentLength:( unsigned long long )contentLength
 {
     self = [ super init ];
     self.contentLength = contentLength;
@@ -19,11 +19,11 @@
     return self;
 }
 
--(id<JNHttpDecoder>)decoderForHeaderString:( NSString* )headerString_
+- (id<JNHttpDecoder>)decoderForHeaderString:(NSString *)headerString
 {
     NSDictionary* decoderClasses_ = @{ @"gzip": [ JNGzipDecoder class ] };
 
-    Class decoderClass_ = decoderClasses_[ headerString_ ];
+    Class decoderClass_ = decoderClasses_[headerString];
     if ( Nil == decoderClass_ )
     {
         return [ self stubDecoder ];
@@ -32,13 +32,12 @@
     return [ [ decoderClass_ alloc ] initWithContentLength: self.contentLength ];
 }
 
--(id<JNHttpDecoder>)gzipDecoder
+- (id<JNHttpDecoder>)gzipDecoder
 {
     return [ [ JNGzipDecoder alloc ] initWithContentLength: self.contentLength ];
 }
 
-
--(id<JNHttpDecoder>)stubDecoder
+- (id<JNHttpDecoder>)stubDecoder
 {
     return [ JNStubDecoder new ];
 }

@@ -13,13 +13,13 @@
 
 @implementation JFFDownloadedBytesPerDate
 
--(id)initWithBytesCount:( NSUInteger )bytesCount_
+- (instancetype)initWithBytesCount:( NSUInteger )bytesCount_
 {
-    self = [ super init ];
-
-    if ( self )
-    {
-        _date       = [ NSDate new ];
+    self = [super init];
+    
+    if (self) {
+        
+        _date       = [NSDate new];
         _bytesCount = bytesCount_;
     }
 
@@ -36,7 +36,7 @@
     JFFScheduler* _scheduler;
 }
 
--(id)initWithDelegate:( id< JFFTrafficCalculatorDelegate > )delegate_
+- (instancetype)initWithDelegate:(id<JFFTrafficCalculatorDelegate>)delegate_
 {
     self = [ super init ];
 
@@ -49,7 +49,7 @@
     return self;
 }
 
--(void)removeOldItemsFromDownloadingSpeedInfo
+- (void)removeOldItemsFromDownloadingSpeedInfo
 {
     static NSTimeInterval average_speed_duration_ = 3.0;
 
@@ -62,7 +62,7 @@
     }
 }
 
--(void)calculateDownloadSpeed
+- (void)calculateDownloadSpeed
 {
     [ self removeOldItemsFromDownloadingSpeedInfo ];
 
@@ -84,43 +84,41 @@
 
         JFFDownloadedBytesPerDate* lastItem_ = [ arrayExcludeLast_ lastObject ];
         
-        NSTimeInterval timeDiff = ( [ lastDate_ timeIntervalSince1970 ] - [ lastItem_.date timeIntervalSince1970 ] );
-        NSTimeInterval result = donloadedBytes_ / timeDiff;
-
+        NSTimeInterval timeDiff = ([lastDate_ timeIntervalSince1970] - [lastItem_.date timeIntervalSince1970]);
+        NSTimeInterval result = donloadedBytes / timeDiff;
+        
         speed_ = (float)result;
     }
 
     [ _delegate trafficCalculator: self didChangeDownloadSpeed: speed_ ];
 }
 
--(void)stop
+- (void)stop
 {
     _scheduler = nil;
 
-    _downloadingSpeedInfo = [ NSMutableArray new ];
-    [ self calculateDownloadSpeed ];
+    _downloadingSpeedInfo = [NSMutableArray new];
+    [self calculateDownloadSpeed];
 }
 
--(void)bytesReceived:( NSUInteger )bytesCount_
+- (void)bytesReceived:(NSUInteger)bytesCount
 {
-    JFFDownloadedBytesPerDate* item_ = [ [ JFFDownloadedBytesPerDate alloc ] initWithBytesCount: bytesCount_ ];
-    [ _downloadingSpeedInfo insertObject: item_ atIndex: 0 ];
-
-    [ self removeOldItemsFromDownloadingSpeedInfo ];
+    JFFDownloadedBytesPerDate *item = [[JFFDownloadedBytesPerDate alloc] initWithBytesCount:bytesCount];
+    [_downloadingSpeedInfo insertObject:item atIndex:0];
+    
+    [self removeOldItemsFromDownloadingSpeedInfo];
 }
 
--(void)startLoading
+- (void)startLoading
 {
-    static NSTimeInterval calculateSpeedInterval_ = 1.0;
-
-    __unsafe_unretained JFFTrafficCalculator* self_ = self;
-    JFFScheduledBlock block_ = ^void( JFFCancelScheduledBlock cancel_ )
-    {
-        [ self_ calculateDownloadSpeed ];
+    __unsafe_unretained JFFTrafficCalculator* weakSelf = self;
+    JFFScheduledBlock block = ^void(JFFCancelScheduledBlock cancel) {
+        
+        [weakSelf calculateDownloadSpeed];
     };
-
-    _scheduler = [ JFFScheduler new ];
-    [ _scheduler addBlock: block_ duration: calculateSpeedInterval_ ];
+    
+    _scheduler = [JFFScheduler new];
+    [_scheduler addBlock:block duration:1. leeway:.2];
 }
 
 @end

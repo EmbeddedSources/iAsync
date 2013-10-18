@@ -2,13 +2,12 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol JFFCacheDB < NSObject >
+@protocol JFFCacheDB <NSObject>
 
 @required
 
 - (NSData *)dataForKey:(id)key;
 - (NSData *)dataForKey:(id)key lastUpdateTime:(NSDate **)date;
-- (NSDate *)lastUpdateTimeForKey:(id)key;
 
 - (void)setData:(NSData *)data forKey:(id)key;
 
@@ -17,6 +16,6 @@
 
 - (void)migrateDB;
 
-- (NSNumber*)timeToLiveInHours;
+- (NSNumber *)timeToLiveInHours;
 
 @end

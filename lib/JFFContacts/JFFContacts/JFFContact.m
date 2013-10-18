@@ -13,97 +13,109 @@
 
 #import <AddressBook/AddressBook.h>
 
-static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
-                                            , ABAddressBookRef addressBook_ )
+static ABRecordRef createOrGetContactPerson(ABRecordID contactInternalId,
+                                            ABAddressBookRef addressBook)
 {
-    if ( contactInternalId_ != 0 )
-    {
-        ABRecordRef result_ = ABAddressBookGetPersonWithRecordID( addressBook_
-                                                                 , contactInternalId_ );
+    if (contactInternalId != 0) {
+        
+        ABRecordRef result = ABAddressBookGetPersonWithRecordID(addressBook,
+                                                                contactInternalId);
 
-        if ( result_ )
-        {
-            CFRetain( result_ );
-            return result_;
+        if (result) {
+            CFRetain(result);
+            return result;
         }
     }
-
+    
     return ABPersonCreate();
 }
 
 @interface JFFContact ()
 
-@property ( nonatomic ) BOOL newContact;
--(ABRecordRef)rawPerson CF_RETURNS_NOT_RETAINED;
--(void)setRawPerson:( ABRecordRef )person_;
+@property (nonatomic) BOOL newContact;
 
+- (ABRecordRef)rawPerson CF_RETURNS_NOT_RETAINED;
+- (void)setRawPerson:(ABRecordRef)person_;
 
 @end
 
 @implementation JFFContact
 {
-    NSMutableDictionary* _fieldByName;
-    JFFAddressBook*      _addressBookWrapper;
+    NSMutableDictionary *_fieldByName;
+    JFFAddressBook      *_addressBookWrapper;
     ABRecordRef          _person;
 }
 
 @dynamic addressBook;
 
-@dynamic firstName
-, lastName
-, company
-, emails
-, phones
-, sites
-, birthday
-, photo
-, addresses;
+@dynamic firstName,
+lastName,
+company,
+emails,
+phones,
+sites,
+birthday,
+photo,
+addresses;
 
--(id)forwardingTargetForSelector:( SEL )selector_
+- (instancetype)init
 {
-    NSString* selectorName_ = NSStringFromSelector( selector_ );
-    JFFContactField* field_ = _fieldByName[ selectorName_ ];
-    if ( !field_ )
-    {
-        field_ = _fieldByName[ [ selectorName_ propertyGetNameFromPropertyName ] ];
-    }
-    return field_ ?: self;
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
--(void)dealloc
+- (id)forwardingTargetForSelector:(SEL)selector
+{
+    NSString *propertyName = NSStringFromSelector(selector);
+    JFFContactField *field = _fieldByName[propertyName];
+    if (!field) {
+        
+        propertyName = [propertyName propertyGetNameFromPropertyName];
+        field = _fieldByName[propertyName];
+    }
+    return field?:self;
+}
+
+- (void)dealloc
 {
     self.rawPerson = nil;
 }
 
--(void)addField:( JFFContactField* )field_
+- (void)addField:(JFFContactField *)field
 {
-    _fieldByName[ field_.name ] = field_;
+    _fieldByName[field.name] = field;
 }
 
--(void)initializeDynamicFields
+- (void)initializeDynamicFields
 {
-    _fieldByName = [ NSMutableDictionary new ];
-
+    _fieldByName = [NSMutableDictionary new];
+    
     NSDictionary* fieldNameByPropertyId_ = @{
     @(kABPersonFirstNameProperty)    : JFFContactFirstName,
     @(kABPersonLastNameProperty)     : JFFContactLastName ,
     @(kABPersonOrganizationProperty) : JFFContactCompany  ,
     @(kABPersonBirthdayProperty)     : JFFContactBirthday ,
     };
-
-    [ fieldNameByPropertyId_ enumerateKeysAndObjectsUsingBlock: ^( NSNumber* propertyID_, id fieldName_, BOOL* stop_ )
-    {
-        [ self addField: [ JFFContactStringField contactFieldWithName: fieldName_
-                                                           propertyID: [ propertyID_ longLongValue ] ] ];
-    } ];
-
-    [ self addField: [ JFFContactPhotoField contactFieldWithName: JFFContactPhoto ] ];
-
+    
+    ABRecordRef person = self.person;
+    
+    [fieldNameByPropertyId_ enumerateKeysAndObjectsUsingBlock:^(NSNumber *propertyID, id fieldName, BOOL *stop) {
+        
+        JFFContactStringField *field = [JFFContactStringField newContactFieldWithName:fieldName
+                                                                           propertyID:(ABPropertyID)[propertyID longLongValue]
+                                                                               record:person];
+        
+        [self addField:field];
+    }];
+    
+    [self addField:[JFFContactPhotoField newContactFieldWithName:JFFContactPhoto record:person]];
+    
     //JTODO localize all labels
     NSArray *labels = @[@"home", @"work"];
-    [self addField:[JFFContactEmailsField contactFieldWithName:JFFContactEmails
-                                                    propertyID:kABPersonEmailProperty
-                                                        labels:labels]];
+    [self addField:[JFFContactEmailsField newContactFieldWithName:JFFContactEmails
+                                                       propertyID:kABPersonEmailProperty
+                                                           labels:labels
+                                                           record:person]];
     
     labels = @[
     @"mobile",
@@ -117,216 +129,200 @@ static ABRecordRef createOrGetContactPerson( ABRecordID contactInternalId_
     @"pager",
     @"other",
     ];
-    [ self addField: [ JFFContactStringArrayField contactFieldWithName:JFFContactPhones
+    [self addField:[JFFContactStringArrayField newContactFieldWithName:JFFContactPhones
                                                             propertyID:kABPersonPhoneProperty
-                                                                labels:labels]];
-
+                                                                labels:labels
+                                                                record:person]];
+    
     labels = @[
     @"home page",
     @"home",
     @"work",
     @"other"
     ];
-    [ self addField: [ JFFContactStringArrayField contactFieldWithName:JFFContactWebsites
+    [self addField:[JFFContactStringArrayField newContactFieldWithName:JFFContactWebsites
                                                             propertyID:kABPersonURLProperty
-                                                                labels:labels]];
-
+                                                                labels:labels
+                                                                record:person]];
+    
     labels = @[
     @"home",
     @"work",
     @"other",
     ];
-    [ self addField: [ JFFContactDictionaryArrayField contactFieldWithName:JFFContactAddresses
+    [self addField:[JFFContactDictionaryArrayField newContactFieldWithName:JFFContactAddresses
                                                                 propertyID:kABPersonAddressProperty
-                                                                    labels:labels]];
+                                                                    labels:labels
+                                                                    record:person]];
 }
 
--(id)initWithPerson:( ABRecordRef )person_
-        addressBook:( JFFAddressBook* )addressBook_
+- (instancetype)initWithPerson:(ABRecordRef)person
+                   addressBook:(JFFAddressBook *)addressBook
 {
-    self = [ super init ];
-
-    if ( !self )
-    {
-        return nil;
-    }
-
-    NSParameterAssert(person_);
-    NSParameterAssert(nil!=addressBook_);
-    _addressBookWrapper = addressBook_;
+    self = [super init];
     
-    [ self initializeDynamicFields ];
-
-    _contactInternalId = ABRecordGetRecordID( person_ );
-
-    [ _fieldByName enumerateKeysAndObjectsUsingBlock: ^( id key, JFFContactField* field_, BOOL* stop )
-    {
-        [ field_ readPropertyFromRecord: person_ ];
-    } ];
-
-    self.rawPerson = person_;
-
-    return self;
-}
-
--(id)initWithFieldsDict:( NSDictionary* )args_
-            addressBook:( JFFAddressBook* )addressBook_
-{
-    self = [ super init ];
-
-    NSParameterAssert( nil != addressBook_ );
-
-    if ( !self )
-    {
+    if (!self) {
         return nil;
     }
-
-    _addressBookWrapper = addressBook_;
-
-    [ self initializeDynamicFields ];
-
-    NSString* contactInternalId_ = args_[ @"contactInternalId" ];
-    _contactInternalId = [ contactInternalId_ longLongValue ];
-    self.newContact = contactInternalId_ == nil;
-
-    ABRecordRef person_ = self.person;
-    [ args_ enumerateKeysAndObjectsUsingBlock: ^( id fieldName_, id value_, BOOL* stop )
-    {
-        JFFContactField* field_ = _fieldByName[ fieldName_ ];
-        if ( !field_ )
-        {
-            NSLog( @"!!!WARNING!!! unsupported field name: %@", fieldName_ );
-        }
-        [ field_ setPropertyFromValue: value_
-                             toRecord: person_ ];
-    } ];
-
+    
+    NSParameterAssert(person);
+    NSParameterAssert(nil!=addressBook);
+    _addressBookWrapper = addressBook;
+    
+    _contactInternalId = ABRecordGetRecordID(person);
+    
+    [self initializeDynamicFields];
+    
     return self;
 }
 
--(ABAddressBookRef)addressBook
+- (instancetype)initWithFieldsDict:(NSDictionary *)args
+                       addressBook:(JFFAddressBook *)addressBook
+{
+    self = [super init];
+    
+    NSParameterAssert(nil != addressBook);
+    
+    if (!self) {
+        return nil;
+    }
+    
+    _addressBookWrapper = addressBook;
+    
+    NSString *contactInternalId = args[@"contactInternalId"];
+    _contactInternalId = (ABRecordID)[contactInternalId longLongValue];
+    self.newContact = contactInternalId == nil;
+    
+    [self initializeDynamicFields];
+    
+    [args enumerateKeysAndObjectsUsingBlock:^(id fieldName, id value, BOOL *stop)
+    {
+        JFFContactField *field = _fieldByName[fieldName];
+        if (!field) {
+            NSLog( @"!!!WARNING!!! unsupported field name: %@", fieldName);
+        }
+        [field setPropertyFromValue:value];
+    }];
+    
+    return self;
+}
+
+- (ABAddressBookRef)addressBook
 {
     return _addressBookWrapper.rawBook;
 }
 
--(ABRecordRef)person
+- (ABRecordRef)person
 {
-    if ( !_person )
-    {
-        _person = createOrGetContactPerson( self.contactInternalId, self.addressBook );
+    if (!_person) {
+        
+        _person = createOrGetContactPerson(self.contactInternalId, self.addressBook);
     }
     return _person;
 }
 
--(ABRecordRef)rawPerson
+- (ABRecordRef)rawPerson
 {
     return _person;
 }
 
--(void)setRawPerson:( ABRecordRef )person_
+- (void)setRawPerson:(ABRecordRef)person
 {
-    if ( person_ == _person )
-    {
+    if (person == _person) {
         return;
     }
-
-    if ( NULL != _person )
-    {
-        CFRelease( _person );
+    
+    if (NULL != _person) {
+        
+        CFRelease(_person);
     }
     _person = NULL;
-
-    if ( NULL != person_ )
-    {
-        _person = CFRetain( person_ );
+    
+    if (NULL != person) {
+        
+        _person = CFRetain(person);
     }
 }
 
--(BOOL)save
+- (BOOL)save
 {
     CFErrorRef error = NULL;
     
-    bool result_ = false;
-    if ( self.newContact )
-    {
-        result_ = ABAddressBookAddRecord( self.addressBook, self.person, &error );
-        if ( !result_ )
-        {
-            NSLog( @"can not add Person" );
+    bool result = false;
+    if (self.newContact) {
+        result = ABAddressBookAddRecord(self.addressBook, self.person, &error);
+        if (!result) {
+            NSLog(@"can not add Person");
             return NO;
         }
     }
-
-    result_ = ABAddressBookSave( self.addressBook, &error );
-    if ( !result_ )
-    {
-        NSLog( @"can not save Person" );
+    
+    result = ABAddressBookSave(self.addressBook, &error);
+    if (!result) {
+        NSLog(@"can not save Person");
         return NO;
     }
-
-    _contactInternalId = ABRecordGetRecordID( self.person );
-
+    
+    _contactInternalId = ABRecordGetRecordID(self.person);
+    
     return YES;
 }
 
--(BOOL)remove
+- (BOOL)remove
 {
-    if ( 0 == _contactInternalId || NULL == self.rawPerson )
-    {
+    if (0 == _contactInternalId || NULL == self.rawPerson) {
         NSLog( @"record has no id" );
         return NO;
     }
-
+    
     CFErrorRef error = NULL;
-    bool result_ = ABAddressBookRemoveRecord( self.addressBook, self.rawPerson, &error );
-    if ( !result_ )
-    {
-        NSLog( @"can not remove record from AddressBook" );
+    bool result = ABAddressBookRemoveRecord( self.addressBook, self.rawPerson, &error );
+    if (!result) {
+        
+        NSLog(@"can not remove record from AddressBook");
         return NO;
     }
-
+    
     error = NULL;
-    result_ = ABAddressBookSave( self.addressBook, &error );
-    if ( !result_ )
-    {
-        NSLog( @"can not save AddressBook" );
+    result = ABAddressBookSave(self.addressBook, &error);
+    if (!result) {
+        
+        NSLog(@"can not save AddressBook");
         return NO;
     }
-
+    
     return YES;
 }
 
-+(id)findContactWithContactInternalId:( ABRecordID )contactInternalId_
-                          addressBook:( JFFAddressBook* )addressBook_
++ (instancetype)findContactWithContactInternalId:(ABRecordID)contactInternalId
+                                     addressBook:(JFFAddressBook *)addressBook
 {
-    ABAddressBookRef addressBookRef_ = addressBook_.rawBook;
-
-    ABRecordRef record_ = ABAddressBookGetPersonWithRecordID( addressBookRef_
-                                                             , contactInternalId_ );
-
-    if ( NULL == record_ )
-    {
+    ABAddressBookRef addressBookRef = addressBook.rawBook;
+    
+    ABRecordRef record = ABAddressBookGetPersonWithRecordID(addressBookRef,
+                                                            contactInternalId);
+    
+    if (NULL == record) {
         return nil;
     }
-
-    return [ [ self alloc ] initWithPerson: record_
-                               addressBook: addressBook_ ];
+    
+    return [[self alloc] initWithPerson:record
+                            addressBook:addressBook];
 }
 
-+(id)allContactsAddressBook:( JFFAddressBook* )addressBook_
++ (NSArray *)allContactsAddressBook:(JFFAddressBook *)addressBook
 {
-    ABAddressBookRef addressBookRef_ = addressBook_.rawBook;
-
-    NSArray* result_ = (__bridge_transfer NSArray*)ABAddressBookCopyArrayOfAllPeople( addressBookRef_ );
-
-    result_ = [ result_ map: ^id( id object_ )
-    {
-        ABRecordRef person_ = ( __bridge ABRecordRef )object_;
-        return [ [ JFFContact alloc ] initWithPerson: person_
-                                         addressBook: addressBook_ ];
-    } ];
-
-    return result_;
+    ABAddressBookRef addressBookRef = addressBook.rawBook;
+    
+    NSArray *result = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookRef);
+    
+    result = [result map:^id(id object) {
+        ABRecordRef person = (__bridge ABRecordRef)object;
+        return [[JFFContact alloc] initWithPerson:person
+                                      addressBook:addressBook];
+    }];
+    
+    return result;
 }
 
 @end

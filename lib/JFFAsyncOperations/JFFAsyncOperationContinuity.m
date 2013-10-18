@@ -144,9 +144,7 @@ JFFAsyncOperation accumulateSequenceResult(NSArray *loaders, JFFSequenceResultAc
     
     resultAccumulator = [resultAccumulator copy];
     
-    NSMutableArray *binders = [[NSMutableArray alloc] initWithCapacity:[loaders count]];
-    
-    for (NSUInteger index = 0; index < [loaders count]; ++index) {
+    NSArray *binders = [NSArray arrayWithSize:[loaders count] producer:^id(NSUInteger index) {
         
         JFFAsyncOperationBinder binder = [^JFFAsyncOperation(id waterfallResult) {
             
@@ -159,14 +157,15 @@ JFFAsyncOperation accumulateSequenceResult(NSArray *loaders, JFFSequenceResultAc
                 :waterfallResult;
                 
                 id newResult = resultAccumulator(currWaterfallResult, result, error);
+                NSCAssert((newResult != nil) ^ (error != nil), nil);
                 
                 if (doneCallback)
                     doneCallback(newResult, newResult?nil:error);
             });
         } copy];
         
-        [binders addObject:binder];
-    }
+        return binder;
+    }];
     
     JFFWaterwallFirstObject *instance = [JFFWaterwallFirstObject sharedWaterwallFirstObject];
     return bindSequenceOfAsyncOperationsArray(asyncOperationWithResult(instance), binders);

@@ -20,14 +20,12 @@
     
     {
         JNConnectionsFactory *factory =
-        [[JNConnectionsFactory alloc]initWithURLConnectionParams:self.params];
+        [[JNConnectionsFactory alloc] initWithURLConnectionParams:self.params];
         
-        self.connection = self.params.useLiveConnection
-        ?[factory createFastConnection    ]
-        :[factory createStandardConnection];
+        _connection = [factory createConnection];
     }
     
-    self.connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
+    _connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
     
     __unsafe_unretained JFFNetworkAsyncOperation *unretainedSelf = self;
     id< JNUrlConnection > connection = self.connection;
@@ -79,26 +77,26 @@
         }
     };
     
-    [self.connection start];
+    [_connection start];
 }
 
--(void)forceCancel
+- (void)forceCancel
 {
     [self cancel:YES];
 }
 
 - (void)cancel:(BOOL)canceled
 {
-    self.connection.didReceiveDataBlock          = nil;
-    self.connection.didFinishLoadingBlock        = nil;
-    self.connection.didReceiveResponseBlock      = nil;
-    self.connection.didUploadDataBlock           = nil;
-    self.connection.shouldAcceptCertificateBlock = nil;
+    _connection.didReceiveDataBlock          = nil;
+    _connection.didFinishLoadingBlock        = nil;
+    _connection.didReceiveResponseBlock      = nil;
+    _connection.didUploadDataBlock           = nil;
+    _connection.shouldAcceptCertificateBlock = nil;
     
     //TODO maybe always cancel?
     if (canceled) {
-        [self.connection cancel];
-        self.connection = nil;
+        [_connection cancel];
+        _connection = nil;
     }
 }
 
