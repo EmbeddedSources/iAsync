@@ -368,7 +368,7 @@ static void readStreamCallback(CFReadStreamRef stream,
         
         dispatch_sync(queueForCallbacks, ^void(void) {
             
-            JFFDidFinishLoadingHandler didFinishLoadingBlock = self.didFinishLoadingBlock;
+            JFFDidFinishLoadingHandler didFinishLoadingBlock = weakSelf.didFinishLoadingBlock;
             
             [weakSelf cancel];
             

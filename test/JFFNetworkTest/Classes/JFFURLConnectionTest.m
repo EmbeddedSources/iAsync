@@ -40,11 +40,11 @@
             connection.didReceiveDataBlock = ^(NSData *dataChunk)
             {
                 NSLog(@"[JFFURLConnectionTest] didReceiveDataBlock: %d ", [dataChunk length]);
-                [totalData appendData: dataChunk];
+                [totalData appendData:dataChunk];
             };
             
-            connection.didFinishLoadingBlock = ^(NSError *error)
-            {
+            connection.didFinishLoadingBlock = ^(NSError *error) {
+                
                 NSLog(@"[JFFURLConnectionTest] didFinishLoadingBlock: %@ ", error);
                 
                 stopTest();
