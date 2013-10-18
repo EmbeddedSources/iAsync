@@ -37,13 +37,6 @@
 			remoteGlobalIDString = 451E6E311152EB4A0024ABA5;
 			remoteInfo = Validator;
 		};
-		7E25B3F215860ED300469187 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E25B3E215860ED300469187 /* TouchXML.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1B0E823A1563882000825E3C;
-			remoteInfo = TouchXMLiOS;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -138,7 +131,6 @@
 			children = (
 				7E25B3EF15860ED300469187 /* TouchXML_UnitTests.octest */,
 				7E25B3F115860ED300469187 /* Validator.app */,
-				7E25B3F315860ED300469187 /* libTouchXMLiOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,7 +177,7 @@
 		7E25B3AF15860D2600469187 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Sitecore;
 			};
 			buildConfigurationList = 7E25B3B215860D2600469187 /* Build configuration list for PBXProject "TouchXmlHelper" */;
@@ -226,13 +218,6 @@
 			remoteRef = 7E25B3F015860ED300469187 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7E25B3F315860ED300469187 /* libTouchXMLiOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libTouchXMLiOS.a;
-			remoteRef = 7E25B3F215860ED300469187 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -256,7 +241,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -276,7 +260,8 @@
 					"$SDKROOT/usr/include/libxml2/**",
 					..,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -285,7 +270,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -298,7 +282,7 @@
 					"$SDKROOT/usr/include/libxml2/**",
 					..,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
