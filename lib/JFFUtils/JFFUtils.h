@@ -48,6 +48,7 @@
 
 #import <JFFUtils/Errors/JFFError.h>
 #import <JFFUtils/Errors/JFFSilentError.h>
+#import <JFFUtils/Errors/NSError+JSON.h>
 #import <JFFUtils/Errors/NSError+SetToPointer.h>
 #import <JFFUtils/Errors/NSError+IsNetworkError.h>
 #import <JFFUtils/Errors/NSError+WriteErrorToNSLog.h>
