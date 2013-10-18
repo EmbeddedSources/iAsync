@@ -31,7 +31,7 @@
 + (JUncertainLogicStates)quickCheckObject:(id)first
                                 isEqualTo:(id)second
 {
-    BOOL isBothNil = (nil == first) && (nil == secon );
+    BOOL isBothNil = (nil == first) && (nil == second);
     BOOL isAnyNil  = (nil == first) || (nil == second);
     
     if (isBothNil) {
