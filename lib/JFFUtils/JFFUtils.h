@@ -73,6 +73,7 @@
 #import <JFFUtils/JSignedRange.h>
 #import <JFFUtils/JGCDAdditions.h>
 #import <JFFUtils/JFFClangLiterals.h>
+#import <JFFUtils/JFFSingleThreadProxy.h>
 #import <JFFUtils/JFFMulticastDelegate.h>
 #import <JFFUtils/JFFMutableAssignArray.h>
 #import <JFFUtils/JFFMutableAssignDictionary.h>
