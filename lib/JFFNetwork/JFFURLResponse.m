@@ -7,6 +7,11 @@
 @dynamic expectedContentLength;
 @dynamic contentEncoding;
 
+- (BOOL)hasContentLength
+{
+    return [_allHeaderFields.allKeys containsObject:@"Content-Length"];
+}
+
 - (unsigned long long)expectedContentLength
 {
     id contentLengthObj = _allHeaderFields[@"Content-Length"];

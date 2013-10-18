@@ -64,33 +64,33 @@
 
 - (void)calculateDownloadSpeed
 {
-    [ self removeOldItemsFromDownloadingSpeedInfo ];
-
-    float speed_ = 0.f;
-
-    if ( [ _downloadingSpeedInfo count ] > 1 )
-    {
-        NSRange range_ = { 0, [ _downloadingSpeedInfo count ] - 1 };
-        NSArray* arrayExcludeLast_ = [ _downloadingSpeedInfo subarrayWithRange: range_ ];
-
-        NSUInteger donloadedBytes_ = 0;
-        for ( JFFDownloadedBytesPerDate* item_ in arrayExcludeLast_ )
-        {
-            donloadedBytes_ += item_.bytesCount;
-        }
-
-        JFFDownloadedBytesPerDate* firstItem_ = arrayExcludeLast_[ 0 ];
-        NSDate* lastDate_ = ( [ arrayExcludeLast_ count ] == 1 ) ? [ NSDate new ] : firstItem_.date;
-
-        JFFDownloadedBytesPerDate* lastItem_ = [ arrayExcludeLast_ lastObject ];
+    [self removeOldItemsFromDownloadingSpeedInfo];
+    
+    float speed = 0.f;
+    
+    if ([_downloadingSpeedInfo count] > 1) {
         
-        NSTimeInterval timeDiff = ([lastDate_ timeIntervalSince1970] - [lastItem_.date timeIntervalSince1970]);
+        NSRange range = {0, [_downloadingSpeedInfo count] - 1};
+        NSArray *arrayExcludeLast = [_downloadingSpeedInfo subarrayWithRange:range];
+
+        NSUInteger donloadedBytes = 0;
+        for (JFFDownloadedBytesPerDate *item in arrayExcludeLast) {
+            
+            donloadedBytes += item.bytesCount;
+        }
+        
+        JFFDownloadedBytesPerDate *firstItem = arrayExcludeLast[ 0 ];
+        NSDate *lastDate = ([arrayExcludeLast count] == 1)?[NSDate new]:firstItem.date;
+
+        JFFDownloadedBytesPerDate* lastItem_ = [ arrayExcludeLast lastObject ];
+        
+        NSTimeInterval timeDiff = ([lastDate timeIntervalSince1970] - [lastItem_.date timeIntervalSince1970]);
         NSTimeInterval result = donloadedBytes / timeDiff;
         
-        speed_ = (float)result;
+        speed = (float)result;
     }
-
-    [ _delegate trafficCalculator: self didChangeDownloadSpeed: speed_ ];
+    
+    [_delegate trafficCalculator:self didChangeDownloadSpeed:speed];
 }
 
 - (void)stop

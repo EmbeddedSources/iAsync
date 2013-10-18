@@ -8,6 +8,10 @@
 #define NSURLConnectionDoesNotWorkWithLocalFiles
 
 @interface JNNsUrlConnection () <NSURLConnectionDelegate>
+
+@property (nonatomic, readonly) unsigned long long downloadedBytesCount;
+@property (nonatomic, readonly) unsigned long long totalBytesCount;
+
 @end
 
 @implementation JNNsUrlConnection
@@ -16,6 +20,9 @@
     JFFURLConnectionParams *_params;
     NSRunLoop              *_connectRunLoop;
 }
+
+@synthesize downloadedBytesCount = _downloadedBytesCount;
+@synthesize totalBytesCount      = _totalBytesCount     ;
 
 - (void)dealloc
 {
@@ -141,6 +148,10 @@ didReceiveResponse:(NSHTTPURLResponse *)response
         return;
     }
     
+    NSString *strContentLength = response.allHeaderFields[@"Content-Length"];
+    _totalBytesCount = (unsigned long long)[strContentLength longLongValue];
+    _downloadedBytesCount = 0;
+    
     if (nil != self.didReceiveResponseBlock) {
         self.didReceiveResponseBlock(response);
     }
@@ -152,6 +163,8 @@ didReceiveResponse:(NSHTTPURLResponse *)response
     if (![self assertConnectionMismatch:connection]) {
         return;
     }
+    
+    _downloadedBytesCount += [chunk length];
     
     if (nil != self.didReceiveDataBlock) {
         self.didReceiveDataBlock(chunk);
