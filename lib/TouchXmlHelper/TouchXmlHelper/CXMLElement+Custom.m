@@ -2,50 +2,49 @@
 
 @implementation CXMLElement (Custom)
 
--(CXMLElement*)firstElementIfExistsForName:( NSString* )name_
-                         logMessageEnabled:( BOOL )logMessageEnabled_
-                                shouldFail:( BOOL )shouldFail_
+- (CXMLElement *)firstElementIfExistsForName:(NSString *)name
+                           logMessageEnabled:(BOOL)logMessageEnabled
+                                  shouldFail:(BOOL)shouldFail
 {
-    NSArray* elements_ = [ self elementsForName: name_ ];
-    if ( [ elements_ count ] == 0 )
-    {
-        if ( logMessageEnabled_ )
-        {
-            NSLog( @"[!!! WARNING !!!] - No elements for name: %@", name_ );
-            NSLog( @"In node : ");
-            NSLog( @"%@", self );
+    NSArray *elements = [self elementsForName:name];
+    if ([elements count] == 0) {
+        
+        if (logMessageEnabled) {
+            
+            NSLog(@"[!!! WARNING !!!] - No elements for name: %@", name);
+            NSLog(@"In node : ");
+            NSLog(@"%@", self);
         }
-        if ( shouldFail_ )
-        {
-            NSAssert1( NO, @"[!!! ERROR !!!] - No elements for name: %@", name_ );
+        if (shouldFail) {
+            NSAssert1(NO, @"[!!! ERROR !!!] - No elements for name: %@", name);
         }
-
+        
         return nil;
     }
-
-    return [ elements_ objectAtIndex: 0 ];
+    
+    return elements[0];
 }
 
--(CXMLElement*)firstElementForName:( NSString* )name_
+- (CXMLElement *)firstElementForName:(NSString *)name
 {
-    return [ self firstElementIfExistsForName: name_
-                            logMessageEnabled: YES
-                                   shouldFail: YES ];
+    return [self firstElementIfExistsForName:name
+                           logMessageEnabled:YES
+                                  shouldFail:YES];
     
 }
 
--(CXMLElement*)firstElementForNameNoThrow:( NSString* )name_
+- (CXMLElement *)firstElementForNameNoThrow:(NSString *)name
 {
-    return [ self firstElementIfExistsForName: name_
-                            logMessageEnabled: YES
-                                   shouldFail: NO ];
+    return [self firstElementIfExistsForName:name
+                           logMessageEnabled:YES
+                                  shouldFail:NO];
 }
 
--(CXMLElement*)firstElementIfExistsForName:( NSString* )name_
+- (CXMLElement *)firstElementIfExistsForName:(NSString *)name
 {
-    return [ self firstElementIfExistsForName: name_
-                            logMessageEnabled: NO
-                                   shouldFail: NO ];
+    return [self firstElementIfExistsForName:name
+                           logMessageEnabled:NO
+                                  shouldFail:NO];
 }
 
 @end

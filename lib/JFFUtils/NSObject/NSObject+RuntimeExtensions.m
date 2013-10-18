@@ -162,4 +162,18 @@ typedef BOOL (^JFFPredicate)();
     }];
 }
 
+#pragma mark -
+#pragma mark Unhook
++ (void)unHookInstanceMethodForClass:(Class)targetClass
+                        withSelector:(SEL)targetSelector
+             prototypeMethodSelector:(SEL)prototypeSelector
+                  hookMethodSelector:(SEL)hookSelector
+{
+    [ self hookInstanceMethodForClass: targetClass
+                         withSelector: targetSelector
+              prototypeMethodSelector: hookSelector
+                   hookMethodSelector: prototypeSelector ];
+}
+
+
 @end
