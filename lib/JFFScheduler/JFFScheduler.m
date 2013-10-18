@@ -57,6 +57,16 @@
     return thread.lazyJffScheduler;
 }
 
+- (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)block
+                           duration:(NSTimeInterval)duration
+                      dispatchQueue:(dispatch_queue_t)dispatchQueue
+{
+    return [self addBlock:block
+                 duration:duration
+                   leeway:duration/10.
+            dispatchQueue:dispatchQueue];
+}
+
 - (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)actionBlock
                            duration:(NSTimeInterval)duration
                              leeway:(NSTimeInterval)leeway
@@ -100,6 +110,14 @@
     dispatch_resume(timer);
     
     return cancelTimerBlockHolder.onceSimpleBlock;
+}
+
+- (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)block
+                           duration:(NSTimeInterval)duration
+{
+    return [self addBlock:block
+                 duration:duration
+                   leeway:duration/10.];
 }
 
 - (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)actionBlock

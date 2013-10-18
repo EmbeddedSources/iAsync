@@ -28,12 +28,18 @@
     _connection.shouldAcceptCertificateBlock = self.params.certificateCallback;
     
     __unsafe_unretained JFFNetworkAsyncOperation *unretainedSelf = self;
+    id<JNUrlConnection> connection = self.connection;
     
     progress = [progress copy];
     _connection.didReceiveDataBlock = ^(NSData *dataChunk) {
         
         JFFNetworkResponseDataCallback *progressData = [JFFNetworkResponseDataCallback new];
-        progressData.dataChunk = dataChunk;
+        {
+            progressData.dataChunk            = dataChunk;
+            progressData.totalBytesCount      = [connection totalBytesCount     ];
+            progressData.downloadedBytesCount = [connection downloadedBytesCount];
+        }
+        
         progress(progressData);
     };
     
