@@ -49,6 +49,8 @@
 		4C4E8EA7180BFA4B002D8A7B /* UITableView+CellsSelections.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E8EA5180BFA4B002D8A7B /* UITableView+CellsSelections.m */; };
 		4C4E8EAA180BFB1A002D8A7B /* UITableView+BlocksAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4E8EA8180BFB1A002D8A7B /* UITableView+BlocksAdditions.h */; };
 		4C4E8EAB180BFB1A002D8A7B /* UITableView+BlocksAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E8EA9180BFB1A002D8A7B /* UITableView+BlocksAdditions.m */; };
+		4C5040D5181126ED003F4B12 /* UIImage+WriteToTmpFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C5040D3181126ED003F4B12 /* UIImage+WriteToTmpFile.h */; };
+		4C5040D6181126ED003F4B12 /* UIImage+WriteToTmpFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5040D4181126ED003F4B12 /* UIImage+WriteToTmpFile.m */; };
 		4C696BEC1742769A00C7D53D /* JFFGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE51742769A00C7D53D /* JFFGridView.h */; };
 		4C696BED1742769A00C7D53D /* JFFGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C696BE61742769A00C7D53D /* JFFGridView.m */; };
 		4C696BEE1742769A00C7D53D /* JFFGridViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C696BE71742769A00C7D53D /* JFFGridViewDelegate.h */; };
@@ -166,6 +168,8 @@
 		4C4E8EA5180BFA4B002D8A7B /* UITableView+CellsSelections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CellsSelections.m"; sourceTree = "<group>"; };
 		4C4E8EA8180BFB1A002D8A7B /* UITableView+BlocksAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+BlocksAdditions.h"; sourceTree = "<group>"; };
 		4C4E8EA9180BFB1A002D8A7B /* UITableView+BlocksAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+BlocksAdditions.m"; sourceTree = "<group>"; };
+		4C5040D3181126ED003F4B12 /* UIImage+WriteToTmpFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WriteToTmpFile.h"; sourceTree = "<group>"; };
+		4C5040D4181126ED003F4B12 /* UIImage+WriteToTmpFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WriteToTmpFile.m"; sourceTree = "<group>"; };
 		4C696BE51742769A00C7D53D /* JFFGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFGridView.h; sourceTree = "<group>"; };
 		4C696BE61742769A00C7D53D /* JFFGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFGridView.m; sourceTree = "<group>"; };
 		4C696BE71742769A00C7D53D /* JFFGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFGridViewDelegate.h; sourceTree = "<group>"; };
@@ -405,6 +409,8 @@
 				4CB4C1B21770592B00F275BC /* UIImage+DrawImageInImage.m */,
 				4CB4C1B51770667E00F275BC /* UIImage+JpegPackImage.h */,
 				4CB4C1B61770667E00F275BC /* UIImage+JpegPackImage.m */,
+				4C5040D3181126ED003F4B12 /* UIImage+WriteToTmpFile.h */,
+				4C5040D4181126ED003F4B12 /* UIImage+WriteToTmpFile.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -503,6 +509,7 @@
 				8D996F1E139F61200075A325 /* NSObject+JFFAlertButton.h in Headers */,
 				1B7F58421435BDC000FF06EC /* UIWebView+HideWhenLoading.h in Headers */,
 				1B7F58971435D53300FF06EC /* UIView+AddSubviewAndScale.h in Headers */,
+				4C5040D5181126ED003F4B12 /* UIImage+WriteToTmpFile.h in Headers */,
 				1B7F589B1435D58000FF06EC /* UIView+AnimationWithBlocks.h in Headers */,
 				1B29555A143DCB3A00532BD7 /* JULoadMoreCellscalculator.h in Headers */,
 				1B29555F143DCB7300532BD7 /* UITableView+WithinUpdates.h in Headers */,
@@ -640,6 +647,7 @@
 				4C4E8EA7180BFA4B002D8A7B /* UITableView+CellsSelections.m in Sources */,
 				1B7F58431435BDC000FF06EC /* UIWebView+HideWhenLoading.m in Sources */,
 				1B7F58981435D53300FF06EC /* UIView+AddSubviewAndScale.m in Sources */,
+				4C5040D6181126ED003F4B12 /* UIImage+WriteToTmpFile.m in Sources */,
 				1B7F589C1435D58000FF06EC /* UIView+AnimationWithBlocks.m in Sources */,
 				1B49CFA8143C6D3500E8AACE /* UIWebViewNewFeaturesRuntime.m in Sources */,
 				1B29555B143DCB3A00532BD7 /* JULoadMoreCellscalculator.m in Sources */,
