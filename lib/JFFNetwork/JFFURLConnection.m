@@ -46,6 +46,7 @@ static const char* const ZIP_QUEUE_NAME = "org.EmbeddedSources.network.gzip";
 @property (nonatomic) unsigned long long downloadedBytesCount;
 @property (nonatomic) unsigned long long totalBytesCount;
 @property (nonatomic) dispatch_queue_t zipQueue;
+@property (nonatomic) id<JNHttpDecoder> decoder;
 
 - (void)handleResponseForReadStream:(CFReadStreamRef)stream;
 - (void)handleData:(void *)buffer length:(NSUInteger)length;
@@ -118,7 +119,6 @@ static void readStreamCallback(CFReadStreamRef stream,
     JFFURLResponse *_urlResponse;
     
     //    NSString* _previousContentEncoding;
-    id<JNHttpDecoder> _decoder;
     unsigned long long _downloadedBytesCount;
     unsigned long long _totalBytesCount;
     
@@ -343,6 +343,7 @@ static void readStreamCallback(CFReadStreamRef stream,
             NSError *decoderCloseError = nil;
             [decoder closeWithError:&decoderCloseError];
             [decoderCloseError writeErrorToNSLog];
+            weakSelf.decoder = nil;
         }
         
         dispatch_sync(queueForCallbacks, ^void(void) {
