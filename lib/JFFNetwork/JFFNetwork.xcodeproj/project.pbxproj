@@ -155,6 +155,7 @@
 		65F47AD01539A3BE00D8C865 /* NSURL+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F47ACE1539A3BE00D8C865 /* NSURL+XQueryComponents.m */; };
 		65F47AD31539A3FF00D8C865 /* NSDictionary+XQueryComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F47AD11539A3FE00D8C865 /* NSDictionary+XQueryComponents.h */; };
 		65F47AD41539A3FF00D8C865 /* NSDictionary+XQueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F47AD21539A3FF00D8C865 /* NSDictionary+XQueryComponents.m */; };
+		78B0B0851815178E0091D1F3 /* JFFUploadProgress.h in Headers */ = {isa = PBXBuildFile; fileRef = 78B0B0841815178E0091D1F3 /* JFFUploadProgress.h */; };
 		7E015B541716BE1400F79665 /* JNConnectionMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E015B521716BE1400F79665 /* JNConnectionMock.h */; };
 		7E015B551716BE1400F79665 /* JNConnectionMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E015B521716BE1400F79665 /* JNConnectionMock.h */; };
 		7E015B561716BE1400F79665 /* JNConnectionMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E015B521716BE1400F79665 /* JNConnectionMock.h */; };
@@ -352,6 +353,7 @@
 		65F47ACE1539A3BE00D8C865 /* NSURL+XQueryComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+XQueryComponents.m"; sourceTree = "<group>"; };
 		65F47AD11539A3FE00D8C865 /* NSDictionary+XQueryComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+XQueryComponents.h"; sourceTree = "<group>"; };
 		65F47AD21539A3FF00D8C865 /* NSDictionary+XQueryComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+XQueryComponents.m"; sourceTree = "<group>"; };
+		78B0B0841815178E0091D1F3 /* JFFUploadProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFUploadProgress.h; sourceTree = "<group>"; };
 		7E015B521716BE1400F79665 /* JNConnectionMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNConnectionMock.h; sourceTree = "<group>"; };
 		7E015B531716BE1400F79665 /* JNConnectionMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNConnectionMock.m; sourceTree = "<group>"; };
 		7E015B5C1716BE3000F79665 /* JNMock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JNMock.h; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 				CEF162E216760EF100B0B6E4 /* JFFNetworkResponseDataCallback.m */,
 				CEF162E516760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.h */,
 				CEF162E616760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.m */,
+				78B0B0841815178E0091D1F3 /* JFFUploadProgress.h */,
 			);
 			path = Callbacks;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				53834214141E691900473CF2 /* JNHttpEncodingsFactory.h in Headers */,
 				53834218141E69E300473CF2 /* JNGzipDecoder.h in Headers */,
 				5383424A141E713900473CF2 /* JNStubDecoder.h in Headers */,
+				78B0B0851815178E0091D1F3 /* JFFUploadProgress.h in Headers */,
 				5310B9F1141F489200A3E2B1 /* JNConstants.h in Headers */,
 				53A33F26141F631500469DAA /* JNZipDecoder.h in Headers */,
 				53A33F34141F7C2C00469DAA /* JNGzipCustomErrors.h in Headers */,
