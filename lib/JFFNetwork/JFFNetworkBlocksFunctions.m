@@ -13,6 +13,8 @@
 
 #import "NSURL+Cookies.h"
 
+#import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationBuilder.h>
+
 static JFFAnalyzer downloadStatusCodeResponseAnalyzer(id<NSCopying> context)
 {
     return ^id(id<JNUrlResponse> response, NSError **outError) {

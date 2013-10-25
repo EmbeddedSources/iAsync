@@ -183,7 +183,8 @@ static void readStreamCallback(CFReadStreamRef stream,
 - (void)startConnectionWithPostData:(NSData *)data
                             headers:(NSDictionary *)headers
 {
-    _queueForCallbacks = dispatch_get_current_queue();
+    NSParameterAssert([[NSThread currentThread] isMainThread]);
+    _queueForCallbacks = dispatch_get_main_queue();
     
     NSString *zipQueueName = [self zipQueueName];
     _zipQueue = dispatch_queue_create([zipQueueName UTF8String], ZIP_QUEUE_MODE);
