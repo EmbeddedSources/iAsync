@@ -1,11 +1,3 @@
-//
-//  JFFStoreKitTests.m
-//  JFFStoreKitTests
-//
-//  Created by user on 01.10.12.
-//  Copyright (c) 2012 EmbeddedSources. All rights reserved.
-//
-
 #import "JFFStoreKitTests.h"
 
 @implementation JFFStoreKitTests

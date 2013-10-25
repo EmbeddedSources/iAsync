@@ -1,7 +1,5 @@
 #import "JFFContactField.h"
 
-#include <objc/runtime.h>
-
 @interface JFFContactField ()
 
 @property (nonatomic) NSString *name;

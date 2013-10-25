@@ -4,7 +4,7 @@
 
 - (instancetype)stringByReplacingJSEscapes
 {
-    NSString *result = [ self stringByReplacingOccurrencesOfString:@"'" withString:@"\\'" ];
+    NSString *result = [ self stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
     
     return result;
 }

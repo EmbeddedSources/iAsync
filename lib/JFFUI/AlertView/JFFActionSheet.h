@@ -1,6 +1,8 @@
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+@class UIView;
 
 @interface JFFActionSheet : NSObject
 
@@ -14,15 +16,15 @@
               destructiveButtonTitle:(id)destructiveButtonTitle
                    otherButtonTitles:(id)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
-- (void)showInView:( UIView* )view_;
+- (void)showInView:(UIView *)view;
 
-- (void)dismissWithClickedButtonIndex:( NSInteger )buttonIndex_
-                             animated:( BOOL )animated_;
+- (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex
+                             animated:(BOOL)animated;
 
 //pass NSString(button title) or JFFAlertButton
-- (NSInteger)addActionButton:( id )alertButton_;
+- (NSInteger)addActionButton:(id)alertButton;
 
-- (void)addActionButtonWithTitle:( NSString* )title_ ation:( JFFSimpleBlock )action_;
+- (void)addActionButtonWithTitle:(NSString *)title ation:(JFFSimpleBlock)action;
 
 + (void)dismissAllActionSheets;
 

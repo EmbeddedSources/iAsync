@@ -1,7 +1,6 @@
 #import "JFFStrategyRandom.h"
 
 #import "JFFQueueState.h"
-#import "JFFBaseLoaderOwner.h"
 
 @implementation JFFStrategyRandom
 

@@ -1,9 +1,7 @@
 #import "JFFAddressBookFactory.h"
 
 #import "JFFAddressBook.h"
-
 #import "JFFAddressBookAccessError.h"
-#import "JFFAddressBookWrapperError.h"
 
 static NSError *convertErrorType(NSError *error)
 {

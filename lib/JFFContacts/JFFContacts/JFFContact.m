@@ -1,8 +1,6 @@
 #import "JFFContact.h"
 
-#import "JFFContactDateField.h"
 #import "JFFContactStringField.h"
-#import "JFFContactStringArrayField.h"
 #import "JFFContactEmailsField.h"
 #import "JFFContactPhotoField.h"
 #import "JFFContactDictionaryArrayField.h"

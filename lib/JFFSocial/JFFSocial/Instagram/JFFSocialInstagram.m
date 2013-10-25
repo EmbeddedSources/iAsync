@@ -4,7 +4,6 @@
 #import "JFFInstagramMediaItem.h"
 #import "JFFInstagramAuthedAccount.h"
 
-#import "JFFInstagramResponseError.h"
 #import "JFFInvalidInstagramResponseURLError.h"
 
 #import "JFFSocialInstagramApi.h"

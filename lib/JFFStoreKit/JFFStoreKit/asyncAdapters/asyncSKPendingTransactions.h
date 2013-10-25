@@ -1,3 +1,3 @@
 #import <Foundation/Foundation.h>
 
-JFFAsyncOperation allPendingTransactionsLoader();
+JFFAsyncOperation allPendingTransactionsLoader(void);

@@ -22,7 +22,8 @@
 
 - (NSString *)errorLogDescription
 {
-    return [[NSString alloc] initWithFormat:@"%@ jsonObject:%@ jsonPattern:%@ message:%@",
+    return [[NSString alloc] initWithFormat:@"%@ : %@ jsonObject:%@ jsonPattern:%@ message:%@",
+            [self class],
             [self localizedDescription],
             _jsonObject,
             _jsonPattern,

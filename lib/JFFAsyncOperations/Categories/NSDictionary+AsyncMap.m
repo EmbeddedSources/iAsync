@@ -1,7 +1,7 @@
 #import "NSDictionary+AsyncMap.h"
 
-#import "JFFAsyncOperationContinuity.h"
 #import "JFFAsyncOperationHelpers.h"
+#import "JFFAsyncOperationContinuity.h"
 
 @implementation NSDictionary (AsyncMap)
 

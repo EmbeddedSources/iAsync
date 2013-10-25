@@ -1,8 +1,5 @@
 #import "JFFQueueStrategyFactory.h"
 
-#import "JFFQueueState.h"
-#import "JFFQueueStrategy.h"
-
 #import "JFFStrategyFifo.h"
 #import "JFFStrategyStack.h"
 #import "JFFStrategyRandom.h"
@@ -23,7 +20,7 @@
         strategies[2] = [JFFStrategyRandom class];
     });
     
-    Class StrategyClass = strategies[ strategyId ];
+    Class StrategyClass = strategies[strategyId];
     return [[StrategyClass alloc] initWithQueueState:state];
 }
 

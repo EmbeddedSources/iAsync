@@ -1,7 +1,9 @@
 #import <Foundation/Foundation.h>
 
-@class JFFActionSheet;
-@class JFFPendingActionSheet;
+@class
+UIView,
+JFFActionSheet,
+JFFPendingActionSheet;
 
 @interface JFFActionSheetsContainer : NSObject
 
@@ -9,9 +11,9 @@
 
 - (NSUInteger)count;
 
-- (void)addActionSheet:(JFFActionSheet *)actionSheet_ withView:(UIView *)view;
-- (void)removeActionSheet:(JFFActionSheet *)actionSheet_;
-- (BOOL)containsActionSheet:(JFFActionSheet *)actionSheet_;
+- (void)addActionSheet:(JFFActionSheet *)actionSheet withView:(UIView *)view;
+- (void)removeActionSheet:(JFFActionSheet *)actionSheet;
+- (BOOL)containsActionSheet:(JFFActionSheet *)actionSheet;
 
 - (JFFPendingActionSheet *)firstPendingActionSheet;
 

@@ -6,11 +6,9 @@
 
 #import "NSDictionary+DBInfo.h"
 
-#import <JFFUtils/NSObject/NSObject+OnDeallocBlock.h>
-#import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>
 #import <JFFScheduler/JFFScheduler.h>
 
-static JFFCaches* sharedCachesInstance;
+static JFFCaches *sharedCachesInstance;
 
 static NSMutableDictionary *autoremoveSchedulersByCacheName;
 static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";

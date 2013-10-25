@@ -1,8 +1,6 @@
 #import "JFFAsyncOperationUtils.h"
 
-#import "JFFBlockOperation.h"
 #import "JFFAsyncOperationBuilder.h"
-
 #import "JFFAsyncOperationAdapter.h"
 
 static const char *const defaultQueueName = "com.jff.async_operations_library.general_queue";

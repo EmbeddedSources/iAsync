@@ -17,28 +17,28 @@
     return instance_;
 }
 
-- (void)addActionSheet:( JFFActionSheet* )actionSheet_ withView:( UIView* )view_
+- (void)addActionSheet:(JFFActionSheet *)actionSheet withView:(UIView *)view
 {
-    if ( !_activeActionSheets )
-    {
-        _activeActionSheets = [ [ NSMutableArray alloc ] initWithCapacity: 1 ];
+    if (!_activeActionSheets) {
+        
+        _activeActionSheets = [[NSMutableArray alloc] initWithCapacity:1];
     }
 
-    JFFPendingActionSheet* pendingActionSheet_ = [ [ JFFPendingActionSheet alloc ] initWithActionSheet: actionSheet_
-                                                                                                  view: view_ ];
-
-    [ _activeActionSheets addObject: pendingActionSheet_ ];
+    JFFPendingActionSheet *pendingActionSheet = [[JFFPendingActionSheet alloc] initWithActionSheet:actionSheet
+                                                                                              view:view];
+    
+    [_activeActionSheets addObject:pendingActionSheet];
 }
 
-- (void)removeActionSheet:( JFFActionSheet* )actionSheet_
+- (void)removeActionSheet:(JFFActionSheet *)actionSheet
 {
-    if ( !_activeActionSheets )
+    if (!_activeActionSheets)
         return;
-
-    [ _activeActionSheets removeObject: [ self objectToRemove: actionSheet_ ] ];
-
-    if ( ![ _activeActionSheets count ] )
-    {
+    
+    [_activeActionSheets removeObject:[self objectToRemove:actionSheet]];
+    
+    if (![_activeActionSheets count]) {
+        
         _activeActionSheets = nil;
     }
 }
@@ -57,7 +57,7 @@
 
 - (NSUInteger)count
 {
-    return [ _activeActionSheets count ];
+    return [_activeActionSheets count];
 }
 
 - (JFFPendingActionSheet *)objectToRemove:(JFFActionSheet *)actionSheet_
@@ -70,8 +70,7 @@
 
 - (NSArray *)allActionSheets
 {
-    return [_activeActionSheets map:^id(JFFPendingActionSheet *object)
-    {
+    return [_activeActionSheets map:^id(JFFPendingActionSheet *object) {
         return object.actionSheet;
     }];
 }

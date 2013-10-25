@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef JFFAlertView*(^JFFAlertViewBuilder)();
+typedef JFFAlertView *(^JFFAlertViewBuilder)(void);
 
 @interface JFFAlertView (Async)
 

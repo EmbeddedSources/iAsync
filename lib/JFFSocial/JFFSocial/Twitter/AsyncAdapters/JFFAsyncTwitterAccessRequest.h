@@ -2,4 +2,4 @@
 
 #import <Foundation/Foundation.h>
 
-JFFAsyncOperation jffTwitterAccessRequestLoader();
+JFFAsyncOperation jffTwitterAccessRequestLoader(void);

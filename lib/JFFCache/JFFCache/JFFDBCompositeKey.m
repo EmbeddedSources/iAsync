@@ -1,7 +1,5 @@
 #import "JFFDBCompositeKey.h"
 
-#import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>
-
 @interface JFFDBCompositeKey ()
 
 @property (nonatomic) NSMutableArray *keys;

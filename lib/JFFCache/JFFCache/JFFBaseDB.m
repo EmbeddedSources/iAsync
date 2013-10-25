@@ -1,7 +1,5 @@
 #import "JFFBaseDB.h"
-#import "JFFDBCompositeKey.h"
 
-#import "NSString+CompositeKey.h"
 #import "NSObject+CompositeKey.h"
 #import "NSString+CacheFSManager.h"
 

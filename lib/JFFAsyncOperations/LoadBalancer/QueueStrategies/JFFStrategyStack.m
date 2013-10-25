@@ -1,7 +1,6 @@
 #import "JFFStrategyStack.h"
 
 #import "JFFQueueState.h"
-#import "JFFBaseLoaderOwner.h"
 
 @implementation JFFStrategyStack
 
