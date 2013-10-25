@@ -1,7 +1,7 @@
 #import <JFFNetwork/JNUrlConnectionCallbacks.h>
 #import <Foundation/Foundation.h>
 
-@protocol JNUrlConnection < NSObject >
+@protocol JNUrlConnection <NSObject>
 
 @required
    - (void)start;

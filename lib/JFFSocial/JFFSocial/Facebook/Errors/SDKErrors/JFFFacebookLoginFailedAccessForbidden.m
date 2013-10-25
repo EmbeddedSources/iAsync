@@ -1,7 +1,5 @@
 #import "JFFFacebookLoginFailedAccessForbidden.h"
 
-#import <JFFJsonTools/JFFJsonValidator.h>
-
 #import <FacebookSDK/FacebookSDK.h>
 
 @implementation JFFFacebookLoginFailedAccessForbidden

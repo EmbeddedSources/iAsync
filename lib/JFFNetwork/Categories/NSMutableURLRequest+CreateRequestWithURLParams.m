@@ -1,6 +1,5 @@
 #import "NSMutableURLRequest+CreateRequestWithURLParams.h"
 
-#import "JNNsUrlConnection.h"
 #import "JFFURLConnectionParams.h"
 
 @implementation NSMutableURLRequest (CreateRequestWithURLParams)

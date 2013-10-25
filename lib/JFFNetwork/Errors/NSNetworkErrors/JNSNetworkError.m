@@ -75,7 +75,8 @@
 
 - (NSString *)errorLogDescription
 {
-    return [[NSString alloc] initWithFormat:@"%@ nativeError:%@ context:%@",
+    return [[NSString alloc] initWithFormat:@"%@ : %@ nativeError:%@ context:%@",
+            [self class],
             [self localizedDescription],
             _nativeError,
             _context];

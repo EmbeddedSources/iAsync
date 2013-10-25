@@ -1,6 +1,5 @@
 #import "NSArray+FqFriendsAPIParser.h"
 
-#import "NSDictionary+FqAPIResponseParser.h"
 #import "FoursquareUserModel+APIParser.h"
 
 #import "JFFFoursquaerAPIInvalidResponseError.h"

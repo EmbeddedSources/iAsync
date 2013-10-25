@@ -4,8 +4,6 @@
 #import "JNConstants.h"
 #import "JNGzipErrorsLogger.h"
 
-#include <zconf.h>
-
 @implementation JNZipDecoder
 
 - (NSData *)decodeData:(NSData *)encodedData
@@ -17,7 +15,7 @@
         return nil;
     }
     
-    Bytef decodedBuffer[ kJNMaxBufferSize ] = {0};
+    Bytef decodedBuffer[kJNMaxBufferSize] = {0};
     uLongf decodedSize = kJNMaxBufferSize;
     
     int uncompressResult = uncompress(decodedBuffer    , &decodedSize        ,

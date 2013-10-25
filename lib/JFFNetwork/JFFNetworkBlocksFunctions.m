@@ -15,7 +15,8 @@
 
 static JFFAnalyzer downloadStatusCodeResponseAnalyzer(id<NSCopying> context)
 {
-    return ^id(id< JNUrlResponse > response, NSError **outError) {
+    return ^id(id<JNUrlResponse> response, NSError **outError) {
+        
         NSInteger statusCode = [response statusCode];
         
         if ([JHttpFlagChecker isDownloadErrorFlag:statusCode]) {

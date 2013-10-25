@@ -2,7 +2,7 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface JFFFacebookGeneralRequestLoader : NSObject < JFFAsyncOperationInterface >
+@interface JFFFacebookGeneralRequestLoader : NSObject <JFFAsyncOperationInterface>
 @end
 
 @implementation JFFFacebookGeneralRequestLoader

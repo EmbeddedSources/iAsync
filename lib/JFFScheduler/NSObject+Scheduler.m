@@ -34,8 +34,8 @@
         }
         
         numOfArgs == 1
-        ? objc_msgSend(unretainedSelf, selector, userInfo)
-        : objc_msgSend(unretainedSelf, selector);
+        ?objc_msgSend(unretainedSelf, selector, userInfo)
+        :objc_msgSend(unretainedSelf, selector);
     };
     
     JFFCancelScheduledBlock cancel = [scheduler addBlock:block

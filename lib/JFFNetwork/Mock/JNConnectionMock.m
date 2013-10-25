@@ -1,10 +1,9 @@
 #import "JNConnectionMock.h"
 
-
 #import "JNUrlConnection.h"
 #import <objc/runtime.h>
 
-typedef void (^NSImplBlock)( id self );
+typedef void (^NSImplBlock)(id self);
 
 @implementation JNConnectionMock
 {

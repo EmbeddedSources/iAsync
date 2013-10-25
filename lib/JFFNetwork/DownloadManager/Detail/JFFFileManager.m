@@ -1,10 +1,5 @@
 #import "JFFFileManager.h"
 
-#import <JFFUtils/NSString/NSString+PathExtensions.h>
-
-#include <sys/types.h>
-#include <sys/stat.h>
-
 @implementation JFFFileManager
 
 + (FILE *)createFileForPath:(NSString *)path

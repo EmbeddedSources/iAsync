@@ -3,11 +3,7 @@
 #import "JFFFacebookSDKErrors.h"
 #import "JFFFacebookAuthorizeError.h"
 
-#import <JFFScheduler/JFFScheduler.h>
-
 #import <FacebookSDK/FacebookSDK.h>
-
-#import <Accounts/Accounts.h>
 
 @interface JFFAsyncFacebookLoginWithPublishPermissions : NSObject <JFFAsyncOperationInterface>
 @end

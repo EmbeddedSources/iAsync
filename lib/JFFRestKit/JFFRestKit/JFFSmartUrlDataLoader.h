@@ -1,5 +1,4 @@
 #import <JFFAsyncOperations/JFFAsyncOperationsBlockDefinitions.h>
-#import <JFFRestKit/JFFRestKitCache.h>
 
 #import <Foundation/Foundation.h>
 

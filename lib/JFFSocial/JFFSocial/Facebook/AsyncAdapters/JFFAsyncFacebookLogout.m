@@ -2,8 +2,6 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 
-#import <Accounts/Accounts.h>
-
 @interface JFFAsyncFacebookLogout : NSObject <JFFAsyncOperationInterface>
 @end
 
@@ -53,7 +51,8 @@
 
 JFFAsyncOperation jffFacebookLogout(FBSession *session, BOOL renewSystemAuthorization)
 {
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>(void) {
+        
         JFFAsyncFacebookLogout *object = [JFFAsyncFacebookLogout new];
         
         object->_session = session;

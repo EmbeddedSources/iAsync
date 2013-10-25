@@ -25,14 +25,14 @@
 
 - (NSArray *)cookiesForURL:(NSURL *)url
 {
-    NSArray *result = [_allCookies selectArray:^BOOL(NSHTTPCookie *cookie)
-    {
-        BOOL result = [cookie matchesURL:url];
+    NSArray *result = [_allCookies selectArray:^BOOL(NSHTTPCookie *cookie) {
         
-        result &= cookie.expiresDate == nil
+        BOOL matches = [cookie matchesURL:url];
+        
+        matches &= cookie.expiresDate == nil
             || [cookie.expiresDate compare:[NSDate new]] == NSOrderedDescending;
         
-        return result;
+        return matches;
     }];
     
     return result;

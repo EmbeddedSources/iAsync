@@ -4,23 +4,20 @@
 
 + (BOOL)isValidLocation:(NSString *)location
 {
-    if ( nil == location )
-    {
+    if (nil == location) {
+        
         return NO;
-    }
-    else if ( [ location isEqualToString: @"" ] )
-    {
+    } else if ([location isEqualToString:@""]) {
+        
         return NO;
-    }
-    else if ( [ location hasPrefix: @"/" ] )
-    {
+    } else if ([location hasPrefix:@"/"]) {
+        
         return YES;
-    }
-    else if ( [ self isLocationValidURL: location ] )
-    {
+    } else if ([self isLocationValidURL:location]) {
+        
         return NO;
     }
-
+    
     return NO;
 }
 

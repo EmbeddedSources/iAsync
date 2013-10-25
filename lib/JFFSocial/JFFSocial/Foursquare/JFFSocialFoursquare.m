@@ -18,7 +18,6 @@
 
 @implementation JFFSocialFoursquare
 
-
 #pragma mark - Common
 
 + (JFFAsyncOperationBinder)serverResponseAnalyzer

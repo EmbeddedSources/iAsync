@@ -1,7 +1,5 @@
 #import "JFFFacebookLoginFailedPasswordWasChanged.h"
 
-#import <JFFJsonTools/JFFJsonValidator.h>
-
 #import <FacebookSDK/FacebookSDK.h>
 
 @implementation JFFFacebookLoginFailedPasswordWasChanged

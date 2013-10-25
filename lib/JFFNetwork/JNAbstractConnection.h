@@ -1,7 +1,7 @@
 #import <JFFNetwork/JNUrlConnection.h>
 #import <Foundation/Foundation.h>
 
-@interface JNAbstractConnection : NSObject < JNUrlConnection >
+@interface JNAbstractConnection : NSObject <JNUrlConnection>
 
 @property (nonatomic, copy) JFFDidReceiveResponseHandler didReceiveResponseBlock;
 @property (nonatomic, copy) JFFDidReceiveDataHandler     didReceiveDataBlock    ;

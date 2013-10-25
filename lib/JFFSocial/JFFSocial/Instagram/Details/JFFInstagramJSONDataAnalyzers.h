@@ -2,11 +2,11 @@
 
 #import <Foundation/Foundation.h>
 
-JFFAsyncOperationBinder jsonDataToAuthedAccountBinder();
+JFFAsyncOperationBinder jsonDataToAuthedAccountBinder(void);
 
-JFFAsyncOperationBinder jsonDataToOneAccountBinder();
-JFFAsyncOperationBinder jsonDataToAccountsBinder();
+JFFAsyncOperationBinder jsonDataToOneAccountBinder(void);
+JFFAsyncOperationBinder jsonDataToAccountsBinder(void);
 
-JFFAsyncOperationBinder jsonDataToMediaItems();
+JFFAsyncOperationBinder jsonDataToMediaItems(void);
 
-JFFAsyncOperationBinder jsonDataToComment();
+JFFAsyncOperationBinder jsonDataToComment(void);

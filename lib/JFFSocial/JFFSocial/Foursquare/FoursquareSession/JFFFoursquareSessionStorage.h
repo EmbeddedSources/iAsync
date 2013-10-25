@@ -1,3 +1,5 @@
+#include <JFFAsyncOperations/JFFAsyncOperationsBlockDefinitions.h>
+
 #import <Foundation/Foundation.h>
 
 @interface JFFFoursquareSessionStorage : NSObject

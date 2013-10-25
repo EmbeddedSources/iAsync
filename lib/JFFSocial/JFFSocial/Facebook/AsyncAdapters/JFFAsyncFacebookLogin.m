@@ -5,8 +5,6 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 
-#import <Accounts/Accounts.h>
-
 @interface JFFAsyncFacebookLogin : NSObject <JFFAsyncOperationInterface>
 @end
 

@@ -21,25 +21,25 @@
 
 - (id<JNHttpDecoder>)decoderForHeaderString:(NSString *)headerString
 {
-    NSDictionary* decoderClasses_ = @{ @"gzip": [ JNGzipDecoder class ] };
-
-    Class decoderClass_ = decoderClasses_[headerString];
-    if ( Nil == decoderClass_ )
-    {
-        return [ self stubDecoder ];
+    NSDictionary *decoderClasses = @{ @"gzip": [JNGzipDecoder class] };
+    
+    Class decoderClass = decoderClasses[headerString];
+    if (Nil == decoderClass) {
+        
+        return [self stubDecoder];
     }
     
-    return [ [ decoderClass_ alloc ] initWithContentLength: self.contentLength ];
+    return [[decoderClass alloc] initWithContentLength:_contentLength];
 }
 
 - (id<JNHttpDecoder>)gzipDecoder
 {
-    return [ [ JNGzipDecoder alloc ] initWithContentLength: self.contentLength ];
+    return [[JNGzipDecoder alloc] initWithContentLength:_contentLength];
 }
 
 - (id<JNHttpDecoder>)stubDecoder
 {
-    return [ JNStubDecoder new ];
+    return [JNStubDecoder new];
 }
 
 @end

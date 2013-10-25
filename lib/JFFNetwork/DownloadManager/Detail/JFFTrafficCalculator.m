@@ -6,21 +6,21 @@
 
 @interface JFFDownloadedBytesPerDate : NSObject
 
-@property ( nonatomic ) NSDate* date;
-@property ( nonatomic ) NSUInteger bytesCount;
+@property (nonatomic) NSDate *date;
+@property (nonatomic) NSUInteger bytesCount;
 
 @end
 
 @implementation JFFDownloadedBytesPerDate
 
-- (instancetype)initWithBytesCount:( NSUInteger )bytesCount_
+- (instancetype)initWithBytesCount:(NSUInteger)bytesCount
 {
     self = [super init];
     
     if (self) {
         
         _date       = [NSDate new];
-        _bytesCount = bytesCount_;
+        _bytesCount = bytesCount;
     }
 
     return self;
@@ -31,34 +31,34 @@
 
 @implementation JFFTrafficCalculator
 {
-    NSMutableArray* _downloadingSpeedInfo;
+    NSMutableArray *_downloadingSpeedInfo;
     __unsafe_unretained id< JFFTrafficCalculatorDelegate > _delegate;
-    JFFScheduler* _scheduler;
+    JFFScheduler *_scheduler;
 }
 
-- (instancetype)initWithDelegate:(id<JFFTrafficCalculatorDelegate>)delegate_
+- (instancetype)initWithDelegate:(id<JFFTrafficCalculatorDelegate>)delegate
 {
-    self = [ super init ];
-
-    if ( self )
-    {
-        _delegate = delegate_;
-        _downloadingSpeedInfo = [ NSMutableArray new ];
+    self = [super init];
+    
+    if (self) {
+        
+        _delegate = delegate;
+        _downloadingSpeedInfo = [NSMutableArray new];
     }
-
+    
     return self;
 }
 
 - (void)removeOldItemsFromDownloadingSpeedInfo
 {
-    static NSTimeInterval average_speed_duration_ = 3.0;
-
-    JFFDownloadedBytesPerDate* lastItem_ = [ _downloadingSpeedInfo lastObject ];
-    while ( lastItem_ &&
-           ( [ [ NSDate new ] timeIntervalSince1970 ] - [ lastItem_.date timeIntervalSince1970 ] > average_speed_duration_ ) )
+    static NSTimeInterval averageSpeedDuration = 3.0;
+    
+    JFFDownloadedBytesPerDate *lastItem = [_downloadingSpeedInfo lastObject];
+    while (lastItem &&
+           ([[NSDate new] timeIntervalSince1970] - [lastItem.date timeIntervalSince1970] > averageSpeedDuration))
     {
-        [ _downloadingSpeedInfo removeLastObject ];
-        lastItem_ = [ _downloadingSpeedInfo lastObject ];
+        [_downloadingSpeedInfo removeLastObject];
+        lastItem = [_downloadingSpeedInfo lastObject];
     }
 }
 
@@ -96,7 +96,7 @@
 - (void)stop
 {
     _scheduler = nil;
-
+    
     _downloadingSpeedInfo = [NSMutableArray new];
     [self calculateDownloadSpeed];
 }

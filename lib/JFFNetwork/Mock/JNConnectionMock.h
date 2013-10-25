@@ -3,10 +3,10 @@
 
 @interface JNConnectionMock : NSObject< JNMock >
 
+@property (nonatomic, readonly) BOOL isMockEnabled;
+
 - (instancetype)initWithConnectionClass:(Class )connectionClass
                                  action:(void (^)(void))action //JFFSimpleBlock
                     executeOriginalImpl:(BOOL)yesNo;
-
-@property (nonatomic, readonly) BOOL isMockEnabled;
 
 @end

@@ -2,8 +2,8 @@
 
 #import "NSString+XQueryComponents.h"
 
-static NSString* const queryComponentFormat    = @"%@=%@";
-static NSString* const queryComponentSeparator = @"&";
+static NSString *const queryComponentFormat    = @"%@=%@";
+static NSString *const queryComponentSeparator = @"&";
 
 @interface NSObject (XQueryComponents)
 

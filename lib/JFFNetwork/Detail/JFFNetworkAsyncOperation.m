@@ -1,8 +1,8 @@
 #import "JFFNetworkAsyncOperation.h"
 
-#import "JFFURLConnectionParams.h"
-#import "JNConnectionsFactory.h"
 #import "JNUrlConnection.h"
+#import "JNConnectionsFactory.h"
+#import "JFFURLConnectionParams.h"
 
 #import "JFFNetworkResponseDataCallback.h"
 #import "JFFNetworkUploadProgressCallback.h"

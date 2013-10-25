@@ -1,6 +1,5 @@
 #import "JFFJsonValidator.h"
 
-#import "JFFJsonValidationError.h"
 #import "NSObject+JFFJsonObjectValidator.h"
 
 #import "JFFOptionalObjectFieldKey.h"

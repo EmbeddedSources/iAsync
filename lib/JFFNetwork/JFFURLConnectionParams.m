@@ -27,7 +27,7 @@
 
 - (NSString *)description
 {
-    static NSString *format = @"<JFFURLConnectionParams url:%@, httpBody:%@, headers:%@, useLiveConnection:%d>";
+    static NSString *const format = @"<JFFURLConnectionParams url:%@, httpBody:%@, headers:%@, useLiveConnection:%d>";
     return [[NSString alloc] initWithFormat:format, _url, [_httpBody toString], _headers, _useLiveConnection];
 }
 

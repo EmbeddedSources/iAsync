@@ -1,7 +1,5 @@
 #import "JFFSocialFacebookUser+Parser.h"
 
-#import <JFFJsonTools/JFFJsonValidator.h>
-
 @implementation JFFSocialFacebookUser (Parser)
 
 + (instancetype)newSocialFacebookUserWithJsonObject:(NSDictionary *)jsonObject

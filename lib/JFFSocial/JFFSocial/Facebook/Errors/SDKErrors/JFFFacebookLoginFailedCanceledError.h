@@ -3,5 +3,4 @@
 #import <Foundation/Foundation.h>
 
 @interface JFFFacebookLoginFailedCanceledError : JFFFacebookSDKErrors
-
 @end

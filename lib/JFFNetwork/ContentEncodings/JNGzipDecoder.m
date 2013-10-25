@@ -2,7 +2,6 @@
 
 #import "JNGzipErrorsLogger.h"
 #import "JNGzipCustomErrors.h"
-#import "JNConstants.h"
 
 NSString* kGzipErrorDomain = @"gzip.error";
 

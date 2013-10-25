@@ -1,9 +1,8 @@
 #import "JFFSmartUrlDataLoader.h"
 
-#import "JFFRestKitError.h"
 #import "JFFResponseDataWithUpdateData.h"
 
-#include <assert.h>
+#import <JFFRestKit/JFFRestKitCache.h>
 
 @implementation NSObject (JFFSmartDataLoaderLogResponse)
 

@@ -1,7 +1,5 @@
 #import "NSMutableDictionary+DownloadingFileInfo.h"
 
-#import <JFFUtils/NSString/NSString+PathExtensions.h>
-
 @implementation NSMutableDictionary (DownloadingFileInfo)
 
 + (NSString *)storePathForDownloadFilesInfo
