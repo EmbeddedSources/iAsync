@@ -1,13 +1,8 @@
-//
-//  UIImage+JpegPackImage.h
-//  JFFJpeg
-//
-//  Created by Владимир Горбенко on 25.10.13.
-//  Copyright (c) 2013 EmbeddedSources. All rights reserved.
-//
-
-
+#import <UIKit/UIKit.h>
 
 @interface UIImage (JpegPackImage)
+
+- (void)jffJpegPackImageToDataFilePath:(NSString *)filePath
+                           compression:(CGFloat)compression;
 
 @end

@@ -63,8 +63,6 @@
 		4CB4C1B01770539900F275BC /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4C1AE1770539900F275BC /* UIImage+ImageWithColor.m */; };
 		4CB4C1B31770592B00F275BC /* UIImage+DrawImageInImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB4C1B11770592B00F275BC /* UIImage+DrawImageInImage.h */; };
 		4CB4C1B41770592B00F275BC /* UIImage+DrawImageInImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4C1B21770592B00F275BC /* UIImage+DrawImageInImage.m */; };
-		4CB4C1B71770667E00F275BC /* UIImage+JpegPackImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB4C1B51770667E00F275BC /* UIImage+JpegPackImage.h */; };
-		4CB4C1B81770667E00F275BC /* UIImage+JpegPackImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4C1B61770667E00F275BC /* UIImage+JpegPackImage.m */; };
 		4CBBA1A917662275007317E6 /* JFFCameraFlashModeType.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBBA1A517662275007317E6 /* JFFCameraFlashModeType.h */; };
 		4CBBA1AA17662275007317E6 /* JFFPhotoCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBBA1A617662275007317E6 /* JFFPhotoCamera.h */; };
 		4CBBA1AB17662275007317E6 /* JFFPhotoCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBBA1A717662275007317E6 /* JFFPhotoCamera.m */; };
@@ -180,8 +178,6 @@
 		4CB4C1AE1770539900F275BC /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
 		4CB4C1B11770592B00F275BC /* UIImage+DrawImageInImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DrawImageInImage.h"; sourceTree = "<group>"; };
 		4CB4C1B21770592B00F275BC /* UIImage+DrawImageInImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+DrawImageInImage.m"; sourceTree = "<group>"; };
-		4CB4C1B51770667E00F275BC /* UIImage+JpegPackImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JpegPackImage.h"; sourceTree = "<group>"; };
-		4CB4C1B61770667E00F275BC /* UIImage+JpegPackImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JpegPackImage.m"; sourceTree = "<group>"; };
 		4CBBA1A517662275007317E6 /* JFFCameraFlashModeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCameraFlashModeType.h; sourceTree = "<group>"; };
 		4CBBA1A617662275007317E6 /* JFFPhotoCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPhotoCamera.h; sourceTree = "<group>"; };
 		4CBBA1A717662275007317E6 /* JFFPhotoCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFPhotoCamera.m; sourceTree = "<group>"; };
@@ -403,8 +399,6 @@
 				4CB4C1AE1770539900F275BC /* UIImage+ImageWithColor.m */,
 				4CB4C1B11770592B00F275BC /* UIImage+DrawImageInImage.h */,
 				4CB4C1B21770592B00F275BC /* UIImage+DrawImageInImage.m */,
-				4CB4C1B51770667E00F275BC /* UIImage+JpegPackImage.h */,
-				4CB4C1B61770667E00F275BC /* UIImage+JpegPackImage.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -536,7 +530,6 @@
 				4CB4C1A71770535700F275BC /* UIImage+FixOrientation.h in Headers */,
 				4CB4C1AF1770539900F275BC /* UIImage+ImageWithColor.h in Headers */,
 				4CB4C1B31770592B00F275BC /* UIImage+DrawImageInImage.h in Headers */,
-				4CB4C1B71770667E00F275BC /* UIImage+JpegPackImage.h in Headers */,
 				4C3D54311772033600EE1C73 /* UIImage+RotateImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -670,7 +663,6 @@
 				4CB4C1A81770535700F275BC /* UIImage+FixOrientation.m in Sources */,
 				4CB4C1B01770539900F275BC /* UIImage+ImageWithColor.m in Sources */,
 				4CB4C1B41770592B00F275BC /* UIImage+DrawImageInImage.m in Sources */,
-				4CB4C1B81770667E00F275BC /* UIImage+JpegPackImage.m in Sources */,
 				4C3D54321772033600EE1C73 /* UIImage+RotateImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
