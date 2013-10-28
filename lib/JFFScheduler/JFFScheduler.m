@@ -44,8 +44,10 @@ char jffSchedulerKey;
 -(void)dealloc
 {
     [self cancelAllScheduledOperations];
-    
+ 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
     dispatch_release(_queue);
+#endif
 }
 
 - (id)init
@@ -54,7 +56,9 @@ char jffSchedulerKey;
     
     if (self) {
         _queue = dispatch_get_current_queue();
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
         dispatch_retain(_queue);
+#endif
         _cancelBlocks = [NSMutableArray new];
     }
     
@@ -91,7 +95,9 @@ char jffSchedulerKey;
             return;
         
         dispatch_source_cancel(timer);
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
         dispatch_release(timer);
+#endif
         timer = NULL;
         
         [unretainedSelf->_cancelBlocks removeObject:unretainedCancelTimerBlockHolder.simpleBlock];

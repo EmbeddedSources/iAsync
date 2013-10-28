@@ -23,7 +23,10 @@
     NSAssert(!_progressBlock   , @"should be nil");
     NSAssert(!_loadDataBlock   , @"should be nil");
     
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
     dispatch_release(_currentQueue);
+#endif
+    
     _currentQueue = NULL;
 }
 
@@ -41,7 +44,10 @@
         self.progressBlock    = progressBlock;
         
         _currentQueue = currentQueue;
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
         dispatch_retain(_currentQueue);
+#endif
         
         _barrier = barrier;
     }

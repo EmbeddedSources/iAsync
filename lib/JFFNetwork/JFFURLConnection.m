@@ -130,11 +130,14 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 -(void)dealloc
 {
+    // NSLog( @"[JFFUrlConnection] : dealloc" );
     [ self cancel ];
 }
 
 -(id)initWithURLConnectionParams:( JFFURLConnectionParams* )params_
 {
+    // NSLog( @"[JFFUrlConnection] : initWithURLConnectionParams" );
+    
     self = [ super init ];
 
     if ( self )
@@ -302,11 +305,12 @@ static void readStreamCallback(CFReadStreamRef stream,
     dispatch_block_t cleanupBlock =
     ^{
         dispatch_queue_t zipQueue = [ weakSelf zipQueue ];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
         if ( NULL != zipQueue )
         {
             dispatch_release( zipQueue );
         }
-        
+#endif
         weakSelf.zipQueue = NULL;
     };
     

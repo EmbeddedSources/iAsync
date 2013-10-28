@@ -49,7 +49,9 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 - (void)dealloc
 {
     sqlite3_close(_db);
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
     dispatch_release(_dispatchQueue);
+#endif
 }
 
 - (id)initWithDBName:(NSString *)dbName
@@ -59,8 +61,11 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     if (self) {
         
         _dispatchQueue = getOrCreateDispatchQueueForFile(dbName);
+    
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
         dispatch_retain(_dispatchQueue);
-        
+#endif
+    
         NSString *const dbPath = [NSString documentsPathByAppendingPathComponent:dbName];
         
         _folder = [dbPath stringByDeletingLastPathComponent];

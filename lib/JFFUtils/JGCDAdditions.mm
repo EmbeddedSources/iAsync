@@ -47,7 +47,10 @@ void dispatch_queue_release_by_label(const char *label)
         auto position = dispatchByLabel.find(labelStr);
         if (position != dispatchByLabel.end()) {
             dispatch_queue_t queue = position->second;
+            
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
             dispatch_release(queue);
+#endif
             
             dispatchByLabel.erase(position);
         }

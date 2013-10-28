@@ -24,14 +24,20 @@
         container.target = nil;
     };
     dispatch_async(_dispatchQueue, releaseListener);
+    
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
     dispatch_release(_dispatchQueue);
+#endif
 }
 
 - (id)initWithTargetFactory:(JFFObjectFactory)factory
               dispatchQueue:(dispatch_queue_t)dispatchQueue
 {
     _dispatchQueue = dispatchQueue;
+    
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
     dispatch_retain(_dispatchQueue);
+#endif
     
     factory = [factory copy];
     void (^releaseListener)(void) = ^ {
