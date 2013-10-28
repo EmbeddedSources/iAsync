@@ -279,23 +279,6 @@
 		CEF162E816760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF162E616760F1C00B0B6E4 /* JFFNetworkUploadProgressCallback.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		7E894BC0158239BD00557C36 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7E54C1D8157F8687007D89F1;
-			remoteInfo = DDUrlBuilder;
-		};
-		7E894BC2158239BD00557C36 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7E54C1F1157F889A007D89F1;
-			remoteInfo = DDUrlBuilderTest;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		1B15CCB11535CAF4005F2B56 /* JFFNetworkAsyncOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFNetworkAsyncOperation.h; sourceTree = "<group>"; };
 		1B15CCB21535CAF4005F2B56 /* JFFNetworkAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFNetworkAsyncOperation.m; sourceTree = "<group>"; };
@@ -367,7 +350,6 @@
 		7E5787EC16E0DE8E006A1FDB /* JNetworkError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNetworkError.m; sourceTree = "<group>"; };
 		7E5787ED16E0DE8E006A1FDB /* JStreamError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JStreamError.h; sourceTree = "<group>"; };
 		7E5787EE16E0DE8E006A1FDB /* JStreamError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JStreamError.m; sourceTree = "<group>"; };
-		7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DDUrlBuilder.xcodeproj; path = "../../../davedelong-Demos/DDURLBuilder/DDUrlBuilder/DDUrlBuilder.xcodeproj"; sourceTree = "<group>"; };
 		7E8F204314F9494300588C7D /* JFFNetworkFW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = JFFNetworkFW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8F204714F9494300588C7D /* JFFNetworkFW-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFNetworkFW-Info.plist"; sourceTree = "<group>"; };
 		7E8F204914F9494300588C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -579,15 +561,6 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
-		7E894BBC158239BD00557C36 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7E894BC1158239BD00557C36 /* libDDUrlBuilder.a */,
-				7E894BC3158239BD00557C36 /* DDUrlBuilderTest.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7E8F204514F9494300588C7D /* JFFNetworkFW */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,7 +605,6 @@
 		8D5AE6DD13F3E6C600EB6143 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */,
 				8D5AE6DE13F3E6C600EB6143 /* Foundation.framework */,
 				5383421A141E6A3B00473CF2 /* libz.dylib */,
 				65802B23148BFC230040A93A /* Cocoa.framework */,
@@ -1001,12 +973,6 @@
 			mainGroup = 8D5AE6D013F3E6C500EB6143;
 			productRefGroup = 8D5AE6DC13F3E6C600EB6143 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 7E894BBC158239BD00557C36 /* Products */;
-					ProjectRef = 7E894BBB158239BD00557C36 /* DDUrlBuilder.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8D5AE6DA13F3E6C600EB6143 /* JFFNetwork */,
@@ -1016,23 +982,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		7E894BC1158239BD00557C36 /* libDDUrlBuilder.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libDDUrlBuilder.a;
-			remoteRef = 7E894BC0158239BD00557C36 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E894BC3158239BD00557C36 /* DDUrlBuilderTest.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = DDUrlBuilderTest.octest;
-			remoteRef = 7E894BC2158239BD00557C36 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7E8F203F14F9494300588C7D /* Resources */ = {
