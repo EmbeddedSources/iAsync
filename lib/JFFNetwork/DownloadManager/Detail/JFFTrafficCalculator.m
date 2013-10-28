@@ -72,19 +72,19 @@
         
         NSRange range = {0, [_downloadingSpeedInfo count] - 1};
         NSArray *arrayExcludeLast = [_downloadingSpeedInfo subarrayWithRange:range];
-
+        
         NSUInteger donloadedBytes = 0;
         for (JFFDownloadedBytesPerDate *item in arrayExcludeLast) {
             
             donloadedBytes += item.bytesCount;
         }
         
-        JFFDownloadedBytesPerDate *firstItem = arrayExcludeLast[ 0 ];
+        JFFDownloadedBytesPerDate *firstItem = arrayExcludeLast[0];
         NSDate *lastDate = ([arrayExcludeLast count] == 1)?[NSDate new]:firstItem.date;
 
-        JFFDownloadedBytesPerDate* lastItem_ = [ arrayExcludeLast lastObject ];
+        JFFDownloadedBytesPerDate *lastItem = [arrayExcludeLast lastObject];
         
-        NSTimeInterval timeDiff = ([lastDate timeIntervalSince1970] - [lastItem_.date timeIntervalSince1970]);
+        NSTimeInterval timeDiff = ([lastDate timeIntervalSince1970] - [lastItem.date timeIntervalSince1970]);
         NSTimeInterval result = donloadedBytes / timeDiff;
         
         speed = (float)result;
