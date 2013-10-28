@@ -48,6 +48,16 @@
         NSUInteger instancesCount = [number unsignedIntValue];
         NSNumber* instancesCountNum = @(++instancesCount);
         self->_instancesNumberByClassName[className] = instancesCountNum;
+        
+        NSLog
+        (
+            @"======incrementInstancesCountForClass======\n"
+            @"className : %@ \n"
+            @"oldCount  : %@ \n"
+            @"newCount  : %@ \n"
+            @"===========================================\n",
+            className, number, instancesCountNum
+        );
     }
 }
 
@@ -59,6 +69,16 @@
         NSUInteger instancesCount   = [number unsignedIntValue];
         NSNumber* instancesCountNum = @(--instancesCount);
         self->_instancesNumberByClassName[className] = instancesCountNum;
+        
+        NSLog
+        (
+         @"======decrementInstancesCountForClass======\n"
+         @"className : %@ \n"
+         @"oldCount  : %@ \n"
+         @"newCount  : %@ \n"
+         @"===========================================\n",
+         className, number, instancesCountNum
+        );
     }
 }
 
