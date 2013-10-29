@@ -11,6 +11,11 @@
 #endif
 
 #ifdef __OBJC__
+    #import <JFFJsonTools/JFFJsonTools.h>
+    #import <JFFTestTools/JFFTestTools.h>
+    #import <JFFUtils/JFFUtils.h>
+    
+    #import <GHUnitIOS/GHUnit.h>
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
