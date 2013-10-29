@@ -3,7 +3,7 @@
 
 @implementation jRestKitXMLToolsTest
 
--(void)testDocumentOfValidXML
+- (void)testDocumentOfValidXML
 {
     NSString* xml_ = @"<user><item></item><item></item></user>";
 
@@ -17,50 +17,50 @@
     GHAssertNil( error_, @"ok" );
 }
 
--(void)testDocumentOfInvalidXML
+- (void)testDocumentOfInvalidXML
 {
-    NSString* xml_ = @"<user><item></item><item></user>";
-
-    NSData* data_ = [ xml_ dataUsingEncoding: NSUTF8StringEncoding ];
-
-    NSError* error_;
-
-    CXMLDocument* document_ = xmlDocumentWithData( data_, &error_ );
-
-    GHAssertNil( document_, @"ok" );
-    GHAssertNotNil( error_, @"ok" );
+    NSString *xml_ = @"<user><item></item><item></user>";
+    
+    NSData *data = [xml dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError *error;
+    
+    CXMLDocument *document = xmlDocumentWithData(data, &error);
+    
+    GHAssertNil(document, @"ok");
+    GHAssertNotNil(error, @"ok");
 }
 
--(void)testDocumentOfInvalidXMLDoc
+- (void)testDocumentOfInvalidXMLDoc
 {
-    NSMutableData* data_ = [ NSMutableData new ];
-
+    NSMutableData *data_ = [NSMutableData new];
+    
     char bytes_[] = { 0,0,0,0 };
-    [ data_ appendBytes: bytes_ length: sizeof( bytes_ )/sizeof( char ) ];
-
+    [data_ appendBytes:bytes_ length:sizeof(bytes_)/sizeof(char)];
+    
     NSError* error_;
-
-    CXMLDocument* document_ = xmlDocumentWithData( data_, &error_ );
-
-    GHAssertNil( document_, @"ok" );
-    GHAssertNotNil( error_, @"ok" );
+    
+    CXMLDocument *document_ = xmlDocumentWithData(data_, &error_);
+    
+    GHAssertNil(document_, @"ok");
+    GHAssertNotNil(error_, @"ok");
 }
 
--(void)testDocumentOfEmptyXML
+- (void)testDocumentOfEmptyXML
 {
     {
-        NSError* error_;
-        CXMLDocument* document_ = xmlDocumentWithData( [ NSData new ], &error_ );
-
-        GHAssertNil( document_, @"ok" );
-        GHAssertTrue( [ error_ isMemberOfClass: [ JFFRestKitParseEmptyXMLError class ] ], @"ok" );
+        NSError *error_;
+        CXMLDocument *document_ = xmlDocumentWithData([NSData new], &error_);
+        
+        GHAssertNil(document_, @"ok");
+        GHAssertTrue([error_ isMemberOfClass:[JFFRestKitParseEmptyXMLError class]], @"ok");
     }
     {
-        NSError* error_;
-        CXMLDocument* document_ = xmlDocumentWithData( nil, &error_ );
-    
-        GHAssertNil( document_, @"ok" );
-        GHAssertTrue( [ error_ isMemberOfClass: [ JFFRestKitParseEmptyXMLError class ] ], @"ok" );
+        NSError *error_;
+        CXMLDocument *document_ = xmlDocumentWithData(nil, &error_);
+        
+        GHAssertNil(document_, @"ok");
+        GHAssertTrue([error_ isMemberOfClass:[JFFRestKitParseEmptyXMLError class]], @"ok");
     }
 }
 

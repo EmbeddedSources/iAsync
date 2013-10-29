@@ -10,6 +10,8 @@
 		1B0BFD0C1561477700853028 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0BFD0B1561477700853028 /* libxml2.dylib */; };
 		1B0E896C1563FA9C00825E3C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E896B1563FA9C00825E3C /* libc++.dylib */; };
 		1BEC4832156A27060099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEC4831156A27060099DA6D /* libstdc++.dylib */; };
+		4CA4F5A8181FD2D200851EA3 /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF0F215181FC1CB00BEA22F /* libJFFTestTools.a */; };
+		4CB91709181FBD4000EBA05C /* JFFDataLoadersToolsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB91708181FBD4000EBA05C /* JFFDataLoadersToolsTests.m */; };
 		65E308201531EE1B00E0B781 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3081F1531EE1B00E0B781 /* UIKit.framework */; };
 		65E308221531EE1B00E0B781 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308211531EE1B00E0B781 /* Foundation.framework */; };
 		65E308241531EE1B00E0B781 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E308231531EE1B00E0B781 /* CoreGraphics.framework */; };
@@ -30,6 +32,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4CA4F5A6181FD2C800851EA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF0F207181FC1CB00BEA22F /* JFFTestTools.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BE0542A154826DA00270B58;
+			remoteInfo = JFFTestTools;
+		};
+		4CA4F5B8181FD4CE00851EA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE19F65716AED89A005B15B4 /* JFFNetwork.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D5AE6DA13F3E6C600EB6143;
+			remoteInfo = JFFNetwork;
+		};
+		4CA4F5BA181FD4CE00851EA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65E308B91531F1E800E0B781 /* JFFScheduler.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFScheduler;
+		};
+		4CB91710181FBD4000EBA05C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65E3084E1531EECF00E0B781 /* JFFRestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C043A4A181E9D8200246A88;
+			remoteInfo = JFFRestKitTests;
+		};
+		4CF0F214181FC1CB00BEA22F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF0F207181FC1CB00BEA22F /* JFFTestTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1BE0542B154826DA00270B58;
+			remoteInfo = JFFTestTools;
+		};
 		65E308461531EEC500E0B781 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65E3083F1531EEC500E0B781 /* JFFUtils.xcodeproj */;
@@ -149,13 +186,6 @@
 			remoteGlobalIDString = 7E8F202A14F9484F00588C7D;
 			remoteInfo = JFFSchedulerFW;
 		};
-		65E308CB1531F1F500E0B781 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65E308B91531F1E800E0B781 /* JFFScheduler.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = JFFScheduler;
-		};
 		CE19F66216AED89A005B15B4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE19F65716AED89A005B15B4 /* JFFNetwork.xcodeproj */;
@@ -184,13 +214,6 @@
 			remoteGlobalIDString = 7E8F204314F9494300588C7D;
 			remoteInfo = JFFNetworkFW;
 		};
-		CE19F66B16AED8B1005B15B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE19F65716AED89A005B15B4 /* JFFNetwork.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D5AE6DA13F3E6C600EB6143;
-			remoteInfo = JFFNetwork;
-		};
 		CED0014916198CE200368E7D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65E3083F1531EEC500E0B781 /* JFFUtils.xcodeproj */;
@@ -205,6 +228,8 @@
 		1B0BFD1A15614F1500853028 /* jRestKitXMLToolsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jRestKitXMLToolsTest.m; sourceTree = "<group>"; };
 		1B0E896B1563FA9C00825E3C /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		1BEC4831156A27060099DA6D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		4CB91708181FBD4000EBA05C /* JFFDataLoadersToolsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDataLoadersToolsTests.m; sourceTree = "<group>"; };
+		4CF0F207181FC1CB00BEA22F /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		65E3081B1531EE1B00E0B781 /* JFFRestKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFRestKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E3081F1531EE1B00E0B781 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		65E308211531EE1B00E0B781 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -232,6 +257,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CA4F5A8181FD2D200851EA3 /* libJFFTestTools.a in Frameworks */,
 				CE19F66E16AED8C7005B15B4 /* libz.dylib in Frameworks */,
 				CE19F66A16AED8A5005B15B4 /* libJFFNetwork.a in Frameworks */,
 				1BEC4832156A27060099DA6D /* libstdc++.dylib in Frameworks */,
@@ -254,6 +280,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CF0F208181FC1CB00BEA22F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4CF0F215181FC1CB00BEA22F /* libJFFTestTools.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		65E308101531EE1B00E0B781 = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +330,7 @@
 				65E308261531EE1B00E0B781 /* Supporting Files */,
 				65E308671531EF0000E0B781 /* SmartDataLoaderTest.m */,
 				1B0BFD1A15614F1500853028 /* jRestKitXMLToolsTest.m */,
+				4CB91708181FBD4000EBA05C /* JFFDataLoadersToolsTests.m */,
 			);
 			path = JFFRestKitTest;
 			sourceTree = "<group>";
@@ -314,6 +349,7 @@
 		65E3083E1531EEB000E0B781 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				4CF0F207181FC1CB00BEA22F /* JFFTestTools.xcodeproj */,
 				CE19F65716AED89A005B15B4 /* JFFNetwork.xcodeproj */,
 				65E308B91531F1E800E0B781 /* JFFScheduler.xcodeproj */,
 				65E3085A1531EEE000E0B781 /* JFFAsyncOperations.xcodeproj */,
@@ -340,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				65E308531531EECF00E0B781 /* libJFFRestKit.a */,
+				4CB91711181FBD4000EBA05C /* JFFRestKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -398,8 +435,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				CE19F66C16AED8B1005B15B4 /* PBXTargetDependency */,
-				65E308CC1531F1F500E0B781 /* PBXTargetDependency */,
+				4CA4F5B9181FD4CE00851EA3 /* PBXTargetDependency */,
+				4CA4F5BB181FD4CE00851EA3 /* PBXTargetDependency */,
+				4CA4F5A7181FD2C800851EA3 /* PBXTargetDependency */,
 				65E3088C1531EF5300E0B781 /* PBXTargetDependency */,
 				65E3088E1531EF5300E0B781 /* PBXTargetDependency */,
 				65E308901531EF5300E0B781 /* PBXTargetDependency */,
@@ -450,6 +488,10 @@
 					ProjectRef = 65E308B91531F1E800E0B781 /* JFFScheduler.xcodeproj */;
 				},
 				{
+					ProductGroup = 4CF0F208181FC1CB00BEA22F /* Products */;
+					ProjectRef = 4CF0F207181FC1CB00BEA22F /* JFFTestTools.xcodeproj */;
+				},
+				{
 					ProductGroup = 65E308401531EEC500E0B781 /* Products */;
 					ProjectRef = 65E3083F1531EEC500E0B781 /* JFFUtils.xcodeproj */;
 				},
@@ -462,6 +504,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4CB91711181FBD4000EBA05C /* JFFRestKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFRestKitTests.xctest;
+			remoteRef = 4CB91710181FBD4000EBA05C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4CF0F215181FC1CB00BEA22F /* libJFFTestTools.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFTestTools.a;
+			remoteRef = 4CF0F214181FC1CB00BEA22F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		65E308471531EEC500E0B781 /* libJFFUtils.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -609,12 +665,28 @@
 			files = (
 				65E3082C1531EE1B00E0B781 /* main.m in Sources */,
 				CED0014C16198DDF00368E7D /* SmartDataLoaderTest.m in Sources */,
+				4CB91709181FBD4000EBA05C /* JFFDataLoadersToolsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4CA4F5A7181FD2C800851EA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFTestTools;
+			targetProxy = 4CA4F5A6181FD2C800851EA3 /* PBXContainerItemProxy */;
+		};
+		4CA4F5B9181FD4CE00851EA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFNetwork;
+			targetProxy = 4CA4F5B8181FD4CE00851EA3 /* PBXContainerItemProxy */;
+		};
+		4CA4F5BB181FD4CE00851EA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFScheduler;
+			targetProxy = 4CA4F5BA181FD4CE00851EA3 /* PBXContainerItemProxy */;
+		};
 		65E3088C1531EF5300E0B781 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JFFRestKit;
@@ -635,16 +707,6 @@
 			name = JFFUtils;
 			targetProxy = 65E308911531EF5300E0B781 /* PBXContainerItemProxy */;
 		};
-		65E308CC1531F1F500E0B781 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = JFFScheduler;
-			targetProxy = 65E308CB1531F1F500E0B781 /* PBXContainerItemProxy */;
-		};
-		CE19F66C16AED8B1005B15B4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = JFFNetwork;
-			targetProxy = CE19F66B16AED8B1005B15B4 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -663,7 +725,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -685,8 +746,10 @@
 					../../lib/TouchXmlHelper,
 					../../../TouchXML,
 					"/usr/include/libxml2/**",
+					../../lib/JFFCache,
+					../../lib/JFFTestTools,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -695,7 +758,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -710,8 +772,10 @@
 					../../lib/TouchXmlHelper,
 					../../../TouchXML,
 					"/usr/include/libxml2/**",
+					../../lib/JFFCache,
+					../../lib/JFFTestTools,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -728,6 +792,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFRestKitTest/JFFRestKitTest-Prefix.pch";
 				INFOPLIST_FILE = "JFFRestKitTest/JFFRestKitTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -747,6 +812,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFRestKitTest/JFFRestKitTest-Prefix.pch";
 				INFOPLIST_FILE = "JFFRestKitTest/JFFRestKitTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
