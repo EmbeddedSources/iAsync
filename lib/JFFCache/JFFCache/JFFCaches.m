@@ -6,7 +6,7 @@
 
 #import "NSDictionary+DBInfo.h"
 
-#import <JFFScheduler/JFFScheduler.h>
+#import <JFFScheduler/JFFTimer.h>
 
 static JFFCaches *sharedCachesInstance;
 
@@ -50,17 +50,18 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
                                     dbInfo:(JFFDBInfo *)dbInfo
 {
     @synchronized(lockObject) {
-        JFFScheduler *scheduler = autoremoveSchedulersByCacheName[dbPropertyName];
         
-        if (scheduler)
+        JFFTimer *timer = autoremoveSchedulersByCacheName[dbPropertyName];
+        
+        if (timer)
             return;
         
         if (!autoremoveSchedulersByCacheName)
             autoremoveSchedulersByCacheName = [NSMutableDictionary new];
         
-        if (!scheduler) {
-            scheduler = [JFFScheduler new];
-            autoremoveSchedulersByCacheName[dbPropertyName] = scheduler;
+        if (!timer) {
+            timer = [JFFTimer new];
+            autoremoveSchedulersByCacheName[dbPropertyName] = timer;
         }
         
         JFFScheduledBlock block = ^void(JFFCancelScheduledBlock cancel) {
@@ -84,7 +85,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
         };
         block(nil);
         
-        [scheduler addBlock:block duration:3600. leeway:1800.];
+        [timer addBlock:block duration:3600. leeway:1800.];
     }
 }
 

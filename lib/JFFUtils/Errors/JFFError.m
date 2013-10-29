@@ -21,8 +21,8 @@
 - (instancetype)initWithDescription:(NSString *)description code:(NSInteger)code
 {
     return [self initWithDescription:description
-                                domain:[[self class] jffErrorsDomain]
-                                    code:code];
+                              domain:[[self class] jffErrorsDomain]
+                                code:code];
 }
 
 - (instancetype)initWithDescription:(NSString *)description

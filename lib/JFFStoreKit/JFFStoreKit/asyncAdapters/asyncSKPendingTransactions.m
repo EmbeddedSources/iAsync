@@ -2,7 +2,7 @@
 
 #import "JFFStoreKitDisabledError.h"
 
-#import <JFFScheduler/JFFScheduler.h>
+#import <JFFScheduler/JFFTimer.h>
 
 static NSString *const mergeObject = @"c8e5abce-1ab9-11e3-9a3b-f23c91aec05e";
 
@@ -17,7 +17,7 @@ JFFAsyncOperationInterface
     SKPaymentQueue *_queue;
     BOOL _addedToObservers;
     JFFAsyncOperationInterfaceResultHandler _handler;
-    JFFScheduler *_scheduler;
+    JFFTimer *_timer;
 }
 
 - (void)dealloc
@@ -65,7 +65,7 @@ JFFAsyncOperationInterface
     
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     
-    _scheduler = [JFFScheduler new];
+    _timer = [JFFTimer new];
     
     __weak JFFAsyncSKPendingTransactions *weakSelf = self;
     
@@ -75,7 +75,7 @@ JFFAsyncOperationInterface
         cancel();
     };
     
-    [_scheduler addBlock:actionBlock duration:0.2 leeway:0.02];
+    [_timer addBlock:actionBlock duration:0.2 leeway:0.02];
 }
 
 - (void)finishWithTransactions:(NSArray *)transactions
@@ -85,7 +85,7 @@ JFFAsyncOperationInterface
     if (_handler)
         _handler(transactions, nil);
     
-    _scheduler = nil;
+    _timer = nil;
 }
 
 - (NSArray *)pendingTransactionsForTransactions:(NSArray *)transactions
@@ -123,7 +123,7 @@ JFFAsyncOperationInterface
     if (_handler)
         _handler(nil, error);
     
-    _scheduler = nil;
+    _timer = nil;
 }
 
 @end

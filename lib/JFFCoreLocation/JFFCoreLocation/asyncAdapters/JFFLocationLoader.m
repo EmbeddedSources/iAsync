@@ -4,7 +4,7 @@
 #import "JFFUnableToGetLocationError.h"
 #import "JFFLocationServicesDisabledError.h"
 
-#import <JFFScheduler/JFFScheduler.h>
+#import <JFFScheduler/JFFTimer.h>
 
 @interface JFFCoreLocationAsyncAdapter : NSObject<
 JFFAsyncOperationInterface,
@@ -19,7 +19,7 @@ JFFLocationObserver
     CLLocationAccuracy _accuracy;
     JFFAsyncOperationInterfaceResultHandler _handler;
     
-    JFFScheduler *_scheduler;
+    JFFTimer *_timer;
 }
 
 - (instancetype)initWithAccuracy:(CLLocationAccuracy)accuracy
@@ -64,9 +64,9 @@ JFFLocationObserver
         return;
     }
     
-    _scheduler = [JFFScheduler new];
+    _timer = [JFFTimer new];
     __weak JFFCoreLocationAsyncAdapter *weakSelf = self;
-    [_scheduler addBlock:^(JFFCancelScheduledBlock cancel) {
+    [_timer addBlock:^(JFFCancelScheduledBlock cancel) {
         
         cancel();
         

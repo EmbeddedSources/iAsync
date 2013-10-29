@@ -2,7 +2,7 @@
 
 #import "JFFTrafficCalculatorDelegate.h"
 
-#import <JFFScheduler/JFFScheduler.h>
+#import <JFFScheduler/JFFTimer.h>
 
 @interface JFFDownloadedBytesPerDate : NSObject
 
@@ -33,7 +33,7 @@
 {
     NSMutableArray *_downloadingSpeedInfo;
     __unsafe_unretained id< JFFTrafficCalculatorDelegate > _delegate;
-    JFFScheduler *_scheduler;
+    JFFTimer *_timer;
 }
 
 - (instancetype)initWithDelegate:(id<JFFTrafficCalculatorDelegate>)delegate
@@ -95,7 +95,7 @@
 
 - (void)stop
 {
-    _scheduler = nil;
+    _timer = nil;
     
     _downloadingSpeedInfo = [NSMutableArray new];
     [self calculateDownloadSpeed];
@@ -117,8 +117,8 @@
         [weakSelf calculateDownloadSpeed];
     };
     
-    _scheduler = [JFFScheduler new];
-    [_scheduler addBlock:block duration:1. leeway:.2];
+    _timer = [JFFTimer new];
+    [_timer addBlock:block duration:1. leeway:.2];
 }
 
 @end

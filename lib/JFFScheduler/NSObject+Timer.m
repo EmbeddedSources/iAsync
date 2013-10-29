@@ -1,22 +1,22 @@
-#import "NSObject+Scheduler.h"
+#import "NSObject+Timer.h"
 
-#import "JFFScheduler.h"
+#import "JFFTimer.h"
 
 #import <JFFUtils/NSString/NSString+Search.h>
 #import <JFFUtils/NSObject/NSObject+OnDeallocBlock.h>
 
 #include <objc/message.h>
 
-@implementation NSObject (Scheduler)
+@implementation NSObject (Timer)
 
 - (void)performSelector:(SEL)selector
            timeInterval:(NSTimeInterval)timeInterval
                  leeway:(NSTimeInterval)leeway
                userInfo:(id)userInfo
                 repeats:(BOOL)repeats
-              scheduler:(JFFScheduler *)scheduler
+                  timer:(JFFTimer *)timer
 {
-    NSParameterAssert(scheduler);
+    NSParameterAssert(timer);
     
     //use signature's number params
     NSString *selectorString = NSStringFromSelector(selector);
@@ -38,9 +38,9 @@
         :objc_msgSend(unretainedSelf, selector);
     };
     
-    JFFCancelScheduledBlock cancel = [scheduler addBlock:block
-                                                duration:timeInterval
-                                                  leeway:leeway];
+    JFFCancelScheduledBlock cancel = [timer addBlock:block
+                                            duration:timeInterval
+                                              leeway:leeway];
     [self addOnDeallocBlock:cancel];
 }
 
@@ -55,7 +55,7 @@
                    leeway:leeway
                  userInfo:userInfo
                   repeats:repeats
-                scheduler:[JFFScheduler sharedByThreadScheduler]];
+                    timer:[JFFTimer sharedByThreadTimer]];
 }
 
 @end

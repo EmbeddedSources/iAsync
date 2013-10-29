@@ -2,7 +2,7 @@
 
 #import "JFFOpenApplicationError.h"
 
-#import <JFFScheduler/NSObject+Scheduler.h>
+#import <JFFScheduler/NSObject+Timer.h>
 #import <JFFAsyncOperations/JFFAsyncOperations.h>
 
 static NSString *const delegateName = @"delegate";

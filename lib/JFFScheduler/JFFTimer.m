@@ -1,11 +1,11 @@
-#import "JFFScheduler.h"
+#import "JFFTimer.h"
 
 #import <JFFUtils/Blocks/JFFSimpleBlockHolder.h>
 #import <JFFUtils/Runtime/JFFRuntimeAddiotions.h>
 
 @interface NSThread (JFFScheduler_Internal)
 
-@property (nonatomic) JFFScheduler *jffScheduler;
+@property (nonatomic) JFFTimer *jffScheduler;
 
 @end
 
@@ -18,11 +18,11 @@
     jClass_implementProperty(self, NSStringFromSelector(@selector(jffScheduler)));
 }
 
-- (JFFScheduler *)lazyJffScheduler
+- (JFFTimer *)lazyJffTimer
 {
     id result = self.jffScheduler;
     if (!result) {
-        result = [JFFScheduler new];
+        result = [JFFTimer new];
         self.jffScheduler = result;
     }
     return result;
@@ -30,7 +30,7 @@
 
 @end
 
-@implementation JFFScheduler
+@implementation JFFTimer
 {
     NSMutableArray *_cancelBlocks;
 }
@@ -51,10 +51,10 @@
     return self;
 }
 
-+ (instancetype)sharedByThreadScheduler
++ (instancetype)sharedByThreadTimer
 {
     NSThread *thread = [NSThread currentThread];
-    return thread.lazyJffScheduler;
+    return thread.lazyJffTimer;
 }
 
 - (JFFCancelScheduledBlock)addBlock:(JFFScheduledBlock)block
@@ -84,7 +84,7 @@
                               delta,
                               leeway * NSEC_PER_SEC);
     
-    __unsafe_unretained JFFScheduler *unretainedSelf = self;
+    __unsafe_unretained JFFTimer *unretainedSelf = self;
     
     JFFSimpleBlockHolder *cancelTimerBlockHolder = [JFFSimpleBlockHolder new];
     __unsafe_unretained JFFSimpleBlockHolder *unretainedCancelTimerBlockHolder = cancelTimerBlockHolder;
