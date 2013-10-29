@@ -7,35 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B835B3F142CC5F100FC004C /* JFFScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1041390559900DD6890 /* JFFScheduler.m */; };
+		4C4182DE181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4182DC181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h */; };
+		4C4182DF181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */; };
+		4C4182E2181E6B6700FF3CA0 /* JFFTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4182E0181E6B6700FF3CA0 /* JFFTimer.h */; };
+		4C4182E3181E6B6700FF3CA0 /* JFFTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182E1181E6B6700FF3CA0 /* JFFTimer.m */; };
 		539103BB14A88BD6007315A3 /* JFFScheduler_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFScheduler_Prefix.pch */; };
 		539103BC14A88BD6007315A3 /* JFFScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE1031390559900DD6890 /* JFFScheduler.h */; };
-		539103BD14A88BD6007315A3 /* NSObject+Scheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE196139195E500DD6890 /* NSObject+Scheduler.h */; };
-		539103BF14A88BD6007315A3 /* NSObject+Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE197139195E500DD6890 /* NSObject+Scheduler.m */; };
-		539103C014A88BD6007315A3 /* JFFScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1041390559900DD6890 /* JFFScheduler.m */; };
+		539103BD14A88BD6007315A3 /* NSObject+Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE196139195E500DD6890 /* NSObject+Timer.h */; };
+		539103BF14A88BD6007315A3 /* NSObject+Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE197139195E500DD6890 /* NSObject+Timer.m */; };
 		539103C214A88BD6007315A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		651BE1051390559900DD6890 /* JFFScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE1031390559900DD6890 /* JFFScheduler.h */; };
-		651BE198139195E500DD6890 /* NSObject+Scheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE196139195E500DD6890 /* NSObject+Scheduler.h */; };
-		651BE199139195E500DD6890 /* NSObject+Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE197139195E500DD6890 /* NSObject+Scheduler.m */; };
+		651BE198139195E500DD6890 /* NSObject+Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE196139195E500DD6890 /* NSObject+Timer.h */; };
+		651BE199139195E500DD6890 /* NSObject+Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE197139195E500DD6890 /* NSObject+Timer.m */; };
 		65802B09148BFB850040A93A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65802B08148BFB850040A93A /* Cocoa.framework */; };
-		65802B18148BFB920040A93A /* NSObject+Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE197139195E500DD6890 /* NSObject+Scheduler.m */; };
-		65802B19148BFB950040A93A /* JFFScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1041390559900DD6890 /* JFFScheduler.m */; };
+		65802B18148BFB920040A93A /* NSObject+Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE197139195E500DD6890 /* NSObject+Timer.m */; };
 		7E8F202B14F9484F00588C7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		7E8F203114F9484F00588C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E8F202F14F9484F00588C7D /* InfoPlist.strings */; };
-		7E8F203714F9486E00588C7D /* JFFScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE1041390559900DD6890 /* JFFScheduler.m */; };
-		7E8F203814F9486E00588C7D /* NSObject+Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE197139195E500DD6890 /* NSObject+Scheduler.m */; };
+		7E8F203814F9486E00588C7D /* NSObject+Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 651BE197139195E500DD6890 /* NSObject+Timer.m */; };
 		7E8F203914F9487B00588C7D /* JFFScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE1031390559900DD6890 /* JFFScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E8F203A14F9487B00588C7D /* NSObject+Scheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE196139195E500DD6890 /* NSObject+Scheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E8F203A14F9487B00588C7D /* NSObject+Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE196139195E500DD6890 /* NSObject+Timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA747D9F0F9514B9006C5449 /* JFFScheduler_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFScheduler_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C4182DC181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationHelpers.h; sourceTree = "<group>"; };
+		4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationHelpers.m; sourceTree = "<group>"; };
+		4C4182E0181E6B6700FF3CA0 /* JFFTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTimer.h; sourceTree = "<group>"; };
+		4C4182E1181E6B6700FF3CA0 /* JFFTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTimer.m; sourceTree = "<group>"; };
 		539103C614A88BD6007315A3 /* libJFFScheduler-clang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libJFFScheduler-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		651BE1031390559900DD6890 /* JFFScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFScheduler.h; sourceTree = "<group>"; };
-		651BE1041390559900DD6890 /* JFFScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFScheduler.m; sourceTree = "<group>"; };
-		651BE196139195E500DD6890 /* NSObject+Scheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Scheduler.h"; sourceTree = "<group>"; };
-		651BE197139195E500DD6890 /* NSObject+Scheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Scheduler.m"; sourceTree = "<group>"; };
+		651BE196139195E500DD6890 /* NSObject+Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Timer.h"; sourceTree = "<group>"; };
+		651BE197139195E500DD6890 /* NSObject+Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Timer.m"; sourceTree = "<group>"; };
 		65802B07148BFB850040A93A /* libJFFSchedulerMacOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFSchedulerMacOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		65802B08148BFB850040A93A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		65802B0B148BFB850040A93A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -124,10 +127,12 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4C4182DB181E649000FF3CA0 /* Async */,
+				4C4182E0181E6B6700FF3CA0 /* JFFTimer.h */,
+				4C4182E1181E6B6700FF3CA0 /* JFFTimer.m */,
+				651BE196139195E500DD6890 /* NSObject+Timer.h */,
+				651BE197139195E500DD6890 /* NSObject+Timer.m */,
 				651BE1031390559900DD6890 /* JFFScheduler.h */,
-				651BE1041390559900DD6890 /* JFFScheduler.m */,
-				651BE196139195E500DD6890 /* NSObject+Scheduler.h */,
-				651BE197139195E500DD6890 /* NSObject+Scheduler.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -138,6 +143,15 @@
 				AA747D9E0F9514B9006C5449 /* JFFScheduler_Prefix.pch */,
 			);
 			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		4C4182DB181E649000FF3CA0 /* Async */ = {
+			isa = PBXGroup;
+			children = (
+				4C4182DC181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h */,
+				4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */,
+			);
+			path = Async;
 			sourceTree = "<group>";
 		};
 		65802B0A148BFB850040A93A /* Other Frameworks */ = {
@@ -193,7 +207,7 @@
 			files = (
 				539103BB14A88BD6007315A3 /* JFFScheduler_Prefix.pch in Headers */,
 				539103BC14A88BD6007315A3 /* JFFScheduler.h in Headers */,
-				539103BD14A88BD6007315A3 /* NSObject+Scheduler.h in Headers */,
+				539103BD14A88BD6007315A3 /* NSObject+Timer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,7 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E8F203914F9487B00588C7D /* JFFScheduler.h in Headers */,
-				7E8F203A14F9487B00588C7D /* NSObject+Scheduler.h in Headers */,
+				7E8F203A14F9487B00588C7D /* NSObject+Timer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,9 +231,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C4182DE181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* JFFScheduler_Prefix.pch in Headers */,
 				651BE1051390559900DD6890 /* JFFScheduler.h in Headers */,
-				651BE198139195E500DD6890 /* NSObject+Scheduler.h in Headers */,
+				651BE198139195E500DD6890 /* NSObject+Timer.h in Headers */,
+				4C4182E2181E6B6700FF3CA0 /* JFFTimer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,8 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				539103BF14A88BD6007315A3 /* NSObject+Scheduler.m in Sources */,
-				539103C014A88BD6007315A3 /* JFFScheduler.m in Sources */,
+				539103BF14A88BD6007315A3 /* NSObject+Timer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,8 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65802B18148BFB920040A93A /* NSObject+Scheduler.m in Sources */,
-				65802B19148BFB950040A93A /* JFFScheduler.m in Sources */,
+				65802B18148BFB920040A93A /* NSObject+Timer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,8 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E8F203714F9486E00588C7D /* JFFScheduler.m in Sources */,
-				7E8F203814F9486E00588C7D /* NSObject+Scheduler.m in Sources */,
+				7E8F203814F9486E00588C7D /* NSObject+Timer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,8 +431,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				651BE199139195E500DD6890 /* NSObject+Scheduler.m in Sources */,
-				1B835B3F142CC5F100FC004C /* JFFScheduler.m in Sources */,
+				4C4182E3181E6B6700FF3CA0 /* JFFTimer.m in Sources */,
+				651BE199139195E500DD6890 /* NSObject+Timer.m in Sources */,
+				4C4182DF181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

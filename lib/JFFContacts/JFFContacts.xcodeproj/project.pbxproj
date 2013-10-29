@@ -14,8 +14,6 @@
 		CE29B81B15F60084000A05B8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B81A15F60084000A05B8 /* SenTestingKit.framework */; };
 		CE29B81E15F60084000A05B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80B15F60083000A05B8 /* Foundation.framework */; };
 		CE29B82115F60084000A05B8 /* libJFFContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80815F60083000A05B8 /* libJFFContacts.a */; };
-		CE29B82715F60084000A05B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE29B82515F60084000A05B8 /* InfoPlist.strings */; };
-		CE29B82A15F60084000A05B8 /* JFFContactsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B82915F60084000A05B8 /* JFFContactsTests.m */; };
 		CE29B84D15F6015B000A05B8 /* JFFAddressBookFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE29B83D15F6015A000A05B8 /* JFFAddressBookFactory.mm */; };
 		CE29B84E15F6015B000A05B8 /* JFFContact.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B83F15F6015A000A05B8 /* JFFContact.m */; };
 		CE29B85715F60213000A05B8 /* NSArray+kABMultiValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B85615F60213000A05B8 /* NSArray+kABMultiValue.m */; };
@@ -102,9 +100,6 @@
 		CE29B81015F60083000A05B8 /* JFFContacts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFContacts.h; sourceTree = "<group>"; };
 		CE29B81915F60084000A05B8 /* JFFContactsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFContactsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE29B81A15F60084000A05B8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		CE29B82415F60084000A05B8 /* JFFContactsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFContactsTests-Info.plist"; sourceTree = "<group>"; };
-		CE29B82615F60084000A05B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CE29B82915F60084000A05B8 /* JFFContactsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFFContactsTests.m; sourceTree = "<group>"; };
 		CE29B83C15F60159000A05B8 /* JFFAddressBookFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBookFactory.h; sourceTree = "<group>"; };
 		CE29B83D15F6015A000A05B8 /* JFFAddressBookFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFAddressBookFactory.mm; sourceTree = "<group>"; };
 		CE29B83E15F6015A000A05B8 /* JFFContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContact.h; sourceTree = "<group>"; };
@@ -164,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				CE29B80D15F60083000A05B8 /* JFFContacts */,
-				CE29B82215F60084000A05B8 /* JFFContactsTests */,
 				CE29B80A15F60083000A05B8 /* Frameworks */,
 				CE29B80915F60083000A05B8 /* Products */,
 			);
@@ -213,24 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				CE29B80F15F60083000A05B8 /* JFFContacts-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		CE29B82215F60084000A05B8 /* JFFContactsTests */ = {
-			isa = PBXGroup;
-			children = (
-				CE29B82915F60084000A05B8 /* JFFContactsTests.m */,
-				CE29B82315F60084000A05B8 /* Supporting Files */,
-			);
-			path = JFFContactsTests;
-			sourceTree = "<group>";
-		};
-		CE29B82315F60084000A05B8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				CE29B82415F60084000A05B8 /* JFFContactsTests-Info.plist */,
-				CE29B82515F60084000A05B8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -409,7 +385,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE29B82715F60084000A05B8 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +435,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE29B82A15F60084000A05B8 /* JFFContactsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,17 +447,6 @@
 			targetProxy = CE29B81F15F60084000A05B8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		CE29B82515F60084000A05B8 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE29B82615F60084000A05B8 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CE29B82B15F60084000A05B8 /* Debug */ = {
