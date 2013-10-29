@@ -5,9 +5,6 @@
 
 @class NSArray;
 
-@interface JFFAsyncTimerResult : NSObject
-@end
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -60,8 +57,6 @@ extern "C" {
     JFFAsyncOperation asyncOperationWithResultOrError(JFFAsyncOperation loader,
                                                       id result,
                                                       NSError *error);
-    
-    JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay, NSTimeInterval leeway);
     
     JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader);
     JFFAsyncOperationBinder ignorePregressBinder(JFFAsyncOperationBinder binder);

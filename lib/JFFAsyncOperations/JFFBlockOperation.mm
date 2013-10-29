@@ -34,12 +34,12 @@
     self = [super init];
     
     if (self) {
-        self.loadDataBlock    = loadDataBlock;
-        self.didLoadDataBlock = didLoadDataBlock;
-        self.progressBlock    = progressBlock;
+        _loadDataBlock    = [loadDataBlock    copy];
+        _didLoadDataBlock = [didLoadDataBlock copy];
+        _progressBlock    = [progressBlock    copy];
         
         _currentQueue = currentQueue;
-        _barrier = barrier;
+        _barrier      = barrier;
     }
     
     return self;

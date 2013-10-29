@@ -83,18 +83,7 @@ extern "C" {
     JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
                                                   JFFSimpleBlock doneCallbackHook) __attribute__((pure,const));
 
-///////////////////////// AUTO REPEAT CIRCLE ////////////////////////
-    
-    JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation loader,
-                                           JFFContinueLoaderWithResult continueLoaderBuilder,
-                                           NSTimeInterval delay,
-                                           NSTimeInterval leeway,
-                                           NSInteger maxRepeatCount) __attribute__((pure,const));
-    
-    JFFAsyncOperation asyncOperationAfterDelay(NSTimeInterval delay,
-                                               NSTimeInterval leeway,
-                                               JFFAsyncOperation loader) __attribute__((pure,const));
-
+   
 #ifdef __cplusplus
 } /* closing brace for extern "C" */
 #endif
