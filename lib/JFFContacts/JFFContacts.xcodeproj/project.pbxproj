@@ -104,7 +104,6 @@
 		CE29B81A15F60084000A05B8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		CE29B82415F60084000A05B8 /* JFFContactsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFContactsTests-Info.plist"; sourceTree = "<group>"; };
 		CE29B82615F60084000A05B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CE29B82815F60084000A05B8 /* JFFContactsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFContactsTests.h; sourceTree = "<group>"; };
 		CE29B82915F60084000A05B8 /* JFFContactsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFFContactsTests.m; sourceTree = "<group>"; };
 		CE29B83C15F60159000A05B8 /* JFFAddressBookFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBookFactory.h; sourceTree = "<group>"; };
 		CE29B83D15F6015A000A05B8 /* JFFAddressBookFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFAddressBookFactory.mm; sourceTree = "<group>"; };
@@ -221,7 +220,6 @@
 		CE29B82215F60084000A05B8 /* JFFContactsTests */ = {
 			isa = PBXGroup;
 			children = (
-				CE29B82815F60084000A05B8 /* JFFContactsTests.h */,
 				CE29B82915F60084000A05B8 /* JFFContactsTests.m */,
 				CE29B82315F60084000A05B8 /* Supporting Files */,
 			);

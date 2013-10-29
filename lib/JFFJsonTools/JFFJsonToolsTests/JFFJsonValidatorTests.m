@@ -1,8 +1,11 @@
-#import "JFFJsonValidatorTests.h"
+#import <XCTest/XCTest.h>
 
 #import "JFFJsonValidator.h"
 
 #import "JFFJsonValidationError.h"
+
+@interface JFFJsonValidatorTests : XCTestCase
+@end
 
 @implementation JFFJsonValidatorTests
 {
@@ -45,20 +48,20 @@
                                              withJsonPattern:[NSString class]
                                                        error:&error];
     
-    STAssertNil(error, @"error should be nil");
-    STAssertTrue(result, @"ivalid result value");
+    XCTAssertNil(error, @"error should be nil");
+    XCTAssertTrue(result, @"ivalid result value");
 }
 
 - (void)testStringTypeMismatch
 {
     JFFJsonValidationError *error;
-
+    
     BOOL result = [JFFJsonObjectValidator validateJsonObject:@NO
                                              withJsonPattern:[NSString class]
                                                        error:&error];
-
-    STAssertNotNil(error, @"error should be nil");
-    STAssertFalse(result, @"ivalid result value");
+    
+    XCTAssertNotNil(error, @"error should be nil");
+    XCTAssertFalse(result, @"ivalid result value");
 }
 
 ////// String value tests /////
@@ -66,25 +69,25 @@
 - (void)testStringValueMatch
 {
     JFFJsonValidationError *error;
-
+    
     BOOL result = [JFFJsonObjectValidator validateJsonObject:@"test"
                                              withJsonPattern:@"test"
                                                        error:&error];
-
-    STAssertNil(error, @"error should be nil");
-    STAssertTrue(result, @"ivalid result value");
+    
+    XCTAssertNil(error, @"error should be nil");
+    XCTAssertTrue(result, @"ivalid result value");
 }
 
 - (void)testStringValueMismatch
 {
     JFFJsonValidationError *error;
-
+    
     BOOL result = [JFFJsonObjectValidator validateJsonObject:@"test"
                                              withJsonPattern:@"test1"
                                                        error:&error];
-
-    STAssertNotNil(error, @"error should be nil");
-    STAssertFalse(result, @"ivalid result value");
+    
+    XCTAssertNotNil(error, @"error should be nil");
+    XCTAssertFalse(result, @"ivalid result value");
 }
 
 ////// Number type tests /////
@@ -92,25 +95,25 @@
 - (void)testNumberTypeMatch
 {
     JFFJsonValidationError *error;
-
+    
     BOOL result = [JFFJsonObjectValidator validateJsonObject:@(1)
                                              withJsonPattern:[NSNumber class]
                                                        error:&error];
-
-    STAssertNil(error, @"error should be nil");
-    STAssertTrue(result, @"ivalid result value");
+    
+    XCTAssertNil(error, @"error should be nil");
+    XCTAssertTrue(result, @"ivalid result value");
 }
 
 - (void)testNumberTypeMismatch
 {
     JFFJsonValidationError *error;
-
+    
     BOOL result = [JFFJsonObjectValidator validateJsonObject:@""
                                              withJsonPattern:[NSNumber class]
                                                        error:&error];
-
-    STAssertNotNil(error, @"error should be nil");
-    STAssertFalse(result, @"ivalid result value");
+    
+    XCTAssertNotNil(error, @"error should be nil");
+    XCTAssertFalse(result, @"ivalid result value");
 }
 
 ////// Number value tests /////
@@ -118,13 +121,13 @@
 - (void)testNumberValueMatch
 {
     JFFJsonValidationError *error;
-
+    
     BOOL result = [JFFJsonObjectValidator validateJsonObject:@(2)
                                              withJsonPattern:@(2)
                                                        error:&error];
-
-    STAssertNil(error, @"error should be nil");
-    STAssertTrue(result, @"ivalid result value");
+    
+    XCTAssertNil(error, @"error should be nil");
+    XCTAssertTrue(result, @"ivalid result value");
 }
 
 - (void)testNumberValueMismatch
@@ -135,8 +138,8 @@
                                              withJsonPattern:@(2)
                                                        error:&error];
     
-    STAssertNotNil(error, @"error should be nil");
-    STAssertFalse(result, @"ivalid result value");
+    XCTAssertNotNil(error, @"error should be nil");
+    XCTAssertFalse(result, @"ivalid result value");
 }
 
 ////// Null type tests /////
@@ -150,8 +153,8 @@
                                                  withJsonPattern:[NSNumber class]
                                                            error:&error];
 
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
     {
         JFFJsonValidationError *error;
@@ -160,8 +163,8 @@
                                                  withJsonPattern:[NSString class]
                                                            error:&error];
         
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
 }
 
@@ -171,15 +174,15 @@
 {
     {
         JFFJsonValidationError *error;
-
+        
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@1, @2, @3]
                                                  withJsonPattern:[NSArray class]
                                                            error:&error];
 
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
-
+    
     {
         JFFJsonValidationError *error;
 
@@ -187,8 +190,8 @@
                                                  withJsonPattern:@[[NSNumber class]]
                                                            error:&error];
 
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
 }
 
@@ -201,19 +204,19 @@
                                                  withJsonPattern:[NSArray class]
                                                            error:&error];
         
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
-
+    
     {
         JFFJsonValidationError *error;
 
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@1, @"2", @3]
                                                  withJsonPattern:@[[NSNumber class]]
                                                            error:&error];
-
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
 }
 
@@ -228,19 +231,19 @@
                                                  withJsonPattern:@[@1, @2, @3]
                                                            error:&error];
 
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
-
+    
     {
         JFFJsonValidationError *error;
-
+        
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@[]
                                                  withJsonPattern:@[]
                                                            error:&error];
-
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
 
     {
@@ -250,8 +253,8 @@
                                                  withJsonPattern:@[@"1"]
                                                            error:&error];
 
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
 }
 
@@ -264,19 +267,19 @@
                                                  withJsonPattern:@[@1, @2, @3]
                                                            error:&error];
 
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
 
     {
         JFFJsonValidationError *error;
-
+        
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@""]
                                                  withJsonPattern:@[]
                                                            error:&error];
-
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
 
     {
@@ -286,8 +289,8 @@
                                                  withJsonPattern:@[@"1"]
                                                            error:&error];
         
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
 }
 
@@ -300,8 +303,8 @@
                                                  withJsonPattern:@[@[[NSNumber class]]]
                                                            error:&error];
 
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
     
     {
@@ -310,9 +313,9 @@
         BOOL result = [JFFJsonObjectValidator validateJsonObject:@[@[@1, @2], @[@1, @"2"], @[@1, @2, @"3"]]
                                                  withJsonPattern:@[@[[NSNumber class]], @[@1, @"2"], @[@1, @2, [NSString class]]]
                                                            error:&error];
-
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
 }
 
@@ -346,8 +349,8 @@
                                                  withJsonPattern:_jsonObjectPatter
                                                            error:&error];
 
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
 }
 
@@ -370,8 +373,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
 }
 
@@ -395,8 +398,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
     {
         JFFJsonValidationError *error;
@@ -416,8 +419,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
 }
 
@@ -441,8 +444,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
     {
         JFFJsonValidationError *error;
@@ -462,8 +465,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
 }
 
@@ -487,8 +490,8 @@
                                              withJsonPattern:jsonPattern
                                                        error:&error];
 
-    STAssertNil(error, @"error should be nil");
-    STAssertTrue(result, @"ivalid result value");
+    XCTAssertNil(error, @"error should be nil");
+    XCTAssertTrue(result, @"ivalid result value");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -523,8 +526,8 @@
                                                  withJsonPattern:_jsonObjectPatter
                                                            error:&error];
 
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
 }
 
@@ -558,8 +561,8 @@
                                                  withJsonPattern:_jsonObjectPatter
                                                            error:&error];
 
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
 }
 
@@ -583,8 +586,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
 }
 
@@ -593,13 +596,13 @@
 - (void)testNullValueMatch
 {
     JFFJsonValidationError *error;
-
+    
     BOOL result = [JFFJsonObjectValidator validateJsonObject:[NSNull null]
                                              withJsonPattern:[NSNull null]
                                                        error:&error];
-
-    STAssertNil(error, @"error should be nil");
-    STAssertTrue(result, @"ivalid result value");
+    
+    XCTAssertNil(error, @"error should be nil");
+    XCTAssertTrue(result, @"ivalid result value");
 }
 
 - (void)testNullValueMismatch
@@ -610,13 +613,13 @@
                                              withJsonPattern:@(2)
                                                        error:&error];
     
-    STAssertNotNil(error, @"error should be nil");
-    STAssertFalse(result, @"ivalid result value");
+    XCTAssertNotNil(error, @"error should be nil");
+    XCTAssertFalse(result, @"ivalid result value");
 }
 
 - (void)testPassNilJsonPattern
 {
-    STAssertThrows( {
+    XCTAssertThrows( {
         [JFFJsonObjectValidator validateJsonObject:nil
                                    withJsonPattern:nil
                                              error:NULL];
@@ -632,9 +635,9 @@
                                                  withJsonPattern:@[]
                                                            error:&error];
         
-        STAssertFalse(result, @"NO expected");
-        STAssertEqualObjects(error.jsonObject , @{}, @"ok");
-        STAssertEqualObjects(error.jsonPattern, @[], @"ok");
+        XCTAssertFalse(result, @"NO expected");
+        XCTAssertEqualObjects(error.jsonObject , @{}, @"ok");
+        XCTAssertEqualObjects(error.jsonPattern, @[], @"ok");
     }
     {
         JFFJsonValidationError *error;
@@ -643,9 +646,9 @@
                                                  withJsonPattern:@{}
                                                            error:&error];
         
-        STAssertFalse(result, @"NO expected");
-        STAssertEqualObjects(error.jsonObject , @[], @"ok");
-        STAssertEqualObjects(error.jsonPattern, @{}, @"ok");
+        XCTAssertFalse(result, @"NO expected");
+        XCTAssertEqualObjects(error.jsonObject , @[], @"ok");
+        XCTAssertEqualObjects(error.jsonPattern, @{}, @"ok");
     }
 }
 
@@ -658,8 +661,8 @@
                                                  withJsonPattern:[NSObject class]
                                                            error:&error];
         
-        STAssertTrue(result, @"NO expected");
-        STAssertNil(error, @"ok");
+        XCTAssertTrue(result, @"NO expected");
+        XCTAssertNil(error, @"ok");
     }
     {
         JFFJsonValidationError *error;
@@ -668,8 +671,8 @@
                                                  withJsonPattern:[NSObject class]
                                                            error:&error];
         
-        STAssertTrue(result, @"NO expected");
-        STAssertNil(error, @"ok");
+        XCTAssertTrue(result, @"NO expected");
+        XCTAssertNil(error, @"ok");
     }
     {
         JFFJsonValidationError *error;
@@ -678,8 +681,8 @@
                                                  withJsonPattern:[NSObject class]
                                                            error:&error];
         
-        STAssertTrue(result, @"NO expected");
-        STAssertNil(error, @"ok");
+        XCTAssertTrue(result, @"NO expected");
+        XCTAssertNil(error, @"ok");
     }
     {
         JFFJsonValidationError *error;
@@ -688,8 +691,8 @@
                                                  withJsonPattern:[NSObject class]
                                                            error:&error];
         
-        STAssertTrue(result, @"NO expected");
-        STAssertNil(error, @"ok");
+        XCTAssertTrue(result, @"NO expected");
+        XCTAssertNil(error, @"ok");
     }
     {
         JFFJsonValidationError *error;
@@ -698,8 +701,8 @@
                                                  withJsonPattern:[NSObject class]
                                                            error:&error];
         
-        STAssertTrue(result, @"NO expected");
-        STAssertNil(error, @"ok");
+        XCTAssertTrue(result, @"NO expected");
+        XCTAssertNil(error, @"ok");
     }
 }
 
@@ -722,8 +725,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNotNil(error, @"error should be nil");
-        STAssertFalse(result, @"ivalid result value");
+        XCTAssertNotNil(error, @"error should be nil");
+        XCTAssertFalse(result, @"ivalid result value");
     }
     {
         JFFJsonValidationError *error;
@@ -742,8 +745,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
     {
         JFFJsonValidationError *error;
@@ -762,8 +765,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
     {
         JFFJsonValidationError *error;
@@ -782,8 +785,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
     
     {
@@ -805,8 +808,8 @@
                                                  withJsonPattern:pattern
                                                            error:&error];
         
-        STAssertNil(error, @"error should be nil");
-        STAssertTrue(result, @"ivalid result value");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertTrue(result, @"ivalid result value");
     }
 }
 

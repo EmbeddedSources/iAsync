@@ -7,6 +7,7 @@ JFFAsyncOperation asyncOperationJsonDataParserWithContext(NSData *data, id<NSCop
     NSCParameterAssert([data isKindOfClass:[NSData class]]);
     
     JFFSyncOperation loadDataBlock = ^id(NSError **outError) {
+        
         NSError *jsonError;
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data
                                                                options:NSJSONReadingAllowFragments

@@ -120,13 +120,13 @@ static JFFAsyncOperation loadFreshCachedDataWithUpdateDate(id key,
 
 JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args)
 {
-    id loadDataIdentifier                           = args.loadDataIdentifier;
-    JFFAsyncOperationBinder dataLoaderForIdentifier = args.dataLoaderForIdentifier;
-    JFFAsyncBinderForIdentifier analyzerForData     = args.analyzerForData;
-    id< JFFRestKitCache > cache                     = args.cache;
-    JFFCacheKeyForIdentifier cacheKeyForIdentifier  = args.cacheKeyForIdentifier;
-    NSTimeInterval cacheDataLifeTimeInSeconds       = args.cacheDataLifeTimeInSeconds;
-    BOOL doesNotIgnoreFreshDataLoadFail             = args.doesNotIgnoreFreshDataLoadFail;
+    id                          loadDataIdentifier             = args.loadDataIdentifier;
+    JFFAsyncOperationBinder     dataLoaderForIdentifier        = args.dataLoaderForIdentifier;
+    JFFAsyncBinderForIdentifier analyzerForData                = args.analyzerForData;
+    id <JFFRestKitCache>        cache                          = args.cache;
+    JFFCacheKeyForIdentifier    cacheKeyForIdentifier          = args.cacheKeyForIdentifier;
+    NSTimeInterval              cacheDataLifeTimeInSeconds     = args.cacheDataLifeTimeInSeconds;
+    BOOL                        doesNotIgnoreFreshDataLoadFail = args.doesNotIgnoreFreshDataLoadFail;
     
     NSCParameterAssert(loadDataIdentifier     );
     NSCParameterAssert(dataLoaderForIdentifier);
@@ -143,8 +143,8 @@ JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args)
     id key;
     if (cache) {
         key = cacheKeyForIdentifier
-            ? cacheKeyForIdentifier(loadDataIdentifier)
-            : [loadDataIdentifier description];
+            ?cacheKeyForIdentifier(loadDataIdentifier)
+            :[loadDataIdentifier description];
     }
     
     JFFAsyncOperation cachedDataLoader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,

@@ -20,17 +20,17 @@
 
 - (void)testDevNullWriteIsNotAllowedWithFlags
 {
-    NSData *data_ = [NSData dataWithBytes:"Don't send me to /dev/null"
-                                   length:26];
+    NSData *data = [NSData dataWithBytes:"Don't send me to /dev/null"
+                                  length:26];
     
-    NSError* error_ =  nil;
+    NSError *error =  nil;
     
-    BOOL result_ = [data_ writeToFile:@"/dev/null"
-                              options:NSDataWritingAtomic | NSDataWritingFileProtectionComplete
-                                error:&error_];
+    BOOL result = [data writeToFile:@"/dev/null"
+                            options:NSDataWritingAtomic | NSDataWritingFileProtectionComplete
+                              error:&error];
     
-    GHAssertFalse(result_, @"/dev/null should be supported as on any other Unix");
-    GHAssertNotNil(error_, @"/dev/null should be supported as on any other Unix");
+    GHAssertFalse(result, @"/dev/null should be supported as on any other Unix");
+    GHAssertNotNil(error, @"/dev/null should be supported as on any other Unix");
 }
 
 - (void)testNilPathProducesCrash
