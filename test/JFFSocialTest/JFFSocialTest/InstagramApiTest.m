@@ -40,7 +40,7 @@ static NSString *const accessToken = @"220778258.a854aa5.d4421b39ccdd4e53b61a779
 //likes - to like and unlike items on a user’s behalf
 
 //comments
--(void)RtestInstagramAuthedUser
+- (void)RtestInstagramAuthedUser
 {
     __block JFFInstagramAuthedAccount *account;
 
@@ -71,7 +71,7 @@ static NSString *const accessToken = @"220778258.a854aa5.d4421b39ccdd4e53b61a779
 
 }
 
--(void)testInstagramFollowersLoader
+- (void)testInstagramFollowersLoader
 {
     __block NSArray *followers;
 
@@ -119,7 +119,7 @@ static NSString *const accessToken = @"220778258.a854aa5.d4421b39ccdd4e53b61a779
                          , [vlg2Account.avatarURL description], @"instagram url mismatch");
 }
 
--(void)testInstagramAuthedUserByAccessToken
+- (void)testInstagramAuthedUserByAccessToken
 {
     __block JFFInstagramAuthedAccount *account;
 
@@ -128,7 +128,7 @@ static NSString *const accessToken = @"220778258.a854aa5.d4421b39ccdd4e53b61a779
         JFFAsyncOperation loader = [JFFSocialInstagram userLoaderForForUserId:@"self"
                                                                   accessToken:accessToken];
 
-        loader(nil,nil,^(id result,NSError *error)
+        loader(nil,nil,^(id result, NSError *error)
         {
             account = result;
             finishBLock();
@@ -148,7 +148,7 @@ static NSString *const accessToken = @"220778258.a854aa5.d4421b39ccdd4e53b61a779
                          , [account.avatarURL description], @"instagram url mismatch");
 }
 
--(void)testLoadOwnMediaItems
+- (void)testLoadOwnMediaItems
 {
     __block NSArray *mediaItems;
     
@@ -184,7 +184,7 @@ static NSString *const accessToken = @"220778258.a854aa5.d4421b39ccdd4e53b61a779
     }
 }
 
--(void)testLoadVlg1MediaItems
+- (void)testLoadVlg1MediaItems
 {
     __block NSArray *mediaItems;
     
@@ -211,7 +211,7 @@ static NSString *const accessToken = @"220778258.a854aa5.d4421b39ccdd4e53b61a779
     GHAssertEqualObjects( @"314347787261450433_221327437", mediaItem.mediaItemId, @"instagram id mismatch");
 }
 
--(void)testCommentVlg1MediaItem
+- (void)testCommentVlg1MediaItem
 {
     __block JFFInstagramComment *comment;
 
@@ -222,8 +222,8 @@ static NSString *const accessToken = @"220778258.a854aa5.d4421b39ccdd4e53b61a779
         JFFAsyncOperation loader = [JFFSocialInstagram commentMediaItemLoaderWithId:@"278621428023433649_221327437"
                                                                             comment:commentText
                                                                         accessToken:accessToken];
-
-        loader(nil,nil,^(id result,NSError *error)
+        
+        loader(nil,nil,^(id result, NSError *error)
         {
             comment = result;
             finishBLock();
@@ -238,7 +238,7 @@ static NSString *const accessToken = @"220778258.a854aa5.d4421b39ccdd4e53b61a779
     GHAssertEqualObjects(commentText, comment.text, @"instagram id mismatch");
 }
 
--(void)testSendMessageToFollowers
+- (void)testSendMessageToFollowers
 {
     __block NSArray *comments;
     

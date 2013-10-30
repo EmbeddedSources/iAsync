@@ -35,16 +35,16 @@
 
 - (void)testNilPathProducesCrash
 {
-    NSData *data_ = [NSData dataWithBytes:"Don't send me to /dev/null"
-                                   length:26];
+    NSData *data = [NSData dataWithBytes:"Don't send me to /dev/null"
+                                  length:26];
     
-    NSError* error_ =  nil;
+    NSError *error =  nil;
     
     GHAssertThrows
     (
-     [data_ writeToFile:nil
+     [data writeToFile:nil
                 options:NSDataWritingAtomic | NSDataWritingFileProtectionComplete
-                  error:&error_]
+                  error:&error]
      , @"assert expected"
     );    
 }

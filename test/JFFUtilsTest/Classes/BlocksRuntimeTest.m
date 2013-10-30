@@ -7,7 +7,6 @@
 @end
 
 @implementation TestRuntimeClass
-
 @end
 
 @interface BlocksRuntimeTest : GHTestCase

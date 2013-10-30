@@ -4,49 +4,49 @@
 
 @implementation JFFSecureStorageTest
 
--(void)testSecureStorage
+- (void)testSecureStorage
 {
-    NSURL* url_ = [ NSURL URLWithString: @"http://www.google.com" ];
+    NSURL *url = [@"http://www.google.com" toURL];
     
     {
-        NSString* login_    = @"llll";
-        NSString* password_ = @"ppp";
+        NSString *login    = @"llll";
+        NSString *password = @"ppp";
         
-        jffStoreSecureCredentials( login_, password_, url_ );
+        jffStoreSecureCredentials(login, password, url);
         
-        NSString* outLogin_ = nil;
-        NSString* outPassword_ = jffGetSecureCredentialsForURL( &outLogin_, url_ );
+        NSString *outLogin = nil;
+        NSString *outPassword = jffGetSecureCredentialsForURL(&outLogin, url);
         
-        GHAssertTrue( [ login_    isEqualToString: outLogin_    ], @"OK" );
-        GHAssertTrue( [ password_ isEqualToString: outPassword_ ], @"OK" );
+        GHAssertTrue([login    isEqualToString:outLogin   ], @"OK");
+        GHAssertTrue([password isEqualToString:outPassword], @"OK");
     }
     
     {
-        NSString* login_    = @"llll2";
-        NSString* password_ = @"ppp2";
-
-        jffStoreSecureCredentials( login_, password_, url_ );
-
-        NSURL* otherUrl_ = [ NSURL URLWithString: @"http://www.google.com/other_url" ];
-        jffStoreSecureCredentials( @"bb", @"aa", otherUrl_ );
-
-        NSString* outLogin_ = nil;
-        NSString* outPassword_ = jffGetSecureCredentialsForURL( &outLogin_, url_ );
-
-        GHAssertTrue( [ login_    isEqualToString: outLogin_    ], @"OK" );
-        GHAssertTrue( [ password_ isEqualToString: outPassword_ ], @"OK" );
+        NSString *login    = @"llll2";
+        NSString *password = @"ppp2";
+        
+        jffStoreSecureCredentials(login, password, url);
+        
+        NSURL *otherUrl = [@"http://www.google.com/other_url" toURL];
+        jffStoreSecureCredentials(@"bb", @"aa", otherUrl);
+        
+        NSString *outLogin = nil;
+        NSString *outPassword = jffGetSecureCredentialsForURL(&outLogin, url);
+        
+        GHAssertTrue([login    isEqualToString:outLogin   ], @"OK");
+        GHAssertTrue([password isEqualToString:outPassword], @"OK");
     }
 }
 
--(void)testNoPassword
+- (void)testNoPassword
 {
-    NSURL* url_ = [ NSURL URLWithString: @"http://www.google.com/xxxx" ];
-
-    NSString* outLogin_ = nil;
-    NSString* outPassword_ = jffGetSecureCredentialsForURL( &outLogin_, url_ );
-
-    GHAssertNil( outLogin_   , @"OK" );
-    GHAssertNil( outPassword_, @"OK" );
+    NSURL *url = [@"http://www.google.com/xxxx" toURL];
+    
+    NSString *outLogin = nil;
+    NSString *outPassword = jffGetSecureCredentialsForURL(&outLogin, url);
+    
+    GHAssertNil(outLogin   , @"OK");
+    GHAssertNil(outPassword, @"OK");
 }
 
 @end

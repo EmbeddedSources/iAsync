@@ -18,34 +18,24 @@
 
 - (void)testInvalidLocationDoesNotCauseCrash
 {
-    NSUInteger initialInstancesCount = [JFFURLConnection instancesCount];
-    
-    @autoreleasepool {
-    
-        __weak GHAsyncTestCase *weakSelf = self;
-        SEL testSelector = _cmd;
+    void (^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishTest) {
         
-        [self prepare:testSelector];
+        JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+        params.useLiveConnection = NO;
+        params.url = [@"http://abrakadabra.com" toURL];
         
-        {
-            JFFURLConnectionParams *params = [JFFURLConnectionParams new];
-            params.useLiveConnection = NO;
-            params.url = [@"http://abrakadabra.com" toURL];
+        JFFURLConnection *connection = [[JFFURLConnection alloc] initWithURLConnectionParams:params];
+        connection.didFinishLoadingBlock = ^(NSError *blockError) {
             
-            JFFURLConnection *connection = [[JFFURLConnection alloc] initWithURLConnectionParams:params];
-            connection.didFinishLoadingBlock = ^(NSError *blockError)
-            {
-                [weakSelf notify:kGHUnitWaitStatusSuccess
-                      forSelector:testSelector];
-            };
-            
-            [connection start];
-        }
+            finishTest();
+        };
         
-        [self waitForStatus:kGHUnitWaitStatusSuccess
-                    timeout:61.];
-    }
-    GHAssertEquals(initialInstancesCount, [JFFURLConnection instancesCount], @"packet mismatch");
+        [connection start];
+    };
+    
+    [self performAsyncRequestOnMainThreadWithBlock:testBlock
+                                          selector:_cmd
+                                           timeout:61.];
 }
 
 - (void)_testMockIsAvailableOnlyForNSUrlConnection

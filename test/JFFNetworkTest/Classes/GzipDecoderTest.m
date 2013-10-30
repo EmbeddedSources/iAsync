@@ -20,48 +20,48 @@
 
 - (void)testNilDataProducesNilResult
 {
-    NSError* error_ = nil;
+    NSError *error = nil;
     
-    JNGzipDecoder* decoder_ = [ [ JNGzipDecoder alloc ] initWithContentLength: 100500 ];
-    NSData *received_data_ = [decoder_ decodeData:nil
-                                            error:&error_];
+    JNGzipDecoder *decoder = [[JNGzipDecoder alloc] initWithContentLength:100500];
+    NSData *receivedData = [decoder decodeData:nil
+                                         error:&error];
     
-    GHAssertNil(received_data_, @"Nil output expected"   );
-    GHAssertNil(error_        , @"No errors are expected");
+    GHAssertNil(receivedData, @"Nil output expected"   );
+    GHAssertNil(error       , @"No errors are expected");
 }
 
 - (void)testGzipFromBackEndExtractedCorrectly
 {
-    NSError* error_ = nil;
+    NSError *error = nil;
     
-    NSData*   gzip_data_ = [ JNTestBundleManager loadZipFileNamed : @"1" ];
-    NSString* expected_  = [ JNTestBundleManager loadTextFileNamed: @"1" ];
+    NSData   *gzipData = [JNTestBundleManager loadZipFileNamed :@"1"];
+    NSString *expected = [JNTestBundleManager loadTextFileNamed:@"1"];
     
-    JNGzipDecoder* decoder_ = [ [ JNGzipDecoder alloc ] initWithContentLength: 1 ];
-    NSData* received_data_ = [ decoder_ decodeData: gzip_data_
-                                             error: &error_ ];
-    GHAssertNil( error_, @"Unexpected decode error - %@", error_ );
+    JNGzipDecoder* decoder_ = [[JNGzipDecoder alloc] initWithContentLength:1];
+    NSData *receivedData = [decoder_ decodeData:gzipData
+                                          error:&error];
+    GHAssertNil(error, @"Unexpected decode error - %@", error);
     
-    NSString* received_ = [ [ NSString alloc ] initWithData: received_data_
-                                                   encoding: NSUTF8StringEncoding ];
+    NSString *received = [[NSString alloc] initWithData:receivedData
+                                               encoding:NSUTF8StringEncoding];
     
-    GHAssertTrue( [ received_ isEqualToString: expected_ ], @"Wrong decoding result" );
+    GHAssertTrue([received isEqualToString: expected ], @"Wrong decoding result" );
 }
 
 - (void)testBadDataProducesCorrectError
 {
-    NSError*       error        = nil;
-    NSData*        gzipData     = nil;
-    NSData*        receivedData = nil;
-    JNGzipDecoder* decoder = nil;
+    NSError       *error        = nil;
+    NSData        *gzipData     = nil;
+    NSData        *receivedData = nil;
+    JNGzipDecoder *decoder      = nil;
     
     {
         //compressed with zip instead of gzip
-        gzipData  = [ JNTestBundleManager loadZipFileNamed : @"1.1" ];
-        decoder = [ [ JNGzipDecoder alloc ] initWithContentLength: [ gzipData length ] ];
+        gzipData  = [JNTestBundleManager loadZipFileNamed:@"1.1"];
+        decoder   = [[JNGzipDecoder alloc] initWithContentLength:[gzipData length]];
         
-        receivedData = [ decoder decodeData: gzipData
-                                      error: &error ];
+        receivedData = [decoder decodeData:gzipData
+                                     error:&error];
         
         GHAssertNil( receivedData, @"nil data in error Expected" );
         
@@ -71,14 +71,14 @@
     
     {
         //compressed with zip instead of gzip
-        gzipData  = [ JNTestBundleManager loadZipFileNamed : @"1-Incomplete" ];
-        decoder = [ [ JNGzipDecoder alloc ] initWithContentLength: [ gzipData length ] ];
+        gzipData  = [JNTestBundleManager loadZipFileNamed:@"1-Incomplete"];
+        decoder = [[JNGzipDecoder alloc] initWithContentLength: [gzipData length]];
         
-        receivedData = [ decoder decodeData: gzipData
-                                      error: &error ];
+        receivedData = [decoder decodeData:gzipData
+                                     error:&error];
         
-        GHAssertNotNil( receivedData, @"nil data in error Expected" );
-        GHAssertNil( error, @"No error expected since on-the-fly unpacking was introduced " );
+        GHAssertNotNil(receivedData, @"nil data in error Expected");
+        GHAssertNil(error, @"No error expected since on-the-fly unpacking was introduced ");
     }
 }
 

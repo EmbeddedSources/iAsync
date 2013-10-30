@@ -89,7 +89,7 @@
     params.headers  = headers;
     JNConnectionsFactory *factory = [[JNConnectionsFactory alloc] initWithURLConnectionParams:params];
     
-    id< JNUrlConnection > connection = nil;
+    id <JNUrlConnection> connection = nil;
     
     connection = [factory createFastConnection];
     GHAssertTrue([connection isMemberOfClass:[JFFURLConnection class]], @"Custom connection class mismatch");

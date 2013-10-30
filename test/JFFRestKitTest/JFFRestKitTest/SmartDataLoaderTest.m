@@ -137,15 +137,15 @@ static JFFAsyncOperationBinder differentTestDataLoader(BOOL *wasCalled)
     JFFAsyncOperation loader = jSmartDataLoader(url,
                                                 dataLoaderForURL,
                                                 analyzerForData);
+    
+    __block NSError *resultError = nil;
+    
+    loader(nil, nil, ^(id data, NSError *error) {
+        
+        resultError = error;
+    });
 
-    __block NSError* resultError_ = nil;
-
-    loader( nil, nil, ^( id data_, NSError* error_ )
-    {
-        resultError_ = error_;
-    } );
-
-    GHAssertTrue( errorToFail == resultError_, @"OK" );
+    GHAssertTrue( errorToFail == resultError, @"OK" );
 }
 
 //Use cached data if cannot load data
@@ -286,25 +286,25 @@ static JFFAsyncOperationBinder differentTestDataLoader(BOOL *wasCalled)
 
     args_.dataLoaderForIdentifier = differentTestDataLoader( &wasCalledAgain_ );
 
-    JFFAsyncOperation differentLoader_ = jSmartDataLoaderWithCache( args_ );
+    JFFAsyncOperation differentLoader = jSmartDataLoaderWithCache( args_ );
 
     __block NSString* storedDataString_ = nil;
     __block NSString* cachedDataString_ = nil;
 
-    loader( nil, nil, ^( id data_, NSError* error_ ) {
+    loader( nil, nil, ^(id data, NSError *error) {
         
-        storedDataString_ = data_;
-        differentLoader_( nil, nil, ^( id data_, NSError* error_ )
-        {
-            cachedDataString_ = data_;
-        } );
-    } );
+        storedDataString_ = data;
+        differentLoader( nil, nil, ^(id data, NSError *error) {
+            
+            cachedDataString_ = data;
+        });
+    });
+    
+    GHAssertTrue([cachedDataString_ isEqualToString:storedDataString_],
+                 @"cached and stored data should be same");
 
-    GHAssertTrue( [ cachedDataString_ isEqualToString: storedDataString_ ]
-                 , @"cached and stored data should be same" );
-
-    GHAssertTrue ( wasCalled, @"OK" );
-    GHAssertFalse( wasCalledAgain_, @"OK" );
+    GHAssertTrue (wasCalled, @"OK" );
+    GHAssertFalse(wasCalledAgain_, @"OK" );
 }
 
 @end

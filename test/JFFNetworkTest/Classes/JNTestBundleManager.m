@@ -4,20 +4,20 @@
 
 + (NSBundle *)decodersDataBundle
 {
-    NSBundle* main_bundle_ = [ NSBundle bundleForClass: [ self class ] ];
-
-    NSString* result_path_ = [ main_bundle_ pathForResource: @"JFFNetworkTestData"
-                                                     ofType: @"bundle" ];
-
-    return [ NSBundle bundleWithPath: result_path_ ];
+    NSBundle *mainBundle = [NSBundle bundleForClass:[self class]];
+    
+    NSString* resultPath = [mainBundle pathForResource:@"JFFNetworkTestData"
+                                                ofType:@"bundle"];
+    
+    return [NSBundle bundleWithPath:resultPath];
 }
 
-+ (NSData *)loadZipFileNamed:(NSString *)file_name_
++ (NSData *)loadZipFileNamed:(NSString *)fileName
 {
-    NSString* result_path_ = [ [ self decodersDataBundle ] pathForResource: file_name_
-                                                                    ofType: @"zip" ];
-
-    return [ NSData dataWithContentsOfFile: result_path_ ];
+    NSString *resultPath = [[self decodersDataBundle] pathForResource:fileName
+                                                               ofType:@"zip"];
+    
+    return [NSData dataWithContentsOfFile:resultPath];
 }
 
 + (NSString *)loadTextFileNamed:(NSString *)fileName

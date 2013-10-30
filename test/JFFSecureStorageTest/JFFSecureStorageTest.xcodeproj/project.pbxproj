@@ -16,6 +16,8 @@
 		1BE99A3015459AB40028F395 /* JFFSecureStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE99A2F15459AB40028F395 /* JFFSecureStorageTest.m */; };
 		1BE99A4015459BCC0028F395 /* libJFFSecureStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE99A3B15459BC20028F395 /* libJFFSecureStorage.a */; };
 		1BE99A4215459BDB0028F395 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE99A4115459BDB0028F395 /* Security.framework */; };
+		4C7F8042182001ED009785AF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7F8041182001ED009785AF /* Default-568h@2x.png */; };
+		4C7F80441820023B009785AF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7F80431820023B009785AF /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		1BE99A2F15459AB40028F395 /* JFFSecureStorageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSecureStorageTest.m; sourceTree = "<group>"; };
 		1BE99A3215459BC20028F395 /* JFFSecureStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFSecureStorage.xcodeproj; path = ../../lib/JFFSecureStorage/JFFSecureStorage.xcodeproj; sourceTree = "<group>"; };
 		1BE99A4115459BDB0028F395 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4C7F8041182001ED009785AF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		4C7F80431820023B009785AF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C7F80441820023B009785AF /* QuartzCore.framework in Frameworks */,
 				1BE99A4215459BDB0028F395 /* Security.framework in Frameworks */,
 				1BE99A4015459BCC0028F395 /* libJFFSecureStorage.a in Frameworks */,
 				1BE99A04154599490028F395 /* UIKit.framework in Frameworks */,
@@ -77,8 +82,9 @@
 		1BE999F4154599490028F395 = {
 			isa = PBXGroup;
 			children = (
-				1BE99A3115459BAF0028F395 /* Dependencies */,
+				4C7F8041182001ED009785AF /* Default-568h@2x.png */,
 				1BE99A09154599490028F395 /* JFFSecureStorageTest */,
+				1BE99A3115459BAF0028F395 /* Dependencies */,
 				1BE99A02154599490028F395 /* Frameworks */,
 				1BE99A00154599490028F395 /* Products */,
 			);
@@ -95,6 +101,7 @@
 		1BE99A02154599490028F395 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C7F80431820023B009785AF /* QuartzCore.framework */,
 				1BE99A4115459BDB0028F395 /* Security.framework */,
 				1BE99A2C154599CD0028F395 /* GHUnitIOS.framework */,
 				1BE99A03154599490028F395 /* UIKit.framework */,
@@ -217,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE99A0E154599490028F395 /* InfoPlist.strings in Resources */,
+				4C7F8042182001ED009785AF /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,11 +266,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -270,12 +276,14 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../lib/JFFSecureStorage;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				HEADER_SEARCH_PATHS = (
+					../../lib/JFFSecureStorage,
+					../../lib,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -284,17 +292,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../lib/JFFSecureStorage;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				HEADER_SEARCH_PATHS = (
+					../../lib/JFFSecureStorage,
+					../../lib,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -312,7 +320,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFSecureStorageTest/JFFSecureStorageTest-Prefix.pch";
 				INFOPLIST_FILE = "JFFSecureStorageTest/JFFSecureStorageTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -334,7 +341,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFSecureStorageTest/JFFSecureStorageTest-Prefix.pch";
 				INFOPLIST_FILE = "JFFSecureStorageTest/JFFSecureStorageTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
