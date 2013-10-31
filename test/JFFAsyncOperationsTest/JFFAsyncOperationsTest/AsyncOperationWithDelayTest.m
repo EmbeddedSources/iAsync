@@ -11,12 +11,12 @@
 
 - (void)setUp
 {
-    [JFFScheduler enableInstancesCounting];
+    [JFFTimer enableInstancesCounting];
 }
 
 - (void)testCancelAsyncOperationWithDelay
 {
-    const NSUInteger initialSchedulerInstancesCount = [JFFScheduler instancesCount];
+    const NSUInteger initialSchedulerInstancesCount = [JFFTimer instancesCount];
     
     __block BOOL cancelBlockOk = NO;
     __block NSTimeInterval timeDifference = 0;
@@ -57,7 +57,7 @@
                                           selector:_cmd
                                            timeout:1.];
     
-    GHAssertTrue(initialSchedulerInstancesCount == [JFFScheduler instancesCount], @"OK");
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFTimer instancesCount], @"OK");
     
     GHAssertTrue(cancelBlockOk, @"OK");
     GHAssertTrue(timeDifference >= 0.3, @"OK");
@@ -65,7 +65,7 @@
 
 - (void)testAsyncOperationWithDelayTwiceCall
 {
-    const NSUInteger initialSchedulerInstancesCount = [JFFScheduler instancesCount];
+    const NSUInteger initialSchedulerInstancesCount = [JFFTimer instancesCount];
     
     __block NSUInteger callsCount = 0;
     
@@ -95,7 +95,7 @@
                                           selector:_cmd
                                            timeout:1.];
     
-    GHAssertTrue(initialSchedulerInstancesCount == [JFFScheduler instancesCount], @"OK");
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFTimer instancesCount], @"OK");
     
     GHAssertTrue(callsCount == 2, @"OK");
 }

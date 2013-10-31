@@ -8,4 +8,6 @@
 //result is CLLocation object
 + (JFFAsyncOperation)locationLoaderWithAccuracy:(CLLocationAccuracy)accuracy;
 
++ (JFFAsyncOperation)locationLoaderWithAccuracy:(CLLocationAccuracy)accuracy tolerance:(NSTimeInterval)tolerance;
+
 @end

@@ -12,9 +12,9 @@
 {
     __block CLLocation *location;
     
-    void(^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishBLock) {
+    void(^testBlock)(JFFSimpleBlock) = ^void(JFFSimpleBlock finishBLock) {
         
-        JFFAsyncOperation loader = [JFFLocationLoader locationLoaderWithAccuracy:kCLLocationAccuracyHundredMeters];
+        JFFAsyncOperation loader = [JFFLocationLoader locationLoaderWithAccuracy:kCLLocationAccuracyKilometer];
         loader(nil, nil, ^(id result, NSError *error) {
             
             location = result;
@@ -24,7 +24,8 @@
     };
     
     [self performAsyncRequestOnMainThreadWithBlock:testBlock
-                                          selector:_cmd];
+                                          selector:_cmd
+                                           timeout:10.];
     
     GHAssertNotNil(location, nil);
 }
@@ -33,9 +34,9 @@
 {
     __block CLPlacemark *placemark;
     
-    void(^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishBLock) {
+    void(^testBlock)(JFFSimpleBlock) = ^void(JFFSimpleBlock finishBLock) {
         
-        JFFAsyncOperation loader = [JFFPlacemarksLoader placemarkLoaderForCurrentLocationWithAccuracy:kCLLocationAccuracyHundredMeters];
+        JFFAsyncOperation loader = [JFFPlacemarksLoader placemarkLoaderForCurrentLocationWithAccuracy:kCLLocationAccuracyKilometer];
         loader(nil, nil, ^(id result, NSError *error) {
             
             placemark = result;
@@ -45,7 +46,8 @@
     };
     
     [self performAsyncRequestOnMainThreadWithBlock:testBlock
-                                          selector:_cmd];
+                                          selector:_cmd
+                                           timeout:10.];
     
     GHAssertNotNil(placemark, nil);
 }

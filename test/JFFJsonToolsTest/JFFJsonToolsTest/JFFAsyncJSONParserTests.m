@@ -17,7 +17,7 @@
     __block id blockResult;
     __block NSError *blockError;
     
-    void (^block)(JFFSimpleBlock) = ^(JFFSimpleBlock block) {
+    void (^block)(JFFSimpleBlock) = ^void(JFFSimpleBlock block) {
         
         NSData *data = [@"{}" dataUsingEncoding:NSUTF8StringEncoding];
         JFFAsyncOperation loader = asyncOperationJsonDataParser(data);

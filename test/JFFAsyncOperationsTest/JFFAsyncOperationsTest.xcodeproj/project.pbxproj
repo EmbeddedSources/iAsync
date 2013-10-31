@@ -88,13 +88,6 @@
 			remoteGlobalIDString = D2AAC07E0554694100DB518D;
 			remoteInfo = JFFScheduler;
 		};
-		1B835B5B142CD17A00FC004C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1B835B52142CD17300FC004C /* JFFScheduler.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = JFFScheduler;
-		};
 		5357CDFC14A9F5130046EA34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1B835A18142C8BB300FC004C /* JFFAsyncOperations.xcodeproj */;
@@ -355,7 +348,6 @@
 			);
 			dependencies = (
 				1B2D8C48154BFE6D00360296 /* PBXTargetDependency */,
-				1B835B5C142CD17A00FC004C /* PBXTargetDependency */,
 				1B835A22142C8BBF00FC004C /* PBXTargetDependency */,
 				1B835A24142C8BBF00FC004C /* PBXTargetDependency */,
 			);
@@ -573,11 +565,6 @@
 			isa = PBXTargetDependency;
 			name = JFFAsyncOperations;
 			targetProxy = 1B835A23142C8BBF00FC004C /* PBXContainerItemProxy */;
-		};
-		1B835B5C142CD17A00FC004C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = JFFScheduler;
-			targetProxy = 1B835B5B142CD17A00FC004C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

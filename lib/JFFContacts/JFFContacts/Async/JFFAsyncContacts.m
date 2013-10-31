@@ -15,9 +15,7 @@
 
 - (void)notifyHandlerWithResult:(id)result error:(NSError *)error
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        _handler(result, error);
-    });
+    _handler(result, error);
 }
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
@@ -29,23 +27,18 @@
     
     __weak JFFAsyncRequestAccessToContactsLoader *weakSelf = self;
     
-    JFFAddressBookSuccessCallback onSuccess = ^(JFFAddressBook *book) {
+    JFFAddressBookSuccessCallback onSuccess = ^void(JFFAddressBook *book) {
         
         [weakSelf notifyHandlerWithResult:book error:nil];
     };
     
-    JFFAddressBookErrorCallback onFailure = ^(ABAuthorizationStatus status, NSError *error) {
+    JFFAddressBookErrorCallback onFailure = ^void(ABAuthorizationStatus status, NSError *error) {
         
         [weakSelf notifyHandlerWithResult:nil error:error];
     };
     
     [JFFAddressBookFactory asyncAddressBookWithSuccessBlock:onSuccess
                                               errorCallback:onFailure];
-}
-
-- (BOOL)isForeignThreadResultCallback
-{
-    return YES;
 }
 
 @end

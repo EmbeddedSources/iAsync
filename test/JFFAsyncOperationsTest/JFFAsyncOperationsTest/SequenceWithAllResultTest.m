@@ -104,7 +104,7 @@
     GHAssertTrue(originalInstanceCount3 == [JFFAsyncOperationManager              instancesCount], @"All object of this class should be deallocated");
 }
 
--(void)testMultiSequenceWithEmptyArray
+- (void)testMultiSequenceWithEmptyArray
 {
     NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
     NSUInteger originalInstanceCount2 = [JFFDidFinishAsyncOperationBlockHolder instancesCount];
@@ -114,7 +114,7 @@
     {
         GHAssertThrows
         (
-         sequenceOfAsyncOperationsWithAllResults( @[] ),
+         sequenceOfAsyncOperationsWithAllResults(@[]),
          @"asert expected"
          );
     }

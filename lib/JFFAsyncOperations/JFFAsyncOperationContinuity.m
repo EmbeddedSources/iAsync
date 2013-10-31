@@ -157,10 +157,11 @@ JFFAsyncOperation accumulateSequenceResult(NSArray *loaders, JFFSequenceResultAc
                 :waterfallResult;
                 
                 id newResult = resultAccumulator(currWaterfallResult, result, error);
+                error = newResult?nil:error;
                 NSCAssert((newResult != nil) ^ (error != nil), nil);
                 
                 if (doneCallback)
-                    doneCallback(newResult, newResult?nil:error);
+                    doneCallback(newResult, error);
             });
         } copy];
         

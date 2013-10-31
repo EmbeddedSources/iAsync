@@ -7,19 +7,19 @@
 
 -(void)testDidFinishAsyncOperationBlockHolder
 {
-    __block BOOL holderDeallocated_ = NO;
+    __block BOOL holderDeallocated = NO;
 
     @autoreleasepool
     {
         JFFDidFinishAsyncOperationBlockHolder *holder = [JFFDidFinishAsyncOperationBlockHolder new];
-        [ holder addOnDeallocBlock: ^void( void )
-        {
-            holderDeallocated_ = YES;
-        } ];
+        [holder addOnDeallocBlock:^void(void) {
+            
+            holderDeallocated = YES;
+        }];
         
         __block BOOL blockContextDeallocated = NO;
         __block NSUInteger finishBlockCallsNumber = 0;
-
+        
         @autoreleasepool
         {
             NSObject *blockContext = [NSObject new];
@@ -39,16 +39,16 @@
 
         holder.onceDidFinishBlock( nil, nil );
 
-        GHAssertTrue( nil == holder.didFinishBlock, @"finish block empty" );
-        GHAssertTrue( blockContextDeallocated, @"context deallocated" );
-        GHAssertTrue( 1 == finishBlockCallsNumber, @"block once was called" );
-
-        holder.onceDidFinishBlock( nil, nil );
-
-        GHAssertTrue( 1 == finishBlockCallsNumber, @"block still once was called" );
+        GHAssertTrue(nil == holder.didFinishBlock, @"finish block empty"   );
+        GHAssertTrue(blockContextDeallocated     , @"context deallocated"  );
+        GHAssertTrue(1 == finishBlockCallsNumber , @"block once was called");
+        
+        holder.onceDidFinishBlock(nil, nil);
+        
+        GHAssertTrue(1 == finishBlockCallsNumber, @"block still once was called");
     }
-
-    GHAssertTrue( holderDeallocated_, @"holder deallocated" );
+    
+    GHAssertTrue( holderDeallocated, @"holder deallocated" );
 }
 
 @end

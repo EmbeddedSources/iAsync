@@ -15,6 +15,9 @@ JFFLocationObserver
 
 @implementation JFFCoreLocationAsyncAdapter
 {
+@public
+    NSTimeInterval _tolerance;
+@private
     JFFLocationLoaderSupervisor *_supervisor;
     CLLocationAccuracy _accuracy;
     JFFAsyncOperationInterfaceResultHandler _handler;
@@ -71,7 +74,7 @@ JFFLocationObserver
         cancel();
         
         [weakSelf onSchedulerWithHandler:handler];
-    } duration:3. leeway:.5];
+    } duration:_tolerance];
 }
 
 - (void)onSchedulerWithHandler:(JFFAsyncOperationInterfaceResultHandler)handler
@@ -131,10 +134,18 @@ JFFLocationObserver
 
 + (JFFAsyncOperation)locationLoaderWithAccuracy:(CLLocationAccuracy)accuracy
 {
+    return [self locationLoaderWithAccuracy:accuracy tolerance:3.];
+}
+
++ (JFFAsyncOperation)locationLoaderWithAccuracy:(CLLocationAccuracy)accuracy tolerance:(NSTimeInterval)tolerance
+{
     NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
-        return [JFFCoreLocationAsyncAdapter newCoreLocationAsyncAdapterWithAccuracy:accuracy];
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>(void) {
+        
+        JFFCoreLocationAsyncAdapter *result = [JFFCoreLocationAsyncAdapter newCoreLocationAsyncAdapterWithAccuracy:accuracy];
+        result->_tolerance = tolerance;
+        return result;
     };
     JFFAsyncOperation loader = buildAsyncOperationWithAdapterFactory(factory);
     

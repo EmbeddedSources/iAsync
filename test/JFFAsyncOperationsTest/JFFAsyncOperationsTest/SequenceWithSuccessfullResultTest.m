@@ -34,7 +34,7 @@
         __weak JFFAsyncOperationManager *assignFirstLoader = firstLoader;
         JFFAsyncOperation loader2 = asyncOperationWithDoneBlock(secondLoader.loader, ^() {
             
-            GHAssertTrue( assignFirstLoader.finished, @"First loader finished already" );
+            GHAssertTrue(assignFirstLoader.finished, @"First loader finished already");
         });
         
         JFFAsyncOperation loader = sequenceOfAsyncOperationsWithSuccessfullResults(@[firstLoader.loader, loader2, thirdLoader.loader]);
@@ -197,26 +197,26 @@
         __block NSError *sequenceError = nil;
         
         __block BOOL sequenceLoaderFinished = NO;
-        loader(nil, nil, ^( id result_, NSError* error_ ) {
+        loader(nil, nil, ^(id result_, NSError *error_) {
             sequenceError  = error_;
             sequenceResult = result_;
             sequenceLoaderFinished = YES;
         });
         
-        GHAssertFalse(firstLoader.finished, @"First loader not finished yet" );
-        GHAssertFalse(secondLoader.finished, @"Second loader not finished yet" );
-        GHAssertFalse(thirdLoader.finished, @"Third loader not finished yet" );
-        GHAssertFalse(sequenceLoaderFinished, @"Sequence loader not finished yet" );
+        GHAssertFalse(firstLoader.finished  , @"First loader not finished yet"   );
+        GHAssertFalse(secondLoader.finished , @"Second loader not finished yet"  );
+        GHAssertFalse(thirdLoader.finished  , @"Third loader not finished yet"   );
+        GHAssertFalse(sequenceLoaderFinished, @"Sequence loader not finished yet");
         
         NSNumber *firstResult  = @(2.71);
         NSNull *thirdResult = [NSNull null];
-        firstLoader.loaderFinishBlock.didFinishBlock( firstResult, nil );
+        firstLoader.loaderFinishBlock.didFinishBlock(firstResult, nil);
         
         //        secondLoader.loaderFinishBlock.didFinishBlock( nil, secondError );
-        GHAssertTrue(firstLoader.finished, @"First loader finished already" );
-        GHAssertTrue(secondLoader.finished, @"Second loader not finished yet" );
-        GHAssertTrue(thirdLoader.finished, @"Third loader not finished yet" );
-        GHAssertTrue(sequenceLoaderFinished, @"Sequence loader finished already" );
+        GHAssertTrue(firstLoader.finished  , @"First loader finished already"   );
+        GHAssertTrue(secondLoader.finished , @"Second loader not finished yet"  );
+        GHAssertTrue(thirdLoader.finished  , @"Third loader not finished yet"   );
+        GHAssertTrue(sequenceLoaderFinished, @"Sequence loader finished already");
         
         GHAssertNotNil(sequenceResult, @"Result type mismatch" );
         GHAssertNil(sequenceError, @"error object mismatch" );
