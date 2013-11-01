@@ -79,7 +79,7 @@ JFFAsyncOperationInterface
 
 - (JFFAsyncOperation)asyncOperationWithApplicationURL:(NSURL *)url
 {
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id <JFFAsyncOperationInterface>(void) {
         
         JFFOpenApplicationWithURLDelegateProxy *proxy =
         [JFFOpenApplicationWithURLDelegateProxy new];

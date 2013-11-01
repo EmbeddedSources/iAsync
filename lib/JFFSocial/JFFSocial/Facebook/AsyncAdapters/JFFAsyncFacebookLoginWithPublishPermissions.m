@@ -79,7 +79,7 @@
 
 JFFAsyncOperation jffFacebookLoginWithPublishPermissions(FBSession *facebook, NSArray *permissions)
 {
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id <JFFAsyncOperationInterface>(void) {
         
         JFFAsyncFacebookLoginWithPublishPermissions *object = [JFFAsyncFacebookLoginWithPublishPermissions new];
         

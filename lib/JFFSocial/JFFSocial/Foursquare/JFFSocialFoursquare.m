@@ -262,9 +262,9 @@
                                  text:(NSString *)text
                                   url:(NSString *)url
 {
-    JFFAsyncOperationBinder addPostBinder = ^JFFAsyncOperation (NSArray *checkins)
+    JFFAsyncOperationBinder addPostBinder = ^JFFAsyncOperation(NSArray *checkins)
     {
-        FoursquareCheckinsModel *lastCheckin = [checkins count] > 0 ? checkins[0] : nil;
+        FoursquareCheckinsModel *lastCheckin = (([checkins count]>0)?checkins[0]:nil);
         
         if (!lastCheckin) {
             return asyncOperationWithError([JFFFoursquareNotFoundUsersCheckinsError new]);

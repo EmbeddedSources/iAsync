@@ -33,6 +33,9 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader(JFFAsyncOperation chunkedD
         __block NSFileHandle *handle = nil;
         __block volatile BOOL canceled = NO;
         
+        //TODO work with file with dispatch_io_create
+        //https://developer.apple.com/library/ios/documentation/Performance/Reference/GCD_libdispatch_Ref/Reference/reference.html#//apple_ref/c/func/dispatch_io_create
+        
         void (^closeFile)(void) = ^(void) {
             
             [handle closeFile];

@@ -80,6 +80,7 @@ static NSError *convertErrorType(NSError *error, ABAuthorizationStatus authoriza
 + (void)asyncAddressBookWithSuccessBlock:(JFFAddressBookSuccessCallback)onSuccess
                            errorCallback:(JFFAddressBookErrorCallback)onFailure
 {
+    NSParameterAssert([[NSThread currentThread] isMainThread]);
     NSParameterAssert(nil!=onSuccess);
     NSParameterAssert(nil!=onFailure);
     

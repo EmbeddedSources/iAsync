@@ -8,7 +8,7 @@
 -(void)testDidFinishAsyncOperationBlockHolder
 {
     __block BOOL holderDeallocated = NO;
-
+    
     @autoreleasepool
     {
         JFFDidFinishAsyncOperationBlockHolder *holder = [JFFDidFinishAsyncOperationBlockHolder new];
@@ -35,10 +35,10 @@
             };
         }
         
-        GHAssertFalse( blockContextDeallocated, @"context not deallocated" );
-
-        holder.onceDidFinishBlock( nil, nil );
-
+        GHAssertFalse(blockContextDeallocated, @"context not deallocated");
+        
+        holder.onceDidFinishBlock(nil, nil);
+        
         GHAssertTrue(nil == holder.didFinishBlock, @"finish block empty"   );
         GHAssertTrue(blockContextDeallocated     , @"context deallocated"  );
         GHAssertTrue(1 == finishBlockCallsNumber , @"block once was called");

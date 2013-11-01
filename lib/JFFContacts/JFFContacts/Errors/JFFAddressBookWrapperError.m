@@ -16,7 +16,8 @@
     JFFAddressBookWrapperError *copy = [super copyWithZone:zone];
     
     if (copy) {
-        copy->_nativeError = [_nativeError copyWithZone:zone];
+        copy->_nativeError         = [_nativeError copyWithZone:zone];
+        copy->_authorizationStatus = _authorizationStatus;
     }
     
     return copy;
