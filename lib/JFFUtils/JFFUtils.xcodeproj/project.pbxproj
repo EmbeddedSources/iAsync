@@ -2437,7 +2437,6 @@
 					../JFFTestTools,
 				);
 				INFOPLIST_FILE = "JFFUtilsTest/JFFUtilsTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2475,7 +2474,6 @@
 					../JFFTestTools,
 				);
 				INFOPLIST_FILE = "JFFUtilsTest copy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2514,7 +2512,6 @@
 					../JFFTestTools,
 				);
 				INFOPLIST_FILE = "JFFUtilsTest copy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2547,7 +2544,6 @@
 					../JFFTestTools,
 				);
 				INFOPLIST_FILE = "JFFUtilsTest copy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2587,7 +2583,6 @@
 					../JFFTestTools,
 				);
 				INFOPLIST_FILE = "JFFUtilsTest/JFFUtilsTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2619,7 +2614,6 @@
 					../JFFTestTools,
 				);
 				INFOPLIST_FILE = "JFFUtilsTest/JFFUtilsTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
