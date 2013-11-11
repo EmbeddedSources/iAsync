@@ -95,12 +95,12 @@ typedef BOOL (^JFFPredicate)();
     NSParameterAssert(prototypeMethod);
     
     const char *typeEncoding = method_getTypeEncoding(prototypeMethod);
-//    BOOL methodAdded =
+    BOOL methodAdded =
     class_addMethod(targetClass,
                     hookSelector,
                     method_getImplementation(prototypeMethod),
                     typeEncoding);
-    //NSAssert(methodAdded, @"should be added");
+    NSAssert(methodAdded, @"should be added");
     Method hookMethod = methodGetter(class, hookSelector);
     
     method_exchangeImplementations(targetMethod, hookMethod);
