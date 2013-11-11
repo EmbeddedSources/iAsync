@@ -34,7 +34,7 @@ static const char* const ZIP_QUEUE_NAME = "org.EmbeddedSources.network.gzip";
 
 @property ( nonatomic ) unsigned long long downloadedBytesCount;
 @property ( nonatomic ) unsigned long long totalBytesCount;
-@property ( nonatomic, unsafe_unretained ) dispatch_queue_t zipQueue;
+@property ( nonatomic ) dispatch_queue_t zipQueue;
 
 -(void)handleResponseForReadStream:( CFReadStreamRef )stream_;
 -(void)handleData:( void* )buffer_ length:( NSUInteger )length_;
@@ -304,14 +304,19 @@ static void readStreamCallback(CFReadStreamRef stream,
     
     dispatch_block_t cleanupBlock =
     ^{
+        
+    #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
+        
         dispatch_queue_t zipQueue = [ weakSelf zipQueue ];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
+        
         if ( NULL != zipQueue )
         {
             dispatch_release( zipQueue );
         }
-#endif
+        
         weakSelf.zipQueue = NULL;
+    #endif
+        
     };
     
     if ( nil == self->_queueForCallbacks )
