@@ -1,4 +1,17 @@
-Collection of IOS libraries which contains:
+# What is iAsync ?
+iAsync is ***a set of IOS libraries*** that aims to make asychronous programming easy for for **Objective-C** developers. 
+It uses **functional programming** ideas to solve **Callback Hell** problem. 
+
+
+
+## Callback Hell Problem
+You are suffering from the callback hell if you have a lot of nested asynchronous calls in your project. For example :
+![Callback Hell](https://github.com/EmbeddedSources/iAsync/raw/readme/readme/1-Callback-Hell.png)
+
+This makes your code hard error prone. It is hard to debug and maintain such codebase. 
+There is a nice [blogpost](http://tirania.org/blog/archive/2013/Aug-15.html) and a [webinar](http://blog.xamarin.com/csharp-async-on-ios-and-android/) by @migueldeicaza .
+
+
 
 "lib" folder:
 JFFLibrary - library which include and build all projects from lib directory.
