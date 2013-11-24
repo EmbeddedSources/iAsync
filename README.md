@@ -9,6 +9,11 @@ It has been designed as a more convenient dispatch_async() with task dependencie
 License : BSD
 Supports iOS versions 4.0 and higher. Builds using IOS SDK ver. 5.0
 ```
+# Contacts
+
+* google group : <https://groups.google.com/forum/#!forum/iasync-users>
+* skype chat (mostly, russian speaking) : <skype:?chat&blob=8WfBM4NDRJZwtFEjtCR69UxYie9KVzZqp0pPogEOUHQGBbvMnxo4IxSHdusKsg8dfhFYYb5vKB2PSkJbfb72_bgSDfanudA7xIjsZORHA6FxPUaLhb7JXI1eFOnIo7l8C4pxHdpIeQipTw>
+
 
 ## Callback Hell Problem
 You are suffering from the callback hell if you have a lot of nested asynchronous calls in your project. For example :
