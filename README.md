@@ -2,7 +2,7 @@
 iAsync is ***a set of IOS libraries*** that aims to make asychronous programming easy for for **Objective-C** developers. 
 It uses **functional programming** ideas to solve **Callback Hell** problem.
 
-
+It has been designed as a more convenient dispatch_async() with task dependencies and functional programming values in mind.
 
 
 ```
@@ -77,6 +77,8 @@ AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager]
      [ self handleError: error ];
 }];
 ```
+
+As you can see, this code has 4 levels of nested callbacks and is hard to maitain. Let's see how iAsync will help you dealing with this complexity.
 
 
 
@@ -153,6 +155,16 @@ And it is as easy to use as built-in dispatch_async() routines :
 ```
 
 
-Of course, we should implement download and parsing routines. Full source code of the [sample](https://github.com/dodikk/weather-iasync/blob/master/lib/iAsyncWeatherOperations/iAsyncWeatherOperations/AWOperationsFactory.mm) can be found at the repository below : https://github.com/dodikk/weather-iasync
+Of course, we should implement download and parsing routines. Full source code of the [sample](https://github.com/dodikk/weather-iasync/blob/master/lib/iAsyncWeatherOperations/iAsyncWeatherOperations/AWOperationsFactory.mm) can be found at the repository below : <https://github.com/dodikk/weather-iasync>
 
 
+## iAsync flow control operators
+iAsync has the following flow control for operations for your asynchronous blocks :
+
+* **sequence** - operations are executed one after another.
+* **sequence of attempts** - operations are executed one after another until one of them succeeds
+* **group** - operations are executed in parallel. A single callback is triggered when all of them are finished.
+* **waterfall** - operations are executed one after another. Results of the previous operation are passed to the one under execution as input.
+
+
+The library has many more features to explore. See the readme in the "lib" directory for details.
