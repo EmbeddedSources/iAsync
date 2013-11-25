@@ -40,8 +40,7 @@ Let's consider an example weather application core. In order to get the weather 
 
 
 ### Traditional approach with dispatch_async() and AFNetworking
-```
-// objective-c
+```objective-c
 
 NSString* geolocationUrl = [ NSString stringWithFormat: @"http://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=%@", @"Kiev"];
 
@@ -97,7 +96,7 @@ Using **iAsync** you can rewrite the code above in functional programming manner
 
 So, the code above can be rewritten in a declarative manner :
 
-```
+```objective-c
 +(JFFAsyncOperation)asyncWeatherForAddress:( NSString* )userInput
 {
    return bindSequenceOfAsyncOperationsArray
@@ -114,7 +113,7 @@ So, the code above can be rewritten in a declarative manner :
 
 And it is as easy to use as built-in dispatch_async() routines :
 
-```
+```objective-c
 -(IBAction)getWeatherButtonTapped:(id)sender
 {
    [ self.txtAddress resignFirstResponder ];
