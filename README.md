@@ -1,3 +1,4 @@
+
 # iAsync - a better dispatch_async()
 iAsync is ***a set of IOS libraries*** that aims to make asychronous programming easy for for **Objective-C** developers. 
 It uses **functional programming** ideas to solve **Callback Hell** problem.
@@ -17,7 +18,8 @@ Supports iOS versions 4.0 and higher. Builds using IOS SDK ver. 5.0
 
 ## Callback Hell Problem
 You are suffering from the callback hell if you have a lot of nested asynchronous calls in your project. For example :
-![Callback Hell](https://github.com/EmbeddedSources/iAsync/raw/readme/readme/1-Callback-Hell.png)
+![Callback Hell](https://github.com/EmbeddedSources/iAsync/raw/master/readme/1-Callback-Hell.png)
+
 
 This makes your code hard error prone. It is hard to debug and maintain such codebase. 
 There is a nice [blogpost](http://tirania.org/blog/archive/2013/Aug-15.html) and a [webinar](http://blog.xamarin.com/csharp-async-on-ios-and-android/) by [Miguel de Icaza](https://github.com/migueldeicaza) .
@@ -90,7 +92,7 @@ As you can see, this code has 4 levels of nested callbacks and is hard to maitai
 ### iAsync approach
 Using **iAsync** you can rewrite the code above in functional programming manner. In our example we use a waterfall flow that ensures execution order and passes results of the previous asynchronous function to the one being executed. 
 
-![Waterfall flow](https://github.com/EmbeddedSources/iAsync/raw/readme/readme/2-Waterfall.png)
+![Waterfall flow](https://github.com/EmbeddedSources/iAsync/raw/master/readme/2-Waterfall.png)
 
 
 So, the code above can be rewritten in a declarative manner :
