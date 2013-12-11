@@ -11,7 +11,7 @@
 {
     @autoreleasepool {
         JFFSimpleBlockHolder* holder_ = [ JFFSimpleBlockHolder new ];
-        STAssertTrue( 0 != [ JFFSimpleBlockHolder instancesCount ], @"Block holder should exists" );
+        XCTAssertTrue( 0 != [ JFFSimpleBlockHolder instancesCount ], @"Block holder should exists" );
         
         __block BOOL blockContextDeallocated_ = NO;
         __block NSUInteger performBlockCount_ = 0;
@@ -36,12 +36,12 @@
             holder_.onceSimpleBlock();
         }
         
-        STAssertTrue( blockContextDeallocated_, @"Block context should be dealloced" );
-        STAssertTrue( 1 == performBlockCount_, @"Block was called once" );
-        STAssertTrue( nil == holder_.simpleBlock, @"Block is nil after call" );
+        XCTAssertTrue( blockContextDeallocated_, @"Block context should be dealloced" );
+        XCTAssertTrue( 1 == performBlockCount_, @"Block was called once" );
+        XCTAssertTrue( nil == holder_.simpleBlock, @"Block is nil after call" );
     }
     
-    STAssertTrue( 0 == [ JFFSimpleBlockHolder instancesCount ], @"Block holder should be dealloced" );
+    XCTAssertTrue( 0 == [ JFFSimpleBlockHolder instancesCount ], @"Block holder should be dealloced" );
 }
 
 @end

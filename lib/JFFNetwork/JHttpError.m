@@ -29,7 +29,9 @@
 
 - (void)writeErrorWithJFFLogger
 {
-    [JFFLogger logErrorWithFormat:@"%@ Http code:%d cantext:%@", [self localizedDescription], self.code, _context];
+    NSString* strStatusCode = [ @(self.code) descriptionWithLocale: nil ];
+    
+    [JFFLogger logErrorWithFormat:@"%@ Http code:%@ cantext:%@", [self localizedDescription], strStatusCode, _context];
 }
 
 -(BOOL)isHttpNotChangedError
@@ -45,6 +47,11 @@
 -(BOOL)isInternalServerError
 {
     return ( self.code == 500 );
+}
+
+-(BOOL)isNotFoundError
+{
+    return ( self.code == 404 );
 }
 
 @end

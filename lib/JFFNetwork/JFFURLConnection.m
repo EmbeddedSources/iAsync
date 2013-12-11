@@ -298,15 +298,15 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 -(void)disposeZipQueue
 {
+    // @adk : idle for iOS 6 and later
+    
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
     // @adk - using "strong" since this code may be called from "dealloc".
     // No retain cycles here
     __strong JFFURLConnection* weakSelf = self;
-    
+
     dispatch_block_t cleanupBlock =
     ^{
-        
-    #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
-        
         dispatch_queue_t zipQueue = [ weakSelf zipQueue ];
         
         if ( NULL != zipQueue )
@@ -315,8 +315,6 @@ static void readStreamCallback(CFReadStreamRef stream,
         }
         
         weakSelf.zipQueue = NULL;
-    #endif
-        
     };
     
     if ( nil == self->_queueForCallbacks )
@@ -329,6 +327,7 @@ static void readStreamCallback(CFReadStreamRef stream,
         safe_dispatch_sync( self->_queueForCallbacks, cleanupBlock );
         return;
     }
+#endif
 }
 
 -(id<JNHttpDecoder>)getDecoder

@@ -24,7 +24,7 @@
         , @"habra"
         , @"ABra"];
         
-        STAssertTrue( [ received isEqualToArray: expected ], @"Arrays mismatch" );
+        XCTAssertTrue( [ received isEqualToArray: expected ], @"Arrays mismatch" );
     }
     
     {
@@ -44,7 +44,7 @@
         , @"four"
         , @"five" ];
         
-        STAssertTrue( [ received isEqualToArray: expected ], @"Arrays mismatch" );
+        XCTAssertTrue( [ received isEqualToArray: expected ], @"Arrays mismatch" );
     }
 }
 
@@ -60,7 +60,7 @@
         received = [items unique];
         expected = items;
         
-        STAssertTrue( [ received isEqualToArray: expected], @"Arrays mismatch" );
+        XCTAssertTrue( [ received isEqualToArray: expected], @"Arrays mismatch" );
     }
 }
 
@@ -97,7 +97,7 @@
         , @"kadabra"
         , @"habra" ];
         
-        STAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+        XCTAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
     }
     
     {
@@ -117,7 +117,7 @@
         , @"four"
         , @"five" ];
         
-        STAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+        XCTAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
     }
 }
 

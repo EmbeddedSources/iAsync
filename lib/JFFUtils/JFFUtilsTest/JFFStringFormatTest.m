@@ -9,7 +9,7 @@
     NSString *param2 = @"2";
     
     NSString *result = [NSString stringWithFormatCheckNill:format, param1, param2, nil];
-    STAssertTrue(result != nil, @"Should NOT be nil value");
+    XCTAssertTrue(result != nil, @"Should NOT be nil value");
 }
 
 - (void)testOneMoreParam
@@ -20,7 +20,7 @@
     NSString *param3 = @"3";
     
     NSString *result = [NSString stringWithFormatCheckNill:format, param1, param2, param3, nil];
-    STAssertTrue(result != nil, @"Should NOT be nil value");
+    XCTAssertTrue(result != nil, @"Should NOT be nil value");
 }
 
 @end

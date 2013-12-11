@@ -17,11 +17,11 @@
         dict = [JFFMutableAssignDictionary new];
         [dict setObject:target forKey:@"1"];
         
-        STAssertTrue(1 == [dict count], @"Contains 1 object");
+        XCTAssertTrue(1 == [dict count], @"Contains 1 object");
     }
     
-    STAssertTrue(targetDeallocated, @"Target should be dealloced");
-    STAssertTrue(0 == [dict count], @"Empty array");
+    XCTAssertTrue(targetDeallocated, @"Target should be dealloced");
+    XCTAssertTrue(0 == [dict count], @"Empty array");
 }
 
 -(void)testMutableAssignDictionaryFirstRelease
@@ -38,7 +38,7 @@
         [ dict_ setObject: target_ forKey: @"1" ];
     }
     
-    STAssertTrue( dict_deallocated_, @"Target should be dealloced" );
+    XCTAssertTrue( dict_deallocated_, @"Target should be dealloced" );
 }
 
 -(void)testObjectForKey
@@ -58,29 +58,29 @@
             [dict setObject:object1 forKey:@"1"];
             [dict setObject:object2 forKey:@"2"];
             
-            STAssertTrue(dict[@"1" ] == object1, @"Dict contains object_");
-            STAssertTrue(dict[@"2" ] == object2, @"Dict contains object_");
-            STAssertTrue(dict[@"3" ] == nil, @"Dict no contains object for key \"2\"");
+            XCTAssertTrue(dict[@"1" ] == object1, @"Dict contains object_");
+            XCTAssertTrue(dict[@"2" ] == object2, @"Dict contains object_");
+            XCTAssertTrue(dict[@"3" ] == nil, @"Dict no contains object for key \"2\"");
             
             __block NSUInteger count_ = 0;
             
             [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                  if ( [ key isEqualToString: @"1" ] ) {
-                     STAssertTrue(obj == object1, nil);
+                     XCTAssertTrue(obj == object1);
                      ++count_;
                  } else if ([key isEqualToString:@"2"]) {
-                     STAssertTrue(obj == object2, nil);
+                     XCTAssertTrue(obj == object2);
                      ++count_;
                  } else {
-                     STFail( @"should not be reached" );
+                     XCTFail( @"should not be reached" );
                  }
              } ];
             
-            STAssertTrue( count_ == 2, @"Dict no contains object for key \"2\"" );
+            XCTAssertTrue( count_ == 2, @"Dict no contains object for key \"2\"" );
         }
         
-        STAssertTrue(target_deallocated, @"Target should be dealloced");
-        STAssertTrue(0 == [dict count], @"Empty dict");
+        XCTAssertTrue(target_deallocated, @"Target should be dealloced");
+        XCTAssertTrue(0 == [dict count], @"Empty dict");
     }
 }
 
@@ -102,20 +102,20 @@
             
             dict[@"1"] = replacedObject;
             
-            STAssertTrue(dict[@"1"] == replacedObject, @"Dict contains object_");
-            STAssertTrue(dict[@"2"] == nil, @"Dict no contains object for key \"2\"");
+            XCTAssertTrue(dict[@"1"] == replacedObject, @"Dict contains object_");
+            XCTAssertTrue(dict[@"2"] == nil, @"Dict no contains object for key \"2\"");
             
             dict[@"1"] = object;
-            STAssertTrue([dict objectForKey:@"1"] == object, @"Dict contains object_");
+            XCTAssertTrue([dict objectForKey:@"1"] == object, @"Dict contains object_");
         }
         
-        STAssertTrue(replacedObjectDealloced, nil);
+        XCTAssertTrue(replacedObjectDealloced);
         
         NSObject *currentObject = [dict objectForKey:@"1"];
-        STAssertTrue(currentObject == object, nil);
+        XCTAssertTrue(currentObject == object);
     }
     
-    STAssertTrue(0 == [dict count], @"Empty dict");
+    XCTAssertTrue(0 == [dict count], @"Empty dict");
 }
 
 - (void)testMapMethod
@@ -131,23 +131,23 @@
         return @(num * [key integerValue]);
     }];
     
-    STAssertTrue([result count] == 3, nil);
+    XCTAssertTrue([result count] == 3);
     if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 6.)
-        STAssertFalse([result isKindOfClass:[NSMutableDictionary class]], nil);
-    STAssertTrue([result isKindOfClass:[NSDictionary class]], nil);
+        XCTAssertFalse([result isKindOfClass:[NSMutableDictionary class]]);
+    XCTAssertTrue([result isKindOfClass:[NSDictionary class]]);
     
-    STAssertEqualObjects(@1, result[@"1"], nil);
-    STAssertEqualObjects(@4, result[@"2"], nil);
-    STAssertEqualObjects(@9, result[@"3"], nil);
+    XCTAssertEqualObjects(@1, result[@"1"]);
+    XCTAssertEqualObjects(@4, result[@"2"]);
+    XCTAssertEqualObjects(@9, result[@"3"]);
     
-    STAssertThrows({
+    XCTAssertThrows({
         [dict map:^id(id key, id object) {
             NSUInteger num = [object unsignedIntegerValue];
             if (num == 3)
                 return nil;
             return @(num * 2);
         }];
-    }, nil);
+    });
 }
 
 - (void)testEnumerateKeysAndObjectsUsingBlock
@@ -170,11 +170,11 @@
     [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         ++count;
         resultDict[key] = obj;
-        STAssertEqualObjects(obj, patternDict[key], nil);
+        XCTAssertEqualObjects(obj, patternDict[key]);
     }];
     
-    STAssertTrue(count == 3, nil);
-    STAssertEqualObjects(resultDict, patternDict, nil);
+    XCTAssertTrue(count == 3);
+    XCTAssertEqualObjects(resultDict, patternDict);
     
     count = 0;
     
@@ -184,7 +184,7 @@
             *stop = YES;
     }];
     
-    STAssertTrue(count == 2, nil);
+    XCTAssertTrue(count == 2);
 }
 
 @end

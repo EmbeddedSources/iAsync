@@ -20,12 +20,12 @@
                 blockCalled = YES;
         } ];
         
-        STAssertFalse(blockContextDeallocated && owner, @"Block context should not be dealloced");
-        STAssertFalse(blockCalled, @"block should not be called here");
+        XCTAssertFalse(blockContextDeallocated && owner, @"Block context should not be dealloced");
+        XCTAssertFalse(blockCalled, @"block should not be called here");
     }
     
-    STAssertTrue(blockContextDeallocated, @"Block context should be dealloced");
-    STAssertTrue(blockCalled, @"block should be called here");
+    XCTAssertTrue(blockContextDeallocated, @"Block context should be dealloced");
+    XCTAssertTrue(blockCalled, @"block should be called here");
 }
 
 - (void)testDoNotCallOnDeallocBlockAfterRemoveIt
@@ -41,12 +41,12 @@
         
         [owner addOnDeallocBlock:onDeallocBloc];
         
-        STAssertFalse(blockCalled, nil);
+        XCTAssertFalse(blockCalled);
         
         [owner removeOnDeallocBlock:onDeallocBloc];
     }
     
-    STAssertFalse(blockCalled, nil);
+    XCTAssertFalse(blockCalled);
 }
 
 @end

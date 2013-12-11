@@ -8,18 +8,30 @@ static NSString *const lockObject = @"0524a0b0-4bc8-47da-a1f5-6073ba5b59d9";
 
 void safe_dispatch_sync(dispatch_queue_t queue, dispatch_block_t block)
 {
-    if (dispatch_get_current_queue() != queue)
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    
+    if (currentQueue != queue)
+    {
         dispatch_sync(queue, block);
+    }
     else
+    {
         block();
+    }
 }
 
 void safe_dispatch_barrier_sync(dispatch_queue_t queue, dispatch_block_t block)
 {
-    if (dispatch_get_current_queue() != queue)
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    
+    if ( currentQueue != queue)
+    {
         dispatch_barrier_sync(queue, block);
+    }
     else
+    {
         block();
+    }
 }
 
 //TODO autoremove mode

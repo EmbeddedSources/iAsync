@@ -55,7 +55,8 @@
         : NSLocalizedString(@"SECONDS", nil);
     }
     
-    NSString *numberStr = [[NSString alloc] initWithFormat:@"%d ", dateComponent];
+    NSString *numberStr = [ @(dateComponent) descriptionWithLocale: nil ];
+    numberStr = [numberStr stringByAppendingString:@" "];
     result = [numberStr stringByAppendingString:result];
     
     return result;

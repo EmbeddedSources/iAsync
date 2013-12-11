@@ -23,7 +23,7 @@
     ];
     
     NSArray *result = [array expandArray];
-    STAssertEqualObjects(expectedResult, result, nil);
+    XCTAssertEqualObjects(expectedResult, result);
 }
 
 @end

@@ -204,10 +204,13 @@ static id cacheKeyForURLScaleSizeAndContentMode(NSURL *url,
                                                 CGSize scaleSize,
                                                 UIViewContentMode contentMode)
 {
-    return [[NSString alloc] initWithFormat:@"resized_image_key:%@<->%@<->%d",
+    // Use nil if you don't want the description formatted.
+    NSString* contentModeString = [ @(contentMode) descriptionWithLocale: nil ];
+    
+    return [[NSString alloc] initWithFormat:@"resized_image_key:%@<->%@<->%@",
             url,
             NSStringFromCGSize(scaleSize),
-            contentMode];
+            contentModeString];
 }
 
 - (JFFAsyncOperation)cachedScaleImageForSize:(CGSize)scaleSize

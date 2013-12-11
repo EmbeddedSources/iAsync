@@ -1,7 +1,7 @@
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import <Foundation/Foundation.h>
 
-@interface JUMutableArrayTest : SenTestCase
+@interface JUMutableArrayTest : XCTestCase
 
 @end

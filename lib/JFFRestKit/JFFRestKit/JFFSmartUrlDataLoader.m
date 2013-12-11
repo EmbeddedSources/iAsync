@@ -18,8 +18,10 @@
 
 - (void)logResponse
 {
+    NSString* castedLength = [ @(self.length) descriptionWithLocale: nil ];
+    
     NSString *str = [[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding];
-    NSLog(@"jsResponse: %@ length: %d", str, self.length);
+    NSLog(@"jsResponse: %@ length: %@", str, castedLength);
 }
 
 @end

@@ -9,5 +9,6 @@
 -(BOOL)isHttpNotChangedError;
 -(BOOL)isServiceUnavailableError;
 -(BOOL)isInternalServerError;
+-(BOOL)isNotFoundError;
 
 @end

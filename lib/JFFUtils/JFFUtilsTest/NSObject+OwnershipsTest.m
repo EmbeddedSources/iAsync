@@ -16,9 +16,9 @@
             [owner addOwnedObject:owned];
         }
         
-        STAssertNotNil(ownedDeallocated, @"Owned should not be dealloced");
+        XCTAssertNotNil(ownedDeallocated, @"Owned should not be dealloced");
     }
-    STAssertNil(ownedDeallocated, @"Owned should be dealloced");
+    XCTAssertNil(ownedDeallocated, @"Owned should be dealloced");
 }
 
 @end

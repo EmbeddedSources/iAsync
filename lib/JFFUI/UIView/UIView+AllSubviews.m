@@ -21,7 +21,7 @@
 
 -(void)logAllSubviewsWithLevel:( NSUInteger )level_
 {
-    NSLog( @"level: %d view: %@", level_++, self );
+    NSLog( @"level: %lu view: %@", (unsigned long)level_++, self );
 
     for ( UIView* sub_view_ in self.subviews )
     {

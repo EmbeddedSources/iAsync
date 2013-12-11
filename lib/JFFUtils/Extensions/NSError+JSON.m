@@ -4,7 +4,9 @@
 
 -(NSString*)toJson
 {
-    return [ NSString stringWithFormat: @"{ \"error\" : \"%@\", \"domain\" : \"%@\", \"code\" : \"%d\", \"localizedDescription\" : \"%@\" }", NSStringFromClass( [ self class ] ), self.domain, self.code, self.localizedDescription ];
+    NSString* strCode = [ @( self.code ) descriptionWithLocale: nil ];
+    
+    return [ NSString stringWithFormat: @"{ \"error\" : \"%@\", \"domain\" : \"%@\", \"code\" : \"%@\", \"localizedDescription\" : \"%@\" }", NSStringFromClass( [ self class ] ), self.domain, strCode, self.localizedDescription ];
 }
 
 @end

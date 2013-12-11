@@ -4,8 +4,8 @@
 
 - (void)testJffMeaningClass:(Class)aClass
 {
-    STAssertTrue([[aClass class] jffMeaningClass] == aClass, nil);
-    STAssertTrue([[aClass new  ] jffMeaningClass] == aClass, nil);
+    XCTAssertTrue([[aClass class] jffMeaningClass] == aClass);
+    XCTAssertTrue([[aClass new  ] jffMeaningClass] == aClass);
 }
 
 - (void)testJFFMeaningClass
@@ -31,13 +31,13 @@
         //STAssertTrue( [[[(__bridge id)arrayRef mutableCopy] class] jffMeaningClass] == [NSMutableArray class], nil);
         //
         
-        STAssertTrue([[[@[] class] new] jffMeaningClass] == [NSArray class], nil);
+        XCTAssertTrue([[[@[] class] new] jffMeaningClass] == [NSArray class]);
         
-        STAssertTrue( [[@[] class] jffMeaningClass] == [NSArray class], nil);
-        STAssertTrue([[[@[] class] new] jffMeaningClass] == [NSArray class], nil);
+        XCTAssertTrue( [[@[] class] jffMeaningClass] == [NSArray class]);
+        XCTAssertTrue([[[@[] class] new] jffMeaningClass] == [NSArray class]);
         
-        STAssertTrue( [[[@[] mutableCopy] class] jffMeaningClass] == [NSMutableArray class], nil);
-        STAssertTrue([[[[@[] mutableCopy] class] new] jffMeaningClass] == [NSMutableArray class], nil);
+        XCTAssertTrue( [[[@[] mutableCopy] class] jffMeaningClass] == [NSMutableArray class]);
+        XCTAssertTrue([[[[@[] mutableCopy] class] new] jffMeaningClass] == [NSMutableArray class]);
         
         CFRelease(arrayRef);
     }
@@ -54,7 +54,7 @@
                                                      NULL
                                                      );
         
-        STAssertTrue( [[(__bridge id)dictRef class] jffMeaningClass] == [NSDictionary class], nil);
+        XCTAssertTrue( [[(__bridge id)dictRef class] jffMeaningClass] == [NSDictionary class]);
         //!!! runtime fail
         //STAssertTrue( [[[(__bridge id)dictRef class] new] jffMeaningClass] == [NSDictionary class], nil);
         //!!!
@@ -63,9 +63,9 @@
         CFRelease(dictRef);
         
         NSMutableDictionary *dict = [NSMutableDictionary new];
-        STAssertTrue( [[[dict copy] class] jffMeaningClass] == [NSDictionary class], nil);
+        XCTAssertTrue( [[[dict copy] class] jffMeaningClass] == [NSDictionary class]);
         
-        STAssertTrue( [[@{} class] jffMeaningClass] == [NSDictionary class], nil);
+        XCTAssertTrue( [[@{} class] jffMeaningClass] == [NSDictionary class]);
         //!!! runtime fail when call new for [[@{} mutableCopy] class]
 //        STAssertTrue([[[@{} class] new] jffMeaningClass] == [NSDictionary class], nil);
         
@@ -82,12 +82,12 @@
                                                            kCFStringEncodingUTF8
                                                            );
         
-        STAssertTrue( [[(__bridge id)stringRef class] jffMeaningClass] == [NSString class], nil);
+        XCTAssertTrue( [[(__bridge id)stringRef class] jffMeaningClass] == [NSString class]);
         
         CFRelease(stringRef);
         
-        STAssertTrue( [[@"a" class] jffMeaningClass] == [NSString class], nil);
-        STAssertTrue( [[[@"a" class] new] jffMeaningClass] == [NSString class], nil);
+        XCTAssertTrue( [[@"a" class] jffMeaningClass] == [NSString class]);
+        XCTAssertTrue( [[[@"a" class] new] jffMeaningClass] == [NSString class]);
         
         //!!! the same as empty CFString
 //        STAssertTrue( [[[@"" mutableCopy] class] jffMeaningClass] == [NSMutableString class], nil);
@@ -97,7 +97,7 @@
     
     
     {
-        STAssertTrue( [[@1 class] jffMeaningClass] == [NSNumber class], nil);
+        XCTAssertTrue( [[@1 class] jffMeaningClass] == [NSNumber class]);
         //!!! strange fails :-(
 //        STAssertTrue( [[[[@1 class] alloc] initWithBool:NO] jffMeaningClass] == [NSString class], nil);
         
@@ -108,7 +108,7 @@
                                                 &value
                                                 );
         
-        STAssertTrue( [[(__bridge id)numberRef class] jffMeaningClass] == [NSNumber class], nil);
+        XCTAssertTrue( [[(__bridge id)numberRef class] jffMeaningClass] == [NSNumber class]);
         //!!! strange fails :-(
 //        STAssertTrue( [[[[(__bridge id)numberRef class] alloc] initWithBool:NO] jffMeaningClass] == [NSNumber class], nil);
         
