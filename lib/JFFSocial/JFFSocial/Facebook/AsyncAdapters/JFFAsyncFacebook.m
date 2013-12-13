@@ -15,11 +15,11 @@
     NSDictionary *_parameters;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    handler = [handler copy];
+    finishCallback = [finishCallback copy];
     
     FBRequest *fbRequest = [FBRequest requestForGraphPath:_graphPath];
     fbRequest.session    = _facebookSession;
@@ -30,14 +30,16 @@
                                                                  FBGraphObject *graphObject,
                                                                  NSError *error) {
         
-        if (handler)
-            handler([graphObject copy], error);
+        if (finishCallback)
+            finishCallback([graphObject copy], error);
     }];
 }
 
-- (void)cancel:(BOOL)canceled
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
 {
-    [_requestConnection cancel];
+    NSCParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+    if (task == JFFAsyncOperationHandlerTaskCancel)
+        [_requestConnection cancel];
 }
 
 @end

@@ -2,4 +2,4 @@
 
 #import <Foundation/Foundation.h>
 
-extern JFFCancelAsyncOperation JFFStubCancelAsyncOperationBlock;
+extern JFFAsyncOperationHandler JFFStubHandlerAsyncOperationBlock;

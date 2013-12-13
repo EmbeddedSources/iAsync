@@ -14,23 +14,21 @@
     NSString     *_title;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
     FBWebDialogHandler fbHandler = ^(FBWebDialogResult result,
                                      NSURL *resultURL,
                                      NSError *error) {
         
-        if (result == FBWebDialogResultDialogNotCompleted) {
+        if (finishCallback) {
             
-            if (cancelHandler)
-                cancelHandler(YES);
-        }
-        
-        if (handler) {
+            error = (result == FBWebDialogResultDialogNotCompleted)
+            ?[JFFAsyncOpFinishedByCancellationError new]
+            :nil;
             
-            handler(error?nil:@YES, nil);
+            finishCallback(error?nil:@YES, error);
         }
     };
     
@@ -39,6 +37,11 @@
                                                     title:_title
                                                parameters:_parameters
                                                   handler:fbHandler];
+}
+
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
 }
 
 @end

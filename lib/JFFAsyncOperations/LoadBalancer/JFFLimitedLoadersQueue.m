@@ -1,9 +1,11 @@
 #import "JFFLimitedLoadersQueue.h"
 
-#import "JFFBaseLoaderOwner.h"
 #import "JFFQueueStrategy.h"
-#import "JFFQueueStrategyFactory.h"
 #import "JFFQueueState.h"
+#import "JFFBaseLoaderOwner.h"
+#import "JFFQueueStrategyFactory.h"
+
+#import "JFFAsyncOpFinishedByCancellationError.h"
 
 @implementation JFFLimitedLoadersQueue
 {
@@ -89,17 +91,16 @@
                                       barrier:(BOOL)barrier
 {
     loader = [loader copy];
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
-        JFFBaseLoaderOwner *loaderHolder =
-        [JFFBaseLoaderOwner newLoaderOwnerWithLoader:loader
-                                               queue:self];
+        JFFBaseLoaderOwner *loaderHolder = [JFFBaseLoaderOwner newLoaderOwnerWithLoader:loader
+                                                                                  queue:self];
         loaderHolder.barrier = barrier;
         
         loaderHolder.progressCallback = progressCallback;
-        loaderHolder.cancelCallback   = cancelCallback;
+        loaderHolder.stateCallback    = stateCallback;
         loaderHolder.doneCallback     = doneCallback;
         
         [_pendingLoaders addObject:loaderHolder];
@@ -108,29 +109,40 @@
         
         __weak JFFBaseLoaderOwner *weakLoaderHolder = loaderHolder;
         
-        return ^(BOOL canceled) {
+        return ^(JFFAsyncOperationHandlerTask task) {
             
             JFFBaseLoaderOwner *loaderHolder = weakLoaderHolder;
             if (!loaderHolder)
                 return;
             
-            JFFCancelAsyncOperationHandler cancelCallback = loaderHolder.cancelCallback;
-            
-            if (canceled) {
-                if (!loaderHolder.cancelLoader) {
-                    //TODO self owning here fix?
-                    [_pendingLoaders removeObject:loaderHolder];
+            switch (task) {
+                case JFFAsyncOperationHandlerTaskUnsubscribe:
+                {
+                    loaderHolder.progressCallback = nil;
+                    loaderHolder.stateCallback    = nil;
+                    loaderHolder.doneCallback     = nil;
+                    break;
                 }
-            } else {
-                loaderHolder.progressCallback = nil;
-                loaderHolder.cancelCallback   = nil;
-                loaderHolder.doneCallback     = nil;
-            }
-            
-            if (loaderHolder.cancelLoader) {
-                loaderHolder.cancelLoader(YES);
-            } else if (cancelCallback) {
-                cancelCallback(canceled);
+                case JFFAsyncOperationHandlerTaskCancel:
+                {
+                    if (loaderHolder.loadersHandler) {
+                        
+                        loaderHolder.loadersHandler(JFFAsyncOperationHandlerTaskCancel);
+                    } else {
+                        
+                        //TODO self owning here fix?
+                        JFFDidFinishAsyncOperationCallback doneCallback = loaderHolder.doneCallback;
+                        [_pendingLoaders removeObject:loaderHolder];
+                        if (doneCallback)
+                            doneCallback(nil, [JFFAsyncOpFinishedByCancellationError new]);
+                    }
+                    break;
+                }
+                default:
+                {
+                    NSCAssert(NO, @"Unsupported type of task: %lu", (unsigned long)task);
+                    break;
+                }
             }
         };
     };

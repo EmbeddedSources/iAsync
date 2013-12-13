@@ -15,7 +15,7 @@ SKProductsRequestDelegate
 @implementation JFFAsyncSKProductsRequestAdapter
 {
     SKProductsRequest                *_request;
-    JFFAsyncOperationInterfaceResultHandler _handler;
+    JFFDidFinishAsyncOperationCallback _finishCallback;
     SKProductsResponse               *_response;
     NSString                         *_productIdentifier;
 }
@@ -36,18 +36,20 @@ SKProductsRequestDelegate
     return self;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    _handler = [handler copy];
+    _finishCallback = [finishCallback copy];
     
     [_request start];
 }
 
-- (void)cancel:(BOOL)canceled
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
 {
-    if (canceled)
+    NSCParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+    
+    if (task == JFFAsyncOperationHandlerTaskCancel)
         [_request cancel];
 }
 
@@ -69,7 +71,7 @@ SKProductsRequestDelegate
             product = [products lastObject];
         }
         
-        _handler(product, nil);
+        _finishCallback(product, nil);
     } else {
         
         NSString *invalidIdentifier = [_response.invalidProductIdentifiers lastObject];
@@ -79,14 +81,14 @@ SKProductsRequestDelegate
         :[JFFStoreKitCanNoLoadProductError new];
         
         error.productIdentifier = _productIdentifier;
-        _handler(nil, error);
+        _finishCallback(nil, error);
     }
 }
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error
 {
     error = error?:[[JFFSilentError alloc] initWithDescription:@"SKRequest no inet connection"];
-    _handler(nil, error);
+    _finishCallback(nil, error);
 }
 
 #pragma mark SKProductsRequestDelegate

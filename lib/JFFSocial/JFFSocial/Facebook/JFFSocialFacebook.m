@@ -44,9 +44,9 @@
 
 + (JFFAsyncOperation)logoutLoaderWithRenewSystemAuthorization:(BOOL)renewSystemAuthorization
 {
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         FBSession *session = [FBSession activeSession];
         
@@ -55,7 +55,7 @@
         :asyncOperationWithResult([NSNull new]);
         
         doneCallback = [doneCallback copy];
-        JFFDidFinishAsyncOperationHandler doneCallbackWrapper = ^(id result, NSError *error) {
+        JFFDidFinishAsyncOperationCallback doneCallbackWrapper = ^(id result, NSError *error) {
             
             if (result)
                 [self setFacebookSession:nil];
@@ -65,16 +65,16 @@
         };
         
         return loader(progressCallback,
-                      cancelCallback,
+                      stateCallback,
                       doneCallbackWrapper);
     };
 }
 
 + (JFFAsyncOperation)authFacebookSessionLoaderWithPermissions:(NSArray *)permissions
 {
-    JFFAsyncOperation loader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                                        JFFCancelAsyncOperationHandler cancelCallback,
-                                                        JFFDidFinishAsyncOperationHandler doneCallback) {
+    JFFAsyncOperation loader = ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                                         JFFAsyncOperationChangeStateCallback stateCallback,
+                                                         JFFDidFinishAsyncOperationCallback doneCallback) {
         
         //TODO split perrmissions, first login for "email" "birthday"
         //tthen for other ones
@@ -87,7 +87,7 @@
         JFFAsyncOperation loader = jffFacebookLogin(session, permissions);
         
         doneCallback = [doneCallback copy];
-        JFFDidFinishAsyncOperationHandler doneCallbackWrapper = ^(FBSession *session, NSError *error) {
+        JFFDidFinishAsyncOperationCallback doneCallbackWrapper = ^(FBSession *session, NSError *error) {
             
             if (session)
                 [self setFacebookSession:session];
@@ -96,7 +96,7 @@
                 doneCallback(session, error);
         };
         
-        return loader(progressCallback, cancelCallback, doneCallbackWrapper);
+        return loader(progressCallback, stateCallback, doneCallbackWrapper);
     };
     
     id mergeObject =
@@ -109,9 +109,9 @@
 
 + (JFFAsyncOperation)authFacebookSessionWithPublishPermissions:(NSArray *)permissions
 {
-    JFFAsyncOperation loader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                                        JFFCancelAsyncOperationHandler cancelCallback,
-                                                        JFFDidFinishAsyncOperationHandler doneCallback) {
+    JFFAsyncOperation loader = ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                                        JFFAsyncOperationChangeStateCallback stateCallback,
+                                                        JFFDidFinishAsyncOperationCallback doneCallback) {
         
         FBSession *session = [self facebookSession];
         
@@ -121,7 +121,7 @@
         JFFAsyncOperation loader = jffFacebookLoginWithPublishPermissions(session, [currPermissions allObjects]);
         
         doneCallback = [doneCallback copy];
-        JFFDidFinishAsyncOperationHandler doneCallbackWrapper = ^(FBSession *session, NSError *error) {
+        JFFDidFinishAsyncOperationCallback doneCallbackWrapper = ^(FBSession *session, NSError *error) {
             
             if (session)
                 [self setFacebookSession:session];
@@ -130,7 +130,7 @@
                 doneCallback(session, error);
         };
         
-        return loader(progressCallback, cancelCallback, doneCallbackWrapper);
+        return loader(progressCallback, stateCallback, doneCallbackWrapper);
     };
     
     id mergeObject =

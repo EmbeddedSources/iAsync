@@ -8,6 +8,7 @@
 
 #import <JFFRestKit/JFFRestKit.h>
 #import <JFFNetwork/JFFNetworkBlocksFunctions.h>
+#import <UIKit/UIKit.h>
 
 static NSString *const cacheQueueName = @"com.embedded_sources.jffcache.thumbnail_storage.cache";
 
@@ -24,6 +25,8 @@ NSString *JFFNoImageDataURLString = @"nodata://jff.cache.com";
 
 @interface JFFCanNotCreateImageError : JFFError
 
+@property (nonatomic) id <NSCopying> context;
+
 @end
 
 @implementation JFFCanNotCreateImageError
@@ -33,8 +36,28 @@ NSString *JFFNoImageDataURLString = @"nodata://jff.cache.com";
     return [self initWithDescription:@"can not create image with given data"];
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    JFFCanNotCreateImageError *copy = [super copyWithZone:zone];
+    
+    if (copy) {
+        copy->_context = [_context copyWithZone:zone];
+    }
+    
+    return copy;
+}
+
 - (void)writeErrorWithJFFLogger
 {
+}
+
+- (NSString *)errorLogDescription
+{
+    return [[NSString alloc] initWithFormat:@"%@ : %@ context: %@",
+            [self class],
+            [self localizedDescription],
+            _context
+            ];
 }
 
 @end
@@ -51,7 +74,9 @@ static JFFAsyncBinderForIdentifier imageDataToUIImageBinder()
             if (image)
                 return asyncOperationWithResult(image);
             
-            return asyncOperationWithError([JFFCanNotCreateImageError new]);
+            JFFCanNotCreateImageError *error = [JFFCanNotCreateImageError new];
+            error.context = url;
+            return asyncOperationWithError(error);
         };
         // TODO: Test perfomance
 //        return ^JFFAsyncOperation(NSData *imageData) {
@@ -231,22 +256,22 @@ static JFFThumbnailStorage *glStorageInstance = nil;
         return asyncOperationWithError([JFFCacheNoURLError new]);
     }
     
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         JFFAsyncOperation loader = [self cachedInDBImageDataLoaderForUrl:url
                                                  ignoreFreshDataLoadFail:YES];
         
         //TODO: also check the last update date here
-        JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc] initWithName:NSStringFromSelector(@selector(imagesByUrl))
+        JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:NSStringFromSelector(@selector(imagesByUrl))
                                                                           key:url];
         
         loader = [self asyncOperationForPropertyWithPath:propertyPath
                                           asyncOperation:loader];
         
         return loader(progressCallback,
-                      cancelCallback,
+                      stateCallback,
                       doneCallback);
     };
 }

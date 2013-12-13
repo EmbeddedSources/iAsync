@@ -7,12 +7,12 @@
     if (!_didFinishBlock)
         return;
     
-    JFFDidFinishAsyncOperationHandler block = _didFinishBlock;
+    JFFDidFinishAsyncOperationCallback block = _didFinishBlock;
     _didFinishBlock = nil;
     block(result, error);
 }
 
-- (JFFDidFinishAsyncOperationHandler)onceDidFinishBlock
+- (JFFDidFinishAsyncOperationCallback)onceDidFinishBlock
 {
     return ^(id result, NSError *error) {
         [self performDidFinishBlockOnceWithResult:result error:error];

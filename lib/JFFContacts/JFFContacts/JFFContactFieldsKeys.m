@@ -12,27 +12,27 @@ NSString* const JFFContactPhones    = @"phones"   ;
 NSString* const JFFContactWebsites  = @"websites" ;
 NSString* const JFFContactAddresses = @"addresses";
 
-NSString* JFFContactAddresseStreetKey()
+NSString *JFFContactAddresseStreetKey()
 {
-    return (__bridge NSString*)kABPersonAddressStreetKey;
+    return (__bridge NSString *)kABPersonAddressStreetKey;
 }
 
-NSString* JFFContactAddresseCityKey()
+NSString *JFFContactAddresseCityKey()
 {
-    return (__bridge NSString*)kABPersonAddressCityKey;
+    return (__bridge NSString *)kABPersonAddressCityKey;
 }
 
-NSString* JFFContactAddresseStateKey()
+NSString *JFFContactAddresseStateKey()
 {
-    return (__bridge NSString*)kABPersonAddressStateKey;
+    return (__bridge NSString *)kABPersonAddressStateKey;
 }
 
-NSString* JFFContactAddresseZIPKey()
+NSString *JFFContactAddresseZIPKey()
 {
-    return (__bridge NSString*)kABPersonAddressZIPKey;
+    return (__bridge NSString *)kABPersonAddressZIPKey;
 }
 
-NSString* JFFContactAddresseCountryKey()
+NSString *JFFContactAddresseCountryKey()
 {
-    return (__bridge NSString*)kABPersonAddressCountryKey;
+    return (__bridge NSString *)kABPersonAddressCountryKey;
 }

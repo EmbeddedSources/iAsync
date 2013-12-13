@@ -9,7 +9,7 @@
 
 @interface TestClassForMulticast : NSObject < TestMulticastDelegateInterface >
 
-@property ( nonatomic, unsafe_unretained ) NSUInteger initialState;
+@property (nonatomic, unsafe_unretained) NSUInteger initialState;
 
 @end
 
@@ -47,8 +47,8 @@
         STAssertTrue( initState_ == [ multicast justReturnFiveNumber ], @"Contains 1 object" );
     }
     
-    STAssertTrue( delegateDeallocated, @"Target should be dealloced" );
-    STAssertTrue( 0 == [ multicast justReturnFiveNumber ], @"Empty array" );
+    STAssertTrue(delegateDeallocated, @"Target should be dealloced");
+    STAssertTrue(0 == [multicast justReturnFiveNumber], @"Empty array");
 }
 
 - (void)testMulticastDelegateFirstRelease

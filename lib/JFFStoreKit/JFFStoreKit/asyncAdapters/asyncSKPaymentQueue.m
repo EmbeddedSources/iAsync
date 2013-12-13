@@ -16,13 +16,13 @@ JFFAsyncOperationInterface
     SKPaymentQueue *_queue;
     SKPayment *_payment;
     BOOL _addedToObservers;
-    JFFAsyncOperationInterfaceResultHandler _handler;
+    JFFDidFinishAsyncOperationCallback _finishCallback;
 }
 
 - (void)dealloc
 {
     [self unsubscribeFromObservervation];
-    _handler = nil;
+    _finishCallback = nil;
 }
 
 - (void)doNothing:(id)objetc
@@ -52,27 +52,35 @@ JFFAsyncOperationInterface
     return result;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
     if (![SKPaymentQueue canMakePayments]) {
-        handler(nil, [JFFStoreKitDisabledError new]);
+        finishCallback(nil, [JFFStoreKitDisabledError new]);
         return;
     }
     
-    _handler = [handler copy];
+    _finishCallback = [finishCallback copy];
     
     SKPaymentTransaction *transaction = [self ownPurchasedTransaction];
     
     if (transaction) {
         
         [self unsubscribeFromObservervation];
-        _handler(transaction, nil);
+        _finishCallback(transaction, nil);
     } else {
         
         [_queue addPayment:_payment];
     }
+}
+
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+    
+    if (task == JFFAsyncOperationHandlerTaskUnsubscribe)
+        [self unsubscribeFromObservervation];
 }
 
 - (SKPaymentTransaction *)ownPurchasedTransaction
@@ -100,7 +108,7 @@ JFFAsyncOperationInterface
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-    if (!_handler) {
+    if (!_finishCallback) {
         return;
     }
     
@@ -118,7 +126,7 @@ JFFAsyncOperationInterface
         case SKPaymentTransactionStatePurchased:
         {
             [self unsubscribeFromObservervation];
-            _handler(transaction, nil);
+            _finishCallback(transaction, nil);
             break;
         }
         case SKPaymentTransactionStateFailed:
@@ -129,13 +137,13 @@ JFFAsyncOperationInterface
             JFFStoreKitTransactionStateFailedError *error = [JFFStoreKitTransactionStateFailedError new];
             error.transaction = transaction;
             [self unsubscribeFromObservervation];
-            _handler(nil, error);
+            _finishCallback(nil, error);
             break;
         }
         case SKPaymentTransactionStateRestored:
         {
             [self unsubscribeFromObservervation];
-            _handler(transaction, nil);
+            _finishCallback(transaction, nil);
             break;
         }
         default:

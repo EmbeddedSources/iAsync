@@ -2,6 +2,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class UIImage;
+
 @interface JFFSocialFoursquare : NSObject
 
 + (JFFAsyncOperation)authLoader;

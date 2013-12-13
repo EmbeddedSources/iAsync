@@ -1,79 +1,63 @@
 #import "JFFAsyncOperationBuilder.h"
 
 #import "JFFAsyncOperationInterface.h"
-
-@interface JFFComplitionHandlerNotifier : NSObject
-
-@property (copy) JFFDidFinishAsyncOperationHandler completionHandler;
-
-- (void)notifyCallbackWithResult:(id)result error:(NSError *)error;
-
-@end
-
-@implementation JFFComplitionHandlerNotifier
-
-- (void)notifyCallbackWithResult:(id)result error:(NSError *)error
-{
-    if (_completionHandler) {
-        _completionHandler(result, error);
-        _completionHandler = nil;
-    }
-}
-
-@end
+#import "JFFAsyncOperationAbstractFinishError.h"
 
 //JTODO test
 JFFAsyncOperation buildAsyncOperationWithAdapterFactoryWithDispatchQueue(JFFAsyncOperationInstanceBuilder objectFactory,
                                                                          dispatch_queue_t callbacksQueue)
 {
     objectFactory = [objectFactory copy];
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         __block id<JFFAsyncOperationInterface> asyncObject = objectFactory();
         __unsafe_unretained id<JFFAsyncOperationInterface> unretaintedAsyncObject = asyncObject;
         
-        doneCallback = [doneCallback copy];
-        void (^completionHandler)(id, NSError*) = [^(id result, NSError *error) {
+        doneCallback  = [doneCallback  copy];
+        stateCallback = [stateCallback copy];
+        
+        __block void (^progressCallbackHolder)(id) = [progressCallback copy];
+        
+        __block JFFDidFinishAsyncOperationCallback finishCallbackHolder = [^(id result, NSError *error) {
             //use asyncObject in if to own it while waiting result
             
             if (!asyncObject)
                 return;
             
-            if (doneCallback) {
+            if (doneCallback)
                 doneCallback(result, error);
-            }
             
             asyncObject = nil;
         } copy];
-        progressCallback = [progressCallback copy];
-        __block void (^progressHandler)(id) = [^(id data) {
-            if (progressCallback)
-                progressCallback(data);
-        } copy];
         
-        completionHandler = [completionHandler copy];
+        __block BOOL stateCallbackCalled = NO;
         
-        __block JFFComplitionHandlerNotifier *proxy = [JFFComplitionHandlerNotifier new];
-        proxy.completionHandler = completionHandler;
-        
-        __block JFFCancelAsyncOperationHandler cancelCallbackHolder = [cancelCallback copy];
+        __block JFFAsyncOperationChangeStateCallback stateCallbackHolder = ^(JFFAsyncOperationState state) {
+            
+            stateCallbackCalled = YES;
+            if (stateCallback)
+                stateCallback(state);
+        };
         
         NSThread *currntThread = [NSThread currentThread];
+        
+        void (^completionHandler)(id, NSError *) = ^(id result, NSError *error) {
+            
+            JFFDidFinishAsyncOperationCallback finishCallbackHolderTmp = finishCallbackHolder;
+            finishCallbackHolder   = nil;
+            progressCallbackHolder = nil;
+            stateCallbackHolder    = nil;
+            
+            if (finishCallbackHolderTmp)
+                finishCallbackHolderTmp(result, error);
+        };
         
         void (^completionHandlerWrapper)(id, NSError *) = [^(id result, NSError *error) {
             
             if (!asyncObject)
                 return;
-            
-            void (^completionHandler)(id, NSError *) = ^(id result, NSError *error) {
-                JFFComplitionHandlerNotifier *proxyOwner = proxy;
-                proxy                = nil;
-                progressHandler      = nil;
-                cancelCallbackHolder = nil;
-                [proxyOwner notifyCallbackWithResult:result error:error];
-            };
             
             if ([asyncObject respondsToSelector:@selector(isForeignThreadResultCallback)]
                 && [asyncObject isForeignThreadResultCallback]) {
@@ -84,53 +68,63 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactoryWithDispatchQueue(JFFAsyn
                 });
             } else {
                 
-                NSCAssert(currntThread == [NSThread currentThread], @"the same thread expected");
+                if (dispatch_get_main_queue() == callbacksQueue) {
+                    NSCAssert(currntThread == [NSThread currentThread], @"the same thread expected");
+                }
                 completionHandler(result, error);
             }
         } copy];
         
         void (^progressHandlerWrapper)(id) = [^(id data) {
-            if (progressHandler)
-                progressHandler(data);
+            if (progressCallbackHolder)
+                progressCallbackHolder(data);
         } copy];
         
-        JFFAsyncOperationInterfaceCancelHandler cancelHandlerWrapper = ^(BOOL canceled) {
+        JFFAsyncOperationChangeStateCallback handlerCallbackWrapper = ^(JFFAsyncOperationState state) {
             
-            if (!proxy.completionHandler) {
+            if (!finishCallbackHolder)
                 return;
-            }
             
-            proxy           = nil;
-            progressHandler = nil;
-            
-            if (cancelCallbackHolder) {
-                JFFCancelAsyncOperationHandler tmpCallback = cancelCallbackHolder;
-                cancelCallbackHolder = nil;
-                tmpCallback(canceled);
-            }
+            if (stateCallbackHolder)
+                stateCallbackHolder(state);
         };
         
-        [asyncObject asyncOperationWithResultHandler:completionHandlerWrapper
-                                       cancelHandler:cancelHandlerWrapper
-                                     progressHandler:progressHandlerWrapper];
+        [asyncObject asyncOperationWithResultCallback:completionHandlerWrapper
+                                      handlerCallback:handlerCallbackWrapper
+                                     progressCallback:progressHandlerWrapper];
         
-        return ^(BOOL canceled) {
+        return ^(JFFAsyncOperationHandlerTask task) {
             
-            if (!proxy.completionHandler) {
+            if (!finishCallbackHolder) {
                 return;
             }
             
-            if ([unretaintedAsyncObject respondsToSelector:@selector(cancel:)]) {
-                [unretaintedAsyncObject cancel:canceled];
+            if ([unretaintedAsyncObject respondsToSelector:@selector(doTask:)]) {
+                
+                stateCallbackCalled = NO;
+                [unretaintedAsyncObject doTask:task];
+            } else {
+                
+                NSCParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
             }
             
-            proxy           = nil;
-            progressHandler = nil;
+            NSError *error = [JFFAsyncOperationAbstractFinishError newAsyncOperationAbstractFinishErrorWithHandlerTask:task];
             
-            if (cancelCallbackHolder) {
-                JFFCancelAsyncOperationHandler tmpCallback = cancelCallbackHolder;
-                cancelCallbackHolder = nil;
-                tmpCallback(canceled);
+            if (error) {
+                completionHandler(nil, error);
+                return;
+            } else {
+                
+                if (!stateCallbackCalled) {
+                    
+                    if (stateCallbackHolder) {
+                        
+                        JFFAsyncOperationState state = (task == JFFAsyncOperationHandlerTaskResume)
+                        ?JFFAsyncOperationStateResumed
+                        :JFFAsyncOperationStateSuspended;
+                        stateCallbackHolder(state);
+                    }
+                }
             }
         };
     };

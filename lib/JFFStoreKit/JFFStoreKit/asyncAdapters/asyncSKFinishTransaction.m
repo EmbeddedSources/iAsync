@@ -17,13 +17,13 @@ JFFAsyncOperationInterface
     SKPaymentQueue *_queue;
     SKPaymentTransaction *_transaction;
     BOOL _addedToObservers;
-    JFFAsyncOperationInterfaceResultHandler _handler;
+    JFFDidFinishAsyncOperationCallback _finishCallback;
 }
 
 - (void)dealloc
 {
     [self unsubscribeFromObservervation];
-    _handler = nil;
+    _finishCallback = nil;
 }
 
 - (void)doNothing:(id)objetc
@@ -53,16 +53,16 @@ JFFAsyncOperationInterface
     return result;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
     if (![SKPaymentQueue canMakePayments]) {
-        handler(nil, [JFFStoreKitDisabledError new]);
+        finishCallback(nil, [JFFStoreKitDisabledError new]);
         return;
     }
     
-    _handler = [handler copy];
+    _finishCallback = [finishCallback copy];
     
     [_queue finishTransaction:_transaction];
     
@@ -74,10 +74,18 @@ JFFAsyncOperationInterface
     }
 }
 
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+    
+    if (task == JFFAsyncOperationHandlerTaskUnsubscribe)
+        [self unsubscribeFromObservervation];
+}
+
 - (void)finishOperation
 {
     [self unsubscribeFromObservervation];
-    _handler(_transaction, nil);
+    _finishCallback(_transaction, nil);
 }
 
 #pragma mark SKPaymentTransactionObserver
@@ -101,8 +109,9 @@ JFFAsyncOperationInterface
                 // Optionally, display an error here.
             }
             JFFStoreKitTransactionStateFailedError *error = [JFFStoreKitTransactionStateFailedError new];
+            error.transaction = _transaction;
             [self unsubscribeFromObservervation];
-            _handler(nil, error);
+            _finishCallback(nil, error);
             break;
         }
         default:

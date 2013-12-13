@@ -169,7 +169,7 @@ static JFFMutableAssignArray *__allActiveCameras;
 - (JFFAVCaptureVideoOrientation)videoOrientation
 {
     AVCaptureConnection *videoConnection = [self videoConnectionFromImageOutput:_camImageOutput];
-    return videoConnection.videoOrientation;
+    return (JFFAVCaptureVideoOrientation)videoConnection.videoOrientation;
 }
 
 - (void)setVideoOrientation:(JFFAVCaptureVideoOrientation)videoOrientation

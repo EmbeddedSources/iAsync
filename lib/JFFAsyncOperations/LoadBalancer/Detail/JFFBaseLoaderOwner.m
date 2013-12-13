@@ -28,38 +28,29 @@
 {
     _loader           = nil;
     _queue            = nil;
-    _cancelLoader     = nil;
+    _loadersHandler   = nil;
     _progressCallback = nil;
-    _cancelCallback   = nil;
+    _stateCallback    = nil;
     _doneCallback     = nil;
 }
 
 - (void)performLoader
 {
-    NSParameterAssert(_cancelLoader == nil);
+    NSParameterAssert(_loadersHandler == nil);
     
-    JFFAsyncOperationProgressHandler progressCallback = ^(id progress) {
+    JFFAsyncOperationProgressCallback progressCallback = ^(id progress) {
         
         if (_progressCallback)
             _progressCallback(progress);
     };
     
-    JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
+    JFFAsyncOperationChangeStateCallback stateCallback = ^(JFFAsyncOperationState state) {
         
-        if (canceled) {
-            [_queue didFinishActiveLoader:self];
-        }
-        
-        if (_cancelCallback) {
-            JFFCancelAsyncOperationHandler cancelCallback = _cancelCallback;
-            _cancelCallback = nil;
-            cancelCallback(canceled);
-        }
-        
-        [self clear];
+        if (_stateCallback)
+            _stateCallback(state);
     };
     
-    JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
+    JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
         
         [_queue didFinishActiveLoader:self];
         
@@ -69,7 +60,7 @@
         [self clear];
     };
     
-    _cancelLoader = _loader(progressCallback, cancelCallback, doneCallback);
+    _loadersHandler = _loader(progressCallback, stateCallback, doneCallback);
 }
 
 @end

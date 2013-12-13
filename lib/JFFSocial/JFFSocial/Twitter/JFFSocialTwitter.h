@@ -10,7 +10,7 @@ typedef void(^JFFSocialTwitterDidLoginCallback)(NSString *login);
 
 + (JFFAsyncOperation)authorizationLoader;
 
-+ (JFFAsyncOperation)usersNearbyCoordinatesLantitude:(double)lantitude longitude:(double)longitude;
++ (JFFAsyncOperation)usersNearbyCoordinatesLantitude:(double)latitude longitude:(double)longitude;
 
 + (JFFAsyncOperation)followersLoader;
 

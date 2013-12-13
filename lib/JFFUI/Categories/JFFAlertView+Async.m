@@ -11,29 +11,30 @@
     JFFAlertView *_alertView;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
     if (!_alertView) {
         
-        if (cancelHandler)
-            cancelHandler(YES);
+        if (finishCallback)
+            finishCallback(nil, [JFFAsyncOpFinishedByCancellationError new]);
         return;
     }
     
     _alertView.didDismissHandler = ^() {
         
-        if (handler)
-            handler([NSNull new], nil);
+        if (finishCallback)
+            finishCallback([NSNull new], nil);
     };
     
     [_alertView show];
 }
 
-- (void)cancel:(BOOL)canceled
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
 {
-    if (canceled)
+    NSCParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+    if (task == JFFAsyncOperationHandlerTaskCancel)
         [_alertView forceDismiss];
 }
 

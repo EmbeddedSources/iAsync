@@ -24,44 +24,20 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader(JFFAsyncOperation chunkedD
 {
     chunkedDataLoader = [chunkedDataLoader copy];
     
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         NSString *fileName = [[NSUUID new] UUIDString];
         NSString *filePath = [NSString cachesPathByAppendingPathComponent:fileName];
         __block NSFileHandle *handle = nil;
         __block volatile BOOL canceled = NO;
         
-        //TODO work with file with dispatch_io_create
+        //TODO work with file with dispatch_io_create !!!
         //https://developer.apple.com/library/ios/documentation/Performance/Reference/GCD_libdispatch_Ref/Reference/reference.html#//apple_ref/c/func/dispatch_io_create
         
-        void (^closeFile)(void) = ^(void) {
-            
-            [handle closeFile];
-            handle = nil;
-        };
-        
-        __block void (^closeAndRemoveFile)(void) = ^(void) {
-            
-            canceled = YES;
-            
-            dispatch_queue_t fileQueue = queueForFileAtPath(fileName);
-            
-            dispatch_barrier_async(fileQueue, ^(void) {
-                
-                closeFile();
-                
-                if (filePath)
-                    [[NSFileManager defaultManager] removeItemAtPath:filePath
-                                                               error:nil];
-                
-                disposeQueueForFileAtPath(fileName);
-            });
-        };
-        
         progressCallback = [progressCallback copy];
-        JFFAsyncOperationProgressHandler progressWrapperCallback = ^(NSData *dataChunk) {
+        JFFAsyncOperationProgressCallback progressWrapperCallback = ^(NSData *dataChunk) {
             
             NSCParameterAssert([dataChunk isKindOfClass:[NSData class]]);
             
@@ -97,24 +73,31 @@ JFFAsyncOperation jTmpFileLoaderWithChunkedDataLoader(JFFAsyncOperation chunkedD
                 progressCallback(dataChunk);
         };
         
-        cancelCallback = [cancelCallback copy];
-        JFFCancelAsyncOperationHandler cancelWrapperCallback = ^(BOOL canceled) {
-            closeAndRemoveFile();
+        stateCallback = [stateCallback copy];
+        JFFAsyncOperationChangeStateCallback cancelWrapperCallback = ^(JFFAsyncOperationState state) {
             
-            if (cancelCallback)
-                cancelCallback(canceled);
+            if (stateCallback)
+                stateCallback(state);
         };
         
-        JFFDidFinishAsyncOperationHandler doneWrapperCallback = ^(id response, NSError *error) {
+        JFFDidFinishAsyncOperationCallback doneWrapperCallback = ^(id response, NSError *error) {
             
             id result = response?filePath:nil;
             
-            if (response) {
+            canceled = [error isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]];
+            
+            if (response || canceled) {
                 
                 dispatch_queue_t writerQueue  = queueForFileAtPath(fileName);
                 dispatch_barrier_sync(writerQueue, ^(void) {
                     
-                    closeFile();
+                    [handle closeFile];
+                    handle = nil;
+                    
+                    if (filePath && canceled)
+                        [[NSFileManager defaultManager] removeItemAtPath:filePath
+                                                                   error:nil];
+                    
                     disposeQueueForFileAtPath(fileName);
                 });
             }

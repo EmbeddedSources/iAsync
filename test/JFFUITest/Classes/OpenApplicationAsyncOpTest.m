@@ -21,7 +21,7 @@
 
 @implementation OpenApplicationAsyncOpTest
 
--(void)__testActionWithTitle
+- (void)__testActionWithTitle
 {
     __block NSURL *resultURL;
     

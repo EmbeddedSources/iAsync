@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C1A0FB918257BA00020FBF6 /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */; };
+		4C1A0FBA18257BA00020FBF6 /* JFFTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182E1181E6B6700FF3CA0 /* JFFTimer.m */; };
+		4C1A0FBB18257BA70020FBF6 /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */; };
+		4C1A0FBC18257BA70020FBF6 /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */; };
 		4C4182DE181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4182DC181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h */; };
 		4C4182DF181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */; };
 		4C4182E2181E6B6700FF3CA0 /* JFFTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4182E0181E6B6700FF3CA0 /* JFFTimer.h */; };
@@ -408,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				539103BF14A88BD6007315A3 /* NSObject+Timer.m in Sources */,
+				4C1A0FBB18257BA70020FBF6 /* JFFAsyncOperationHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +421,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65802B18148BFB920040A93A /* NSObject+Timer.m in Sources */,
+				4C1A0FBA18257BA00020FBF6 /* JFFTimer.m in Sources */,
+				4C1A0FB918257BA00020FBF6 /* JFFAsyncOperationHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E8F203814F9486E00588C7D /* NSObject+Timer.m in Sources */,
+				4C1A0FBC18257BA70020FBF6 /* JFFAsyncOperationHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +497,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -509,6 +518,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

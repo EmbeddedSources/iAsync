@@ -4,7 +4,7 @@
 
 @interface JFFDidFinishAsyncOperationBlockHolder : NSObject
 
-@property (nonatomic, copy) JFFDidFinishAsyncOperationHandler didFinishBlock;
-@property (nonatomic, copy, readonly) JFFDidFinishAsyncOperationHandler onceDidFinishBlock;
+@property (nonatomic, copy) JFFDidFinishAsyncOperationCallback didFinishBlock;
+@property (nonatomic, copy, readonly) JFFDidFinishAsyncOperationCallback onceDidFinishBlock;
 
 @end

@@ -3,7 +3,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+    
+    JFFAsyncOperation generalAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
+                                                                     const char *queueName,
+                                                                     BOOL barrier,
+                                                                     dispatch_queue_t currentQueue,
+                                                                     dispatch_queue_attr_t attr);
+    
     JFFAsyncOperation asyncOperationWithSyncOperation(JFFSyncOperation loadDataBlock);
     
     JFFAsyncOperation asyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,

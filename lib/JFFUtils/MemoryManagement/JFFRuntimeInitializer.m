@@ -24,6 +24,7 @@
 
 + (void)load
 {
+    //TODO may be we can already remove this ???
     [self hookInstanceMethodForClass:[NSObject class]
                         withSelector:@selector(dealloc)
              prototypeMethodSelector:@selector(deallocRemoveAssociatedObjectsPrototype)

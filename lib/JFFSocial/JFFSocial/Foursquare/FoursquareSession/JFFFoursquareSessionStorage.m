@@ -2,6 +2,8 @@
 
 #import "JFFFoursquareAuthURLError.h"
 
+#import <UIKit/UIKit.h>
+
 #define FOURSQUARE_ACCESS_TOKEN_KEY @"FOURSQUARE_ACCESS_TOKEN_KEY"
 #define FOURSQUARE_AUTH_URL_FORMAT @"https://foursquare.com/oauth2/authenticate?client_id=%@&response_type=token&redirect_uri=%@"
 
@@ -17,7 +19,7 @@
 
 @interface JFFFoursquareSessionStorage ()
 
-@property (copy, nonatomic) JFFDidFinishAsyncOperationHandler authorizeHendler;
+@property (copy, nonatomic) JFFDidFinishAsyncOperationCallback authorizeHendler;
 
 @end
 
@@ -57,7 +59,7 @@
 
 #pragma mark - Authorization
 
-- (void)openSessionWithHandler:(JFFDidFinishAsyncOperationHandler)hendler
+- (void)openSessionWithHandler:(JFFDidFinishAsyncOperationCallback)hendler
 {
     self.authorizeHendler = hendler;
     

@@ -10,8 +10,8 @@
     
     std::string urlCppString
     ( 
-       [self cStringUsingEncoding: NSUTF8StringEncoding],
-       [self lengthOfBytesUsingEncoding: NSUTF8StringEncoding]
+       [self cStringUsingEncoding:NSUTF8StringEncoding],
+       [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding]
     );
     
     return urlCppString;

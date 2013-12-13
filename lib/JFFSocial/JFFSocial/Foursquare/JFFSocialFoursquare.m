@@ -16,14 +16,16 @@
 
 #import "JFFFoursquareNotFoundUsersCheckinsError.h"
 
+#import <UIKit/UIKit.h>
+
 @implementation JFFSocialFoursquare
 
 #pragma mark - Common
 
 + (JFFAsyncOperationBinder)serverResponseAnalyzer
 {
-    return ^JFFAsyncOperation (NSDictionary *response)
-    {
+    return ^JFFAsyncOperation(NSDictionary *response) {
+        
         return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
             id result = [NSDictionary fqApiresponseDictWithDict:response error:outError];
             return result;
@@ -36,6 +38,7 @@
 + (JFFAsyncOperation)cachedAuthLoader
 {
     return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
+        
         NSString *cachedAccessToken = [JFFFoursquareSessionStorage accessToken];
         
         if (cachedAccessToken) {
@@ -55,11 +58,11 @@
     {
         NSString *accessToken = [JFFFoursquareSessionStorage accessTokenWithURL:url];
         if (accessToken) {
+            
             [JFFFoursquareSessionStorage saveAccessToken:accessToken];
             return asyncOperationWithResult(accessToken);
-        }
-        else
-        {
+        } else {
+            
             return asyncOperationWithError([JFFFoursquareAuthInvalidAccessTokenError new]);
         }
     };
@@ -110,8 +113,8 @@
     
     NSDictionary *params = @{ @"limit" : @(limit)};
     
-    JFFAsyncOperationBinder checkinsBinder = ^JFFAsyncOperation (NSString *accessToken)
-    {
+    JFFAsyncOperationBinder checkinsBinder = ^JFFAsyncOperation(NSString *accessToken) {
+        
         return bindSequenceOfAsyncOperations(jffFoursquareRequestLoader(fqLoadCheckinsURL, @"GET", accessToken, params),
                                              asyncOperationBinderJsonDataParser(),
                                              [self serverResponseAnalyzer],
@@ -126,8 +129,8 @@
 
 + (JFFAsyncOperationBinder)checkinsParser
 {
-    return ^JFFAsyncOperation (NSDictionary *response)
-    {
+    return ^JFFAsyncOperation(NSDictionary *response) {
+        
         return asyncOperationWithSyncOperation(^id(NSError *__autoreleasing *outError) {
             NSArray *checkins = [NSArray fqCheckinsWithDict:response error:outError];
             return checkins;
@@ -262,15 +265,15 @@
                                  text:(NSString *)text
                                   url:(NSString *)url
 {
-    JFFAsyncOperationBinder addPostBinder = ^JFFAsyncOperation(NSArray *checkins)
-    {
-        FoursquareCheckinsModel *lastCheckin = (([checkins count]>0)?checkins[0]:nil);
+    JFFAsyncOperationBinder addPostBinder = ^JFFAsyncOperation(NSArray *checkins) {
+        
+        FoursquareCheckinsModel *lastCheckin = [checkins firstObject];
         
         if (!lastCheckin) {
             return asyncOperationWithError([JFFFoursquareNotFoundUsersCheckinsError new]);
         }
 //        return [self addPostToCheckin:lastCheckin.checkinID withText:text url:url contentID:nil];
-        return [self postComment:@"http://wishdates.com" toCheckin:lastCheckin.checkinID];
+        return [self postComment:@"Just Comment )" toCheckin:lastCheckin.checkinID];
     };
     
     return bindSequenceOfAsyncOperations([self checkinsLoaderWithUserId:userID limit:1], addPostBinder, nil);

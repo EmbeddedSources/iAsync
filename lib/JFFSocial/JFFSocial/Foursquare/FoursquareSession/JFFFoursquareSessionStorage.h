@@ -14,7 +14,7 @@
 
 + (NSString *)accessTokenWithURL:(NSURL *)url;
 
-- (void)openSessionWithHandler:(JFFDidFinishAsyncOperationHandler)hendler;
+- (void)openSessionWithHandler:(JFFDidFinishAsyncOperationCallback)hendler;
 
 + (NSString *)redirectURI;
 

@@ -25,7 +25,7 @@
 delegates,
 asyncLoader,
 didFinishBlock,
-cancelBlock;
+loaderHandler;
 
 - (void)clearData
 {

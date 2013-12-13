@@ -25,15 +25,14 @@
         
         void (^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishTest) {
             
-            JFFAsyncOperationProgressHandler progress = ^(NSData *dataChunk)
-            {
+            JFFAsyncOperationProgressCallback progress = ^(NSData *dataChunk) {
                 if (!totalData)
                     totalData = [NSMutableData new];
                 [totalData appendData:dataChunk];
             };
             
-            JFFDidFinishAsyncOperationHandler finish = ^(id result, NSError *error)
-            {
+            JFFDidFinishAsyncOperationCallback finish = ^(id result, NSError *error) {
+                
                 didFinishLoadingBlockError = error;
                 finishTest();
             };

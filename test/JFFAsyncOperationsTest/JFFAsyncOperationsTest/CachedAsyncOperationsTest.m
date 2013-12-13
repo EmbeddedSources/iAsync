@@ -1,25 +1,22 @@
-#import "JFFAsyncOperationManager.h"
-
-#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFAsyncOperationHandlerBlockHolder.h>
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
 @interface TestClassWithProperties : NSObject
 
-@property ( nonatomic ) NSMutableDictionary* dict;
+@property (nonatomic) NSMutableDictionary *dict;
 
 @end
 
 @implementation TestClassWithProperties
 
--(id)init
+- (instancetype)init
 {
-    self = [ super init ];
-
-    if ( self )
-    {
-        self->_dict = [ NSMutableDictionary new ];
+    self = [super init];
+    
+    if (self) {
+        _dict = [NSMutableDictionary new];
     }
-
+    
     return self;
 }
 
@@ -30,219 +27,215 @@
 
 @implementation CachedAsyncOperationsTest
 
--(void)setUp
+- (void)setUp
 {
-    [ JFFCancelAsyncOperationBlockHolder    enableInstancesCounting ];
-    [ JFFDidFinishAsyncOperationBlockHolder enableInstancesCounting ];
-
-    [ JFFAsyncOperationManager enableInstancesCounting ];
+    [JFFAsyncOperationHandlerBlockHolder   enableInstancesCounting];
+    [JFFDidFinishAsyncOperationBlockHolder enableInstancesCounting];
+    
+    [JFFAsyncOperationManager enableInstancesCounting];
 }
 
--(void)testCachedAsyncOperationsCancel
+- (void)testCachedAsyncOperationsCancel
 {
     @autoreleasepool
     {
-        JFFAsyncOperationManager* nativeLoader_ = [ JFFAsyncOperationManager new ];
-
-        JFFPropertyPath* propertyPath_ = [[JFFPropertyPath alloc] initWithName:@"dict"
-                                                                           key:@"1"];
+        JFFAsyncOperationManager *nativeLoader = [JFFAsyncOperationManager new];
         
-        JFFPropertyExtractorFactoryBlock factory_ = ^JFFPropertyExtractor*( void )
-        {
-            return [ JFFPropertyExtractor new ];
+        JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:@"dict" key:@"1"];
+        
+        JFFPropertyExtractorFactoryBlock factory = ^JFFPropertyExtractor *(void) {
+            
+            return [JFFPropertyExtractor new];
         };
         
-        TestClassWithProperties* dataOwner_ = [ TestClassWithProperties new ];
-
+        TestClassWithProperties *dataOwner = [TestClassWithProperties new];
+        
         @autoreleasepool
         {
-            JFFAsyncOperation cachedLoader_ = [ dataOwner_ asyncOperationForPropertyWithPath: propertyPath_
-                                                               propertyExtractorFactoryBlock: factory_
-                                                                              asyncOperation: nativeLoader_.loader
-                                                                      didFinishLoadDataBlock: nil ];
-
-            __block BOOL cancelFlag_ = NO;
-            JFFCancelAsyncOperationHandler cancel_callback_ = ^( BOOL canceled_ )
-            {
-                cancelFlag_ = canceled_;
+            JFFAsyncOperation cachedLoader = [dataOwner asyncOperationForPropertyWithPath:propertyPath
+                                                            propertyExtractorFactoryBlock:factory
+                                                                           asyncOperation:nativeLoader.loader
+                                                                   didFinishLoadDataBlock:nil];
+            
+            __block NSError *finishError;
+            JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
+                
+                finishError = error;
             };
-
-            JFFCancelAsyncOperation cancel_ = cachedLoader_( nil, cancel_callback_, nil );
-
-            GHAssertFalse( nativeLoader_.finished  , @"OK" );
-            GHAssertFalse( nativeLoader_.canceled  , @"OK" );
-            GHAssertFalse( nativeLoader_.cancelFlag, @"OK" );
-
-            cancel_( YES );
-
-            GHAssertFalse( nativeLoader_.finished  , @"OK" );
-            GHAssertTrue ( nativeLoader_.canceled  , @"OK" );
-            GHAssertTrue ( nativeLoader_.cancelFlag, @"OK" );
-
-            GHAssertTrue( cancelFlag_, @"OK" );
+            
+            JFFAsyncOperationHandler cancel = cachedLoader(nil, nil, doneCallback);
+            
+            GHAssertFalse(nativeLoader.finished, @"OK");
+            GHAssertFalse(nativeLoader.canceled, @"OK");
+            GHAssertTrue (nativeLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskUndefined, @"OK");
+            
+            cancel(JFFAsyncOperationHandlerTaskCancel);
+            
+            GHAssertFalse(nativeLoader.finished  , @"OK");
+            GHAssertTrue (nativeLoader.canceled  , @"OK");
+            GHAssertTrue (nativeLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskCancel, @"OK");
+            
+            GHAssertTrue([finishError isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]], @"OK");
         }
-
     }
-
-    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
+    
+    GHAssertTrue(0 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFAsyncOperationManager              instancesCount], @"OK");
 }
 
--(void)testCachedAsyncOperationsUnsibscribe
+- (void)testCachedAsyncOperationsUnsibscribe
 {
     @autoreleasepool
     {
-        JFFAsyncOperationManager* nativeLoader_ = [ JFFAsyncOperationManager new ];
-
-       JFFPropertyPath* propertyPath_ = [ [ JFFPropertyPath alloc ] initWithName: @"dict"
-                                                                             key: @"1" ];
-
-        JFFPropertyExtractorFactoryBlock factory_ = ^JFFPropertyExtractor*( void )
-        {
-            return [ JFFPropertyExtractor new ];
+        JFFAsyncOperationManager *nativeLoader = [JFFAsyncOperationManager new];
+        
+        JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:@"dict"
+                                                                          key:@"1"];
+        
+        JFFPropertyExtractorFactoryBlock factory = ^JFFPropertyExtractor *(void) {
+            
+            return [JFFPropertyExtractor new];
         };
-
-        TestClassWithProperties* dataOwner_ = [ TestClassWithProperties new ];
-
-        JFFAsyncOperation cachedLoader_ = [ dataOwner_ asyncOperationForPropertyWithPath: propertyPath_
-                                                           propertyExtractorFactoryBlock: factory_
-                                                                          asyncOperation: nativeLoader_.loader
-                                                                  didFinishLoadDataBlock: nil ];
-
-        __block BOOL cancelFlag_ = YES;
-        JFFCancelAsyncOperationHandler cancel_callback_ = ^( BOOL canceled_ )
-        {
-            cancelFlag_ = canceled_;
+        
+        TestClassWithProperties *dataOwner = [TestClassWithProperties new];
+        
+        JFFAsyncOperation cachedLoader = [dataOwner asyncOperationForPropertyWithPath:propertyPath
+                                                        propertyExtractorFactoryBlock:factory
+                                                                       asyncOperation:nativeLoader.loader
+                                                               didFinishLoadDataBlock:nil];
+        
+        __block NSError *resultError;
+        JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
+            
+            resultError = error;
         };
-
-        JFFCancelAsyncOperation cancel_ = cachedLoader_( nil, cancel_callback_, nil );
-
-        GHAssertFalse( nativeLoader_.finished  , @"OK" );
-        GHAssertFalse( nativeLoader_.canceled  , @"OK" );
-        GHAssertFalse( nativeLoader_.cancelFlag, @"OK" );
-
-        cancel_( NO );
-
-        GHAssertFalse( nativeLoader_.finished  , @"OK" );
-        GHAssertFalse( nativeLoader_.canceled  , @"OK" );
-        GHAssertFalse( nativeLoader_.cancelFlag, @"OK" );
-
-        GHAssertFalse( cancelFlag_, @"OK" );
-        cancelFlag_ = YES;
-
-        nativeLoader_.loaderCancelBlock.onceCancelBlock( NO );
-
-        GHAssertTrue( cancelFlag_, @"OK" );
+        
+        JFFAsyncOperationHandler cancel = cachedLoader(nil, nil, doneCallback);
+        
+        GHAssertFalse(nativeLoader.finished, @"OK");
+        GHAssertFalse(nativeLoader.canceled, @"OK");
+        GHAssertTrue(nativeLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskUndefined, @"OK");
+        
+        cancel(JFFAsyncOperationHandlerTaskUnsubscribe);
+        
+        GHAssertFalse(nativeLoader.finished  , @"OK");
+        GHAssertFalse(nativeLoader.canceled  , @"OK");
+        GHAssertTrue(nativeLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskUndefined, @"OK");
+        
+        GHAssertTrue([resultError isKindOfClass:[JFFAsyncOpFinishedByUnsubscriptionError class]], @"OK");
+        resultError = nil;
+        
+        nativeLoader.loaderHandlerBlock(JFFAsyncOperationHandlerTaskUnsubscribe);
+        
+        GHAssertNil(resultError, @"OK");
     }
-
-    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
+    
+    GHAssertTrue(0 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFAsyncOperationManager              instancesCount], @"OK");
 }
 
--(void)testCachedAsyncOperationsCancelNative
+- (void)testCachedAsyncOperationsCancelNative
 {
     @autoreleasepool
     {
-        JFFAsyncOperationManager* nativeLoader_ = [ JFFAsyncOperationManager new ];
-
-        JFFPropertyPath* propertyPath_ = [ [ JFFPropertyPath alloc ] initWithName: @"dict"
-                                                                                key: @"1" ];
-
-        JFFPropertyExtractorFactoryBlock factory_ = ^JFFPropertyExtractor*( void )
+        JFFAsyncOperationManager *nativeLoader = [JFFAsyncOperationManager new];
+        
+        JFFPropertyPath* propertyPath = [[JFFPropertyPath alloc] initWithName:@"dict"
+                                                                           key:@"1"];
+        
+        JFFPropertyExtractorFactoryBlock factory = ^JFFPropertyExtractor *(void)
         {
-            return [ JFFPropertyExtractor new ];
+            return [JFFPropertyExtractor new];
         };
-
-        TestClassWithProperties* dataOwner_ = [ TestClassWithProperties new ];
-
-        JFFAsyncOperation cachedLoader_ = [ dataOwner_ asyncOperationForPropertyWithPath: propertyPath_
-                                                           propertyExtractorFactoryBlock: factory_
-                                                                          asyncOperation: nativeLoader_.loader
-                                                                  didFinishLoadDataBlock: nil ];
-
-        __block BOOL cancelFlag_ = NO;
-        JFFCancelAsyncOperationHandler cancel_callback_ = ^( BOOL canceled_ )
-        {
-            cancelFlag_ = canceled_;
+        
+        TestClassWithProperties *dataOwner = [TestClassWithProperties new];
+        
+        JFFAsyncOperation cachedLoader = [dataOwner asyncOperationForPropertyWithPath:propertyPath
+                                                        propertyExtractorFactoryBlock:factory
+                                                                       asyncOperation:nativeLoader.loader
+                                                               didFinishLoadDataBlock:nil];
+        
+        __block NSError *resultError;
+        JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
+            resultError = error;
         };
-
-        JFFCancelAsyncOperation cancel_ = cachedLoader_( nil, cancel_callback_, nil );
-
-        GHAssertFalse( nativeLoader_.finished  , @"OK" );
-        GHAssertFalse( nativeLoader_.canceled  , @"OK" );
-        GHAssertFalse( nativeLoader_.cancelFlag, @"OK" );
-
-        nativeLoader_.loaderCancelBlock.onceCancelBlock( YES );
-
-        GHAssertFalse( nativeLoader_.finished  , @"OK" );
-        GHAssertTrue( nativeLoader_.canceled  , @"OK" );
-        GHAssertTrue( nativeLoader_.cancelFlag, @"OK" );
-
-        GHAssertTrue( cancelFlag_, @"OK" );
-        cancelFlag_ = NO;
-
-        cancel_( YES );
-
-        GHAssertFalse( cancelFlag_, @"OK" );
+        
+        JFFAsyncOperationHandler cancel = cachedLoader(nil, nil, doneCallback);
+        
+        GHAssertFalse(nativeLoader.finished  , @"OK");
+        GHAssertFalse(nativeLoader.canceled  , @"OK");
+        GHAssertTrue(nativeLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskUndefined, @"OK");
+        
+        nativeLoader.loaderHandlerBlock(JFFAsyncOperationHandlerTaskCancel);
+        
+        GHAssertFalse(nativeLoader.finished, @"OK" );
+        GHAssertTrue(nativeLoader.canceled , @"OK" );
+        GHAssertTrue(nativeLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskCancel, @"OK" );
+        
+        GHAssertTrue([resultError isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]], @"OK");
+        resultError = nil;
+        
+        cancel(JFFAsyncOperationHandlerTaskCancel);
+        
+        GHAssertNil(resultError, @"OK");
     }
-
-    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
+    
+    GHAssertTrue(0 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFAsyncOperationManager              instancesCount], @"OK");
 }
 
--(void)testCachedAsyncOperationsUnsibscribeNative
+- (void)testCachedAsyncOperationsUnsibscribeNative
 {
     @autoreleasepool
     {
-        JFFAsyncOperationManager* nativeLoader_ = [ JFFAsyncOperationManager new ];
-
-        JFFPropertyPath* propertyPath_ = [ [ JFFPropertyPath alloc ] initWithName: @"dict"
-                                                                                key: @"1" ];
-
-        JFFPropertyExtractorFactoryBlock factory_ = ^JFFPropertyExtractor*( void )
-        {
-            return [ JFFPropertyExtractor new ];
+        JFFAsyncOperationManager *nativeLoader = [JFFAsyncOperationManager new];
+        
+        JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:@"dict"
+                                                                          key:@"1"];
+        
+        JFFPropertyExtractorFactoryBlock factory = ^JFFPropertyExtractor *(void) {
+            
+            return [JFFPropertyExtractor new];
         };
-
-        TestClassWithProperties* dataOwner_ = [ TestClassWithProperties new ];
-
-        JFFAsyncOperation cachedLoader_ = [ dataOwner_ asyncOperationForPropertyWithPath: propertyPath_
-                                                           propertyExtractorFactoryBlock: factory_
-                                                                          asyncOperation: nativeLoader_.loader
-                                                                  didFinishLoadDataBlock: nil ];
-
-        __block BOOL cancelFlag_ = YES;
-        JFFCancelAsyncOperationHandler cancelCallback_ = ^( BOOL canceled_ )
-        {
-            cancelFlag_ = canceled_;
+        
+        TestClassWithProperties *dataOwner = [TestClassWithProperties new];
+        
+        JFFAsyncOperation cachedLoader = [dataOwner asyncOperationForPropertyWithPath:propertyPath
+                                                        propertyExtractorFactoryBlock:factory
+                                                                       asyncOperation:nativeLoader.loader
+                                                               didFinishLoadDataBlock:nil];
+        
+        __block NSError *resultError;
+        JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
+            resultError = error;
         };
-
-        JFFCancelAsyncOperation cancel_ = cachedLoader_( nil, cancelCallback_, nil );
-
-        GHAssertFalse( nativeLoader_.finished  , @"OK" );
-        GHAssertFalse( nativeLoader_.canceled  , @"OK" );
-        GHAssertFalse( nativeLoader_.cancelFlag, @"OK" );
-
-        nativeLoader_.loaderCancelBlock.onceCancelBlock( NO );
-
-        GHAssertFalse( nativeLoader_.finished  , @"OK" );
-        GHAssertTrue( nativeLoader_.canceled  , @"OK" );
-        GHAssertFalse( nativeLoader_.cancelFlag, @"OK" );
-
-        GHAssertFalse( cancelFlag_, @"OK" );
-        cancelFlag_ = YES;
-
-        cancel_( NO );
-
-        GHAssertTrue( cancelFlag_, @"OK" );
+        
+        JFFAsyncOperationHandler cancel = cachedLoader(nil, nil, doneCallback);
+        
+        GHAssertFalse(nativeLoader.finished  , @"OK");
+        GHAssertFalse(nativeLoader.canceled  , @"OK");
+        GHAssertTrue(nativeLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskUndefined, @"OK");
+        
+        nativeLoader.loaderHandlerBlock(JFFAsyncOperationHandlerTaskUnsubscribe);
+        
+        GHAssertFalse(nativeLoader.finished  , @"OK");
+        GHAssertTrue(nativeLoader.canceled  , @"OK");
+        GHAssertTrue(nativeLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskUnsubscribe, @"OK");
+        
+        GHAssertTrue([resultError isKindOfClass:[JFFAsyncOpFinishedByUnsubscriptionError class]], @"OK" );
+        resultError = nil;
+        
+        cancel(JFFAsyncOperationHandlerTaskUnsubscribe);
+        
+        GHAssertNil(resultError, @"OK");
     }
-
-    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
+    
+    GHAssertTrue(0 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFAsyncOperationManager              instancesCount], @"OK");
 }
 
 -(void)testCachedAsyncOperationsOnceLoading
@@ -299,7 +292,7 @@
         GHAssertTrue( dataOwner_.dict[@"1"] == nil, @"OK" );
 
         id result_ = [ NSNull null ];
-        nativeLoader.loaderFinishBlock.didFinishBlock( result_, nil );
+        nativeLoader.loaderFinishBlock(result_, nil);
 
         GHAssertTrue( nativeLoader.finished, @"OK" );
         GHAssertTrue( finished1_, @"OK" );
@@ -309,7 +302,7 @@
         GHAssertTrue( dataOwner_.dict[@"1"] == result_, @"OK" );
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationHandlerBlockHolder   instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
@@ -355,12 +348,12 @@
                 unsubscribeLoader_(nil, nil, nil);
             }
 
-            nativeLoader_.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+            nativeLoader_.loaderFinishBlock([NSNull null], nil);
         }
-        GHAssertTrue( deallocated_, @"OK" );
+        GHAssertTrue(deallocated_, @"OK");
     }
 
-    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
+    GHAssertTrue( 0 == [ JFFAsyncOperationHandlerBlockHolder   instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }

@@ -29,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4C14CAA61827E47D00371E39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEBCBDEB1619A425007F805F /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C1A0F8D182577BE0020FBF6;
+			remoteInfo = JFFAsyncOperationsMacOS;
+		};
 		CEBCBDF81619A426007F805F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEBCBDEB1619A425007F805F /* JFFAsyncOperations.xcodeproj */;
@@ -183,6 +190,7 @@
 				CEBCBDF91619A426007F805F /* libJFFAsyncOperations.a */,
 				CEBCBDFB1619A426007F805F /* libJFFAsyncOperations-clang.a */,
 				CEBCBDFD1619A426007F805F /* JFFAsyncOperationsFW.framework */,
+				4C14CAA71827E47D00371E39 /* libJFFAsyncOperationsMacOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -381,6 +389,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4C14CAA71827E47D00371E39 /* libJFFAsyncOperationsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperationsMacOS.a;
+			remoteRef = 4C14CAA61827E47D00371E39 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CEBCBDF91619A426007F805F /* libJFFAsyncOperations.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -523,6 +538,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = NO;
@@ -554,6 +570,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = YES;

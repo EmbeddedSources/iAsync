@@ -6,7 +6,7 @@ typedef NSInputStream *(^JFFInputStreamBuilder)(void);
 
 @class JFFLocalCookiesStorage;
 
-@interface JFFURLConnectionParams : NSObject<NSCopying>
+@interface JFFURLConnectionParams : NSObject <NSCopying>
 
 @property (nonatomic) NSURL         *url;
 @property (nonatomic) NSData        *httpBody;

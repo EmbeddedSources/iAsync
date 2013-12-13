@@ -16,22 +16,23 @@
     return self;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
     self.operation = [JFFBlockOperation performOperationWithQueueName:_queueName.c_str()
                                                         loadDataBlock:_loadDataBlock
-                                                     didLoadDataBlock:handler
-                                                        progressBlock:progress
+                                                     didLoadDataBlock:finishCallback
+                                                        progressBlock:progressCallback
                                                               barrier:_barrier
                                                          currentQueue:_currentQueue
                                                    serialOrConcurrent:_queueAttributes];
 }
 
-- (void)cancel:(BOOL)canceled
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
 {
-    if (canceled) {
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+    if (task == JFFAsyncOperationHandlerTaskCancel) {
         [_operation cancel];
         _operation = nil;
     }

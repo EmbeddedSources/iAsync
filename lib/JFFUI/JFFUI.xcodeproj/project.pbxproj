@@ -33,6 +33,10 @@
 		1BD3616C1455A2F80036F786 /* JFFPageSliderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD3616B1455A2F80036F786 /* JFFPageSliderDelegate.h */; };
 		1BE053B715480F4400270B58 /* JFFActionSheetsContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE053B515480F4400270B58 /* JFFActionSheetsContainer.h */; };
 		1BE053B815480F4400270B58 /* JFFActionSheetsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053B615480F4400270B58 /* JFFActionSheetsContainer.m */; };
+		4C1A0EFC182572FB0020FBF6 /* UIColor+ColorForHex.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C1A0EFA182572FB0020FBF6 /* UIColor+ColorForHex.h */; };
+		4C1A0EFD182572FB0020FBF6 /* UIColor+ColorForHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A0EFB182572FB0020FBF6 /* UIColor+ColorForHex.m */; };
+		4C1A0F36182574A70020FBF6 /* UIDevice+PlatformName.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C1A0F34182574A70020FBF6 /* UIDevice+PlatformName.h */; };
+		4C1A0F37182574A70020FBF6 /* UIDevice+PlatformName.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A0F35182574A70020FBF6 /* UIDevice+PlatformName.m */; };
 		4C21FA7D16EF4F59005C4E57 /* JFFStripeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C21FA7916EF4F59005C4E57 /* JFFStripeView.h */; };
 		4C21FA7E16EF4F59005C4E57 /* JFFStripeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C21FA7A16EF4F59005C4E57 /* JFFStripeView.m */; };
 		4C21FA7F16EF4F59005C4E57 /* JFFStripeViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C21FA7B16EF4F59005C4E57 /* JFFStripeViewDelegate.h */; };
@@ -148,6 +152,10 @@
 		1BD3616B1455A2F80036F786 /* JFFPageSliderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFPageSliderDelegate.h; sourceTree = "<group>"; };
 		1BE053B515480F4400270B58 /* JFFActionSheetsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFActionSheetsContainer.h; sourceTree = "<group>"; };
 		1BE053B615480F4400270B58 /* JFFActionSheetsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFActionSheetsContainer.m; sourceTree = "<group>"; };
+		4C1A0EFA182572FB0020FBF6 /* UIColor+ColorForHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorForHex.h"; sourceTree = "<group>"; };
+		4C1A0EFB182572FB0020FBF6 /* UIColor+ColorForHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorForHex.m"; sourceTree = "<group>"; };
+		4C1A0F34182574A70020FBF6 /* UIDevice+PlatformName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlatformName.h"; sourceTree = "<group>"; };
+		4C1A0F35182574A70020FBF6 /* UIDevice+PlatformName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+PlatformName.m"; sourceTree = "<group>"; };
 		4C21FA7916EF4F59005C4E57 /* JFFStripeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStripeView.h; sourceTree = "<group>"; };
 		4C21FA7A16EF4F59005C4E57 /* JFFStripeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStripeView.m; sourceTree = "<group>"; };
 		4C21FA7B16EF4F59005C4E57 /* JFFStripeViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStripeViewDelegate.h; sourceTree = "<group>"; };
@@ -364,6 +372,10 @@
 				4C2CFD9C1754A4FA00E87F22 /* UIApplication+OpenApplicationAsyncOp.m */,
 				4C8973911761F33C00E24F7B /* UIWebView+UserAgent.h */,
 				4C8973921761F33C00E24F7B /* UIWebView+UserAgent.m */,
+				4C1A0EFA182572FB0020FBF6 /* UIColor+ColorForHex.h */,
+				4C1A0EFB182572FB0020FBF6 /* UIColor+ColorForHex.m */,
+				4C1A0F34182574A70020FBF6 /* UIDevice+PlatformName.h */,
+				4C1A0F35182574A70020FBF6 /* UIDevice+PlatformName.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -502,6 +514,7 @@
 				1B29555F143DCB7300532BD7 /* UITableView+WithinUpdates.h in Headers */,
 				1BD361691455A0630036F786 /* JFFPageSlider.h in Headers */,
 				1BD3616C1455A2F80036F786 /* JFFPageSliderDelegate.h in Headers */,
+				4C1A0F36182574A70020FBF6 /* UIDevice+PlatformName.h in Headers */,
 				1B3A3854147683E9007D8C10 /* UIView+AllSubviews.h in Headers */,
 				1B5E1AD214D0203B0075049A /* UIViewController+PresentTopViewController.h in Headers */,
 				1BE053B715480F4400270B58 /* JFFActionSheetsContainer.h in Headers */,
@@ -526,6 +539,7 @@
 				4CBBA1A917662275007317E6 /* JFFCameraFlashModeType.h in Headers */,
 				4CBBA1AA17662275007317E6 /* JFFPhotoCamera.h in Headers */,
 				4CBBA1AC17662275007317E6 /* JFFPhotoCameraType.h in Headers */,
+				4C1A0EFC182572FB0020FBF6 /* UIColor+ColorForHex.h in Headers */,
 				4CB4C1A31770530C00F275BC /* UIImage+ScaleToSize.h in Headers */,
 				4CB4C1A71770535700F275BC /* UIImage+FixOrientation.h in Headers */,
 				4CB4C1AF1770539900F275BC /* UIImage+ImageWithColor.h in Headers */,
@@ -628,10 +642,12 @@
 				655E9DB91392E8C00074BD61 /* JFFAlertButton.m in Sources */,
 				655E9DBB1392E8C00074BD61 /* JFFAlertView.m in Sources */,
 				655E9DBD1392E8C00074BD61 /* NSError+Alert.m in Sources */,
+				4C1A0EFD182572FB0020FBF6 /* UIColor+ColorForHex.m in Sources */,
 				8D996F19139F5D370075A325 /* JFFActionSheet.m in Sources */,
 				8D996F1F139F61200075A325 /* NSObject+JFFAlertButton.m in Sources */,
 				4C4E8EA7180BFA4B002D8A7B /* UITableView+CellsSelections.m in Sources */,
 				1B7F58431435BDC000FF06EC /* UIWebView+HideWhenLoading.m in Sources */,
+				4C1A0F37182574A70020FBF6 /* UIDevice+PlatformName.m in Sources */,
 				1B7F58981435D53300FF06EC /* UIView+AddSubviewAndScale.m in Sources */,
 				1B7F589C1435D58000FF06EC /* UIView+AnimationWithBlocks.m in Sources */,
 				1B49CFA8143C6D3500E8AACE /* UIWebViewNewFeaturesRuntime.m in Sources */,
@@ -709,6 +725,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -730,6 +747,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

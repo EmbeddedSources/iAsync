@@ -11,7 +11,8 @@
 #ifdef __OBJC__
     #import <JFFUI/JFFUI.h>
     #import <JFFUtils/JFFUtils.h>
-    
+    #import <JFFCache/JFFCache.h>
+
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif

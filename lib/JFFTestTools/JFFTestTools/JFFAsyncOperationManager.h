@@ -2,9 +2,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class JFFCancelAsyncOperationBlockHolder;
-@class JFFDidFinishAsyncOperationBlockHolder;
-
 typedef enum {
     
     JFFDoNotCancelAsyncOperationManager,
@@ -20,13 +17,13 @@ typedef enum {
 @property (nonatomic) JFFCancelAsyncOperationManagerType cancelAtLoading;
 
 @property (nonatomic, copy, readonly) JFFAsyncOperation loader;
-@property (nonatomic, readonly) JFFDidFinishAsyncOperationBlockHolder* loaderFinishBlock;
-@property (nonatomic, readonly) JFFCancelAsyncOperationBlockHolder* loaderCancelBlock;
+@property (nonatomic, copy, readonly) JFFDidFinishAsyncOperationCallback loaderFinishBlock;
+@property (nonatomic, copy, readonly) JFFAsyncOperationHandler loaderHandlerBlock;
 
 @property (nonatomic, readonly) NSUInteger loadingCount;
 @property (nonatomic, readonly) BOOL finished;
 @property (nonatomic, readonly) BOOL canceled;
-@property (nonatomic, readonly) BOOL cancelFlag;
+@property (nonatomic, readonly) JFFAsyncOperationHandlerTask lastHandleFlag;
 
 - (void)clear;
 

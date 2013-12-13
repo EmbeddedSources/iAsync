@@ -17,7 +17,7 @@
         
         JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
                                                               NSError *error,
-                                                              JFFDidFinishAsyncOperationHandler doneCallback) {
+                                                              JFFDidFinishAsyncOperationCallback doneCallback) {
             
             if (result)
                 finalResult[key] = result;

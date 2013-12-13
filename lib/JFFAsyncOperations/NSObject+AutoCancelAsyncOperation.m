@@ -2,29 +2,30 @@
 
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 #import "JFFDidFinishAsyncOperationBlockHolder.h"
+#import "JFFAsyncOperationAbstractFinishError.h"
 
 @implementation NSObject (WeakAsyncOperation)
 
 - (JFFAsyncOperation)autoUnsibscribeOrCancelAsyncOperation:(JFFAsyncOperation)nativeAsyncOp
-                                                    cancel:(BOOL)cancelNativeAsyncOp
+                                                      task:(JFFAsyncOperationHandlerTask)task
 {
     NSParameterAssert(nativeAsyncOp);
     
     __weak id weakSelf = self;
     
     nativeAsyncOp = [nativeAsyncOp copy];
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback)
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback)
     {
         id self_ = weakSelf;
         
         if (self_ == nil) {
             
-            if (cancelCallback) {
-                cancelCallback(cancelNativeAsyncOp);
-            }
-            return JFFStubCancelAsyncOperationBlock;
+            NSError *error = [JFFAsyncOperationAbstractFinishError newAsyncOperationAbstractFinishErrorWithHandlerTask:task];
+            if (doneCallback)
+                doneCallback(nil, error);
+            return JFFStubHandlerAsyncOperationBlock;
         }
         
         __block BOOL finished = NO;
@@ -41,50 +42,44 @@
             }
         };
         
-        __block JFFCancelAsyncOperation cancelCallbackHolder;
-        cancelCallbackHolder = [cancelCallback copy];
-        JFFCancelAsyncOperationHandler cancelCallbackWrapper = ^void(BOOL cancelOp) {
-            removeOndeallocBlockHolder.onceSimpleBlock();
-            if (cancelCallbackHolder) {
-                cancelCallbackHolder(cancelOp);
-                cancelCallbackHolder = nil;
-            }
-        };
-        
         JFFDidFinishAsyncOperationBlockHolder *doneCallbackHolder = [JFFDidFinishAsyncOperationBlockHolder new];
         doneCallbackHolder.didFinishBlock = doneCallback;
-        JFFDidFinishAsyncOperationHandler doneCallbackWrapper = ^void(id result, NSError *error) {
+        JFFDidFinishAsyncOperationCallback doneCallbackWrapper = ^void(id result, NSError *error) {
             removeOndeallocBlockHolder.onceSimpleBlock();
             doneCallbackHolder.onceDidFinishBlock(result, error);
         };
         
-        JFFCancelAsyncOperation cancel = nativeAsyncOp(progressCallback,
-                                                       cancelCallbackWrapper,
-                                                       doneCallbackWrapper);
+        JFFAsyncOperationHandler loadersHandler = nativeAsyncOp(progressCallback,
+                                                                stateCallback,
+                                                                doneCallbackWrapper);
         
         if (finished) {
-            return JFFStubCancelAsyncOperationBlock;
+            return JFFStubHandlerAsyncOperationBlock;
         }
-
+        
         //TODO remove using of ondealloc block holder class
         ondeallocBlockHolder.simpleBlock = ^void(void) {
             
-            cancel(cancelNativeAsyncOp);
+            loadersHandler(task);
         };
         
         //try assert retain count
         [self_ addOnDeallocBlock:ondeallocBlockHolder.onceSimpleBlock];
         
-        __block JFFCancelAsyncOperation cancelBlockHolder = [^void(BOOL canceled) {
-            cancel(canceled);
+        __block JFFAsyncOperationHandler handlerBlockHolder = [^void(JFFAsyncOperationHandlerTask task) {
+            loadersHandler(task);
         } copy];
         
-        return ^(BOOL canceled) {
-            JFFCancelAsyncOperation cancel = cancelBlockHolder;
-            if (!cancel)
+        return ^(JFFAsyncOperationHandlerTask task) {
+            
+            JFFAsyncOperationHandler hadler = handlerBlockHolder;
+            if (!hadler)
                 return;
-            cancelBlockHolder = nil;
-            cancel(canceled);
+            
+            if (task <= JFFAsyncOperationHandlerTaskCancel) {
+                handlerBlockHolder = nil;
+            }
+            hadler(task);
         };
     };
 }
@@ -92,13 +87,13 @@
 - (JFFAsyncOperation)autoUnsubsribeOnDeallocAsyncOperation:(JFFAsyncOperation)nativeLoader
 {
     return [self autoUnsibscribeOrCancelAsyncOperation:nativeLoader
-                                                 cancel:NO];
+                                                  task:JFFAsyncOperationHandlerTaskUnsubscribe];
 }
 
 - (JFFAsyncOperation)autoCancelOnDeallocAsyncOperation:(JFFAsyncOperation)nativeLoader
 {
     return [self autoUnsibscribeOrCancelAsyncOperation:nativeLoader
-                                                cancel:YES];
+                                                  task:JFFAsyncOperationHandlerTaskCancel];
 }
 
 @end

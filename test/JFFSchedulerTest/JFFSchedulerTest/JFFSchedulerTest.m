@@ -14,26 +14,30 @@
 
 - (void)testCancelWhenDeallocedScheduler
 {
-    __block BOOL fired = NO;
     JFFTimer *sharedScheduler = [JFFTimer sharedByThreadTimer];
-    const NSUInteger initialSchedulerInstancesCount_ = [JFFTimer instancesCount];
-    __block NSTimeInterval timeDifference_ = 0;
+    const NSUInteger initialSchedulerInstancesCount = [JFFTimer instancesCount];
+    
+    __block BOOL fired = NO;
+    __block NSTimeInterval timeDifference = 0;
     
     @autoreleasepool {
+        
         [[JFFTimer new] addBlock:^(JFFCancelScheduledBlock cancel) {
+            
             cancel();
             fired = YES;
-        } duration: 0.1 ];
+        } duration:0.1];
         
-        NSDate* startDate_ = [ NSDate new ];
+        NSDate *startDate = [NSDate new];
         
         [sharedScheduler addBlock:^(JFFCancelScheduledBlock cancel) {
-            NSDate* finishDate_ = [ NSDate new ];
-            timeDifference_ = [ finishDate_ timeIntervalSinceDate: startDate_ ];
+            
+            NSDate *finishDate = [NSDate new];
+            timeDifference = [finishDate timeIntervalSinceDate:startDate];
             
             cancel();
             [self notify:kGHUnitWaitStatusSuccess forSelector:_cmd];
-        } duration: 0.2 ];
+        } duration:0.2];
         
         //GHAssertTrue( 0 != [JFFTimer instancesCount], @"OK");
     }
@@ -42,54 +46,60 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.];
     
     GHAssertFalse(fired, @"OK" );
-    GHAssertTrue(initialSchedulerInstancesCount_ == [JFFTimer instancesCount], @"OK");
-    GHAssertTrue(timeDifference_ >= 0.2, @"OK" );
+    GHAssertTrue(timeDifference >= 0.2, @"OK" );
+    
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFTimer instancesCount], @"OK");
 }
 
 - (void)testCancelBlockReturned
 {
-    __block BOOL fired_ = NO;
-    JFFTimer *sharedScheduler_ = [JFFTimer sharedByThreadTimer];
-    const NSUInteger initialSchedulerInstancesCount_ = [JFFTimer instancesCount];
-    __block NSTimeInterval timeDifference_ = 0;
+    JFFTimer *sharedScheduler = [JFFTimer sharedByThreadTimer];
+    const NSUInteger initialSchedulerInstancesCount = [JFFTimer instancesCount];
+    
+    __block BOOL fired = NO;
+    __block NSTimeInterval timeDifference = 0;
     
     @autoreleasepool {
-        JFFCancelScheduledBlock mainCancel_ = [[JFFTimer new] addBlock:^(JFFCancelScheduledBlock cancel_) {
-            cancel_();
-            fired_ = YES;
-        } duration: 0.2 ];
         
-        [sharedScheduler_ addBlock: ^( JFFCancelScheduledBlock cancel_ ) {
-            mainCancel_();
-            cancel_();
-        } duration: 0.1 ];
+        JFFCancelScheduledBlock mainCancel = [[JFFTimer new] addBlock:^(JFFCancelScheduledBlock cancel) {
+            cancel();
+            fired = YES;
+        } duration:0.2];
         
-        NSDate* startDate_ = [NSDate new];
+        [sharedScheduler addBlock:^void(JFFCancelScheduledBlock cancel) {
+            mainCancel();
+            cancel();
+        } duration:0.1];
         
-        [sharedScheduler_ addBlock:^(JFFCancelScheduledBlock cancel_) {
-            NSDate* finishDate_ = [ NSDate new ];
-            timeDifference_ = [ finishDate_ timeIntervalSinceDate: startDate_ ];
+        NSDate *startDate = [NSDate new];
+        
+        [sharedScheduler addBlock:^(JFFCancelScheduledBlock cancel) {
             
-            cancel_();
-            [ self notify: kGHUnitWaitStatusSuccess forSelector: _cmd ];
-        } duration: 0.3 ];
+            NSDate *finishDate = [NSDate new];
+            timeDifference = [finishDate timeIntervalSinceDate:startDate];
+            
+            cancel();
+            [self notify:kGHUnitWaitStatusSuccess forSelector:_cmd];
+        } duration:0.3];
         
         //GHAssertTrue( 0 != [ JFFScheduler instancesCount ], @"OK" );
     }
     
-    [ self prepare ];
-    [ self waitForStatus: kGHUnitWaitStatusSuccess timeout: 1. ];
+    [self prepare];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.];
     
-    GHAssertFalse( fired_, @"OK" );
-    GHAssertTrue( initialSchedulerInstancesCount_ == [JFFTimer instancesCount], @"OK");
-    GHAssertTrue( timeDifference_ >= 0.3, @"OK" );
+    GHAssertFalse(fired, @"OK" );
+    GHAssertTrue(timeDifference >= 0.3, @"OK" );
+    
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFTimer instancesCount], @"OK");
 }
 
 - (void)testCancelAllScheduledOperations
 {
-    __block BOOL fired = NO;
     JFFTimer *sharedScheduler = [JFFTimer sharedByThreadTimer];
     const NSUInteger initialSchedulerInstancesCount = [JFFTimer instancesCount];
+    
+    __block BOOL fired = NO;
     __block NSTimeInterval timeDifference = 0;
     
     @autoreleasepool {
@@ -99,12 +109,12 @@
         [timer addBlock:^(JFFCancelScheduledBlock cancel) {
             cancel();
             fired = YES;
-        } duration:0.3 leeway:0.];
+        } duration:0.6 leeway:0.];
         
         [timer addBlock:^(JFFCancelScheduledBlock cancel) {
             cancel();
             fired = YES;
-        } duration:0.3 leeway:0.];
+        } duration:0.6 leeway:0.];
         
         [sharedScheduler addBlock:^(JFFCancelScheduledBlock cancel) {
             [timer cancelAllScheduledOperations];
@@ -119,7 +129,7 @@
             
             cancel();
             [self notify:kGHUnitWaitStatusSuccess forSelector:_cmd];
-        } duration:0.3 leeway:0.];
+        } duration:0.6 leeway:0.];
         
         //GHAssertTrue( 0 != [ JFFScheduler instancesCount ], @"OK" );
     }
@@ -128,40 +138,46 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.];
     
     GHAssertFalse(fired, @"OK");
-    GHAssertTrue(initialSchedulerInstancesCount == [JFFTimer instancesCount], @"OK");
     GHAssertTrue(timeDifference >= 0.2, @"OK" );
+    
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFTimer instancesCount], @"OK");
 }
 
 - (void)testNotmalScheduledOperationTwice
 {
-    JFFTimer *sharedScheduler_ = [JFFTimer sharedByThreadTimer];
-    const NSUInteger initialSchedulerInstancesCount_ = [JFFTimer instancesCount];
-    __block NSTimeInterval timeDifference_ = 0;
+    JFFTimer *sharedScheduler = [JFFTimer sharedByThreadTimer];
+    
+    const NSUInteger initialSchedulerInstancesCount = [JFFTimer instancesCount];
+    __block NSTimeInterval timeDifference = 0;
     
     @autoreleasepool {
-        NSDate* startDate_ = [ NSDate new ];
         
-        __block BOOL fired_ = NO;
-        [ sharedScheduler_ addBlock: ^( JFFCancelScheduledBlock cancel_ ) {
-            if ( fired_ ) {
-                NSDate* finishDate_ = [ NSDate new ];
-                timeDifference_ = [ finishDate_ timeIntervalSinceDate: startDate_ ];
+        NSDate *startDate = [NSDate new];
+        
+        __block BOOL fired = NO;
+        [sharedScheduler addBlock:^void(JFFCancelScheduledBlock cancel) {
+            
+            if (fired) {
                 
-                cancel_();
-                [ self notify: kGHUnitWaitStatusSuccess forSelector: _cmd ];
+                NSDate *finishDate = [NSDate new];
+                timeDifference = [finishDate timeIntervalSinceDate:startDate];
+                
+                cancel();
+                [self notify:kGHUnitWaitStatusSuccess forSelector:_cmd];
             }
             
-            fired_ = YES;
-        } duration: 0.2 ];
+            fired = YES;
+        } duration:0.2];
         
         //GHAssertTrue( 0 != [ JFFScheduler instancesCount ], @"OK" );
     }
     
-    [ self prepare ];
-    [ self waitForStatus: kGHUnitWaitStatusSuccess timeout: 1. ];
+    [self prepare];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.];
     
-    GHAssertTrue(initialSchedulerInstancesCount_ == [JFFTimer instancesCount], @"OK");
-    GHAssertTrue(timeDifference_ >= 0.2, @"OK");
+    GHAssertTrue(timeDifference >= 0.2, @"OK");
+    
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFTimer instancesCount], @"OK");
 }
 
 @end

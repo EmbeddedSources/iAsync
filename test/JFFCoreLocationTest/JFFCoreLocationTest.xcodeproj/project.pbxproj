@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C11F7A0182792ED00229A6B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11F79F182792ED00229A6B /* QuartzCore.framework */; };
+		4C11F7A2182792F900229A6B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11F7A1182792F900229A6B /* CoreGraphics.framework */; };
 		CE206E2B16414CFF002476FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206E2A16414CFF002476FD /* UIKit.framework */; };
 		CE206E2D16414CFF002476FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206E2C16414CFF002476FD /* Foundation.framework */; };
-		CE206E2F16414CFF002476FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206E2E16414CFF002476FD /* CoreGraphics.framework */; };
 		CE206E3516414CFF002476FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE206E3316414CFF002476FD /* InfoPlist.strings */; };
 		CE206E3716414CFF002476FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE206E3616414CFF002476FD /* main.m */; };
 		CE206E3D16414CFF002476FD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CE206E3C16414CFF002476FD /* Default.png */; };
@@ -28,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4C11F795182792DF00229A6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E7616414EE5002476FD /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C1A0F8D182577BE0020FBF6;
+			remoteInfo = JFFAsyncOperationsMacOS;
+		};
 		CE206E7216414EDE002476FD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE206E6A16414EDE002476FD /* JFFCoreLocation.xcodeproj */;
@@ -171,10 +179,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C11F79F182792ED00229A6B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4C11F7A1182792F900229A6B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CE206E2616414CFF002476FD /* JFFCoreLocationTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFCoreLocationTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE206E2A16414CFF002476FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE206E2C16414CFF002476FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		CE206E2E16414CFF002476FD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CE206E3216414CFF002476FD /* JFFCoreLocationTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFCoreLocationTest-Info.plist"; sourceTree = "<group>"; };
 		CE206E3416414CFF002476FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE206E3616414CFF002476FD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -199,6 +208,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C11F7A2182792F900229A6B /* CoreGraphics.framework in Frameworks */,
+				4C11F7A0182792ED00229A6B /* QuartzCore.framework in Frameworks */,
 				CE206FC116415677002476FD /* CoreLocation.framework in Frameworks */,
 				CE206EF516414FE7002476FD /* libJFFScheduler.a in Frameworks */,
 				CE206EF616414FE7002476FD /* libJFFTestTools.a in Frameworks */,
@@ -209,7 +220,6 @@
 				CE206EAC16414F05002476FD /* libJFFUtils.a in Frameworks */,
 				CE206E2B16414CFF002476FD /* UIKit.framework in Frameworks */,
 				CE206E2D16414CFF002476FD /* Foundation.framework in Frameworks */,
-				CE206E2F16414CFF002476FD /* CoreGraphics.framework in Frameworks */,
 				CE206E6316414D2C002476FD /* GHUnitIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,13 +248,14 @@
 		CE206E2916414CFF002476FD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C11F7A1182792F900229A6B /* CoreGraphics.framework */,
+				4C11F79F182792ED00229A6B /* QuartzCore.framework */,
 				CE206EDD16414FC0002476FD /* libc++.dylib */,
 				CE206EDB16414FB9002476FD /* libstdc++.dylib */,
 				CE206FC016415677002476FD /* CoreLocation.framework */,
 				CE206E6216414D2C002476FD /* GHUnitIOS.framework */,
 				CE206E2A16414CFF002476FD /* UIKit.framework */,
 				CE206E2C16414CFF002476FD /* Foundation.framework */,
-				CE206E2E16414CFF002476FD /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -299,6 +310,7 @@
 				CE206E8416414EE6002476FD /* libJFFAsyncOperations.a */,
 				CE206E8616414EE6002476FD /* libJFFAsyncOperations-clang.a */,
 				CE206E8816414EE6002476FD /* JFFAsyncOperationsFW.framework */,
+				4C11F796182792DF00229A6B /* libJFFAsyncOperationsMacOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,6 +420,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4C11F796182792DF00229A6B /* libJFFAsyncOperationsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperationsMacOS.a;
+			remoteRef = 4C11F795182792DF00229A6B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CE206E7316414EDE002476FD /* libJFFCoreLocation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;

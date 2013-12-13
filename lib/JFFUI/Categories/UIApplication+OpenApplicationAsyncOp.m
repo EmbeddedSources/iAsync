@@ -16,25 +16,26 @@ JFFAsyncOperationInterface
 
 @implementation JFFOpenApplicationWithURLDelegateProxy
 {
-    JFFAsyncOperationInterfaceResultHandler _handler;
+    JFFDidFinishAsyncOperationCallback _finishCallback;
 @public
     NSURL         *_url;
     UIApplication *_application;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
     [_application addDelegateProxy:self delegateName:delegateName];
     
-    _handler = [handler copy];
+    _finishCallback = [finishCallback copy];
     
     [_application openURL:_url];
 }
 
-- (void)cancel:(BOOL)canceled
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
 {
+    NSCParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
     [_application removeDelegateProxy:self delegateName:delegateName];
 }
 
@@ -43,9 +44,9 @@ JFFAsyncOperationInterface
     [_application removeDelegateProxy:self delegateName:delegateName];
     
     if (url) {
-        _handler(url, nil);
+        _finishCallback(url, nil);
     } else {
-        _handler(nil, [JFFOpenApplicationError new]);
+        _finishCallback(nil, [JFFOpenApplicationError new]);
     }
     
     return YES;

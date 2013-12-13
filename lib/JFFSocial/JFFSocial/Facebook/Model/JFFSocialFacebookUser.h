@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CGGeometry.h>
 
 @interface JFFSocialFacebookUser : NSObject <NSCopying>
 

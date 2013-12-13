@@ -221,7 +221,7 @@
         
         JFFAddressBookSuccessCallback onSuccess = ^(JFFAddressBook *book)
         {
-            NSArray *savedContacts = [contactIds forceMap: ^id(NSNumber *contactId) {
+            NSArray *savedContacts = [contactIds forceMap:^id(NSNumber *contactId) {
                 return [JFFContact findContactWithContactInternalId:[contactId longLongValue]
                                                         addressBook:book];
             }];

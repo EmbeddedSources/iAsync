@@ -10,20 +10,20 @@
 
 @implementation JFFAsyncRequestAccessToContactsLoader
 {
-    JFFAsyncOperationInterfaceResultHandler _handler;
+    JFFDidFinishAsyncOperationCallback _finishCallback;
 }
 
 - (void)notifyHandlerWithResult:(id)result error:(NSError *)error
 {
-    _handler(result, error);
+    _finishCallback(result, error);
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    NSParameterAssert(handler);
-    _handler = handler;
+    NSParameterAssert(finishCallback);
+    _finishCallback = finishCallback;
     
     __weak JFFAsyncRequestAccessToContactsLoader *weakSelf = self;
     
@@ -39,6 +39,11 @@
     
     [JFFAddressBookFactory asyncAddressBookWithSuccessBlock:onSuccess
                                               errorCallback:onFailure];
+}
+
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
 }
 
 @end

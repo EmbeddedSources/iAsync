@@ -36,9 +36,9 @@
 
 - (JFFAsyncOperation)loaderToSetData:(NSData *)data forKey:(NSString *)key
 {
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                    JFFAsyncOperationChangeStateCallback stateCallback,
+                                    JFFDidFinishAsyncOperationCallback doneCallback) {
         
         JFFResponseDataWithUpdateData *cachedData = [JFFResponseDataWithUpdateData new];
         
@@ -50,15 +50,15 @@
         if (doneCallback)
             doneCallback([NSNull new], nil);
         
-        return JFFStubCancelAsyncOperationBlock;
+        return JFFStubHandlerAsyncOperationBlock;
     };
 }
 
 - (JFFAsyncOperation)cachedDataLoaderForKey:(NSString *)key
 {
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         if (doneCallback) {
             
@@ -66,7 +66,7 @@
             doneCallback(cachedData, cachedData?nil:[JFFSilentError newErrorWithDescription:@"no data for key"]);
         }
         
-        return JFFStubCancelAsyncOperationBlock;
+        return JFFStubHandlerAsyncOperationBlock;
     };
 }
 
@@ -203,9 +203,9 @@ static JFFAsyncOperation twitterAccountsLoader()
 {
     ayncAnalyzer = [ayncAnalyzer copy];
     
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         id<NSCopying, NSObject> loadDataIdentifier =
         @{
@@ -236,7 +236,7 @@ static JFFAsyncOperation twitterAccountsLoader()
         }
         
         return loader(progressCallback,
-                      cancelCallback,
+                      stateCallback,
                       doneCallback);
     };
 }
@@ -253,13 +253,13 @@ static JFFAsyncOperation twitterAccountsLoader()
                                cacheDataLifeTimeInSeconds:0.];
 }
 
-+ (JFFAsyncOperation)usersNearbyCoordinatesLantitude:(double)lantitude longitude:(double)longitude
++ (JFFAsyncOperation)usersNearbyCoordinatesLantitude:(double)latitude longitude:(double)longitude
 {
     static NSString *geocodeFormat = @"%f,%f,100mi";
     
     id params = @{
     @"q"                : @"",
-    @"geocode"          : [[NSString alloc] initWithFormat:geocodeFormat, lantitude, longitude],
+    @"geocode"          : [[NSString alloc] initWithFormat:geocodeFormat, latitude, longitude],
     @"count"            : @"100",
     @"include_entities" : @"true",
     @"result_type"      : @"recent",
@@ -321,7 +321,7 @@ static JFFAsyncOperation twitterAccountsLoader()
                                                                 requestMethod:SLRequestMethodPOST
                                                                  ayncAnalyzer:asyncJSONObjectToDirectTweet()];
     
-    loader = asyncOperationWithFinishHookBlock(loader, ^(id result, NSError *error, JFFDidFinishAsyncOperationHandler doneCallback) {
+    loader = asyncOperationWithFinishHookBlock(loader, ^(id result, NSError *error, JFFDidFinishAsyncOperationCallback doneCallback) {
         
         if (!doneCallback)
             return;

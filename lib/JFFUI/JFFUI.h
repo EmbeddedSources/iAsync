@@ -41,8 +41,10 @@
 //Categories
 #import <JFFUI/Categories/UINib+FirstObject.h>
 #import <JFFUI/Categories/JFFAlertView+Async.h>
-#import <JFFUI/Categories/UIApplication+OpenApplicationAsyncOp.h>
 #import <JFFUI/Categories/UIWebView+UserAgent.h>
+#import <JFFUI/Categories/UIColor+ColorForHex.h>
+#import <JFFUI/Categories/UIDevice+PlatformName.h>
+#import <JFFUI/Categories/UIApplication+OpenApplicationAsyncOp.h>
 
 #import <JFFUI/UIImage/UIImage+ScaleToSize.h>
 #import <JFFUI/UIImage/UIImage+FixOrientation.h>

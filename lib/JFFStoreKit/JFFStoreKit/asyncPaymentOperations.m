@@ -22,12 +22,13 @@
                                          nil);
 }
 
+//should return [srvResult, transaction] in doneCallback
 + (JFFAsyncOperation)purcheserWithProduct:(SKProduct *)product
                               srvCallback:(JFFAsyncOperationBinder)srvCallback
 {
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         SKPayment *payment = [SKPayment paymentWithProduct:product];
         JFFAsyncOperation paymentloader = asyncOperationWithSKPayment(payment);
@@ -39,7 +40,7 @@
             JFFAsyncOperationBinder removeTransaction = ^JFFAsyncOperation(id srvResult) {
                 
                 JFFAsyncOperation finishTransaction = asyncOperationFinishTransaction(transaction);
-                return sequenceOfAsyncOperations(finishTransaction, asyncOperationWithResult(srvResult), nil);
+                return sequenceOfAsyncOperations(finishTransaction, asyncOperationWithResult(@[srvResult, transaction]), nil);
             };
             
             return bindSequenceOfAsyncOperations(srvLoader,
@@ -51,7 +52,7 @@
                                                                  srvPaymentBinder,
                                                                  nil);
         
-        return loader(progressCallback, cancelCallback, doneCallback);
+        return loader(progressCallback, stateCallback, doneCallback);
     };
 }
 

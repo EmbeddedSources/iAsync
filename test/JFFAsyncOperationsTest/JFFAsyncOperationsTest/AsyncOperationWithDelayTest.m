@@ -1,5 +1,3 @@
-#import "JFFAsyncOperationManager.h"
-
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
 #import <JFFScheduler/JFFScheduler.h>
@@ -24,30 +22,30 @@
     void (^block)(JFFSimpleBlock) = ^(JFFSimpleBlock complete) {
         
         @autoreleasepool {
+            
             JFFAsyncOperation loader = asyncOperationWithDelay(.2, .02);
             
-            JFFAsyncOperationProgressHandler progressCallback = ^(id data) {
+            JFFAsyncOperationProgressCallback progressCallback = ^(id data) {
+                
                 complete();
             };
-            JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
-                cancelBlockOk = canceled;
-            };
-            JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
-                complete();
+            JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
+                
+                cancelBlockOk = [error isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]];
             };
             
-            JFFCancelAsyncOperation cancel = loader(progressCallback,
-                                                    cancelCallback,
-                                                    doneCallback);
+            JFFAsyncOperationHandler cancel = loader(progressCallback,
+                                                     nil,
+                                                     doneCallback);
             
-            cancel(YES);
+            cancel(JFFAsyncOperationHandlerTaskCancel);
             
             NSDate *startDate = [NSDate new];
             
             asyncOperationWithDelay(.3, .03)(nil, nil, ^(id result, NSError *error) {
+                
                 NSDate *finishDate = [NSDate new];
                 timeDifference = [finishDate timeIntervalSinceDate:startDate];
-                
                 complete();
             });
         }
@@ -74,13 +72,13 @@
         @autoreleasepool {
             JFFAsyncOperation loader = asyncOperationWithDelay(.2, .02);
             
-            JFFAsyncOperationProgressHandler progressCallback = ^(id data) {
+            JFFAsyncOperationProgressCallback progressCallback = ^(id data) {
                 complete();
             };
-            JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
+            JFFAsyncOperationChangeStateCallback cancelCallback = ^(JFFAsyncOperationState state) {
                 complete();
             };
-            JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
+            JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
                 ++callsCount;
                 if (callsCount == 2)
                     complete();

@@ -3,8 +3,8 @@
 //
 
 #ifdef __OBJC__
-    #import <DDURLBuilder/DDURLBuilder.h>
+    #import <JFFUtils/JFFUtils.h>
     #import <Cocoa/Cocoa.h>
-
+    
     #include <zlib.h>
 #endif

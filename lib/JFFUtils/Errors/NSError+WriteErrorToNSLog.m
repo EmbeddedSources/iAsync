@@ -15,7 +15,7 @@
 
 - (void)writeErrorToNSLog
 {
-    NSLog(@"%@", [self errorLogDescription]);
+    NSLog(@"only log - %@", [self errorLogDescription]);
 }
 
 - (void)writeErrorWithJFFLogger

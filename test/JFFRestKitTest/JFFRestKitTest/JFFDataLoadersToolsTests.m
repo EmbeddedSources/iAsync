@@ -2,9 +2,9 @@
 
 static JFFAsyncOperation testDataLoader(const int *buffer, int bufferSize)
 {
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback cancelCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         __block JFFTimer *timer = [JFFTimer new];
         
@@ -34,13 +34,15 @@ static JFFAsyncOperation testDataLoader(const int *buffer, int bufferSize)
             }
         } duration:.01];
         
-        return ^(BOOL canceled) {
+        return ^(JFFAsyncOperationHandlerTask task) {
+            
+            NSCParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
             
             if (!timer)
                 return;
             
             if (cancelCallback)
-                cancelCallback(canceled);
+                cancelCallback(task);
             
             [timer cancelAllScheduledOperations];
             timer = nil;
@@ -75,7 +77,7 @@ static JFFAsyncOperation testDataLoader(const int *buffer, int bufferSize)
         
         JFFAsyncOperation loader = jTmpFileLoaderWithChunkedDataLoader(dataLoader);
         
-        JFFAsyncOperationProgressHandler progressCallback = ^(NSData *chunkData) {
+        JFFAsyncOperationProgressCallback progressCallback = ^(NSData *chunkData) {
             
             [chunks addObject:chunkData];
         };

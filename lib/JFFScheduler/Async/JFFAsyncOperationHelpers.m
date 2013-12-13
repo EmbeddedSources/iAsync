@@ -2,6 +2,7 @@
 
 #import "JFFTimer.h"
 
+#import <JFFAsyncOperations/Errors/JFFAsyncOpFinishedByCancellationError.h>
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationBuilder.h>
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationInterface.h>
 
@@ -17,59 +18,108 @@
 @implementation JFFAsyncOperationScheduler
 {
     JFFTimer *_timer;
+    JFFDidFinishAsyncOperationCallback _finishCallback;
 @public
     NSTimeInterval _duration;
     NSTimeInterval _leeway;
+    dispatch_queue_t _callbacksQueue;
 }
 
-- (void)asyncOperationWithResultHandler:(void(^)(id, NSError *))handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)startIfNeeds
 {
-    handler = [handler copy];
+    if (_timer)
+        return;
+    
+    __unsafe_unretained JFFAsyncOperationScheduler *unsafeUnretainedSelf = self;
     
     _timer = [JFFTimer new];
     [_timer addBlock:^(JFFCancelScheduledBlock cancel) {
         
         cancel();
-        if (handler)
-            handler([JFFAsyncTimerResult new], nil);
-    } duration:_duration leeway:_leeway];
+        
+        JFFDidFinishAsyncOperationCallback finishCallback = unsafeUnretainedSelf->_finishCallback;
+        
+        if (finishCallback)
+            finishCallback([JFFAsyncTimerResult new], nil);
+    } duration:_duration leeway:_leeway dispatchQueue:_callbacksQueue];
 }
 
-- (void)cancel:(BOOL)canceled
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    _timer = nil;
+    _finishCallback = finishCallback;
+    
+    [self startIfNeeds];
+}
+
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    switch (task) {
+            
+        case JFFAsyncOperationHandlerTaskUnsubscribe:
+        case JFFAsyncOperationHandlerTaskCancel:
+        case JFFAsyncOperationHandlerTaskSuspend:
+        {
+            _timer = nil;
+            break;
+        }
+        case JFFAsyncOperationHandlerTaskResume:
+        {
+            [self startIfNeeds];
+            break;
+        }
+        default:
+        {
+            NSAssert1(NO, @"invalid parameter: %lu", (unsigned long)task);
+            break;
+        }
+    }
 }
 
 @end
 
 JFFAsyncOperation asyncOperationWithDelay(NSTimeInterval delay, NSTimeInterval leeway)
 {
+    NSCAssert([NSThread isMainThread], @"main thread expected");
+    return asyncOperationWithDelayWithDispatchQueue(delay, leeway, dispatch_get_main_queue());
+}
+
+JFFAsyncOperation asyncOperationWithDelayWithDispatchQueue(NSTimeInterval delay, NSTimeInterval leeway, dispatch_queue_t callbacksQueue)
+{
     JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>(void) {
         
         JFFAsyncOperationScheduler *asyncObject = [JFFAsyncOperationScheduler new];
-        asyncObject->_duration = delay;
-        asyncObject->_leeway   = leeway;
+        asyncObject->_duration       = delay;
+        asyncObject->_leeway         = leeway;
+        asyncObject->_callbacksQueue = callbacksQueue;
         return asyncObject;
     };
-    return buildAsyncOperationWithAdapterFactory(factory);
+    return buildAsyncOperationWithAdapterFactoryWithDispatchQueue(factory, callbacksQueue);
 }
 
 JFFAsyncOperation asyncOperationAfterDelay(NSTimeInterval delay,
                                            NSTimeInterval leeway,
                                            JFFAsyncOperation loader)
 {
-    return sequenceOfAsyncOperations(asyncOperationWithDelay(delay, leeway), loader, nil);
+    NSCAssert([NSThread isMainThread], @"main thread expected");
+    return asyncOperationAfterDelayWithDispatchQueue(delay,
+                                                     leeway,
+                                                     loader,
+                                                     dispatch_get_main_queue());
 }
 
+JFFAsyncOperation asyncOperationAfterDelayWithDispatchQueue(NSTimeInterval delay,
+                                                            NSTimeInterval leeway,
+                                                            JFFAsyncOperation loader,
+                                                            dispatch_queue_t callbacksQueue)
+{
+    return sequenceOfAsyncOperations(asyncOperationWithDelayWithDispatchQueue(delay, leeway, callbacksQueue), loader, nil);
+}
 
-//TODO test it, on leaks also
-JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
-                                       JFFContinueLoaderWithResult continueLoaderBuilder,
-                                       NSTimeInterval delay,
-                                       NSTimeInterval leeway,
-                                       NSInteger maxRepeatCount)
+JFFAsyncOperation repeatAsyncOperationWithDelayLoader(JFFAsyncOperation nativeLoader,
+                                                      JFFContinueLoaderWithResult continueLoaderBuilder,
+                                                      NSInteger maxRepeatCount)
 {
     NSCParameterAssert(nativeLoader         );//can not be nil
     NSCParameterAssert(continueLoaderBuilder);//can not be nil
@@ -77,39 +127,76 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
     nativeLoader          = [nativeLoader          copy];
     continueLoaderBuilder = [continueLoaderBuilder copy];
     
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         progressCallback = [progressCallback copy];
-        cancelCallback   = [cancelCallback   copy];
+        stateCallback    = [stateCallback    copy];
         doneCallback     = [doneCallback     copy];
         
-        __block JFFCancelAsyncOperation cancelBlockHolder;
-        
+        __block JFFAsyncOperationHandler currentLoaderHandlerHolder;
         __block JFFDidFinishAsyncOperationHook finishHookHolder;
+        
+        __block JFFAsyncOperationProgressCallback    progressCallbackHolder = [progressCallback copy];
+        __block JFFAsyncOperationChangeStateCallback stateCallbackHolder    = [stateCallback    copy];
+        __block JFFDidFinishAsyncOperationCallback   doneCallbackkHolder    = [doneCallback     copy];
+        
+        JFFAsyncOperationProgressCallback progressCallbackWrapper = ^(id progressInfo) {
+            
+            if (progressCallbackHolder)
+                progressCallbackHolder(progressInfo);
+        };
+        JFFAsyncOperationChangeStateCallback stateCallbackWrapper = ^(JFFAsyncOperationState state) {
+            
+            if (stateCallbackHolder)
+                stateCallbackHolder(state);
+        };
+        JFFDidFinishAsyncOperationCallback doneCallbackkWrapper = ^(id result, NSError *error) {
+            
+            if (doneCallbackkHolder) {
+                doneCallbackkHolder(result, error);
+                doneCallbackkHolder = nil;
+            }
+        };
         
         __block NSInteger currentLeftCount = maxRepeatCount;
         
         JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
                                                               NSError *error,
-                                                              JFFDidFinishAsyncOperationHandler doneCallback) {
+                                                              JFFDidFinishAsyncOperationCallback doneCallback) {
+            
+            if ([error isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]]) {
+                
+                finishHookHolder = nil;
+                doneCallbackkWrapper(nil, error);
+                
+                progressCallbackHolder = nil;
+                stateCallbackHolder    = nil;
+                doneCallbackkHolder    = nil;
+                return;
+            }
             
             JFFAsyncOperation newLoader = continueLoaderBuilder(result, error);
+            
             if (!newLoader || currentLeftCount == 0) {
+                
                 finishHookHolder = nil;
-                if (doneCallback)
-                    doneCallback(result, error);
+                doneCallbackkWrapper(result, error);
+                
+                progressCallbackHolder = nil;
+                stateCallbackHolder    = nil;
+                doneCallbackkHolder    = nil;
+                
             } else {
+                
                 currentLeftCount = currentLeftCount > 0
                 ?currentLeftCount - 1
                 :currentLeftCount;
                 
-                JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(newLoader,
-                                                                             finishHookHolder);
-                loader = asyncOperationAfterDelay(delay, leeway, loader);
+                JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(newLoader, finishHookHolder);
                 
-                cancelBlockHolder = loader(progressCallback, cancelCallback, doneCallback);
+                currentLoaderHandlerHolder = loader(progressCallbackWrapper, stateCallbackWrapper, doneCallbackkWrapper);
             }
         };
         
@@ -118,15 +205,49 @@ JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
         JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(nativeLoader,
                                                                      finishHookHolder);
         
-        cancelBlockHolder = loader(progressCallback, cancelCallback, doneCallback);
+        currentLoaderHandlerHolder = loader(progressCallback, stateCallbackWrapper, doneCallbackkWrapper);
         
-        return ^(BOOL canceled) {
-            finishHookHolder = nil;
+        return ^void(JFFAsyncOperationHandlerTask task) {
             
-            if (!cancelBlockHolder)
+            if (task == JFFAsyncOperationHandlerTaskCancel)
+                finishHookHolder = nil;
+            
+            if (!currentLoaderHandlerHolder)
                 return;
-            cancelBlockHolder(canceled);
-            cancelBlockHolder = nil;
+            
+            if (task != JFFAsyncOperationHandlerTaskUnsubscribe)
+                currentLoaderHandlerHolder(task);
+            
+            if (task == JFFAsyncOperationHandlerTaskCancel)
+                currentLoaderHandlerHolder = nil;
+            
+            if (task == JFFAsyncOperationHandlerTaskUnsubscribe) {
+                
+                progressCallbackHolder = nil;
+                stateCallbackHolder    = nil;
+                doneCallbackkHolder    = nil;
+            }
         };
     };
+}
+
+JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
+                                       JFFContinueLoaderWithResult continueLoaderBuilder,
+                                       NSTimeInterval delay,
+                                       NSTimeInterval leeway,
+                                       NSInteger maxRepeatCount)
+{
+    continueLoaderBuilder = [continueLoaderBuilder copy];
+    JFFContinueLoaderWithResult continueLoaderBuilderWrapper = ^JFFAsyncOperation(id result, NSError *error) {
+        
+        JFFAsyncOperation loader = continueLoaderBuilder(result, error);
+        if (!loader)
+            return nil;
+        
+        return sequenceOfAsyncOperations(asyncOperationWithDelay(delay, leeway), loader, nil);
+    };
+    
+    return repeatAsyncOperationWithDelayLoader(nativeLoader,
+                                               continueLoaderBuilderWrapper,
+                                               maxRepeatCount);
 }

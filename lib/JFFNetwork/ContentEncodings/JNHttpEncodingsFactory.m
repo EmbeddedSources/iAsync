@@ -13,8 +13,11 @@
 
 - (instancetype)initWithContentLength:( unsigned long long )contentLength
 {
-    self = [ super init ];
-    self.contentLength = contentLength;
+    self = [super init];
+    
+    if (self) {
+        _contentLength = contentLength;
+    }
     
     return self;
 }

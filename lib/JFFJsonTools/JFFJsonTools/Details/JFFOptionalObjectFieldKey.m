@@ -38,4 +38,9 @@
     return [_fieldKey hash];
 }
 
+- (NSString *)description
+{
+    return [[NSString alloc] initWithFormat:@"<%@: %p fieldKey: %@>", [self class], self, _fieldKey];
+}
+
 @end

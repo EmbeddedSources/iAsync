@@ -17,11 +17,11 @@
 
 #pragma mark - JFFAsyncOperationInterface
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    handler = [handler copy];
+    finishCallback = [finishCallback copy];
     
     BOOL hasAllPermissions = [_permissions all:^BOOL(NSString *permission) {
         
@@ -32,7 +32,7 @@
         
         [self handleLoginWithSession:_session
                                error:nil
-                             handler:handler];
+                      finishCallback:finishCallback];
         return;
     }
     
@@ -45,7 +45,7 @@
             
             [self handleLoginWithSession:session
                                    error:libError
-                                 handler:handler];
+                          finishCallback:finishCallback];
         };
         
         [_session requestNewPublishPermissions:_permissions
@@ -69,7 +69,7 @@
         
         [weakSelf handleLoginWithSession:session
                                    error:libError
-                                 handler:handler];
+                          finishCallback:finishCallback];
     };
     
     [FBSession openActiveSessionWithPublishPermissions:_permissions
@@ -78,15 +78,20 @@
                                      completionHandler:fbHandler];
 }
 
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+}
+
 - (void)handleLoginWithSession:(FBSession *)session
                          error:(NSError *)error
-                       handler:(JFFAsyncOperationInterfaceResultHandler)handler
+                finishCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
 {
     if (!error && !session.isOpen) {
         error = [JFFFacebookRequestPublishingAccessError new];
     }
-    if (handler) {
-        handler(error?nil:session, error);
+    if (finishCallback) {
+        finishCallback(error?nil:session, error);
     }
 }
 

@@ -15,6 +15,8 @@
 		1BE054441548273000270B58 /* GHAsyncTestCase+MainThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE054421548273000270B58 /* GHAsyncTestCase+MainThreadTests.m */; };
 		1BE054B0154828F000270B58 /* NSObject+InstancesCount.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE054AE154828EF00270B58 /* NSObject+InstancesCount.h */; };
 		1BE054B1154828F000270B58 /* NSObject+InstancesCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE054AF154828EF00270B58 /* NSObject+InstancesCount.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4CDB8DD9182BBBEA00C5BFA3 /* JFFAsyncOperationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CDB8DD7182BBBEA00C5BFA3 /* JFFAsyncOperationManager.h */; };
+		4CDB8DDA182BBBEA00C5BFA3 /* JFFAsyncOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB8DD8182BBBEA00C5BFA3 /* JFFAsyncOperationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		1BE054421548273000270B58 /* GHAsyncTestCase+MainThreadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GHAsyncTestCase+MainThreadTests.m"; sourceTree = "<group>"; };
 		1BE054AE154828EF00270B58 /* NSObject+InstancesCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+InstancesCount.h"; sourceTree = "<group>"; };
 		1BE054AF154828EF00270B58 /* NSObject+InstancesCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+InstancesCount.m"; sourceTree = "<group>"; };
+		4CDB8DD7182BBBEA00C5BFA3 /* JFFAsyncOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationManager.h; sourceTree = "<group>"; };
+		4CDB8DD8182BBBEA00C5BFA3 /* JFFAsyncOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 		1BE05430154826DA00270B58 /* JFFTestTools */ = {
 			isa = PBXGroup;
 			children = (
+				4CDB8DD7182BBBEA00C5BFA3 /* JFFAsyncOperationManager.h */,
+				4CDB8DD8182BBBEA00C5BFA3 /* JFFAsyncOperationManager.m */,
 				1BE054AE154828EF00270B58 /* NSObject+InstancesCount.h */,
 				1BE054AF154828EF00270B58 /* NSObject+InstancesCount.m */,
 				1BE054411548273000270B58 /* GHAsyncTestCase+MainThreadTests.h */,
@@ -100,6 +106,7 @@
 				1BE054431548273000270B58 /* GHAsyncTestCase+MainThreadTests.h in Headers */,
 				1BE054B0154828F000270B58 /* NSObject+InstancesCount.h in Headers */,
 				1B160AD7154BE3F200702B1D /* testTools.h in Headers */,
+				4CDB8DD9182BBBEA00C5BFA3 /* JFFAsyncOperationManager.h in Headers */,
 				1B2D8B52154BF28100360296 /* JFFTestTools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE054441548273000270B58 /* GHAsyncTestCase+MainThreadTests.m in Sources */,
+				4CDB8DDA182BBBEA00C5BFA3 /* JFFAsyncOperationManager.m in Sources */,
 				1BE054B1154828F000270B58 /* NSObject+InstancesCount.m in Sources */,
 				1B160AD8154BE3F200702B1D /* testTools.m in Sources */,
 			);

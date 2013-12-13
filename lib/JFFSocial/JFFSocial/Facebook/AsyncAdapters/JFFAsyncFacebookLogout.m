@@ -7,7 +7,7 @@
 
 @implementation JFFAsyncFacebookLogout
 {
-    JFFAsyncOperationInterfaceResultHandler _handler;
+    JFFDidFinishAsyncOperationCallback _finishCallback;
 @public
     FBSession *_session;
     BOOL _renewSystemAuthorization;
@@ -23,11 +23,11 @@
     [self performSelector:@selector(notifyFinished) withObject:nil afterDelay:1.];
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    _handler = [handler copy];
+    _finishCallback = [finishCallback copy];
     
     if (_renewSystemAuthorization) {
         
@@ -42,9 +42,14 @@
     [self logout];
 }
 
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+}
+
 - (void)notifyFinished
 {
-    _handler(@YES, nil);
+    _finishCallback(@YES, nil);
 }
 
 @end

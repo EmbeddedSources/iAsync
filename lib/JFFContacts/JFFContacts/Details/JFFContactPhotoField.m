@@ -1,5 +1,7 @@
 #import "JFFContactPhotoField.h"
 
+#import <UIKit/UIKit.h>
+
 @implementation JFFContactPhotoField
 
 + (instancetype)newContactFieldWithName:(NSString *)name

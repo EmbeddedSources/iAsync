@@ -74,15 +74,15 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
 {
     NSCParameterAssert([params.url isKindOfClass:[NSURL class]]);
     params = [params copy];
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         JFFAsyncOperation loader = privateGenericChunkedURLResponseLoader(params, responseAnalyzer);
         
         NSMutableData *responseData = [NSMutableData new];
         progressCallback = [progressCallback copy];
-        JFFAsyncOperationProgressHandler dataProgressCallback = ^void(id progressInfo) {
+        JFFAsyncOperationProgressCallback dataProgressCallback = ^void(id progressInfo) {
             
             if ([progressInfo isKindOfClass:[JFFNetworkResponseDataCallback class]]) {
                 
@@ -93,7 +93,14 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
                 progressCallback(progressInfo);
         };
         
-        JFFDidFinishAsyncOperationHandler doneCallbackWrapper;
+        /*NSArray *skipPt = @[@"profile/profileapi/changes", @"/info/api/report", @"/api/addDeviceProfileId"];
+        
+        if ([skipPt all:^BOOL(id object) {
+            return ![[params.url description] containsString:object];
+        }])*/
+        //NSLog(@"start url: %@", params.url);
+        
+        JFFDidFinishAsyncOperationCallback doneCallbackWrapper;
         if (doneCallback) {
             doneCallback = [doneCallback copy];
             doneCallbackWrapper = ^void(id result, NSError *error) {
@@ -101,11 +108,16 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
                 if ([responseData length] == 0 && !error) {
                     NSLog(@"!!!WARNING!!! request with params: %@ got an empty reponse", params);
                 }
+                /*if ([skipPt all:^BOOL(id object) {
+                    return ![[params.url description] containsString:object];
+                }])
+                //NSLog(@"done url: %@ response: %@  \n \n", params.url, [responseData toString]);*/
+                //NSLog(@"done url: %@", params.url);
                 doneCallback(result?responseData:nil, error);
             };
         }
         
-        return loader(dataProgressCallback, cancelCallback, doneCallbackWrapper);
+        return loader(dataProgressCallback, stateCallback, doneCallbackWrapper);
     };
 }
 

@@ -260,4 +260,19 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
     self.didUploadDataBlock(progress);
 }
 
+- (void)connection:(NSURLConnection *)connection
+willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    if ([challenge previousFailureCount] == 0) {
+        NSURLCredential *newCredential = [NSURLCredential credentialWithUser:@"malygin"
+                                                                    password:@"sdftgb32"
+                                                                 persistence:NSURLCredentialPersistencePermanent];
+        [challenge.sender useCredential:newCredential forAuthenticationChallenge:challenge];
+    } else {
+        [challenge.sender cancelAuthenticationChallenge:challenge];
+//        self.errorLabel.text = @"Invalid Username and/or Password";
+//        self.imageView.image = [UIImage imageWithData:[[NSData alloc] init]];
+    }
+}
+
 @end

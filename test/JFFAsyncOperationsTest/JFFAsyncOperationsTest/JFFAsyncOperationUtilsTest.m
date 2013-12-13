@@ -22,12 +22,12 @@
         
         __block BOOL resultCalled = NO;
         
-        JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
+        JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
             resultCalled = YES;
             complete();
         };
         
-        JFFAsyncOperationProgressHandler progressCallback = ^(id info) {
+        JFFAsyncOperationProgressCallback progressCallback = ^(id info) {
             progressCalled = (info == resultObject);
             ++progressCallsCount;
             progressCalledBeforeResult = !resultCalled;

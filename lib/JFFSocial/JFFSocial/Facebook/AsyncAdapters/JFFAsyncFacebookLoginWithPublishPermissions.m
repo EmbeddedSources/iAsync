@@ -17,11 +17,11 @@
 
 #pragma mark - JFFAsyncOperationInterface
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    handler = [handler copy];
+    finishCallback = [finishCallback copy];
     
     NSMutableSet *requstPermissions = [[NSMutableSet alloc] initWithArray:_permissions];
     NSSet *currPermissions = [[NSSet alloc] initWithArray:_facebookSession.permissions];
@@ -35,7 +35,7 @@
             [self handleLoginWithSession:_facebookSession
                                    error:nil
                                   status:_facebookSession.state
-                                 handler:handler];
+                          finishCallback:finishCallback];
             return;
         }
     }
@@ -52,7 +52,7 @@
         
         NSError *libError = error?[JFFFacebookSDKErrors newFacebookSDKErrorsWithNativeError:error]:nil;
         
-        [weakSelf handleLoginWithSession:session error:libError status:status handler:handler];
+        [weakSelf handleLoginWithSession:session error:libError status:status finishCallback:finishCallback];
     };
     
     [FBSession openActiveSessionWithPublishPermissions:[requstPermissions allObjects]
@@ -61,17 +61,22 @@
                                      completionHandler:fbHandler];
 }
 
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+}
+
 - (void)handleLoginWithSession:(FBSession *)session
                          error:(NSError *)error
                         status:(FBSessionState)status
-                       handler:(JFFAsyncOperationInterfaceResultHandler)handler
+                finishCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
 {
     if (!error && !session.isOpen) {
         error = [JFFFacebookAuthorizeError new];
     }
     
-    if (handler) {
-        handler(error?nil:session, error);
+    if (finishCallback) {
+        finishCallback(error?nil:session, error);
     }
 }
 

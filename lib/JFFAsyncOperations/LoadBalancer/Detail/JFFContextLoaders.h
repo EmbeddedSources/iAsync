@@ -8,36 +8,36 @@
 
 @end
 
-@interface JFFContextLoaders ( ActiveLoaders )
+@interface JFFContextLoaders (ActiveLoaders)
 
 @property (nonatomic, readonly) NSUInteger activeLoadersNumber;
 
 - (void)addActiveNativeLoader:(JFFAsyncOperation)nativeLoader
-                wrappedCancel:(JFFCancelAsyncOperation)cancel;
+                wrappedCancel:(JFFAsyncOperationHandler)cancel;
 
 - (BOOL)removeActiveNativeLoader:(JFFAsyncOperation)nativeLoader;
 
-- (void)cancelActiveNativeLoader:(JFFAsyncOperation)nativeLoader cancel:(BOOL)canceled;
+- (void)handleActiveNativeLoader:(JFFAsyncOperation)nativeLoader
+                        withTask:(JFFAsyncOperationHandlerTask)task;
 
 @end
 
 @class JFFPedingLoaderData;
 
-@interface JFFContextLoaders ( PendingLoaders )
+@interface JFFContextLoaders (PendingLoaders)
 
 @property (nonatomic, readonly) NSUInteger pendingLoadersNumber;
-
-- (JFFPedingLoaderData *)popPendingLoaderData;
+@property (nonatomic, readonly) BOOL hasReadyToStartPendingLoaders;
 
 - (void)addPendingNativeLoader:(JFFAsyncOperation)nativeLoader
-              progressCallback:(JFFAsyncOperationProgressHandler)progressCallback
-                cancelCallback:(JFFCancelAsyncOperationHandler)cancelCallback
-                  doneCallback:(JFFDidFinishAsyncOperationHandler)doneCallback;
+              progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
+                 stateCallback:(JFFAsyncOperationChangeStateCallback)stateCallback
+                  doneCallback:(JFFDidFinishAsyncOperationCallback)doneCallback;
 
-- (BOOL)containsPendingNativeLoader:(JFFAsyncOperation)nativeLoader;
+- (JFFPedingLoaderData *)popNotSuspendedPendingLoaderData;
 
-- (void)removePendingNativeLoader:(JFFAsyncOperation)nativeLoader;
+- (JFFPedingLoaderData *)pendingLoaderDataForNativeLoader:(JFFAsyncOperation)nativeLoader;
 
-- (void)unsubscribePendingNativeLoader:(JFFAsyncOperation)nativeLoader;
+- (void)removePedingLoaderData:(JFFPedingLoaderData *)data;
 
 @end

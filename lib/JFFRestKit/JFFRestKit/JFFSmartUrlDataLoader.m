@@ -66,7 +66,7 @@ static JFFAsyncOperationBinder dataLoaderWithCachedResultBinder(BOOL doesNotIgno
     
         JFFDidFinishAsyncOperationHook finishCallbackHook = ^(NSData* srvResponse,
                                                               NSError* error,
-                                                              JFFDidFinishAsyncOperationHandler doneCallback) {
+                                                              JFFDidFinishAsyncOperationCallback doneCallback) {
             if (!doneCallback)
                 return;
             
@@ -147,9 +147,9 @@ JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args)
             :[loadDataIdentifier description];
     }
     
-    JFFAsyncOperation cachedDataLoader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                                                  JFFCancelAsyncOperationHandler cancelCallback,
-                                                                  JFFDidFinishAsyncOperationHandler doneCallback) {
+    JFFAsyncOperation cachedDataLoader = ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                                                   JFFAsyncOperationChangeStateCallback stateCallback,
+                                                                   JFFDidFinishAsyncOperationCallback doneCallback) {
         
         JFFAsyncOperationBinder dataLoaderBinder = dataLoaderWithCachedResultBinder(doesNotIgnoreFreshDataLoadFail,
                                                                                     dataLoaderForIdentifier,
@@ -169,7 +169,7 @@ JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args)
         }
         
         return loader(progressCallback,
-                      cancelCallback,
+                      stateCallback,
                       doneCallback);
     };
     

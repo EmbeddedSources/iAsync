@@ -20,7 +20,9 @@
 		1B41AD65151CD1EE00566B1B /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41AD5C151CD1E000566B1B /* libJFFUtils.a */; };
 		1BEC47F7156A26B80099DA6D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEC47F6156A26B80099DA6D /* libstdc++.dylib */; };
 		1BEE3D2615EFB43E0024D249 /* PerformSelectorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE3D2515EFB43E0024D249 /* PerformSelectorTest.m */; };
+		4C11F7DC1827956900229A6B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11F7DB1827956900229A6B /* QuartzCore.framework */; };
 		4C7F8060182008CC009785AF /* libJFFAsyncOperations.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7F8059182008BB009785AF /* libJFFAsyncOperations.a */; };
+		4CDB8DC7182BBB5200C5BFA3 /* JFFAsyncOperationHelpersTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB8DC6182BBB5200C5BFA3 /* JFFAsyncOperationHelpersTest.m */; };
 		CE1BC2DB161B2E81007DEC95 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BC2DA161B2E81007DEC95 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +111,13 @@
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = JFFUtils;
 		};
+		4C11F7E01827956900229A6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C7F8052182008BB009785AF /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C1A0F8D182577BE0020FBF6;
+			remoteInfo = JFFAsyncOperationsMacOS;
+		};
 		4C7F8058182008BB009785AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4C7F8052182008BB009785AF /* JFFAsyncOperations.xcodeproj */;
@@ -163,7 +172,9 @@
 		1B41AD51151CD1E000566B1B /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
 		1BEC47F6156A26B80099DA6D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		1BEE3D2515EFB43E0024D249 /* PerformSelectorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerformSelectorTest.m; sourceTree = "<group>"; };
+		4C11F7DB1827956900229A6B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4C7F8052182008BB009785AF /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../../lib/JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
+		4CDB8DC6182BBB5200C5BFA3 /* JFFAsyncOperationHelpersTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationHelpersTest.m; sourceTree = "<group>"; };
 		CE1BC2DA161B2E81007DEC95 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C11F7DC1827956900229A6B /* QuartzCore.framework in Frameworks */,
 				4C7F8060182008CC009785AF /* libJFFAsyncOperations.a in Frameworks */,
 				1BEC47F7156A26B80099DA6D /* libstdc++.dylib in Frameworks */,
 				1B0E89441563FA7900825E3C /* libc++.dylib in Frameworks */,
@@ -218,6 +230,7 @@
 		1B41ACF8151CCF7100566B1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C11F7DB1827956900229A6B /* QuartzCore.framework */,
 				1B0E89431563FA7900825E3C /* libc++.dylib */,
 				1BEC47F6156A26B80099DA6D /* libstdc++.dylib */,
 				1B41AD19151CCF9300566B1B /* GHUnitIOS.framework */,
@@ -234,6 +247,7 @@
 				1B41AD00151CCF7100566B1B /* Supporting Files */,
 				1B41AD1C151CD08100566B1B /* JFFSchedulerTest.m */,
 				1BEE3D2515EFB43E0024D249 /* PerformSelectorTest.m */,
+				4CDB8DC6182BBB5200C5BFA3 /* JFFAsyncOperationHelpersTest.m */,
 			);
 			path = JFFSchedulerTest;
 			sourceTree = "<group>";
@@ -289,6 +303,7 @@
 				4C7F8059182008BB009785AF /* libJFFAsyncOperations.a */,
 				4C7F805B182008BB009785AF /* libJFFAsyncOperations-clang.a */,
 				4C7F805D182008BB009785AF /* JFFAsyncOperationsFW.framework */,
+				4C11F7E11827956900229A6B /* libJFFAsyncOperationsMacOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -424,6 +439,13 @@
 			remoteRef = 1B41AD61151CD1E000566B1B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4C11F7E11827956900229A6B /* libJFFAsyncOperationsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperationsMacOS.a;
+			remoteRef = 4C11F7E01827956900229A6B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4C7F8059182008BB009785AF /* libJFFAsyncOperations.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -472,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B41AD06151CCF7100566B1B /* main.m in Sources */,
+				4CDB8DC7182BBB5200C5BFA3 /* JFFAsyncOperationHelpersTest.m in Sources */,
 				1B41AD1D151CD08100566B1B /* JFFSchedulerTest.m in Sources */,
 				1BEE3D2615EFB43E0024D249 /* PerformSelectorTest.m in Sources */,
 			);

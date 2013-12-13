@@ -11,10 +11,10 @@
 @property (nonatomic, copy) JFFAsyncOperation loader;
 @property (nonatomic, weak) JFFLimitedLoadersQueue *queue;
 
-@property (nonatomic, copy) JFFCancelAsyncOperation cancelLoader;
-@property (nonatomic, copy) JFFAsyncOperationProgressHandler progressCallback;
-@property (nonatomic, copy) JFFCancelAsyncOperationHandler cancelCallback;
-@property (nonatomic, copy) JFFDidFinishAsyncOperationHandler doneCallback;
+@property (nonatomic, copy) JFFAsyncOperationHandler loadersHandler;
+@property (nonatomic, copy) JFFAsyncOperationProgressCallback progressCallback;
+@property (nonatomic, copy) JFFAsyncOperationChangeStateCallback stateCallback;
+@property (nonatomic, copy) JFFDidFinishAsyncOperationCallback doneCallback;
 
 + (instancetype)newLoaderOwnerWithLoader:(JFFAsyncOperation)loader
                                    queue:(JFFLimitedLoadersQueue *)queue;
