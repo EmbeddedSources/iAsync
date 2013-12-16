@@ -12,4 +12,9 @@
    return self[index];
 }
 
+- (id)firstObject
+{
+    return [self noThrowObjectAtIndex:0];
+}
+
 @end

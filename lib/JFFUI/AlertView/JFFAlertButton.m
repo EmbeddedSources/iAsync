@@ -2,7 +2,7 @@
 
 @implementation JFFAlertButton
 
-- (id)initButton:(NSString *)title action:(JFFSimpleBlock)action
+- (instancetype)initButton:(NSString *)title action:(JFFSimpleBlock)action
 {
     self = [super init];
     
@@ -15,7 +15,7 @@
     return self;
 }
 
-+ (id)newAlertButton:(NSString *)title action:(JFFSimpleBlock)action
++ (instancetype)newAlertButton:(NSString *)title action:(JFFSimpleBlock)action
 {
     return [[self alloc] initButton:title action:action];
 }

@@ -1,7 +1,7 @@
 
 #import <JFFTestTools/GHAsyncTestCase+MainThreadTests.h>
 
-static NSString * const testProductIdentifier = @"test.free.purchase1";
+static NSString *const testProductIdentifier = @"test.free.purchase1";
 
 @interface PurchasingTest : GHAsyncTestCase
 @end
@@ -14,6 +14,7 @@ static NSString * const testProductIdentifier = @"test.free.purchase1";
     __block NSString *productIdentifier;
     
     void(^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishBLock) {
+        
         JFFAsyncOperationBinder srvCallback = ^JFFAsyncOperation(SKPaymentTransaction *transaction) {
             productIdentifier = transaction.payment.productIdentifier; //product.productIdentifier;
             return asyncOperationWithResult(@YES);
@@ -40,6 +41,7 @@ static NSString * const testProductIdentifier = @"test.free.purchase1";
     __block NSString *productIdentifier;
     
     void(^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishBLock) {
+        
         JFFAsyncOperation productLoader = skProductLoaderWithProductIdentifier(testProductIdentifier);
         
         productLoader(nil, nil, ^(SKProduct *product, NSError *error) {
@@ -57,8 +59,8 @@ static NSString * const testProductIdentifier = @"test.free.purchase1";
                                                               srvCallback:srvCallback];
             
             loader(nil, nil, ^(id result, NSError *error) {
-                purchaseResult = result;
                 
+                purchaseResult = result;
                 finishBLock();
             });
         });

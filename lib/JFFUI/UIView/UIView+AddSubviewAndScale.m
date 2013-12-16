@@ -2,13 +2,13 @@
 
 @implementation UIView (AddSubviewAndScale)
 
--(void)addSubviewAndScale:( UIView* )view_
+- (void)addSubviewAndScale:(UIView *)view
 {
-    [ view_ removeFromSuperview ];
-
-    view_.frame = self.bounds;
-    view_.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [ self addSubview: view_ ];
+    [view removeFromSuperview];
+    
+    view.frame = self.bounds;
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self addSubview:view];
 }
 
 @end

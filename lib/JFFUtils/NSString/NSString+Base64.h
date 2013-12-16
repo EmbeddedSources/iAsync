@@ -2,6 +2,6 @@
 
 @interface NSString (Base64)
 
-+(NSString*)base64StringFromData:( NSData* )data length:( int )length;
++ (instancetype)base64StringFromData:(NSData *)data length:(int)length;
 
 @end

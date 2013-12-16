@@ -14,7 +14,7 @@ static JFFDBInfo* sharedInfo = nil;
     NSDictionary *_dbInfo;
 }
 
-- (id)initWithInfoPath:(NSString *)infoPath
+- (instancetype)initWithInfoPath:(NSString *)infoPath
 {
     self = [super init];
     
@@ -25,7 +25,7 @@ static JFFDBInfo* sharedInfo = nil;
     return self;
 }
 
-- (id)initWithInfoDictionary:(NSDictionary *)infoDictionry
+- (instancetype)initWithInfoDictionary:(NSDictionary *)infoDictionry
 {
     self = [super init];
     

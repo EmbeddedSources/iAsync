@@ -2,10 +2,6 @@
 
 #import "JFFPropertyPath.h"
 
-#include <objc/runtime.h>
-
-static char propertyDataPropertyKey;
-
 @interface NSObject (PropertyExtractorPrivate)
 
 @property (nonatomic) NSMutableDictionary *propertyDataByPropertyName;
@@ -14,13 +10,20 @@ static char propertyDataPropertyKey;
 
 @implementation NSObject (PropertyExtractor)
 
+@dynamic propertyDataByPropertyName;
+
++ (void)load
+{
+    jClass_implementProperty(self, NSStringFromSelector(@selector(propertyDataByPropertyName)));
+}
+
 - (JFFObjectRelatedPropertyData *)propertyDataForPropertPath:(JFFPropertyPath *)propertyPath
 {
     id data = self.propertyDataByPropertyName[propertyPath.name];
     if (propertyPath.key == nil) {
         return data;
     }
-    return [data objectForKey: propertyPath.key];
+    return [data objectForKey:propertyPath.key];
 }
 
 //JTODO test
@@ -33,11 +36,11 @@ static char propertyDataPropertyKey;
             [self.propertyDataByPropertyName removeObjectForKey:propertyPath.name];
         }
     } else {
-        [ self.propertyDataByPropertyName removeObjectForKey:propertyPath.name ];
+        [self.propertyDataByPropertyName removeObjectForKey:propertyPath.name];
     }
     
     //clear property
-    if ( [ self.propertyDataByPropertyName count ] == 0 ) {
+    if ([self.propertyDataByPropertyName count] == 0) {
         self.propertyDataByPropertyName = nil;
     }
 }
@@ -66,16 +69,6 @@ static char propertyDataPropertyKey;
     }
     
     self.propertyDataByPropertyName[propertyPath.name] = property;
-}
-
-- (NSMutableDictionary *)propertyDataByPropertyName
-{
-    return objc_getAssociatedObject(self, &propertyDataPropertyKey);
-}
-
-- (void)setPropertyDataByPropertyName:( NSMutableDictionary* )dictionary
-{
-    objc_setAssociatedObject(self, &propertyDataPropertyKey, dictionary, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

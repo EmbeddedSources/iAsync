@@ -2,18 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ES_THUMBNAIL_DB</key>
+	<key>JFF_THUMBNAIL_DB</key>
 	<dict>
 		<key>fileName</key>
-		<string>WDThumbnails.sqlite</string>
+		<string>images/JFFThumbnails.sqlite</string>
 		<key>maxItems</key>
 		<integer>0</integer>
 		<key>version</key>
-		<integer>1</integer>
+		<integer>2</integer>
 		<key>timeToLiveInHours</key>
-		<integer>24</integer>
-		<key>autoRemoveByLastAccessDateInHours</key>
-		<real>72</real>
+		<integer>168</integer>
+		<key>autoRemove</key>
+		<dict>
+			<key>lastAccessDateInHours</key>
+			<integer>320</integer>
+			<key>maxSizeInMB</key>
+			<integer>100</integer>
+		</dict>
 	</dict>
 </dict>
 </plist>

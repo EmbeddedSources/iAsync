@@ -10,13 +10,13 @@
     id _realDelegate;
 }
 
-+ (id)newProxyDelegatesDispatcherWithRealDelegate:(id)realDelegate
-                                        delegates:(JFFMutableAssignArray *)delegates
++ (instancetype)newProxyDelegatesDispatcherWithRealDelegate:(id)realDelegate
+                                                  delegates:(JFFMutableAssignArray *)delegates
 {
     JFFProxyDelegatesDispatcher *result = [JFFProxyDelegatesDispatcher new];
     
-    if (result)
-    {
+    if (result) {
+        
         result->_delegates    = delegates;
         result->_realDelegate = realDelegate;
     }
@@ -37,11 +37,11 @@
         [invocation invokeWithTarget:_realDelegate];
 }
 
-- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
     __block NSMethodSignature *result;
-    [[_delegates array] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-    {
+    [[_delegates array] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
         result = [obj methodSignatureForSelector:selector];
         if (result)
             *stop = YES;

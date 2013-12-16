@@ -2,7 +2,7 @@
 
 @implementation FoursquareCheckinsModel (APIParser)
 
-+ (id)fqCheckinModelWithDict:(NSDictionary *)jsonObject error:(NSError **)outError
++ (instancetype)fqCheckinModelWithDict:(NSDictionary *)jsonObject error:(NSError **)outError
 {
     id jsonPattern = @{
     @"id"   : [NSString class],

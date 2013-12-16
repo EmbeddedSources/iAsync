@@ -2,7 +2,7 @@
 
 @interface NSString (RFC_2965)
 
--(BOOL)domainMatchesCookiesDomain:( NSString* )cookiesDomain_;
--(BOOL)pathMatchesCookiesPath:( NSString* )cookiesPath_;
+- (BOOL)domainMatchesCookiesDomain:(NSString *)cookiesDomain;
+- (BOOL)pathMatchesCookiesPath:(NSString *)cookiesPath;
 
 @end

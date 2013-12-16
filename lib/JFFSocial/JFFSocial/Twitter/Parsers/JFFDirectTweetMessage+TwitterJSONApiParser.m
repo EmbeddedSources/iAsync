@@ -2,8 +2,8 @@
 
 @implementation JFFDirectTweetMessage (TwitterJSONApiParser)
 
-+ (id)newDirectTweetMessageWithTwitterJSONObject:(NSDictionary *)jsonObject
-                                           error:(NSError **)outError
++ (instancetype)newDirectTweetMessageWithTwitterJSONObject:(NSDictionary *)jsonObject
+                                                     error:(NSError **)outError
 {
     id jsonPattern = @{
     @"text" : [NSString class],

@@ -4,9 +4,9 @@
 
 @implementation JFFContactEmailsField
 
--(NSArray*)filteredValues:( NSArray* )values_
+- (NSArray *)filteredValues:(NSArray *)values
 {
-    return [ values_ jffContactsSelectWithEmailOnly ];
+    return [values jffContactsSelectWithEmailOnly];
 }
 
 @end

@@ -2,6 +2,6 @@
 
 @interface NSObject (Const0)
 
-+(id)objectThatAlwaysReturnsZeroForAnyMethod;
++ (id)objectThatAlwaysReturnsZeroForAnyMethod;
 
 @end

@@ -13,6 +13,7 @@
     #import <JFFAsyncOperations/JFFAsyncOperations.h>
     #import <JFFCache/JFFCache.h>
     #import <JFFRestKit/JFFRestKit.h>
+    #import <JFFScheduler/JFFScheduler.h>
 
     #import <GHUnitIOS/GHUnit.h>
     

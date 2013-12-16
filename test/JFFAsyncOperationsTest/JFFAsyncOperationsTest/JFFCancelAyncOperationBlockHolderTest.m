@@ -11,12 +11,12 @@
 
     @autoreleasepool
     {
-        JFFCancelAsyncOperationBlockHolder* holder_ = [ JFFCancelAsyncOperationBlockHolder new ];
-        [ holder_ addOnDeallocBlock: ^void( void )
-        {
+        JFFCancelAsyncOperationBlockHolder* holder_ = [JFFCancelAsyncOperationBlockHolder new];
+        [holder_ addOnDeallocBlock:^void(void) {
+        
             holderDeallocated_ = YES;
-        } ];
-
+        }];
+        
         __block BOOL blockContextDeallocated_ = NO;
         __block NSUInteger cancelBlockCallsNumber_ = 0;
 
@@ -34,14 +34,14 @@
                     ++cancelBlockCallsNumber_;
             };
         }
+        
+        GHAssertFalse(blockContextDeallocated_, @"context not deallocated");
+        
+        holder_.onceCancelBlock(NO);
 
-        GHAssertFalse( blockContextDeallocated_, @"context not deallocated" );
-
-        holder_.onceCancelBlock( NO );
-
-        GHAssertTrue( nil == holder_.cancelBlock, @"cancel block empty" );
-        GHAssertTrue( blockContextDeallocated_, @"context deallocated" );
-        GHAssertTrue( 1 == cancelBlockCallsNumber_, @"block once was called" );
+        GHAssertTrue(nil == holder_.cancelBlock, @"cancel block empty"     );
+        GHAssertTrue(blockContextDeallocated_, @"context deallocated"      );
+        GHAssertTrue(1 == cancelBlockCallsNumber_, @"block once was called");
 
         holder_.onceCancelBlock( NO );
 

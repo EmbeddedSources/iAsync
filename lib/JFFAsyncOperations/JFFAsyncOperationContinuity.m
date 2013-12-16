@@ -144,9 +144,7 @@ JFFAsyncOperation accumulateSequenceResult(NSArray *loaders, JFFSequenceResultAc
     
     resultAccumulator = [resultAccumulator copy];
     
-    NSMutableArray *binders = [[NSMutableArray alloc] initWithCapacity:[loaders count]];
-    
-    for (NSUInteger index = 0; index < [loaders count]; ++index) {
+    NSArray *binders = [NSArray arrayWithSize:[loaders count] producer:^id(NSUInteger index) {
         
         JFFAsyncOperationBinder binder = [^JFFAsyncOperation(id waterfallResult) {
             
@@ -159,14 +157,16 @@ JFFAsyncOperation accumulateSequenceResult(NSArray *loaders, JFFSequenceResultAc
                 :waterfallResult;
                 
                 id newResult = resultAccumulator(currWaterfallResult, result, error);
+                error = newResult?nil:error;
+                NSCAssert((newResult != nil) ^ (error != nil), nil);
                 
                 if (doneCallback)
-                    doneCallback(newResult, newResult?nil:error);
+                    doneCallback(newResult, error);
             });
         } copy];
         
-        [binders addObject:binder];
-    }
+        return binder;
+    }];
     
     JFFWaterwallFirstObject *instance = [JFFWaterwallFirstObject sharedWaterwallFirstObject];
     return bindSequenceOfAsyncOperationsArray(asyncOperationWithResult(instance), binders);
@@ -726,76 +726,4 @@ JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
         };
         return loader(progressCallback, wrappedCancelCallback, wrappedDoneCallback);
     };
-}
-
-//TODO test it, on leaks also
-JFFAsyncOperation repeatAsyncOperation(JFFAsyncOperation nativeLoader,
-                                       JFFContinueLoaderWithResult continueLoaderBuilder,
-                                       NSTimeInterval delay,
-                                       NSInteger maxRepeatCount)
-{
-    NSCParameterAssert(nativeLoader         );// can not be nil
-    NSCParameterAssert(continueLoaderBuilder);// can not be nil
-    
-    nativeLoader          = [nativeLoader          copy];
-    continueLoaderBuilder = [continueLoaderBuilder copy];
-    
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
-        
-        progressCallback = [progressCallback copy];
-        cancelCallback   = [cancelCallback   copy];
-        doneCallback     = [doneCallback     copy];
-        
-        __block JFFCancelAsyncOperation cancelBlockHolder;
-        
-        __block JFFDidFinishAsyncOperationHook finishHookHolder;
-        
-        __block NSInteger currentLeftCount = maxRepeatCount;
-        
-        JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
-                                                              NSError *error,
-                                                              JFFDidFinishAsyncOperationHandler doneCallback) {
-            
-            JFFAsyncOperation newLoader = continueLoaderBuilder(result, error);
-            if (!newLoader || currentLeftCount == 0) {
-                finishHookHolder = nil;
-                if (doneCallback)
-                    doneCallback(result, error);
-            } else {
-                currentLeftCount = currentLeftCount > 0
-                ?currentLeftCount - 1
-                :currentLeftCount;
-                
-                JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(newLoader,
-                                                                             finishHookHolder);
-                loader = asyncOperationAfterDelay(delay, loader);
-                
-                cancelBlockHolder = loader(progressCallback, cancelCallback, doneCallback);
-            }
-        };
-        
-        finishHookHolder = [finishCallbackHook copy];
-        
-        JFFAsyncOperation loader = asyncOperationWithFinishHookBlock(nativeLoader,
-                                                                     finishHookHolder);
-        
-        cancelBlockHolder = loader(progressCallback, cancelCallback, doneCallback);
-        
-        return ^(BOOL canceled) {
-            finishHookHolder = nil;
-            
-            if (!cancelBlockHolder)
-                return;
-            cancelBlockHolder(canceled);
-            cancelBlockHolder = nil;
-        };
-    };
-}
-
-JFFAsyncOperation asyncOperationAfterDelay(NSTimeInterval delay,
-                                           JFFAsyncOperation loader)
-{
-    return sequenceOfAsyncOperations(asyncOperationWithDelay(delay), loader, nil);
 }

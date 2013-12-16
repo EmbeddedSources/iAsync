@@ -1,7 +1,7 @@
 #ifndef __JN_CONSTANTS_H__
 #define __JN_CONSTANTS_H__
 
-enum JNConstantsEnum
+typedef NS_ENUM(NSUInteger, JNConstantsEnum)
 {
    kJNMaxBufferSize = 4096
 };

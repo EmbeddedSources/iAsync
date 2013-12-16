@@ -13,8 +13,8 @@
 #import <JFFAsyncOperations/LoadBalancer/JFFLimitedLoadersQueue.h>
 #import <JFFAsyncOperations/LoadBalancer/JFFAsyncOperationLoadBalancer.h>
 
-#import <JFFAsyncOperations/Extensions/NSArray+AsyncMap.h>
-#import <JFFAsyncOperations/Extensions/NSDictionary+AsyncMap.h>
+#import <JFFAsyncOperations/Categories/NSArray+AsyncMap.h>
+#import <JFFAsyncOperations/Categories/NSDictionary+AsyncMap.h>
 
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationInterface.h>
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationBuilder.h>

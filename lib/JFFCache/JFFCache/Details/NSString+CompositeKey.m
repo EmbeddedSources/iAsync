@@ -2,7 +2,7 @@
 
 @implementation NSString (CompositeKey)
 
-- (NSString *)toCompositeKey
+- (instancetype)toCompositeKey
 {
     return self;
 }

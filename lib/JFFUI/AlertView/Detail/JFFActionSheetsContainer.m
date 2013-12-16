@@ -5,80 +5,77 @@
 
 @implementation JFFActionSheetsContainer
 {
-    NSMutableArray* _activeActionSheets;
+    NSMutableArray *_activeActionSheets;
 }
 
-+(id)sharedActionSheetsContainer
++ (instancetype)sharedActionSheetsContainer
 {
     static id instance_ = nil;
-    if ( !instance_ )
-    {
-        instance_ = [ self new ];
+    if (!instance_) {
+        instance_ = [self new];
     }
     return instance_;
 }
 
--(void)addActionSheet:( JFFActionSheet* )actionSheet_ withView:( UIView* )view_
+- (void)addActionSheet:(JFFActionSheet *)actionSheet withView:(UIView *)view
 {
-    if ( !_activeActionSheets )
-    {
-        _activeActionSheets = [ [ NSMutableArray alloc ] initWithCapacity: 1 ];
+    if (!_activeActionSheets) {
+        
+        _activeActionSheets = [[NSMutableArray alloc] initWithCapacity:1];
     }
 
-    JFFPendingActionSheet* pendingActionSheet_ = [ [ JFFPendingActionSheet alloc ] initWithActionSheet: actionSheet_
-                                                                                                  view: view_ ];
-
-    [ _activeActionSheets addObject: pendingActionSheet_ ];
+    JFFPendingActionSheet *pendingActionSheet = [[JFFPendingActionSheet alloc] initWithActionSheet:actionSheet
+                                                                                              view:view];
+    
+    [_activeActionSheets addObject:pendingActionSheet];
 }
 
--(void)removeActionSheet:( JFFActionSheet* )actionSheet_
+- (void)removeActionSheet:(JFFActionSheet *)actionSheet
 {
-    if ( !_activeActionSheets )
+    if (!_activeActionSheets)
         return;
-
-    [ _activeActionSheets removeObject: [ self objectToRemove: actionSheet_ ] ];
-
-    if ( ![ _activeActionSheets count ] )
-    {
+    
+    [_activeActionSheets removeObject:[self objectToRemove:actionSheet]];
+    
+    if (![_activeActionSheets count]) {
+        
         _activeActionSheets = nil;
     }
 }
 
 - (BOOL)containsActionSheet:(JFFActionSheet *)actionSheet
 {
-    return [_activeActionSheets any:^BOOL(JFFPendingActionSheet *pendingActionSheet)
-    {
+    return [_activeActionSheets any:^BOOL(JFFPendingActionSheet *pendingActionSheet) {
         return pendingActionSheet.actionSheet == actionSheet;
     }];
 }
 
--(JFFPendingActionSheet*)firstPendingActionSheet
+- (JFFPendingActionSheet *)firstPendingActionSheet
 {
-    return [ _activeActionSheets noThrowObjectAtIndex: 0 ];
+    return [_activeActionSheets firstObject];
 }
 
--(NSUInteger)count
+- (NSUInteger)count
 {
-    return [ _activeActionSheets count ];
+    return [_activeActionSheets count];
 }
 
--(JFFPendingActionSheet*)objectToRemove:( JFFActionSheet* )actionSheet_
+- (JFFPendingActionSheet *)objectToRemove:(JFFActionSheet *)actionSheet_
 {
-    return [_activeActionSheets firstMatch:^BOOL(JFFPendingActionSheet *pendingActionSheet_)
-    {
+    return [_activeActionSheets firstMatch:^BOOL(JFFPendingActionSheet *pendingActionSheet_) {
+        
         return pendingActionSheet_.actionSheet ==  actionSheet_;
     }];
 }
 
--(NSArray*)allActionSheets
+- (NSArray *)allActionSheets
 {
-    return [ _activeActionSheets map: ^id( JFFPendingActionSheet* object_ )
-    {
-        return object_.actionSheet;
-    } ];
+    return [_activeActionSheets map:^id(JFFPendingActionSheet *object) {
+        return object.actionSheet;
+    }];
 }
 
--(void)removeAllActionSheets
+- (void)removeAllActionSheets
 {
     _activeActionSheets = nil;
 }

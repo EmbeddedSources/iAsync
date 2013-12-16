@@ -1,35 +1,38 @@
 #import "JFFAsyncOperationUtils.h"
 
-#import "JFFBlockOperation.h"
 #import "JFFAsyncOperationBuilder.h"
-
 #import "JFFAsyncOperationAdapter.h"
+
+static const char *const defaultQueueName = "com.jff.async_operations_library.general_queue";
 
 static JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlockAndQueue(JFFSyncOperationWithProgress progressLoadDataBlock,
                                                                                   const char *queueName,
                                                                                   BOOL barrier,
+                                                                                  dispatch_queue_t currentQueue,
                                                                                   dispatch_queue_attr_t attr)
 {
+    NSCParameterAssert(queueName != NULL);
+    NSString *str = @(queueName);
     progressLoadDataBlock = [progressLoadDataBlock copy];
-    NSString *str = @(queueName?:"");
     
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
-        JFFAsyncOperationAdapter *asyncObject = [JFFAsyncOperationAdapter new];
-        asyncObject.loadDataBlock = progressLoadDataBlock;
-        asyncObject.queueName     = [str cStringUsingEncoding:NSUTF8StringEncoding];
-        asyncObject.barrier       = barrier;
-        asyncObject.queueAttributes = attr;
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>() {
         
+        JFFAsyncOperationAdapter *asyncObject = [JFFAsyncOperationAdapter new];
+        asyncObject.loadDataBlock   = progressLoadDataBlock;
+        asyncObject.queueName       = [str cStringUsingEncoding:NSUTF8StringEncoding];
+        asyncObject.barrier         = barrier;
+        asyncObject.currentQueue    = currentQueue;
+        asyncObject.queueAttributes = attr;
         return asyncObject;
     };
     return buildAsyncOperationWithAdapterFactory(factory);
 }
 
-static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue(
-    JFFSyncOperation loadDataBlock,
-    const char *queueName,
-    BOOL barrier,
-    dispatch_queue_attr_t attr )
+static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
+                                                                        const char *queueName,
+                                                                        BOOL barrier,
+                                                                        dispatch_queue_t currentQueue,
+                                                                        dispatch_queue_attr_t attr)
 {
     loadDataBlock = [loadDataBlock copy];
     JFFSyncOperationWithProgress progressLoadDataBlock= ^id(NSError *__autoreleasing *error,
@@ -43,43 +46,54 @@ static JFFAsyncOperation privateAsyncOperationWithSyncOperationAndQueue(
     return asyncOperationWithSyncOperationWithProgressBlockAndQueue(progressLoadDataBlock,
                                                                     queueName,
                                                                     barrier,
-                                                                    attr );
+                                                                    currentQueue,
+                                                                    attr);
 }
 
 JFFAsyncOperation asyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock, const char *queueName)
 {
+    NSCParameterAssert([NSThread isMainThread]);
     return privateAsyncOperationWithSyncOperationAndQueue(loadDataBlock,
                                                           queueName,
                                                           NO,
-                                                          DISPATCH_QUEUE_CONCURRENT );
+                                                          dispatch_get_main_queue(),
+                                                          DISPATCH_QUEUE_CONCURRENT);
 }
 
 JFFAsyncOperation barrierAsyncOperationWithSyncOperationAndQueue(JFFSyncOperation loadDataBlock,
                                                                  const char *queueName)
 {
+    NSCParameterAssert([NSThread isMainThread]);
     return privateAsyncOperationWithSyncOperationAndQueue(loadDataBlock,
                                                           queueName,
                                                           YES,
-                                                          DISPATCH_QUEUE_CONCURRENT );
+                                                          dispatch_get_main_queue(),
+                                                          DISPATCH_QUEUE_CONCURRENT);
 }
 
-//TODO check using of all asyncOperationWithSyncOperation (without queue name) or remove asyncOperationWithSyncOperation at all
+JFFAsyncOperation asyncOperationWithSyncOperationAndConfigurableQueue(JFFSyncOperation loadDataBlock, const char *queueName, BOOL isSerialQueue)
+{
+    NSCParameterAssert([NSThread isMainThread]);
+    dispatch_queue_attr_t attr = isSerialQueue?DISPATCH_QUEUE_SERIAL:DISPATCH_QUEUE_CONCURRENT;
+    
+    return privateAsyncOperationWithSyncOperationAndQueue(loadDataBlock,
+                                                          queueName,
+                                                          NO,
+                                                          dispatch_get_main_queue(),
+                                                          attr);
+}
+
 JFFAsyncOperation asyncOperationWithSyncOperation(JFFSyncOperation loadDataBlock)
 {
-    return asyncOperationWithSyncOperationAndQueue(loadDataBlock, nil);
+    return asyncOperationWithSyncOperationAndQueue(loadDataBlock, defaultQueueName);
 }
 
 JFFAsyncOperation asyncOperationWithSyncOperationWithProgressBlock(JFFSyncOperationWithProgress progressLoadDataBlock)
 {
+    NSCParameterAssert([NSThread isMainThread]);
     return asyncOperationWithSyncOperationWithProgressBlockAndQueue(progressLoadDataBlock,
-                                                                    nil,
+                                                                    defaultQueueName,
                                                                     NO,
+                                                                    dispatch_get_main_queue(),
                                                                     DISPATCH_QUEUE_CONCURRENT);
-}
-
-JFFAsyncOperation asyncOperationWithSyncOperationAndConfigurableQueue( JFFSyncOperation loadDataBlock_, const char* queueName_, BOOL isSerialQueue_ )
-{
-    dispatch_queue_attr_t attr_ = isSerialQueue_ ? DISPATCH_QUEUE_SERIAL : DISPATCH_QUEUE_CONCURRENT;
-    
-    return privateAsyncOperationWithSyncOperationAndQueue( loadDataBlock_, queueName_, NO, attr_ );
 }

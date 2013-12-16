@@ -4,7 +4,6 @@
 #import "JFFInstagramMediaItem.h"
 #import "JFFInstagramAuthedAccount.h"
 
-#import "JFFInstagramResponseError.h"
 #import "JFFInvalidInstagramResponseURLError.h"
 
 #import "JFFSocialInstagramApi.h"
@@ -48,7 +47,7 @@
         
         JFFAsyncOperation loader = bindSequenceOfAsyncOperations(accountLoader, accountToAccessTokenBinder, nil);
         
-        loader = [self asyncOperationForPropertyWithName:@"accessToken"
+        loader = [self asyncOperationForPropertyWithName:NSStringFromSelector(@selector(accessToken))
                                           asyncOperation:loader];
         
         return loader(progressCallback,

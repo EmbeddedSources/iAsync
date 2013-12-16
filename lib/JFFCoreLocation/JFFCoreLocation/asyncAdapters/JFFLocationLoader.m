@@ -4,7 +4,7 @@
 #import "JFFUnableToGetLocationError.h"
 #import "JFFLocationServicesDisabledError.h"
 
-#import <JFFScheduler/JFFScheduler.h>
+#import <JFFScheduler/JFFTimer.h>
 
 @interface JFFCoreLocationAsyncAdapter : NSObject<
 JFFAsyncOperationInterface,
@@ -15,14 +15,17 @@ JFFLocationObserver
 
 @implementation JFFCoreLocationAsyncAdapter
 {
+@public
+    NSTimeInterval _tolerance;
+@private
     JFFLocationLoaderSupervisor *_supervisor;
     CLLocationAccuracy _accuracy;
     JFFAsyncOperationInterfaceResultHandler _handler;
     
-    JFFScheduler *_scheduler;
+    JFFTimer *_timer;
 }
 
-- (id)initWithAccuracy:(CLLocationAccuracy)accuracy
+- (instancetype)initWithAccuracy:(CLLocationAccuracy)accuracy
 {
     self = [super init];
     
@@ -33,7 +36,7 @@ JFFLocationObserver
     return self;
 }
 
-+ (id)newCoreLocationAsyncAdapterWithAccuracy:(double)accuracyInMeters
++ (instancetype)newCoreLocationAsyncAdapterWithAccuracy:(double)accuracyInMeters
 {
     return [[self alloc] initWithAccuracy:accuracyInMeters];
 }
@@ -64,14 +67,14 @@ JFFLocationObserver
         return;
     }
     
-    _scheduler = [JFFScheduler new];
+    _timer = [JFFTimer new];
     __weak JFFCoreLocationAsyncAdapter *weakSelf = self;
-    [_scheduler addBlock:^(JFFCancelScheduledBlock cancel) {
+    [_timer addBlock:^(JFFCancelScheduledBlock cancel) {
         
         cancel();
         
         [weakSelf onSchedulerWithHandler:handler];
-    } duration:1.];
+    } duration:_tolerance];
 }
 
 - (void)onSchedulerWithHandler:(JFFAsyncOperationInterfaceResultHandler)handler
@@ -108,8 +111,8 @@ JFFLocationObserver
     if (!location)
         return NO;
     
-    if (location.horizontalAccuracy <= 200.
-        && location.verticalAccuracy <= 200.) {
+    if (location.horizontalAccuracy <= 2000.
+        && location.verticalAccuracy <= 2000.) {
         
         [self forceProcessLocation:location];
         return YES;
@@ -131,17 +134,24 @@ JFFLocationObserver
 
 + (JFFAsyncOperation)locationLoaderWithAccuracy:(CLLocationAccuracy)accuracy
 {
-    NSParameterAssert(accuracy == kCLLocationAccuracyHundredMeters);
+    return [self locationLoaderWithAccuracy:accuracy tolerance:3.];
+}
+
++ (JFFAsyncOperation)locationLoaderWithAccuracy:(CLLocationAccuracy)accuracy tolerance:(NSTimeInterval)tolerance
+{
+    NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
-        return [JFFCoreLocationAsyncAdapter newCoreLocationAsyncAdapterWithAccuracy:accuracy];
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>(void) {
+        
+        JFFCoreLocationAsyncAdapter *result = [JFFCoreLocationAsyncAdapter newCoreLocationAsyncAdapterWithAccuracy:accuracy];
+        result->_tolerance = tolerance;
+        return result;
     };
     JFFAsyncOperation loader = buildAsyncOperationWithAdapterFactory(factory);
     
     id key = @{
     @"accuracy" : @(accuracy),
     @"method"   : NSStringFromSelector(_cmd),
-    @"class"    : [self description],
     };
     return [self asyncOperationMergeLoaders:loader withArgument:key];
 }

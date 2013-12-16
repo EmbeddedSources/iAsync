@@ -1,9 +1,12 @@
 #import <JFFContacts/Errors/JFFAddressBookError.h>
 
+#import <AddressBook/ABAddressBook.h>
+
 @interface JFFAddressBookWrapperError : JFFAddressBookError
 
 @property (nonatomic) NSError *nativeError;
+@property (nonatomic) ABAuthorizationStatus authorizationStatus;
 
-+ (id)newAddressBookWrapperErrorWithNativeError:(NSError *)nativeError;
++ (instancetype)newAddressBookWrapperErrorWithNativeError:(NSError *)nativeError;
 
 @end

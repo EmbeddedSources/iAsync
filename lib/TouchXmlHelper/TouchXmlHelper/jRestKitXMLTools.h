@@ -2,5 +2,4 @@
 
 @class CXMLDocument;
 
-CXMLDocument* xmlDocumentWithData( NSData* data_, NSError** outError_ );
-
+CXMLDocument *xmlDocumentWithData(NSData *data, NSError **outError);

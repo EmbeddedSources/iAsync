@@ -27,7 +27,7 @@
 
 - (void)testMutableAssignArrayFirstRelease
 {
-    __weak JFFMutableAssignArray* weakArray;
+    __weak JFFMutableAssignArray *weakArray;
     {
         JFFMutableAssignArray *array = [JFFMutableAssignArray new];
         

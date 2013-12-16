@@ -5,7 +5,7 @@
 
 @property (nonatomic, readonly) CF_RETURNS_NOT_RETAINED ABAddressBookRef rawBook;
 
-- (id)initWithRawBook:(ABAddressBookRef)CF_CONSUMED rawBook;
+- (instancetype)initWithRawBook:(ABAddressBookRef)CF_CONSUMED rawBook;
 
 - (BOOL)removeAllContactsWithError:(NSError **)error;
 

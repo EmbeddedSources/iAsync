@@ -4,16 +4,17 @@
 
 @interface JFFBlockOperation : NSObject
 
-+ (id)performOperationWithQueueName:(const char*)queueName
-                      loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                   didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
-                      progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
-                            barrier:(BOOL)barrier
-                 serialOrConcurrent:( dispatch_queue_attr_t )serialOrConcurrent_;
++ (instancetype)performOperationWithQueueName:(const char*)queueName
+                                loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
+                             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
+                                progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
+                                      barrier:(BOOL)barrier
+                                 currentQueue:(dispatch_queue_t)currentQueue
+                           serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent;
 
-+ (id)performOperationWithQueueName:(const char*)queueName
-                      loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                   didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock;
++ (instancetype)performOperationWithQueueName:(const char*)queueName
+                                loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
+                             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock;
 
 - (void)cancel;
 

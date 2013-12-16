@@ -1,7 +1,6 @@
 #import "NSObject+AutoCancelAsyncOperation.h"
 
 #import "JFFAsyncOperationsPredefinedBlocks.h"
-
 #import "JFFDidFinishAsyncOperationBlockHolder.h"
 
 @implementation NSObject (WeakAsyncOperation)
@@ -18,7 +17,9 @@
                                     JFFCancelAsyncOperationHandler cancelCallback,
                                     JFFDidFinishAsyncOperationHandler doneCallback)
     {
-        if (weakSelf == nil) {
+        id self_ = weakSelf;
+        
+        if (self_ == nil) {
             
             if (cancelCallback) {
                 cancelCallback(cancelNativeAsyncOp);
@@ -72,7 +73,7 @@
         };
         
         //try assert retain count
-        [weakSelf addOnDeallocBlock:ondeallocBlockHolder.onceSimpleBlock];
+        [self_ addOnDeallocBlock:ondeallocBlockHolder.onceSimpleBlock];
         
         __block JFFCancelAsyncOperation cancelBlockHolder = [^void(BOOL canceled) {
             cancel(canceled);

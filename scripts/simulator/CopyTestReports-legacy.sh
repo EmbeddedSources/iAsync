@@ -27,4 +27,5 @@ cd "$LAUNCH_DIR"
 
 cd "$DEPLOYMENT_DIR"
    zip -r test-results.zip test-results
+
 cd "$LAUNCH_DIR"

@@ -2,17 +2,17 @@
 
 @implementation UITableView (WithinUpdates)
 
--(void)withinUpdates:( void (^)( void ) )block_
+- (void)withinUpdates:(void (^)(void))block
 {
-    [ self beginUpdates ];
-
+    [self beginUpdates];
+    
     @try
     {
-        block_();
+        block();
     }
     @finally
     {
-        [ self endUpdates ];
+        [self endUpdates];
     }
 }
 

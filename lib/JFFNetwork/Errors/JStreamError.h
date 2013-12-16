@@ -1,10 +1,12 @@
 #import <JFFNetwork/Errors/JNetworkError.h>
-#import <CFNetwork/CFNetwork.h>
+
+#import <Foundation/Foundation.h>
 
 @interface JStreamError : JNetworkError
 
--(id)initWithStreamError:( CFStreamError )rawError_;
+@property (nonatomic, readonly) CFStreamError rawError;
 
-@property ( nonatomic, assign, readonly ) CFStreamError rawError;
+- (instancetype)initWithStreamError:(CFStreamError)rawError
+                            context:(id<NSCopying>)context;
 
 @end

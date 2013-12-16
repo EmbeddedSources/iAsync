@@ -3,7 +3,7 @@
 
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
-#import <JFFAsyncOperations/LoadBalancer/Details2/JFFBaseLoaderOwner.h>
+#import <JFFAsyncOperations/LoadBalancer/Detail/JFFBaseLoaderOwner.h>
 
 @interface JFFLimitedLoadersQueueTest : GHAsyncTestCase
 @end

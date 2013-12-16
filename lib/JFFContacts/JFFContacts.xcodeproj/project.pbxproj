@@ -11,12 +11,6 @@
 		4CA36A7916DB6852001F79B6 /* JFFAddressBookWrapperError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA36A7816DB6852001F79B6 /* JFFAddressBookWrapperError.m */; };
 		CE29B80C15F60083000A05B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80B15F60083000A05B8 /* Foundation.framework */; };
 		CE29B81115F60083000A05B8 /* JFFContacts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE29B81015F60083000A05B8 /* JFFContacts.h */; };
-		CE29B81B15F60084000A05B8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B81A15F60084000A05B8 /* SenTestingKit.framework */; };
-		CE29B81D15F60084000A05B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B81C15F60084000A05B8 /* UIKit.framework */; };
-		CE29B81E15F60084000A05B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80B15F60083000A05B8 /* Foundation.framework */; };
-		CE29B82115F60084000A05B8 /* libJFFContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE29B80815F60083000A05B8 /* libJFFContacts.a */; };
-		CE29B82715F60084000A05B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE29B82515F60084000A05B8 /* InfoPlist.strings */; };
-		CE29B82A15F60084000A05B8 /* JFFContactsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B82915F60084000A05B8 /* JFFContactsTests.m */; };
 		CE29B84D15F6015B000A05B8 /* JFFAddressBookFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE29B83D15F6015A000A05B8 /* JFFAddressBookFactory.mm */; };
 		CE29B84E15F6015B000A05B8 /* JFFContact.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B83F15F6015A000A05B8 /* JFFContact.m */; };
 		CE29B85715F60213000A05B8 /* NSArray+kABMultiValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B85615F60213000A05B8 /* NSArray+kABMultiValue.m */; };
@@ -35,13 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CE29B81F15F60084000A05B8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE29B7FF15F60083000A05B8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CE29B80715F60083000A05B8;
-			remoteInfo = JFFContacts;
-		};
 		CE29B86215F60330000A05B8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */;
@@ -101,13 +88,7 @@
 		CE29B80B15F60083000A05B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CE29B80F15F60083000A05B8 /* JFFContacts-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFContacts-Prefix.pch"; sourceTree = "<group>"; };
 		CE29B81015F60083000A05B8 /* JFFContacts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFContacts.h; sourceTree = "<group>"; };
-		CE29B81915F60084000A05B8 /* JFFContactsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFContactsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE29B81A15F60084000A05B8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		CE29B81C15F60084000A05B8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		CE29B82415F60084000A05B8 /* JFFContactsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFContactsTests-Info.plist"; sourceTree = "<group>"; };
-		CE29B82615F60084000A05B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CE29B82815F60084000A05B8 /* JFFContactsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFContactsTests.h; sourceTree = "<group>"; };
-		CE29B82915F60084000A05B8 /* JFFContactsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFFContactsTests.m; sourceTree = "<group>"; };
 		CE29B83C15F60159000A05B8 /* JFFAddressBookFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAddressBookFactory.h; sourceTree = "<group>"; };
 		CE29B83D15F6015A000A05B8 /* JFFAddressBookFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFAddressBookFactory.mm; sourceTree = "<group>"; };
 		CE29B83E15F6015A000A05B8 /* JFFContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFContact.h; sourceTree = "<group>"; };
@@ -150,17 +131,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE29B81515F60084000A05B8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE29B81B15F60084000A05B8 /* SenTestingKit.framework in Frameworks */,
-				CE29B81D15F60084000A05B8 /* UIKit.framework in Frameworks */,
-				CE29B81E15F60084000A05B8 /* Foundation.framework in Frameworks */,
-				CE29B82115F60084000A05B8 /* libJFFContacts.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -168,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				CE29B80D15F60083000A05B8 /* JFFContacts */,
-				CE29B82215F60084000A05B8 /* JFFContactsTests */,
 				CE29B80A15F60083000A05B8 /* Frameworks */,
 				CE29B80915F60083000A05B8 /* Products */,
 			);
@@ -178,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				CE29B80815F60083000A05B8 /* libJFFContacts.a */,
-				CE29B81915F60084000A05B8 /* JFFContactsTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,7 +157,6 @@
 				CE29B85815F60330000A05B8 /* JFFUtils.xcodeproj */,
 				CE29B80B15F60083000A05B8 /* Foundation.framework */,
 				CE29B81A15F60084000A05B8 /* SenTestingKit.framework */,
-				CE29B81C15F60084000A05B8 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -218,25 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				CE29B80F15F60083000A05B8 /* JFFContacts-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		CE29B82215F60084000A05B8 /* JFFContactsTests */ = {
-			isa = PBXGroup;
-			children = (
-				CE29B82815F60084000A05B8 /* JFFContactsTests.h */,
-				CE29B82915F60084000A05B8 /* JFFContactsTests.m */,
-				CE29B82315F60084000A05B8 /* Supporting Files */,
-			);
-			path = JFFContactsTests;
-			sourceTree = "<group>";
-		};
-		CE29B82315F60084000A05B8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				CE29B82415F60084000A05B8 /* JFFContactsTests-Info.plist */,
-				CE29B82515F60084000A05B8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -320,32 +268,13 @@
 			productReference = CE29B80815F60083000A05B8 /* libJFFContacts.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		CE29B81815F60084000A05B8 /* JFFContactsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CE29B83015F60084000A05B8 /* Build configuration list for PBXNativeTarget "JFFContactsTests" */;
-			buildPhases = (
-				CE29B81415F60084000A05B8 /* Sources */,
-				CE29B81515F60084000A05B8 /* Frameworks */,
-				CE29B81615F60084000A05B8 /* Resources */,
-				CE29B81715F60084000A05B8 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CE29B82015F60084000A05B8 /* PBXTargetDependency */,
-			);
-			name = JFFContactsTests;
-			productName = JFFContactsTests;
-			productReference = CE29B81915F60084000A05B8 /* JFFContactsTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		CE29B7FF15F60083000A05B8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = EmbeddedSources;
 			};
 			buildConfigurationList = CE29B80215F60083000A05B8 /* Build configuration list for PBXProject "JFFContacts" */;
@@ -367,7 +296,6 @@
 			projectRoot = "";
 			targets = (
 				CE29B80715F60083000A05B8 /* JFFContacts */,
-				CE29B81815F60084000A05B8 /* JFFContactsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -410,33 +338,6 @@
 		};
 /* End PBXReferenceProxy section */
 
-/* Begin PBXResourcesBuildPhase section */
-		CE29B81615F60084000A05B8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE29B82715F60084000A05B8 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		CE29B81715F60084000A05B8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		CE29B80415F60083000A05B8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -462,49 +363,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE29B81415F60084000A05B8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE29B82A15F60084000A05B8 /* JFFContactsTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		CE29B82015F60084000A05B8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CE29B80715F60083000A05B8 /* JFFContacts */;
-			targetProxy = CE29B81F15F60084000A05B8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		CE29B82515F60084000A05B8 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE29B82615F60084000A05B8 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CE29B82B15F60084000A05B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -512,15 +387,18 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../,
 					.,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -529,24 +407,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../,
 					.,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -558,6 +440,7 @@
 				DSTROOT = /tmp/JFFContacts.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFContacts/JFFContacts-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -570,39 +453,10 @@
 				DSTROOT = /tmp/JFFContacts.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFContacts/JFFContacts-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		CE29B83115F60084000A05B8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "JFFContacts/JFFContacts-Prefix.pch";
-				INFOPLIST_FILE = "JFFContactsTests/JFFContactsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		CE29B83215F60084000A05B8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "JFFContacts/JFFContacts-Prefix.pch";
-				INFOPLIST_FILE = "JFFContactsTests/JFFContactsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -623,15 +477,6 @@
 			buildConfigurations = (
 				CE29B82E15F60084000A05B8 /* Debug */,
 				CE29B82F15F60084000A05B8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CE29B83015F60084000A05B8 /* Build configuration list for PBXNativeTarget "JFFContactsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CE29B83115F60084000A05B8 /* Debug */,
-				CE29B83215F60084000A05B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

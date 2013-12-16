@@ -13,7 +13,7 @@
     return @"com.just_for_fun.facebook.sdk.errors.library";
 }
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"FACEBOOK_GENERAL_ERROR", nil)];
 }
@@ -23,7 +23,7 @@
     return NO;
 }
 
-+ (id)newFacebookSDKErrorsWithNativeError:(NSError *)nativeError
++ (instancetype)newFacebookSDKErrorsWithNativeError:(NSError *)nativeError
 {
     Class class = Nil;
     
@@ -55,7 +55,7 @@
     return error;
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFFacebookSDKErrors *copy = [super copyWithZone:zone];
     
@@ -66,9 +66,12 @@
     return copy;
 }
 
-- (void)writeErrorWithJFFLogger
+- (NSString *)errorLogDescription
 {
-    [JFFLogger logErrorWithFormat:@"%@ nativeError:%@", [self localizedDescription], _nativeError];
+    return [[NSString alloc] initWithFormat:@"%@ : %@ nativeError:%@",
+            [self class],
+            [self localizedDescription],
+            _nativeError];
 }
 
 @end

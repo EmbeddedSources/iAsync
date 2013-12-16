@@ -1,5 +1,7 @@
 #import <JFFJsonTools/Errors/JFFJsonToolsError.h>
 
+#import <Foundation/Foundation.h>
+
 @interface JFFParseJsonError : JFFJsonToolsError
 
 @property (nonatomic) NSError *nativeError;

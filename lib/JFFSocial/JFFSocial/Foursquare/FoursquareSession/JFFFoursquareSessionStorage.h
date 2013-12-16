@@ -1,3 +1,5 @@
+#include <JFFAsyncOperations/JFFAsyncOperationsBlockDefinitions.h>
+
 #import <Foundation/Foundation.h>
 
 @interface JFFFoursquareSessionStorage : NSObject
@@ -16,6 +18,6 @@
 
 + (NSString *)redirectURI;
 
-+ (id)shared;
++ (instancetype)shared;
 
 @end

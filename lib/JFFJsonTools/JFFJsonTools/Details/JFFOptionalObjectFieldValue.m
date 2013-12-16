@@ -2,7 +2,7 @@
 
 @implementation JFFOptionalObjectFieldValue : NSObject
 
-+ (id)newOptionalObjectFieldWithFieldValue:(id)fieldValue
++ (instancetype)newOptionalObjectFieldWithFieldValue:(id)fieldValue
 {
     JFFOptionalObjectFieldValue *result = [self new];
     

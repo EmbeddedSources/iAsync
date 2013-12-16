@@ -1,6 +1,6 @@
 
-#import <JFFScheduler/JFFScheduler.h>
-#import <JFFScheduler/NSObject+Scheduler.h>
+#import <JFFScheduler/JFFTimer.h>
+#import <JFFScheduler/NSObject+Timer.h>
 
 #import <JFFTestTools/JFFTestTools.h>
 
@@ -17,26 +17,30 @@
 
 - (void)targetMethodWithFinishTest
 {
-    self->_targetMethodDateCalling = [NSDate new];
-    [self->_asyncTestCase notify:kGHUnitWaitStatusSuccess];
+    _targetMethodDateCalling = [NSDate new];
+    [_asyncTestCase notify:kGHUnitWaitStatusSuccess];
 }
 
 - (void)targetMethodWithFinishTestWithArgument:(id)argument
 {
-    self->_targetMethodWithFinishTestWithArgument = argument;
-    self->_targetMethodDateCalling = [NSDate new];
-    [self->_asyncTestCase notify:kGHUnitWaitStatusSuccess];
+    _targetMethodWithFinishTestWithArgument = argument;
+    _targetMethodDateCalling = [NSDate new];
+    [_asyncTestCase notify:kGHUnitWaitStatusSuccess];
 }
 
 - (void)targetRepeatMethod
 {
-    if (self->_repeatCount == 0)
+    if (_repeatCount == 0)
         return;
     
-    self->_repeatCount = self->_repeatCount - 1;
+    _repeatCount = _repeatCount - 1;
     
-    if (self->_repeatCount == 0)
-        [self->_asyncTestCase notify:kGHUnitWaitStatusSuccess];
+    if (_repeatCount == 0)
+        [_asyncTestCase notify:kGHUnitWaitStatusSuccess];
+}
+
+- (void)someShouldNeverBeCalledMethod
+{
 }
 
 @end
@@ -55,6 +59,7 @@
     
     [targetObject performSelector:@selector(targetMethodWithFinishTest)
                      timeInterval:0.001
+                           leeway:0.0001
                          userInfo:nil
                           repeats:NO];
     
@@ -81,6 +86,7 @@
     
     [targetObject performSelector:@selector(targetMethodWithFinishTestWithArgument:)
                      timeInterval:0.001
+                           leeway:0.0001
                          userInfo:argument
                           repeats:NO];
     
@@ -106,6 +112,7 @@
     
     [targetObject performSelector:@selector(targetRepeatMethod)
                      timeInterval:0.001
+                           leeway:0.0001
                          userInfo:nil
                           repeats:YES];
     
@@ -124,6 +131,7 @@
         
         [targetObject performSelector:@selector(someShouldNeverBeCalledMethod)
                          timeInterval:0.001
+                               leeway:0.0001
                              userInfo:nil
                               repeats:NO];
     }
@@ -132,7 +140,7 @@
     
     [self prepare];
     
-    [[JFFScheduler sharedByThreadScheduler] addBlock:^(JFFCancelScheduledBlock cancel) {
+    [[JFFTimer sharedByThreadTimer] addBlock:^(JFFCancelScheduledBlock cancel) {
         [self notify:kGHUnitWaitStatusSuccess];
     } duration:0.01];
     
@@ -143,19 +151,20 @@
 {
     JFFObjectToTestTimer *targetObject = [JFFObjectToTestTimer new];
     @autoreleasepool {
-        JFFScheduler *scheduler = [JFFScheduler new];
+        JFFTimer *timer = [JFFTimer new];
         [targetObject performSelector:@selector(someShouldNeverBeCalledMethod)
                          timeInterval:0.001
+                               leeway:0.0001
                              userInfo:nil
                               repeats:NO
-                            scheduler:scheduler];
+                                timer:timer];
     }
     
     NSTimeInterval timeout = 0.1;
     
     [self prepare];
     
-    [[JFFScheduler sharedByThreadScheduler] addBlock:^(JFFCancelScheduledBlock cancel) {
+    [[JFFTimer sharedByThreadTimer] addBlock:^(JFFCancelScheduledBlock cancel) {
         [self notify:kGHUnitWaitStatusSuccess];
     } duration:0.01];
     

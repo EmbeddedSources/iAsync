@@ -4,7 +4,7 @@
 
 @implementation NSDictionary (JFFExtendedDictionary)
 
-- (NSDictionary *)dictionaryByAddingObjectsFromDictionary:(NSDictionary *)dictionary
+- (instancetype)dictionaryByAddingObjectsFromDictionary:(NSDictionary *)dictionary
 {
     NSMutableDictionary *result = [self mutableCopy];
     

@@ -1,10 +1,5 @@
 #import "ViewController.h"
 
-#import <JFFCache/JFFCache.h>
-
-@interface ViewController ()
-@end
-
 @implementation ViewController
 {
     NSArray *_imageUrls;
@@ -57,7 +52,10 @@
 
 - (IBAction)clearAllCache
 {
-    [[[JFFCaches sharedCaches]thumbnailDB] removeAllRecords];
+    [[[JFFCaches sharedCaches] thumbnailDB] removeAllRecordsWithCallback:^() {
+        
+        NSLog(@"cache cleared");
+    }];
 }
 
 - (void)viewDidLoad

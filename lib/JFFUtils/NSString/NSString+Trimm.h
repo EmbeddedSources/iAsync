@@ -2,9 +2,9 @@
 
 @interface NSString (Trimm)
 
--(NSString*)stringByTrimmingWhitespaces;
--(NSString*)stringByTrimmingPunctuation;
+- (instancetype)stringByTrimmingWhitespaces;
+- (instancetype)stringByTrimmingPunctuation;
 
--(NSString*)stringByTrimmingQuotes;
+- (instancetype)stringByTrimmingQuotes;
 
 @end

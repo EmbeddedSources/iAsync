@@ -1,13 +1,6 @@
-//
-//  JFFStoreKitInvalidProductIdentifierError.h
-//  JFFStoreKit
-//
-//  Created by Maxim Malygin on 11/1/12.
-//  Copyright (c) 2012 EmbeddedSources. All rights reserved.
-//
+#import <JFFStoreKit/Errors/JFFStoreKitCanNoLoadProductError.h>
 
-#import "JFFStoreKitCanNoLoadProductError.h"
+#import <Foundation/Foundation.h>
 
 @interface JFFStoreKitInvalidProductIdentifierError : JFFStoreKitCanNoLoadProductError
-
 @end

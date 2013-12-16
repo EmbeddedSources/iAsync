@@ -2,6 +2,6 @@
 
 @interface NSObject (CompositeKey) 
 
--(NSString*)toCompositeKey;
+- (NSString *)toCompositeKey;
 
 @end

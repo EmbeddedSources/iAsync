@@ -2,7 +2,7 @@
 
 @interface NSArray (ContactsDataFilters)
 
--(id)jffContactsSelectNotEmptyStrings;
--(id)jffContactsSelectWithEmailOnly;
+- (instancetype)jffContactsSelectNotEmptyStrings;
+- (instancetype)jffContactsSelectWithEmailOnly;
 
 @end

@@ -2,9 +2,9 @@
 
 @interface NSMutableSet (DownloadManager)
 
-+(void)addDownloadedFileWithPath:( NSString* )path_;
++ (void)addDownloadedFileWithPath:(NSString *)path;
 
-+(BOOL)containsDownloadedFileWithPath:( NSString* )file_path_;
-+(void)removeDownloadedFileWithPath:( NSString* )path_;
++ (BOOL)containsDownloadedFileWithPath:(NSString *)filePath;
++ (void)removeDownloadedFileWithPath:(NSString *)path;
 
 @end

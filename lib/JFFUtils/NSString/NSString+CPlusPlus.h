@@ -3,7 +3,7 @@
 
 @interface NSString (CPlusPlus)
 
--(std::string)toStlString;
-+(id)stringWithStlStringNoCopy:( const std::string& )stlString_;
+- (std::string)toStlString;
++ (instancetype)stringWithStlStringNoCopy:( const std::string& )stlString_;
 
 @end

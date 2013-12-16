@@ -14,7 +14,7 @@ typedef id (^JFFProducerBlock)(NSUInteger index);
 typedef NSArray* (^JFFFlattenBlock)(id object);
 
 typedef void (^JFFTransformBlock)(id firstObject, id secondObject);
-typedef NSUInteger (^JFFElementIndexBlock)( id object_ );
-typedef BOOL (^JFFEqualityCheckerBlock)( id firstObject_, id secondObject_ );
+typedef NSUInteger (^JFFElementIndexBlock)(id object);
+typedef BOOL (^JFFEqualityCheckerBlock)(id firstObject, id secondObject);
 
 #endif //__JU_ARRAY_HELPER_BLOCKS_H__

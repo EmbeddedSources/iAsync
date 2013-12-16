@@ -4,7 +4,7 @@
 
 @implementation NSMutableArray (BlocksAdditions)
 
-+ (id)converToCurrentTypeMutableArray:(NSMutableArray *)array
++ (instancetype)converToCurrentTypeMutableArray:(NSMutableArray *)array
 {
     return array;
 }
@@ -13,34 +13,34 @@
 
 @implementation NSArray (BlocksAdditions)
 
-+ (id)converToCurrentTypeMutableArray:(NSMutableArray *)array
++ (instancetype)converToCurrentTypeMutableArray:(NSMutableArray *)array
 {
     return [array copy];
 }
 
-+ (id)arrayWithSize:(NSUInteger)size
-           producer:(JFFProducerBlock)block
++ (instancetype)arrayWithSize:(NSUInteger)size
+                     producer:(JFFProducerBlock)block
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:size];
-
-    for ( NSUInteger index = 0; index < size; ++index ) {
+    
+    for (NSUInteger index = 0; index < size; ++index) {
         [result addObject:block(index)];
     }
-
+    
     return [self converToCurrentTypeMutableArray:result];
 }
 
-+ (id)arrayWithCapacity:(NSUInteger)capacity
-   ignoringNilsProducer:(JFFProducerBlock)block
++ (instancetype)arrayWithCapacity:(NSUInteger)capacity
+             ignoringNilsProducer:(JFFProducerBlock)block
 {
-    NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:capacity];
-
-    for ( NSUInteger index = 0; index < capacity; ++index ) {
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:capacity];
+    
+    for (NSUInteger index = 0; index < capacity; ++index) {
         id object = block(index);
         if (object)
             [result addObject:object];
     }
-
+    
     return [self converToCurrentTypeMutableArray:result];
 }
 
@@ -51,14 +51,14 @@
     }];
 }
 
-- (NSArray *)select:(JFFPredicateBlock)predicate
+- (instancetype)select:(JFFPredicateBlock)predicate
 {
     return [self selectWithIndex:^(id obj, NSUInteger idx) {
         return predicate(obj);
     }];
 }
 
-- (NSArray *)selectWithIndex:(JFFPredicateWithIndexBlock)predicate
+- (instancetype)selectWithIndex:(JFFPredicateWithIndexBlock)predicate
 {
     NSIndexSet *indexes = [self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         return predicate(obj, idx);
@@ -66,7 +66,7 @@
     return [self objectsAtIndexes:indexes];
 }
 
-- (NSArray *)map:(JFFMappingBlock)block
+- (instancetype)map:(JFFMappingBlock)block
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
@@ -79,7 +79,7 @@
     return [result copy];
 }
 
-- (NSArray *)map:(JFFMappingWithErrorBlock)block error:(NSError **)outError
+- (instancetype)map:(JFFMappingWithErrorBlock)block error:(NSError **)outError
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
@@ -95,8 +95,7 @@
     return [result copy];
 }
 
-
--(NSArray*)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_
+-(instancetype)mapIgnoringNilError:( JFFMappingWithErrorBlock )block_ error:( NSError** )outError_
 {
     NSParameterAssert( NULL != outError_ );
     NSMutableArray* result_ = [ [ NSMutableArray alloc ] initWithCapacity: [ self count ] ];
@@ -117,7 +116,8 @@
     return [ result_ copy ];
 }
 
-- (NSArray *)forceMap:(JFFMappingBlock)block
+
+- (instancetype)forceMap:(JFFMappingBlock)block
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
@@ -131,7 +131,7 @@
     return [result copy];
 }
 
-- (NSArray *)mapWithIndex:(JFFMappingWithErrorAndIndexBlock)block error:(NSError **)outError
+- (instancetype)mapWithIndex:(JFFMappingWithErrorAndIndexBlock)block error:(NSError **)outError
 {
     __block NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
@@ -162,15 +162,15 @@
         id key;
         id value;
         block(object, &key, &value);
-        [keys   addObject: key  ];
-        [values addObject: value];
+        [keys   addObject:key  ];
+        [values addObject:value];
     }
     
-    return [[NSDictionary alloc] initWithObjects: values
-                                         forKeys: keys];
+    return [[NSDictionary alloc] initWithObjects:values
+                                         forKeys:keys];
 }
 
-- (NSArray *)flatten:(JFFFlattenBlock)block
+- (instancetype)flatten:(JFFFlattenBlock)block
 {
     NSMutableArray *result = [NSMutableArray new];
     
@@ -203,6 +203,17 @@
     return nil;
 }
 
+- (id)lastMatch:(JFFPredicateBlock)predicate
+{
+    NSEnumerator *enumerator = [self reverseObjectEnumerator];
+    for (id object in enumerator) {
+        
+        if (predicate(object))
+            return object;
+    }
+    return nil;
+}
+
 - (NSUInteger)firstIndexOfObjectMatch:(JFFPredicateBlock)predicate
 {
     NSUInteger result = 0;
@@ -225,8 +236,8 @@
     }
 }
 
-- (NSArray *)devideIntoArrayWithSize:(NSUInteger)size
-                   elementIndexBlock:(JFFElementIndexBlock)block
+- (instancetype)devideIntoArrayWithSize:(NSUInteger)size
+                      elementIndexBlock:(JFFElementIndexBlock)block
 {
     NSParameterAssert(size > 0);
     NSParameterAssert(block   );
@@ -236,12 +247,12 @@
         return [NSMutableArray new];
     }];
     
-    [self enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSUInteger inserIndex = block(obj);
         [mResult[inserIndex] addObject: obj];
     }];
     
-    NSArray *result = [mResult map: ^id(id object) {
+    NSArray *result = [mResult map:^id(id object) {
         return [object copy];
     }];
     

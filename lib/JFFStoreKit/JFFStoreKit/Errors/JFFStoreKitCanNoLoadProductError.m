@@ -2,12 +2,12 @@
 
 @implementation JFFStoreKitCanNoLoadProductError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"STORE_KIT_CAN_NOT_LOAD_PRODUCT", nil)];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFStoreKitCanNoLoadProductError *copy = [super copyWithZone:zone];
     
@@ -16,6 +16,10 @@
     }
     
     return copy;
+}
+
+- (void)writeErrorWithJFFLogger
+{
 }
 
 @end

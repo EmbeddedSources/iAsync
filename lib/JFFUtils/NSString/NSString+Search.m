@@ -14,7 +14,7 @@
         ++result;
         
         searchRange.location = range.location + step;
-        searchRange.length   = [ self length ] - searchRange.location;
+        searchRange.length   = [self length] - searchRange.location;
         if (searchRange.location >= [self length])
             break;
         

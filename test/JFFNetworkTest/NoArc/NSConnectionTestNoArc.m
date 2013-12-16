@@ -4,7 +4,7 @@
 
 @implementation NSConnectionTestNoArc
 
--(void)setUp
+- (void)setUp
 {
     [JNNsUrlConnection enableInstancesCounting];
 }
@@ -15,6 +15,7 @@
     id< JNUrlConnection > connection = nil;
     __block BOOL executed = NO;
     __block BOOL isDownloadSuccessfull = NO;
+    __unsafe_unretained id<JNUrlConnection> unretainedConnection = connection;
     
     NSAutoreleasePool *pool = [NSAutoreleasePool new];
     [self prepare];
@@ -33,19 +34,17 @@
         
         connection.didReceiveResponseBlock = ^(id response)
         {
-            NSLog( @"[testValidDownloadCompletesCorrectly] - didReceiveResponseBlock : %@", response );
+            NSLog(@"[testValidDownloadCompletesCorrectly] - didReceiveResponseBlock : %@", response );
         };
         connection.didReceiveDataBlock = ^(NSData *dataChunk)
         {
             [totalData appendData:dataChunk];
         };
         
-        connection.didFinishLoadingBlock = ^(NSError *error)
-        {
+        connection.didFinishLoadingBlock = ^(NSError *error) {
             executed = YES;
             
-            if (nil != error)
-            {
+            if (nil != error) {
                 [self notify:kGHUnitWaitStatusFailure
                  forSelector:_cmd];
                 return;
@@ -56,21 +55,22 @@
             
             [self notify:kGHUnitWaitStatusSuccess
              forSelector:_cmd];
+            
+            [unretainedConnection cancel];
         };
         
         [connection start];
     }
-    if ( !executed )
-    {
+    if (!executed) {
+        
         [self waitForStatus:kGHUnitWaitStatusSuccess
                     timeout:61.];
     }
     [pool drain];
-
-    GHAssertTrue( isDownloadSuccessfull, @"Unexpected download failure" );
     
-    NSUInteger currentCount = [JNNsUrlConnection instancesCount];
-    GHAssertTrue(initialCount == currentCount, @"packet mismatch");
+    GHAssertTrue(isDownloadSuccessfull, @"Unexpected download failure");
+    
+    GHAssertEquals(initialCount, [JNNsUrlConnection instancesCount], @"packet mismatch");
 }
 
 @end

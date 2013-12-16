@@ -2,6 +2,6 @@
 
 @interface JFFSocialFacebookUser (Parser)
 
-+ (id)newSocialFacebookUserWithJsonObject:(NSDictionary *)jsonObject error:(NSError **)outError;
++ (instancetype)newSocialFacebookUserWithJsonObject:(NSDictionary *)jsonObject error:(NSError **)outError;
 
 @end

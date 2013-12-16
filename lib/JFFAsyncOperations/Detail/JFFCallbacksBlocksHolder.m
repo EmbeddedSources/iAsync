@@ -2,19 +2,19 @@
 
 @implementation JFFCallbacksBlocksHolder
 
-- (id)initWithOnProgressBlock:(JFFAsyncOperationProgressHandler)onProgressBlock
-                onCancelBlock:(JFFCancelAsyncOperationHandler)onCancelBlock
-             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
+- (instancetype)initWithOnProgressBlock:(JFFAsyncOperationProgressHandler)onProgressBlock
+                          onCancelBlock:(JFFCancelAsyncOperationHandler)onCancelBlock
+                       didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
 {
-    self = [ super init ];
-
+    self = [super init];
+    
     if (self) {
         
-        self.onProgressBlock  = onProgressBlock;
-        self.onCancelBlock    = onCancelBlock;
-        self.didLoadDataBlock = didLoadDataBlock;
+        _onProgressBlock  = [onProgressBlock  copy];
+        _onCancelBlock    = [onCancelBlock    copy];
+        _didLoadDataBlock = [didLoadDataBlock copy];
     }
-
+    
     return self;
 }
 

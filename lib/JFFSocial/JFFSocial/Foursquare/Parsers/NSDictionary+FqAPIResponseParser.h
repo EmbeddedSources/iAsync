@@ -2,6 +2,6 @@
 
 @interface NSDictionary (FqAPIresponseParser)
 
-+ (id)fqApiresponseDictWithDict:(NSDictionary *)dict error:(NSError **)outError;
++ (instancetype)fqApiresponseDictWithDict:(NSDictionary *)dict error:(NSError **)outError;
 
 @end

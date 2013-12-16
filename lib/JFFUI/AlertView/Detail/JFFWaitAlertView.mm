@@ -4,13 +4,13 @@
 
 @interface JFFAlertView (JFFWaitAlertView)
 
-@property ( nonatomic, readonly ) UIAlertView* alertView;
+@property (nonatomic, readonly) UIAlertView *alertView;
 
 @end
 
 @implementation JFFWaitAlertView
 
--(void)showActivityIndicatorView
+- (void)showActivityIndicatorView
 {
     UIActivityIndicatorView* indicator_ = [ [ UIActivityIndicatorView alloc ] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhiteLarge ];
 
@@ -23,7 +23,7 @@
 
 #pragma mark UIAlertViewDelegate
 
--(void)willPresentAlertView:( UIAlertView* )alertView_
+- (void)willPresentAlertView:(UIAlertView *)alertView_
 {
     SEL selector_ = @selector( willPresentAlertView: );
     if ( [ [ self superclass ] hasInstanceMethodWithSelector: selector_ ] )

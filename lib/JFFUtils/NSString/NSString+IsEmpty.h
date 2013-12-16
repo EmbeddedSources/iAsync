@@ -2,7 +2,7 @@
 
 @interface NSString (IsEmpty)
 
--(BOOL)hasSymbols;
--(BOOL)hasNonWhitespaceSymbols;
+- (BOOL)hasSymbols;
+- (BOOL)hasNonWhitespaceSymbols;
 
 @end

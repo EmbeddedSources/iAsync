@@ -4,11 +4,11 @@
 
 - (void)performCancelBlockOnceWithArgument:(BOOL)cancel
 {
-    if (!self.cancelBlock)
+    if (!_cancelBlock)
         return;
     
-    JFFCancelAsyncOperation block = self.cancelBlock;
-    self.cancelBlock = nil;
+    JFFCancelAsyncOperation block = _cancelBlock;
+    _cancelBlock = nil;
     block(cancel);
 }
 

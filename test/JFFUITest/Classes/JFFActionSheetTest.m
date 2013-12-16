@@ -6,78 +6,78 @@
 
 @implementation JFFActionSheetTest
 
--(void)testEmptyActionSheetAndHide
+- (void)testEmptyActionSheetAndHide
 {
-    __block __weak JFFActionSheet* weakActionSheet_;
+    __block __weak JFFActionSheet *weakActionSheet;
 
-    void (^showActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
-    {
-        JFFActionSheet* actionSheet_ = [ JFFActionSheet actionSheetWithTitle: @"Test Empty"
-                                                           cancelButtonTitle: nil
-                                                      destructiveButtonTitle: nil
-                                                           otherButtonTitles: nil ];
-
-        weakActionSheet_ = actionSheet_;
-
-        [ actionSheet_ showInView: [ [ UIApplication sharedApplication ] keyWindow ] ];
-
-        finishTest_();
+    void (^showActionSheetBlock_)(JFFSimpleBlock) = ^void(JFFSimpleBlock finishTest) {
+        
+        JFFActionSheet *actionSheet = [JFFActionSheet actionSheetWithTitle:@"Test Empty"
+                                                          cancelButtonTitle:nil
+                                                     destructiveButtonTitle:nil
+                                                          otherButtonTitles:nil];
+        
+        weakActionSheet = actionSheet;
+        
+        [actionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
+        
+        finishTest();
     };
-
-    [ self performAsyncRequestOnMainThreadWithBlock: showActionSheetBlock_
-                                           selector: _cmd ];
-
-    GHAssertNotNil( weakActionSheet_, @"OK" );
-
-    void (^hideActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
+    
+    [self performAsyncRequestOnMainThreadWithBlock:showActionSheetBlock_
+                                          selector:_cmd];
+    
+    GHAssertNotNil(weakActionSheet, @"OK");
+    
+    void (^hideActionSheetBlock_)(JFFSimpleBlock) = ^void(JFFSimpleBlock finishTest)
     {
-        [ weakActionSheet_ dismissWithClickedButtonIndex: 0
-                                                animated: NO ];
-
-        finishTest_();
+        [weakActionSheet dismissWithClickedButtonIndex:0
+                                              animated:NO];
+        
+        finishTest();
     };
-
-    [ self performAsyncRequestOnMainThreadWithBlock: hideActionSheetBlock_
-                                           selector: _cmd ];
-
-    GHAssertNil( weakActionSheet_, @"OK" );
+    
+    [self performAsyncRequestOnMainThreadWithBlock:hideActionSheetBlock_
+                                          selector:_cmd];
+    
+    GHAssertNil(weakActionSheet, @"OK");
 }
 
--(void)testActionWithTitle
+- (void)testActionWithTitle
 {
-    __block __weak JFFActionSheet* weakActionSheet_;
-
-    void (^showActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
+    __block __weak JFFActionSheet *weakActionSheet;
+    
+    void (^showActionSheetBlock)(JFFSimpleBlock) = ^void(JFFSimpleBlock finishTest)
     {
-        JFFActionSheet* actionSheet_ = [ JFFActionSheet actionSheetWithTitle: @"Test With Cancel"
-                                                           cancelButtonTitle: @"Cancel"
-                                                      destructiveButtonTitle: nil
-                                                           otherButtonTitles: nil ];
-
-        weakActionSheet_ = actionSheet_;
-
-        [ actionSheet_ showInView: [ [ UIApplication sharedApplication ] keyWindow ] ];
-
-        finishTest_();
+        JFFActionSheet *actionSheet = [JFFActionSheet actionSheetWithTitle:@"Test With Cancel"
+                                                         cancelButtonTitle:@"Cancel"
+                                                    destructiveButtonTitle:nil
+                                                         otherButtonTitles:nil];
+        
+        weakActionSheet = actionSheet;
+        
+        [actionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
+        
+        finishTest();
     };
-
-    [ self performAsyncRequestOnMainThreadWithBlock: showActionSheetBlock_
-                                           selector: _cmd ];
-
-    GHAssertNotNil( weakActionSheet_, @"OK" );
-
-    void (^hideActionSheetBlock_)(JFFSimpleBlock) = ^void( JFFSimpleBlock finishTest_ )
+    
+    [self performAsyncRequestOnMainThreadWithBlock:showActionSheetBlock
+                                          selector:_cmd];
+    
+    GHAssertNotNil(weakActionSheet, @"OK");
+    
+    void (^hideActionSheetBlock_)(JFFSimpleBlock) = ^void(JFFSimpleBlock finishTest)
     {
-        [ weakActionSheet_ dismissWithClickedButtonIndex: 0
-                                                animated: NO ];
-
-        finishTest_();
+        [weakActionSheet dismissWithClickedButtonIndex:0
+                                              animated:NO];
+        
+        finishTest();
     };
-
-    [ self performAsyncRequestOnMainThreadWithBlock: hideActionSheetBlock_
-                                           selector: _cmd ];
-
-    GHAssertNil( weakActionSheet_, @"OK" );
+    
+    [self performAsyncRequestOnMainThreadWithBlock:hideActionSheetBlock_
+                                          selector:_cmd];
+    
+    GHAssertNil(weakActionSheet, @"OK");
 }
 
 @end

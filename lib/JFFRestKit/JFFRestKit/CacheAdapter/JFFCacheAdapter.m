@@ -10,8 +10,8 @@
     NSString *_cacheQueueName;
 }
 
-+ (id)newCacheAdapterWithCacheFactory:(JFFCacheFactory)cacheFactory
-                       cacheQueueName:(NSString *)cacheQueueName
++ (instancetype)newCacheAdapterWithCacheFactory:(JFFCacheFactory)cacheFactory
+                                 cacheQueueName:(NSString *)cacheQueueName
 {
     NSParameterAssert(cacheFactory);
     
@@ -19,7 +19,8 @@
     
     if (result) {
         
-        result->_cacheFactory = [cacheFactory copy];
+        result->_cacheQueueName = cacheQueueName;
+        result->_cacheFactory   = [cacheFactory copy];
     }
     
     return result;

@@ -2,25 +2,25 @@
 
 #import "JFFTrafficCalculatorDelegate.h"
 
-#import <JFFScheduler/JFFScheduler.h>
+#import <JFFScheduler/JFFTimer.h>
 
 @interface JFFDownloadedBytesPerDate : NSObject
 
-@property ( nonatomic ) NSDate* date;
-@property ( nonatomic ) NSUInteger bytesCount;
+@property (nonatomic) NSDate *date;
+@property (nonatomic) NSUInteger bytesCount;
 
 @end
 
 @implementation JFFDownloadedBytesPerDate
 
--(id)initWithBytesCount:( NSUInteger )bytesCount_
+- (instancetype)initWithBytesCount:(NSUInteger)bytesCount
 {
-    self = [ super init ];
-
-    if ( self )
-    {
-        _date       = [ NSDate new ];
-        _bytesCount = bytesCount_;
+    self = [super init];
+    
+    if (self) {
+        
+        _date       = [NSDate new];
+        _bytesCount = bytesCount;
     }
 
     return self;
@@ -31,96 +31,94 @@
 
 @implementation JFFTrafficCalculator
 {
-    NSMutableArray* _downloadingSpeedInfo;
+    NSMutableArray *_downloadingSpeedInfo;
     __unsafe_unretained id< JFFTrafficCalculatorDelegate > _delegate;
-    JFFScheduler* _scheduler;
+    JFFTimer *_timer;
 }
 
--(id)initWithDelegate:( id< JFFTrafficCalculatorDelegate > )delegate_
+- (instancetype)initWithDelegate:(id<JFFTrafficCalculatorDelegate>)delegate
 {
-    self = [ super init ];
-
-    if ( self )
-    {
-        _delegate = delegate_;
-        _downloadingSpeedInfo = [ NSMutableArray new ];
+    self = [super init];
+    
+    if (self) {
+        
+        _delegate = delegate;
+        _downloadingSpeedInfo = [NSMutableArray new];
     }
-
+    
     return self;
 }
 
--(void)removeOldItemsFromDownloadingSpeedInfo
+- (void)removeOldItemsFromDownloadingSpeedInfo
 {
-    static NSTimeInterval average_speed_duration_ = 3.0;
-
-    JFFDownloadedBytesPerDate* lastItem_ = [ _downloadingSpeedInfo lastObject ];
-    while ( lastItem_ &&
-           ( [ [ NSDate new ] timeIntervalSince1970 ] - [ lastItem_.date timeIntervalSince1970 ] > average_speed_duration_ ) )
+    static NSTimeInterval averageSpeedDuration = 3.0;
+    
+    JFFDownloadedBytesPerDate *lastItem = [_downloadingSpeedInfo lastObject];
+    while (lastItem &&
+           ([[NSDate new] timeIntervalSince1970] - [lastItem.date timeIntervalSince1970] > averageSpeedDuration))
     {
-        [ _downloadingSpeedInfo removeLastObject ];
-        lastItem_ = [ _downloadingSpeedInfo lastObject ];
+        [_downloadingSpeedInfo removeLastObject];
+        lastItem = [_downloadingSpeedInfo lastObject];
     }
 }
 
--(void)calculateDownloadSpeed
+- (void)calculateDownloadSpeed
 {
-    [ self removeOldItemsFromDownloadingSpeedInfo ];
-
-    float speed_ = 0.f;
-
-    if ( [ _downloadingSpeedInfo count ] > 1 )
-    {
-        NSRange range_ = { 0, [ _downloadingSpeedInfo count ] - 1 };
-        NSArray* arrayExcludeLast_ = [ _downloadingSpeedInfo subarrayWithRange: range_ ];
-
-        NSUInteger donloadedBytes_ = 0;
-        for ( JFFDownloadedBytesPerDate* item_ in arrayExcludeLast_ )
-        {
-            donloadedBytes_ += item_.bytesCount;
-        }
-
-        JFFDownloadedBytesPerDate* firstItem_ = arrayExcludeLast_[ 0 ];
-        NSDate* lastDate_ = ( [ arrayExcludeLast_ count ] == 1 ) ? [ NSDate new ] : firstItem_.date;
-
-        JFFDownloadedBytesPerDate* lastItem_ = [ arrayExcludeLast_ lastObject ];
+    [self removeOldItemsFromDownloadingSpeedInfo];
+    
+    float speed = 0.f;
+    
+    if ([_downloadingSpeedInfo count] > 1) {
         
-        NSTimeInterval timeDiff = ( [ lastDate_ timeIntervalSince1970 ] - [ lastItem_.date timeIntervalSince1970 ] );
-        NSTimeInterval result = donloadedBytes_ / timeDiff;
+        NSRange range = {0, [_downloadingSpeedInfo count] - 1};
+        NSArray *arrayExcludeLast = [_downloadingSpeedInfo subarrayWithRange:range];
+        
+        NSUInteger donloadedBytes = 0;
+        for (JFFDownloadedBytesPerDate *item in arrayExcludeLast) {
+            
+            donloadedBytes += item.bytesCount;
+        }
+        
+        JFFDownloadedBytesPerDate *firstItem = arrayExcludeLast[0];
+        NSDate *lastDate = ([arrayExcludeLast count] == 1)?[NSDate new]:firstItem.date;
 
-        speed_ = (float)result;
+        JFFDownloadedBytesPerDate *lastItem = [arrayExcludeLast lastObject];
+        
+        NSTimeInterval timeDiff = ([lastDate timeIntervalSince1970] - [lastItem.date timeIntervalSince1970]);
+        NSTimeInterval result = donloadedBytes / timeDiff;
+        
+        speed = (float)result;
     }
-
-    [ _delegate trafficCalculator: self didChangeDownloadSpeed: speed_ ];
+    
+    [_delegate trafficCalculator:self didChangeDownloadSpeed:speed];
 }
 
--(void)stop
+- (void)stop
 {
-    _scheduler = nil;
-
-    _downloadingSpeedInfo = [ NSMutableArray new ];
-    [ self calculateDownloadSpeed ];
+    _timer = nil;
+    
+    _downloadingSpeedInfo = [NSMutableArray new];
+    [self calculateDownloadSpeed];
 }
 
--(void)bytesReceived:( NSUInteger )bytesCount_
+- (void)bytesReceived:(NSUInteger)bytesCount
 {
-    JFFDownloadedBytesPerDate* item_ = [ [ JFFDownloadedBytesPerDate alloc ] initWithBytesCount: bytesCount_ ];
-    [ _downloadingSpeedInfo insertObject: item_ atIndex: 0 ];
-
-    [ self removeOldItemsFromDownloadingSpeedInfo ];
+    JFFDownloadedBytesPerDate *item = [[JFFDownloadedBytesPerDate alloc] initWithBytesCount:bytesCount];
+    [_downloadingSpeedInfo insertObject:item atIndex:0];
+    
+    [self removeOldItemsFromDownloadingSpeedInfo];
 }
 
--(void)startLoading
+- (void)startLoading
 {
-    static NSTimeInterval calculateSpeedInterval_ = 1.0;
-
-    __unsafe_unretained JFFTrafficCalculator* self_ = self;
-    JFFScheduledBlock block_ = ^void( JFFCancelScheduledBlock cancel_ )
-    {
-        [ self_ calculateDownloadSpeed ];
+    __unsafe_unretained JFFTrafficCalculator* weakSelf = self;
+    JFFScheduledBlock block = ^void(JFFCancelScheduledBlock cancel) {
+        
+        [weakSelf calculateDownloadSpeed];
     };
-
-    _scheduler = [ JFFScheduler new ];
-    [ _scheduler addBlock: block_ duration: calculateSpeedInterval_ ];
+    
+    _timer = [JFFTimer new];
+    [_timer addBlock:block duration:1. leeway:.2];
 }
 
 @end

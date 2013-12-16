@@ -2,7 +2,7 @@
 
 @implementation JFFOptionalObjectFieldKey : NSObject
 
-+ (id)newOptionalObjectFieldWithFieldKey:(id)fieldKey
++ (instancetype)newOptionalObjectFieldWithFieldKey:(id)fieldKey
 {
     JFFOptionalObjectFieldKey *result = [self new];
     
@@ -13,7 +13,7 @@
     return result;
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFOptionalObjectFieldKey *copy = [[[self class] allocWithZone:zone] init];
     

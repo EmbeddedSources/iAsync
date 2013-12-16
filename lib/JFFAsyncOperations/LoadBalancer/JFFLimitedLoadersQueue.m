@@ -5,7 +5,6 @@
 #import "JFFQueueStrategyFactory.h"
 #import "JFFQueueState.h"
 
-
 @implementation JFFLimitedLoadersQueue
 {
     NSMutableArray *_activeLoaders;
@@ -14,40 +13,37 @@
     id<JFFQueueStrategy> _orderStrategy;
 }
 
--(id)initWithExecutionOrder:( JFFQueueExecutionOrder )orderStrategyId
+- (instancetype)initWithExecutionOrder:(JFFQueueExecutionOrder)orderStrategyId
 {
     self = [super init];
     
     if (self) {
-        self->_limitCount     = 10;
-        self->_activeLoaders  = [NSMutableArray new];
-        self->_pendingLoaders = [NSMutableArray new];
         
-        JFFQueueState* state = [ JFFQueueState new ];
-        state.activeLoaders = self->_activeLoaders;
-        state.pendingLoaders = self->_pendingLoaders;
+        _limitCount     = 10;
+        _activeLoaders  = [NSMutableArray new];
+        _pendingLoaders = [NSMutableArray new];
         
-        self->_orderStrategy = [ JFFQueueStrategyFactory queueStrategyWithId: orderStrategyId
-                                                                  queueState: state ];
+        JFFQueueState *state = [JFFQueueState new];
+        state->_activeLoaders  = _activeLoaders ;
+        state->_pendingLoaders = _pendingLoaders;
+        
+        _orderStrategy = [JFFQueueStrategyFactory queueStrategyWithId:orderStrategyId
+                                                           queueState:state];
     }
-
+    
     return self;
 }
 
--(id)init
+- (instancetype)init
 {
-    return [ self initWithExecutionOrder: JQOrderFifo ];
+    return [self initWithExecutionOrder:JQOrderFifo];
 }
 
-- (BOOL)hasLoadersReadyToStart
+- (BOOL)hasLoadersReadyToStartForPendingLoader:(JFFBaseLoaderOwner *)pendingLoader
 {
-    if ([_pendingLoaders count] > 0) {
+    if (pendingLoader.barrier) {
         
-        JFFBaseLoaderOwner *pendingLoader = _pendingLoaders[0];
-        if (pendingLoader.barrier) {
-            
-            return [_activeLoaders count] == 0;
-        }
+        return [_activeLoaders count] == 0;
     }
     
     BOOL result = _limitCount > [_activeLoaders count] && [_pendingLoaders count] > 0;
@@ -62,10 +58,23 @@
     return result;
 }
 
+- (JFFBaseLoaderOwner *)nextPendingLoader
+{
+    JFFBaseLoaderOwner *result = ([_pendingLoaders count] > 0)
+    ?[_orderStrategy firstPendingLoader]
+    :nil;
+    
+    return result;
+}
+
 - (void)performPendingLoaders
 {
-    while ([self hasLoadersReadyToStart]) {        
-        [self->_orderStrategy executePendingLoader];
+    JFFBaseLoaderOwner *pendingLoader = [self nextPendingLoader];
+    
+    while (pendingLoader && [self hasLoadersReadyToStartForPendingLoader:pendingLoader]) {
+        
+        [_orderStrategy executePendingLoader:pendingLoader];
+        pendingLoader = [self nextPendingLoader];
     }
 }
 
@@ -100,24 +109,28 @@
         __weak JFFBaseLoaderOwner *weakLoaderHolder = loaderHolder;
         
         return ^(BOOL canceled) {
-            if (weakLoaderHolder) {
-                
-                JFFCancelAsyncOperationHandler cancelCallback = weakLoaderHolder.cancelCallback;
-                
-                if (canceled) {
-                    if (!weakLoaderHolder.cancelLoader)
-                        [_pendingLoaders removeObject:weakLoaderHolder];
-                } else {
-                    weakLoaderHolder.progressCallback = nil;
-                    weakLoaderHolder.cancelCallback   = nil;
-                    weakLoaderHolder.doneCallback     = nil;
+            
+            JFFBaseLoaderOwner *loaderHolder = weakLoaderHolder;
+            if (!loaderHolder)
+                return;
+            
+            JFFCancelAsyncOperationHandler cancelCallback = loaderHolder.cancelCallback;
+            
+            if (canceled) {
+                if (!loaderHolder.cancelLoader) {
+                    //TODO self owning here fix?
+                    [_pendingLoaders removeObject:loaderHolder];
                 }
-                
-                if (weakLoaderHolder.cancelLoader) {
-                    weakLoaderHolder.cancelLoader(YES);
-                } else if (cancelCallback) {
-                    cancelCallback(canceled);
-                }
+            } else {
+                loaderHolder.progressCallback = nil;
+                loaderHolder.cancelCallback   = nil;
+                loaderHolder.doneCallback     = nil;
+            }
+            
+            if (loaderHolder.cancelLoader) {
+                loaderHolder.cancelLoader(YES);
+            } else if (cancelCallback) {
+                cancelCallback(canceled);
             }
         };
     };
@@ -133,7 +146,7 @@
     return [self balancedLoaderWithLoader:loader barrier:YES];
 }
 
-- (void)didFinishedActiveLoader:(JFFBaseLoaderOwner *)activeLoader
+- (void)didFinishActiveLoader:(JFFBaseLoaderOwner *)activeLoader
 {
     [_activeLoaders removeObject:activeLoader];
     [self performPendingLoaders];

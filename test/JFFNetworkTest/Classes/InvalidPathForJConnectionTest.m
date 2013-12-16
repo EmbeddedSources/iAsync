@@ -1,66 +1,51 @@
 #import "BadHeadersMockNetwork.h"
 
-static const NSTimeInterval TIMEOUT = 10.f;
-
 @interface InvalidPathForJConnectionTest : GHAsyncTestCase< NSURLConnectionDelegate >
 @end
 
 @implementation InvalidPathForJConnectionTest
 
--(void)setUp
+- (void)setUp
 {
-    [ NSURLProtocol registerClass: [ BadHeadersMockNetwork class ] ];
+    [NSURLProtocol registerClass:[BadHeadersMockNetwork class]];
+    [JNNsUrlConnection enableInstancesCounting];
 }
 
--(void)tearDown
+- (void)tearDown
 {
-    [ NSURLProtocol unregisterClass: [ BadHeadersMockNetwork class ] ];   
+    [NSURLProtocol unregisterClass:[BadHeadersMockNetwork class]];
 }
 
--(void)testInvalidLocationDoesNotCauseCrash
+- (void)testInvalidLocationDoesNotCauseCrash
 {
-    __weak GHAsyncTestCase* weakSelf_ = self;
-    SEL testSelector_ = _cmd;
-    
-    [ self prepare: _cmd ];
-    
-    JFFURLConnection* connection_ = nil;
-    JFFURLConnectionParams* params_ = nil;
-    
-    {
-        params_ = [ JFFURLConnectionParams new ];
-        params_.useLiveConnection = NO;
-        params_.url = [ NSURL URLWithString: @"http://abrakadabra.com" ];       
-
-        connection_ = [ [ JFFURLConnection alloc ] initWithURLConnectionParams: params_ ];
-        connection_.didFinishLoadingBlock = ^( NSError* blockError_)
-        {
-            [ weakSelf_ notify: kGHUnitWaitStatusSuccess
-                   forSelector: testSelector_ ];
+    void (^testBlock)(JFFSimpleBlock) = ^(JFFSimpleBlock finishTest) {
+        
+        JFFURLConnectionParams *params = [JFFURLConnectionParams new];
+        params.useLiveConnection = NO;
+        params.url = [@"http://abrakadabra.com" toURL];
+        
+        JFFURLConnection *connection = [[JFFURLConnection alloc] initWithURLConnectionParams:params];
+        connection.didFinishLoadingBlock = ^(NSError *blockError) {
+            
+            finishTest();
         };
         
-        [ connection_ start ];
-    }
+        [connection start];
+    };
     
-    [ self waitForStatus: kGHUnitWaitStatusSuccess
-                 timeout: TIMEOUT ];
+    [self performAsyncRequestOnMainThreadWithBlock:testBlock
+                                          selector:_cmd
+                                           timeout:61.];
 }
 
--(void)_testMockIsAvailableOnlyForNSUrlConnection
+- (void)_testMockIsAvailableOnlyForNSUrlConnection
 {
-    [ self prepare: _cmd ];
+    [self prepare:_cmd];
     
-    NSURLRequest* request_ = [ NSURLRequest requestWithURL: [ NSURL URLWithString: @"http://abrakadabra.com" ] ];
-    NSURLConnection* conn_ = [ [ NSURLConnection alloc ] initWithRequest: request_
-                                                                delegate: self ];
-    [ conn_ start ];
-}
-
-- (void)connection:(NSURLConnection *)connection_
-didReceiveResponse:(NSURLResponse *)response_
-{
-    [ self notify: kGHUnitWaitStatusSuccess
-      forSelector: @selector(testInvalidLocationDoesNotCauseCrash) ];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://abrakadabra.com"]];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request
+                                                            delegate:self];
+    [conn start];
 }
 
 @end

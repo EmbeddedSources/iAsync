@@ -17,12 +17,12 @@
     _locationManager = nil;
 }
 
-- (id)initWithAccuracy:(CLLocationAccuracy)accuracy
+- (instancetype)initWithAccuracy:(CLLocationAccuracy)accuracy
 {
     self = [super init];
     
     if (self) {
-        _accuracy = accuracy;
+        _accuracy  = accuracy;
         _observers = [JFFMutableAssignArray new];
         
         __weak JFFLocationLoaderSupervisor *weakSelf = self;
@@ -34,9 +34,9 @@
     return self;
 }
 
-+ (id)sharedLocationLoaderSupervisorWithAccuracy:(CLLocationAccuracy)accuracy
++ (instancetype)sharedLocationLoaderSupervisorWithAccuracy:(CLLocationAccuracy)accuracy
 {
-    NSParameterAssert(accuracy == kCLLocationAccuracyHundredMeters);
+    NSParameterAssert(accuracy == kCLLocationAccuracyKilometer);
     
     __weak static id instance;
     

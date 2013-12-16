@@ -1,22 +1,23 @@
 #import "asyncXMLParsers.h"
 
 #import "jRestKitXMLTools.h"
+
 #import <JFFAsyncOperations/JFFAsyncOperationsPredefinedBlocks.h>
 
 //JTODO test
 JFFAsyncOperationBinder xmlDocumentWithDataAsyncBinder( void )
 {
-    return ^JFFAsyncOperation( NSData* data_ ) {
-        return ^JFFCancelAsyncOperation( JFFAsyncOperationProgressHandler progressCallback_
-                                        , JFFCancelAsyncOperationHandler cancelCallback_
-                                        , JFFDidFinishAsyncOperationHandler doneCallback_ )
-        {
-            NSError* parseError_ = nil;
-            //STODO parse on separate thread and test
-            CXMLDocument* document_ = xmlDocumentWithData( data_, &parseError_ );
+    return ^JFFAsyncOperation(NSData *data) {
+        return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
+                                        JFFCancelAsyncOperationHandler cancelCallback,
+                                        JFFDidFinishAsyncOperationHandler doneCallback) {
             
-            if ( doneCallback_ )
-                doneCallback_( document_, parseError_ );
+            NSError *parseError = nil;
+            //STODO parse on separate thread and test
+            CXMLDocument *document = xmlDocumentWithData(data, &parseError);
+            
+            if (doneCallback)
+                doneCallback(document, parseError);
             
             return JFFStubCancelAsyncOperationBlock;
         };

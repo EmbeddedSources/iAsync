@@ -2,19 +2,18 @@
 
 @implementation NSHTTPCookie (HTTPCookieWithHeader)
 
-+(id)HTTPCookieWithHeader:( NSString* )header_
-                      url:( NSURL* )url_
++ (instancetype)HTTPCookieWithHeader:(NSString *)header
+                                 url:(NSURL *)url
 {
-    if ( [ header_ length ] == 0 )
+    if ([header length] == 0)
         return nil;
     
-    NSDictionary* headers_ = [ NSDictionary dictionaryWithObject: header_
-                                                          forKey: @"Set-Cookie" ];
+    NSDictionary *headers = @{ @"Set-Cookie" : header };
     
-    NSArray* cookies_ = [ NSHTTPCookie cookiesWithResponseHeaderFields: headers_
-                                                                forURL: url_ ];
+    NSArray *cookies = [ NSHTTPCookie cookiesWithResponseHeaderFields:headers
+                                                               forURL:url];
     
-    return [ cookies_ lastObject ];
+    return [cookies lastObject];
 }
 
 @end

@@ -38,6 +38,7 @@
 #import "GHTestGroup.h"
 #import "GHTest+JUnitXML.h"
 #import "GHTestGroup+JUnitXML.h"
+#import "GHTestUtils.h"
 #import "NSException+GHTestFailureExceptions.h"
 #import "NSValue+GHValueFormatter.h"
 

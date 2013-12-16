@@ -2,7 +2,7 @@
 
 @implementation NSString (Format)
 
-+ (id)stringWithFormatCheckNill:(NSString *)format, ...
++ (instancetype)stringWithFormatCheckNill:(NSString *)format, ...
 {
     if ([format length] == 0) {
         return nil;
@@ -31,9 +31,9 @@
                                   arguments:argumentList];
 }
 
--(NSString*)singleQuotedString
+- (instancetype)singleQuotedString
 {
-    return [ NSString stringWithFormat: @"'%@'", self ];
+    return [[NSString alloc] initWithFormat:@"'%@'", self];
 }
 
 @end

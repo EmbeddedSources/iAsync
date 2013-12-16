@@ -2,7 +2,7 @@
 
 @implementation NSURL (ToURL)
 
--(NSURL*)toURL
+- (NSURL *)toURL
 {
     return self;
 }

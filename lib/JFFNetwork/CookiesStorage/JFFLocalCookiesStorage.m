@@ -4,22 +4,21 @@
 
 @implementation JFFLocalCookiesStorage
 {
-    NSMutableSet* _allCookies;
+    NSMutableSet *_allCookies;
 }
 
--(id)init
+- (instancetype)init
 {
-    self = [ super init ];
-
-    if ( self )
-    {
-        _allCookies = [ NSMutableSet new ];
+    self = [super init];
+    
+    if (self) {
+        _allCookies = [NSMutableSet new];
     }
-
+    
     return self;
 }
 
--(void)setCookie:( NSHTTPCookie* )cookie_
+- (void)setCookie:(NSHTTPCookie *)cookie
 {
     NSParameterAssert( [ cookie_ isKindOfClass: [ NSHTTPCookie class ] ] );
     [ self->_allCookies addObject: cookie_ ];
@@ -33,19 +32,19 @@
     }
 }
 
--(NSArray*)cookiesForURL:( NSURL* )url_
+- (NSArray *)cookiesForURL:(NSURL *)url
 {
-    NSArray* result_ = [ _allCookies selectArray: ^BOOL( NSHTTPCookie* cookie_ )
-    {
-        BOOL result_ = [ cookie_ matchesURL: url_ ];
-
-        result_ &= cookie_.expiresDate == nil
-            || [ cookie_.expiresDate compare: [ NSDate new ] ] == NSOrderedDescending;
-
-        return result_;
-    } ];
-
-    return result_;
+    NSArray *result = [_allCookies selectArray:^BOOL(NSHTTPCookie *cookie) {
+        
+        BOOL matches = [cookie matchesURL:url];
+        
+        matches &= cookie.expiresDate == nil
+            || [cookie.expiresDate compare:[NSDate new]] == NSOrderedDescending;
+        
+        return matches;
+    }];
+    
+    return result;
 }
 
 @end

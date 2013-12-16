@@ -4,12 +4,12 @@
 
 @interface JNHttpEncodingsFactory : NSObject 
 
--(id)initWithContentLength:( unsigned long long )contentLength;
+- (instancetype)initWithContentLength:(unsigned long long)contentLength;
 
 @property (nonatomic, readonly) unsigned long long contentLength;
 
--(id<JNHttpDecoder>)decoderForHeaderString:( NSString* )header_string_;
--(id<JNHttpDecoder>)gzipDecoder;
--(id<JNHttpDecoder>)stubDecoder;
+- (id<JNHttpDecoder>)decoderForHeaderString:(NSString *)headerString;
+- (id<JNHttpDecoder>)gzipDecoder;
+- (id<JNHttpDecoder>)stubDecoder;
 
 @end

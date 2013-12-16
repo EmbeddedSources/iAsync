@@ -4,12 +4,12 @@
 
 @implementation StubDecoderTest
 
--(void)testErrorParameterIsRequired
+- (void)RtestErrorParameterIsRequired
 {
-    NSData*   gzip_data_  = [ JNTestBundleManager loadZipFileNamed : @"1" ];
-   
+    NSData *gzip_data_  = [ JNTestBundleManager loadZipFileNamed : @"1" ];
+    
     JNStubDecoder* decoder_ = [ JNStubDecoder new ];
-   
+    
     GHAssertThrows
     (
      [ decoder_ decodeData: gzip_data_
@@ -18,7 +18,7 @@
      );
 }
 
--(void)testStubDecoderReturnsTheSameVariable
+- (void)testStubDecoderReturnsTheSameVariable
 {
     NSError*       error_         = nil;
     JNStubDecoder* decoder_       = nil;

@@ -5,12 +5,12 @@
 
 #include <math.h>
 
-@interface JFFPageSlider () < UIScrollViewDelegate >
+@interface JFFPageSlider () <UIScrollViewDelegate>
 
-@property ( nonatomic ) UIScrollView *scrollView;
-@property ( nonatomic ) NSInteger activeIndex;
-@property ( nonatomic ) NSInteger firstIndex;
-@property ( nonatomic ) NSMutableDictionary *viewByIndex;
+@property (nonatomic) UIScrollView *scrollView;
+@property (nonatomic) NSInteger activeIndex;
+@property (nonatomic) NSInteger firstIndex;
+@property (nonatomic) NSMutableDictionary *viewByIndex;
 
 @end
 
@@ -21,15 +21,15 @@
     NSRange   _previousVisiableIndexesRange;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     self.scrollView.delegate = nil;
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)initWithFrame:(CGRect)frame
-           delegate:(id< JFFPageSliderDelegate >)delegate
+- (instancetype)initWithFrame:(CGRect)frame
+                     delegate:(id< JFFPageSliderDelegate >)delegate
 {
     self = [super initWithFrame:frame];
     
@@ -41,11 +41,11 @@
     return self;
 }
 
--(void)initialize
+- (void)initialize
 {
-    _viewByIndex = [ NSMutableDictionary new ];
+    _viewByIndex = [NSMutableDictionary new];
 
-    _scrollView = [ [ UIScrollView alloc ] initWithFrame: self.bounds ];
+    _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     _scrollView.backgroundColor = [ UIColor clearColor ];
     _scrollView.delegate      = self;
     _scrollView.clipsToBounds = YES;
@@ -56,9 +56,6 @@
     
     NSRange range_ = { 0, 1 };
     _previousVisiableIndexesRange = range_;
-
-    if (self.delegate)
-        [self reloadData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveMemoryWarning:)
@@ -83,17 +80,14 @@
     }
 }
 
--(CGRect)elementFrameForIndex:( NSInteger )index_
+- (CGRect)elementFrameForIndex:(NSInteger)index
 {
-    CGFloat x_ = self.bounds.size.width * ( index_ - _firstIndex );
-    CGRect frame_ = { { x_, 0.f }, { self.bounds.size.width, self.bounds.size.height } };
-    
-    
-    
-    return frame_;
+    CGFloat x = self.bounds.size.width * (index - _firstIndex);
+    CGRect frame = CGRectMake(x, 0.f, self.bounds.size.width, self.bounds.size.height);
+    return frame;
 }
 
--(void)removeAllElements
+- (void)removeAllElements
 {
     [_viewByIndex enumerateKeysAndObjectsUsingBlock:^(id key, UIView *view, BOOL *stop) {
         [view removeFromSuperview];
@@ -101,7 +95,7 @@
     [_viewByIndex removeAllObjects];
 }
 
--(void)updateScrollViewContentSize
+- (void)updateScrollViewContentSize
 {
     //calls layoutSubviews
     _scrollView.contentSize = CGSizeMake(self.bounds.size.width * _cachedNumberOfElements,
@@ -148,7 +142,7 @@
     [self updateScrollViewContentSize];
 }
 
--(CGPoint)offsetForIndex:( NSInteger )index_
+- (CGPoint)offsetForIndex:( NSInteger )index_
 {
     CGPoint result_ = { ( index_ - _firstIndex ) * _scrollView.bounds.size.width
         , _scrollView.contentOffset.y };
@@ -179,7 +173,7 @@
     return nil;
 }
 
--(void)slideForward
+- (void)slideForward
 {
     [self doesNotRecognizeSelector:_cmd];
 }
@@ -189,7 +183,7 @@
     [self doesNotRecognizeSelector:_cmd];
 }
 
--(void)slideToIndex:( NSInteger )index_ animated:( BOOL )animated_
+- (void)slideToIndex:( NSInteger )index_ animated:( BOOL )animated_
 {
     _previousIndex = self.activeIndex;
     self.activeIndex = index_;
@@ -197,7 +191,7 @@
     [ _scrollView setContentOffset: offset_ animated: animated_ ];
 }
 
--(void)removeViewAtIndex:( NSInteger )index_
+- (void)removeViewAtIndex:( NSInteger )index_
 {
     NSAssert( index_ != _activeIndex, @"Can not remove View at active index" );
 
@@ -212,7 +206,7 @@
     [ _viewByIndex removeObjectForKey: numberIndex_ ];
 }
 
--(void)removeViewsInRange:( JSignedRange )range_
+- (void)removeViewsInRange:( JSignedRange )range_
 {
     for ( NSInteger index_ = range_.location;
          index_ < range_.location + range_.length;
@@ -230,52 +224,48 @@
     [ _scrollView setContentOffset: offset_ animated: NO ];
 }
 
--(void)slideToIndex:( NSInteger )index_
+- (void)slideToIndex:( NSInteger )index_
 {
     [ self slideToIndex: index_ animated: NO ];
 }
 
--(NSRange)visiableIndexesRange
-{    
-    if ( _scrollView.bounds.size.width == 0 )
-    {
+- (NSRange)visiableIndexesRange
+{
+    if (_scrollView.bounds.size.width == 0) {
         NSLog(@"[!!!ERROR!!!] division by zero");
         return _previousVisiableIndexesRange;
     }
     
-    NSInteger first_index_ = floorf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
-    NSInteger last_index_ = ceilf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
+    NSInteger firstIndex = floorf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
+    NSInteger lastIndex  = ceilf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
+    lastIndex = fmin( lastIndex, self.lastIndex );
     
-    last_index_ = fmin( last_index_, self.lastIndex );
+    firstIndex = firstIndex > 0 ?: 0;
 
-    first_index_ = first_index_ > 0 ?: 0;
-
-    NSRange range_ = { first_index_, last_index_ - first_index_ + 1 };
+    NSRange range_ = { firstIndex, lastIndex - firstIndex + 1 };
     _previousVisiableIndexesRange = range_;
     return _previousVisiableIndexesRange;
 }
 
--(NSInteger)lastIndex
+- (NSInteger)lastIndex
 {
     return _firstIndex + _cachedNumberOfElements - 1;
 }
 
--(void)shiftRightElementsFromIndex:( NSInteger )shiftFromIndex
-                           toIndex:( NSInteger )to_index_
+- (void)shiftRightElementsFromIndex:(NSInteger)shiftFromIndex
+                            toIndex:(NSInteger)toIndex
 {
-    for (NSInteger index_ = to_index_; index_ >= shiftFromIndex; --index_) {
+    for (NSInteger index = toIndex; index >= shiftFromIndex; --index) {
         
-        UIView *view_ = [ self elementAtIndex: index_ ];
-        if ( !view_ )
-        {
+        UIView *view = [self elementAtIndex:index];
+        if (!view)
             continue;
-        }
-
-        [ self cacheAndPositionView: view_ toIndex: index_ ];
+        
+        [self cacheAndPositionView:view toIndex:index];
     }
 }
 
--(void)inserElementAtIndex:( NSInteger )index_
+- (void)inserElementAtIndex:( NSInteger )index_
 {
     NSInteger prevLastIndex_ = self.lastIndex;
 
@@ -287,51 +277,46 @@
 
     self.firstIndex = fmin( _firstIndex, index_ );
     if ( index_ <= prevLastIndex_ )
-    {
         [ self shiftRightElementsFromIndex: index_ toIndex: prevLastIndex_ ];
-    }
 
     [ self addViewForIndex: index_ ];
 
     [ self updateScrollViewContentSize ];
 
+    [ self slideToIndex: _activeIndex ];
 }
 
--(void)pushFrontElement
+- (void)pushFrontElement
 {
     [ self inserElementAtIndex: self.lastIndex + 1 ];
 }
 
--(void)pushBackElement
+- (void)pushBackElement
 {
     [ self inserElementAtIndex: self.firstIndex - 1 ];
 }
 
 #pragma mark UIScrollViewDelegate
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSRange previuosRange_ = _previousVisiableIndexesRange;
-    NSRange index_range_ = [ self visiableIndexesRange ];
-
-    if ( NSEqualRanges( previuosRange_, index_range_ ) )
-    {
+    NSRange previuosRange = _previousVisiableIndexesRange;
+    NSRange indexRange = [self visiableIndexesRange];
+    
+    if (NSEqualRanges(previuosRange, indexRange))
         return;
-    }
-
-    NSInteger to_index_ = index_range_.location + index_range_.length;
-    for ( NSInteger index_ = index_range_.location; index_ < to_index_; ++index_ )
-    {
-        if ( [ self elementAtIndex: index_ ] )
-        {
+    
+    NSInteger toIndex = indexRange.location + indexRange.length;
+    for (NSInteger index = indexRange.location; index < toIndex; ++index) {
+        
+        if ([self elementAtIndex:index])
             continue;
-        }
-
-        [ self addViewForIndex: index_ ];
+        
+        [self addViewForIndex:index];
     }
 }
 
--(void)syncContentOffsetWithActiveElement
+- (void)syncContentOffsetWithActiveElement
 {
     if (_scrollView.bounds.size.width == 0)
     {
@@ -348,6 +333,16 @@
     [ self.delegate pageSlider: self
     didChangeActiveElementFrom: _previousIndex
                             to: self.activeIndex ];
+}
+
+- (void)scrollViewDidEndDecelerating:( UIScrollView* )scrollView_
+{
+    [ self syncContentOffsetWithActiveElement ];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:( UIScrollView* )scrollView_
+{
+    [ self syncContentOffsetWithActiveElement ];
 }
 
 @end

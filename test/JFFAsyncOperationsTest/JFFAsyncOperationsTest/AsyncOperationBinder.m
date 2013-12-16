@@ -61,40 +61,39 @@
     GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
 }
 
--(void)testFailFirstLoader
+- (void)testFailFirstLoader
 {
     @autoreleasepool
     {
-        JFFAsyncOperationManager* firstLoader_  = [JFFAsyncOperationManager new];
-        JFFAsyncOperationManager* secondLoader_ = [JFFAsyncOperationManager new];
-        JFFAsyncOperation secondLoaderBlock_ = secondLoader_.loader;
+        JFFAsyncOperationManager *firstLoader  = [JFFAsyncOperationManager new];
+        JFFAsyncOperationManager *secondLoader = [JFFAsyncOperationManager new];
+        JFFAsyncOperation secondLoaderBlock = secondLoader.loader;
         
-        __block NSError* finalError_ = nil;
-        __block BOOL binderCalled_ = NO;
+        __block NSError *finalError = nil;
+        __block BOOL binderCalled = NO;
         
-        JFFAsyncOperationBinder secondLoaderBinder_ = ^JFFAsyncOperation( id firstResult_ ) {
-            binderCalled_ = YES;
-            return secondLoaderBlock_;
+        JFFAsyncOperationBinder secondLoaderBinder = ^JFFAsyncOperation( id firstResult_ ) {
+            binderCalled = YES;
+            return secondLoaderBlock;
         };
-        JFFAsyncOperation asyncOp_ = bindSequenceOfAsyncOperations( firstLoader_.loader
-                                                                   , secondLoaderBinder_
-                                                                   , nil );
-
-        asyncOp_( nil, nil, ^( id result_, NSError* error_ )
-        {
-            finalError_ = error_;
-        } );
-
-        NSError* failError_ = [ JFFError newErrorWithDescription: @"error1" ];
-        firstLoader_.loaderFinishBlock.didFinishBlock( nil, failError_ );
-
-        GHAssertFalse( binderCalled_, @"OK" );
-        GHAssertTrue( failError_ == finalError_, @"OK" );
+        JFFAsyncOperation asyncOp = bindSequenceOfAsyncOperations(firstLoader.loader,
+                                                                  secondLoaderBinder,
+                                                                  nil );
+        
+        asyncOp(nil, nil, ^(id result, NSError *error) {
+            finalError = error;
+        });
+        
+        NSError* failError = [JFFError newErrorWithDescription:@"error1"];
+        firstLoader.loaderFinishBlock.didFinishBlock( nil, failError );
+        
+        GHAssertFalse(binderCalled, @"OK" );
+        GHAssertTrue(failError == finalError, @"OK" );
     }
-
-    GHAssertTrue( 0 == [ JFFCancelAsyncOperationBlockHolder    instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFDidFinishAsyncOperationBlockHolder instancesCount ], @"OK" );
-    GHAssertTrue( 0 == [ JFFAsyncOperationManager              instancesCount ], @"OK" );
+    
+    GHAssertTrue(0 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"OK");
+    GHAssertTrue(0 == [JFFAsyncOperationManager              instancesCount], @"OK");
 }
 
 @end

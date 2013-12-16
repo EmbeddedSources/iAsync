@@ -1,7 +1,5 @@
 #import "JFFBaseDB.h"
-#import "JFFDBCompositeKey.h"
 
-#import "NSString+CompositeKey.h"
 #import "NSObject+CompositeKey.h"
 #import "NSString+CacheFSManager.h"
 
@@ -33,7 +31,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 @property (nonatomic, readonly) dispatch_queue_t queue;
 @property (nonatomic, readonly) NSString *folder;
 
-- (id)initWithDBName:(NSString *)dbName;
+- (instancetype)initWithDBName:(NSString *)dbName;
 
 - (BOOL)prepareQuery:(NSString *)sql
            statement:(sqlite3_stmt **)statement;
@@ -49,30 +47,22 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 - (void)dealloc
 {
     sqlite3_close(_db);
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
-    dispatch_release(_dispatchQueue);
-#endif
 }
 
-- (id)initWithDBName:(NSString *)dbName
+- (instancetype)initWithDBName:(NSString *)dbName
 {
     self = [super init];
     
     if (self) {
         
         _dispatchQueue = getOrCreateDispatchQueueForFile(dbName);
-    
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
-        dispatch_retain(_dispatchQueue);
-#endif
-    
         NSString *const dbPath = [NSString documentsPathByAppendingPathComponent:dbName];
         
         _folder = [dbPath stringByDeletingLastPathComponent];
         
         __block BOOL ok = NO;
         
-        safe_dispatch_barrier_sync(self.queue, ^{
+        dispatch_barrier_sync(self.queue, ^{
             
             BOOL created = [[NSFileManager defaultManager] createDirectoryAtPath:_folder
                                                      withIntermediateDirectories:YES
@@ -153,7 +143,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     JFFSQLiteDB *_db;
 }
 
-- (id)initWithCacheFileName:(NSString *)cacheName
+- (instancetype)initWithCacheFileName:(NSString *)cacheName
 {
     NSParameterAssert(cacheName);
     
@@ -218,7 +208,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     
     __block NSString *result;
     
-    safe_dispatch_sync([self db].queue, ^{
+    dispatch_sync([self db].queue, ^{
         
         sqlite3_stmt *statement = 0;
         if ([[self db] prepareQuery:query statement:&statement]) {
@@ -291,7 +281,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
 
 - (void)addData:(NSData *)data forRecord:(NSString *)recordId
 {
-    NSString *fileLink = [NSString createUuid];
+    NSString *fileLink = [[NSUUID new] UUIDString];
     
     static NSString *const addQueryFormat = @"INSERT INTO records (record_id, file_link, update_time, access_time) VALUES ('%@', '%@', '%f', '%f');";
     NSString *addQuery = [[NSString alloc] initWithFormat:addQueryFormat,
@@ -478,7 +468,7 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     
     __block NSData *recordData;
     
-    safe_dispatch_sync([self db].queue, ^ {
+    dispatch_sync([self db].queue, ^ {
     
         sqlite3_stmt *statement = 0;
         if ([self.db prepareQuery:query statement:&statement]) {
@@ -501,32 +491,6 @@ static dispatch_queue_t getOrCreateDispatchQueueForFile(NSString *file)
     }
     
     return recordData;
-}
-
-- (NSDate *)lastUpdateTimeForKey:(id)key
-{
-    NSString *recordId = [key toCompositeKey];
-    
-    static const NSUInteger dateIndex = 0;
-    
-    static NSString *const queryFormat = @"SELECT update_time FROM records WHERE record_id='%@';";
-    NSString *query = [[NSString alloc]initWithFormat:queryFormat, recordId];
-    
-    __block NSDate *result;
-    
-    safe_dispatch_sync([self db].queue, ^ {
-    
-        sqlite3_stmt *statement = 0;
-        if ([self.db prepareQuery:query statement:&statement]) {
-            if (sqlite3_step(statement) == SQLITE_ROW) {
-                NSTimeInterval dateInetrval = sqlite3_column_double(statement, dateIndex);
-                result = [[NSDate alloc] initWithTimeIntervalSince1970:dateInetrval];
-            }
-            sqlite3_finalize(statement);
-        }
-    });
-    
-    return result;
 }
 
 - (void)removeAllRecordsWithCallback:(JFFSimpleBlock)callback

@@ -7,7 +7,7 @@
 
 #import "JFFWaitAlertView.h"
 
-@interface JFFAlertView () < UIAlertViewDelegate >
+@interface JFFAlertView () <UIAlertViewDelegate>
 
 + (void)activeAlertsAddAlert:(JFFAlertView *)alertView;
 - (void)forceShow;
@@ -19,7 +19,7 @@
     BOOL _exclusive;
     NSMutableArray * _alertButtons;
     UIAlertView    * _alertView   ;
-
+    
     BOOL _ignoreDismiss;
 }
 
@@ -27,7 +27,7 @@
 
 - (void)dealloc
 {
-    [NSThread assertMainThread];
+    NSParameterAssert([NSThread isMainThread]);
     
     _alertView.delegate = nil;
     [self stopMonitoringBackgroundEvents];
@@ -93,6 +93,24 @@
     [alert show];
 }
 
++ (void)showAlertWithTitle:(NSString *)title
+               description:(NSString *)description
+                 exclusive:(BOOL)isExclusive
+{
+    JFFAlertView *alert = [JFFAlertView alertWithTitle:title
+                                               message:description
+                                     cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                     otherButtonTitles:nil];
+
+    if (isExclusive) {
+        
+        [alert exclusiveShow];
+    } else {
+        
+        [alert show];
+    }
+}
+
 + (void)showExclusiveAlertWithTitle:(NSString *)title
                         description:(NSString *)description
 {
@@ -112,7 +130,7 @@
 
 + (void)showInformationWithDescription:(NSString *)description
 {
-    [self showAlertWithTitle:NSLocalizedString(@"INFORMATION", nil)
+    [self showAlertWithTitle:NSLocalizedString(@"JFF_ALERT_INFORMATION", nil)
                  description:description];
 }
 
@@ -129,10 +147,10 @@
                           description:description];
 }
 
-+ (id)waitAlertWithTitle:(NSString *)title
-            cancelButton:(JFFAlertButton *)button
++ (instancetype)waitAlertWithTitle:(NSString *)title
+                      cancelButton:(JFFAlertButton *)button
 {
-    button = button ?: [NSLocalizedString(@"CANCEL", nil) toAlertButton];
+    button = button ?: [NSLocalizedString(@"CANCEL_ACTION", nil) toAlertButton];
     
     title = [title ?: @"" stringByAppendingString:@"\n\n"];
     
@@ -146,35 +164,33 @@
     return alertView;
 }
 
-- (id)initWithTitle:(NSString *)title
-            message:(NSString *)message
-           delegate:(id /*<UIAlertViewDelegate>*/)delegate
-  cancelButtonTitle:(NSString *)cancelButtonTitle
-  otherButtonTitles:(NSString *)otherButtonTitles, ...
+- (instancetype)initWithTitle:(NSString *)title
+                      message:(NSString *)message
+                     delegate:(id /*<UIAlertViewDelegate>*/)delegate
+            cancelButtonTitle:(NSString *)cancelButtonTitle
+            otherButtonTitles:(NSString *)otherButtonTitles, ...
 {
     NSAssert(NO, @"dont use this constructor of JFFAlertView");
     return nil;
 }
 
-- (id)initWithTitle:(NSString *)title
-            message:(NSString *)message
-  cancelButtonTitle:(NSString *)cancelButtonTitle
-otherButtonTitlesArray:(NSArray *)otherButtonTitles
+- (instancetype)initWithTitle:(NSString *)title
+                      message:(NSString *)message
+            cancelButtonTitle:(NSString *)cancelButtonTitle
+       otherButtonTitlesArray:(NSArray *)otherButtonTitles
 {
     self = [super init];
-    if (nil == self)
-    {
+    if (nil == self) {
         return nil;
     }
     
     _alertView = [[UIAlertView alloc] initWithTitle:title
-                                                  message:message
-                                                 delegate:self
-                                        cancelButtonTitle:cancelButtonTitle
-                                        otherButtonTitles:nil];
-
-    if (nil == _alertView)
-    {
+                                            message:message
+                                           delegate:self
+                                  cancelButtonTitle:cancelButtonTitle
+                                  otherButtonTitles:nil];
+    
+    if (nil == _alertView) {
         return nil;
     }
     
@@ -215,12 +231,12 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
     return [self addAlertButtonWithIndex:title];
 }
 
-+ (id)alertWithTitle:(NSString *)title
-             message:(NSString *)message
-   cancelButtonTitle:(id)cancelButtonTitle
-   otherButtonTitles:(id)otherButtonTitles, ...
++ (instancetype)alertWithTitle:(NSString *)title
+                       message:(NSString *)message
+             cancelButtonTitle:(id)cancelButtonTitle
+             otherButtonTitles:(id)otherButtonTitles, ...
 {
-    [NSThread assertMainThread];
+    NSParameterAssert([NSThread isMainThread]);
     
     NSMutableArray *otherAlertButtons      = [NSMutableArray new];
     NSMutableArray *otherAlertStringTitles = [NSMutableArray new];
@@ -235,11 +251,11 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
         [otherAlertButtons addObject:alertButton];
         [otherAlertStringTitles addObject:alertButton.title];
     }
-    va_end( args );
+    va_end(args);
     
     JFFAlertButton *cancelButton = [cancelButtonTitle toAlertButton];
-    if (cancelButton)
-    {
+    if (cancelButton) {
+        
         [otherAlertButtons insertObject:cancelButton atIndex:0];
     }
     
@@ -283,8 +299,7 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 
 - (void)applicationDidEnterBackground:(id)sender
 {
-    if (self.dismissBeforeEnterBackground)
-    {
+    if (_dismissBeforeEnterBackground) {
         [self forceDismiss];
     }
 }
@@ -300,8 +315,8 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 {
     JFFAlertButton *alertButton = _alertButtons[buttonIndex];
     
-    if (alertButton)
-    {
+    if (alertButton) {
+        
         _ignoreDismiss = YES;
         alertButton.action();
         _ignoreDismiss = NO;
@@ -316,10 +331,15 @@ otherButtonTitlesArray:(NSArray *)otherButtonTitles
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    JFFSimpleBlock didDismissHandler = _didDismissHandler;
+    
     [[self class] activeAlertsRemoveAlert:self];
     
     JFFAlertViewsContainer *container = [JFFAlertViewsContainer sharedAlertViewsContainer];
     [[container firstAlertView] forceShow];
+    
+    if (didDismissHandler)
+        didDismissHandler();
 }
 
 - (BOOL)isOnScreen

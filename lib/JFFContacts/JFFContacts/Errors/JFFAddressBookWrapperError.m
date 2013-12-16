@@ -6,23 +6,24 @@
 
 @implementation JFFAddressBookWrapperError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"ADDRESS_BOOK_WRAPPER_ERROR", nil)];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFAddressBookWrapperError *copy = [super copyWithZone:zone];
     
     if (copy) {
-        copy->_nativeError = [_nativeError copyWithZone:zone];
+        copy->_nativeError         = [_nativeError copyWithZone:zone];
+        copy->_authorizationStatus = _authorizationStatus;
     }
     
     return copy;
 }
 
-+ (id)newAddressBookWrapperErrorWithNativeError:(NSError *)nativeError
++ (instancetype)newAddressBookWrapperErrorWithNativeError:(NSError *)nativeError
 {
     Class class = Nil;
     
@@ -45,9 +46,12 @@
     return error;
 }
 
-- (void)writeErrorWithJFFLogger
+- (NSString *)errorLogDescription
 {
-    [JFFLogger logErrorWithFormat:@"%@ nativeError:%@", [self localizedDescription], _nativeError];
+    return [[NSString alloc] initWithFormat:@"%@ : %@ nativeError:%@",
+            [self class],
+            [self localizedDescription],
+            _nativeError];
 }
 
 @end

@@ -1,6 +1,5 @@
 #import "NSArray+FqCheckinsAPIParser.h"
 
-#import "NSDictionary+FqAPIresponseParser.h"
 #import "FoursquareCheckinsModel+APIParser.h"
 
 #import "JFFFoursquaerAPIInvalidresponseError.h"

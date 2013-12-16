@@ -2,9 +2,17 @@
 
 @implementation NSString (IsEmpty)
 
--(BOOL)hasSymbols
+- (BOOL)hasSymbols
 {
-    return ![ self isEqualToString: @"" ];
+    return ![self isEqualToString:@""];
+}
+
+- (BOOL)hasNonWhitespaceSymbols
+{
+    NSCharacterSet *whiteSpaces = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *stringWithoutWhiteSpaces = [self stringByTrimmingCharactersInSet:whiteSpaces];
+    
+    return [stringWithoutWhiteSpaces hasSymbols];
 }
 
 -(BOOL)hasNonWhitespaceSymbols

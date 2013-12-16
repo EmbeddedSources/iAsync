@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM( NSInteger, JUncertainLogicStates )
+typedef NS_ENUM(NSInteger, JUncertainLogicStates)
 {
     ULFalse = 0,
     ULTrue  = 1,
@@ -13,13 +13,13 @@ typedef NS_ENUM( NSInteger, JUncertainLogicStates )
      isEqualTo:(NSObject *)object2;
 
 
-+(JUncertainLogicStates)quickCheckObject:( id )first
-                               isEqualTo:( id )second;
++ (JUncertainLogicStates)quickCheckObject:(id)first
+                                isEqualTo:(id)second;
 
-+(BOOL)objcBoolean:( BOOL )first
-           xorWith:( BOOL )second;
++ (BOOL)objcBoolean:(BOOL)first
+            xorWith:(BOOL)second;
 
-+(BOOL)objcBoolean:( BOOL )first
-         isEqualTo:( BOOL )second;
++ (BOOL)objcBoolean:(BOOL)first
+          isEqualTo:(BOOL)second;
 
 @end

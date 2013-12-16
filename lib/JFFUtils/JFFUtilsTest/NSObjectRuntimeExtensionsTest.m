@@ -2,8 +2,8 @@
 
 #include <objc/message.h>
 
-static const NSUInteger testClassMethodResult_ = 34;//just rendomize number
-static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
+static const NSUInteger testClassMethodResult    = 34;//just rendomize number
+static const NSUInteger testInstanceMethodResult = 35;//just rendomize number
 
 @interface NSTestClass : NSObject
 @end
@@ -22,12 +22,12 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
 
 + (NSUInteger)classMethodWithLongNameForUniquenessPurposes
 {
-    return testClassMethodResult_;
+    return testClassMethodResult;
 }
 
 - (NSUInteger)instanceMethodWithLongNameForUniquenessPurposes
 {
-    return testInstanceMethodResult_;
+    return testInstanceMethodResult;
 }
 
 @end
@@ -49,12 +49,12 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
 
 + (NSUInteger)classMethodWithLongNameForUniquenessPurposes
 {
-    return testClassMethodResult_;
+    return testClassMethodResult;
 }
 
 - (NSUInteger)instanceMethodWithLongNameForUniquenessPurposes
 {
-    return testInstanceMethodResult_;
+    return testInstanceMethodResult;
 }
 
 @end
@@ -66,24 +66,24 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
 
 - (NSUInteger)hookMethod
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return 0;
 }
 
 - (NSUInteger)prototypeMethod
 {
-    return [ self hookMethod ] * 2;
+    return [self hookMethod] * 2;
 }
 
 + (NSUInteger)hookMethod
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return 0;
 }
 
 + (NSUInteger)prototypeMethod
 {
-    return [ self hookMethod ] * 3;
+    return [self hookMethod] * 3;
 }
 
 @end
@@ -95,232 +95,232 @@ static const NSUInteger testInstanceMethodResult_ = 35;//just rendomize number
 
 - (NSUInteger)twiceHookMethod
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return 0;
 }
 
 - (NSUInteger)twicePrototypeMethod
 {
-    return [ self twiceHookMethod ] * 2;
+    return [self twiceHookMethod] * 2;
 }
 
 + (NSUInteger)twiceHookMethod
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return 0;
 }
 
 + (NSUInteger)twicePrototypeMethod
 {
-    return [ self twiceHookMethod ] * 3;
+    return [self twiceHookMethod] * 3;
 }
 
 @end
 
 @implementation NSObjectRuntimeExtensionsTest
 
--(void)testHookInstanceMethodAssertPrototypeAndTargetSelectors
+- (void)testHookInstanceMethodAssertPrototypeAndTargetSelectors
 {
-    XCTAssertThrows({
-        [ [ HookMethodsClass class ] hookInstanceMethodForClass:[NSTestClass class]
-                                                   withSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes)
-                                        prototypeMethodSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes)
-                                             hookMethodSelector:@selector(hookMethod)];
+    STAssertThrows({
+        [[HookMethodsClass class] hookInstanceMethodForClass:[NSTestClass class]
+                                                 withSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes)
+                                      prototypeMethodSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes)
+                                           hookMethodSelector:@selector(hookMethod)];
     }, @"no prototypeMethodSelector asert expected" );
     
-    XCTAssertThrows({
-        [ [ HookMethodsClass class ] hookInstanceMethodForClass: [ NSTestClass class ]
-                                                   withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes2 )
-                                        prototypeMethodSelector: @selector( prototypeMethod )
-                                             hookMethodSelector: @selector( hookMethod ) ];
+    STAssertThrows({
+        [[HookMethodsClass class] hookInstanceMethodForClass:[NSTestClass class]
+                                                withSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes2)
+                                     prototypeMethodSelector:@selector(prototypeMethod)
+                                          hookMethodSelector:@selector(hookMethod)];
     }, @"no target selector asert expected" );
 }
 
--(void)testHookInstanceMethod
+- (void)testHookInstanceMethod
 {
-    static BOOL firstTestRun_ = YES;
+    static BOOL firstTestRun = YES;
     
-    if ( !firstTestRun_ )
+    if (!firstTestRun)
         return;
     
-    NSTestClass* instance_ = [ NSTestClass new ];
+    NSTestClass *instance_ = [NSTestClass new];
     
-    XCTAssertEqual( testInstanceMethodResult_
-                   , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
-                   , @"result mismatch" );
+    STAssertEquals(testInstanceMethodResult,
+                   [instance_ instanceMethodWithLongNameForUniquenessPurposes],
+                   @"result mismatch");
     
-    [ [ HookMethodsClass class ] hookInstanceMethodForClass: [ NSTestClass class ]
-                                               withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
-                                    prototypeMethodSelector: @selector( prototypeMethod )
-                                         hookMethodSelector: @selector( hookMethod ) ];
+    [[HookMethodsClass class] hookInstanceMethodForClass:[NSTestClass class]
+                                            withSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes)
+                                 prototypeMethodSelector:@selector(prototypeMethod)
+                                      hookMethodSelector:@selector(hookMethod)];
     
-    XCTAssertEqual( testInstanceMethodResult_ * 2
+    STAssertEquals( testInstanceMethodResult * 2
                    , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
                    , @"result mismatch" );
 }
 
 -(void)testHookClassMethodAssertPrototypeAndTargetSelectors
 {
-    XCTAssertThrows({
-        [ [ HookMethodsClass class ] hookClassMethodForClass: [ NSTestClass class ]
-                                                withSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
-                                     prototypeMethodSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
-                                          hookMethodSelector: @selector( hookMethod ) ];
+    STAssertThrows({
+        [[HookMethodsClass class] hookClassMethodForClass:[NSTestClass class]
+                                             withSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
+                                  prototypeMethodSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
+                                       hookMethodSelector:@selector(hookMethod)];
     }, @"no prototypeMethodSelector asert expected" );
     
-    XCTAssertThrows({
-        [ [ HookMethodsClass class ] hookClassMethodForClass: [ NSTestClass class ]
-                                                withSelector: @selector( classMethodWithLongNameForUniquenessPurposes2 )
-                                     prototypeMethodSelector: @selector( prototypeMethod )
-                                          hookMethodSelector: @selector( hookMethod ) ];
+    STAssertThrows({
+        [[HookMethodsClass class] hookClassMethodForClass:[NSTestClass class]
+                                             withSelector:@selector(classMethodWithLongNameForUniquenessPurposes2)
+                                  prototypeMethodSelector:@selector(prototypeMethod)
+                                       hookMethodSelector:@selector(hookMethod)];
     }, @"no target selector asert expected" );
 }
 
--(void)testHookClassMethod
+- (void)testHookClassMethod
 {
-    static BOOL firstTestRun_ = YES;
+    static BOOL firstTestRun = YES;
     
-    if ( !firstTestRun_ )
+    if (!firstTestRun)
         return;
     
-    Class class_ = [ NSTestClass class ];
+    Class class = [NSTestClass class];
     
-    XCTAssertEqual( testClassMethodResult_
-                   , [ class_ classMethodWithLongNameForUniquenessPurposes ]
-                   , @"result mismatch" );
+    STAssertEquals(testClassMethodResult,
+                   [class classMethodWithLongNameForUniquenessPurposes],
+                   @"result mismatch" );
     
-    [ [ HookMethodsClass class ] hookClassMethodForClass: [ NSTestClass class ]
-                                            withSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
-                                 prototypeMethodSelector: @selector( prototypeMethod )
-                                      hookMethodSelector: @selector( hookMethod ) ];
+    [[HookMethodsClass class] hookClassMethodForClass:[NSTestClass class]
+                                         withSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
+                              prototypeMethodSelector:@selector(prototypeMethod)
+                                   hookMethodSelector:@selector(hookMethod)];
     
-    XCTAssertEqual( testClassMethodResult_ * 3
-                   , [ class_ classMethodWithLongNameForUniquenessPurposes ]
+    STAssertEquals( testClassMethodResult * 3
+                   , [ class classMethodWithLongNameForUniquenessPurposes ]
                    , @"result mismatch" );
 }
 
--(void)testHasClassMethodWithSelector
+- (void)testHasClassMethodWithSelector
 {
-    XCTAssertTrue( [ NSObject hasClassMethodWithSelector: @selector( allocWithZone: ) ], @"NSOBject has allocWithZone: method" );
-    XCTAssertFalse( [ NSObject hasClassMethodWithSelector: @selector( allocWithZone2: ) ], @"NSOBject has no allocWithZone2: method" );
+    STAssertTrue([NSObject hasClassMethodWithSelector:@selector(allocWithZone:)], @"NSOBject has allocWithZone: method");
+    STAssertFalse([NSObject hasClassMethodWithSelector:@selector(allocWithZone2:)], @"NSOBject has no allocWithZone2: method");
     
-    XCTAssertTrue( [ NSTestClass hasClassMethodWithSelector: @selector( allocWithZone: ) ]
-                 , @"NSTestClass has allocWithZone: method" );
-    XCTAssertFalse( [ NSTestClass hasClassMethodWithSelector: @selector( alloc ) ]
+    STAssertTrue([NSTestClass hasClassMethodWithSelector:@selector(allocWithZone:)],
+                 @"NSTestClass has allocWithZone: method" );
+    STAssertFalse( [ NSTestClass hasClassMethodWithSelector: @selector( alloc ) ]
                   , @"NSTestClass has no alloc method" );
 }
 
--(void)testHasInstanceMethodWithSelector
+- (void)testHasInstanceMethodWithSelector
 {
-    XCTAssertTrue( [ NSObject hasInstanceMethodWithSelector: @selector( isEqual: ) ], @"NSOBject has isEqual: method" );
-    XCTAssertFalse( [ NSObject hasInstanceMethodWithSelector: @selector( isEqual2: ) ], @"NSOBject has no isEqual2: method" );
+    STAssertTrue([NSObject hasInstanceMethodWithSelector:@selector(isEqual:)], @"NSOBject has isEqual: method");
+    STAssertFalse([NSObject hasInstanceMethodWithSelector:@selector(isEqual2:)], @"NSOBject has no isEqual2: method");
     
-    XCTAssertTrue( [ NSTestClass hasInstanceMethodWithSelector: @selector( isEqual: ) ]
-                 , @"NSTestClass has isEqual: method" );
-    XCTAssertFalse( [ NSTestClass hasInstanceMethodWithSelector: @selector( description ) ]
-                  , @"NSTestClass has no description method" );
+    STAssertTrue([NSTestClass hasInstanceMethodWithSelector:@selector(isEqual:)],
+                 @"NSTestClass has isEqual: method");
+    STAssertFalse([NSTestClass hasInstanceMethodWithSelector:@selector(description)],
+                  @"NSTestClass has no description method" );
 }
 
--(void)testAddClassMethodIfNeedWithSelector
+- (void)testAddClassMethodIfNeedWithSelector
 {
-    static BOOL firstTestRun_ = YES;
+    static BOOL firstTestRun = YES;
     
-    if ( firstTestRun_ )
-    {
-        BOOL result_ = [ NSTestClass addClassMethodIfNeedWithSelector: @selector( classMethodWithLongNameForUniquenessPurposes )
-                                                              toClass: [ NSTestClass class ]
-                                                    newMethodSelector: @selector( classMethodWithLongNameForUniquenessPurposes2 ) ];
+    if (firstTestRun) {
         
-        XCTAssertTrue( result_, @"method added" );
+        BOOL result = [NSTestClass addClassMethodIfNeedWithSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
+                                                            toClass:[NSTestClass class]
+                                                  newMethodSelector:@selector(classMethodWithLongNameForUniquenessPurposes2)];
         
-        XCTAssertTrue( [ NSTestClass hasClassMethodWithSelector: @selector( classMethodWithLongNameForUniquenessPurposes2 ) ]
-                     , @"NSTestClass has classMethodWithLongNameForUniquenessPurposes2 method" );
+        STAssertTrue(result, @"method added");
         
-        NSUInteger method_result_ = (NSUInteger)objc_msgSend( [ NSTestClass class ], @selector( classMethodWithLongNameForUniquenessPurposes2 ) );
-        XCTAssertTrue( testClassMethodResult_ == method_result_, @"check implementation of new method" );
+        STAssertTrue([NSTestClass hasClassMethodWithSelector:@selector(classMethodWithLongNameForUniquenessPurposes2)],
+                     @"NSTestClass has classMethodWithLongNameForUniquenessPurposes2 method");
         
-        firstTestRun_ = NO;
+        NSUInteger methodResult = (NSUInteger)objc_msgSend([NSTestClass class], @selector(classMethodWithLongNameForUniquenessPurposes2));
+        STAssertTrue(testClassMethodResult == methodResult, @"check implementation of new method");
+        
+        firstTestRun = NO;
     }
 }
 
 -(void)testAddInstanceMethodIfNeedWithSelector
 {
-    static BOOL firstTestRun_ = YES;
+    static BOOL firstTestRun = YES;
     
-    if ( firstTestRun_ )
-    {
-        SEL newMethodSelector_ = @selector( instanceMethodWithLongNameForUniquenessPurposes2 );
-        SEL selector_ = @selector( instanceMethodWithLongNameForUniquenessPurposes );
-        BOOL result_ = [ NSTestClass addInstanceMethodIfNeedWithSelector: selector_
-                                                                 toClass: [ NSTestClass class ]
-                                                       newMethodSelector: newMethodSelector_ ];
+    if (firstTestRun) {
         
-        XCTAssertTrue( result_, @"method added" );
+        SEL newMethodSelector = @selector(instanceMethodWithLongNameForUniquenessPurposes2);
+        SEL selector = @selector(instanceMethodWithLongNameForUniquenessPurposes);
+        BOOL result = [NSTestClass addInstanceMethodIfNeedWithSelector:selector
+                                                               toClass:[NSTestClass class]
+                                                     newMethodSelector:newMethodSelector];
         
-        XCTAssertTrue( [ NSTestClass hasInstanceMethodWithSelector: newMethodSelector_ ]
-                     , @"NSTestClass has instanceMethodWithLongNameForUniquenessPurposes2 method" );
+        STAssertTrue(result, @"method added");
         
-        NSTestClass* instance_ = [ NSTestClass new ];
-        NSUInteger method_result_ = (NSUInteger)objc_msgSend( instance_, newMethodSelector_ );
-        XCTAssertTrue( testInstanceMethodResult_ == method_result_, @"check implementation of new method" );
+        STAssertTrue([NSTestClass hasInstanceMethodWithSelector:newMethodSelector],
+                     @"NSTestClass has instanceMethodWithLongNameForUniquenessPurposes2 method");
         
-        firstTestRun_ = NO;
+        NSTestClass *instance = [NSTestClass new];
+        NSUInteger methodResult = (NSUInteger)objc_msgSend(instance, newMethodSelector);
+        STAssertTrue(testInstanceMethodResult == methodResult, @"check implementation of new method" );
+        
+        firstTestRun = NO;
     }
 }
 
 -(void)testTwiceHookInstanceMethod
 {
-    static BOOL firstTestRun_ = YES;
+    static BOOL firstTestRun = YES;
     
-    if ( !firstTestRun_ )
+    if (!firstTestRun)
         return;
     
-    NSTwiceTestClass* instance_ = [ NSTwiceTestClass new ];
+    NSTwiceTestClass *instance = [ NSTwiceTestClass new ];
     
-    XCTAssertEqual( testInstanceMethodResult_
-                   , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
-                   , @"result mismatch" );
+    STAssertEquals(testInstanceMethodResult,
+                   [instance instanceMethodWithLongNameForUniquenessPurposes],
+                   @"result mismatch" );
     
-    [ [ TwiceHookMethodsClass class ] hookInstanceMethodForClass: [ NSTwiceTestClass class ]
-                                                    withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
-                                         prototypeMethodSelector: @selector( twicePrototypeMethod )
-                                              hookMethodSelector: @selector( twiceHookMethod ) ];
+    [[TwiceHookMethodsClass class] hookInstanceMethodForClass:[NSTwiceTestClass class]
+                                                 withSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes)
+                                      prototypeMethodSelector:@selector(twicePrototypeMethod)
+                                           hookMethodSelector:@selector(twiceHookMethod)];
     
-    XCTAssertEqual( testInstanceMethodResult_ * 2
-                   , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
-                   , @"result mismatch" );
+    STAssertEquals(testInstanceMethodResult * 2,
+                   [instance instanceMethodWithLongNameForUniquenessPurposes],
+                   @"result mismatch");
     
-    XCTAssertThrows( {
-                       [ [ TwiceHookMethodsClass class ] hookInstanceMethodForClass: [ NSTwiceTestClass class ]
-                                                                       withSelector: @selector( instanceMethodWithLongNameForUniquenessPurposes )
-                                                            prototypeMethodSelector: @selector( twicePrototypeMethod )
-                                                                 hookMethodSelector: @selector( twiceHookMethod ) ];
-                   }, @"twice hook forbidden" );
+    STAssertThrows( {
+        [[TwiceHookMethodsClass class] hookInstanceMethodForClass:[NSTwiceTestClass class]
+                                                     withSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes)
+                                          prototypeMethodSelector:@selector(twicePrototypeMethod)
+                                               hookMethodSelector:@selector(twiceHookMethod)];
+    }, @"twice hook forbidden" );
 }
 
 -(void)testTwiceHookClassMethod
 {
-    static BOOL firstTestRun_ = YES;
+    static BOOL firstTestRun = YES;
     
-    if ( !firstTestRun_ )
+    if (!firstTestRun)
         return;
     
-    Class class_ = [ NSTwiceTestClass class ];
+    Class class = [NSTwiceTestClass class];
     
-    XCTAssertEqual( testClassMethodResult_
-                   , [ class_ classMethodWithLongNameForUniquenessPurposes ]
-                   , @"result mismatch" );
+    STAssertEquals(testClassMethodResult,
+                   [class classMethodWithLongNameForUniquenessPurposes],
+                   @"result mismatch");
     
-    [[TwiceHookMethodsClass class]hookClassMethodForClass:[NSTwiceTestClass class]
-                                             withSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
-                                  prototypeMethodSelector:@selector(twicePrototypeMethod)
-                                       hookMethodSelector:@selector(twiceHookMethod)];
+    [[TwiceHookMethodsClass class] hookClassMethodForClass:[NSTwiceTestClass class]
+                                              withSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
+                                   prototypeMethodSelector:@selector(twicePrototypeMethod)
+                                        hookMethodSelector:@selector(twiceHookMethod)];
     
-    XCTAssertEqual(testClassMethodResult_ * 3,
-                   [ class_ classMethodWithLongNameForUniquenessPurposes ],
+    STAssertEquals(testClassMethodResult * 3,
+                   [class classMethodWithLongNameForUniquenessPurposes],
                    @"result mismatch" );
     
-    XCTAssertThrows({
+    STAssertThrows({
         [[TwiceHookMethodsClass class]hookClassMethodForClass:[NSTwiceTestClass class]
                                                  withSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
                                       prototypeMethodSelector:@selector(twicePrototypeMethod)

@@ -2,10 +2,10 @@
 
 @implementation NSString (JSEscape)
 
--(NSString *)stringByReplacingJSEscapes
+- (instancetype)stringByReplacingJSEscapes
 {
-    NSString *result = [ self stringByReplacingOccurrencesOfString:@"'" withString:@"\\'" ];
-
+    NSString *result = [ self stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
+    
     return result;
 }
 

@@ -40,20 +40,19 @@
 
 - (void)testAuth
 {
-
-    TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock)
-    {
+    TestAsyncRequestBlock block = ^(JFFSimpleBlock finishBLock) {
+        
         JFFAsyncOperation loader = [JFFSocialFoursquare authLoader];
         
-        loader(nil,nil,^(id result,NSError *error)
-               {
-                   NSLog(@"Access token: %@", result);
-                   finishBLock();
-               });
+        loader(nil, nil, ^(id result, NSError *error) {
+            
+            NSLog(@"Access token: %@", result);
+            finishBLock();
+        });
     };
     
-    [ self performAsyncRequestOnMainThreadWithBlock:block
-                                           selector:_cmd ];
+    [self performAsyncRequestOnMainThreadWithBlock:block
+                                          selector:_cmd];
 }
 
 - (void)testFriendsLoader
@@ -61,22 +60,19 @@
     [self prepare];
     
     SEL selector = _cmd;
-    [JFFSocialFoursquare myFriendsLoader] (nil, nil, ^(id result, NSError *error)
-                                          {
-                                              if (!error && [result isKindOfClass:[NSArray class]] && [result count] > 0)
-                                              {
-                                                  for (FoursquareUserModel *model  in result) {
-                                                      NSLog(@"Model: %@", model.contacts);
-                                                  }
-                                                  
-                                                  [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
-                                              }
-                                              else
-                                              {
-                                                  [self notify:kGHUnitWaitStatusFailure forSelector:selector];
-                                              }
-                                              
-                                          });
+    [JFFSocialFoursquare myFriendsLoader](nil, nil, ^(id result, NSError *error) {
+        
+        if (!error && [result isKindOfClass:[NSArray class]] && [result count] > 0) {
+            
+            for (FoursquareUserModel *model  in result) {
+                NSLog(@"Model: %@", model.contacts);
+            }
+            
+            [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
+        } else {
+            [self notify:kGHUnitWaitStatusFailure forSelector:selector];
+        }
+    });
     
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:100.0];
 }
@@ -86,18 +82,16 @@
     [self prepare];
     
     SEL selector = _cmd;
-    [JFFSocialFoursquare checkinsLoaderWithUserId:nil limit:1] (nil, nil, ^(id result, NSError *error)
-                                          {
-                                              if (!error && [result isKindOfClass:[NSArray class]] && [result count] > 0)
-                                              {
-                                                  [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
-                                              }
-                                              else
-                                              {
-                                                  [self notify:kGHUnitWaitStatusFailure forSelector:selector];
-                                              }
-                                              
-                                          });
+    [JFFSocialFoursquare checkinsLoaderWithUserId:nil limit:1] (nil, nil, ^(id result, NSError *error) {
+        
+        if (!error && [result isKindOfClass:[NSArray class]] && [result count] > 0) {
+            
+            [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
+        } else {
+            
+            [self notify:kGHUnitWaitStatusFailure forSelector:selector];
+        }
+    });
     
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:100.0];
 }
@@ -111,18 +105,16 @@
                                  withText:@"Hi!"
                                       url:@"http://wishdates.com"
                                 contentID:nil]
-    (nil, nil, ^(id result, NSError *error)
-     {
-         if (!error)
-         {
-             [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
-         }
-         else
-         {
-             [self notify:kGHUnitWaitStatusFailure forSelector:selector];
-         }
-         
-     });
+    (nil, nil, ^(id result, NSError *error) {
+        
+        if (!error) {
+            
+            [self notify:kGHUnitWaitStatusSuccess forSelector:selector];
+        } else {
+            
+            [self notify:kGHUnitWaitStatusFailure forSelector:selector];
+        }
+    });
     
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:100.0];
 }

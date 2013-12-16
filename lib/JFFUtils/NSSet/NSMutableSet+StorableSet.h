@@ -2,7 +2,7 @@
 
 @interface NSMutableSet (StorableSet)
 
-+ (id)newStorableSetWithContentsOfFile:(NSString *)fileName;
++ (instancetype)newStorableSetWithContentsOfFile:(NSString *)fileName;
 
 - (BOOL)addAndSaveObject:(id)object;
 - (BOOL)removeAndSaveObject:(id)object;

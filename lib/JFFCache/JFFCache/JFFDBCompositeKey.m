@@ -1,7 +1,5 @@
 #import "JFFDBCompositeKey.h"
 
-#import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>
-
 @interface JFFDBCompositeKey ()
 
 @property (nonatomic) NSMutableArray *keys;
@@ -10,7 +8,7 @@
 
 @implementation JFFDBCompositeKey
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
     JFFDBCompositeKey *copy = [[[self class] allocWithZone:zone] init];
     
@@ -23,16 +21,16 @@
 
 - (NSUInteger)hash
 {
-    return [self.keys hash];
+    return [_keys hash];
 }
 
 - (BOOL)isEqual:(id)object
 {
     JFFDBCompositeKey *otherObject = object;
-    return [otherObject.keys isEqual:self.keys];
+    return [otherObject.keys isEqual:_keys];
 }
 
-- (id)initWithKeys:(NSArray *)keys
+- (instancetype)initWithKeys:(NSArray *)keys
 {
     NSParameterAssert([keys isKindOfClass:[NSArray class]]);
     
@@ -45,7 +43,7 @@
     return self;
 }
 
-+ (id)compositeKeyWithKeys:(NSString *)key, ...
++ (instancetype)compositeKeyWithKeys:(NSString *)key, ...
 {
     NSMutableArray *keys = [NSMutableArray new];
     va_list args;
@@ -58,7 +56,7 @@
     return [[self alloc] initWithKeys:keys];
 }
 
-+ (id)compositeKeyWithKey:(JFFDBCompositeKey *)compositeKey forIndexes:(NSIndexSet *)indexes
++ (instancetype)compositeKeyWithKey:(JFFDBCompositeKey *)compositeKey forIndexes:(NSIndexSet *)indexes
 {
     NSUInteger size = [compositeKey.keys count];
     NSArray *newKeys = [NSArray arrayWithSize:size producer:^id(NSUInteger index) {
@@ -72,7 +70,7 @@
 
 - (NSString *)toCompositeKey
 {
-    return [self.keys componentsJoinedByString:@"_"];
+    return [_keys componentsJoinedByString:@"_"];
 }
 
 @end

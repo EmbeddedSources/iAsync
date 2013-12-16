@@ -9,8 +9,8 @@
 
 @implementation JFFInstagramAccount (JFFInstagramJSONDataAnalyzers)
 
-+ (id)newInstagramAccountWithJSONObject:(NSDictionary *)userJsonObject
-                                  error:(NSError **)outError
++ (instancetype)newInstagramAccountWithJSONObject:(NSDictionary *)userJsonObject
+                                            error:(NSError **)outError
 {
     id jsonPattern = @{
     @"username"        : [NSString class],
@@ -26,9 +26,12 @@
     
     JFFInstagramAccount *result = [self new];
     
-    result.name               =  userJsonObject[@"username"];
-    result.avatarURL          = [userJsonObject[@"profile_picture"]toURL];
-    result.instagramAccountId =  userJsonObject[@"id"];
+    if (result) {
+        
+        result.name               =  userJsonObject[@"username"];
+        result.avatarURL          = [userJsonObject[@"profile_picture"] toURL];
+        result.instagramAccountId =  userJsonObject[@"id"];
+    }
     
     return result;
 }
@@ -37,8 +40,8 @@
 
 @implementation JFFInstagramAuthedAccount (JFFInstagramJSONDataAnalyzers)
 
-+ (id)newInstagramAuthedAccountWithJSONObject:(NSDictionary *)jsonObject
-                                        error:(NSError **)outError
++ (instancetype)newInstagramAuthedAccountWithJSONObject:(NSDictionary *)jsonObject
+                                                  error:(NSError **)outError
 {
     id jsonPattern = @{
     @"user"         : [NSDictionary class],
@@ -66,8 +69,8 @@
 
 @implementation JFFInstagramMediaItemImage (JFFInstagramJSONDataAnalyzers)
 
-+ (id)newInstagramMediaItemImageWithJsonObject:(NSDictionary *)jsonObject
-                                         error:(NSError **)outError
++ (instancetype)newInstagramMediaItemImageWithJsonObject:(NSDictionary *)jsonObject
+                                                   error:(NSError **)outError
 {
     id jsonPattern =
     @{
@@ -97,8 +100,8 @@
 
 @implementation JFFInstagramMediaItem (JFFInstagramJSONDataAnalyzers)
 
-+ (id)newInstagramMediaItemWithJSONObject:(NSDictionary *)jsonObject
-                                    error:(NSError **)outError
++ (instancetype)newInstagramMediaItemWithJSONObject:(NSDictionary *)jsonObject
+                                              error:(NSError **)outError
 {
     id jsonPattern = @{
     @"user"   : [NSDictionary class],
@@ -151,8 +154,8 @@
 
 @implementation JFFInstagramComment (JFFInstagramJSONDataAnalyzers)
 
-+ (id)newInstagramCommentWithJSONObject:(NSDictionary *)jsonObject
-                                  error:(NSError **)outError
++ (instancetype)newInstagramCommentWithJSONObject:(NSDictionary *)jsonObject
+                                            error:(NSError **)outError
 {
     id jsonPattern = @{
     @"from" : [NSDictionary class],
@@ -213,7 +216,7 @@ static BOOL validJeneralJSONObject(NSDictionary *jsonObject, NSError *__autorele
 
 static JFFAsyncOperationBinder generalJsonDataBinderWithAnalyzer(JFFAnalyzer analyzer)
 {
-    assert(analyzer);
+    NSCParameterAssert(analyzer);
     analyzer = [analyzer copy];
     
     return ^JFFAsyncOperation(NSData *data) {

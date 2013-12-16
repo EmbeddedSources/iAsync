@@ -5,41 +5,45 @@
 
 #import <JFFAsyncOperations/JFFAsyncOperations.h>
 
-@interface JFFAsyncRequestAccessToContactsLoader : NSObject < JFFAsyncOperationInterface >
+@interface JFFAsyncRequestAccessToContactsLoader : NSObject <JFFAsyncOperationInterface>
 @end
 
 @implementation JFFAsyncRequestAccessToContactsLoader
+{
+    JFFAsyncOperationInterfaceResultHandler _handler;
+}
+
+- (void)notifyHandlerWithResult:(id)result error:(NSError *)error
+{
+    _handler(result, error);
+}
 
 - (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
     NSParameterAssert(handler);
-    handler = [handler  copy];
+    _handler = handler;
     
-    JFFAddressBookSuccessCallback onSuccess = ^(JFFAddressBook *book) {
+    __weak JFFAsyncRequestAccessToContactsLoader *weakSelf = self;
+    
+    JFFAddressBookSuccessCallback onSuccess = ^void(JFFAddressBook *book) {
         
-        handler(book, nil);
+        [weakSelf notifyHandlerWithResult:book error:nil];
     };
     
-    JFFAddressBookErrorCallback onFailure = ^(ABAuthorizationStatus status, NSError *error) {
-        if (handler) {
-            
-            handler(nil, error);
-        }
+    JFFAddressBookErrorCallback onFailure = ^void(ABAuthorizationStatus status, NSError *error) {
+        
+        [weakSelf notifyHandlerWithResult:nil error:error];
     };
     
     [JFFAddressBookFactory asyncAddressBookWithSuccessBlock:onSuccess
                                               errorCallback:onFailure];
 }
 
-- (void)cancel:(BOOL)canceled
-{
-}
-
 @end
 
-JFFAsyncOperation asyncAllContactsLoader( void )
+JFFAsyncOperation asyncAllContactsLoader()
 {
     JFFAsyncOperationBinder contacts = ^JFFAsyncOperation(JFFAddressBook *book) {
         
@@ -53,7 +57,7 @@ JFFAsyncOperation asyncAllContactsLoader( void )
 
 JFFAsyncOperation requestAccessToContactsLoader()
 {
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>(void) {
         return [JFFAsyncRequestAccessToContactsLoader new];
     };
     return buildAsyncOperationWithAdapterFactory(factory);

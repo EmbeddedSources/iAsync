@@ -9,7 +9,7 @@
 + (JFFCaches *)sharedCaches;
 + (void)setSharedCaches:(JFFCaches *)caches;
 
-- (id)initWithDBInfoDictionary:(NSDictionary *)cachesInfo;
+- (instancetype)initWithDBInfoDictionary:(NSDictionary *)cachesInfo;
 
 + (id< JFFCacheDB >)createCacheForName:(NSString *)name;
 

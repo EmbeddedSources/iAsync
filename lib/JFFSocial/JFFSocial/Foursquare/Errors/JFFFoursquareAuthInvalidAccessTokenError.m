@@ -2,7 +2,7 @@
 
 @implementation JFFFoursquareAuthInvalidAccessTokenError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"FOUTSQUARE_INVALID_ACCESS_TOKEN", nil)];
 }

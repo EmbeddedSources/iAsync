@@ -4,11 +4,11 @@
 
 - (void)performDidFinishBlockOnceWithResult:(id)result error:(NSError *)error
 {
-    if (!self.didFinishBlock)
+    if (!_didFinishBlock)
         return;
     
-    JFFDidFinishAsyncOperationHandler block = self.didFinishBlock;
-    self.didFinishBlock = nil;
+    JFFDidFinishAsyncOperationHandler block = _didFinishBlock;
+    _didFinishBlock = nil;
     block(result, error);
 }
 

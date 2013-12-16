@@ -2,6 +2,6 @@
 
 @interface NSUrlLocationValidator : NSObject
 
-+(BOOL)isValidLocation:( NSString* )location_;
++ (BOOL)isValidLocation:(NSString *)location;
 
 @end

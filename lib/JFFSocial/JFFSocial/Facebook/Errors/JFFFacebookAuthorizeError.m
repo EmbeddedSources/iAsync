@@ -2,7 +2,7 @@
 
 @implementation JFFFacebookAuthorizeError
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithDescription:NSLocalizedString(@"FACEBOOK_AUTHORIZATION_FAILED", nil)];
 }

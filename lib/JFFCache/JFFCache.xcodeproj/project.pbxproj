@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C0D56E617E70F4A001F0944 /* JFFCacheLoadImageError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C0D56E417E70F4A001F0944 /* JFFCacheLoadImageError.h */; };
+		4C0D56E717E70F4A001F0944 /* JFFCacheLoadImageError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0D56E517E70F4A001F0944 /* JFFCacheLoadImageError.m */; };
 		4CA0CAA816CE864C0007A85D /* JFFCacheError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAA616CE864C0007A85D /* JFFCacheError.h */; };
 		4CA0CAA916CE864C0007A85D /* JFFCacheError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAA716CE864C0007A85D /* JFFCacheError.m */; };
 		4CA0CAC116CE86B90007A85D /* NSDictionary+DBInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAAB16CE86B80007A85D /* NSDictionary+DBInfo.h */; };
@@ -33,10 +35,14 @@
 		4CA0CAD616CE86B90007A85D /* JFFThumbnailStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAC016CE86B90007A85D /* JFFThumbnailStorage.m */; };
 		4CA0CAD916CE86F70007A85D /* JFFCacheNoURLError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA0CAD716CE86F70007A85D /* JFFCacheNoURLError.h */; };
 		4CA0CADA16CE86F70007A85D /* JFFCacheNoURLError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA0CAD816CE86F70007A85D /* JFFCacheNoURLError.m */; };
+		4CB92AE516FA02E600471165 /* UIImageView+CachedAsyncImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB92AE316FA02E600471165 /* UIImageView+CachedAsyncImageLoader.h */; };
+		4CB92AE616FA02E600471165 /* UIImageView+CachedAsyncImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB92AE416FA02E600471165 /* UIImageView+CachedAsyncImageLoader.m */; };
 		6516847B144F4ECD0014670E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6516847A144F4ECD0014670E /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C0D56E417E70F4A001F0944 /* JFFCacheLoadImageError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheLoadImageError.h; sourceTree = "<group>"; };
+		4C0D56E517E70F4A001F0944 /* JFFCacheLoadImageError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCacheLoadImageError.m; sourceTree = "<group>"; };
 		4CA0CAA616CE864C0007A85D /* JFFCacheError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheError.h; sourceTree = "<group>"; };
 		4CA0CAA716CE864C0007A85D /* JFFCacheError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCacheError.m; sourceTree = "<group>"; };
 		4CA0CAAB16CE86B80007A85D /* NSDictionary+DBInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DBInfo.h"; sourceTree = "<group>"; };
@@ -63,6 +69,8 @@
 		4CA0CAC016CE86B90007A85D /* JFFThumbnailStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFThumbnailStorage.m; sourceTree = "<group>"; };
 		4CA0CAD716CE86F70007A85D /* JFFCacheNoURLError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFCacheNoURLError.h; sourceTree = "<group>"; };
 		4CA0CAD816CE86F70007A85D /* JFFCacheNoURLError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFCacheNoURLError.m; sourceTree = "<group>"; };
+		4CB92AE316FA02E600471165 /* UIImageView+CachedAsyncImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CachedAsyncImageLoader.h"; sourceTree = "<group>"; };
+		4CB92AE416FA02E600471165 /* UIImageView+CachedAsyncImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CachedAsyncImageLoader.m"; sourceTree = "<group>"; };
 		65168477144F4ECD0014670E /* libJFFCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJFFCache.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6516847A144F4ECD0014670E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6516847E144F4ECD0014670E /* JFFCache-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFCache-Prefix.pch"; sourceTree = "<group>"; };
@@ -88,6 +96,8 @@
 				4CA0CAA716CE864C0007A85D /* JFFCacheError.m */,
 				4CA0CAD716CE86F70007A85D /* JFFCacheNoURLError.h */,
 				4CA0CAD816CE86F70007A85D /* JFFCacheNoURLError.m */,
+				4C0D56E417E70F4A001F0944 /* JFFCacheLoadImageError.h */,
+				4C0D56E517E70F4A001F0944 /* JFFCacheLoadImageError.m */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -105,6 +115,15 @@
 				4CA0CAB216CE86B80007A85D /* NSString+CompositeKey.m */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		4CB92AE216FA02E600471165 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4CB92AE316FA02E600471165 /* UIImageView+CachedAsyncImageLoader.h */,
+				4CB92AE416FA02E600471165 /* UIImageView+CachedAsyncImageLoader.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		6516846C144F4ECD0014670E = {
@@ -135,6 +154,7 @@
 		6516847C144F4ECD0014670E /* JFFCache */ = {
 			isa = PBXGroup;
 			children = (
+				4CB92AE216FA02E600471165 /* Categories */,
 				4CA0CAA516CE86320007A85D /* Errors */,
 				4CA0CAAA16CE86B80007A85D /* Details */,
 				4CA0CAB316CE86B80007A85D /* JFFBaseDB.h */,
@@ -194,6 +214,8 @@
 				4CA0CAD316CE86B90007A85D /* JFFDBManager.h in Headers */,
 				4CA0CAD516CE86B90007A85D /* JFFThumbnailStorage.h in Headers */,
 				4CA0CAD916CE86F70007A85D /* JFFCacheNoURLError.h in Headers */,
+				4C0D56E617E70F4A001F0944 /* JFFCacheLoadImageError.h in Headers */,
+				4CB92AE516FA02E600471165 /* UIImageView+CachedAsyncImageLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +245,7 @@
 		6516846E144F4ECD0014670E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 65168471144F4ECD0014670E /* Build configuration list for PBXProject "JFFCache" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -252,6 +274,7 @@
 				4CA0CAC416CE86B90007A85D /* NSObject+CompositeKey.m in Sources */,
 				4CA0CAC616CE86B90007A85D /* NSString+CacheFSManager.m in Sources */,
 				4CA0CAC816CE86B90007A85D /* NSString+CompositeKey.m in Sources */,
+				4C0D56E717E70F4A001F0944 /* JFFCacheLoadImageError.m in Sources */,
 				4CA0CACA16CE86B90007A85D /* JFFBaseDB.m in Sources */,
 				4CA0CACE16CE86B90007A85D /* JFFCaches.m in Sources */,
 				4CA0CAD016CE86B90007A85D /* JFFDBCompositeKey.m in Sources */,
@@ -259,6 +282,7 @@
 				4CA0CAD416CE86B90007A85D /* JFFDBManager.m in Sources */,
 				4CA0CAD616CE86B90007A85D /* JFFThumbnailStorage.m in Sources */,
 				4CA0CADA16CE86F70007A85D /* JFFCacheNoURLError.m in Sources */,
+				4CB92AE616FA02E600471165 /* UIImageView+CachedAsyncImageLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,8 +294,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -281,6 +306,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../,
@@ -288,6 +314,7 @@
 					.,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -297,10 +324,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../,
@@ -308,6 +337,7 @@
 					.,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -320,6 +350,7 @@
 				DSTROOT = /tmp/JFFCache.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFCache/JFFCache-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -333,6 +364,7 @@
 				DSTROOT = /tmp/JFFCache.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFCache/JFFCache-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

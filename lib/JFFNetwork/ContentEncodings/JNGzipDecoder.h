@@ -2,8 +2,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JNGzipDecoder : NSObject < JNHttpDecoder >
+@interface JNGzipDecoder : NSObject <JNHttpDecoder>
 
--(id)initWithContentLength:( unsigned long long )contentLength_;
+- (instancetype)initWithContentLength:(unsigned long long)contentLength;
 
 @end

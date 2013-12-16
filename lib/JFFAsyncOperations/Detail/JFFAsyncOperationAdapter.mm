@@ -4,16 +4,15 @@
 
 @implementation JFFAsyncOperationAdapter
 
--(id)init
+- (instancetype)init
 {
-    self = [ super init ];
-    if ( nil == self )
-    {
+    self = [super init];
+    if (nil == self) {
         return nil;
     }
-
-    self->_queueAttributes = DISPATCH_QUEUE_CONCURRENT;
-
+    
+    _queueAttributes = DISPATCH_QUEUE_CONCURRENT;
+    
     return self;
 }
 
@@ -21,19 +20,20 @@
                           cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
                         progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
 {
-    self.operation = [JFFBlockOperation performOperationWithQueueName:self.queueName.c_str()
-                                                        loadDataBlock:self.loadDataBlock
+    self.operation = [JFFBlockOperation performOperationWithQueueName:_queueName.c_str()
+                                                        loadDataBlock:_loadDataBlock
                                                      didLoadDataBlock:handler
                                                         progressBlock:progress
-                                                              barrier:self.barrier
-                                                   serialOrConcurrent:self->_queueAttributes];
+                                                              barrier:_barrier
+                                                         currentQueue:_currentQueue
+                                                   serialOrConcurrent:_queueAttributes];
 }
 
 - (void)cancel:(BOOL)canceled
 {
     if (canceled) {
-        [self.operation cancel];
-        self.operation = nil;
+        [_operation cancel];
+        _operation = nil;
     }
 }
 

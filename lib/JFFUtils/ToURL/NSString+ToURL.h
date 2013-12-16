@@ -2,6 +2,6 @@
 
 @interface NSString (ToURL)
 
-- (NSURL*)toURL;
+- (NSURL *)toURL;
 
 @end

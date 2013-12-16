@@ -2,50 +2,52 @@
 
 @implementation JFFContactPhotoField
 
-+(id)contactFieldWithName:( NSString* )name_
++ (instancetype)newContactFieldWithName:(NSString *)name
+                                 record:(ABRecordRef)record
 {
-    return [ self contactFieldWithName: name_
-                            propertyID: 0 ];
+    return [self newContactFieldWithName:name
+                              propertyID:0
+                                  record:record];
     
 }
 
--(void)readPropertyFromRecord:( ABRecordRef )record_
+- (id)readProperty
 {
-    CFDataRef dataRef_ = ABPersonCopyImageData( record_ );
-    if ( dataRef_ )
-    {
-        NSData* data_ = ( __bridge_transfer NSData* )dataRef_;
-        self.value = [ UIImage imageWithData: data_ ];
+    CFDataRef dataRef = ABPersonCopyImageData(self.record);
+    if (dataRef != NULL) {
+        
+        NSData *data = (__bridge_transfer NSData *)dataRef;
+        self.value = [UIImage imageWithData:data];
     }
+    return self.value;
 }
 
--(void)setPropertyFromValue:( id )value_
-                   toRecord:( ABRecordRef )record_
+- (void)setPropertyFromValue:(id)value
 {
-    NSParameterAssert( [ value_ isKindOfClass: [ UIImage class ] ]
-                      || [ value_ isKindOfClass: [ NSData class ] ]
-                      || [ value_ isKindOfClass: [ NSNull class ] ] );
-
-    if ( [ value_ isKindOfClass: [ NSNull class ] ] )
+    NSParameterAssert( [value isKindOfClass:[UIImage class]]
+                      || [value isKindOfClass:[NSData class]]
+                      || [value isKindOfClass:[NSNull class]]);
+    
+    if ([value isKindOfClass:[NSNull class]])
     {
-        if ( ABPersonHasImageData( record_ ) )
-        {
+        if (ABPersonHasImageData(self.record)) {
+            
             CFErrorRef error = NULL;
-            ABPersonRemoveImageData( record_, &error );
+            ABPersonRemoveImageData(self.record, &error);
         }
         return;
     }
-
-    NSData* data_ = value_;
-    if ( [ value_ isKindOfClass: [ UIImage class ] ] )
-    {
-        data_ = UIImagePNGRepresentation( value_ );
+    
+    NSData *data = value;
+    if ([value isKindOfClass:[UIImage class]]) {
+        
+        data = UIImagePNGRepresentation(value);
     }
-
-    if ( data_ )
-    {
+    
+    if (data) {
+        
         CFErrorRef error = NULL;
-        bool didSet = ABPersonSetImageData( record_, ( __bridge CFDataRef )data_, &error );
+        bool didSet = ABPersonSetImageData(self.record, (__bridge CFDataRef)data, &error);
         if (!didSet) { NSLog( @"can not set %@", self.name ); }
     }
 }

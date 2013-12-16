@@ -6,7 +6,7 @@
 
 + (NSString *)currentInterfaceLanguageCode
 {
-    NSString *languageCode = [[self preferredLanguages] noThrowObjectAtIndex:0];
+    NSString *languageCode = [[self preferredLanguages] firstObject];
     return languageCode;
 }
 
@@ -14,7 +14,7 @@
 {
     NSString *languageCode = [self currentInterfaceLanguageCode];
     
-    return [[languageCode componentsSeparatedByString:@"_"] noThrowObjectAtIndex:0];
+    return [[languageCode componentsSeparatedByString:@"_"] firstObject];
 }
 
 @end

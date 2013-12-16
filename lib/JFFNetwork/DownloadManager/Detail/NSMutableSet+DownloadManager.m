@@ -4,12 +4,12 @@
 
 @implementation NSMutableSet (DownloadManager)
 
-+(NSString*)storePathForDownloadedFiles
++ (NSString *)storePathForDownloadedFiles
 {
     return [ NSString documentsPathByAppendingPathComponent: @"JFFDownloadedFiles.data" ];
 }
 
-+ (id)setWithDownloadedFiles
++ (instancetype)setWithDownloadedFiles
 {
     NSString *storePathForDownloadedFiles = [self storePathForDownloadedFiles];
     NSArray  *downloadedItems = [[NSArray alloc] initWithContentsOfFile:storePathForDownloadedFiles];
@@ -35,30 +35,29 @@
     [self writeToFileDownloadedFiles];
 }
 
--(BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
+- (BOOL)containsDownloadedFileWithPath:(NSString *)filePath
 {
-    BOOL result_ = [ self containsObject: filePath_ ];
-    if ( result_ && ![ [ NSFileManager defaultManager ] fileExistsAtPath: filePath_ ] )
-    {
-        [ self removeDownloadedFileWithPath: filePath_ ];
+    BOOL result = [self containsObject:filePath];
+    if (result && ![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        [self removeDownloadedFileWithPath:filePath];
         return NO;
     }
-    return result_;
+    return result;
 }
 
-+(void)addDownloadedFileWithPath:( NSString* )filePath_
++ (void)addDownloadedFileWithPath:(NSString *)filePath
 {
-    [ [ self setWithDownloadedFiles ] addDownloadedFileWithPath: filePath_ ];
+    [[self setWithDownloadedFiles] addDownloadedFileWithPath:filePath];
 }
 
-+(BOOL)containsDownloadedFileWithPath:( NSString* )filePath_
++ (BOOL)containsDownloadedFileWithPath:(NSString *)filePath
 {
-    return [ [ self setWithDownloadedFiles ] containsDownloadedFileWithPath: filePath_ ];
+    return [[self setWithDownloadedFiles] containsDownloadedFileWithPath:filePath];
 }
 
-+(void)removeDownloadedFileWithPath:( NSString* )filePath_
++ (void)removeDownloadedFileWithPath:(NSString *)filePath
 {
-    [ [ self setWithDownloadedFiles ] removeDownloadedFileWithPath: filePath_ ];
+    [[self setWithDownloadedFiles] removeDownloadedFileWithPath:filePath];
 }
 
 @end

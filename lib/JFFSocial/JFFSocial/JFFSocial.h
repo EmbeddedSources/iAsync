@@ -43,5 +43,6 @@
 
 //Facebook Errors
 #import <JFFSocial/Facebook/Errors/JFFFacebookAuthorizeError.h>
+#import <JFFSocial/Facebook/Errors/SDKErrors/JFFFacebookLoginFailedCanceledError.h>
 #import <JFFSocial/Facebook/Errors/SDKErrors/JFFFacebookLoginFailedAccessForbidden.h>
 #import <JFFSocial/Facebook/Errors/SDKErrors/JFFFacebookLoginFailedPasswordWasChanged.h>

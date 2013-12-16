@@ -2,25 +2,25 @@
 
 @implementation JFFContactDateField
 
--(void)readPropertyFromRecord:( ABRecordRef )record_
+- (id)readProperty
 {
-    CFStringRef value_ = ABRecordCopyValue( record_, self.propertyID );
-    self.value = ( __bridge_transfer NSDate* )value_;
+    CFStringRef value = ABRecordCopyValue(self.record, self.propertyID);
+    self.value = ( __bridge_transfer NSDate* )value;
+    return self.value;
 }
 
-- (void)setPropertyFromValue:(id)value_
-                    toRecord:(ABRecordRef)record_
+- (void)setPropertyFromValue:(id)value
 {
-    NSParameterAssert([value_ isKindOfClass:[NSString class]]);
-
-    NSTimeInterval timeInterval_ = [ value_ longLongValue ] / 1000.;
+    NSParameterAssert([value isKindOfClass:[NSString class]]);
+    
+    NSTimeInterval timeInterval_ = [value longLongValue] / 1000.;
     self.value = timeInterval_ == 0. ? nil : [ NSDate dateWithTimeIntervalSince1970: timeInterval_ ];
-
+    
     CFErrorRef error = NULL;
-    bool didSet = ABRecordSetValue( record_
-                                   , self.propertyID
-                                   , (__bridge CFTypeRef)self.value
-                                   , &error);
+    bool didSet = ABRecordSetValue(self.record,
+                                   self.propertyID,
+                                   (__bridge CFTypeRef)self.value,
+                                   &error);
     if (!didSet) { NSLog( @"can not set %@", self.name ); }
 }
 

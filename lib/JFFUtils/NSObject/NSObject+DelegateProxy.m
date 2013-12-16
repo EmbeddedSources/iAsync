@@ -14,7 +14,7 @@ static char proxyDelegatesKey;
 
 @implementation NSObject (DelegateProxy)
 
-- (NSMutableDictionary*)lazyProxyDelegatesDictionary
+- (NSMutableDictionary *)lazyProxyDelegatesDictionary
 {
     NSMutableDictionary *result = objc_getAssociatedObject(self, &proxyDelegatesKey);
     
@@ -26,7 +26,7 @@ static char proxyDelegatesKey;
     return result;
 }
 
-- (JFFMutableAssignArray*)proxyDelegatesForDelegateWithName:(NSString *)delegateName
+- (JFFMutableAssignArray *)proxyDelegatesForDelegateWithName:(NSString *)delegateName
 {
     NSMutableDictionary *arrayByDelegateName = [self lazyProxyDelegatesDictionary];
     
@@ -34,7 +34,7 @@ static char proxyDelegatesKey;
     return delegates;
 }
 
-- (JFFMutableAssignArray*)lazyProxyDelegatesForDelegateWithName:(NSString *)delegateName
+- (JFFMutableAssignArray *)lazyProxyDelegatesForDelegateWithName:(NSString *)delegateName
 {
     NSMutableDictionary *arrayByDelegateName = [self lazyProxyDelegatesDictionary];
     

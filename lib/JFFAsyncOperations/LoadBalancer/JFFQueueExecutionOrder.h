@@ -3,7 +3,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM( NSInteger, JFFQueueExecutionOrder )
+typedef NS_ENUM(NSInteger, JFFQueueExecutionOrder)
 {
     JQOrderFifo   = 0,
     JQOrderStack  = 1,

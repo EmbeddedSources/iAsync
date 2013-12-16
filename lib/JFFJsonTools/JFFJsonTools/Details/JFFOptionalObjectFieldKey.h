@@ -4,7 +4,7 @@
 
 @property (nonatomic, readonly, copy) id fieldKey;
 
-+ (id)newOptionalObjectFieldWithFieldKey:(id)fieldKey;
++ (instancetype)newOptionalObjectFieldWithFieldKey:(id)fieldKey;
 
 @end
 

@@ -6,7 +6,7 @@
 
 @interface JFFQueueStrategyFactory : NSObject
 
-+(id<JFFQueueStrategy>)queueStrategyWithId:( JFFQueueExecutionOrder )strategyId
-                                queueState:( JFFQueueState* )state;
++ (id<JFFQueueStrategy>)queueStrategyWithId:(JFFQueueExecutionOrder)strategyId
+                                 queueState:(JFFQueueState *)state;
 
 @end

@@ -1,3 +1,3 @@
 #import <Foundation/Foundation.h>
 
-JFFAsyncOperation jffFoursquareLoginLoader ();
+JFFAsyncOperation jffFoursquareLoginLoader(void);

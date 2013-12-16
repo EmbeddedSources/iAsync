@@ -3,23 +3,22 @@
 #import "NSArray+kABMultiValue.h"
 #import "NSArray+ContactsDataFilters.h"
 
-//STODO remove duplicates
-static ABMutableMultiValueRef createMutableMultiValueWithArray( NSArray* elements
-                                                               , NSArray* labels_ )
+static ABMutableMultiValueRef createMutableMultiValueWithArray(NSArray *elements,
+                                                               NSArray *labels)
 {
     ABMutableMultiValueRef result = ABMultiValueCreateMutable(kABMultiDictionaryPropertyType);
     
     NSUInteger index = 0;
-    for (NSDictionary *element in elements)
-    {
-        id label_ = [ labels_ noThrowObjectAtIndex: index ];
-        if ( ![ label_ isKindOfClass: [ NSDictionary class ] ] )
-            label_ = nil;
+    for (NSDictionary *element in elements) {
         
-        ABMultiValueAddValueAndLabel( result
-                                     , (__bridge CFTypeRef)element
-                                     , (__bridge CFTypeRef)label_
-                                     , NULL );
+        id label = [labels noThrowObjectAtIndex:index];
+        if (![label isKindOfClass:[NSDictionary class]])
+            label = nil;
+        
+        ABMultiValueAddValueAndLabel(result,
+                                     (__bridge CFTypeRef)element,
+                                     (__bridge CFTypeRef)label,
+                                     NULL);
         ++index;
     }
     
@@ -34,50 +33,55 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray( NSArray* element
     NSArray* _labels;
 }
 
-+(id)contactFieldWithName:( NSString* )name_
-               propertyID:( ABPropertyID )propertyID_
-                   labels:( NSArray* )labels_
++ (instancetype)newContactFieldWithName:(NSString *)name
+                             propertyID:(ABPropertyID)propertyID
+                                 labels:(NSArray *)labels
+                                 record:(ABRecordRef)record
 {
-    JFFContactDictionaryArrayField* result_ = [ self contactFieldWithName: name_
-                                                              propertyID: propertyID_ ];
-
-    result_->_labels = labels_;
-
-    return result_;
+    JFFContactDictionaryArrayField *result = [self newContactFieldWithName:name
+                                                                propertyID:propertyID
+                                                                    record:record];
+    
+    if (result) {
+        result->_labels = labels;
+    }
+    
+    return result;
 }
 
--(void)readPropertyFromRecord:( ABRecordRef )record_
+- (id)readProperty
 {
-    CFTypeRef value_ = ABRecordCopyValue( record_, self.propertyID );
-    NSArray* address_ = [ NSArray arrayWithMultyValue: value_ ];
-
+    CFTypeRef value = ABRecordCopyValue(self.record, self.propertyID);
+    NSArray *address_ = [ NSArray arrayWithMultyValue:value];
+    
     self.value = address_;
-
-    if ( value_ )
-        CFRelease( value_ );
+    
+    if (value)
+        CFRelease(value);
+    
+    return self.value;
 }
 
--(NSArray*)filteredValues:( NSArray* )values_
+- (NSArray *)filteredValues:(NSArray *)values
 {
-    return [ values_ jffContactsSelectNotEmptyStrings ];
+    return [values jffContactsSelectNotEmptyStrings];
 }
 
-- (void)setPropertyFromValue:( id )value_
-                    toRecord:( ABRecordRef )record_
+- (void)setPropertyFromValue:(id)value
 {
-    NSParameterAssert([value_ isKindOfClass:[NSArray class]]);
+    NSParameterAssert([value isKindOfClass:[NSArray class]]);
 
-    self.value = value_;
+    self.value = value;
 
     CFErrorRef error = NULL;
-    ABMutableMultiValueRef values_ = createMutableMultiValueWithArray( value_, _labels );
-    BOOL didSet = ABRecordSetValue( record_
-                                   , self.propertyID
-                                   , values_
-                                   , &error );
+    ABMutableMultiValueRef values = createMutableMultiValueWithArray(value, _labels);
+    BOOL didSet = ABRecordSetValue(self.record,
+                                   self.propertyID,
+                                   values,
+                                   &error);
     if (!didSet) { NSLog( @"can not set %@", self.name ); }
-    if ( values_ )
-        CFRelease( values_ );
+    if (values)
+        CFRelease(values);
 }
 
 @end

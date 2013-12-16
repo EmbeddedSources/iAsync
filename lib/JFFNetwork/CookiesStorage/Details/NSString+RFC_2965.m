@@ -13,22 +13,22 @@
  restrictions are valid. See RFC 2965 for more detail.
  @result The domain of the receiver.
  */
--(BOOL)domainMatchesCookiesDomain:( NSString* )cookiesDomain_
+- (BOOL)domainMatchesCookiesDomain:(NSString *)cookiesDomain
 {
-    NSString* domain_ = [ self lowercaseString ];
-    cookiesDomain_    = [ cookiesDomain_ lowercaseString ];
-
-    if ( [ cookiesDomain_ length ] == 0 )
+    NSString* domain = [self lowercaseString];
+    cookiesDomain    = [cookiesDomain lowercaseString];
+    
+    if ([cookiesDomain length] == 0)
         return NO;
-
-    if ( [ cookiesDomain_ hasPrefix: @"." ] )
-    {
-        return [ domain_ hasSuffix: cookiesDomain_ ]
-        || ( ( [ cookiesDomain_ length ] - [ domain_ length ] ) == 1
-            && [ cookiesDomain_ hasSuffix: domain_ ] );
+    
+    if ([cookiesDomain hasPrefix:@"."]) {
+        
+        return [domain hasSuffix: cookiesDomain]
+        || (([cookiesDomain length] - [domain length]) == 1
+            && [cookiesDomain hasSuffix:domain]);
     }
-
-    return [ domain_ isEqualToString: cookiesDomain_ ];
+    
+    return [domain isEqualToString:cookiesDomain];
 }
 
 /*!
@@ -39,18 +39,18 @@
  be sent for children of that path, so "/" is the most general.
  @result The path of the receiver.
  */
--(BOOL)pathMatchesCookiesPath:( NSString* )cookiesPath_
+- (BOOL)pathMatchesCookiesPath:(NSString *)cookiesPath
 {
-    if ( [ cookiesPath_ length ] == 0 )
+    if ([cookiesPath length] == 0)
         return NO;
-
-    if ( [ cookiesPath_ isEqualToString: @"/" ] )
+    
+    if ([cookiesPath isEqualToString:@"/"])
         return YES;
-
-    NSString* path_ = [ self lowercaseString ];
-    cookiesPath_    = [ cookiesPath_ lowercaseString ];
-
-    return [ path_ hasPrefix: cookiesPath_ ];
+    
+    NSString *path = [self lowercaseString];
+    cookiesPath    = [cookiesPath lowercaseString];
+    
+    return [path hasPrefix:cookiesPath];
 }
 
 @end

@@ -2,6 +2,6 @@
 
 @interface UIView (AddSubviewAndScale)
 
--(void)addSubviewAndScale:( UIView* )view_;
+- (void)addSubviewAndScale:(UIView *)view;
 
 @end

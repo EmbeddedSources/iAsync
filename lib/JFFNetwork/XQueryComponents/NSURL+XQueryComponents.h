@@ -2,6 +2,6 @@
 
 @interface NSURL (XQueryComponents)
 
--(NSDictionary*)queryComponents;
+- (NSDictionary *)queryComponents;
 
 @end

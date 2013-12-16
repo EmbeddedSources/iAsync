@@ -5,10 +5,10 @@
 @property (atomic, readonly) NSDictionary *dbInfo;
 @property (atomic) NSDictionary *currentDbInfo;
 
-- (id)initWithInfoPath:(NSString *)infoPath;
-- (id)initWithInfoDictionary:(NSDictionary *)infoDictionry;
+- (instancetype)initWithInfoPath:(NSString *)infoPath;
+- (instancetype)initWithInfoDictionary:(NSDictionary *)infoDictionry;
 
 + (void)setSharedDBInfo:(JFFDBInfo *)dbInfo;
-+ (JFFDBInfo*)sharedDBInfo;
++ (JFFDBInfo *)sharedDBInfo;
 
 @end

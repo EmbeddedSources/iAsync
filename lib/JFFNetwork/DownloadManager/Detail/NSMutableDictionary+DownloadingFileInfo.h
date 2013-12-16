@@ -2,9 +2,9 @@
 
 @interface NSMutableDictionary (DownloadingFileInfo)
 
-+(unsigned long long)fileLengthForDestinationURL:( NSURL* )url_;
++ (unsigned long long)fileLengthForDestinationURL:(NSURL *)url;
 
-+(void)setFileLength:( unsigned long long )file_length_
-   forDestinationURL:( NSURL* )url_;
++ (void)setFileLength:(unsigned long long)fileLength
+    forDestinationURL:(NSURL *)url;
 
 @end

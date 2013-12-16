@@ -1,29 +1,31 @@
 #import <JFFUtils/Blocks/JFFUtilsBlockDefinitions.h>
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+@class UIView;
 
 @interface JFFActionSheet : NSObject
 
-@property ( nonatomic ) BOOL dismissBeforeEnterBackground;
-@property ( nonatomic ) NSInteger cancelButtonIndex;
-@property ( nonatomic, readonly ) NSInteger numberOfButtons;
+@property (nonatomic) BOOL dismissBeforeEnterBackground;
+@property (nonatomic) NSInteger cancelButtonIndex;
+@property (nonatomic, readonly) NSInteger numberOfButtons;
 
 //cancelButtonTitle, otherButtonTitles - pass NSString(button title) or JFFAlertButton
-+(id)actionSheetWithTitle:( NSString* )title_
-        cancelButtonTitle:( id )cancel_button_title_
-   destructiveButtonTitle:( id )destructive_button_title_
-        otherButtonTitles:( id )other_button_titles_, ... NS_REQUIRES_NIL_TERMINATION;
++ (instancetype)actionSheetWithTitle:(NSString *)title
+                   cancelButtonTitle:(id)cancelButtonTitle
+              destructiveButtonTitle:(id)destructiveButtonTitle
+                   otherButtonTitles:(id)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
--(void)showInView:( UIView* )view_;
+- (void)showInView:(UIView *)view;
 
--(void)dismissWithClickedButtonIndex:( NSInteger )buttonIndex_
-                            animated:( BOOL )animated_;
+- (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex
+                             animated:(BOOL)animated;
 
 //pass NSString(button title) or JFFAlertButton
--(NSInteger)addActionButton:( id )alertButton_;
+- (NSInteger)addActionButton:(id)alertButton;
 
--(void)addActionButtonWithTitle:( NSString* )title_ ation:( JFFSimpleBlock )action_;
+- (void)addActionButtonWithTitle:(NSString *)title ation:(JFFSimpleBlock)action;
 
-+(void)dismissAllActionSheets;
++ (void)dismissAllActionSheets;
 
 @end

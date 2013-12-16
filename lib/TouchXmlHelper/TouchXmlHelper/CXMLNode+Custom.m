@@ -2,53 +2,51 @@
 
 @implementation CXMLNode (Custom)
 
--(CXMLNode*)firstNodeIfExistsForXPath:( NSString* )xpath_
-                    namespaceMappings:( NSDictionary* )namespaceMappings_
-                    logMessageEnabled:( BOOL )logMessageEnabled_
-                           shouldFail:( BOOL )shouldFail_
+- (CXMLNode *)firstNodeIfExistsForXPath:(NSString *)xpath
+                      namespaceMappings:(NSDictionary *)namespaceMappings
+                      logMessageEnabled:(BOOL)logMessageEnabled
+                             shouldFail:(BOOL)shouldFail
 {
-    NSArray* nodes_ = [ self nodesForXPath: xpath_ namespaceMappings: namespaceMappings_ ];
-    if ( [ nodes_ count ] == 0 )
-    {
-        if ( logMessageEnabled_ )
-        {
-            NSLog( @"[!!! WARNING !!!] - No elements for path: %@", xpath_ );
-            NSLog( @"In node : ");
-            NSLog( @"%@", self );
+    NSArray *nodes = [self nodesForXPath:xpath namespaceMappings:namespaceMappings];
+    if ([nodes count] == 0) {
+        
+        if (logMessageEnabled) {
+            NSLog(@"[!!! WARNING !!!] - No elements for path: %@", xpath);
+            NSLog(@"In node : ");
+            NSLog(@"%@", self );
         }
-        if ( shouldFail_ )
-        {
-            NSAssert1( NO, @"[!!! ERROR !!!] - No elements for path: %@", xpath_ );
+        if (shouldFail) {
+            NSAssert1(NO, @"[!!! ERROR !!!] - No elements for path: %@", xpath);
         }
-
+        
         return nil;
     }
-
-    return [ nodes_ objectAtIndex: 0 ];
+    
+    return nodes[0];
 }
 
--(CXMLNode*)firstNodeIfExistsForXPath:( NSString* )xpath_
-                    namespaceMappings:( NSDictionary* )namespaceMappings_
+- (CXMLNode *)firstNodeIfExistsForXPath:(NSString *)xpath
+                      namespaceMappings:(NSDictionary *)namespaceMappings
 {
-    return [self firstNodeIfExistsForXPath: xpath_
-                         namespaceMappings: namespaceMappings_
-                         logMessageEnabled: NO
-                                shouldFail: NO ];
+    return [self firstNodeIfExistsForXPath:xpath
+                         namespaceMappings:namespaceMappings
+                         logMessageEnabled:NO
+                                shouldFail:NO];
 }
 
--(CXMLNode*)firstNodeForXPath:( NSString* )xpath_
-            namespaceMappings:( NSDictionary* )namespaceMappings_
+- (CXMLNode *)firstNodeForXPath:(NSString *)xpath
+              namespaceMappings:(NSDictionary *)namespaceMappings
 {
-    return [ self firstNodeIfExistsForXPath: xpath_
-                          namespaceMappings: namespaceMappings_
-                          logMessageEnabled: YES
-                                 shouldFail: YES ];
+    return [self firstNodeIfExistsForXPath:xpath
+                         namespaceMappings:namespaceMappings
+                         logMessageEnabled:YES
+                                shouldFail:YES];
 }
 
--(NSArray*)nodesForXPath:( NSString* )xpath_
-       namespaceMappings:( NSDictionary* )namespace_mappings_
+- (NSArray *)nodesForXPath:(NSString *)xpath
+         namespaceMappings:(NSDictionary *)namespaceMappings
 {
-    return [ self nodesForXPath: xpath_ namespaceMappings: namespace_mappings_ error: 0 ];
+    return [self nodesForXPath:xpath namespaceMappings:namespaceMappings error:0];
 }
 
 @end

@@ -1,7 +1,4 @@
-#import <JFFUtils/JFFError.h>
-
-#import <Foundation/Foundation.h>
+#import <JFFUtils/Errors/JFFError.h>
 
 @interface JFFFacebookError : JFFError
-
 @end

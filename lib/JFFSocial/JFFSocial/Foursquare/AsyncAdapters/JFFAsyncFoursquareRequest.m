@@ -12,11 +12,11 @@ static NSDictionary *requaredParamsWithAccessToken(NSString *accessToken)
 
 static JFFAsyncOperation generalFoursquareRequestLoader(NSString *requestURL,
                                                         NSString *httpMethod,
-                                                        NSData *httpBody,
+                                                        NSMutableData *httpBody,
                                                         NSString *accessToken,
                                                         NSDictionary *parameters)
 {
-    assert(accessToken);
+    NSCParameterAssert(accessToken);
     
     JFFURLConnectionParams *params = [JFFURLConnectionParams new];
     
@@ -30,8 +30,8 @@ static JFFAsyncOperation generalFoursquareRequestLoader(NSString *requestURL,
     if ([httpMethod isEqualToString:@"POST"]) {
         params.url = [requestURL toURL];
         if (httpBody) {
-            NSString *boundary = [NSString createUuid];
-            params.httpBody = [httpBody dataForHTTPPostByAppendingParameters:fullParams boundary:boundary];
+            NSString *boundary = [[NSUUID new] UUIDString];
+            [httpBody appendHTTPParameters:fullParams boundary:boundary];
             params.headers = @{ @"Content-Type" : @"multipart/form-data" };
         } else {
             params.httpBody = [paramsString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
@@ -53,7 +53,7 @@ JFFAsyncOperation jffFoursquareRequestLoader (NSString *requestURL, NSString *ht
                                           parameters);
 }
 
-JFFAsyncOperation jffFoursquareRequestLoaderWithHTTPBody (NSString *requestURL, NSData *httpBody, NSString *accessToken)
+JFFAsyncOperation jffFoursquareRequestLoaderWithHTTPBody (NSString *requestURL, NSMutableData *httpBody, NSString *accessToken)
 {
     return generalFoursquareRequestLoader(requestURL,
                                           @"POST",

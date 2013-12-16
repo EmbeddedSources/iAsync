@@ -1,6 +1,6 @@
 #import <JFFAsyncOperations/JFFAsyncOperationsBlockDefinitions.h>
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 typedef void(^JFFSocialTwitterDidLoginCallback)(NSString *login);
 
@@ -18,9 +18,5 @@ typedef void(^JFFSocialTwitterDidLoginCallback)(NSString *login);
                       toFollowerWithId:(NSString *)userId;
 
 + (JFFAsyncOperation)sendTweetMessage:(NSString *)message;
-
-#pragma mark callbacks
-
-+ (void)setDidLoginCallback:(JFFSocialTwitterDidLoginCallback)didLoginCallback;
 
 @end

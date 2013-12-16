@@ -4,20 +4,20 @@
 
 @interface JFFContextLoaders : NSObject
 
-@property ( nonatomic, retain ) NSString* name;
+@property (nonatomic) NSString *name;
 
 @end
 
 @interface JFFContextLoaders ( ActiveLoaders )
 
-@property ( nonatomic, readonly ) NSUInteger activeLoadersNumber;
+@property (nonatomic, readonly) NSUInteger activeLoadersNumber;
 
 - (void)addActiveNativeLoader:(JFFAsyncOperation)nativeLoader
-               wrappedCancel:( JFFCancelAsyncOperation )cancel_;
+                wrappedCancel:(JFFCancelAsyncOperation)cancel;
 
-- (BOOL)removeActiveNativeLoader:( JFFAsyncOperation )nativeLoader;
+- (BOOL)removeActiveNativeLoader:(JFFAsyncOperation)nativeLoader;
 
-- (void)cancelActiveNativeLoader:( JFFAsyncOperation )nativeLoader cancel:( BOOL )canceled;
+- (void)cancelActiveNativeLoader:(JFFAsyncOperation)nativeLoader cancel:(BOOL)canceled;
 
 @end
 
@@ -25,9 +25,9 @@
 
 @interface JFFContextLoaders ( PendingLoaders )
 
-@property ( nonatomic, readonly ) NSUInteger pendingLoadersNumber;
+@property (nonatomic, readonly) NSUInteger pendingLoadersNumber;
 
--(JFFPedingLoaderData*)popPendingLoaderData;
+- (JFFPedingLoaderData *)popPendingLoaderData;
 
 - (void)addPendingNativeLoader:(JFFAsyncOperation)nativeLoader
               progressCallback:(JFFAsyncOperationProgressHandler)progressCallback

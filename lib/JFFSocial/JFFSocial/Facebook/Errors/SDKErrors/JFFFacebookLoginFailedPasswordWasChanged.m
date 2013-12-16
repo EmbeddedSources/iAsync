@@ -1,18 +1,17 @@
 #import "JFFFacebookLoginFailedPasswordWasChanged.h"
 
-#import <JFFJsonTools/JFFJsonValidator.h>
-
 #import <FacebookSDK/FacebookSDK.h>
 
 @implementation JFFFacebookLoginFailedPasswordWasChanged
 
-- (id)init
+- (instancetype)init
 {
-    return [self initWithDescription:NSLocalizedString(@"FACEBOOK_LOGIN_ERROR_PASSWORD_WAS_CHANGED", nil)];
+    return [self initWithDescription:NSLocalizedString(@"FACEBOOK_LOGIN_ERROR_USER_DENIED_PERMISSION", nil)];
 }
 
 - (void)writeErrorWithJFFLogger
 {
+    [self writeErrorToNSLog];
 }
 
 + (BOOL)isMineFacebookNativeError:(NSError *)nativeError

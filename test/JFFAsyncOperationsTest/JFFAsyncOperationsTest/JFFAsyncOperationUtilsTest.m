@@ -6,40 +6,43 @@
 
 -(void)testCallingOfPregressBlock
 {
-    NSObject *resultObject = [NSObject new];
-    
-    JFFSyncOperation loadDataBlock = ^id(NSError **error) {
-        return resultObject;
-    };
-    
-    JFFAsyncOperation loader = asyncOperationWithSyncOperationAndQueue(loadDataBlock, "com.test");
-    
-    __block BOOL resultCalled = NO;
-    
-    JFFDidFinishAsyncOperationHandler doneCallback_ = ^(id result, NSError *error) {
-        resultCalled = YES;
-        [ self notify: kGHUnitWaitStatusSuccess forSelector: _cmd ];
-    };
-    
-    __block BOOL progressCalled_ = NO;
+    __block BOOL progressCalled = NO;
     __block NSUInteger progressCallsCount   = 0;
     __block BOOL progressCalledBeforeResult = NO;
     
-    JFFAsyncOperationProgressHandler progressCallback_ = ^(id info) {
-        progressCalled_ = (info == resultObject);
-        ++progressCallsCount;
-        progressCalledBeforeResult = !resultCalled;
+    void (^block)(JFFSimpleBlock) = ^(JFFSimpleBlock complete) {
+        
+        NSObject *resultObject = [NSObject new];
+        
+        JFFSyncOperation loadDataBlock = ^id(NSError **error) {
+            return resultObject;
+        };
+        
+        JFFAsyncOperation loader = asyncOperationWithSyncOperationAndQueue(loadDataBlock, "com.test");
+        
+        __block BOOL resultCalled = NO;
+        
+        JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
+            resultCalled = YES;
+            complete();
+        };
+        
+        JFFAsyncOperationProgressHandler progressCallback = ^(id info) {
+            progressCalled = (info == resultObject);
+            ++progressCallsCount;
+            progressCalledBeforeResult = !resultCalled;
+        };
+        
+        loader(progressCallback, nil, doneCallback);
     };
-
-    loader(progressCallback_, nil, doneCallback_);
     
-    //TODO sometimes fails - fix !!!
-    [self prepare];
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.];
-
-    GHAssertTrue( progressCalled_, @"ok" );
-    GHAssertTrue( progressCallsCount == 1, @"ok" );
-    GHAssertTrue( progressCalledBeforeResult, @"ok" );
+    [self performAsyncRequestOnMainThreadWithBlock:block
+                                          selector:_cmd
+                                           timeout:1.];
+    
+    GHAssertTrue(progressCalled, @"ok");
+    GHAssertTrue(progressCallsCount == 1, @"ok");
+    GHAssertTrue(progressCalledBeforeResult, @"ok");
 }
 
 @end

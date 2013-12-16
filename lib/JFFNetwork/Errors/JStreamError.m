@@ -4,40 +4,64 @@
 {
 @private
     CFStreamError _rawError;
+    id<NSCopying> _context;
 }
 
-
--(id)init
+- (instancetype)init
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
--(id)initWithDescription:( NSString* )description_
-                  domain:( NSString* )domain_
-                    code:( NSInteger )code_
+- (instancetype)initWithDescription:(NSString *)description
+                             domain:(NSString *)domain
+                               code:(NSInteger)code
 {
-    [ self doesNotRecognizeSelector: _cmd ];
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
--(id)initWithStreamError:( CFStreamError )rawError_
+- (instancetype)initWithStreamError:(CFStreamError)rawError
+                            context:(id<NSCopying>)context
 {
-    NSString* domain_ = [ NSString stringWithFormat: @"com.just_for_fun.library.network.CFError(%ld)", rawError_.domain ];
+    NSString *domain_ = [[NSString alloc] initWithFormat: @"com.just_for_fun.library.network.CFError(%ld)", rawError.domain];
     
-    self = [ super initWithDescription: NSLocalizedString( @"JNETWORK_CF_STREAM_ERROR", nil )
-                                domain: domain_
-                                  code: rawError_.error ];
+    self = [super initWithDescription:NSLocalizedString(@"JNETWORK_CF_STREAM_ERROR", nil)
+                               domain:domain_
+                                 code:rawError.error];
     
-    if ( nil == self )
-    {
+    if (nil == self) {
+        
         return nil;
     }
     
-    
-    self->_rawError = rawError_;
+    _rawError = rawError;
+    _context  = context;
     
     return self;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    JStreamError *copy = [super copyWithZone:zone];
+    
+    if (copy) {
+        
+        copy->_rawError = _rawError;
+        copy->_context  = [_context copyWithZone:zone];
+    }
+    
+    return copy;
+}
+
+- (NSString *)errorLogDescription
+{
+    return [[NSString alloc] initWithFormat:@"%@ : %@ nativeError domain:%ld error_code:%d context:%@",
+            [self class],
+            [self localizedDescription],
+            _rawError.domain,
+            (int)_rawError.error,
+            _context];
 }
 
 @end

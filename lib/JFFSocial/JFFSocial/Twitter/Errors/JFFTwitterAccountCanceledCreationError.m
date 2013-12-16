@@ -2,9 +2,9 @@
 
 @implementation JFFTwitterAccountCanceledCreationError
 
--(id)init
+- (instancetype)init
 {
-    return [ self initWithDescription: NSLocalizedString( @"USER_HAS_CANCELED_CREATION_OF_TWITTER_ACCOUNT", nil ) ];
+    return [self initWithDescription:NSLocalizedString(@"USER_HAS_CANCELED_CREATION_OF_TWITTER_ACCOUNT", nil)];
 }
 
 @end

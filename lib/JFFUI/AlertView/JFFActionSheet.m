@@ -11,51 +11,51 @@
 
 @implementation JFFActionSheet
 {
-    NSMutableArray* _alertButtons;
-    UIActionSheet*  _actionSheet;
+    NSMutableArray *_alertButtons;
+    UIActionSheet  *_actionSheet;
 }
 
--(void)dealloc
+- (void)dealloc
 {
-    [ [ NSNotificationCenter defaultCenter ] removeObserver: self ];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-+(void)dismissAllActionSheets
++ (void)dismissAllActionSheets
 {
-    JFFActionSheetsContainer* container_ = [ JFFActionSheetsContainer sharedActionSheetsContainer ];
-
-    for ( JFFActionSheet* actionSheet_ in [ container_ allActionSheets ] )
-    {
-        [ actionSheet_ dismissWithClickedButtonIndex: [ actionSheet_ cancelButtonIndex ]
-                                            animated: NO ];
+    JFFActionSheetsContainer *container = [ JFFActionSheetsContainer sharedActionSheetsContainer ];
+    
+    for (JFFActionSheet *actionSheet in [container allActionSheets]) {
+        
+        [actionSheet dismissWithClickedButtonIndex:[actionSheet cancelButtonIndex]
+                                           animated:NO];
     }
 
-    [ container_ removeAllActionSheets ];
+    [container removeAllActionSheets];
 }
 
--(id)initWithTitle:( NSString* )title_
- cancelButtonTitle:( NSString* )cancelButtonTitle_
-destructiveButtonTitle:( NSString* )destructiveButtonTitle_
-otherButtonTitlesArray:( NSArray* )otherButtonTitles_
+- (instancetype)initWithTitle:(NSString *)title
+            cancelButtonTitle:(NSString *)cancelButtonTitle
+       destructiveButtonTitle:(NSString *)destructiveButtonTitle
+       otherButtonTitlesArray:(NSArray *)otherButtonTitles
 {
-    self = [ super init ];
-
-    if ( self )
-    {
-        _actionSheet = [ [ UIActionSheet alloc ] initWithTitle: title_
-                                                      delegate: self
-                                             cancelButtonTitle: nil
-                                        destructiveButtonTitle: destructiveButtonTitle_
-                                             otherButtonTitles: nil ];
-
-        for ( NSString* buttonTitle_ in otherButtonTitles_ )
-        {
-            [ _actionSheet addButtonWithTitle: buttonTitle_ ];
+    self = [super init];
+    
+    if (self) {
+        
+        _actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                   delegate:self
+                                          cancelButtonTitle:nil
+                                     destructiveButtonTitle:destructiveButtonTitle
+                                          otherButtonTitles:nil];
+        
+        for (NSString *buttonTitle in otherButtonTitles) {
+            
+            [_actionSheet addButtonWithTitle:buttonTitle];
         }
         
-        if (cancelButtonTitle_)
-        {
-            [_actionSheet addButtonWithTitle:cancelButtonTitle_];
+        if (cancelButtonTitle) {
+            
+            [_actionSheet addButtonWithTitle:cancelButtonTitle];
             _actionSheet.cancelButtonIndex = _actionSheet.numberOfButtons - 1;
         }
         
@@ -68,7 +68,7 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
     return self;
 }
 
--(NSInteger)addActionButton:( id )alertButtonObject_
+- (NSInteger)addActionButton:(id)alertButtonObject_
 {
     JFFAlertButton* alertButton_ = [ alertButtonObject_ toAlertButton ];
     NSInteger index_ = [ _actionSheet addButtonWithTitle: alertButton_.title ];
@@ -86,10 +86,10 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
     return [self addActionButton:title];
 }
 
-+ (id)actionSheetWithTitle:(NSString *)title
-         cancelButtonTitle:(id)cancelButtonTitle
-    destructiveButtonTitle:(id)destructiveButtonTitle
-         otherButtonTitles:(id)otherButtonTitles, ...
++ (instancetype)actionSheetWithTitle:(NSString *)title
+                   cancelButtonTitle:(id)cancelButtonTitle
+              destructiveButtonTitle:(id)destructiveButtonTitle
+                   otherButtonTitles:(id)otherButtonTitles, ...
 {
     NSMutableArray *otherActionButtons      = [NSMutableArray new];
     NSMutableArray *otherActionStringTitles = [NSMutableArray new];
@@ -128,7 +128,7 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
     return actionSheet;
 }
 
--(void)showInView:( UIView* )view_
+- (void)showInView:(UIView *)view_
 {
     JFFActionSheetsContainer* container_ = [ JFFActionSheetsContainer sharedActionSheetsContainer ];
 
@@ -140,17 +140,17 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
     [ container_ addActionSheet: self withView: view_ ];
 }
 
--(void)applicationDidEnterBackground:( id )sender_
+- (void)applicationDidEnterBackground:( id )sender_
 {
-    if ( self.dismissBeforeEnterBackground )
-    {
+    if (self.dismissBeforeEnterBackground) {
+        
         [ self dismissWithClickedButtonIndex: [ self cancelButtonIndex ] animated: NO ];
     }
 }
 
 #pragma mark UIActionSheetDelegate
 
--(void)actionSheet:( UIActionSheet* )actionSheet_ clickedButtonAtIndex:( NSInteger )button_index_
+- (void)actionSheet:( UIActionSheet* )actionSheet_ clickedButtonAtIndex:( NSInteger )button_index_
 {
     JFFAlertButton* alertButton_ = _alertButtons[ button_index_ ];
 
@@ -158,7 +158,7 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
         alertButton_.action();
 }
 
--(void)actionSheet:( UIActionSheet* )actionSheet_ didDismissWithButtonIndex:( NSInteger )button_index_
+- (void)actionSheet:( UIActionSheet* )actionSheet_ didDismissWithButtonIndex:( NSInteger )button_index_
 {
     JFFActionSheetsContainer* container_ = [ JFFActionSheetsContainer sharedActionSheetsContainer ];
     [ container_ removeActionSheet: self ];
@@ -168,15 +168,29 @@ otherButtonTitlesArray:( NSArray* )otherButtonTitles_
         [ actionSheetsStruct_.actionSheet->_actionSheet showInView: actionSheetsStruct_.view ];
 }
 
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet
+{
+    NSArray *buttons = [actionSheet.subviews select:^BOOL(UIView* view) {
+        return [view isKindOfClass:[UIButton class]];
+    }];
+    
+    [_alertButtons enumerateObjectsUsingBlock:^(JFFAlertButton *button, NSUInteger idx, BOOL *stop) {
+    
+        if (button.backgroundImage) {
+            [buttons[idx] setBackgroundImage:button.backgroundImage forState:UIControlStateNormal];
+        }
+    }];
+}
+
 #pragma mark -
 #pragma mark forward ActionSeet methods
 
--(id)forwardingTargetForSelector:( SEL )selector_
+- (id)forwardingTargetForSelector:(SEL)selector
 {
     return _actionSheet;
 }
 
--(void)dismissWithClickedButtonIndex:( NSInteger )buttonIndex_ animated:( BOOL )animated_
+- (void)dismissWithClickedButtonIndex:( NSInteger )buttonIndex_ animated:( BOOL )animated_
 {
     JFFActionSheetsContainer* container_ = [ JFFActionSheetsContainer sharedActionSheetsContainer ];
 

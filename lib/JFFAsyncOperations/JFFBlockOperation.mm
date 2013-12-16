@@ -22,40 +22,30 @@
     NSAssert(!_didLoadDataBlock, @"should be nil");
     NSAssert(!_progressBlock   , @"should be nil");
     NSAssert(!_loadDataBlock   , @"should be nil");
-    
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
-    dispatch_release(_currentQueue);
-#endif
-    
-    _currentQueue = NULL;
 }
 
-- (id)initWithLoadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-           didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
-              progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
-               currentQueue:(dispatch_queue_t)currentQueue
-                    barrier:(BOOL)barrier
+- (instancetype)initWithLoadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
+                     didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
+                        progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
+                         currentQueue:(dispatch_queue_t)currentQueue
+                              barrier:(BOOL)barrier
+                   serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent
 {
     self = [super init];
     
     if (self) {
-        self.loadDataBlock    = loadDataBlock;
-        self.didLoadDataBlock = didLoadDataBlock;
-        self.progressBlock    = progressBlock;
+        _loadDataBlock    = [loadDataBlock    copy];
+        _didLoadDataBlock = [didLoadDataBlock copy];
+        _progressBlock    = [progressBlock    copy];
         
         _currentQueue = currentQueue;
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0
-        dispatch_retain(_currentQueue);
-#endif
-        
-        _barrier = barrier;
+        _barrier      = barrier;
     }
     
     return self;
 }
 
--(void)finalizeOperations
+- (void)finalizeOperations
 {
     _finishedOrCanceled = YES;
 
@@ -70,7 +60,7 @@
     if (self.finishedOrCanceled)
         return;
     
-    self.didLoadDataBlock(result, error);
+    _didLoadDataBlock(result, error);
     
     [self finalizeOperations];
 }
@@ -86,9 +76,6 @@
     if (self.finishedOrCanceled)
         return;
     
-    dispatch_queue_t currentQueue = dispatch_get_current_queue();
-    NSAssert(currentQueue == _currentQueue, @"Invalid current queue queue");
-    
     [self finalizeOperations];
 }
 
@@ -99,8 +86,6 @@
     ?&dispatch_barrier_async
     :&dispatch_async;
     
-//    static int val;
-//    NSLog(@"dispatchAsyncMethod+: %d", ++val);
     dispatchAsyncMethod(queue, ^{
         if (self.finishedOrCanceled)
             return;
@@ -115,7 +100,9 @@
                 });
             };
             @autoreleasepool {
+                
                 opResult = loadDataBlock(&error, progressCallback);
+                NSAssert(((opResult != nil) ^ (error != nil)), @"result xor error should be loaded");
             }
         }
         @catch (NSException *ex) {
@@ -128,28 +115,26 @@
         }
         
         dispatch_async(_currentQueue, ^ {
-//            NSLog(@"dispatchAsyncMethod+: %d", --val);
             [self didFinishOperationWithResult:opResult error:error];
         });
     });
 }
 
-+ (id)performOperationWithQueueName:(const char*)queueName
-                      loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                   didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
-                      progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
-                            barrier:(BOOL)barrier
-                 serialOrConcurrent:( dispatch_queue_attr_t )serialOrConcurrent_;
++ (instancetype)performOperationWithQueueName:(const char*)queueName
+                                loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
+                             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
+                                progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
+                                      barrier:(BOOL)barrier
+                                 currentQueue:(dispatch_queue_t)currentQueue
+                           serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent
 {
     NSParameterAssert(loadDataBlock   );
     NSParameterAssert(didLoadDataBlock);
-    
-    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    NSParameterAssert(currentQueue    );
     
     dispatch_queue_t queue = NULL;
     if (queueName != NULL && strlen(queueName) != 0) {
-        queue = dispatch_queue_get_or_create(queueName,
-                                             serialOrConcurrent_);
+        queue = dispatch_queue_get_or_create(queueName, serialOrConcurrent);
     } else {
         queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     }
@@ -160,7 +145,8 @@
                                                    didLoadDataBlock:didLoadDataBlock
                                                       progressBlock:progressBlock
                                                        currentQueue:currentQueue
-                                                            barrier:barrier];
+                                                            barrier:barrier
+                                                 serialOrConcurrent:serialOrConcurrent];
     
     [result performBackgroundOperationInQueue:queue
                                 loadDataBlock:loadDataBlock];
@@ -168,16 +154,18 @@
     return result;
 }
 
-+ (id)performOperationWithQueueName:(const char *)queueName
-                      loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                   didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
++ (instancetype)performOperationWithQueueName:(const char *)queueName
+                                loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
+                             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
 {
+    NSParameterAssert([NSThread isMainThread]);
     return [self performOperationWithQueueName:queueName
                                  loadDataBlock:loadDataBlock
                               didLoadDataBlock:didLoadDataBlock
                                  progressBlock:nil
                                        barrier:NO
-                            serialOrConcurrent:DISPATCH_QUEUE_CONCURRENT ];
+                                  currentQueue:dispatch_get_main_queue()
+                            serialOrConcurrent:DISPATCH_QUEUE_CONCURRENT];
 }
 
 @end

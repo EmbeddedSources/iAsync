@@ -1,16 +1,16 @@
 #import "JFFAddressBookFactory.h"
 
 #import "JFFAddressBook.h"
+#import "JFFAddressBookAccessError.h"
 
-#import "JFFAddressBookWrapperError.h"
-
-static NSError *convertErrorType(NSError *error)
+static NSError *convertErrorType(NSError *error, ABAuthorizationStatus authorizationStatus)
 {
     if (!error)
-        return nil;
+        return [JFFAddressBookAccessError new];
     
     JFFAddressBookWrapperError *result = [JFFAddressBookWrapperError newAddressBookWrapperErrorWithNativeError:error];
-    result.nativeError = error;
+    result.nativeError         = error;
+    result.authorizationStatus = authorizationStatus;
     return result;
 }
 
@@ -18,52 +18,46 @@ static NSError *convertErrorType(NSError *error)
 
 + (void)asyncAddressBookWithOnCreatedBlock:(JFFAddressBookOnCreated)callback
 {
-    NSParameterAssert(nil!=callback);
-    
-#ifdef kCFCoreFoundationVersionNumber_iOS_5_1
-    if (kCFCoreFoundationVersionNumber <= kCFCoreFoundationVersionNumber_iOS_5_1) {
-#endif
-        [self asyncLegacyAddressBookWithOnCreatedBlock:callback];
-        return;
-#ifdef kCFCoreFoundationVersionNumber_iOS_5_1
-    }
+    NSParameterAssert(callback);
     
     CFErrorRef error = NULL;
     ABAddressBookRef result = ABAddressBookCreateWithOptions(0, &error);
+    ABAuthorizationStatus authorizationStatus = ::ABAddressBookGetAuthorizationStatus();
     
     if (NULL != error) {
-        NSError *retError = (__bridge NSError*)error;
+        
+        NSError *retError = (__bridge NSError *)error;
         if (result)
             CFRelease(result);
-        if (callback) {
-            
-            callback(nil, kABAuthorizationStatusNotDetermined, convertErrorType(retError));
-        }
+        
+        if (callback)
+            callback(nil, kABAuthorizationStatusNotDetermined, convertErrorType(retError, authorizationStatus));
         return;
+    }
+    
+    JFFAddressBook *bookWrapper = [[JFFAddressBook alloc] initWithRawBook:result];
+    
+    if (authorizationStatus != kABAuthorizationStatusNotDetermined) {
+        
+        BOOL blockGranted = (authorizationStatus == kABAuthorizationStatusAuthorized);
+        callback(bookWrapper, ::ABAddressBookGetAuthorizationStatus(), blockGranted?nil:convertErrorType(nil, authorizationStatus));
     }
     
     callback = [callback copy];
     
     ABAddressBookRequestAccessCompletionHandler onAddressBookAccess =
-        ^(bool blockGranted, CFErrorRef blockError) {
-            NSError *retError = (__bridge NSError *)(blockError);
+    
+        ^void(bool blockGranted, CFErrorRef blockError) {
             
-            JFFAddressBook *bookWrapper = [[JFFAddressBook alloc] initWithRawBook:result];
-            callback(bookWrapper, ::ABAddressBookGetAuthorizationStatus(), convertErrorType(retError));
+            NSError *retError = (__bridge NSError *)(blockError);
+            ABAuthorizationStatus authorizationStatus = ::ABAddressBookGetAuthorizationStatus();
+            
+            dispatch_async(dispatch_get_main_queue(), ^void(void){
+                callback(bookWrapper, ::ABAddressBookGetAuthorizationStatus(), blockGranted?nil:convertErrorType(retError, authorizationStatus));
+            });
         };
     
     ABAddressBookRequestAccessWithCompletion(result, onAddressBookAccess);
-#endif
-}
-
-+ (void)asyncLegacyAddressBookWithOnCreatedBlock:(JFFAddressBookOnCreated)callback
-{
-    NSParameterAssert(nil!=callback);
-    
-    ABAddressBookRef result = ::ABAddressBookCreate();
-    JFFAddressBook *bookWrapper = [[JFFAddressBook alloc] initWithRawBook:result];
-    
-    callback(bookWrapper, kABAuthorizationStatusAuthorized, nil);
 }
 
 + (NSString *)bookStatusToString:(ABAuthorizationStatus)status
@@ -86,6 +80,7 @@ static NSError *convertErrorType(NSError *error)
 + (void)asyncAddressBookWithSuccessBlock:(JFFAddressBookSuccessCallback)onSuccess
                            errorCallback:(JFFAddressBookErrorCallback)onFailure
 {
+    NSParameterAssert([[NSThread currentThread] isMainThread]);
     NSParameterAssert(nil!=onSuccess);
     NSParameterAssert(nil!=onFailure);
     

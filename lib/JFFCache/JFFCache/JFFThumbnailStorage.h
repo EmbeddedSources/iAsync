@@ -1,17 +1,17 @@
 #import <JFFAsyncOperations/JFFAsyncOperationsBlockDefinitions.h>
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+extern NSString *JFFNoImageDataURLString;
 
 @interface JFFThumbnailStorage : NSObject
 
-+ (JFFThumbnailStorage *)sharedStorage;
++ (instancetype)sharedStorage;
 + (void)setSharedStorage:(JFFThumbnailStorage *)storage;
 
 - (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url;
 
-- (JFFAsyncOperation)thumbnailLoaderForUrl:(NSURL *)url
-                              scaledToSize:(CGSize)scaleSize
-                               contentMode:(UIViewContentMode)contentMode;
+- (JFFAsyncOperation)tryThumbnailLoaderForUrls:(NSArray *)urls;
 
 - (void)resetCache;
 

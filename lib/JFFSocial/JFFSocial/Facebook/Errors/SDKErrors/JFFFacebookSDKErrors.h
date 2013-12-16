@@ -1,4 +1,4 @@
-#import <JFFUtils/JFFError.h>
+#import <JFFUtils/Errors/JFFError.h>
 
 #import <Foundation/Foundation.h>
 
@@ -6,6 +6,6 @@
 
 @property (nonatomic) NSError *nativeError;
 
-+ (id)newFacebookSDKErrorsWithNativeError:(NSError *)nativeError;
++ (instancetype)newFacebookSDKErrorsWithNativeError:(NSError *)nativeError;
 
 @end

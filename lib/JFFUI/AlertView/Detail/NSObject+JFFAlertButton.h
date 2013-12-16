@@ -4,6 +4,6 @@
 
 @interface NSObject (JFFAlertButton)
 
--(JFFAlertButton*)toAlertButton;
+- (JFFAlertButton *)toAlertButton;
 
 @end
