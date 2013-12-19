@@ -5,6 +5,10 @@
 static const NSUInteger testClassMethodResult    = 34;//just rendomize number
 static const NSUInteger testInstanceMethodResult = 35;//just rendomize number
 
+typedef NSUInteger (*UIntPropertyGetterMsgSendFunction)( id, SEL );
+static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGetterMsgSendFunction)objc_msgSend;
+
+
 @interface NSTestClass : NSObject
 @end
 
@@ -231,10 +235,24 @@ static const NSUInteger testInstanceMethodResult = 35;//just rendomize number
                                                             toClass:[NSTestClass class]
                                                   newMethodSelector:@selector(classMethodWithLongNameForUniquenessPurposes2)];
         
+<<<<<<< .mine
         STAssertTrue(result, @"method added");
+=======
         
+
+        XCTAssertTrue( [ NSTestClass hasClassMethodWithSelector: @selector( classMethodWithLongNameForUniquenessPurposes2 ) ]
+                     , @"NSTestClass has classMethodWithLongNameForUniquenessPurposes2 method" );
+>>>>>>> .r49669
+
+        
+<<<<<<< .mine
         STAssertTrue([NSTestClass hasClassMethodWithSelector:@selector(classMethodWithLongNameForUniquenessPurposes2)],
                      @"NSTestClass has classMethodWithLongNameForUniquenessPurposes2 method");
+=======
+        NSUInteger method_result_ = FPropertyGetter(
+            [ NSTestClass class ], @selector( classMethodWithLongNameForUniquenessPurposes2 ) );
+        XCTAssertTrue( testClassMethodResult_ == method_result_, @"check implementation of new method" );
+>>>>>>> .r49669
         
         NSUInteger methodResult = (NSUInteger)objc_msgSend([NSTestClass class], @selector(classMethodWithLongNameForUniquenessPurposes2));
         STAssertTrue(testClassMethodResult == methodResult, @"check implementation of new method");
@@ -257,8 +275,14 @@ static const NSUInteger testInstanceMethodResult = 35;//just rendomize number
         
         STAssertTrue(result, @"method added");
         
+<<<<<<< .mine
         STAssertTrue([NSTestClass hasInstanceMethodWithSelector:newMethodSelector],
                      @"NSTestClass has instanceMethodWithLongNameForUniquenessPurposes2 method");
+=======
+        NSTestClass* instance_ = [ NSTestClass new ];
+        NSUInteger method_result_ = FPropertyGetter( instance_, newMethodSelector_ );
+        XCTAssertTrue( testInstanceMethodResult_ == method_result_, @"check implementation of new method" );
+>>>>>>> .r49669
         
         NSTestClass *instance = [NSTestClass new];
         NSUInteger methodResult = (NSUInteger)objc_msgSend(instance, newMethodSelector);

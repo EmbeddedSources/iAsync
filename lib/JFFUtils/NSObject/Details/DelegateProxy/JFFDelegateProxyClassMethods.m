@@ -7,6 +7,11 @@
 @class JFFMutableAssignArray;
 @class JFFProxyDelegatesDispatcher;
 
+
+typedef id (*PropertyGetterMsgSendFunction)( id, SEL );
+static const PropertyGetterMsgSendFunction FPropertyGetter = (PropertyGetterMsgSendFunction)objc_msgSend;
+
+
 @interface NSObject (DelegateProxyPrivate_JFFDelegateProxyClassMethods)
 
 - (JFFProxyDelegatesDispatcher *)proxyDelegatesDispatcherForHookedGetterName:(NSString *)hookedGetterName
@@ -28,9 +33,11 @@
     JFFProxyDelegatesDispatcher *proxy = [self proxyDelegatesDispatcherForHookedGetterName:hookedGetterName
                                                                               delegateName:hookedDelegateName];
     if (proxy)
+    {
         return proxy;
+    }
     
-    return objc_msgSend(self, NSSelectorFromString(hookedGetterName));
+    return FPropertyGetter(self, NSSelectorFromString(hookedGetterName));
 }
 
 @end

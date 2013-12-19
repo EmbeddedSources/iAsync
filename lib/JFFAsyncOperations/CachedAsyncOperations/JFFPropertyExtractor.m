@@ -9,6 +9,14 @@
 
 #import <objc/message.h>
 
+
+typedef id (*PropertyGetterMsgSendFunction)( id, SEL );
+typedef void (*PropertySetterMsgSendFunction)( id, SEL, id );
+
+static const PropertyGetterMsgSendFunction FPropertyGetter = (PropertyGetterMsgSendFunction)objc_msgSend;
+static const PropertySetterMsgSendFunction FPropertySetter = (PropertySetterMsgSendFunction)objc_msgSend;
+
+
 @interface JFFPropertyExtractor ()
 
 @property (nonatomic) JFFObjectRelatedPropertyData *objectPropertyData;
@@ -46,39 +54,76 @@ cancelBlock;
 
 - (SEL)propertySetSelector
 {
+    NSString* methodNameForLogging = NSStringFromSelector( _cmd );
+    [ JFFLogger logInfoWithFormat: @"[BEGIN] %@", methodNameForLogging ];
+    
     if (!_propertySetSelector) {
-        NSString *setPropertyName = [self.propertyPath.name propertySetNameForPropertyName];
+        NSString* propertyPathName = self.propertyPath.name;
+        
+        NSString *setPropertyName = [ propertyPathName propertySetNameForPropertyName];
         _propertySetSelector = NSSelectorFromString(setPropertyName);
+        
+        [ JFFLogger logInfoWithFormat: @"setPropertyName : %@", setPropertyName ];
+        [ JFFLogger logInfoWithFormat: @"result : %p", _propertySetSelector ];
     }
+    
+    [ JFFLogger logInfoWithFormat: @"[END] %@", methodNameForLogging ];
     return _propertySetSelector;
 }
 
-- (id)property
+-(id)property
 {
-    id result = objc_msgSend(self.object, self.propertyGetSelector);
+    id result = FPropertyGetter(self.object, self.propertyGetSelector);
     return self.propertyPath.key?[result objectForKey:self.propertyPath.key]:result;
 }
 
+
 - (void)setProperty:(id)property
 {
+    NSString* methodNameForLogging = NSStringFromSelector( _cmd );
+    
+    [ JFFLogger logInfoWithFormat: @"[BEGIN] %@", methodNameForLogging ];
+    [ JFFLogger logInfoWithFormat: @"property : %@", property ];
+    [ JFFLogger logInfoWithFormat: @"self.object : %@", self.object ];
+    [ JFFLogger logInfoWithFormat: @"self.propertyPath : (%@ --> %@)", self.propertyPath.key, self.propertyPath.name  ];
+    
+    SEL propertySetSelector = self.propertySetSelector;
+    [ JFFLogger logInfoWithFormat: @"self.propertySetSelector : %p", propertySetSelector ];
+    
     if (!self.propertyPath.key) {
-        objc_msgSend(self.object, self.propertySetSelector, property);
+        [ JFFLogger logInfoWithFormat: @"---" ];
+        [ JFFLogger logInfoWithFormat: @"propertyPath.key is nil" ];
+        [ JFFLogger logInfoWithFormat: @"setting property by name..." ];
+        
+        FPropertySetter( self.object, propertySetSelector, property );
+        
+        [ JFFLogger logInfoWithFormat: @"===[END1] %@", methodNameForLogging ];
         return;
     }
     
-    NSMutableDictionary* dict = objc_msgSend(self.object, self.propertyGetSelector);
+    [ JFFLogger logInfoWithFormat: @"getting dict..." ];
+    NSMutableDictionary* dict = FPropertyGetter(self.object, self.propertyGetSelector);
     
+    [ JFFLogger logInfoWithFormat: @"---" ];
     if (!dict) {
+        [ JFFLogger logInfoWithFormat: @"dict is nil. Setting an empty one..." ];
         dict = [NSMutableDictionary new];
-        objc_msgSend(self.object, self.propertySetSelector, dict);
+        FPropertySetter(self.object, self.propertySetSelector, dict);
     }
     
     if (property) {
-        [dict setObject:property forKey:self.propertyPath.key];
+        [ JFFLogger logInfoWithFormat: @"setting property by key..." ];
+        [ dict setObject: property
+                  forKey: self.propertyPath.key ];
+
+        [ JFFLogger logInfoWithFormat: @"===[END2] %@", methodNameForLogging ];
         return;
     }
+
+    [ JFFLogger logInfoWithFormat: @"removing key from dict..." ];
+    [ dict removeObjectForKey: self.propertyPath.key ];
     
-    [dict removeObjectForKey:self.propertyPath.key];
+    [ JFFLogger logInfoWithFormat: @"===[END] %@", methodNameForLogging ];
 }
 
 ////////////////////////OBJECT RELATED DATA///////////////////////
