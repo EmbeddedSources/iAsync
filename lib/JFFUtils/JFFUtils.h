@@ -36,6 +36,7 @@
 #import <JFFUtils/NSString/NSString+LocalizedPrice.h>
 #import <JFFUtils/NSString/NSString+StringWithCutPrefix.h>
 #import <JFFUtils/NSString/NSString+StringFromTemplateString.h>
+#import <JFFUtils/NSString/NSString+UUIDCreation.h>
 
 #import <JFFUtils/NSSet/NSSet+BlocksAdditions.h>
 #import <JFFUtils/NSSet/NSMutableSet+StorableSet.h>
