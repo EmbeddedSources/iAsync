@@ -16,9 +16,4 @@
     return YES;
 }
 
--(BOOL)closeWithError:( NSError ** )outError
-{
-    return YES;
-}
-
 @end

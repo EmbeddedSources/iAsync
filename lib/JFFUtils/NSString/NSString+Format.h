@@ -6,6 +6,4 @@
 
 - (instancetype)singleQuotedString;
 
--(NSString*)singleQuotedString;
-
 @end

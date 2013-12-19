@@ -15,12 +15,4 @@
     return [stringWithoutWhiteSpaces hasSymbols];
 }
 
--(BOOL)hasNonWhitespaceSymbols
-{
-    NSCharacterSet *whiteSpaces_ = [ NSCharacterSet whitespaceAndNewlineCharacterSet ];
-    NSString *stringWithoutWhiteSpaces_ = [ self stringByTrimmingCharactersInSet: whiteSpaces_ ];
-
-    return [ stringWithoutWhiteSpaces_ hasSymbols];
-}
-
 @end
