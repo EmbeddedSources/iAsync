@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C4182DE181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4182DC181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h */; };
-		4C4182DF181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */; };
+		4C4182DE181E64A800FF3CA0 /* JFFTimerHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4182DC181E64A800FF3CA0 /* JFFTimerHelpers.h */; };
+		4C4182DF181E64A800FF3CA0 /* JFFTimerHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFTimerHelpers.m */; };
 		4C4182E2181E6B6700FF3CA0 /* JFFTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4182E0181E6B6700FF3CA0 /* JFFTimer.h */; };
 		4C4182E3181E6B6700FF3CA0 /* JFFTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182E1181E6B6700FF3CA0 /* JFFTimer.m */; };
 		539103BB14A88BD6007315A3 /* JFFScheduler_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFScheduler_Prefix.pch */; };
@@ -31,8 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C4182DC181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationHelpers.h; sourceTree = "<group>"; };
-		4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationHelpers.m; sourceTree = "<group>"; };
+		4C4182DC181E64A800FF3CA0 /* JFFTimerHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTimerHelpers.h; sourceTree = "<group>"; };
+		4C4182DD181E64A800FF3CA0 /* JFFTimerHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTimerHelpers.m; sourceTree = "<group>"; };
 		4C4182E0181E6B6700FF3CA0 /* JFFTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTimer.h; sourceTree = "<group>"; };
 		4C4182E1181E6B6700FF3CA0 /* JFFTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTimer.m; sourceTree = "<group>"; };
 		539103C614A88BD6007315A3 /* libJFFScheduler-clang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libJFFScheduler-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,8 +148,8 @@
 		4C4182DB181E649000FF3CA0 /* Async */ = {
 			isa = PBXGroup;
 			children = (
-				4C4182DC181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h */,
-				4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */,
+				4C4182DC181E64A800FF3CA0 /* JFFTimerHelpers.h */,
+				4C4182DD181E64A800FF3CA0 /* JFFTimerHelpers.m */,
 			);
 			path = Async;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C4182DE181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h in Headers */,
+				4C4182DE181E64A800FF3CA0 /* JFFTimerHelpers.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* JFFScheduler_Prefix.pch in Headers */,
 				651BE1051390559900DD6890 /* JFFScheduler.h in Headers */,
 				651BE198139195E500DD6890 /* NSObject+Timer.h in Headers */,
@@ -433,7 +433,7 @@
 			files = (
 				4C4182E3181E6B6700FF3CA0 /* JFFTimer.m in Sources */,
 				651BE199139195E500DD6890 /* NSObject+Timer.m in Sources */,
-				4C4182DF181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m in Sources */,
+				4C4182DF181E64A800FF3CA0 /* JFFTimerHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
