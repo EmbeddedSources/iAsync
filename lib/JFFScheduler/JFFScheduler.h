@@ -2,4 +2,4 @@
 
 #import <JFFScheduler/JFFTimer.h>
 #import <JFFScheduler/NSObject+Timer.h>
-#import <JFFScheduler/Async/JFFAsyncOperationHelpers.h>
+#import <JFFScheduler/Async/JFFTimerHelpers.h>

@@ -20,8 +20,8 @@
 
 - (void)setCookie:(NSHTTPCookie *)cookie
 {
-    NSParameterAssert( [ cookie_ isKindOfClass: [ NSHTTPCookie class ] ] );
-    [ self->_allCookies addObject: cookie_ ];
+    NSParameterAssert( [ cookie isKindOfClass: [ NSHTTPCookie class ] ] );
+    [ self->_allCookies addObject: cookie ];
 }
 
 -(void)setMultipleCookies:( NSArray* )cookies

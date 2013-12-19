@@ -437,8 +437,8 @@ static void readStreamCallback(CFReadStreamRef stream,
     if ([JHttpFlagChecker isRedirectFlag:statusCode])
     {
         NSDebugLog( @"JConnection - creating URL..." );
-        NSDebugLog( @"%@", self->_params.url );
-        NSString* location_ = allHeadersDict_[ @"Location" ];
+        NSDebugLog( @"%@", self->_context.params.url );
+        NSString* location_ = allHeadersDict[ @"Location" ];
 
 #ifdef USE_DD_URL_BUILDER
         if ( ![ NSUrlLocationValidator isValidLocation: location_ ] )
@@ -447,32 +447,32 @@ static void readStreamCallback(CFReadStreamRef stream,
             location_ = @"/";
         }
         
-        DDURLBuilder* urlBuilder_ = [ DDURLBuilder URLBuilderWithURL: self->_params.url ];
+        DDURLBuilder* urlBuilder_ = [ DDURLBuilder URLBuilderWithURL: self->_context.params.url ];
         urlBuilder_.shouldSkipPathPercentEncoding = YES;
         urlBuilder_.path = location_;
         
-        self->_params.url = [ urlBuilder_ URL ];
+        self->_context.params.url = [ urlBuilder_ URL ];
         
         // To avoid HTTP 500
-        self->_params.httpMethod = @"GET";
-        self->_params.httpBody = nil;
+        self->_context.params.httpMethod = @"GET";
+        self->_context.params.httpBody = nil;
 #else
         if ( [ location_ hasPrefix: @"/" ] )
         {
-            self->_params.url = [ self->_params.url URLWithLocation: location_ ];
+            self->_context.params.url = [ self->_context.params.url URLWithLocation: location_ ];
         }
         else
         {
-            self->_params.url = [location_ toURL];
+            self->_context.params.url = [location_ toURL];
         }
 
-        if ( !self->_params.url )
+        if ( !self->_context.params.url )
         {
-            self->_params.url = [ self->_params.url URLWithLocation: @"/" ];
+            self->_context.params.url = [ self->_context.params.url URLWithLocation: @"/" ];
         }
 
-        self->_params.httpMethod = @"GET";
-        self->_params.httpBody = nil;
+        self->_context.params.httpMethod = @"GET";
+        self->_context.params.httpBody = nil;
 #endif
 
         NSDebugLog( @"%@", _params.url );
@@ -492,7 +492,7 @@ static void readStreamCallback(CFReadStreamRef stream,
             
             urlResponse.statusCode      = statusCode;
             urlResponse.allHeaderFields = allHeadersDict;
-            urlResponse.url             = self->_params.url;
+            urlResponse.url             = self->_context.params.url;
          
             //here in callback connection can be cancelled
             didReceiveResponseBlock(urlResponse);
@@ -500,8 +500,8 @@ static void readStreamCallback(CFReadStreamRef stream,
             self->_decoder = nil;
             self->_urlResponse = urlResponse;
             
-            unsigned long long tmpContentLength = [urlResponse_ expectedContentLength];
-            if ( [urlResponse_ hasContentLength] )
+            unsigned long long tmpContentLength = [urlResponse expectedContentLength];
+            if ( [urlResponse hasContentLength] )
             {
                 self->_totalBytesCount = tmpContentLength;
             }

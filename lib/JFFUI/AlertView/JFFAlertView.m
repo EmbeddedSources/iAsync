@@ -84,24 +84,13 @@
 
 + (void)showAlertWithTitle:(NSString *)title
                description:(NSString *)description
-{
-    JFFAlertView *alert = [JFFAlertView alertWithTitle:title
-                                               message:description
-                                     cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                     otherButtonTitles:nil ];   
-    
-    [alert show];
-}
-
-+ (void)showAlertWithTitle:(NSString *)title
-               description:(NSString *)description
                  exclusive:(BOOL)isExclusive
 {
     JFFAlertView *alert = [JFFAlertView alertWithTitle:title
                                                message:description
                                      cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                      otherButtonTitles:nil];
-
+    
     if (isExclusive) {
         
         [alert exclusiveShow];
@@ -109,6 +98,17 @@
         
         [alert show];
     }
+}
+
++ (void)showAlertWithTitle:(NSString *)title
+               description:(NSString *)description
+{
+    JFFAlertView *alert = [JFFAlertView alertWithTitle:title
+                                               message:description
+                                     cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                     otherButtonTitles:nil ];   
+    
+    [alert show];
 }
 
 + (void)showExclusiveAlertWithTitle:(NSString *)title
@@ -362,25 +362,6 @@
 {
     // dodikk - no need to unsubscribe a single event
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-+(void)showAlertWithTitle:( NSString* )title_
-              description:( NSString* )description_
-                exclusive:( BOOL )isExclusive_
-{
-    JFFAlertView* alert_ = [ JFFAlertView alertWithTitle: title_
-                                                 message: description_
-                                       cancelButtonTitle: NSLocalizedString( @"OK", nil )
-                                       otherButtonTitles: nil ];
-    
-    if ( isExclusive_ )
-    {
-        [ alert_ exclusiveShow ];
-    }
-    else
-    {
-        [ alert_ show ];
-    }
 }
 
 @end
