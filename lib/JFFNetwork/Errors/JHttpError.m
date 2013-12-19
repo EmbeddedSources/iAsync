@@ -65,4 +65,9 @@
     return (self.code == 500);
 }
 
+- (BOOL)isNotFoundError
+{
+    return ( self.code == 404 );
+}
+
 @end
