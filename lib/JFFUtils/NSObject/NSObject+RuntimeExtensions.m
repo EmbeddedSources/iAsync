@@ -95,10 +95,11 @@ typedef BOOL (^JFFPredicate)();
     NSParameterAssert(prototypeMethod);
     
     const char *typeEncoding = method_getTypeEncoding(prototypeMethod);
-    BOOL methodAdded = class_addMethod(targetClass,
-                                       hookSelector,
-                                       method_getImplementation(prototypeMethod),
-                                       typeEncoding);
+    BOOL methodAdded =
+    class_addMethod(targetClass,
+                    hookSelector,
+                    method_getImplementation(prototypeMethod),
+                    typeEncoding);
     NSAssert(methodAdded, @"should be added");
     Method hookMethod = methodGetter(class, hookSelector);
     
@@ -119,17 +120,6 @@ typedef BOOL (^JFFPredicate)();
      prototypeMethodSelector:prototypeSelector
           hookMethodSelector:hookSelector
                 methodGetter:methodGetter];
-}
-
-+ (void)unHookInstanceMethodForClass:(Class)targetClass
-                        withSelector:(SEL)targetSelector
-             prototypeMethodSelector:(SEL)prototypeSelector
-                  hookMethodSelector:(SEL)hookSelector
-{
-    [self unHookInstanceMethodForClass:targetClass
-                          withSelector:targetSelector
-                prototypeMethodSelector:targetSelector
-                    hookMethodSelector:prototypeSelector];
 }
 
 + (void)hookClassMethodForClass:(Class)class
@@ -155,6 +145,10 @@ typedef BOOL (^JFFPredicate)();
     if (!method)
         return NO;
     
+    //TODO ?
+//    if (![self superclass])
+//        return NO;
+    
     Method superMethod = methodGetter([self superclass]);
     return method != superMethod;
 }
@@ -175,15 +169,16 @@ typedef BOOL (^JFFPredicate)();
 
 #pragma mark -
 #pragma mark Unhook
-+ (void)unHookClassMethodForClass:(Class)targetClass
++ (void)unHookInstanceMethodForClass:(Class)targetClass
                         withSelector:(SEL)targetSelector
              prototypeMethodSelector:(SEL)prototypeSelector
                   hookMethodSelector:(SEL)hookSelector
 {
-    [self hookClassMethodForClass:targetClass
-                     withSelector:targetSelector
-          prototypeMethodSelector:hookSelector
-               hookMethodSelector:prototypeSelector];
+    [ self hookInstanceMethodForClass: targetClass
+                         withSelector: targetSelector
+              prototypeMethodSelector: hookSelector
+                   hookMethodSelector: prototypeSelector ];
 }
+
 
 @end

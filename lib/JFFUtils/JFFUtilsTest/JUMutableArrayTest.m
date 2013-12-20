@@ -6,12 +6,12 @@
 {
     NSMutableArray* items_ = [ @[] mutableCopy ];
     
-    STAssertNotNil( items_               , @"Array should be empty" );
-    STAssertTrue  ( 0 == [ items_ count ], @"Array should be empty" );
+    XCTAssertNotNil( items_               , @"Array should be empty" );
+    XCTAssertTrue  ( 0 == [ items_ count ], @"Array should be empty" );
     
     [ items_ shrinkToSize: 234 ];
-    STAssertNotNil( items_               , @"Array should be empty" );
-    STAssertTrue  ( 0 == [ items_ count ], @"Array should be empty" );
+    XCTAssertNotNil( items_               , @"Array should be empty" );
+    XCTAssertTrue  ( 0 == [ items_ count ], @"Array should be empty" );
 }
 
 -(void)testArrayBecomesEmptyForZeroArg
@@ -24,12 +24,12 @@
                               , @"six"
                               , @"seven" ] mutableCopy ];
     
-    STAssertNotNil( items_               , @"Array should be valid"     );
-    STAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
+    XCTAssertNotNil( items_               , @"Array should be valid"     );
+    XCTAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
     
     [ items_ shrinkToSize: 0 ];
-    STAssertNotNil( items_               , @"Array should be empty" );
-    STAssertTrue  ( 0 == [ items_ count ], @"Array should be empty" );
+    XCTAssertNotNil( items_               , @"Array should be empty" );
+    XCTAssertTrue  ( 0 == [ items_ count ], @"Array should be empty" );
 }
 
 -(void)testArrayDoesNotGrowOnShrinks
@@ -45,14 +45,14 @@
                   , @"six"
                   , @"seven" ] mutableCopy ];
         
-        STAssertNotNil( items_               , @"Array should be valid"     );
-        STAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
+        XCTAssertNotNil( items_               , @"Array should be valid"     );
+        XCTAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
         
         [ items_ shrinkToSize: 100 ];
-        STAssertNotNil( items_               , @"Array should be valid"     );
-        STAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
+        XCTAssertNotNil( items_               , @"Array should be valid"     );
+        XCTAssertTrue  ( 7 == [ items_ count ], @"Array should have 7 items" );
         
-        STAssertTrue( [ [ items_ lastObject ] isEqualToString: @"seven" ], @"Last item mismatch" );
+        XCTAssertTrue( [ [ items_ lastObject ] isEqualToString: @"seven" ], @"Last item mismatch" );
     }
 }
 
@@ -68,15 +68,15 @@
                   , @"five"
                   , @"six"
                   , @"seven" ] mutableCopy ];
+
+        XCTAssertNotNil( items               , @"Array should be valid"     );
+        XCTAssertTrue  ( 7 == [ items count ], @"Array should have 7 items" );
         
-        STAssertNotNil( items               , @"Array should be valid"     );
-        STAssertTrue  ( 7 == [ items count ], @"Array should have 7 items" );
+        [ items shrinkToSize: 3 ];
+        XCTAssertNotNil( items               , @"Array should be valid"     );
+        XCTAssertTrue  ( 3 == [ items count ], @"Array should have 3 items" );
         
-        [items shrinkToSize:3];
-        STAssertNotNil( items               , @"Array should be valid"     );
-        STAssertTrue  ( 3 == [ items count ], @"Array should have 3 items" );
-        
-        STAssertTrue( [ [ items lastObject ] isEqualToString: @"three" ], @"Last item mismatch" );
+        XCTAssertTrue( [ [ items lastObject ] isEqualToString: @"three" ], @"Last item mismatch" );
     }
     
     {
@@ -87,15 +87,15 @@
                   , @"five"
                   , @"six"
                   , @"seven" ] mutableCopy ];
-        
-        STAssertNotNil( items               , @"Array should be valid"     );
-        STAssertTrue  ( 7 == [ items count ], @"Array should have 7 items" );
+
+        XCTAssertNotNil( items               , @"Array should be valid"     );
+        XCTAssertTrue  ( 7 == [ items count ], @"Array should have 7 items" );
         
         [ items shrinkToSize: 5 ];
-        STAssertNotNil( items               , @"Array should be valid"     );
-        STAssertTrue  ( 5 == [ items count ], @"Array should have 5 items" );
+        XCTAssertNotNil( items               , @"Array should be valid"     );
+        XCTAssertTrue  ( 5 == [ items count ], @"Array should have 5 items" );
         
-        STAssertTrue( [ [ items lastObject ] isEqualToString: @"five" ], @"Last item mismatch" );
+        XCTAssertTrue( [ [ items lastObject ] isEqualToString: @"five" ], @"Last item mismatch" );
     }
 }
 

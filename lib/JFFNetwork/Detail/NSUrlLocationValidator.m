@@ -2,29 +2,32 @@
 
 @implementation NSUrlLocationValidator
 
-+ (BOOL)isValidLocation:(NSString *)location
++(BOOL)isValidLocation:( NSString* )location_
 {
-    if (nil == location) {
-        
-        return NO;
-    } else if ([location isEqualToString:@""]) {
-        
-        return NO;
-    } else if ([location hasPrefix:@"/"]) {
-        
-        return YES;
-    } else if ([self isLocationValidURL:location]) {
-        
+    if ( nil == location_ )
+    {
         return NO;
     }
-    
+    else if ( [ location_ isEqualToString: @"" ] )
+    {
+        return NO;
+    }
+    else if ( [ location_ hasPrefix: @"/" ] )
+    {
+        return YES;
+    }
+    else if ( [ self isLocationValidURL: location_ ] )
+    {
+        return NO;
+    }
+
     return NO;
 }
 
-+ (BOOL)isLocationValidURL:(NSString *)location
++(BOOL)isLocationValidURL:( NSString* )location_
 {
-    NSURL *url =  [NSURL URLWithString:location];
-    return (nil != url);
+    NSURL* url_ =  [ NSURL URLWithString: location_ ];
+    return ( nil != url_ );
 }
 
 @end

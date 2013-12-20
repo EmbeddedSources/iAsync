@@ -15,23 +15,23 @@
         return @(num * [key integerValue]);
     }];
     
-    STAssertTrue([result count] == 3, nil);
+    XCTAssertTrue([result count] == 3);
     if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 6.)
-        STAssertFalse([result isKindOfClass:[NSMutableDictionary class]], nil);
-    STAssertTrue ([result isKindOfClass:[NSDictionary class]], nil);
+        XCTAssertFalse([result isKindOfClass:[NSMutableDictionary class]]);
+    XCTAssertTrue ([result isKindOfClass:[NSDictionary class]]);
     
-    STAssertEqualObjects(@1, result[@"1"], nil);
-    STAssertEqualObjects(@4, result[@"2"], nil);
-    STAssertEqualObjects(@9, result[@"3"], nil);
+    XCTAssertEqualObjects(@1, result[@"1"]);
+    XCTAssertEqualObjects(@4, result[@"2"]);
+    XCTAssertEqualObjects(@9, result[@"3"]);
     
-    STAssertThrows({
+    XCTAssertThrows({
         [dict map:^id(id key, id object) {
             NSUInteger num = [object unsignedIntegerValue];
             if (num == 3)
                 return nil;
             return @(num * 2);
         }];
-    }, nil);
+    });
 }
 
 - (void)testEachMethod
@@ -50,16 +50,16 @@
         [objects addObject:object];
     }];
     
-    STAssertTrue([keys    count] == 3, nil);
+    XCTAssertTrue([keys    count] == 3);
     
     for (id key in [dict allKeys]) {
-        STAssertTrue([keys containsObject:key], nil);
+        XCTAssertTrue([keys containsObject:key]);
     }
     
-    STAssertTrue([objects count] == 3, nil);
+    XCTAssertTrue([objects count] == 3);
     
     for (id value in [dict allValues]) {
-        STAssertTrue([objects containsObject:value], nil);
+        XCTAssertTrue([objects containsObject:value]);
     }
 }
 
@@ -75,7 +75,7 @@
         return [@2 isEqualToNumber:object] && [@"2" isEqualToString:key];
     }];
     
-    STAssertTrue(count == 1, nil);
+    XCTAssertTrue(count == 1);
 }
 
 - (void)testKeyMethod
@@ -90,23 +90,23 @@
         return [[key uppercaseString] stringByAppendingFormat:@"%@", object];
     }];
     
-    STAssertTrue([result count] == 3, nil);
+    XCTAssertTrue([result count] == 3);
     if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 6.)
-        STAssertFalse([result isKindOfClass:[NSMutableDictionary class]], nil);
-    STAssertTrue([result isKindOfClass:[NSDictionary class]], nil);
+        XCTAssertFalse([result isKindOfClass:[NSMutableDictionary class]]);
+    XCTAssertTrue([result isKindOfClass:[NSDictionary class]]);
     
-    STAssertEqualObjects(@1, result[@"ONE1"  ], nil);
-    STAssertEqualObjects(@2, result[@"TWO2"  ], nil);
-    STAssertEqualObjects(@3, result[@"THREE3"], nil);
+    XCTAssertEqualObjects(@1, result[@"ONE1"  ]);
+    XCTAssertEqualObjects(@2, result[@"TWO2"  ]);
+    XCTAssertEqualObjects(@3, result[@"THREE3"]);
     
-    STAssertThrows({
+    XCTAssertThrows({
         [dict map:^id(id key, id object) {
             NSUInteger num = [object unsignedIntegerValue];
             if (num == 3)
                 return nil;
             return [key uppercaseString];
         }];
-    }, nil);
+    });
 }
 
 - (void)testMapAndErrorMethodWithoutError
@@ -120,21 +120,21 @@
     NSError *error;
     
     NSDictionary *result = [dict map:^id(id key, id object, NSError **outError) {
-        STAssertTrue(outError != NULL, nil);
+        XCTAssertTrue(outError != NULL);
         NSUInteger num = [object unsignedIntegerValue];
         return @(num * [key integerValue]);
     } error:&error];
     
-    STAssertNil(error, nil);
+    XCTAssertNil(error);
     
-    STAssertTrue([result count] == 3, nil);
+    XCTAssertTrue([result count] == 3);
     if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 6.)
-        STAssertFalse([result isKindOfClass:[NSMutableDictionary class]], nil);
-    STAssertTrue([result isKindOfClass:[NSDictionary class]], nil);
+        XCTAssertFalse([result isKindOfClass:[NSMutableDictionary class]]);
+    XCTAssertTrue([result isKindOfClass:[NSDictionary class]]);
     
-    STAssertEqualObjects(@1, result[@"1"], nil);
-    STAssertEqualObjects(@4, result[@"2"], nil);
-    STAssertEqualObjects(@9, result[@"3"], nil);
+    XCTAssertEqualObjects(@1, result[@"1"]);
+    XCTAssertEqualObjects(@4, result[@"2"]);
+    XCTAssertEqualObjects(@9, result[@"3"]);
 }
 
 - (void)testMapAndErrorMethodWithError
@@ -150,7 +150,7 @@
     NSError *errorForMap = [JFFError newErrorWithDescription:@"test error"];
     
     NSDictionary *result = [dict map:^id(id key, id object, NSError **outError) {
-        STAssertTrue(outError != NULL, nil);
+        XCTAssertTrue(outError != NULL);
         NSUInteger num = [object unsignedIntegerValue];
         if (num == 3) {
             *outError = errorForMap;
@@ -159,44 +159,44 @@
         return @(num * [key integerValue]);
     } error:&error];
     
-    STAssertNil(result, nil);
-    STAssertNotNil(error , nil);
+    XCTAssertNil(result);
+    XCTAssertNotNil(error );
     
-    STAssertTrue(errorForMap == error, nil);
+    XCTAssertTrue(errorForMap == error);
 }
 
 - (void)testAny
 {
     NSArray *arr = @[@"a", @"b", @"c"];
     
-    STAssertTrue([arr any:^BOOL(NSString *str) {
+    XCTAssertTrue([arr any:^BOOL(NSString *str) {
         return [str isEqualToString:@"a"];
-    }], nil);
+    }]);
     
-    STAssertTrue([arr any:^BOOL(NSString *str) {
+    XCTAssertTrue([arr any:^BOOL(NSString *str) {
         return [str isEqualToString:@"b"];
-    }], nil);
+    }]);
     
-    STAssertTrue([arr any:^BOOL(NSString *str) {
+    XCTAssertTrue([arr any:^BOOL(NSString *str) {
         return [str isEqualToString:@"c"];
-    }], nil);
+    }]);
     
-    STAssertFalse([arr any:^BOOL(NSString *str) {
+    XCTAssertFalse([arr any:^BOOL(NSString *str) {
         return [str isEqualToString:@"d"];
-    }], nil);
+    }]);
 }
 
 - (void)testAll
 {
     NSArray *arr = @[@"a", @"b", @"c"];
     
-    STAssertTrue([arr all:^BOOL(NSString *str) {
+    XCTAssertTrue([arr all:^BOOL(NSString *str) {
         return [str length] == 1;
-    }], nil);
+    }]);
     
-    STAssertFalse([arr all:^BOOL(NSString *str) {
+    XCTAssertFalse([arr all:^BOOL(NSString *str) {
         return [str isEqualToString:@"a"] || [str isEqualToString:@"b"];
-    }], nil);
+    }]);
 }
 
 @end

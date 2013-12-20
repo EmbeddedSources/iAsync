@@ -31,7 +31,7 @@
         proxy = [[JFFAssignProxy alloc] initWithTarget:target];
     }
     
-    STAssertTrue(targetDeallocated, @"Target should be dealloced");
+    XCTAssertTrue(targetDeallocated, @"Target should be dealloced");
 }
 
 -(void)testAssignProxyMethodCalls
@@ -39,7 +39,7 @@
     ProxyTargetTest *target_ = [ProxyTargetTest new];
     
     id proxy_ = [[JFFAssignProxy alloc] initWithTarget:target_ ];
-    STAssertTrue( 5 == [ proxy_ justReturnFiveNumber ], @"Target should be dealloced" );
+    XCTAssertTrue( 5 == [ proxy_ justReturnFiveNumber ], @"Target should be dealloced" );
 }
 
 @end

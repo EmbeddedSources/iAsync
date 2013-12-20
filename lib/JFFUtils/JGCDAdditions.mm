@@ -30,3 +30,41 @@ void dispatch_queue_release_by_label(const char *label)
         dispatchByLabel.erase(label);
     }
 }
+
+
+#pragma mark -
+#pragma mark Legacy
+void dispatch_sync_check_queue(dispatch_queue_t queue, dispatch_queue_t currentQueue, dispatch_block_t block)
+{    
+    if (currentQueue != queue)
+    {
+        dispatch_sync(queue, block);
+    }
+    else
+    {
+        block();
+    }
+}
+
+void dispatch_barrier_sync_check_queue(dispatch_queue_t queue, dispatch_queue_t currentQueue,dispatch_block_t block)
+{
+    if ( currentQueue != queue)
+    {
+        dispatch_barrier_sync(queue, block);
+    }
+    else
+    {
+        block();
+    }
+}
+
+void safe_dispatch_sync(dispatch_queue_t queue, dispatch_block_t block)
+{
+    dispatch_sync_check_queue( queue, dispatch_get_main_queue(), block );
+}
+
+void safe_dispatch_barrier_sync(dispatch_queue_t queue, dispatch_block_t block)
+{
+    dispatch_barrier_sync_check_queue( queue, dispatch_get_main_queue(), block );
+}
+

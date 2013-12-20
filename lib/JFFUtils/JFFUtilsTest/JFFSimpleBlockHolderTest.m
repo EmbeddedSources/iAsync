@@ -10,38 +10,38 @@
 -(void)testSimpleBlockHolderBehavior
 {
     @autoreleasepool {
-        JFFSimpleBlockHolder* holder = [ JFFSimpleBlockHolder new ];
-        STAssertTrue( 0 != [ JFFSimpleBlockHolder instancesCount ], @"Block holder should exists" );
+        JFFSimpleBlockHolder* holder_ = [ JFFSimpleBlockHolder new ];
+        XCTAssertTrue( 0 != [ JFFSimpleBlockHolder instancesCount ], @"Block holder should exists" );
         
-        __block BOOL blockContextDeallocated = NO;
-        __block NSUInteger performBlockCount = 0;
+        __block BOOL blockContextDeallocated_ = NO;
+        __block NSUInteger performBlockCount_ = 0;
         
         @autoreleasepool {
-            NSObject *blockContext = [NSObject new];
-            [ blockContext addOnDeallocBlock: ^void( void )
+            NSObject *blockContext_ = [NSObject new];
+            [ blockContext_ addOnDeallocBlock: ^void( void )
              {
-                 blockContextDeallocated = YES;
+                 blockContextDeallocated_ = YES;
              } ];
             
-            holder.simpleBlock = ^void( void )
+            holder_.simpleBlock = ^void( void )
             {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
-                if ([blockContext class] && [holder class])
-                    ++performBlockCount;
+                if ( [ blockContext_ class ] && [ holder_ class ] )
+                    ++performBlockCount_;
 #pragma clang diagnostic pop
             };
             
-            holder.onceSimpleBlock();
-            holder.onceSimpleBlock();
+            holder_.onceSimpleBlock();
+            holder_.onceSimpleBlock();
         }
         
-        STAssertTrue(blockContextDeallocated, @"Block context should be dealloced");
-        STAssertTrue(1 == performBlockCount, @"Block was called once");
-        STAssertTrue(nil == holder.simpleBlock, @"Block is nil after call");
+        XCTAssertTrue( blockContextDeallocated_, @"Block context should be dealloced" );
+        XCTAssertTrue( 1 == performBlockCount_, @"Block was called once" );
+        XCTAssertTrue( nil == holder_.simpleBlock, @"Block is nil after call" );
     }
     
-    STAssertTrue( 0 == [ JFFSimpleBlockHolder instancesCount ], @"Block holder should be dealloced" );
+    XCTAssertTrue( 0 == [ JFFSimpleBlockHolder instancesCount ], @"Block holder should be dealloced" );
 }
 
 @end

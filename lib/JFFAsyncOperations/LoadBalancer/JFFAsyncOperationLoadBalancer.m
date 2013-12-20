@@ -113,8 +113,9 @@ static void logBalancerState(JFFContextLoaders* originContextLoaders)
     JFFAsyncOperationLoadBalancerContexts *balancer = sharedBalancer();
     JFFContextLoaders* activeLoaders = [balancer activeContextLoaders];
     NSLog(@"Active context name: %@", activeLoaders.name);
-    NSLog(@"pending count: %lu", (unsigned long)activeLoaders.pendingLoadersNumber);
-    NSLog(@"active  count: %lu", (unsigned long)activeLoaders.activeLoadersNumber);
+
+    NSLog(@"pending count: %@", [ @(activeLoaders.pendingLoadersNumber) descriptionWithLocale: nil ]);
+    NSLog(@"active  count: %@", [ @(activeLoaders.activeLoadersNumber) descriptionWithLocale: nil ]);
     
     [balancer.contextLoadersByName enumerateKeysAndObjectsUsingBlock:^(id name,
                                                                        JFFContextLoaders *contextLoaders,
@@ -122,8 +123,9 @@ static void logBalancerState(JFFContextLoaders* originContextLoaders)
         
         if (activeLoaders != contextLoaders) {
             NSLog(@"context name: %@", contextLoaders.name );
-            NSLog(@"pending count: %lu", (unsigned long)contextLoaders.pendingLoadersNumber );
-            NSLog(@"active  count: %lu", (unsigned long)contextLoaders.activeLoadersNumber );
+
+            NSLog(@"pending count: %@", [ @(contextLoaders.pendingLoadersNumber) descriptionWithLocale: nil ] );
+            NSLog(@"active  count: %@", [ @(contextLoaders.activeLoadersNumber) descriptionWithLocale: nil ] );
         }
     }];
     NSLog(@"|||||END LOG|||||");

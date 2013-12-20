@@ -44,11 +44,11 @@
         
         [multicast addDelegate:delegate];
         
-        STAssertTrue( initState_ == [ multicast justReturnFiveNumber ], @"Contains 1 object" );
+        XCTAssertTrue( initState_ == [ multicast justReturnFiveNumber ], @"Contains 1 object" );
     }
     
-    STAssertTrue( delegateDeallocated, @"Target should be dealloced" );
-    STAssertTrue( 0 == [ multicast justReturnFiveNumber ], @"Empty array" );
+    XCTAssertTrue( delegateDeallocated, @"Target should be dealloced" );
+    XCTAssertTrue( 0 == [ multicast justReturnFiveNumber ], @"Empty array" );
 }
 
 - (void)testMulticastDelegateFirstRelease
@@ -66,7 +66,7 @@
         [multicast addDelegate:delegate];
     }
     
-    STAssertTrue( multicast_deallocated_, @"Target should be dealloced" );
+    XCTAssertTrue( multicast_deallocated_, @"Target should be dealloced" );
 }
 
 - (void)testAddDelegateTwice
@@ -79,7 +79,7 @@
     
     [multicast addDelegate:delegate];
     
-    STAssertTrue(5 == [multicast justReturnFiveNumber], @"Contains 1 object");
+    XCTAssertTrue(5 == [multicast justReturnFiveNumber], @"Contains 1 object");
 }
 
 @end

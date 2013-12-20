@@ -29,6 +29,7 @@
 		53A33F2E141F69EB00469DAA /* 1.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 53A33F2C141F69EB00469DAA /* 1.1.txt */; };
 		53A33F2F141F69EB00469DAA /* 1.1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 53A33F2D141F69EB00469DAA /* 1.1.zip */; };
 		53A33F4A141F9AA000469DAA /* 1-Incomplete.zip in Resources */ = {isa = PBXBuildFile; fileRef = 53A33F49141F9A9F00469DAA /* 1-Incomplete.zip */; };
+		7E38854A17FBEEAF00399329 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E38854917FBEEAF00399329 /* QuartzCore.framework */; };
 		7E6AF9A0157E105600CA8ED4 /* BadHeadersMockNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6AF99F157E105600CA8ED4 /* BadHeadersMockNetwork.m */; };
 		7EBCDA6316E5E76E0095EE39 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBCDA6216E5E76E0095EE39 /* Default-568h@2x.png */; };
 		CE29B5E915F5E984000A05B8 /* URLWithLocationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B5E815F5E983000A05B8 /* URLWithLocationTest.m */; };
@@ -206,6 +207,13 @@
 			remoteGlobalIDString = 7E57F42414F93738002D139B;
 			remoteInfo = JFFUtilsFW;
 		};
+		7ED1F4CD17DF65EB0003CDD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5310BA8D141F51AD00A3E2B1 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7ED3CB1516E6387B00E5A00F;
+			remoteInfo = "JFFUtilsTest-CI";
+		};
 		CE433772160A1A5800C2279F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5310BA8D141F51AD00A3E2B1 /* JFFUtils.xcodeproj */;
@@ -258,6 +266,7 @@
 		53A33F49141F9A9F00469DAA /* 1-Incomplete.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "1-Incomplete.zip"; sourceTree = "<group>"; };
 		65C1D70A1539BE950092F5E6 /* JFFURLConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFURLConnectionTest.m; sourceTree = "<group>"; };
 		65F47AC41539A33500D8C865 /* StringFromQueryComponentsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringFromQueryComponentsTest.m; sourceTree = "<group>"; };
+		7E38854917FBEEAF00399329 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7E6AF99B157E0BF100CA8ED4 /* InvalidPathForJConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvalidPathForJConnectionTest.m; sourceTree = "<group>"; };
 		7E6AF99E157E105600CA8ED4 /* BadHeadersMockNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadHeadersMockNetwork.h; sourceTree = "<group>"; };
 		7E6AF99F157E105600CA8ED4 /* BadHeadersMockNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadHeadersMockNetwork.m; sourceTree = "<group>"; };
@@ -272,6 +281,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E38854A17FBEEAF00399329 /* QuartzCore.framework in Frameworks */,
 				1BEC485C156A27270099DA6D /* libstdc++.dylib in Frameworks */,
 				1B0E89961563FAC800825E3C /* libc++.dylib in Frameworks */,
 				1B2669E615623FBD0054E183 /* libJFFTestTools.a in Frameworks */,
@@ -393,6 +403,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E38854917FBEEAF00399329 /* QuartzCore.framework */,
 				1BEC485B156A27270099DA6D /* libstdc++.dylib */,
 				1B0E89951563FAC800825E3C /* libc++.dylib */,
 				53A33F2A141F65F700469DAA /* CFNetwork.framework */,
@@ -445,6 +456,7 @@
 				5357CDF514A9F4F80046EA34 /* libJFFUtils-clang.a */,
 				65B1F94A151A8B74000A1736 /* JFFUtilsFW.framework */,
 				CE433773160A1A5800C2279F /* JFFUtilsTest.octest */,
+				7ED1F4CE17DF65EB0003CDD4 /* JFFUtilsTest-CI.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -683,6 +695,13 @@
 			fileType = wrapper.framework.static;
 			path = JFFUtilsFW.framework;
 			remoteRef = 65B1F949151A8B74000A1736 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7ED1F4CE17DF65EB0003CDD4 /* JFFUtilsTest-CI.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "JFFUtilsTest-CI.octest";
+			remoteRef = 7ED1F4CD17DF65EB0003CDD4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CE433773160A1A5800C2279F /* JFFUtilsTest.octest */ = {

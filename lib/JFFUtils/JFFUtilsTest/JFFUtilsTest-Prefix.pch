@@ -1,7 +1,3 @@
-//
-// Prefix header for all source files of the 'JFFUtilsTest' target in the 'JFFUtilsTest' project
-//
-
 #ifdef __OBJC__
     #import <JFFTestTools/JFFTestTools.h>
     #import <JFFUtils/JFFUtils.h>

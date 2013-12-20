@@ -26,12 +26,17 @@
 - (void)willPresentAlertView:(UIAlertView *)alertView_
 {
     SEL selector_ = @selector( willPresentAlertView: );
+    typedef void (*WillPresentAlertMsgSendFunction)( struct objc_super*, SEL , id );
+    static const WillPresentAlertMsgSendFunction WillPresentAlert = (WillPresentAlertMsgSendFunction)objc_msgSendSuper;
+
+    
     if ( [ [ self superclass ] hasInstanceMethodWithSelector: selector_ ] )
     {
         struct objc_super superTarget_;
         superTarget_.receiver = self;
         superTarget_.super_class = [ self superclass ];
-        objc_msgSendSuper( &superTarget_, selector_, alertView_ );
+     
+        WillPresentAlert( &superTarget_, selector_, alertView_ );
     }
 
     [ self showActivityIndicatorView ];

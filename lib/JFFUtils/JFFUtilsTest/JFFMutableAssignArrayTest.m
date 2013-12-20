@@ -17,12 +17,12 @@
             JFFMutableAssignArray *array = [JFFMutableAssignArray new];
             [array addObject:target];
             
-            STAssertTrue(1 == [array count], @"Contains 1 object");
+            XCTAssertTrue(1 == [array count], @"Contains 1 object");
         }
         
-        STAssertNil(weakTarget, @"Target should be dealloced");
+        XCTAssertNil(weakTarget, @"Target should be dealloced");
     }
-    STAssertTrue(0 == [array count], @"Empty array");
+    XCTAssertTrue(0 == [array count], @"Empty array");
 }
 
 - (void)testMutableAssignArrayFirstRelease
@@ -37,7 +37,7 @@
         [array addObject:target];
     }
     
-    STAssertNil(weakArray, @"Target should be dealloced");
+    XCTAssertNil(weakArray, @"Target should be dealloced");
 }
 
 - (void)testLastObject
@@ -47,7 +47,7 @@
     NSObject *object = [NSObject new];
     [array addObject:object];
     
-    STAssertTrue(object == [array lastObject], @"Target should be dealloced");
+    XCTAssertTrue(object == [array lastObject], @"Target should be dealloced");
 }
 
 - (void)testContainsObject
@@ -69,13 +69,13 @@
             NSObject *object2 = [NSObject new];
             [array addObject: object1];
             
-            STAssertTrue ([array containsObject:object1], @"Array contains object1"   );
-            STAssertFalse([array containsObject:object2], @"Array no contains object2");
+            XCTAssertTrue ([array containsObject:object1], @"Array contains object1"   );
+            XCTAssertFalse([array containsObject:object2], @"Array no contains object2");
         }
         
-        STAssertTrue(onDeallocBlockCalled, @"EonDeallocBlock called");
-        STAssertTrue(0 == [array count], @"Empty array");
-        STAssertNil(object1Ptr, @"Empty array");
+        XCTAssertTrue(onDeallocBlockCalled, @"EonDeallocBlock called");
+        XCTAssertTrue(0 == [array count], @"Empty array");
+        XCTAssertNil(object1Ptr, @"Empty array");
     }
 }
 

@@ -314,6 +314,14 @@
 		7E57F4D114F93840002D139B /* JSignedRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B104D911483C85A0025FDDA /* JSignedRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4D314F93840002D139B /* JFFUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 651BE27B1391BD7800DD6890 /* JFFUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E57F4D414F93840002D139B /* JFFCastFunctions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 534CDFC014A8C2930068F4DF /* JFFCastFunctions.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E7DF4B6186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7DF4B4186368CF001ABB23 /* NSString+UUIDCreation.h */; };
+		7E7DF4B7186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7DF4B4186368CF001ABB23 /* NSString+UUIDCreation.h */; };
+		7E7DF4B8186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7DF4B4186368CF001ABB23 /* NSString+UUIDCreation.h */; };
+		7E7DF4B9186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7DF4B4186368CF001ABB23 /* NSString+UUIDCreation.h */; };
+		7E7DF4BA186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7DF4B5186368CF001ABB23 /* NSString+UUIDCreation.m */; };
+		7E7DF4BB186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7DF4B5186368CF001ABB23 /* NSString+UUIDCreation.m */; };
+		7E7DF4BC186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7DF4B5186368CF001ABB23 /* NSString+UUIDCreation.m */; };
+		7E7DF4BD186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7DF4B5186368CF001ABB23 /* NSString+UUIDCreation.m */; };
 		8D1DE52B13AB8269001FD56F /* NSObject+RuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D1DE52913AB8269001FD56F /* NSObject+RuntimeExtensions.h */; };
 		8D1DE52C13AB8269001FD56F /* NSObject+RuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */; };
 		8D713C6D13F3F62B007268DF /* JFFMutableAssignArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713C6B13F3F62B007268DF /* JFFMutableAssignArray.h */; };
@@ -562,6 +570,8 @@
 		7E57F42814F93738002D139B /* JFFUtilsFW-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFUtilsFW-Info.plist"; sourceTree = "<group>"; };
 		7E57F42A14F93738002D139B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E57F42C14F93738002D139B /* JFFUtilsFW-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFUtilsFW-Prefix.pch"; sourceTree = "<group>"; };
+		7E7DF4B4186368CF001ABB23 /* NSString+UUIDCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UUIDCreation.h"; sourceTree = "<group>"; };
+		7E7DF4B5186368CF001ABB23 /* NSString+UUIDCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUIDCreation.m"; sourceTree = "<group>"; };
 		8D1DE52913AB8269001FD56F /* NSObject+RuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RuntimeExtensions.h"; sourceTree = "<group>"; };
 		8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RuntimeExtensions.m"; sourceTree = "<group>"; };
 		8D713C6B13F3F62B007268DF /* JFFMutableAssignArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFMutableAssignArray.h; sourceTree = "<group>"; };
@@ -975,6 +985,8 @@
 		651BE19A1391969300DD6890 /* NSString */ = {
 			isa = PBXGroup;
 			children = (
+				7E7DF4B4186368CF001ABB23 /* NSString+UUIDCreation.h */,
+				7E7DF4B5186368CF001ABB23 /* NSString+UUIDCreation.m */,
 				1B909B8314EA919400B19283 /* NSString+Format.h */,
 				1B909B8414EA919400B19283 /* NSString+Format.m */,
 				651BE19B1391969A00DD6890 /* NSString+Search.h */,
@@ -1194,6 +1206,7 @@
 				539103FB14A88C04007315A3 /* NSObject+OnDeallocBlock.h in Headers */,
 				539103FC14A88C04007315A3 /* JFFUtils.h in Headers */,
 				539103FD14A88C04007315A3 /* NSString+PropertyName.h in Headers */,
+				7E7DF4B8186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */,
 				539103FF14A88C04007315A3 /* NSObject+RuntimeExtensions.h in Headers */,
 				5391040014A88C04007315A3 /* JFFMulticastDelegate.h in Headers */,
 				5391040114A88C04007315A3 /* JFFAssignProxy.h in Headers */,
@@ -1228,6 +1241,7 @@
 				65802A6B148BF2B10040A93A /* JFFUtils.h in Headers */,
 				534CDFC314A8C2930068F4DF /* JFFCastFunctions.hpp in Headers */,
 				7E44D667158F179400A2C11E /* NSURL+CPlusPlus.h in Headers */,
+				7E7DF4B7186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */,
 				7E44D672158F189F00A2C11E /* NSString+CPlusPlus.h in Headers */,
 				1B9C101115C802E600C20BCA /* JFFClangLiterals.h in Headers */,
 				1B14141F15DBCD3F00EFB2B8 /* NSDate+DateDifference.h in Headers */,
@@ -1250,6 +1264,7 @@
 				7E57F49E14F93840002D139B /* NSString+PropertyName.h in Headers */,
 				7E57F4A014F93840002D139B /* NSString+PathExtensions.h in Headers */,
 				7E57F4A214F93840002D139B /* NSString+Trimm.h in Headers */,
+				7E7DF4B9186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */,
 				7E57F4A614F93840002D139B /* NSString+IsEmpty.h in Headers */,
 				7E57F4AB14F93840002D139B /* NSMutableArray+ChangeCount.h in Headers */,
 				7E57F4AD14F93840002D139B /* NSArray+BlocksAdditions.h in Headers */,
@@ -1293,6 +1308,7 @@
 				65648B7E13923EC4001E163C /* NSString+PropertyName.h in Headers */,
 				8D1DE52B13AB8269001FD56F /* NSObject+RuntimeExtensions.h in Headers */,
 				8DB67B1A13E97FCF0024EA6C /* JFFMulticastDelegate.h in Headers */,
+				7E7DF4B6186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */,
 				8DB67B1F13E980B70024EA6C /* JFFAssignProxy.h in Headers */,
 				8D713C6D13F3F62B007268DF /* JFFMutableAssignArray.h in Headers */,
 				8D713CC713F539A5007268DF /* NSString+PathExtensions.h in Headers */,
@@ -1619,6 +1635,7 @@
 				4CF0FFDF1706038200282900 /* JFFRuntimeAddiotions.m in Sources */,
 				4CC643C1171700BA000BF15A /* NSObject+ObjectMethodHook.mm in Sources */,
 				4C50BF5B171D85B400251A16 /* JFFError.m in Sources */,
+				7E7DF4BC186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1627,6 +1644,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65802A6C148BF2B50040A93A /* JGCDAdditions.mm in Sources */,
+				7E7DF4BB186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */,
 				65802A6E148BF2BA0040A93A /* JFFMulticastDelegate.m in Sources */,
 				65802A6F148BF2BE0040A93A /* JFFMutableAssignDictionary.m in Sources */,
 				65802A70148BF2C10040A93A /* JFFMutableAssignArray.m in Sources */,
@@ -1697,6 +1715,7 @@
 				37497BD71600971C00AF0C29 /* NSDictionary+ValueWithType.m in Sources */,
 				4CEED6BD1701E23C004CFCB3 /* JFFMutableAssignKeyDictionary.mm in Sources */,
 				4CF0FFE01706038300282900 /* JFFRuntimeAddiotions.m in Sources */,
+				7E7DF4BD186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */,
 				4CC643C2171700BA000BF15A /* NSObject+ObjectMethodHook.mm in Sources */,
 				4C50BF5C171D85B500251A16 /* JFFError.m in Sources */,
 			);
@@ -1829,6 +1848,7 @@
 				4C3B63A31701C84700D5A8FD /* JFFMutableAssignKeyDictionary.mm in Sources */,
 				4CC6BBED17058D4200BD49E8 /* NSDecimalNumber+Increment.m in Sources */,
 				4CC6BBF117058D5F00BD49E8 /* UIColor+ColorForHex.m in Sources */,
+				7E7DF4BA186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */,
 				4CC6BBF917058DB100BD49E8 /* NSData+ToString.m in Sources */,
 				4CC6BBFD17058DD000BD49E8 /* NSNumber+FSStorable.m in Sources */,
 				4CC6BC0117058DFF00BD49E8 /* NSDateFormatter+MultiThreading.m in Sources */,
@@ -1892,7 +1912,6 @@
 				GCC_PREFIX_HEADER = JFFUtils_Prefix.pch;
 				HEADER_SEARCH_PATHS = ../;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = JFFUtils;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1909,7 +1928,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFUtils_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = JFFUtils;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1919,6 +1937,8 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1927,7 +1947,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LLVM_VECTORIZE_LOOPS = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -1937,6 +1957,8 @@
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -1944,7 +1966,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LLVM_VECTORIZE_LOOPS = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -1955,7 +1977,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/JFFUtils.dst;
@@ -1967,7 +1988,6 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = ../;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "JFFUtils-clang";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
@@ -1978,7 +1998,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/JFFUtils.dst;
 				GCC_MODEL_TUNING = G5;
@@ -1986,7 +2005,6 @@
 				GCC_PREFIX_HEADER = JFFUtils_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "JFFUtils-clang";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
@@ -2018,7 +2036,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};

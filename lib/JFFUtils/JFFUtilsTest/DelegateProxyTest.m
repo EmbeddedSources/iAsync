@@ -104,7 +104,7 @@
     
     [[self classesToTestOnLeaks]enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSNumber *num = initialInstancesCouns[idx];
-        STAssertEqualObjects(num, @([obj instancesCount]), @"we got a leak");
+        XCTAssertEqualObjects(num, @([obj instancesCount]), @"we got a leak");
     }];
 }
 
@@ -122,7 +122,7 @@
         
         object.delegate = delegate;
         
-        STAssertTrue(object.delegate != delegate, @"not the same object");
+        XCTAssertTrue(object.delegate != delegate, @"not the same object");
     }];
 }
 
@@ -147,9 +147,9 @@
          id sentObject = [NSObject new];
          [object.delegate someDelegateMethod:sentObject];
          
-         STAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
-         STAssertTrue(proxyDelegate1.methodCallArgument == sentObject, @"method was called");
-         STAssertTrue(proxyDelegate2.methodCallArgument == sentObject, @"method was called");
+         XCTAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
+         XCTAssertTrue(proxyDelegate1.methodCallArgument == sentObject, @"method was called");
+         XCTAssertTrue(proxyDelegate2.methodCallArgument == sentObject, @"method was called");
      }];
 }
 
@@ -172,7 +172,7 @@
         id sentObject = [NSObject new];
         [object.delegate someDelegateMethod:sentObject];
         
-        STAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
+        XCTAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
     }];
 }
 
@@ -195,9 +195,9 @@
         id sentObject = [NSNull null];
         [object.delegate someDelegateMethod:[NSNull null]];
         
-        STAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
+        XCTAssertTrue(delegate.methodCallArgument == sentObject, @"method was called");
         
-        STAssertTrue(object.delegate == delegate, @"method was called");
+        XCTAssertTrue(object.delegate == delegate, @"method was called");
     }];
 }
 

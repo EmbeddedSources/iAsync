@@ -6,8 +6,9 @@
 
 @interface JFFPropertyExtractor : NSObject
 
-@property (nonatomic) JFFPropertyPath *propertyPath;
-@property (nonatomic) NSObject *object;
+// Do not pass properties with primitive types (int/BOOL/...)
+@property ( nonatomic ) JFFPropertyPath* propertyPath;
+@property ( nonatomic ) NSObject* object;
 
 //object related data
 @property (nonatomic) NSMutableArray *delegates;

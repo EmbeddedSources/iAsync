@@ -17,6 +17,209 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7E3942CF18642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DBE938F13B4D70200C26B09 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391037B14A88BB5007315A3;
+			remoteInfo = "JFFAsyncOperations-clang";
+		};
+		7E3942D118642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DBE938F13B4D70200C26B09 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F20C914F94BDF00588C7D;
+			remoteInfo = JFFAsyncOperationsFW;
+		};
+		7E3942D618642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D713C1E13F3F2AE007268DF /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802B22148BFC230040A93A;
+			remoteInfo = JFFNetworkMacOS;
+		};
+		7E3942D818642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D713C1E13F3F2AE007268DF /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103B714A88BCA007315A3;
+			remoteInfo = "JFFNetwork-clang";
+		};
+		7E3942DA18642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D713C1E13F3F2AE007268DF /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F204314F9494300588C7D;
+			remoteInfo = JFFNetworkFW;
+		};
+		7E3942DF18642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DBE939813B4D70800C26B09 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802B07148BFB850040A93A;
+			remoteInfo = JFFSchedulerMacOS;
+		};
+		7E3942E118642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DBE939813B4D70800C26B09 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103C614A88BD6007315A3;
+			remoteInfo = "JFFScheduler-clang";
+		};
+		7E3942E318642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DBE939813B4D70800C26B09 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F202A14F9484F00588C7D;
+			remoteInfo = JFFSchedulerFW;
+		};
+		7E3942E618642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DBE93A113B4D71000C26B09 /* JFFUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103F014A88BE1007315A3;
+			remoteInfo = "JFFUI-clang";
+		};
+		7E3942EC18642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DBE93AA13B4D71800C26B09 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802A5B148BF2930040A93A;
+			remoteInfo = JFFUtilsMacOS;
+		};
+		7E3942EE18642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DBE93AA13B4D71800C26B09 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391044314A88C04007315A3;
+			remoteInfo = "JFFUtils-clang";
+		};
+		7E3942F018642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DBE93AA13B4D71800C26B09 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E57F42414F93738002D139B;
+			remoteInfo = JFFUtilsFW;
+		};
+		7E3942F218642AA5008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DBE93AA13B4D71800C26B09 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE444A1C1608609100DD85B0;
+			remoteInfo = JFFUtilsTest;
+		};
+		7E3942F918642AC1008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E3942F518642AC0008750FE /* JFFCache.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65168477144F4ECD0014670E;
+			remoteInfo = JFFCache;
+		};
+		7E39430018642AC7008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E3942FB18642AC6008750FE /* JFFContacts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE29B80815F60083000A05B8;
+			remoteInfo = JFFContacts;
+		};
+		7E39430718642ACC008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39430218642ACC008750FE /* JFFCoreLocation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE206DF016414CC2002476FD;
+			remoteInfo = JFFCoreLocation;
+		};
+		7E39430918642ACC008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39430218642ACC008750FE /* JFFCoreLocation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE206E0116414CC3002476FD;
+			remoteInfo = JFFCoreLocationTests;
+		};
+		7E39431018642ADD008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39430B18642ADD008750FE /* JFFJpeg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CC7B9D0181A300900F7AB24;
+			remoteInfo = JFFJpeg;
+		};
+		7E39431218642ADD008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39430B18642ADD008750FE /* JFFJpeg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CC7B9E0181A300900F7AB24;
+			remoteInfo = JFFJpegTests;
+		};
+		7E39431D18642AE3008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39431418642AE3008750FE /* JFFJsonTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE532C0916036CE40029920A;
+			remoteInfo = JFFJsonTools;
+		};
+		7E39431F18642AE3008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39431418642AE3008750FE /* JFFJsonTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C043A76181EA60D00246A88;
+			remoteInfo = JFFJsonToolsTests;
+		};
+		7E39432618642AEB008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39432118642AEB008750FE /* JFFRestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B7ABA81152D973A005DD4CA;
+			remoteInfo = JFFRestKit;
+		};
+		7E39432818642AEB008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39432118642AEB008750FE /* JFFRestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C043A4A181E9D8200246A88;
+			remoteInfo = JFFRestKitTests;
+		};
+		7E39432F18642AF2008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39432A18642AF1008750FE /* JFFSecureStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B9781B51540235B001F00EE;
+			remoteInfo = JFFSecureStorage;
+		};
+		7E39433118642AF2008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39432A18642AF1008750FE /* JFFSecureStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B9781C51540235C001F00EE;
+			remoteInfo = JFFSecureStorageTests;
+		};
+		7E39433B18642AF9008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39433318642AF9008750FE /* JFFSocial.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE4F600815F8B2BB00271035;
+			remoteInfo = JFFSocial;
+		};
+		7E39434418642B01008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39433D18642B01008750FE /* JFFStoreKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CED0022E1619A33E00368E7D;
+			remoteInfo = JFFStoreKit;
+		};
+		7E39434618642B01008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39433D18642B01008750FE /* JFFStoreKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CED0023F1619A33F00368E7D;
+			remoteInfo = JFFStoreKitTests;
+		};
+		7E39434D18642B21008750FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E39434918642B21008750FE /* JFFTestTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1BE0542B154826DA00270B58;
+			remoteInfo = JFFTestTools;
+		};
 		8D713C2513F3F2AE007268DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D713C1E13F3F2AE007268DF /* JFFNetwork.xcodeproj */;
@@ -90,6 +293,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E3942F518642AC0008750FE /* JFFCache.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFCache.xcodeproj; path = ../JFFCache/JFFCache.xcodeproj; sourceTree = "<group>"; };
+		7E3942FB18642AC6008750FE /* JFFContacts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFContacts.xcodeproj; path = ../JFFContacts/JFFContacts.xcodeproj; sourceTree = "<group>"; };
+		7E39430218642ACC008750FE /* JFFCoreLocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFCoreLocation.xcodeproj; path = ../JFFCoreLocation/JFFCoreLocation.xcodeproj; sourceTree = "<group>"; };
+		7E39430B18642ADD008750FE /* JFFJpeg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFJpeg.xcodeproj; path = ../JFFJpeg/JFFJpeg.xcodeproj; sourceTree = "<group>"; };
+		7E39431418642AE3008750FE /* JFFJsonTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFJsonTools.xcodeproj; path = ../JFFJsonTools/JFFJsonTools.xcodeproj; sourceTree = "<group>"; };
+		7E39432118642AEB008750FE /* JFFRestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFRestKit.xcodeproj; path = ../JFFRestKit/JFFRestKit.xcodeproj; sourceTree = "<group>"; };
+		7E39432A18642AF1008750FE /* JFFSecureStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFSecureStorage.xcodeproj; path = ../JFFSecureStorage/JFFSecureStorage.xcodeproj; sourceTree = "<group>"; };
+		7E39433318642AF9008750FE /* JFFSocial.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFSocial.xcodeproj; path = ../JFFSocial/JFFSocial.xcodeproj; sourceTree = "<group>"; };
+		7E39433D18642B01008750FE /* JFFStoreKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFStoreKit.xcodeproj; path = ../JFFStoreKit/JFFStoreKit.xcodeproj; sourceTree = "<group>"; };
+		7E39434918642B21008750FE /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
 		8D713C1E13F3F2AE007268DF /* JFFNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFNetwork.xcodeproj; path = ../JFFNetwork/JFFNetwork.xcodeproj; sourceTree = "<group>"; };
 		8DBE938F13B4D70200C26B09 /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = SOURCE_ROOT; };
 		8DBE939813B4D70800C26B09 /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../JFFScheduler/JFFScheduler.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -128,11 +341,9 @@
 		0867D691FE84028FC02AAC07 /* JFFLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				8D713C1E13F3F2AE007268DF /* JFFNetwork.xcodeproj */,
-				8DBE93AA13B4D71800C26B09 /* JFFUtils.xcodeproj */,
-				8DBE93A113B4D71000C26B09 /* JFFUI.xcodeproj */,
-				8DBE939813B4D70800C26B09 /* JFFScheduler.xcodeproj */,
-				8DBE938F13B4D70200C26B09 /* JFFAsyncOperations.xcodeproj */,
+				7E39434818642B12008750FE /* unit-test */,
+				7E3942F418642AAD008750FE /* core */,
+				7E3942CC18642AA5008750FE /* extra */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -164,10 +375,135 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		7E3942CC18642AA5008750FE /* extra */ = {
+			isa = PBXGroup;
+			children = (
+				7E39433D18642B01008750FE /* JFFStoreKit.xcodeproj */,
+				7E39433318642AF9008750FE /* JFFSocial.xcodeproj */,
+				7E39432A18642AF1008750FE /* JFFSecureStorage.xcodeproj */,
+				7E39432118642AEB008750FE /* JFFRestKit.xcodeproj */,
+				7E39431418642AE3008750FE /* JFFJsonTools.xcodeproj */,
+				7E39430B18642ADD008750FE /* JFFJpeg.xcodeproj */,
+				7E39430218642ACC008750FE /* JFFCoreLocation.xcodeproj */,
+				7E3942FB18642AC6008750FE /* JFFContacts.xcodeproj */,
+				7E3942F518642AC0008750FE /* JFFCache.xcodeproj */,
+			);
+			name = extra;
+			sourceTree = "<group>";
+		};
+		7E3942F418642AAD008750FE /* core */ = {
+			isa = PBXGroup;
+			children = (
+				8D713C1E13F3F2AE007268DF /* JFFNetwork.xcodeproj */,
+				8DBE93AA13B4D71800C26B09 /* JFFUtils.xcodeproj */,
+				8DBE93A113B4D71000C26B09 /* JFFUI.xcodeproj */,
+				8DBE939813B4D70800C26B09 /* JFFScheduler.xcodeproj */,
+				8DBE938F13B4D70200C26B09 /* JFFAsyncOperations.xcodeproj */,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
+		7E3942F618642AC0008750FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E3942FA18642AC1008750FE /* libJFFCache.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E3942FC18642AC6008750FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E39430118642AC7008750FE /* libJFFContacts.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E39430318642ACC008750FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E39430818642ACC008750FE /* libJFFCoreLocation.a */,
+				7E39430A18642ACC008750FE /* JFFCoreLocationTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E39430C18642ADD008750FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E39431118642ADD008750FE /* libJFFJpeg.a */,
+				7E39431318642ADD008750FE /* JFFJpegTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E39431518642AE3008750FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E39431E18642AE3008750FE /* libJFFJsonTools.a */,
+				7E39432018642AE3008750FE /* JFFJsonToolsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E39432218642AEB008750FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E39432718642AEB008750FE /* libJFFRestKit.a */,
+				7E39432918642AEB008750FE /* JFFRestKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E39432B18642AF1008750FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E39433018642AF2008750FE /* libJFFSecureStorage.a */,
+				7E39433218642AF2008750FE /* JFFSecureStorageTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E39433418642AF9008750FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E39433C18642AF9008750FE /* libJFFSocial.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E39433E18642B01008750FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E39434518642B01008750FE /* libJFFStoreKit.a */,
+				7E39434718642B01008750FE /* JFFStoreKitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E39434818642B12008750FE /* unit-test */ = {
+			isa = PBXGroup;
+			children = (
+				7E39434918642B21008750FE /* JFFTestTools.xcodeproj */,
+			);
+			name = "unit-test";
+			sourceTree = "<group>";
+		};
+		7E39434A18642B21008750FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E39434E18642B21008750FE /* libJFFTestTools.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		8D713C1F13F3F2AE007268DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				8D713C2613F3F2AE007268DF /* libJFFNetwork.a */,
+				7E3942D718642AA5008750FE /* libJFFNetworkMacOS.a */,
+				7E3942D918642AA5008750FE /* libJFFNetwork-clang.a */,
+				7E3942DB18642AA5008750FE /* JFFNetworkFW.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,6 +512,8 @@
 			isa = PBXGroup;
 			children = (
 				8DBE939713B4D70200C26B09 /* libJFFAsyncOperations.a */,
+				7E3942D018642AA5008750FE /* libJFFAsyncOperations-clang.a */,
+				7E3942D218642AA5008750FE /* JFFAsyncOperationsFW.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,6 +522,9 @@
 			isa = PBXGroup;
 			children = (
 				8DBE93A013B4D70800C26B09 /* libJFFScheduler.a */,
+				7E3942E018642AA5008750FE /* libJFFSchedulerMacOS.a */,
+				7E3942E218642AA5008750FE /* libJFFScheduler-clang.a */,
+				7E3942E418642AA5008750FE /* JFFSchedulerFW.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				8DBE93A913B4D71000C26B09 /* libJFFUI.a */,
+				7E3942E718642AA5008750FE /* libJFFUI-clang.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,6 +542,10 @@
 			isa = PBXGroup;
 			children = (
 				8DBE93B213B4D71800C26B09 /* libJFFUtils.a */,
+				7E3942ED18642AA5008750FE /* libJFFUtilsMacOS.a */,
+				7E3942EF18642AA5008750FE /* libJFFUtils-clang.a */,
+				7E3942F118642AA5008750FE /* JFFUtilsFW.framework */,
+				7E3942F318642AA5008750FE /* JFFUtilsTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -267,12 +613,52 @@
 					ProjectRef = 8DBE938F13B4D70200C26B09 /* JFFAsyncOperations.xcodeproj */;
 				},
 				{
+					ProductGroup = 7E3942F618642AC0008750FE /* Products */;
+					ProjectRef = 7E3942F518642AC0008750FE /* JFFCache.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E3942FC18642AC6008750FE /* Products */;
+					ProjectRef = 7E3942FB18642AC6008750FE /* JFFContacts.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E39430318642ACC008750FE /* Products */;
+					ProjectRef = 7E39430218642ACC008750FE /* JFFCoreLocation.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E39430C18642ADD008750FE /* Products */;
+					ProjectRef = 7E39430B18642ADD008750FE /* JFFJpeg.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E39431518642AE3008750FE /* Products */;
+					ProjectRef = 7E39431418642AE3008750FE /* JFFJsonTools.xcodeproj */;
+				},
+				{
 					ProductGroup = 8D713C1F13F3F2AE007268DF /* Products */;
 					ProjectRef = 8D713C1E13F3F2AE007268DF /* JFFNetwork.xcodeproj */;
 				},
 				{
+					ProductGroup = 7E39432218642AEB008750FE /* Products */;
+					ProjectRef = 7E39432118642AEB008750FE /* JFFRestKit.xcodeproj */;
+				},
+				{
 					ProductGroup = 8DBE939913B4D70800C26B09 /* Products */;
 					ProjectRef = 8DBE939813B4D70800C26B09 /* JFFScheduler.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E39432B18642AF1008750FE /* Products */;
+					ProjectRef = 7E39432A18642AF1008750FE /* JFFSecureStorage.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E39433418642AF9008750FE /* Products */;
+					ProjectRef = 7E39433318642AF9008750FE /* JFFSocial.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E39433E18642B01008750FE /* Products */;
+					ProjectRef = 7E39433D18642B01008750FE /* JFFStoreKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E39434A18642B21008750FE /* Products */;
+					ProjectRef = 7E39434918642B21008750FE /* JFFTestTools.xcodeproj */;
 				},
 				{
 					ProductGroup = 8DBE93A213B4D71000C26B09 /* Products */;
@@ -291,6 +677,209 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		7E3942D018642AA5008750FE /* libJFFAsyncOperations-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFAsyncOperations-clang.a";
+			remoteRef = 7E3942CF18642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942D218642AA5008750FE /* JFFAsyncOperationsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFAsyncOperationsFW.framework;
+			remoteRef = 7E3942D118642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942D718642AA5008750FE /* libJFFNetworkMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFNetworkMacOS.a;
+			remoteRef = 7E3942D618642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942D918642AA5008750FE /* libJFFNetwork-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFNetwork-clang.a";
+			remoteRef = 7E3942D818642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942DB18642AA5008750FE /* JFFNetworkFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFNetworkFW.framework;
+			remoteRef = 7E3942DA18642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942E018642AA5008750FE /* libJFFSchedulerMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFSchedulerMacOS.a;
+			remoteRef = 7E3942DF18642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942E218642AA5008750FE /* libJFFScheduler-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFScheduler-clang.a";
+			remoteRef = 7E3942E118642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942E418642AA5008750FE /* JFFSchedulerFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFSchedulerFW.framework;
+			remoteRef = 7E3942E318642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942E718642AA5008750FE /* libJFFUI-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFUI-clang.a";
+			remoteRef = 7E3942E618642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942ED18642AA5008750FE /* libJFFUtilsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtilsMacOS.a;
+			remoteRef = 7E3942EC18642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942EF18642AA5008750FE /* libJFFUtils-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFUtils-clang.a";
+			remoteRef = 7E3942EE18642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942F118642AA5008750FE /* JFFUtilsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFUtilsFW.framework;
+			remoteRef = 7E3942F018642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942F318642AA5008750FE /* JFFUtilsTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFUtilsTest.octest;
+			remoteRef = 7E3942F218642AA5008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E3942FA18642AC1008750FE /* libJFFCache.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFCache.a;
+			remoteRef = 7E3942F918642AC1008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39430118642AC7008750FE /* libJFFContacts.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFContacts.a;
+			remoteRef = 7E39430018642AC7008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39430818642ACC008750FE /* libJFFCoreLocation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFCoreLocation.a;
+			remoteRef = 7E39430718642ACC008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39430A18642ACC008750FE /* JFFCoreLocationTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFCoreLocationTests.octest;
+			remoteRef = 7E39430918642ACC008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39431118642ADD008750FE /* libJFFJpeg.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFJpeg.a;
+			remoteRef = 7E39431018642ADD008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39431318642ADD008750FE /* JFFJpegTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFJpegTests.xctest;
+			remoteRef = 7E39431218642ADD008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39431E18642AE3008750FE /* libJFFJsonTools.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFJsonTools.a;
+			remoteRef = 7E39431D18642AE3008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39432018642AE3008750FE /* JFFJsonToolsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFJsonToolsTests.xctest;
+			remoteRef = 7E39431F18642AE3008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39432718642AEB008750FE /* libJFFRestKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFRestKit.a;
+			remoteRef = 7E39432618642AEB008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39432918642AEB008750FE /* JFFRestKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFRestKitTests.xctest;
+			remoteRef = 7E39432818642AEB008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39433018642AF2008750FE /* libJFFSecureStorage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFSecureStorage.a;
+			remoteRef = 7E39432F18642AF2008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39433218642AF2008750FE /* JFFSecureStorageTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFSecureStorageTests.octest;
+			remoteRef = 7E39433118642AF2008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39433C18642AF9008750FE /* libJFFSocial.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFSocial.a;
+			remoteRef = 7E39433B18642AF9008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39434518642B01008750FE /* libJFFStoreKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFStoreKit.a;
+			remoteRef = 7E39434418642B01008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39434718642B01008750FE /* JFFStoreKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFStoreKitTests.octest;
+			remoteRef = 7E39434618642B01008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E39434E18642B21008750FE /* libJFFTestTools.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFTestTools.a;
+			remoteRef = 7E39434D18642B21008750FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		8D713C2613F3F2AE007268DF /* libJFFNetwork.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;

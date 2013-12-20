@@ -30,6 +30,7 @@
     return 0;
 }
 
+
 #pragma mark -
 #pragma mark Callbacks management
 - (void)clearCallbacks

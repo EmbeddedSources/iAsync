@@ -57,7 +57,9 @@ static char proxyDelegatesKey;
         return nil;
     }
     
-    id realDelegate = objc_msgSend(self, NSSelectorFromString(hookedGetterName));
+    typedef id (*PropertyGetterMsgSendFunction)( id, SEL );
+    static const PropertyGetterMsgSendFunction FPropertyGetter = (PropertyGetterMsgSendFunction)objc_msgSend;
+    id realDelegate = FPropertyGetter(self, NSSelectorFromString(hookedGetterName));
     
     JFFProxyDelegatesDispatcher *dispatcher =
     [JFFProxyDelegatesDispatcher newProxyDelegatesDispatcherWithRealDelegate:realDelegate

@@ -53,7 +53,11 @@
         if (_cancelCallback) {
             JFFCancelAsyncOperationHandler cancelCallback = _cancelCallback;
             _cancelCallback = nil;
-            cancelCallback(canceled);
+            
+            if ( cancelCallback )
+            {
+                cancelCallback(canceled);
+            }
         }
         
         [self clear];

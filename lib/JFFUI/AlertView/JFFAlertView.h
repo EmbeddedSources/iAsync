@@ -39,6 +39,11 @@
 + (void)showExclusiveAlertWithTitle:(NSString *)title
                         description:(NSString *)description;
 
++(void)showAlertWithTitle:( NSString* )title_
+              description:( NSString* )description_
+                exclusive:( BOOL )isExclusive_;
+
+                        
 + (void)showErrorWithDescription:(NSString *)description;
 + (void)showExclusiveErrorWithDescription:(NSString *)description;
 + (void)showInformationWithDescription:(NSString *)description;

@@ -27,7 +27,8 @@
         
         return [fileLength unsignedLongLongValue];
     }
-    return NSURLResponseUnknownLength;
+    
+    return (unsigned long long)NSURLResponseUnknownLength;
 }
 
 + (void)setFileLength:(unsigned long long)fileLength

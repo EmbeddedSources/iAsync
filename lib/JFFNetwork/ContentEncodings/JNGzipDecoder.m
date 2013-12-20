@@ -2,6 +2,7 @@
 
 #import "JNGzipErrorsLogger.h"
 #import "JNGzipCustomErrors.h"
+#import "JNConstants.h"
 
 NSString* kGzipErrorDomain = @"gzip.error";
 
@@ -14,46 +15,48 @@ NSString* kGzipErrorDomain = @"gzip.error";
     unsigned long long _contentLength;
 }
 
-- (instancetype)init
+-(id)init
 {
-    [self doesNotRecognizeSelector:_cmd];
+    [ self doesNotRecognizeSelector: _cmd ];
     return nil;
 }
 
-- (instancetype)initWithContentLength:(unsigned long long)contentLength
+-(id)initWithContentLength:( unsigned long long )contentLength_
 {
-    self = [super init];
-    if (nil == self) {
+    self = [ super init ];
+    if ( nil == self )
+    {
         return nil;
     }
     
-    _contentLength = contentLength;
+    self->_contentLength = contentLength_;
     
     return self;
 }
 
-- (BOOL)openZipStreamWithError:(NSError **)outError
+-(BOOL)openZipStreamWithError:( NSError** )outError
 {
-    if (_isOpen) {
-        
+    if ( self->_isOpen )
+    {
         return YES;
     }
-    
-    _strm.total_out = 0;
-    _strm.zalloc    = Z_NULL;
-    _strm.zfree     = Z_NULL;
-    
+
+    self->_strm.total_out = 0;
+    self->_strm.zalloc    = Z_NULL;
+    self->_strm.zfree     = Z_NULL;
+
+
     //!! dodikk -- WTF Magic
-    int initResult = inflateInit2(&_strm, (15+32));
-    BOOL result = (Z_OK == initResult);
-    
-    if (!result) {
-        
-        [JFFLogger logErrorWithFormat:@"JNGzipDecoder -- inflateInit2 failed"];
-        NSError *gzipError = [NSError errorWithDomain:kGzipErrorDomain
-                                                 code:kJNGzipInitFailed
-                                             userInfo:nil];
-        [gzipError setToPointer:outError];
+    int initResult = inflateInit2( &self->_strm, (15+32) );
+    BOOL result = ( Z_OK == initResult );
+
+    if ( !result )
+    {
+        [ JFFLogger logErrorWithFormat:@"JNGzipDecoder -- inflateInit2 failed" ];
+        NSError* gzipError = [ NSError errorWithDomain: kGzipErrorDomain
+                                                  code: kJNGzipInitFailed
+                                              userInfo: nil ];
+        [ gzipError setToPointer: outError ];
         
         return NO;
     }
@@ -61,120 +64,146 @@ NSString* kGzipErrorDomain = @"gzip.error";
     return YES;
 }
 
+
+
+- (NSData*)decodeData:(NSData *)encodedData_
+                error:(NSError **)outError
+{
+    @synchronized( self )
+    {
+        return [ self threadUnsafeDecodeData: encodedData_
+                                       error: outError ];
+    }
+}
+
+
 //http://www.cocoadev.com/index.pl?NSDataCategory
-- (NSData *)decodeData:(NSData *)encodedData
-                 error:(NSError **)outError
+- (NSData*)threadUnsafeDecodeData:(NSData *)encodedData_
+                            error:(NSError **)outError
 {
     NSParameterAssert(outError);
     *outError = nil;
-    
-    if (0 == [encodedData length]) {
-        return encodedData;
+
+    if ( 0 == [ encodedData_ length ] ) 
+    {
+        return encodedData_;
     }
-    
-    NSUInteger fullLength = [encodedData length];
-    
+
+    NSUInteger full_length_ = [ encodedData_ length ];
+
     static const NSUInteger SCALE_TO_GET_ENOUGH_MEMORY = 3;
-    NSUInteger bufferLength_ = SCALE_TO_GET_ENOUGH_MEMORY * fullLength;
+    NSUInteger bufferLength_ = SCALE_TO_GET_ENOUGH_MEMORY * full_length_;
     
-    NSMutableData* decompressed = [NSMutableData dataWithLength:bufferLength_];
-    int  status = 0 ;
+    NSMutableData* decompressed_ = [ NSMutableData dataWithLength: bufferLength_ ];
+    int  status_ = 0 ;
+
+    self->_strm.next_in   = (Bytef*)[ encodedData_ bytes  ];
+    self->_strm.avail_in  = (uInt  )[ encodedData_ length ];
     
-    _strm.next_in   = (Bytef*)[ encodedData bytes  ];
-    _strm.avail_in  = (uInt  )[ encodedData length ];
+
     
-    _isOpen = [ self openZipStreamWithError: outError ];
-    if (!_isOpen) {
+    self->_isOpen = [ self openZipStreamWithError: outError ];
+    if ( !self->_isOpen )
+    {
         return nil;
     }
-    else if (_done) {
-        [self closeZipStreamWithError:outError];
+    else if ( self->_done )
+    {
+        [ self closeZipStreamWithError: outError ];
     }
     
+    
+    
     NSUInteger decompressedThisTime = 0;
-    uLong oldTotalOut = _strm.total_out;
+    uLong oldTotalOut = self->_strm.total_out;
     uLong totalCountDiff = 0;
     
-    while (0 != _strm.avail_in) {
-        
+    while ( 0 != self->_strm.avail_in )
+    {
         // Make sure we have enough room and reset the lengths.
-        NSUInteger decompressedDataLength = [decompressed length];
+        NSUInteger decompressedDataLength_ = [ decompressed_ length ];
         
-        if (_strm.total_out >= decompressedDataLength) {
-            [ decompressed increaseLengthBy: decompressedDataLength ];
+        if ( self->_strm.total_out >= decompressedDataLength_)
+        {
+            [ decompressed_ increaseLengthBy: decompressedDataLength_ ];
         }
         
-        _strm.next_out = [decompressed mutableBytes]  + decompressedThisTime;
-        _strm.avail_out = (uInt)( [decompressed length] - decompressedThisTime );
-        
+        self->_strm.next_out = [decompressed_ mutableBytes]  + decompressedThisTime;
+        self->_strm.avail_out = (uInt)( [decompressed_ length] - decompressedThisTime );
+
         // Inflate another chunk.
-        status = inflate (&_strm, Z_SYNC_FLUSH);
+        status_ = inflate (&self->_strm, Z_SYNC_FLUSH);
         
-        totalCountDiff = _strm.total_out - oldTotalOut;
-        oldTotalOut = _strm.total_out;
+        
+        totalCountDiff = self->_strm.total_out - oldTotalOut;
+        oldTotalOut = self->_strm.total_out;
         decompressedThisTime += totalCountDiff;
         
-        if (status == Z_STREAM_END)  {
-            
-            _done = YES;
+        
+        if (status_ == Z_STREAM_END) 
+        {
+            self->_done = YES;
             break;
         }
-        else if (status != Z_OK) {
+        else if (status_ != Z_OK)
+        {
+            NSLog( @"[!!! WARNING !!!] JNZipDecoder -- unzip action has failed.\n Zip error code -- %d\n Zip error -- %@"
+                  , status_
+                  , [ JNGzipErrorsLogger zipErrorMessageFromCode: status_ ] );
             
-            NSLog(@"[!!! WARNING !!!] JNZipDecoder -- unzip action has failed.\n Zip error code -- %d\n Zip error -- %@",
-                  status,
-                  [JNGzipErrorsLogger zipErrorMessageFromCode:status]);
             
+            NSError* gzipError = [ NSError errorWithDomain: kGzipErrorDomain
+                                                      code: status_
+                                                  userInfo: nil ];
+            [ gzipError setToPointer: outError ];
             
-            NSError *gzipError = [NSError errorWithDomain:kGzipErrorDomain
-                                                     code:status
-                                                 userInfo:nil];
-            [gzipError setToPointer:outError];
-            
-            inflateEnd(&_strm);
+            inflateEnd(&self->_strm);
             
             return nil;
         }
     }
+
     
-    BOOL isEndingSignatureAvailable = (_strm.avail_in > 0);
-    
-    if (_done) {
-        
-        if ( isEndingSignatureAvailable ) {
-            
-            [self closeZipStreamWithError:outError];
+    BOOL isEndingSignatureAvailable = ( self->_strm.avail_in > 0 );
+    if ( self->_done )
+    {
+        if ( isEndingSignatureAvailable )
+        {
+            [ self closeZipStreamWithError: outError ];
         }
-    }
-    
+	}
+
     // Set real length.
-    [decompressed setLength:decompressedThisTime];
-    return [[NSData alloc] initWithData:decompressed];
+        [ decompressed_ setLength: decompressedThisTime ];
+        return [ NSData dataWithData: decompressed_ ];
 }
 
-- (BOOL)closeWithError:(NSError **)outError
+-(BOOL)closeWithError:( NSError ** )outError
 {
-    return [self closeZipStreamWithError:outError];
+    return [ self closeZipStreamWithError: outError ];
 }
 
-- (BOOL)closeZipStreamWithError:(NSError **)outError
+-(BOOL)closeZipStreamWithError:( NSError ** )outError
 {
-    if (!_isOpen) {
+    if ( !self->_isOpen )
+    {
         return YES;
     }
     
-    int inflateEndResultCode = inflateEnd(&_strm);
-    _isOpen = NO;
     
-    if (inflateEndResultCode != Z_OK) {
+    int inflateEndResultCode_ = inflateEnd (&self->_strm);
+    self->_isOpen = NO;
+    
+    if ( inflateEndResultCode_ != Z_OK)
+    {
         NSLog( @"[!!! WARNING !!!] JNZipDecoder -- unexpected EOF" );
         
-        NSError *gzipError =
-        [[NSError alloc] initWithDomain:kGzipErrorDomain
-                                   code:kJNGzipUnexpectedEOF
-                               userInfo:nil];
+        NSError* gzipError =
+        [ NSError errorWithDomain: kGzipErrorDomain
+                                         code: kJNGzipUnexpectedEOF
+                                     userInfo: nil ];
         
-        [gzipError setToPointer:outError];
+        [ gzipError setToPointer: outError ];
         
         return NO;
     }

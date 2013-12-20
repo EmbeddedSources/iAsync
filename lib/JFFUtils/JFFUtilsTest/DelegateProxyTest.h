@@ -1,6 +1,6 @@
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import <Foundation/Foundation.h>
 
-@interface DelegateProxyTest : SenTestCase
+@interface DelegateProxyTest : XCTestCase
 @end
