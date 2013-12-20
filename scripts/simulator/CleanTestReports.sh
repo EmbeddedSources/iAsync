@@ -5,8 +5,6 @@
 
 ## rm -r -f "$TEST_RESULTS_DIR"
 
-
 cd ~/Library/Application\ Support/iPhone\ Simulator/7.0.3/
-
 rm -rf Applications
 mkdir -p Applications
