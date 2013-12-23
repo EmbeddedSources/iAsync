@@ -135,7 +135,7 @@
         return;
     }
     
-    self.activeIndex = fmin(_activeIndex, self.lastIndex);
+    self.activeIndex = std::min(_activeIndex, self.lastIndex);
     
     [self addViewForIndex:_activeIndex];
     
@@ -238,7 +238,7 @@
     
     NSInteger firstIndex = floorf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
     NSInteger lastIndex  = ceilf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
-    lastIndex = fmin( lastIndex, self.lastIndex );
+    lastIndex = std::min( lastIndex, self.lastIndex );
     
     firstIndex = firstIndex > 0 ?: 0;
 
@@ -275,7 +275,7 @@
     NSAssert( _cachedNumberOfElements - 1 == last_elements_count_, @"invalid elements count" );
     NSAssert( ( index_ >= _firstIndex - 1 ) && ( index_ <= self.lastIndex + 1 ), @"invalid index" );
 
-    self.firstIndex = fmin( _firstIndex, index_ );
+    self.firstIndex = std::min( _firstIndex, index_ );
     if ( index_ <= prevLastIndex_ )
         [ self shiftRightElementsFromIndex: index_ toIndex: prevLastIndex_ ];
 
