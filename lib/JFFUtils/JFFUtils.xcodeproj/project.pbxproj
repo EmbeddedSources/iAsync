@@ -353,6 +353,142 @@
 		7E972D2218683A9100D9681C /* NSError+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E972D1C18683A9100D9681C /* NSError+JSON.m */; };
 		7E972D2318683A9100D9681C /* NSError+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E972D1C18683A9100D9681C /* NSError+JSON.m */; };
 		7E972D2418683A9100D9681C /* NSError+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E972D1C18683A9100D9681C /* NSError+JSON.m */; };
+		7E9ED9DC1868493000B3B5BB /* NSString+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BA1868493000B3B5BB /* NSString+Base64.h */; };
+		7E9ED9DD1868493000B3B5BB /* NSString+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BA1868493000B3B5BB /* NSString+Base64.h */; };
+		7E9ED9DE1868493000B3B5BB /* NSString+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BA1868493000B3B5BB /* NSString+Base64.h */; };
+		7E9ED9DF1868493000B3B5BB /* NSString+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BA1868493000B3B5BB /* NSString+Base64.h */; };
+		7E9ED9E01868493000B3B5BB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BB1868493000B3B5BB /* NSString+Base64.m */; };
+		7E9ED9E11868493000B3B5BB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BB1868493000B3B5BB /* NSString+Base64.m */; };
+		7E9ED9E21868493000B3B5BB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BB1868493000B3B5BB /* NSString+Base64.m */; };
+		7E9ED9E31868493000B3B5BB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BB1868493000B3B5BB /* NSString+Base64.m */; };
+		7E9ED9E41868493000B3B5BB /* NSString+CPlusPlus.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BC1868493000B3B5BB /* NSString+CPlusPlus.h */; };
+		7E9ED9E51868493000B3B5BB /* NSString+CPlusPlus.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BC1868493000B3B5BB /* NSString+CPlusPlus.h */; };
+		7E9ED9E61868493000B3B5BB /* NSString+CPlusPlus.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BC1868493000B3B5BB /* NSString+CPlusPlus.h */; };
+		7E9ED9E71868493000B3B5BB /* NSString+CPlusPlus.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BC1868493000B3B5BB /* NSString+CPlusPlus.h */; };
+		7E9ED9E81868493000B3B5BB /* NSString+CPlusPlus.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BD1868493000B3B5BB /* NSString+CPlusPlus.mm */; };
+		7E9ED9E91868493000B3B5BB /* NSString+CPlusPlus.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BD1868493000B3B5BB /* NSString+CPlusPlus.mm */; };
+		7E9ED9EA1868493000B3B5BB /* NSString+CPlusPlus.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BD1868493000B3B5BB /* NSString+CPlusPlus.mm */; };
+		7E9ED9EB1868493000B3B5BB /* NSString+CPlusPlus.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BD1868493000B3B5BB /* NSString+CPlusPlus.mm */; };
+		7E9ED9EC1868493000B3B5BB /* NSString+FileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BE1868493000B3B5BB /* NSString+FileAttributes.h */; };
+		7E9ED9ED1868493000B3B5BB /* NSString+FileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BE1868493000B3B5BB /* NSString+FileAttributes.h */; };
+		7E9ED9EE1868493000B3B5BB /* NSString+FileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BE1868493000B3B5BB /* NSString+FileAttributes.h */; };
+		7E9ED9EF1868493000B3B5BB /* NSString+FileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9BE1868493000B3B5BB /* NSString+FileAttributes.h */; };
+		7E9ED9F01868493000B3B5BB /* NSString+FileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BF1868493000B3B5BB /* NSString+FileAttributes.m */; };
+		7E9ED9F11868493000B3B5BB /* NSString+FileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BF1868493000B3B5BB /* NSString+FileAttributes.m */; };
+		7E9ED9F21868493000B3B5BB /* NSString+FileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BF1868493000B3B5BB /* NSString+FileAttributes.m */; };
+		7E9ED9F31868493000B3B5BB /* NSString+FileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9BF1868493000B3B5BB /* NSString+FileAttributes.m */; };
+		7E9ED9F41868493000B3B5BB /* NSString+Format.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C01868493000B3B5BB /* NSString+Format.h */; };
+		7E9ED9F51868493000B3B5BB /* NSString+Format.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C01868493000B3B5BB /* NSString+Format.h */; };
+		7E9ED9F61868493000B3B5BB /* NSString+Format.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C01868493000B3B5BB /* NSString+Format.h */; };
+		7E9ED9F71868493000B3B5BB /* NSString+Format.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C01868493000B3B5BB /* NSString+Format.h */; };
+		7E9ED9F81868493000B3B5BB /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C11868493000B3B5BB /* NSString+Format.m */; };
+		7E9ED9F91868493000B3B5BB /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C11868493000B3B5BB /* NSString+Format.m */; };
+		7E9ED9FA1868493000B3B5BB /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C11868493000B3B5BB /* NSString+Format.m */; };
+		7E9ED9FB1868493000B3B5BB /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C11868493000B3B5BB /* NSString+Format.m */; };
+		7E9ED9FC1868493000B3B5BB /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C21868493000B3B5BB /* NSString+HTML.h */; };
+		7E9ED9FD1868493000B3B5BB /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C21868493000B3B5BB /* NSString+HTML.h */; };
+		7E9ED9FE1868493000B3B5BB /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C21868493000B3B5BB /* NSString+HTML.h */; };
+		7E9ED9FF1868493000B3B5BB /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C21868493000B3B5BB /* NSString+HTML.h */; };
+		7E9EDA001868493000B3B5BB /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C31868493000B3B5BB /* NSString+HTML.m */; };
+		7E9EDA011868493000B3B5BB /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C31868493000B3B5BB /* NSString+HTML.m */; };
+		7E9EDA021868493000B3B5BB /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C31868493000B3B5BB /* NSString+HTML.m */; };
+		7E9EDA031868493000B3B5BB /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C31868493000B3B5BB /* NSString+HTML.m */; };
+		7E9EDA041868493000B3B5BB /* NSString+IsEmailValid.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C41868493000B3B5BB /* NSString+IsEmailValid.h */; };
+		7E9EDA051868493000B3B5BB /* NSString+IsEmailValid.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C41868493000B3B5BB /* NSString+IsEmailValid.h */; };
+		7E9EDA061868493000B3B5BB /* NSString+IsEmailValid.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C41868493000B3B5BB /* NSString+IsEmailValid.h */; };
+		7E9EDA071868493000B3B5BB /* NSString+IsEmailValid.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C41868493000B3B5BB /* NSString+IsEmailValid.h */; };
+		7E9EDA081868493000B3B5BB /* NSString+IsEmailValid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C51868493000B3B5BB /* NSString+IsEmailValid.m */; };
+		7E9EDA091868493000B3B5BB /* NSString+IsEmailValid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C51868493000B3B5BB /* NSString+IsEmailValid.m */; };
+		7E9EDA0A1868493000B3B5BB /* NSString+IsEmailValid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C51868493000B3B5BB /* NSString+IsEmailValid.m */; };
+		7E9EDA0B1868493000B3B5BB /* NSString+IsEmailValid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C51868493000B3B5BB /* NSString+IsEmailValid.m */; };
+		7E9EDA0C1868493000B3B5BB /* NSString+IsEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C61868493000B3B5BB /* NSString+IsEmpty.h */; };
+		7E9EDA0D1868493000B3B5BB /* NSString+IsEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C61868493000B3B5BB /* NSString+IsEmpty.h */; };
+		7E9EDA0E1868493000B3B5BB /* NSString+IsEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C61868493000B3B5BB /* NSString+IsEmpty.h */; };
+		7E9EDA0F1868493000B3B5BB /* NSString+IsEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C61868493000B3B5BB /* NSString+IsEmpty.h */; };
+		7E9EDA101868493000B3B5BB /* NSString+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C71868493000B3B5BB /* NSString+IsEmpty.m */; };
+		7E9EDA111868493000B3B5BB /* NSString+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C71868493000B3B5BB /* NSString+IsEmpty.m */; };
+		7E9EDA121868493000B3B5BB /* NSString+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C71868493000B3B5BB /* NSString+IsEmpty.m */; };
+		7E9EDA131868493000B3B5BB /* NSString+IsEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C71868493000B3B5BB /* NSString+IsEmpty.m */; };
+		7E9EDA141868493000B3B5BB /* NSString+JSEscape.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C81868493000B3B5BB /* NSString+JSEscape.h */; };
+		7E9EDA151868493000B3B5BB /* NSString+JSEscape.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C81868493000B3B5BB /* NSString+JSEscape.h */; };
+		7E9EDA161868493000B3B5BB /* NSString+JSEscape.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C81868493000B3B5BB /* NSString+JSEscape.h */; };
+		7E9EDA171868493000B3B5BB /* NSString+JSEscape.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9C81868493000B3B5BB /* NSString+JSEscape.h */; };
+		7E9EDA181868493000B3B5BB /* NSString+JSEscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C91868493000B3B5BB /* NSString+JSEscape.m */; };
+		7E9EDA191868493000B3B5BB /* NSString+JSEscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C91868493000B3B5BB /* NSString+JSEscape.m */; };
+		7E9EDA1A1868493000B3B5BB /* NSString+JSEscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C91868493000B3B5BB /* NSString+JSEscape.m */; };
+		7E9EDA1B1868493000B3B5BB /* NSString+JSEscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9C91868493000B3B5BB /* NSString+JSEscape.m */; };
+		7E9EDA1C1868493000B3B5BB /* NSString+LocalizedPrice.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CA1868493000B3B5BB /* NSString+LocalizedPrice.h */; };
+		7E9EDA1D1868493000B3B5BB /* NSString+LocalizedPrice.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CA1868493000B3B5BB /* NSString+LocalizedPrice.h */; };
+		7E9EDA1E1868493000B3B5BB /* NSString+LocalizedPrice.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CA1868493000B3B5BB /* NSString+LocalizedPrice.h */; };
+		7E9EDA1F1868493000B3B5BB /* NSString+LocalizedPrice.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CA1868493000B3B5BB /* NSString+LocalizedPrice.h */; };
+		7E9EDA201868493000B3B5BB /* NSString+LocalizedPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CB1868493000B3B5BB /* NSString+LocalizedPrice.m */; };
+		7E9EDA211868493000B3B5BB /* NSString+LocalizedPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CB1868493000B3B5BB /* NSString+LocalizedPrice.m */; };
+		7E9EDA221868493000B3B5BB /* NSString+LocalizedPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CB1868493000B3B5BB /* NSString+LocalizedPrice.m */; };
+		7E9EDA231868493000B3B5BB /* NSString+LocalizedPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CB1868493000B3B5BB /* NSString+LocalizedPrice.m */; };
+		7E9EDA241868493000B3B5BB /* NSString+MD5.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CC1868493000B3B5BB /* NSString+MD5.h */; };
+		7E9EDA251868493000B3B5BB /* NSString+MD5.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CC1868493000B3B5BB /* NSString+MD5.h */; };
+		7E9EDA261868493000B3B5BB /* NSString+MD5.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CC1868493000B3B5BB /* NSString+MD5.h */; };
+		7E9EDA271868493000B3B5BB /* NSString+MD5.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CC1868493000B3B5BB /* NSString+MD5.h */; };
+		7E9EDA281868493000B3B5BB /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CD1868493000B3B5BB /* NSString+MD5.m */; };
+		7E9EDA291868493000B3B5BB /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CD1868493000B3B5BB /* NSString+MD5.m */; };
+		7E9EDA2A1868493000B3B5BB /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CD1868493000B3B5BB /* NSString+MD5.m */; };
+		7E9EDA2B1868493000B3B5BB /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CD1868493000B3B5BB /* NSString+MD5.m */; };
+		7E9EDA2C1868493000B3B5BB /* NSString+PathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CE1868493000B3B5BB /* NSString+PathExtensions.h */; };
+		7E9EDA2D1868493000B3B5BB /* NSString+PathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CE1868493000B3B5BB /* NSString+PathExtensions.h */; };
+		7E9EDA2E1868493000B3B5BB /* NSString+PathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CE1868493000B3B5BB /* NSString+PathExtensions.h */; };
+		7E9EDA2F1868493000B3B5BB /* NSString+PathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9CE1868493000B3B5BB /* NSString+PathExtensions.h */; };
+		7E9EDA301868493000B3B5BB /* NSString+PathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CF1868493000B3B5BB /* NSString+PathExtensions.m */; };
+		7E9EDA311868493000B3B5BB /* NSString+PathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CF1868493000B3B5BB /* NSString+PathExtensions.m */; };
+		7E9EDA321868493000B3B5BB /* NSString+PathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CF1868493000B3B5BB /* NSString+PathExtensions.m */; };
+		7E9EDA331868493000B3B5BB /* NSString+PathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9CF1868493000B3B5BB /* NSString+PathExtensions.m */; };
+		7E9EDA341868493000B3B5BB /* NSString+PropertyName.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D01868493000B3B5BB /* NSString+PropertyName.h */; };
+		7E9EDA351868493000B3B5BB /* NSString+PropertyName.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D01868493000B3B5BB /* NSString+PropertyName.h */; };
+		7E9EDA361868493000B3B5BB /* NSString+PropertyName.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D01868493000B3B5BB /* NSString+PropertyName.h */; };
+		7E9EDA371868493000B3B5BB /* NSString+PropertyName.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D01868493000B3B5BB /* NSString+PropertyName.h */; };
+		7E9EDA381868493000B3B5BB /* NSString+PropertyName.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D11868493000B3B5BB /* NSString+PropertyName.m */; };
+		7E9EDA391868493000B3B5BB /* NSString+PropertyName.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D11868493000B3B5BB /* NSString+PropertyName.m */; };
+		7E9EDA3A1868493000B3B5BB /* NSString+PropertyName.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D11868493000B3B5BB /* NSString+PropertyName.m */; };
+		7E9EDA3B1868493000B3B5BB /* NSString+PropertyName.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D11868493000B3B5BB /* NSString+PropertyName.m */; };
+		7E9EDA3C1868493000B3B5BB /* NSString+Search.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D21868493000B3B5BB /* NSString+Search.h */; };
+		7E9EDA3D1868493000B3B5BB /* NSString+Search.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D21868493000B3B5BB /* NSString+Search.h */; };
+		7E9EDA3E1868493000B3B5BB /* NSString+Search.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D21868493000B3B5BB /* NSString+Search.h */; };
+		7E9EDA3F1868493000B3B5BB /* NSString+Search.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D21868493000B3B5BB /* NSString+Search.h */; };
+		7E9EDA401868493000B3B5BB /* NSString+Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D31868493000B3B5BB /* NSString+Search.m */; };
+		7E9EDA411868493000B3B5BB /* NSString+Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D31868493000B3B5BB /* NSString+Search.m */; };
+		7E9EDA421868493000B3B5BB /* NSString+Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D31868493000B3B5BB /* NSString+Search.m */; };
+		7E9EDA431868493000B3B5BB /* NSString+Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D31868493000B3B5BB /* NSString+Search.m */; };
+		7E9EDA441868493000B3B5BB /* NSString+StringFromTemplateString.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D41868493000B3B5BB /* NSString+StringFromTemplateString.h */; };
+		7E9EDA451868493000B3B5BB /* NSString+StringFromTemplateString.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D41868493000B3B5BB /* NSString+StringFromTemplateString.h */; };
+		7E9EDA461868493000B3B5BB /* NSString+StringFromTemplateString.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D41868493000B3B5BB /* NSString+StringFromTemplateString.h */; };
+		7E9EDA471868493000B3B5BB /* NSString+StringFromTemplateString.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D41868493000B3B5BB /* NSString+StringFromTemplateString.h */; };
+		7E9EDA481868493000B3B5BB /* NSString+StringFromTemplateString.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D51868493000B3B5BB /* NSString+StringFromTemplateString.m */; };
+		7E9EDA491868493000B3B5BB /* NSString+StringFromTemplateString.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D51868493000B3B5BB /* NSString+StringFromTemplateString.m */; };
+		7E9EDA4A1868493000B3B5BB /* NSString+StringFromTemplateString.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D51868493000B3B5BB /* NSString+StringFromTemplateString.m */; };
+		7E9EDA4B1868493000B3B5BB /* NSString+StringFromTemplateString.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D51868493000B3B5BB /* NSString+StringFromTemplateString.m */; };
+		7E9EDA4C1868493000B3B5BB /* NSString+StringWithCutPrefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D61868493000B3B5BB /* NSString+StringWithCutPrefix.h */; };
+		7E9EDA4D1868493000B3B5BB /* NSString+StringWithCutPrefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D61868493000B3B5BB /* NSString+StringWithCutPrefix.h */; };
+		7E9EDA4E1868493000B3B5BB /* NSString+StringWithCutPrefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D61868493000B3B5BB /* NSString+StringWithCutPrefix.h */; };
+		7E9EDA4F1868493000B3B5BB /* NSString+StringWithCutPrefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D61868493000B3B5BB /* NSString+StringWithCutPrefix.h */; };
+		7E9EDA501868493000B3B5BB /* NSString+StringWithCutPrefix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D71868493000B3B5BB /* NSString+StringWithCutPrefix.m */; };
+		7E9EDA511868493000B3B5BB /* NSString+StringWithCutPrefix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D71868493000B3B5BB /* NSString+StringWithCutPrefix.m */; };
+		7E9EDA521868493000B3B5BB /* NSString+StringWithCutPrefix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D71868493000B3B5BB /* NSString+StringWithCutPrefix.m */; };
+		7E9EDA531868493000B3B5BB /* NSString+StringWithCutPrefix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D71868493000B3B5BB /* NSString+StringWithCutPrefix.m */; };
+		7E9EDA541868493000B3B5BB /* NSString+Trimm.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D81868493000B3B5BB /* NSString+Trimm.h */; };
+		7E9EDA551868493000B3B5BB /* NSString+Trimm.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D81868493000B3B5BB /* NSString+Trimm.h */; };
+		7E9EDA561868493000B3B5BB /* NSString+Trimm.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D81868493000B3B5BB /* NSString+Trimm.h */; };
+		7E9EDA571868493000B3B5BB /* NSString+Trimm.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9D81868493000B3B5BB /* NSString+Trimm.h */; };
+		7E9EDA581868493000B3B5BB /* NSString+Trimm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D91868493000B3B5BB /* NSString+Trimm.m */; };
+		7E9EDA591868493000B3B5BB /* NSString+Trimm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D91868493000B3B5BB /* NSString+Trimm.m */; };
+		7E9EDA5A1868493000B3B5BB /* NSString+Trimm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D91868493000B3B5BB /* NSString+Trimm.m */; };
+		7E9EDA5B1868493000B3B5BB /* NSString+Trimm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9D91868493000B3B5BB /* NSString+Trimm.m */; };
+		7E9EDA5C1868493000B3B5BB /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9DA1868493000B3B5BB /* NSString+UUIDCreation.h */; };
+		7E9EDA5D1868493000B3B5BB /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9DA1868493000B3B5BB /* NSString+UUIDCreation.h */; };
+		7E9EDA5E1868493000B3B5BB /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9DA1868493000B3B5BB /* NSString+UUIDCreation.h */; };
+		7E9EDA5F1868493000B3B5BB /* NSString+UUIDCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E9ED9DA1868493000B3B5BB /* NSString+UUIDCreation.h */; };
+		7E9EDA601868493000B3B5BB /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9DB1868493000B3B5BB /* NSString+UUIDCreation.m */; };
+		7E9EDA611868493000B3B5BB /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9DB1868493000B3B5BB /* NSString+UUIDCreation.m */; };
+		7E9EDA621868493000B3B5BB /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9DB1868493000B3B5BB /* NSString+UUIDCreation.m */; };
+		7E9EDA631868493000B3B5BB /* NSString+UUIDCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9ED9DB1868493000B3B5BB /* NSString+UUIDCreation.m */; };
 		8D1DE52B13AB8269001FD56F /* NSObject+RuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D1DE52913AB8269001FD56F /* NSObject+RuntimeExtensions.h */; };
 		8D1DE52C13AB8269001FD56F /* NSObject+RuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */; };
 		8D713C6D13F3F62B007268DF /* JFFMutableAssignArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D713C6B13F3F62B007268DF /* JFFMutableAssignArray.h */; };
@@ -563,6 +699,40 @@
 		7E8EE29918646C90000A3B34 /* JFFUtilsTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFUtilsTest-Prefix.pch"; sourceTree = "<group>"; };
 		7E972D1B18683A9100D9681C /* NSError+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+JSON.h"; sourceTree = "<group>"; };
 		7E972D1C18683A9100D9681C /* NSError+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+JSON.m"; sourceTree = "<group>"; };
+		7E9ED9BA1868493000B3B5BB /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "NSString/NSString+Base64.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9BB1868493000B3B5BB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "NSString/NSString+Base64.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9BC1868493000B3B5BB /* NSString+CPlusPlus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+CPlusPlus.h"; path = "NSString/NSString+CPlusPlus.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9BD1868493000B3B5BB /* NSString+CPlusPlus.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "NSString+CPlusPlus.mm"; path = "NSString/NSString+CPlusPlus.mm"; sourceTree = SOURCE_ROOT; };
+		7E9ED9BE1868493000B3B5BB /* NSString+FileAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FileAttributes.h"; path = "NSString/NSString+FileAttributes.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9BF1868493000B3B5BB /* NSString+FileAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FileAttributes.m"; path = "NSString/NSString+FileAttributes.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9C01868493000B3B5BB /* NSString+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Format.h"; path = "NSString/NSString+Format.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9C11868493000B3B5BB /* NSString+Format.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Format.m"; path = "NSString/NSString+Format.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9C21868493000B3B5BB /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+HTML.h"; path = "NSString/NSString+HTML.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9C31868493000B3B5BB /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+HTML.m"; path = "NSString/NSString+HTML.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9C41868493000B3B5BB /* NSString+IsEmailValid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+IsEmailValid.h"; path = "NSString/NSString+IsEmailValid.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9C51868493000B3B5BB /* NSString+IsEmailValid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+IsEmailValid.m"; path = "NSString/NSString+IsEmailValid.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9C61868493000B3B5BB /* NSString+IsEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+IsEmpty.h"; path = "NSString/NSString+IsEmpty.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9C71868493000B3B5BB /* NSString+IsEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+IsEmpty.m"; path = "NSString/NSString+IsEmpty.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9C81868493000B3B5BB /* NSString+JSEscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+JSEscape.h"; path = "NSString/NSString+JSEscape.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9C91868493000B3B5BB /* NSString+JSEscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+JSEscape.m"; path = "NSString/NSString+JSEscape.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9CA1868493000B3B5BB /* NSString+LocalizedPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+LocalizedPrice.h"; path = "NSString/NSString+LocalizedPrice.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9CB1868493000B3B5BB /* NSString+LocalizedPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+LocalizedPrice.m"; path = "NSString/NSString+LocalizedPrice.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9CC1868493000B3B5BB /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "NSString/NSString+MD5.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9CD1868493000B3B5BB /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "NSString/NSString+MD5.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9CE1868493000B3B5BB /* NSString+PathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+PathExtensions.h"; path = "NSString/NSString+PathExtensions.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9CF1868493000B3B5BB /* NSString+PathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+PathExtensions.m"; path = "NSString/NSString+PathExtensions.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9D01868493000B3B5BB /* NSString+PropertyName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+PropertyName.h"; path = "NSString/NSString+PropertyName.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9D11868493000B3B5BB /* NSString+PropertyName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+PropertyName.m"; path = "NSString/NSString+PropertyName.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9D21868493000B3B5BB /* NSString+Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Search.h"; path = "NSString/NSString+Search.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9D31868493000B3B5BB /* NSString+Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Search.m"; path = "NSString/NSString+Search.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9D41868493000B3B5BB /* NSString+StringFromTemplateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+StringFromTemplateString.h"; path = "NSString/NSString+StringFromTemplateString.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9D51868493000B3B5BB /* NSString+StringFromTemplateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+StringFromTemplateString.m"; path = "NSString/NSString+StringFromTemplateString.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9D61868493000B3B5BB /* NSString+StringWithCutPrefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+StringWithCutPrefix.h"; path = "NSString/NSString+StringWithCutPrefix.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9D71868493000B3B5BB /* NSString+StringWithCutPrefix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+StringWithCutPrefix.m"; path = "NSString/NSString+StringWithCutPrefix.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9D81868493000B3B5BB /* NSString+Trimm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Trimm.h"; path = "NSString/NSString+Trimm.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9D91868493000B3B5BB /* NSString+Trimm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Trimm.m"; path = "NSString/NSString+Trimm.m"; sourceTree = SOURCE_ROOT; };
+		7E9ED9DA1868493000B3B5BB /* NSString+UUIDCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+UUIDCreation.h"; path = "NSString/NSString+UUIDCreation.h"; sourceTree = SOURCE_ROOT; };
+		7E9ED9DB1868493000B3B5BB /* NSString+UUIDCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+UUIDCreation.m"; path = "NSString/NSString+UUIDCreation.m"; sourceTree = SOURCE_ROOT; };
 		8D1DE52913AB8269001FD56F /* NSObject+RuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RuntimeExtensions.h"; sourceTree = "<group>"; };
 		8D1DE52A13AB8269001FD56F /* NSObject+RuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RuntimeExtensions.m"; sourceTree = "<group>"; };
 		8D713C6B13F3F62B007268DF /* JFFMutableAssignArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFMutableAssignArray.h; sourceTree = "<group>"; };
@@ -844,6 +1014,40 @@
 				4CC01A9517438408003F1C88 /* NSError+IsNetworkError.m */,
 				7E972D1B18683A9100D9681C /* NSError+JSON.h */,
 				7E972D1C18683A9100D9681C /* NSError+JSON.m */,
+				7E9ED9BA1868493000B3B5BB /* NSString+Base64.h */,
+				7E9ED9BB1868493000B3B5BB /* NSString+Base64.m */,
+				7E9ED9BC1868493000B3B5BB /* NSString+CPlusPlus.h */,
+				7E9ED9BD1868493000B3B5BB /* NSString+CPlusPlus.mm */,
+				7E9ED9BE1868493000B3B5BB /* NSString+FileAttributes.h */,
+				7E9ED9BF1868493000B3B5BB /* NSString+FileAttributes.m */,
+				7E9ED9C01868493000B3B5BB /* NSString+Format.h */,
+				7E9ED9C11868493000B3B5BB /* NSString+Format.m */,
+				7E9ED9C21868493000B3B5BB /* NSString+HTML.h */,
+				7E9ED9C31868493000B3B5BB /* NSString+HTML.m */,
+				7E9ED9C41868493000B3B5BB /* NSString+IsEmailValid.h */,
+				7E9ED9C51868493000B3B5BB /* NSString+IsEmailValid.m */,
+				7E9ED9C61868493000B3B5BB /* NSString+IsEmpty.h */,
+				7E9ED9C71868493000B3B5BB /* NSString+IsEmpty.m */,
+				7E9ED9C81868493000B3B5BB /* NSString+JSEscape.h */,
+				7E9ED9C91868493000B3B5BB /* NSString+JSEscape.m */,
+				7E9ED9CA1868493000B3B5BB /* NSString+LocalizedPrice.h */,
+				7E9ED9CB1868493000B3B5BB /* NSString+LocalizedPrice.m */,
+				7E9ED9CC1868493000B3B5BB /* NSString+MD5.h */,
+				7E9ED9CD1868493000B3B5BB /* NSString+MD5.m */,
+				7E9ED9CE1868493000B3B5BB /* NSString+PathExtensions.h */,
+				7E9ED9CF1868493000B3B5BB /* NSString+PathExtensions.m */,
+				7E9ED9D01868493000B3B5BB /* NSString+PropertyName.h */,
+				7E9ED9D11868493000B3B5BB /* NSString+PropertyName.m */,
+				7E9ED9D21868493000B3B5BB /* NSString+Search.h */,
+				7E9ED9D31868493000B3B5BB /* NSString+Search.m */,
+				7E9ED9D41868493000B3B5BB /* NSString+StringFromTemplateString.h */,
+				7E9ED9D51868493000B3B5BB /* NSString+StringFromTemplateString.m */,
+				7E9ED9D61868493000B3B5BB /* NSString+StringWithCutPrefix.h */,
+				7E9ED9D71868493000B3B5BB /* NSString+StringWithCutPrefix.m */,
+				7E9ED9D81868493000B3B5BB /* NSString+Trimm.h */,
+				7E9ED9D91868493000B3B5BB /* NSString+Trimm.m */,
+				7E9ED9DA1868493000B3B5BB /* NSString+UUIDCreation.h */,
+				7E9ED9DB1868493000B3B5BB /* NSString+UUIDCreation.m */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -1204,6 +1408,7 @@
 				539103F414A88C04007315A3 /* JFFUtils_Prefix.pch in Headers */,
 				539103F514A88C04007315A3 /* JFFUtilsBlockDefinitions.h in Headers */,
 				539103F614A88C04007315A3 /* JFFSimpleBlockHolder.h in Headers */,
+				7E9EDA4E1868493000B3B5BB /* NSString+StringWithCutPrefix.h in Headers */,
 				539103F714A88C04007315A3 /* NSArray+BlocksAdditions.h in Headers */,
 				539103F814A88C04007315A3 /* NSObject+Ownerships.h in Headers */,
 				539103F914A88C04007315A3 /* NSString+Search.h in Headers */,
@@ -1211,32 +1416,48 @@
 				539103FB14A88C04007315A3 /* NSObject+OnDeallocBlock.h in Headers */,
 				539103FC14A88C04007315A3 /* JFFUtils.h in Headers */,
 				539103FD14A88C04007315A3 /* NSString+PropertyName.h in Headers */,
+				7E9ED9DE1868493000B3B5BB /* NSString+Base64.h in Headers */,
 				7E7DF4B8186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */,
+				7E9EDA5E1868493000B3B5BB /* NSString+UUIDCreation.h in Headers */,
 				539103FF14A88C04007315A3 /* NSObject+RuntimeExtensions.h in Headers */,
+				7E9EDA3E1868493000B3B5BB /* NSString+Search.h in Headers */,
 				5391040014A88C04007315A3 /* JFFMulticastDelegate.h in Headers */,
 				5391040114A88C04007315A3 /* JFFAssignProxy.h in Headers */,
 				5391040214A88C04007315A3 /* JFFMutableAssignArray.h in Headers */,
 				5391040314A88C04007315A3 /* NSString+PathExtensions.h in Headers */,
 				5391040414A88C04007315A3 /* NSMutableArray+ChangeCount.h in Headers */,
+				7E9ED9E61868493000B3B5BB /* NSString+CPlusPlus.h in Headers */,
 				5391040514A88C04007315A3 /* NSArray+RemoveDuplicates.h in Headers */,
+				7E9ED9FE1868493000B3B5BB /* NSString+HTML.h in Headers */,
 				5391040714A88C04007315A3 /* NSArray+IsEmpty.h in Headers */,
 				5391040814A88C04007315A3 /* NSObject+Const0.h in Headers */,
+				7E9EDA261868493000B3B5BB /* NSString+MD5.h in Headers */,
 				5391040C14A88C04007315A3 /* JGCDAdditions.h in Headers */,
 				5391041014A88C04007315A3 /* NSArray+NoThrowObjectAtIndex.h in Headers */,
 				5391041114A88C04007315A3 /* NSString+Trimm.h in Headers */,
+				7E9EDA0E1868493000B3B5BB /* NSString+IsEmpty.h in Headers */,
+				7E9ED9EE1868493000B3B5BB /* NSString+FileAttributes.h in Headers */,
+				7E9EDA461868493000B3B5BB /* NSString+StringFromTemplateString.h in Headers */,
 				5391041414A88C04007315A3 /* NSString+ToURL.h in Headers */,
 				5391041514A88C04007315A3 /* NSURL+ToURL.h in Headers */,
+				7E9EDA1E1868493000B3B5BB /* NSString+LocalizedPrice.h in Headers */,
 				5391041614A88C04007315A3 /* JFFMutableAssignDictionary.h in Headers */,
 				5391041814A88C04007315A3 /* JSignedRange.h in Headers */,
 				5391041914A88C04007315A3 /* NSObject+ExpandArray.h in Headers */,
+				7E9EDA561868493000B3B5BB /* NSString+Trimm.h in Headers */,
 				534CDFC414A8C2930068F4DF /* JFFCastFunctions.hpp in Headers */,
 				7E44D668158F179400A2C11E /* NSURL+CPlusPlus.h in Headers */,
+				7E9EDA061868493000B3B5BB /* NSString+IsEmailValid.h in Headers */,
+				7E9EDA361868493000B3B5BB /* NSString+PropertyName.h in Headers */,
 				7E44D673158F189F00A2C11E /* NSString+CPlusPlus.h in Headers */,
 				1B9C101215C802E600C20BCA /* JFFClangLiterals.h in Headers */,
+				7E9ED9F61868493000B3B5BB /* NSString+Format.h in Headers */,
 				7E972D1F18683A9100D9681C /* NSError+JSON.h in Headers */,
 				1B14142015DBCD3F00EFB2B8 /* NSDate+DateDifference.h in Headers */,
 				1B2A4AA015EF62A3004ABB2E /* NSString+FileAttributes.h in Headers */,
+				7E9EDA161868493000B3B5BB /* NSString+JSEscape.h in Headers */,
 				37497BD21600971C00AF0C29 /* NSDictionary+ValueWithType.h in Headers */,
+				7E9EDA2E1868493000B3B5BB /* NSString+PathExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1244,16 +1465,33 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9ED9E51868493000B3B5BB /* NSString+CPlusPlus.h in Headers */,
 				65802A6B148BF2B10040A93A /* JFFUtils.h in Headers */,
 				534CDFC314A8C2930068F4DF /* JFFCastFunctions.hpp in Headers */,
+				7E9EDA5D1868493000B3B5BB /* NSString+UUIDCreation.h in Headers */,
 				7E44D667158F179400A2C11E /* NSURL+CPlusPlus.h in Headers */,
+				7E9EDA051868493000B3B5BB /* NSString+IsEmailValid.h in Headers */,
+				7E9EDA0D1868493000B3B5BB /* NSString+IsEmpty.h in Headers */,
 				7E7DF4B7186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */,
+				7E9EDA1D1868493000B3B5BB /* NSString+LocalizedPrice.h in Headers */,
+				7E9EDA3D1868493000B3B5BB /* NSString+Search.h in Headers */,
+				7E9EDA4D1868493000B3B5BB /* NSString+StringWithCutPrefix.h in Headers */,
 				7E44D672158F189F00A2C11E /* NSString+CPlusPlus.h in Headers */,
 				1B9C101115C802E600C20BCA /* JFFClangLiterals.h in Headers */,
+				7E9EDA551868493000B3B5BB /* NSString+Trimm.h in Headers */,
+				7E9ED9FD1868493000B3B5BB /* NSString+HTML.h in Headers */,
 				7E972D1E18683A9100D9681C /* NSError+JSON.h in Headers */,
+				7E9EDA351868493000B3B5BB /* NSString+PropertyName.h in Headers */,
 				1B14141F15DBCD3F00EFB2B8 /* NSDate+DateDifference.h in Headers */,
+				7E9EDA151868493000B3B5BB /* NSString+JSEscape.h in Headers */,
+				7E9ED9F51868493000B3B5BB /* NSString+Format.h in Headers */,
 				1B2A4A9F15EF62A3004ABB2E /* NSString+FileAttributes.h in Headers */,
+				7E9EDA451868493000B3B5BB /* NSString+StringFromTemplateString.h in Headers */,
 				37497BD11600971C00AF0C29 /* NSDictionary+ValueWithType.h in Headers */,
+				7E9EDA251868493000B3B5BB /* NSString+MD5.h in Headers */,
+				7E9ED9DD1868493000B3B5BB /* NSString+Base64.h in Headers */,
+				7E9EDA2D1868493000B3B5BB /* NSString+PathExtensions.h in Headers */,
+				7E9ED9ED1868493000B3B5BB /* NSString+FileAttributes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1264,6 +1502,7 @@
 				7E57F48314F93840002D139B /* NSString+ToURL.h in Headers */,
 				7E57F48514F93840002D139B /* NSURL+ToURL.h in Headers */,
 				7E57F49314F93840002D139B /* JFFUtilsBlockDefinitions.h in Headers */,
+				7E9EDA4F1868493000B3B5BB /* NSString+StringWithCutPrefix.h in Headers */,
 				7E57F49414F93840002D139B /* JFFSimpleBlockHolder.h in Headers */,
 				7E57F49614F93840002D139B /* JFFOnDeallocBlockOwner.h in Headers */,
 				7E57F49A14F93840002D139B /* NSString+Format.h in Headers */,
@@ -1271,32 +1510,48 @@
 				7E57F49E14F93840002D139B /* NSString+PropertyName.h in Headers */,
 				7E57F4A014F93840002D139B /* NSString+PathExtensions.h in Headers */,
 				7E57F4A214F93840002D139B /* NSString+Trimm.h in Headers */,
+				7E9ED9DF1868493000B3B5BB /* NSString+Base64.h in Headers */,
 				7E7DF4B9186368CF001ABB23 /* NSString+UUIDCreation.h in Headers */,
+				7E9EDA5F1868493000B3B5BB /* NSString+UUIDCreation.h in Headers */,
 				7E57F4A614F93840002D139B /* NSString+IsEmpty.h in Headers */,
+				7E9EDA3F1868493000B3B5BB /* NSString+Search.h in Headers */,
 				7E57F4AB14F93840002D139B /* NSMutableArray+ChangeCount.h in Headers */,
 				7E57F4AD14F93840002D139B /* NSArray+BlocksAdditions.h in Headers */,
 				7E57F4AF14F93840002D139B /* NSArray+RemoveDuplicates.h in Headers */,
 				7E57F4B114F93840002D139B /* NSArray+IsEmpty.h in Headers */,
 				7E57F4B314F93840002D139B /* NSArray+NoThrowObjectAtIndex.h in Headers */,
+				7E9ED9E71868493000B3B5BB /* NSString+CPlusPlus.h in Headers */,
 				7E57F4B514F93840002D139B /* NSObject+Ownerships.h in Headers */,
+				7E9ED9FF1868493000B3B5BB /* NSString+HTML.h in Headers */,
 				7E57F4B714F93840002D139B /* NSObject+OnDeallocBlock.h in Headers */,
 				7E57F4B914F93840002D139B /* NSObject+RuntimeExtensions.h in Headers */,
+				7E9EDA271868493000B3B5BB /* NSString+MD5.h in Headers */,
 				7E57F4BB14F93840002D139B /* NSObject+Const0.h in Headers */,
 				7E57F4BF14F93840002D139B /* NSObject+ExpandArray.h in Headers */,
 				7E57F4C314F93840002D139B /* JFFAssignProxy.h in Headers */,
+				7E9EDA0F1868493000B3B5BB /* NSString+IsEmpty.h in Headers */,
+				7E9ED9EF1868493000B3B5BB /* NSString+FileAttributes.h in Headers */,
+				7E9EDA471868493000B3B5BB /* NSString+StringFromTemplateString.h in Headers */,
 				7E57F4C714F93840002D139B /* JFFMutableAssignArray.h in Headers */,
 				7E57F4C914F93840002D139B /* JFFMutableAssignDictionary.h in Headers */,
+				7E9EDA1F1868493000B3B5BB /* NSString+LocalizedPrice.h in Headers */,
 				7E57F4CB14F93840002D139B /* JFFMulticastDelegate.h in Headers */,
 				7E57F4CF14F93840002D139B /* JGCDAdditions.h in Headers */,
 				7E57F4D114F93840002D139B /* JSignedRange.h in Headers */,
+				7E9EDA571868493000B3B5BB /* NSString+Trimm.h in Headers */,
 				7E57F4D314F93840002D139B /* JFFUtils.h in Headers */,
 				7E57F4D414F93840002D139B /* JFFCastFunctions.hpp in Headers */,
+				7E9EDA071868493000B3B5BB /* NSString+IsEmailValid.h in Headers */,
+				7E9EDA371868493000B3B5BB /* NSString+PropertyName.h in Headers */,
 				7E44D669158F179400A2C11E /* NSURL+CPlusPlus.h in Headers */,
 				7E44D674158F189F00A2C11E /* NSString+CPlusPlus.h in Headers */,
+				7E9ED9F71868493000B3B5BB /* NSString+Format.h in Headers */,
 				7E972D2018683A9100D9681C /* NSError+JSON.h in Headers */,
 				1B14142115DBCD3F00EFB2B8 /* NSDate+DateDifference.h in Headers */,
 				1B2A4AA115EF62A3004ABB2E /* NSString+FileAttributes.h in Headers */,
+				7E9EDA171868493000B3B5BB /* NSString+JSEscape.h in Headers */,
 				37497BD31600971C00AF0C29 /* NSDictionary+ValueWithType.h in Headers */,
+				7E9EDA2F1868493000B3B5BB /* NSString+PathExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1304,13 +1559,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9EDA541868493000B3B5BB /* NSString+Trimm.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* JFFUtils_Prefix.pch in Headers */,
 				651BE0B41390496200DD6890 /* JFFUtilsBlockDefinitions.h in Headers */,
 				651BE0B71390496200DD6890 /* JFFSimpleBlockHolder.h in Headers */,
+				7E9ED9EC1868493000B3B5BB /* NSString+FileAttributes.h in Headers */,
 				651BE0B91390496200DD6890 /* NSArray+BlocksAdditions.h in Headers */,
 				651BE139139107EA00DD6890 /* NSObject+Ownerships.h in Headers */,
 				651BE19D1391969A00DD6890 /* NSString+Search.h in Headers */,
 				651BE1C31391A25500DD6890 /* JFFOnDeallocBlockOwner.h in Headers */,
+				7E9EDA3C1868493000B3B5BB /* NSString+Search.h in Headers */,
 				651BE1CD1391A36800DD6890 /* NSObject+OnDeallocBlock.h in Headers */,
 				651BE27C1391BD7800DD6890 /* JFFUtils.h in Headers */,
 				65648B7E13923EC4001E163C /* NSString+PropertyName.h in Headers */,
@@ -1323,14 +1581,19 @@
 				1BCDF9E514320B3200CEB6E7 /* NSMutableArray+ChangeCount.h in Headers */,
 				53BCF8E0143239D100E896B3 /* NSArray+RemoveDuplicates.h in Headers */,
 				53E366C81433760A002AB0B9 /* NSArray+IsEmpty.h in Headers */,
+				7E9EDA1C1868493000B3B5BB /* NSString+LocalizedPrice.h in Headers */,
 				1BE75CFF1434B3450076E068 /* NSObject+Const0.h in Headers */,
 				1B76089A1444912F0059E977 /* JGCDAdditions.h in Headers */,
 				1B3CDDE51445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.h in Headers */,
 				1B6AAD8E1447039B00EA1D96 /* NSString+Trimm.h in Headers */,
 				1BA676CE144C474500B14D49 /* NSString+ToURL.h in Headers */,
+				7E9EDA441868493000B3B5BB /* NSString+StringFromTemplateString.h in Headers */,
+				7E9ED9E41868493000B3B5BB /* NSString+CPlusPlus.h in Headers */,
+				7E9EDA0C1868493000B3B5BB /* NSString+IsEmpty.h in Headers */,
 				1BA676D2144C476600B14D49 /* NSURL+ToURL.h in Headers */,
 				1BD1820D1467D71B0033BEFF /* JFFMutableAssignDictionary.h in Headers */,
 				1B104D921483C85A0025FDDA /* JSignedRange.h in Headers */,
+				7E9EDA2C1868493000B3B5BB /* NSString+PathExtensions.h in Headers */,
 				1B3EE0361487D03A00BA6680 /* NSObject+ExpandArray.h in Headers */,
 				534CDFC214A8C2930068F4DF /* JFFCastFunctions.hpp in Headers */,
 				53A3BB3F14DAB3CD008B71BE /* NSString+IsEmpty.h in Headers */,
@@ -1349,21 +1612,29 @@
 				1B14141E15DBCD3F00EFB2B8 /* NSDate+DateDifference.h in Headers */,
 				1B2A4A9E15EF62A3004ABB2E /* NSString+FileAttributes.h in Headers */,
 				37063C6715FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.h in Headers */,
+				7E9EDA141868493000B3B5BB /* NSString+JSEscape.h in Headers */,
 				655C20E715FE5A4000022B11 /* NSObject+DelegateProxy.h in Headers */,
 				CEA0979C15FF2ADE0080DEF7 /* DelegateProxyUtils.h in Headers */,
+				7E9ED9FC1868493000B3B5BB /* NSString+HTML.h in Headers */,
 				CEA097A015FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.h in Headers */,
+				7E9EDA241868493000B3B5BB /* NSString+MD5.h in Headers */,
+				7E9EDA041868493000B3B5BB /* NSString+IsEmailValid.h in Headers */,
+				7E9EDA5C1868493000B3B5BB /* NSString+UUIDCreation.h in Headers */,
 				CEA097A415FF2C860080DEF7 /* JFFDelegateProxyClassMethods.h in Headers */,
 				CEA097A815FF2E3E0080DEF7 /* JFFProxyDelegatesDispatcher.h in Headers */,
 				37497BD01600971C00AF0C29 /* NSDictionary+ValueWithType.h in Headers */,
 				CE444A1416085D5A00DD85B0 /* NSObject+JFFMeaningClass.h in Headers */,
 				CE57FBB81611EFFF00124D90 /* NSSet+BlocksAdditions.h in Headers */,
+				7E9EDA341868493000B3B5BB /* NSString+PropertyName.h in Headers */,
 				CE57FBBD1611F0BF00124D90 /* NSMutableSet+StorableSet.h in Headers */,
 				CE998C481626B988002D39FD /* NSOrderedSet+BlocksAdditions.h in Headers */,
 				37805592164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.h in Headers */,
+				7E9EDA4C1868493000B3B5BB /* NSString+StringWithCutPrefix.h in Headers */,
 				CEC70F13169DBA8B006D63DE /* JFFLogger.h in Headers */,
 				CEC8479616A98A6C00065745 /* NSObject+NsNullAsNil.h in Headers */,
 				4C98FBA116E0B38D00B6EFD8 /* NSString+HTML.h in Headers */,
 				4C98FBAC16E0B56D00B6EFD8 /* NSArray+Templates.hpp in Headers */,
+				7E9ED9F41868493000B3B5BB /* NSString+Format.h in Headers */,
 				4C3B63A21701C84700D5A8FD /* JFFMutableAssignKeyDictionary.h in Headers */,
 				4CC6BBEC17058D4200BD49E8 /* NSDecimalNumber+Increment.h in Headers */,
 				4CC6BBF017058D5F00BD49E8 /* UIColor+ColorForHex.h in Headers */,
@@ -1383,6 +1654,7 @@
 				4C6AFDFD177AD544009D09C3 /* NSString+MD5.h in Headers */,
 				4C8D176917870ED900DE7624 /* NSString+LocalizedPrice.h in Headers */,
 				4C4E1E6D179D3529009E9C71 /* NSString+StringFromTemplateString.h in Headers */,
+				7E9ED9DC1868493000B3B5BB /* NSString+Base64.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1603,21 +1875,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9ED9E21868493000B3B5BB /* NSString+Base64.m in Sources */,
 				5391041B14A88C04007315A3 /* JFFSimpleBlockHolder.m in Sources */,
+				7E9EDA4A1868493000B3B5BB /* NSString+StringFromTemplateString.m in Sources */,
+				7E9EDA021868493000B3B5BB /* NSString+HTML.m in Sources */,
+				7E9EDA0A1868493000B3B5BB /* NSString+IsEmailValid.m in Sources */,
 				5391041C14A88C04007315A3 /* NSArray+BlocksAdditions.m in Sources */,
 				5391041D14A88C04007315A3 /* NSObject+Ownerships.m in Sources */,
 				5391041E14A88C04007315A3 /* NSString+Search.m in Sources */,
 				5391041F14A88C04007315A3 /* JFFOnDeallocBlockOwner.m in Sources */,
+				7E9EDA521868493000B3B5BB /* NSString+StringWithCutPrefix.m in Sources */,
+				7E9ED9FA1868493000B3B5BB /* NSString+Format.m in Sources */,
+				7E9EDA221868493000B3B5BB /* NSString+LocalizedPrice.m in Sources */,
 				5391042014A88C04007315A3 /* NSObject+OnDeallocBlock.m in Sources */,
+				7E9EDA621868493000B3B5BB /* NSString+UUIDCreation.m in Sources */,
 				5391042114A88C04007315A3 /* NSString+PropertyName.m in Sources */,
+				7E9EDA2A1868493000B3B5BB /* NSString+MD5.m in Sources */,
 				5391042314A88C04007315A3 /* NSObject+RuntimeExtensions.m in Sources */,
 				5391042514A88C04007315A3 /* JFFMulticastDelegate.m in Sources */,
+				7E9ED9F21868493000B3B5BB /* NSString+FileAttributes.m in Sources */,
 				5391042614A88C04007315A3 /* JFFAssignProxy.m in Sources */,
 				5391042714A88C04007315A3 /* JFFMutableAssignArray.m in Sources */,
 				5391042814A88C04007315A3 /* NSString+PathExtensions.m in Sources */,
+				7E9EDA121868493000B3B5BB /* NSString+IsEmpty.m in Sources */,
 				5391042914A88C04007315A3 /* NSMutableArray+ChangeCount.m in Sources */,
+				7E9EDA421868493000B3B5BB /* NSString+Search.m in Sources */,
 				5391042A14A88C04007315A3 /* NSArray+RemoveDuplicates.m in Sources */,
 				5391042B14A88C04007315A3 /* NSArray+IsEmpty.m in Sources */,
+				7E9EDA3A1868493000B3B5BB /* NSString+PropertyName.m in Sources */,
 				5391042C14A88C04007315A3 /* NSObject+Const0.m in Sources */,
 				5391043014A88C04007315A3 /* JGCDAdditions.mm in Sources */,
 				5391043414A88C04007315A3 /* NSArray+NoThrowObjectAtIndex.m in Sources */,
@@ -1627,13 +1912,17 @@
 				7E972D2318683A9100D9681C /* NSError+JSON.m in Sources */,
 				5391043A14A88C04007315A3 /* JFFMutableAssignDictionary.m in Sources */,
 				5391043C14A88C04007315A3 /* JSignedRange.m in Sources */,
+				7E9EDA321868493000B3B5BB /* NSString+PathExtensions.m in Sources */,
 				5391043D14A88C04007315A3 /* NSObject+ExpandArray.m in Sources */,
+				7E9EDA5A1868493000B3B5BB /* NSString+Trimm.m in Sources */,
 				7E44D66C158F179400A2C11E /* NSURL+CPlusPlus.mm in Sources */,
 				7E44D677158F189F00A2C11E /* NSString+CPlusPlus.mm in Sources */,
 				1B14142415DBCD3F00EFB2B8 /* NSDate+DateDifference.m in Sources */,
+				7E9ED9EA1868493000B3B5BB /* NSString+CPlusPlus.mm in Sources */,
 				1B2A4AA415EF62A3004ABB2E /* NSString+FileAttributes.m in Sources */,
 				37497BD61600971C00AF0C29 /* NSDictionary+ValueWithType.m in Sources */,
 				4CEED6BE1701E23C004CFCB3 /* JFFMutableAssignKeyDictionary.mm in Sources */,
+				7E9EDA1A1868493000B3B5BB /* NSString+JSEscape.m in Sources */,
 				4CF0FFDF1706038200282900 /* JFFRuntimeAddiotions.m in Sources */,
 				4CC643C1171700BA000BF15A /* NSObject+ObjectMethodHook.mm in Sources */,
 				4C50BF5B171D85B400251A16 /* JFFError.m in Sources */,
@@ -1646,33 +1935,50 @@
 			buildActionMask = 2147483647;
 			files = (
 				65802A6C148BF2B50040A93A /* JGCDAdditions.mm in Sources */,
+				7E9EDA591868493000B3B5BB /* NSString+Trimm.m in Sources */,
 				7E7DF4BB186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */,
 				65802A6E148BF2BA0040A93A /* JFFMulticastDelegate.m in Sources */,
 				7E972D2218683A9100D9681C /* NSError+JSON.m in Sources */,
+				7E9EDA611868493000B3B5BB /* NSString+UUIDCreation.m in Sources */,
 				65802A6F148BF2BE0040A93A /* JFFMutableAssignDictionary.m in Sources */,
 				65802A70148BF2C10040A93A /* JFFMutableAssignArray.m in Sources */,
 				65802A72148BF2C80040A93A /* JFFAssignProxy.m in Sources */,
 				65802A95148BF4610040A93A /* NSString+ToURL.m in Sources */,
+				7E9EDA311868493000B3B5BB /* NSString+PathExtensions.m in Sources */,
 				65802A97148BF4640040A93A /* NSURL+ToURL.m in Sources */,
+				7E9EDA211868493000B3B5BB /* NSString+LocalizedPrice.m in Sources */,
+				7E9EDA411868493000B3B5BB /* NSString+Search.m in Sources */,
 				65802A9C148BF4800040A93A /* JFFSimpleBlockHolder.m in Sources */,
+				7E9ED9F11868493000B3B5BB /* NSString+FileAttributes.m in Sources */,
 				65802A9D148BF4820040A93A /* JFFOnDeallocBlockOwner.m in Sources */,
 				65802A9E148BF4870040A93A /* NSString+Search.m in Sources */,
+				7E9ED9E91868493000B3B5BB /* NSString+CPlusPlus.mm in Sources */,
+				7E9EDA011868493000B3B5BB /* NSString+HTML.m in Sources */,
 				65802A9F148BF4890040A93A /* NSString+PropertyName.m in Sources */,
 				65802AA0148BF48F0040A93A /* NSString+PathExtensions.m in Sources */,
+				7E9EDA491868493000B3B5BB /* NSString+StringFromTemplateString.m in Sources */,
 				65802AA1148BF4920040A93A /* NSString+Trimm.m in Sources */,
 				65802AA3148BF49B0040A93A /* NSMutableArray+ChangeCount.m in Sources */,
+				7E9EDA111868493000B3B5BB /* NSString+IsEmpty.m in Sources */,
+				7E9EDA291868493000B3B5BB /* NSString+MD5.m in Sources */,
+				7E9EDA511868493000B3B5BB /* NSString+StringWithCutPrefix.m in Sources */,
+				7E9EDA391868493000B3B5BB /* NSString+PropertyName.m in Sources */,
+				7E9EDA191868493000B3B5BB /* NSString+JSEscape.m in Sources */,
 				65802AA4148BF49D0040A93A /* NSArray+BlocksAdditions.m in Sources */,
 				65802AA5148BF4A00040A93A /* NSArray+RemoveDuplicates.m in Sources */,
 				65802AA6148BF4A30040A93A /* NSArray+IsEmpty.m in Sources */,
 				65802AA7148BF4A60040A93A /* NSArray+NoThrowObjectAtIndex.m in Sources */,
 				65802AA8148BF4AB0040A93A /* NSObject+Ownerships.m in Sources */,
 				65802AA9148BF4AE0040A93A /* NSObject+OnDeallocBlock.m in Sources */,
+				7E9EDA091868493000B3B5BB /* NSString+IsEmailValid.m in Sources */,
+				7E9ED9E11868493000B3B5BB /* NSString+Base64.m in Sources */,
 				65802AAA148BF4B00040A93A /* NSObject+RuntimeExtensions.m in Sources */,
 				65802AAB148BF4B20040A93A /* NSObject+Const0.m in Sources */,
 				7E44D66B158F179400A2C11E /* NSURL+CPlusPlus.mm in Sources */,
 				7E44D676158F189F00A2C11E /* NSString+CPlusPlus.mm in Sources */,
 				1B14142315DBCD3F00EFB2B8 /* NSDate+DateDifference.m in Sources */,
 				1B2A4AA315EF62A3004ABB2E /* NSString+FileAttributes.m in Sources */,
+				7E9ED9F91868493000B3B5BB /* NSString+Format.m in Sources */,
 				37497BD51600971C00AF0C29 /* NSDictionary+ValueWithType.m in Sources */,
 				4CEED6BF1701E23D004CFCB3 /* JFFMutableAssignKeyDictionary.mm in Sources */,
 				4CF0FFDE1706038200282900 /* JFFRuntimeAddiotions.m in Sources */,
@@ -1685,16 +1991,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9EDA4B1868493000B3B5BB /* NSString+StringFromTemplateString.m in Sources */,
 				7E57F43114F937E0002D139B /* NSString+ToURL.m in Sources */,
 				7E57F43314F937E0002D139B /* NSURL+ToURL.m in Sources */,
+				7E9ED9FB1868493000B3B5BB /* NSString+Format.m in Sources */,
 				7E57F44214F937E0002D139B /* JFFSimpleBlockHolder.m in Sources */,
+				7E9EDA331868493000B3B5BB /* NSString+PathExtensions.m in Sources */,
 				7E57F44414F937E0002D139B /* JFFOnDeallocBlockOwner.m in Sources */,
 				7E57F44814F937E0002D139B /* NSString+Format.m in Sources */,
 				7E57F44A14F937E0002D139B /* NSString+Search.m in Sources */,
+				7E9EDA5B1868493000B3B5BB /* NSString+Trimm.m in Sources */,
+				7E9EDA131868493000B3B5BB /* NSString+IsEmpty.m in Sources */,
 				7E972D2418683A9100D9681C /* NSError+JSON.m in Sources */,
+				7E9EDA3B1868493000B3B5BB /* NSString+PropertyName.m in Sources */,
+				7E9EDA231868493000B3B5BB /* NSString+LocalizedPrice.m in Sources */,
 				7E57F44C14F937E0002D139B /* NSString+PropertyName.m in Sources */,
+				7E9ED9EB1868493000B3B5BB /* NSString+CPlusPlus.mm in Sources */,
+				7E9EDA031868493000B3B5BB /* NSString+HTML.m in Sources */,
 				7E57F44E14F937E0002D139B /* NSString+PathExtensions.m in Sources */,
 				7E57F45014F937E0002D139B /* NSString+Trimm.m in Sources */,
+				7E9ED9E31868493000B3B5BB /* NSString+Base64.m in Sources */,
 				7E57F45414F937E0002D139B /* NSString+IsEmpty.m in Sources */,
 				7E57F45914F937E0002D139B /* NSMutableArray+ChangeCount.m in Sources */,
 				7E57F45B14F937E0002D139B /* NSArray+BlocksAdditions.m in Sources */,
@@ -1707,7 +2023,10 @@
 				7E57F46914F937E0002D139B /* NSObject+Const0.m in Sources */,
 				7E57F46D14F937E0002D139B /* NSObject+ExpandArray.m in Sources */,
 				7E57F47114F937E0002D139B /* JFFAssignProxy.m in Sources */,
+				7E9EDA1B1868493000B3B5BB /* NSString+JSEscape.m in Sources */,
+				7E9EDA631868493000B3B5BB /* NSString+UUIDCreation.m in Sources */,
 				7E57F47514F937E0002D139B /* JFFMutableAssignArray.m in Sources */,
+				7E9EDA0B1868493000B3B5BB /* NSString+IsEmailValid.m in Sources */,
 				7E57F47714F937E0002D139B /* JFFMutableAssignDictionary.m in Sources */,
 				7E57F47914F937E0002D139B /* JFFMulticastDelegate.m in Sources */,
 				7E57F47D14F937E0002D139B /* JGCDAdditions.mm in Sources */,
@@ -1715,13 +2034,17 @@
 				7E44D66D158F179400A2C11E /* NSURL+CPlusPlus.mm in Sources */,
 				7E44D678158F189F00A2C11E /* NSString+CPlusPlus.mm in Sources */,
 				1B14142515DBCD3F00EFB2B8 /* NSDate+DateDifference.m in Sources */,
+				7E9EDA2B1868493000B3B5BB /* NSString+MD5.m in Sources */,
 				1B2A4AA515EF62A3004ABB2E /* NSString+FileAttributes.m in Sources */,
 				37497BD71600971C00AF0C29 /* NSDictionary+ValueWithType.m in Sources */,
 				4CEED6BD1701E23C004CFCB3 /* JFFMutableAssignKeyDictionary.mm in Sources */,
 				4CF0FFE01706038300282900 /* JFFRuntimeAddiotions.m in Sources */,
 				7E7DF4BD186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */,
 				4CC643C2171700BA000BF15A /* NSObject+ObjectMethodHook.mm in Sources */,
+				7E9ED9F31868493000B3B5BB /* NSString+FileAttributes.m in Sources */,
+				7E9EDA531868493000B3B5BB /* NSString+StringWithCutPrefix.m in Sources */,
 				4C50BF5C171D85B500251A16 /* JFFError.m in Sources */,
+				7E9EDA431868493000B3B5BB /* NSString+Search.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1764,15 +2087,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9EDA601868493000B3B5BB /* NSString+UUIDCreation.m in Sources */,
 				651BE0B81390496200DD6890 /* JFFSimpleBlockHolder.m in Sources */,
 				651BE0BA1390496200DD6890 /* NSArray+BlocksAdditions.m in Sources */,
 				651BE13A139107EA00DD6890 /* NSObject+Ownerships.m in Sources */,
 				651BE19E1391969A00DD6890 /* NSString+Search.m in Sources */,
 				651BE1C41391A25500DD6890 /* JFFOnDeallocBlockOwner.m in Sources */,
 				651BE1CE1391A36800DD6890 /* NSObject+OnDeallocBlock.m in Sources */,
+				7E9EDA401868493000B3B5BB /* NSString+Search.m in Sources */,
+				7E9EDA281868493000B3B5BB /* NSString+MD5.m in Sources */,
+				7E9ED9F81868493000B3B5BB /* NSString+Format.m in Sources */,
 				65648B7F13923EC4001E163C /* NSString+PropertyName.m in Sources */,
 				8D1DE52C13AB8269001FD56F /* NSObject+RuntimeExtensions.m in Sources */,
 				8DB67B1B13E97FCF0024EA6C /* JFFMulticastDelegate.m in Sources */,
+				7E9ED9E01868493000B3B5BB /* NSString+Base64.m in Sources */,
 				8DB67B2013E980B70024EA6C /* JFFAssignProxy.m in Sources */,
 				8D713C6E13F3F62B007268DF /* JFFMutableAssignArray.m in Sources */,
 				8D713CC813F539A5007268DF /* NSString+PathExtensions.m in Sources */,
@@ -1780,7 +2108,9 @@
 				53BCF8E1143239D100E896B3 /* NSArray+RemoveDuplicates.m in Sources */,
 				53E366C91433760A002AB0B9 /* NSArray+IsEmpty.m in Sources */,
 				1BE75D001434B3450076E068 /* NSObject+Const0.m in Sources */,
+				7E9ED9F01868493000B3B5BB /* NSString+FileAttributes.m in Sources */,
 				1B76089B1444912F0059E977 /* JGCDAdditions.mm in Sources */,
+				7E9EDA101868493000B3B5BB /* NSString+IsEmpty.m in Sources */,
 				1B3CDDE61445DFD300733BE5 /* NSArray+NoThrowObjectAtIndex.m in Sources */,
 				1B6AAD8F1447039B00EA1D96 /* NSString+Trimm.m in Sources */,
 				1BA676CF144C474500B14D49 /* NSString+ToURL.m in Sources */,
@@ -1788,11 +2118,13 @@
 				1BD1820E1467D71B0033BEFF /* JFFMutableAssignDictionary.m in Sources */,
 				1B104D8F1483C8410025FDDA /* JSignedRange.m in Sources */,
 				1B3EE0371487D03A00BA6680 /* NSObject+ExpandArray.m in Sources */,
+				7E9EDA381868493000B3B5BB /* NSString+PropertyName.m in Sources */,
 				53A3BB4214DAB3CD008B71BE /* NSString+IsEmpty.m in Sources */,
 				1B5E1B9714D037EE0075049A /* NSString+StringWithCutPrefix.m in Sources */,
 				1B1B280914D825A700FA5388 /* NSString+IsEmailValid.m in Sources */,
 				1B90996C14EA4D9500B19283 /* NSString+Base64.m in Sources */,
 				1B909B8014EA918800B19283 /* JFFMemoryMgmt.m in Sources */,
+				7E9EDA501868493000B3B5BB /* NSString+StringWithCutPrefix.m in Sources */,
 				1B909B8614EA919400B19283 /* NSString+Format.m in Sources */,
 				1B054D501521C6F4008E4B9E /* NSDictionary+BlocksAdditions.m in Sources */,
 				1B054D541521C739008E4B9E /* NSDictionary+JFFExtendedDictionary.m in Sources */,
@@ -1802,27 +2134,35 @@
 				1B14142215DBCD3F00EFB2B8 /* NSDate+DateDifference.m in Sources */,
 				1B2A4AA215EF62A3004ABB2E /* NSString+FileAttributes.m in Sources */,
 				37063C6815FE0C5700B4B059 /* NSOrderedSet+NoThrowObjectAtIndex.m in Sources */,
+				7E9EDA081868493000B3B5BB /* NSString+IsEmailValid.m in Sources */,
 				655C20E815FE5A4000022B11 /* NSObject+DelegateProxy.m in Sources */,
 				CEA0979D15FF2ADE0080DEF7 /* DelegateProxyUtils.m in Sources */,
 				CEA097A115FF2C110080DEF7 /* NSString+DelegateProxySelectorsNames.m in Sources */,
 				CEA097A515FF2C860080DEF7 /* JFFDelegateProxyClassMethods.m in Sources */,
+				7E9ED9E81868493000B3B5BB /* NSString+CPlusPlus.mm in Sources */,
 				CEA097A915FF2E3E0080DEF7 /* JFFProxyDelegatesDispatcher.m in Sources */,
 				7E972D2118683A9100D9681C /* NSError+JSON.m in Sources */,
 				37497BD41600971C00AF0C29 /* NSDictionary+ValueWithType.m in Sources */,
 				CE444A1516085D5A00DD85B0 /* NSObject+JFFMeaningClass.m in Sources */,
+				7E9EDA481868493000B3B5BB /* NSString+StringFromTemplateString.m in Sources */,
 				CE57FBB91611EFFF00124D90 /* NSSet+BlocksAdditions.m in Sources */,
 				CE57FBBE1611F0BF00124D90 /* NSMutableSet+StorableSet.m in Sources */,
 				CEE653CF16144C8900C4D536 /* JFFRuntimeInitializer.m in Sources */,
+				7E9EDA301868493000B3B5BB /* NSString+PathExtensions.m in Sources */,
 				CE998C491626B988002D39FD /* NSOrderedSet+BlocksAdditions.m in Sources */,
 				37805593164D432700459BA7 /* NSLocale+CurrentInterfaceLanguageCode.m in Sources */,
 				CEC70F14169DBA8B006D63DE /* JFFLogger.m in Sources */,
 				CEC8479716A98A6C00065745 /* NSObject+NsNullAsNil.m in Sources */,
+				7E9EDA581868493000B3B5BB /* NSString+Trimm.m in Sources */,
 				4C98FBA216E0B38D00B6EFD8 /* NSString+HTML.m in Sources */,
 				4C3B63A31701C84700D5A8FD /* JFFMutableAssignKeyDictionary.mm in Sources */,
+				7E9EDA181868493000B3B5BB /* NSString+JSEscape.m in Sources */,
 				4CC6BBED17058D4200BD49E8 /* NSDecimalNumber+Increment.m in Sources */,
 				4CC6BBF117058D5F00BD49E8 /* UIColor+ColorForHex.m in Sources */,
+				7E9EDA001868493000B3B5BB /* NSString+HTML.m in Sources */,
 				7E7DF4BA186368CF001ABB23 /* NSString+UUIDCreation.m in Sources */,
 				4CC6BBF917058DB100BD49E8 /* NSData+ToString.m in Sources */,
+				7E9EDA201868493000B3B5BB /* NSString+LocalizedPrice.m in Sources */,
 				4CC6BBFD17058DD000BD49E8 /* NSNumber+FSStorable.m in Sources */,
 				4CC6BC0117058DFF00BD49E8 /* NSDateFormatter+MultiThreading.m in Sources */,
 				4CC6BC0917058E3900BD49E8 /* UIDevice+PlatformName.m in Sources */,
