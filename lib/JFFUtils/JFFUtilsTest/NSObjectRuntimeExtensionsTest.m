@@ -125,14 +125,14 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
 
 - (void)testHookInstanceMethodAssertPrototypeAndTargetSelectors
 {
-    STAssertThrows({
+    XCTAssertThrows({
         [[HookMethodsClass class] hookInstanceMethodForClass:[NSTestClass class]
                                                  withSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes)
                                       prototypeMethodSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes)
                                            hookMethodSelector:@selector(hookMethod)];
     }, @"no prototypeMethodSelector asert expected" );
     
-    STAssertThrows({
+    XCTAssertThrows({
         [[HookMethodsClass class] hookInstanceMethodForClass:[NSTestClass class]
                                                 withSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes2)
                                      prototypeMethodSelector:@selector(prototypeMethod)
@@ -149,7 +149,7 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
     
     NSTestClass *instance_ = [NSTestClass new];
     
-    STAssertEquals(testInstanceMethodResult,
+    XCTAssertEqual(testInstanceMethodResult,
                    [instance_ instanceMethodWithLongNameForUniquenessPurposes],
                    @"result mismatch");
     
@@ -158,21 +158,21 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
                                  prototypeMethodSelector:@selector(prototypeMethod)
                                       hookMethodSelector:@selector(hookMethod)];
     
-    STAssertEquals( testInstanceMethodResult * 2
+    XCTAssertEqual( testInstanceMethodResult * 2
                    , [ instance_ instanceMethodWithLongNameForUniquenessPurposes ]
                    , @"result mismatch" );
 }
 
 -(void)testHookClassMethodAssertPrototypeAndTargetSelectors
 {
-    STAssertThrows({
+    XCTAssertThrows({
         [[HookMethodsClass class] hookClassMethodForClass:[NSTestClass class]
                                              withSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
                                   prototypeMethodSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
                                        hookMethodSelector:@selector(hookMethod)];
     }, @"no prototypeMethodSelector asert expected" );
     
-    STAssertThrows({
+    XCTAssertThrows({
         [[HookMethodsClass class] hookClassMethodForClass:[NSTestClass class]
                                              withSelector:@selector(classMethodWithLongNameForUniquenessPurposes2)
                                   prototypeMethodSelector:@selector(prototypeMethod)
@@ -189,7 +189,7 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
     
     Class class = [NSTestClass class];
     
-    STAssertEquals(testClassMethodResult,
+    XCTAssertEqual(testClassMethodResult,
                    [class classMethodWithLongNameForUniquenessPurposes],
                    @"result mismatch" );
     
@@ -198,30 +198,30 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
                               prototypeMethodSelector:@selector(prototypeMethod)
                                    hookMethodSelector:@selector(hookMethod)];
     
-    STAssertEquals( testClassMethodResult * 3
+    XCTAssertEqual( testClassMethodResult * 3
                    , [ class classMethodWithLongNameForUniquenessPurposes ]
                    , @"result mismatch" );
 }
 
 - (void)testHasClassMethodWithSelector
 {
-    STAssertTrue([NSObject hasClassMethodWithSelector:@selector(allocWithZone:)], @"NSOBject has allocWithZone: method");
-    STAssertFalse([NSObject hasClassMethodWithSelector:@selector(allocWithZone2:)], @"NSOBject has no allocWithZone2: method");
+    XCTAssertTrue([NSObject hasClassMethodWithSelector:@selector(allocWithZone:)], @"NSOBject has allocWithZone: method");
+    XCTAssertFalse([NSObject hasClassMethodWithSelector:@selector(allocWithZone2:)], @"NSOBject has no allocWithZone2: method");
     
-    STAssertTrue([NSTestClass hasClassMethodWithSelector:@selector(allocWithZone:)],
+    XCTAssertTrue([NSTestClass hasClassMethodWithSelector:@selector(allocWithZone:)],
                  @"NSTestClass has allocWithZone: method" );
-    STAssertFalse( [ NSTestClass hasClassMethodWithSelector: @selector( alloc ) ]
+    XCTAssertFalse( [ NSTestClass hasClassMethodWithSelector: @selector( alloc ) ]
                   , @"NSTestClass has no alloc method" );
 }
 
 - (void)testHasInstanceMethodWithSelector
 {
-    STAssertTrue([NSObject hasInstanceMethodWithSelector:@selector(isEqual:)], @"NSOBject has isEqual: method");
-    STAssertFalse([NSObject hasInstanceMethodWithSelector:@selector(isEqual2:)], @"NSOBject has no isEqual2: method");
+    XCTAssertTrue([NSObject hasInstanceMethodWithSelector:@selector(isEqual:)], @"NSOBject has isEqual: method");
+    XCTAssertFalse([NSObject hasInstanceMethodWithSelector:@selector(isEqual2:)], @"NSOBject has no isEqual2: method");
     
-    STAssertTrue([NSTestClass hasInstanceMethodWithSelector:@selector(isEqual:)],
+    XCTAssertTrue([NSTestClass hasInstanceMethodWithSelector:@selector(isEqual:)],
                  @"NSTestClass has isEqual: method");
-    STAssertFalse([NSTestClass hasInstanceMethodWithSelector:@selector(description)],
+    XCTAssertFalse([NSTestClass hasInstanceMethodWithSelector:@selector(description)],
                   @"NSTestClass has no description method" );
 }
 
@@ -235,27 +235,20 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
                                                             toClass:[NSTestClass class]
                                                   newMethodSelector:@selector(classMethodWithLongNameForUniquenessPurposes2)];
         
-<<<<<<< .mine
-        STAssertTrue(result, @"method added");
-=======
+
+        XCTAssertTrue(result, @"method added");
+
         
 
         XCTAssertTrue( [ NSTestClass hasClassMethodWithSelector: @selector( classMethodWithLongNameForUniquenessPurposes2 ) ]
                      , @"NSTestClass has classMethodWithLongNameForUniquenessPurposes2 method" );
->>>>>>> .r49669
 
         
-<<<<<<< .mine
-        STAssertTrue([NSTestClass hasClassMethodWithSelector:@selector(classMethodWithLongNameForUniquenessPurposes2)],
-                     @"NSTestClass has classMethodWithLongNameForUniquenessPurposes2 method");
-=======
         NSUInteger method_result_ = FPropertyGetter(
             [ NSTestClass class ], @selector( classMethodWithLongNameForUniquenessPurposes2 ) );
-        XCTAssertTrue( testClassMethodResult_ == method_result_, @"check implementation of new method" );
->>>>>>> .r49669
+        NSUInteger testClassMethodResult = 0;
         
-        NSUInteger methodResult = (NSUInteger)objc_msgSend([NSTestClass class], @selector(classMethodWithLongNameForUniquenessPurposes2));
-        STAssertTrue(testClassMethodResult == methodResult, @"check implementation of new method");
+        XCTAssertTrue( testClassMethodResult == method_result_, @"check implementation of new method" );
         
         firstTestRun = NO;
     }
@@ -273,20 +266,17 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
                                                                toClass:[NSTestClass class]
                                                      newMethodSelector:newMethodSelector];
         
-        STAssertTrue(result, @"method added");
+        XCTAssertTrue(result, @"method added");
         
-<<<<<<< .mine
-        STAssertTrue([NSTestClass hasInstanceMethodWithSelector:newMethodSelector],
+
+        XCTAssertTrue([NSTestClass hasInstanceMethodWithSelector:newMethodSelector],
                      @"NSTestClass has instanceMethodWithLongNameForUniquenessPurposes2 method");
-=======
+
         NSTestClass* instance_ = [ NSTestClass new ];
-        NSUInteger method_result_ = FPropertyGetter( instance_, newMethodSelector_ );
-        XCTAssertTrue( testInstanceMethodResult_ == method_result_, @"check implementation of new method" );
->>>>>>> .r49669
         
-        NSTestClass *instance = [NSTestClass new];
-        NSUInteger methodResult = (NSUInteger)objc_msgSend(instance, newMethodSelector);
-        STAssertTrue(testInstanceMethodResult == methodResult, @"check implementation of new method" );
+        NSUInteger testInstanceMethodResult_ = 0;
+        NSUInteger method_result_ = FPropertyGetter( instance_, newMethodSelector );
+        XCTAssertTrue( testInstanceMethodResult_ == method_result_, @"check implementation of new method" );
         
         firstTestRun = NO;
     }
@@ -297,11 +287,13 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
     static BOOL firstTestRun = YES;
     
     if (!firstTestRun)
+    {
         return;
+    }
     
     NSTwiceTestClass *instance = [ NSTwiceTestClass new ];
     
-    STAssertEquals(testInstanceMethodResult,
+    XCTAssertEqual(testInstanceMethodResult,
                    [instance instanceMethodWithLongNameForUniquenessPurposes],
                    @"result mismatch" );
     
@@ -310,11 +302,11 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
                                       prototypeMethodSelector:@selector(twicePrototypeMethod)
                                            hookMethodSelector:@selector(twiceHookMethod)];
     
-    STAssertEquals(testInstanceMethodResult * 2,
+    XCTAssertEqual(testInstanceMethodResult * 2,
                    [instance instanceMethodWithLongNameForUniquenessPurposes],
                    @"result mismatch");
     
-    STAssertThrows( {
+    XCTAssertThrows( {
         [[TwiceHookMethodsClass class] hookInstanceMethodForClass:[NSTwiceTestClass class]
                                                      withSelector:@selector(instanceMethodWithLongNameForUniquenessPurposes)
                                           prototypeMethodSelector:@selector(twicePrototypeMethod)
@@ -331,7 +323,7 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
     
     Class class = [NSTwiceTestClass class];
     
-    STAssertEquals(testClassMethodResult,
+    XCTAssertEqual(testClassMethodResult,
                    [class classMethodWithLongNameForUniquenessPurposes],
                    @"result mismatch");
     
@@ -340,11 +332,11 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
                                    prototypeMethodSelector:@selector(twicePrototypeMethod)
                                         hookMethodSelector:@selector(twiceHookMethod)];
     
-    STAssertEquals(testClassMethodResult * 3,
+    XCTAssertEqual(testClassMethodResult * 3,
                    [class classMethodWithLongNameForUniquenessPurposes],
                    @"result mismatch" );
     
-    STAssertThrows({
+    XCTAssertThrows({
         [[TwiceHookMethodsClass class]hookClassMethodForClass:[NSTwiceTestClass class]
                                                  withSelector:@selector(classMethodWithLongNameForUniquenessPurposes)
                                       prototypeMethodSelector:@selector(twicePrototypeMethod)

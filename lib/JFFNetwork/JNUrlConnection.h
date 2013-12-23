@@ -8,11 +8,6 @@
    - (void)cancel;
 
 @required
-    - (unsigned long long)downloadedBytesCount;
-    - (unsigned long long)totalBytesCount;
-
-
-@required
     -(unsigned long long)downloadedBytesCount;
     -(unsigned long long)totalBytesCount;
 

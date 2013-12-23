@@ -18,7 +18,6 @@ rm -r -f "$TEST_PUBLISH_DIR"
 mkdir -p "$TEST_PUBLISH_DIR"
 
 
-
 cd ~/Library/Application\ Support/iPhone\ Simulator/7.0.3/Applications
 for directory in $( ls -1 ); do
    echo "$directory/tmp/test-results"

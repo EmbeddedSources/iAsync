@@ -23,12 +23,12 @@
                                             );
         
         //fails TODO fix
-        //STAssertTrue( [[(__bridge id)arrayRef class] jffMeaningClass] == [NSArray class], nil);
+        //XCTAssertTrue( [[(__bridge id)arrayRef class] jffMeaningClass] == [NSArray class], nil);
         //!!! memory fail
-        //STAssertTrue( [[[(__bridge id)arrayRef class] new] jffMeaningClass] == [NSArray class], nil);
+        //XCTAssertTrue( [[[(__bridge id)arrayRef class] new] jffMeaningClass] == [NSArray class], nil);
         
         //!!! [[[(__bridge id)arrayRef mutableCopy] class] == [(__bridge id)arrayRef class] :-(
-        //STAssertTrue( [[[(__bridge id)arrayRef mutableCopy] class] jffMeaningClass] == [NSMutableArray class], nil);
+        //XCTAssertTrue( [[[(__bridge id)arrayRef mutableCopy] class] jffMeaningClass] == [NSMutableArray class], nil);
         //
         
         XCTAssertTrue([[[@[] class] new] jffMeaningClass] == [NSArray class]);
@@ -56,9 +56,9 @@
         
         XCTAssertTrue( [[(__bridge id)dictRef class] jffMeaningClass] == [NSDictionary class]);
         //!!! runtime fail
-        //STAssertTrue( [[[(__bridge id)dictRef class] new] jffMeaningClass] == [NSDictionary class], nil);
+        //XCTAssertTrue( [[[(__bridge id)dictRef class] new] jffMeaningClass] == [NSDictionary class], nil);
         //!!!
-        //STAssertTrue( [[[(__bridge id)dictRef mutableCopy] class] jffMeaningClass] == [NSDictionary class], nil);
+        //XCTAssertTrue( [[[(__bridge id)dictRef mutableCopy] class] jffMeaningClass] == [NSDictionary class], nil);
         
         CFRelease(dictRef);
         
@@ -67,11 +67,11 @@
         
         XCTAssertTrue( [[@{} class] jffMeaningClass] == [NSDictionary class]);
         //!!! runtime fail when call new for [[@{} mutableCopy] class]
-//        STAssertTrue([[[@{} class] new] jffMeaningClass] == [NSDictionary class], nil);
+//        XCTAssertTrue([[[@{} class] new] jffMeaningClass] == [NSDictionary class], nil);
         
         //!!! [[[@{} mutableCopy] class] == [@{} class] :-(
-//        STAssertTrue( [[[@{} mutableCopy] class] jffMeaningClass] == [NSMutableDictionary class], nil);
-//        STAssertTrue([[[[@{} mutableCopy] class] new] jffMeaningClass] == [NSMutableDictionary class], nil);
+//        XCTAssertTrue( [[[@{} mutableCopy] class] jffMeaningClass] == [NSMutableDictionary class], nil);
+//        XCTAssertTrue([[[[@{} mutableCopy] class] new] jffMeaningClass] == [NSMutableDictionary class], nil);
     }
     
     {
@@ -90,16 +90,16 @@
         XCTAssertTrue( [[[@"a" class] new] jffMeaningClass] == [NSString class]);
         
         //!!! the same as empty CFString
-//        STAssertTrue( [[[@"" mutableCopy] class] jffMeaningClass] == [NSMutableString class], nil);
+//        XCTAssertTrue( [[[@"" mutableCopy] class] jffMeaningClass] == [NSMutableString class], nil);
         //!!! runtime fail when call new for [[@"" mutableCopy] class]
-//        STAssertTrue([[[[@"" mutableCopy] class] new] jffMeaningClass] == [NSMutableString class], nil);
+//        XCTAssertTrue([[[[@"" mutableCopy] class] new] jffMeaningClass] == [NSMutableString class], nil);
     }
     
     
     {
         XCTAssertTrue( [[@1 class] jffMeaningClass] == [NSNumber class]);
         //!!! strange fails :-(
-//        STAssertTrue( [[[[@1 class] alloc] initWithBool:NO] jffMeaningClass] == [NSString class], nil);
+//        XCTAssertTrue( [[[[@1 class] alloc] initWithBool:NO] jffMeaningClass] == [NSString class], nil);
         
         const double value;
         CFNumberRef numberRef = CFNumberCreate (
@@ -110,7 +110,7 @@
         
         XCTAssertTrue( [[(__bridge id)numberRef class] jffMeaningClass] == [NSNumber class]);
         //!!! strange fails :-(
-//        STAssertTrue( [[[[(__bridge id)numberRef class] alloc] initWithBool:NO] jffMeaningClass] == [NSNumber class], nil);
+//        XCTAssertTrue( [[[[(__bridge id)numberRef class] alloc] initWithBool:NO] jffMeaningClass] == [NSNumber class], nil);
         
         CFRelease(numberRef);
 

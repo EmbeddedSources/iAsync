@@ -224,7 +224,7 @@ didChangeActiveElementFrom:previousActiveElement
     NSInteger maxIndex = [self maxInternalIndex];
     NSInteger positionBasedIndex = ceilf(x / ( [_delegate elementOffsetInStripeView:self] + self.elementWidth)) - 1;
     
-    NSInteger result = fmin(maxIndex, positionBasedIndex);
+    NSInteger result = std::min(maxIndex, positionBasedIndex);
     result = fmax(result, firstVisibleIndex);
     return result;
 }
@@ -399,7 +399,7 @@ didChangeActiveElementFrom:previousActiveElement
 
 - (NSUInteger)activeElement
 {
-    return fmin(_activeElement, [_delegate numberOfElementsInStripeView:self] - 1);
+    return std::min(_activeElement, [_delegate numberOfElementsInStripeView:self] - 1);
 }
 
 -(UIView *)activeElementView
@@ -498,7 +498,7 @@ didChangeActiveElementFrom:previousActiveElement
                     insertAction:(BOOL)yes
 {
     NSUInteger currentIndex = yes
-    ? fmin([self lastVisibleIndexWithFirstVisibleIndex:[self firstVisibleIndex]], [_delegate numberOfElementsInStripeView:self] - 1)
+    ? std::min([self lastVisibleIndexWithFirstVisibleIndex:[self firstVisibleIndex]], [_delegate numberOfElementsInStripeView:self] - 1)
     : index;
     
     UIView* element_ = [self elementAtIndex:yes?--currentIndex:++currentIndex];

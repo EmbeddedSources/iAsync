@@ -13,7 +13,7 @@
                                  @"price"      : @"$23",
                                  }];
         
-        STAssertEqualObjects(@"3 months for $23/month", resultString, nil);
+        XCTAssertEqualObjects(@"3 months for $23/month", resultString, @"unexpected template result" );
     }
     
     {
@@ -25,7 +25,7 @@
                                   @"price"      : @"$23",
                                   }];
         
-        STAssertEqualObjects(@"$23 months for 3/month", resultString, nil);
+        XCTAssertEqualObjects(@"$23 months for 3/month", resultString, @"unexpected template result");
     }
     
     {
@@ -37,7 +37,7 @@
                                   @"price"      : @"$23",
                                   }];
         
-        STAssertEqualObjects(@"cc 3 months for $23", resultString, nil);
+        XCTAssertEqualObjects(@"cc 3 months for $23", resultString, @"unexpected template result");
     }
     
     {
@@ -49,7 +49,7 @@
                                   @"price"      : @"$23",
                                   }];
         
-        STAssertEqualObjects(@"3$23", resultString, nil);
+        XCTAssertEqualObjects(@"3$23", resultString, @"unexpected template result");
     }
     
     {
@@ -60,7 +60,7 @@
                                   @"monthCount" : @3,
                                   }];
         
-        STAssertEqualObjects(@"${monthCount", resultString, nil);
+        XCTAssertEqualObjects(@"${monthCount", resultString, @"unexpected template result");
     }
     
     {
@@ -71,7 +71,7 @@
                                   @"monthCount2" : @3,
                                   }];
         
-        STAssertEqualObjects(@"${monthCount}", resultString, nil);
+        XCTAssertEqualObjects(@"${monthCount}", resultString, @"unexpected template result");
     }
 }
 

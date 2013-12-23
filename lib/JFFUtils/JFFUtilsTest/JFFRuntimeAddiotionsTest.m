@@ -28,7 +28,7 @@
     {
         TestWeakOwnerClass *owner = [TestWeakOwnerClass new];
         
-        STAssertNil(owner.dynamicWeakOwnedObject, nil);
+        XCTAssertNil(owner.dynamicWeakOwnedObject, @"memory leak");
         
         @autoreleasepool
         {
@@ -36,14 +36,14 @@
             NSObject *owned2 = [NSObject new];
             
             owner.dynamicWeakOwnedObject = owned;
-            STAssertNotNil(owner.dynamicWeakOwnedObject, nil);
+            XCTAssertNotNil(owner.dynamicWeakOwnedObject, @"memory leak");
             
             owner.normalWeakOwnedObject = owned2;
-            STAssertNotNil(owner.normalWeakOwnedObject, nil);
+            XCTAssertNotNil(owner.normalWeakOwnedObject, @"memory management issue");
         }
         
-        STAssertNil(owner.dynamicWeakOwnedObject, nil);
-        STAssertNil(owner.normalWeakOwnedObject, nil);
+        XCTAssertNil(owner.dynamicWeakOwnedObject, @"memory leak");
+        XCTAssertNil(owner.normalWeakOwnedObject, @"memory leak");
     }
     
     @autoreleasepool
@@ -53,10 +53,10 @@
         @autoreleasepool
         {
             TestWeakOwnerClass *owner = [TestWeakOwnerClass new];
-            STAssertNil(owner.dynamicWeakOwnedObject, nil);
+            XCTAssertNil(owner.dynamicWeakOwnedObject, @"memory leak");
             
             owner.dynamicWeakOwnedObject = owned;
-            STAssertNotNil(owner.dynamicWeakOwnedObject, nil);
+            XCTAssertNotNil(owner.dynamicWeakOwnedObject, @"memory leak");
         }
     }
 }

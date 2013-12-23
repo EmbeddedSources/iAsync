@@ -1,5 +1,4 @@
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface StringFromTemplateString : SenTestCase
-
+@interface StringFromTemplateString : XCTestCase
 @end

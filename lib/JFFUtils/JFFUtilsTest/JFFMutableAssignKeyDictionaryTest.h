@@ -1,7 +1,4 @@
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-#import <Foundation/Foundation.h>
-
-@interface JFFMutableAssignKeyDictionaryTest : SenTestCase
-
+@interface JFFMutableAssignKeyDictionaryTest : XCTestCase
 @end

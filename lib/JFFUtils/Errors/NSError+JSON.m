@@ -4,7 +4,10 @@
 
 - (NSString *)toJson
 {
-    return [NSString stringWithFormat: @"{ \"error\" : \"%@\", \"domain\" : \"%@\", \"code\" : \"%d\", \"localizedDescription\" : \"%@\" }", NSStringFromClass([self class]), self.domain, self.code, self.localizedDescription];
+    NSNumber* errorCode = @(self.code);
+    NSString* errorCodeString = [ errorCode descriptionWithLocale: nil ];
+    
+    return [NSString stringWithFormat: @"{ \"error\" : \"%@\", \"domain\" : \"%@\", \"code\" : \"%@\", \"localizedDescription\" : \"%@\" }", NSStringFromClass([self class]), self.domain, errorCodeString, self.localizedDescription];
 }
 
 @end
