@@ -231,12 +231,18 @@ didChangeActiveElementFrom:previousActiveElement
 
 - (JSignedRange)visibleIndexesRange
 {
-    if ([_delegate numberOfElementsInStripeView:self] == 0)
+    if ( 0 == [ self->_delegate numberOfElementsInStripeView:self ] )
+    {
         return JSignedRangeMake(0, 0);
+    }
     
     NSUInteger firstVisibleIndex = [self firstVisibleIndex];
     NSUInteger lastVisibleIndex  = [self lastVisibleIndexWithFirstVisibleIndex:firstVisibleIndex];
-    return JSignedRangeMake(firstVisibleIndex, lastVisibleIndex - firstVisibleIndex + 1);
+    
+    NSInteger castedRangeStart = static_cast<NSInteger>( firstVisibleIndex );
+    NSInteger castedRangeCount = static_cast<NSInteger>( lastVisibleIndex - firstVisibleIndex + 1 );
+    
+    return JSignedRangeMake( castedRangeStart, castedRangeCount );
 }
 
 - (NSMutableOrderedSet *)mutableVisibleIndexes
@@ -497,9 +503,17 @@ didChangeActiveElementFrom:previousActiveElement
 - (void)reindexElementsFromIndex:(NSUInteger)index
                     insertAction:(BOOL)yes
 {
-    NSUInteger currentIndex = yes
-    ? std::min([self lastVisibleIndexWithFirstVisibleIndex:[self firstVisibleIndex]], [_delegate numberOfElementsInStripeView:self] - 1)
-    : index;
+    BOOL shouldInsert = yes;
+    NSUInteger currentIndex = index;
+
+    if ( shouldInsert )
+    {
+        NSInteger actualLastIndex = [self lastVisibleIndexWithFirstVisibleIndex:[self firstVisibleIndex]];
+        NSUInteger delegateLastIndex = [_delegate numberOfElementsInStripeView:self] - 1;
+
+        currentIndex = std::min( static_cast<NSUInteger>(actualLastIndex), static_cast<NSUInteger>(delegateLastIndex) );
+    }
+
     
     UIView* element_ = [self elementAtIndex:yes?--currentIndex:++currentIndex];
     BOOL removeLastElement = yes;
