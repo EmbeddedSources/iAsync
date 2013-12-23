@@ -34,7 +34,7 @@
 		1BE053B715480F4400270B58 /* JFFActionSheetsContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE053B515480F4400270B58 /* JFFActionSheetsContainer.h */; };
 		1BE053B815480F4400270B58 /* JFFActionSheetsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE053B615480F4400270B58 /* JFFActionSheetsContainer.m */; };
 		4C21FA7D16EF4F59005C4E57 /* JFFStripeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C21FA7916EF4F59005C4E57 /* JFFStripeView.h */; };
-		4C21FA7E16EF4F59005C4E57 /* JFFStripeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C21FA7A16EF4F59005C4E57 /* JFFStripeView.m */; };
+		4C21FA7E16EF4F59005C4E57 /* JFFStripeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C21FA7A16EF4F59005C4E57 /* JFFStripeView.mm */; };
 		4C21FA7F16EF4F59005C4E57 /* JFFStripeViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C21FA7B16EF4F59005C4E57 /* JFFStripeViewDelegate.h */; };
 		4C21FA8016EF4F59005C4E57 /* JFFStripeViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C21FA7C16EF4F59005C4E57 /* JFFStripeViewDelegate.m */; };
 		4C2CFD951754A29F00E87F22 /* JFFAlertView+Async.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C2CFD931754A29E00E87F22 /* JFFAlertView+Async.h */; };
@@ -149,7 +149,7 @@
 		1BE053B515480F4400270B58 /* JFFActionSheetsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFActionSheetsContainer.h; sourceTree = "<group>"; };
 		1BE053B615480F4400270B58 /* JFFActionSheetsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFActionSheetsContainer.m; sourceTree = "<group>"; };
 		4C21FA7916EF4F59005C4E57 /* JFFStripeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStripeView.h; sourceTree = "<group>"; };
-		4C21FA7A16EF4F59005C4E57 /* JFFStripeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStripeView.m; sourceTree = "<group>"; };
+		4C21FA7A16EF4F59005C4E57 /* JFFStripeView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JFFStripeView.mm; sourceTree = "<group>"; };
 		4C21FA7B16EF4F59005C4E57 /* JFFStripeViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStripeViewDelegate.h; sourceTree = "<group>"; };
 		4C21FA7C16EF4F59005C4E57 /* JFFStripeViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStripeViewDelegate.m; sourceTree = "<group>"; };
 		4C2CFD931754A29E00E87F22 /* JFFAlertView+Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JFFAlertView+Async.h"; sourceTree = "<group>"; };
@@ -335,7 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				4C21FA7916EF4F59005C4E57 /* JFFStripeView.h */,
-				4C21FA7A16EF4F59005C4E57 /* JFFStripeView.m */,
+				4C21FA7A16EF4F59005C4E57 /* JFFStripeView.mm */,
 				4C21FA7B16EF4F59005C4E57 /* JFFStripeViewDelegate.h */,
 				4C21FA7C16EF4F59005C4E57 /* JFFStripeViewDelegate.m */,
 				1BD361671455A0630036F786 /* JFFPageSlider.h */,
@@ -650,7 +650,7 @@
 				CE5EF36B167CE4D8009BD15D /* UIViewController+ForceRemoveFromParentViewController.m in Sources */,
 				CE5EF370167CE536009BD15D /* UIViewController+PerformSegueWithCallback.m in Sources */,
 				4CC3865216DE68630079F968 /* UIViewController+Dialog.m in Sources */,
-				4C21FA7E16EF4F59005C4E57 /* JFFStripeView.m in Sources */,
+				4C21FA7E16EF4F59005C4E57 /* JFFStripeView.mm in Sources */,
 				4C21FA8016EF4F59005C4E57 /* JFFStripeViewDelegate.m in Sources */,
 				4C696BED1742769A00C7D53D /* JFFGridView.m in Sources */,
 				4C696BEF1742769A00C7D53D /* JFFGridViewDelegate.m in Sources */,
