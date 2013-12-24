@@ -246,7 +246,6 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
         
         NSUInteger method_result_ = FPropertyGetter(
             [ NSTestClass class ], @selector( classMethodWithLongNameForUniquenessPurposes2 ) );
-        NSUInteger testClassMethodResult = 0;
         
         XCTAssertTrue( testClassMethodResult == method_result_, @"check implementation of new method" );
         
@@ -274,9 +273,8 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
 
         NSTestClass* instance_ = [ NSTestClass new ];
         
-        NSUInteger testInstanceMethodResult_ = 0;
         NSUInteger method_result_ = FPropertyGetter( instance_, newMethodSelector );
-        XCTAssertTrue( testInstanceMethodResult_ == method_result_, @"check implementation of new method" );
+        XCTAssertTrue( testInstanceMethodResult == method_result_, @"check implementation of new method" );
         
         firstTestRun = NO;
     }
