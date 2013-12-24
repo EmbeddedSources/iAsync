@@ -49,12 +49,15 @@
                              arg3:(float)arg3
                              arg4:(double)arg4
 {
-    return [[NSString alloc] initWithFormat:@"arg1: %@ arg2: %@ arg3: %f arg4: %f",
+    NSString* result =
+     [[NSString alloc] initWithFormat:@"arg1: %@ arg2: {%.1f, %.1f} arg3: %1f arg4: %1f",
             NSStringFromRange(arg1),
-            NSStringFromCGPoint(arg2),
+            arg2.x, arg2.y,
             arg3,
             arg4
             ];
+
+    return result;
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
@@ -489,7 +492,7 @@
 
 - (void)testSignatures
 {
-    id block = ^NSObject *(id _self, NSUInteger arg, NSRange point) {
+    id block = ^id(id _self, NSUInteger arg, NSRange point) {
         
         return nil;
     };
