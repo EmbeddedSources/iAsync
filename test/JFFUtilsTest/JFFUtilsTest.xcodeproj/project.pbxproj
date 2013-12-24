@@ -62,13 +62,6 @@
 			remoteGlobalIDString = 7E57F42414F93738002D139B;
 			remoteInfo = JFFUtilsFW;
 		};
-		7E72CA1D17FBEFF80081F306 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7ED3CB1516E6387B00E5A00F;
-			remoteInfo = "JFFUtilsTest-CI";
-		};
 		B69484641429E24B00B8247E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B694845D1429E24B00B8247E /* JFFUtils.xcodeproj */;
@@ -235,7 +228,6 @@
 				534CDFD414A8C7E00068F4DF /* libJFFUtils-clang.a */,
 				6515B960152B726E00518996 /* JFFUtilsFW.framework */,
 				CE444A3F160860B500DD85B0 /* JFFUtilsTest.octest */,
-				7E72CA1E17FBEFF80081F306 /* JFFUtilsTest-CI.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -327,13 +319,6 @@
 			remoteRef = 6515B95F152B726E00518996 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7E72CA1E17FBEFF80081F306 /* JFFUtilsTest-CI.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "JFFUtilsTest-CI.octest";
-			remoteRef = 7E72CA1D17FBEFF80081F306 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		B69484651429E24B00B8247E /* libJFFUtils.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -344,7 +329,7 @@
 		CE444A3F160860B500DD85B0 /* JFFUtilsTest.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = JFFUtilsTest.octest;
+			path = JFFUtilsTest.xctest;
 			remoteRef = CE444A3E160860B500DD85B0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -424,7 +409,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
@@ -445,7 +430,7 @@
 					../../lib/,
 					../../lib/JFFTestTools,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				New_Setting = "";
 				OTHER_LDFLAGS = "-all_load";
 				SDKROOT = iphoneos;
@@ -457,7 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
@@ -471,7 +456,7 @@
 					../../lib/,
 					../../lib/JFFTestTools,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				New_Setting = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-all_load";
