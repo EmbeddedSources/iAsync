@@ -174,3 +174,7 @@ iAsync has the following flow control for operations for your asynchronous block
 
 
 The library has many more features to explore. See the readme in the "lib" directory for details.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/EmbeddedSources/iasync/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
