@@ -32,7 +32,7 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactoryWithDispatchQueue(JFFAsyn
                                     JFFDidFinishAsyncOperationHandler doneCallback) {
         
         __block id<JFFAsyncOperationInterface> asyncObject = objectFactory();
-        __unsafe_unretained id<JFFAsyncOperationInterface> unretaintedAsyncObject = asyncObject;
+        __weak id<JFFAsyncOperationInterface> unretaintedAsyncObject = asyncObject;
         
         doneCallback = [doneCallback copy];
         void (^completionHandler)(id, NSError*) = [^(id result, NSError *error) {
@@ -103,7 +103,7 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactoryWithDispatchQueue(JFFAsyn
             proxy           = nil;
             progressHandler = nil;
             
-            if (cancelCallbackHolder) {
+            if (nil != cancelCallbackHolder) {
                 JFFCancelAsyncOperationHandler tmpCallback = cancelCallbackHolder;
                 cancelCallbackHolder = nil;
                 tmpCallback(canceled);
@@ -114,7 +114,7 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactoryWithDispatchQueue(JFFAsyn
                                        cancelHandler:cancelHandlerWrapper
                                      progressHandler:progressHandlerWrapper];
         
-        return ^(BOOL canceled) {
+        return ^void(BOOL canceled) {
             
             if (!proxy.completionHandler) {
                 return;
