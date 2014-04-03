@@ -9,6 +9,8 @@
 
 #import <objc/message.h>
 
+//#define JFF_LOG_INFO( ... )
+#define JFF_LOG_INFO( ... ) [ JFFLogger logInfoWithFormat: __VA_ARGS__ ]
 
 typedef id (*PropertyGetterMsgSendFunction)( id, SEL );
 typedef void (*PropertySetterMsgSendFunction)( id, SEL, id );
@@ -55,7 +57,7 @@ cancelBlock;
 - (SEL)propertySetSelector
 {
     NSString* methodNameForLogging = NSStringFromSelector( _cmd );
-    [ JFFLogger logInfoWithFormat: @"[BEGIN] %@", methodNameForLogging ];
+    JFF_LOG_INFO( @"[BEGIN] %@", methodNameForLogging );
     
     if (!_propertySetSelector) {
         NSString* propertyPathName = self.propertyPath.name;
@@ -63,11 +65,11 @@ cancelBlock;
         NSString *setPropertyName = [ propertyPathName propertySetNameForPropertyName];
         _propertySetSelector = NSSelectorFromString(setPropertyName);
         
-        [ JFFLogger logInfoWithFormat: @"setPropertyName : %@", setPropertyName ];
-        [ JFFLogger logInfoWithFormat: @"result : %p", _propertySetSelector ];
+        JFF_LOG_INFO( @"setPropertyName : %@", setPropertyName );
+        JFF_LOG_INFO( @"result : %p", _propertySetSelector );
     }
     
-    [ JFFLogger logInfoWithFormat: @"[END] %@", methodNameForLogging ];
+    JFF_LOG_INFO(  @"[END] %@", methodNameForLogging );
     return _propertySetSelector;
 }
 
@@ -82,48 +84,48 @@ cancelBlock;
 {
     NSString* methodNameForLogging = NSStringFromSelector( _cmd );
     
-    [ JFFLogger logInfoWithFormat: @"[BEGIN] %@", methodNameForLogging ];
-    [ JFFLogger logInfoWithFormat: @"property : %@", property ];
-    [ JFFLogger logInfoWithFormat: @"self.object : %@", self.object ];
-    [ JFFLogger logInfoWithFormat: @"self.propertyPath : (%@ --> %@)", self.propertyPath.key, self.propertyPath.name  ];
+    JFF_LOG_INFO( @"[BEGIN] %@", methodNameForLogging );
+    JFF_LOG_INFO( @"property : %@", property );
+    JFF_LOG_INFO( @"self.object : %@", self.object );
+    JFF_LOG_INFO( @"self.propertyPath : (%@ --> %@)", self.propertyPath.key, self.propertyPath.name  );
     
     SEL propertySetSelector = self.propertySetSelector;
-    [ JFFLogger logInfoWithFormat: @"self.propertySetSelector : %p", propertySetSelector ];
+    JFF_LOG_INFO( @"self.propertySetSelector : %p", propertySetSelector );
     
     if (!self.propertyPath.key) {
-        [ JFFLogger logInfoWithFormat: @"---" ];
-        [ JFFLogger logInfoWithFormat: @"propertyPath.key is nil" ];
-        [ JFFLogger logInfoWithFormat: @"setting property by name..." ];
+        JFF_LOG_INFO( @"---" );
+        JFF_LOG_INFO( @"propertyPath.key is nil" );
+        JFF_LOG_INFO( @"setting property by name..." );
         
         FPropertySetter( self.object, propertySetSelector, property );
         
-        [ JFFLogger logInfoWithFormat: @"===[END1] %@", methodNameForLogging ];
+        JFF_LOG_INFO( @"===[END1] %@", methodNameForLogging );
         return;
     }
     
-    [ JFFLogger logInfoWithFormat: @"getting dict..." ];
+    JFF_LOG_INFO( @"getting dict..." );
     NSMutableDictionary* dict = FPropertyGetter(self.object, self.propertyGetSelector);
     
-    [ JFFLogger logInfoWithFormat: @"---" ];
+    JFF_LOG_INFO( @"---" );
     if (!dict) {
-        [ JFFLogger logInfoWithFormat: @"dict is nil. Setting an empty one..." ];
+        JFF_LOG_INFO( @"dict is nil. Setting an empty one..." );
         dict = [NSMutableDictionary new];
         FPropertySetter(self.object, self.propertySetSelector, dict);
     }
     
     if (property) {
-        [ JFFLogger logInfoWithFormat: @"setting property by key..." ];
+        JFF_LOG_INFO( @"setting property by key..." );
         [ dict setObject: property
                   forKey: self.propertyPath.key ];
 
-        [ JFFLogger logInfoWithFormat: @"===[END2] %@", methodNameForLogging ];
+        JFF_LOG_INFO( @"===[END2] %@", methodNameForLogging );
         return;
     }
 
-    [ JFFLogger logInfoWithFormat: @"removing key from dict..." ];
+    JFF_LOG_INFO( @"removing key from dict..." );
     [ dict removeObjectForKey: self.propertyPath.key ];
     
-    [ JFFLogger logInfoWithFormat: @"===[END] %@", methodNameForLogging ];
+    JFF_LOG_INFO( @"===[END] %@", methodNameForLogging );
 }
 
 ////////////////////////OBJECT RELATED DATA///////////////////////
