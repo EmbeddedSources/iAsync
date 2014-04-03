@@ -692,6 +692,7 @@
 		7E57F42C14F93738002D139B /* JFFUtilsFW-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFUtilsFW-Prefix.pch"; sourceTree = "<group>"; };
 		7E7DF4B4186368CF001ABB23 /* NSString+UUIDCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UUIDCreation.h"; sourceTree = "<group>"; };
 		7E7DF4B5186368CF001ABB23 /* NSString+UUIDCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUIDCreation.m"; sourceTree = "<group>"; };
+		7E8117AA188FCC62002FC987 /* libXCode5gcovPatch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libXCode5gcovPatch.a; path = ../../frameworks/libXCode5gcovPatch.a; sourceTree = "<group>"; };
 		7E8EE28C18646C8F000A3B34 /* JFFUtilsTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFUtilsTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8EE28D18646C8F000A3B34 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7E8EE29318646C8F000A3B34 /* JFFUtilsTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFUtilsTest-Info.plist"; sourceTree = "<group>"; };
@@ -899,6 +900,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E8117AA188FCC62002FC987 /* libXCode5gcovPatch.a */,
 				1B266C9C15627F7D0054E183 /* libc++.dylib */,
 				CEC851AB15F4E20E0022F479 /* UIKit.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
@@ -2444,6 +2446,183 @@
 			};
 			name = Release;
 		};
+		7E69EE1518901D55003043B3 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LLVM_VECTORIZE_LOOPS = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+			};
+			name = Coverage;
+		};
+		7E69EE1618901D55003043B3 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/JFFUtils.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = JFFUtils_Prefix.pch;
+				HEADER_SEARCH_PATHS = ../;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = JFFUtils;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Coverage;
+		};
+		7E69EE1718901D55003043B3 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFUtilsMacOS/JFFUtilsMacOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Coverage;
+		};
+		7E69EE1818901D55003043B3 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/JFFUtils.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = JFFUtils_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = ../;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "JFFUtils-clang";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Coverage;
+		};
+		7E69EE1918901D55003043B3 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFUtilsFW/JFFUtilsFW-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "JFFUtilsFW/JFFUtilsFW-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Coverage;
+		};
+		7E69EE1A18901D55003043B3 /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFUtilsTest/JFFUtilsTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					../JFFTestTools,
+				);
+				INFOPLIST_FILE = "JFFUtilsTest/JFFUtilsTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Volumes/untitled/projects/lib-third-party/JFFLibrary/frameworks",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lXCode5gcovPatch",
+					"-L../../frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Coverage;
+		};
 		7E8EE29D18646C90000A3B34 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2484,6 +2663,10 @@
 					../JFFTestTools,
 				);
 				INFOPLIST_FILE = "JFFUtilsTest/JFFUtilsTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Volumes/untitled/projects/lib-third-party/JFFLibrary/frameworks",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
@@ -2525,6 +2708,10 @@
 					../JFFTestTools,
 				);
 				INFOPLIST_FILE = "JFFUtilsTest/JFFUtilsTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Volumes/untitled/projects/lib-third-party/JFFLibrary/frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = xctest;
@@ -2538,6 +2725,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB921F08733DC00010E9CD /* Debug */,
+				7E69EE1618901D55003043B3 /* Coverage */,
 				1DEB922008733DC00010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2547,6 +2735,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB922308733DC00010E9CD /* Debug */,
+				7E69EE1518901D55003043B3 /* Coverage */,
 				1DEB922408733DC00010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2556,6 +2745,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5391044114A88C04007315A3 /* Debug */,
+				7E69EE1818901D55003043B3 /* Coverage */,
 				5391044214A88C04007315A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2565,6 +2755,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				65802A69148BF2930040A93A /* Debug */,
+				7E69EE1718901D55003043B3 /* Coverage */,
 				65802A6A148BF2930040A93A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2574,6 +2765,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7E57F42E14F93738002D139B /* Debug */,
+				7E69EE1918901D55003043B3 /* Coverage */,
 				7E57F42F14F93738002D139B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2583,6 +2775,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7E8EE29D18646C90000A3B34 /* Debug */,
+				7E69EE1A18901D55003043B3 /* Coverage */,
 				7E8EE29E18646C90000A3B34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

@@ -13,6 +13,7 @@ cd ../../
     PROJECT_ROOT=$PWD
 cd "$LAUNCH_DIR"
 
+GCOVR=$SCRIPTS_ROOT_DIR/gcovr
 
 # IOS_VERSION=5.1
 CONFIGURATION=Debug
@@ -49,4 +50,19 @@ mkdir -p "$PROJECT_ROOT/deployment/test-results"
 
 /bin/bash "$SCRIPTS_ROOT_DIR/simulator/CopyTestReports.sh"
 
+
+################  COVERAGE
+echo "---Collecting coverage reports---"
+
+cd "$PROJECT_ROOT"
+    echo "$GCOVR $PWD --root=$PWD --xml > $PWD/Coverage.xml"
+	echo "$GCOVR $PWD --root=$PWD       > $PWD/Coverage.txt"
+
+	$GCOVR "$PWD" --root="$PWD" --xml | tee "$PWD/Coverage.xml"
+	$GCOVR "$PWD" --root="$PWD"       | tee "$PWD/Coverage.txt"
+cd "$LAUNCH_DIR"
+
+echo "---Done---"
+exit 0
+##################################
 
