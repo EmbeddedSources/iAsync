@@ -127,7 +127,6 @@ static void readStreamCallback(CFReadStreamRef stream,
     BOOL _responseHandled;
     
     JFFURLResponse *_urlResponse;
-    id< JNHttpDecoder > _decoder;
     
     unsigned long long _downloadedBytesCount;
     unsigned long long _totalBytesCount;
@@ -327,41 +326,49 @@ static void readStreamCallback(CFReadStreamRef stream,
     if (!self.didReceiveDataBlock)
         return;
     
-    __weak JFFURLConnection* weakSelf = self;
+    NSData *rawNsData = [[NSData alloc] initWithBytes:buffer
+                                               length:length];
     
-    id< JNHttpDecoder > decoder = [ self getDecoder ];
-    NSData *rawNsData = [ [ NSData alloc ] initWithBytes: buffer_
-                                                  length: length_ ];
-    dispatch_queue_t zipQueue = self->_zipQueue;
+    __weak JFFURLConnection *weakSelf = self;
     
-    dispatch_barrier_async( zipQueue, ^void(void){
+    self.downloadedBytesCount += length;
+    BOOL isDownloadCompleted = (self.totalBytesCount == self.downloadedBytesCount);
+    
+    dispatch_queue_t queueForCallbacks = _queueForCallbacks;
+    
+    dispatch_barrier_async(_zipQueue, ^void(void) {
+        
+        id<JNHttpDecoder> decoder = [weakSelf getDecoder];
+        
         NSError *decoderError = nil;
         
-        NSData *decodedData = [ decoder decodeData: rawNsData
-                                             error: &decoderError ];
+        NSData *decodedData = [decoder decodeData:rawNsData
+                                            error:&decoderError];
         
-        
-        weakSelf.downloadedBytesCount += length_;
-        BOOL isDownloadCompleted = ( weakSelf.totalBytesCount == weakSelf.downloadedBytesCount );
-
         BOOL finished = (nil == decodedData || isDownloadCompleted);
         
-        if ( finished ){
-            NSError* decoderCloseError = nil;
-            [ decoder closeWithError: &decoderCloseError ];
-            [ decoderCloseError writeErrorToNSLog ];
+        if (finished) {
             
-// @adk : ???
-// maybe these blocks should be invoked with dispatch_sync()
-            [ weakSelf invokeDataBlock: decodedData ];
-            [ weakSelf handleFinish: decoderError ];
+            NSError *decoderCloseError = nil;
+            [decoder closeWithError:&decoderCloseError];
+            [decoderCloseError writeErrorToNSLog];
+            weakSelf.decoder = nil;
         }
-        else
-        {
-            [ weakSelf invokeDataBlock: decodedData ];
-        }
-    } );
-
+        
+        dispatch_sync(queueForCallbacks, ^void(void) {
+            
+            if (weakSelf.didReceiveDataBlock)
+                weakSelf.didReceiveDataBlock(decodedData);
+            
+            if (finished) {
+                
+                NSError *error = decoderError
+                ?decoderError
+                :((nil == decodedData)?decoderError:nil);
+                [weakSelf handleFinish:error];
+            }
+        });
+    });
 }
 
 - (void)handleFinish:(NSError *)error
@@ -458,13 +465,13 @@ static void readStreamCallback(CFReadStreamRef stream,
         _context.params.httpBody = nil;
 #endif
         
-        NSDebugLog(@"%@", _params.url);
+        NSDebugLog(@"%@", _context.params.url);
         NSDebugLog(@"Done.");
         
         [self start];//TODO start it later
     } else {
         _responseHandled = YES;
-        JFFDidReceiveResponseHandler didReceiveResponseBlock = [self.didReceiveResponseBlock copy];
+        JFFDidReceiveResponseHandler didReceiveResponseBlock = self.didReceiveResponseBlock;
         self.didReceiveResponseBlock = nil;
         
         if (didReceiveResponseBlock) {
@@ -490,21 +497,6 @@ static void readStreamCallback(CFReadStreamRef stream,
             }
         }
     }
-}
-
-#pragma mark -
-#pragma mark Callbacks
-
-- (void)invokeDataBlock:(NSData *)data
-{
-    JFFDidReceiveDataHandler block = self.didReceiveDataBlock;
-    if (nil == block) {
-        return;
-    }
-    
-    dispatch_async(_queueForCallbacks, ^{
-       block(data);
-    });
 }
 
 @end

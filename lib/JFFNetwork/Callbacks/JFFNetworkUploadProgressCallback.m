@@ -1,5 +1,7 @@
 #import "JFFNetworkUploadProgressCallback.h"
 
+#import "JFFURLConnectionParams.h"
+
 @implementation JFFNetworkUploadProgressCallback
 
 - (NSNumber *)progress

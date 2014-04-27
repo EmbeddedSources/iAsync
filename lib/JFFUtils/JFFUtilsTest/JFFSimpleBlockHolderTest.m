@@ -2,29 +2,27 @@
 
 @implementation JFFSimpleBlockHolderTest
 
--(void)setUp
+- (void)setUp
 {
     [JFFSimpleBlockHolder enableInstancesCounting];
 }
 
--(void)testSimpleBlockHolderBehavior
+- (void)testSimpleBlockHolderBehavior
 {
     @autoreleasepool {
         JFFSimpleBlockHolder *holder = [JFFSimpleBlockHolder new];
-        XCTAssertTrue( 0 != [ JFFSimpleBlockHolder instancesCount ], @"Block holder should exists" );
+        XCTAssertTrue(0 != [JFFSimpleBlockHolder instancesCount], @"Block holder should exists");
         
         __block BOOL blockContextDeallocated = NO;
         __block NSUInteger performBlockCount = 0;
         
         @autoreleasepool {
             NSObject *blockContext = [NSObject new];
-            [ blockContext addOnDeallocBlock: ^void( void )
-             {
-                 blockContextDeallocated = YES;
-             } ];
+            [blockContext addOnDeallocBlock:^void(void) {
+                blockContextDeallocated = YES;
+            }];
             
-            holder.simpleBlock = ^void( void )
-            {
+            holder.simpleBlock = ^void(void) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
                 if ([blockContext class] && [holder class])
@@ -41,7 +39,7 @@
         XCTAssertTrue(nil == holder.simpleBlock, @"Block is nil after call");
     }
     
-    XCTAssertTrue( 0 == [ JFFSimpleBlockHolder instancesCount ], @"Block holder should be dealloced" );
+    XCTAssertTrue(0 == [JFFSimpleBlockHolder instancesCount], @"Block holder should be dealloced");
 }
 
 @end
