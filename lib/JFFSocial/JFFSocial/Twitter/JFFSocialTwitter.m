@@ -155,7 +155,7 @@ static JFFAsyncOperation twitterAccountsLoader()
     };
 }
 
-+ (JFFAsyncBinderForIdentifier)analyzerForDataWithAnalizer:(JFFAsyncOperationBinder)ayncAnalyzer
++ (JFFAsyncBinderForIdentifier)analyzerForDataWithAnalyzer:(JFFAsyncOperationBinder)ayncAnalyzer
 {
     ayncAnalyzer = [ayncAnalyzer copy];
     
@@ -219,15 +219,15 @@ static JFFAsyncOperation twitterAccountsLoader()
         if (cacheDataLifeTimeInSeconds == 0.) {
             
             loader = bindSequenceOfAsyncOperations([self dataLoaderForIdentifier](loadDataIdentifier),
-                                                   [self analyzerForDataWithAnalizer:ayncAnalyzer](loadDataIdentifier),
+                                                   [self analyzerForDataWithAnalyzer:ayncAnalyzer](loadDataIdentifier),
                                                    nil);
         } else {
             
-            JFFSmartUrlDataLoaderFields *args = [JFFSmartUrlDataLoaderFields new];
+            JFFSmartDataLoaderFields *args = [JFFSmartDataLoaderFields new];
             
             args.loadDataIdentifier         = loadDataIdentifier;
             args.dataLoaderForIdentifier    = [self dataLoaderForIdentifier];
-            args.analyzerForData            = [self analyzerForDataWithAnalizer:ayncAnalyzer];
+            args.analyzerForData            = [self analyzerForDataWithAnalyzer:ayncAnalyzer];
             args.cacheKeyForIdentifier      = [self cacheKeyForIdentifier];
             args.cacheDataLifeTimeInSeconds = cacheDataLifeTimeInSeconds;
             args.cache                      = self.cache;
@@ -253,7 +253,7 @@ static JFFAsyncOperation twitterAccountsLoader()
                                cacheDataLifeTimeInSeconds:0.];
 }
 
-+ (JFFAsyncOperation)usersNearbyCoordinatesLantitude:(double)latitude longitude:(double)longitude
++ (JFFAsyncOperation)usersNearbyCoordinatesLatitude:(double)latitude longitude:(double)longitude
 {
     static NSString *geocodeFormat = @"%f,%f,100mi";
     
@@ -323,9 +323,6 @@ static JFFAsyncOperation twitterAccountsLoader()
     
     loader = asyncOperationWithFinishHookBlock(loader, ^(id result, NSError *error, JFFDidFinishAsyncOperationCallback doneCallback) {
         
-        if (!doneCallback)
-            return;
-            
         if ([error isKindOfClass:[JFFTwitterDirectMessageAlreadySentError class]]) {
             
             result = [NSNull new];

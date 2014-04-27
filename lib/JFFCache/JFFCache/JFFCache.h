@@ -3,7 +3,6 @@
 
 #import <JFFCache/JFFCaches.h>
 #import <JFFCache/JFFCacheDB.h>
-#import <JFFCache/JFFDBManager.h>
 #import <JFFCache/JFFThumbnailStorage.h>
 
 //Errors

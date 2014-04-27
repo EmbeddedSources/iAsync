@@ -15,7 +15,7 @@
 
 #pragma mark - JFFAsyncOperationInterface
 
-- (void)logout
+- (void)logOut
 {
     [_session closeAndClearTokenInformation];
     
@@ -33,13 +33,13 @@
         
         [FBSession renewSystemCredentials:^(ACAccountCredentialRenewResult result, NSError *error) {
             
-            [self logout];
+            [self logOut];
         }];
         
         return;
     }
     
-    [self logout];
+    [self logOut];
 }
 
 - (void)doTask:(JFFAsyncOperationHandlerTask)task

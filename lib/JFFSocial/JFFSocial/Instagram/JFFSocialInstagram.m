@@ -69,7 +69,7 @@
             NSDictionary *params = [[url query] dictionaryFromQueryComponents];
             NSArray *codeParams = params[@"code"];
             
-            if ([codeParams count]==0) {
+            if ([codeParams count] == 0) {
             
                 JFFInvalidInstagramResponseURLError *error = [JFFInvalidInstagramResponseURLError new];
                 error.url = url;

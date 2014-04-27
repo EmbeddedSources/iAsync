@@ -135,7 +135,7 @@ static JFFAsyncOperationHandler cancelBlock(JFFPropertyExtractor *propertyExtrac
         handler = [handler copy];
         
         switch (task) {
-            case JFFAsyncOperationHandlerTaskUnsubscribe:
+            case JFFAsyncOperationHandlerTaskUnSubscribe:
             {
                 JFFDidFinishAsyncOperationCallback didLoadDataBlock = callbacks.didLoadDataBlock;
                 
@@ -293,14 +293,11 @@ static JFFAsyncOperationHandler performNativeLoader(JFFPropertyExtractor *proper
         
         if (nil == propertyExtractor.delegates) {
             propertyExtractor.delegates = [@[callbacks] mutableCopy];
+            return performNativeLoader(propertyExtractor, callbacks);
         }
         
-        if (propertyExtractor.loaderHandler != nil) {
-            [propertyExtractor.delegates addObject:callbacks];
-            return cancelBlock(propertyExtractor, callbacks);
-        }
-        
-        return performNativeLoader(propertyExtractor, callbacks);
+        [propertyExtractor.delegates addObject:callbacks];
+        return cancelBlock(propertyExtractor, callbacks);
     };
 }
 
@@ -384,7 +381,7 @@ static JFFAsyncOperationHandler performNativeLoader(JFFPropertyExtractor *proper
     static NSString *const name = @".__JFF_MERGE_LOADERS_BY_ARGUMENTS__.";
     JFFPropertyPath *propertyPath = [[JFFPropertyPath alloc] initWithName:name
                                                                       key:argument];
-    JFFPropertyExtractorFactoryBlock factory = ^JFFPropertyExtractor*{
+    JFFPropertyExtractorFactoryBlock factory = ^JFFPropertyExtractor * (void){
         return [JFFCachePropertyExtractor new];
     };
     

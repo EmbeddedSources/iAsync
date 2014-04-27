@@ -33,9 +33,17 @@
             cancel();
         }
         
-        numOfArgs == 1
-        ?objc_msgSend(unretainedSelf, selector, userInfo)
-        :objc_msgSend(unretainedSelf, selector);
+        if (numOfArgs == 1) {
+            
+            typedef void (*AlignMsgSendFunction)(id, SEL, id);
+            AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+            alignFunction(unretainedSelf, selector, userInfo);
+        } else {
+            
+            typedef void (*AlignMsgSendFunction)(id, SEL);
+            AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+            alignFunction(unretainedSelf, selector);
+        }
     };
     
     JFFCancelScheduledBlock cancel = [timer addBlock:block

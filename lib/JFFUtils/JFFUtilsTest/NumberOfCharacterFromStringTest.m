@@ -4,32 +4,32 @@
 
 -(void)testNumberOfCharacterFromString
 {
-    STAssertEquals((NSUInteger)0, [@"" numberOfCharacterFromString: @""], nil);
+    XCTAssertEqual((NSUInteger)0, [@"" numberOfCharacterFromString: @""]);
     
-    STAssertEquals((NSUInteger)0, [@"" numberOfCharacterFromString: @"1"], nil);
+    XCTAssertEqual((NSUInteger)0, [@"" numberOfCharacterFromString: @"1"]);
     
-    STAssertEquals((NSUInteger)2, [@"11" numberOfCharacterFromString: @"1"], nil);
+    XCTAssertEqual((NSUInteger)2, [@"11" numberOfCharacterFromString: @"1"]);
     
-    STAssertEquals((NSUInteger)2, [@"21212" numberOfCharacterFromString: @"1"], nil);
+    XCTAssertEqual((NSUInteger)2, [@"21212" numberOfCharacterFromString: @"1"]);
     
-    STAssertEquals((NSUInteger)5, [@"00021212000" numberOfCharacterFromString: @"21"], nil);
+    XCTAssertEqual((NSUInteger)5, [@"00021212000" numberOfCharacterFromString: @"21"]);
     
-    STAssertEquals((NSUInteger)7, [@"00032123120000" numberOfCharacterFromString: @"213"], nil);
+    XCTAssertEqual((NSUInteger)7, [@"00032123120000" numberOfCharacterFromString: @"213"]);
 }
 
 -(void)testNumberOfStringsFromString
 {
-    STAssertEquals((NSUInteger)3, [@"aaa" numberOfStringsFromString: @"a" ], nil);
+    XCTAssertEqual((NSUInteger)3, [@"aaa" numberOfStringsFromString: @"a" ]);
     
-    STAssertEquals((NSUInteger)1, [@"aaa" numberOfStringsFromString: @"aa" ], nil);
+    XCTAssertEqual((NSUInteger)1, [@"aaa" numberOfStringsFromString: @"aa" ]);
     
-    STAssertEquals((NSUInteger)1, [@"ab a" numberOfStringsFromString: @"ab" ], nil);
+    XCTAssertEqual((NSUInteger)1, [@"ab a" numberOfStringsFromString: @"ab" ]);
     
-    STAssertEquals((NSUInteger)1, [@"a abc" numberOfStringsFromString: @"abc" ], nil);
+    XCTAssertEqual((NSUInteger)1, [@"a abc" numberOfStringsFromString: @"abc" ]);
     
-    STAssertEquals((NSUInteger)0, [@"a ab c" numberOfStringsFromString: @"abc" ], nil);
+    XCTAssertEqual((NSUInteger)0, [@"a ab c" numberOfStringsFromString: @"abc" ]);
     
-    STAssertEquals((NSUInteger)3, [@"ababab" numberOfStringsFromString: @"ab" ], nil);
+    XCTAssertEqual((NSUInteger)3, [@"ababab" numberOfStringsFromString: @"ab" ]);
 }
 
 @end

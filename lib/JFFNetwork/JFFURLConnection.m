@@ -79,7 +79,7 @@ static void readStreamCallback(CFReadStreamRef stream,
         {
             [connectionContext.connection handleResponseForReadStream:stream];
             
-            UInt8 buffer[kJNMaxBufferSize];
+            UInt8 buffer[kJNMaxBufferSize] = {0};
             CFIndex bytesRead = CFReadStreamRead(stream, buffer, kJNMaxBufferSize);
             if (bytesRead > 0) {
                 
@@ -97,14 +97,23 @@ static void readStreamCallback(CFReadStreamRef stream,
             [connectionContext.connection handleResponseForReadStream:stream];
             
             CFStreamError error = CFReadStreamGetError(stream);
-            
-            JFFError *wrappedError = [[JStreamError alloc] initWithStreamError:error context:connectionContext.params];
+			
+			
+			
+			
+            JStreamError *wrappedError = [[JStreamError alloc] initWithStreamError:error 
+                                                                           context:connectionContext.params];
+
+            // @adk : wrap into dispatch_barrier_async() if crashes
             [connectionContext.connection handleFinish:wrappedError];
+	
             break;
         }
         case kCFStreamEventEndEncountered:
         {
             [connectionContext.connection handleResponseForReadStream:stream];
+	
+			// @adk : wrap into dispatch_barrier_async() if crashes
             [connectionContext.connection handleFinish:nil];
             break;
         }
@@ -116,14 +125,13 @@ static void readStreamCallback(CFReadStreamRef stream,
     CFReadStreamRef _readStream;
     id _cookiesStorage;
     BOOL _responseHandled;
+    
     JFFURLResponse *_urlResponse;
     
-    //    NSString* _previousContentEncoding;
     unsigned long long _downloadedBytesCount;
     unsigned long long _totalBytesCount;
     
     dispatch_queue_t _queueForCallbacks;
-    
     __strong id _selfHolder;
 };
 
@@ -183,6 +191,8 @@ static void readStreamCallback(CFReadStreamRef stream,
 - (void)startConnectionWithPostData:(NSData *)data
                             headers:(NSDictionary *)headers
 {
+	// TODO : use "dependency injection" based design
+	// pass "queueForCallbacks" to the constructor
     NSParameterAssert([[NSThread currentThread] isMainThread]);
     _queueForCallbacks = dispatch_get_main_queue();
     
@@ -214,9 +224,9 @@ static void readStreamCallback(CFReadStreamRef stream,
     }];
     
     [self closeReadStream];
-    //   CFReadStreamCreateForStreamedHTTPRequest( CFAllocatorRef alloc,
-    //                                             CFHTTPMessageRef requestHeaders,
-    //                                             CFReadStreamRef  requestBody )
+
+
+
     _readStream = CFReadStreamCreateForHTTPRequest(NULL, httpRequest);
     CFRelease(httpRequest);
     
@@ -248,7 +258,6 @@ static void readStreamCallback(CFReadStreamRef stream,
     
     Boolean openResult = CFReadStreamOpen(_readStream);
     if (!openResult) {
-        
         NSLog(@"Error opening a socket");
     }
 }
@@ -274,6 +283,8 @@ static void readStreamCallback(CFReadStreamRef stream,
         CFReadStreamUnscheduleFromRunLoop(_readStream,
                                           streamRunLoop,
                                           kCFRunLoopCommonModes);
+										  										  
+        // @adk : wrap into @synchronized if crashes. Double check NULL.
         CFReadStreamClose(_readStream);
         CFRelease(_readStream);
         _readStream = nil;
@@ -365,11 +376,14 @@ static void readStreamCallback(CFReadStreamRef stream,
     __weak JFFURLConnection *weakSelf = self;
     
     dispatch_queue_t queueForCallbacks = _queueForCallbacks;
-    
+
+// wait until all unzip operations are completed
     dispatch_barrier_async(_zipQueue, ^void(void) {
         
+// and notify callbacks on a proper queue
         dispatch_sync(queueForCallbacks, ^void(void) {
             
+// @adk : maybe dispatch_async() is a better fit?
             JFFDidFinishLoadingHandler didFinishLoadingBlock = weakSelf.didFinishLoadingBlock;
             
             [weakSelf cancel];
@@ -397,18 +411,19 @@ static void readStreamCallback(CFReadStreamRef stream,
         return;
     }
     
-    NSDictionary* allHeadersDict;
-    CFIndex statusCode;
+    NSDictionary *allHeadersDict;
+    CFIndex statusCode = 0;
     
     {
         CFHTTPMessageRef response = (CFHTTPMessageRef)CFReadStreamCopyProperty(stream, kCFStreamPropertyHTTPResponseHeader);
         
-        if (!response)
+        if (NULL == response)
             return;
         
         allHeadersDict = (__bridge_transfer NSDictionary *)CFHTTPMessageCopyAllHeaderFields(response);
         statusCode = CFHTTPMessageGetResponseStatusCode(response);
         
+        NSParameterAssert(NULL != response);
         CFRelease(response);
     }
     
@@ -422,7 +437,6 @@ static void readStreamCallback(CFReadStreamRef stream,
         
 #ifdef USE_DD_URL_BUILDER
         if (![ NSUrlLocationValidator isValidLocation:location]) {
-            
             NSLog(@"[!!!WARNING!!!] JConnection : path for URL is invalid. Ignoring...");
             location = @"/";
         }
@@ -438,16 +452,14 @@ static void readStreamCallback(CFReadStreamRef stream,
         _context.params.httpBody = nil;
 #else
         if ([location hasPrefix:@"/"]) {
-            
             _context.params.url = [_context.params.url URLWithLocation:location];
         } else {
-            
             _context.params.url = [location toURL];
         }
         
         if (!_context.params.url) {
             _context.params.url = [_context.params.url URLWithLocation:@"/"];
-        } 
+        }
         
         _context.params.httpMethod = @"GET";
         _context.params.httpBody = nil;
@@ -457,11 +469,8 @@ static void readStreamCallback(CFReadStreamRef stream,
         NSDebugLog(@"Done.");
         
         [self start];//TODO start it later
-    }
-    else
-    {
+   } else {
         _responseHandled = YES;
-        
         JFFDidReceiveResponseHandler didReceiveResponseBlock = self.didReceiveResponseBlock;
         self.didReceiveResponseBlock = nil;
         

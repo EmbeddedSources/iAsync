@@ -36,7 +36,7 @@ extern "C" {
     
     JFFAsyncOperation asyncOperationWithStartAndDoneBlocks(JFFAsyncOperation loader,
                                                            JFFSimpleBlock startBlock,
-                                                           JFFSimpleBlock doneBlock);
+                                                           JFFDidFinishAsyncOperationCallback doneBlock);
     
     JFFAsyncOperation asyncOperationWithAnalyzer(id data, JFFAnalyzer analyzer);
     
@@ -58,7 +58,7 @@ extern "C" {
                                                       id result,
                                                       NSError *error);
     
-    JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader);
+    JFFAsyncOperation ignoreProgressLoader(JFFAsyncOperation loader);
     JFFAsyncOperationBinder ignorePregressBinder(JFFAsyncOperationBinder binder);
     
     JFFAsyncOperation loaderWithAdditionalParalelLoaders(JFFAsyncOperation original, JFFAsyncOperation additionalLoader, ...) NS_REQUIRES_NIL_TERMINATION;

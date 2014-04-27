@@ -23,18 +23,21 @@
 
 #pragma mark UIAlertViewDelegate
 
-- (void)willPresentAlertView:(UIAlertView *)alertView_
+- (void)willPresentAlertView:(UIAlertView *)alertView
 {
-    SEL selector_ = @selector( willPresentAlertView: );
-    if ( [ [ self superclass ] hasInstanceMethodWithSelector: selector_ ] )
-    {
-        struct objc_super superTarget_;
-        superTarget_.receiver = self;
-        superTarget_.super_class = [ self superclass ];
-        objc_msgSendSuper( &superTarget_, selector_, alertView_ );
+    SEL selector = @selector(willPresentAlertView:);
+    if ([[self superclass] hasInstanceMethodWithSelector:selector]) {
+        
+        struct objc_super superTarget;
+        superTarget.receiver = self;
+        superTarget.super_class = [self superclass];
+        
+        typedef void (*AlignMsgSendFunction)(struct objc_super *super, SEL, UIView *);
+        AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSendSuper;
+        alignFunction(&superTarget, selector, alertView);
     }
 
-    [ self showActivityIndicatorView ];
+    [self showActivityIndicatorView];
 }
 
 @end

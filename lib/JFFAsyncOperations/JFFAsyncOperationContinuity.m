@@ -136,7 +136,7 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
                     handlerBlockHolder = nil;
                 }
                 
-                if (task != JFFAsyncOperationHandlerTaskUnsubscribe)
+                if (task != JFFAsyncOperationHandlerTaskUnSubscribe)
                     currentHandler(task);
                 
                 if (task <= JFFAsyncOperationHandlerTaskCancel) {
@@ -211,8 +211,7 @@ JFFAsyncOperation accumulateSequenceResult(NSArray *loaders, JFFSequenceResultAc
                 error = newResult?nil:error;
                 NSCAssert((newResult != nil) ^ (error != nil), nil);
                 
-                if (doneCallback)
-                    doneCallback(newResult, error);
+                doneCallback(newResult, error);
             });
         } copy];
         
@@ -395,7 +394,7 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBin
                 if (task <= JFFAsyncOperationHandlerTaskCancel)
                     handlerBlockHolder = nil;
                 
-                if (task != JFFAsyncOperationHandlerTaskUnsubscribe)
+                if (task != JFFAsyncOperationHandlerTaskUnSubscribe)
                     currentHandler(task);
                 
                 if (task <= JFFAsyncOperationHandlerTaskCancel) {
@@ -550,7 +549,7 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
                     
                     finishTask = ([error isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]])
                     ?JFFAsyncOperationHandlerTaskCancel
-                    :JFFAsyncOperationHandlerTaskUnsubscribe;
+                    :JFFAsyncOperationHandlerTaskUnSubscribe;
                     [otherHandlerHolder performCancelBlockOnceWithArgument:finishTask];
                     
                     handlerHolder1 = nil;
@@ -602,7 +601,7 @@ static JFFAsyncOperation groupOfAsyncOperationsPair(JFFAsyncOperation firstLoade
         
         if (blockCanceledOrUnsubscribed) {
             
-            if (finishTask == JFFAsyncOperationHandlerTaskUnsubscribe) {
+            if (finishTask == JFFAsyncOperationHandlerTaskUnSubscribe) {
                 
                 secondLoader(nil, nil, nil);
             }
@@ -725,7 +724,7 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOper
                     
                     blockCanceledOrUnsubscribed = YES;
                     finishTask = [error isKindOfClass:[JFFAsyncOpFinishedByUnsubscriptionError class]]
-                    ?JFFAsyncOperationHandlerTaskUnsubscribe
+                    ?JFFAsyncOperationHandlerTaskUnSubscribe
                     :JFFAsyncOperationHandlerTaskCancel;
                     [otherHandlerHolder performCancelBlockOnceWithArgument:finishTask];
                     
@@ -758,7 +757,7 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOper
         
         if (blockCanceledOrUnsubscribed) {
             
-            if (finishTask == JFFAsyncOperationHandlerTaskUnsubscribe) {
+            if (finishTask == JFFAsyncOperationHandlerTaskUnSubscribe) {
                 
                 secondLoader(nil, nil, nil);
             }

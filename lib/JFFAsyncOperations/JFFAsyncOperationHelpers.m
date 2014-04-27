@@ -189,7 +189,7 @@ JFFAsyncOperation asyncOperationWithOptionalStartAndFinishBlocks(JFFAsyncOperati
 
 JFFAsyncOperation asyncOperationWithStartAndDoneBlocks(JFFAsyncOperation loader,
                                                        JFFSimpleBlock startBlock,
-                                                       JFFSimpleBlock doneBlock)
+                                                       JFFDidFinishAsyncOperationCallback doneBlock)
 {
     NSCParameterAssert(loader);
     startBlock = [startBlock copy];
@@ -208,7 +208,7 @@ JFFAsyncOperation asyncOperationWithStartAndDoneBlocks(JFFAsyncOperation loader,
         JFFDidFinishAsyncOperationCallback wrappedDoneCallback = ^(id result, NSError *error) {
             
             if (doneBlock)
-                doneBlock();
+                doneBlock(result, error);
             
             if (doneCallback)
                 doneCallback(result, error);
@@ -312,8 +312,8 @@ JFFAsyncOperation asyncOperationWithChangedError(JFFAsyncOperation loader,
     JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
                                                           NSError *error,
                                                           JFFDidFinishAsyncOperationCallback doneCallback) {
-        if (doneCallback)
-            doneCallback(result, error?errorBuilder(error) : nil);
+        
+        doneCallback(result, error?errorBuilder(error) : nil);
     };
     return asyncOperationWithFinishHookBlock(loader, finishCallbackHook);
 }
@@ -326,8 +326,7 @@ JFFAsyncOperation asyncOperationWithResultOrError(JFFAsyncOperation loader,
                                              ^(id localResult,
                                                NSError *localError,
                                                JFFDidFinishAsyncOperationCallback doneCallback) {
-        if (doneCallback)
-            doneCallback(result, error);
+        doneCallback(result, error);
     });
 }
 
@@ -387,7 +386,7 @@ JFFAnalyzer analyzerAsSequenceOfAnalyzers(JFFAnalyzer firstAnalyzer, ...)
     };
 }
 
-JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader)
+JFFAsyncOperation ignoreProgressLoader(JFFAsyncOperation loader)
 {
     loader = [loader copy];
     return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
@@ -404,7 +403,7 @@ JFFAsyncOperationBinder ignorePregressBinder(JFFAsyncOperationBinder binder)
     return ^JFFAsyncOperation(id data) {
         
         JFFAsyncOperation loader = binder(data);
-        return ignorePregressLoader(loader);
+        return ignoreProgressLoader(loader);
     };
 }
 

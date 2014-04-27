@@ -1030,7 +1030,7 @@
 		8D5AE6D213F3E6C500EB6143 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 8D5AE6D513F3E6C500EB6143 /* Build configuration list for PBXProject "JFFNetwork" */;
 			compatibilityVersion = "Xcode 3.2";

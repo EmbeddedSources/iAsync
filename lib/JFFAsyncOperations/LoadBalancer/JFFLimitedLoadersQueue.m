@@ -50,12 +50,9 @@
     
     BOOL result = _limitCount > [_activeLoaders count] && [_pendingLoaders count] > 0;
     
-    if (result) {
-        
-        result = [_activeLoaders all:^BOOL(JFFBaseLoaderOwner *activeLoader) {
-            return !activeLoader.barrier;
-        }];
-    }
+    result = result && [_activeLoaders all:^BOOL(JFFBaseLoaderOwner *activeLoader) {
+        return !activeLoader.barrier;
+    }];
     
     return result;
 }
@@ -116,7 +113,7 @@
                 return;
             
             switch (task) {
-                case JFFAsyncOperationHandlerTaskUnsubscribe:
+                case JFFAsyncOperationHandlerTaskUnSubscribe:
                 {
                     loaderHolder.progressCallback = nil;
                     loaderHolder.stateCallback    = nil;

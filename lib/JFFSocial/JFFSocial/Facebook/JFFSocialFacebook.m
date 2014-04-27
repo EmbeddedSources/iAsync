@@ -17,7 +17,6 @@
 + (NSArray *)authPermissions
 {
     NSArray *result = @[@"email", @"user_birthday"];
-    
     return result;
 }
 

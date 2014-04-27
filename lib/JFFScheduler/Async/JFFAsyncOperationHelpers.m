@@ -57,7 +57,7 @@
 {
     switch (task) {
             
-        case JFFAsyncOperationHandlerTaskUnsubscribe:
+        case JFFAsyncOperationHandlerTaskUnSubscribe:
         case JFFAsyncOperationHandlerTaskCancel:
         case JFFAsyncOperationHandlerTaskSuspend:
         {
@@ -140,7 +140,7 @@ JFFAsyncOperation repeatAsyncOperationWithDelayLoader(JFFAsyncOperation nativeLo
         
         __block JFFAsyncOperationProgressCallback    progressCallbackHolder = [progressCallback copy];
         __block JFFAsyncOperationChangeStateCallback stateCallbackHolder    = [stateCallback    copy];
-        __block JFFDidFinishAsyncOperationCallback   doneCallbackkHolder    = [doneCallback     copy];
+        __block JFFDidFinishAsyncOperationCallback   doneCallbackHolder     = [doneCallback     copy];
         
         JFFAsyncOperationProgressCallback progressCallbackWrapper = ^(id progressInfo) {
             
@@ -154,26 +154,35 @@ JFFAsyncOperation repeatAsyncOperationWithDelayLoader(JFFAsyncOperation nativeLo
         };
         JFFDidFinishAsyncOperationCallback doneCallbackkWrapper = ^(id result, NSError *error) {
             
-            if (doneCallbackkHolder) {
-                doneCallbackkHolder(result, error);
-                doneCallbackkHolder = nil;
+            if (doneCallbackHolder) {
+                doneCallbackHolder(result, error);
+                doneCallbackHolder = nil;
             }
         };
         
         __block NSInteger currentLeftCount = maxRepeatCount;
         
+        void (^clearCallbacks)(void) = ^() {
+            progressCallbackHolder = nil;
+            stateCallbackHolder    = nil;
+            doneCallbackHolder     = nil;
+        };
+        
         JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
                                                               NSError *error,
                                                               JFFDidFinishAsyncOperationCallback doneCallback) {
             
-            if ([error isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]]) {
+            void (^finish)(void) = ^() {
                 
                 finishHookHolder = nil;
-                doneCallbackkWrapper(nil, error);
+                doneCallbackkWrapper(result, error);
                 
-                progressCallbackHolder = nil;
-                stateCallbackHolder    = nil;
-                doneCallbackkHolder    = nil;
+                clearCallbacks();
+            };
+            
+            if ([error isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]]) {
+                
+                finish();
                 return;
             }
             
@@ -181,13 +190,7 @@ JFFAsyncOperation repeatAsyncOperationWithDelayLoader(JFFAsyncOperation nativeLo
             
             if (!newLoader || currentLeftCount == 0) {
                 
-                finishHookHolder = nil;
-                doneCallbackkWrapper(result, error);
-                
-                progressCallbackHolder = nil;
-                stateCallbackHolder    = nil;
-                doneCallbackkHolder    = nil;
-                
+                finish();
             } else {
                 
                 currentLeftCount = currentLeftCount > 0
@@ -215,17 +218,15 @@ JFFAsyncOperation repeatAsyncOperationWithDelayLoader(JFFAsyncOperation nativeLo
             if (!currentLoaderHandlerHolder)
                 return;
             
-            if (task != JFFAsyncOperationHandlerTaskUnsubscribe)
+            if (task != JFFAsyncOperationHandlerTaskUnSubscribe)
                 currentLoaderHandlerHolder(task);
             
             if (task == JFFAsyncOperationHandlerTaskCancel)
                 currentLoaderHandlerHolder = nil;
             
-            if (task == JFFAsyncOperationHandlerTaskUnsubscribe) {
+            if (task == JFFAsyncOperationHandlerTaskUnSubscribe) {
                 
-                progressCallbackHolder = nil;
-                stateCallbackHolder    = nil;
-                doneCallbackkHolder    = nil;
+                clearCallbacks();
             }
         };
     };

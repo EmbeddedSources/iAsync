@@ -1,7 +1,10 @@
 #import "JFFThumbnailStorage.h"
 
-#import "JFFCacheDB.h"
 #import "JFFCaches.h"
+#import "JFFDBInfo.h"
+#import "JFFCacheDB.h"
+#import "CacheDBInfo.h"
+#import "CacheDBInfoStorage.h"
 
 #import "JFFCacheNoURLError.h"
 #import "JFFCacheLoadImageError.h"
@@ -187,7 +190,9 @@ static JFFThumbnailStorage *glStorageInstance = nil;
 
 + (NSTimeInterval)cacheDataLifeTimeInSeconds
 {
-    NSNumber *timeToLiveInHours = [[JFFCaches createThumbnailDB] timeToLiveInHours];
+    CacheDBInfoStorage *dbInfoByNames = [[JFFDBInfo sharedDBInfo] dbInfoByNames];
+    CacheDBInfo *info = [dbInfoByNames infoByDBName:[JFFCaches thumbnailDBName]];
+    NSNumber *timeToLiveInHours = info.timeToLiveInHours;
     NSParameterAssert(timeToLiveInHours);
     return [timeToLiveInHours doubleValue]*3600.;
 }
@@ -212,7 +217,7 @@ static JFFThumbnailStorage *glStorageInstance = nil;
 - (JFFAsyncOperation)cachedInDBImageDataLoaderForUrl:(NSURL *)url
                              ignoreFreshDataLoadFail:(BOOL)ignoreFreshDataLoadFail
 {
-    JFFSmartUrlDataLoaderFields *args = [JFFSmartUrlDataLoaderFields new];
+    JFFSmartDataLoaderFields *args = [JFFSmartDataLoaderFields new];
     args.loadDataIdentifier = url;
     args.cacheDataLifeTimeInSeconds = [[self class] cacheDataLifeTimeInSeconds];
     args.doesNotIgnoreFreshDataLoadFail = ignoreFreshDataLoadFail;

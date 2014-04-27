@@ -11,12 +11,16 @@
 
 - (instancetype)initWithDBInfoDictionary:(NSDictionary *)cachesInfo;
 
-+ (id< JFFCacheDB >)createCacheForName:(NSString *)name;
++ (id<JFFCacheDB>)createCacheForName:(NSString *)name;
 
-- (id< JFFCacheDB >)cacheByName:(NSString *)name;
+- (id<JFFCacheDB>)cacheByName:(NSString *)name;
 
-- (id< JFFCacheDB >)thumbnailDB;
++ (NSString *)thumbnailDBName;
 
-+ (id< JFFCacheDB >)createThumbnailDB;
+- (id<JFFCacheDB>)thumbnailDB;
+
++ (id<JFFCacheDB>)createThumbnailDB;
+
+- (void)migrateDBs;
 
 @end

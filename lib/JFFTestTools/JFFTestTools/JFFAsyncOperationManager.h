@@ -2,13 +2,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
-    
+typedef NS_ENUM(NSUInteger, JFFCancelAsyncOperationManagerType)
+{
     JFFDoNotCancelAsyncOperationManager,
     JFFCancelAsyncOperationManagerWithNoFlag,
     JFFCancelAsyncOperationManagerWithYesFlag
-    
-} JFFCancelAsyncOperationManagerType;
+};
 
 @interface JFFAsyncOperationManager : NSObject
 

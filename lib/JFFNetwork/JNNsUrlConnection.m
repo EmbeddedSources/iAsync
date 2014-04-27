@@ -68,9 +68,9 @@
     NSError *error;
     //STODO read file in separate thread
     //STODO read big files by chunks
-    NSData *data_ = [[NSData alloc]initWithContentsOfFile:path
-                                                  options:0
-                                                    error:&error];
+    NSData *data = [[NSData alloc]initWithContentsOfFile:path
+                                                 options:0
+                                                   error:&error];
     
     if (error) {
         [self connection:_nativeConnection
@@ -85,7 +85,7 @@
       didReceiveResponse:response];
         
         [self connection:_nativeConnection
-          didReceiveData:data_];
+          didReceiveData:data];
         
         [self connectionDidFinishLoading:_nativeConnection];
     }
@@ -97,9 +97,9 @@
 - (void)start
 {
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
-    if ( [ _params.url isFileURL ] ) {
-        NSString* path_ = [ _params.url path ];
-        [ self processLocalFileWithPath: path_ ];
+    if ([_params.url isFileURL]) {
+        NSString *path = [_params.url path];
+        [self processLocalFileWithPath:path];
         return;
     }
 #endif
@@ -123,7 +123,7 @@
 
     if (_connectRunLoop) {
         [_nativeConnection unscheduleFromRunLoop:_connectRunLoop
-                                               forMode:NSDefaultRunLoopMode];
+                                         forMode:NSDefaultRunLoopMode];
     }
 }
 
@@ -258,21 +258,6 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
     
     NSNumber *progress = @((float)totalBytesWritten/totalBytesExpectedToWrite);
     self.didUploadDataBlock(progress);
-}
-
-- (void)connection:(NSURLConnection *)connection
-willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-{
-    if ([challenge previousFailureCount] == 0) {
-        NSURLCredential *newCredential = [NSURLCredential credentialWithUser:@"malygin"
-                                                                    password:@"sdftgb32"
-                                                                 persistence:NSURLCredentialPersistencePermanent];
-        [challenge.sender useCredential:newCredential forAuthenticationChallenge:challenge];
-    } else {
-        [challenge.sender cancelAuthenticationChallenge:challenge];
-//        self.errorLabel.text = @"Invalid Username and/or Password";
-//        self.imageView.image = [UIImage imageWithData:[[NSData alloc] init]];
-    }
 }
 
 @end

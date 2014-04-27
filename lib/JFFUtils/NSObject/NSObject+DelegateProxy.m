@@ -57,7 +57,9 @@ static char proxyDelegatesKey;
         return nil;
     }
     
-    id realDelegate = objc_msgSend(self, NSSelectorFromString(hookedGetterName));
+    typedef id (*AlignMsgSendFunction)(id, SEL);
+    AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+    id realDelegate = alignFunction(self, NSSelectorFromString(hookedGetterName));
     
     JFFProxyDelegatesDispatcher *dispatcher =
     [JFFProxyDelegatesDispatcher newProxyDelegatesDispatcherWithRealDelegate:realDelegate

@@ -17,18 +17,23 @@
 
 #pragma mark - JFFAsyncOperationInterface
 
+- (BOOL)isValidSession:(FBSession *)session
+{
+    return session.isOpen && session.accessTokenData.accessToken;
+}
+
 - (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
                          handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
                         progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
     finishCallback = [finishCallback copy];
     
-    NSMutableSet *requstPermissions = [[NSMutableSet alloc] initWithArray:_permissions];
+    NSMutableSet *requestPermissions = [[NSMutableSet alloc] initWithArray:_permissions];
     NSSet *currPermissions = [[NSSet alloc] initWithArray:_facebookSession.permissions];
     
-    if (_facebookSession.isOpen) {
+    if ([self isValidSession:_facebookSession]) {
         
-        BOOL hasAllPermissions = [requstPermissions isSubsetOfSet:currPermissions];
+        BOOL hasAllPermissions = [requestPermissions isSubsetOfSet:currPermissions];
         
         if (hasAllPermissions) {
             
@@ -40,26 +45,18 @@
         }
     }
     
-    [requstPermissions unionSet:currPermissions];
+    [requestPermissions unionSet:currPermissions];
     
     //exclude publich pemissions
     {
         static NSSet *publishPermissions;
         
-        //    "share_item",
-        //    "photo_upload",
-        //    "video_upload",
-        //    "installed",
-        //    "status_update",
-        //    "email",
-        //    "user_birthday",
-        //    "create_note",
         if (!publishPermissions) {
             
-            publishPermissions = [[NSSet alloc] initWithArray:@[@"publish_actions", @"publish_stream"]];
+            publishPermissions = [[NSSet alloc] initWithArray:@[@"publish_actions", @"publish_stream", @"publish_checkins"]];
         }
         
-        [requstPermissions minusSet:publishPermissions];
+        [requestPermissions minusSet:publishPermissions];
     }
     
     __block BOOL finished = NO;
@@ -77,7 +74,7 @@
         [weakSelf handleLoginWithSession:session error:libError status:status finishCallback:finishCallback];
     };
     
-    [FBSession openActiveSessionWithReadPermissions:[requstPermissions allObjects]
+    [FBSession openActiveSessionWithReadPermissions:[requestPermissions allObjects]
                                        allowLoginUI:YES
                                   completionHandler:fbHandler];
 }
@@ -92,7 +89,10 @@
                         status:(FBSessionState)status
                 finishCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
 {
-    if (!error && (!session.isOpen || !session.accessTokenData.accessToken)) {
+    if (status == FBSessionStateCreatedOpening)
+        return;
+    
+    if (!error && ![self isValidSession:session]) {
         error = [JFFFacebookAuthorizeError new];
     }
     
@@ -105,7 +105,7 @@
 
 JFFAsyncOperation jffFacebookLogin(FBSession *facebook, NSArray *permissions)
 {
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>() {
         
         JFFAsyncFacebookLogin *object = [JFFAsyncFacebookLogin new];
         

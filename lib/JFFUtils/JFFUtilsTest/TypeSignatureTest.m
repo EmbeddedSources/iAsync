@@ -46,7 +46,7 @@ static NSArray *typeEncodingOffsets(const char *signature)
         char returnType[strlen(sinature) + 1];
         sscanf(sinature, typeSignatureScanFormat, returnType);
         
-        STAssertTrue(strcmp(returnType, sig.methodReturnType) == 0, nil);
+        XCTAssertTrue(strcmp(returnType, sig.methodReturnType) == 0, @"methodReturnType mismatch");
     }
     
     //"void *" return type
@@ -65,7 +65,7 @@ static NSArray *typeEncodingOffsets(const char *signature)
         char returnType[strlen(sinature) + 1];
         sscanf(sinature, typeSignatureScanFormat, returnType);
         
-        STAssertTrue(strcmp(returnType, sig.methodReturnType) == 0, nil);
+        XCTAssertTrue(strcmp(returnType, sig.methodReturnType) == 0, @"methodReturnType mismatch");
     }
     
     //"BOOL" return type
@@ -84,7 +84,7 @@ static NSArray *typeEncodingOffsets(const char *signature)
         char returnType[strlen(sinature) + 1];
         sscanf(sinature, typeSignatureScanFormat, returnType);
         
-        STAssertTrue(strcmp(returnType, sig.methodReturnType) == 0, nil);
+        XCTAssertTrue(strcmp(returnType, sig.methodReturnType) == 0, @"methodReturnType mismatch");
     }
     
     //"NSUInteger" return type
@@ -107,7 +107,7 @@ static NSArray *typeEncodingOffsets(const char *signature)
 //        NSLog(@"ret1: %s", returnType);
 //        NSLog(@"ret2: %s", sig.methodReturnType);
         
-        STAssertTrue(strcmp(returnType, sig.methodReturnType) == 0, nil);
+        XCTAssertTrue(strcmp(returnType, sig.methodReturnType) == 0, @"methodReturnType mismatch");
     }
 }
 
@@ -124,7 +124,7 @@ static NSArray *typeEncodingOffsets(const char *signature)
         
         NSArray *arr = @[@20, @0, @4, @8, @12];
         
-        STAssertEqualObjects(arr, typeEncodingOffsets(sinature), nil);
+        XCTAssertEqualObjects(arr, typeEncodingOffsets(sinature), @"method signature musmatch");
     }
     
     {
@@ -138,7 +138,7 @@ static NSArray *typeEncodingOffsets(const char *signature)
         
         NSArray *arr = @[@12, @0, @4, @8];
         
-        STAssertEqualObjects(arr, typeEncodingOffsets(sinature), nil);
+        XCTAssertEqualObjects(arr, typeEncodingOffsets(sinature), @"method signature musmatch");
     }
     
     {
@@ -152,7 +152,7 @@ static NSArray *typeEncodingOffsets(const char *signature)
         
         NSArray *arr = @[@20, @0, @4, @8, @12];
         
-        STAssertEqualObjects(arr, typeEncodingOffsets(sinature), nil);
+        XCTAssertEqualObjects(arr, typeEncodingOffsets(sinature), @"method signature musmatch");
     }
 }
 

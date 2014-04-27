@@ -17,7 +17,7 @@
     NSUInteger errorIndex    = errorCode + abs(Z_VERSION_ERROR);
     NSUInteger maxErrorIndex = Z_ERRNO   + abs(Z_VERSION_ERROR);
     
-    if (errorIndex > maxErrorIndex) {
+    if (errorIndex > maxErrorIndex || errorIndex < 0) {
         return @"Z_UnknownError";
     }
     

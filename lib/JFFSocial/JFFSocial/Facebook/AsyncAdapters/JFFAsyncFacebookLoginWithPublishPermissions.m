@@ -98,7 +98,7 @@ JFFAsyncOperation jffFacebookLoginWithPublishPermissions(FBSession *facebook, NS
     
     NSDictionary *mergeParams =
     @{
-      @"method"      : @"jffFacebookLoginWithPublishPermissions",
+      @"method"      : @(__FUNCTION__),
       @"permissions" : [[NSSet alloc] initWithArray:permissions],
       @"class"       : NSStringFromClass([JFFAsyncFacebookLoginWithPublishPermissions class])
       };

@@ -61,7 +61,6 @@ SKProductsRequestDelegate
     if ([products hasElements]) {
         
         SKProduct *product = [products firstMatch:^BOOL(SKProduct *product) {
-            
             return [product.productIdentifier isEqualToString:_productIdentifier];
         }];
         

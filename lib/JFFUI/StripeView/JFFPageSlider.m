@@ -18,7 +18,7 @@
 {
     NSInteger _previousIndex;
     NSInteger _cachedNumberOfElements;
-    NSRange   _previousVisiableIndexesRange;
+    NSRange   _previousVisibleIndexesRange;
 }
 
 - (void)dealloc
@@ -54,8 +54,8 @@
     _scrollView.scrollEnabled = YES;
     [self addSubviewAndScale:_scrollView];
     
-    NSRange range_ = { 0, 1 };
-    _previousVisiableIndexesRange = range_;
+    NSRange range = { 0, 1 };
+    _previousVisibleIndexesRange = range;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveMemoryWarning:)
@@ -229,11 +229,11 @@
     [ self slideToIndex: index_ animated: NO ];
 }
 
-- (NSRange)visiableIndexesRange
+- (NSRange)visibleIndexesRange
 {
     if (_scrollView.bounds.size.width == 0) {
         NSLog(@"[!!!ERROR!!!] division by zero");
-        return _previousVisiableIndexesRange;
+        return _previousVisibleIndexesRange;
     }
     
     NSInteger firstIndex = floorf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
@@ -242,9 +242,9 @@
     
     firstIndex = firstIndex > 0 ?: 0;
 
-    NSRange range_ = { firstIndex, lastIndex - firstIndex + 1 };
-    _previousVisiableIndexesRange = range_;
-    return _previousVisiableIndexesRange;
+    NSRange range = { firstIndex, lastIndex - firstIndex + 1 };
+    _previousVisibleIndexesRange = range;
+    return _previousVisibleIndexesRange;
 }
 
 - (NSInteger)lastIndex
@@ -300,8 +300,8 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSRange previuosRange = _previousVisiableIndexesRange;
-    NSRange indexRange = [self visiableIndexesRange];
+    NSRange previuosRange = _previousVisibleIndexesRange;
+    NSRange indexRange = [self visibleIndexesRange];
     
     if (NSEqualRanges(previuosRange, indexRange))
         return;

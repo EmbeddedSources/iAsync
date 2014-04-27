@@ -3,7 +3,7 @@
 
 typedef NS_ENUM(NSUInteger, JFFAsyncOperationHandlerTask)
 {
-    JFFAsyncOperationHandlerTaskUnsubscribe = 0,
+    JFFAsyncOperationHandlerTaskUnSubscribe = 0,
     JFFAsyncOperationHandlerTaskCancel      = 1,
     JFFAsyncOperationHandlerTaskResume      = 2,
     JFFAsyncOperationHandlerTaskSuspend     = 3,

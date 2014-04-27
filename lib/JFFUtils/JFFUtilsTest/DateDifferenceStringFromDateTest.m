@@ -19,7 +19,7 @@
     NSDate *date     = [_formatter dateFromString: @"2012-12-01 12:00:00"];
     NSDate *fromDate = [_formatter dateFromString: @"2012-12-01 12:00:00"];
     
-    STAssertThrows
+    XCTAssertThrows
     (
      [date dateDifferenceStringFromDate: fromDate]
      , @"assert expected"
@@ -31,7 +31,7 @@
     NSDate *date     = [_formatter dateFromString: @"2012-12-01 12:00:00"];
     NSDate *fromDate = [_formatter dateFromString: @"2012-12-01 12:00:01"];
     
-    STAssertThrows
+    XCTAssertThrows
     (
      [date dateDifferenceStringFromDate: fromDate]
      , @"assert expected"
@@ -45,7 +45,7 @@
     
     NSString *result = [date dateDifferenceStringFromDate: fromDate];
     
-    STAssertEqualObjects(@"1 SECOND", result, @"date difference mismatch");
+    XCTAssertEqualObjects(@"1 SECOND", result, @"date difference mismatch");
 }
 
 - (void)testSeveralSecondDifference
@@ -55,7 +55,7 @@
     
     NSString *result = [date dateDifferenceStringFromDate: fromDate];
     
-    STAssertEqualObjects(@"22 SECONDS", result, @"date difference mismatch");
+    XCTAssertEqualObjects(@"22 SECONDS", result, @"date difference mismatch");
 }
 
 - (void)testOneMinuteDifference
@@ -65,7 +65,7 @@
     
     NSString *result = [date dateDifferenceStringFromDate: fromDate];
     
-    STAssertEqualObjects(@"1 MINUTE", result, @"date difference mismatch");
+    XCTAssertEqualObjects(@"1 MINUTE", result, @"date difference mismatch");
 }
 
 @end

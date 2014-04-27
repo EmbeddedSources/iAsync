@@ -216,7 +216,7 @@ static JFFAsyncOperation wrappedAsyncOperationWithContext(JFFAsyncOperation nati
         
         JFFAsyncOperationHandler wrappedCancelBlock = [^void(JFFAsyncOperationHandlerTask task) {
             
-            if (JFFAsyncOperationHandlerTaskUnsubscribe == task) {
+            if (JFFAsyncOperationHandlerTaskUnSubscribe == task) {
                 
                 finishBlockHolder.onceDidFinishBlock(nil, [JFFAsyncOpFinishedByUnsubscriptionError new]);
                 
@@ -295,7 +295,7 @@ JFFAsyncOperation balancedAsyncOperationInContext(JFFAsyncOperation nativeLoader
             }
             
             switch (task) {
-                case JFFAsyncOperationHandlerTaskUnsubscribe:
+                case JFFAsyncOperationHandlerTaskUnSubscribe:
                 {
                     [pedingLoaderData unsubscribe];
                     if (doneCallback)

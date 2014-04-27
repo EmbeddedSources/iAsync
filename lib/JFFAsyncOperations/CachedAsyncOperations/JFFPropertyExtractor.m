@@ -55,22 +55,31 @@ loaderHandler;
 
 - (id)property
 {
-    id result = objc_msgSend(self.object, self.propertyGetSelector);
+    typedef id (*AlignMsgSendFunction)(id, SEL);
+    AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+    id result = alignFunction(self.object, self.propertyGetSelector);
     return self.propertyPath.key?[result objectForKey:self.propertyPath.key]:result;
 }
 
 - (void)setProperty:(id)property
 {
     if (!self.propertyPath.key) {
-        objc_msgSend(self.object, self.propertySetSelector, property);
+        
+        typedef void (*AlignMsgSendFunction)(id, SEL, id);
+        AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+        alignFunction(self.object, self.propertySetSelector, property);
         return;
     }
     
-    NSMutableDictionary* dict = objc_msgSend(self.object, self.propertyGetSelector);
+    typedef NSMutableDictionary *(*AlignMsgSendFunction)(id, SEL);
+    AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+    NSMutableDictionary *dict = alignFunction(self.object, self.propertyGetSelector);
     
     if (!dict) {
         dict = [NSMutableDictionary new];
-        objc_msgSend(self.object, self.propertySetSelector, dict);
+        typedef void (*AlignMsgSendFunction)(id, SEL, NSMutableDictionary *);
+        AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+        alignFunction(self.object, self.propertySetSelector, dict);
     }
     
     if (property) {

@@ -13,7 +13,7 @@
     
     {
         result = objc_dynamic_cast<JMChild>(parent);
-        STAssertNil(result, @"nil expected");
+        XCTAssertNil(result, @"nil expected");
     }
 }
 
@@ -24,7 +24,7 @@
     
     {
         result = objc_dynamic_cast<JMChild>(parent);
-        STAssertNil(result, @"nil expected");
+        XCTAssertNil(result, @"nil expected");
     }
 }
 
@@ -35,8 +35,8 @@
     
     {
         result = objc_dynamic_cast<JMParent>(parent);
-        STAssertNotNil(result, @"nil expected");
-        STAssertTrue(result == parent, @"same object expected");
+        XCTAssertNotNil(result, @"nil expected");
+        XCTAssertTrue(result == parent, @"same object expected");
     }
 }
 
@@ -51,18 +51,18 @@
     
     {
         result = objc_dynamic_cast<JMChild>(p_child);
-        STAssertNotNil(result, @"nil expected");
-        STAssertTrue(result == p_child, @"same object expected");
+        XCTAssertNotNil(result, @"nil expected");
+        XCTAssertTrue(result == p_child, @"same object expected");
     }
     
     {
         result = objc_dynamic_cast<JMParent>(o_child);
-        STAssertNotNil(result, @"nil expected" );
-        STAssertTrue(result == p_child, @"same object expected");
+        XCTAssertNotNil(result, @"nil expected" );
+        XCTAssertTrue(result == p_child, @"same object expected");
         
         result = objc_dynamic_cast<JMChild>(o_child);
-        STAssertNotNil(result, @"nil expected" );
-        STAssertTrue(result == p_child, @"same object expected");
+        XCTAssertNotNil(result, @"nil expected" );
+        XCTAssertTrue(result == p_child, @"same object expected");
     }
 }
 

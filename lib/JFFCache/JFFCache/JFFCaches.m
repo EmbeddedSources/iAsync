@@ -1,10 +1,11 @@
 #import "JFFCaches.h"
 
 #import "JFFCacheDB.h"
-#import "JFFBaseDB.h"
 #import "JFFDBInfo.h"
+#import "JFFKeyValueDB.h"
 
-#import "NSDictionary+DBInfo.h"
+#import "CacheDBInfo.h"
+#import "CacheDBInfoStorage.h"
 
 #import <JFFScheduler/JFFTimer.h>
 
@@ -13,45 +14,38 @@ static JFFCaches *sharedCachesInstance;
 static NSMutableDictionary *autoremoveSchedulersByCacheName;
 static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
 
-@interface JFFInternalCacheDB : JFFBaseDB <JFFCacheDB>
+@interface JFFInternalCacheDB : JFFKeyValueDB <JFFCacheDB>
 
-@property (nonatomic) NSString *configPropertyName;
+@property (nonatomic) CacheDBInfo *cacheDBInfo;
 
 @end
 
 @implementation JFFInternalCacheDB
 
-+ (void)removeOldDataWithAutoremoveProperties:(NSDictionary *)autoremoveProperties
-                               dbPropertyName:(NSString *)dbPropertyName
-                                       dbInfo:(JFFDBInfo *)dbInfo
+- (void)removeOldData
 {
-    NSTimeInterval removeRarelyAccessDataDelay = [autoremoveProperties autoRemoveByLastAccessDate];
-    
-    JFFInternalCacheDB *cacheDB = [[self alloc] initWithCacheDBWithName:dbPropertyName
-                                                                 dbInfo:dbInfo];
+    NSTimeInterval removeRarelyAccessDataDelay = _cacheDBInfo.autoRemoveByLastAccessDate;
     
     if (removeRarelyAccessDataDelay > 0.) {
         
         NSDate *fromDate = [[NSDate new] dateByAddingTimeInterval:-removeRarelyAccessDataDelay];
         
-        [cacheDB removeRecordsToAccessDate:fromDate];
+        [self removeRecordsToAccessDate:fromDate];
     }
     
-    unsigned long long bytes = [autoremoveProperties autoRemoveByMaxSizeInMB] * 1024 * 1024;
+    unsigned long long bytes = _cacheDBInfo.autoRemoveByMaxSizeInMB * 1024 * 1024;
     
     if (bytes > 0) {
         
-        [cacheDB removeRecordsWhileTotalSizeMoreThenBytes:bytes];
+        [self removeRecordsWhileTotalSizeMoreThenBytes:bytes];
     }
 }
 
-+ (void)runAutoremoveDataSchedulerWithName:(NSString *)dbPropertyName
-                      autoremoveProperties:(NSDictionary *)autoremoveProperties
-                                    dbInfo:(JFFDBInfo *)dbInfo
+- (void)runAutoRemoveDataSchedulerIfNeeds
 {
     @synchronized(lockObject) {
         
-        JFFTimer *timer = autoremoveSchedulersByCacheName[dbPropertyName];
+        JFFTimer *timer = autoremoveSchedulersByCacheName[_cacheDBInfo.dbPropertyName];
         
         if (timer)
             return;
@@ -61,17 +55,14 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
         
         if (!timer) {
             timer = [JFFTimer new];
-            autoremoveSchedulersByCacheName[dbPropertyName] = timer;
+            autoremoveSchedulersByCacheName[_cacheDBInfo.dbPropertyName] = timer;
         }
         
         JFFScheduledBlock block = ^void(JFFCancelScheduledBlock cancel) {
             
             JFFSyncOperation loadDataBlock = ^id(NSError *__autoreleasing *outError) {
                 
-                [self removeOldDataWithAutoremoveProperties:autoremoveProperties
-                                             dbPropertyName:dbPropertyName
-                                                     dbInfo:dbInfo];
-                
+                [self removeOldData];
                 return [NSNull new];
             };
             
@@ -89,30 +80,12 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
     }
 }
 
-+ (void)runAutoremoveDataSchedulerIfNeedsWithName:(NSString *)dbPropertyName
-                                           dbInfo:(JFFDBInfo *)dbInfo
+- (instancetype)initWithCacheDBInfo:(CacheDBInfo *)dbInfo
 {
-    NSDictionary *dbInfoDict = [dbInfo currentDbInfo];
-    NSDictionary *autoremoveProperties =
-    [dbInfoDict autoRemoveProperiesForDBWithName:dbPropertyName];
-    
-    if (autoremoveProperties) {
-        
-        [self runAutoremoveDataSchedulerWithName:dbPropertyName
-                            autoremoveProperties:autoremoveProperties
-                                          dbInfo:dbInfo];
-    }
-}
-
-- (instancetype)initWithCacheDBWithName:(NSString *)dbPropertyName
-                                 dbInfo:(JFFDBInfo *)dbInfo
-{
-    NSString *filePath = [[dbInfo dbInfo] fileNameForDBWithName:dbPropertyName];
-    
-    self = [super initWithCacheFileName:filePath];
+    self = [super initWithCacheFileName:dbInfo.fileName];
     
     if (self) {
-        _configPropertyName = dbPropertyName;
+        _cacheDBInfo = dbInfo;
     }
     
     return self;
@@ -121,15 +94,15 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
 //JTODO check using of migrateDB method when multithreaded
 - (void)migrateDB
 {
-    NSDictionary *currentDbInfo = [[JFFDBInfo sharedDBInfo] currentDbInfo];
-    if (!currentDbInfo) {
+    NSDictionary *currentDbInfo = [[JFFDBInfo sharedDBInfo] currentDbVersionsByName];
+    NSNumber *currVersion = currentDbInfo[_cacheDBInfo.dbPropertyName];
+    
+    if (!currVersion) {
         return;
     }
     
-    NSDictionary *dbInfo = [[JFFDBInfo sharedDBInfo] dbInfo];
-    
-    NSInteger lastVersion    = [dbInfo versionForDBWithName:_configPropertyName];
-    NSInteger currentVersion = [currentDbInfo versionForDBWithName:_configPropertyName];
+    NSInteger lastVersion    = _cacheDBInfo.version;
+    NSInteger currentVersion = [currVersion unsignedIntegerValue];
     
     if (lastVersion > currentVersion) {
         [self removeAllRecordsWithCallback:nil];
@@ -138,8 +111,8 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
 
 - (NSNumber *)timeToLiveInHours
 {
-    NSDictionary *dbInfo = [[JFFDBInfo sharedDBInfo] currentDbInfo];
-    NSNumber *result = [dbInfo timeToLiveInHoursForDBWithName:_configPropertyName];
+    CacheDBInfoStorage *dbInfo = [[JFFDBInfo sharedDBInfo] dbInfoByNames];
+    NSNumber *result = [[dbInfo infoByDBName:_cacheDBInfo.dbPropertyName] timeToLiveInHours];
     return result;
 }
 
@@ -162,9 +135,10 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
     id< JFFCacheDB > result = self.mutableCacheDbByName[dbPropertyName];
     
     if (!result) {
-        result = [[self class] createCacheForName:dbPropertyName
-                                           dbInfo:dbInfo];
-        self.mutableCacheDbByName[dbPropertyName] = result;
+        JFFInternalCacheDB *db = (JFFInternalCacheDB *)[[self class] createCacheForName:dbPropertyName];
+        [db runAutoRemoveDataSchedulerIfNeeds];
+        self.mutableCacheDbByName[dbPropertyName] = db;
+        result = db;
     }
     
     return result;
@@ -172,7 +146,7 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
 
 - (void)setupCachesWithDBInfo:(JFFDBInfo *)dbInfo
 {
-    [dbInfo.dbInfo enumerateKeysAndObjectsUsingBlock:^(id dbName, id obj, BOOL *stop) {
+    [dbInfo.dbInfoByNames enumerateKeysAndObjectsUsingBlock:^(NSString *dbName, CacheDBInfo *obj, BOOL *stop) {
         [self registerAndCreateCacheDBWithName:dbName
                                         dbInfo:dbInfo];
     }];
@@ -224,39 +198,41 @@ static NSString *const lockObject = @"41d318da-1229-4a50-9222-4ad870c56ecc";
     return self.mutableCacheDbByName;
 }
 
-- (id< JFFCacheDB >)cacheByName:(NSString *)name
+- (id<JFFCacheDB>)cacheByName:(NSString *)name
 {
     return self.cacheDbByName[name];
 }
 
-- (id< JFFCacheDB >)thumbnailDB
++ (NSString *)thumbnailDBName
 {
-    return [self cacheByName:@"JFF_THUMBNAIL_DB"];
+    return @"JFF_THUMBNAIL_DB";
 }
 
-+ (id< JFFCacheDB >)createCacheForName:(NSString *)name
-                                dbInfo:(JFFDBInfo *)dbInfo
+- (id<JFFCacheDB>)thumbnailDB
 {
-    id< JFFCacheDB > result = [[JFFInternalCacheDB alloc ] initWithCacheDBWithName:name
-                                                                            dbInfo:dbInfo];
-    
-    [JFFInternalCacheDB runAutoremoveDataSchedulerIfNeedsWithName:name
-                                                           dbInfo:dbInfo];
-    
-    return result;
+    return [self cacheByName:[[self class] thumbnailDBName]];
 }
 
-+ (id< JFFCacheDB >)createCacheForName:(NSString *)name
++ (id<JFFCacheDB>)createCacheForName:(NSString *)name
 {
     JFFDBInfo *dbInfo = [JFFDBInfo sharedDBInfo];
     
-    return [self createCacheForName:name
-                             dbInfo:dbInfo];
+    return [[JFFInternalCacheDB alloc] initWithCacheDBInfo:[dbInfo.dbInfoByNames infoByDBName:name]];
 }
 
-+ (id< JFFCacheDB >)createThumbnailDB
++ (id<JFFCacheDB>)createThumbnailDB
 {
-    return [self createCacheForName:@"JFF_THUMBNAIL_DB"];
+    return [self createCacheForName:[[self class] thumbnailDBName]];
+}
+
+- (void)migrateDBs
+{
+    NSDictionary *cacheDbByName = [self cacheDbByName];
+    [cacheDbByName enumerateKeysAndObjectsUsingBlock:^(id key, JFFInternalCacheDB *db, BOOL *stop) {
+        [db migrateDB];
+    }];
+    
+    [[JFFDBInfo sharedDBInfo] saveCurrentDBInfoVersions];
 }
 
 @end

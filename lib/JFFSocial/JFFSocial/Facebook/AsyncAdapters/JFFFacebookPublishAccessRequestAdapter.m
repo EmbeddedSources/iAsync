@@ -113,7 +113,7 @@ JFFAsyncOperation jffFacebookPublishAccessRequest(FBSession *session, NSArray *p
     
     NSDictionary *mergeParams =
     @{
-      @"method"      : @"jffFacebookPublishAccessRequest",
+      @"method"      : @(__FUNCTION__),
       @"permissions" : [[NSSet alloc] initWithArray:permissions],
       @"class"       : NSStringFromClass([JFFFacebookPublishAccessRequestAdapter class])
       };

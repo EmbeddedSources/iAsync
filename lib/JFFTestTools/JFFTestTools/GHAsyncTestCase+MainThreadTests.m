@@ -33,24 +33,26 @@
             
             void (^didFinishCallback)(void) = ^void() {
                 
-                objc_msgSend(self,
-                             @selector(notify:forSelector:),
-                             kGHUnitWaitStatusSuccess,
-                             selector);
+                typedef void (*AlignMsgSendFunction)(id, SEL, NSInteger, SEL);
+                AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+                alignFunction(self, @selector(notify:forSelector:), kGHUnitWaitStatusSuccess, selector);
             };
             
             block([didFinishCallback copy]);
         }
     };
     
-    objc_msgSend(self, @selector(prepare), nil);
+    {
+        typedef void (*AlignMsgSendFunction)(id, SEL);
+        AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+        alignFunction(self, @selector(prepare));
+    }
     
     dispatch_async(dispatch_get_main_queue(), autoreleaseBlock);
     
-    objc_msgSend(self,
-                 @selector(waitForStatus:timeout:),
-                 kGHUnitWaitStatusSuccess,
-                 timeout);
+    typedef void (*AlignMsgSendFunction)(id, SEL, NSInteger, NSTimeInterval);
+    AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+    alignFunction(self, @selector(waitForStatus:timeout:), kGHUnitWaitStatusSuccess, timeout);
 }
 
 + (void)load

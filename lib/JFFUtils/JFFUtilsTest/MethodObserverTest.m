@@ -49,12 +49,15 @@
                              arg3:(float)arg3
                              arg4:(double)arg4
 {
-    return [[NSString alloc] initWithFormat:@"arg1: %@ arg2: %@ arg3: %f arg4: %f",
+    NSString* result =
+     [[NSString alloc] initWithFormat:@"arg1: %@ arg2: {%.1f, %.1f} arg3: %1f arg4: %1f",
             NSStringFromRange(arg1),
-            NSStringFromCGPoint(arg2),
+            arg2.x, arg2.y,
             arg3,
             arg4
             ];
+
+    return result;
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
@@ -316,8 +319,8 @@
             
             return ^BOOL(id _self, CGPoint point, UIEvent *event) {
                 
-                STAssertEqualObjects(NSStringFromCGPoint(originalPoint), NSStringFromCGPoint(point), nil);
-                STAssertTrue(originalEvent == event, nil);
+                XCTAssertEqualObjects(NSStringFromCGPoint(originalPoint), NSStringFromCGPoint(point), @"points mismatch");
+                XCTAssertTrue(originalEvent == event, @"pointer mismatch" );
                 
                 hookWasCalled = YES;
                 
@@ -325,10 +328,10 @@
                 
                 BOOL previousResult = previousImplementation(_self, point, event);
                 
-                STAssertEqualObjects(NSStringFromCGPoint(originalPoint), NSStringFromCGPoint(weakTestObject.point), nil);
-                STAssertTrue(originalEvent == weakTestObject.event, nil);
+                XCTAssertEqualObjects(NSStringFromCGPoint(originalPoint), NSStringFromCGPoint(weakTestObject.point), @"points mismatch");
+                XCTAssertTrue(originalEvent == weakTestObject.event, @"pointer mismatch");
                 
-                STAssertTrue(previousResult, nil);
+                XCTAssertTrue(previousResult, @"previousResult mismatch");
                 
                 return NO;
             };
@@ -342,9 +345,9 @@
         
         BOOL result = [testObject pointInside:originalPoint withEvent:originalEvent];
         
-        STAssertFalse(result, nil);
+        XCTAssertFalse(result, @"point must be outside" );
         
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertTrue(hookWasCalled, @"hook call missed" );
     }
     
     //test normal call
@@ -356,9 +359,9 @@
             
             BOOL result = [testObject pointInside:originalPoint withEvent:originalEvent];
             
-            STAssertTrue(result, nil);
+            XCTAssertTrue(result, @"point inside musmatch");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory management issue");
     }
 }
 
@@ -380,8 +383,8 @@
                 
                 previousImplementation(_self, arg, str);
                 
-                STAssertEquals((NSUInteger)24, *arg, nil);
-                STAssertEqualObjects(@"32", str, nil);
+                XCTAssertEqual((NSUInteger)24, *arg, @"unexpected arg");
+                XCTAssertEqualObjects(@"32", str, @"unexpected arg");
                 
                 *arg = 11;
             };
@@ -398,9 +401,9 @@
         
         [testObject mutStateOnArgPtr:&originalArg str:@"32"];
         
-        STAssertEquals((NSUInteger)11, originalArg, nil);
+        XCTAssertEqual((NSUInteger)11, originalArg, @"unexpected arg");
         
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     
     //test normal call
@@ -418,9 +421,9 @@
             
             id result = [testObject returnObjectForIntegerPoint:NSMakeRange(2, 3) arg:originalArg];
             
-            STAssertEqualObjects(@(originalArg * originalState), result, nil);
+            XCTAssertEqualObjects(@(originalArg * originalState), result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
 }
 
@@ -445,9 +448,9 @@
                 
                 NSUInteger previousResult = previousImplementation(_self, arg);
                 
-                STAssertEquals((NSUInteger)24, previousResult, nil);
+                XCTAssertEqual((NSUInteger)24, previousResult, @"unexpected arg");
                 
-                STAssertEquals((NSUInteger)12, arg, nil);
+                XCTAssertEqual((NSUInteger)12, arg, @"unexpected arg");
                 return 11;
             };
         };
@@ -461,9 +464,9 @@
         
         NSUInteger result = [testObject mutStateOnArg:originalArg];
         
-        STAssertEquals((NSUInteger)11, result, nil);
+        XCTAssertEqual((NSUInteger)11, result, @"unexpected arg");
         
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     
     //test normal call
@@ -481,15 +484,15 @@
             
             NSUInteger result = [testObject mutStateOnArg:originalArg];
             
-            STAssertEquals((NSUInteger)30, result, nil);
+            XCTAssertEqual((NSUInteger)30, result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
 }
 
 - (void)testSignatures
 {
-    id block = ^NSObject *(id _self, NSUInteger arg, NSRange point) {
+    id block = ^id(id _self, NSUInteger arg, NSRange point) {
         
         return nil;
     };
@@ -500,13 +503,13 @@
     NSMethodSignature *methodSig = [NSMethodSignature signatureWithObjCTypes:methodSinature];
     NSMethodSignature *blockSig  = [NSMethodSignature signatureWithObjCTypes:blockSinature ];
     
-    STAssertTrue(strcmp(methodSig.methodReturnType, blockSig.methodReturnType) == 0, nil);
-    STAssertTrue(methodSig.numberOfArguments == blockSig.numberOfArguments, nil);
-    STAssertTrue(methodSig.frameLength == blockSig.frameLength, nil);
+    XCTAssertTrue(strcmp(methodSig.methodReturnType, blockSig.methodReturnType) == 0, @"methodReturnType mismatch");
+    XCTAssertTrue(methodSig.numberOfArguments == blockSig.numberOfArguments, @"numberOfArguments mismatch");
+    XCTAssertTrue(methodSig.frameLength == blockSig.frameLength, @"frameLength mismatch");
     
     for (NSUInteger index = 2; index < methodSig.numberOfArguments; ++index) {
         
-        STAssertTrue(strcmp([methodSig getArgumentTypeAtIndex:index], [blockSig getArgumentTypeAtIndex:index]) == 0, @"parameter mismatch");
+        XCTAssertTrue(strcmp([methodSig getArgumentTypeAtIndex:index], [blockSig getArgumentTypeAtIndex:index]) == 0, @"parameter mismatch");
     }
 }
 
@@ -517,11 +520,11 @@
     
     NSObject *(^block)(id _self, NSRange point, NSRange point2) = ^NSObject *(id _self, NSRange point, NSRange point2) {
         
-        STAssertEquals(originalRange1.length, point.length, nil);
-        STAssertEquals(originalRange1.location, point.location, nil);
+        XCTAssertEqual(originalRange1.length, point.length, @"length mismatch");
+        XCTAssertEqual(originalRange1.location, point.location, @"location mismatch");
         
-        STAssertEquals(originalRange2.length, point2.length, nil);
-        STAssertEquals(originalRange2.location, point2.location, nil);
+        XCTAssertEqual(originalRange2.length, point2.length, @"length mismatch");
+        XCTAssertEqual(originalRange2.location, point2.location, @"location mismatch");
         
         //return (__bridge NSObject *)(CFRetain((__bridge_retained CFTypeRef)@3));
         return @"12";
@@ -559,7 +562,7 @@
     
     id result = [obj returnObjectForIntegerPoint:originalRange1 point:originalRange2];
     
-    STAssertEqualObjects(@"12", result, nil);
+    XCTAssertEqualObjects(@"12", result, @"unexpected arg");
 }
 
 //- (NSObject *)returnObjectForIntegerPoint:(NSRange)point
@@ -590,7 +593,7 @@
             {
                 id previousResult = previousBlock(_self, arg1, arg2, arg3, arg4);
                 
-                STAssertEqualObjects(@"arg1: {7, 8} arg2: {4.5, 6.7} arg3: 3.200000 arg4: 2.300000", previousResult, nil);
+                XCTAssertEqualObjects(@"arg1: {7, 8} arg2: {4.5, 6.7} arg3: 3.200000 arg4: 2.300000", previousResult, @"unexpected format");
             }
             
             return @"1";
@@ -613,11 +616,11 @@
                                                arg3:3.2
                                                arg4:2.3];
         
-        STAssertEqualObjects(@"1", result, nil);
+        XCTAssertEqualObjects(@"1", result, @"bad result");
     }
     
-    STAssertNil(weakTestObject, nil);
-    STAssertTrue(hookWasCalled, nil);
+    XCTAssertNil(weakTestObject, @"memory leak");
+    XCTAssertTrue(hookWasCalled, @"hook call missed");
 }
 
 - (void)testHookExistedMethodWithObjectPointerReturnType
@@ -642,10 +645,10 @@
                 {
                     id previousResult = previousBlock(_self, point, arg);
                     
-                    STAssertEqualObjects(@(originalArg * originalState), previousResult, nil);
+                    XCTAssertEqualObjects(@(originalArg * originalState), previousResult, @"unexpected arg");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"unexpected arg");
                 return @(originalArg);
             };
         };
@@ -663,11 +666,11 @@
             
             id result = [testObject returnObjectForIntegerPoint:NSMakeRange(2, 3) arg:originalArg];
             
-            STAssertEqualObjects(@(originalArg), result, nil);
+            XCTAssertEqualObjects(@(originalArg), result, @"unexpected arg");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     //test normal call
     {
@@ -684,9 +687,9 @@
             
             id result = [testObject returnObjectForIntegerPoint:NSMakeRange(2, 3) arg:originalArg];
             
-            STAssertEqualObjects(@(originalArg * originalState), result, nil);
+            XCTAssertEqualObjects(@(originalArg * originalState), result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
 }
 
@@ -708,9 +711,9 @@
                 
                 BlockObserver previousBlock = previousBlockGetter();
                 
-                STAssertNil(previousBlock, @"no original method");
+                XCTAssertNil(previousBlock, @"no original method");
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(originalArg) stringValue];
             };
         };
@@ -726,11 +729,11 @@
             
             id result = [testObject returnObjectForIntegerPoint2:NSMakeRange(2, 3) arg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg" );
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     
     //test normal call
@@ -747,16 +750,16 @@
             testObject.state = originalState;
             
             //todo fix?
-            STAssertTrue([testObject respondsToSelector:@selector(returnObjectForIntegerPoint2:arg:)], nil);
+            XCTAssertTrue([testObject respondsToSelector:@selector(returnObjectForIntegerPoint2:arg:)], @"method missing");
             
-            STAssertThrows({
+            XCTAssertThrows({
                 
                 [testObject returnObjectForIntegerPoint2:NSMakeRange(2, 3) arg:originalArg];
-            }, nil);
+            }, @"method missing");
             
-            //STAssertEqualObjects([@(originalArg * originalState) stringValue], result, nil);
+            //XCTAssertEqualObjects([@(originalArg * originalState) stringValue], result, nil);
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
 }
 
@@ -779,9 +782,9 @@
                 
                 BlockObserver previousBlock = previousBlockGetter();
                 
-                STAssertNil(previousBlock, @"no original method");
+                XCTAssertNil(previousBlock, @"no original method");
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(originalArg) stringValue];
             };
         };
@@ -797,11 +800,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     
     //test normal call for child
@@ -815,14 +818,14 @@
             weakTestObject = testObject;
             
             //todo fix?
-            STAssertTrue([testObject respondsToSelector:@selector(returnObjectForArg:)], nil);
+            XCTAssertTrue([testObject respondsToSelector:@selector(returnObjectForArg:)], @"method missing");
             
-            STAssertThrows({
+            XCTAssertThrows({
                 
                 [testObject returnObjectForArg:originalArg];
-            }, nil);
+            }, @"unexpected arg");
             
-            //STAssertEqualObjects([@(originalArg * originalState) stringValue], result, nil);
+            //XCTAssertEqualObjects([@(originalArg * originalState) stringValue], result, nil);
         }
     }
     
@@ -836,14 +839,14 @@
             ParentTestClassCase1_a *testObject = [ParentTestClassCase1_a new];
             weakTestObject = testObject;
             
-            STAssertFalse([testObject respondsToSelector:@selector(returnObjectForArg:)], nil);
+            XCTAssertFalse([testObject respondsToSelector:@selector(returnObjectForArg:)], @"method missing");
             
-            STAssertThrows({
+            XCTAssertThrows({
                 
                 [testObject returnObjectForArg:originalArg];
-            }, nil);
+            }, @"unexpected arg");
             
-            //STAssertEqualObjects([@(originalArg * originalState) stringValue], result, nil);
+            //XCTAssertEqualObjects([@(originalArg * originalState) stringValue], result, nil);
         }
     }
 }
@@ -868,9 +871,9 @@
                 
                 BlockObserver previousBlock = previousBlockGetter();
                 
-                STAssertNil(previousBlock, @"no original method");
+                XCTAssertNil(previousBlock, @"no original method");
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(originalArg) stringValue];
             };
         };
@@ -886,11 +889,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     };
     
     hookTest();
@@ -907,12 +910,12 @@
             weakTestObject = testObject;
             
             //todo fix?
-            STAssertTrue([testObject respondsToSelector:@selector(returnObjectForArg:)], nil);
+            XCTAssertTrue([testObject respondsToSelector:@selector(returnObjectForArg:)], @"missing method");
             
-            STAssertThrows({
+            XCTAssertThrows({
                 
                 [testObject returnObjectForArg:originalArg];
-            }, nil);
+            }, @"assert expected");
         }
     }
     
@@ -927,12 +930,12 @@
             weakTestObject = testObject;
             
             //todo fix?
-            STAssertTrue([testObject respondsToSelector:@selector(returnObjectForArg:)], nil);
+            XCTAssertTrue([testObject respondsToSelector:@selector(returnObjectForArg:)], @"missing method");
             
-            STAssertThrows({
+            XCTAssertThrows({
                 
                 [testObject returnObjectForArg:originalArg];
-            }, nil);
+            }, @"assert expected");
         }
     }
 }
@@ -961,10 +964,10 @@
                 {
                     id previousResult = previousBlock(_self, arg);
                     
-                    STAssertEqualObjects([@(originalArg) stringValue], previousResult, nil);
+                    XCTAssertEqualObjects([@(originalArg) stringValue], previousResult, @"arg mismatch");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(internalResult) stringValue];
             };
         };
@@ -980,11 +983,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(internalResult) stringValue], result, nil);
+            XCTAssertEqualObjects([@(internalResult) stringValue], result, @"arg mismatch");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     };
     firstHookTest();
     
@@ -1000,9 +1003,9 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     //test normal call
     {
@@ -1014,12 +1017,12 @@
             ParentTestClassCase2_a *testObject = [ParentTestClassCase2_a new];
             weakTestObject = testObject;
             
-            STAssertThrows({
+            XCTAssertThrows({
                 
                 [testObject returnObjectForArg:originalArg];
-            }, nil);
+            }, @"assert expected");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     
     //hook parent
@@ -1037,9 +1040,9 @@
                 hookWasCalled = YES;
                 
                 BlockObserver previousBlock = previousBlockGetter();
-                STAssertNil(previousBlock, nil);
+                XCTAssertNil(previousBlock, @"previous block missing");
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(arg) stringValue];
             };
         };
@@ -1055,11 +1058,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     
     firstHookTest();
@@ -1085,9 +1088,9 @@
                 hookWasCalled = YES;
                 
                 BlockObserver previousBlock = previousBlockGetter();
-                STAssertNil(previousBlock, nil);
+                XCTAssertNil(previousBlock, @"previous block missing");
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(internalResult) stringValue];
             };
         };
@@ -1103,11 +1106,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(internalResult) stringValue], result, nil);
+            XCTAssertEqualObjects([@(internalResult) stringValue], result, @"arg mismatch");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     };
     firstHookTest();
     
@@ -1123,9 +1126,9 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     //test normal call
     {
@@ -1137,12 +1140,12 @@
             ParentTestClassCase2_a *testObject = [ParentTestClassCase2_a new];
             weakTestObject = testObject;
             
-            STAssertThrows({
+            XCTAssertThrows({
                 
                 [testObject returnObjectForArg:originalArg];
-            }, nil);
+            }, @"assert expected");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     
     //hook child
@@ -1164,10 +1167,10 @@
                 {
                     id previousResult = previousBlock(_self, arg);
                     
-                    STAssertEqualObjects([@(originalArg) stringValue], previousResult, nil);
+                    XCTAssertEqualObjects([@(originalArg) stringValue], previousResult, @"arg mismatch");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(arg) stringValue];
             };
         };
@@ -1183,11 +1186,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     
     firstHookTest();
@@ -1217,10 +1220,10 @@
                 {
                     id previousResult = previousBlock(_self, arg);
                     
-                    STAssertEqualObjects([@(originalArg) stringValue], previousResult, nil);
+                    XCTAssertEqualObjects([@(originalArg) stringValue], previousResult, @"arg mismatch");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(internalResult) stringValue];
             };
         };
@@ -1236,11 +1239,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(internalResult) stringValue], result, nil);
+            XCTAssertEqualObjects([@(internalResult) stringValue], result, @"arg mismatch");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     };
     firstHookTest();
     
@@ -1256,9 +1259,9 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     //test normal call
     {
@@ -1272,9 +1275,9 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     
     //hook parent
@@ -1296,10 +1299,10 @@
                 {
                     id previousResult = previousBlock(_self, arg);
                     
-                    STAssertEqualObjects([@(originalArg) stringValue], previousResult, nil);
+                    XCTAssertEqualObjects([@(originalArg) stringValue], previousResult, @"arg mismatch");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(arg) stringValue];
             };
         };
@@ -1315,11 +1318,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     
     firstHookTest();
@@ -1349,10 +1352,10 @@
                 {
                     id previousResult = previousBlock(_self, arg);
                     
-                    STAssertEqualObjects([@(originalArg) stringValue], previousResult, nil);
+                    XCTAssertEqualObjects([@(originalArg) stringValue], previousResult, @"arg mismatch");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(internalResult) stringValue];
             };
         };
@@ -1368,11 +1371,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(internalResult) stringValue], result, nil);
+            XCTAssertEqualObjects([@(internalResult) stringValue], result, @"arg mismatch");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     };
     firstHookTest();
     
@@ -1388,9 +1391,9 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     //test normal call
     {
@@ -1404,9 +1407,9 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     
     //hook parent
@@ -1428,10 +1431,10 @@
                 {
                     id previousResult = previousBlock(_self, arg);
                     
-                    STAssertEqualObjects([@(originalArg) stringValue], previousResult, nil);
+                    XCTAssertEqualObjects([@(originalArg) stringValue], previousResult, @"arg mismatch");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(arg) stringValue];
             };
         };
@@ -1447,11 +1450,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     
     firstHookTest();
@@ -1481,10 +1484,10 @@
                 {
                     id previousResult = previousBlock(_self, arg);
                     
-                    STAssertEqualObjects([@(originalArg * 2) stringValue], previousResult, nil);
+                    XCTAssertEqualObjects([@(originalArg * 2) stringValue], previousResult, @"arg mismatch");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(internalResult) stringValue];
             };
         };
@@ -1500,11 +1503,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(internalResult) stringValue], result, nil);
+            XCTAssertEqualObjects([@(internalResult) stringValue], result, @"arg mismatch");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     };
     firstHookTest();
     
@@ -1520,9 +1523,9 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg * 2) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg * 2) stringValue], result, @"arg mismatch");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     //test normal call
     {
@@ -1536,9 +1539,9 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     
     //hook child
@@ -1560,10 +1563,10 @@
                 {
                     id previousResult = previousBlock(_self, arg);
                     
-                    STAssertEqualObjects([@(originalArg) stringValue], previousResult, nil);
+                    XCTAssertEqualObjects([@(originalArg) stringValue], previousResult, @"arg mismatch");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(arg) stringValue];
             };
         };
@@ -1579,11 +1582,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     
     firstHookTest();
@@ -1613,10 +1616,10 @@
                 {
                     id previousResult = previousBlock(_self, arg);
                     
-                    STAssertEqualObjects([@(originalArg) stringValue], previousResult, nil);
+                    XCTAssertEqualObjects([@(originalArg) stringValue], previousResult, @"arg mismatch");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(internalResult) stringValue];
             };
         };
@@ -1632,11 +1635,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(internalResult) stringValue], result, nil);
+            XCTAssertEqualObjects([@(internalResult) stringValue], result, @"arg mismatch");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     };
     firstHookTest();
     
@@ -1652,9 +1655,9 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg * 2) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg * 2) stringValue], result, @"arg mismatch");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     //test normal call
     {
@@ -1668,9 +1671,9 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
-        STAssertNil(weakTestObject, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
     }
     
     //hook child
@@ -1692,10 +1695,10 @@
                 {
                     id previousResult = previousBlock(_self, arg);
                     
-                    STAssertEqualObjects([@(originalArg * 2) stringValue], previousResult, nil);
+                    XCTAssertEqualObjects([@(originalArg * 2) stringValue], previousResult, @"arg mismatch");
                 }
                 
-                STAssertEquals(originalArg, arg, nil);
+                XCTAssertEqual(originalArg, arg, @"arg mismatch");
                 return [@(arg) stringValue];
             };
         };
@@ -1711,11 +1714,11 @@
             
             id result = [testObject returnObjectForArg:originalArg];
             
-            STAssertEqualObjects([@(originalArg) stringValue], result, nil);
+            XCTAssertEqualObjects([@(originalArg) stringValue], result, @"unexpected arg");
         }
         
-        STAssertNil(weakTestObject, nil);
-        STAssertTrue(hookWasCalled, nil);
+        XCTAssertNil(weakTestObject, @"memory leak");
+        XCTAssertTrue(hookWasCalled, @"hook call missed");
     }
     
     firstHookTest();

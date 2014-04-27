@@ -106,7 +106,7 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
             doneCallbackWrapper = ^void(id result, NSError *error) {
                 
                 if ([responseData length] == 0 && !error) {
-                    NSLog(@"!!!WARNING!!! request with params: %@ got an empty reponse", params);
+                    NSLog(@"!!!WARNING!!! request with params: %@ got an empty response", params);
                 }
                 /*if ([skipPt all:^BOOL(id object) {
                     return ![[params.url description] containsString:object];

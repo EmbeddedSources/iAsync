@@ -15,8 +15,8 @@
 		4C043A4F181E9D8300246A88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C043A4E181E9D8300246A88 /* UIKit.framework */; };
 		4C043A55181E9D8300246A88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C043A53181E9D8300246A88 /* InfoPlist.strings */; };
 		4C043A57181E9D8300246A88 /* JFFRestKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C043A56181E9D8300246A88 /* JFFRestKitTests.m */; };
-		65A0BD6A15301D890007A3B5 /* JFFSmartUrlDataLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 65A0BD6815301D890007A3B5 /* JFFSmartUrlDataLoader.h */; };
-		65A0BD6B15301D890007A3B5 /* JFFSmartUrlDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A0BD6915301D890007A3B5 /* JFFSmartUrlDataLoader.m */; };
+		65A0BD6A15301D890007A3B5 /* JFFSmartDataLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 65A0BD6815301D890007A3B5 /* JFFSmartDataLoader.h */; };
+		65A0BD6B15301D890007A3B5 /* JFFSmartDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A0BD6915301D890007A3B5 /* JFFSmartDataLoader.m */; };
 		65E307BC1531E9B200E0B781 /* JFFRestKitError.h in Headers */ = {isa = PBXBuildFile; fileRef = 65E307BA1531E9B200E0B781 /* JFFRestKitError.h */; };
 		65E307BD1531E9B200E0B781 /* JFFRestKitError.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E307BB1531E9B200E0B781 /* JFFRestKitError.m */; };
 		CE19F62716AED02D005B15B4 /* JFFCacheAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = CE19F62516AED02D005B15B4 /* JFFCacheAdapter.h */; };
@@ -49,8 +49,8 @@
 		4C043A54181E9D8300246A88 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C043A56181E9D8300246A88 /* JFFRestKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFFRestKitTests.m; sourceTree = "<group>"; };
 		4C043A58181E9D8300246A88 /* JFFRestKitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFRestKitTests-Prefix.pch"; sourceTree = "<group>"; };
-		65A0BD6815301D890007A3B5 /* JFFSmartUrlDataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSmartUrlDataLoader.h; sourceTree = "<group>"; };
-		65A0BD6915301D890007A3B5 /* JFFSmartUrlDataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSmartUrlDataLoader.m; sourceTree = "<group>"; };
+		65A0BD6815301D890007A3B5 /* JFFSmartDataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFSmartDataLoader.h; sourceTree = "<group>"; };
+		65A0BD6915301D890007A3B5 /* JFFSmartDataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFSmartDataLoader.m; sourceTree = "<group>"; };
 		65E307BA1531E9B200E0B781 /* JFFRestKitError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFRestKitError.h; sourceTree = "<group>"; };
 		65E307BB1531E9B200E0B781 /* JFFRestKitError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFRestKitError.m; sourceTree = "<group>"; };
 		65E307BE1531EC3B00E0B781 /* JFFRestKitCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFRestKitCache.h; sourceTree = "<group>"; };
@@ -119,8 +119,8 @@
 				65E307BE1531EC3B00E0B781 /* JFFRestKitCache.h */,
 				65E307BA1531E9B200E0B781 /* JFFRestKitError.h */,
 				65E307BB1531E9B200E0B781 /* JFFRestKitError.m */,
-				65A0BD6815301D890007A3B5 /* JFFSmartUrlDataLoader.h */,
-				65A0BD6915301D890007A3B5 /* JFFSmartUrlDataLoader.m */,
+				65A0BD6815301D890007A3B5 /* JFFSmartDataLoader.h */,
+				65A0BD6915301D890007A3B5 /* JFFSmartDataLoader.m */,
 				1B32850C153FFDD000BE99CC /* JFFDataLoadersTools.h */,
 				1B32850D153FFDD000BE99CC /* JFFDataLoadersTools.m */,
 				1B7ABA89152D973A005DD4CA /* JFFRestKit.h */,
@@ -181,7 +181,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65A0BD6A15301D890007A3B5 /* JFFSmartUrlDataLoader.h in Headers */,
+				65A0BD6A15301D890007A3B5 /* JFFSmartDataLoader.h in Headers */,
 				65E307BC1531E9B200E0B781 /* JFFRestKitError.h in Headers */,
 				1B32850E153FFDD000BE99CC /* JFFDataLoadersTools.h in Headers */,
 				CE19F62716AED02D005B15B4 /* JFFCacheAdapter.h in Headers */,
@@ -233,7 +233,7 @@
 		1B7ABA78152D9739005DD4CA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					4C043A49181E9D8200246A88 = {
 						TestTargetID = 1B7ABA80152D973A005DD4CA;
@@ -274,7 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65A0BD6B15301D890007A3B5 /* JFFSmartUrlDataLoader.m in Sources */,
+				65A0BD6B15301D890007A3B5 /* JFFSmartDataLoader.m in Sources */,
 				65E307BD1531E9B200E0B781 /* JFFRestKitError.m in Sources */,
 				1B32850F153FFDD000BE99CC /* JFFDataLoadersTools.m in Sources */,
 				CE19F62816AED02D005B15B4 /* JFFCacheAdapter.m in Sources */,
@@ -340,8 +340,9 @@
 					../TouchXmlHelper,
 					../JFFCache,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LLVM_VECTORIZE_LOOPS = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -367,7 +368,7 @@
 					../TouchXmlHelper,
 					../JFFCache,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -380,7 +381,6 @@
 				DSTROOT = /tmp/JFFRestKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFRestKit/JFFRestKit-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -393,7 +393,6 @@
 				DSTROOT = /tmp/JFFRestKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFRestKit/JFFRestKit-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -403,7 +402,6 @@
 		4C043A5B181E9D8300246A88 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -440,7 +438,6 @@
 		4C043A5C181E9D8300246A88 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;

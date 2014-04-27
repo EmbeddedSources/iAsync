@@ -79,7 +79,7 @@ JFFAsyncOperationInterface
 {
     NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
     
-    if (task == JFFAsyncOperationHandlerTaskUnsubscribe)
+    if (task == JFFAsyncOperationHandlerTaskUnSubscribe)
         [self unsubscribeFromObservervation];
 }
 

@@ -30,7 +30,9 @@
     if (proxy)
         return proxy;
     
-    return objc_msgSend(self, NSSelectorFromString(hookedGetterName));
+    typedef id (*AlignMsgSendFunction)(id, SEL);
+    AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+    return alignFunction(self, NSSelectorFromString(hookedGetterName));
 }
 
 @end

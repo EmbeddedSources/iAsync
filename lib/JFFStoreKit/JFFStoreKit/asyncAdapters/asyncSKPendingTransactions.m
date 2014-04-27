@@ -67,22 +67,21 @@ JFFAsyncOperationInterface
 {
     NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
     
-    if (task == JFFAsyncOperationHandlerTaskUnsubscribe)
+    if (task == JFFAsyncOperationHandlerTaskUnSubscribe)
         [self unsubscribeFromObservervation];
 }
 
 - (void)finishWithTransactions:(NSArray *)transactions
 {
-    transactions = [self pendingTransactionsForTransactions:transactions]?:@[];
+    transactions = [self restoredTransactionsForTransactions:transactions]?:@[];
     
     if (_finishCallback)
         _finishCallback(transactions, nil);
 }
 
-- (NSArray *)pendingTransactionsForTransactions:(NSArray *)transactions
+- (NSArray *)restoredTransactionsForTransactions:(NSArray *)transactions
 {
     NSArray *result = [transactions select:^BOOL(SKPaymentTransaction *transaction) {
-        
         return transaction.transactionState == SKPaymentTransactionStateRestored;
     }];
     
@@ -93,27 +92,24 @@ JFFAsyncOperationInterface
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-    if (!_finishCallback) {
-        return;
-    }
-    
-    //TODO fix workaround for IOS 6.0
-    [self performSelector:@selector(doNothing:) withObject:self afterDelay:1.];
-    
-    [self finishWithTransactions:transactions];
-    [self unsubscribeFromObservervation];
 }
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
-    if (_finishCallback)
-        _finishCallback(@[], nil);
+    JFFAsyncSKPendingTransactions *self_ = self;
+    
+    [self_ finishWithTransactions:queue.transactions];
+    [self_ unsubscribeFromObservervation];
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
 {
+    JFFAsyncSKPendingTransactions *self_ = self;
+    
     if (_finishCallback)
         _finishCallback(nil, error);
+    
+    [self_ unsubscribeFromObservervation];
 }
 
 @end

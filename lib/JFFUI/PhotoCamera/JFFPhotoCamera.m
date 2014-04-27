@@ -175,17 +175,17 @@ static JFFMutableAssignArray *__allActiveCameras;
 - (void)setVideoOrientation:(JFFAVCaptureVideoOrientation)videoOrientation
 {
     AVCaptureConnection *videoConnection = [self videoConnectionFromImageOutput:_camImageOutput];
-    videoConnection.videoOrientation = videoOrientation;
+    videoConnection.videoOrientation = (AVCaptureVideoOrientation)videoOrientation;
 }
 
 - (JFFCameraFlashModeType)flashMode
 {
     //TODO check is front camera
     return _backCameraDevice.flashMode == AVCaptureFlashModeAuto
-    ? JFFCameraFlashModeAuto
-    : _backCameraDevice.flashMode == AVCaptureFlashModeOn
-    ? JFFCameraFlashModeOn
-    : JFFCameraFlashModeOff;
+    ?JFFCameraFlashModeAuto
+    :_backCameraDevice.flashMode == AVCaptureFlashModeOn
+    ?JFFCameraFlashModeOn
+    :JFFCameraFlashModeOff;
 }
 
 - (void)setFlashMode:(JFFCameraFlashModeType)flashMode

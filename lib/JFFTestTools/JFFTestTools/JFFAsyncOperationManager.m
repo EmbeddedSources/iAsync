@@ -57,7 +57,7 @@
             if (doneCallback) {
                 
                 JFFAsyncOperationHandlerTask task = (self.cancelAtLoading == JFFCancelAsyncOperationManagerWithNoFlag)
-                ?JFFAsyncOperationHandlerTaskUnsubscribe
+                ?JFFAsyncOperationHandlerTaskUnSubscribe
                 :JFFAsyncOperationHandlerTaskCancel;
                 NSError *error = [JFFAsyncOperationAbstractFinishError newAsyncOperationAbstractFinishErrorWithHandlerTask:task];
                 doneCallback(nil, error);
