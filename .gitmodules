@@ -1,3 +1,0 @@
-[submodule "lib-third-party/libturbojpeg-ios"]
-	path = lib-third-party/libturbojpeg-ios
-	url = https://github.com/dunkelstern/libturbojpeg-ios.git

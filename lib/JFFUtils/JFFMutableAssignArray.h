@@ -14,6 +14,8 @@
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)removeAllObjects;
 
+- (id)objectAtIndexedSubscript:(NSUInteger)idx;
+
 - (NSUInteger)indexOfObject:(id)object;
 
 - (NSUInteger)count;

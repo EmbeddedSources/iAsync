@@ -20,15 +20,14 @@
 
 - (void)setCookie:(NSHTTPCookie *)cookie
 {
-    NSParameterAssert( [ cookie isKindOfClass: [ NSHTTPCookie class ] ] );
-    [ self->_allCookies addObject: cookie ];
+    NSParameterAssert([cookie isKindOfClass:[NSHTTPCookie class]]);
+    [_allCookies addObject:cookie];
 }
 
--(void)setMultipleCookies:( NSArray* )cookies
+- (void)setMultipleCookies:(NSArray *)cookies
 {
-    for ( NSHTTPCookie* singleCookie in cookies )
-    {
-        [ self setCookie: singleCookie ];
+    for (NSHTTPCookie *singleCookie in cookies) {
+        [self setCookie:singleCookie];
     }
 }
 

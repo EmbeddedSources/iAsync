@@ -1,6 +1,4 @@
-#import "JFFAsyncOperationManager.h"
-
-#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFAsyncOperationHandlerBlockHolder.h>
 #import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
 
 @interface TrySequenceOfAsyncOperationsTest : GHTestCase
@@ -10,7 +8,7 @@
 
 -(void)setUp
 {
-    [JFFCancelAsyncOperationBlockHolder    enableInstancesCounting];
+    [JFFAsyncOperationHandlerBlockHolder   enableInstancesCounting];
     [JFFDidFinishAsyncOperationBlockHolder enableInstancesCounting];
 
     [JFFAsyncOperationManager enableInstancesCounting];
@@ -18,7 +16,7 @@
 
 -(void)testTrySequenceOfAsyncOperations
 {
-    NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
+    NSUInteger originalInstanceCount1 = [JFFAsyncOperationHandlerBlockHolder   instancesCount];
     NSUInteger originalInstanceCount2 = [JFFDidFinishAsyncOperationBlockHolder instancesCount];
     NSUInteger originalInstanceCount3 = [JFFAsyncOperationManager              instancesCount];
     
@@ -45,18 +43,18 @@
             }
         } );
         
-        GHAssertFalse( firstLoader.finished, @"First loader not finished yet" );
-        GHAssertFalse( secondLoader.finished, @"Second loader not finished yet" );
-        GHAssertFalse( sequenceLoaderFinished_, @"Sequence loader not finished yet" );
+        GHAssertFalse(firstLoader.finished, @"First loader not finished yet" );
+        GHAssertFalse(secondLoader.finished, @"Second loader not finished yet" );
+        GHAssertFalse(sequenceLoaderFinished_, @"Sequence loader not finished yet" );
 
-        firstLoader.loaderFinishBlock.didFinishBlock( nil, [ JFFError newErrorWithDescription: @"some error" ] );
+        firstLoader.loaderFinishBlock(nil, [JFFError newErrorWithDescription:@"some error"]);
         
         GHAssertTrue( firstLoader.finished, @"First loader finished already" );
         GHAssertFalse( secondLoader.finished, @"Second loader not finished yet" );
         GHAssertFalse( sequenceLoaderFinished_, @"Sequence loader finished already" );
         
         id result_ = [NSObject new];
-        secondLoader.loaderFinishBlock.didFinishBlock( result_, nil );
+        secondLoader.loaderFinishBlock(result_, nil);
         
         GHAssertTrue( firstLoader.finished, @"First loader finished already" );
         GHAssertTrue( secondLoader.finished, @"Second loader not finished yet" );
@@ -65,151 +63,148 @@
         GHAssertTrue( result_ == sequenceResult_, @"Sequence loader finished already" );
     }
     
-    GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");
+    GHAssertTrue(originalInstanceCount1 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount2 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount3 == [JFFAsyncOperationManager              instancesCount], @"All object of this class should be deallocated");
 }
 
--(void)testCancelFirstLoaderOfTrySequence
+- (void)testCancelFirstLoaderOfTrySequence
 {
-    NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
+    NSUInteger originalInstanceCount1 = [JFFAsyncOperationHandlerBlockHolder   instancesCount];
     NSUInteger originalInstanceCount2 = [JFFDidFinishAsyncOperationBlockHolder instancesCount];
     NSUInteger originalInstanceCount3 = [JFFAsyncOperationManager              instancesCount];
     
     @autoreleasepool
     {
-        JFFAsyncOperationManager* firstLoader_  = [ JFFAsyncOperationManager new ];
-        JFFAsyncOperationManager* secondLoader_ = [ JFFAsyncOperationManager new ];
+        JFFAsyncOperationManager *firstLoader  = [JFFAsyncOperationManager new];
+        JFFAsyncOperationManager *secondLoader = [JFFAsyncOperationManager new];
         
-        JFFAsyncOperation loader_ = trySequenceOfAsyncOperations( firstLoader_.loader
-                                                                 , secondLoader_.loader
-                                                                 , nil );
+        JFFAsyncOperation loader = trySequenceOfAsyncOperations(firstLoader.loader,
+                                                                secondLoader.loader,
+                                                                nil);
         
-        JFFCancelAsyncOperation cancel_ = loader_( nil, nil, nil );
+        JFFAsyncOperationHandler handler = loader(nil, nil, nil);
         
-        GHAssertFalse( firstLoader_.canceled, @"still not canceled" );
-        GHAssertFalse( secondLoader_.canceled, @"still not canceled" );
+        GHAssertFalse(firstLoader .canceled, @"still not canceled" );
+        GHAssertFalse(secondLoader.canceled, @"still not canceled" );
         
-        cancel_( YES );
+        handler(JFFAsyncOperationHandlerTaskCancel);
         
-        GHAssertTrue( firstLoader_.canceled  , @"canceled" );
-        GHAssertTrue( firstLoader_.cancelFlag, @"canceled" );
-        GHAssertFalse( secondLoader_.canceled, @"still not canceled" );
+        GHAssertTrue(firstLoader.canceled  , @"canceled" );
+        GHAssertTrue(firstLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskCancel, @"canceled" );
+        GHAssertFalse( secondLoader.canceled, @"still not canceled" );
     }
     
-    GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");
+    GHAssertTrue(originalInstanceCount1 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount2 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount3 == [JFFAsyncOperationManager              instancesCount], @"All object of this class should be deallocated");
 }
 
--(void)testCancelSecondLoaderOfTrySequence
+- (void)testCancelSecondLoaderOfTrySequence
 {
-    NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
+    NSUInteger originalInstanceCount1 = [JFFAsyncOperationHandlerBlockHolder   instancesCount];
     NSUInteger originalInstanceCount2 = [JFFDidFinishAsyncOperationBlockHolder instancesCount];
     NSUInteger originalInstanceCount3 = [JFFAsyncOperationManager              instancesCount];
     
     @autoreleasepool
     {
-        JFFAsyncOperationManager* firstLoader_ = [ JFFAsyncOperationManager new ];
-        JFFAsyncOperationManager* secondLoader_ = [ JFFAsyncOperationManager new ];
-
-        JFFAsyncOperation loader_ = trySequenceOfAsyncOperations( firstLoader_.loader, secondLoader_.loader, nil );
-
-        JFFCancelAsyncOperation cancel_ = loader_( nil, nil, nil );
-
-        GHAssertFalse( firstLoader_.canceled, @"still not canceled" );
-        GHAssertFalse( secondLoader_.canceled, @"still not canceled" );
-
-        firstLoader_.loaderFinishBlock.didFinishBlock( nil, [ JFFError newErrorWithDescription: @"some error" ] );
-
-        GHAssertFalse( firstLoader_.canceled, @"still not canceled" );
-        GHAssertFalse( secondLoader_.canceled, @"still not canceled" );
-
-        cancel_( YES );
-
-        GHAssertFalse( firstLoader_.canceled, @"canceled" );
-        GHAssertTrue( secondLoader_.canceled, @"still not canceled" );
-        GHAssertTrue( secondLoader_.cancelFlag, @"canceled" );
-
+        JFFAsyncOperationManager *firstLoader  = [JFFAsyncOperationManager new];
+        JFFAsyncOperationManager *secondLoader = [JFFAsyncOperationManager new];
+        
+        JFFAsyncOperation loader = trySequenceOfAsyncOperations( firstLoader.loader, secondLoader.loader, nil );
+        
+        JFFAsyncOperationHandler handler = loader(nil, nil, nil);
+        
+        GHAssertFalse(firstLoader.canceled, @"still not canceled" );
+        GHAssertFalse(secondLoader.canceled, @"still not canceled" );
+        
+        firstLoader.loaderFinishBlock(nil, [JFFError newErrorWithDescription:@"some error"]);
+        
+        GHAssertFalse(firstLoader.canceled, @"still not canceled");
+        GHAssertFalse(secondLoader.canceled, @"still not canceled");
+        
+        handler(JFFAsyncOperationHandlerTaskCancel);
+        
+        GHAssertFalse(firstLoader.canceled, @"canceled");
+        GHAssertTrue(secondLoader.canceled, @"still not canceled");
+        GHAssertTrue(secondLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskCancel, @"canceled");
     }
     
-    GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");
+    GHAssertTrue(originalInstanceCount1 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount2 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount3 == [JFFAsyncOperationManager              instancesCount], @"All object of this class should be deallocated");
 }
 
--(void)testCancelSecondLoaderOfTrySequenceIfFirstInstantFinish
+- (void)testCancelSecondLoaderOfTrySequenceIfFirstInstantFinish
 {
-    NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
+    NSUInteger originalInstanceCount1 = [JFFAsyncOperationHandlerBlockHolder   instancesCount];
     NSUInteger originalInstanceCount2 = [JFFDidFinishAsyncOperationBlockHolder instancesCount];
     NSUInteger originalInstanceCount3 = [JFFAsyncOperationManager              instancesCount];
     
     @autoreleasepool
     {
-        JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
-        first_loader_.failAtLoading = YES;
-
-        JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
-
-        JFFAsyncOperation loader_ = trySequenceOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
-
-        JFFCancelAsyncOperation cancel_ = loader_( nil, nil, nil );
-
-        GHAssertTrue( first_loader_.finished, @"finished" );
-        GHAssertFalse( second_loader_.finished, @"not finished" );
-
-        cancel_( YES );
-
-        GHAssertFalse( first_loader_.canceled, @"canceled" );
-        GHAssertTrue( second_loader_.canceled, @"still not canceled" );
-        GHAssertTrue( second_loader_.cancelFlag, @"canceled" );
-
+        JFFAsyncOperationManager* firstLoader = [ JFFAsyncOperationManager new ];
+        firstLoader.failAtLoading = YES;
+        
+        JFFAsyncOperationManager* secondLoader = [ JFFAsyncOperationManager new ];
+        
+        JFFAsyncOperation loader_ = trySequenceOfAsyncOperations( firstLoader.loader, secondLoader.loader, nil );
+        
+        JFFAsyncOperationHandler handler = loader_( nil, nil, nil );
+        
+        GHAssertTrue( firstLoader.finished, @"finished" );
+        GHAssertFalse( secondLoader.finished, @"not finished" );
+        
+        handler(JFFAsyncOperationHandlerTaskCancel);
+        
+        GHAssertFalse(firstLoader.canceled, @"canceled" );
+        GHAssertTrue(secondLoader.canceled, @"still not canceled" );
+        GHAssertTrue(secondLoader.lastHandleFlag == JFFAsyncOperationHandlerTaskCancel, @"canceled" );
     }
     
-    GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");
+    GHAssertTrue(originalInstanceCount1 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount2 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount3 == [JFFAsyncOperationManager              instancesCount], @"All object of this class should be deallocated");
 }
 
--(void)testFirstLoaderOkOfTrySequence
+- (void)testFirstLoaderOkOfTrySequence
 {
-    NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
+    NSUInteger originalInstanceCount1 = [JFFAsyncOperationHandlerBlockHolder   instancesCount];
     NSUInteger originalInstanceCount2 = [JFFDidFinishAsyncOperationBlockHolder instancesCount];
     NSUInteger originalInstanceCount3 = [JFFAsyncOperationManager              instancesCount];
     
     @autoreleasepool
     {
-        JFFAsyncOperationManager* first_loader_ = [ JFFAsyncOperationManager new ];
-        first_loader_.finishAtLoading = YES;
-
-        JFFAsyncOperationManager* second_loader_ = [ JFFAsyncOperationManager new ];
-
-        JFFAsyncOperation loader_ = trySequenceOfAsyncOperations( first_loader_.loader, second_loader_.loader, nil );
-
-        __block BOOL sequence_loader_finished_ = NO;
-
-        loader_( nil, nil, ^( id result_, NSError* error_ )
-        {
-            if ( result_ && !error_ )
-            {
-                sequence_loader_finished_ = YES;
+        JFFAsyncOperationManager *firstLoader = [JFFAsyncOperationManager new];
+        firstLoader.finishAtLoading = YES;
+        
+        JFFAsyncOperationManager *secondLoader = [JFFAsyncOperationManager new];
+        
+        JFFAsyncOperation loader = trySequenceOfAsyncOperations(firstLoader.loader, secondLoader.loader, nil);
+        
+        __block BOOL sequenceLoaderFinished = NO;
+        
+        loader(nil, nil, ^(id result, NSError *error) {
+            
+            if (result && !error) {
+                
+                sequenceLoaderFinished = YES;
             }
-        } );
+        });
 
-        GHAssertTrue( sequence_loader_finished_, @"sequence failed" );
-        GHAssertTrue( first_loader_.finished, @"first - finished" );
-        GHAssertFalse( second_loader_.finished, @"second - not finished" );
-
+        GHAssertTrue(sequenceLoaderFinished, @"sequence failed" );
+        GHAssertTrue(firstLoader.finished, @"first - finished" );
+        GHAssertFalse(secondLoader.finished, @"second - not finished" );
     }
     
-    GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");
+    GHAssertTrue(originalInstanceCount1 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount2 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount3 == [JFFAsyncOperationManager              instancesCount], @"All object of this class should be deallocated");
 }
 
--(void)testTrySequenceWithOneLoader
+- (void)testTrySequenceWithOneLoader
 {
-    NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
+    NSUInteger originalInstanceCount1 = [JFFAsyncOperationHandlerBlockHolder   instancesCount];
     NSUInteger originalInstanceCount2 = [JFFDidFinishAsyncOperationBlockHolder instancesCount];
     NSUInteger originalInstanceCount3 = [JFFAsyncOperationManager              instancesCount];
     
@@ -229,44 +224,53 @@
             }
         });
         
-        GHAssertFalse( sequenceLoaderFinished, @"sequence not finished" );
+        GHAssertFalse(sequenceLoaderFinished, @"sequence not finished");
         
-        firstLoader.loaderFinishBlock.didFinishBlock([NSNull new], nil);
+        firstLoader.loaderFinishBlock([NSNull new], nil);
         
-        GHAssertTrue( sequenceLoaderFinished, @"sequence finished" );
+        GHAssertTrue(sequenceLoaderFinished, @"sequence finished");
     }
     
-    GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");
+    GHAssertTrue(originalInstanceCount1 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount2 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount3 == [JFFAsyncOperationManager              instancesCount], @"All object of this class should be deallocated");
 }
 
 - (void)testCriticalErrorOnFailFirstLoaderWhenTrySequenceResultCallbackIsNil
 {
-    NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
+    NSUInteger originalInstanceCount1 = [JFFAsyncOperationHandlerBlockHolder   instancesCount];
     NSUInteger originalInstanceCount2 = [JFFDidFinishAsyncOperationBlockHolder instancesCount];
     NSUInteger originalInstanceCount3 = [JFFAsyncOperationManager              instancesCount];
+    
+    __weak JFFAsyncOperationManager *weakFirstLoader;
+    __weak JFFAsyncOperationManager *weakSecondLoader;
     
     @autoreleasepool
     {
         JFFAsyncOperationManager *firstLoader  = [JFFAsyncOperationManager new];
         JFFAsyncOperationManager *secondLoader = [JFFAsyncOperationManager new];
         
+        weakFirstLoader  = firstLoader;
+        weakSecondLoader = secondLoader;
+        
         JFFAsyncOperation loader = trySequenceOfAsyncOperations(firstLoader.loader, secondLoader.loader, nil);
         
         loader(nil, nil, nil);
         
-        firstLoader.loaderFinishBlock.didFinishBlock( [ NSNull null ], nil );
+        firstLoader.loaderFinishBlock([NSNull null], nil);
     }
     
-    GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");
+    GHAssertNil(weakFirstLoader , nil);
+    GHAssertNil(weakSecondLoader, nil);
+    
+    GHAssertTrue(originalInstanceCount1 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount2 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount3 == [JFFAsyncOperationManager              instancesCount], @"All object of this class should be deallocated");
 }
 
 - (void)testImmediatelyCancelCallbackOfFirstLoader
 {
-    NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
+    NSUInteger originalInstanceCount1 = [JFFAsyncOperationHandlerBlockHolder   instancesCount];
     NSUInteger originalInstanceCount2 = [JFFDidFinishAsyncOperationBlockHolder instancesCount];
     NSUInteger originalInstanceCount3 = [JFFAsyncOperationManager              instancesCount];
     
@@ -280,40 +284,34 @@
         JFFAsyncOperation loader = trySequenceOfAsyncOperations(firstLoader.loader, secondLoader.loader, nil);
         
         __block BOOL progressCallbackCalled = NO;
-        JFFAsyncOperationProgressHandler progressCallback = ^(id progressInfo) {
+        JFFAsyncOperationProgressCallback progressCallback = ^(id progressInfo) {
             
             progressCallbackCalled = YES;
         };
         
-        __block NSNumber *cancelCallbackCallFlag = NO;
-        JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
+        __block NSError *finishError;
+        
+        JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
             
-            cancelCallbackCallFlag = @(canceled);
+            finishError = error;
         };
         
-        __block BOOL doneCallbackCalled = NO;
-        JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
-            
-            doneCallbackCalled = YES;
-        };
-        
-        loader(progressCallback, cancelCallback, doneCallback);
+        loader(progressCallback, nil, doneCallback);
         
         GHAssertFalse(progressCallbackCalled, nil);
-        GHAssertEqualObjects(@YES, cancelCallbackCallFlag, nil);
-        GHAssertFalse(doneCallbackCalled, nil);
+        GHAssertTrue([finishError isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]], nil);
         
         GHAssertEquals((NSUInteger)0, secondLoader.loadingCount, nil);
     }
     
-    GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");
+    GHAssertTrue(originalInstanceCount1 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount2 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount3 == [JFFAsyncOperationManager              instancesCount], @"All object of this class should be deallocated");
 }
 
 - (void)testImmediatelyCancelCallbackOfSecondLoader
 {
-    NSUInteger originalInstanceCount1 = [JFFCancelAsyncOperationBlockHolder    instancesCount];
+    NSUInteger originalInstanceCount1 = [JFFAsyncOperationHandlerBlockHolder   instancesCount];
     NSUInteger originalInstanceCount2 = [JFFDidFinishAsyncOperationBlockHolder instancesCount];
     NSUInteger originalInstanceCount3 = [JFFAsyncOperationManager              instancesCount];
     
@@ -327,33 +325,27 @@
         JFFAsyncOperation loader = trySequenceOfAsyncOperations(firstLoader.loader, secondLoader.loader, nil);
         
         __block BOOL progressCallbackCalled = NO;
-        JFFAsyncOperationProgressHandler progressCallback = ^(id progressInfo) {
+        JFFAsyncOperationProgressCallback progressCallback = ^(id progressInfo) {
             
             progressCallbackCalled = YES;
         };
         
-        __block NSNumber *cancelCallbackCallFlag = NO;
-        JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled) {
+        __block NSError *finishError;
+        
+        JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
             
-            cancelCallbackCallFlag = @(canceled);
+            finishError = error;
         };
         
-        __block BOOL doneCallbackCalled = NO;
-        JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error) {
-            
-            doneCallbackCalled = YES;
-        };
+        loader(progressCallback, nil, doneCallback);
         
-        loader(progressCallback, cancelCallback, doneCallback);
-        
-        firstLoader.loaderFinishBlock.didFinishBlock(nil, [JFFError newErrorWithDescription:@"test"]);
+        firstLoader.loaderFinishBlock(nil, [JFFError newErrorWithDescription:@"test"]);
         
         GHAssertFalse(progressCallbackCalled, nil);
-        GHAssertEqualObjects(@YES, cancelCallbackCallFlag, nil);
-        GHAssertFalse(doneCallbackCalled, nil);
+        GHAssertTrue([finishError isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]], nil);
     }
     
-    GHAssertTrue(originalInstanceCount1 == [JFFCancelAsyncOperationBlockHolder    instancesCount], @"All object of this class should be deallocated");
+    GHAssertTrue(originalInstanceCount1 == [JFFAsyncOperationHandlerBlockHolder   instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount2 == [JFFDidFinishAsyncOperationBlockHolder instancesCount], @"All object of this class should be deallocated");
     GHAssertTrue(originalInstanceCount3 == [JFFAsyncOperationManager              instancesCount], @"All object of this class should be deallocated");
 }

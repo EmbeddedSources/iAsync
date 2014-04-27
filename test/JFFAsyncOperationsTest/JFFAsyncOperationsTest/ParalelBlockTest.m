@@ -7,12 +7,12 @@
 
 @implementation ParalelBlockTest
 
--(void)setUp
+- (void)setUp
 {
     [JFFBlockOperation enableInstancesCounting];
 }
 
--(void)testParalelTask
+- (void)testParalelTask
 {
     const NSUInteger initialSchedulerInstancesCount = [JFFBlockOperation instancesCount];
     
@@ -20,24 +20,25 @@
     __block BOOL theProgressOk = NO;
     
     void (^block)(JFFSimpleBlock) = ^(JFFSimpleBlock complete) {
+        
         @autoreleasepool
         {
             dispatch_queue_t currentQueue = dispatch_get_current_queue();
             
-            JFFSyncOperationWithProgress progressLoadDataBlock_ = ^id(NSError** error,
-                                                                      JFFAsyncOperationProgressHandler progressCallback)
-            {
+            JFFSyncOperationWithProgress progressLoadDataBlock = ^id(NSError** error,
+                                                                     JFFAsyncOperationProgressCallback progressCallback) {
+                
                 if (progressCallback)
                     progressCallback([NSNull null]);
                 return [NSNull null];
             };
-            JFFAsyncOperation loader = asyncOperationWithSyncOperationWithProgressBlock( progressLoadDataBlock_ );
+            JFFAsyncOperation loader = asyncOperationWithSyncOperationWithProgressBlock(progressLoadDataBlock);
             
-            JFFDidFinishAsyncOperationHandler doneCallback = ^( id result_, NSError* error_ )
+            JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error)
             {
                 theSameThread = ( currentQueue == dispatch_get_current_queue() );
                 
-                if ( result_ && theSameThread )
+                if ( result && theSameThread )
                 {
                     complete();
                 }
@@ -47,7 +48,7 @@
                 }
             };
             
-            JFFAsyncOperationProgressHandler progressCallback = ^(id data)
+            JFFAsyncOperationProgressCallback progressCallback = ^(id data)
             {
                 theProgressOk = YES;
                 
@@ -85,41 +86,34 @@
             dispatch_queue_t currentQueue = dispatch_get_current_queue();
             
             JFFSyncOperationWithProgress progressLoadDataBlock = ^id(NSError **error,
-                                                                     JFFAsyncOperationProgressHandler progressCallback)
-            {
+                                                                     JFFAsyncOperationProgressCallback progressCallback) {
+                
                 progressCallback([ NSNull new]);
                 return [NSNull new];
             };
             JFFAsyncOperation loader = asyncOperationWithSyncOperationWithProgressBlock(progressLoadDataBlock);
             
-            JFFCancelAsyncOperationHandler cancelCallback = ^(BOOL canceled)
-            {
-                theSameThread = ( currentQueue == dispatch_get_current_queue() );
-                
-                if (theSameThread && canceled)
-                {
-                    complete();
-                }
-                else
-                {
-                    complete();
-                }
-            };
-            
-            JFFDidFinishAsyncOperationHandler doneCallback = ^(id result, NSError *error)
+            JFFAsyncOperationChangeStateCallback stateCallback = ^(JFFAsyncOperationState state)
             {
                 complete();
             };
             
-            JFFAsyncOperationProgressHandler progressCallback = ^(id data)
+            JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error)
             {
+                theSameThread = (currentQueue == dispatch_get_current_queue());
+                
+                complete();
+            };
+            
+            JFFAsyncOperationProgressCallback progressCallback = ^(id data) {
+                
                 complete();
             };
             
             asyncOperationWithDelay(0.1, 0.01)(nil, nil, ^(id result, NSError *error)
             {
                 loader(progressCallback,
-                       cancelCallback,
+                       stateCallback,
                        doneCallback)(YES);
             } );
         }

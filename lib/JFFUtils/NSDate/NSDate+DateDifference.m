@@ -30,32 +30,32 @@
     if ([components year]) {
         dateComponent = [components year];
         result        = dateComponent == 1
-        ? NSLocalizedString(@"YEAR", nil)
-        : NSLocalizedString(@"YEARS", nil);
+        ?NSLocalizedString(@"YEAR" , nil)
+        :NSLocalizedString(@"YEARS", nil);
     } else if ([components month]) {
         dateComponent = [components month];
         result        = dateComponent == 1
-        ? NSLocalizedString(@"MONTH", nil)
-        : NSLocalizedString(@"MONTHS", nil);
+        ?NSLocalizedString(@"MONTH" , nil)
+        :NSLocalizedString(@"MONTHS", nil);
     } else if ([components day]) {
         dateComponent = [components day];
         result        = dateComponent == 1
-        ? NSLocalizedString(@"DAY", nil)
-        : NSLocalizedString(@"DAYS", nil);
+        ?NSLocalizedString(@"DAY" , nil)
+        :NSLocalizedString(@"DAYS", nil);
     } else if ([components minute]) {
         dateComponent = [components minute];
         result        = dateComponent == 1
-        ? NSLocalizedString(@"MINUTE", nil)
-        : NSLocalizedString(@"MINUTES", nil);
+        ?NSLocalizedString(@"MINUTE" , nil)
+        :NSLocalizedString(@"MINUTES", nil);
     } else {
         dateComponent = [components second];
         dateComponent = dateComponent < 1 ? 1 : dateComponent;
         result        = dateComponent == 1
-        ? NSLocalizedString(@"SECOND", nil)
-        : NSLocalizedString(@"SECONDS", nil);
+        ?NSLocalizedString(@"SECOND" , nil)
+        :NSLocalizedString(@"SECONDS", nil);
     }
     
-    NSString *numberStr = [ @(dateComponent) descriptionWithLocale: nil ];
+    NSString *numberStr = [@(dateComponent) descriptionWithLocale:nil];
     numberStr = [numberStr stringByAppendingString:@" "];
     result = [numberStr stringByAppendingString:result];
     

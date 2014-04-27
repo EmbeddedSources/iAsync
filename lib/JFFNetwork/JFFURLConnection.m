@@ -65,7 +65,8 @@ static void readStreamCallback(CFReadStreamRef stream,
         return;
     }
     
-    switch(event) {	
+    switch(event) {
+            
         case kCFStreamEventNone:
         {
             break;
@@ -75,7 +76,7 @@ static void readStreamCallback(CFReadStreamRef stream,
             break;
         }
         case kCFStreamEventHasBytesAvailable:
-        {			
+        {
             [connectionContext.connection handleResponseForReadStream:stream];
             
             UInt8 buffer[kJNMaxBufferSize] = {0};
@@ -124,12 +125,10 @@ static void readStreamCallback(CFReadStreamRef stream,
     CFReadStreamRef _readStream;
     id _cookiesStorage;
     BOOL _responseHandled;
-	
-	
-    JFFURLResponse* _urlResponse;
+    
+    JFFURLResponse *_urlResponse;
     id< JNHttpDecoder > _decoder;
-
-	
+    
     unsigned long long _downloadedBytesCount;
     unsigned long long _totalBytesCount;
     
@@ -148,7 +147,7 @@ static void readStreamCallback(CFReadStreamRef stream,
 - (instancetype)initWithURLConnectionParams:(JFFURLConnectionParams *)params
 {
     self = [super init];
-
+    
     if (self) {
         
         _context = [JFFURLConnectionContext new];
@@ -156,7 +155,7 @@ static void readStreamCallback(CFReadStreamRef stream,
         _context.params     = params;
         _cookiesStorage     = _context.params.cookiesStorage?:[NSHTTPCookieStorage sharedHTTPCookieStorage];
     }
-
+    
     return self;
 }
 
@@ -186,10 +185,6 @@ static void readStreamCallback(CFReadStreamRef stream,
                                          (__bridge CFStringRef)value);
     }];
 }
-
-
-
-
 
 //JTODO add timeout and test
 //JTODO test invalid url
@@ -304,35 +299,33 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 - (void)cancel
 {
-    [ self closeStreams    ];
-    [ self clearCallbacks  ];
+    [self closeStreams  ];
+    [self clearCallbacks];
+    
+    _selfHolder = nil;
 }
 
--(id<JNHttpDecoder>)getDecoder
+- (id<JNHttpDecoder>)getDecoder
 {
-    NSString* contentEncoding = self->_urlResponse.contentEncoding;
-
-    BOOL isDecoderMissing = ( nil == self->_decoder );
+    NSString *contentEncoding = _urlResponse.contentEncoding;
     
-    if ( isDecoderMissing )
-    {
-        JNHttpEncodingsFactory* factory = [ [ JNHttpEncodingsFactory alloc ] initWithContentLength: self->_totalBytesCount ];
+    BOOL isDecoderMissing = (nil == _decoder);
+    
+    if (isDecoderMissing) {
+        JNHttpEncodingsFactory *factory = [[JNHttpEncodingsFactory alloc] initWithContentLength:_totalBytesCount];
         
-        id< JNHttpDecoder > decoder = [ factory decoderForHeaderString: contentEncoding ];
-        self->_decoder = decoder;
+        id<JNHttpDecoder> decoder = [factory decoderForHeaderString:contentEncoding];
+        _decoder = decoder;
     }
-
     
-    return self->_decoder;
+    return _decoder;
 }
 
--(void)handleData:( void* )buffer_
-           length:( NSUInteger )length_
+- (void)handleData:(void *)buffer
+            length:(NSUInteger)length
 {
     if (!self.didReceiveDataBlock)
-    {
         return;
-    }
     
     __weak JFFURLConnection* weakSelf = self;
     
@@ -389,9 +382,7 @@ static void readStreamCallback(CFReadStreamRef stream,
             [weakSelf cancel];
             
             if (didFinishLoadingBlock)
-            {
                 didFinishLoadingBlock(error);
-            }
         });
     });
 }
@@ -409,101 +400,93 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 - (void)handleResponseForReadStream:(CFReadStreamRef)stream
 {
-    if (self->_responseHandled){
+    if (_responseHandled) {
         return;
     }
     
-    NSDictionary* allHeadersDict = nil;
+    NSDictionary *allHeadersDict;
     CFIndex statusCode = 0;
     
     {
         CFHTTPMessageRef response = (CFHTTPMessageRef)CFReadStreamCopyProperty(stream, kCFStreamPropertyHTTPResponseHeader);
         
         if (NULL == response)
-		{
-            return;	
-		}
+            return;
         
         allHeadersDict = (__bridge_transfer NSDictionary *)CFHTTPMessageCopyAllHeaderFields(response);
         statusCode = CFHTTPMessageGetResponseStatusCode(response);
         
-		NSParameterAssert( NULL != response );
+        NSParameterAssert(NULL != response);
         CFRelease(response);
     }
     
     [self acceptCookiesForHeaders:allHeadersDict];
     
     //JTODO test redirects (cyclic for example)
-    if ([JHttpFlagChecker isRedirectFlag:statusCode])
-    {
-        NSDebugLog( @"JConnection - creating URL..." );
-        NSDebugLog( @"%@", self->_context.params.url );
-        NSString* location_ = allHeadersDict[ @"Location" ];
-
+    if ([JHttpFlagChecker isRedirectFlag:statusCode]) {
+        NSDebugLog(@"JConnection - creating URL...");
+        NSDebugLog(@"%@", _context.params.url);
+        NSString *location = allHeadersDict[@"Location"];
+        
 #ifdef USE_DD_URL_BUILDER
-        if ( ![ NSUrlLocationValidator isValidLocation: location_ ] )
-        {
-            NSLog( @"[!!!WARNING!!!] JConnection : path for URL is invalid. Ignoring..." );
-            location_ = @"/";
+        if (![ NSUrlLocationValidator isValidLocation:location]) {
+            NSLog(@"[!!!WARNING!!!] JConnection : path for URL is invalid. Ignoring...");
+            location = @"/";
         }
         
-        DDURLBuilder* urlBuilder_ = [ DDURLBuilder URLBuilderWithURL: self->_context.params.url ];
-        urlBuilder_.shouldSkipPathPercentEncoding = YES;
-        urlBuilder_.path = location_;
+        DDURLBuilder *urlBuilder = [DDURLBuilder URLBuilderWithURL:_context.params.url];
+        urlBuilder.shouldSkipPathPercentEncoding = YES;
+        urlBuilder.path = location;
         
-        self->_context.params.url = [ urlBuilder_ URL ];
+        _context.params.url = [urlBuilder URL];
         
         // To avoid HTTP 500
-        self->_context.params.httpMethod = @"GET";
-        self->_context.params.httpBody = nil;
+        _context.params.httpMethod = @"GET";
+        _context.params.httpBody = nil;
 #else
-        if ( [ location_ hasPrefix: @"/" ] )
-        {
-            self->_context.params.url = [ self->_context.params.url URLWithLocation: location_ ];
+        if ([location hasPrefix:@"/"]) {
+            _context.params.url = [_context.params.url URLWithLocation:location];
+        } else {
+            _context.params.url = [location toURL];
         }
-        else
-        {
-            self->_context.params.url = [location_ toURL];
+        
+        if (!_context.params.url) {
+            _context.params.url = [_context.params.url URLWithLocation:@"/"];
         }
-
-        if ( !self->_context.params.url )
-        {
-            self->_context.params.url = [ self->_context.params.url URLWithLocation: @"/" ];
-        }
-
-        self->_context.params.httpMethod = @"GET";
-        self->_context.params.httpBody = nil;
+        
+        _context.params.httpMethod = @"GET";
+        _context.params.httpBody = nil;
 #endif
-
-        NSDebugLog( @"%@", _params.url );
-        NSDebugLog( @"Done." );
-
-        [ self start ];
-    }
-    else
-    {
-        self->_responseHandled = YES;
-        JFFDidReceiveResponseHandler didReceiveResponseBlock = [ self.didReceiveResponseBlock copy ];
+        
+        NSDebugLog(@"%@", _params.url);
+        NSDebugLog(@"Done.");
+        
+        [self start];//TODO start it later
+    } else {
+        _responseHandled = YES;
+        JFFDidReceiveResponseHandler didReceiveResponseBlock = [self.didReceiveResponseBlock copy];
         self.didReceiveResponseBlock = nil;
-
-        if ( didReceiveResponseBlock )
-        {
-            JFFURLResponse* urlResponse = [ JFFURLResponse new ];
+        
+        if (didReceiveResponseBlock) {
+            
+            __strong JFFURLConnection *self_ = self;
+            
+            JFFURLResponse *urlResponse = [JFFURLResponse new];
             
             urlResponse.statusCode      = statusCode;
             urlResponse.allHeaderFields = allHeadersDict;
-            urlResponse.url             = self->_context.params.url;
-         
-            //here in callback connection can be cancelled
-            didReceiveResponseBlock(urlResponse);
+            urlResponse.url             = self_->_context.params.url;
             
-            self->_decoder = nil;
-            self->_urlResponse = urlResponse;
+            didReceiveResponseBlock(urlResponse);//here in callback connection can be cancelled
+            
+            //            _previousContentEncoding = _urlResponse.contentEncoding;
+            self_->_decoder     = nil;
+            self_->_urlResponse = urlResponse;
             
             unsigned long long tmpContentLength = [urlResponse expectedContentLength];
-            if ( [urlResponse hasContentLength] )
-            {
-                self->_totalBytesCount = tmpContentLength;
+            if ([urlResponse hasContentLength]) {
+                
+                self_->_totalBytesCount = tmpContentLength;
             }
         }
     }
@@ -511,47 +494,17 @@ static void readStreamCallback(CFReadStreamRef stream,
 
 #pragma mark -
 #pragma mark Callbacks
--(void)invokeResponseBlock:( id )response
-{
-    JFFDidReceiveResponseHandler block = self.didReceiveResponseBlock;
-    if ( nil == block )
-    {
-        return;
-    }
-    
-    dispatch_async( self->_queueForCallbacks,
-    ^{
-        block( response );
-    } );
-}
 
--(void)invokeDataBlock:( NSData* )data
+- (void)invokeDataBlock:(NSData *)data
 {
     JFFDidReceiveDataHandler block = self.didReceiveDataBlock;
-    if ( nil == block )
-    {
+    if (nil == block) {
         return;
     }
     
-    dispatch_async( self->_queueForCallbacks,
-   ^{
-       block( data );
-   } );
-}
-
--(void)invokeFinishBlock:( NSError* )error
-{
-    JFFDidFinishLoadingHandler block = self.didFinishLoadingBlock;
-    if ( nil == block )
-    {
-        return;
-    }
-    
-    
-    dispatch_async( self->_queueForCallbacks,
-    ^{
-       block( error );
-    } );
+    dispatch_async(_queueForCallbacks, ^{
+       block(data);
+    });
 }
 
 @end

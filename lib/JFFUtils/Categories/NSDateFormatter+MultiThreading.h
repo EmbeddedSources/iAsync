@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface NSDateFormatter (JFFMultiThreading)
+@interface NSDateFormatter (MultiThreading)
 
 - (NSString *)synchronizedStringFromDate:(NSDate *)date;
 - (NSDate *)synchronizedDateFromString:(NSString *)string;

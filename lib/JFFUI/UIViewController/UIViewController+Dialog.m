@@ -29,9 +29,9 @@
 - (void)completeDialogWithResult:(id)result error:(NSError *)error isCanceled:(BOOL)isCancaled
 {
     JFFCompleteDialogCallbackBlock onCompleteDialogBlock = self.onCompleteDialogBlock;
-    if (onCompleteDialogBlock) {
+    
+    if (onCompleteDialogBlock)
         onCompleteDialogBlock(result, error, isCancaled);
-    }
 }
 
 @end

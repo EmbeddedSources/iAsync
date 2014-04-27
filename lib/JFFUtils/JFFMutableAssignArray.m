@@ -108,6 +108,12 @@
     [_mutableArray removeAllObjects];
 }
 
+- (id)objectAtIndexedSubscript:(NSUInteger)idx
+{
+    JFFAutoRemoveAssignProxy *proxy = _mutableArray[idx];
+    return proxy.target;
+}
+
 - (NSUInteger)indexOfObject:(id)object
 {
     NSUInteger index = [_mutableArray firstIndexOfObjectMatch:^BOOL(id element) {

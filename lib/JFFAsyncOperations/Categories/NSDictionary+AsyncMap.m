@@ -17,13 +17,12 @@
         
         JFFDidFinishAsyncOperationHook finishCallbackHook = ^(id result,
                                                               NSError *error,
-                                                              JFFDidFinishAsyncOperationHandler doneCallback) {
+                                                              JFFDidFinishAsyncOperationCallback doneCallback) {
             
             if (result)
                 finalResult[key] = result;
             
-            if (doneCallback)
-                doneCallback(result, error);
+            doneCallback(result, error);
         };
         loader = asyncOperationWithFinishHookBlock(loader, finishCallbackHook);
         

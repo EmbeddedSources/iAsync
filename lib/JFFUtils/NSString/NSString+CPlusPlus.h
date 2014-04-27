@@ -4,6 +4,6 @@
 @interface NSString (CPlusPlus)
 
 - (std::string)toStlString;
-+ (instancetype)stringWithStlStringNoCopy:( const std::string& )stlString_;
++ (instancetype)stringWithStlStringNoCopy:(const std::string &)stlString;
 
 @end

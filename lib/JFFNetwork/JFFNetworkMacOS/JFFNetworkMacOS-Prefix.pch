@@ -3,7 +3,8 @@
 //
 
 #ifdef __OBJC__
+    #import <JFFUtils/JFFUtils.h>
     #import <Cocoa/Cocoa.h>
-
+    
     #include <zlib.h>
 #endif

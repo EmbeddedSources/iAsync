@@ -2,7 +2,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class FBSession;
+@class
+UIImage,
+FBSession;
 
 @interface JFFSocialFacebook : NSObject
 

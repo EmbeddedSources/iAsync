@@ -2,8 +2,6 @@
 
 #import "JFFStoreKitDisabledError.h"
 
-#import <JFFScheduler/JFFTimer.h>
-
 static NSString *const mergeObject = @"c8e5abce-1ab9-11e3-9a3b-f23c91aec05e";
 
 @interface JFFAsyncSKPendingTransactions : NSObject <
@@ -16,14 +14,13 @@ JFFAsyncOperationInterface
 {
     SKPaymentQueue *_queue;
     BOOL _addedToObservers;
-    JFFAsyncOperationInterfaceResultHandler _handler;
-    JFFTimer *_timer;
+    JFFDidFinishAsyncOperationCallback _finishCallback;
 }
 
 - (void)dealloc
 {
     [self unsubscribeFromObservervation];
-    _handler = nil;
+    _finishCallback = nil;
 }
 
 - (void)doNothing:(id)objetc
@@ -52,46 +49,39 @@ JFFAsyncOperationInterface
     return result;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
     if (![SKPaymentQueue canMakePayments]) {
-        handler(nil, [JFFStoreKitDisabledError new]);
+        finishCallback(nil, [JFFStoreKitDisabledError new]);
         return;
     }
     
-    _handler = [handler copy];
+    _finishCallback = [finishCallback copy];
     
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
     
-    _timer = [JFFTimer new];
-    
-    __weak JFFAsyncSKPendingTransactions *weakSelf = self;
-    
-    JFFScheduledBlock actionBlock = ^(JFFCancelScheduledBlock cancel) {
-        
-        [weakSelf finishWithTransactions:@[]];
-        cancel();
-    };
-    
-    [_timer addBlock:actionBlock duration:0.2 leeway:0.02];
+    if (task == JFFAsyncOperationHandlerTaskUnSubscribe)
+        [self unsubscribeFromObservervation];
 }
 
 - (void)finishWithTransactions:(NSArray *)transactions
 {
-    transactions = [self pendingTransactionsForTransactions:transactions]?:@[];
+    transactions = [self restoredTransactionsForTransactions:transactions]?:@[];
     
-    if (_handler)
-        _handler(transactions, nil);
-    
-    _timer = nil;
+    if (_finishCallback)
+        _finishCallback(transactions, nil);
 }
 
-- (NSArray *)pendingTransactionsForTransactions:(NSArray *)transactions
+- (NSArray *)restoredTransactionsForTransactions:(NSArray *)transactions
 {
     NSArray *result = [transactions select:^BOOL(SKPaymentTransaction *transaction) {
-        
         return transaction.transactionState == SKPaymentTransactionStateRestored;
     }];
     
@@ -102,28 +92,24 @@ JFFAsyncOperationInterface
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-    if (!_handler) {
-        return;
-    }
-    
-    //TODO fix workaround for IOS 6.0
-    [self performSelector:@selector(doNothing:) withObject:self afterDelay:1.];
-    
-    [self finishWithTransactions:transactions];
-    [self unsubscribeFromObservervation];
 }
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
-    //TODO finish here operation
+    JFFAsyncSKPendingTransactions *self_ = self;
+    
+    [self_ finishWithTransactions:queue.transactions];
+    [self_ unsubscribeFromObservervation];
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
 {
-    if (_handler)
-        _handler(nil, error);
+    JFFAsyncSKPendingTransactions *self_ = self;
     
-    _timer = nil;
+    if (_finishCallback)
+        _finishCallback(nil, error);
+    
+    [self_ unsubscribeFromObservervation];
 }
 
 @end

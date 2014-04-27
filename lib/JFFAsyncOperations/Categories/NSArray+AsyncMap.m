@@ -28,12 +28,10 @@
     NSArray *asyncOperations = [self map:^id(id object) {
         
         JFFAsyncOperation loader = block(object);
-        JFFDidFinishAsyncOperationHandler finishCallbackBlock = ^void(id localResult, NSError *error)
-        {
+        JFFDidFinishAsyncOperationCallback finishCallbackBlock = ^void(id localResult, NSError *error) {
+            
             if (localResult)
-            {
                 [result addObject:localResult];
-            }
         };
         return asyncOperationWithFinishCallbackBlock(loader, finishCallbackBlock);
     }];

@@ -6,7 +6,7 @@
 
 @property (nonatomic) NSMutableArray *delegates;
 @property (nonatomic, copy) JFFAsyncOperation asyncLoader;
-@property (nonatomic, copy) JFFDidFinishAsyncOperationHandler didFinishBlock;
-@property (nonatomic, copy) JFFCancelAsyncOperation cancelBlock;
+@property (nonatomic, copy) JFFDidFinishAsyncOperationCallback didFinishBlock;
+@property (nonatomic, copy) JFFAsyncOperationHandler loaderHandler;
 
 @end

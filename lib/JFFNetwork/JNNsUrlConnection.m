@@ -52,7 +52,7 @@
             NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
             if (runLoop != [NSRunLoop mainRunLoop]) {
                 _connectRunLoop = runLoop;
-                [nativeConnection scheduleInRunLoop:runLoop forMode: NSDefaultRunLoopMode];
+                [nativeConnection scheduleInRunLoop:runLoop forMode:NSDefaultRunLoopMode];
             }
             
             _nativeConnection = nativeConnection;
@@ -68,9 +68,9 @@
     NSError *error;
     //STODO read file in separate thread
     //STODO read big files by chunks
-    NSData *data_ = [[NSData alloc]initWithContentsOfFile:path
-                                                  options:0
-                                                    error:&error];
+    NSData *data = [[NSData alloc]initWithContentsOfFile:path
+                                                 options:0
+                                                   error:&error];
     
     if (error) {
         [self connection:_nativeConnection
@@ -85,7 +85,7 @@
       didReceiveResponse:response];
         
         [self connection:_nativeConnection
-          didReceiveData:data_];
+          didReceiveData:data];
         
         [self connectionDidFinishLoading:_nativeConnection];
     }
@@ -97,9 +97,9 @@
 - (void)start
 {
 #ifdef NSURLConnectionDoesNotWorkWithLocalFiles
-    if ( [ _params.url isFileURL ] ) {
-        NSString* path_ = [ _params.url path ];
-        [ self processLocalFileWithPath: path_ ];
+    if ([_params.url isFileURL]) {
+        NSString *path = [_params.url path];
+        [self processLocalFileWithPath:path];
         return;
     }
 #endif
@@ -123,7 +123,7 @@
 
     if (_connectRunLoop) {
         [_nativeConnection unscheduleFromRunLoop:_connectRunLoop
-                                               forMode:NSDefaultRunLoopMode];
+                                         forMode:NSDefaultRunLoopMode];
     }
 }
 

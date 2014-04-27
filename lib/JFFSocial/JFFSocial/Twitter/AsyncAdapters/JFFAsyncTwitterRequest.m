@@ -14,27 +14,32 @@
     SLRequest *_request;
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
     [_request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         
-        if (!handler)
+        if (!finishCallback)
             return;
         
         if (error) {
             
-            handler(nil, error);
+            finishCallback(nil, error);
         } else {
             
             JFFTwitterResponse *result = [JFFTwitterResponse new];
             result.responseData = responseData;
             result.urlResponse  = urlResponse;
             
-            handler(result, nil);
+            finishCallback(result, nil);
         }
     }];
+}
+
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
 }
 
 - (BOOL)isForeignThreadResultCallback

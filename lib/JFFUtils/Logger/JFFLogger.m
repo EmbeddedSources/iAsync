@@ -7,7 +7,7 @@ static JFFLogHandler logHandler;
 + (JFFLogHandler)logHandler
 {
     if (!logHandler) {
-        logHandler = ^(NSString *log, NSString *level) {
+        logHandler = ^(NSString *log, NSString *level, id context) {
             NSLog(@"%@: %@", level, log);
         };
     }
@@ -26,6 +26,21 @@ static JFFLogHandler logHandler;
     va_start(args, format);
     
     [self logInfoWithLevel:@"error"
+                   context:nil
+                    format:format
+                   argList:args];
+    
+    va_end(args);
+}
+
++ (void)logErrorWithContext:(id)context
+                     format:(NSString *)format, ...
+{
+    va_list args;
+    va_start(args, format);
+    
+    [self logInfoWithLevel:@"error"
+                   context:context
                     format:format
                    argList:args];
     
@@ -38,6 +53,7 @@ static JFFLogHandler logHandler;
     va_start(args, format);
     
     [self logInfoWithLevel:@"info"
+                   context:nil
                     format:format
                    argList:args];
     
@@ -45,11 +61,12 @@ static JFFLogHandler logHandler;
 }
 
 + (void)logInfoWithLevel:(NSString *)level
+                 context:(id)context
                   format:(NSString *)format
                  argList:(va_list)argList
 {
     NSString *str = [[NSString alloc] initWithFormat:format arguments:argList];
-    [self logHandler](str, level);
+    [self logHandler](str, level, context);
 }
 
 @end

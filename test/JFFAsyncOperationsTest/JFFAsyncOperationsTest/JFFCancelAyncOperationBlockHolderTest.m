@@ -1,54 +1,54 @@
-#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFAsyncOperationHandlerBlockHolder.h>
 
-@interface JFFCancelAsyncOperationBlockHolderTest : GHTestCase
+@interface JFFAsyncOperationHandlerBlockHolderTest : GHTestCase
 @end
 
-@implementation JFFCancelAsyncOperationBlockHolderTest
+@implementation JFFAsyncOperationHandlerBlockHolderTest
 
 -(void)testJFFCancelAsyncOperationBlockHolder
 {
-    __block BOOL holderDeallocated_ = NO;
-
+    __block BOOL holderDeallocated = NO;
+    
     @autoreleasepool
     {
-        JFFCancelAsyncOperationBlockHolder* holder_ = [JFFCancelAsyncOperationBlockHolder new];
-        [holder_ addOnDeallocBlock:^void(void) {
+        JFFAsyncOperationHandlerBlockHolder *holder = [JFFAsyncOperationHandlerBlockHolder new];
+        [holder addOnDeallocBlock:^void(void) {
         
-            holderDeallocated_ = YES;
+            holderDeallocated = YES;
         }];
         
-        __block BOOL blockContextDeallocated_ = NO;
-        __block NSUInteger cancelBlockCallsNumber_ = 0;
-
+        __block BOOL blockContextDeallocated = NO;
+        __block NSUInteger cancelBlockCallsNumber = 0;
+        
         @autoreleasepool
         {
-            NSObject* blockContext_ = [ NSObject new ];
-            [ blockContext_ addOnDeallocBlock: ^void( void )
-            {
-                blockContextDeallocated_ = YES;
-            } ];
-
-            holder_.cancelBlock = ^( BOOL unsubscribeOnlyIfNo_ )
-            {
-                if ( [ blockContext_ class ] )
-                    ++cancelBlockCallsNumber_;
+            NSObject *blockContext = [NSObject new];
+            [blockContext addOnDeallocBlock:^void(void) {
+                
+                blockContextDeallocated = YES;
+            }];
+            
+            holder.loaderHandler = ^(JFFAsyncOperationHandlerTask task) {
+                
+                if ([blockContext class])
+                    ++cancelBlockCallsNumber;
             };
         }
         
-        GHAssertFalse(blockContextDeallocated_, @"context not deallocated");
+        GHAssertFalse(blockContextDeallocated, @"context not deallocated");
         
-        holder_.onceCancelBlock(NO);
-
-        GHAssertTrue(nil == holder_.cancelBlock, @"cancel block empty"     );
-        GHAssertTrue(blockContextDeallocated_, @"context deallocated"      );
-        GHAssertTrue(1 == cancelBlockCallsNumber_, @"block once was called");
-
-        holder_.onceCancelBlock( NO );
-
-        GHAssertTrue( 1 == cancelBlockCallsNumber_, @"block still once was called" );
+        holder.smartLoaderHandler(JFFAsyncOperationHandlerTaskUnsubscribe);
+        
+        GHAssertTrue(nil == holder.loaderHandler, @"cancel block empty"  );
+        GHAssertTrue(blockContextDeallocated, @"context deallocated"     );
+        GHAssertTrue(1 == cancelBlockCallsNumber, @"block once was called");
+        
+        holder.smartLoaderHandler(JFFAsyncOperationHandlerTaskUnsubscribe);
+        
+        GHAssertTrue(1 == cancelBlockCallsNumber, @"block still once was called" );
     }
-
-    GHAssertTrue( holderDeallocated_, @"holder deallocated" );
+    
+    GHAssertTrue(holderDeallocated, @"holder deallocated");
 }
 
 @end

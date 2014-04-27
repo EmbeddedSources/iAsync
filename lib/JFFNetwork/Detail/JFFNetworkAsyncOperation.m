@@ -11,12 +11,12 @@
 
 @implementation JFFNetworkAsyncOperation
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    NSParameterAssert(handler );
-    NSParameterAssert(progress);
+    NSParameterAssert(finishCallback  );
+    NSParameterAssert(progressCallback);
     
     {
         JNConnectionsFactory *factory =
@@ -29,20 +29,18 @@
     
     __unsafe_unretained JFFNetworkAsyncOperation *unretainedSelf = self;
     id<JNUrlConnection> connection = self.connection;
-
     
-    progress = [progress copy];
+    progressCallback = [progressCallback copy];
     _connection.didReceiveDataBlock = ^(NSData *dataChunk) {
         
         JFFNetworkResponseDataCallback *progressData = [JFFNetworkResponseDataCallback new];
         {
             progressData.dataChunk            = dataChunk;
-
             progressData.totalBytesCount      = [connection totalBytesCount     ];
             progressData.downloadedBytesCount = [connection downloadedBytesCount];
         }
         
-        progress(progressData);
+        progressCallback(progressData);
     };
     
     _connection.didUploadDataBlock = ^(NSNumber *progressNum) {
@@ -50,24 +48,23 @@
         JFFNetworkUploadProgressCallback *uploadProgress = [JFFNetworkUploadProgressCallback new];
         uploadProgress.progress = progressNum;
         uploadProgress.params   = unretainedSelf.params;
-        progress(uploadProgress);
+        progressCallback(uploadProgress);
     };
     
     __block id resultHolder;
     
     JFFNetworkErrorTransformer errorTransformer = _errorTransformer;
     
-    handler = [handler copy];
+    finishCallback = [finishCallback copy];
     JFFDidFinishLoadingHandler finish = [^(NSError *error) {
         
         if (error) {
             
-            handler(nil, errorTransformer?errorTransformer(error):error);
+            finishCallback(nil, errorTransformer?errorTransformer(error):error);
             return;
         }
         
-        handler(resultHolder, nil);
-        
+        finishCallback(resultHolder, nil);
     } copy];
     
     finish = [finish copy];
@@ -94,11 +91,13 @@
 
 - (void)forceCancel
 {
-    [self cancel:YES];
+    [self doTask:JFFAsyncOperationHandlerTaskCancel];
 }
 
-- (void)cancel:(BOOL)canceled
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
 {
+    NSCParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+    
     _connection.didReceiveDataBlock          = nil;
     _connection.didFinishLoadingBlock        = nil;
     _connection.didReceiveResponseBlock      = nil;
@@ -106,7 +105,7 @@
     _connection.shouldAcceptCertificateBlock = nil;
     
     //TODO maybe always cancel?
-    if (canceled) {
+    if (task == JFFAsyncOperationHandlerTaskCancel) {
         [_connection cancel];
         _connection = nil;
     }

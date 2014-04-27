@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C4182DE181E64A800FF3CA0 /* JFFTimerHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4182DC181E64A800FF3CA0 /* JFFTimerHelpers.h */; };
-		4C4182DF181E64A800FF3CA0 /* JFFTimerHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFTimerHelpers.m */; };
+		4C1A0FB918257BA00020FBF6 /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */; };
+		4C1A0FBA18257BA00020FBF6 /* JFFTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182E1181E6B6700FF3CA0 /* JFFTimer.m */; };
+		4C1A0FBB18257BA70020FBF6 /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */; };
+		4C1A0FBC18257BA70020FBF6 /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */; };
+		4C4182DE181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4182DC181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h */; };
+		4C4182DF181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */; };
 		4C4182E2181E6B6700FF3CA0 /* JFFTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4182E0181E6B6700FF3CA0 /* JFFTimer.h */; };
 		4C4182E3181E6B6700FF3CA0 /* JFFTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4182E1181E6B6700FF3CA0 /* JFFTimer.m */; };
 		539103BB14A88BD6007315A3 /* JFFScheduler_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JFFScheduler_Prefix.pch */; };
@@ -31,8 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C4182DC181E64A800FF3CA0 /* JFFTimerHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTimerHelpers.h; sourceTree = "<group>"; };
-		4C4182DD181E64A800FF3CA0 /* JFFTimerHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTimerHelpers.m; sourceTree = "<group>"; };
+		4C4182DC181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFAsyncOperationHelpers.h; sourceTree = "<group>"; };
+		4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFAsyncOperationHelpers.m; sourceTree = "<group>"; };
 		4C4182E0181E6B6700FF3CA0 /* JFFTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTimer.h; sourceTree = "<group>"; };
 		4C4182E1181E6B6700FF3CA0 /* JFFTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTimer.m; sourceTree = "<group>"; };
 		539103C614A88BD6007315A3 /* libJFFScheduler-clang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libJFFScheduler-clang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,8 +152,8 @@
 		4C4182DB181E649000FF3CA0 /* Async */ = {
 			isa = PBXGroup;
 			children = (
-				4C4182DC181E64A800FF3CA0 /* JFFTimerHelpers.h */,
-				4C4182DD181E64A800FF3CA0 /* JFFTimerHelpers.m */,
+				4C4182DC181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h */,
+				4C4182DD181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m */,
 			);
 			path = Async;
 			sourceTree = "<group>";
@@ -231,7 +235,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C4182DE181E64A800FF3CA0 /* JFFTimerHelpers.h in Headers */,
+				4C4182DE181E64A800FF3CA0 /* JFFAsyncOperationHelpers.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* JFFScheduler_Prefix.pch in Headers */,
 				651BE1051390559900DD6890 /* JFFScheduler.h in Headers */,
 				651BE198139195E500DD6890 /* NSObject+Timer.h in Headers */,
@@ -320,7 +324,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "JFFScheduler" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -408,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				539103BF14A88BD6007315A3 /* NSObject+Timer.m in Sources */,
+				4C1A0FBB18257BA70020FBF6 /* JFFAsyncOperationHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +421,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65802B18148BFB920040A93A /* NSObject+Timer.m in Sources */,
+				4C1A0FBA18257BA00020FBF6 /* JFFTimer.m in Sources */,
+				4C1A0FB918257BA00020FBF6 /* JFFAsyncOperationHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E8F203814F9486E00588C7D /* NSObject+Timer.m in Sources */,
+				4C1A0FBC18257BA70020FBF6 /* JFFAsyncOperationHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,7 +441,7 @@
 			files = (
 				4C4182E3181E6B6700FF3CA0 /* JFFTimer.m in Sources */,
 				651BE199139195E500DD6890 /* NSObject+Timer.m in Sources */,
-				4C4182DF181E64A800FF3CA0 /* JFFTimerHelpers.m in Sources */,
+				4C4182DF181E64A800FF3CA0 /* JFFAsyncOperationHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +471,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFScheduler_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = JFFScheduler;
 				SKIP_INSTALL = YES;
 			};
@@ -478,7 +485,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JFFScheduler_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = JFFScheduler;
 				SKIP_INSTALL = YES;
 			};
@@ -487,9 +493,9 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -499,7 +505,7 @@
 				HEADER_SEARCH_PATHS = ../;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LLVM_VECTORIZE_LOOPS = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 			};
@@ -508,9 +514,9 @@
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -563,7 +569,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -593,7 +598,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

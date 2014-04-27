@@ -35,9 +35,9 @@
 
 + (JFFAsyncOperation)instagramAccessTokenLoaderForCredentials:(JFFInstagramCredentials *)redentials
 {
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         JFFAsyncOperation accountLoader = [self authedUserLoaderWithCredentials:redentials];
         
@@ -51,26 +51,26 @@
                                           asyncOperation:loader];
         
         return loader(progressCallback,
-                      cancelCallback,
+                      stateCallback,
                       doneCallback);
     };
 }
 
 + (JFFAsyncOperation)authedUserLoaderWithCredentials:(JFFInstagramCredentials *)redentials
 {
-    return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                    JFFCancelAsyncOperationHandler cancelCallback,
-                                    JFFDidFinishAsyncOperationHandler doneCallback) {
+    return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                     JFFAsyncOperationChangeStateCallback stateCallback,
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
         
         JFFAsyncOperation oAuthUrlLoader = codeURLLoader(redentials.redirectURI, redentials.clientId);
         
         JFFAsyncOperationBinder urlToCodeBinder = ^JFFAsyncOperation(NSURL *url)
         {
             NSDictionary *params = [[url query] dictionaryFromQueryComponents];
-            NSArray* codeParams = params[@"code"];
+            NSArray *codeParams = params[@"code"];
             
-            if ([codeParams count]==0)
-            {
+            if ([codeParams count] == 0) {
+            
                 JFFInvalidInstagramResponseURLError *error = [JFFInvalidInstagramResponseURLError new];
                 error.url = url;
                 return asyncOperationWithError(error);
@@ -96,7 +96,7 @@
                                                                  nil);
         
         return loader(progressCallback,
-                      cancelCallback,
+                      stateCallback,
                       doneCallback);
     };
 }

@@ -4,7 +4,7 @@ typedef void (^JFFCompleteDialogCallbackBlock)(id result, NSError *error, BOOL i
 
 @protocol JFFDialogProtocol <NSObject>
 
-@property (copy, nonatomic) JFFCompleteDialogCallbackBlock onCompleteDialogBlock;
+@property (copy, nonatomic) JFFCompleteDialogCallbackBlock onCompleteDialogBlock;//can be called several times
 
 @required
 - (void)completeDialogWithResult:(id)result error:(NSError *)error isCanceled:(BOOL)isCancaled;

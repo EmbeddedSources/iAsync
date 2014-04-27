@@ -9,7 +9,7 @@
 
 @interface TestClassForMulticast : NSObject < TestMulticastDelegateInterface >
 
-@property ( nonatomic, unsafe_unretained ) NSUInteger initialState;
+@property (nonatomic, unsafe_unretained) NSUInteger initialState;
 
 @end
 

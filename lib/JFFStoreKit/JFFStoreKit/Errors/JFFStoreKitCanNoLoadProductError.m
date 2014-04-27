@@ -18,6 +18,14 @@
     return copy;
 }
 
+- (NSString *)errorLogDescription
+{
+    return [[NSString alloc] initWithFormat:@"%@ : %@ productIdentifier:%@",
+            [self class],
+            [self localizedDescription],
+            _productIdentifier];
+}
+
 - (void)writeErrorWithJFFLogger
 {
 }

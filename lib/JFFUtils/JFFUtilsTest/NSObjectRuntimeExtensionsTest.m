@@ -5,9 +5,8 @@
 static const NSUInteger testClassMethodResult    = 34;//just rendomize number
 static const NSUInteger testInstanceMethodResult = 35;//just rendomize number
 
-typedef NSUInteger (*UIntPropertyGetterMsgSendFunction)( id, SEL );
+typedef NSUInteger (*UIntPropertyGetterMsgSendFunction)(id, SEL);
 static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGetterMsgSendFunction)objc_msgSend;
-
 
 @interface NSTestClass : NSObject
 @end
@@ -285,9 +284,7 @@ static const UIntPropertyGetterMsgSendFunction FPropertyGetter = (UIntPropertyGe
     static BOOL firstTestRun = YES;
     
     if (!firstTestRun)
-    {
         return;
-    }
     
     NSTwiceTestClass *instance = [ NSTwiceTestClass new ];
     

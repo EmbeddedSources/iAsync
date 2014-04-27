@@ -44,9 +44,9 @@ static JFFAsyncOperationBinder testDataLoader(BOOL *wasCalled)
 {
     return ^JFFAsyncOperation(NSURL *url) {
         NSData *response = [[url description] dataUsingEncoding:NSUTF8StringEncoding];
-        return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                        JFFCancelAsyncOperationHandler cancelCallback,
-                                        JFFDidFinishAsyncOperationHandler doneCallback) {
+        return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                         JFFAsyncOperationChangeStateCallback cancelCallback,
+                                         JFFDidFinishAsyncOperationCallback doneCallback) {
             if (wasCalled)
                 *wasCalled = YES;
             return asyncOperationWithResult(response)(progressCallback,
@@ -67,13 +67,13 @@ static NSString const* differntServerResponse = @"differnt response";
 
 static JFFAsyncOperationBinder differentTestDataLoader(BOOL *wasCalled)
 {
-    return ^JFFAsyncOperation(NSURL *url)
-    {
+    return ^JFFAsyncOperation(NSURL *url) {
+        
         NSData *response = [differntServerResponse  dataUsingEncoding:NSUTF8StringEncoding];
-        return ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                        JFFCancelAsyncOperationHandler cancelCallback,
-                                        JFFDidFinishAsyncOperationHandler doneCallback)
-        {
+        return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                         JFFAsyncOperationChangeStateCallback cancelCallback,
+                                         JFFDidFinishAsyncOperationCallback doneCallback) {
+            
             if (wasCalled)
                 *wasCalled = YES;
             return asyncOperationWithResult(response)(progressCallback,
@@ -187,11 +187,11 @@ static JFFAsyncOperationBinder differentTestDataLoader(BOOL *wasCalled)
     __block NSString *storedDataString = nil;
     __block NSString *cachedDataString = nil;
     
-    loader(nil, nil, ^(id data, NSError *error_) {
+    loader(nil, nil, ^(id data, NSError *error) {
         
         storedDataString = data;
-        loaderWromCache( nil, nil, ^( id data_, NSError* error_ ) {
-            cachedDataString = data_;
+        loaderWromCache( nil, nil, ^(id data, NSError *error) {
+            cachedDataString = data;
         });
     });
     

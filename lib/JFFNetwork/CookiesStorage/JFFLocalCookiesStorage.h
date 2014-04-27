@@ -2,9 +2,9 @@
 
 @interface JFFLocalCookiesStorage : NSObject
 
--(void)setMultipleCookies:( NSArray* )cookies;
+- (void)setMultipleCookies:(NSArray *)cookies;
 
--(void)setCookie:( NSHTTPCookie* )cookie_;
--(NSArray*)cookiesForURL:( NSURL* )url_;
+- (void)setCookie:(NSHTTPCookie *)cookie;
+- (NSArray *)cookiesForURL:(NSURL *)url;
 
 @end

@@ -7,6 +7,7 @@
 + (JFFAsyncOperation)purcheserWithProductIdentifier:(NSString *)productIdentifier
                                         srvCallback:(JFFAsyncOperationBinder)srvCallback;
 
+//should return [srvResult, transaction] in doneCallback
 + (JFFAsyncOperation)purcheserWithProduct:(SKProduct *)product
                               srvCallback:(JFFAsyncOperationBinder)srvCallback;
 

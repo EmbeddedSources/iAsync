@@ -23,12 +23,12 @@
     NSMutableDictionary *dict = [self dictionaryWithDownloadFilesInfo];
     
     NSNumber *fileLength = dict[[url absoluteString]];
-    if (fileLength) {
-        
-        return [fileLength unsignedLongLongValue];
-    }
     
-    return (unsigned long long)NSURLResponseUnknownLength;
+    unsigned long long result = fileLength
+    ?[fileLength unsignedLongLongValue];
+    :(unsigned long long)NSURLResponseUnknownLength;
+    
+    return result;
 }
 
 + (void)setFileLength:(unsigned long long)fileLength

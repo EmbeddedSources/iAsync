@@ -13,7 +13,8 @@
 
 #import <JFFAsyncOperations/CachedAsyncOperations/NSObject+AsyncPropertyReader.h>
 #import <JFFAsyncOperations/JFFAsyncOperationHelpers.h>
-#import <JFFAsyncOperations/Helpers/JFFCancelAsyncOperationBlockHolder.h>
+#import <JFFAsyncOperations/Helpers/JFFAsyncOperationHandlerBlockHolder.h>
+#import <JFFAsyncOperations/Errors/JFFAsyncOpFinishedByCancellationError.h>
 
 static JFFMutableAssignArray *downloadItems = nil;
 
@@ -27,7 +28,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 @property (nonatomic) unsigned long long fileLength;
 @property (nonatomic) unsigned long long downloadedFileLength;
 @property (nonatomic) NSNull *downloadedFlag;
-@property (nonatomic, copy) JFFCancelAsyncOperation stopBlock;
+@property (nonatomic, copy) JFFAsyncOperationHandler stopBlock;
 
 @end
 
@@ -36,7 +37,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     JFFTrafficCalculator *_trafficCalculator;
     FILE *_file;
     float _previousProgress;
-    JFFMulticastDelegate< JFFDownloadItemDelegate > *_multicastDelegate;
+    JFFMulticastDelegate<JFFDownloadItemDelegate> *_multicastDelegate;
 }
 
 @dynamic downloadedFlag;
@@ -78,10 +79,10 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 - (JFFTrafficCalculator *)trafficCalculator
 {
-   if (!_trafficCalculator) {
-      _trafficCalculator = [[JFFTrafficCalculator alloc] initWithDelegate:self];
-   }
-   return _trafficCalculator;
+    if (!_trafficCalculator) {
+        _trafficCalculator = [[JFFTrafficCalculator alloc] initWithDelegate:self];
+    }
+    return _trafficCalculator;
 }
 
 - (void)closeFile
@@ -134,7 +135,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     BOOL result = ![downloadItems any:^BOOL(id object) {
         JFFDownloadItem *item_ = object;
         return ![item_.url isEqual:url]
-            && [ item_.localFilePath isEqualToString:localFilePath];
+             && [item_.localFilePath isEqualToString:localFilePath];
     }];
     
     if (!result && outError) {
@@ -167,7 +168,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
         }
         [downloadItems addObject:result];
     }
-
+    
     return result;
 }
 
@@ -194,7 +195,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 - (void)stop
 {
-    JFFCancelAsyncOperation stopBlock = [self.stopBlock copy];
+    JFFAsyncOperationHandler stopBlock = [self.stopBlock copy];
     if (stopBlock) {
         self.stopBlock = nil;
         stopBlock(YES);
@@ -257,20 +258,15 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     [self finalizeLoading];
 }
 
-- (void)didCancelWithFlag:(BOOL)canceled
-           cancelCallback:(JFFCancelAsyncOperationHandler)cancelCallback
+- (void)cancel
 {
-    NSParameterAssert(canceled);
     [self finalizeLoading];
     
     [_multicastDelegate didCancelLoadingOfDownloadItem:self];
-    
-    if (cancelCallback)
-        cancelCallback(canceled);
 }
 
 - (void)didReceiveData:(NSData *)data
-       progressHandler:(JFFAsyncOperationProgressHandler)progressCallback
+      progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
     if (!_trafficCalculator)
         [self.trafficCalculator startLoading];
@@ -301,9 +297,9 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
 
 - (JFFAsyncOperation)fileLoader
 {
-    JFFAsyncOperation loader = ^JFFCancelAsyncOperation(JFFAsyncOperationProgressHandler progressCallback,
-                                                         JFFCancelAsyncOperationHandler cancelCallback,
-                                                         JFFDidFinishAsyncOperationHandler doneCallback)
+    JFFAsyncOperation loader = ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
+                                                         JFFAsyncOperationChangeStateCallback stateCallback,
+                                                         JFFDidFinishAsyncOperationCallback doneCallback)
     {
         NSString *range = [[NSString alloc] initWithFormat:@"bytes=%qu-", self.downloadedFileLength];
         NSDictionary *headers = @{ @"Range" : range };
@@ -316,7 +312,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
         progressCallback = [ progressCallback copy ];
         connection.didReceiveDataBlock = ^(NSData *data) {
             [self didReceiveData:data
-                 progressHandler:progressCallback];
+                progressCallback:progressCallback];
         };
         
         doneCallback = [doneCallback copy];
@@ -332,26 +328,27 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
             [self didReceiveResponse:response];
         };
         
-        JFFCancelAsyncOperationBlockHolder *cancelCallbackBlockHolder = [JFFCancelAsyncOperationBlockHolder new];
-        cancelCallback = [cancelCallback copy];
-        JFFCancelAsyncOperationHandler cancelCallbackWrapper = ^(BOOL canceled)
-        {
-            [self didCancelWithFlag:canceled cancelCallback:cancelCallback];
+        JFFAsyncOperationHandlerBlockHolder *cancelCallbackBlockHolder = [JFFAsyncOperationHandlerBlockHolder new];
+        JFFAsyncOperationHandler loaderHandlerWrapper = ^(JFFAsyncOperationHandlerTask task) {
+            
+            [self cancel];
+            if (doneCallback)
+                doneCallback(nil, [JFFAsyncOpFinishedByCancellationError new]);
         };
-        cancelCallbackBlockHolder.cancelBlock = cancelCallbackWrapper;
+        cancelCallbackBlockHolder.loaderHandler = loaderHandlerWrapper;
         
         [connection start];
         
         [_multicastDelegate didProgressChangeForDownloadItem:self];
         
-        self.stopBlock = ^void(BOOL canceled)
-        {
-            if (canceled)
+        self.stopBlock = ^void(JFFAsyncOperationHandlerTask task) {
+            
+            if (task == JFFAsyncOperationHandlerTaskCancel)
                 [connection cancel];
             else
-                NSCAssert(NO, @"pass canceled as YES only");
+                NSCAssert(NO, @"pass task: JFFAsyncOperationHandlerTaskCancel only");
             
-            cancelCallbackBlockHolder.onceCancelBlock(canceled);
+            [cancelCallbackBlockHolder performCancelBlockOnceWithArgument:JFFAsyncOperationHandlerTaskCancel];
         };
         return self.stopBlock;
     };
@@ -359,7 +356,7 @@ long long JFFUnknownFileLength = NSURLResponseUnknownLength;
     loader = [self asyncOperationForPropertyWithName:NSStringFromSelector(@selector(downloadedFlag))
                                       asyncOperation:loader];
     
-    JFFDidFinishAsyncOperationHandler didFinishOperation = ^void(id result, NSError *error) {
+    JFFDidFinishAsyncOperationCallback didFinishOperation = ^void(id result, NSError *error) {
         [self notifyFinishWithError:error];
     };
     return asyncOperationWithFinishCallbackBlock(loader,

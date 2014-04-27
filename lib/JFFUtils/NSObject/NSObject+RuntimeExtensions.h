@@ -32,10 +32,10 @@
            prototypeMethodSelector:(SEL)prototypeSelector
                 hookMethodSelector:(SEL)hookSelector;
 
-//+ (void)unHookInstanceMethodForClass:(Class)targetClass
-//                        withSelector:(SEL)targetSelector
-//             prototypeMethodSelector:(SEL)prototypeSelector
-//                  hookMethodSelector:(SEL)hookSelector;
++ (void)unHookInstanceMethodForClass:(Class)targetClass
+                        withSelector:(SEL)targetSelector
+             prototypeMethodSelector:(SEL)prototypeSelector
+                  hookMethodSelector:(SEL)hookSelector;
 
 /**
  @param targetClass - a class for which the hook is being set up. Both targetSelector andhookSelector must be implemented for it.
@@ -51,10 +51,10 @@
         prototypeMethodSelector:(SEL)prototypeSelector
              hookMethodSelector:(SEL)hookSelector;
 
-//+ (void)unHookClassMethodForClass:(Class)targetClass
-//                     withSelector:(SEL)targetSelector
-//          prototypeMethodSelector:(SEL)prototypeSelector
-//               hookMethodSelector:(SEL)hookSelector;
++ (void)unHookClassMethodForClass:(Class)targetClass
+                     withSelector:(SEL)targetSelector
+          prototypeMethodSelector:(SEL)prototypeSelector
+               hookMethodSelector:(SEL)hookSelector;
 
 + (BOOL)hasInstanceMethodWithSelector:(SEL)methodSelector;
 + (BOOL)hasClassMethodWithSelector:(SEL)methodSelector;

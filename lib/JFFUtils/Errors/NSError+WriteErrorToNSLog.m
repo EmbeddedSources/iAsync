@@ -6,17 +6,18 @@
 
 - (NSString *)errorLogDescription
 {
-    NSString* strCode = [ @([ self code] ) descriptionWithLocale: nil ];
+    NSString *strCode = [@([self code]) descriptionWithLocale:nil];
     
-    return [[NSString alloc] initWithFormat:@"NSError : %@, domain : %@ code : %@",
+    return [[NSString alloc] initWithFormat:@"%@ : %@, domain : %@ code : %@",
+            [self class],
             [self localizedDescription],
             [self domain],
-            strCode ];
+            strCode];
 }
 
 - (void)writeErrorToNSLog
 {
-    NSLog(@"%@", [self errorLogDescription]);
+    NSLog(@"only log - %@", [self errorLogDescription]);
 }
 
 - (void)writeErrorWithJFFLogger

@@ -9,11 +9,11 @@
 
 @implementation JFFAsyncTwitterAccessRequest
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    handler = [handler copy];
+    finishCallback = [finishCallback copy];
     
     ACAccountStore *accountStore = [ACAccountStore new];
     
@@ -23,19 +23,24 @@
                                           options:nil
                                        completion:^(BOOL granted, NSError *error) {
         
-        if (!handler)
+        if (!finishCallback)
             return;
         
         if (error) {
-            handler(nil, error);
+            finishCallback(nil, error);
         } else {
             if (granted) {
-                handler([NSNull new], nil);
+                finishCallback([NSNull new], nil);
             } else {
-                handler(nil, [JFFTwitterAccountAccessNotGrantedError new]);
+                finishCallback(nil, [JFFTwitterAccountAccessNotGrantedError new]);
             }
         }
     }];
+}
+
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
+{
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
 }
 
 - (BOOL)isForeignThreadResultCallback

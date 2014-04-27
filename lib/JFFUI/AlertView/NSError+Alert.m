@@ -2,6 +2,9 @@
 
 #import "JFFAlertView.h"
 
+#import <JFFAsyncOperations/Errors/JFFAsyncOpFinishedByCancellationError.h>
+#import <JFFAsyncOperations/Errors/JFFAsyncOpFinishedByUnsubscriptionError.h>
+
 @implementation NSError (Alert)
 
 - (void)showAlertWithTitle:(NSString *)title
@@ -20,6 +23,44 @@
 {
     [self writeErrorWithJFFLogger];
     [JFFAlertView showExclusiveErrorWithDescription:[self localizedDescription]];
+}
+
+@end
+
+@implementation JFFAsyncOpFinishedByCancellationError (Alert)
+
+- (void)showAlertWithTitle:(NSString *)title
+{
+    [self writeErrorWithJFFLogger];
+}
+
+- (void)showErrorAlert
+{
+    [self writeErrorWithJFFLogger];
+}
+
+- (void)showExclusiveErrorAlert
+{
+    [self writeErrorWithJFFLogger];
+}
+
+@end
+
+@implementation JFFAsyncOpFinishedByUnsubscriptionError (Alert)
+
+- (void)showAlertWithTitle:(NSString *)title
+{
+    [self writeErrorWithJFFLogger];
+}
+
+- (void)showErrorAlert
+{
+    [self writeErrorWithJFFLogger];
+}
+
+- (void)showExclusiveErrorAlert
+{
+    [self writeErrorWithJFFLogger];
 }
 
 @end

@@ -1,6 +1,6 @@
 #import "NSDateFormatter+MultiThreading.h"
 
-@implementation NSDateFormatter (JFFMultiThreading)
+@implementation NSDateFormatter (MultiThreading)
 
 //TODO remove this methods and create thread safe NSDateFormatter
 - (NSString *)synchronizedStringFromDate:(NSDate *)date

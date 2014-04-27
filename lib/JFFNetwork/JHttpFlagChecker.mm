@@ -4,18 +4,19 @@
 
 @implementation JHttpFlagChecker
 
-+ (BOOL)isDownloadErrorFlag:( CFIndex )statusCode
++ (BOOL)isDownloadErrorFlag:(CFIndex)statusCode
 {
     BOOL result =
         ![self isSuccessFlag :statusCode] &&
         ![self isRedirectFlag:statusCode];
-
+    
     return result;
 }
 
 + (BOOL)isRedirectFlag:(CFIndex)statusCode
 {
-    std::set<CFIndex> redirectFlags;
+    static std::set<CFIndex> redirectFlags;
+    if (redirectFlags.size() == 0)
     {
         redirectFlags.insert(301);
         redirectFlags.insert(302);
@@ -24,8 +25,8 @@
     };
     auto iFlag = redirectFlags.find(statusCode);
 
-    BOOL result_ = (redirectFlags.end() != iFlag);
-    return result_;
+    BOOL result = (redirectFlags.end() != iFlag);
+    return result;
 }
 
 + (BOOL)isSuccessFlag:(CFIndex)statusCode
