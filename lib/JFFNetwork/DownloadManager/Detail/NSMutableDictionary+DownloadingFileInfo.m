@@ -25,7 +25,7 @@
     NSNumber *fileLength = dict[[url absoluteString]];
     
     unsigned long long result = fileLength
-    ?[fileLength unsignedLongLongValue];
+    ?[fileLength unsignedLongLongValue]
     :(unsigned long long)NSURLResponseUnknownLength;
     
     return result;

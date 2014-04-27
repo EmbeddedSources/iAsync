@@ -3,9 +3,9 @@
 
 @class JFFURLConnectionParams;
 
-@interface JFFNetworkUploadProgressCallback : JFFNetworkAsyncOperationCallback<JFFUploadProgress>
+@interface JFFNetworkUploadProgressCallback : JFFNetworkAsyncOperationCallback <JFFUploadProgress>
 
-@property (nonatomic, strong) NSNumber *progress;
-@property (nonatomic, strong) JFFURLConnectionParams *params;
+@property (nonatomic) NSNumber *progress;
+@property (nonatomic) JFFURLConnectionParams *params;
 
 @end

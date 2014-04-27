@@ -16,8 +16,7 @@
 + (BOOL)isRedirectFlag:(CFIndex)statusCode
 {
     static std::set<CFIndex> redirectFlags;
-    if (redirectFlags.size() == 0)
-    {
+    if (redirectFlags.size() == 0) {
         redirectFlags.insert(301);
         redirectFlags.insert(302);
         redirectFlags.insert(303);
