@@ -20,7 +20,7 @@ JFFLocationObserver
 @private
     JFFLocationLoaderSupervisor *_supervisor;
     CLLocationAccuracy _accuracy;
-    JFFAsyncOperationInterfaceResultHandler _handler;
+    JFFDidFinishAsyncOperationCallback _finishCallback;
     
     JFFTimer *_timer;
 }
@@ -41,12 +41,12 @@ JFFLocationObserver
     return [[self alloc] initWithAccuracy:accuracyInMeters];
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    handler = [handler copy];
-    _handler = handler;
+    finishCallback = [finishCallback copy];
+    _finishCallback = finishCallback;
     
     _supervisor = [JFFLocationLoaderSupervisor sharedLocationLoaderSupervisorWithAccuracy:_accuracy];
     
@@ -63,7 +63,7 @@ JFFLocationObserver
     
     if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
         
-        handler(nil, [JFFLocationServicesDisabledError new]);
+        finishCallback(nil, [JFFLocationServicesDisabledError new]);
         return;
     }
     
@@ -73,16 +73,16 @@ JFFLocationObserver
         
         cancel();
         
-        [weakSelf onSchedulerWithHandler:handler];
+        [weakSelf onSchedulerWithHandler:finishCallback];
     } duration:_tolerance];
 }
 
-- (void)onSchedulerWithHandler:(JFFAsyncOperationInterfaceResultHandler)handler
+- (void)onSchedulerWithHandler:(JFFDidFinishAsyncOperationCallback)finishCallback
 {
     if (_supervisor.location) {
         [self forceProcessLocation:_supervisor.location];
     } else {
-        handler(nil, [JFFUnableToGetLocationError new]);
+        finishCallback(nil, [JFFUnableToGetLocationError new]);
     }
 }
 
@@ -92,9 +92,11 @@ JFFLocationObserver
     _supervisor = nil;
 }
 
-- (void)cancel:(BOOL)canceled
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
 {
-    if (canceled) {
+    NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+    
+    if (task == JFFAsyncOperationHandlerTaskCancel) {
         [self stopObserving];
     }
 }
@@ -103,7 +105,7 @@ JFFLocationObserver
 {
     NSParameterAssert(location);
     
-    _handler(location, nil);
+    _finishCallback(location, nil);
 }
 
 - (BOOL)processLocation:(CLLocation *)location

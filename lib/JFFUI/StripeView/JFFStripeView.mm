@@ -231,16 +231,14 @@ didChangeActiveElementFrom:previousActiveElement
 
 - (JSignedRange)visibleIndexesRange
 {
-    if ( 0 == [ self->_delegate numberOfElementsInStripeView:self ] )
-    {
+    if ([_delegate numberOfElementsInStripeView:self] == 0)
         return JSignedRangeMake(0, 0);
-    }
     
     NSUInteger firstVisibleIndex = [self firstVisibleIndex];
     NSUInteger lastVisibleIndex  = [self lastVisibleIndexWithFirstVisibleIndex:firstVisibleIndex];
     
-    NSInteger castedRangeStart = static_cast<NSInteger>( firstVisibleIndex );
-    NSInteger castedRangeCount = static_cast<NSInteger>( lastVisibleIndex - firstVisibleIndex + 1 );
+    NSInteger castedRangeStart = static_cast<NSInteger>(firstVisibleIndex);
+    NSInteger castedRangeCount = static_cast<NSInteger>(lastVisibleIndex - firstVisibleIndex + 1);
     
     return JSignedRangeMake( castedRangeStart, castedRangeCount );
 }
@@ -506,20 +504,17 @@ didChangeActiveElementFrom:previousActiveElement
     BOOL shouldInsert = yes;
     NSUInteger currentIndex = index;
 
-    if ( shouldInsert )
-    {
+    if (shouldInsert) {
         NSInteger actualLastIndex = [self lastVisibleIndexWithFirstVisibleIndex:[self firstVisibleIndex]];
         NSUInteger delegateLastIndex = [_delegate numberOfElementsInStripeView:self] - 1;
 
         currentIndex = std::min( static_cast<NSUInteger>(actualLastIndex), static_cast<NSUInteger>(delegateLastIndex) );
     }
-
     
-    UIView* element_ = [self elementAtIndex:yes?--currentIndex:++currentIndex];
+    UIView *element = [self elementAtIndex:yes?--currentIndex:++currentIndex];
     BOOL removeLastElement = yes;
-    while ( element_ && currentIndex >= index )
-    {
-        NSNumber* newIndex = @(currentIndex + ( yes ? 1 : -1 ));
+    while (element && currentIndex >= index) {
+        NSNumber *newIndex = @(currentIndex + (yes?1:-1));
         
         //local TODO move for insert action
         if (removeLastElement) {
@@ -527,11 +522,11 @@ didChangeActiveElementFrom:previousActiveElement
             [self removeElementWithIndex:[newIndex intValue]];
             removeLastElement = NO;
         }
-        self.elementsByIndex[newIndex] = element_;
+        self.elementsByIndex[newIndex] = element;
         
         [_elementsByIndex removeObjectForKey:@(currentIndex)];
         
-        element_ = _elementsByIndex[@( yes ? --currentIndex : ++currentIndex)];
+        element = _elementsByIndex[@( yes ? --currentIndex : ++currentIndex)];
     }
 }
 
@@ -582,12 +577,12 @@ didChangeActiveElementFrom:previousActiveElement
 {
     JFFSimpleBlock animations = ^() {
         
-        NSOrderedSet* visibleIndexes = [self visibleIndexes];
+        NSOrderedSet *visibleIndexes = [self visibleIndexes];
         
         NSNumber *numIndex_ = @(index);
         if ([visibleIndexes containsObject:numIndex_]) {
             
-            [ self addElementAtIndex: numIndex_ toPosition: index ];
+            [self addElementAtIndex:numIndex_ toPosition:index];
         }
     };
     

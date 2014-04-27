@@ -2,7 +2,7 @@
 
 @class JFFSQLiteDB;
 
-@interface JFFBaseDB : NSObject
+@interface JFFKeyValueDB : NSObject
 
 - (instancetype)initWithCacheFileName:(NSString *)cacheName;
 

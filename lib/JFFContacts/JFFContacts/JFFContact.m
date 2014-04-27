@@ -18,7 +18,7 @@ static ABRecordRef createOrGetContactPerson(ABRecordID contactInternalId,
         
         ABRecordRef result = ABAddressBookGetPersonWithRecordID(addressBook,
                                                                 contactInternalId);
-
+        
         if (result) {
             CFRetain(result);
             return result;
@@ -88,7 +88,7 @@ addresses;
 {
     _fieldByName = [NSMutableDictionary new];
     
-    NSDictionary* fieldNameByPropertyId_ = @{
+    NSDictionary *fieldNameByPropertyId = @{
     @(kABPersonFirstNameProperty)    : JFFContactFirstName,
     @(kABPersonLastNameProperty)     : JFFContactLastName ,
     @(kABPersonOrganizationProperty) : JFFContactCompany  ,
@@ -97,7 +97,7 @@ addresses;
     
     ABRecordRef person = self.person;
     
-    [fieldNameByPropertyId_ enumerateKeysAndObjectsUsingBlock:^(NSNumber *propertyID, id fieldName, BOOL *stop) {
+    [fieldNameByPropertyId enumerateKeysAndObjectsUsingBlock:^(NSNumber *propertyID, id fieldName, BOOL *stop) {
         
         JFFContactStringField *field = [JFFContactStringField newContactFieldWithName:fieldName
                                                                            propertyID:(ABPropertyID)[propertyID longLongValue]

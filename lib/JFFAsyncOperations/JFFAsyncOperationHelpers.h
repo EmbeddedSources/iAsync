@@ -8,35 +8,35 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+    
 ///////////////////////// ADD OBSERVERS OF ASYNC OP. RESULT ////////////////////////
 
     JFFAsyncOperation asyncOperationWithResult(id result);
     JFFAsyncOperation asyncOperationWithError(NSError *error);
-    JFFAsyncOperation asyncOperationWithCancelFlag(BOOL canceled);
+    JFFAsyncOperation asyncOperationWithHandlerFlag(JFFAsyncOperationHandlerTask task);
     JFFAsyncOperation neverFinishAsyncOperation(void);
     
     JFFAsyncOperation asyncOperationWithSyncOperationInCurrentQueue(JFFSyncOperation block);
     
-    //finish_callback_block_ called before loader_'s JFFDidFinishAsyncOperationHandler
+    //finish_callback_block_ called before loader_'s JFFDidFinishAsyncOperationCallback
     JFFAsyncOperation asyncOperationWithFinishCallbackBlock(JFFAsyncOperation loader,
-                                                            JFFDidFinishAsyncOperationHandler finishCallbackBlock);
+                                                            JFFDidFinishAsyncOperationCallback finishCallbackBlock);
     
-    //finish_callback_hook_ called instead loader_'s JFFDidFinishAsyncOperationHandler
+    //finish_callback_hook_ called instead loader_'s JFFDidFinishAsyncOperationCallback
     JFFAsyncOperation asyncOperationWithFinishHookBlock(JFFAsyncOperation loader,
                                                         JFFDidFinishAsyncOperationHook finishCallbackHook);
     
     JFFAsyncOperation asyncOperationWithStartAndFinishBlocks(JFFAsyncOperation loader,
                                                              JFFSimpleBlock startBlock,
-                                                             JFFDidFinishAsyncOperationHandler finishCallback);
+                                                             JFFDidFinishAsyncOperationCallback finishCallback);
     
     JFFAsyncOperation asyncOperationWithOptionalStartAndFinishBlocks(JFFAsyncOperation loader,
                                                                      JFFSimpleBlock startBlock,
-                                                                     JFFDidFinishAsyncOperationHandler finishCallback);
+                                                                     JFFDidFinishAsyncOperationCallback finishCallback);
     
     JFFAsyncOperation asyncOperationWithStartAndDoneBlocks(JFFAsyncOperation loader,
                                                            JFFSimpleBlock startBlock,
-                                                           JFFSimpleBlock doneBlock);
+                                                           JFFDidFinishAsyncOperationCallback doneBlock);
     
     JFFAsyncOperation asyncOperationWithAnalyzer(id data, JFFAnalyzer analyzer);
     
@@ -58,7 +58,7 @@ extern "C" {
                                                       id result,
                                                       NSError *error);
     
-    JFFAsyncOperation ignorePregressLoader(JFFAsyncOperation loader);
+    JFFAsyncOperation ignoreProgressLoader(JFFAsyncOperation loader);
     JFFAsyncOperationBinder ignorePregressBinder(JFFAsyncOperationBinder binder);
     
     JFFAsyncOperation loaderWithAdditionalParalelLoaders(JFFAsyncOperation original, JFFAsyncOperation additionalLoader, ...) NS_REQUIRES_NIL_TERMINATION;
@@ -66,6 +66,10 @@ extern "C" {
     ///////////////////////////////////// SEQUENCE /////////////////////////////////////
     
     JFFAnalyzer analyzerAsSequenceOfAnalyzers(JFFAnalyzer firstAnalyzer, ...) NS_REQUIRES_NIL_TERMINATION;
+    
+    void processHandlerFlag(JFFAsyncOperationHandlerTask task,
+                            JFFAsyncOperationChangeStateCallback stateCallback,
+                            JFFDidFinishAsyncOperationCallback doneCallback);
 
 #ifdef __cplusplus
 } /* closing brace for extern "C" */

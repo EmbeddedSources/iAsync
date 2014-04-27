@@ -47,7 +47,9 @@ static BOOL isClass(id object)
     
     SEL selector = isClass(self)?@selector(isSubclassOfClass:):@selector(isKindOfClass:);
     
-    if (!objc_msgSend(self, selector, checkClass)) {
+    typedef BOOL (*AlignMsgSendFunction)(id, SEL, id);
+    AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+    if (!alignFunction(self, selector, checkClass)) {
         if (outError) {
             JFFJsonValidationError *error = [JFFJsonValidationError new];
             error.jsonObject  = rootJsonObject ;

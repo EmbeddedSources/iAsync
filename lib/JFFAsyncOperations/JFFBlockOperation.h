@@ -6,15 +6,15 @@
 
 + (instancetype)performOperationWithQueueName:(const char*)queueName
                                 loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
-                                progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
+                             didLoadDataBlock:(JFFDidFinishAsyncOperationCallback)didLoadDataBlock
+                                progressBlock:(JFFAsyncOperationProgressCallback)progressBlock
                                       barrier:(BOOL)barrier
                                  currentQueue:(dispatch_queue_t)currentQueue
                            serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent;
 
 + (instancetype)performOperationWithQueueName:(const char*)queueName
                                 loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock;
+                             didLoadDataBlock:(JFFDidFinishAsyncOperationCallback)didLoadDataBlock;
 
 - (void)cancel;
 

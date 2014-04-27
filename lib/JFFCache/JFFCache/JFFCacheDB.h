@@ -14,8 +14,4 @@
 - (void)removeRecordsForKey:(id)key;
 - (void)removeAllRecordsWithCallback:(JFFSimpleBlock)callback;
 
-- (void)migrateDB;
-
-- (NSNumber *)timeToLiveInHours;
-
 @end

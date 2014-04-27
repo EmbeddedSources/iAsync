@@ -7,7 +7,7 @@
 typedef JFFAsyncOperationBinder(^JFFAsyncBinderForIdentifier)(id<NSCopying> loadDataIdentifier);
 typedef id (^JFFCacheKeyForIdentifier)(id<NSCopying> loadDataIdentifier);
 
-@interface JFFSmartUrlDataLoaderFields : NSObject
+@interface JFFSmartDataLoaderFields : NSObject
 
 @property (nonatomic, copy) id<NSCopying> loadDataIdentifier;
 @property (nonatomic, copy) JFFAsyncOperationBinder dataLoaderForIdentifier;
@@ -23,7 +23,7 @@ typedef id (^JFFCacheKeyForIdentifier)(id<NSCopying> loadDataIdentifier);
 extern "C" {
 #endif
 
-    JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartUrlDataLoaderFields *args);
+    JFFAsyncOperation jSmartDataLoaderWithCache(JFFSmartDataLoaderFields *args);
     
     JFFAsyncOperation jSmartDataLoader(id<NSCopying> loadDataIdentifier,
                                        JFFAsyncOperationBinder dataLoaderForIdentifier,

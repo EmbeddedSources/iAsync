@@ -12,7 +12,7 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray(NSArray *elements
     for (NSDictionary *element in elements) {
         
         id label = [labels noThrowObjectAtIndex:index];
-        if (![label isKindOfClass:[NSDictionary class]])
+        if (![label isKindOfClass:[NSDictionary class]])//TODO check
             label = nil;
         
         ABMultiValueAddValueAndLabel(result,
@@ -25,12 +25,9 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray(NSArray *elements
     return result;
 }
 
-@interface JFFContactDictionaryArrayField ()
-@end
-
 @implementation JFFContactDictionaryArrayField
 {
-    NSArray* _labels;
+    NSArray *_labels;
 }
 
 + (instancetype)newContactFieldWithName:(NSString *)name
@@ -52,9 +49,9 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray(NSArray *elements
 - (id)readProperty
 {
     CFTypeRef value = ABRecordCopyValue(self.record, self.propertyID);
-    NSArray *address_ = [ NSArray arrayWithMultyValue:value];
+    NSArray *address = [NSArray arrayWithMultyValue:value];
     
-    self.value = address_;
+    self.value = address;
     
     if (value)
         CFRelease(value);
@@ -70,9 +67,9 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray(NSArray *elements
 - (void)setPropertyFromValue:(id)value
 {
     NSParameterAssert([value isKindOfClass:[NSArray class]]);
-
+    
     self.value = value;
-
+    
     CFErrorRef error = NULL;
     ABMutableMultiValueRef values = createMutableMultiValueWithArray(value, _labels);
     BOOL didSet = ABRecordSetValue(self.record,

@@ -1,0 +1,4 @@
+#import <JFFAsyncOperations/Errors/JFFAsyncOperationAbstractFinishError.h>
+
+@interface JFFAsyncOpFinishedByCancellationError : JFFAsyncOperationAbstractFinishError
+@end

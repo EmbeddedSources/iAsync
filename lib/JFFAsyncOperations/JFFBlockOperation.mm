@@ -4,9 +4,9 @@
 
 @interface JFFBlockOperation ()
 
-@property (nonatomic, copy) JFFSyncOperationWithProgress      loadDataBlock;
-@property (nonatomic, copy) JFFDidFinishAsyncOperationHandler didLoadDataBlock;
-@property (nonatomic, copy) JFFAsyncOperationProgressHandler  progressBlock;
+@property (nonatomic, copy) JFFSyncOperationWithProgress       loadDataBlock;
+@property (nonatomic, copy) JFFDidFinishAsyncOperationCallback didLoadDataBlock;
+@property (nonatomic, copy) JFFAsyncOperationProgressCallback  progressBlock;
 @property BOOL finishedOrCanceled;
 
 @end
@@ -25,8 +25,8 @@
 }
 
 - (instancetype)initWithLoadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                     didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
-                        progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
+                     didLoadDataBlock:(JFFDidFinishAsyncOperationCallback)didLoadDataBlock
+                        progressBlock:(JFFAsyncOperationProgressCallback)progressBlock
                          currentQueue:(dispatch_queue_t)currentQueue
                               barrier:(BOOL)barrier
                    serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent
@@ -93,7 +93,7 @@
         NSError *error;
         id opResult;
         @try {
-            JFFAsyncOperationProgressHandler progressCallback = ^(id info) {
+            JFFAsyncOperationProgressCallback progressCallback = ^(id info) {
                 //TODO to garante that finish will called after progress
                 dispatch_async(_currentQueue, ^ {
                     [self progressWithInfo:info];
@@ -122,8 +122,8 @@
 
 + (instancetype)performOperationWithQueueName:(const char*)queueName
                                 loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
-                                progressBlock:(JFFAsyncOperationProgressHandler)progressBlock
+                             didLoadDataBlock:(JFFDidFinishAsyncOperationCallback)didLoadDataBlock
+                                progressBlock:(JFFAsyncOperationProgressCallback)progressBlock
                                       barrier:(BOOL)barrier
                                  currentQueue:(dispatch_queue_t)currentQueue
                            serialOrConcurrent:(dispatch_queue_attr_t)serialOrConcurrent
@@ -156,7 +156,7 @@
 
 + (instancetype)performOperationWithQueueName:(const char *)queueName
                                 loadDataBlock:(JFFSyncOperationWithProgress)loadDataBlock
-                             didLoadDataBlock:(JFFDidFinishAsyncOperationHandler)didLoadDataBlock
+                             didLoadDataBlock:(JFFDidFinishAsyncOperationCallback)didLoadDataBlock
 {
     NSParameterAssert([NSThread isMainThread]);
     return [self performOperationWithQueueName:queueName

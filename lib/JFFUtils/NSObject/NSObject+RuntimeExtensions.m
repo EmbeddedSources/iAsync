@@ -95,11 +95,10 @@ typedef BOOL (^JFFPredicate)();
     NSParameterAssert(prototypeMethod);
     
     const char *typeEncoding = method_getTypeEncoding(prototypeMethod);
-    BOOL methodAdded =
-    class_addMethod(targetClass,
-                    hookSelector,
-                    method_getImplementation(prototypeMethod),
-                    typeEncoding);
+    BOOL methodAdded = class_addMethod(targetClass,
+                                       hookSelector,
+                                       method_getImplementation(prototypeMethod),
+                                       typeEncoding);
     NSAssert(methodAdded, @"should be added");
     Method hookMethod = methodGetter(class, hookSelector);
     
@@ -155,10 +154,6 @@ typedef BOOL (^JFFPredicate)();
     
     if (!method)
         return NO;
-    
-    //TODO ?
-//    if (![self superclass])
-//        return NO;
     
     Method superMethod = methodGetter([self superclass]);
     return method != superMethod;

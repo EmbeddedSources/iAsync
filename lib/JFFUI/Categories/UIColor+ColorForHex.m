@@ -1,6 +1,6 @@
 #import "UIColor+ColorForHex.h"
 
-#import "NSString+Trimm.h"
+//#import <JFFUtils/NSString/NSString+Trimm.h>
 
 //source: http://iphonedevelopertips.com/general/using-nsscanner-to-convert-hex-to-rgb-color.html
 @implementation UIColor (ColorForHex)

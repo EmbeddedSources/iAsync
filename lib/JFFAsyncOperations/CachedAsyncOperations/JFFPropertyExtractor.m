@@ -9,14 +9,6 @@
 
 #import <objc/message.h>
 
-
-typedef id (*PropertyGetterMsgSendFunction)( id, SEL );
-typedef void (*PropertySetterMsgSendFunction)( id, SEL, id );
-
-static const PropertyGetterMsgSendFunction FPropertyGetter = (PropertyGetterMsgSendFunction)objc_msgSend;
-static const PropertySetterMsgSendFunction FPropertySetter = (PropertySetterMsgSendFunction)objc_msgSend;
-
-
 @interface JFFPropertyExtractor ()
 
 @property (nonatomic) JFFObjectRelatedPropertyData *objectPropertyData;
@@ -33,7 +25,7 @@ static const PropertySetterMsgSendFunction FPropertySetter = (PropertySetterMsgS
 delegates,
 asyncLoader,
 didFinishBlock,
-cancelBlock;
+loaderHandler;
 
 - (void)clearData
 {
@@ -54,76 +46,48 @@ cancelBlock;
 
 - (SEL)propertySetSelector
 {
-    NSString* methodNameForLogging = NSStringFromSelector( _cmd );
-    [ JFFLogger logInfoWithFormat: @"[BEGIN] %@", methodNameForLogging ];
-    
     if (!_propertySetSelector) {
-        NSString* propertyPathName = self.propertyPath.name;
-        
-        NSString *setPropertyName = [ propertyPathName propertySetNameForPropertyName];
+        NSString *setPropertyName = [self.propertyPath.name propertySetNameForPropertyName];
         _propertySetSelector = NSSelectorFromString(setPropertyName);
-        
-        [ JFFLogger logInfoWithFormat: @"setPropertyName : %@", setPropertyName ];
-        [ JFFLogger logInfoWithFormat: @"result : %p", _propertySetSelector ];
     }
-    
-    [ JFFLogger logInfoWithFormat: @"[END] %@", methodNameForLogging ];
     return _propertySetSelector;
 }
 
--(id)property
+- (id)property
 {
-    id result = FPropertyGetter(self.object, self.propertyGetSelector);
+    typedef id (*AlignMsgSendFunction)(id, SEL);
+    AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+    id result = alignFunction(self.object, self.propertyGetSelector);
     return self.propertyPath.key?[result objectForKey:self.propertyPath.key]:result;
 }
 
-
 - (void)setProperty:(id)property
 {
-    NSString* methodNameForLogging = NSStringFromSelector( _cmd );
-    
-    [ JFFLogger logInfoWithFormat: @"[BEGIN] %@", methodNameForLogging ];
-    [ JFFLogger logInfoWithFormat: @"property : %@", property ];
-    [ JFFLogger logInfoWithFormat: @"self.object : %@", self.object ];
-    [ JFFLogger logInfoWithFormat: @"self.propertyPath : (%@ --> %@)", self.propertyPath.key, self.propertyPath.name  ];
-    
-    SEL propertySetSelector = self.propertySetSelector;
-    [ JFFLogger logInfoWithFormat: @"self.propertySetSelector : %p", propertySetSelector ];
-    
     if (!self.propertyPath.key) {
-        [ JFFLogger logInfoWithFormat: @"---" ];
-        [ JFFLogger logInfoWithFormat: @"propertyPath.key is nil" ];
-        [ JFFLogger logInfoWithFormat: @"setting property by name..." ];
         
-        FPropertySetter( self.object, propertySetSelector, property );
-        
-        [ JFFLogger logInfoWithFormat: @"===[END1] %@", methodNameForLogging ];
+        typedef void (*AlignMsgSendFunction)(id, SEL, id);
+        AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+        alignFunction(self.object, self.propertySetSelector, property);
         return;
     }
     
-    [ JFFLogger logInfoWithFormat: @"getting dict..." ];
-    NSMutableDictionary* dict = FPropertyGetter(self.object, self.propertyGetSelector);
+    typedef NSMutableDictionary *(*AlignMsgSendFunction)(id, SEL);
+    AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+    NSMutableDictionary *dict = alignFunction(self.object, self.propertyGetSelector);
     
-    [ JFFLogger logInfoWithFormat: @"---" ];
     if (!dict) {
-        [ JFFLogger logInfoWithFormat: @"dict is nil. Setting an empty one..." ];
         dict = [NSMutableDictionary new];
-        FPropertySetter(self.object, self.propertySetSelector, dict);
+        typedef void (*AlignMsgSendFunction)(id, SEL, NSMutableDictionary *);
+        AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSend;
+        alignFunction(self.object, self.propertySetSelector, dict);
     }
     
     if (property) {
-        [ JFFLogger logInfoWithFormat: @"setting property by key..." ];
-        [ dict setObject: property
-                  forKey: self.propertyPath.key ];
-
-        [ JFFLogger logInfoWithFormat: @"===[END2] %@", methodNameForLogging ];
+        [dict setObject:property forKey:self.propertyPath.key];
         return;
     }
-
-    [ JFFLogger logInfoWithFormat: @"removing key from dict..." ];
-    [ dict removeObjectForKey: self.propertyPath.key ];
     
-    [ JFFLogger logInfoWithFormat: @"===[END] %@", methodNameForLogging ];
+    [dict removeObjectForKey:self.propertyPath.key];
 }
 
 ////////////////////////OBJECT RELATED DATA///////////////////////

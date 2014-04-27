@@ -2,8 +2,8 @@
 
 @protocol JFFUploadProgress <NSObject>
 
--(NSNumber*)progress;
--(NSURL*)url;
--(NSDictionary*)headers;
+- (NSNumber *)progress;
+- (NSURL *)url;
+- (NSDictionary  *)headers;
 
 @end

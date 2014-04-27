@@ -13,4 +13,9 @@
     return result;
 }
 
+- (NSString *)description
+{
+    return [[NSString alloc] initWithFormat:@"<%@: %p fieldValue: %@>", [self class], self, _fieldValue];
+}
+
 @end

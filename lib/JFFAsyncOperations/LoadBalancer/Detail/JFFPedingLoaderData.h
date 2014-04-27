@@ -5,8 +5,12 @@
 @interface JFFPedingLoaderData : NSObject
 
 @property (nonatomic, copy) JFFAsyncOperation nativeLoader;
-@property (nonatomic, copy) JFFAsyncOperationProgressHandler progressCallback;
-@property (nonatomic, copy) JFFCancelAsyncOperationHandler cancelCallback;
-@property (nonatomic, copy) JFFDidFinishAsyncOperationHandler doneCallback;
+@property (nonatomic, copy) JFFAsyncOperationProgressCallback progressCallback;
+@property (nonatomic, copy) JFFAsyncOperationChangeStateCallback stateCallback;
+@property (nonatomic, copy) JFFDidFinishAsyncOperationCallback doneCallback;
+
+@property (nonatomic) BOOL suspended;
+
+- (void)unsubscribe;
 
 @end

@@ -1,6 +1,6 @@
-#import <JFFNetwork/Callbacks/JFFNetworkAsyncOperationCallback.h>
+#import <Foundation/Foundation.h>
 
-@interface JFFNetworkResponseDataCallback : JFFNetworkAsyncOperationCallback
+@interface JFFNetworkResponseDataCallback : NSObject
 
 @property (nonatomic) NSData *dataChunk;
 

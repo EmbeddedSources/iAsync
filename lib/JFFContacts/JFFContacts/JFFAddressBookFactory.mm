@@ -35,6 +35,7 @@ static NSError *convertErrorType(NSError *error, ABAuthorizationStatus authoriza
         return;
     }
     
+    CFRetain(result);
     JFFAddressBook *bookWrapper = [[JFFAddressBook alloc] initWithRawBook:result];
     
     if (authorizationStatus != kABAuthorizationStatusNotDetermined) {
@@ -58,6 +59,7 @@ static NSError *convertErrorType(NSError *error, ABAuthorizationStatus authoriza
         };
     
     ABAddressBookRequestAccessWithCompletion(result, onAddressBookAccess);
+    CFRelease(result);
 }
 
 + (NSString *)bookStatusToString:(ABAuthorizationStatus)status

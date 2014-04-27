@@ -36,7 +36,6 @@
 #import <JFFUtils/NSString/NSString+LocalizedPrice.h>
 #import <JFFUtils/NSString/NSString+StringWithCutPrefix.h>
 #import <JFFUtils/NSString/NSString+StringFromTemplateString.h>
-#import <JFFUtils/NSString/NSString+UUIDCreation.h>
 
 #import <JFFUtils/NSSet/NSSet+BlocksAdditions.h>
 #import <JFFUtils/NSSet/NSMutableSet+StorableSet.h>
@@ -49,7 +48,6 @@
 
 #import <JFFUtils/Errors/JFFError.h>
 #import <JFFUtils/Errors/JFFSilentError.h>
-#import <JFFUtils/Errors/NSError+JSON.h>
 #import <JFFUtils/Errors/NSError+SetToPointer.h>
 #import <JFFUtils/Errors/NSError+IsNetworkError.h>
 #import <JFFUtils/Errors/NSError+WriteErrorToNSLog.h>
@@ -59,9 +57,7 @@
 #import <JFFUtils/Blocks/JUContainersHelperBlocks.h>
 
 #import <JFFUtils/Categories/NSData+ToString.h>
-#import <JFFUtils/Categories/UIColor+ColorForHex.h>
 #import <JFFUtils/Categories/NSNumber+FSStorable.h>
-#import <JFFUtils/Categories/UIDevice+PlatformName.h>
 #import <JFFUtils/Categories/NSDecimalNumber+Increment.h>
 #import <JFFUtils/Categories/NSDateFormatter+MultiThreading.h>
 

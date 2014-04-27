@@ -18,7 +18,7 @@
 {
     NSInteger _previousIndex;
     NSInteger _cachedNumberOfElements;
-    NSRange   _previousVisiableIndexesRange;
+    NSRange   _previousVisibleIndexesRange;
 }
 
 - (void)dealloc
@@ -54,8 +54,8 @@
     _scrollView.scrollEnabled = YES;
     [self addSubviewAndScale:_scrollView];
     
-    NSRange range_ = { 0, 1 };
-    _previousVisiableIndexesRange = range_;
+    NSRange range = { 0, 1 };
+    _previousVisibleIndexesRange = range;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveMemoryWarning:)
@@ -229,11 +229,11 @@
     [ self slideToIndex: index_ animated: NO ];
 }
 
-- (NSRange)visiableIndexesRange
+- (NSRange)visibleIndexesRange
 {
     if (_scrollView.bounds.size.width == 0) {
         NSLog(@"[!!!ERROR!!!] division by zero");
-        return _previousVisiableIndexesRange;
+        return _previousVisibleIndexesRange;
     }
     
     NSInteger firstIndex = floorf( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
@@ -242,9 +242,9 @@
     
     firstIndex = firstIndex > 0 ?: 0;
 
-    NSRange range_ = { firstIndex, lastIndex - firstIndex + 1 };
-    _previousVisiableIndexesRange = range_;
-    return _previousVisiableIndexesRange;
+    NSRange range = { firstIndex, lastIndex - firstIndex + 1 };
+    _previousVisibleIndexesRange = range;
+    return _previousVisibleIndexesRange;
 }
 
 - (NSInteger)lastIndex
@@ -265,43 +265,44 @@
     }
 }
 
-- (void)inserElementAtIndex:( NSInteger )index_
+- (void)inserElementAtIndex:(NSInteger)index
 {
-    NSInteger prevLastIndex_ = self.lastIndex;
-
-    NSInteger last_elements_count_ = _cachedNumberOfElements;
-    _cachedNumberOfElements = [ self.delegate numberOfElementsInStripeView: self ];
-
-    NSAssert( _cachedNumberOfElements - 1 == last_elements_count_, @"invalid elements count" );
-    NSAssert( ( index_ >= _firstIndex - 1 ) && ( index_ <= self.lastIndex + 1 ), @"invalid index" );
-
-    self.firstIndex = std::min( _firstIndex, index_ );
-    if ( index_ <= prevLastIndex_ )
-        [ self shiftRightElementsFromIndex: index_ toIndex: prevLastIndex_ ];
-
-    [ self addViewForIndex: index_ ];
-
-    [ self updateScrollViewContentSize ];
-
-    [ self slideToIndex: _activeIndex ];
+    NSInteger prevLastIndex = self.lastIndex;
+    
+    NSInteger lastElementsCount = _cachedNumberOfElements;
+    _cachedNumberOfElements = [self.delegate numberOfElementsInStripeView:self];
+    
+    NSAssert(_cachedNumberOfElements - 1 == lastElementsCount, @"invalid elements count");
+    NSAssert((index >= _firstIndex - 1) && (index <= self.lastIndex + 1), @"invalid index");
+    
+    NSInteger firstIndex = _firstIndex;
+    self.firstIndex = std::min(firstIndex, index);
+    if (index <= prevLastIndex)
+        [self shiftRightElementsFromIndex:index toIndex:prevLastIndex];
+    
+    [self addViewForIndex:index];
+    
+    [self updateScrollViewContentSize];
+    
+    [self slideToIndex:_activeIndex];
 }
 
 - (void)pushFrontElement
 {
-    [ self inserElementAtIndex: self.lastIndex + 1 ];
+    [self inserElementAtIndex:self.lastIndex + 1];
 }
 
 - (void)pushBackElement
 {
-    [ self inserElementAtIndex: self.firstIndex - 1 ];
+    [self inserElementAtIndex:self.firstIndex - 1];
 }
 
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSRange previuosRange = _previousVisiableIndexesRange;
-    NSRange indexRange = [self visiableIndexesRange];
+    NSRange previuosRange = _previousVisibleIndexesRange;
+    NSRange indexRange = [self visibleIndexesRange];
     
     if (NSEqualRanges(previuosRange, indexRange))
         return;
@@ -318,31 +319,30 @@
 
 - (void)syncContentOffsetWithActiveElement
 {
-    if (_scrollView.bounds.size.width == 0)
-    {
+    if (_scrollView.bounds.size.width == 0) {
         NSLog(@"[!!!ERROR!!!] division by zero");
         return;
     }
     
     self.activeIndex = floor( _scrollView.contentOffset.x / _scrollView.bounds.size.width ) + _firstIndex;
     
-    [ self updateScrollViewContentSize ];
-    CGPoint offset_ = [ self offsetForIndex: _activeIndex ];
-    [ _scrollView setContentOffset: offset_ animated: NO ];
+    [self updateScrollViewContentSize];
+    CGPoint offset_ = [self offsetForIndex:_activeIndex];
+    [_scrollView setContentOffset:offset_ animated:NO];
 
     [ self.delegate pageSlider: self
     didChangeActiveElementFrom: _previousIndex
                             to: self.activeIndex ];
 }
 
-- (void)scrollViewDidEndDecelerating:( UIScrollView* )scrollView_
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [ self syncContentOffsetWithActiveElement ];
+    [self syncContentOffsetWithActiveElement];
 }
 
-- (void)scrollViewDidEndScrollingAnimation:( UIScrollView* )scrollView_
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
-    [ self syncContentOffsetWithActiveElement ];
+    [self syncContentOffsetWithActiveElement];
 }
 
 @end

@@ -48,24 +48,25 @@ JFFAsyncOperationInterface
     return [[self alloc] initWithLocation:location];
 }
 
-- (void)asyncOperationWithResultHandler:(JFFAsyncOperationInterfaceResultHandler)handler
-                          cancelHandler:(JFFAsyncOperationInterfaceCancelHandler)cancelHandler
-                        progressHandler:(JFFAsyncOperationInterfaceProgressHandler)progress
+- (void)asyncOperationWithResultCallback:(JFFDidFinishAsyncOperationCallback)finishCallback
+                         handlerCallback:(JFFAsyncOperationChangeStateCallback)handlerCallback
+                        progressCallback:(JFFAsyncOperationProgressCallback)progressCallback
 {
-    handler = [handler copy];
+    finishCallback = [finishCallback copy];
     _geocoder = [CLGeocoder new];
     
     CLGeocodeCompletionHandler completionHandler = ^void(NSArray *placemarks, NSError *error) {
         
-        handler(placemarks, error);
+        finishCallback(placemarks, error);
     };
     
     [_geocoder reverseGeocodeLocation:_location completionHandler:completionHandler];
 }
 
-- (void)cancel:(BOOL)canceled
+- (void)doTask:(JFFAsyncOperationHandlerTask)task
 {
-    if (canceled) {
+    NSCParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
+    if (task == JFFAsyncOperationHandlerTaskCancel) {
         [_geocoder cancelGeocode];
     }
 }

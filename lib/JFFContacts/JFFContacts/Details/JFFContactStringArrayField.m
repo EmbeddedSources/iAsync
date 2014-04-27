@@ -72,14 +72,14 @@ static ABMutableMultiValueRef createMutableMultiValueWithArray(NSArray *elements
     self.value = [self filteredValues:value];
     
     CFErrorRef error = NULL;
-    ABMutableMultiValueRef values_ = createMutableMultiValueWithArray(self.value, _labels);
+    ABMutableMultiValueRef values = createMutableMultiValueWithArray(self.value, _labels);
     BOOL didSet = ABRecordSetValue(self.record,
                                    self.propertyID,
-                                   values_,
+                                   values,
                                    &error);
     if (!didSet) { NSLog( @"can not set %@", self.name ); }
-    if ( values_ )
-        CFRelease( values_ );
+    if (values)
+        CFRelease(values);
 }
 
 @end

@@ -1,21 +1,20 @@
 #import "JFFNetworkUploadProgressCallback.h"
-#import "JFFURLConnectionParams.h"
 
 @implementation JFFNetworkUploadProgressCallback
 
--(NSNumber*)progress
+- (NSNumber *)progress
 {
-    return self->_progress;
+    return _progress;
 }
 
--(NSURL*)url
+- (NSURL *)url
 {
-    return self->_params.url;
+    return _params.url;
 }
 
--(NSDictionary*)headers
+- (NSDictionary *)headers
 {
-    return self->_params.headers;
+    return _params.headers;
 }
 
 @end

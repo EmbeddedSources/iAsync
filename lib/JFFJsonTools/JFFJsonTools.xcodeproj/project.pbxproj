@@ -101,6 +101,13 @@
 			remoteGlobalIDString = 1BE0542A154826DA00270B58;
 			remoteInfo = JFFTestTools;
 		};
+		4C3C5BC018674D68000B235A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE532C7016036D9A0029920A /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C1A0F8D182577BE0020FBF6;
+			remoteInfo = JFFAsyncOperationsMacOS;
+		};
 		CE532C5416036D3E0029920A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE532C4A16036D3E0029920A /* JFFScheduler.xcodeproj */;
@@ -355,6 +362,7 @@
 				CE532C7E16036D9A0029920A /* libJFFAsyncOperations.a */,
 				CE532C8016036D9A0029920A /* libJFFAsyncOperations-clang.a */,
 				CE532C8216036D9A0029920A /* JFFAsyncOperationsFW.framework */,
+				4C3C5BC118674D68000B235A /* libJFFAsyncOperationsMacOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -432,7 +440,7 @@
 		CE532C0016036CE40029920A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = EmbeddedSources;
 				TargetAttributes = {
 					4C043A75181EA60D00246A88 = {
@@ -517,6 +525,13 @@
 			fileType = wrapper.cfbundle;
 			path = JFFUtilsTest.octest;
 			remoteRef = 4C043AA9181EAB1E00246A88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C3C5BC118674D68000B235A /* libJFFAsyncOperationsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperationsMacOS.a;
+			remoteRef = 4C3C5BC018674D68000B235A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CE532C5516036D3E0029920A /* libJFFScheduler.a */ = {
@@ -692,7 +707,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -710,7 +724,6 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -722,6 +735,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LLVM_VECTORIZE_LOOPS = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 			};
@@ -731,7 +745,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -742,7 +755,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				COPY_PHASE_STRIP = YES;
-				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -766,7 +778,6 @@
 				DSTROOT = /tmp/JFFJsonTools.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFJsonTools/JFFJsonTools-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -778,7 +789,6 @@
 				DSTROOT = /tmp/JFFJsonTools.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFFJsonTools/JFFJsonTools-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

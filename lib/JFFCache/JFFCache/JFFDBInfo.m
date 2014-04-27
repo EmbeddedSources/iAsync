@@ -1,6 +1,9 @@
 #import "JFFDBInfo.h"
 
-static JFFDBInfo* sharedInfo = nil;
+#import "CacheDBInfo.h"
+#import "CacheDBInfoStorage.h"
+
+static JFFDBInfo *sharedInfo = nil;
 
 @interface JFFDBInfo ()
 
@@ -10,8 +13,8 @@ static JFFDBInfo* sharedInfo = nil;
 
 @implementation JFFDBInfo
 {
-    NSDictionary *_currentDbInfo;
-    NSDictionary *_dbInfo;
+    NSDictionary *_currentDbVersionsByName;
+    CacheDBInfoStorage *_dbInfoByNames;
 }
 
 - (instancetype)initWithInfoPath:(NSString *)infoPath
@@ -30,29 +33,30 @@ static JFFDBInfo* sharedInfo = nil;
     self = [super init];
     
     if (self) {
-        _currentDbInfo = infoDictionry;
+        _dbInfoByNames = [CacheDBInfoStorage newCacheDBInfoStorageWithPlistInfo:infoDictionry];
     }
     
     return self;
 }
 
-- (NSDictionary *)createDBInfo
+- (CacheDBInfoStorage *)createDBInfo
 {
-    return _currentDbInfo?:[NSDictionary dictionaryWithContentsOfFile:_dbInfoPath];
+    id info = [NSDictionary dictionaryWithContentsOfFile:_dbInfoPath];
+    return [CacheDBInfoStorage newCacheDBInfoStorageWithPlistInfo:info];
 }
 
-- (NSDictionary *)dbInfo
+- (CacheDBInfoStorage *)dbInfoByNames
 {
-    if (_dbInfo)
-        return _dbInfo;
+    if (_dbInfoByNames)
+        return _dbInfoByNames;
     
     @synchronized(self) {
-        if (_dbInfo)
-            return _dbInfo;
+        if (_dbInfoByNames)
+            return _dbInfoByNames;
         
-        _dbInfo = [self createDBInfo];
+        _dbInfoByNames = [self createDBInfo];
     }
-    return _dbInfo;
+    return _dbInfoByNames;
 }
 
 + (JFFDBInfo *)newDbInfo
@@ -78,39 +82,48 @@ static JFFDBInfo* sharedInfo = nil;
 
 + (NSString *)currentDBInfoFilePath
 {
-    return [NSString documentsPathByAppendingPathComponent:@"JFFCurrentDBInfo.data"] ;
+    return [NSString documentsPathByAppendingPathComponent:@"JFFCurrentDBVersions.data"];
 }
 
-- (NSDictionary *)currentDbInfo
+- (NSDictionary *)currentDbVersionsByName
 {
-    if (_currentDbInfo)
-        return _currentDbInfo;
+    if (_currentDbVersionsByName)
+        return _currentDbVersionsByName;
     
     @synchronized(self) {
-        if (_currentDbInfo)
-            return _currentDbInfo;
+        if (_currentDbVersionsByName)
+            return _currentDbVersionsByName;
         
         NSString *path = [[self class] currentDBInfoFilePath];
         NSDictionary *currentDbInfo = [[NSDictionary alloc] initWithContentsOfFile:path];
-        self.currentDbInfo = currentDbInfo?:@{};
+        
+        if ([currentDbInfo count] > 0)
+            _currentDbVersionsByName = currentDbInfo;
     }
     
-    return _currentDbInfo;
+    return _currentDbVersionsByName;
 }
 
-- (void)setCurrentDbInfo:(NSDictionary *)currentDbInfo
+- (void)saveCurrentDBInfoVersions
 {
-    if (_currentDbInfo == currentDbInfo)
-        return;
-    
     @synchronized(self) {
-        if (_currentDbInfo == currentDbInfo)
+        
+        NSMutableDictionary *mutableCurrentVersions = [NSMutableDictionary new];
+        
+        [self.dbInfoByNames enumerateKeysAndObjectsUsingBlock:^(NSString *key, CacheDBInfo *obj, BOOL *stop) {
+            
+            mutableCurrentVersions[key] = @(obj.version);
+        }];
+        
+        NSDictionary *currentVersions = [mutableCurrentVersions copy];
+        
+        if ([self.currentDbVersionsByName isEqual:currentVersions])
             return;
         
-        _currentDbInfo = currentDbInfo?:@{};
+        _currentDbVersionsByName = currentVersions;
         
         NSString *path = [[self class] currentDBInfoFilePath];
-        [_currentDbInfo writeToFile:path atomically:YES];
+        [currentVersions writeToFile:path atomically:YES];
         [path addSkipBackupAttribute];
     }
 }

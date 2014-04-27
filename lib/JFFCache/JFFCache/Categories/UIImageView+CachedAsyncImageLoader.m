@@ -44,7 +44,7 @@ jffAsycLoadedImageURL;
     
     __weak UIImageView *weakSelf = self;
     
-    JFFDidFinishAsyncOperationHandler doneCallback = ^(UIImage *result, NSError *error) {
+    JFFDidFinishAsyncOperationCallback doneCallback = ^(UIImage *result, NSError *error) {
         
         [error writeErrorWithJFFLogger];
         [weakSelf jffSetImage:result URL:url];

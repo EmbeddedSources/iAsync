@@ -6,7 +6,6 @@
 typedef void (^JFFSimpleBlock)(void);
 typedef BOOL (^JFFPredicateBlock)(id object);
 typedef BOOL (^JFFPredicateWithIndexBlock)(id object, NSUInteger index);
-typedef BOOL (^JFFResultPredicateBlock)(id result, NSError *error);
 typedef id (^JFFAnalyzer)(id result, NSError **outError);
 
 #endif //JFF_UTILS_BLOCK_DEFINITIONS

@@ -1,3 +1,3 @@
 #import "JFFAsyncOperationsPredefinedBlocks.h"
 
-JFFCancelAsyncOperation JFFStubCancelAsyncOperationBlock = ^void(BOOL cancel){ /*do nothing*/ };
+JFFAsyncOperationHandler JFFStubHandlerAsyncOperationBlock = ^void(JFFAsyncOperationHandlerTask task){ /*do nothing*/ };
