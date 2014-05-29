@@ -52,7 +52,7 @@
             NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
             if (runLoop != [NSRunLoop mainRunLoop]) {
                 _connectRunLoop = runLoop;
-                [nativeConnection scheduleInRunLoop:runLoop forMode: NSDefaultRunLoopMode];
+                [nativeConnection scheduleInRunLoop:runLoop forMode:NSDefaultRunLoopMode];
             }
             
             _nativeConnection = nativeConnection;
