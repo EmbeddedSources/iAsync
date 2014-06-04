@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		37A360261642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A360251642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m */; };
-		37D865291643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D865281643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m */; };
 		4C6C1D8817AA54D30087127E /* JFFStoreKitDisabledError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6C1D8717AA54D30087127E /* JFFStoreKitDisabledError.m */; };
 		4C6DA35617E1AD5F00501F48 /* asyncSKFinishTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DA35517E1AD5F00501F48 /* asyncSKFinishTransaction.m */; };
+		4CD01D9B19352944005E3AF9 /* appStoreReceiptData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD01D9A19352944005E3AF9 /* appStoreReceiptData.m */; };
 		4CF9DB8A17E05376007D769C /* asyncSKPendingTransactions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF9DB8917E05376007D769C /* asyncSKPendingTransactions.m */; };
 		CEBCBE011619A7D8007F805F /* SKProduct+LocalizedPriceString.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCBE001619A7D8007F805F /* SKProduct+LocalizedPriceString.m */; };
 		CEBCBE071619AB0A007F805F /* asyncSKPaymentQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCBE061619AB0A007F805F /* asyncSKPaymentQueue.m */; };
@@ -117,12 +117,12 @@
 /* Begin PBXFileReference section */
 		37A360241642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStoreKitInvalidProductIdentifierError.h; sourceTree = "<group>"; };
 		37A360251642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStoreKitInvalidProductIdentifierError.m; sourceTree = "<group>"; };
-		37D865271643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKPaymentTransaction+ReceiptInBase64.h"; sourceTree = "<group>"; };
-		37D865281643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKPaymentTransaction+ReceiptInBase64.m"; sourceTree = "<group>"; };
 		4C6C1D8617AA54D30087127E /* JFFStoreKitDisabledError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStoreKitDisabledError.h; sourceTree = "<group>"; };
 		4C6C1D8717AA54D30087127E /* JFFStoreKitDisabledError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStoreKitDisabledError.m; sourceTree = "<group>"; };
 		4C6DA35417E1AD5E00501F48 /* asyncSKFinishTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asyncSKFinishTransaction.h; sourceTree = "<group>"; };
 		4C6DA35517E1AD5F00501F48 /* asyncSKFinishTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asyncSKFinishTransaction.m; sourceTree = "<group>"; };
+		4CD01D9919352944005E3AF9 /* appStoreReceiptData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appStoreReceiptData.h; sourceTree = "<group>"; };
+		4CD01D9A19352944005E3AF9 /* appStoreReceiptData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = appStoreReceiptData.m; sourceTree = "<group>"; };
 		4CF9DB8817E05376007D769C /* asyncSKPendingTransactions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asyncSKPendingTransactions.h; sourceTree = "<group>"; };
 		4CF9DB8917E05376007D769C /* asyncSKPendingTransactions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asyncSKPendingTransactions.m; sourceTree = "<group>"; };
 		CEBCBDEB1619A425007F805F /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
@@ -175,15 +175,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		37D8651D1643FD5600ABFD13 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				37D865271643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.h */,
-				37D865281643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		CEBCBDEC1619A425007F805F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,7 +231,6 @@
 		CED002331619A33E00368E7D /* JFFStoreKit */ = {
 			isa = PBXGroup;
 			children = (
-				37D8651D1643FD5600ABFD13 /* Utils */,
 				CED85B5F161C2C1C00F28EBC /* Errors */,
 				CED0025F1619A37E00368E7D /* asyncAdapters */,
 				CEBCBDFF1619A7D8007F805F /* SKProduct+LocalizedPriceString.h */,
@@ -291,6 +281,8 @@
 				4C6DA35517E1AD5F00501F48 /* asyncSKFinishTransaction.m */,
 				4CF9DB8817E05376007D769C /* asyncSKPendingTransactions.h */,
 				4CF9DB8917E05376007D769C /* asyncSKPendingTransactions.m */,
+				4CD01D9919352944005E3AF9 /* appStoreReceiptData.h */,
+				4CD01D9A19352944005E3AF9 /* appStoreReceiptData.m */,
 			);
 			path = asyncAdapters;
 			sourceTree = "<group>";
@@ -349,7 +341,7 @@
 			name = JFFStoreKitTests;
 			productName = JFFStoreKitTests;
 			productReference = CED0023F1619A33F00368E7D /* JFFStoreKitTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -357,7 +349,7 @@
 		CED002251619A33E00368E7D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0600;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = EmbeddedSources;
 			};
@@ -487,6 +479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CD01D9B19352944005E3AF9 /* appStoreReceiptData.m in Sources */,
 				CEBCBE011619A7D8007F805F /* SKProduct+LocalizedPriceString.m in Sources */,
 				CEBCBE071619AB0A007F805F /* asyncSKPaymentQueue.m in Sources */,
 				CEBCBE241619B1B2007F805F /* asyncPaymentOperations.m in Sources */,
@@ -495,7 +488,6 @@
 				CED85B6E161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.m in Sources */,
 				CED85B71161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.m in Sources */,
 				37A360261642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m in Sources */,
-				37D865291643FDA100ABFD13 /* SKPaymentTransaction+ReceiptInBase64.m in Sources */,
 				4C6C1D8817AA54D30087127E /* JFFStoreKitDisabledError.m in Sources */,
 				4CF9DB8A17E05376007D769C /* asyncSKPendingTransactions.m in Sources */,
 				4C6DA35617E1AD5F00501F48 /* asyncSKFinishTransaction.m in Sources */,
@@ -558,7 +550,7 @@
 					../,
 					.,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LLVM_VECTORIZE_LOOPS = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -584,7 +576,7 @@
 					../,
 					.,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
