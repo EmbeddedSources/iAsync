@@ -11,7 +11,6 @@
 @property (nonatomic, copy) JFFSimpleBlock didDismissHandler;
 @property (nonatomic, readonly) BOOL isOnScreen;
 
-
 //cancelButtonTitle, otherButtonTitles - pass NSString(button title) or JFFAlertButton
 + (instancetype)alertWithTitle:(NSString *)title
                        message:(NSString *)message

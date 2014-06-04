@@ -2,13 +2,13 @@
 
 @class JFFPageSlider;
 
-@protocol JFFPageSliderDelegate < NSObject >
+@protocol JFFPageSliderDelegate <NSObject>
 
 @required
-- (NSInteger)numberOfElementsInStripeView:( JFFPageSlider* )pageSlider_;
+- (NSInteger)numberOfElementsInStripeView:(JFFPageSlider *)pageSlider;
 
-- (UIView *)stripeView:(JFFPageSlider *)pageSlider_
-        elementAtIndex:(NSInteger)index_;
+- (UIView *)stripeView:(JFFPageSlider *)pageSlider
+        elementAtIndex:(NSInteger)index;
 
 - (void)pageSlider:(JFFPageSlider *)pageSlider
 didChangeActiveElementFrom:(NSInteger)previousIndex
@@ -16,6 +16,6 @@ didChangeActiveElementFrom:(NSInteger)previousIndex
 
 @optional
 - (void)pageSlider:(JFFPageSlider *)pageSlider
-handleMemoryWarningForElementAtIndex:(NSInteger)element_index_;
+handleMemoryWarningForElementAtIndex:(NSInteger)elementIndex;
 
 @end

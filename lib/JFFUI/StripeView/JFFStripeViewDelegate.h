@@ -2,7 +2,7 @@
 
 @class JFFStripeView;
 
-@protocol JFFStripeViewDelegate< NSObject >
+@protocol JFFStripeViewDelegate <NSObject>
 
 - (NSUInteger)numberOfElementsInStripeView:(JFFStripeView *)stripeView;
 

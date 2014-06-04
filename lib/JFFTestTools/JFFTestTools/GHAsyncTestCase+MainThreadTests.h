@@ -9,11 +9,11 @@ typedef void (^TestAsyncRequestBlock)(JFFSimpleBlock);
 - (void)performAsyncRequestOnMainThreadWithBlock:(TestAsyncRequestBlock)block
                                         selector:(SEL)selector;
 
--(void)waitForeverForAsyncRequestOnMainThreadWithBlock:(TestAsyncRequestBlock)block
-                                              selector:(SEL)selector;
+- (void)waitForeverForAsyncRequestOnMainThreadWithBlock:(TestAsyncRequestBlock)block
+                                               selector:(SEL)selector;
 
--(void)performAsyncRequestOnMainThreadWithBlock:(TestAsyncRequestBlock)block
-                                       selector:(SEL)selector
-                                        timeout:(NSTimeInterval)timeout;
+- (void)performAsyncRequestOnMainThreadWithBlock:(TestAsyncRequestBlock)block
+                                        selector:(SEL)selector
+                                         timeout:(NSTimeInterval)timeout;
 
 @end

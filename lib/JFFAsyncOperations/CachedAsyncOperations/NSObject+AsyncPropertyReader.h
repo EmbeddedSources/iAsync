@@ -36,11 +36,11 @@ typedef JFFPropertyExtractor *(^JFFPropertyExtractorFactoryBlock)(void);
                                 didFinishLoadDataBlock:(JFFDidFinishAsyncOperationCallback)didFinishOperation;
 
 - (JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
-                                   withArgument:(id< NSCopying, NSObject >)argument;
+                                   withArgument:(id<NSCopying, NSObject>)argument;
 
 - (BOOL)isLoadingPropertyForPropertyName:(NSString *)name;
 
 + (JFFAsyncOperation)asyncOperationMergeLoaders:(JFFAsyncOperation)asyncOperation
-                                   withArgument:(id< NSCopying, NSObject >)argument;
+                                   withArgument:(id<NSCopying, NSObject>)argument;
 
 @end

@@ -5,6 +5,8 @@
 
 static NSString *const mergeObject = @"002fc0c2-07c3-41c4-8296-d6f4c038655a";
 
+typedef BOOL(^FinishTransactionPredicate)(SKPaymentTransaction *);
+
 @interface JFFAsyncSKFinishTransaction : NSObject <
 SKPaymentTransactionObserver,
 JFFAsyncOperationInterface
@@ -15,7 +17,7 @@ JFFAsyncOperationInterface
 @implementation JFFAsyncSKFinishTransaction
 {
     SKPaymentQueue *_queue;
-    SKPaymentTransaction *_transaction;
+    FinishTransactionPredicate _transactionPredicate;
     BOOL _addedToObservers;
     JFFDidFinishAsyncOperationCallback _finishCallback;
 }
@@ -38,13 +40,13 @@ JFFAsyncOperationInterface
     }
 }
 
-+ (instancetype)newFAsyncSKFinishTransactionWithTransaction:(SKPaymentTransaction *)transaction
++ (instancetype)newFAsyncSKFinishTransactionWithPredicate:(BOOL (^)(SKPaymentTransaction *))transactionPredicate
 {
     JFFAsyncSKFinishTransaction *result = [self new];
     
     if (result) {
-        result->_transaction = transaction;
-        result->_queue       = [SKPaymentQueue defaultQueue];
+        result->_transactionPredicate = transactionPredicate;
+        result->_queue                = [SKPaymentQueue defaultQueue];
         
         [result->_queue addTransactionObserver:result];
         result->_addedToObservers = YES;
@@ -64,13 +66,16 @@ JFFAsyncOperationInterface
     
     _finishCallback = [finishCallback copy];
     
-    [_queue finishTransaction:_transaction];
+    NSArray *transactionsToClose = [self transactionsToClose];
     
-    BOOL contains = [_queue.transactions containsObject:_transaction];
-    
-    if (!contains) {
-    
-        [self finishOperation];
+    if ([transactionsToClose count] > 0) {
+        for (SKPaymentTransaction *transaction in transactionsToClose) {
+            [_queue finishTransaction:transaction];
+        }
+    } else {
+        [self finishOperationWithTransactionIDs:[transactionsToClose map:^id(SKPaymentTransaction *transaction) {
+            return transaction.transactionIdentifier;
+        }]];
     }
 }
 
@@ -82,61 +87,107 @@ JFFAsyncOperationInterface
         [self unsubscribeFromObservervation];
 }
 
-- (void)finishOperation
+- (void)finishOperationWithTransactionIDs:(NSArray *)transactionIDs
 {
     [self unsubscribeFromObservervation];
-    _finishCallback(_transaction, nil);
+    _finishCallback(transactionIDs, nil);
+}
+
+- (NSArray *)transactionsToClose
+{
+    return [_queue.transactions select:^BOOL(SKPaymentTransaction *transaction) {
+        return _transactionPredicate(transaction);
+    }];
 }
 
 #pragma mark SKPaymentTransactionObserver
 
 - (void)paymentQueue:(SKPaymentQueue *)queue removedTransactions:(NSArray *)transactions
 {
-    if ([transactions containsObject:_transaction])
-        [self finishOperation];
+    NSArray *transactionsToClose = [self transactionsToClose];
+    if ([transactionsToClose lastObject] == nil)
+        [self finishOperationWithTransactionIDs:@[]];
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-    if (![queue.transactions containsObject:_transaction])
-        [self finishOperation];
+    NSArray *transactionsToClose = [self transactionsToClose];
     
-    switch (_transaction.transactionState)
-    {
-        case SKPaymentTransactionStateFailed:
-        {
-            if (_transaction.error.code != SKErrorPaymentCancelled) {
-                // Optionally, display an error here.
+    if ([transactionsToClose lastObject] == nil)
+        [self finishOperationWithTransactionIDs:@[]];
+    
+    for (SKPaymentTransaction *transaction in transactionsToClose) {
+        
+        if (SKPaymentTransactionStateFailed == transaction.transactionState) {
+            if (transaction.error.code != SKErrorPaymentCancelled) {
+            // Optionally, display an error here.
             }
             JFFStoreKitTransactionStateFailedError *error = [JFFStoreKitTransactionStateFailedError new];
-            error.transaction = _transaction;
+            error.transaction = transaction;
+            JFFDidFinishAsyncOperationCallback finishCallback = _finishCallback;
             [self unsubscribeFromObservervation];
-            _finishCallback(nil, error);
-            break;
+            if (finishCallback)
+                finishCallback(nil, error);
+            return;
         }
-        default:
-            break;
     }
 }
 
 @end
 
-JFFAsyncOperation asyncOperationFinishTransaction(SKPaymentTransaction *transaction)
+JFFAsyncOperation asyncOperationFinishTransaction(SKPaymentTransaction *originalTransaction)
 {
-    NSCParameterAssert(transaction.transactionState == SKPaymentTransactionStatePurchased
-                       || transaction.transactionState == SKPaymentTransactionStateRestored
-                       || transaction.transactionState == SKPaymentTransactionStateFailed
+    NSCParameterAssert(originalTransaction.transactionState == SKPaymentTransactionStatePurchased
+                       || originalTransaction.transactionState == SKPaymentTransactionStateRestored
+                       || originalTransaction.transactionState == SKPaymentTransactionStateFailed
                        );
     
-    JFFAsyncOperationInstanceBuilder factory = ^id< JFFAsyncOperationInterface >() {
-        return [JFFAsyncSKFinishTransaction newFAsyncSKFinishTransactionWithTransaction:transaction];
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>(void) {
+        return [JFFAsyncSKFinishTransaction newFAsyncSKFinishTransactionWithPredicate:^BOOL(SKPaymentTransaction *transaction) {
+            return [transaction.transactionIdentifier isEqualToString:originalTransaction.transactionIdentifier];
+        }];
     };
     JFFAsyncOperation loader = buildAsyncOperationWithAdapterFactory(factory);
     
-    id key =
+    id const key =
     @{
       @"cmd" : @(__FUNCTION__),
-      @"transactionIdentifier" : transaction.transactionIdentifier,
+      @"transactionIdentifier" : originalTransaction.transactionIdentifier,
+      };
+    return [mergeObject asyncOperationMergeLoaders:loader withArgument:key];
+}
+
+JFFAsyncOperation asyncOperationFinishTransactions(NSArray *transactionIDs)
+{
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>(void) {
+        NSSet *transactionIDsSet = [[NSSet alloc] initWithArray:transactionIDs];
+        return [JFFAsyncSKFinishTransaction newFAsyncSKFinishTransactionWithPredicate:^BOOL(SKPaymentTransaction *transaction) {
+            return [transactionIDsSet containsObject:transaction.transactionIdentifier];
+        }];
+    };
+    JFFAsyncOperation loader = buildAsyncOperationWithAdapterFactory(factory);
+    
+    id const key =
+    @{
+      @"cmd"            : @(__FUNCTION__),
+      @"transactionIDs" : [[NSSet alloc] initWithArray:transactionIDs], //TODO !!!
+      };
+    return [mergeObject asyncOperationMergeLoaders:loader withArgument:key];
+}
+
+JFFAsyncOperation asyncOperationFinishTransactionsForProducts(NSArray *productIDs)
+{
+    JFFAsyncOperationInstanceBuilder factory = ^id<JFFAsyncOperationInterface>(void) {
+        return [JFFAsyncSKFinishTransaction newFAsyncSKFinishTransactionWithPredicate:^BOOL(SKPaymentTransaction *transaction) {
+            return [productIDs containsObject:transaction.payment.productIdentifier];
+        }];
+    };
+    JFFAsyncOperation loader = buildAsyncOperationWithAdapterFactory(factory);
+    
+    id const key =
+    @{
+      @"cmd"            : @(__FUNCTION__),
+      @"productIDs" : [[NSSet alloc] initWithArray:productIDs], //TODO !!!
       };
     return [mergeObject asyncOperationMergeLoaders:loader withArgument:key];
 }

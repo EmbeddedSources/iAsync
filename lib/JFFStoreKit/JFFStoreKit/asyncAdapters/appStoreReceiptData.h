@@ -2,4 +2,4 @@
 
 #import <Foundation/Foundation.h>
 
-JFFAsyncOperation allPendingTransactionsLoader(void);
+JFFAsyncOperation appStoreReceiptDataLoader(void);

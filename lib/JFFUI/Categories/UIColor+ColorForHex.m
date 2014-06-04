@@ -41,10 +41,10 @@
     [[NSScanner scannerWithString:gString] scanHexInt:&g];
     [[NSScanner scannerWithString:bString] scanHexInt:&b];
     
-    return [self colorWithRed:((float)r / 255.0f)
-                        green:((float)g / 255.0f)
-                         blue:((float)b / 255.0f)
-                        alpha:1.0f];
+    return [self colorWithRed:((float)r / 255.f)
+                        green:((float)g / 255.f)
+                         blue:((float)b / 255.f)
+                        alpha:1.f];
 }
 
 @end

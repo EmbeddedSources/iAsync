@@ -14,7 +14,7 @@
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 
-#define DEFAULT_SEARCH_RADIUS 100.0f
+#define DEFAULT_SEARCH_RADIUS 100.f
 
 @interface JFFTwitterReponsesCache : NSObject <JFFRestKitCache>
 @end

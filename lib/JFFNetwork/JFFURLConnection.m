@@ -97,16 +97,12 @@ static void readStreamCallback(CFReadStreamRef stream,
             [connectionContext.connection handleResponseForReadStream:stream];
             
             CFStreamError error = CFReadStreamGetError(stream);
-			
-			
-			
-			
+            
             JStreamError *wrappedError = [[JStreamError alloc] initWithStreamError:error 
                                                                            context:connectionContext.params];
 
             // @adk : wrap into dispatch_barrier_async() if crashes
             [connectionContext.connection handleFinish:wrappedError];
-	
             break;
         }
         case kCFStreamEventEndEncountered:
@@ -224,8 +220,6 @@ static void readStreamCallback(CFReadStreamRef stream,
     }];
     
     [self closeReadStream];
-
-
 
     _readStream = CFReadStreamCreateForHTTPRequest(NULL, httpRequest);
     CFRelease(httpRequest);

@@ -93,13 +93,6 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
                 progressCallback(progressInfo);
         };
         
-        /*NSArray *skipPt = @[@"profile/profileapi/changes", @"/info/api/report", @"/api/addDeviceProfileId"];
-        
-        if ([skipPt all:^BOOL(id object) {
-            return ![[params.url description] containsString:object];
-        }])*/
-        //NSLog(@"start url: %@", params.url);
-        
         JFFDidFinishAsyncOperationCallback doneCallbackWrapper;
         if (doneCallback) {
             doneCallback = [doneCallback copy];
@@ -108,11 +101,6 @@ static JFFAsyncOperation privateGenericDataURLResponseLoader(JFFURLConnectionPar
                 if ([responseData length] == 0 && !error) {
                     NSLog(@"!!!WARNING!!! request with params: %@ got an empty response", params);
                 }
-                /*if ([skipPt all:^BOOL(id object) {
-                    return ![[params.url description] containsString:object];
-                }])
-                //NSLog(@"done url: %@ response: %@  \n \n", params.url, [responseData toString]);*/
-                //NSLog(@"done url: %@", params.url);
                 doneCallback(result?responseData:nil, error);
             };
         }

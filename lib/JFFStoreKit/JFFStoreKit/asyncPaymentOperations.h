@@ -4,11 +4,11 @@
 
 @interface JFFPurchsing : NSObject
 
-+ (JFFAsyncOperation)purcheserWithProductIdentifier:(NSString *)productIdentifier
++ (JFFAsyncOperation)purchaserWithProductIdentifier:(NSString *)productIdentifier
                                         srvCallback:(JFFAsyncOperationBinder)srvCallback;
 
 //should return [srvResult, transaction] in doneCallback
-+ (JFFAsyncOperation)purcheserWithProduct:(SKProduct *)product
++ (JFFAsyncOperation)purchaserWithProduct:(SKProduct *)product
                               srvCallback:(JFFAsyncOperationBinder)srvCallback;
 
 @end

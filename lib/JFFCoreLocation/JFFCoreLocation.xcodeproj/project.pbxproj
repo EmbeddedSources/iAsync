@@ -243,7 +243,7 @@
 			name = JFFCoreLocationTests;
 			productName = JFFCoreLocationTests;
 			productReference = CE206E0116414CC3002476FD /* JFFCoreLocationTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -251,7 +251,7 @@
 		CE206DE716414CC2002476FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0600;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = EmbeddedSources;
 			};
@@ -372,7 +372,7 @@
 					../,
 					.,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LLVM_VECTORIZE_LOOPS = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -398,7 +398,7 @@
 					../,
 					.,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LLVM_VECTORIZE_LOOPS = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

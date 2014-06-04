@@ -102,7 +102,10 @@
             @autoreleasepool {
                 
                 opResult = loadDataBlock(&error, progressCallback);
-                NSAssert(((opResult != nil) ^ (error != nil)), @"result xor error should be loaded");
+                
+                if (!((opResult != nil) ^ (error != nil))) {
+                    NSAssert1(NO, @"result xor error should be loaded for queue: %s", dispatch_queue_get_label(queue));
+                }
             }
         }
         @catch (NSException *ex) {

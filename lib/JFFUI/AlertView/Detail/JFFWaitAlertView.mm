@@ -12,13 +12,13 @@
 
 - (void)showActivityIndicatorView
 {
-    UIActivityIndicatorView* indicator_ = [ [ UIActivityIndicatorView alloc ] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhiteLarge ];
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 
     // Adjust the indicator so it is up a few pixels from the bottom of the alert
-    indicator_.center = CGPointMake( self.alertView.bounds.size.width / 2.f
-                                    , self.alertView.bounds.size.height / 2.f - 10.f );
-    [ indicator_ startAnimating ];
-    [ self.alertView addSubview: indicator_ ];
+    indicator.center = CGPointMake(self.alertView.bounds.size.width / 2.f,
+                                   self.alertView.bounds.size.height / 2.f - 10.f );
+    [indicator startAnimating];
+    [self.alertView addSubview:indicator];
 }
 
 #pragma mark UIAlertViewDelegate
@@ -36,7 +36,7 @@
         AlignMsgSendFunction alignFunction = (AlignMsgSendFunction)objc_msgSendSuper;
         alignFunction(&superTarget, selector, alertView);
     }
-
+    
     [self showActivityIndicatorView];
 }
 

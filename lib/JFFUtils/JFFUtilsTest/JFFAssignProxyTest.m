@@ -17,16 +17,16 @@
 
 @implementation JFFAssignProxyTest
 
--(void)testAssignProxyDealloc
+- (void)testAssignProxyDealloc
 {
     JFFAssignProxy *proxy;
     __block BOOL targetDeallocated = NO;
     
     {
         ProxyTargetTest *target = [ProxyTargetTest new];
-        [target addOnDeallocBlock: ^void( void ) {
+        [target addOnDeallocBlock: ^void(void) {
             targetDeallocated = YES;
-        } ];
+        }];
         
         proxy = [[JFFAssignProxy alloc] initWithTarget:target];
     }
@@ -34,12 +34,12 @@
     XCTAssertTrue(targetDeallocated, @"Target should be dealloced");
 }
 
--(void)testAssignProxyMethodCalls
+- (void)testAssignProxyMethodCalls
 {
     ProxyTargetTest *target_ = [ProxyTargetTest new];
     
-    id proxy_ = [[JFFAssignProxy alloc] initWithTarget:target_ ];
-    XCTAssertTrue( 5 == [ proxy_ justReturnFiveNumber ], @"Target should be dealloced" );
+    id proxy = [[JFFAssignProxy alloc] initWithTarget:target_];
+    XCTAssertTrue( 5 == [ proxy justReturnFiveNumber ], @"Target should be dealloced" );
 }
 
 @end

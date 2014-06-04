@@ -4,8 +4,7 @@
 
 - (NSString *)localizedPriceString
 {
-    return [NSString localizedPrice:self.price
-                        priceLocale:self.priceLocale];
+    return [NSString localizedPrice:self.price priceLocale:self.priceLocale];
 }
 
 @end

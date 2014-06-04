@@ -19,6 +19,8 @@
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationInterface.h>
 #import <JFFAsyncOperations/AsyncOperartionsBuilder/JFFAsyncOperationBuilder.h>
 
+#import <JFFAsyncOperations/ArrayLoadersMerger/ArrayLoadersMerger.h>
+
 //Errors
 #import <JFFAsyncOperations/Errors/JFFAsyncOpFinishedByCancellationError.h>
 #import <JFFAsyncOperations/Errors/JFFAsyncOpFinishedByUnsubscriptionError.h>
