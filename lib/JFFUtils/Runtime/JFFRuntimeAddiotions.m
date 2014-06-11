@@ -16,8 +16,12 @@ void enumerateAllClassesWithBlock(void(^block)(Class))
         @autoreleasepool {
             
             Class class = classes[index];
+            NSString *className = NSStringFromClass(class);
+            if (![className isEqualToString:@"PFUbiquityLocation"])
             if (class_getClassMethod(class, @selector(conformsToProtocol:)))
+            {
                 block(class);
+            }
         }
     }
 }
