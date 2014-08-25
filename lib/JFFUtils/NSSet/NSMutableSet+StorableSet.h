@@ -4,9 +4,12 @@
 
 + (instancetype)newStorableSetWithContentsOfFile:(NSString *)fileName;
 
-- (BOOL)addAndSaveObject:(id)object;
-- (BOOL)removeAndSaveObject:(id)object;
+- (BOOL)addAndSaveObject:(id)object
+                fileName:(NSString *)fileName;
 
-- (BOOL)saveData;
+- (BOOL)removeAndSaveObject:(id)object
+                   fileName:(NSString *)fileName;
+
+- (BOOL)saveDataWithFileName:(NSString *)fileName;
 
 @end

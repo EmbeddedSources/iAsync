@@ -19,13 +19,13 @@
     return string?scanner(string):nil;
 }
 
-+ (instancetype)newLongLongNumberWithContentsOfFile:(NSString *)fileName
++ (instancetype)newIntNumberWithContentsOfFile:(NSString *)fileName
 {
     NSNumber *(^scanner)(NSString *) = ^NSNumber *(NSString *string) {
         
-        double scannedNumber = 0;
+        int scannedNumber = 0;
         NSScanner *scanner = [NSScanner scannerWithString:string];
-        [scanner scanDouble:&scannedNumber];
+        [scanner scanInt:&scannedNumber];
         NSNumber *result = @(scannedNumber);
         return result;
     };
@@ -38,9 +38,9 @@
 {
     NSNumber *(^scanner)(NSString *) = ^NSNumber *(NSString *string) {
         
-        long long scannedNumber = 0;
+        double scannedNumber = 0;
         NSScanner *scanner = [NSScanner scannerWithString:string];
-        [scanner scanLongLong:&scannedNumber];
+        [scanner scanDouble:&scannedNumber];
         NSNumber *result = @(scannedNumber);
         return result;
     };

@@ -5,23 +5,6 @@
 
 #include "JFFRuntimeAddiotions.h"
 
-@interface NSMutableSet (StorableSet_Internal)
-
-@property (nonatomic) NSString *storeFilePath;
-
-@end
-
-@implementation NSMutableSet (StorableSet_Internal)
-
-@dynamic storeFilePath;
-
-+ (void)load
-{
-    jClass_implementProperty(self, NSStringFromSelector(@selector(storeFilePath)));
-}
-
-@end
-
 @implementation NSMutableSet (StorableSet)
 
 + (instancetype)newStorableSetWithContentsOfFile:(NSString *)fileName
@@ -31,32 +14,34 @@
     fileName = [NSString documentsPathByAppendingPathComponent:fileName];
     NSMutableArray *array = [[NSMutableArray alloc] initWithContentsOfFile:fileName];
     NSMutableSet *result = [[NSMutableSet alloc] initWithArray:array];
-    result.storeFilePath = fileName;
     return result;
 }
 
 - (BOOL)addAndSaveObject:(id)object
+                fileName:(NSString *)fileName
 {
     [self addObject:object];
     
-    return [self saveData];
+    return [self saveDataWithFileName:fileName];
 }
 
 - (BOOL)removeAndSaveObject:(id)object
+                   fileName:(NSString *)fileName
 {
     [self removeObject:object];
     
-    return [self saveData];
+    return [self saveDataWithFileName:fileName];
 }
 
-- (BOOL)saveData
+- (BOOL)saveDataWithFileName:(NSString *)fileName
 {
     NSArray *array = [self allObjects];
     
-    NSString *storeFilePath = self.storeFilePath;
+    NSString *storeFilePath = fileName;
     BOOL result = [array writeToFile:storeFilePath atomically:YES];
-    if (result)
+    if (result) {
         [storeFilePath addSkipBackupAttribute];
+    }
     return result;
 }
 
