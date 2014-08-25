@@ -15,4 +15,6 @@
 
 - (JFFAsyncOperation)barrierBalancedLoaderWithLoader:(JFFAsyncOperation)loader;
 
+- (void)cancelAllActiveLoaders;
+
 @end

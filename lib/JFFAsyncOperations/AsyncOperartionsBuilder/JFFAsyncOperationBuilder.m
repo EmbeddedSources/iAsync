@@ -41,7 +41,7 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactoryWithDispatchQueue(JFFAsyn
                 stateCallback(state);
         };
         
-        NSThread *currntThread = [NSThread currentThread];
+        NSThread *currentThread = [NSThread currentThread];
         
         void (^completionHandler)(id, NSError *) = ^(id result, NSError *error) {
             
@@ -69,7 +69,7 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactoryWithDispatchQueue(JFFAsyn
             } else {
                 
                 if (dispatch_get_main_queue() == callbacksQueue) {
-                    NSCAssert(currntThread == [NSThread currentThread], @"the same thread expected");
+                    NSCAssert(currentThread == [NSThread currentThread], @"the same thread expected");
                 }
                 completionHandler(result, error);
             }
@@ -111,20 +111,17 @@ JFFAsyncOperation buildAsyncOperationWithAdapterFactoryWithDispatchQueue(JFFAsyn
             NSError *error = [JFFAsyncOperationAbstractFinishError newAsyncOperationAbstractFinishErrorWithHandlerTask:task];
             
             if (error) {
-                completionHandler(nil, error);
-                return;
-            } else {
                 
-                if (!stateCallbackCalled) {
-                    
-                    if (stateCallbackHolder) {
-                        
-                        JFFAsyncOperationState state = (task == JFFAsyncOperationHandlerTaskResume)
-                        ?JFFAsyncOperationStateResumed
-                        :JFFAsyncOperationStateSuspended;
-                        stateCallbackHolder(state);
-                    }
+                completionHandler(nil, error);
+            } else if (!stateCallbackCalled) {
+                
+                if (stateCallbackHolder) {
+                    JFFAsyncOperationState state = (task == JFFAsyncOperationHandlerTaskResume)
+                    ?JFFAsyncOperationStateResumed
+                    :JFFAsyncOperationStateSuspended;
+                    stateCallbackHolder(state);
                 }
+                stateCallbackCalled = NO;
             }
         };
     };

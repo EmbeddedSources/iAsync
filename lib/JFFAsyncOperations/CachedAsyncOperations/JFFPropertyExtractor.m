@@ -24,7 +24,6 @@
 @dynamic
 delegates,
 asyncLoader,
-didFinishBlock,
 loaderHandler;
 
 - (void)clearData

@@ -136,8 +136,13 @@ JFFAsyncOperationBinder bindSequenceOfBindersPair(JFFAsyncOperationBinder firstB
                     handlerBlockHolder = nil;
                 }
                 
-                if (task != JFFAsyncOperationHandlerTaskUnSubscribe)
+                if (task != JFFAsyncOperationHandlerTaskUnSubscribe) {
                     currentHandler(task);
+                } else {
+                    if (doneCallbackHolder) {
+                        doneCallbackHolder(nil, [JFFAsyncOpFinishedByUnsubscriptionError new]);
+                    }
+                }
                 
                 if (task <= JFFAsyncOperationHandlerTaskCancel) {
                     
@@ -195,7 +200,7 @@ JFFAsyncOperation accumulateSequenceResult(NSArray *loaders, JFFSequenceResultAc
     
     resultAccumulator = [resultAccumulator copy];
     
-    NSArray *binders = [NSArray arrayWithSize:[loaders count] producer:^id(NSUInteger index) {
+    NSArray *binders = [NSArray arrayWithSize:[loaders count] producer:^id(NSInteger index) {
         
         JFFAsyncOperation loader = loaders[index];
         
@@ -394,8 +399,13 @@ static JFFAsyncOperationBinder bindTrySequenceOfBindersPair(JFFAsyncOperationBin
                 if (task <= JFFAsyncOperationHandlerTaskCancel)
                     handlerBlockHolder = nil;
                 
-                if (task != JFFAsyncOperationHandlerTaskUnSubscribe)
+                if (task != JFFAsyncOperationHandlerTaskUnSubscribe) {
                     currentHandler(task);
+                } else {
+                    if (doneCallbackHolder) {
+                        doneCallbackHolder(nil, [JFFAsyncOpFinishedByUnsubscriptionError new]);
+                    }
+                }
                 
                 if (task <= JFFAsyncOperationHandlerTaskCancel) {
                     
@@ -434,7 +444,7 @@ JFFAsyncOperation trySequenceOfAsyncOperations(JFFAsyncOperation firstLoader,
 
 JFFAsyncOperation trySequenceOfAsyncOperationsArray(NSArray *loaders)
 {
-    NSCParameterAssert([loaders hasElements]);
+    NSCParameterAssert([loaders count] > 0);
     
     NSArray *binders = [loaders map:^id(id loader) {
         loader = [loader copy];
@@ -673,16 +683,6 @@ JFFAsyncOperation groupOfAsyncOperations(JFFAsyncOperation firstLoader, ...)
     return groupOfAsyncOperationsArray(loaders);
 }
 
-static JFFDidFinishAsyncOperationCallback cancelSafeResultBlock(JFFDidFinishAsyncOperationCallback resultBlock,
-                                                               JFFAsyncOperationHandlerBlockHolder *cancelHolder)
-{
-    resultBlock = [resultBlock copy];
-    return ^void(id result, NSError *error) {
-        cancelHolder.loaderHandler = nil;
-        resultBlock(result, error);
-    };
-}
-
 static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOperation firstLoader,
                                                                     JFFAsyncOperation secondLoader)
 {
@@ -691,8 +691,9 @@ static JFFAsyncOperation failOnFirstErrorGroupOfAsyncOperationsPair(JFFAsyncOper
     firstLoader  = [firstLoader  copy];
     secondLoader = [secondLoader copy];
     
-    if (secondLoader == nil)
+    if (secondLoader == nil) {
         return firstLoader;
+    }
     
     return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
                                      JFFAsyncOperationChangeStateCallback stateCallback,
@@ -813,8 +814,9 @@ JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
                                               JFFSimpleBlock doneCallbackHook)
 {
     loader = [loader copy];
-    if (nil == doneCallbackHook)
+    if (nil == doneCallbackHook) {
         return loader;
+    }
     
     doneCallbackHook = [doneCallbackHook copy];
     return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
@@ -825,8 +827,9 @@ JFFAsyncOperation asyncOperationWithDoneBlock(JFFAsyncOperation loader,
         JFFDidFinishAsyncOperationCallback wrappedDoneCallback = ^void(id result, NSError *error) {
             doneCallbackHook();
             
-            if (doneCallback)
+            if (doneCallback) {
                 doneCallback(result, error);
+            }
         };
         return loader(progressCallback, stateCallback, wrappedDoneCallback);
     };

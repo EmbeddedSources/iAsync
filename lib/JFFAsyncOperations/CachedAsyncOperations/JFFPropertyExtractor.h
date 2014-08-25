@@ -13,7 +13,6 @@
 @property (nonatomic) NSMutableArray *delegates;
 @property (nonatomic, copy) JFFAsyncOperation asyncLoader;
 @property (nonatomic, copy) JFFAsyncOperationHandler loaderHandler;
-@property (nonatomic, copy) JFFDidFinishAsyncOperationCallback didFinishBlock;
 
 @property (nonatomic) id property;
 

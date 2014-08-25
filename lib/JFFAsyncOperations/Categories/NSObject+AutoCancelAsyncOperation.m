@@ -16,8 +16,8 @@
     nativeAsyncOp = [nativeAsyncOp copy];
     return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
                                      JFFAsyncOperationChangeStateCallback stateCallback,
-                                     JFFDidFinishAsyncOperationCallback doneCallback)
-    {
+                                     JFFDidFinishAsyncOperationCallback doneCallback) {
+        
         id self_ = weakSelf;
         
         if (self_ == nil) {
@@ -30,22 +30,18 @@
         
         __block BOOL finished = NO;
         
-        JFFSimpleBlockHolder *ondeallocBlockHolder = [JFFSimpleBlockHolder new];
-        
-        JFFSimpleBlockHolder *removeOndeallocBlockHolder = [JFFSimpleBlockHolder new];
-        removeOndeallocBlockHolder.simpleBlock = ^void(void) {
-            finished = YES;
-            
-            if (ondeallocBlockHolder.simpleBlock) {
-                [weakSelf removeOnDeallocBlock:ondeallocBlockHolder.simpleBlock];
-                ondeallocBlockHolder.simpleBlock = nil;
-            }
-        };
+        __block JFFSimpleBlock handlerHolder;
         
         JFFDidFinishAsyncOperationBlockHolder *doneCallbackHolder = [JFFDidFinishAsyncOperationBlockHolder new];
         doneCallbackHolder.didFinishBlock = doneCallback;
         JFFDidFinishAsyncOperationCallback doneCallbackWrapper = ^void(id result, NSError *error) {
-            removeOndeallocBlockHolder.onceSimpleBlock();
+            
+            if (handlerHolder) {
+                [weakSelf removeOnDeallocBlock:handlerHolder];
+                handlerHolder = nil;
+            }
+            
+            finished = YES;
             doneCallbackHolder.onceDidFinishBlock(result, error);
         };
         
@@ -57,14 +53,13 @@
             return JFFStubHandlerAsyncOperationBlock;
         }
         
-        //TODO remove using of ondealloc block holder class
-        ondeallocBlockHolder.simpleBlock = ^void(void) {
+        handlerHolder = ^void(void) {
             
             loadersHandler(task);
         };
         
         //try assert retain count
-        [self_ addOnDeallocBlock:ondeallocBlockHolder.onceSimpleBlock];
+        [self_ addOnDeallocBlock:handlerHolder];
         
         __block JFFAsyncOperationHandler handlerBlockHolder = [^void(JFFAsyncOperationHandlerTask task) {
             loadersHandler(task);

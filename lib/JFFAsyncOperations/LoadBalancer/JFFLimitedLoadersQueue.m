@@ -41,6 +41,16 @@
     return [self initWithExecutionOrder:JQOrderFifo];
 }
 
+- (void)cancelAllActiveLoaders
+{
+    for (JFFBaseLoaderOwner *activeLoader in _activeLoaders) {
+        
+        if (activeLoader.loadersHandler) {
+            activeLoader.loadersHandler(JFFAsyncOperationHandlerTaskCancel);
+        }
+    }
+}
+
 - (BOOL)hasLoadersReadyToStartForPendingLoader:(JFFBaseLoaderOwner *)pendingLoader
 {
     if (pendingLoader.barrier) {
@@ -109,8 +119,9 @@
         return ^(JFFAsyncOperationHandlerTask task) {
             
             JFFBaseLoaderOwner *loaderHolder = weakLoaderHolder;
-            if (!loaderHolder)
+            if (!loaderHolder) {
                 return;
+            }
             
             switch (task) {
                 case JFFAsyncOperationHandlerTaskUnSubscribe:

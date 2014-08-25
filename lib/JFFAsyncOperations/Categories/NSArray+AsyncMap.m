@@ -30,8 +30,9 @@
         JFFAsyncOperation loader = block(object);
         JFFDidFinishAsyncOperationCallback finishCallbackBlock = ^void(id localResult, NSError *error) {
             
-            if (localResult)
+            if (localResult) {
                 [result addObject:localResult];
+            }
         };
         return asyncOperationWithFinishCallbackBlock(loader, finishCallbackBlock);
     }];
