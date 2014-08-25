@@ -18,6 +18,7 @@ typedef NS_ENUM(NSUInteger, JFFAVCaptureVideoOrientation)
 @interface JFFPhotoCamera : NSObject
 
 @property (nonatomic, readonly) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
+@property (nonatomic, readonly) NSSet *availableCameraTypes;
 @property (nonatomic, copy) NSString *sessionPreset;
 @property (nonatomic) JFFCameraFlashModeType flashMode;
 @property (nonatomic) JFFPhotoCameraType photoCameraType;

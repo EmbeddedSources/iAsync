@@ -59,6 +59,11 @@ static JFFMutableAssignArray *__allActiveCameras;
 
 @dynamic captureVideoPreviewLayer;
 
+- (void)dealloc
+{
+    [self stopRunning];
+}
+
 + (instancetype)allocWithZone:(NSZone *)zone
 {
     JFFPhotoCamera *result = [super allocWithZone:zone];
@@ -91,6 +96,10 @@ static JFFMutableAssignArray *__allActiveCameras;
         [self initCaptureSessions];
         [self setupCaptureInputs ];
         [self setupImageOutput   ];
+        
+        if (![[self availableCameraTypes] containsObject:@(photoCameraType)]) {
+            return nil;
+        }
     }
     
     return self;
@@ -112,24 +121,58 @@ static JFFMutableAssignArray *__allActiveCameras;
     
     for (AVCaptureDevice *device in videoDevices) {
         
-        if (device.position == AVCaptureDevicePositionFront) {
-            _frontCameraDevice = device;
-            break;
+        switch (device.position) {
+            case AVCaptureDevicePositionBack:
+                _backCameraDevice = device;
+                break;
+            case AVCaptureDevicePositionFront:
+                _frontCameraDevice = device;
+                break;
+            default:
+                break;
         }
     }
     
-    NSError *error;
-    _frontCamInput = [AVCaptureDeviceInput deviceInputWithDevice:_frontCameraDevice error:&error];
+    __weak JFFPhotoCamera *weakSelf = self;
     
-    NSAssert(!error, @"frontCamInput not intialized");
+    _frontCamInput = ^AVCaptureDeviceInput *() {
+        
+        JFFPhotoCamera *self_ = weakSelf;
+        
+        if (!self_)
+            return nil;
+        
+        NSError *error;
+        AVCaptureDeviceInput *result = (self_->_frontCameraDevice != nil)?[AVCaptureDeviceInput deviceInputWithDevice:self_->_frontCameraDevice error:&error]:nil;
+        
+        if (error)
+            NSLog(@"frontCamInput error: %@", [error errorLogDescription]);
+        
+        return result;
+    }();
     
-    _backCameraDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    _backCamInput = ^AVCaptureDeviceInput *() {
+        
+        JFFPhotoCamera *self_ = weakSelf;
+        
+        if (!self_)
+            return nil;
+        
+        NSError *error;
+        AVCaptureDeviceInput *result = (self_->_backCameraDevice != nil)?[AVCaptureDeviceInput deviceInputWithDevice:self_->_backCameraDevice error:&error]:nil;
+        
+        if (error)
+            NSLog(@"backCamInput error: %@", [error errorLogDescription]);
+        
+        return result;
+    }();
     
-    _backCamInput = [AVCaptureDeviceInput deviceInputWithDevice:_backCameraDevice error:&error];
+    AVCaptureDeviceInput *currCamInput = (_photoCameraType == JFFPhotoCameraFront)
+    ?(_frontCamInput?:_backCamInput )
+    :(_backCamInput ?:_frontCamInput);
     
-    NSAssert(!error, @"frontCamInput not intialized");
-    
-    [_captureSession addInput:(_photoCameraType == JFFPhotoCameraFront)?_frontCamInput:_backCamInput];
+    if (currCamInput)
+        [_captureSession addInput:currCamInput];
 }
 
 - (CALayer *)captureVideoPreviewLayer
@@ -210,6 +253,20 @@ static JFFMutableAssignArray *__allActiveCameras;
     return _photoCameraType;
 }
 
+- (NSSet *)availableCameraTypes
+{
+    NSMutableSet *result = [NSMutableSet new];
+    
+    if (_frontCamInput) {
+        [result addObject:@(JFFPhotoCameraFront)];
+    }
+    if (_backCamInput) {
+        [result addObject:@(JFFPhotoCameraBack)];
+    }
+    
+    return [result copy];
+}
+
 - (void)setPhotoCameraType:(JFFPhotoCameraType)photoCameraType
 {
     if (_photoCameraType == photoCameraType)
@@ -226,8 +283,8 @@ static JFFMutableAssignArray *__allActiveCameras;
     
     [_captureSession beginConfiguration];
     
-    [_captureSession removeInput: frontCameraWasActive?_frontCamInput:_backCamInput];
-    [_captureSession addInput:    frontCameraWasActive?_backCamInput :_frontCamInput];
+    [_captureSession removeInput:frontCameraWasActive?_frontCamInput:_backCamInput];
+    [_captureSession addInput:   frontCameraWasActive?_backCamInput :_frontCamInput];
     
     [_captureSession commitConfiguration];
     
@@ -280,8 +337,8 @@ static JFFMutableAssignArray *__allActiveCameras;
     
     callback = [callback copy];
     
-    BOOL fixOrientation = self.fixOrientation;
-    BOOL rotateImage    = self.rotateImage;
+    BOOL fixOrientation = _fixOrientation;
+    BOOL rotateImage    = _rotateImage;
     
     JFFPhotoCameraType photoCameraType = _photoCameraType;
     
