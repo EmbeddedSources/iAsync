@@ -18,11 +18,11 @@
     
     NSArray *tweets = jsonObject[@"statuses"];
     
-    NSArray *result = [tweets map:^id(id object, NSError *__autoreleasing *outError)
-    {
+    NSArray *result = [tweets map:^id(id object, NSError *__autoreleasing *outError) {
+        
         return [JFFTweet newTweetWithTwitterJSONApiDictionary:object
                                                         error:outError];
-    } error:outError];
+    } outError:outError];
     
     return result;
 }
