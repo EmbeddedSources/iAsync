@@ -18,6 +18,7 @@
 #import <Foundation/Foundation.h>
 
 #import "FBGraphObject.h"
+#import "FBSDKMacros.h"
 
 // up-front decl's
 @class FBRequest;
@@ -35,9 +36,9 @@
 
  @discussion This is a bitflag enum that can be composed of different values.
 
-     See FBError.h and FBErrorUtility.h for error category and user message details.
+ See FBError.h and FBErrorUtility.h for error category and user message details.
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, FBRequestConnectionErrorBehavior) {
     /*! The default behavior of none */
     FBRequestConnectionErrorBehaviorNone                   = 0,
 
@@ -69,7 +70,7 @@ typedef enum {
      that will be subject to race conditions.
      */
     FBRequestConnectionErrorBehaviorReconnectSession     = 4,
-} FBRequestConnectionErrorBehavior;
+};
 
 /*!
  Normally requests return JSON data that is parsed into a set of `NSDictionary`
@@ -78,8 +79,8 @@ typedef enum {
  When a request returns a non-JSON response, that response is packaged in
  a `NSDictionary` using FBNonJSONResponseProperty as the key and the literal
  response as the value.
-*/
-extern NSString *const FBNonJSONResponseProperty;
+ */
+FBSDK_EXTERN NSString *const FBNonJSONResponseProperty;
 
 /*!
  @typedef FBRequestHandler
@@ -95,15 +96,131 @@ extern NSString *const FBNonJSONResponseProperty;
  @param connection      The `FBRequestConnection` that sent the request.
 
  @param result          The result of the request.  This is a translation of
-                        JSON data to `NSDictionary` and `NSArray` objects.  This
-                        is nil if there was an error.
+ JSON data to `NSDictionary` and `NSArray` objects.  This
+ is nil if there was an error.
 
  @param error           The `NSError` representing any error that occurred.
 
-*/
+ */
 typedef void (^FBRequestHandler)(FBRequestConnection *connection,
                                  id result,
                                  NSError *error);
+
+/*!
+ @protocol
+
+ @abstract
+ The `FBRequestConnectionDelegate` protocol defines the methods used to receive network
+ activity progress information from a <FBRequestConnection>.
+ */
+@protocol FBRequestConnectionDelegate <NSObject>
+
+@optional
+
+/*!
+ @method
+
+ @abstract
+ Tells the delegate the request connection will begin loading
+
+ @discussion
+ If the <FBRequestConnection> is created using one of the convenience factory methods prefixed with
+ start, the object returned from the convenience method has already begun loading and this method
+ will not be called when the delegate is set.
+
+ @param connection    The request connection that is starting a network request
+ @param isCached      YES if the request can be fulfilled using cached data, otherwise NO indicating
+                      the result will require a network request.
+ */
+- (void)requestConnectionWillBeginLoading:(FBRequestConnection *)connection
+                                fromCache:(BOOL)isCached;
+
+/*!
+ @method
+
+ @abstract
+ Tells the delegate the request connection finished loading
+
+ @discussion
+ If the request connection completes without a network error occuring then this method is called.
+ Invocation of this method does not indicate success of every <FBRequest> made, only that the
+ request connection has no further activity. Use the error argument passed to the FBRequestHandler
+ block to determine success or failure of each <FBRequest>.
+
+ This method is invoked after the completion handler for each <FBRequest>.
+
+ @param connection    The request connection that successfully completed a network request
+ @param isCached      YES if the request was fulfilled using cached data, otherwise NO indicating
+                      a network request was completed.
+ */
+- (void)requestConnectionDidFinishLoading:(FBRequestConnection *)connection
+                                fromCache:(BOOL)isCached;
+
+/*!
+ @method
+
+ @abstract
+ Tells the delegate the request connection failed with an error
+
+ @discussion
+ If the request connection fails with a network error then this method is called. The `error`
+ argument specifies why the network connection failed. The `NSError` object passed to the
+ FBRequestHandler block may contain additional information.
+
+ This method is invoked after the completion handler for each <FBRequest> and only if a network
+ request was made. If the request was fulfilled using cached data, this method is not called.
+
+ @param connection    The request connection that successfully completed a network request
+ @param error         The `NSError` representing the network error that occurred, if any. May be nil
+                      in some circumstances. Consult the `NSError` for the <FBRequest> for reliable
+                      failure information.
+ */
+- (void)requestConnection:(FBRequestConnection *)connection
+         didFailWithError:(NSError *)error;
+
+/*!
+ @method
+
+ @abstract
+ Tells the delegate the request connection is going to retry some network operations
+
+ @discussion
+ If some <FBRequests> fail, <FBRequestConnection> may create a new instance to retry the failed
+ requests. This method is called before the new instance is started. You must set the delegate
+ property on `retryConnection` to continue to receive progress information. If a delegate is
+ set on `retryConnection` then -requestConnectionWillBeginLoading: will be invoked.
+
+ This method is invoked after the completion handler for each <FBRequest> and only if a network
+ request was made. If the request was fulfilled using cached data, this method is not called.
+
+ @param connection      The request connection that successfully completed a network request
+ @param retryConnection The new request connection that will retry the failed <FBRequest>s
+ */
+- (void)     requestConnection:(FBRequestConnection *)connection
+willRetryWithRequestConnection:(FBRequestConnection *)retryConnection;
+
+/*!
+ @method
+
+ @abstract
+ Tells the delegate how much data has been sent and is planned to send to the remote host
+
+ @discussion
+ The byte count arguments refer to the aggregated <FBRequest> objects, not a particular <FBRequest>.
+
+ Like `NSURLConnection`, the values may change in unexpected ways if data needs to be resent.
+
+ @param connection                The request connection transmitting data to a remote host
+ @param bytesWritten              The number of bytes sent in the last transmission
+ @param totalBytesWritten         The total number of bytes sent to the remote host
+ @param totalBytesExpectedToWrite The total number of bytes expected to send to the remote host
+ */
+- (void)requestConnection:(FBRequestConnection *)connection
+          didSendBodyData:(NSInteger)bytesWritten
+        totalBytesWritten:(NSInteger)totalBytesWritten
+totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite;
+
+@end
 
 /*!
  @class FBRequestConnection
@@ -116,19 +233,19 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  `FBRequestConnection` object encapsulates the concerns of a single communication
  e.g. starting a connection, canceling a connection, or batching requests.
 
-*/
+ */
 @interface FBRequestConnection : NSObject
 
 /*!
  @methodgroup Creating a request
-*/
+ */
 
 /*!
  @method
 
  Calls <initWithTimeout:> with a default timeout of 180 seconds.
-*/
-- (id)init;
+ */
+- (instancetype)init;
 
 /*!
  @method
@@ -149,9 +266,9 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  must be set either in the plist or through an explicit call to <[FBSession defaultAppID]>.
 
  @param timeout         The `NSTimeInterval` (seconds) to wait for a response before giving up.
-*/
+ */
 
-- (id)initWithTimeout:(NSTimeInterval)timeout;
+- (instancetype)initWithTimeout:(NSTimeInterval)timeout;
 
 // properties
 
@@ -166,7 +283,7 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  the `NSMutableURLRequest` must result in an appropriate response.  Furthermore, once
  this property has been set, no more <FBRequest> objects can be added to this
  `FBRequestConnection`.
-*/
+ */
 @property (nonatomic, retain, readwrite) NSMutableURLRequest *urlRequest;
 
 /*!
@@ -179,7 +296,7 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
 
  The property is nil until the request completes.  If there was a response
  then this property will be non-nil during the FBRequestHandler callback.
-*/
+ */
 @property (nonatomic, retain, readonly) NSHTTPURLResponse *urlResponse;
 
 /*!
@@ -193,12 +310,14 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  When using retry behaviors, note the FBRequestConnection instance
  passed to the FBRequestHandler may be a different instance that the
  one the requests were originally started on.
-*/
+ */
 @property (nonatomic, assign) FBRequestConnectionErrorBehavior errorBehavior;
+
+@property (nonatomic, assign) id<FBRequestConnectionDelegate> delegate;
 
 /*!
  @methodgroup Adding requests
-*/
+ */
 
 /*!
  @method
@@ -212,9 +331,9 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
 
  @param request       A request to be included in the round-trip when start is called.
  @param handler       A handler to call back when the round-trip completes or times out.
-                      The handler will be invoked on the main thread.
-*/
-- (void)addRequest:(FBRequest*)request
+ The handler will be invoked on the main thread.
+ */
+- (void)addRequest:(FBRequest *)request
  completionHandler:(FBRequestHandler)handler;
 
 /*!
@@ -231,16 +350,16 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  @param request         A request to be included in the round-trip when start is called.
 
  @param handler         A handler to call back when the round-trip completes or times out.
-                        The handler will be invoked on the main thread.
+ The handler will be invoked on the main thread.
 
  @param name            An optional name for this request.  This can be used to feed
  the results of one request to the input of another <FBRequest> in the same
  `FBRequestConnection` as described in
  [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
-*/
-- (void)addRequest:(FBRequest*)request
+ */
+- (void)addRequest:(FBRequest *)request
  completionHandler:(FBRequestHandler)handler
-    batchEntryName:(NSString*)name;
+    batchEntryName:(NSString *)name;
 
 /*!
  @method
@@ -261,13 +380,13 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  as described in [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
  Examples include "depends_on", "name", or "omit_response_on_success".
  */
-- (void)addRequest:(FBRequest*)request
+- (void)addRequest:(FBRequest *)request
  completionHandler:(FBRequestHandler)handler
-   batchParameters:(NSDictionary*)batchParameters;
+   batchParameters:(NSDictionary *)batchParameters;
 
 /*!
  @methodgroup Instance methods
-*/
+ */
 
 /*!
  @method
@@ -290,7 +409,7 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  In this scenario all requests fail.
 
  This method cannot be called twice for an `FBRequestConnection` instance.
-*/
+ */
 - (void)start;
 
 /*!
@@ -306,8 +425,23 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  does promise that  all handlers will complete before the cancel returns. A call to
  cancel prior to a start implies a cancellation of all requests associated
  with the connection.
-*/
+ */
 - (void)cancel;
+
+/*!
+ @method
+
+ @abstract
+ Overrides the default version for a batch request
+
+ @discussion
+ The SDK automatically prepends a version part, such as "v2.0" to API paths in order to simplify API versioning
+ for applications. If you want to override the version part while using batch requests on the connection, call
+ this method to set the version for the batch request.
+
+ @param version   This is a string in the form @"v2.0" which will be used for the version part of an API path
+ */
+- (void)overrideVersionPartWith:(NSString *)version;
 
 /*!
  @method
@@ -321,7 +455,7 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
 
  @param handler          The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startForMeWithCompletionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startForMeWithCompletionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -335,7 +469,7 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
 
  @param handler          The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startForMyFriendsWithCompletionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startForMyFriendsWithCompletionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -347,8 +481,8 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  @param photo            A `UIImage` for the photo to upload.
  @param handler          The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startForUploadPhoto:(UIImage *)photo
-                          completionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startForUploadPhoto:(UIImage *)photo
+                           completionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -401,18 +535,18 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  @param radius          The search radius in meters.
 
  @param limit           The maxiumum number of results to return.  It is
-                        possible to receive fewer than this because of the
-                        radius and because of server limits.
+ possible to receive fewer than this because of the
+ radius and because of server limits.
 
  @param searchText      The text to use in the query to narrow the set of places
-                        returned.
+ returned.
  @param handler          The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startForPlacesSearchAtCoordinate:(CLLocationCoordinate2D)coordinate
-                                          radiusInMeters:(NSInteger)radius
-                                            resultsLimit:(NSInteger)limit
-                                              searchText:(NSString*)searchText
-                                       completionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startForPlacesSearchAtCoordinate:(CLLocationCoordinate2D)coordinate
+                                           radiusInMeters:(NSInteger)radius
+                                             resultsLimit:(NSInteger)limit
+                                               searchText:(NSString *)searchText
+                                        completionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -444,8 +578,8 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
 
  @param handler The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startForCustomAudienceThirdPartyID:(FBSession *)session
-                                         completionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startForCustomAudienceThirdPartyID:(FBSession *)session
+                                          completionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -460,8 +594,8 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  @param graphPath        The Graph API endpoint to use for the request, for example "me".
  @param handler          The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startWithGraphPath:(NSString*)graphPath
-                         completionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startWithGraphPath:(NSString *)graphPath
+                          completionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -474,8 +608,8 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  @param object           The object to delete, may be an NSString or NSNumber representing an fbid or an NSDictionary with an id property
  @param handler          The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startForDeleteObject:(id)object
-                           completionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startForDeleteObject:(id)object
+                            completionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -493,10 +627,10 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
 
  @discussion This method is typically used for posting an open graph action. If you are only
  posting an open graph object (without an action), consider using `startForPostOpenGraphObject:completionHandler:`
-*/
-+ (FBRequestConnection*)startForPostWithGraphPath:(NSString*)graphPath
-                                      graphObject:(id<FBGraphObject>)graphObject
-                                completionHandler:(FBRequestHandler)handler;
+ */
++ (FBRequestConnection *)startForPostWithGraphPath:(NSString *)graphPath
+                                       graphObject:(id<FBGraphObject>)graphObject
+                                 completionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -516,10 +650,10 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
 
  @param handler          The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startWithGraphPath:(NSString*)graphPath
-                                parameters:(NSDictionary*)parameters
-                                HTTPMethod:(NSString*)HTTPMethod
-                         completionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startWithGraphPath:(NSString *)graphPath
+                                 parameters:(NSDictionary *)parameters
+                                 HTTPMethod:(NSString *)HTTPMethod
+                          completionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -534,8 +668,8 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
 
  @param handler          The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startForPostOpenGraphObject:(id<FBOpenGraphObject>)object
-                                  completionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startForPostOpenGraphObject:(id<FBOpenGraphObject>)object
+                                   completionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -554,13 +688,13 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
  @param objectProperties Any additional properties for the Open Graph object.
  @param handler          The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startForPostOpenGraphObjectWithType:(NSString *)type
-                                                      title:(NSString *)title
-                                                      image:(id)image
-                                                        url:(id)url
-                                                description:(NSString *)description
-                                           objectProperties:(NSDictionary *)objectProperties
-                                          completionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startForPostOpenGraphObjectWithType:(NSString *)type
+                                                       title:(NSString *)title
+                                                       image:(id)image
+                                                         url:(id)url
+                                                 description:(NSString *)description
+                                            objectProperties:(NSDictionary *)objectProperties
+                                           completionHandler:(FBRequestHandler)handler;
 
 /*!
  @method
@@ -575,8 +709,8 @@ typedef void (^FBRequestHandler)(FBRequestConnection *connection,
 
  @param handler          The handler block to call when the request completes with a success, error, or cancel action.
  */
-+ (FBRequestConnection*)startForUpdateOpenGraphObject:(id<FBOpenGraphObject>)object
-                                    completionHandler:(FBRequestHandler)handler;
++ (FBRequestConnection *)startForUpdateOpenGraphObject:(id<FBOpenGraphObject>)object
+                                     completionHandler:(FBRequestHandler)handler;
 
 /*!
  @method

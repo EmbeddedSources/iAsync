@@ -21,9 +21,10 @@
 #import "FBOpenGraphAction.h"
 #import "FBOpenGraphObject.h"
 #import "FBRequestConnection.h"
+#import "FBSDKMacros.h"
 
 /*! The base URL used for graph requests */
-extern NSString* const FBGraphBasePath __attribute__((deprecated));
+FBSDK_EXTERN NSString *const FBGraphBasePath __attribute__((deprecated));
 
 // up-front decl's
 @protocol FBRequestDelegate;
@@ -41,16 +42,15 @@ extern NSString* const FBGraphBasePath __attribute__((deprecated));
  apps time to remove dependency on this.
 
  @deprecated
-*/
+ */
 typedef NSUInteger FBRequestState __attribute__((deprecated));
 
 /*!
  @class FBRequest
 
  @abstract
- The `FBRequest` object is used to setup and manage requests to Facebook Graph
- and REST APIs. This class provides helper methods that simplify the connection
- and response handling.
+ The `FBRequest` object is used to setup and manage requests to the Facebook Graph API.
+ This class provides helper methods that simplify the connection and response handling.
 
  @discussion
  An <FBSession> object is required for all authenticated uses of `FBRequest`.
@@ -69,18 +69,19 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  Class and instance methods prefixed with **start* ** can be used to perform the
  request setup and initiate the connection in a single call.
 
-*/
+ */
 @interface FBRequest : NSObject {
 @private
     id<FBRequestDelegate> _delegate;
-    NSString*             _url;
-    NSURLConnection*      _connection;
-    NSMutableData*        _responseText;
+    NSString *            _url;
+    NSString *            _versionPart;
+    NSURLConnection *     _connection;
+    NSMutableData *       _responseText;
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     FBRequestState        _state;
 #pragma GCC diagnostic pop
-    NSError*              _error;
+    NSError *             _error;
     BOOL                  _sessionDidExpire;
     id<FBGraphObject>     _graphObject;
 }
@@ -90,8 +91,8 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
 
  @method
  Calls <initWithSession:graphPath:parameters:HTTPMethod:> with the default parameters.
-*/
-- (id)init;
+ */
+- (instancetype)init;
 
 /*!
  @method
@@ -103,9 +104,9 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  use the active session pass `[FBSession activeSession]`.
 
  @param graphPath   The Graph API endpoint to use for the request, for example "me".
-*/
-- (id)initWithSession:(FBSession*)session
-            graphPath:(NSString *)graphPath;
+ */
+- (instancetype)initWithSession:(FBSession *)session
+                      graphPath:(NSString *)graphPath;
 
 /*!
  @method
@@ -130,11 +131,11 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  parameters, for example, the access token. The default is nil.
 
  @param HTTPMethod       The HTTP method to use for the request. The default is value of nil implies a GET.
-*/
-- (id)initWithSession:(FBSession*)session
-            graphPath:(NSString *)graphPath
-           parameters:(NSDictionary *)parameters
-           HTTPMethod:(NSString *)HTTPMethod;
+ */
+- (instancetype)initWithSession:(FBSession *)session
+                      graphPath:(NSString *)graphPath
+                     parameters:(NSDictionary *)parameters
+                     HTTPMethod:(NSString *)HTTPMethod;
 
 /*!
  @method
@@ -155,41 +156,10 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  @param graphPath        The Graph API endpoint to use for the request, for example "me".
 
  @param graphObject      An object or open graph action to post.
-*/
-- (id)initForPostWithSession:(FBSession*)session
-                   graphPath:(NSString *)graphPath
-                 graphObject:(id<FBGraphObject>)graphObject;
-
-/*!
- @method
- @abstract
- Initialize a `FBRequest` object that will do a rest API request.
-
- @discussion
- Prefer to use graph requests instead of this where possible.
-
- Note that this only sets properties on the `FBRequest`.
-
- To send the request, initialize a <FBRequestConnection>, add this request,
- and send <[FBRequestConnection start]>.  See other methods on this
- class for shortcuts to simplify this process.
-
- @param session          The session object representing the identity of the Facebook user making
- the request. A nil value indicates a request that requires no token; to
- use the active session pass `[FBSession activeSession]`.
-
- @param restMethod        A valid REST API method.
-
- @param parameters       The parameters for the request. A value of nil sends only the automatically handled
- parameters, for example, the access token. The default is nil.
-
- @param HTTPMethod       The HTTP method to use for the request. The default is value of nil implies a GET.
-
-*/
-- (id)initWithSession:(FBSession*)session
-           restMethod:(NSString *)restMethod
-           parameters:(NSDictionary *)parameters
-           HTTPMethod:(NSString *)HTTPMethod;
+ */
+- (instancetype)initForPostWithSession:(FBSession *)session
+                             graphPath:(NSString *)graphPath
+                           graphObject:(id<FBGraphObject>)graphObject;
 
 /*!
  @abstract
@@ -203,7 +173,7 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  `NSString` parameters are used to generate URL parameter values or JSON
  parameters.  `NSData` and `UIImage` parameters are added as attachments
  to the HTTP body and referenced by name in the URL and/or JSON.
-*/
+ */
 @property (nonatomic, retain, readonly) NSMutableDictionary *parameters;
 
 /*!
@@ -214,7 +184,7 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  May be used to read the session that was automatically set during
  the object initiliazation. Make any required modifications prior to
  sending the request.
-*/
+ */
 @property (nonatomic, retain) FBSession *session;
 
 /*!
@@ -225,22 +195,8 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  May be used to read the Graph API endpoint that was automatically set during
  the object initiliazation. Make any required modifications prior to
  sending the request.
-*/
+ */
 @property (nonatomic, copy) NSString *graphPath;
-
-/*!
- @abstract
- A valid REST API method.
-
- @discussion
- May be used to read the REST method that was automatically set during
- the object initiliazation. Make any required modifications prior to
- sending the request.
-
- Use the Graph API equivalent of the API if it exists as the REST API
- method is deprecated if there is a Graph API equivalent.
-*/
-@property (nonatomic, copy) NSString *restMethod;
 
 /*!
  @abstract
@@ -250,7 +206,7 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  May be used to read the HTTP method that was automatically set during
  the object initiliazation. Make any required modifications prior to
  sending the request.
-*/
+ */
 @property (nonatomic, copy) NSString *HTTPMethod;
 
 /*!
@@ -261,12 +217,28 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  May be used to read the graph object that was automatically set during
  the object initiliazation. Make any required modifications prior to
  sending the request.
-*/
+ */
 @property (nonatomic, retain) id<FBGraphObject> graphObject;
 
 /*!
  @methodgroup Instance methods
-*/
+ */
+
+/*!
+ @method
+ 
+ @abstract
+ Overrides the default version for a single request
+ 
+ @discussion
+ The SDK automatically prepends a version part, such as "v2.0" to API paths in order to simplify API versioning
+ for applications. Sometimes it is preferable to explicitly set the version for a request, which can be 
+ accomplished in one of two ways. The first is to call this method and set an override version part. The second
+ is approach is to include the version part in the api path, for example @"v2.0/me/friends"
+ 
+ @param version   This is a string in the form @"v2.0" which will be used for the version part of an API path
+ */
+- (void)overrideVersionPartWith:(NSString *)version;
 
 /*!
  @method
@@ -280,8 +252,8 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
 
  @param handler   The handler block to call when the request completes with a success, error, or cancel action.
  The handler will be invoked on the main thread.
-*/
-- (FBRequestConnection*)startWithCompletionHandler:(FBRequestHandler)handler;
+ */
+- (FBRequestConnection *)startWithCompletionHandler:(FBRequestHandler)handler;
 
 /*!
  @methodgroup FBRequestConnection start methods
@@ -295,7 +267,7 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  initializing a <FBRequestConnection> object, adding the `FBRequest`
  object to the to the <FBRequestConnection>, and finally starting the
  connection.
-*/
+ */
 
 /*!
  @methodgroup FBRequest factory methods
@@ -311,9 +283,9 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  These method do not initialize an <FBRequestConnection> object. To initiate the API
  call first instantiate an <FBRequestConnection> object, add the request to this object,
  then call the `start` method on the connection instance.
-*/
+ */
 
-// request*
+// request
 //
 // Summary:
 // Helper methods used to create common request objects which can be used to create single or batch connections
@@ -340,7 +312,7 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
 
  Note you may change the session property after construction if a session other than
  the active session is preferred.
-*/
+ */
 + (FBRequest *)requestForMe;
 
 /*!
@@ -358,7 +330,7 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
 
  A successful Graph API call will return an array of <FBGraphUser> objects representing the
  user's friends.
-*/
+ */
 + (FBRequest *)requestForMyFriends;
 
 /*!
@@ -447,11 +419,11 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
 
  @param searchText       The text to use in the query to narrow the set of places
  returned.
-*/
+ */
 + (FBRequest *)requestForPlacesSearchAtCoordinate:(CLLocationCoordinate2D)coordinate
                                    radiusInMeters:(NSInteger)radius
                                      resultsLimit:(NSInteger)limit
-                                       searchText:(NSString*)searchText;
+                                       searchText:(NSString *)searchText;
 
 /*!
  @method
@@ -498,7 +470,7 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
 
  @param graphPath        The Graph API endpoint to use for the request, for example "me".
  */
-+ (FBRequest *)requestForGraphPath:(NSString*)graphPath;
++ (FBRequest *)requestForGraphPath:(NSString *)graphPath;
 
 /*!
  @method
@@ -530,7 +502,7 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  @discussion This method is typically used for posting an open graph action. If you are only
  posting an open graph object (without an action), consider using `requestForPostOpenGraphObject:`
  */
-+ (FBRequest *)requestForPostWithGraphPath:(NSString*)graphPath
++ (FBRequest *)requestForPostWithGraphPath:(NSString *)graphPath
                                graphObject:(id<FBGraphObject>)graphObject;
 
 /*!
@@ -552,9 +524,9 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
 
  @param HTTPMethod       The HTTP method to use for the request. A nil value implies a GET.
  */
-+ (FBRequest *)requestWithGraphPath:(NSString*)graphPath
-                        parameters:(NSDictionary*)parameters
-                        HTTPMethod:(NSString*)HTTPMethod;
++ (FBRequest *)requestWithGraphPath:(NSString *)graphPath
+                         parameters:(NSDictionary *)parameters
+                         HTTPMethod:(NSString *)HTTPMethod;
 
 /*!
  @method
