@@ -1,7 +1,5 @@
 #import "NSArray+BlocksAdditions.h"
 
-#import "JFFClangLiterals.h"
-
 @implementation NSMutableArray (BlocksAdditions)
 
 + (instancetype)converToCurrentTypeMutableArray:(NSMutableArray *)array
@@ -18,24 +16,24 @@
     return [array copy];
 }
 
-+ (instancetype)arrayWithSize:(NSUInteger)size
++ (instancetype)arrayWithSize:(NSInteger)size
                      producer:(JFFProducerBlock)block
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:size];
     
-    for (NSUInteger index = 0; index < size; ++index) {
+    for (NSInteger index = 0; index < size; ++index) {
         [result addObject:block(index)];
     }
     
     return [self converToCurrentTypeMutableArray:result];
 }
 
-+ (instancetype)arrayWithCapacity:(NSUInteger)capacity
++ (instancetype)arrayWithCapacity:(NSInteger)capacity
              ignoringNilsProducer:(JFFProducerBlock)block
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:capacity];
     
-    for (NSUInteger index = 0; index < capacity; ++index) {
+    for (NSInteger index = 0; index < capacity; ++index) {
         id object = block(index);
         if (object)
             [result addObject:object];
@@ -51,14 +49,14 @@
     }];
 }
 
-- (instancetype)select:(JFFPredicateBlock)predicate
+- (instancetype)filter:(JFFPredicateBlock)predicate
 {
-    return [self selectWithIndex:^(id obj, NSUInteger idx) {
+    return [self filterWithIndex:^(id obj, NSInteger idx) {
         return predicate(obj);
     }];
 }
 
-- (instancetype)selectWithIndex:(JFFPredicateWithIndexBlock)predicate
+- (instancetype)filterWithIndex:(JFFPredicateWithIndexBlock)predicate
 {
     NSIndexSet *indexes = [self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         return predicate(obj, idx);
@@ -79,7 +77,7 @@
     return [result copy];
 }
 
-- (instancetype)map:(JFFMappingWithErrorBlock)block error:(NSError **)outError
+- (instancetype)map:(JFFMappingWithErrorBlock)block outError:(NSError **)outError
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
@@ -109,7 +107,7 @@
     return [result copy];
 }
 
-- (instancetype)mapWithIndex:(JFFMappingWithErrorAndIndexBlock)block error:(NSError **)outError
+- (instancetype)mapWithIndex:(JFFMappingWithErrorAndIndexBlock)block outError:(NSError **)outError
 {
     __block NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     
@@ -160,9 +158,9 @@
     return [result copy];
 }
 
-- (NSUInteger)count:(JFFPredicateBlock)predicate
+- (NSInteger)count:(JFFPredicateBlock)predicate
 {
-    __block NSUInteger count = 0;
+    __block NSInteger count = 0;
     
     [self each: ^void(id object) {
         if (predicate(object))
@@ -192,9 +190,9 @@
     return nil;
 }
 
-- (NSUInteger)firstIndexOfObjectMatch:(JFFPredicateBlock)predicate
+- (NSInteger)firstIndexOfObjectMatch:(JFFPredicateBlock)predicate
 {
-    NSUInteger result = 0;
+    NSInteger result = 0;
     for (id object in self) {
         if (predicate(object))
             return result;
@@ -208,25 +206,25 @@
 {
     NSAssert([self count] == [other count], @"Dimensions must match to perform transform action");
     
-    NSUInteger arraySize = [self count];
-    for (NSUInteger itemIndex = 0; itemIndex < arraySize; ++itemIndex) {
+    NSInteger arraySize = [self count];
+    for (NSInteger itemIndex = 0; itemIndex < arraySize; ++itemIndex) {
         block(self[itemIndex], other[itemIndex]);
     }
 }
 
-- (instancetype)devideIntoArrayWithSize:(NSUInteger)size
+- (instancetype)devideIntoArrayWithSize:(NSInteger)size
                       elementIndexBlock:(JFFElementIndexBlock)block
 {
     NSParameterAssert(size > 0);
     NSParameterAssert(block   );
     
     NSMutableArray *mResult = [NSMutableArray arrayWithSize:size
-                                                   producer:^id(NSUInteger index) {
+                                                   producer:^id(NSInteger index) {
         return [NSMutableArray new];
     }];
     
     [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSUInteger inserIndex = block(obj);
+        NSInteger inserIndex = block(obj);
         [mResult[inserIndex] addObject: obj];
     }];
     

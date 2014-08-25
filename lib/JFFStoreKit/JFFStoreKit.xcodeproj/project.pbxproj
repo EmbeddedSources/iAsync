@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		37A360261642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A360251642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m */; };
+		4C68388A1956459200C0D76F /* NSError+CanceledPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6838891956459200C0D76F /* NSError+CanceledPurchase.m */; };
 		4C6C1D8817AA54D30087127E /* JFFStoreKitDisabledError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6C1D8717AA54D30087127E /* JFFStoreKitDisabledError.m */; };
 		4C6DA35617E1AD5F00501F48 /* asyncSKFinishTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6DA35517E1AD5F00501F48 /* asyncSKFinishTransaction.m */; };
 		4CD01D9B19352944005E3AF9 /* appStoreReceiptData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD01D9A19352944005E3AF9 /* appStoreReceiptData.m */; };
@@ -117,6 +118,8 @@
 /* Begin PBXFileReference section */
 		37A360241642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStoreKitInvalidProductIdentifierError.h; sourceTree = "<group>"; };
 		37A360251642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStoreKitInvalidProductIdentifierError.m; sourceTree = "<group>"; };
+		4C6838881956459200C0D76F /* NSError+CanceledPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+CanceledPurchase.h"; sourceTree = "<group>"; };
+		4C6838891956459200C0D76F /* NSError+CanceledPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+CanceledPurchase.m"; sourceTree = "<group>"; };
 		4C6C1D8617AA54D30087127E /* JFFStoreKitDisabledError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFStoreKitDisabledError.h; sourceTree = "<group>"; };
 		4C6C1D8717AA54D30087127E /* JFFStoreKitDisabledError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFStoreKitDisabledError.m; sourceTree = "<group>"; };
 		4C6DA35417E1AD5E00501F48 /* asyncSKFinishTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asyncSKFinishTransaction.h; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 				37A360251642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m */,
 				CED85B6F161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.h */,
 				CED85B70161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.m */,
+				4C6838881956459200C0D76F /* NSError+CanceledPurchase.h */,
+				4C6838891956459200C0D76F /* NSError+CanceledPurchase.m */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 				CEBCBE271619B729007F805F /* asyncSKProductRequest.m in Sources */,
 				CED85B6B161C2C4800F28EBC /* JFFStoreKitError.m in Sources */,
 				CED85B6E161C2C8000F28EBC /* JFFStoreKitCanNoLoadProductError.m in Sources */,
+				4C68388A1956459200C0D76F /* NSError+CanceledPurchase.m in Sources */,
 				CED85B71161C2F7C00F28EBC /* JFFStoreKitTransactionStateFailedError.m in Sources */,
 				37A360261642A4BC00FBA5DD /* JFFStoreKitInvalidProductIdentifierError.m in Sources */,
 				4C6C1D8817AA54D30087127E /* JFFStoreKitDisabledError.m in Sources */,

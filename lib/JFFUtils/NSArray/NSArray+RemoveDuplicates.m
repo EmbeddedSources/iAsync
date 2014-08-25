@@ -2,8 +2,6 @@
 #import "NSArray+BlocksAdditions.h"
 #import "NSArray+IsEmpty.h"
 
-#import "JFFClangLiterals.h"
-
 @implementation NSArray( RemoveDuplicates )
 
 - (instancetype)arrayByRemovingDuplicates
@@ -49,7 +47,7 @@
         searchPredicate = ^BOOL(id itemObject) {
             return predicate(firstItem, itemObject);
         };
-        filtered = [myCopy select:searchPredicate];
+        filtered = [myCopy filter:searchPredicate];
         
         [result addObject:firstItem];
         [myCopy removeObjectsInArray:filtered];

@@ -1,7 +1,5 @@
 #import "NSDictionary+BlocksAdditions.h"
 
-#import "JFFClangLiterals.h"
-
 @implementation NSDictionary (BlocksAdditions)
 
 - (instancetype)map:(JFFDictMappingBlock)block
@@ -15,7 +13,18 @@
     return [result copy];
 }
 
-- (instancetype)map:(JFFDictMappingWithErrorBlock)block error:(NSError *__autoreleasing *)outError
+- (instancetype)forceMap:(JFFDictMappingBlock)block
+{
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
+        id newObject = block(key, object);
+        if (newObject)
+            result[key] = newObject;
+    }];
+    return [result copy];
+}
+
+- (instancetype)map:(JFFDictMappingWithErrorBlock)block outError:(NSError *__autoreleasing *)outError
 {
     __block NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
     
@@ -67,7 +76,7 @@
     }];
 }
 
-- (instancetype)select:(JFFDictPredicateBlock)predicate
+- (instancetype)filter:(JFFDictPredicateBlock)predicate
 {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
     

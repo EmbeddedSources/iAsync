@@ -8,7 +8,7 @@
 
 + (NSArray *)fqCheckinsWithDict:(NSDictionary *)response error:(NSError **)outError
 {
-    NSArray *friendsArray = [[response dictionaryForKey:@"checkins"] arrayForKey:@"items"];
+    NSArray *friendsArray = [response[@"checkins"] arrayForKey:@"items"];
     
     if (friendsArray) {
         friendsArray = [friendsArray map:^id(NSDictionary *object, NSError *__autoreleasing *outError) {
@@ -16,7 +16,7 @@
             FoursquareCheckinsModel *checkinModel = [FoursquareCheckinsModel fqCheckinModelWithDict:object error:outError];
             return checkinModel;
             
-        } error:outError];
+        } outError:outError];
     }
     else
     {

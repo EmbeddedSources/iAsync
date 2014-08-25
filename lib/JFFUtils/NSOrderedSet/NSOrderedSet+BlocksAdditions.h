@@ -21,6 +21,6 @@
 
 //Invokes the block passing in successive elements from self,
 //Creates a new NSSet containing those elements for which the block returns a YES value
-- (instancetype)select:(JFFPredicateBlock)predicate;
+- (instancetype)filter:(JFFPredicateBlock)predicate;
 
 @end

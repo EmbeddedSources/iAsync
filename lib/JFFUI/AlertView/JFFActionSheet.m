@@ -170,7 +170,7 @@
 
 - (void)willPresentActionSheet:(UIActionSheet *)actionSheet
 {
-    NSArray *buttons = [actionSheet.subviews select:^BOOL(UIView* view) {
+    NSArray *buttons = [actionSheet.subviews filter:^BOOL(UIView* view) {
         return [view isKindOfClass:[UIButton class]];
     }];
     

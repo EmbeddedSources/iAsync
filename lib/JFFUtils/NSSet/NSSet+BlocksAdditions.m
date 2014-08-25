@@ -42,14 +42,14 @@
     return [NSSet setWithArray:arrray];
 }
 
-- (instancetype)select:(JFFPredicateBlock)predicate
+- (instancetype)filter:(JFFPredicateBlock)predicate
 {
     return [self objectsPassingTest:^BOOL(id obj, BOOL *stop) {
         return predicate(obj);
     }];
 }
 
-- (NSArray *)selectArray:(JFFPredicateBlock)predicate
+- (NSArray *)filterArray:(JFFPredicateBlock)predicate
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self count]];
     for (id object in self) {

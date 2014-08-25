@@ -8,7 +8,7 @@
 
 + (NSArray *)fqFriendsWithDict:(NSDictionary *)response error:(NSError **)outError
 {
-    NSArray *friendsArray = [[response dictionaryForKey:@"friends"] arrayForKey:@"items"];
+    NSArray *friendsArray = [response[@"friends"] arrayForKey:@"items"];
     
     if (friendsArray) {
         friendsArray = [friendsArray map:^id(NSDictionary *object, NSError *__autoreleasing *outError) {
@@ -16,7 +16,7 @@
             FoursquareUserModel *userModel = [FoursquareUserModel fqUserModelWithDict:object error:outError];
             return userModel;
             
-        } error:outError];
+        } outError:outError];
     }
     else
     {

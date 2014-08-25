@@ -242,7 +242,7 @@
     
     firstIndex = firstIndex > 0 ?: 0;
 
-    NSRange range = { firstIndex, lastIndex - firstIndex + 1 };
+    NSRange range = { static_cast<NSUInteger>(firstIndex), static_cast<NSUInteger>(lastIndex - firstIndex + 1) };
     _previousVisibleIndexesRange = range;
     return _previousVisibleIndexesRange;
 }

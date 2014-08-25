@@ -13,7 +13,7 @@
 
 - (instancetype)arrayByRemovingObject:(id)objectToRemove
 {
-    return [self select:^BOOL(id object) {
+    return [self filter:^BOOL(id object) {
         
         return objectToRemove != object;
     }];

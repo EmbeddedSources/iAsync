@@ -61,7 +61,6 @@
 #import <JFFUtils/Categories/NSDecimalNumber+Increment.h>
 #import <JFFUtils/Categories/NSDateFormatter+MultiThreading.h>
 
-#import <JFFUtils/Dictionary/NSDictionary+ValueWithType.h>
 #import <JFFUtils/Dictionary/NSDictionary+BlocksAdditions.h>
 #import <JFFUtils/Dictionary/NSDictionary+JFFExtendedDictionary.h>
 
@@ -69,7 +68,6 @@
 
 #import <JFFUtils/JSignedRange.h>
 #import <JFFUtils/JGCDAdditions.h>
-#import <JFFUtils/JFFClangLiterals.h>
 #import <JFFUtils/JFFMulticastDelegate.h>
 #import <JFFUtils/JFFMutableAssignArray.h>
 #import <JFFUtils/JFFMutableAssignDictionary.h>

@@ -81,7 +81,7 @@ JFFAsyncOperationInterface
 
 - (NSArray *)restoredTransactionsForTransactions:(NSArray *)transactions
 {
-    NSArray *result = [transactions select:^BOOL(SKPaymentTransaction *transaction) {
+    NSArray *result = [transactions filter:^BOOL(SKPaymentTransaction *transaction) {
         return transaction.transactionState == SKPaymentTransactionStateRestored;
     }];
     

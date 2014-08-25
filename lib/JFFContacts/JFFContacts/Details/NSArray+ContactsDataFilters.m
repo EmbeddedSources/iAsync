@@ -8,7 +8,7 @@
         return [str stringByTrimmingWhitespaces];
     }];
     
-    result = [result select:^BOOL(NSString *str) {
+    result = [result filter:^BOOL(NSString *str) {
         return [str length] != 0;
     }];
     
@@ -21,7 +21,7 @@
         return [str stringByTrimmingWhitespaces];
     }];
     
-    result = [result select:^BOOL(NSString *str) {
+    result = [result filter:^BOOL(NSString *str) {
         return [str isEmailValid];
     }];
     

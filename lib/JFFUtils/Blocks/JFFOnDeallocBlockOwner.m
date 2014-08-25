@@ -16,8 +16,9 @@
 
 - (void)dealloc
 {
-    if (_block)
+    if (_block) {
         _block();
+    }
 }
 
 @end

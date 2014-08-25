@@ -61,7 +61,7 @@ JFFAsyncOperationBinder asyncJSONObjectToTwitterUsers()
             NSArray *accounts = [jsonObject map:^id(id object, NSError *__autoreleasing *outError) {
                 return [JFFTwitterAccount newTwitterAccountWithTwitterJSONApiDictionary:object
                                                                                   error:outError];
-            } error:outError];
+            } outError:outError];
             return accounts;
         };
         

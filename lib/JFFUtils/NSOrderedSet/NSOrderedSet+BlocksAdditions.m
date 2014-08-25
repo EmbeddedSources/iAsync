@@ -80,7 +80,7 @@
     return ![self any:notPredicate];
 }
 
-- (instancetype)select:(JFFPredicateBlock)predicate
+- (instancetype)filter:(JFFPredicateBlock)predicate
 {
     NSIndexSet *indexes = [self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         

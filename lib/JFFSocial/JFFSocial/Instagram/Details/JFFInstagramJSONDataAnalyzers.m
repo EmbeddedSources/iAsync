@@ -129,12 +129,11 @@
     
     NSDictionary *imagesJsonObjects = jsonObject[@"images"];
     
-    JFFDictMappingWithErrorBlock mapBlock = ^(id key, id object, NSError **outError) {
+    NSDictionary *images = [imagesJsonObjects map:^(id key, id object, NSError **outError) {
         return [JFFInstagramMediaItemImage newInstagramMediaItemImageWithJsonObject:object
                                                                               error:outError];
-    };
-    NSDictionary *images = [imagesJsonObjects map:mapBlock
-                                            error:outError];
+    }
+                                         outError:outError];
     
     if (!images)
         return nil;
@@ -285,7 +284,7 @@ JFFAsyncOperationBinder jsonDataToAccountsBinder()
         NSArray *result = [accountsJson map:^id(id object, NSError *__autoreleasing *outError) {
             return [JFFInstagramAccount newInstagramAccountWithJSONObject:object
                                                                     error:outError];
-        } error:outError];
+        } outError:outError];
 
         return result;
     });
@@ -303,7 +302,7 @@ JFFAsyncOperationBinder jsonDataToMediaItems()
         NSArray *result = [mediaItemsJson map:^id(id object, NSError *__autoreleasing *outError) {
             return [JFFInstagramMediaItem newInstagramMediaItemWithJSONObject:object
                                                                         error:outError];
-        } error:outError];
+        } outError:outError];
         
         return result;
     });

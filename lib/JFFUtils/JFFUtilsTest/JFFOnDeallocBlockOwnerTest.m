@@ -13,12 +13,12 @@
         NSObject *blockContext = [NSObject new];
         [blockContext addOnDeallocBlock:^void(void) {
             blockContextDeallocated = YES;
-        } ];
+        }];
         
         JFFOnDeallocBlockOwner *owner = [[JFFOnDeallocBlockOwner alloc] initWithBlock:^void(void) {
             if ([blockContext description])
                 blockCalled = YES;
-        } ];
+        }];
         
         XCTAssertFalse(blockContextDeallocated && owner, @"Block context should not be dealloced");
         XCTAssertFalse(blockCalled, @"block should not be called here");
@@ -35,15 +35,15 @@
     @autoreleasepool {
         NSObject *owner = [NSObject new];
         
-        void(^onDeallocBloc)(void) = [^void(void) {
+        void(^onDeallocBlock)(void) = [^void(void) {
             blockCalled = YES;
         } copy];
         
-        [owner addOnDeallocBlock:onDeallocBloc];
+        [owner addOnDeallocBlock:onDeallocBlock];
         
         XCTAssertFalse(blockCalled);
         
-        [owner removeOnDeallocBlock:onDeallocBloc];
+        [owner removeOnDeallocBlock:onDeallocBlock];
     }
     
     XCTAssertFalse(blockCalled);

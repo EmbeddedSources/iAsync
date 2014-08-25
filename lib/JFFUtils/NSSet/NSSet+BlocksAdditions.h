@@ -20,11 +20,11 @@
 
 //Invokes the block passing in successive elements from self,
 //Creates a new NSSet containing those elements for which the block returns a YES value
-- (instancetype)select:(JFFPredicateBlock)predicate;
+- (instancetype)filter:(JFFPredicateBlock)predicate;
 
 //Invokes the block passing in successive elements from self,
 //Creates a new NSArray containing those elements for which the block returns a YES value
-- (NSArray *)selectArray:(JFFPredicateBlock)predicate;
+- (NSArray *)filterArray:(JFFPredicateBlock)predicate;
 
 //Invokes the block passing in successive elements from self,
 //returning the first element for which the block returns a YES value

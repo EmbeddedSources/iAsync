@@ -33,7 +33,7 @@
 
 - (NSArray *)cookiesForURL:(NSURL *)url
 {
-    NSArray *result = [_allCookies selectArray:^BOOL(NSHTTPCookie *cookie) {
+    NSArray *result = [_allCookies filterArray:^BOOL(NSHTTPCookie *cookie) {
         
         BOOL matches = [cookie matchesURL:url];
         
