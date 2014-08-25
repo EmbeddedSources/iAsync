@@ -3,7 +3,6 @@
 #import "JFFAssignProxy.h"
 #import "JFFMutableAssignArray.h"
 
-#import "JFFClangLiterals.h"
 #import "DelegateProxyUtils.h"
 #import "JFFProxyDelegatesDispatcher.h"
 

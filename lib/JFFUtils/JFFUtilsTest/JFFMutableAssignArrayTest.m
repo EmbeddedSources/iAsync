@@ -14,7 +14,7 @@
             
             weakTarget = target;
             
-            JFFMutableAssignArray *array = [JFFMutableAssignArray new];
+            array = [JFFMutableAssignArray new];
             [array addObject:target];
             
             XCTAssertTrue(1 == [array count], @"Contains 1 object");

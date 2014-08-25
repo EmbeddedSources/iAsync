@@ -9,13 +9,13 @@
     NSArray *expected = nil;
     
     {
-        items = @[ @"abra"
+        items = @[@"abra"
         , @"shwabra"
         , @"kadabra"
         , @"abra"
         , @"habra"
         , @"kadabra"
-        , @"ABra" ];
+        , @"ABra"];
         
         received = [items unique];
         expected = @[@"abra"
@@ -24,27 +24,27 @@
         , @"habra"
         , @"ABra"];
         
-        XCTAssertTrue( [ received isEqualToArray: expected ], @"Arrays mismatch" );
+        XCTAssertTrue([received isEqualToArray:expected], @"Arrays mismatch");
     }
     
     {
-        items = @[ @"one"
+        items = @[@"one"
         , @"two"
         , @"three"
         , @"two"
         , @"one"
         , @"four"
         , @"five"
-        , @"one" ];
+        , @"one"];
         
-        received = [ items unique ];
-        expected = @[ @"one"
+        received = [items unique];
+        expected = @[@"one"
         , @"two"
         , @"three"
         , @"four"
-        , @"five" ];
+        , @"five"];
         
-        XCTAssertTrue( [ received isEqualToArray: expected ], @"Arrays mismatch" );
+        XCTAssertTrue([received isEqualToArray:expected], @"Arrays mismatch");
     }
 }
 
@@ -67,23 +67,23 @@
 
 -(void)testBlockVersionWorksCorrectly
 {
-    NSArray* items_    = nil;
-    NSArray* received_ = nil;
-    NSArray* expected_ = nil;
+    NSArray* items    = nil;
+    NSArray* received = nil;
+    NSArray* expected = nil;
     
-    JFFEqualityCheckerBlock predicate_ = ^( id left_, id right_ )
+    JFFEqualityCheckerBlock predicate = ^(id left, id right)
     {
-        NSComparisonResult result1 = [ left_  caseInsensitiveCompare: right_ ];
-        NSComparisonResult result2 = [ right_ caseInsensitiveCompare: left_  ];
+        NSComparisonResult result1 = [left  caseInsensitiveCompare:right];
+        NSComparisonResult result2 = [right caseInsensitiveCompare:left  ];
         
-        BOOL resultEqual_ = ( result1      == result2 );
-        BOOL resultSame_  = ( NSOrderedSame == result2 );
+        BOOL resultEqual = (result1       == result2);
+        BOOL resultSame  = (NSOrderedSame == result2);
         
-        return (BOOL)( resultSame_ && resultEqual_ );
+        return (BOOL)(resultSame && resultEqual);
     };
     
     {
-        items_ = @[ @"abra"
+        items = @[ @"abra"
         , @"shwabra"
         , @"kadabra"
         , @"abRa"
@@ -91,33 +91,33 @@
         , @"KAdabRA"
         , @"ABra" ];
         
-        received_ = [ items_ uniqueBy: predicate_ ];
-        expected_ = @[ @"abra"
+        received = [items uniqueBy:predicate];
+        expected = @[ @"abra"
         , @"shwabra"
         , @"kadabra"
-        , @"habra" ];
+        , @"habra"];
         
-        XCTAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+        XCTAssertTrue([received isEqualToArray:expected], @"Arrays mismatch");
     }
     
     {
-        items_ = @[ @"one"
+        items = @[@"one"
         , @"Two"
         , @"THREE"
         , @"two"
         , @"One"
         , @"four"
         , @"five"
-        , @"ONE" ];
+        , @"ONE"];
         
-        received_ = [ items_ uniqueBy: predicate_ ];
-        expected_ = @[ @"one"
+        received = [items uniqueBy:predicate];
+        expected = @[ @"one"
         , @"Two"
         , @"THREE"
         , @"four"
         , @"five" ];
         
-        XCTAssertTrue( [ received_ isEqualToArray: expected_ ], @"Arrays mismatch" );
+        XCTAssertTrue([received isEqualToArray:expected], @"Arrays mismatch");
     }
 }
 

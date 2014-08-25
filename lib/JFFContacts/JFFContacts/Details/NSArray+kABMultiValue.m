@@ -12,10 +12,9 @@
         return nil;
     
     NSArray *result = [NSArray arrayWithCapacity:count
-                            ignoringNilsProducer:^id(NSUInteger index) {
+                            ignoringNilsProducer:^id(NSInteger index) {
     
         CFTypeRef value = ABMultiValueCopyValueAtIndex(multyValue, index);
-        
         return (__bridge_transfer NSString *)value;
     }];
     

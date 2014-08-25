@@ -36,8 +36,9 @@ jffAsycLoadedImageURL;
 
 - (void)setImageWithURL:(NSURL *)url andPlaceholder:(UIImage *)placeholder
 {
-    if ([self.jffAsycLoadedImageURL isEqual:url])
+    if ([self.jffAsycLoadedImageURL isEqual:url]) {
         return;
+    }
     
     self.image           = placeholder;
     self.jffAsycImageURL = url;

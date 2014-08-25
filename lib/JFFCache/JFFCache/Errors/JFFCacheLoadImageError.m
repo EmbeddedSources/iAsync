@@ -30,7 +30,7 @@
 
 - (void)writeErrorWithJFFLogger
 {
-    [JFFLogger logInfoWithFormat:@"%@", [self errorLogDescription]];
+    [[JLogger sharedJLogger] logError:[self errorLogDescription]];
 }
 
 @end

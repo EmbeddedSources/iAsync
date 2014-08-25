@@ -62,37 +62,16 @@ JFFAsyncOperationInterface
     }
     
     _finishCallback = [finishCallback copy];
-    
-    SKPaymentTransaction *transaction = [self ownPurchasedTransaction];
-    
-    if (transaction) {
-        
-        [self unsubscribeFromObservervation];
-        _finishCallback(transaction, nil);
-    } else {
-        
-        [_queue addPayment:_payment];
-    }
+    [_queue addPayment:_payment];
 }
 
 - (void)doTask:(JFFAsyncOperationHandlerTask)task
 {
     NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
     
-    if (task == JFFAsyncOperationHandlerTaskUnSubscribe)
+    if (task == JFFAsyncOperationHandlerTaskUnSubscribe) {
         [self unsubscribeFromObservervation];
-}
-
-- (SKPaymentTransaction *)ownPurchasedTransaction
-{
-    //SKPayment
-    SKPaymentTransaction *transaction = [_queue.transactions firstMatch:^BOOL(SKPaymentTransaction *transaction) {
-        
-        return transaction.transactionState == SKPaymentTransactionStatePurchased
-        && [_payment.productIdentifier isEqualToString:transaction.payment.productIdentifier];
-    }];
-    
-    return transaction;
+    }
 }
 
 - (SKPaymentTransaction *)ownTransactionForTransactions:(NSArray *)transactions
@@ -131,11 +110,17 @@ JFFAsyncOperationInterface
         }
         case SKPaymentTransactionStateFailed:
         {
-            if (transaction.error.code != SKErrorPaymentCancelled) {
-                // Optionally, display an error here.
+            NSError *error;
+            if (([SKErrorDomain isEqualToString:transaction.error.domain]
+                 && (transaction.error.code == SKErrorPaymentCancelled))) {
+                
+                error = [JFFAsyncOpFinishedByCancellationError new];
+            } else {
+                
+                JFFStoreKitTransactionStateFailedError *locError = [JFFStoreKitTransactionStateFailedError new];
+                locError.transaction = transaction;
+                error = locError;
             }
-            JFFStoreKitTransactionStateFailedError *error = [JFFStoreKitTransactionStateFailedError new];
-            error.transaction = transaction;
             [self unsubscribeFromObservervation];
             _finishCallback(nil, error);
             break;

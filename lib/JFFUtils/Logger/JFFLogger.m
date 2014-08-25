@@ -2,9 +2,18 @@
 
 static JFFLogHandler logHandler;
 
-@implementation JFFLogger
+@implementation JLogger
 
-+ (JFFLogHandler)logHandler
++ (instancetype)sharedJLogger
+{
+    static JLogger *instance;
+    if (!instance) {
+        instance = [JLogger new];
+    }
+    return instance;
+}
+
+- (JFFLogHandler)logHandler
 {
     if (!logHandler) {
         logHandler = ^(NSString *log, NSString *level, id context) {
@@ -15,25 +24,17 @@ static JFFLogHandler logHandler;
     return logHandler;
 }
 
-+ (void)setLogHandler:(JFFLogHandler)handler
+- (void)setLogHandler:(JFFLogHandler)handler
 {
     logHandler = handler;
 }
 
-+ (void)logErrorWithFormat:(NSString *)format, ...
+- (void)logError:(NSString *)str
 {
-    va_list args;
-    va_start(args, format);
-    
-    [self logInfoWithLevel:@"error"
-                   context:nil
-                    format:format
-                   argList:args];
-    
-    va_end(args);
+    [self logHandler](str, @"error", nil);
 }
 
-+ (void)logErrorWithContext:(id)context
+- (void)logErrorWithContext:(id)context
                      format:(NSString *)format, ...
 {
     va_list args;
@@ -47,7 +48,7 @@ static JFFLogHandler logHandler;
     va_end(args);
 }
 
-+ (void)logInfoWithFormat:(NSString *)format, ...
+- (void)logInfoWithFormat:(NSString *)format, ...
 {
     va_list args;
     va_start(args, format);
@@ -60,7 +61,7 @@ static JFFLogHandler logHandler;
     va_end(args);
 }
 
-+ (void)logInfoWithLevel:(NSString *)level
+- (void)logInfoWithLevel:(NSString *)level
                  context:(id)context
                   format:(NSString *)format
                  argList:(va_list)argList

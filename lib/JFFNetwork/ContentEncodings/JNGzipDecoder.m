@@ -49,7 +49,7 @@ NSString* kGzipErrorDomain = @"gzip.error";
     
     if (!result) {
         
-        [JFFLogger logErrorWithFormat:@"JNGzipDecoder -- inflateInit2 failed"];
+        [[JLogger sharedJLogger] logError:@"JNGzipDecoder -- inflateInit2 failed"];
         NSError *gzipError = [NSError errorWithDomain:kGzipErrorDomain
                                                  code:kJNGzipInitFailed
                                              userInfo:nil];

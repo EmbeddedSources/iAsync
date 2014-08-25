@@ -4,7 +4,6 @@
 #import <JFFUtils/Blocks/JFFOnDeallocBlockOwner.h>
 #import <JFFUtils/NSObject/NSObject+RuntimeExtensions.h>
 #import <JFFUtils/NSObject/NSObject+OnDeallocBlock.h>
-#import <JFFUtils/JFFClangLiterals.h>
 
 @interface JFFNSObjectInstancesCounter : NSObject
 

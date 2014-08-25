@@ -8,8 +8,6 @@
 
 #include "JFFUtilsBlockDefinitions.h"
 
-#import "JFFClangLiterals.h"
-
 @interface JFFAutoRemoveFromDictAssignProxy : JFFAssignProxy
 
 @property (nonatomic, copy) JFFSimpleBlock onDeallocBlock;

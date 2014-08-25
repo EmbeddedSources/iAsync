@@ -36,10 +36,10 @@
 
 - (void)testAssignProxyMethodCalls
 {
-    ProxyTargetTest *target_ = [ProxyTargetTest new];
+    ProxyTargetTest *target = [ProxyTargetTest new];
     
-    id proxy = [[JFFAssignProxy alloc] initWithTarget:target_];
-    XCTAssertTrue( 5 == [ proxy justReturnFiveNumber ], @"Target should be dealloced" );
+    id proxy = [[JFFAssignProxy alloc] initWithTarget:target];
+    XCTAssertTrue(5 == [proxy justReturnFiveNumber], @"Target should be dealloced");
 }
 
 @end

@@ -3,8 +3,6 @@
 #import "JFFStoreKitCanNoLoadProductError.h"
 #import "JFFStoreKitInvalidProductIdentifierError.h"
 
-#import <JFFUtils/NSArray/NSArray+BlocksAdditions.h>
-
 @interface JFFAsyncSKProductsRequestAdapter : NSObject <
 JFFAsyncOperationInterface,
 SKProductsRequestDelegate
@@ -49,8 +47,9 @@ SKProductsRequestDelegate
 {
     NSCParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
     
-    if (task == JFFAsyncOperationHandlerTaskCancel)
+    if (task == JFFAsyncOperationHandlerTaskCancel) {
         [_request cancel];
+    }
 }
 
 #pragma mark SKRequestDelegate
@@ -58,7 +57,7 @@ SKProductsRequestDelegate
 - (void)requestDidFinish:(SKRequest *)request
 {
     NSArray *products = _response.products;
-    if ([products hasElements]) {
+    if ([products count] > 0) {
         
         SKProduct *product = [products firstMatch:^BOOL(SKProduct *product) {
             return [product.productIdentifier isEqualToString:_productIdentifier];
@@ -66,7 +65,8 @@ SKProductsRequestDelegate
         
         if (!product) {
             
-            [JFFLogger logErrorWithFormat:@"requestDidFinish products does not contains product with id: %@", _productIdentifier];
+            NSString *log = [[NSString alloc] initWithFormat:@"requestDidFinish products does not contains product with id: %@", _productIdentifier];
+            [[JLogger sharedJLogger] logError:log];
             product = [products lastObject];
         }
         

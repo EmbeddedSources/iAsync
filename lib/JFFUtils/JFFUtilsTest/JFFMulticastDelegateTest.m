@@ -35,20 +35,20 @@
     
     @autoreleasepool {
         TestClassForMulticast *delegate = [TestClassForMulticast new];
-        NSUInteger initState_ = rand();
-        delegate.initialState = initState_;
+        NSUInteger initState = rand();
+        delegate.initialState = initState;
         
         [delegate addOnDeallocBlock:^void(void) {
             delegateDeallocated = YES;
-        } ];
+        }];
         
         [multicast addDelegate:delegate];
         
-        XCTAssertTrue( initState_ == [ multicast justReturnFiveNumber ], @"Contains 1 object" );
+        XCTAssertTrue(initState == [ multicast justReturnFiveNumber ], @"Contains 1 object" );
     }
     
-    XCTAssertTrue( delegateDeallocated, @"Target should be dealloced" );
-    XCTAssertTrue( 0 == [ multicast justReturnFiveNumber ], @"Empty array" );
+    XCTAssertTrue(delegateDeallocated, @"Target should be dealloced");
+    XCTAssertTrue(0 == [multicast justReturnFiveNumber ], @"Empty array");
 }
 
 - (void)testMulticastDelegateFirstRelease

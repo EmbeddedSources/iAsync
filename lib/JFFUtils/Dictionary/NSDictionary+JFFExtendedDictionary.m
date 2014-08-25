@@ -1,7 +1,5 @@
 #import "NSDictionary+JFFExtendedDictionary.h"
 
-#import "JFFClangLiterals.h"
-
 @implementation NSDictionary (JFFExtendedDictionary)
 
 - (instancetype)dictionaryByAddingObjectsFromDictionary:(NSDictionary *)dictionary

@@ -4,14 +4,16 @@
 
 typedef void(^JFFLogHandler)(NSString *log, NSString *level, id context);
 
-@interface JFFLogger : NSObject
+@interface JLogger : NSObject
 
-+ (void)setLogHandler:(JFFLogHandler)handler;
++ (instancetype)sharedJLogger;
 
-+ (void)logErrorWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
+- (void)setLogHandler:(JFFLogHandler)handler;
 
-+ (void)logErrorWithContext:(id)context format:(NSString *)format, ... NS_FORMAT_FUNCTION(2,3);
+- (void)logError:(NSString *)str;
 
-+ (void)logInfoWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
+- (void)logErrorWithContext:(id)context format:(NSString *)format, ... NS_FORMAT_FUNCTION(2,3);
+
+- (void)logInfoWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
 @end

@@ -10,7 +10,8 @@
 - (void)writeErrorWithJFFLogger
 {
 #ifndef DEBUG
-    [JFFLogger logErrorWithFormat:@"%@ : %@", [self class], [self errorLogDescription]];
+    NSString *str = [[NSString alloc] initWithFormat:@"%@ : %@", [self class], [self errorLogDescription]];
+    [[JLogger sharedJLogger] logError:str];
 #endif //DEBUG
 }
 

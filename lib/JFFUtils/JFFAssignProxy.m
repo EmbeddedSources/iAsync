@@ -19,7 +19,7 @@
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
-   return [_target methodSignatureForSelector:selector];
+    return [_target methodSignatureForSelector:selector];
 }
 
 @end

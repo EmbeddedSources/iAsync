@@ -108,13 +108,6 @@
 #pragma mark CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation
-{
-    [self notifyEachObserverWithLocation:newLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray *)locations
 {
     [self notifyEachObserverWithLocation:[locations lastObject]];

@@ -59,7 +59,7 @@
 + (instancetype)compositeKeyWithKey:(JFFDBCompositeKey *)compositeKey forIndexes:(NSIndexSet *)indexes
 {
     NSUInteger size = [compositeKey.keys count];
-    NSArray *newKeys = [NSArray arrayWithSize:size producer:^id(NSUInteger index) {
+    NSArray *newKeys = [NSArray arrayWithSize:size producer:^id(NSInteger index) {
         return [indexes containsIndex:index]
         ?compositeKey.keys[index]
         :@"%";

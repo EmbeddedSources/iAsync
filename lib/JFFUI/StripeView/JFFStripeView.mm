@@ -247,7 +247,7 @@ didChangeActiveElementFrom:previousActiveElement
 {
     JSignedRange signedRange = [self visibleIndexesRange];
     
-    JFFProducerBlock block = ^id(NSUInteger index) {
+    JFFProducerBlock block = ^id(NSInteger index) {
         
         return @(signedRange.location + index);
     };
@@ -296,8 +296,9 @@ didChangeActiveElementFrom:previousActiveElement
 
 - (id)dequeueReusableElement
 {
-    if ([_reusableElements count] == 0)
+    if ([_reusableElements count] == 0) {
         return nil;
+    }
     
     UIView *reusableController = [_reusableElements lastObject];
     [_reusableElements removeLastObject];

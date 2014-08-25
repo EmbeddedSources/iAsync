@@ -26,8 +26,8 @@
     model.userID    = dict[@"id"];
     model.firstName = dict[@"firstName"];
     model.lastName  = dict[@"lastName"];
-    model.contacts  = [dict dictionaryForKey:@"contact"];
-    model.photoURL  = [[dict stringForKeyPath:@"photo.prefix"] stringByAppendingString:[dict stringForKeyPath:@"photo.suffix"]];
+    model.contacts  = dict[@"contact"];
+    model.photoURL  = [dict[@"photo.prefix"] stringByAppendingString:dict[@"photo.suffix"]];
     
     return model;
 }

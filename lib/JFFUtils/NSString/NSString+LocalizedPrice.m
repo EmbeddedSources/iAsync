@@ -1,7 +1,5 @@
 #import "NSString+LocalizedPrice.h"
 
-#import "NSString+Search.h"
-
 @implementation NSString (LocalizedPrice)
 
 + (instancetype)localizedPrice:(NSNumber *)price

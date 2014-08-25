@@ -7,8 +7,6 @@
 
 #include "JFFUtilsBlockDefinitions.h"
 
-#import "JFFClangLiterals.h"
-
 @interface JFFAutoRemoveAssignProxy : JFFAssignProxy
 
 @property (nonatomic, copy) JFFSimpleBlock onDeallocBlock;
@@ -37,7 +35,7 @@
 
 @interface JFFMutableAssignArray ()
 
-@property (nonatomic) NSMutableArray* mutableArray;
+@property (nonatomic) NSMutableArray *mutableArray;
 
 @end
 
