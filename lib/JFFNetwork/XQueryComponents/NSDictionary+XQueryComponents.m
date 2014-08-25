@@ -8,6 +8,7 @@ static NSString *const queryComponentSeparator = @"&";
 @interface NSObject (XQueryComponents)
 
 - (NSArray *)arrayOfQueryComponentsForKey:(NSString *)key;
+- (NSString *)stringFromQueryComponentAndKey:(NSString *)key;
 
 @end
 
@@ -15,8 +16,7 @@ static NSString *const queryComponentSeparator = @"&";
 
 - (NSString *)stringFromQueryComponentAndKey:(NSString *)key
 {
-    NSString *value = [[self description] stringByEncodingURLFormat];
-    return [[NSString alloc] initWithFormat:queryComponentFormat, key, value];
+    return [[self description] stringFromQueryComponentAndKey:key];
 }
 
 - (NSArray *)arrayOfQueryComponentsForKey:(NSString *)key
@@ -27,10 +27,24 @@ static NSString *const queryComponentSeparator = @"&";
 
 @end
 
+@implementation NSString (XQueryComponents_Private)
+
+- (NSString *)stringFromQueryComponentAndKey:(NSString *)key
+{
+    NSString *value = [[self description] stringByEncodingURLFormat];
+    return [[NSString alloc] initWithFormat:queryComponentFormat, key, value];
+}
+
+@end
+
 @implementation NSArray (XQueryComponents)
 
 - (instancetype)arrayOfQueryComponentsForKey:(NSString *)key
 {
+    if (self.count == 0) {
+        return @[[@"" stringFromQueryComponentAndKey:key]];
+    }
+    
     return [self map:^id(id value) {
         return [value stringFromQueryComponentAndKey:key];
     }];
