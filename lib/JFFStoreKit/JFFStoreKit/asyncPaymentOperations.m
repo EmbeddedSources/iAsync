@@ -9,13 +9,20 @@
 
 + (JFFAsyncOperation)purchaserWithProductIdentifier:(NSString *)productIdentifier
                                         srvCallback:(JFFAsyncOperationBinder)srvCallback
+                                recallSrvWithResult:(JFFPredicateBlock)recallSrvWithResult
+                          productIDsFromSrvResponse:(JFFMappingBlock)productIDsFromSrvResponse
 {
-    srvCallback = [srvCallback copy];
+    srvCallback               = [srvCallback         copy];
+    recallSrvWithResult       = [recallSrvWithResult copy];
+    productIDsFromSrvResponse = [productIDsFromSrvResponse copy];
     
     JFFAsyncOperation productLoader = skProductLoaderWithProductIdentifier(productIdentifier);
     
     JFFAsyncOperationBinder paymentBinder = ^JFFAsyncOperation(SKProduct *product) {
-        return [self purchaserWithProduct:product srvCallback:srvCallback];
+        return [self purchaserWithProduct:product
+                              srvCallback:srvCallback
+                      recallSrvWithResult:recallSrvWithResult
+                productIDsFromSrvResponse:productIDsFromSrvResponse];
     };
     
     return bindSequenceOfAsyncOperations(productLoader,
@@ -25,15 +32,19 @@
 
 + (JFFAsyncOperation)purchaserWithProduct:(SKProduct *)product
                               srvCallback:(JFFAsyncOperationBinder)srvCallback
+                      recallSrvWithResult:(JFFPredicateBlock)recallSrvWithResult
+                productIDsFromSrvResponse:(JFFMappingBlock)productIDsFromSrvResponse
 {
-    srvCallback = [srvCallback copy];
+    srvCallback               = [srvCallback               copy];
+    recallSrvWithResult       = [recallSrvWithResult       copy];
+    productIDsFromSrvResponse = [productIDsFromSrvResponse copy];
     
     //TODO repeate srvLoader until buy products
     return ^JFFAsyncOperationHandler(JFFAsyncOperationProgressCallback progressCallback,
                                      JFFAsyncOperationChangeStateCallback stateCallback,
                                      JFFDidFinishAsyncOperationCallback doneCallback) {
         
-        JFFAsyncOperation (^loadTransactionIDs)(BOOL) = ^JFFAsyncOperation(BOOL failIfNoTransactions) {
+        JFFAsyncOperation (^processPayment)(BOOL) = ^JFFAsyncOperation(BOOL failIfNoProductsIDs) {
             
             //1. close previous transactions
             JFFAsyncOperation processTransactions = bindSequenceOfAsyncOperations(appStoreReceiptDataLoader(), ^(NSData *appStoreReceiptData) {
@@ -43,7 +54,7 @@
             
             JFFAsyncOperationBinder closeTranactions = ^JFFAsyncOperation(NSArray *productIDs) {
                 
-                if (failIfNoTransactions && ![productIDs lastObject]) {
+                if (failIfNoProductsIDs && ![productIDs lastObject]) {
                     NSError *error = [JFFError newErrorWithDescription:@"no srv transactions - TODO fix!"];
                     return asyncOperationWithError(error);
                 }
@@ -54,19 +65,40 @@
                                                     nil);
             };
             
-            JFFAsyncOperation srvProcessAndCloseTransactions = bindSequenceOfAsyncOperations(processTransactions, closeTranactions, nil);
+            JFFAsyncOperationBinder closeTransactionsAndReturnServerResult = ^(id nativeServerResult) {
+                
+                NSArray *productIDs = productIDsFromSrvResponse(nativeServerResult);
+                return sequenceOfAsyncOperations(closeTranactions(productIDs), asyncOperationWithResult(nativeServerResult), nil);
+            };
+            
+            JFFAsyncOperation srvProcessAndCloseTransactions = bindSequenceOfAsyncOperations(processTransactions,
+                                                                                             closeTransactionsAndReturnServerResult,
+                                                                                             nil);
             
             return srvProcessAndCloseTransactions;
         };
         
-        //Make payment
-        SKPayment *payment = [SKPayment paymentWithProduct:product];
-        JFFAsyncOperation paymentLoader = asyncOperationWithSKPayment(payment);
+        JFFAsyncOperationBinder makePayment = ^(id nativeServerResult) {
+            
+            if (!recallSrvWithResult(nativeServerResult)) {
+                return asyncOperationWithResult(nativeServerResult);
+            }
+            
+            //Make payment
+            SKPayment *payment = [SKPayment paymentWithProduct:product];
+            JFFAsyncOperation paymentLoader = asyncOperationWithSKPayment(payment);
+            
+            JFFAsyncOperation noError = asyncOperationWithResult(@[]);
+            JFFAsyncOperation closeTranactions = trySequenceOfAsyncOperations(asyncOperationFinishTransactionsForProducts(@[payment.productIdentifier]),
+                                                                              noError,
+                                                                              nil);
+            
+            return sequenceOfAsyncOperations(closeTranactions, paymentLoader, processPayment(YES), nil);
+        };
         
-        JFFAsyncOperation loader = sequenceOfAsyncOperations(loadTransactionIDs(NO),
-                                                             paymentLoader,
-                                                             loadTransactionIDs(YES),
-                                                             nil);
+        JFFAsyncOperation loader = bindSequenceOfAsyncOperations(processPayment(NO),
+                                                                 makePayment,
+                                                                 nil);
         
         return loader(progressCallback, stateCallback, doneCallback);
     };

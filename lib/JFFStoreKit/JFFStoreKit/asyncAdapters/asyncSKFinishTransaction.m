@@ -3,6 +3,8 @@
 #import "JFFStoreKitDisabledError.h"
 #import "JFFStoreKitTransactionStateFailedError.h"
 
+#import <JFFScheduler/JFFTimer.h>
+
 static NSString *const mergeObject = @"002fc0c2-07c3-41c4-8296-d6f4c038655a";
 
 typedef BOOL(^FinishTransactionPredicate)(SKPaymentTransaction *);
@@ -17,6 +19,7 @@ JFFAsyncOperationInterface
 @implementation JFFAsyncSKFinishTransaction
 {
     SKPaymentQueue *_queue;
+    JFFTimer *_finishTimer;
     FinishTransactionPredicate _transactionPredicate;
     BOOL _addedToObservers;
     JFFDidFinishAsyncOperationCallback _finishCallback;
@@ -72,10 +75,16 @@ JFFAsyncOperationInterface
         for (SKPaymentTransaction *transaction in transactionsToClose) {
             [_queue finishTransaction:transaction];
         }
+        
+        _finishTimer = [JFFTimer new];
+        __weak JFFAsyncSKFinishTransaction *weakSelf = self;
+        [_finishTimer addBlock:^(JFFCancelScheduledBlock cancel) {
+            
+            cancel();
+            [weakSelf finishOperationWithTransactionIDs:@[]];
+        } duration:3.0];
     } else {
-        [self finishOperationWithTransactionIDs:[transactionsToClose map:^id(SKPaymentTransaction *transaction) {
-            return transaction.transactionIdentifier;
-        }]];
+        [self finishOperationWithTransactionIDs:@[]];
     }
 }
 
@@ -83,8 +92,9 @@ JFFAsyncOperationInterface
 {
     NSParameterAssert(task <= JFFAsyncOperationHandlerTaskCancel);
     
-    if (task == JFFAsyncOperationHandlerTaskUnSubscribe)
+    if (task == JFFAsyncOperationHandlerTaskUnSubscribe) {
         [self unsubscribeFromObservervation];
+    }
 }
 
 - (void)finishOperationWithTransactionIDs:(NSArray *)transactionIDs
@@ -95,9 +105,14 @@ JFFAsyncOperationInterface
 
 - (NSArray *)transactionsToClose
 {
-    return [_queue.transactions select:^BOOL(SKPaymentTransaction *transaction) {
+    NSArray *result = [_queue.transactions filter:^BOOL(SKPaymentTransaction *transaction) {
         return _transactionPredicate(transaction);
     }];
+    result = [result filter:^BOOL(SKPaymentTransaction *transaction) {
+        
+        return transaction.transactionState != SKPaymentTransactionStatePurchasing;
+    }];
+    return result;
 }
 
 #pragma mark SKPaymentTransactionObserver
@@ -105,29 +120,32 @@ JFFAsyncOperationInterface
 - (void)paymentQueue:(SKPaymentQueue *)queue removedTransactions:(NSArray *)transactions
 {
     NSArray *transactionsToClose = [self transactionsToClose];
-    if ([transactionsToClose lastObject] == nil)
+    if ([transactionsToClose lastObject] == nil) {
         [self finishOperationWithTransactionIDs:@[]];
+    }
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
     NSArray *transactionsToClose = [self transactionsToClose];
     
-    if ([transactionsToClose lastObject] == nil)
+    if ([transactionsToClose lastObject] == nil) {
         [self finishOperationWithTransactionIDs:@[]];
+    }
     
     for (SKPaymentTransaction *transaction in transactionsToClose) {
         
         if (SKPaymentTransactionStateFailed == transaction.transactionState) {
             if (transaction.error.code != SKErrorPaymentCancelled) {
-            // Optionally, display an error here.
+                // Optionally, display an error here.
             }
             JFFStoreKitTransactionStateFailedError *error = [JFFStoreKitTransactionStateFailedError new];
             error.transaction = transaction;
             JFFDidFinishAsyncOperationCallback finishCallback = _finishCallback;
             [self unsubscribeFromObservervation];
-            if (finishCallback)
+            if (finishCallback) {
                 finishCallback(nil, error);
+            }
             return;
         }
     }
@@ -186,7 +204,7 @@ JFFAsyncOperation asyncOperationFinishTransactionsForProducts(NSArray *productID
     
     id const key =
     @{
-      @"cmd"            : @(__FUNCTION__),
+      @"cmd"        : @(__FUNCTION__),
       @"productIDs" : [[NSSet alloc] initWithArray:productIDs], //TODO !!!
       };
     return [mergeObject asyncOperationMergeLoaders:loader withArgument:key];
