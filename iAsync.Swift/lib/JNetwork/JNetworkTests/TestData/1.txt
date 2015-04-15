@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+    <result>
+        <status>Failure</status>
+        <status_code>10000001</status_code>
+        <message>
+            <![CDATA[This show is on a restricted channel that you do not currently have access to.]]>
+        </message>
+        <timezone>(GMT+00:00) UTC</timezone>
+        <timestamp>Tue Sep 13 09:07:17 UTC 2011</timestamp>
+    </result>
+</response>

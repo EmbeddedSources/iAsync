@@ -1,0 +1,4 @@
+
+//Network errors
+"J_NETWORK_NO_INTERNET_ERROR" = "Wir können im Moment leider keine Verbindung herstellen. Bitte versuche es später wieder. ";
+"J_NETWORK_GENERIC_ERROR"     = "Wir können im Moment leider keine Verbindung herstellen. Bitte versuche es später wieder. ";

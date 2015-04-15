@@ -1,0 +1,15 @@
+/*
+ Localizable.strings
+ JSocial
+ 
+ Created by Vladimir Gorbenko on 07.10.14.
+ Copyright (c) 2014 EmbeddedSources. All rights reserved.
+ */
+
+//Facebook errors
+"J_FACEBOOK_GENERAL_ERROR"                      = "Мы обнаружили ошибку с сервером Facebook.\nЧтобы продолжить, пожалуйста, войдите снова";
+"J_FACEBOOK_LOGIN_ERROR_USER_DENIED_PERMISSION" = "Проверьте, пожалуйста, данные вашего Facebook аккаунта в \"Настройках/Facebook\"";
+"J_FACEBOOK_AUTHORIZATION_FAILED"               = "Мы обнаружили ошибку с сервером Facebook.\nЧтобы продолжить, пожалуйста, войдите снова";
+"J_FACEBOOK_LOGIN_ERROR_ACCESS_FORBIDDEN"       = "Проверьте, пожалуйста, данные вашего Facebook аккаунта в \"Настройках/Facebook\"";
+
+"J_STOREKIT_PURCHASE_DISABLED_ERROR" = "Пожалуйста, включите встроенные покупки в настройках вашего телефона";

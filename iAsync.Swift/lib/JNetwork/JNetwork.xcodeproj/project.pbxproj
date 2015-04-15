@@ -1,0 +1,737 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C18953819D0CCA7009959ED /* JNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C18953719D0CCA7009959ED /* JNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4C18954219D0CCA7009959ED /* JNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C18954119D0CCA7009959ED /* JNetworkTests.swift */; };
+		4C21395B19D5749E00350F21 /* JNetworkUploadProgressCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21395A19D5749E00350F21 /* JNetworkUploadProgressCallback.swift */; };
+		4C21396119D5752F00350F21 /* JUploadProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21396019D5752F00350F21 /* JUploadProgress.swift */; };
+		4C21396419D5786C00350F21 /* JNetworkAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21396319D5786C00350F21 /* JNetworkAsync.swift */; };
+		4C213A4F19D5B0BF00350F21 /* JHttpFlagChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C213A4E19D5B0BF00350F21 /* JHttpFlagChecker.swift */; };
+		4C213A5719D5B69600350F21 /* JNetworkBlocksFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C213A5619D5B69600350F21 /* JNetworkBlocksFunctions.swift */; };
+		4C5941501A6DAEC10093FFE6 /* JAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C59414B1A6DAEB00093FFE6 /* JAsync.framework */; };
+		4C6CE5581A87A040004D2C37 /* JNSURLConnectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6CE5571A87A040004D2C37 /* JNSURLConnectionTest.swift */; };
+		4C6CE55C1A87A407004D2C37 /* JNetworkBlocksFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C213A5619D5B69600350F21 /* JNetworkBlocksFunctions.swift */; };
+		4C6CE55D1A87A414004D2C37 /* JURLConnectionParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE43F7A19D34FD600FEAFD2 /* JURLConnectionParams.swift */; };
+		4C6CE55E1A87A465004D2C37 /* JHttpFlagChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C213A4E19D5B0BF00350F21 /* JHttpFlagChecker.swift */; };
+		4C6CE55F1A87A472004D2C37 /* JHttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2656919D189EA00086CD2 /* JHttpError.swift */; };
+		4C6CE5601A87A47D004D2C37 /* JNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2656719D189BD00086CD2 /* JNetworkError.swift */; };
+		4C6CE5611A87A490004D2C37 /* JNetworkAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21396319D5786C00350F21 /* JNetworkAsync.swift */; };
+		4C6CE5621A87A49B004D2C37 /* JURLConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3EEB19D3F654001707D3 /* JURLConnection.swift */; };
+		4C6CE5641A87A4C2004D2C37 /* JNSNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2656E19D18A4100086CD2 /* JNSNetworkError.swift */; };
+		4C6CE5651A87A4CE004D2C37 /* JURLConnectionCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3EEE19D3F727001707D3 /* JURLConnectionCallbacks.swift */; };
+		4C6CE5661A87A4DA004D2C37 /* JNetworkResponseDataCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC2D59319D5727A00B45493 /* JNetworkResponseDataCallback.swift */; };
+		4C6CE5671A87A4EE004D2C37 /* JNetworkUploadProgressCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21395A19D5749E00350F21 /* JNetworkUploadProgressCallback.swift */; };
+		4C6CE5681A87A4F9004D2C37 /* JUploadProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21396019D5752F00350F21 /* JUploadProgress.swift */; };
+		4C6CE5691A87A507004D2C37 /* JNSURLConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3EF119D3FD67001707D3 /* JNSURLConnection.swift */; };
+		4C6CE56A1A87A541004D2C37 /* JAbstractConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3EF319D3FDA6001707D3 /* JAbstractConnection.swift */; };
+		4C6CE56B1A87A54C004D2C37 /* JNSNoInternetNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2657019D18A5500086CD2 /* JNSNoInternetNetworkError.swift */; };
+		4C6CE56C1A87A555004D2C37 /* NSError+IsNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2655419D1874500086CD2 /* NSError+IsNetworkError.swift */; };
+		4C6CE56D1A87A5C1004D2C37 /* NSMutableURLRequest+CreateRequestWithURLParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE43F7819D34F6000FEAFD2 /* NSMutableURLRequest+CreateRequestWithURLParams.swift */; };
+		4C6CE5791A87AFF0004D2C37 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4C6CE5781A87AFF0004D2C37 /* 1.txt */; };
+		4C6CE5911A8800E7004D2C37 /* StringFromQueryComponentsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6CE5901A8800E7004D2C37 /* StringFromQueryComponentsTest.swift */; };
+		4C6CE5931A88036D004D2C37 /* XQueryComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3F9419D49DA4001707D3 /* XQueryComponents.swift */; };
+		4C6CE5941A880378004D2C37 /* String+XQueryComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5029919EC621F0025D830 /* String+XQueryComponents.swift */; };
+		4C6F3EEC19D3F654001707D3 /* JURLConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3EEB19D3F654001707D3 /* JURLConnection.swift */; };
+		4C6F3EEF19D3F727001707D3 /* JURLConnectionCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3EEE19D3F727001707D3 /* JURLConnectionCallbacks.swift */; };
+		4C6F3F3219D4600B001707D3 /* NSMutableURLRequest+CreateRequestWithURLParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE43F7819D34F6000FEAFD2 /* NSMutableURLRequest+CreateRequestWithURLParams.swift */; };
+		4C6F3F3319D4616D001707D3 /* JNSURLConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3EF119D3FD67001707D3 /* JNSURLConnection.swift */; };
+		4C6F3F3419D46171001707D3 /* JAbstractConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3EF319D3FDA6001707D3 /* JAbstractConnection.swift */; };
+		4C6F3F8C19D475CA001707D3 /* JHttpBodyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3F8B19D475CA001707D3 /* JHttpBodyBuilder.swift */; };
+		4C6F3F9519D49DA4001707D3 /* XQueryComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F3F9419D49DA4001707D3 /* XQueryComponents.swift */; };
+		4CB5029A19EC621F0025D830 /* String+XQueryComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5029919EC621F0025D830 /* String+XQueryComponents.swift */; };
+		4CC2D59419D5727B00B45493 /* JNetworkResponseDataCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC2D59319D5727A00B45493 /* JNetworkResponseDataCallback.swift */; };
+		4CE2655519D1874500086CD2 /* NSError+IsNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2655419D1874500086CD2 /* NSError+IsNetworkError.swift */; };
+		4CE2656819D189BD00086CD2 /* JNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2656719D189BD00086CD2 /* JNetworkError.swift */; };
+		4CE2656A19D189EA00086CD2 /* JHttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2656919D189EA00086CD2 /* JHttpError.swift */; };
+		4CE2656C19D18A0200086CD2 /* JStreamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2656B19D18A0200086CD2 /* JStreamError.swift */; };
+		4CE2656F19D18A4100086CD2 /* JNSNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2656E19D18A4100086CD2 /* JNSNetworkError.swift */; };
+		4CE2657119D18A5500086CD2 /* JNSNoInternetNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2657019D18A5500086CD2 /* JNSNoInternetNetworkError.swift */; };
+		4CE43F7519D33CC200FEAFD2 /* NSURL+Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE43F7419D33CC200FEAFD2 /* NSURL+Cookies.swift */; };
+		4CE43F7719D3485A00FEAFD2 /* NSMutableData+DataForHTTPPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE43F7619D3485A00FEAFD2 /* NSMutableData+DataForHTTPPost.swift */; };
+		4CE43F7B19D34FD600FEAFD2 /* JURLConnectionParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE43F7A19D34FD600FEAFD2 /* JURLConnectionParams.swift */; };
+		4CEC4CC519ED5350003C1206 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CEC4CC719ED5350003C1206 /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4C59414A1A6DAEB00093FFE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C5941451A6DAEB00093FFE6 /* JAsync.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C383A1F19C241870064C519;
+			remoteInfo = JAsync;
+		};
+		4C59414C1A6DAEB00093FFE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C5941451A6DAEB00093FFE6 /* JAsync.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C383A2A19C241870064C519;
+			remoteInfo = JAsyncTests;
+		};
+		4C59414E1A6DAEBB0093FFE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C5941451A6DAEB00093FFE6 /* JAsync.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C383A1E19C241870064C519;
+			remoteInfo = JAsync;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4C18953219D0CCA7009959ED /* JNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C18953619D0CCA7009959ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C18953719D0CCA7009959ED /* JNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JNetwork.h; sourceTree = "<group>"; };
+		4C18953D19D0CCA7009959ED /* JNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C18954019D0CCA7009959ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C18954119D0CCA7009959ED /* JNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JNetworkTests.swift; sourceTree = "<group>"; };
+		4C21395A19D5749E00350F21 /* JNetworkUploadProgressCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNetworkUploadProgressCallback.swift; sourceTree = "<group>"; };
+		4C21396019D5752F00350F21 /* JUploadProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JUploadProgress.swift; sourceTree = "<group>"; };
+		4C21396319D5786C00350F21 /* JNetworkAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNetworkAsync.swift; sourceTree = "<group>"; };
+		4C213A4E19D5B0BF00350F21 /* JHttpFlagChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHttpFlagChecker.swift; sourceTree = "<group>"; };
+		4C213A5619D5B69600350F21 /* JNetworkBlocksFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNetworkBlocksFunctions.swift; sourceTree = "<group>"; };
+		4C5941451A6DAEB00093FFE6 /* JAsync.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JAsync.xcodeproj; path = ../JAsync/JAsync.xcodeproj; sourceTree = "<group>"; };
+		4C6CE5571A87A040004D2C37 /* JNSURLConnectionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNSURLConnectionTest.swift; sourceTree = "<group>"; };
+		4C6CE5781A87AFF0004D2C37 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
+		4C6CE5901A8800E7004D2C37 /* StringFromQueryComponentsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFromQueryComponentsTest.swift; sourceTree = "<group>"; };
+		4C6F3EEB19D3F654001707D3 /* JURLConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JURLConnection.swift; sourceTree = "<group>"; };
+		4C6F3EEE19D3F727001707D3 /* JURLConnectionCallbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JURLConnectionCallbacks.swift; sourceTree = "<group>"; };
+		4C6F3EF119D3FD67001707D3 /* JNSURLConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNSURLConnection.swift; sourceTree = "<group>"; };
+		4C6F3EF319D3FDA6001707D3 /* JAbstractConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JAbstractConnection.swift; sourceTree = "<group>"; };
+		4C6F3F8B19D475CA001707D3 /* JHttpBodyBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHttpBodyBuilder.swift; sourceTree = "<group>"; };
+		4C6F3F9419D49DA4001707D3 /* XQueryComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XQueryComponents.swift; sourceTree = "<group>"; };
+		4CB5029919EC621F0025D830 /* String+XQueryComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+XQueryComponents.swift"; sourceTree = "<group>"; };
+		4CC2D59319D5727A00B45493 /* JNetworkResponseDataCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNetworkResponseDataCallback.swift; sourceTree = "<group>"; };
+		4CE2655419D1874500086CD2 /* NSError+IsNetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+IsNetworkError.swift"; sourceTree = "<group>"; };
+		4CE2656719D189BD00086CD2 /* JNetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNetworkError.swift; sourceTree = "<group>"; };
+		4CE2656919D189EA00086CD2 /* JHttpError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHttpError.swift; sourceTree = "<group>"; };
+		4CE2656B19D18A0200086CD2 /* JStreamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JStreamError.swift; sourceTree = "<group>"; };
+		4CE2656E19D18A4100086CD2 /* JNSNetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNSNetworkError.swift; sourceTree = "<group>"; };
+		4CE2657019D18A5500086CD2 /* JNSNoInternetNetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNSNoInternetNetworkError.swift; sourceTree = "<group>"; };
+		4CE43F7419D33CC200FEAFD2 /* NSURL+Cookies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Cookies.swift"; sourceTree = "<group>"; };
+		4CE43F7619D3485A00FEAFD2 /* NSMutableData+DataForHTTPPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableData+DataForHTTPPost.swift"; sourceTree = "<group>"; };
+		4CE43F7819D34F6000FEAFD2 /* NSMutableURLRequest+CreateRequestWithURLParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableURLRequest+CreateRequestWithURLParams.swift"; sourceTree = "<group>"; };
+		4CE43F7A19D34FD600FEAFD2 /* JURLConnectionParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JURLConnectionParams.swift; sourceTree = "<group>"; };
+		4CEC4CC619ED5350003C1206 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CEC4CEC19ED5390003C1206 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CEC4CED19ED5393003C1206 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CEC4CEE19ED5395003C1206 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CEC4CEF19ED5397003C1206 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CEC4CF019ED5399003C1206 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CEC4CF119ED539C003C1206 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CEC4CF219ED539E003C1206 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CEC4CF319ED53A0003C1206 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CEC4CF419ED53A2003C1206 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C18952E19D0CCA7009959ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C5941501A6DAEC10093FFE6 /* JAsync.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C18953A19D0CCA7009959ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C18952819D0CCA7009959ED = {
+			isa = PBXGroup;
+			children = (
+				4C18953419D0CCA7009959ED /* JNetwork */,
+				4C18953E19D0CCA7009959ED /* JNetworkTests */,
+				4C18953319D0CCA7009959ED /* Products */,
+				4C18954B19D0CCB1009959ED /* Dependencies */,
+			);
+			sourceTree = "<group>";
+		};
+		4C18953319D0CCA7009959ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C18953219D0CCA7009959ED /* JNetwork.framework */,
+				4C18953D19D0CCA7009959ED /* JNetworkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C18953419D0CCA7009959ED /* JNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				4CC2D59119D5726800B45493 /* Callbacks */,
+				4C6F3F8619D47361001707D3 /* ConnectionsFactory */,
+				4C21396219D5785B00350F21 /* Details */,
+				4CE43F6A19D3386D00FEAFD2 /* Extensions */,
+				4C6F3F8A19D475B1001707D3 /* HttpBodyBuilder */,
+				4CE2655319D1873C00086CD2 /* NSError */,
+				4C6F3F8D19D4922C001707D3 /* XQueryComponents */,
+				4C6F3EEB19D3F654001707D3 /* JURLConnection.swift */,
+				4C6F3EEE19D3F727001707D3 /* JURLConnectionCallbacks.swift */,
+				4CE43F7A19D34FD600FEAFD2 /* JURLConnectionParams.swift */,
+				4C6F3EF319D3FDA6001707D3 /* JAbstractConnection.swift */,
+				4C6F3EF119D3FD67001707D3 /* JNSURLConnection.swift */,
+				4C213A4E19D5B0BF00350F21 /* JHttpFlagChecker.swift */,
+				4C213A5619D5B69600350F21 /* JNetworkBlocksFunctions.swift */,
+				4C18953719D0CCA7009959ED /* JNetwork.h */,
+				4C18953519D0CCA7009959ED /* Supporting Files */,
+				4CEC4CC119ED531C003C1206 /* Resources */,
+			);
+			path = JNetwork;
+			sourceTree = "<group>";
+		};
+		4C18953519D0CCA7009959ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C18953619D0CCA7009959ED /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C18953E19D0CCA7009959ED /* JNetworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				4C6CE5771A87AFE1004D2C37 /* TestData */,
+				4C18954119D0CCA7009959ED /* JNetworkTests.swift */,
+				4C6CE5571A87A040004D2C37 /* JNSURLConnectionTest.swift */,
+				4C6CE5901A8800E7004D2C37 /* StringFromQueryComponentsTest.swift */,
+				4C18953F19D0CCA7009959ED /* Supporting Files */,
+			);
+			path = JNetworkTests;
+			sourceTree = "<group>";
+		};
+		4C18953F19D0CCA7009959ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C18954019D0CCA7009959ED /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C18954B19D0CCB1009959ED /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				4C5941451A6DAEB00093FFE6 /* JAsync.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		4C21396219D5785B00350F21 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				4C21396319D5786C00350F21 /* JNetworkAsync.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		4C5941461A6DAEB00093FFE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C59414B1A6DAEB00093FFE6 /* JAsync.framework */,
+				4C59414D1A6DAEB00093FFE6 /* JAsyncTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C6CE5771A87AFE1004D2C37 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				4C6CE5781A87AFF0004D2C37 /* 1.txt */,
+			);
+			path = TestData;
+			sourceTree = "<group>";
+		};
+		4C6F3F8619D47361001707D3 /* ConnectionsFactory */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ConnectionsFactory;
+			sourceTree = "<group>";
+		};
+		4C6F3F8A19D475B1001707D3 /* HttpBodyBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F3F8B19D475CA001707D3 /* JHttpBodyBuilder.swift */,
+			);
+			path = HttpBodyBuilder;
+			sourceTree = "<group>";
+		};
+		4C6F3F8D19D4922C001707D3 /* XQueryComponents */ = {
+			isa = PBXGroup;
+			children = (
+				4CB5029919EC621F0025D830 /* String+XQueryComponents.swift */,
+				4C6F3F9419D49DA4001707D3 /* XQueryComponents.swift */,
+			);
+			path = XQueryComponents;
+			sourceTree = "<group>";
+		};
+		4CC2D59119D5726800B45493 /* Callbacks */ = {
+			isa = PBXGroup;
+			children = (
+				4CC2D59319D5727A00B45493 /* JNetworkResponseDataCallback.swift */,
+				4C21396019D5752F00350F21 /* JUploadProgress.swift */,
+				4C21395A19D5749E00350F21 /* JNetworkUploadProgressCallback.swift */,
+			);
+			path = Callbacks;
+			sourceTree = "<group>";
+		};
+		4CE2655319D1873C00086CD2 /* NSError */ = {
+			isa = PBXGroup;
+			children = (
+				4CE2656D19D18A3300086CD2 /* NSNetworkErrors */,
+				4CE2655419D1874500086CD2 /* NSError+IsNetworkError.swift */,
+				4CE2656719D189BD00086CD2 /* JNetworkError.swift */,
+				4CE2656919D189EA00086CD2 /* JHttpError.swift */,
+				4CE2656B19D18A0200086CD2 /* JStreamError.swift */,
+			);
+			path = NSError;
+			sourceTree = "<group>";
+		};
+		4CE2656D19D18A3300086CD2 /* NSNetworkErrors */ = {
+			isa = PBXGroup;
+			children = (
+				4CE2656E19D18A4100086CD2 /* JNSNetworkError.swift */,
+				4CE2657019D18A5500086CD2 /* JNSNoInternetNetworkError.swift */,
+			);
+			path = NSNetworkErrors;
+			sourceTree = "<group>";
+		};
+		4CE43F6A19D3386D00FEAFD2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4CE43F7419D33CC200FEAFD2 /* NSURL+Cookies.swift */,
+				4CE43F7619D3485A00FEAFD2 /* NSMutableData+DataForHTTPPost.swift */,
+				4CE43F7819D34F6000FEAFD2 /* NSMutableURLRequest+CreateRequestWithURLParams.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4CEC4CC119ED531C003C1206 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4CEC4CC719ED5350003C1206 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4C18952F19D0CCA7009959ED /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C18953819D0CCA7009959ED /* JNetwork.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4C18953119D0CCA7009959ED /* JNetwork */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C18954519D0CCA7009959ED /* Build configuration list for PBXNativeTarget "JNetwork" */;
+			buildPhases = (
+				4C18952D19D0CCA7009959ED /* Sources */,
+				4C18952E19D0CCA7009959ED /* Frameworks */,
+				4C18952F19D0CCA7009959ED /* Headers */,
+				4C18953019D0CCA7009959ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C59414F1A6DAEBB0093FFE6 /* PBXTargetDependency */,
+			);
+			name = JNetwork;
+			productName = JNetwork;
+			productReference = 4C18953219D0CCA7009959ED /* JNetwork.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4C18953C19D0CCA7009959ED /* JNetworkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C18954819D0CCA7009959ED /* Build configuration list for PBXNativeTarget "JNetworkTests" */;
+			buildPhases = (
+				4C18953919D0CCA7009959ED /* Sources */,
+				4C18953A19D0CCA7009959ED /* Frameworks */,
+				4C18953B19D0CCA7009959ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JNetworkTests;
+			productName = JNetworkTests;
+			productReference = 4C18953D19D0CCA7009959ED /* JNetworkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C18952919D0CCA7009959ED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = EmbeddedSources;
+				TargetAttributes = {
+					4C18953119D0CCA7009959ED = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+					4C18953C19D0CCA7009959ED = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 4C18952C19D0CCA7009959ED /* Build configuration list for PBXProject "JNetwork" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+				es,
+				fr,
+				it,
+				ja,
+				pt,
+				ru,
+				tr,
+				uk,
+			);
+			mainGroup = 4C18952819D0CCA7009959ED;
+			productRefGroup = 4C18953319D0CCA7009959ED /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4C5941461A6DAEB00093FFE6 /* Products */;
+					ProjectRef = 4C5941451A6DAEB00093FFE6 /* JAsync.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				4C18953119D0CCA7009959ED /* JNetwork */,
+				4C18953C19D0CCA7009959ED /* JNetworkTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4C59414B1A6DAEB00093FFE6 /* JAsync.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JAsync.framework;
+			remoteRef = 4C59414A1A6DAEB00093FFE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C59414D1A6DAEB00093FFE6 /* JAsyncTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JAsyncTests.xctest;
+			remoteRef = 4C59414C1A6DAEB00093FFE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C18953019D0CCA7009959ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEC4CC519ED5350003C1206 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C18953B19D0CCA7009959ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C6CE5791A87AFF0004D2C37 /* 1.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C18952D19D0CCA7009959ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CE2656819D189BD00086CD2 /* JNetworkError.swift in Sources */,
+				4C6F3F8C19D475CA001707D3 /* JHttpBodyBuilder.swift in Sources */,
+				4C213A5719D5B69600350F21 /* JNetworkBlocksFunctions.swift in Sources */,
+				4CE2656C19D18A0200086CD2 /* JStreamError.swift in Sources */,
+				4C6F3F3419D46171001707D3 /* JAbstractConnection.swift in Sources */,
+				4C6F3F3319D4616D001707D3 /* JNSURLConnection.swift in Sources */,
+				4CE2655519D1874500086CD2 /* NSError+IsNetworkError.swift in Sources */,
+				4C21396119D5752F00350F21 /* JUploadProgress.swift in Sources */,
+				4CE43F7B19D34FD600FEAFD2 /* JURLConnectionParams.swift in Sources */,
+				4C21396419D5786C00350F21 /* JNetworkAsync.swift in Sources */,
+				4CE2657119D18A5500086CD2 /* JNSNoInternetNetworkError.swift in Sources */,
+				4C21395B19D5749E00350F21 /* JNetworkUploadProgressCallback.swift in Sources */,
+				4CE2656A19D189EA00086CD2 /* JHttpError.swift in Sources */,
+				4C6F3EEF19D3F727001707D3 /* JURLConnectionCallbacks.swift in Sources */,
+				4CE43F7519D33CC200FEAFD2 /* NSURL+Cookies.swift in Sources */,
+				4CE43F7719D3485A00FEAFD2 /* NSMutableData+DataForHTTPPost.swift in Sources */,
+				4CB5029A19EC621F0025D830 /* String+XQueryComponents.swift in Sources */,
+				4C6F3F9519D49DA4001707D3 /* XQueryComponents.swift in Sources */,
+				4C213A4F19D5B0BF00350F21 /* JHttpFlagChecker.swift in Sources */,
+				4CE2656F19D18A4100086CD2 /* JNSNetworkError.swift in Sources */,
+				4CC2D59419D5727B00B45493 /* JNetworkResponseDataCallback.swift in Sources */,
+				4C6F3F3219D4600B001707D3 /* NSMutableURLRequest+CreateRequestWithURLParams.swift in Sources */,
+				4C6F3EEC19D3F654001707D3 /* JURLConnection.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C18953919D0CCA7009959ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C6CE5911A8800E7004D2C37 /* StringFromQueryComponentsTest.swift in Sources */,
+				4C6CE5621A87A49B004D2C37 /* JURLConnection.swift in Sources */,
+				4C6CE56D1A87A5C1004D2C37 /* NSMutableURLRequest+CreateRequestWithURLParams.swift in Sources */,
+				4C6CE5651A87A4CE004D2C37 /* JURLConnectionCallbacks.swift in Sources */,
+				4C6CE5611A87A490004D2C37 /* JNetworkAsync.swift in Sources */,
+				4C6CE55E1A87A465004D2C37 /* JHttpFlagChecker.swift in Sources */,
+				4C6CE55C1A87A407004D2C37 /* JNetworkBlocksFunctions.swift in Sources */,
+				4C6CE5941A880378004D2C37 /* String+XQueryComponents.swift in Sources */,
+				4C6CE56C1A87A555004D2C37 /* NSError+IsNetworkError.swift in Sources */,
+				4C6CE5671A87A4EE004D2C37 /* JNetworkUploadProgressCallback.swift in Sources */,
+				4C18954219D0CCA7009959ED /* JNetworkTests.swift in Sources */,
+				4C6CE5931A88036D004D2C37 /* XQueryComponents.swift in Sources */,
+				4C6CE55D1A87A414004D2C37 /* JURLConnectionParams.swift in Sources */,
+				4C6CE5641A87A4C2004D2C37 /* JNSNetworkError.swift in Sources */,
+				4C6CE5601A87A47D004D2C37 /* JNetworkError.swift in Sources */,
+				4C6CE5661A87A4DA004D2C37 /* JNetworkResponseDataCallback.swift in Sources */,
+				4C6CE56A1A87A541004D2C37 /* JAbstractConnection.swift in Sources */,
+				4C6CE5681A87A4F9004D2C37 /* JUploadProgress.swift in Sources */,
+				4C6CE5581A87A040004D2C37 /* JNSURLConnectionTest.swift in Sources */,
+				4C6CE56B1A87A54C004D2C37 /* JNSNoInternetNetworkError.swift in Sources */,
+				4C6CE55F1A87A472004D2C37 /* JHttpError.swift in Sources */,
+				4C6CE5691A87A507004D2C37 /* JNSURLConnection.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C59414F1A6DAEBB0093FFE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JAsync;
+			targetProxy = 4C59414E1A6DAEBB0093FFE6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4CEC4CC719ED5350003C1206 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CEC4CC619ED5350003C1206 /* en */,
+				4CEC4CEC19ED5390003C1206 /* de */,
+				4CEC4CED19ED5393003C1206 /* es */,
+				4CEC4CEE19ED5395003C1206 /* fr */,
+				4CEC4CEF19ED5397003C1206 /* it */,
+				4CEC4CF019ED5399003C1206 /* ja */,
+				4CEC4CF119ED539C003C1206 /* pt */,
+				4CEC4CF219ED539E003C1206 /* ru */,
+				4CEC4CF319ED53A0003C1206 /* tr */,
+				4CEC4CF419ED53A2003C1206 /* uk */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4C18954319D0CCA7009959ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4C18954419D0CCA7009959ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4C18954619D0CCA7009959ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = JNetwork/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4C18954719D0CCA7009959ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = JNetwork/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		4C18954919D0CCA7009959ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = JNetworkTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4C18954A19D0CCA7009959ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = JNetworkTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C18952C19D0CCA7009959ED /* Build configuration list for PBXProject "JNetwork" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C18954319D0CCA7009959ED /* Debug */,
+				4C18954419D0CCA7009959ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C18954519D0CCA7009959ED /* Build configuration list for PBXNativeTarget "JNetwork" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C18954619D0CCA7009959ED /* Debug */,
+				4C18954719D0CCA7009959ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C18954819D0CCA7009959ED /* Build configuration list for PBXNativeTarget "JNetworkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C18954919D0CCA7009959ED /* Debug */,
+				4C18954A19D0CCA7009959ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4C18952919D0CCA7009959ED /* Project object */;
+}

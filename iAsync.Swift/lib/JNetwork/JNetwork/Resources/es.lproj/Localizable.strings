@@ -1,0 +1,11 @@
+/*
+ Localizable.strings
+ Wishdates
+ 
+ Created by user on 04.10.12.
+ 
+ */
+
+//Network errors ;
+"J_NETWORK_NO_INTERNET_ERROR" = "No se pudo establecer una conexión en este momento, por favor, inténtalo de nuevo más tarde";
+"J_NETWORK_GENERIC_ERROR"     = "No se pudo establecer una conexión en este momento, por favor, inténtalo de nuevo más tarde";

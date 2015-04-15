@@ -1,0 +1,11 @@
+/*
+ Localizable.strings
+ Wishdates
+ 
+ Created by user on ????.
+ 
+ */
+
+//Network errors
+"J_NETWORK_NO_INTERNET_ERROR" = "Nous sommes dans l'incapacité d'établir une connexion pour le moment. Veuillez réessayer plus tard.";
+"J_NETWORK_GENERIC_ERROR"     = "Nous sommes dans l'incapacité d'établir une connexion pour le moment. Veuillez réessayer plus tard.";

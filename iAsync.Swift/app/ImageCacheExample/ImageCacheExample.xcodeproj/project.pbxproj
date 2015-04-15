@@ -1,0 +1,1110 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE102EE916088D7C004229C5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE102EE816088D7C004229C5 /* CFNetwork.framework */; };
+		CE102EEB16088D83004229C5 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE102EEA16088D83004229C5 /* libsqlite3.dylib */; };
+		CE102EED16088D8E004229C5 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE102EEC16088D8E004229C5 /* libc++.dylib */; };
+		CE102EEF16088D94004229C5 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE102EEE16088D94004229C5 /* libstdc++.dylib */; };
+		CE102EF116088DAE004229C5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE102EF016088DAE004229C5 /* libz.dylib */; };
+		CE78FD481608A57C005CE392 /* libJFFRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233F8160882DB00B34AD8 /* libJFFRestKit.a */; };
+		CED85D83161C41C200F28EBC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED85D82161C41C200F28EBC /* Default-568h@2x.png */; };
+		CEE233341608821E00B34AD8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233331608821E00B34AD8 /* UIKit.framework */; };
+		CEE233361608821E00B34AD8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233351608821E00B34AD8 /* Foundation.framework */; };
+		CEE233381608821E00B34AD8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233371608821E00B34AD8 /* CoreGraphics.framework */; };
+		CEE2333E1608821E00B34AD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE2333C1608821E00B34AD8 /* InfoPlist.strings */; };
+		CEE233401608821E00B34AD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE2333F1608821E00B34AD8 /* main.m */; };
+		CEE233441608821E00B34AD8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE233431608821E00B34AD8 /* AppDelegate.m */; };
+		CEE233471608821E00B34AD8 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE233451608821E00B34AD8 /* MainStoryboard_iPhone.storyboard */; };
+		CEE2334A1608821F00B34AD8 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE233481608821F00B34AD8 /* MainStoryboard_iPad.storyboard */; };
+		CEE2334D1608821F00B34AD8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE2334C1608821F00B34AD8 /* ViewController.m */; };
+		CEE233551608821F00B34AD8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233541608821F00B34AD8 /* SenTestingKit.framework */; };
+		CEE233561608821F00B34AD8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233331608821E00B34AD8 /* UIKit.framework */; };
+		CEE233571608821F00B34AD8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233351608821E00B34AD8 /* Foundation.framework */; };
+		CEE2335F1608821F00B34AD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE2335D1608821F00B34AD8 /* InfoPlist.strings */; };
+		CEE233621608821F00B34AD8 /* ImageCacheExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE233611608821F00B34AD8 /* ImageCacheExampleTests.m */; };
+		CEE234451608831500B34AD8 /* JFFCacheDBInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE234441608831500B34AD8 /* JFFCacheDBInfo.plist */; };
+		CEE235EE16088A0F00B34AD8 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE235ED16088A0F00B34AD8 /* loading.png */; };
+		CEE235FF16088BB800B34AD8 /* libJFFAsyncOperations.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE2343E160882F800B34AD8 /* libJFFAsyncOperations.a */; };
+		CEE2360016088BB800B34AD8 /* libJFFCache.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE23436160882F100B34AD8 /* libJFFCache.a */; };
+		CEE2360116088BB800B34AD8 /* libJFFJsonTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE23421160882EA00B34AD8 /* libJFFJsonTools.a */; };
+		CEE2360216088BB800B34AD8 /* libJFFNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE23407160882DF00B34AD8 /* libJFFNetwork.a */; };
+		CEE2360416088BB800B34AD8 /* libJFFScheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233E4160882D300B34AD8 /* libJFFScheduler.a */; };
+		CEE2360516088BB800B34AD8 /* libJFFUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233D6160882CB00B34AD8 /* libJFFUI.a */; };
+		CEE2360616088BB800B34AD8 /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE233C4160882C500B34AD8 /* libJFFUtils.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4C0C3F291826DD6300984027 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE23437160882F800B34AD8 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C1A0F8D182577BE0020FBF6;
+			remoteInfo = JFFAsyncOperationsMacOS;
+		};
+		4C0C3F301826DD6300984027 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233EB160882DA00B34AD8 /* JFFRestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C043A4A181E9D8200246A88;
+			remoteInfo = JFFRestKitTests;
+		};
+		CE102F3B16089E13004229C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233EB160882DA00B34AD8 /* JFFRestKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B7ABA80152D973A005DD4CA;
+			remoteInfo = JFFRestKit;
+		};
+		CEE233581608821F00B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233261608821E00B34AD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEE2332E1608821E00B34AD8;
+			remoteInfo = ImageCacheExample;
+		};
+		CEE233C3160882C500B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233B8160882C500B34AD8 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+		CEE233C5160882C500B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233B8160882C500B34AD8 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802A5B148BF2930040A93A;
+			remoteInfo = JFFUtilsMacOS;
+		};
+		CEE233C7160882C500B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233B8160882C500B34AD8 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391044314A88C04007315A3;
+			remoteInfo = "JFFUtils-clang";
+		};
+		CEE233C9160882C500B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233B8160882C500B34AD8 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E57F42414F93738002D139B;
+			remoteInfo = JFFUtilsFW;
+		};
+		CEE233CB160882C500B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233B8160882C500B34AD8 /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE444A1C1608609100DD85B0;
+			remoteInfo = JFFUtilsTest;
+		};
+		CEE233D5160882CB00B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233CD160882CB00B34AD8 /* JFFUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFUI;
+		};
+		CEE233D7160882CB00B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233CD160882CB00B34AD8 /* JFFUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103F014A88BE1007315A3;
+			remoteInfo = "JFFUI-clang";
+		};
+		CEE233E3160882D300B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233D9160882D300B34AD8 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFScheduler;
+		};
+		CEE233E5160882D300B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233D9160882D300B34AD8 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802B07148BFB850040A93A;
+			remoteInfo = JFFSchedulerMacOS;
+		};
+		CEE233E7160882D300B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233D9160882D300B34AD8 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103C614A88BD6007315A3;
+			remoteInfo = "JFFScheduler-clang";
+		};
+		CEE233E9160882D300B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233D9160882D300B34AD8 /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F202A14F9484F00588C7D;
+			remoteInfo = JFFSchedulerFW;
+		};
+		CEE233F7160882DB00B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233EB160882DA00B34AD8 /* JFFRestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B7ABA81152D973A005DD4CA;
+			remoteInfo = JFFRestKit;
+		};
+		CEE23406160882DF00B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233FB160882DF00B34AD8 /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D5AE6DB13F3E6C600EB6143;
+			remoteInfo = JFFNetwork;
+		};
+		CEE23408160882DF00B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233FB160882DF00B34AD8 /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802B22148BFC230040A93A;
+			remoteInfo = JFFNetworkMacOS;
+		};
+		CEE2340A160882DF00B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233FB160882DF00B34AD8 /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103B714A88BCA007315A3;
+			remoteInfo = "JFFNetwork-clang";
+		};
+		CEE2340C160882DF00B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233FB160882DF00B34AD8 /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F204314F9494300588C7D;
+			remoteInfo = JFFNetworkFW;
+		};
+		CEE23420160882EA00B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE2340E160882E900B34AD8 /* JFFJsonTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE532C0916036CE40029920A;
+			remoteInfo = JFFJsonTools;
+		};
+		CEE23422160882EA00B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE2340E160882E900B34AD8 /* JFFJsonTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE532C1A16036CE40029920A;
+			remoteInfo = JFFJsonToolsTests;
+		};
+		CEE23435160882F100B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE2342E160882F100B34AD8 /* JFFCache.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65168477144F4ECD0014670E;
+			remoteInfo = JFFCache;
+		};
+		CEE2343D160882F800B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE23437160882F800B34AD8 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFAsyncOperations;
+		};
+		CEE2343F160882F800B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE23437160882F800B34AD8 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391037B14A88BB5007315A3;
+			remoteInfo = "JFFAsyncOperations-clang";
+		};
+		CEE23441160882F800B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE23437160882F800B34AD8 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F20C914F94BDF00588C7D;
+			remoteInfo = JFFAsyncOperationsFW;
+		};
+		CEE235EF16088BA900B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233B8160882C500B34AD8 /* JFFUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+		CEE235F116088BA900B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE23437160882F800B34AD8 /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFAsyncOperations;
+		};
+		CEE235F316088BA900B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE2342E160882F100B34AD8 /* JFFCache.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 65168476144F4ECD0014670E;
+			remoteInfo = JFFCache;
+		};
+		CEE235F516088BA900B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE2340E160882E900B34AD8 /* JFFJsonTools.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CE532C0816036CE40029920A;
+			remoteInfo = JFFJsonTools;
+		};
+		CEE235F916088BA900B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233FB160882DF00B34AD8 /* JFFNetwork.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D5AE6DA13F3E6C600EB6143;
+			remoteInfo = JFFNetwork;
+		};
+		CEE235FB16088BA900B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233CD160882CB00B34AD8 /* JFFUI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFUI;
+		};
+		CEE235FD16088BA900B34AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE233D9160882D300B34AD8 /* JFFScheduler.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFScheduler;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CE102EE816088D7C004229C5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CE102EEA16088D83004229C5 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		CE102EEC16088D8E004229C5 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		CE102EEE16088D94004229C5 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		CE102EF016088DAE004229C5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		CED85D82161C41C200F28EBC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		CEE2332F1608821E00B34AD8 /* ImageCacheExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageCacheExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEE233331608821E00B34AD8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CEE233351608821E00B34AD8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CEE233371608821E00B34AD8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CEE2333B1608821E00B34AD8 /* ImageCacheExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImageCacheExample-Info.plist"; sourceTree = "<group>"; };
+		CEE2333D1608821E00B34AD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CEE2333F1608821E00B34AD8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CEE233411608821E00B34AD8 /* ImageCacheExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImageCacheExample-Prefix.pch"; sourceTree = "<group>"; };
+		CEE233421608821E00B34AD8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CEE233431608821E00B34AD8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CEE233461608821E00B34AD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		CEE233491608821F00B34AD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		CEE2334B1608821F00B34AD8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CEE2334C1608821F00B34AD8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CEE233531608821F00B34AD8 /* ImageCacheExampleTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageCacheExampleTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEE233541608821F00B34AD8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		CEE2335C1608821F00B34AD8 /* ImageCacheExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImageCacheExampleTests-Info.plist"; sourceTree = "<group>"; };
+		CEE2335E1608821F00B34AD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CEE233601608821F00B34AD8 /* ImageCacheExampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCacheExampleTests.h; sourceTree = "<group>"; };
+		CEE233611608821F00B34AD8 /* ImageCacheExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCacheExampleTests.m; sourceTree = "<group>"; };
+		CEE233B8160882C500B34AD8 /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
+		CEE233CD160882CB00B34AD8 /* JFFUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUI.xcodeproj; path = ../../lib/JFFUI/JFFUI.xcodeproj; sourceTree = "<group>"; };
+		CEE233D9160882D300B34AD8 /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../../lib/JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
+		CEE233EB160882DA00B34AD8 /* JFFRestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFRestKit.xcodeproj; path = ../../lib/JFFRestKit/JFFRestKit.xcodeproj; sourceTree = "<group>"; };
+		CEE233FB160882DF00B34AD8 /* JFFNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFNetwork.xcodeproj; path = ../../lib/JFFNetwork/JFFNetwork.xcodeproj; sourceTree = "<group>"; };
+		CEE2340E160882E900B34AD8 /* JFFJsonTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFJsonTools.xcodeproj; path = ../../lib/JFFJsonTools/JFFJsonTools.xcodeproj; sourceTree = "<group>"; };
+		CEE2342E160882F100B34AD8 /* JFFCache.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFCache.xcodeproj; path = ../../lib/JFFCache/JFFCache.xcodeproj; sourceTree = "<group>"; };
+		CEE23437160882F800B34AD8 /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../../lib/JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
+		CEE234441608831500B34AD8 /* JFFCacheDBInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JFFCacheDBInfo.plist; sourceTree = "<group>"; };
+		CEE235ED16088A0F00B34AD8 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CEE2332C1608821E00B34AD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE78FD481608A57C005CE392 /* libJFFRestKit.a in Frameworks */,
+				CE102EF116088DAE004229C5 /* libz.dylib in Frameworks */,
+				CE102EEF16088D94004229C5 /* libstdc++.dylib in Frameworks */,
+				CE102EED16088D8E004229C5 /* libc++.dylib in Frameworks */,
+				CE102EEB16088D83004229C5 /* libsqlite3.dylib in Frameworks */,
+				CE102EE916088D7C004229C5 /* CFNetwork.framework in Frameworks */,
+				CEE235FF16088BB800B34AD8 /* libJFFAsyncOperations.a in Frameworks */,
+				CEE2360016088BB800B34AD8 /* libJFFCache.a in Frameworks */,
+				CEE2360116088BB800B34AD8 /* libJFFJsonTools.a in Frameworks */,
+				CEE2360216088BB800B34AD8 /* libJFFNetwork.a in Frameworks */,
+				CEE2360416088BB800B34AD8 /* libJFFScheduler.a in Frameworks */,
+				CEE2360516088BB800B34AD8 /* libJFFUI.a in Frameworks */,
+				CEE2360616088BB800B34AD8 /* libJFFUtils.a in Frameworks */,
+				CEE233341608821E00B34AD8 /* UIKit.framework in Frameworks */,
+				CEE233361608821E00B34AD8 /* Foundation.framework in Frameworks */,
+				CEE233381608821E00B34AD8 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE2334F1608821F00B34AD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE233551608821F00B34AD8 /* SenTestingKit.framework in Frameworks */,
+				CEE233561608821F00B34AD8 /* UIKit.framework in Frameworks */,
+				CEE233571608821F00B34AD8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CEE233241608821E00B34AD8 = {
+			isa = PBXGroup;
+			children = (
+				CED85D82161C41C200F28EBC /* Default-568h@2x.png */,
+				CEE233391608821E00B34AD8 /* ImageCacheExample */,
+				CEE2335A1608821F00B34AD8 /* ImageCacheExampleTests */,
+				CEE234431608831500B34AD8 /* Resources */,
+				CEE233321608821E00B34AD8 /* Frameworks */,
+				CEE233301608821E00B34AD8 /* Products */,
+				CEE233B6160882A400B34AD8 /* Dependencies */,
+			);
+			sourceTree = "<group>";
+		};
+		CEE233301608821E00B34AD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEE2332F1608821E00B34AD8 /* ImageCacheExample.app */,
+				CEE233531608821F00B34AD8 /* ImageCacheExampleTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEE233321608821E00B34AD8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE102EF016088DAE004229C5 /* libz.dylib */,
+				CE102EEE16088D94004229C5 /* libstdc++.dylib */,
+				CE102EEC16088D8E004229C5 /* libc++.dylib */,
+				CE102EEA16088D83004229C5 /* libsqlite3.dylib */,
+				CE102EE816088D7C004229C5 /* CFNetwork.framework */,
+				CEE233331608821E00B34AD8 /* UIKit.framework */,
+				CEE233351608821E00B34AD8 /* Foundation.framework */,
+				CEE233371608821E00B34AD8 /* CoreGraphics.framework */,
+				CEE233541608821F00B34AD8 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CEE233391608821E00B34AD8 /* ImageCacheExample */ = {
+			isa = PBXGroup;
+			children = (
+				CEE233421608821E00B34AD8 /* AppDelegate.h */,
+				CEE233431608821E00B34AD8 /* AppDelegate.m */,
+				CEE233451608821E00B34AD8 /* MainStoryboard_iPhone.storyboard */,
+				CEE233481608821F00B34AD8 /* MainStoryboard_iPad.storyboard */,
+				CEE2334B1608821F00B34AD8 /* ViewController.h */,
+				CEE2334C1608821F00B34AD8 /* ViewController.m */,
+				CEE2333A1608821E00B34AD8 /* Supporting Files */,
+			);
+			path = ImageCacheExample;
+			sourceTree = "<group>";
+		};
+		CEE2333A1608821E00B34AD8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CEE2333B1608821E00B34AD8 /* ImageCacheExample-Info.plist */,
+				CEE2333C1608821E00B34AD8 /* InfoPlist.strings */,
+				CEE2333F1608821E00B34AD8 /* main.m */,
+				CEE233411608821E00B34AD8 /* ImageCacheExample-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEE2335A1608821F00B34AD8 /* ImageCacheExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				CEE233601608821F00B34AD8 /* ImageCacheExampleTests.h */,
+				CEE233611608821F00B34AD8 /* ImageCacheExampleTests.m */,
+				CEE2335B1608821F00B34AD8 /* Supporting Files */,
+			);
+			path = ImageCacheExampleTests;
+			sourceTree = "<group>";
+		};
+		CEE2335B1608821F00B34AD8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CEE2335C1608821F00B34AD8 /* ImageCacheExampleTests-Info.plist */,
+				CEE2335D1608821F00B34AD8 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEE233B6160882A400B34AD8 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				CEE23437160882F800B34AD8 /* JFFAsyncOperations.xcodeproj */,
+				CEE2342E160882F100B34AD8 /* JFFCache.xcodeproj */,
+				CEE2340E160882E900B34AD8 /* JFFJsonTools.xcodeproj */,
+				CEE233FB160882DF00B34AD8 /* JFFNetwork.xcodeproj */,
+				CEE233EB160882DA00B34AD8 /* JFFRestKit.xcodeproj */,
+				CEE233D9160882D300B34AD8 /* JFFScheduler.xcodeproj */,
+				CEE233CD160882CB00B34AD8 /* JFFUI.xcodeproj */,
+				CEE233B8160882C500B34AD8 /* JFFUtils.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		CEE233B9160882C500B34AD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEE233C4160882C500B34AD8 /* libJFFUtils.a */,
+				CEE233C6160882C500B34AD8 /* libJFFUtilsMacOS.a */,
+				CEE233C8160882C500B34AD8 /* libJFFUtils-clang.a */,
+				CEE233CA160882C500B34AD8 /* JFFUtilsFW.framework */,
+				CEE233CC160882C500B34AD8 /* JFFUtilsTest.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEE233CE160882CB00B34AD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEE233D6160882CB00B34AD8 /* libJFFUI.a */,
+				CEE233D8160882CB00B34AD8 /* libJFFUI-clang.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEE233DA160882D300B34AD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEE233E4160882D300B34AD8 /* libJFFScheduler.a */,
+				CEE233E6160882D300B34AD8 /* libJFFSchedulerMacOS.a */,
+				CEE233E8160882D300B34AD8 /* libJFFScheduler-clang.a */,
+				CEE233EA160882D300B34AD8 /* JFFSchedulerFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEE233EC160882DA00B34AD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEE233F8160882DB00B34AD8 /* libJFFRestKit.a */,
+				4C0C3F311826DD6300984027 /* JFFRestKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEE233FC160882DF00B34AD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEE23407160882DF00B34AD8 /* libJFFNetwork.a */,
+				CEE23409160882DF00B34AD8 /* libJFFNetworkMacOS.a */,
+				CEE2340B160882DF00B34AD8 /* libJFFNetwork-clang.a */,
+				CEE2340D160882DF00B34AD8 /* JFFNetworkFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEE2340F160882E900B34AD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEE23421160882EA00B34AD8 /* libJFFJsonTools.a */,
+				CEE23423160882EA00B34AD8 /* JFFJsonToolsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEE2342F160882F100B34AD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEE23436160882F100B34AD8 /* libJFFCache.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEE23438160882F800B34AD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEE2343E160882F800B34AD8 /* libJFFAsyncOperations.a */,
+				CEE23440160882F800B34AD8 /* libJFFAsyncOperations-clang.a */,
+				CEE23442160882F800B34AD8 /* JFFAsyncOperationsFW.framework */,
+				4C0C3F2A1826DD6300984027 /* libJFFAsyncOperationsMacOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEE234431608831500B34AD8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CEE235ED16088A0F00B34AD8 /* loading.png */,
+				CEE234441608831500B34AD8 /* JFFCacheDBInfo.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CEE2332E1608821E00B34AD8 /* ImageCacheExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEE233651608821F00B34AD8 /* Build configuration list for PBXNativeTarget "ImageCacheExample" */;
+			buildPhases = (
+				CEE2332B1608821E00B34AD8 /* Sources */,
+				CEE2332C1608821E00B34AD8 /* Frameworks */,
+				CEE2332D1608821E00B34AD8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE102F3C16089E13004229C5 /* PBXTargetDependency */,
+				CEE235F016088BA900B34AD8 /* PBXTargetDependency */,
+				CEE235F216088BA900B34AD8 /* PBXTargetDependency */,
+				CEE235F416088BA900B34AD8 /* PBXTargetDependency */,
+				CEE235F616088BA900B34AD8 /* PBXTargetDependency */,
+				CEE235FA16088BA900B34AD8 /* PBXTargetDependency */,
+				CEE235FC16088BA900B34AD8 /* PBXTargetDependency */,
+				CEE235FE16088BA900B34AD8 /* PBXTargetDependency */,
+			);
+			name = ImageCacheExample;
+			productName = ImageCacheExample;
+			productReference = CEE2332F1608821E00B34AD8 /* ImageCacheExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CEE233521608821F00B34AD8 /* ImageCacheExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEE233681608821F00B34AD8 /* Build configuration list for PBXNativeTarget "ImageCacheExampleTests" */;
+			buildPhases = (
+				CEE2334E1608821F00B34AD8 /* Sources */,
+				CEE2334F1608821F00B34AD8 /* Frameworks */,
+				CEE233501608821F00B34AD8 /* Resources */,
+				CEE233511608821F00B34AD8 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEE233591608821F00B34AD8 /* PBXTargetDependency */,
+			);
+			name = ImageCacheExampleTests;
+			productName = ImageCacheExampleTests;
+			productReference = CEE233531608821F00B34AD8 /* ImageCacheExampleTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CEE233261608821E00B34AD8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = EmbeddedSources;
+			};
+			buildConfigurationList = CEE233291608821E00B34AD8 /* Build configuration list for PBXProject "ImageCacheExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CEE233241608821E00B34AD8;
+			productRefGroup = CEE233301608821E00B34AD8 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CEE23438160882F800B34AD8 /* Products */;
+					ProjectRef = CEE23437160882F800B34AD8 /* JFFAsyncOperations.xcodeproj */;
+				},
+				{
+					ProductGroup = CEE2342F160882F100B34AD8 /* Products */;
+					ProjectRef = CEE2342E160882F100B34AD8 /* JFFCache.xcodeproj */;
+				},
+				{
+					ProductGroup = CEE2340F160882E900B34AD8 /* Products */;
+					ProjectRef = CEE2340E160882E900B34AD8 /* JFFJsonTools.xcodeproj */;
+				},
+				{
+					ProductGroup = CEE233FC160882DF00B34AD8 /* Products */;
+					ProjectRef = CEE233FB160882DF00B34AD8 /* JFFNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = CEE233EC160882DA00B34AD8 /* Products */;
+					ProjectRef = CEE233EB160882DA00B34AD8 /* JFFRestKit.xcodeproj */;
+				},
+				{
+					ProductGroup = CEE233DA160882D300B34AD8 /* Products */;
+					ProjectRef = CEE233D9160882D300B34AD8 /* JFFScheduler.xcodeproj */;
+				},
+				{
+					ProductGroup = CEE233CE160882CB00B34AD8 /* Products */;
+					ProjectRef = CEE233CD160882CB00B34AD8 /* JFFUI.xcodeproj */;
+				},
+				{
+					ProductGroup = CEE233B9160882C500B34AD8 /* Products */;
+					ProjectRef = CEE233B8160882C500B34AD8 /* JFFUtils.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				CEE2332E1608821E00B34AD8 /* ImageCacheExample */,
+				CEE233521608821F00B34AD8 /* ImageCacheExampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4C0C3F2A1826DD6300984027 /* libJFFAsyncOperationsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperationsMacOS.a;
+			remoteRef = 4C0C3F291826DD6300984027 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C0C3F311826DD6300984027 /* JFFRestKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFRestKitTests.xctest;
+			remoteRef = 4C0C3F301826DD6300984027 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233C4160882C500B34AD8 /* libJFFUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtils.a;
+			remoteRef = CEE233C3160882C500B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233C6160882C500B34AD8 /* libJFFUtilsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtilsMacOS.a;
+			remoteRef = CEE233C5160882C500B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233C8160882C500B34AD8 /* libJFFUtils-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFUtils-clang.a";
+			remoteRef = CEE233C7160882C500B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233CA160882C500B34AD8 /* JFFUtilsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFUtilsFW.framework;
+			remoteRef = CEE233C9160882C500B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233CC160882C500B34AD8 /* JFFUtilsTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFUtilsTest.octest;
+			remoteRef = CEE233CB160882C500B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233D6160882CB00B34AD8 /* libJFFUI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUI.a;
+			remoteRef = CEE233D5160882CB00B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233D8160882CB00B34AD8 /* libJFFUI-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFUI-clang.a";
+			remoteRef = CEE233D7160882CB00B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233E4160882D300B34AD8 /* libJFFScheduler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFScheduler.a;
+			remoteRef = CEE233E3160882D300B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233E6160882D300B34AD8 /* libJFFSchedulerMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFSchedulerMacOS.a;
+			remoteRef = CEE233E5160882D300B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233E8160882D300B34AD8 /* libJFFScheduler-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFScheduler-clang.a";
+			remoteRef = CEE233E7160882D300B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233EA160882D300B34AD8 /* JFFSchedulerFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFSchedulerFW.framework;
+			remoteRef = CEE233E9160882D300B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE233F8160882DB00B34AD8 /* libJFFRestKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFRestKit.a;
+			remoteRef = CEE233F7160882DB00B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE23407160882DF00B34AD8 /* libJFFNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFNetwork.a;
+			remoteRef = CEE23406160882DF00B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE23409160882DF00B34AD8 /* libJFFNetworkMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFNetworkMacOS.a;
+			remoteRef = CEE23408160882DF00B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE2340B160882DF00B34AD8 /* libJFFNetwork-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFNetwork-clang.a";
+			remoteRef = CEE2340A160882DF00B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE2340D160882DF00B34AD8 /* JFFNetworkFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFNetworkFW.framework;
+			remoteRef = CEE2340C160882DF00B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE23421160882EA00B34AD8 /* libJFFJsonTools.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFJsonTools.a;
+			remoteRef = CEE23420160882EA00B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE23423160882EA00B34AD8 /* JFFJsonToolsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFJsonToolsTests.xctest;
+			remoteRef = CEE23422160882EA00B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE23436160882F100B34AD8 /* libJFFCache.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFCache.a;
+			remoteRef = CEE23435160882F100B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE2343E160882F800B34AD8 /* libJFFAsyncOperations.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperations.a;
+			remoteRef = CEE2343D160882F800B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE23440160882F800B34AD8 /* libJFFAsyncOperations-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFAsyncOperations-clang.a";
+			remoteRef = CEE2343F160882F800B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CEE23442160882F800B34AD8 /* JFFAsyncOperationsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFAsyncOperationsFW.framework;
+			remoteRef = CEE23441160882F800B34AD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CEE2332D1608821E00B34AD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE2333E1608821E00B34AD8 /* InfoPlist.strings in Resources */,
+				CEE233471608821E00B34AD8 /* MainStoryboard_iPhone.storyboard in Resources */,
+				CEE2334A1608821F00B34AD8 /* MainStoryboard_iPad.storyboard in Resources */,
+				CEE234451608831500B34AD8 /* JFFCacheDBInfo.plist in Resources */,
+				CEE235EE16088A0F00B34AD8 /* loading.png in Resources */,
+				CED85D83161C41C200F28EBC /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE233501608821F00B34AD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE2335F1608821F00B34AD8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CEE233511608821F00B34AD8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CEE2332B1608821E00B34AD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE233401608821E00B34AD8 /* main.m in Sources */,
+				CEE233441608821E00B34AD8 /* AppDelegate.m in Sources */,
+				CEE2334D1608821F00B34AD8 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE2334E1608821F00B34AD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE233621608821F00B34AD8 /* ImageCacheExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE102F3C16089E13004229C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFRestKit;
+			targetProxy = CE102F3B16089E13004229C5 /* PBXContainerItemProxy */;
+		};
+		CEE233591608821F00B34AD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEE2332E1608821E00B34AD8 /* ImageCacheExample */;
+			targetProxy = CEE233581608821F00B34AD8 /* PBXContainerItemProxy */;
+		};
+		CEE235F016088BA900B34AD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFUtils;
+			targetProxy = CEE235EF16088BA900B34AD8 /* PBXContainerItemProxy */;
+		};
+		CEE235F216088BA900B34AD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFAsyncOperations;
+			targetProxy = CEE235F116088BA900B34AD8 /* PBXContainerItemProxy */;
+		};
+		CEE235F416088BA900B34AD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFCache;
+			targetProxy = CEE235F316088BA900B34AD8 /* PBXContainerItemProxy */;
+		};
+		CEE235F616088BA900B34AD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFJsonTools;
+			targetProxy = CEE235F516088BA900B34AD8 /* PBXContainerItemProxy */;
+		};
+		CEE235FA16088BA900B34AD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFNetwork;
+			targetProxy = CEE235F916088BA900B34AD8 /* PBXContainerItemProxy */;
+		};
+		CEE235FC16088BA900B34AD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFUI;
+			targetProxy = CEE235FB16088BA900B34AD8 /* PBXContainerItemProxy */;
+		};
+		CEE235FE16088BA900B34AD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFScheduler;
+			targetProxy = CEE235FD16088BA900B34AD8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CEE2333C1608821E00B34AD8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEE2333D1608821E00B34AD8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CEE233451608821E00B34AD8 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEE233461608821E00B34AD8 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		CEE233481608821F00B34AD8 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEE233491608821F00B34AD8 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		CEE2335D1608821F00B34AD8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEE2335E1608821F00B34AD8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CEE233631608821F00B34AD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../lib,
+					../../lib/JFFCache,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = "-all_load";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CEE233641608821F00B34AD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../lib,
+					../../lib/JFFCache,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-all_load";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CEE233661608821F00B34AD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ImageCacheExample/ImageCacheExample-Prefix.pch";
+				INFOPLIST_FILE = "ImageCacheExample/ImageCacheExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CEE233671608821F00B34AD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ImageCacheExample/ImageCacheExample-Prefix.pch";
+				INFOPLIST_FILE = "ImageCacheExample/ImageCacheExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CEE233691608821F00B34AD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImageCacheExample.app/ImageCacheExample";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ImageCacheExample/ImageCacheExample-Prefix.pch";
+				INFOPLIST_FILE = "ImageCacheExampleTests/ImageCacheExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		CEE2336A1608821F00B34AD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImageCacheExample.app/ImageCacheExample";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ImageCacheExample/ImageCacheExample-Prefix.pch";
+				INFOPLIST_FILE = "ImageCacheExampleTests/ImageCacheExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CEE233291608821E00B34AD8 /* Build configuration list for PBXProject "ImageCacheExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEE233631608821F00B34AD8 /* Debug */,
+				CEE233641608821F00B34AD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEE233651608821F00B34AD8 /* Build configuration list for PBXNativeTarget "ImageCacheExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEE233661608821F00B34AD8 /* Debug */,
+				CEE233671608821F00B34AD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEE233681608821F00B34AD8 /* Build configuration list for PBXNativeTarget "ImageCacheExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEE233691608821F00B34AD8 /* Debug */,
+				CEE2336A1608821F00B34AD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CEE233261608821E00B34AD8 /* Project object */;
+}

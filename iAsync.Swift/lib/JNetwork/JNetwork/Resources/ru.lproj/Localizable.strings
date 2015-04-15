@@ -1,0 +1,11 @@
+/*
+ Localizable.strings
+ Wishdates
+ 
+ Created by user on 04.10.12.
+ 
+ */
+
+//Network errors
+"J_NETWORK_NO_INTERNET_ERROR" = "Не можем присоединиться к серверу, пожалуйста, попробуйте позже";
+"J_NETWORK_GENERIC_ERROR"     = "Не можем присоединиться к серверу, пожалуйста, попробуйте позже";

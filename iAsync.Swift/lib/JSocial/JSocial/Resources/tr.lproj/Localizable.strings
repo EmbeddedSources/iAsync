@@ -1,0 +1,15 @@
+/*
+ Localizable.strings
+ JSocial
+ 
+ Created by Vladimir Gorbenko on 07.10.14.
+ Copyright (c) 2014 EmbeddedSources. All rights reserved.
+ */
+
+//Facebook errors
+"J_FACEBOOK_GENERAL_ERROR"                      = "Bir hata Facebook sunucu ile oluştu. \n Devam etmek için tekrar deneyin"; //t
+"J_FACEBOOK_LOGIN_ERROR_USER_DENIED_PERMISSION" = "Please, check the details of your Facebook account in the \"Settings/Facebook\"";
+"J_FACEBOOK_AUTHORIZATION_FAILED"               = "Bir hata Facebook sunucu ile oluştu. \n Devam etmek için tekrar deneyin"; //t
+"J_FACEBOOK_LOGIN_ERROR_ACCESS_FORBIDDEN"       = "Lütfen, Ayarlar Facebook hesabının ayrıntılarını kontrol edin."; //t
+
+"J_STOREKIT_PURCHASE_DISABLED_ERROR" = "IOS \"Ayarlar\" in-app alımları etkinleştirin";

@@ -1,0 +1,721 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C11F7A0182792ED00229A6B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11F79F182792ED00229A6B /* QuartzCore.framework */; };
+		4C11F7A2182792F900229A6B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11F7A1182792F900229A6B /* CoreGraphics.framework */; };
+		CE206E2B16414CFF002476FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206E2A16414CFF002476FD /* UIKit.framework */; };
+		CE206E2D16414CFF002476FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206E2C16414CFF002476FD /* Foundation.framework */; };
+		CE206E3516414CFF002476FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE206E3316414CFF002476FD /* InfoPlist.strings */; };
+		CE206E3716414CFF002476FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE206E3616414CFF002476FD /* main.m */; };
+		CE206E3D16414CFF002476FD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CE206E3C16414CFF002476FD /* Default.png */; };
+		CE206E3F16414CFF002476FD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE206E3E16414CFF002476FD /* Default@2x.png */; };
+		CE206E4116414CFF002476FD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE206E4016414CFF002476FD /* Default-568h@2x.png */; };
+		CE206E6316414D2C002476FD /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206E6216414D2C002476FD /* GHUnitIOS.framework */; };
+		CE206EAA16414F05002476FD /* libJFFAsyncOperations.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206E8416414EE6002476FD /* libJFFAsyncOperations.a */; };
+		CE206EAB16414F05002476FD /* libJFFCoreLocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206E7316414EDE002476FD /* libJFFCoreLocation.a */; };
+		CE206EAC16414F05002476FD /* libJFFUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206E9A16414EEB002476FD /* libJFFUtils.a */; };
+		CE206EDC16414FB9002476FD /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206EDB16414FB9002476FD /* libstdc++.dylib */; };
+		CE206EDE16414FC0002476FD /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206EDD16414FC0002476FD /* libc++.dylib */; };
+		CE206EF516414FE7002476FD /* libJFFScheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206EEA16414FD4002476FD /* libJFFScheduler.a */; };
+		CE206EF616414FE7002476FD /* libJFFTestTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206EB816414F53002476FD /* libJFFTestTools.a */; };
+		CE206FC116415677002476FD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE206FC016415677002476FD /* CoreLocation.framework */; };
+		CE20708716415D23002476FD /* JFFLocationLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE20708616415D23002476FD /* JFFLocationLoaderTest.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4C11F795182792DF00229A6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E7616414EE5002476FD /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C1A0F8D182577BE0020FBF6;
+			remoteInfo = JFFAsyncOperationsMacOS;
+		};
+		CE206E7216414EDE002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E6A16414EDE002476FD /* JFFCoreLocation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE206DF016414CC2002476FD;
+			remoteInfo = JFFCoreLocation;
+		};
+		CE206E7416414EDE002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E6A16414EDE002476FD /* JFFCoreLocation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE206E0116414CC3002476FD;
+			remoteInfo = JFFCoreLocationTests;
+		};
+		CE206E8316414EE6002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E7616414EE5002476FD /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFAsyncOperations;
+		};
+		CE206E8516414EE6002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E7616414EE5002476FD /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391037B14A88BB5007315A3;
+			remoteInfo = "JFFAsyncOperations-clang";
+		};
+		CE206E8716414EE6002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E7616414EE5002476FD /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F20C914F94BDF00588C7D;
+			remoteInfo = JFFAsyncOperationsFW;
+		};
+		CE206E9916414EEB002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E8A16414EEB002476FD /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+		CE206E9B16414EEB002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E8A16414EEB002476FD /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802A5B148BF2930040A93A;
+			remoteInfo = JFFUtilsMacOS;
+		};
+		CE206E9D16414EEB002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E8A16414EEB002476FD /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391044314A88C04007315A3;
+			remoteInfo = "JFFUtils-clang";
+		};
+		CE206E9F16414EEB002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E8A16414EEB002476FD /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E57F42414F93738002D139B;
+			remoteInfo = JFFUtilsFW;
+		};
+		CE206EA116414EEB002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E8A16414EEB002476FD /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE444A1C1608609100DD85B0;
+			remoteInfo = JFFUtilsTest;
+		};
+		CE206EA416414EFA002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E8A16414EEB002476FD /* JFFUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+		CE206EA616414EFA002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E6A16414EDE002476FD /* JFFCoreLocation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CE206DEF16414CC2002476FD;
+			remoteInfo = JFFCoreLocation;
+		};
+		CE206EA816414EFA002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206E7616414EE5002476FD /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFAsyncOperations;
+		};
+		CE206EB716414F53002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206EB316414F53002476FD /* JFFTestTools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1BE0542B154826DA00270B58;
+			remoteInfo = JFFTestTools;
+		};
+		CE206EE916414FD4002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206EDF16414FD4002476FD /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFScheduler;
+		};
+		CE206EEB16414FD4002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206EDF16414FD4002476FD /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802B07148BFB850040A93A;
+			remoteInfo = JFFSchedulerMacOS;
+		};
+		CE206EED16414FD4002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206EDF16414FD4002476FD /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103C614A88BD6007315A3;
+			remoteInfo = "JFFScheduler-clang";
+		};
+		CE206EEF16414FD4002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206EDF16414FD4002476FD /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F202A14F9484F00588C7D;
+			remoteInfo = JFFSchedulerFW;
+		};
+		CE206EF116414FE3002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206EDF16414FD4002476FD /* JFFScheduler.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFScheduler;
+		};
+		CE206EF316414FE3002476FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE206EB316414F53002476FD /* JFFTestTools.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BE0542A154826DA00270B58;
+			remoteInfo = JFFTestTools;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4C11F79F182792ED00229A6B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4C11F7A1182792F900229A6B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CE206E2616414CFF002476FD /* JFFCoreLocationTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFFCoreLocationTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE206E2A16414CFF002476FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CE206E2C16414CFF002476FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE206E3216414CFF002476FD /* JFFCoreLocationTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFFCoreLocationTest-Info.plist"; sourceTree = "<group>"; };
+		CE206E3416414CFF002476FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE206E3616414CFF002476FD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE206E3816414CFF002476FD /* JFFCoreLocationTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFFCoreLocationTest-Prefix.pch"; sourceTree = "<group>"; };
+		CE206E3C16414CFF002476FD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		CE206E3E16414CFF002476FD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		CE206E4016414CFF002476FD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		CE206E6216414D2C002476FD /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../../frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
+		CE206E6A16414EDE002476FD /* JFFCoreLocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFCoreLocation.xcodeproj; path = ../../lib/JFFCoreLocation/JFFCoreLocation.xcodeproj; sourceTree = "<group>"; };
+		CE206E7616414EE5002476FD /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../../lib/JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
+		CE206E8A16414EEB002476FD /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
+		CE206EB316414F53002476FD /* JFFTestTools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFTestTools.xcodeproj; path = ../../lib/JFFTestTools/JFFTestTools.xcodeproj; sourceTree = "<group>"; };
+		CE206EDB16414FB9002476FD /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		CE206EDD16414FC0002476FD /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		CE206EDF16414FD4002476FD /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../../lib/JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
+		CE206FC016415677002476FD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CE20708616415D23002476FD /* JFFLocationLoaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFLocationLoaderTest.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE206E2316414CFE002476FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C11F7A2182792F900229A6B /* CoreGraphics.framework in Frameworks */,
+				4C11F7A0182792ED00229A6B /* QuartzCore.framework in Frameworks */,
+				CE206FC116415677002476FD /* CoreLocation.framework in Frameworks */,
+				CE206EF516414FE7002476FD /* libJFFScheduler.a in Frameworks */,
+				CE206EF616414FE7002476FD /* libJFFTestTools.a in Frameworks */,
+				CE206EDE16414FC0002476FD /* libc++.dylib in Frameworks */,
+				CE206EDC16414FB9002476FD /* libstdc++.dylib in Frameworks */,
+				CE206EAA16414F05002476FD /* libJFFAsyncOperations.a in Frameworks */,
+				CE206EAB16414F05002476FD /* libJFFCoreLocation.a in Frameworks */,
+				CE206EAC16414F05002476FD /* libJFFUtils.a in Frameworks */,
+				CE206E2B16414CFF002476FD /* UIKit.framework in Frameworks */,
+				CE206E2D16414CFF002476FD /* Foundation.framework in Frameworks */,
+				CE206E6316414D2C002476FD /* GHUnitIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE206E1B16414CFE002476FD = {
+			isa = PBXGroup;
+			children = (
+				CE206E3016414CFF002476FD /* JFFCoreLocationTest */,
+				CE206E2916414CFF002476FD /* Frameworks */,
+				CE206E2716414CFF002476FD /* Products */,
+				CE206E6816414EC6002476FD /* Dependencies */,
+			);
+			sourceTree = "<group>";
+		};
+		CE206E2716414CFF002476FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE206E2616414CFF002476FD /* JFFCoreLocationTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE206E2916414CFF002476FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C11F7A1182792F900229A6B /* CoreGraphics.framework */,
+				4C11F79F182792ED00229A6B /* QuartzCore.framework */,
+				CE206EDD16414FC0002476FD /* libc++.dylib */,
+				CE206EDB16414FB9002476FD /* libstdc++.dylib */,
+				CE206FC016415677002476FD /* CoreLocation.framework */,
+				CE206E6216414D2C002476FD /* GHUnitIOS.framework */,
+				CE206E2A16414CFF002476FD /* UIKit.framework */,
+				CE206E2C16414CFF002476FD /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE206E3016414CFF002476FD /* JFFCoreLocationTest */ = {
+			isa = PBXGroup;
+			children = (
+				CE206E3116414CFF002476FD /* Supporting Files */,
+				CE20708616415D23002476FD /* JFFLocationLoaderTest.m */,
+			);
+			path = JFFCoreLocationTest;
+			sourceTree = "<group>";
+		};
+		CE206E3116414CFF002476FD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE206E3216414CFF002476FD /* JFFCoreLocationTest-Info.plist */,
+				CE206E3316414CFF002476FD /* InfoPlist.strings */,
+				CE206E3616414CFF002476FD /* main.m */,
+				CE206E3816414CFF002476FD /* JFFCoreLocationTest-Prefix.pch */,
+				CE206E3C16414CFF002476FD /* Default.png */,
+				CE206E3E16414CFF002476FD /* Default@2x.png */,
+				CE206E4016414CFF002476FD /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE206E6816414EC6002476FD /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				CE206EDF16414FD4002476FD /* JFFScheduler.xcodeproj */,
+				CE206EB316414F53002476FD /* JFFTestTools.xcodeproj */,
+				CE206E8A16414EEB002476FD /* JFFUtils.xcodeproj */,
+				CE206E7616414EE5002476FD /* JFFAsyncOperations.xcodeproj */,
+				CE206E6A16414EDE002476FD /* JFFCoreLocation.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		CE206E6B16414EDE002476FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE206E7316414EDE002476FD /* libJFFCoreLocation.a */,
+				CE206E7516414EDE002476FD /* JFFCoreLocationTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE206E7716414EE5002476FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE206E8416414EE6002476FD /* libJFFAsyncOperations.a */,
+				CE206E8616414EE6002476FD /* libJFFAsyncOperations-clang.a */,
+				CE206E8816414EE6002476FD /* JFFAsyncOperationsFW.framework */,
+				4C11F796182792DF00229A6B /* libJFFAsyncOperationsMacOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE206E8B16414EEB002476FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE206E9A16414EEB002476FD /* libJFFUtils.a */,
+				CE206E9C16414EEB002476FD /* libJFFUtilsMacOS.a */,
+				CE206E9E16414EEB002476FD /* libJFFUtils-clang.a */,
+				CE206EA016414EEB002476FD /* JFFUtilsFW.framework */,
+				CE206EA216414EEB002476FD /* JFFUtilsTest.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE206EB416414F53002476FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE206EB816414F53002476FD /* libJFFTestTools.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE206EE016414FD4002476FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE206EEA16414FD4002476FD /* libJFFScheduler.a */,
+				CE206EEC16414FD4002476FD /* libJFFSchedulerMacOS.a */,
+				CE206EEE16414FD4002476FD /* libJFFScheduler-clang.a */,
+				CE206EF016414FD4002476FD /* JFFSchedulerFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE206E2516414CFE002476FD /* JFFCoreLocationTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE206E4D16414CFF002476FD /* Build configuration list for PBXNativeTarget "JFFCoreLocationTest" */;
+			buildPhases = (
+				CE206E2216414CFE002476FD /* Sources */,
+				CE206E2316414CFE002476FD /* Frameworks */,
+				CE206E2416414CFE002476FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE206EF216414FE3002476FD /* PBXTargetDependency */,
+				CE206EF416414FE3002476FD /* PBXTargetDependency */,
+				CE206EA516414EFA002476FD /* PBXTargetDependency */,
+				CE206EA716414EFA002476FD /* PBXTargetDependency */,
+				CE206EA916414EFA002476FD /* PBXTargetDependency */,
+			);
+			name = JFFCoreLocationTest;
+			productName = JFFCoreLocationTest;
+			productReference = CE206E2616414CFF002476FD /* JFFCoreLocationTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE206E1D16414CFE002476FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = EmbeddedSources;
+			};
+			buildConfigurationList = CE206E2016414CFE002476FD /* Build configuration list for PBXProject "JFFCoreLocationTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CE206E1B16414CFE002476FD;
+			productRefGroup = CE206E2716414CFF002476FD /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CE206E7716414EE5002476FD /* Products */;
+					ProjectRef = CE206E7616414EE5002476FD /* JFFAsyncOperations.xcodeproj */;
+				},
+				{
+					ProductGroup = CE206E6B16414EDE002476FD /* Products */;
+					ProjectRef = CE206E6A16414EDE002476FD /* JFFCoreLocation.xcodeproj */;
+				},
+				{
+					ProductGroup = CE206EE016414FD4002476FD /* Products */;
+					ProjectRef = CE206EDF16414FD4002476FD /* JFFScheduler.xcodeproj */;
+				},
+				{
+					ProductGroup = CE206EB416414F53002476FD /* Products */;
+					ProjectRef = CE206EB316414F53002476FD /* JFFTestTools.xcodeproj */;
+				},
+				{
+					ProductGroup = CE206E8B16414EEB002476FD /* Products */;
+					ProjectRef = CE206E8A16414EEB002476FD /* JFFUtils.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				CE206E2516414CFE002476FD /* JFFCoreLocationTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4C11F796182792DF00229A6B /* libJFFAsyncOperationsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperationsMacOS.a;
+			remoteRef = 4C11F795182792DF00229A6B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206E7316414EDE002476FD /* libJFFCoreLocation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFCoreLocation.a;
+			remoteRef = CE206E7216414EDE002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206E7516414EDE002476FD /* JFFCoreLocationTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFCoreLocationTests.octest;
+			remoteRef = CE206E7416414EDE002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206E8416414EE6002476FD /* libJFFAsyncOperations.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperations.a;
+			remoteRef = CE206E8316414EE6002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206E8616414EE6002476FD /* libJFFAsyncOperations-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFAsyncOperations-clang.a";
+			remoteRef = CE206E8516414EE6002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206E8816414EE6002476FD /* JFFAsyncOperationsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFAsyncOperationsFW.framework;
+			remoteRef = CE206E8716414EE6002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206E9A16414EEB002476FD /* libJFFUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtils.a;
+			remoteRef = CE206E9916414EEB002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206E9C16414EEB002476FD /* libJFFUtilsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtilsMacOS.a;
+			remoteRef = CE206E9B16414EEB002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206E9E16414EEB002476FD /* libJFFUtils-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFUtils-clang.a";
+			remoteRef = CE206E9D16414EEB002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206EA016414EEB002476FD /* JFFUtilsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFUtilsFW.framework;
+			remoteRef = CE206E9F16414EEB002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206EA216414EEB002476FD /* JFFUtilsTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JFFUtilsTest.octest;
+			remoteRef = CE206EA116414EEB002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206EB816414F53002476FD /* libJFFTestTools.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFTestTools.a;
+			remoteRef = CE206EB716414F53002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206EEA16414FD4002476FD /* libJFFScheduler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFScheduler.a;
+			remoteRef = CE206EE916414FD4002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206EEC16414FD4002476FD /* libJFFSchedulerMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFSchedulerMacOS.a;
+			remoteRef = CE206EEB16414FD4002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206EEE16414FD4002476FD /* libJFFScheduler-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFScheduler-clang.a";
+			remoteRef = CE206EED16414FD4002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE206EF016414FD4002476FD /* JFFSchedulerFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFSchedulerFW.framework;
+			remoteRef = CE206EEF16414FD4002476FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE206E2416414CFE002476FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE206E3516414CFF002476FD /* InfoPlist.strings in Resources */,
+				CE206E3D16414CFF002476FD /* Default.png in Resources */,
+				CE206E3F16414CFF002476FD /* Default@2x.png in Resources */,
+				CE206E4116414CFF002476FD /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE206E2216414CFE002476FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE206E3716414CFF002476FD /* main.m in Sources */,
+				CE20708716415D23002476FD /* JFFLocationLoaderTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE206EA516414EFA002476FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFUtils;
+			targetProxy = CE206EA416414EFA002476FD /* PBXContainerItemProxy */;
+		};
+		CE206EA716414EFA002476FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFCoreLocation;
+			targetProxy = CE206EA616414EFA002476FD /* PBXContainerItemProxy */;
+		};
+		CE206EA916414EFA002476FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFAsyncOperations;
+			targetProxy = CE206EA816414EFA002476FD /* PBXContainerItemProxy */;
+		};
+		CE206EF216414FE3002476FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFScheduler;
+			targetProxy = CE206EF116414FE3002476FD /* PBXContainerItemProxy */;
+		};
+		CE206EF416414FE3002476FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFTestTools;
+			targetProxy = CE206EF316414FE3002476FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CE206E3316414CFF002476FD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE206E3416414CFF002476FD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE206E4B16414CFF002476FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../lib/,
+					../../lib/JFFTestTools,
+					../../lib/JFFCoreLocation,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE206E4C16414CFF002476FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../lib/,
+					../../lib/JFFTestTools,
+					../../lib/JFFCoreLocation,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE206E4E16414CFF002476FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFCoreLocationTest/JFFCoreLocationTest-Prefix.pch";
+				INFOPLIST_FILE = "JFFCoreLocationTest/JFFCoreLocationTest-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CE206E4F16414CFF002476FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFFCoreLocationTest/JFFCoreLocationTest-Prefix.pch";
+				INFOPLIST_FILE = "JFFCoreLocationTest/JFFCoreLocationTest-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE206E2016414CFE002476FD /* Build configuration list for PBXProject "JFFCoreLocationTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE206E4B16414CFF002476FD /* Debug */,
+				CE206E4C16414CFF002476FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE206E4D16414CFF002476FD /* Build configuration list for PBXNativeTarget "JFFCoreLocationTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE206E4E16414CFF002476FD /* Debug */,
+				CE206E4F16414CFF002476FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE206E1D16414CFE002476FD /* Project object */;
+}

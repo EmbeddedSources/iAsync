@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  JNetwork
+
+  Created by Vladimir Gorbenko on 14.10.14.
+  Copyright (c) 2014 EmbeddedSources. All rights reserved.
+*/
+
+//Network errors
+"J_NETWORK_NO_INTERNET_ERROR" = "Cannot connect to server. Please try again later.";
+"J_NETWORK_GENERIC_ERROR"     = "Cannot connect to server. Please try again later.";

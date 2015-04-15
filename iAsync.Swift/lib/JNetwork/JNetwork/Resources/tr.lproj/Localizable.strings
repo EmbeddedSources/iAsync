@@ -1,0 +1,11 @@
+/*
+ Localizable.strings
+ Wishdates
+ 
+ Created by user on 04.10.12.
+ 
+ */
+
+//Network errors
+"J_NETWORK_NO_INTERNET_ERROR" = "Biz şu anda bir bağlantı kurmak için koyamadık, daha sonra tekrar deneyin"; //t
+"J_NETWORK_GENERIC_ERROR"     = "Biz şu anda bir bağlantı kurmak için koyamadık, daha sonra tekrar deneyin"; //t

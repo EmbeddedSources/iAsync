@@ -1,0 +1,783 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C04DD8C19F6D40C00729AAD /* NSDate+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C04DD8B19F6D40C00729AAD /* NSDate+Utils.swift */; };
+		4C04DE0319F79BFB00729AAD /* String+toURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C04DE0219F79BFB00729AAD /* String+toURL.swift */; };
+		4C05C6B119C2467F006CC8B4 /* JError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C05C6B019C2467F006CC8B4 /* JError.swift */; };
+		4C05C6B319C2469A006CC8B4 /* JSilentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C05C6B219C2469A006CC8B4 /* JSilentError.swift */; };
+		4C05C6B519C246B9006CC8B4 /* NSError+WriteErrorToNSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C05C6B419C246B9006CC8B4 /* NSError+WriteErrorToNSLog.swift */; };
+		4C06E67B19DE9D3200DF111C /* JObjcUtilsBlockDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C06E67A19DE9D3200DF111C /* JObjcUtilsBlockDefinitions.swift */; };
+		4C111A7719CC66F800D27A8C /* JMutableAssignArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C111A7619CC66F800D27A8C /* JMutableAssignArray.swift */; };
+		4C111A7A19CC8C5900D27A8C /* NSNumber+FSStorableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C111A7919CC8C5900D27A8C /* NSNumber+FSStorableTest.swift */; };
+		4C111A7E19CC8C9F00D27A8C /* JAssignObjectHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C111A7D19CC8C9F00D27A8C /* JAssignObjectHolder.swift */; };
+		4C111A8219CC8CE700D27A8C /* JUtils-Bridging-Impl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C868FE519C8D0190006E34A /* JUtils-Bridging-Impl.m */; };
+		4C111A8519CC8E4300D27A8C /* NumberOfCharacterFromStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C111A8419CC8E4300D27A8C /* NumberOfCharacterFromStringTest.swift */; };
+		4C111A8819CC8E7000D27A8C /* JMutableAssignArrayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C111A8719CC8E7000D27A8C /* JMutableAssignArrayTest.swift */; };
+		4C125D5619DD9BB70044050C /* HashableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C125D5519DD9BB70044050C /* HashableArray.swift */; };
+		4C125D5819DD9C1C0044050C /* HashableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C125D5719DD9C1C0044050C /* HashableDictionary.swift */; };
+		4C21B8F219CD7E6300DA4CE2 /* JMutableAssignDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21B8F119CD7E6300DA4CE2 /* JMutableAssignDictionary.swift */; };
+		4C21B8F419CD881200DA4CE2 /* JMutableAssignDictionaryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21B8F319CD881200DA4CE2 /* JMutableAssignDictionaryTest.swift */; };
+		4C236E7D19CD915F00526F4F /* NSMutableSet+StorableSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C236E7C19CD915F00526F4F /* NSMutableSet+StorableSet.swift */; };
+		4C236E8019CD919200526F4F /* NSMutableSet+StorableSetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C236E7F19CD919200526F4F /* NSMutableSet+StorableSetTest.swift */; };
+		4C236E8319CD937A00526F4F /* JAssignProxyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C236E8219CD937A00526F4F /* JAssignProxyTest.swift */; };
+		4C236E8519CD983900526F4F /* NSSet+BlocksAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C236E8419CD983900526F4F /* NSSet+BlocksAdditions.swift */; };
+		4C2501F019C20D79002FF3EB /* JLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2501EF19C20D79002FF3EB /* JLogger.swift */; };
+		4C38396E19C22C0F0064C519 /* NSObject+ToURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C38396D19C22C0F0064C519 /* NSObject+ToURL.swift */; };
+		4C383A0B19C2343D0064C519 /* JOnDeallocBlockOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C383A0A19C2343D0064C519 /* JOnDeallocBlockOwner.swift */; };
+		4C383A0E19C236020064C519 /* NSObject+OnDeallocBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C383A0D19C236020064C519 /* NSObject+OnDeallocBlock.swift */; };
+		4C383A1019C2364A0064C519 /* NSObject+Ownerships.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C383A0F19C2364A0064C519 /* NSObject+Ownerships.swift */; };
+		4C45518419C8162900113ED7 /* NSObject+OwnershipsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C45518319C8162900113ED7 /* NSObject+OwnershipsTest.swift */; };
+		4C45518719C8167000113ED7 /* JSimpleBlockHolderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C45518619C8167000113ED7 /* JSimpleBlockHolderTest.swift */; };
+		4C45518C19C816AD00113ED7 /* NSDictionary+BlocksAdditionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C45518B19C816AD00113ED7 /* NSDictionary+BlocksAdditionsTest.swift */; };
+		4C45519319C81C2C00113ED7 /* JOnDeallocBlockOwnerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C45519219C81C2C00113ED7 /* JOnDeallocBlockOwnerTest.swift */; };
+		4C6A9DF619C21B1000762E29 /* NSArray+BlocksAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A9DF519C21B1000762E29 /* NSArray+BlocksAdditions.swift */; };
+		4C6CF32719E32FCB000274F5 /* JObjcMutableAssignArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6CF32619E32FCB000274F5 /* JObjcMutableAssignArray.swift */; };
+		4C6CF34619E331CB000274F5 /* JUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD7BF1119BDAD0700CDFEFF /* JUtils.framework */; };
+		4C6CF34719E331D5000274F5 /* JUtils.framework in Resources */ = {isa = PBXBuildFile; fileRef = 4CD7BF1119BDAD0700CDFEFF /* JUtils.framework */; };
+		4C6EE76819C227950071784A /* JResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE76719C227950071784A /* JResult.swift */; };
+		4C6EE76A19C228F10071784A /* NSArray+NoThrowObjectAtIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE76919C228F10071784A /* NSArray+NoThrowObjectAtIndex.swift */; };
+		4C7115B31AB60D9F00CEE5D0 /* NSOrderedSet+BlocksAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF83EE419CD9AD800D7151F /* NSOrderedSet+BlocksAdditions.swift */; };
+		4C788C3619C2FA5300D5D2D0 /* Dictionary+BlocksAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C788C3519C2FA5300D5D2D0 /* Dictionary+BlocksAdditions.swift */; };
+		4C788C3819C2FB2A00D5D2D0 /* JUDictionaryHelperBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C788C3719C2FB2A00D5D2D0 /* JUDictionaryHelperBlocks.swift */; };
+		4C788C3A19C2FB4400D5D2D0 /* NSDictionary+BlocksAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C788C3919C2FB4400D5D2D0 /* NSDictionary+BlocksAdditions.swift */; };
+		4C788C3C19C2FB6800D5D2D0 /* NSDictionary+JExtendedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C788C3B19C2FB6800D5D2D0 /* NSDictionary+JExtendedDictionary.swift */; };
+		4C868FE619C8D0190006E34A /* JUtils-Bridging-Impl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C868FE519C8D0190006E34A /* JUtils-Bridging-Impl.m */; };
+		4C868FFE19C8D6A40006E34A /* NSString+IsEmailValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C868FFD19C8D6A40006E34A /* NSString+IsEmailValid.swift */; };
+		4C86900219C8D7720006E34A /* JRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86900119C8D7720006E34A /* JRegex.swift */; };
+		4C86900419C8D9B80006E34A /* NSString+LocalizedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86900319C8D9B80006E34A /* NSString+LocalizedPrice.swift */; };
+		4C86900619C8DAF20006E34A /* NSString+PropertyName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86900519C8DAF20006E34A /* NSString+PropertyName.swift */; };
+		4C86900819C8DD970006E34A /* NSString+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86900719C8DD970006E34A /* NSString+Search.swift */; };
+		4C8C0F6719C8B44F00449163 /* NSData+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8C0F6619C8B44F00449163 /* NSData+ToString.swift */; };
+		4C9C5FCE19CF442B008743AA /* JGCDAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C5FCD19CF442B008743AA /* JGCDAdditions.swift */; };
+		4C9C5FD019CF44A0008743AA /* JHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C5FCF19CF44A0008743AA /* JHelpers.swift */; };
+		4CB10D8C19C2F2E800358814 /* JSimpleBlockHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB10D8B19C2F2E800358814 /* JSimpleBlockHolder.swift */; };
+		4CB4B63719E1C4D000F45575 /* JTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4B63619E1C4D000F45575 /* JTimer.swift */; };
+		4CB4B64119E1C59C00F45575 /* JSchedulerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB4B64019E1C59C00F45575 /* JSchedulerTest.swift */; };
+		4CB7247419F52A280031E480 /* String+toDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7247319F52A280031E480 /* String+toDouble.swift */; };
+		4CB7E21219C21C3400989364 /* JContainersHelperBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7E21119C21C3400989364 /* JContainersHelperBlocks.swift */; };
+		4CB7E21419C21CAF00989364 /* JUtilsBlockDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7E21319C21CAF00989364 /* JUtilsBlockDefinitions.swift */; };
+		4CC244C919E3E39800CB3F85 /* JObjcMutableAssignDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC244C819E3E39800CB3F85 /* JObjcMutableAssignDictionary.swift */; };
+		4CC90D1219C9DA3900A8F9BA /* StringFromTemplateString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC90D1119C9DA3900A8F9BA /* StringFromTemplateString.swift */; };
+		4CC90D1619C9E95D00A8F9BA /* NSString+Trimm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC90D1519C9E95D00A8F9BA /* NSString+Trimm.swift */; };
+		4CD7BF1719BDAD0700CDFEFF /* JUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD7BF1619BDAD0700CDFEFF /* JUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4CDB5E3519C8C20200FD6773 /* NSLocale+CurrentInterfaceLanguageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB5E3419C8C20200FD6773 /* NSLocale+CurrentInterfaceLanguageCode.swift */; };
+		4CDF310A1AB5B7510084DD80 /* NSString+FileAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBAF6919C8C71C00E24EFD /* NSString+FileAttributes.swift */; };
+		4CE1B17819DB518500B4C2B6 /* SequenceType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1B17719DB518500B4C2B6 /* SequenceType+Extensions.swift */; };
+		4CEB207819C22B4400E61C57 /* NSObject+NsNullAsNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB207719C22B4400E61C57 /* NSObject+NsNullAsNil.swift */; };
+		4CEBAF6419C8C58A00E24EFD /* NSNumber+FSStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBAF6319C8C58A00E24EFD /* NSNumber+FSStorable.swift */; };
+		4CEBAF6819C8C62E00E24EFD /* NSString+PathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBAF6719C8C62E00E24EFD /* NSString+PathExtensions.swift */; };
+		4CEBAF7219C8CCBF00E24EFD /* JUtils-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CEBAF7119C8CCB000E24EFD /* JUtils-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4CF40D2519CD9E3900BBD935 /* NSOrderedSet+NoThrowObjectAtIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF40D2419CD9E3900BBD935 /* NSOrderedSet+NoThrowObjectAtIndex.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4CB723CA19DC8E6A0066574F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CD7BF0819BDAD0700CDFEFF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CD7BF1019BDAD0700CDFEFF;
+			remoteInfo = JUtils;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4C04DD8B19F6D40C00729AAD /* NSDate+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Utils.swift"; sourceTree = "<group>"; };
+		4C04DE0219F79BFB00729AAD /* String+toURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+toURL.swift"; sourceTree = "<group>"; };
+		4C05C6B019C2467F006CC8B4 /* JError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JError.swift; sourceTree = "<group>"; };
+		4C05C6B219C2469A006CC8B4 /* JSilentError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSilentError.swift; sourceTree = "<group>"; };
+		4C05C6B419C246B9006CC8B4 /* NSError+WriteErrorToNSLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+WriteErrorToNSLog.swift"; sourceTree = "<group>"; };
+		4C06E67A19DE9D3200DF111C /* JObjcUtilsBlockDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JObjcUtilsBlockDefinitions.swift; sourceTree = "<group>"; };
+		4C111A7619CC66F800D27A8C /* JMutableAssignArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMutableAssignArray.swift; sourceTree = "<group>"; };
+		4C111A7919CC8C5900D27A8C /* NSNumber+FSStorableTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNumber+FSStorableTest.swift"; sourceTree = "<group>"; };
+		4C111A7D19CC8C9F00D27A8C /* JAssignObjectHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JAssignObjectHolder.swift; sourceTree = "<group>"; };
+		4C111A8319CC8D2D00D27A8C /* JUtilsTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JUtilsTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		4C111A8419CC8E4300D27A8C /* NumberOfCharacterFromStringTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberOfCharacterFromStringTest.swift; sourceTree = "<group>"; };
+		4C111A8719CC8E7000D27A8C /* JMutableAssignArrayTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMutableAssignArrayTest.swift; sourceTree = "<group>"; };
+		4C125D5519DD9BB70044050C /* HashableArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableArray.swift; sourceTree = "<group>"; };
+		4C125D5719DD9C1C0044050C /* HashableDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableDictionary.swift; sourceTree = "<group>"; };
+		4C21B8F119CD7E6300DA4CE2 /* JMutableAssignDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMutableAssignDictionary.swift; sourceTree = "<group>"; };
+		4C21B8F319CD881200DA4CE2 /* JMutableAssignDictionaryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMutableAssignDictionaryTest.swift; sourceTree = "<group>"; };
+		4C236E7C19CD915F00526F4F /* NSMutableSet+StorableSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableSet+StorableSet.swift"; sourceTree = "<group>"; };
+		4C236E7F19CD919200526F4F /* NSMutableSet+StorableSetTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableSet+StorableSetTest.swift"; sourceTree = "<group>"; };
+		4C236E8219CD937A00526F4F /* JAssignProxyTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JAssignProxyTest.swift; sourceTree = "<group>"; };
+		4C236E8419CD983900526F4F /* NSSet+BlocksAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSSet+BlocksAdditions.swift"; sourceTree = "<group>"; };
+		4C2501EF19C20D79002FF3EB /* JLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLogger.swift; sourceTree = "<group>"; };
+		4C38396D19C22C0F0064C519 /* NSObject+ToURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+ToURL.swift"; sourceTree = "<group>"; };
+		4C383A0A19C2343D0064C519 /* JOnDeallocBlockOwner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JOnDeallocBlockOwner.swift; sourceTree = "<group>"; };
+		4C383A0D19C236020064C519 /* NSObject+OnDeallocBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+OnDeallocBlock.swift"; sourceTree = "<group>"; };
+		4C383A0F19C2364A0064C519 /* NSObject+Ownerships.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Ownerships.swift"; sourceTree = "<group>"; };
+		4C45517719C815D400113ED7 /* JUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C45517A19C815D400113ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C45518319C8162900113ED7 /* NSObject+OwnershipsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+OwnershipsTest.swift"; sourceTree = "<group>"; };
+		4C45518619C8167000113ED7 /* JSimpleBlockHolderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSimpleBlockHolderTest.swift; sourceTree = "<group>"; };
+		4C45518B19C816AD00113ED7 /* NSDictionary+BlocksAdditionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDictionary+BlocksAdditionsTest.swift"; sourceTree = "<group>"; };
+		4C45519219C81C2C00113ED7 /* JOnDeallocBlockOwnerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JOnDeallocBlockOwnerTest.swift; sourceTree = "<group>"; };
+		4C6A9DF519C21B1000762E29 /* NSArray+BlocksAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSArray+BlocksAdditions.swift"; sourceTree = "<group>"; };
+		4C6CF32619E32FCB000274F5 /* JObjcMutableAssignArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JObjcMutableAssignArray.swift; sourceTree = "<group>"; };
+		4C6EE76719C227950071784A /* JResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JResult.swift; sourceTree = "<group>"; };
+		4C6EE76919C228F10071784A /* NSArray+NoThrowObjectAtIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSArray+NoThrowObjectAtIndex.swift"; sourceTree = "<group>"; };
+		4C788C3519C2FA5300D5D2D0 /* Dictionary+BlocksAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+BlocksAdditions.swift"; sourceTree = "<group>"; };
+		4C788C3719C2FB2A00D5D2D0 /* JUDictionaryHelperBlocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JUDictionaryHelperBlocks.swift; sourceTree = "<group>"; };
+		4C788C3919C2FB4400D5D2D0 /* NSDictionary+BlocksAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDictionary+BlocksAdditions.swift"; sourceTree = "<group>"; };
+		4C788C3B19C2FB6800D5D2D0 /* NSDictionary+JExtendedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDictionary+JExtendedDictionary.swift"; sourceTree = "<group>"; };
+		4C868FE519C8D0190006E34A /* JUtils-Bridging-Impl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JUtils-Bridging-Impl.m"; sourceTree = "<group>"; };
+		4C868FFD19C8D6A40006E34A /* NSString+IsEmailValid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+IsEmailValid.swift"; sourceTree = "<group>"; };
+		4C86900119C8D7720006E34A /* JRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JRegex.swift; sourceTree = "<group>"; };
+		4C86900319C8D9B80006E34A /* NSString+LocalizedPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+LocalizedPrice.swift"; sourceTree = "<group>"; };
+		4C86900519C8DAF20006E34A /* NSString+PropertyName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+PropertyName.swift"; sourceTree = "<group>"; };
+		4C86900719C8DD970006E34A /* NSString+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Search.swift"; sourceTree = "<group>"; };
+		4C8C0F6619C8B44F00449163 /* NSData+ToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+ToString.swift"; sourceTree = "<group>"; };
+		4C9C5FCD19CF442B008743AA /* JGCDAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGCDAdditions.swift; sourceTree = "<group>"; };
+		4C9C5FCF19CF44A0008743AA /* JHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHelpers.swift; sourceTree = "<group>"; };
+		4CB10D8B19C2F2E800358814 /* JSimpleBlockHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSimpleBlockHolder.swift; sourceTree = "<group>"; };
+		4CB4B63619E1C4D000F45575 /* JTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JTimer.swift; sourceTree = "<group>"; };
+		4CB4B64019E1C59C00F45575 /* JSchedulerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSchedulerTest.swift; sourceTree = "<group>"; };
+		4CB7247319F52A280031E480 /* String+toDouble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+toDouble.swift"; sourceTree = "<group>"; };
+		4CB7E21119C21C3400989364 /* JContainersHelperBlocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JContainersHelperBlocks.swift; sourceTree = "<group>"; };
+		4CB7E21319C21CAF00989364 /* JUtilsBlockDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JUtilsBlockDefinitions.swift; sourceTree = "<group>"; };
+		4CC244C819E3E39800CB3F85 /* JObjcMutableAssignDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JObjcMutableAssignDictionary.swift; sourceTree = "<group>"; };
+		4CC90D1119C9DA3900A8F9BA /* StringFromTemplateString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFromTemplateString.swift; sourceTree = "<group>"; };
+		4CC90D1519C9E95D00A8F9BA /* NSString+Trimm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Trimm.swift"; sourceTree = "<group>"; };
+		4CD7BF1119BDAD0700CDFEFF /* JUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CD7BF1519BDAD0700CDFEFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CD7BF1619BDAD0700CDFEFF /* JUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUtils.h; sourceTree = "<group>"; };
+		4CDB5E3419C8C20200FD6773 /* NSLocale+CurrentInterfaceLanguageCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLocale+CurrentInterfaceLanguageCode.swift"; sourceTree = "<group>"; };
+		4CE1B17719DB518500B4C2B6 /* SequenceType+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+Extensions.swift"; sourceTree = "<group>"; };
+		4CEB207719C22B4400E61C57 /* NSObject+NsNullAsNil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+NsNullAsNil.swift"; sourceTree = "<group>"; };
+		4CEBAF6319C8C58A00E24EFD /* NSNumber+FSStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNumber+FSStorable.swift"; sourceTree = "<group>"; };
+		4CEBAF6719C8C62E00E24EFD /* NSString+PathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+PathExtensions.swift"; sourceTree = "<group>"; };
+		4CEBAF6919C8C71C00E24EFD /* NSString+FileAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+FileAttributes.swift"; sourceTree = "<group>"; };
+		4CEBAF7119C8CCB000E24EFD /* JUtils-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JUtils-Bridging-Header.h"; sourceTree = "<group>"; };
+		4CF40D2419CD9E3900BBD935 /* NSOrderedSet+NoThrowObjectAtIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSOrderedSet+NoThrowObjectAtIndex.swift"; sourceTree = "<group>"; };
+		4CF83EE419CD9AD800D7151F /* NSOrderedSet+BlocksAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSOrderedSet+BlocksAdditions.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C45517419C815D400113ED7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C6CF34619E331CB000274F5 /* JUtils.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CD7BF0D19BDAD0700CDFEFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C04DD8A19F6D3E300729AAD /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				4C04DD8B19F6D40C00729AAD /* NSDate+Utils.swift */,
+			);
+			path = NSDate;
+			sourceTree = "<group>";
+		};
+		4C05C6AF19C24663006CC8B4 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				4C05C6B019C2467F006CC8B4 /* JError.swift */,
+				4C05C6B219C2469A006CC8B4 /* JSilentError.swift */,
+				4C05C6B419C246B9006CC8B4 /* NSError+WriteErrorToNSLog.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		4C06E67919DE9D1400DF111C /* ObjCBridg */ = {
+			isa = PBXGroup;
+			children = (
+				4C06E67A19DE9D3200DF111C /* JObjcUtilsBlockDefinitions.swift */,
+				4C6CF32619E32FCB000274F5 /* JObjcMutableAssignArray.swift */,
+				4CC244C819E3E39800CB3F85 /* JObjcMutableAssignDictionary.swift */,
+			);
+			path = ObjCBridg;
+			sourceTree = "<group>";
+		};
+		4C111A7C19CC8C9500D27A8C /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				4C111A7D19CC8C9F00D27A8C /* JAssignObjectHolder.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		4C236E7B19CD914000526F4F /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				4C236E7C19CD915F00526F4F /* NSMutableSet+StorableSet.swift */,
+				4C236E8419CD983900526F4F /* NSSet+BlocksAdditions.swift */,
+			);
+			path = Set;
+			sourceTree = "<group>";
+		};
+		4C2501EE19C20D5D002FF3EB /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				4C2501EF19C20D79002FF3EB /* JLogger.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		4C45517819C815D400113ED7 /* JUtilsTests */ = {
+			isa = PBXGroup;
+			children = (
+				4CC90D1119C9DA3900A8F9BA /* StringFromTemplateString.swift */,
+				4C45518619C8167000113ED7 /* JSimpleBlockHolderTest.swift */,
+				4C45518319C8162900113ED7 /* NSObject+OwnershipsTest.swift */,
+				4C45518B19C816AD00113ED7 /* NSDictionary+BlocksAdditionsTest.swift */,
+				4C45519219C81C2C00113ED7 /* JOnDeallocBlockOwnerTest.swift */,
+				4C111A7919CC8C5900D27A8C /* NSNumber+FSStorableTest.swift */,
+				4C111A8419CC8E4300D27A8C /* NumberOfCharacterFromStringTest.swift */,
+				4C111A8719CC8E7000D27A8C /* JMutableAssignArrayTest.swift */,
+				4C21B8F319CD881200DA4CE2 /* JMutableAssignDictionaryTest.swift */,
+				4C236E7F19CD919200526F4F /* NSMutableSet+StorableSetTest.swift */,
+				4C236E8219CD937A00526F4F /* JAssignProxyTest.swift */,
+				4CB4B64019E1C59C00F45575 /* JSchedulerTest.swift */,
+				4C45517919C815D400113ED7 /* Supporting Files */,
+				4C111A8319CC8D2D00D27A8C /* JUtilsTests-Bridging-Header.h */,
+			);
+			path = JUtilsTests;
+			sourceTree = "<group>";
+		};
+		4C45517919C815D400113ED7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C45517A19C815D400113ED7 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C6A9DF419C21B0400762E29 /* Array */ = {
+			isa = PBXGroup;
+			children = (
+				4C6A9DF519C21B1000762E29 /* NSArray+BlocksAdditions.swift */,
+				4C6EE76919C228F10071784A /* NSArray+NoThrowObjectAtIndex.swift */,
+				4C125D5519DD9BB70044050C /* HashableArray.swift */,
+			);
+			path = Array;
+			sourceTree = "<group>";
+		};
+		4C6A9DFA19C21BFE00762E29 /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				4CB7E21119C21C3400989364 /* JContainersHelperBlocks.swift */,
+				4CB7E21319C21CAF00989364 /* JUtilsBlockDefinitions.swift */,
+				4C383A0A19C2343D0064C519 /* JOnDeallocBlockOwner.swift */,
+				4CB10D8B19C2F2E800358814 /* JSimpleBlockHolder.swift */,
+			);
+			path = Blocks;
+			sourceTree = "<group>";
+		};
+		4C788C3419C2FA2600D5D2D0 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				4C788C3519C2FA5300D5D2D0 /* Dictionary+BlocksAdditions.swift */,
+				4C788C3719C2FB2A00D5D2D0 /* JUDictionaryHelperBlocks.swift */,
+				4C788C3919C2FB4400D5D2D0 /* NSDictionary+BlocksAdditions.swift */,
+				4C788C3B19C2FB6800D5D2D0 /* NSDictionary+JExtendedDictionary.swift */,
+				4C125D5719DD9C1C0044050C /* HashableDictionary.swift */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		4C86900019C8D74D0006E34A /* Regex */ = {
+			isa = PBXGroup;
+			children = (
+				4C86900119C8D7720006E34A /* JRegex.swift */,
+			);
+			path = Regex;
+			sourceTree = "<group>";
+		};
+		4C8C0F6519C8B43500449163 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4C8C0F6619C8B44F00449163 /* NSData+ToString.swift */,
+				4CDB5E3419C8C20200FD6773 /* NSLocale+CurrentInterfaceLanguageCode.swift */,
+				4CEBAF6319C8C58A00E24EFD /* NSNumber+FSStorable.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4CD7BF0719BDAD0700CDFEFF = {
+			isa = PBXGroup;
+			children = (
+				4CD7BF1319BDAD0700CDFEFF /* JUtils */,
+				4C45517819C815D400113ED7 /* JUtilsTests */,
+				4CD7BF1219BDAD0700CDFEFF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4CD7BF1219BDAD0700CDFEFF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4CD7BF1119BDAD0700CDFEFF /* JUtils.framework */,
+				4C45517719C815D400113ED7 /* JUtilsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4CD7BF1319BDAD0700CDFEFF /* JUtils */ = {
+			isa = PBXGroup;
+			children = (
+				4C111A7C19CC8C9500D27A8C /* Details */,
+				4C6A9DF419C21B0400762E29 /* Array */,
+				4C6A9DFA19C21BFE00762E29 /* Blocks */,
+				4C788C3419C2FA2600D5D2D0 /* Dictionary */,
+				4C05C6AF19C24663006CC8B4 /* Errors */,
+				4C8C0F6519C8B43500449163 /* Extensions */,
+				4C2501EE19C20D5D002FF3EB /* Logger */,
+				4CEB207619C22B2800E61C57 /* NSObject */,
+				4C04DD8A19F6D3E300729AAD /* NSDate */,
+				4CF83EE319CD9AA900D7151F /* OrderedSet */,
+				4C86900019C8D74D0006E34A /* Regex */,
+				4C236E7B19CD914000526F4F /* Set */,
+				4CEBAF6619C8C60F00E24EFD /* String */,
+				4C06E67919DE9D1400DF111C /* ObjCBridg */,
+				4C6EE76719C227950071784A /* JResult.swift */,
+				4C111A7619CC66F800D27A8C /* JMutableAssignArray.swift */,
+				4C21B8F119CD7E6300DA4CE2 /* JMutableAssignDictionary.swift */,
+				4C9C5FCD19CF442B008743AA /* JGCDAdditions.swift */,
+				4C9C5FCF19CF44A0008743AA /* JHelpers.swift */,
+				4CB4B63619E1C4D000F45575 /* JTimer.swift */,
+				4CE1B17719DB518500B4C2B6 /* SequenceType+Extensions.swift */,
+				4CD7BF1419BDAD0700CDFEFF /* Supporting Files */,
+				4CEBAF7119C8CCB000E24EFD /* JUtils-Bridging-Header.h */,
+				4C868FE519C8D0190006E34A /* JUtils-Bridging-Impl.m */,
+				4CD7BF1619BDAD0700CDFEFF /* JUtils.h */,
+			);
+			path = JUtils;
+			sourceTree = "<group>";
+		};
+		4CD7BF1419BDAD0700CDFEFF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4CD7BF1519BDAD0700CDFEFF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4CEB207619C22B2800E61C57 /* NSObject */ = {
+			isa = PBXGroup;
+			children = (
+				4CEB207719C22B4400E61C57 /* NSObject+NsNullAsNil.swift */,
+				4C38396D19C22C0F0064C519 /* NSObject+ToURL.swift */,
+				4C383A0D19C236020064C519 /* NSObject+OnDeallocBlock.swift */,
+				4C383A0F19C2364A0064C519 /* NSObject+Ownerships.swift */,
+			);
+			path = NSObject;
+			sourceTree = "<group>";
+		};
+		4CEBAF6619C8C60F00E24EFD /* String */ = {
+			isa = PBXGroup;
+			children = (
+				4CEBAF6919C8C71C00E24EFD /* NSString+FileAttributes.swift */,
+				4CEBAF6719C8C62E00E24EFD /* NSString+PathExtensions.swift */,
+				4C868FFD19C8D6A40006E34A /* NSString+IsEmailValid.swift */,
+				4C86900319C8D9B80006E34A /* NSString+LocalizedPrice.swift */,
+				4C86900519C8DAF20006E34A /* NSString+PropertyName.swift */,
+				4C86900719C8DD970006E34A /* NSString+Search.swift */,
+				4CC90D1519C9E95D00A8F9BA /* NSString+Trimm.swift */,
+				4CB7247319F52A280031E480 /* String+toDouble.swift */,
+				4C04DE0219F79BFB00729AAD /* String+toURL.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		4CF83EE319CD9AA900D7151F /* OrderedSet */ = {
+			isa = PBXGroup;
+			children = (
+				4CF83EE419CD9AD800D7151F /* NSOrderedSet+BlocksAdditions.swift */,
+				4CF40D2419CD9E3900BBD935 /* NSOrderedSet+NoThrowObjectAtIndex.swift */,
+			);
+			path = OrderedSet;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4CD7BF0E19BDAD0700CDFEFF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CEBAF7219C8CCBF00E24EFD /* JUtils-Bridging-Header.h in Headers */,
+				4CD7BF1719BDAD0700CDFEFF /* JUtils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4C45517619C815D400113ED7 /* JUtilsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C45517D19C815D400113ED7 /* Build configuration list for PBXNativeTarget "JUtilsTests" */;
+			buildPhases = (
+				4C45517319C815D400113ED7 /* Sources */,
+				4C45517419C815D400113ED7 /* Frameworks */,
+				4C45517519C815D400113ED7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4CB723CB19DC8E6A0066574F /* PBXTargetDependency */,
+			);
+			name = JUtilsTests;
+			productName = JUtilsTests;
+			productReference = 4C45517719C815D400113ED7 /* JUtilsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4CD7BF1019BDAD0700CDFEFF /* JUtils */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CD7BF2419BDAD0700CDFEFF /* Build configuration list for PBXNativeTarget "JUtils" */;
+			buildPhases = (
+				4CD7BF0C19BDAD0700CDFEFF /* Sources */,
+				4CD7BF0D19BDAD0700CDFEFF /* Frameworks */,
+				4CD7BF0E19BDAD0700CDFEFF /* Headers */,
+				4CD7BF0F19BDAD0700CDFEFF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JUtils;
+			productName = JUtils;
+			productReference = 4CD7BF1119BDAD0700CDFEFF /* JUtils.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4CD7BF0819BDAD0700CDFEFF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = EmbeddedSources;
+				TargetAttributes = {
+					4C45517619C815D400113ED7 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					4CD7BF1019BDAD0700CDFEFF = {
+						CreatedOnToolsVersion = 6.0;
+					};
+				};
+			};
+			buildConfigurationList = 4CD7BF0B19BDAD0700CDFEFF /* Build configuration list for PBXProject "JUtils" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4CD7BF0719BDAD0700CDFEFF;
+			productRefGroup = 4CD7BF1219BDAD0700CDFEFF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4CD7BF1019BDAD0700CDFEFF /* JUtils */,
+				4C45517619C815D400113ED7 /* JUtilsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C45517519C815D400113ED7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C6CF34719E331D5000274F5 /* JUtils.framework in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CD7BF0F19BDAD0700CDFEFF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C45517319C815D400113ED7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C45518719C8167000113ED7 /* JSimpleBlockHolderTest.swift in Sources */,
+				4C111A8519CC8E4300D27A8C /* NumberOfCharacterFromStringTest.swift in Sources */,
+				4C45518419C8162900113ED7 /* NSObject+OwnershipsTest.swift in Sources */,
+				4CB4B64119E1C59C00F45575 /* JSchedulerTest.swift in Sources */,
+				4C236E8319CD937A00526F4F /* JAssignProxyTest.swift in Sources */,
+				4C111A7A19CC8C5900D27A8C /* NSNumber+FSStorableTest.swift in Sources */,
+				4C45518C19C816AD00113ED7 /* NSDictionary+BlocksAdditionsTest.swift in Sources */,
+				4C45519319C81C2C00113ED7 /* JOnDeallocBlockOwnerTest.swift in Sources */,
+				4C111A8219CC8CE700D27A8C /* JUtils-Bridging-Impl.m in Sources */,
+				4C21B8F419CD881200DA4CE2 /* JMutableAssignDictionaryTest.swift in Sources */,
+				4CC90D1219C9DA3900A8F9BA /* StringFromTemplateString.swift in Sources */,
+				4C111A8819CC8E7000D27A8C /* JMutableAssignArrayTest.swift in Sources */,
+				4C236E8019CD919200526F4F /* NSMutableSet+StorableSetTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CD7BF0C19BDAD0700CDFEFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C868FE619C8D0190006E34A /* JUtils-Bridging-Impl.m in Sources */,
+				4C125D5819DD9C1C0044050C /* HashableDictionary.swift in Sources */,
+				4CEBAF6419C8C58A00E24EFD /* NSNumber+FSStorable.swift in Sources */,
+				4C05C6B319C2469A006CC8B4 /* JSilentError.swift in Sources */,
+				4CB4B63719E1C4D000F45575 /* JTimer.swift in Sources */,
+				4C05C6B519C246B9006CC8B4 /* NSError+WriteErrorToNSLog.swift in Sources */,
+				4C6EE76A19C228F10071784A /* NSArray+NoThrowObjectAtIndex.swift in Sources */,
+				4C86900419C8D9B80006E34A /* NSString+LocalizedPrice.swift in Sources */,
+				4C21B8F219CD7E6300DA4CE2 /* JMutableAssignDictionary.swift in Sources */,
+				4C04DD8C19F6D40C00729AAD /* NSDate+Utils.swift in Sources */,
+				4C383A0E19C236020064C519 /* NSObject+OnDeallocBlock.swift in Sources */,
+				4C6A9DF619C21B1000762E29 /* NSArray+BlocksAdditions.swift in Sources */,
+				4CEBAF6819C8C62E00E24EFD /* NSString+PathExtensions.swift in Sources */,
+				4C788C3619C2FA5300D5D2D0 /* Dictionary+BlocksAdditions.swift in Sources */,
+				4CC244C919E3E39800CB3F85 /* JObjcMutableAssignDictionary.swift in Sources */,
+				4C86900819C8DD970006E34A /* NSString+Search.swift in Sources */,
+				4C125D5619DD9BB70044050C /* HashableArray.swift in Sources */,
+				4CDB5E3519C8C20200FD6773 /* NSLocale+CurrentInterfaceLanguageCode.swift in Sources */,
+				4CF40D2519CD9E3900BBD935 /* NSOrderedSet+NoThrowObjectAtIndex.swift in Sources */,
+				4C236E8519CD983900526F4F /* NSSet+BlocksAdditions.swift in Sources */,
+				4C9C5FCE19CF442B008743AA /* JGCDAdditions.swift in Sources */,
+				4C788C3C19C2FB6800D5D2D0 /* NSDictionary+JExtendedDictionary.swift in Sources */,
+				4C04DE0319F79BFB00729AAD /* String+toURL.swift in Sources */,
+				4C111A7719CC66F800D27A8C /* JMutableAssignArray.swift in Sources */,
+				4C06E67B19DE9D3200DF111C /* JObjcUtilsBlockDefinitions.swift in Sources */,
+				4C383A0B19C2343D0064C519 /* JOnDeallocBlockOwner.swift in Sources */,
+				4CB7247419F52A280031E480 /* String+toDouble.swift in Sources */,
+				4C6CF32719E32FCB000274F5 /* JObjcMutableAssignArray.swift in Sources */,
+				4C6EE76819C227950071784A /* JResult.swift in Sources */,
+				4C05C6B119C2467F006CC8B4 /* JError.swift in Sources */,
+				4C38396E19C22C0F0064C519 /* NSObject+ToURL.swift in Sources */,
+				4CEB207819C22B4400E61C57 /* NSObject+NsNullAsNil.swift in Sources */,
+				4C86900619C8DAF20006E34A /* NSString+PropertyName.swift in Sources */,
+				4C9C5FD019CF44A0008743AA /* JHelpers.swift in Sources */,
+				4C7115B31AB60D9F00CEE5D0 /* NSOrderedSet+BlocksAdditions.swift in Sources */,
+				4C383A1019C2364A0064C519 /* NSObject+Ownerships.swift in Sources */,
+				4C111A7E19CC8C9F00D27A8C /* JAssignObjectHolder.swift in Sources */,
+				4C8C0F6719C8B44F00449163 /* NSData+ToString.swift in Sources */,
+				4CB10D8C19C2F2E800358814 /* JSimpleBlockHolder.swift in Sources */,
+				4CC90D1619C9E95D00A8F9BA /* NSString+Trimm.swift in Sources */,
+				4CDF310A1AB5B7510084DD80 /* NSString+FileAttributes.swift in Sources */,
+				4CE1B17819DB518500B4C2B6 /* SequenceType+Extensions.swift in Sources */,
+				4C868FFE19C8D6A40006E34A /* NSString+IsEmailValid.swift in Sources */,
+				4C788C3819C2FB2A00D5D2D0 /* JUDictionaryHelperBlocks.swift in Sources */,
+				4C788C3A19C2FB4400D5D2D0 /* NSDictionary+BlocksAdditions.swift in Sources */,
+				4CB7E21419C21CAF00989364 /* JUtilsBlockDefinitions.swift in Sources */,
+				4C236E7D19CD915F00526F4F /* NSMutableSet+StorableSet.swift in Sources */,
+				4C86900219C8D7720006E34A /* JRegex.swift in Sources */,
+				4CB7E21219C21C3400989364 /* JContainersHelperBlocks.swift in Sources */,
+				4C2501F019C20D79002FF3EB /* JLogger.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4CB723CB19DC8E6A0066574F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CD7BF1019BDAD0700CDFEFF /* JUtils */;
+			targetProxy = 4CB723CA19DC8E6A0066574F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4C45517E19C815D400113ED7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = JUtilsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JUtilsTests/JUtilsTests-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		4C45517F19C815D400113ED7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = JUtilsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JUtilsTests/JUtilsTests-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		4CD7BF2219BDAD0700CDFEFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4CD7BF2319BDAD0700CDFEFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4CD7BF2519BDAD0700CDFEFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = JUtils/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4CD7BF2619BDAD0700CDFEFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = JUtils/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C45517D19C815D400113ED7 /* Build configuration list for PBXNativeTarget "JUtilsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C45517E19C815D400113ED7 /* Debug */,
+				4C45517F19C815D400113ED7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4CD7BF0B19BDAD0700CDFEFF /* Build configuration list for PBXProject "JUtils" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CD7BF2219BDAD0700CDFEFF /* Debug */,
+				4CD7BF2319BDAD0700CDFEFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4CD7BF2419BDAD0700CDFEFF /* Build configuration list for PBXNativeTarget "JUtils" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CD7BF2519BDAD0700CDFEFF /* Debug */,
+				4CD7BF2619BDAD0700CDFEFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4CD7BF0819BDAD0700CDFEFF /* Project object */;
+}

@@ -1,0 +1,101 @@
+#import <JFFAsyncOperations/Helpers/JFFDidFinishAsyncOperationBlockHolder.h>
+
+#import <JFFScheduler/JFFScheduler.h>
+
+@interface AsyncOperationWithDelayTest : GHAsyncTestCase
+@end
+
+@implementation AsyncOperationWithDelayTest
+
+- (void)setUp
+{
+    [JFFTimer enableInstancesCounting];
+}
+
+- (void)testCancelAsyncOperationWithDelay
+{
+    const NSUInteger initialSchedulerInstancesCount = [JFFTimer instancesCount];
+    
+    __block BOOL cancelBlockOk = NO;
+    __block NSTimeInterval timeDifference = 0;
+    
+    void (^block)(JFFSimpleBlock) = ^(JFFSimpleBlock complete) {
+        
+        @autoreleasepool {
+            
+            JFFAsyncOperation loader = asyncOperationWithDelay(.2, .02);
+            
+            JFFAsyncOperationProgressCallback progressCallback = ^(id data) {
+                
+                complete();
+            };
+            JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
+                
+                cancelBlockOk = [error isKindOfClass:[JFFAsyncOpFinishedByCancellationError class]];
+            };
+            
+            JFFAsyncOperationHandler cancel = loader(progressCallback,
+                                                     nil,
+                                                     doneCallback);
+            
+            cancel(JFFAsyncOperationHandlerTaskCancel);
+            
+            NSDate *startDate = [NSDate new];
+            
+            asyncOperationWithDelay(.3, .03)(nil, nil, ^(id result, NSError *error) {
+                
+                NSDate *finishDate = [NSDate new];
+                timeDifference = [finishDate timeIntervalSinceDate:startDate];
+                complete();
+            });
+        }
+    };
+    
+    [self performAsyncRequestOnMainThreadWithBlock:block
+                                          selector:_cmd
+                                           timeout:1.];
+    
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFTimer instancesCount], @"OK");
+    
+    GHAssertTrue(cancelBlockOk, @"OK");
+    GHAssertTrue(timeDifference >= 0.3, @"OK");
+}
+
+- (void)testAsyncOperationWithDelayTwiceCall
+{
+    const NSUInteger initialSchedulerInstancesCount = [JFFTimer instancesCount];
+    
+    __block NSUInteger callsCount = 0;
+    
+    void (^block)(JFFSimpleBlock) = ^(JFFSimpleBlock complete) {
+        
+        @autoreleasepool {
+            JFFAsyncOperation loader = asyncOperationWithDelay(.2, .02);
+            
+            JFFAsyncOperationProgressCallback progressCallback = ^(id data) {
+                complete();
+            };
+            JFFAsyncOperationChangeStateCallback cancelCallback = ^(JFFAsyncOperationState state) {
+                complete();
+            };
+            JFFDidFinishAsyncOperationCallback doneCallback = ^(id result, NSError *error) {
+                ++callsCount;
+                if (callsCount == 2)
+                    complete();
+            };
+            
+            loader(progressCallback, cancelCallback, doneCallback);
+            loader(progressCallback, cancelCallback, doneCallback);
+        }
+    };
+    
+    [self performAsyncRequestOnMainThreadWithBlock:block
+                                          selector:_cmd
+                                           timeout:1.];
+    
+    GHAssertTrue(initialSchedulerInstancesCount == [JFFTimer instancesCount], @"OK");
+    
+    GHAssertTrue(callsCount == 2, @"OK");
+}
+
+@end

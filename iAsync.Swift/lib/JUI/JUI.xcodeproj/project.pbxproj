@@ -1,0 +1,596 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C0F3E441A40B20F00C90918 /* JUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0F3E3F1A40B20300C90918 /* JUtils.framework */; };
+		4C0F3E4B1A40E33300C90918 /* UIView+AnimationWithBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0F3E4A1A40E33300C90918 /* UIView+AnimationWithBlocks.swift */; };
+		4C669BEF1A401C62006F2987 /* JUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C669BEE1A401C62006F2987 /* JUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4C669BF51A401C62006F2987 /* JUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C669BE91A401C62006F2987 /* JUI.framework */; };
+		4C669BFC1A401C62006F2987 /* JUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C669BFB1A401C62006F2987 /* JUITests.swift */; };
+		4C7BA2191AB8503B00A59768 /* JCameraFlashMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BA2181AB8503B00A59768 /* JCameraFlashMode.swift */; };
+		4C7BA2231AB854FC00A59768 /* JAVCaptureVideoOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BA2221AB854FC00A59768 /* JAVCaptureVideoOrientation.swift */; };
+		4C7BDE1D1ABB2ED6007C0981 /* UIViewController+PresentTopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BDE1C1ABB2ED6007C0981 /* UIViewController+PresentTopViewController.swift */; };
+		4C7BDE281ABB3071007C0981 /* UIViewController+ForceRemoveFromParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BDE271ABB3071007C0981 /* UIViewController+ForceRemoveFromParentViewController.swift */; };
+		4C7BDE451ABB3B9C007C0981 /* UIView+AllSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BDE441ABB3B9C007C0981 /* UIView+AllSubviews.swift */; };
+		4C7BDE4C1ABB53EC007C0981 /* UIImage+FixOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BDE4B1ABB53EC007C0981 /* UIImage+FixOrientation.swift */; };
+		4C7BDE4E1ABB56D0007C0981 /* UIImage+ScaleToSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BDE4D1ABB56D0007C0981 /* UIImage+ScaleToSize.swift */; };
+		4C7BDE501ABB5804007C0981 /* UIImage+DrawImageInImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BDE4F1ABB5804007C0981 /* UIImage+DrawImageInImage.swift */; };
+		4C8FCBD41AB9BBA600512EE9 /* JPhotoCameraOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8FCBD31AB9BBA600512EE9 /* JPhotoCameraOrientation.swift */; };
+		4CBCA2241AC1EE0D009D4BD3 /* UITableView+WithinUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBCA2231AC1EE0D009D4BD3 /* UITableView+WithinUpdates.swift */; };
+		4CBCA2341AC1EF4B009D4BD3 /* UITableView+BlocksAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBCA2331AC1EF4B009D4BD3 /* UITableView+BlocksAdditions.swift */; };
+		4CBCA2361AC1F526009D4BD3 /* UITableView+CellsSelections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBCA2351AC1F526009D4BD3 /* UITableView+CellsSelections.swift */; };
+		4CE9D9F51A587E0600341481 /* UIView+AddSubviewAndScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE9D9F41A587E0600341481 /* UIView+AddSubviewAndScale.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4C0F3E3E1A40B20300C90918 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C0F3E391A40B20300C90918 /* JUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CD7BF1119BDAD0700CDFEFF;
+			remoteInfo = JUtils;
+		};
+		4C0F3E401A40B20300C90918 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C0F3E391A40B20300C90918 /* JUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C45517719C815D400113ED7;
+			remoteInfo = JUtilsTests;
+		};
+		4C0F3E421A40B20A00C90918 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C0F3E391A40B20300C90918 /* JUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CD7BF1019BDAD0700CDFEFF;
+			remoteInfo = JUtils;
+		};
+		4C669BF61A401C62006F2987 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C669BE01A401C62006F2987 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C669BE81A401C62006F2987;
+			remoteInfo = JUI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4C0F3E391A40B20300C90918 /* JUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JUtils.xcodeproj; path = ../JUtils/JUtils.xcodeproj; sourceTree = "<group>"; };
+		4C0F3E4A1A40E33300C90918 /* UIView+AnimationWithBlocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AnimationWithBlocks.swift"; sourceTree = "<group>"; };
+		4C669BE91A401C62006F2987 /* JUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C669BED1A401C62006F2987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C669BEE1A401C62006F2987 /* JUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUI.h; sourceTree = "<group>"; };
+		4C669BF41A401C62006F2987 /* JUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C669BFA1A401C62006F2987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C669BFB1A401C62006F2987 /* JUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JUITests.swift; sourceTree = "<group>"; };
+		4C7BA2181AB8503B00A59768 /* JCameraFlashMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCameraFlashMode.swift; sourceTree = "<group>"; };
+		4C7BA2221AB854FC00A59768 /* JAVCaptureVideoOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JAVCaptureVideoOrientation.swift; sourceTree = "<group>"; };
+		4C7BDE1C1ABB2ED6007C0981 /* UIViewController+PresentTopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentTopViewController.swift"; sourceTree = "<group>"; };
+		4C7BDE271ABB3071007C0981 /* UIViewController+ForceRemoveFromParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ForceRemoveFromParentViewController.swift"; sourceTree = "<group>"; };
+		4C7BDE441ABB3B9C007C0981 /* UIView+AllSubviews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AllSubviews.swift"; sourceTree = "<group>"; };
+		4C7BDE4B1ABB53EC007C0981 /* UIImage+FixOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+FixOrientation.swift"; sourceTree = "<group>"; };
+		4C7BDE4D1ABB56D0007C0981 /* UIImage+ScaleToSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ScaleToSize.swift"; sourceTree = "<group>"; };
+		4C7BDE4F1ABB5804007C0981 /* UIImage+DrawImageInImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+DrawImageInImage.swift"; sourceTree = "<group>"; };
+		4C8FCBD31AB9BBA600512EE9 /* JPhotoCameraOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPhotoCameraOrientation.swift; sourceTree = "<group>"; };
+		4CBCA2231AC1EE0D009D4BD3 /* UITableView+WithinUpdates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+WithinUpdates.swift"; sourceTree = "<group>"; };
+		4CBCA2331AC1EF4B009D4BD3 /* UITableView+BlocksAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+BlocksAdditions.swift"; sourceTree = "<group>"; };
+		4CBCA2351AC1F526009D4BD3 /* UITableView+CellsSelections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+CellsSelections.swift"; sourceTree = "<group>"; };
+		4CE9D9CA1A582DE100341481 /* JGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGridView.swift; sourceTree = "<group>"; };
+		4CE9D9CC1A582E0500341481 /* JGridViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JGridViewDelegate.swift; sourceTree = "<group>"; };
+		4CE9D9F41A587E0600341481 /* UIView+AddSubviewAndScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviewAndScale.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C669BE51A401C62006F2987 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C0F3E441A40B20F00C90918 /* JUtils.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C669BF11A401C62006F2987 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C669BF51A401C62006F2987 /* JUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C0F3E381A40B1EF00C90918 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				4C0F3E391A40B20300C90918 /* JUtils.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		4C0F3E3A1A40B20300C90918 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C0F3E3F1A40B20300C90918 /* JUtils.framework */,
+				4C0F3E411A40B20300C90918 /* JUtilsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C0F3E491A40E32800C90918 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				4CE9D9F41A587E0600341481 /* UIView+AddSubviewAndScale.swift */,
+				4C0F3E4A1A40E33300C90918 /* UIView+AnimationWithBlocks.swift */,
+				4C7BDE441ABB3B9C007C0981 /* UIView+AllSubviews.swift */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		4C669BDF1A401C62006F2987 = {
+			isa = PBXGroup;
+			children = (
+				4C669BEB1A401C62006F2987 /* JUI */,
+				4C669BF81A401C62006F2987 /* JUITests */,
+				4C669BEA1A401C62006F2987 /* Products */,
+				4C0F3E381A40B1EF00C90918 /* Dependencies */,
+			);
+			sourceTree = "<group>";
+		};
+		4C669BEA1A401C62006F2987 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C669BE91A401C62006F2987 /* JUI.framework */,
+				4C669BF41A401C62006F2987 /* JUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C669BEB1A401C62006F2987 /* JUI */ = {
+			isa = PBXGroup;
+			children = (
+				4CE9D9C81A582DC500341481 /* GridView */,
+				4C7BA2161AB8500400A59768 /* PhotoCamera */,
+				4C7BDE4A1ABB53D7007C0981 /* UIImage */,
+				4CBCA2211AC1EE00009D4BD3 /* UITableView */,
+				4C0F3E491A40E32800C90918 /* UIView */,
+				4C7BDE1A1ABB2EC6007C0981 /* UIViewController */,
+				4C669BEE1A401C62006F2987 /* JUI.h */,
+				4C669BEC1A401C62006F2987 /* Supporting Files */,
+			);
+			path = JUI;
+			sourceTree = "<group>";
+		};
+		4C669BEC1A401C62006F2987 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C669BED1A401C62006F2987 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C669BF81A401C62006F2987 /* JUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4C669BFB1A401C62006F2987 /* JUITests.swift */,
+				4C669BF91A401C62006F2987 /* Supporting Files */,
+			);
+			path = JUITests;
+			sourceTree = "<group>";
+		};
+		4C669BF91A401C62006F2987 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C669BFA1A401C62006F2987 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C7BA2161AB8500400A59768 /* PhotoCamera */ = {
+			isa = PBXGroup;
+			children = (
+				4C7BA2181AB8503B00A59768 /* JCameraFlashMode.swift */,
+				4C7BA2221AB854FC00A59768 /* JAVCaptureVideoOrientation.swift */,
+				4C8FCBD31AB9BBA600512EE9 /* JPhotoCameraOrientation.swift */,
+			);
+			path = PhotoCamera;
+			sourceTree = "<group>";
+		};
+		4C7BDE1A1ABB2EC6007C0981 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4C7BDE1C1ABB2ED6007C0981 /* UIViewController+PresentTopViewController.swift */,
+				4C7BDE271ABB3071007C0981 /* UIViewController+ForceRemoveFromParentViewController.swift */,
+			);
+			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		4C7BDE4A1ABB53D7007C0981 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				4C7BDE4B1ABB53EC007C0981 /* UIImage+FixOrientation.swift */,
+				4C7BDE4D1ABB56D0007C0981 /* UIImage+ScaleToSize.swift */,
+				4C7BDE4F1ABB5804007C0981 /* UIImage+DrawImageInImage.swift */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		4CBCA2211AC1EE00009D4BD3 /* UITableView */ = {
+			isa = PBXGroup;
+			children = (
+				4CBCA2331AC1EF4B009D4BD3 /* UITableView+BlocksAdditions.swift */,
+				4CBCA2351AC1F526009D4BD3 /* UITableView+CellsSelections.swift */,
+				4CBCA2231AC1EE0D009D4BD3 /* UITableView+WithinUpdates.swift */,
+			);
+			path = UITableView;
+			sourceTree = "<group>";
+		};
+		4CE9D9C81A582DC500341481 /* GridView */ = {
+			isa = PBXGroup;
+			children = (
+				4CE9D9CA1A582DE100341481 /* JGridView.swift */,
+				4CE9D9CC1A582E0500341481 /* JGridViewDelegate.swift */,
+			);
+			path = GridView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4C669BE61A401C62006F2987 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C669BEF1A401C62006F2987 /* JUI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4C669BE81A401C62006F2987 /* JUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C669BFF1A401C62006F2987 /* Build configuration list for PBXNativeTarget "JUI" */;
+			buildPhases = (
+				4C669BE41A401C62006F2987 /* Sources */,
+				4C669BE51A401C62006F2987 /* Frameworks */,
+				4C669BE61A401C62006F2987 /* Headers */,
+				4C669BE71A401C62006F2987 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C0F3E431A40B20A00C90918 /* PBXTargetDependency */,
+			);
+			name = JUI;
+			productName = JUI;
+			productReference = 4C669BE91A401C62006F2987 /* JUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4C669BF31A401C62006F2987 /* JUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C669C021A401C62006F2987 /* Build configuration list for PBXNativeTarget "JUITests" */;
+			buildPhases = (
+				4C669BF01A401C62006F2987 /* Sources */,
+				4C669BF11A401C62006F2987 /* Frameworks */,
+				4C669BF21A401C62006F2987 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C669BF71A401C62006F2987 /* PBXTargetDependency */,
+			);
+			name = JUITests;
+			productName = JUITests;
+			productReference = 4C669BF41A401C62006F2987 /* JUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C669BE01A401C62006F2987 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = EmbeddedSources;
+				TargetAttributes = {
+					4C669BE81A401C62006F2987 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					4C669BF31A401C62006F2987 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = 4C669BE31A401C62006F2987 /* Build configuration list for PBXProject "JUI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4C669BDF1A401C62006F2987;
+			productRefGroup = 4C669BEA1A401C62006F2987 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4C0F3E3A1A40B20300C90918 /* Products */;
+					ProjectRef = 4C0F3E391A40B20300C90918 /* JUtils.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				4C669BE81A401C62006F2987 /* JUI */,
+				4C669BF31A401C62006F2987 /* JUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4C0F3E3F1A40B20300C90918 /* JUtils.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JUtils.framework;
+			remoteRef = 4C0F3E3E1A40B20300C90918 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C0F3E411A40B20300C90918 /* JUtilsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JUtilsTests.xctest;
+			remoteRef = 4C0F3E401A40B20300C90918 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C669BE71A401C62006F2987 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C669BF21A401C62006F2987 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C669BE41A401C62006F2987 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C7BDE451ABB3B9C007C0981 /* UIView+AllSubviews.swift in Sources */,
+				4C7BDE501ABB5804007C0981 /* UIImage+DrawImageInImage.swift in Sources */,
+				4CE9D9F51A587E0600341481 /* UIView+AddSubviewAndScale.swift in Sources */,
+				4C0F3E4B1A40E33300C90918 /* UIView+AnimationWithBlocks.swift in Sources */,
+				4C8FCBD41AB9BBA600512EE9 /* JPhotoCameraOrientation.swift in Sources */,
+				4C7BA2231AB854FC00A59768 /* JAVCaptureVideoOrientation.swift in Sources */,
+				4C7BA2191AB8503B00A59768 /* JCameraFlashMode.swift in Sources */,
+				4CBCA2341AC1EF4B009D4BD3 /* UITableView+BlocksAdditions.swift in Sources */,
+				4CBCA2361AC1F526009D4BD3 /* UITableView+CellsSelections.swift in Sources */,
+				4C7BDE4E1ABB56D0007C0981 /* UIImage+ScaleToSize.swift in Sources */,
+				4C7BDE4C1ABB53EC007C0981 /* UIImage+FixOrientation.swift in Sources */,
+				4C7BDE1D1ABB2ED6007C0981 /* UIViewController+PresentTopViewController.swift in Sources */,
+				4C7BDE281ABB3071007C0981 /* UIViewController+ForceRemoveFromParentViewController.swift in Sources */,
+				4CBCA2241AC1EE0D009D4BD3 /* UITableView+WithinUpdates.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C669BF01A401C62006F2987 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C669BFC1A401C62006F2987 /* JUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C0F3E431A40B20A00C90918 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JUtils;
+			targetProxy = 4C0F3E421A40B20A00C90918 /* PBXContainerItemProxy */;
+		};
+		4C669BF71A401C62006F2987 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C669BE81A401C62006F2987 /* JUI */;
+			targetProxy = 4C669BF61A401C62006F2987 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4C669BFD1A401C62006F2987 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4C669BFE1A401C62006F2987 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4C669C001A401C62006F2987 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = JUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4C669C011A401C62006F2987 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = JUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		4C669C031A401C62006F2987 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = JUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4C669C041A401C62006F2987 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = JUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C669BE31A401C62006F2987 /* Build configuration list for PBXProject "JUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C669BFD1A401C62006F2987 /* Debug */,
+				4C669BFE1A401C62006F2987 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C669BFF1A401C62006F2987 /* Build configuration list for PBXNativeTarget "JUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C669C001A401C62006F2987 /* Debug */,
+				4C669C011A401C62006F2987 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C669C021A401C62006F2987 /* Build configuration list for PBXNativeTarget "JUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C669C031A401C62006F2987 /* Debug */,
+				4C669C041A401C62006F2987 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4C669BE01A401C62006F2987 /* Project object */;
+}

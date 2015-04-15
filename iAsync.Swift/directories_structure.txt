@@ -1,0 +1,13 @@
+That's why we suggest using the following repository structure :
+ 1. app ￐ for main project sources
+ 2. lib ￐ shared code, maintained by our team. Libraries, containing the model and network protocol bindings should also be stored here.
+ 3. lib-third-party ￐ for libraries and frameworks used by our applications
+binaries deployment.
+ 4. frameworks ￐ pre-build third-party libraries and those maintained by our team.
+It should contain no *.xcodeproj entries. Instead only deployed libraries must be placed there. All frameworks and universal libraries, developed by our team must be deployed into this directory.
+ 5. test ￐ for unit tests of all kinds (Sen Testing Kit, Google toolbox, GHUnit).
+ 6. tools ￐ ready-to-use binaries and or source code which are used
+ 7. scripts ￐ scripts for continuous integration in bash/ruby/python/<your favorite scripting language>.
+ 8. certificates ￐ contains Apple provision and developer profiles.
+ 9. deployment ￐ this directory is NOT supposed to be under version control. It contains
+build artifacts that will be deployed by the build server or in some other (most efficient for you) way.

@@ -1,0 +1,4 @@
+1. fix NSLocalizedString issue
+2. add unit test
+3. Comment library using this - http://www.gentlebytes.com/home/appledocapp/
+see https://github.com/tomaz/appledoc

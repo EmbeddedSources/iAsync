@@ -1,0 +1,693 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		7E57F3B914F93313002D139B /* iAsync */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 7E57F3BA14F93313002D139B /* Build configuration list for PBXAggregateTarget "iAsync" */;
+			buildPhases = (
+			);
+			dependencies = (
+				7E57F40214F93398002D139B /* PBXTargetDependency */,
+				7E57F40014F93393002D139B /* PBXTargetDependency */,
+				7E57F3FE14F9338E002D139B /* PBXTargetDependency */,
+				7E57F3FC14F9338A002D139B /* PBXTargetDependency */,
+			);
+			name = iAsync;
+			productName = iAsync;
+		};
+		7E57F40314F933A3002D139B /* iAsync-clang */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 7E57F40414F933A3002D139B /* Build configuration list for PBXAggregateTarget "iAsync-clang" */;
+			buildPhases = (
+			);
+			dependencies = (
+				7E57F40E14F933B5002D139B /* PBXTargetDependency */,
+				7E57F40C14F933B0002D139B /* PBXTargetDependency */,
+				7E57F40A14F933AD002D139B /* PBXTargetDependency */,
+				7E57F40814F933AA002D139B /* PBXTargetDependency */,
+			);
+			name = "iAsync-clang";
+			productName = "iAsync-clang";
+		};
+		7E57F40F14F933D5002D139B /* iAsync-Desktop */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 7E57F41014F933D5002D139B /* Build configuration list for PBXAggregateTarget "iAsync-Desktop" */;
+			buildPhases = (
+			);
+			dependencies = (
+				7E57F41A14F9340C002D139B /* PBXTargetDependency */,
+				7E57F41814F933EF002D139B /* PBXTargetDependency */,
+				7E57F41614F933EA002D139B /* PBXTargetDependency */,
+				7E57F41414F933E0002D139B /* PBXTargetDependency */,
+			);
+			name = "iAsync-Desktop";
+			productName = "iAsync-Desktop";
+		};
+		7E8F20B114F94AA900588C7D /* iAsync-Framework-iOS */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 7E8F20B814F94AA900588C7D /* Build configuration list for PBXAggregateTarget "iAsync-Framework-iOS" */;
+			buildPhases = (
+			);
+			dependencies = (
+				7E8F20C014F94AC300588C7D /* PBXTargetDependency */,
+				7E8F20BE14F94ABD00588C7D /* PBXTargetDependency */,
+				7E8F20BC14F94AB900588C7D /* PBXTargetDependency */,
+			);
+			name = "iAsync-Framework-iOS";
+			productName = "iAsync-Framework-iOS";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXContainerItemProxy section */
+		7E57F3C914F93328002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFAsyncOperations;
+		};
+		7E57F3CB14F93328002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391037B14A88BB5007315A3;
+			remoteInfo = "JFFAsyncOperations-clang";
+		};
+		7E57F3D714F93333002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D5AE6DB13F3E6C600EB6143;
+			remoteInfo = JFFNetwork;
+		};
+		7E57F3D914F93333002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802B22148BFC230040A93A;
+			remoteInfo = JFFNetworkMacOS;
+		};
+		7E57F3DB14F93333002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103B714A88BCA007315A3;
+			remoteInfo = "JFFNetwork-clang";
+		};
+		7E57F3E614F9333B002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFScheduler;
+		};
+		7E57F3E814F9333B002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802B07148BFB850040A93A;
+			remoteInfo = JFFSchedulerMacOS;
+		};
+		7E57F3EA14F9333B002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 539103C614A88BD6007315A3;
+			remoteInfo = "JFFScheduler-clang";
+		};
+		7E57F3F514F93344002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+		7E57F3F714F93344002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65802A5B148BF2930040A93A;
+			remoteInfo = JFFUtilsMacOS;
+		};
+		7E57F3F914F93344002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5391044314A88C04007315A3;
+			remoteInfo = "JFFUtils-clang";
+		};
+		7E57F3FB14F9338A002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D5AE6DA13F3E6C600EB6143;
+			remoteInfo = JFFNetwork;
+		};
+		7E57F3FD14F9338E002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFAsyncOperations;
+		};
+		7E57F3FF14F93393002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFScheduler;
+		};
+		7E57F40114F93398002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFUtils;
+		};
+		7E57F40714F933AA002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5391037D14A88BCA007315A3;
+			remoteInfo = "JFFNetwork-clang";
+		};
+		7E57F40914F933AD002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5391035314A88BB5007315A3;
+			remoteInfo = "JFFAsyncOperations-clang";
+		};
+		7E57F40B14F933B0002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 539103B914A88BD6007315A3;
+			remoteInfo = "JFFScheduler-clang";
+		};
+		7E57F40D14F933B5002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 539103F214A88C04007315A3;
+			remoteInfo = "JFFUtils-clang";
+		};
+		7E57F41314F933E0002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 65802B21148BFC230040A93A;
+			remoteInfo = JFFNetworkMacOS;
+		};
+		7E57F41514F933EA002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 65802B06148BFB850040A93A;
+			remoteInfo = JFFSchedulerMacOS;
+		};
+		7E57F41714F933EF002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 65802A5A148BF2930040A93A;
+			remoteInfo = JFFUtilsMacOS;
+		};
+		7E57F41914F9340C002D139B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = JFFAsyncOperations;
+		};
+		7E8F201F14F9438000588C7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E57F42414F93738002D139B;
+			remoteInfo = JFFUtilsFW;
+		};
+		7E8F20B314F94AA900588C7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F204314F9494300588C7D;
+			remoteInfo = JFFNetworkFW;
+		};
+		7E8F20B614F94AA900588C7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F202A14F9484F00588C7D;
+			remoteInfo = JFFSchedulerFW;
+		};
+		7E8F20BB14F94AB900588C7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E57F42314F93738002D139B;
+			remoteInfo = JFFUtilsFW;
+		};
+		7E8F20BD14F94ABD00588C7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E8F204214F9494300588C7D;
+			remoteInfo = JFFNetworkFW;
+		};
+		7E8F20BF14F94AC300588C7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E8F202914F9484F00588C7D;
+			remoteInfo = JFFSchedulerFW;
+		};
+		7E8F213E14F9549500588C7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7E8F20C914F94BDF00588C7D;
+			remoteInfo = JFFAsyncOperationsFW;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFAsyncOperations.xcodeproj; path = ../lib/JFFAsyncOperations/JFFAsyncOperations.xcodeproj; sourceTree = "<group>"; };
+		7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFNetwork.xcodeproj; path = ../lib/JFFNetwork/JFFNetwork.xcodeproj; sourceTree = "<group>"; };
+		7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFScheduler.xcodeproj; path = ../lib/JFFScheduler/JFFScheduler.xcodeproj; sourceTree = "<group>"; };
+		7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JFFUtils.xcodeproj; path = ../lib/JFFUtils/JFFUtils.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		7E57F3B014F932EB002D139B = {
+			isa = PBXGroup;
+			children = (
+				7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */,
+				7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */,
+				7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */,
+				7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		7E57F3BE14F93328002D139B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E57F3CA14F93328002D139B /* libJFFAsyncOperations.a */,
+				7E57F3CC14F93328002D139B /* libJFFAsyncOperations-clang.a */,
+				7E8F213F14F9549500588C7D /* JFFAsyncOperationsFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E57F3CF14F93333002D139B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E57F3D814F93333002D139B /* libJFFNetwork.a */,
+				7E57F3DA14F93333002D139B /* libJFFNetworkMacOS.a */,
+				7E57F3DC14F93333002D139B /* libJFFNetwork-clang.a */,
+				7E8F20B414F94AA900588C7D /* JFFNetworkFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E57F3DE14F9333B002D139B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E57F3E714F9333B002D139B /* libJFFScheduler.a */,
+				7E57F3E914F9333B002D139B /* libJFFSchedulerMacOS.a */,
+				7E57F3EB14F9333B002D139B /* libJFFScheduler-clang.a */,
+				7E8F20B714F94AA900588C7D /* JFFSchedulerFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E57F3ED14F93343002D139B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E57F3F614F93344002D139B /* libJFFUtils.a */,
+				7E57F3F814F93344002D139B /* libJFFUtilsMacOS.a */,
+				7E57F3FA14F93344002D139B /* libJFFUtils-clang.a */,
+				7E8F202014F9438000588C7D /* JFFUtilsFW.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		7E57F3B214F932EB002D139B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Embedded Sources";
+			};
+			buildConfigurationList = 7E57F3B514F932EB002D139B /* Build configuration list for PBXProject "iAsync" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7E57F3B014F932EB002D139B;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7E57F3BE14F93328002D139B /* Products */;
+					ProjectRef = 7E57F3BD14F93328002D139B /* JFFAsyncOperations.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E57F3CF14F93333002D139B /* Products */;
+					ProjectRef = 7E57F3CE14F93333002D139B /* JFFNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E57F3DE14F9333B002D139B /* Products */;
+					ProjectRef = 7E57F3DD14F9333B002D139B /* JFFScheduler.xcodeproj */;
+				},
+				{
+					ProductGroup = 7E57F3ED14F93343002D139B /* Products */;
+					ProjectRef = 7E57F3EC14F93343002D139B /* JFFUtils.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				7E57F3B914F93313002D139B /* iAsync */,
+				7E57F40314F933A3002D139B /* iAsync-clang */,
+				7E57F40F14F933D5002D139B /* iAsync-Desktop */,
+				7E8F20B114F94AA900588C7D /* iAsync-Framework-iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7E57F3CA14F93328002D139B /* libJFFAsyncOperations.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFAsyncOperations.a;
+			remoteRef = 7E57F3C914F93328002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E57F3CC14F93328002D139B /* libJFFAsyncOperations-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFAsyncOperations-clang.a";
+			remoteRef = 7E57F3CB14F93328002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E57F3D814F93333002D139B /* libJFFNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFNetwork.a;
+			remoteRef = 7E57F3D714F93333002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E57F3DA14F93333002D139B /* libJFFNetworkMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFNetworkMacOS.a;
+			remoteRef = 7E57F3D914F93333002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E57F3DC14F93333002D139B /* libJFFNetwork-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFNetwork-clang.a";
+			remoteRef = 7E57F3DB14F93333002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E57F3E714F9333B002D139B /* libJFFScheduler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFScheduler.a;
+			remoteRef = 7E57F3E614F9333B002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E57F3E914F9333B002D139B /* libJFFSchedulerMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFSchedulerMacOS.a;
+			remoteRef = 7E57F3E814F9333B002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E57F3EB14F9333B002D139B /* libJFFScheduler-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFScheduler-clang.a";
+			remoteRef = 7E57F3EA14F9333B002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E57F3F614F93344002D139B /* libJFFUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtils.a;
+			remoteRef = 7E57F3F514F93344002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E57F3F814F93344002D139B /* libJFFUtilsMacOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJFFUtilsMacOS.a;
+			remoteRef = 7E57F3F714F93344002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E57F3FA14F93344002D139B /* libJFFUtils-clang.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libJFFUtils-clang.a";
+			remoteRef = 7E57F3F914F93344002D139B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E8F202014F9438000588C7D /* JFFUtilsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFUtilsFW.framework;
+			remoteRef = 7E8F201F14F9438000588C7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E8F20B414F94AA900588C7D /* JFFNetworkFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFNetworkFW.framework;
+			remoteRef = 7E8F20B314F94AA900588C7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E8F20B714F94AA900588C7D /* JFFSchedulerFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFSchedulerFW.framework;
+			remoteRef = 7E8F20B614F94AA900588C7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7E8F213F14F9549500588C7D /* JFFAsyncOperationsFW.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = JFFAsyncOperationsFW.framework;
+			remoteRef = 7E8F213E14F9549500588C7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXTargetDependency section */
+		7E57F3FC14F9338A002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFNetwork;
+			targetProxy = 7E57F3FB14F9338A002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F3FE14F9338E002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFAsyncOperations;
+			targetProxy = 7E57F3FD14F9338E002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F40014F93393002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFScheduler;
+			targetProxy = 7E57F3FF14F93393002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F40214F93398002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFUtils;
+			targetProxy = 7E57F40114F93398002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F40814F933AA002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "JFFNetwork-clang";
+			targetProxy = 7E57F40714F933AA002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F40A14F933AD002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "JFFAsyncOperations-clang";
+			targetProxy = 7E57F40914F933AD002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F40C14F933B0002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "JFFScheduler-clang";
+			targetProxy = 7E57F40B14F933B0002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F40E14F933B5002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "JFFUtils-clang";
+			targetProxy = 7E57F40D14F933B5002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F41414F933E0002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFNetworkMacOS;
+			targetProxy = 7E57F41314F933E0002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F41614F933EA002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFSchedulerMacOS;
+			targetProxy = 7E57F41514F933EA002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F41814F933EF002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFUtilsMacOS;
+			targetProxy = 7E57F41714F933EF002D139B /* PBXContainerItemProxy */;
+		};
+		7E57F41A14F9340C002D139B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFAsyncOperations;
+			targetProxy = 7E57F41914F9340C002D139B /* PBXContainerItemProxy */;
+		};
+		7E8F20BC14F94AB900588C7D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFUtilsFW;
+			targetProxy = 7E8F20BB14F94AB900588C7D /* PBXContainerItemProxy */;
+		};
+		7E8F20BE14F94ABD00588C7D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFNetworkFW;
+			targetProxy = 7E8F20BD14F94ABD00588C7D /* PBXContainerItemProxy */;
+		};
+		7E8F20C014F94AC300588C7D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JFFSchedulerFW;
+			targetProxy = 7E8F20BF14F94AC300588C7D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		7E57F3B714F932EB002D139B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		7E57F3B814F932EB002D139B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		7E57F3BB14F93313002D139B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7E57F3BC14F93313002D139B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7E57F40514F933A3002D139B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7E57F40614F933A3002D139B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7E57F41114F933D5002D139B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7E57F41214F933D5002D139B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7E8F20B914F94AA900588C7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7E8F20BA14F94AA900588C7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7E57F3B514F932EB002D139B /* Build configuration list for PBXProject "iAsync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E57F3B714F932EB002D139B /* Debug */,
+				7E57F3B814F932EB002D139B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E57F3BA14F93313002D139B /* Build configuration list for PBXAggregateTarget "iAsync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E57F3BB14F93313002D139B /* Debug */,
+				7E57F3BC14F93313002D139B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E57F40414F933A3002D139B /* Build configuration list for PBXAggregateTarget "iAsync-clang" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E57F40514F933A3002D139B /* Debug */,
+				7E57F40614F933A3002D139B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E57F41014F933D5002D139B /* Build configuration list for PBXAggregateTarget "iAsync-Desktop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E57F41114F933D5002D139B /* Debug */,
+				7E57F41214F933D5002D139B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E8F20B814F94AA900588C7D /* Build configuration list for PBXAggregateTarget "iAsync-Framework-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E8F20B914F94AA900588C7D /* Debug */,
+				7E8F20BA14F94AA900588C7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7E57F3B214F932EB002D139B /* Project object */;
+}

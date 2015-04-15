@@ -1,0 +1,15 @@
+/*
+ Localizable.strings
+ JSocial
+ 
+ Created by Vladimir Gorbenko on 07.10.14.
+ Copyright (c) 2014 EmbeddedSources. All rights reserved.
+ */
+
+//Facebook errors
+"J_FACEBOOK_GENERAL_ERROR"                      = "Ha habido un error con el servidor de Facebook.\nPor favor, prueba de nuevo para continuar";
+"J_FACEBOOK_LOGIN_ERROR_USER_DENIED_PERMISSION" = "Por favor, comprueba los detalles de tu cuenta de Facebook en \"Configuración/Facebook\"";
+"J_FACEBOOK_AUTHORIZATION_FAILED"               = "Por favor, comprueba los detalles de tu cuenta de Facebook en \"Configuración/Facebook\"";
+"J_FACEBOOK_LOGIN_ERROR_ACCESS_FORBIDDEN"       = "Por favor, comprueba los detalles de tu cuenta de Facebook en \"Configuración/Facebook\"";
+
+"J_STOREKIT_PURCHASE_DISABLED_ERROR" = "Por favor, activa las compras in-app de iOS \"Settings\"";
